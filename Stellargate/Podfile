@@ -12,19 +12,19 @@ def ui_components_and_helper_pods
     pod 'DGElasticPullToRefresh'
 end
 
-target 'jupiter' do
+target 'Stellargate' do
 
   # Pods for jupiter
   ui_components_and_helper_pods
   
   pod 'stellar-ios-mac-sdk'
 
-  target 'jupiterTests' do
+  target 'StellargateTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
-  target 'jupiterUITests' do
+  target 'StellargateUITests' do
     inherit! :search_paths
     # Pods for testing
   end
