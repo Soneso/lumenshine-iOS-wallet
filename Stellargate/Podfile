@@ -1,0 +1,32 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '9.0'
+
+# Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+use_frameworks!
+
+def ui_components_and_helper_pods
+    pod 'Material'
+    pod 'SnapKit'
+    pod 'DrawerController'
+    pod 'MaterialComponents/FlexibleHeader+Extensions'
+    pod 'DGElasticPullToRefresh'
+end
+
+target 'jupiter' do
+
+  # Pods for jupiter
+  ui_components_and_helper_pods
+  
+  pod 'stellar-ios-mac-sdk'
+
+  target 'jupiterTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'jupiterUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
