@@ -8,7 +8,6 @@
 
 import UIKit
 import Material
-import MaterialComponents.MaterialFlexibleHeader
 import DGElasticPullToRefresh
 
 class HomeViewController: CardCollectionViewController {
@@ -16,8 +15,6 @@ class HomeViewController: CardCollectionViewController {
     // MARK: - Properties
     
     fileprivate let viewModel: HomeViewModelType
-    
-    fileprivate let headerViewController = MDCFlexibleHeaderViewController()
     
     init(viewModel: HomeViewModelType) {
         self.viewModel = viewModel
@@ -34,7 +31,6 @@ class HomeViewController: CardCollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        prepareHeader()
         prepareView()
         prepareRefresh()
     }
@@ -43,15 +39,6 @@ class HomeViewController: CardCollectionViewController {
 //        super.viewWillAppear(animated)
 //        navigationController?.setNavigationBarHidden(true, animated: animated)
 //    }
-//
-//    override func viewWillLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        headerViewController.updateTopLayoutGuide()
-//    }
-    
-    override var childViewControllerForStatusBarHidden: UIViewController? {
-        return headerViewController
-    }
 }
 
 extension HomeViewController {
@@ -61,35 +48,6 @@ extension HomeViewController {
         return cell
     }
     
-}
-
-extension HomeViewController {
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView == headerViewController.headerView.trackingScrollView {
-            headerViewController.headerView.trackingScrollDidScroll()
-        }
-    }
-
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if scrollView == headerViewController.headerView.trackingScrollView {
-            headerViewController.headerView.trackingScrollDidEndDecelerating()
-        }
-    }
-
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        let headerView = headerViewController.headerView
-        if scrollView == headerView.trackingScrollView {
-            headerView.trackingScrollDidEndDraggingWillDecelerate(decelerate)
-        }
-    }
-
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let headerView = headerViewController.headerView
-        if scrollView == headerView.trackingScrollView {
-            headerView.trackingScrollWillEndDragging(withVelocity: velocity, targetContentOffset: targetContentOffset)
-        }
-    }
 }
 
 fileprivate extension HomeViewController {
@@ -142,44 +100,6 @@ fileprivate extension HomeViewController {
         navigationController?.navigationBar.shadowColor = Stylesheet.color(.clear)
     }
     
-    func prepareHeader() {
-
-        addChildViewController(headerViewController)
-        headerViewController.view.frame = view.bounds
-        view.addSubview(headerViewController.view)
-        headerViewController.didMove(toParentViewController: self)
-
-        collectionView.delegate = self
-        headerViewController.layoutDelegate = self
-        headerViewController.headerView.trackingScrollView = collectionView
-
-        headerViewController.headerView.backgroundColor = Stylesheet.color(.cyan)
-        headerViewController.headerView.shiftBehavior = .enabled
-        headerViewController.headerView.canOverExtend = false
-        headerViewController.headerView.minimumHeight = 0
-        headerViewController.headerView.maximumHeight = 100
-        headerViewController.headerView.minMaxHeightIncludesSafeArea = false
-        headerViewController.headerView.statusBarHintCanOverlapHeader = false
-        
-//        headerViewController.headerView.changeContentInsets {
-//            self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//        }
-        
-        prepareNavigation()
-    }
-    
-    func prepareNavigation() {
-        // Use a standard UINavigationBar in the flexible header.
-        let navBarFrame = CGRect(origin: .zero, size: CGSize(width: headerViewController.headerView.frame.width, height: 60))
-        let navBar = UINavigationBar(frame: navBarFrame)
-        navBar.autoresizingMask = .flexibleWidth
-        navBar.tintColor = Color.white
-        
-        headerViewController.headerView.addSubview(navBar)
-        
-
-        navBar.setItems([navigationItem], animated: true)
-    }
     
     func prepareRefresh() {
         
@@ -193,25 +113,5 @@ fileprivate extension HomeViewController {
             }, loadingView: loadingView)
         collectionView.dg_setPullToRefreshFillColor(Stylesheet.color(.cyan))
         collectionView.dg_setPullToRefreshBackgroundColor(collectionView.backgroundColor!)
-    }
-}
-
-extension HomeViewController: MDCFlexibleHeaderViewLayoutDelegate {
-    
-    // MARK: MDCFlexibleHeaderViewLayoutDelegate
-    func flexibleHeaderViewController(_: MDCFlexibleHeaderViewController,
-                                      flexibleHeaderViewFrameDidChange flexibleHeaderView: MDCFlexibleHeaderView) {
-        // Called whenever the frame changes.
-        print("frame: \(flexibleHeaderView.frame)")
-        
-//        if flexibleHeaderView.frame.height > 90 {
-//            let image = UIImage.image(with: Stylesheet.color(.clear), size: CGSize(width: 100, height: 100))
-//            navigationController?.navigationBar.setBackgroundImage(image, for: .default)
-//            navigationController?.navigationBar.backgroundColor = Stylesheet.color(.clear)
-//
-//        } else {
-//            let image = UIImage.image(with: Stylesheet.color(.blue), size: CGSize(width: 100, height: 100))
-//            navigationController?.navigationBar.setBackgroundImage(image, for: .default)
-//        }
     }
 }

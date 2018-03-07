@@ -8,7 +8,6 @@ def ui_components_and_helper_pods
     pod 'Material'
     pod 'SnapKit'
     pod 'DrawerController'
-    pod 'MaterialComponents/FlexibleHeader+Extensions'
     pod 'DGElasticPullToRefresh'
 end
 
