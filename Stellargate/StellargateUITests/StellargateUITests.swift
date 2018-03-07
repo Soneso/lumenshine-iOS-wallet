@@ -1,6 +1,6 @@
 //
-//  jupiterUITests.swift
-//  jupiterUITests
+//  StellargateUITests.swift
+//  StellargateUITests
 //
 //  Created by Razvan Chelemen on 25/01/2018.
 //  Copyright © 2018 Soneso. All rights reserved.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class jupiterUITests: XCTestCase {
+class StellargateUITests: XCTestCase {
         
     override func setUp() {
         super.setUp()
