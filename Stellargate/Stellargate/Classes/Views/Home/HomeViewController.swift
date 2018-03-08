@@ -15,6 +15,8 @@ class HomeViewController: CardCollectionViewController {
     // MARK: - Properties
     
     fileprivate let viewModel: HomeViewModelType
+    fileprivate var headerBar: FlexibleHeightBar!
+    fileprivate var titleLabel = UILabel()
     
     init(viewModel: HomeViewModelType) {
         self.viewModel = viewModel
@@ -33,6 +35,7 @@ class HomeViewController: CardCollectionViewController {
         super.viewDidLoad()
         prepareView()
         prepareRefresh()
+        prepareHeader()
     }
     
 //    override func viewWillAppear(_ animated: Bool) {
@@ -48,6 +51,22 @@ extension HomeViewController {
         return cell
     }
     
+}
+
+extension HomeViewController {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        headerBar.behaviorDefiner?.scrollViewDidScroll(scrollView)
+        titleLabel.text = headerBar.progress < 0.75 ? "" : "TrendyStartup.io"
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        headerBar.behaviorDefiner?.scrollViewDidEndDecelerating(scrollView)
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        headerBar.behaviorDefiner?.scrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
+    }
 }
 
 fileprivate extension HomeViewController {
@@ -98,6 +117,48 @@ fileprivate extension HomeViewController {
         collectionView.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
         
         navigationController?.navigationBar.shadowColor = Stylesheet.color(.clear)
+        
+        titleLabel.textColor = Stylesheet.color(.white)
+        titleLabel.textAlignment = .center
+        navigationItem.centerViews = [titleLabel]
+    }
+    
+    func prepareHeader() {
+        headerBar = FlexibleHeightBar(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: 100.0))
+        headerBar.minimumBarHeight = 0.0
+
+        headerBar.backgroundColor = Stylesheet.color(.cyan)
+        view.addSubview(headerBar)
+
+        collectionView.contentInset = UIEdgeInsetsMake(100.0, 0.0, 0.0, 0.0)
+
+        headerBar.behaviorDefiner = FacebookBarBehaviorDefiner()
+        
+        //        navigationController?.navigationBar.isTranslucent = true
+        
+        let label = UILabel();
+        label.text = "TrendyStartup.io"
+        label.font = UIFont.systemFont(ofSize: 25.0)
+        label.textColor = UIColor.white
+        label.sizeToFit()
+        headerBar.addSubview(label)
+        
+        let initialLayoutAttributes = FlexibleHeightBarSubviewLayoutAttributes()
+        initialLayoutAttributes.size = label.frame.size
+        initialLayoutAttributes.center = CGPoint(x: headerBar.bounds.midX, y: headerBar.bounds.midY + 10.0)
+        
+        // This is what we want the bar to look like at its maximum height (progress == 0.0)
+        headerBar.addLayoutAttributes(initialLayoutAttributes, forSubview: label, forProgress: 0.0)
+        
+        // Create a final set of layout attributes based on the same values as the initial layout attributes
+        let finalLayoutAttributes = FlexibleHeightBarSubviewLayoutAttributes(layoutAttributes: initialLayoutAttributes)
+        finalLayoutAttributes.alpha = 0.0
+        let translation = CGAffineTransform(translationX: 0.0, y: -50.0)
+        let scale = CGAffineTransform(scaleX: 0.2, y: 0.2)
+        finalLayoutAttributes.transform = scale.concatenating(translation)
+        
+        // This is what we want the bar to look like at its minimum height (progress == 1.0)
+        headerBar.addLayoutAttributes(finalLayoutAttributes, forSubview: label, forProgress: 1.0)
     }
     
     
@@ -105,7 +166,7 @@ fileprivate extension HomeViewController {
         
         // Initialize tableView
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
-        loadingView.tintColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
+        loadingView.tintColor = Stylesheet.color(.white)
         collectionView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
             // Add your logic here
             // Do not forget to call dg_stopLoading() at the end

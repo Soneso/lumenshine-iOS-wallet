@@ -12,7 +12,7 @@ import UIKit
 
 public class HamburgerButton: UIButton {
 
-    public var color: UIColor = UIColor.black {
+    public var color: UIColor = UIColor.white {
     didSet {
         for shapeLayer in shapeLayers {
             shapeLayer.strokeColor = color.cgColor

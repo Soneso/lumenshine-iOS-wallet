@@ -20,7 +20,7 @@ class AppNavigationDrawerController: DrawerController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIStatusBarStyle.default
+        return UIStatusBarStyle.lightContent
     }
     
 }

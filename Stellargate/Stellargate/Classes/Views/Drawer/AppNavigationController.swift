@@ -17,6 +17,6 @@ class AppNavigationController: NavigationController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIStatusBarStyle.default
+        return UIStatusBarStyle.lightContent
     }
 }

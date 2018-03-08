@@ -15,6 +15,12 @@
 		4314B9F2204806E5006DBE63 /* MaterialIcons.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4314B9F1204806E5006DBE63 /* MaterialIcons.bundle */; };
 		4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4314B9F320480813006DBE63 /* MenuViewProtocol.swift */; };
 		4314B9F9204812BC006DBE63 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4314B9F8204812BC006DBE63 /* MenuTableViewCell.swift */; };
+		436B366E20512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436B366820512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift */; };
+		436B366F20512114009F7C21 /* FlexibleHeightBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436B366920512114009F7C21 /* FlexibleHeightBar.swift */; };
+		436B367020512114009F7C21 /* FlexibleHeightBarBehaviorDefiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436B366A20512114009F7C21 /* FlexibleHeightBarBehaviorDefiner.swift */; };
+		436B367120512114009F7C21 /* FacebookBarBehaviorDefiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436B366B20512114009F7C21 /* FacebookBarBehaviorDefiner.swift */; };
+		436B367220512114009F7C21 /* SquareCashBarBehaviorDefiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436B366C20512114009F7C21 /* SquareCashBarBehaviorDefiner.swift */; };
+		436B367320512114009F7C21 /* TableViewDelegateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436B366D20512114009F7C21 /* TableViewDelegateHandler.swift */; };
 		4376F49E204D9DF800B179C3 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4376F49D204D9DF800B179C3 /* HomeCoordinator.swift */; };
 		4376F4A0204D9E2700B179C3 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4376F49F204D9E2700B179C3 /* CoordinatorProtocol.swift */; };
 		4376F4A3204D9F9D00B179C3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4376F4A2204D9F9D00B179C3 /* HomeViewModel.swift */; };
@@ -22,7 +28,6 @@
 		438BE842204D51FD007EBFB9 /* HamburgerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438BE841204D51FD007EBFB9 /* HamburgerButton.swift */; };
 		43EFF204204939F700B1887C /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EFF203204939F700B1887C /* UIColor+Utils.swift */; };
 		43EFF20620493B4900B1887C /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EFF20520493B4900B1887C /* Stylesheet.swift */; };
-		43F55647204FEDB200FD32E0 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43F55646204FEDB200FD32E0 /* Info.plist */; };
 		7445E9C52019CF7200470E0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7445E9C42019CF7200470E0A /* AppDelegate.swift */; };
 		7445E9C72019CF7200470E0A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7445E9C62019CF7200470E0A /* ViewController.swift */; };
 		7445E9CA2019CF7200470E0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7445E9C82019CF7200470E0A /* Main.storyboard */; };
@@ -73,6 +78,12 @@
 		4314B9F1204806E5006DBE63 /* MaterialIcons.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MaterialIcons.bundle; sourceTree = "<group>"; };
 		4314B9F320480813006DBE63 /* MenuViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewProtocol.swift; sourceTree = "<group>"; };
 		4314B9F8204812BC006DBE63 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
+		436B366820512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexibleHeightBarSubviewLayoutAttributes.swift; sourceTree = "<group>"; };
+		436B366920512114009F7C21 /* FlexibleHeightBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexibleHeightBar.swift; sourceTree = "<group>"; };
+		436B366A20512114009F7C21 /* FlexibleHeightBarBehaviorDefiner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexibleHeightBarBehaviorDefiner.swift; sourceTree = "<group>"; };
+		436B366B20512114009F7C21 /* FacebookBarBehaviorDefiner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookBarBehaviorDefiner.swift; sourceTree = "<group>"; };
+		436B366C20512114009F7C21 /* SquareCashBarBehaviorDefiner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareCashBarBehaviorDefiner.swift; sourceTree = "<group>"; };
+		436B366D20512114009F7C21 /* TableViewDelegateHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDelegateHandler.swift; sourceTree = "<group>"; };
 		4376F49D204D9DF800B179C3 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		4376F49F204D9E2700B179C3 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		4376F4A2204D9F9D00B179C3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -185,6 +196,7 @@
 		4314B9EB204805D4006DBE63 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				436B366720512114009F7C21 /* FlexibleHeightBar */,
 				438BE840204D51E9007EBFB9 /* HamburgerButton */,
 				43EFF1F2204939E300B1887C /* Extensions */,
 				4314B9ED20480605006DBE63 /* Resources */,
@@ -215,6 +227,19 @@
 				4314B9F1204806E5006DBE63 /* MaterialIcons.bundle */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		436B366720512114009F7C21 /* FlexibleHeightBar */ = {
+			isa = PBXGroup;
+			children = (
+				436B366820512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift */,
+				436B366920512114009F7C21 /* FlexibleHeightBar.swift */,
+				436B366A20512114009F7C21 /* FlexibleHeightBarBehaviorDefiner.swift */,
+				436B366B20512114009F7C21 /* FacebookBarBehaviorDefiner.swift */,
+				436B366C20512114009F7C21 /* SquareCashBarBehaviorDefiner.swift */,
+				436B366D20512114009F7C21 /* TableViewDelegateHandler.swift */,
+			);
+			path = FlexibleHeightBar;
 			sourceTree = "<group>";
 		};
 		4376F49C204D9DEA00B179C3 /* Coordinators */ = {
@@ -444,7 +469,6 @@
 				7445E9CF2019CF7200470E0A /* LaunchScreen.storyboard in Resources */,
 				7445E9CC2019CF7200470E0A /* Assets.xcassets in Resources */,
 				7445E9CA2019CF7200470E0A /* Main.storyboard in Resources */,
-				43F55647204FEDB200FD32E0 /* Info.plist in Resources */,
 				4314B9F2204806E5006DBE63 /* MaterialIcons.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -640,11 +664,17 @@
 				4314B9EF2048060F006DBE63 /* MaterialIcon.swift in Sources */,
 				4376F4A0204D9E2700B179C3 /* CoordinatorProtocol.swift in Sources */,
 				438BE842204D51FD007EBFB9 /* HamburgerButton.swift in Sources */,
+				436B366F20512114009F7C21 /* FlexibleHeightBar.swift in Sources */,
 				4376F4A3204D9F9D00B179C3 /* HomeViewModel.swift in Sources */,
+				436B367320512114009F7C21 /* TableViewDelegateHandler.swift in Sources */,
 				4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */,
+				436B366E20512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift in Sources */,
 				43EFF20620493B4900B1887C /* Stylesheet.swift in Sources */,
+				436B367120512114009F7C21 /* FacebookBarBehaviorDefiner.swift in Sources */,
+				436B367020512114009F7C21 /* FlexibleHeightBarBehaviorDefiner.swift in Sources */,
 				431437EF2047FF4500189C83 /* MenuViewController.swift in Sources */,
 				7445E9C52019CF7200470E0A /* AppDelegate.swift in Sources */,
+				436B367220512114009F7C21 /* SquareCashBarBehaviorDefiner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
