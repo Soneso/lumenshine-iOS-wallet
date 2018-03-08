@@ -19,6 +19,7 @@ class HomeCoordinator: CoordinatorType {
         
         let navigationController = AppNavigationController(rootViewController: homeView)
         let drawer = AppNavigationDrawerController(centerViewController: navigationController, leftDrawerViewController: menuView, rightDrawerViewController: nil)
+        drawer.maximumLeftDrawerWidth = 260
         
         menuView.present(homeView)
         

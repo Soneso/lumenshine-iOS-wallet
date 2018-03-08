@@ -25,9 +25,9 @@ public class HamburgerButton: UIButton {
     private let bottom: CAShapeLayer = CAShapeLayer()
     private let width: CGFloat = 18
     private let height: CGFloat = 16
-    private let topYPosition: CGFloat = 2
-    private let middleYPosition: CGFloat = 7
-    private let bottomYPosition: CGFloat = 12
+    private var topYPosition: CGFloat = 2
+    private var middleYPosition: CGFloat = 7
+    private var bottomYPosition: CGFloat = 12
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,6 +40,10 @@ public class HamburgerButton: UIButton {
     }
 
     private func commonInit() {
+        topYPosition = (frame.height - height)/2
+        middleYPosition = (height-1)/3 + topYPosition
+        bottomYPosition = 2*(height-1)/3 + topYPosition
+        
         let path = UIBezierPath()
         path.move(to: CGPoint(x: 0, y: 0))
         path.addLine(to: CGPoint(x: width, y: 0))
@@ -62,7 +66,7 @@ public class HamburgerButton: UIButton {
             layer.addSublayer(shapeLayer)
         }
 
-        let widthMiddle = width / 2
+        let widthMiddle = width
         top.position = CGPoint(x: widthMiddle, y: topYPosition)
         middle.position = CGPoint(x: widthMiddle, y: middleYPosition)
         bottom.position = CGPoint(x: widthMiddle, y: bottomYPosition)
@@ -93,7 +97,7 @@ public class HamburgerButton: UIButton {
             top.ahk_applyKeyframeValuesAnimation(animation: topRotation)
 
             let topPosition = CAKeyframeAnimation(keyPath: "position")
-            let topPositionEndPoint = CGPoint(x: width / 2, y: showsMenu ? topYPosition : bottomYPosition + verticalOffsetInRotatedState)
+            let topPositionEndPoint = CGPoint(x: width, y: showsMenu ? topYPosition : bottomYPosition + verticalOffsetInRotatedState)
             topPosition.path = quadBezierCurveFromPoint(startPoint: top.position,
                 toPoint: topPositionEndPoint,
                 controlPoint: CGPoint(x: width, y: positionPathControlPointY)).cgPath
@@ -118,7 +122,7 @@ public class HamburgerButton: UIButton {
             bottom.ahk_applyKeyframeValuesAnimation(animation: bottomRotation)
 
             let bottomPosition = CAKeyframeAnimation(keyPath: "position")
-            let bottomPositionEndPoint = CGPoint(x: width / 2, y: showsMenu ? bottomYPosition : topYPosition - verticalOffsetInRotatedState)
+            let bottomPositionEndPoint = CGPoint(x: width, y: showsMenu ? bottomYPosition : topYPosition - verticalOffsetInRotatedState)
             bottomPosition.path = quadBezierCurveFromPoint(startPoint: bottom.position,
                 toPoint: bottomPositionEndPoint,
                 controlPoint: CGPoint(x: 0, y: positionPathControlPointY)).cgPath

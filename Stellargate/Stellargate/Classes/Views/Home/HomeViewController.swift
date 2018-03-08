@@ -57,7 +57,7 @@ extension HomeViewController {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         headerBar.behaviorDefiner?.scrollViewDidScroll(scrollView)
-        titleLabel.text = headerBar.progress < 0.75 ? "" : "TrendyStartup.io"
+        titleLabel.text = headerBar.progress < 0.65 ? "" : "TrendyStartup.io"
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -153,7 +153,7 @@ fileprivate extension HomeViewController {
         // Create a final set of layout attributes based on the same values as the initial layout attributes
         let finalLayoutAttributes = FlexibleHeightBarSubviewLayoutAttributes(layoutAttributes: initialLayoutAttributes)
         finalLayoutAttributes.alpha = 0.0
-        let translation = CGAffineTransform(translationX: 0.0, y: -50.0)
+        let translation = CGAffineTransform(translationX: 0.0, y: -100.0)
         let scale = CGAffineTransform(scaleX: 0.2, y: 0.2)
         finalLayoutAttributes.transform = scale.concatenating(translation)
         

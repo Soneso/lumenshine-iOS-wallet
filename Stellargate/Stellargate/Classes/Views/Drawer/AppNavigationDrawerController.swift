@@ -14,7 +14,6 @@ class AppNavigationDrawerController: DrawerController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        minimumAnimationDuration = 0.4
-        
         openDrawerGestureModeMask = [.panningCenterView, .panningNavigationBar]
         closeDrawerGestureModeMask = [.panningCenterView, .panningNavigationBar]
     }

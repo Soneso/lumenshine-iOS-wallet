@@ -30,7 +30,7 @@ class MenuViewController: UITableViewController {
         [MaterialIcon.settings.size24pt, MaterialIcon.help.size24pt]
     ]
     
-    fileprivate let menuButton = HamburgerButton(frame: CGRect(origin: .zero, size: CGSize(width: 36, height: 36)))
+    fileprivate let menuButton = HamburgerButton(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
     
     override init(style: UITableViewStyle) {
         super.init(style: style)
@@ -124,7 +124,7 @@ extension MenuViewController {
 fileprivate extension MenuViewController {
     
     func linkMenuButton(to controller: UIViewController) {
-        menuButton.transform = menuButton.transform.scaledBy(x: 1.5, y: 1.5)
+        menuButton.transform = menuButton.transform.scaledBy(x: 1.35, y: 1.35)
         menuButton.addTarget(self, action: #selector(onMenuButtonTap(_:event:)), for: .touchUpInside)
         controller.navigationItem.leftViews = [menuButton]
         evo_drawerController?.gestureCompletionBlock = { (drawer, gesture) in
