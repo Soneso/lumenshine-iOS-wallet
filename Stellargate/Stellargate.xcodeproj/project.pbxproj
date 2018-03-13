@@ -21,11 +21,15 @@
 		436B367120512114009F7C21 /* FacebookBarBehaviorDefiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436B366B20512114009F7C21 /* FacebookBarBehaviorDefiner.swift */; };
 		436B367220512114009F7C21 /* SquareCashBarBehaviorDefiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436B366C20512114009F7C21 /* SquareCashBarBehaviorDefiner.swift */; };
 		436B367320512114009F7C21 /* TableViewDelegateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436B366D20512114009F7C21 /* TableViewDelegateHandler.swift */; };
+		436FE5082052634300CFE788 /* WebCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436FE5072052634300CFE788 /* WebCard.swift */; };
 		4376F49E204D9DF800B179C3 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4376F49D204D9DF800B179C3 /* HomeCoordinator.swift */; };
 		4376F4A0204D9E2700B179C3 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4376F49F204D9E2700B179C3 /* CoordinatorProtocol.swift */; };
 		4376F4A3204D9F9D00B179C3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4376F4A2204D9F9D00B179C3 /* HomeViewModel.swift */; };
-		4376F4A6204DA0FE00B179C3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4376F4A5204DA0FE00B179C3 /* HomeViewController.swift */; };
 		438BE842204D51FD007EBFB9 /* HamburgerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438BE841204D51FD007EBFB9 /* HamburgerButton.swift */; };
+		43D131E220569950000483C4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E120569950000483C4 /* HomeViewController.swift */; };
+		43D131E42056D439000483C4 /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E32056D439000483C4 /* CardTableViewCell.swift */; };
+		43D131E62056E3BD000483C4 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E52056E3BD000483C4 /* CardViewModel.swift */; };
+		43D131E82056EAC6000483C4 /* ChartCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E72056EAC6000483C4 /* ChartCard.swift */; };
 		43EFF204204939F700B1887C /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EFF203204939F700B1887C /* UIColor+Utils.swift */; };
 		43EFF20620493B4900B1887C /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EFF20520493B4900B1887C /* Stylesheet.swift */; };
 		7445E9C52019CF7200470E0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7445E9C42019CF7200470E0A /* AppDelegate.swift */; };
@@ -84,11 +88,16 @@
 		436B366B20512114009F7C21 /* FacebookBarBehaviorDefiner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookBarBehaviorDefiner.swift; sourceTree = "<group>"; };
 		436B366C20512114009F7C21 /* SquareCashBarBehaviorDefiner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareCashBarBehaviorDefiner.swift; sourceTree = "<group>"; };
 		436B366D20512114009F7C21 /* TableViewDelegateHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDelegateHandler.swift; sourceTree = "<group>"; };
+		436FE5072052634300CFE788 /* WebCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCard.swift; sourceTree = "<group>"; };
 		4376F49D204D9DF800B179C3 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		4376F49F204D9E2700B179C3 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		4376F4A2204D9F9D00B179C3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		4376F4A5204DA0FE00B179C3 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		438BE841204D51FD007EBFB9 /* HamburgerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HamburgerButton.swift; sourceTree = "<group>"; };
+		43D131E020566802000483C4 /* Stellargate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Stellargate.entitlements; sourceTree = "<group>"; };
+		43D131E120569950000483C4 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		43D131E32056D439000483C4 /* CardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
+		43D131E52056E3BD000483C4 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
+		43D131E72056EAC6000483C4 /* ChartCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCard.swift; sourceTree = "<group>"; };
 		43EFF203204939F700B1887C /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
 		43EFF20520493B4900B1887C /* Stylesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stylesheet.swift; sourceTree = "<group>"; };
 		43F55646204FEDB200FD32E0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -154,9 +163,9 @@
 		431437EB2047FEEC00189C83 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				4376F4A1204D9F5A00B179C3 /* ViewModels */,
-				4376F49C204D9DEA00B179C3 /* Coordinators */,
 				4314B9EC204805F6006DBE63 /* AppDelegate */,
+				4376F49C204D9DEA00B179C3 /* Coordinators */,
+				4376F4A1204D9F5A00B179C3 /* ViewModels */,
 				431437EC2047FF1A00189C83 /* Views */,
 				4314B9EB204805D4006DBE63 /* Framework */,
 			);
@@ -166,8 +175,8 @@
 		431437EC2047FF1A00189C83 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4376F4A4204DA07A00B179C3 /* Home */,
 				7445E9C62019CF7200470E0A /* ViewController.swift */,
+				4376F4A4204DA07A00B179C3 /* Home */,
 				431437F02047FF7E00189C83 /* Drawer */,
 				431437ED2047FF2000189C83 /* Menu */,
 			);
@@ -255,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				4376F4A2204D9F9D00B179C3 /* HomeViewModel.swift */,
+				43D131E52056E3BD000483C4 /* CardViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -262,7 +272,10 @@
 		4376F4A4204DA07A00B179C3 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				4376F4A5204DA0FE00B179C3 /* HomeViewController.swift */,
+				43D131E32056D439000483C4 /* CardTableViewCell.swift */,
+				43D131E120569950000483C4 /* HomeViewController.swift */,
+				436FE5072052634300CFE788 /* WebCard.swift */,
+				43D131E72056EAC6000483C4 /* ChartCard.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -308,6 +321,7 @@
 		7445E9C32019CF7200470E0A /* Stellargate */ = {
 			isa = PBXGroup;
 			children = (
+				43D131E020566802000483C4 /* Stellargate.entitlements */,
 				431437EB2047FEEC00189C83 /* Classes */,
 				4314B9F02048068B006DBE63 /* Resources */,
 				7445E9C82019CF7200470E0A /* Main.storyboard */,
@@ -428,6 +442,14 @@
 					7445E9C02019CF7200470E0A = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
 					};
 					7445E9D42019CF7300470E0A = {
 						CreatedOnToolsVersion = 9.2;
@@ -611,6 +633,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Stellargate/Pods-Stellargate-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/DGElasticPullToRefresh/DGElasticPullToRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/DrawerController/DrawerController.framework",
 				"${BUILT_PRODUCTS_DIR}/Material/Material.framework",
@@ -620,6 +643,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DGElasticPullToRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DrawerController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Material.framework",
@@ -654,24 +678,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43D131E42056D439000483C4 /* CardTableViewCell.swift in Sources */,
 				43EFF204204939F700B1887C /* UIColor+Utils.swift in Sources */,
 				4376F49E204D9DF800B179C3 /* HomeCoordinator.swift in Sources */,
 				7445E9C72019CF7200470E0A /* ViewController.swift in Sources */,
 				431437F22047FF9100189C83 /* AppNavigationController.swift in Sources */,
 				4314B9F9204812BC006DBE63 /* MenuTableViewCell.swift in Sources */,
-				4376F4A6204DA0FE00B179C3 /* HomeViewController.swift in Sources */,
 				431437F42047FFB400189C83 /* AppNavigationDrawerController.swift in Sources */,
 				4314B9EF2048060F006DBE63 /* MaterialIcon.swift in Sources */,
+				43D131E82056EAC6000483C4 /* ChartCard.swift in Sources */,
 				4376F4A0204D9E2700B179C3 /* CoordinatorProtocol.swift in Sources */,
 				438BE842204D51FD007EBFB9 /* HamburgerButton.swift in Sources */,
+				436FE5082052634300CFE788 /* WebCard.swift in Sources */,
 				436B366F20512114009F7C21 /* FlexibleHeightBar.swift in Sources */,
 				4376F4A3204D9F9D00B179C3 /* HomeViewModel.swift in Sources */,
+				43D131E220569950000483C4 /* HomeViewController.swift in Sources */,
 				436B367320512114009F7C21 /* TableViewDelegateHandler.swift in Sources */,
 				4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */,
 				436B366E20512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift in Sources */,
 				43EFF20620493B4900B1887C /* Stylesheet.swift in Sources */,
 				436B367120512114009F7C21 /* FacebookBarBehaviorDefiner.swift in Sources */,
 				436B367020512114009F7C21 /* FlexibleHeightBarBehaviorDefiner.swift in Sources */,
+				43D131E62056E3BD000483C4 /* CardViewModel.swift in Sources */,
 				431437EF2047FF4500189C83 /* MenuViewController.swift in Sources */,
 				7445E9C52019CF7200470E0A /* AppDelegate.swift in Sources */,
 				436B367220512114009F7C21 /* SquareCashBarBehaviorDefiner.swift in Sources */,
@@ -841,12 +869,13 @@
 			baseConfigurationReference = DD63FE5AB755CC7789C9DBAD /* Pods-Stellargate.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Stellargate/Stellargate.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QD77X3XT7P;
+				DEVELOPMENT_TEAM = QN6AY4TH84;
 				INFOPLIST_FILE = Stellargate/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.soneso.jupiter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.soneso.stellar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -858,12 +887,13 @@
 			baseConfigurationReference = 5A5A4485ADF2A66A43DCDEFB /* Pods-Stellargate.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Stellargate/Stellargate.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QD77X3XT7P;
+				DEVELOPMENT_TEAM = QN6AY4TH84;
 				INFOPLIST_FILE = Stellargate/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.soneso.jupiter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.soneso.stellar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

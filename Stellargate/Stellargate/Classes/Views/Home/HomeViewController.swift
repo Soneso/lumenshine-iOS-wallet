@@ -10,17 +10,30 @@ import UIKit
 import Material
 import DGElasticPullToRefresh
 
-class HomeViewController: CardCollectionViewController {
+class HomeViewController: UIViewController {
+    
+    fileprivate static let CellIdentifier = "CardTableViewCell"
     
     // MARK: - Properties
     
     fileprivate let viewModel: HomeViewModelType
     fileprivate var headerBar: FlexibleHeightBar!
     fileprivate var titleLabel = UILabel()
+    fileprivate let tableView: UITableView
+    
+    fileprivate var dataSourceItems = [WebCard]()
     
     init(viewModel: HomeViewModelType) {
         self.viewModel = viewModel
+        tableView = UITableView(frame: .zero, style: .grouped)
         super.init(nibName: nil, bundle: nil)
+        
+        dataSourceItems = [
+            card(),
+            card(),
+            card(),
+            card()
+        ]
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -28,7 +41,7 @@ class HomeViewController: CardCollectionViewController {
     }
     
     deinit {
-        collectionView.dg_removePullToRefresh()
+        tableView.dg_removePullToRefresh()
     }
     
     override func viewDidLoad() {
@@ -38,19 +51,30 @@ class HomeViewController: CardCollectionViewController {
         prepareHeader()
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        navigationController?.setNavigationBarHidden(true, animated: animated)
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.shadowColor = Stylesheet.color(.clear)
+    }
 }
 
-extension HomeViewController {
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! CardCollectionViewCell
-        
+extension HomeViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataSourceItems.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: HomeViewController.CellIdentifier, for: indexPath) as! CardTableViewCell
+
+        cell.card = dataSourceItems[indexPath.row]
+        cell.selectionStyle = .none
+
         return cell
     }
     
+}
+
+extension HomeViewController:UITableViewDelegate {
 }
 
 extension HomeViewController {
@@ -59,22 +83,19 @@ extension HomeViewController {
         headerBar.behaviorDefiner?.scrollViewDidScroll(scrollView)
         titleLabel.text = headerBar.progress < 0.65 ? "" : "TrendyStartup.io"
     }
-    
+
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         headerBar.behaviorDefiner?.scrollViewDidEndDecelerating(scrollView)
     }
-    
+
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         headerBar.behaviorDefiner?.scrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
     }
 }
 
 fileprivate extension HomeViewController {
-    func imageCard() -> ImageCard {
-        let card = ImageCard()
-        
-        let favoriteButton = IconButton(image: Icon.favorite, tintColor: Color.red.base)
-        let shareButton = IconButton(image: Icon.cm.share, tintColor: Color.blueGrey.base)
+    func card() -> WebCard {
+        let card = WebCard()
         
         let dateLabel = UILabel()
         dateLabel.font = RobotoFont.regular(with: 12)
@@ -84,39 +105,39 @@ fileprivate extension HomeViewController {
         
         let contentView = UILabel()
         contentView.numberOfLines = 0
-        contentView.text = "Material is an animation and graphics framework that is used to create beautiful applications."
+        contentView.text = "Material is an animation and graphics framework that is used to create beautiful applications. Material is an animation and graphics framework that is used to create beautiful applications.Material is an animation and graphics framework that is used to create beautiful applications.Material is an animation and graphics framework that is used to create beautiful applications.Material is an animation and graphics framework that is used to create beautiful applications.Material is an animation and graphics framework that is used to create beautiful applications."
         contentView.font = RobotoFont.regular(with: 14)
         
         let imageView = UIImageView()
         imageView.image = UIImage.image(with: Color.blue.lighten3, size: CGSize(width: 100, height: 100))
-        card.imageView = imageView
+        card.setImage(UIImage.image(with: Color.blue.lighten3, size: CGSize(width: 100, height: 100)))
         
-        card.contentView = contentView
-        card.contentViewEdgeInsetsPreset = .square3
+        card.setTitle("Test title")
         
-        card.bottomBar = Bar(leftViews: [favoriteButton], rightViews: [shareButton], centerViews: [dateLabel])
-        card.bottomBarEdgeInsetsPreset = .wideRectangle2
+        card.setDetail("Material is an animation and graphics framework that is used to create beautiful applications. Material is an animation and graphics framework that is used to create beautiful applications.Material is an animation and graphics framework that is used to create beautiful applications.Material is an animation and graphics framework that is used to create beautiful applications.Material is an animation and graphics framework that is used to create beautiful applications.Material is an animation and graphics framework that is used to create beautiful applications.")
+        
+        let button1 = FlatButton()
+        button1.title = "Read more"
+        card.setBottomBar(buttons: [button1])
         
         card.cornerRadiusPreset = .cornerRadius2
         card.depthPreset = .depth3
-        
         return card
     }
     
     func prepareView() {
-        let width = CGFloat(0)
-        let height = CGFloat(300)
+        view.backgroundColor = Stylesheet.color(.white)
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         
-        dataSourceItems = [
-            DataSourceItem(data: imageCard(), width: width, height: height),
-            DataSourceItem(data: imageCard(), width: width, height: height),
-            DataSourceItem(data: imageCard(), width: width, height: height),
-            DataSourceItem(data: imageCard(), width: width, height: height)
-        ]
-        
-        collectionView.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
-        
-        navigationController?.navigationBar.shadowColor = Stylesheet.color(.clear)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = Stylesheet.color(.white)
+        tableView.register(CardTableViewCell.self, forCellReuseIdentifier: HomeViewController.CellIdentifier)
+        tableView.estimatedRowHeight = UITableViewAutomaticDimension
+        tableView.separatorStyle = .none
         
         titleLabel.textColor = Stylesheet.color(.white)
         titleLabel.textAlignment = .center
@@ -130,11 +151,9 @@ fileprivate extension HomeViewController {
         headerBar.backgroundColor = Stylesheet.color(.cyan)
         view.addSubview(headerBar)
 
-        collectionView.contentInset = UIEdgeInsetsMake(100.0, 0.0, 0.0, 0.0)
+        tableView.contentInset = UIEdgeInsetsMake(100.0, 0.0, 0.0, 0.0)
 
         headerBar.behaviorDefiner = FacebookBarBehaviorDefiner()
-        
-        //        navigationController?.navigationBar.isTranslucent = true
         
         let label = UILabel();
         label.text = "TrendyStartup.io"
@@ -167,12 +186,12 @@ fileprivate extension HomeViewController {
         // Initialize tableView
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
         loadingView.tintColor = Stylesheet.color(.white)
-        collectionView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
+        tableView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
             // Add your logic here
             // Do not forget to call dg_stopLoading() at the end
-            self?.collectionView.dg_stopLoading()
+            self?.tableView.dg_stopLoading()
             }, loadingView: loadingView)
-        collectionView.dg_setPullToRefreshFillColor(Stylesheet.color(.cyan))
-        collectionView.dg_setPullToRefreshBackgroundColor(collectionView.backgroundColor!)
+        tableView.dg_setPullToRefreshFillColor(Stylesheet.color(.cyan))
+        tableView.dg_setPullToRefreshBackgroundColor(tableView.backgroundColor!)
     }
 }

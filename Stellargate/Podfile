@@ -9,6 +9,7 @@ def ui_components_and_helper_pods
     pod 'SnapKit'
     pod 'DrawerController'
     pod 'DGElasticPullToRefresh'
+    pod 'Charts'
 end
 
 target 'Stellargate' do
