@@ -21,7 +21,7 @@ class HomeViewController: UIViewController {
     fileprivate var titleLabel = UILabel()
     fileprivate let tableView: UITableView
     
-    fileprivate var dataSourceItems = [WebCard]()
+    fileprivate var dataSourceItems = [Card]()
     
     init(viewModel: HomeViewModelType) {
         self.viewModel = viewModel
@@ -29,10 +29,10 @@ class HomeViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         dataSourceItems = [
-            card(),
-            card(),
-            card(),
-            card()
+            webCard(),
+            chartCard(),
+            webCard(),
+            chartCard()
         ]
     }
     
@@ -94,30 +94,29 @@ extension HomeViewController {
 }
 
 fileprivate extension HomeViewController {
-    func card() -> WebCard {
+    func webCard() -> WebCard {
         let card = WebCard()
         
-        let dateLabel = UILabel()
-        dateLabel.font = RobotoFont.regular(with: 12)
-        dateLabel.textColor = Color.blueGrey.base
-        dateLabel.textAlignment = .center
-        dateLabel.text = "2018.03.05"
-        
-        let contentView = UILabel()
-        contentView.numberOfLines = 0
-        contentView.text = "Material is an animation and graphics framework that is used to create beautiful applications. Material is an animation and graphics framework that is used to create beautiful applications.Material is an animation and graphics framework that is used to create beautiful applications.Material is an animation and graphics framework that is used to create beautiful applications.Material is an animation and graphics framework that is used to create beautiful applications.Material is an animation and graphics framework that is used to create beautiful applications."
-        contentView.font = RobotoFont.regular(with: 14)
-        
-        let imageView = UIImageView()
-        imageView.image = UIImage.image(with: Color.blue.lighten3, size: CGSize(width: 100, height: 100))
         card.setImage(UIImage.image(with: Color.blue.lighten3, size: CGSize(width: 100, height: 100)))
-        
         card.setTitle("Test title")
-        
         card.setDetail("Material is an animation and graphics framework that is used to create beautiful applications. Material is an animation and graphics framework that is used to create beautiful applications.Material is an animation and graphics framework that is used to create beautiful applications.Material is an animation and graphics framework that is used to create beautiful applications.Material is an animation and graphics framework that is used to create beautiful applications.Material is an animation and graphics framework that is used to create beautiful applications.")
         
         let button1 = FlatButton()
         button1.title = "Read more"
+        card.setBottomBar(buttons: [button1])
+        
+        card.cornerRadiusPreset = .cornerRadius2
+        card.depthPreset = .depth3
+        return card
+    }
+    
+    func chartCard() -> ChartCard {
+        let card = ChartCard()
+        
+        card.setTitle("Test title")
+        
+        let button1 = FlatButton()
+        button1.title = "Sell Lumen"
         card.setBottomBar(buttons: [button1])
         
         card.cornerRadiusPreset = .cornerRadius2

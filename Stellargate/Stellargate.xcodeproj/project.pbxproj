@@ -25,7 +25,9 @@
 		4376F49E204D9DF800B179C3 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4376F49D204D9DF800B179C3 /* HomeCoordinator.swift */; };
 		4376F4A0204D9E2700B179C3 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4376F49F204D9E2700B179C3 /* CoordinatorProtocol.swift */; };
 		4376F4A3204D9F9D00B179C3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4376F4A2204D9F9D00B179C3 /* HomeViewModel.swift */; };
+		4387980A20584335005261C8 /* InternalCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4387980920584335005261C8 /* InternalCard.swift */; };
 		438BE842204D51FD007EBFB9 /* HamburgerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438BE841204D51FD007EBFB9 /* HamburgerButton.swift */; };
+		43920D9A2057EECA0040003C /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43920D992057EECA0040003C /* Card.swift */; };
 		43D131E220569950000483C4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E120569950000483C4 /* HomeViewController.swift */; };
 		43D131E42056D439000483C4 /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E32056D439000483C4 /* CardTableViewCell.swift */; };
 		43D131E62056E3BD000483C4 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E52056E3BD000483C4 /* CardViewModel.swift */; };
@@ -92,7 +94,9 @@
 		4376F49D204D9DF800B179C3 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		4376F49F204D9E2700B179C3 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		4376F4A2204D9F9D00B179C3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		4387980920584335005261C8 /* InternalCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalCard.swift; sourceTree = "<group>"; };
 		438BE841204D51FD007EBFB9 /* HamburgerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HamburgerButton.swift; sourceTree = "<group>"; };
+		43920D992057EECA0040003C /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		43D131E020566802000483C4 /* Stellargate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Stellargate.entitlements; sourceTree = "<group>"; };
 		43D131E120569950000483C4 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		43D131E32056D439000483C4 /* CardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
@@ -276,6 +280,8 @@
 				43D131E120569950000483C4 /* HomeViewController.swift */,
 				436FE5072052634300CFE788 /* WebCard.swift */,
 				43D131E72056EAC6000483C4 /* ChartCard.swift */,
+				43920D992057EECA0040003C /* Card.swift */,
+				4387980920584335005261C8 /* InternalCard.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -678,6 +684,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4387980A20584335005261C8 /* InternalCard.swift in Sources */,
 				43D131E42056D439000483C4 /* CardTableViewCell.swift in Sources */,
 				43EFF204204939F700B1887C /* UIColor+Utils.swift in Sources */,
 				4376F49E204D9DF800B179C3 /* HomeCoordinator.swift in Sources */,
@@ -695,6 +702,7 @@
 				43D131E220569950000483C4 /* HomeViewController.swift in Sources */,
 				436B367320512114009F7C21 /* TableViewDelegateHandler.swift in Sources */,
 				4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */,
+				43920D9A2057EECA0040003C /* Card.swift in Sources */,
 				436B366E20512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift in Sources */,
 				43EFF20620493B4900B1887C /* Stylesheet.swift in Sources */,
 				436B367120512114009F7C21 /* FacebookBarBehaviorDefiner.swift in Sources */,

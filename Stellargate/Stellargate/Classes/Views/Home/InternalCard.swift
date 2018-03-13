@@ -1,29 +1,25 @@
 //
-//  WebCard.swift
+//  InternalCard.swift
 //  Stellargate
 //
-//  Created by Istvan Elekes on 3/9/18.
+//  Created by Istvan Elekes on 3/13/18.
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
 import UIKit
-import Material
 import SnapKit
 
-protocol WebCardProtocol {
+protocol InternalCardProtocol {
     func setImage(_ image: UIImage?)
     func setTitle(_ text: String?)
     func setDetail(_ detail: String?)
-//    func setBottomBar(buttons: [Button])
 }
 
-class WebCard: Card {
+class InternalCard: Card {
     
     fileprivate let imageView = UIImageView()
     fileprivate let titleLabel = UILabel()
     fileprivate let detailLabel = UILabel()
-    
-//    fileprivate var viewModel: CardViewModel?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,10 +30,10 @@ class WebCard: Card {
         fatalError("init(coder:) has not been implemented")
     }
     
-
+    
 }
 
-extension WebCard: WebCardProtocol {
+extension InternalCard: InternalCardProtocol {
     func setImage(_ image: UIImage?) {
         imageView.image = image
     }
@@ -51,7 +47,7 @@ extension WebCard: WebCardProtocol {
     }
 }
 
-fileprivate extension WebCard {
+fileprivate extension InternalCard {
     func prepare() {
         
         cornerRadiusPreset = .cornerRadius3
@@ -102,5 +98,6 @@ fileprivate extension WebCard {
         }
     }
 }
+
 
 

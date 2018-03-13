@@ -6,7 +6,7 @@
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
-import Material
+import UIKit
 import SnapKit
 
 class CardTableViewCell: UITableViewCell {
@@ -19,7 +19,7 @@ class CardTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var card: WebCard? {
+    var card: Card? {
         didSet {
             oldValue?.removeFromSuperview()
 
