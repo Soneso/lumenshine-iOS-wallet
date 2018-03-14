@@ -21,19 +21,15 @@ class HomeViewController: UIViewController {
     fileprivate var titleLabel = UILabel()
     fileprivate let tableView: UITableView
     
-    fileprivate var dataSourceItems = [Card]()
+    fileprivate let dataSourceItems: [Card]
     
     init(viewModel: HomeViewModelType) {
         self.viewModel = viewModel
+        dataSourceItems = viewModel.cardViewModels.map {
+            Card.create(viewModel: $0)
+        }
         tableView = UITableView(frame: .zero, style: .grouped)
         super.init(nibName: nil, bundle: nil)
-        
-        dataSourceItems = [
-            webCard(),
-            chartCard(),
-            webCard(),
-            chartCard()
-        ]
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -94,36 +90,6 @@ extension HomeViewController {
 }
 
 fileprivate extension HomeViewController {
-    func webCard() -> WebCard {
-        let card = WebCard()
-        
-        card.setImage(UIImage.image(with: Color.blue.lighten3, size: CGSize(width: 100, height: 100)))
-        card.setTitle("Test title")
-        card.setDetail("Material is an animation and graphics framework that is used to create beautiful applications. Material is an animation and graphics framework that is used to create beautiful applications.Material is an animation and graphics framework that is used to create beautiful applications.Material is an animation and graphics framework that is used to create beautiful applications.Material is an animation and graphics framework that is used to create beautiful applications.Material is an animation and graphics framework that is used to create beautiful applications.")
-        
-        let button1 = FlatButton()
-        button1.title = "Read more"
-        card.setBottomBar(buttons: [button1])
-        
-        card.cornerRadiusPreset = .cornerRadius2
-        card.depthPreset = .depth3
-        return card
-    }
-    
-    func chartCard() -> ChartCard {
-        let card = ChartCard()
-        
-        card.setTitle("Test title")
-        
-        let button1 = FlatButton()
-        button1.title = "Sell Lumen"
-        card.setBottomBar(buttons: [button1])
-        
-        card.cornerRadiusPreset = .cornerRadius2
-        card.depthPreset = .depth3
-        return card
-    }
-    
     func prepareView() {
         view.backgroundColor = Stylesheet.color(.white)
         view.addSubview(tableView)

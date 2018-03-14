@@ -30,6 +30,13 @@ class ChartCard: Card {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override var viewModel: CardViewModelType? {
+        didSet {
+            setTitle(viewModel?.title)
+            setDetail(viewModel?.detail)
+        }
+    }
 }
 
 extension ChartCard: ChartCardProtocol {    
@@ -64,7 +71,7 @@ fileprivate extension ChartCard {
             dataEntries.append(dataEntry)
         }
         
-        let lineChartDataSet = LineChartDataSet(values: dataEntries, label: "Units Sold")
+        let lineChartDataSet = LineChartDataSet(values: dataEntries, label: "EUR 0.244")
         lineChartDataSet.mode = .cubicBezier
         let lineChartData = LineChartData(dataSets: [lineChartDataSet])
 //        let lineChartData = LineChartData(xVals: dataPoints, dataSet: lineChartDataSet)
@@ -74,30 +81,30 @@ fileprivate extension ChartCard {
     
     func prepareChart() {
         let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
-        let unitsSold = [20.0, 4.0, 6.0, 3.0, 12.0, 16.0]
+        let unitsSold = [2.0, 4.0, 6.0, 3.0, 12.0, 16.0]
         
         setChart(dataPoints: months, values: unitsSold)
         
         addSubview(lineChartView)
         lineChartView.snp.makeConstraints { (make) in
-            make.top.equalTo(10)
             make.left.equalTo(10)
             make.right.equalTo(-10)
             make.height.equalTo(200)
+            make.bottom.equalTo(bottomBar.snp.top).offset(-5)
         }
     }
     
     func prepareTitle() {
         titleLabel.textColor = Stylesheet.color(.black)
         titleLabel.font = Stylesheet.font(.body)
-        titleLabel.textAlignment = .center
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.numberOfLines = 0
         
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(lineChartView.snp.bottom).offset(10)
-            make.left.right.equalToSuperview()
+            make.top.equalTo(10)
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
         }
     }
     
@@ -113,7 +120,7 @@ fileprivate extension ChartCard {
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
             make.left.equalTo(10)
             make.right.equalTo(-10)
-            make.bottom.equalTo(bottomBar.snp.top).offset(-5)
+            make.bottom.equalTo(lineChartView.snp.top).offset(-5)
         }
     }
 }

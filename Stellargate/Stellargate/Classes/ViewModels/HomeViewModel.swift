@@ -10,13 +10,23 @@ import Foundation
 
 protocol HomeViewModelType: Transitionable {
     
+    var cardViewModels: [CardViewModelType] { get }
+    
 }
 
 class HomeViewModel : HomeViewModelType {
     
     weak var navigationCoordinator: CoordinatorType?
     
+    var cardViewModels: [CardViewModelType]
+    
     init() {
+        cardViewModels = [
+            CardViewModel(type: .web),
+            CardViewModel(type: .chart),
+            CardViewModel(type: .web),
+            CardViewModel(type: .chart)
+        ]
     }
     
 }

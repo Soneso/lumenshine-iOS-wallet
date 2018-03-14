@@ -30,7 +30,13 @@ class InternalCard: Card {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
+    override var viewModel: CardViewModelType? {
+        didSet {
+            setImage(viewModel?.image)
+            setTitle(viewModel?.title)
+            setDetail(viewModel?.detail)
+        }
+    }
 }
 
 extension InternalCard: InternalCardProtocol {

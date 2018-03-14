@@ -11,13 +11,26 @@ import Material
 import SnapKit
 
 protocol CardProtocol {
-    func setBottomBar(buttons: [Button])
+    func setBottomBar(buttons: [Button]?)
 }
 
 class Card: UIView {
     
     internal let bottomBar = Bar()
-    internal var viewModel: CardViewModel?
+    internal var viewModel: CardViewModelType? {
+        didSet {
+            let buttons = viewModel?.bottomTitles?.map {
+                return FlatButton(title: $0)
+            }
+            setBottomBar(buttons: buttons)
+        }
+    }
+    
+//    init(viewModel:CardViewModelType) {
+//        super.init(frame: .zero)
+//        self.viewModel = viewModel
+//        prepare()
+//    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,12 +41,26 @@ class Card: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
+    class func create(viewModel:CardViewModelType) -> Card {
+        var card: Card
+        switch viewModel.type {
+        case .web:
+             card = WebCard()
+        case .chart:
+            card = ChartCard()
+        case .intern:
+            card = InternalCard()
+        case .account:
+            card = Card()
+        }
+        card.viewModel = viewModel
+        return card
+    }
 }
 
 extension Card: CardProtocol {
-    func setBottomBar(buttons: [Button]) {
-        bottomBar.rightViews = buttons
+    func setBottomBar(buttons: [Button]?) {
+        bottomBar.rightViews = buttons ?? []
     }
 }
 

@@ -14,7 +14,6 @@ protocol WebCardProtocol {
     func setImage(_ image: UIImage?)
     func setTitle(_ text: String?)
     func setDetail(_ detail: String?)
-//    func setBottomBar(buttons: [Button])
 }
 
 class WebCard: Card {
@@ -22,8 +21,6 @@ class WebCard: Card {
     fileprivate let imageView = UIImageView()
     fileprivate let titleLabel = UILabel()
     fileprivate let detailLabel = UILabel()
-    
-//    fileprivate var viewModel: CardViewModel?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,7 +31,13 @@ class WebCard: Card {
         fatalError("init(coder:) has not been implemented")
     }
     
-
+    override var viewModel: CardViewModelType? {
+        didSet {
+            setImage(viewModel?.image)
+            setTitle(viewModel?.title)
+            setDetail(viewModel?.detail)
+        }
+    }
 }
 
 extension WebCard: WebCardProtocol {
