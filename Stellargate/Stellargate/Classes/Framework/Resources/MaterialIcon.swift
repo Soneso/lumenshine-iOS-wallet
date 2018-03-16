@@ -158,5 +158,30 @@ public struct MaterialIcon {
     public struct account {
         public static let size48pt = MaterialIcon.icon("ic_account_circle_white_48pt")
     }
+    
+    public struct qrCode {
+        public static let size24pt = MaterialIcon.icon("ic_qr_code")
+        public static let size36pt = MaterialIcon.icon("ic_qr_code_36pt")
+    }
+    
+    public struct send {
+        public static let size24pt = MaterialIcon.icon("ic_send")
+        public static let size36pt = MaterialIcon.icon("ic_send_36pt")
+    }
+    
+    public struct received {
+        public static let size24pt = MaterialIcon.icon("ic_call_received")
+        public static let size36pt = MaterialIcon.icon("ic_call_received_36pt")
+    }
+    
+    public struct money {
+        public static let size24pt = MaterialIcon.icon("ic_attach_money")
+        public static let size36pt = MaterialIcon.icon("ic_attach_money_36pt")
+    }
+    
+    public struct accountBalance {
+        public static let size24pt = MaterialIcon.icon("ic_account_balance")
+        public static let size36pt = MaterialIcon.icon("ic_account_balance36pt")
+    }
 }
 

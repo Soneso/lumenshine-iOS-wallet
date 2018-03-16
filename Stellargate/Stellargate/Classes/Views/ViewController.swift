@@ -8,12 +8,24 @@
 
 import UIKit
 import stellarsdk
+import SnapKit
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        let view = UIView()
+        view.backgroundColor = UIColor.blue
+        
+        self.view.addSubview(view)
+        view.snp.makeConstraints { make in
+            make.top.equalTo(self.view.snp.centerY)
+            make.bottom.left.right.equalToSuperview()
+        }
+        
+        self.view.backgroundColor = Stylesheet.color(.darkGray).withAlphaComponent(0.5)
         
         let sdk = StellarSDK()
         let keyPair = try! KeyPair.generateRandomKeyPair()

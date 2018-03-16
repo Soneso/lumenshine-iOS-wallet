@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    fileprivate let mainCoordinator = HomeCoordinator()
+    fileprivate let mainCoordinator = MainCoordinator()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = mainCoordinator.baseController
+        window?.rootViewController = mainCoordinator.baseController.evo_drawerController
         window?.makeKeyAndVisible()
         
         return true

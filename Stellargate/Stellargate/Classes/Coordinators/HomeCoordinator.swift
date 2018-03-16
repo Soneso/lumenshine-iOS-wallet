@@ -13,26 +13,29 @@ class HomeCoordinator: CoordinatorType {
     
     init() {
         let viewModel = HomeViewModel()
-        
-        let menuView = MenuViewController(style: .grouped)
         let homeView = HomeViewController(viewModel: viewModel)
         
-        let navigationController = AppNavigationController(rootViewController: homeView)
-        let drawer = AppNavigationDrawerController(centerViewController: navigationController, leftDrawerViewController: menuView, rightDrawerViewController: nil)
-        drawer.maximumLeftDrawerWidth = 260
-        
-        menuView.present(homeView)
-        
-        self.baseController = drawer
+        self.baseController = homeView
         viewModel.navigationCoordinator = self
     }
     
     func performTransition(transition: Transition) {
-        
+        switch transition {
+        case .showHeaderMenu(let titles, let icons):
+            showHeaderMenu(titles: titles, icons: icons)
+        default: break
+        }
     }
 }
 
 fileprivate extension HomeCoordinator {
-    
+    func showHeaderMenu(titles: [String], icons: [UIImage?]) {
+        let headerVC = HeaderMenuViewController(titles: titles, icons: icons)
+        headerVC.delegate = self.baseController as! HomeViewController
+        
+        headerVC.modalPresentationStyle = .overCurrentContext
+        
+        self.baseController.present(headerVC, animated: true)
+    }
 }
 

@@ -15,6 +15,7 @@
 		4314B9F2204806E5006DBE63 /* MaterialIcons.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4314B9F1204806E5006DBE63 /* MaterialIcons.bundle */; };
 		4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4314B9F320480813006DBE63 /* MenuViewProtocol.swift */; };
 		4314B9F9204812BC006DBE63 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4314B9F8204812BC006DBE63 /* MenuTableViewCell.swift */; };
+		4322BA26205BAA60007FEB5E /* HeaderMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA25205BAA60007FEB5E /* HeaderMenuViewController.swift */; };
 		436B366E20512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436B366820512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift */; };
 		436B366F20512114009F7C21 /* FlexibleHeightBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436B366920512114009F7C21 /* FlexibleHeightBar.swift */; };
 		436B367020512114009F7C21 /* FlexibleHeightBarBehaviorDefiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436B366A20512114009F7C21 /* FlexibleHeightBarBehaviorDefiner.swift */; };
@@ -32,6 +33,10 @@
 		43D131E42056D439000483C4 /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E32056D439000483C4 /* CardTableViewCell.swift */; };
 		43D131E62056E3BD000483C4 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E52056E3BD000483C4 /* CardViewModel.swift */; };
 		43D131E82056EAC6000483C4 /* ChartCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E72056EAC6000483C4 /* ChartCard.swift */; };
+		43D7A775205A84B300238E29 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D7A774205A84B300238E29 /* R.generated.swift */; };
+		43D7A77B205A892E00238E29 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43D7A777205A892E00238E29 /* Localizable.strings */; };
+		43D7A77C205A892E00238E29 /* Common.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43D7A779205A892E00238E29 /* Common.strings */; };
+		43D7A77E205A90CC00238E29 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D7A77D205A90CC00238E29 /* MainCoordinator.swift */; };
 		43EFF204204939F700B1887C /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EFF203204939F700B1887C /* UIColor+Utils.swift */; };
 		43EFF20620493B4900B1887C /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EFF20520493B4900B1887C /* Stylesheet.swift */; };
 		7445E9C52019CF7200470E0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7445E9C42019CF7200470E0A /* AppDelegate.swift */; };
@@ -84,6 +89,7 @@
 		4314B9F1204806E5006DBE63 /* MaterialIcons.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MaterialIcons.bundle; sourceTree = "<group>"; };
 		4314B9F320480813006DBE63 /* MenuViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewProtocol.swift; sourceTree = "<group>"; };
 		4314B9F8204812BC006DBE63 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
+		4322BA25205BAA60007FEB5E /* HeaderMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMenuViewController.swift; sourceTree = "<group>"; };
 		436B366820512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexibleHeightBarSubviewLayoutAttributes.swift; sourceTree = "<group>"; };
 		436B366920512114009F7C21 /* FlexibleHeightBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexibleHeightBar.swift; sourceTree = "<group>"; };
 		436B366A20512114009F7C21 /* FlexibleHeightBarBehaviorDefiner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexibleHeightBarBehaviorDefiner.swift; sourceTree = "<group>"; };
@@ -102,6 +108,10 @@
 		43D131E32056D439000483C4 /* CardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
 		43D131E52056E3BD000483C4 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		43D131E72056EAC6000483C4 /* ChartCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCard.swift; sourceTree = "<group>"; };
+		43D7A774205A84B300238E29 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
+		43D7A778205A892E00238E29 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		43D7A77A205A892E00238E29 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Common.strings; sourceTree = "<group>"; };
+		43D7A77D205A90CC00238E29 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		43EFF203204939F700B1887C /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
 		43EFF20520493B4900B1887C /* Stylesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stylesheet.swift; sourceTree = "<group>"; };
 		43F55646204FEDB200FD32E0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -237,6 +247,8 @@
 		4314B9F02048068B006DBE63 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				43D7A776205A892E00238E29 /* Strings */,
+				43D7A774205A84B300238E29 /* R.generated.swift */,
 				4314B9F1204806E5006DBE63 /* MaterialIcons.bundle */,
 			);
 			path = Resources;
@@ -258,8 +270,9 @@
 		4376F49C204D9DEA00B179C3 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				4376F49D204D9DF800B179C3 /* HomeCoordinator.swift */,
 				4376F49F204D9E2700B179C3 /* CoordinatorProtocol.swift */,
+				4376F49D204D9DF800B179C3 /* HomeCoordinator.swift */,
+				43D7A77D205A90CC00238E29 /* MainCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -282,6 +295,7 @@
 				43D131E72056EAC6000483C4 /* ChartCard.swift */,
 				43920D992057EECA0040003C /* Card.swift */,
 				4387980920584335005261C8 /* InternalCard.swift */,
+				4322BA25205BAA60007FEB5E /* HeaderMenuViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -292,6 +306,15 @@
 				438BE841204D51FD007EBFB9 /* HamburgerButton.swift */,
 			);
 			path = HamburgerButton;
+			sourceTree = "<group>";
+		};
+		43D7A776205A892E00238E29 /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				43D7A777205A892E00238E29 /* Localizable.strings */,
+				43D7A779205A892E00238E29 /* Common.strings */,
+			);
+			path = Strings;
 			sourceTree = "<group>";
 		};
 		43EFF1F2204939E300B1887C /* Extensions */ = {
@@ -383,6 +406,7 @@
 				C5462C68818F6346BD32CEEB /* [CP] Embed Pods Frameworks */,
 				F3DCCDC04EBC4BFF275E5F52 /* [CP] Copy Pods Resources */,
 				74DABE68201B1455007FB701 /* CopyFiles */,
+				43FF90192059581C00650ED5 /* Compile R.swift resources */,
 			);
 			buildRules = (
 			);
@@ -494,10 +518,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43D7A77B205A892E00238E29 /* Localizable.strings in Resources */,
 				7445E9CF2019CF7200470E0A /* LaunchScreen.storyboard in Resources */,
 				7445E9CC2019CF7200470E0A /* Assets.xcassets in Resources */,
 				7445E9CA2019CF7200470E0A /* Main.storyboard in Resources */,
 				4314B9F2204806E5006DBE63 /* MaterialIcons.bundle in Resources */,
+				43D7A77C205A892E00238E29 /* Common.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,6 +544,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		43FF90192059581C00650ED5 /* Compile R.swift resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Compile R.swift resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/$PRODUCT_NAME/Resources/\"";
+		};
 		460174F21E85AB6EC34932A2 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -644,6 +684,7 @@
 				"${BUILT_PRODUCTS_DIR}/DrawerController/DrawerController.framework",
 				"${BUILT_PRODUCTS_DIR}/Material/Material.framework",
 				"${BUILT_PRODUCTS_DIR}/Motion/Motion.framework",
+				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/stellar-ios-mac-sdk/stellarsdk.framework",
 			);
@@ -654,6 +695,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DrawerController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Material.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Motion.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/stellarsdk.framework",
 			);
@@ -684,6 +726,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4322BA26205BAA60007FEB5E /* HeaderMenuViewController.swift in Sources */,
 				4387980A20584335005261C8 /* InternalCard.swift in Sources */,
 				43D131E42056D439000483C4 /* CardTableViewCell.swift in Sources */,
 				43EFF204204939F700B1887C /* UIColor+Utils.swift in Sources */,
@@ -696,9 +739,11 @@
 				43D131E82056EAC6000483C4 /* ChartCard.swift in Sources */,
 				4376F4A0204D9E2700B179C3 /* CoordinatorProtocol.swift in Sources */,
 				438BE842204D51FD007EBFB9 /* HamburgerButton.swift in Sources */,
+				43D7A77E205A90CC00238E29 /* MainCoordinator.swift in Sources */,
 				436FE5082052634300CFE788 /* WebCard.swift in Sources */,
 				436B366F20512114009F7C21 /* FlexibleHeightBar.swift in Sources */,
 				4376F4A3204D9F9D00B179C3 /* HomeViewModel.swift in Sources */,
+				43D7A775205A84B300238E29 /* R.generated.swift in Sources */,
 				43D131E220569950000483C4 /* HomeViewController.swift in Sources */,
 				436B367320512114009F7C21 /* TableViewDelegateHandler.swift in Sources */,
 				4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */,
@@ -746,6 +791,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		43D7A777205A892E00238E29 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				43D7A778205A892E00238E29 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		43D7A779205A892E00238E29 /* Common.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				43D7A77A205A892E00238E29 /* en */,
+			);
+			name = Common.strings;
+			sourceTree = "<group>";
+		};
 		7445E9C82019CF7200470E0A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

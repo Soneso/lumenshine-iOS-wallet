@@ -17,6 +17,7 @@ target 'Stellargate' do
   # Pods for jupiter
   ui_components_and_helper_pods
   
+  pod 'R.swift'
   pod 'stellar-ios-mac-sdk'
 
   target 'StellargateTests' do

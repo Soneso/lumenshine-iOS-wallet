@@ -76,6 +76,8 @@ fileprivate extension Card {
     }
     
     func prepareBottomBar() {
+        bottomBar.cornerRadiusPreset = .cornerRadius3
+        
         addSubview(bottomBar)
         bottomBar.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()

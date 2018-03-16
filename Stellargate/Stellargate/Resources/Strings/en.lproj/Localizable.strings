@@ -1,0 +1,137 @@
+/*
+ * Loco ios export: iOS Localizable.strings
+ * Project: strings.xml conversion
+ * Release: Working copy
+ * Locale: en, English
+ * Exported by: Unregistered user
+ * Exported at: Thu, 04 Jan 2018 06:53:20 +0000
+ */
+
+/*  */
+"get_started_button" = "Get Started";
+
+/*  */
+"sign_in_error_msg" = "Something went wrong. Try again, please.";
+
+/*  */
+"ok" = "OK";
+
+/*  */
+"next" = "Next";
+
+/*  */
+"save" = "Save";
+
+/*  */
+"close" = "Close";
+
+/*  */
+"delete" = "Delete";
+
+/*  */
+"send" = "Send";
+
+/*  */
+"logout" = "Log Out";
+
+/*  */
+"cancel" = "Cancel";
+
+/*  */
+"submit" = "Submit";
+
+/*  */
+"back" = "Back";
+
+/*  */
+"sell" = "Sell";
+
+/*  */
+"scan" = "Scan";
+
+/*  */
+"receive" = "Receive";
+
+/*  */
+"more" = "More";
+
+/*  */
+"deposit" = "Deposit money";
+
+/*  */
+"withdraw" = "Withdraw money";
+
+/*  */
+"go" = "Let's go";
+
+/*  */
+"unknown" = "Anonymous";
+
+/*  */
+"settings" = "Settings";
+
+/*  */
+"lbl_save" = "Save";
+
+/*  */
+"lbl_message" = "Message";
+
+/*  */
+"lbl_recommend" = "Recommend";
+
+/*  */
+"lbl_delete" = "Delete";
+
+/*  */
+"lbl_moment_year_count" = "one year ago";
+
+/*  */
+"x-moment_years" = "%1$d years ago";
+
+/*  */
+"lbl_moment_month_count" = "one month ago";
+
+/*  */
+"x-moment_months" = "%1$d months ago";
+
+/*  */
+"lbl_moment_week_count" = "one week ago";
+
+/*  */
+"x-moment_weeks" = "%1$d weeks ago";
+
+/*  */
+"lbl_moment_day_count" = "one day ago";
+
+/*  */
+"x-moment_days" = "%1$d days ago";
+
+/*  */
+"lbl_moment_hour_count" = "one hour ago";
+
+/*  */
+"x-moment_hours" = "%1$d hours ago";
+
+/*  */
+"lbl_moment_minute_count" = "one minute ago";
+
+/*  */
+"x-moment_minutes" = "%1$d minutes ago";
+
+/*  */
+"lbl_moment_second_count" = "one second ago";
+
+/*  */
+"x-moment_seconds" = "%1$d seconds ago";
+
+/*  */
+"user_not_logged_in" = "User is not logged in";
+
+/*  */
+"unexpected_data_type" = "Unexpected data type";
+
+/*  */
+"invalid_request" = "Invalid request";
+
+/*  */
+"bad_ credentials" = "Wrong account or password";

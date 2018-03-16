@@ -20,8 +20,7 @@ protocol CoordinatorType: class {
 }
 
 public enum Transition {
-    case showOnboarding(String)
-    case showSelfie(UIImage)
-    case showSurvey
+    case showHome
+    case showHeaderMenu([String],[UIImage?])
 }
 
