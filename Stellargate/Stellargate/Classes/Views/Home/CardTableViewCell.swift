@@ -19,10 +19,13 @@ class CardTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var card: Card? {
+    var card: CardView? {
+        willSet {
+            contentView.subviews.forEach {
+                $0.removeFromSuperview()
+            }
+        }
         didSet {
-            oldValue?.removeFromSuperview()
-
             guard let v = card else {
                 return
             }
@@ -34,8 +37,12 @@ class CardTableViewCell: UITableViewCell {
                 make.right.equalTo(-10)
                 make.bottom.equalTo(-10)
             }
-
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        card = nil
     }
     
 //    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes)

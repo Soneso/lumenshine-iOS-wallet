@@ -1,5 +1,5 @@
 //
-//  Card.swift
+//  CardView.swift
 //  Stellargate
 //
 //  Created by Istvan Elekes on 3/13/18.
@@ -14,9 +14,10 @@ protocol CardProtocol {
     func setBottomBar(buttons: [Button]?)
 }
 
-class Card: UIView {
-    
+class CardView: UIView {
+    internal let contentView = UIView()
     internal let bottomBar = Bar()
+    
     internal var viewModel: CardViewModelType? {
         didSet {
             let buttons = viewModel?.bottomTitles?.map {
@@ -25,12 +26,6 @@ class Card: UIView {
             setBottomBar(buttons: buttons)
         }
     }
-    
-//    init(viewModel:CardViewModelType) {
-//        super.init(frame: .zero)
-//        self.viewModel = viewModel
-//        prepare()
-//    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,8 +36,8 @@ class Card: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    class func create(viewModel:CardViewModelType) -> Card {
-        var card: Card
+    class func create(viewModel:CardViewModelType) -> CardView {
+        var card: CardView
         switch viewModel.type {
         case .web:
              card = WebCard()
@@ -51,34 +46,39 @@ class Card: UIView {
         case .intern:
             card = InternalCard()
         case .account:
-            card = Card()
+            card = InternalCard()
         }
         card.viewModel = viewModel
         return card
     }
 }
 
-extension Card: CardProtocol {
+extension CardView: CardProtocol {
     func setBottomBar(buttons: [Button]?) {
         bottomBar.rightViews = buttons ?? []
     }
 }
 
-fileprivate extension Card {
+fileprivate extension CardView {
     func prepare() {
         
-        cornerRadiusPreset = .cornerRadius3
-        depthPreset = .depth3
+        contentView.cornerRadiusPreset = .cornerRadius3
+        contentView.clipsToBounds = true
+        contentView.backgroundColor = Stylesheet.color(.white)
         
-        backgroundColor = Stylesheet.color(.white)
+        depthPreset = .depth3
+        backgroundColor = Stylesheet.color(.clear)
+        
+        addSubview(contentView)
+        contentView.snp.makeConstraints {make in
+            make.edges.equalToSuperview()
+        }
         
         prepareBottomBar()
     }
     
     func prepareBottomBar() {
-        bottomBar.cornerRadiusPreset = .cornerRadius3
-        
-        addSubview(bottomBar)
+        contentView.addSubview(bottomBar)
         bottomBar.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.bottom.equalToSuperview()
@@ -87,7 +87,7 @@ fileprivate extension Card {
         
         let separator = UIView()
         separator.backgroundColor = Stylesheet.color(.lightGray)
-        addSubview(separator)
+        contentView.addSubview(separator)
         separator.snp.makeConstraints { (make) in
             make.bottom.equalTo(bottomBar.snp.top)
             make.left.right.equalToSuperview()

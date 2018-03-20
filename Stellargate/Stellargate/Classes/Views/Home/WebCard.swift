@@ -11,12 +11,12 @@ import Material
 import SnapKit
 
 protocol WebCardProtocol {
-    func setImage(_ image: UIImage?)
+    func setImage(from URL: URL?)
     func setTitle(_ text: String?)
     func setDetail(_ detail: String?)
 }
 
-class WebCard: Card {
+class WebCard: CardView {
     
     fileprivate let imageView = UIImageView()
     fileprivate let titleLabel = UILabel()
@@ -33,7 +33,7 @@ class WebCard: Card {
     
     override var viewModel: CardViewModelType? {
         didSet {
-            setImage(viewModel?.image)
+            setImage(from: viewModel?.imageURL)
             setTitle(viewModel?.title)
             setDetail(viewModel?.detail)
         }
@@ -41,8 +41,14 @@ class WebCard: Card {
 }
 
 extension WebCard: WebCardProtocol {
-    func setImage(_ image: UIImage?) {
-        imageView.image = image
+    func setImage(from URL: URL?) {
+        guard let url = URL else {return}
+        UIImage.contentsOfURL(url: url) { (image, error) in
+            if error == nil {
+                self.imageView.image = image
+                self.setNeedsDisplay()
+            }
+        }
     }
     
     func setTitle(_ text: String?) {
@@ -56,22 +62,16 @@ extension WebCard: WebCardProtocol {
 
 fileprivate extension WebCard {
     func prepare() {
-        
-        cornerRadiusPreset = .cornerRadius3
-        depthPreset = .depth3
-        
-        backgroundColor = Stylesheet.color(.white)
-        
         prepareImage()
         prepareTitle()
         prepareDetail()
     }
     
     func prepareImage() {
-        addSubview(imageView)
+        contentView.addSubview(imageView)
         imageView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview()
-            make.centerX.equalToSuperview()
+            make.top.left.right.equalToSuperview()
+            make.height.lessThanOrEqualTo(300)
         }
     }
     
@@ -82,7 +82,7 @@ fileprivate extension WebCard {
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.numberOfLines = 0
         
-        addSubview(titleLabel)
+        contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(imageView.snp.bottom).offset(10)
             make.left.right.equalToSuperview()
@@ -96,7 +96,7 @@ fileprivate extension WebCard {
         detailLabel.adjustsFontSizeToFitWidth = true
         detailLabel.numberOfLines = 0
         
-        addSubview(detailLabel)
+        contentView.addSubview(detailLabel)
         detailLabel.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
             make.left.equalTo(10)

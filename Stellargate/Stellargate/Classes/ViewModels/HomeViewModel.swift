@@ -17,6 +17,8 @@ protocol HomeViewModelType: Transitionable {
     
     func barItemSelected(at index:Int)
     
+    var reloadClosure: (() -> ())? { get set }
+    
 }
 
 class HomeViewModel : HomeViewModelType {
@@ -41,17 +43,30 @@ class HomeViewModel : HomeViewModelType {
         ]
     }
     
+    fileprivate let service: HomeService
+    
+    fileprivate var responsesMock: CardsResponsesMock?
+    
     var navigationCoordinator: CoordinatorType?
     
     var cardViewModels: [CardViewModelType]
+    var reloadClosure: (() -> ())?
     
-    init() {
-        cardViewModels = [
-            CardViewModel(type: .web),
-            CardViewModel(type: .chart),
-            CardViewModel(type: .web),
-            CardViewModel(type: .chart)
-        ]
+    init(service: HomeService) {
+        self.service = service
+        cardViewModels = []
+        
+        // TODO: remove mock when service is ready
+        mockService()
+        
+        self.service.getCards() { response in
+            self.cardViewModels = response.map {
+                return CardViewModel(card: $0)
+            }
+            if let reload = self.reloadClosure {
+                reload()
+            }
+        }
     }
     
     func barItemSelected(at index:Int) {
@@ -75,5 +90,54 @@ class HomeViewModel : HomeViewModelType {
             navigationCoordinator?.performTransition(transition: .showHeaderMenu(titles, icons))
         }
     }
+}
+
+fileprivate extension HomeViewModel {
+    func mockService() {
+        URLProtocol.registerClass(ServerMock.self)
+        
+        responsesMock = CardsResponsesMock()
+        responsesMock?.addCardsResponse(mockJSON())
+
+    }
+    
+    func mockJSON() -> String {
+        let JSON = """
+                {
+                 "cards": [
+                    {
+                      "type": 0,
+                      "title": "Web card",
+                      "description": "Stellar | Move Money Across Borders Quickly, Reliably, And For Fractions Of A Penny.",
+                      "detail": "Stellar is a platform that connects banks, payments systems, and people. Integrate to move money quickly, reliably, and at almost no cost.",
+                      "link": "https://www.stellar.org/how-it-works/stellar-basics/",
+                      "imgUrl": "https://cryptocrimson.com/wp-content/uploads/2018/02/Stellar-Lumens-Price-Update-18-February-2018.jpg"
+                    },
+                    {
+                      "type": 1,
+                      "title": "Internal card",
+                      "description": "Stellar | Move Money Across Borders Quickly, Reliably, And For Fractions Of A Penny.",
+                      "detail": "Stellar is a platform that connects banks, payments systems, and people. Integrate to move money quickly, reliably, and at almost no cost.",
+                      "imgUrl": "https://smartereum.com/wp-content/uploads/2018/02/Stellar-price-predictions-2018-Moderate-returns-but-good-development-potential-USD-XLM-price-analysis-XLM-Stellar-News-Today.jpg"
+                    },
+                    {
+                      "type": 2,
+                      "title": "Chart card",
+                      "description": "Stellar | Move Money Across Borders Quickly, Reliably, And For Fractions Of A Penny.",
+                      "chartData": "0001010"
+                    },
+                    {
+                      "type": 3,
+                      "title": "Account card",
+                      "description": "Stellar | Move Money Across Borders Quickly, Reliably, And For Fractions Of A Penny.",
+                      "detail": "Stellar is a platform that connects banks, payments systems, and people. Integrate to move money quickly, reliably, and at almost no cost."
+                    },
+                  ]
+                }
+            """
+        return JSON
+    }
+    
     
 }
+

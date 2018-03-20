@@ -21,15 +21,20 @@ class HomeViewController: UIViewController {
     fileprivate var titleLabel = UILabel()
     fileprivate let tableView: UITableView
     
-    fileprivate let dataSourceItems: [Card]
+    fileprivate var dataSourceItems = [CardView]()
     
     init(viewModel: HomeViewModelType) {
         self.viewModel = viewModel
-        dataSourceItems = viewModel.cardViewModels.map {
-            Card.create(viewModel: $0)
-        }
         tableView = UITableView(frame: .zero, style: .grouped)
         super.init(nibName: nil, bundle: nil)
+        viewModel.reloadClosure = {
+            DispatchQueue.main.async {
+                self.dataSourceItems = self.viewModel.cardViewModels.map {
+                    CardView.create(viewModel: $0)
+                }
+                self.tableView.reloadData()
+            }
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

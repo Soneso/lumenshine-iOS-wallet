@@ -11,8 +11,8 @@ import UIKit
 class HomeCoordinator: CoordinatorType {
     var baseController: UIViewController
     
-    init() {
-        let viewModel = HomeViewModel()
+    init(service: HomeService) {
+        let viewModel = HomeViewModel(service: service)
         let homeView = HomeViewController(viewModel: viewModel)
         
         self.baseController = homeView

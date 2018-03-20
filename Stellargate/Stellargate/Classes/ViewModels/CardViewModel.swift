@@ -8,53 +8,41 @@
 
 import UIKit
 
-enum CardType {
-    case web
-    case chart
-    case intern
-    case account
-}
 
 protocol CardViewModelType: Transitionable {
     var type: CardType { get }
     
-    var image: UIImage? { get }
+    var imageURL: URL? { get }
     var title: String? { get }
     var detail: String? { get }
     var bottomTitles: [String]? { get }
 }
 
 class CardViewModel : CardViewModelType {
-    var type: CardType
-    
     weak var navigationCoordinator: CoordinatorType?
     
-    init(type: CardType) {
-        self.type = type
+    fileprivate let card: Card
+    
+    init(card: Card) {
+        self.card = card
     }
     
-    var image: UIImage? {
-        if type == .web || type == .intern {
-            return UIImage.image(with: Stylesheet.color(.green), size: CGSize(width: 200, height: 100))
-        }
-        return nil
+    var type: CardType {
+        return card.type!
+    }
+    
+    var imageURL: URL? {
+        guard let urlString = card.imgUrl else { return nil }
+        guard let url = URL(string: urlString) else { return nil}
+        return url
     }
     
     var title: String? {
-        return "Test title"
+        return card.title
     }
     
     var detail: String? {
-        switch type {
-        case .web:
-            return "Material is an animation and graphics framework that is used to create beautiful applications. Material is an animation and graphics framework that is used to create beautiful applications"
-        case .chart:
-            return "7 days - Updated just now"
-        case .intern:
-            return "Need help or have a suggestion?"
-        case .account:
-            return "Test"
-        }
+        return card.detail
 
     }
     

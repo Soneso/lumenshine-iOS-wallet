@@ -16,6 +16,10 @@
 		4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4314B9F320480813006DBE63 /* MenuViewProtocol.swift */; };
 		4314B9F9204812BC006DBE63 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4314B9F8204812BC006DBE63 /* MenuTableViewCell.swift */; };
 		4322BA26205BAA60007FEB5E /* HeaderMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA25205BAA60007FEB5E /* HeaderMenuViewController.swift */; };
+		4322BA2F205BD69F007FEB5E /* ResponseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA2D205BD69F007FEB5E /* ResponseMock.swift */; };
+		4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA2E205BD69F007FEB5E /* ServerMock.swift */; };
+		4322BA33205BDB6E007FEB5E /* CardsResponsesMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA32205BDB6E007FEB5E /* CardsResponsesMock.swift */; };
+		4322BA35205BDD58007FEB5E /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA34205BDD58007FEB5E /* Card.swift */; };
 		436B366E20512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436B366820512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift */; };
 		436B366F20512114009F7C21 /* FlexibleHeightBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436B366920512114009F7C21 /* FlexibleHeightBar.swift */; };
 		436B367020512114009F7C21 /* FlexibleHeightBarBehaviorDefiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436B366A20512114009F7C21 /* FlexibleHeightBarBehaviorDefiner.swift */; };
@@ -28,7 +32,10 @@
 		4376F4A3204D9F9D00B179C3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4376F4A2204D9F9D00B179C3 /* HomeViewModel.swift */; };
 		4387980A20584335005261C8 /* InternalCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4387980920584335005261C8 /* InternalCard.swift */; };
 		438BE842204D51FD007EBFB9 /* HamburgerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438BE841204D51FD007EBFB9 /* HamburgerButton.swift */; };
-		43920D9A2057EECA0040003C /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43920D992057EECA0040003C /* Card.swift */; };
+		4390D57C205FA4EF00383BB2 /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4390D57B205FA4EF00383BB2 /* HomeService.swift */; };
+		4390D57E205FA5FC00383BB2 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4390D57D205FA5FC00383BB2 /* BaseService.swift */; };
+		4390D582205FBD6E00383BB2 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4390D581205FBD6E00383BB2 /* Services.swift */; };
+		43920D9A2057EECA0040003C /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43920D992057EECA0040003C /* CardView.swift */; };
 		43D131E220569950000483C4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E120569950000483C4 /* HomeViewController.swift */; };
 		43D131E42056D439000483C4 /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E32056D439000483C4 /* CardTableViewCell.swift */; };
 		43D131E62056E3BD000483C4 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E52056E3BD000483C4 /* CardViewModel.swift */; };
@@ -90,6 +97,10 @@
 		4314B9F320480813006DBE63 /* MenuViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewProtocol.swift; sourceTree = "<group>"; };
 		4314B9F8204812BC006DBE63 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		4322BA25205BAA60007FEB5E /* HeaderMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMenuViewController.swift; sourceTree = "<group>"; };
+		4322BA2D205BD69F007FEB5E /* ResponseMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseMock.swift; sourceTree = "<group>"; };
+		4322BA2E205BD69F007FEB5E /* ServerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerMock.swift; sourceTree = "<group>"; };
+		4322BA32205BDB6E007FEB5E /* CardsResponsesMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsResponsesMock.swift; sourceTree = "<group>"; };
+		4322BA34205BDD58007FEB5E /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		436B366820512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexibleHeightBarSubviewLayoutAttributes.swift; sourceTree = "<group>"; };
 		436B366920512114009F7C21 /* FlexibleHeightBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexibleHeightBar.swift; sourceTree = "<group>"; };
 		436B366A20512114009F7C21 /* FlexibleHeightBarBehaviorDefiner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexibleHeightBarBehaviorDefiner.swift; sourceTree = "<group>"; };
@@ -102,7 +113,10 @@
 		4376F4A2204D9F9D00B179C3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		4387980920584335005261C8 /* InternalCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalCard.swift; sourceTree = "<group>"; };
 		438BE841204D51FD007EBFB9 /* HamburgerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HamburgerButton.swift; sourceTree = "<group>"; };
-		43920D992057EECA0040003C /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		4390D57B205FA4EF00383BB2 /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
+		4390D57D205FA5FC00383BB2 /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
+		4390D581205FBD6E00383BB2 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
+		43920D992057EECA0040003C /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		43D131E020566802000483C4 /* Stellargate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Stellargate.entitlements; sourceTree = "<group>"; };
 		43D131E120569950000483C4 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		43D131E32056D439000483C4 /* CardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
@@ -177,10 +191,12 @@
 		431437EB2047FEEC00189C83 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				4390D572205EC5CF00383BB2 /* Service */,
 				4314B9EC204805F6006DBE63 /* AppDelegate */,
 				4376F49C204D9DEA00B179C3 /* Coordinators */,
 				4376F4A1204D9F5A00B179C3 /* ViewModels */,
 				431437EC2047FF1A00189C83 /* Views */,
+				4322BA31205BDB5A007FEB5E /* Entities */,
 				4314B9EB204805D4006DBE63 /* Framework */,
 			);
 			path = Classes;
@@ -219,6 +235,7 @@
 		4314B9EB204805D4006DBE63 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				4322BA2C205BD69F007FEB5E /* ServerMock */,
 				436B366720512114009F7C21 /* FlexibleHeightBar */,
 				438BE840204D51E9007EBFB9 /* HamburgerButton */,
 				43EFF1F2204939E300B1887C /* Extensions */,
@@ -252,6 +269,24 @@
 				4314B9F1204806E5006DBE63 /* MaterialIcons.bundle */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		4322BA2C205BD69F007FEB5E /* ServerMock */ = {
+			isa = PBXGroup;
+			children = (
+				4322BA2D205BD69F007FEB5E /* ResponseMock.swift */,
+				4322BA2E205BD69F007FEB5E /* ServerMock.swift */,
+			);
+			path = ServerMock;
+			sourceTree = "<group>";
+		};
+		4322BA31205BDB5A007FEB5E /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				4322BA32205BDB6E007FEB5E /* CardsResponsesMock.swift */,
+				4322BA34205BDD58007FEB5E /* Card.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		436B366720512114009F7C21 /* FlexibleHeightBar */ = {
@@ -293,7 +328,7 @@
 				43D131E120569950000483C4 /* HomeViewController.swift */,
 				436FE5072052634300CFE788 /* WebCard.swift */,
 				43D131E72056EAC6000483C4 /* ChartCard.swift */,
-				43920D992057EECA0040003C /* Card.swift */,
+				43920D992057EECA0040003C /* CardView.swift */,
 				4387980920584335005261C8 /* InternalCard.swift */,
 				4322BA25205BAA60007FEB5E /* HeaderMenuViewController.swift */,
 			);
@@ -306,6 +341,16 @@
 				438BE841204D51FD007EBFB9 /* HamburgerButton.swift */,
 			);
 			path = HamburgerButton;
+			sourceTree = "<group>";
+		};
+		4390D572205EC5CF00383BB2 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				4390D57B205FA4EF00383BB2 /* HomeService.swift */,
+				4390D57D205FA5FC00383BB2 /* BaseService.swift */,
+				4390D581205FBD6E00383BB2 /* Services.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		43D7A776205A892E00238E29 /* Strings */ = {
@@ -738,22 +783,29 @@
 				4314B9EF2048060F006DBE63 /* MaterialIcon.swift in Sources */,
 				43D131E82056EAC6000483C4 /* ChartCard.swift in Sources */,
 				4376F4A0204D9E2700B179C3 /* CoordinatorProtocol.swift in Sources */,
+				4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */,
+				4390D57E205FA5FC00383BB2 /* BaseService.swift in Sources */,
 				438BE842204D51FD007EBFB9 /* HamburgerButton.swift in Sources */,
 				43D7A77E205A90CC00238E29 /* MainCoordinator.swift in Sources */,
 				436FE5082052634300CFE788 /* WebCard.swift in Sources */,
 				436B366F20512114009F7C21 /* FlexibleHeightBar.swift in Sources */,
+				4390D57C205FA4EF00383BB2 /* HomeService.swift in Sources */,
 				4376F4A3204D9F9D00B179C3 /* HomeViewModel.swift in Sources */,
 				43D7A775205A84B300238E29 /* R.generated.swift in Sources */,
+				4322BA2F205BD69F007FEB5E /* ResponseMock.swift in Sources */,
 				43D131E220569950000483C4 /* HomeViewController.swift in Sources */,
 				436B367320512114009F7C21 /* TableViewDelegateHandler.swift in Sources */,
 				4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */,
-				43920D9A2057EECA0040003C /* Card.swift in Sources */,
+				4322BA35205BDD58007FEB5E /* Card.swift in Sources */,
+				43920D9A2057EECA0040003C /* CardView.swift in Sources */,
 				436B366E20512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift in Sources */,
 				43EFF20620493B4900B1887C /* Stylesheet.swift in Sources */,
 				436B367120512114009F7C21 /* FacebookBarBehaviorDefiner.swift in Sources */,
 				436B367020512114009F7C21 /* FlexibleHeightBarBehaviorDefiner.swift in Sources */,
 				43D131E62056E3BD000483C4 /* CardViewModel.swift in Sources */,
 				431437EF2047FF4500189C83 /* MenuViewController.swift in Sources */,
+				4322BA33205BDB6E007FEB5E /* CardsResponsesMock.swift in Sources */,
+				4390D582205FBD6E00383BB2 /* Services.swift in Sources */,
 				7445E9C52019CF7200470E0A /* AppDelegate.swift in Sources */,
 				436B367220512114009F7C21 /* SquareCashBarBehaviorDefiner.swift in Sources */,
 			);

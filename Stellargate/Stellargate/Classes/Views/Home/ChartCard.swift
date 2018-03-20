@@ -16,7 +16,7 @@ protocol ChartCardProtocol {
     func setDetail(_ detail: String?)
 }
 
-class ChartCard: Card {
+class ChartCard: CardView {
     
     fileprivate let lineChartView = LineChartView()
     fileprivate let titleLabel = UILabel()
@@ -51,11 +51,7 @@ extension ChartCard: ChartCardProtocol {
 
 fileprivate extension ChartCard {
     func prepare() {
-        
-        cornerRadiusPreset = .cornerRadius3
-        depthPreset = .depth3
-        
-        backgroundColor = Stylesheet.color(.cyan)
+        contentView.backgroundColor = Stylesheet.color(.cyan)
         
         prepareChart()
         prepareTitle()
@@ -85,7 +81,7 @@ fileprivate extension ChartCard {
         
         setChart(dataPoints: months, values: unitsSold)
         
-        addSubview(lineChartView)
+        contentView.addSubview(lineChartView)
         lineChartView.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.right.equalTo(-10)
@@ -95,12 +91,12 @@ fileprivate extension ChartCard {
     }
     
     func prepareTitle() {
-        titleLabel.textColor = Stylesheet.color(.black)
+        titleLabel.textColor = Stylesheet.color(.white)
         titleLabel.font = Stylesheet.font(.body)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.numberOfLines = 0
         
-        addSubview(titleLabel)
+        contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(10)
             make.left.equalTo(10)
@@ -109,13 +105,13 @@ fileprivate extension ChartCard {
     }
     
     func prepareDetail() {
-        detailLabel.textColor = Stylesheet.color(.black)
+        detailLabel.textColor = Stylesheet.color(.white)
         detailLabel.font = Stylesheet.font(.callout)
         detailLabel.textAlignment = .left
         detailLabel.adjustsFontSizeToFitWidth = true
         detailLabel.numberOfLines = 0
         
-        addSubview(detailLabel)
+        contentView.addSubview(detailLabel)
         detailLabel.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
             make.left.equalTo(10)

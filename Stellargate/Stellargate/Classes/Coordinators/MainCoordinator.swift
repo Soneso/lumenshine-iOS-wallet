@@ -12,8 +12,10 @@ class MainCoordinator: CoordinatorType {
     var baseController: UIViewController
     
     fileprivate let drawer: AppNavigationDrawerController
+    fileprivate let service: Services
     
     init() {
+        service = Services()
 //        let viewModel = MenuViewModel()
         let menuView = MenuViewController(style: .grouped)
         
@@ -36,7 +38,7 @@ class MainCoordinator: CoordinatorType {
 
 fileprivate extension MainCoordinator {
     func showHome() {
-        let coordinator = HomeCoordinator()
+        let coordinator = HomeCoordinator(service: service.home)
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
         drawer.setCenter(navigationController, withCloseAnimation: false, completion: nil)
         (baseController as! MenuViewController).present(coordinator.baseController)
