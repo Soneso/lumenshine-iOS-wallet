@@ -22,5 +22,6 @@ protocol CoordinatorType: class {
 public enum Transition {
     case showHome
     case showHeaderMenu([String],[UIImage?])
+    case showOnWeb(URL)
 }
 

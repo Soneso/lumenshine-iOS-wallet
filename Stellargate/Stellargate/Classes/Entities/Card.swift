@@ -22,6 +22,7 @@ class Card: NSObject, Decodable {
     let descript: String?
     let detail: String?
     let imgUrl: String?
+    let link: String?
     let data: Data?
     
     private enum CodingKeys: String, CodingKey {
@@ -30,6 +31,7 @@ class Card: NSObject, Decodable {
         case description
         case detail
         case imgUrl
+        case link
         case data = "data"
     }
     
@@ -41,6 +43,7 @@ class Card: NSObject, Decodable {
         descript = try values.decode(String.self, forKey: .description)
         detail = try values.decodeIfPresent(String.self, forKey: .detail)
         imgUrl = try values.decodeIfPresent(String.self, forKey: .imgUrl)
+        link = try values.decodeIfPresent(String.self, forKey: .link)
         data = try values.decodeIfPresent(Data.self, forKey: .data)
     }
 }

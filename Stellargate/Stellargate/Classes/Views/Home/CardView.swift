@@ -20,8 +20,10 @@ class CardView: UIView {
     
     internal var viewModel: CardViewModelType? {
         didSet {
-            let buttons = viewModel?.bottomTitles?.map {
-                return FlatButton(title: $0)
+            let buttons = viewModel?.bottomTitles?.map { title -> FlatButton in
+                let button = FlatButton(title: title)
+                button.addTarget(self, action: #selector(barButtonClick(_:)), for: .touchUpInside)
+                return button
             }
             setBottomBar(buttons: buttons)
         }
@@ -50,6 +52,11 @@ class CardView: UIView {
         }
         card.viewModel = viewModel
         return card
+    }
+    
+    @objc
+    func barButtonClick(_ sender: FlatButton) {
+        viewModel?.barButtonSelected(at: sender.tag)
     }
 }
 

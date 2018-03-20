@@ -23,6 +23,8 @@ class HomeCoordinator: CoordinatorType {
         switch transition {
         case .showHeaderMenu(let titles, let icons):
             showHeaderMenu(titles: titles, icons: icons)
+        case .showOnWeb(let url):
+            showOnWeb(url: url)
         default: break
         }
     }
@@ -36,6 +38,10 @@ fileprivate extension HomeCoordinator {
         headerVC.modalPresentationStyle = .overCurrentContext
         
         self.baseController.present(headerVC, animated: true)
+    }
+    
+    func showOnWeb(url: URL) {
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 }
 

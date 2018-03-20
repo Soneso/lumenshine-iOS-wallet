@@ -61,7 +61,9 @@ class HomeViewModel : HomeViewModelType {
         
         self.service.getCards() { response in
             self.cardViewModels = response.map {
-                return CardViewModel(card: $0)
+                let viewModel = CardViewModel(card: $0)
+                viewModel.navigationCoordinator = self.navigationCoordinator
+                return viewModel
             }
             if let reload = self.reloadClosure {
                 reload()

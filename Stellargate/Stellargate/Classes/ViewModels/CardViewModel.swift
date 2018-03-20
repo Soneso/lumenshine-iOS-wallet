@@ -13,13 +13,16 @@ protocol CardViewModelType: Transitionable {
     var type: CardType { get }
     
     var imageURL: URL? { get }
+    var linkURL: URL? { get }
     var title: String? { get }
     var detail: String? { get }
     var bottomTitles: [String]? { get }
+    
+    func barButtonSelected(at index: Int)
 }
 
 class CardViewModel : CardViewModelType {
-    weak var navigationCoordinator: CoordinatorType?
+    var navigationCoordinator: CoordinatorType?
     
     fileprivate let card: Card
     
@@ -37,13 +40,18 @@ class CardViewModel : CardViewModelType {
         return url
     }
     
+    var linkURL: URL? {
+        guard let urlString = card.link else { return nil }
+        guard let url = URL(string: urlString) else { return nil}
+        return url
+    }
+    
     var title: String? {
         return card.title
     }
     
     var detail: String? {
         return card.detail
-
     }
     
     var bottomTitles: [String]? {
@@ -56,6 +64,16 @@ class CardViewModel : CardViewModelType {
             return ["Send feedback", "View FAQ"]
         case .account:
             return ["Learn more"]
+        }
+    }
+    
+    func barButtonSelected(at index: Int) {
+        switch type {
+        case .web:
+            guard let url = linkURL else { return }
+            navigationCoordinator?.performTransition(transition: .showOnWeb(url))
+        default:
+            break
         }
     }
     
