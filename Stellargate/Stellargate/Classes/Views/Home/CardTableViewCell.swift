@@ -44,15 +44,4 @@ class CardTableViewCell: UITableViewCell {
         super.prepareForReuse()
         card = nil
     }
-    
-//    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes)
-//        -> UICollectionViewLayoutAttributes {
-//
-//            let attr = super.preferredLayoutAttributesFitting(layoutAttributes)
-//            var frame = attr.frame
-//            frame.size.width = layoutAttributes.size.width
-//            attr.frame = frame
-//            return attr
-//    }
-    
 }

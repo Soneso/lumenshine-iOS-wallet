@@ -11,7 +11,6 @@ import UIKit
 
 protocol CardViewModelType: Transitionable {
     var type: CardType { get }
-    
     var imageURL: URL? { get }
     var linkURL: URL? { get }
     var title: String? { get }
@@ -76,5 +75,4 @@ class CardViewModel : CardViewModelType {
             break
         }
     }
-    
 }

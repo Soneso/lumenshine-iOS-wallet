@@ -46,6 +46,7 @@
 		43D7A77E205A90CC00238E29 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D7A77D205A90CC00238E29 /* MainCoordinator.swift */; };
 		43EFF204204939F700B1887C /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EFF203204939F700B1887C /* UIColor+Utils.swift */; };
 		43EFF20620493B4900B1887C /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EFF20520493B4900B1887C /* Stylesheet.swift */; };
+		43FBEE452062853A004E2BB1 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FBEE442062853A004E2BB1 /* ScanViewController.swift */; };
 		7445E9C52019CF7200470E0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7445E9C42019CF7200470E0A /* AppDelegate.swift */; };
 		7445E9C72019CF7200470E0A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7445E9C62019CF7200470E0A /* ViewController.swift */; };
 		7445E9CA2019CF7200470E0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7445E9C82019CF7200470E0A /* Main.storyboard */; };
@@ -129,6 +130,7 @@
 		43EFF203204939F700B1887C /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
 		43EFF20520493B4900B1887C /* Stylesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stylesheet.swift; sourceTree = "<group>"; };
 		43F55646204FEDB200FD32E0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		43FBEE442062853A004E2BB1 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		5A5A4485ADF2A66A43DCDEFB /* Pods-Stellargate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stellargate.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stellargate/Pods-Stellargate.release.xcconfig"; sourceTree = "<group>"; };
 		7445E9C12019CF7200470E0A /* Stellargate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stellargate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7445E9C42019CF7200470E0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				7445E9C62019CF7200470E0A /* ViewController.swift */,
+				43FBEE4320628521004E2BB1 /* Scan */,
 				4376F4A4204DA07A00B179C3 /* Home */,
 				431437F02047FF7E00189C83 /* Drawer */,
 				431437ED2047FF2000189C83 /* Menu */,
@@ -368,6 +371,14 @@
 				43EFF203204939F700B1887C /* UIColor+Utils.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		43FBEE4320628521004E2BB1 /* Scan */ = {
+			isa = PBXGroup;
+			children = (
+				43FBEE442062853A004E2BB1 /* ScanViewController.swift */,
+			);
+			path = Scan;
 			sourceTree = "<group>";
 		};
 		7445E9B82019CF7200470E0A = {
@@ -790,6 +801,7 @@
 				436FE5082052634300CFE788 /* WebCard.swift in Sources */,
 				436B366F20512114009F7C21 /* FlexibleHeightBar.swift in Sources */,
 				4390D57C205FA4EF00383BB2 /* HomeService.swift in Sources */,
+				43FBEE452062853A004E2BB1 /* ScanViewController.swift in Sources */,
 				4376F4A3204D9F9D00B179C3 /* HomeViewModel.swift in Sources */,
 				43D7A775205A84B300238E29 /* R.generated.swift in Sources */,
 				4322BA2F205BD69F007FEB5E /* ResponseMock.swift in Sources */,

@@ -25,6 +25,8 @@ class HomeCoordinator: CoordinatorType {
             showHeaderMenu(titles: titles, icons: icons)
         case .showOnWeb(let url):
             showOnWeb(url: url)
+        case .showScan:
+            showScan()
         default: break
         }
     }
@@ -42,6 +44,12 @@ fileprivate extension HomeCoordinator {
     
     func showOnWeb(url: URL) {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
+    func showScan() {
+        let scanVC = ScanViewController()
+        scanVC.delegate = self.baseController as! HomeViewController
+        self.baseController.navigationController?.pushViewController(scanVC, animated: true)
     }
 }
 
