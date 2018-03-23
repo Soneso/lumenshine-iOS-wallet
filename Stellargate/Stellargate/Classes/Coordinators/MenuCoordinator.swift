@@ -7,23 +7,27 @@
 //
 
 import UIKit
+import Material
 
-class MainCoordinator: CoordinatorType {
+class MenuCoordinator: CoordinatorType {
     var baseController: UIViewController
     
     fileprivate let drawer: AppNavigationDrawerController
     fileprivate let service: Services
+    fileprivate let user: User
     
-    init() {
-        service = Services()
-//        let viewModel = MenuViewModel()
-        let menuView = MenuViewController(style: .grouped)
+    init(user: User) {
+        self.user = user
+        self.service = Services()
+        
+        let viewModel = MenuViewModel()
+        let menuView = MenuViewController(viewModel: viewModel)
         
         drawer = AppNavigationDrawerController(centerViewController: UIViewController(), leftDrawerViewController: menuView, rightDrawerViewController: nil)
         drawer.maximumLeftDrawerWidth = 260
         
         self.baseController = menuView
-//        viewModel.navigationCoordinator = self
+        viewModel.navigationCoordinator = self
         showHome()
     }
     
@@ -31,16 +35,26 @@ class MainCoordinator: CoordinatorType {
         switch transition {
         case .showHome:
             showHome()
+        case .showSettings:
+            showSettings()
         default: break
         }
     }
 }
 
-fileprivate extension MainCoordinator {
+fileprivate extension MenuCoordinator {
     func showHome() {
         let coordinator = HomeCoordinator(service: service.home)
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
-        drawer.setCenter(navigationController, withCloseAnimation: false, completion: nil)
+        drawer.setCenter(navigationController, withCloseAnimation: true, completion: nil)
         (baseController as! MenuViewController).present(coordinator.baseController)
+    }
+    
+    func showSettings() {
+        let settingsVC = SettingsTableViewController()
+        let navigationController = AppNavigationController(rootViewController: settingsVC)
+        drawer.setCenter(navigationController, withCloseAnimation: true, completion: nil)
+        (baseController as! MenuViewController).present(settingsVC)
+        
     }
 }

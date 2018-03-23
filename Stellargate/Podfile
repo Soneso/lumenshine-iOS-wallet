@@ -19,6 +19,7 @@ target 'Stellargate' do
   
   pod 'R.swift'
   pod 'stellar-ios-mac-sdk'
+  pod 'IQKeyboardManagerSwift'
 
   target 'StellargateTests' do
     inherit! :search_paths

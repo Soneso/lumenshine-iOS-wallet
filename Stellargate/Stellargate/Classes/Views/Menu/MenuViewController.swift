@@ -18,23 +18,12 @@ class MenuViewController: UITableViewController {
     
     // MARK: - Properties
     
-    fileprivate var items: [[String?]] = [
-        [nil, "name@email.com"],
-        ["Home", "Wallets", "Transactions", "Promotions"],
-        ["Settings", "Help Center"]
-    ]
-    
-    fileprivate var icons: [[UIImage?]] = [
-        [MaterialIcon.account.size48pt, nil],
-        [MaterialIcon.home.size24pt, MaterialIcon.wallets.size24pt, MaterialIcon.transactions.size24pt, MaterialIcon.promotions.size24pt],
-        [MaterialIcon.settings.size24pt, MaterialIcon.help.size24pt]
-    ]
-    
+    fileprivate let viewModel: MenuViewModelType
     fileprivate let menuButton = HamburgerButton(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
     
-    override init(style: UITableViewStyle) {
-        super.init(style: style)
-        prepare()
+    init(viewModel: MenuViewModelType) {
+        self.viewModel = viewModel
+        super.init(style: .grouped)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -43,6 +32,7 @@ class MenuViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        prepare()
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,19 +47,19 @@ class MenuViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return items.count
+        return viewModel.items.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items[section].count
+        return viewModel.items[section].count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MenuViewController.CellIdentifier, for: indexPath)
 
-        cell.textLabel?.text = items[indexPath.section][indexPath.row]
-        cell.imageView?.image = icons[indexPath.section][indexPath.row]
+        cell.textLabel?.text = viewModel.items[indexPath.section][indexPath.row]
+        cell.imageView?.image = viewModel.icons[indexPath.section][indexPath.row]
 
         return cell
     }
@@ -90,6 +80,10 @@ class MenuViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return indexPath.section != 0
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.menuItemSelected(at: indexPath)
+    }
 
 }
 
@@ -104,17 +98,30 @@ fileprivate extension MenuViewController {
             tableView.backgroundColor = Stylesheet.color(.cyan)
         }
         tableView.tableHeaderView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
+        prepareMenuButton()
+    }
+    
+    func prepareMenuButton() {
+        menuButton.transform = menuButton.transform.scaledBy(x: 1.35, y: 1.35)
+        menuButton.addTarget(self, action: #selector(onMenuButtonTap(_:event:)), for: .touchUpInside)
+        evo_drawerController?.gestureCompletionBlock = { (drawer, gesture) in
+            let action = drawer.openSide == DrawerSide.none
+            if action != self.menuButton.showsMenu {
+                self.menuButton.showsMenu = action
+            }
+        }
     }
 }
 
 extension MenuViewController: MenuViewProtocol {
     func present(_ viewController: UIViewController) {
         linkMenuButton(to: viewController)
+        menuButton.showsMenu = evo_drawerController?.openSide != DrawerSide.none
     }
 }
 
 extension MenuViewController {
-    @IBAction
+    @objc
     func onMenuButtonTap(_ sender: UIButton, event: UIEvent) {
         evo_drawerController?.toggleLeftDrawerSide(animated: true, completion: nil)
         menuButton.showsMenu = evo_drawerController?.openSide != DrawerSide.none
@@ -124,14 +131,6 @@ extension MenuViewController {
 fileprivate extension MenuViewController {
     
     func linkMenuButton(to controller: UIViewController) {
-        menuButton.transform = menuButton.transform.scaledBy(x: 1.35, y: 1.35)
-        menuButton.addTarget(self, action: #selector(onMenuButtonTap(_:event:)), for: .touchUpInside)
         controller.navigationItem.leftViews = [menuButton]
-        evo_drawerController?.gestureCompletionBlock = { (drawer, gesture) in
-            let action = drawer.openSide == DrawerSide.none
-            if action != self.menuButton.showsMenu {
-                self.menuButton.showsMenu = action
-            }
-        }
     }
 }

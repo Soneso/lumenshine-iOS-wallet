@@ -78,6 +78,8 @@ public class HamburgerButton: UIButton {
 
     public var showsMenu: Bool = true {
         didSet {
+            if oldValue == showsMenu { return }
+            
             // There's many animations so it's easier to set up duration and timing function at once.
             CATransaction.begin()
             CATransaction.setAnimationDuration(0.4)

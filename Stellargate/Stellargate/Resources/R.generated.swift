@@ -40,14 +40,28 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 1 images.
+  /// This `R.image` struct is generated, and contains static references to 3 images.
   struct image {
+    /// Image `FaceIcon`.
+    static let faceIcon = Rswift.ImageResource(bundle: R.hostingBundle, name: "FaceIcon")
     /// Image `MenuColor`.
     static let menuColor = Rswift.ImageResource(bundle: R.hostingBundle, name: "MenuColor")
+    /// Image `Touch-icon-lg`.
+    static let touchIconLg = Rswift.ImageResource(bundle: R.hostingBundle, name: "Touch-icon-lg")
+    
+    /// `UIImage(named: "FaceIcon", bundle: ..., traitCollection: ...)`
+    static func faceIcon(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.faceIcon, compatibleWith: traitCollection)
+    }
     
     /// `UIImage(named: "MenuColor", bundle: ..., traitCollection: ...)`
     static func menuColor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.menuColor, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "Touch-icon-lg", bundle: ..., traitCollection: ...)`
+    static func touchIconLg(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.touchIconLg, compatibleWith: traitCollection)
     }
     
     fileprivate init() {}

@@ -20,7 +20,9 @@ protocol CoordinatorType: class {
 }
 
 public enum Transition {
+    case showMain(User)
     case showHome
+    case showSettings
     case showHeaderMenu([String],[UIImage?])
     case showOnWeb(URL)
     case showScan

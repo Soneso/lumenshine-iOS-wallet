@@ -26,6 +26,8 @@
 	<string>Main</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Scan QR code</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>We use Face ID to unlock the notes</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
