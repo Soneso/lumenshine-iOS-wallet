@@ -18,6 +18,12 @@ protocol MenuViewModelType: Transitionable {
 
 class MenuViewModel : MenuViewModelType {
     
+    fileprivate var lastIndex = IndexPath(row: 0, section: 1)
+    
+    init() {
+        
+    }
+    
     var items: [[String?]] = [
         [nil, "name@email.com"],
         ["Home", "Wallets", "Transactions", "Promotions"],
@@ -32,10 +38,8 @@ class MenuViewModel : MenuViewModelType {
     
     var navigationCoordinator: CoordinatorType?
     
-    init() {
-    }
-    
     func menuItemSelected(at indexPath:IndexPath) {
+        if indexPath == lastIndex { return }
         switch indexPath.section {
         case 0:
             navigationCoordinator?.performTransition(transition: .showSettings)
@@ -49,5 +53,6 @@ class MenuViewModel : MenuViewModelType {
             }
         default: break
         }
+        lastIndex = indexPath
     }
 }

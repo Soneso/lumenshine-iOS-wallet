@@ -114,9 +114,11 @@ fileprivate extension MenuViewController {
 }
 
 extension MenuViewController: MenuViewProtocol {
-    func present(_ viewController: UIViewController) {
+    func present(_ viewController: UIViewController, updateMenu: Bool = true) {
         linkMenuButton(to: viewController)
-        menuButton.showsMenu = evo_drawerController?.openSide != DrawerSide.none
+        if updateMenu {
+            menuButton.showsMenu = evo_drawerController?.openSide != DrawerSide.none
+        }
     }
 }
 

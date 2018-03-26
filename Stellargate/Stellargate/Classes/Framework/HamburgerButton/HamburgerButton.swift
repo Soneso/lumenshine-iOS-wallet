@@ -13,11 +13,11 @@ import UIKit
 public class HamburgerButton: UIButton {
 
     public var color: UIColor = UIColor.white {
-    didSet {
-        for shapeLayer in shapeLayers {
-            shapeLayer.strokeColor = color.cgColor
+        didSet {
+            for shapeLayer in shapeLayers {
+                shapeLayer.strokeColor = color.cgColor
+            }
         }
-    }
     }
 
     private let top: CAShapeLayer = CAShapeLayer()

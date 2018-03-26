@@ -28,7 +28,7 @@ class MenuCoordinator: CoordinatorType {
         
         self.baseController = menuView
         viewModel.navigationCoordinator = self
-        showHome()
+        showHome(updateMenu: false)
     }
     
     func performTransition(transition: Transition) {
@@ -43,11 +43,11 @@ class MenuCoordinator: CoordinatorType {
 }
 
 fileprivate extension MenuCoordinator {
-    func showHome() {
+    func showHome(updateMenu: Bool = true) {
         let coordinator = HomeCoordinator(service: service.home)
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
         drawer.setCenter(navigationController, withCloseAnimation: true, completion: nil)
-        (baseController as! MenuViewController).present(coordinator.baseController)
+        (baseController as! MenuViewController).present(coordinator.baseController, updateMenu: updateMenu)
     }
     
     func showSettings() {
