@@ -16,12 +16,17 @@ enum BiometricType {
 }
 
 class BiometricIDAuth {
-    fileprivate let context: LAContext
+    fileprivate var context: LAContext
     var loginReason = "Logging in with Touch ID"
     
     init() {
         context = LAContext()
         context.touchIDAuthenticationAllowableReuseDuration = 0
+    }
+    
+    func invalidate() {
+        context.invalidate()
+        context = LAContext()
     }
     
     func biometricType() -> BiometricType {

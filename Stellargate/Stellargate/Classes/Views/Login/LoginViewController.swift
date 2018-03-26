@@ -9,22 +9,14 @@
 import UIKit
 import Material
 
-struct KeychainConfiguration {
-    static let serviceName = "TouchMeIn"
-    static let accessGroup: String? = nil
-}
-
 class LoginViewController: UIViewController {
     
     // MARK: - Properties
     
     fileprivate let viewModel: LoginViewModelType
     
-    // MARK: - Properties
-    var passwordItems: [KeychainPasswordItem] = []
-    let createLoginButtonTag = 0
-    let loginButtonTag = 1
-    let touchMe = BiometricIDAuth()
+    fileprivate let createLoginButtonTag = 0
+    fileprivate let loginButtonTag = 1
     
     // MARK: - UI properties
     fileprivate let loginButton = RaisedButton()
@@ -51,7 +43,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let touchBool = touchMe.canEvaluatePolicy()
+        let touchBool = viewModel.canEvaluatePolicy()
         if touchBool {
             self.touchIDLoginAction()
         }
@@ -80,32 +72,13 @@ extension LoginViewController {
         passwordTextField.resignFirstResponder()
         
         if sender.tag == createLoginButtonTag {
-            let hasLoginKey = UserDefaults.standard.bool(forKey: "hasLoginKey")
-            if !hasLoginKey && usernameTextField.hasText {
-                UserDefaults.standard.setValue(usernameTextField.text, forKey: "username")
-            }
-            
-            do {
-                
-                // This is a new account, create a new keychain item with the account name.
-                let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
-                                                        account: newAccountName,
-                                                        accessGroup: KeychainConfiguration.accessGroup)
-                
-                // Save the password for the new item.
-                try passwordItem.savePassword(newPassword)
-            } catch {
-                fatalError("Error updating keychain - \(error)")
-            }
-            
-            UserDefaults.standard.set(true, forKey: "hasLoginKey")
+            viewModel.createAccount(username: newAccountName, password: newPassword)
+            viewModel.loginCompleted()
             loginButton.tag = loginButtonTag
-            
-            viewModel.loginCompleted(User(id: "1", name: usernameTextField.text))
             passwordTextField.text = nil
         } else if sender.tag == loginButtonTag {
-            if checkLogin(username: newAccountName, password: newPassword) {
-                viewModel.loginCompleted(User(id: "1", name: newAccountName))
+            if viewModel.checkLogin(username: newAccountName, password: newPassword) {
+                viewModel.loginCompleted()
                 passwordTextField.text = nil
             } else {
                 showLoginFailedAlert()
@@ -115,39 +88,20 @@ extension LoginViewController {
     
     @objc
     func touchIDLoginAction() {
-        touchMe.authenticateUser() { [weak self] message in
-            if let message = message {
+        viewModel.authenticateUser() { [weak self] error in
+            if let message = error {
                 // if the completion is not nil show an alert
                 let alertView = UIAlertController(title: "Error",
                                                   message: message,
                                                   preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "Darn!", style: .default)
+                let okAction = UIAlertAction(title: R.string.localizable.ok(), style: .default)
                 alertView.addAction(okAction)
                 self?.present(alertView, animated: true)
                 
             } else {
-                let username = UserDefaults.standard.value(forKey: "username") as? String
-                self?.viewModel.loginCompleted(User(id: "1", name: username))
+                self?.viewModel.loginCompleted()
             }
         }
-    }
-    
-    func checkLogin(username: String, password: String) -> Bool {
-        guard username == UserDefaults.standard.value(forKey: "username") as? String else {
-            return false
-        }
-        
-        do {
-            let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
-                                                    account: username,
-                                                    accessGroup: KeychainConfiguration.accessGroup)
-            let keychainPassword = try passwordItem.readPassword()
-            return password == keychainPassword
-        }
-        catch {
-            fatalError("Error reading password from keychain - \(error)")
-        }
-        return false
     }
 }
 
@@ -208,9 +162,9 @@ fileprivate extension LoginViewController {
     }
     
     func prepareTouchButton() {
-        touchIDButton.isHidden = !touchMe.canEvaluatePolicy()
+        touchIDButton.isHidden = !viewModel.canEvaluatePolicy()
         
-        switch touchMe.biometricType() {
+        switch viewModel.biometricType() {
         case .faceID:
             touchIDButton.setImage(UIImage(named: "FaceIcon"),  for: .normal)
         default:
@@ -227,7 +181,7 @@ fileprivate extension LoginViewController {
     }
     
     func showLoginFailedAlert() {
-        let alertView = UIAlertController(title: "Login Problem",
+        let alertView = UIAlertController(title: R.string.localizable.sign_in_error_msg(),
                                           message: "Wrong username or password.",
                                           preferredStyle:. alert)
         let okAction = UIAlertAction(title: "Failed Again!", style: .default)
