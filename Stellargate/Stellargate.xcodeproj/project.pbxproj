@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		168F2E2F3C93E3C12AE88E06 /* Pods_Stellargate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 134821A0A729CE3C02C022E4 /* Pods_Stellargate.framework */; };
+		43044914206BE7B400349B51 /* MnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43044913206BE7B400349B51 /* MnemonicViewController.swift */; };
+		43044916206BE7E800349B51 /* VerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43044915206BE7E800349B51 /* VerificationViewController.swift */; };
+		43044918206BE85D00349B51 /* PillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43044917206BE85D00349B51 /* PillView.swift */; };
+		4304491A206BF22A00349B51 /* WordSuggestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43044919206BF22A00349B51 /* WordSuggestionCell.swift */; };
+		4304491C206BF47400349B51 /* UIView+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4304491B206BF47400349B51 /* UIView+Shake.swift */; };
 		431437EF2047FF4500189C83 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431437EE2047FF4500189C83 /* MenuViewController.swift */; };
 		431437F22047FF9100189C83 /* AppNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431437F12047FF9100189C83 /* AppNavigationController.swift */; };
 		431437F42047FFB400189C83 /* AppNavigationDrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431437F32047FFB400189C83 /* AppNavigationDrawerController.swift */; };
@@ -56,8 +61,6 @@
 		43EFF20620493B4900B1887C /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EFF20520493B4900B1887C /* Stylesheet.swift */; };
 		43FBEE452062853A004E2BB1 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FBEE442062853A004E2BB1 /* ScanViewController.swift */; };
 		7445E9C52019CF7200470E0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7445E9C42019CF7200470E0A /* AppDelegate.swift */; };
-		7445E9C72019CF7200470E0A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7445E9C62019CF7200470E0A /* ViewController.swift */; };
-		7445E9CA2019CF7200470E0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7445E9C82019CF7200470E0A /* Main.storyboard */; };
 		7445E9CC2019CF7200470E0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7445E9CB2019CF7200470E0A /* Assets.xcassets */; };
 		7445E9CF2019CF7200470E0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7445E9CD2019CF7200470E0A /* LaunchScreen.storyboard */; };
 		7445E9DA2019CF7300470E0A /* StellargateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7445E9D92019CF7300470E0A /* StellargateTests.swift */; };
@@ -98,6 +101,11 @@
 /* Begin PBXFileReference section */
 		134821A0A729CE3C02C022E4 /* Pods_Stellargate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stellargate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C5E9D71329C9F6FF75B440F /* Pods_StellargateTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StellargateTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		43044913206BE7B400349B51 /* MnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicViewController.swift; sourceTree = "<group>"; };
+		43044915206BE7E800349B51 /* VerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationViewController.swift; sourceTree = "<group>"; };
+		43044917206BE85D00349B51 /* PillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillView.swift; sourceTree = "<group>"; };
+		43044919206BF22A00349B51 /* WordSuggestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSuggestionCell.swift; sourceTree = "<group>"; };
+		4304491B206BF47400349B51 /* UIView+Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shake.swift"; sourceTree = "<group>"; };
 		431437EE2047FF4500189C83 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		431437F12047FF9100189C83 /* AppNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigationController.swift; sourceTree = "<group>"; };
 		431437F32047FFB400189C83 /* AppNavigationDrawerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigationDrawerController.swift; sourceTree = "<group>"; };
@@ -150,8 +158,6 @@
 		5A5A4485ADF2A66A43DCDEFB /* Pods-Stellargate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stellargate.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stellargate/Pods-Stellargate.release.xcconfig"; sourceTree = "<group>"; };
 		7445E9C12019CF7200470E0A /* Stellargate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stellargate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7445E9C42019CF7200470E0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7445E9C62019CF7200470E0A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		7445E9C92019CF7200470E0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7445E9CB2019CF7200470E0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7445E9CE2019CF7200470E0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7445E9D52019CF7300470E0A /* StellargateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StellargateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,6 +212,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		43044912206BE7A400349B51 /* Mnemonic */ = {
+			isa = PBXGroup;
+			children = (
+				43044913206BE7B400349B51 /* MnemonicViewController.swift */,
+				43044915206BE7E800349B51 /* VerificationViewController.swift */,
+				43044917206BE85D00349B51 /* PillView.swift */,
+				43044919206BF22A00349B51 /* WordSuggestionCell.swift */,
+			);
+			path = Mnemonic;
+			sourceTree = "<group>";
+		};
 		431437EB2047FEEC00189C83 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,8 +240,8 @@
 		431437EC2047FF1A00189C83 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				43044912206BE7A400349B51 /* Mnemonic */,
 				4370E23B20655F6F004C62C3 /* Settings */,
-				7445E9C62019CF7200470E0A /* ViewController.swift */,
 				4319B17C2063EDFA007CE18D /* Login */,
 				43FBEE4320628521004E2BB1 /* Scan */,
 				4376F4A4204DA07A00B179C3 /* Home */,
@@ -417,6 +434,7 @@
 			isa = PBXGroup;
 			children = (
 				43EFF203204939F700B1887C /* UIColor+Utils.swift */,
+				4304491B206BF47400349B51 /* UIView+Shake.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -457,7 +475,6 @@
 				43D131E020566802000483C4 /* Stellargate.entitlements */,
 				431437EB2047FEEC00189C83 /* Classes */,
 				4314B9F02048068B006DBE63 /* Resources */,
-				7445E9C82019CF7200470E0A /* Main.storyboard */,
 				7445E9CB2019CF7200470E0A /* Assets.xcassets */,
 				43F55646204FEDB200FD32E0 /* Info.plist */,
 				7445E9CD2019CF7200470E0A /* LaunchScreen.storyboard */,
@@ -625,7 +642,6 @@
 				43D7A77B205A892E00238E29 /* Localizable.strings in Resources */,
 				7445E9CF2019CF7200470E0A /* LaunchScreen.storyboard in Resources */,
 				7445E9CC2019CF7200470E0A /* Assets.xcassets in Resources */,
-				7445E9CA2019CF7200470E0A /* Main.storyboard in Resources */,
 				4314B9F2204806E5006DBE63 /* MaterialIcons.bundle in Resources */,
 				43D7A77C205A892E00238E29 /* Common.strings in Resources */,
 			);
@@ -837,11 +853,12 @@
 				43D131E42056D439000483C4 /* CardTableViewCell.swift in Sources */,
 				43EFF204204939F700B1887C /* UIColor+Utils.swift in Sources */,
 				4376F49E204D9DF800B179C3 /* HomeCoordinator.swift in Sources */,
+				43044914206BE7B400349B51 /* MnemonicViewController.swift in Sources */,
 				4319B1902063FA8F007CE18D /* KeychainPasswordItem.swift in Sources */,
 				4319B1892063FA46007CE18D /* BiometricIDAuth.swift in Sources */,
-				7445E9C72019CF7200470E0A /* ViewController.swift in Sources */,
 				431437F22047FF9100189C83 /* AppNavigationController.swift in Sources */,
 				4314B9F9204812BC006DBE63 /* MenuTableViewCell.swift in Sources */,
+				43044918206BE85D00349B51 /* PillView.swift in Sources */,
 				431437F42047FFB400189C83 /* AppNavigationDrawerController.swift in Sources */,
 				4314B9EF2048060F006DBE63 /* MaterialIcon.swift in Sources */,
 				43D131E82056EAC6000483C4 /* ChartCard.swift in Sources */,
@@ -863,6 +880,7 @@
 				4319B17E2063EE0E007CE18D /* LoginViewController.swift in Sources */,
 				436B367320512114009F7C21 /* TableViewDelegateHandler.swift in Sources */,
 				4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */,
+				4304491A206BF22A00349B51 /* WordSuggestionCell.swift in Sources */,
 				4322BA35205BDD58007FEB5E /* Card.swift in Sources */,
 				4319B1802063EEA9007CE18D /* LoginViewModel.swift in Sources */,
 				43920D9A2057EECA0040003C /* CardView.swift in Sources */,
@@ -873,6 +891,8 @@
 				43D131E62056E3BD000483C4 /* CardViewModel.swift in Sources */,
 				431437EF2047FF4500189C83 /* MenuViewController.swift in Sources */,
 				4322BA33205BDB6E007FEB5E /* CardsResponsesMock.swift in Sources */,
+				43044916206BE7E800349B51 /* VerificationViewController.swift in Sources */,
+				4304491C206BF47400349B51 /* UIView+Shake.swift in Sources */,
 				4390D582205FBD6E00383BB2 /* Services.swift in Sources */,
 				7445E9C52019CF7200470E0A /* AppDelegate.swift in Sources */,
 				436B367220512114009F7C21 /* SquareCashBarBehaviorDefiner.swift in Sources */,
@@ -927,14 +947,6 @@
 				43D7A77A205A892E00238E29 /* en */,
 			);
 			name = Common.strings;
-			sourceTree = "<group>";
-		};
-		7445E9C82019CF7200470E0A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7445E9C92019CF7200470E0A /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		7445E9CD2019CF7200470E0A /* LaunchScreen.storyboard */ = {

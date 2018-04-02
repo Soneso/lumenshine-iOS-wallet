@@ -62,6 +62,12 @@
 "withdraw" = "Withdraw money";
 
 /*  */
+"lbl_mnemonic_title" = "Please write down and safely store this phrase. It's the ONLY WAY to retrieve your wallet.";
+
+/*  */
+"lbl_mnemonic_button_title" = "I have written it down";
+
+/*  */
 "go" = "Let's go";
 
 /*  */

@@ -82,21 +82,14 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.storyboard` struct is generated, and contains static references to 2 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 1 storyboards.
   struct storyboard {
     /// Storyboard `LaunchScreen`.
     static let launchScreen = _R.storyboard.launchScreen()
-    /// Storyboard `Main`.
-    static let main = _R.storyboard.main()
     
     /// `UIStoryboard(name: "LaunchScreen", bundle: ...)`
     static func launchScreen(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.launchScreen)
-    }
-    
-    /// `UIStoryboard(name: "Main", bundle: ...)`
-    static func main(_: Void = ()) -> UIKit.UIStoryboard {
-      return UIKit.UIStoryboard(resource: R.storyboard.main)
     }
     
     fileprivate init() {}
@@ -154,7 +147,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 43 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 45 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -216,6 +209,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let get_started_button = Rswift.StringResource(key: "get_started_button", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: I have written it down
+      /// 
+      /// Locales: en
+      static let lbl_mnemonic_button_title = Rswift.StringResource(key: "lbl_mnemonic_button_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Invalid request
       /// 
       /// Locales: en
@@ -244,6 +241,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let ok = Rswift.StringResource(key: "ok", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Please write down and safely store this phrase. It's the ONLY WAY to retrieve your wallet.
+      /// 
+      /// Locales: en
+      static let lbl_mnemonic_title = Rswift.StringResource(key: "lbl_mnemonic_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Receive
       /// 
       /// Locales: en
@@ -434,6 +435,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("get_started_button", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: I have written it down
+      /// 
+      /// Locales: en
+      static func lbl_mnemonic_button_title(_: Void = ()) -> String {
+        return NSLocalizedString("lbl_mnemonic_button_title", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Invalid request
       /// 
       /// Locales: en
@@ -481,6 +489,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func ok(_: Void = ()) -> String {
         return NSLocalizedString("ok", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Please write down and safely store this phrase. It's the ONLY WAY to retrieve your wallet.
+      /// 
+      /// Locales: en
+      static func lbl_mnemonic_title(_: Void = ()) -> String {
+        return NSLocalizedString("lbl_mnemonic_title", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Receive
@@ -660,15 +675,6 @@ struct _R {
       
       let bundle = R.hostingBundle
       let name = "LaunchScreen"
-      
-      fileprivate init() {}
-    }
-    
-    struct main: Rswift.StoryboardResourceWithInitialControllerType {
-      typealias InitialController = ViewController
-      
-      let bundle = R.hostingBundle
-      let name = "Main"
       
       fileprivate init() {}
     }
