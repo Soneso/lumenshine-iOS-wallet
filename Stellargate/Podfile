@@ -18,7 +18,7 @@ target 'Stellargate' do
   ui_components_and_helper_pods
   
   pod 'R.swift'
-  pod 'stellar-ios-mac-sdk'
+#  pod 'stellar-ios-mac-sdk'
   pod 'IQKeyboardManagerSwift'
 
   target 'StellargateTests' do

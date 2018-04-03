@@ -18,10 +18,13 @@ class WordSuggestionCell: UICollectionViewCell {
         super.init(frame: frame)
         
         titleLabel.textColor = Stylesheet.color(.white)
+        titleLabel.textAlignment = .center
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        backgroundColor = Stylesheet.color(.lightGray)
     }
     
     required init?(coder aDecoder: NSCoder) {

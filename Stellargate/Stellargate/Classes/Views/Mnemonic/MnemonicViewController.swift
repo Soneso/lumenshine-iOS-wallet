@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import stellarsdk
+//import stellarsdk
 import Material
 
 class MnemonicViewController: UIViewController {
@@ -92,7 +92,9 @@ class MnemonicViewController: UIViewController {
     
     func generateMnemonic() {
         
-        mnemonic = Wallet.generate24WordMnemonic()
+        // TODO: use this when sdk is fixed
+//        mnemonic = Wallet.generate24WordMnemonic()
+        mnemonic = "Kids Prefer Cheese Over Fried Green Spinach My Very Excited Mother Just Served Us Nine Pies Bad Beer Rots Our Young Guts But Vodka Goes Well"
         let words = mnemonic.components(separatedBy: " ")
         
         var originX: CGFloat = 0.0

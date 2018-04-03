@@ -6,18 +6,21 @@
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
-import stellarsdk
+//import stellarsdk
 import UIKit
+import Material
 
 class VerificationViewController: UIViewController {
     
-    fileprivate let collectionView: UICollectionView
     fileprivate let textView = UITextView()
     fileprivate let progressView = UIProgressView()
-    fileprivate let quicktypeView = UIView()
     fileprivate let questionHolderView = UIView()
     fileprivate let questionTitleLabel = UILabel()
     fileprivate let questionSubtitleLabel = UILabel()
+    
+    fileprivate let quicktypeView = UIView()
+    fileprivate var collectionView: UICollectionView?
+    fileprivate let nextButton = FlatButton()
     
     fileprivate var textViewHeight: CGFloat = 0
     fileprivate var questionViewHeight: CGFloat = 0
@@ -38,22 +41,22 @@ class VerificationViewController: UIViewController {
     }
     
     var type: VerificationType = .recovery
+    let zeroSuggestions = ["", "" , ""]
     var suggestions: [String] = []
     var questionWords: [String] = []
     var currentWord: String = ""
     var mnemonic: String = ""
     
     required init?(coder aDecoder: NSCoder) {
-        self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         super.init(coder: aDecoder)
     }
     
     init(type: VerificationType, mnemonic: String) {
-        self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         super.init(nibName: nil, bundle: nil)
         
         self.type = type
         self.mnemonic = mnemonic
+        self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     }
     
     override func viewDidLoad() {
@@ -107,7 +110,13 @@ extension VerificationViewController: UITextViewDelegate {
             suggestions.append(contentsOf: getAutocompleteSuggestions(userText: lastWord))
         }
         
-        collectionView.reloadData()
+        for i in 0...2 {
+            if suggestions.count == i {
+                suggestions.append("")
+            }
+        }
+        
+        collectionView?.reloadData()
         
         return true
     }
@@ -146,7 +155,11 @@ extension VerificationViewController: UICollectionViewDelegate {
 
 extension VerificationViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.size.width / 3, height: collectionView.frame.size.height)
+        return CGSize(width: collectionView.frame.width/3 - 1, height: collectionView.frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
     }
 }
 
@@ -154,7 +167,7 @@ fileprivate extension VerificationViewController {
     func prepareViews() {
         prepareQuestionHolder()
         prepareTextView()
-        
+        prepareQuickTypeView()
     }
     
     func prepareQuestionHolder() {
@@ -183,6 +196,10 @@ fileprivate extension VerificationViewController {
     }
     
     func prepareTextView() {
+        textView.delegate = self
+        textView.autocorrectionType = .no
+        textView.spellCheckingType = .no
+        
         view.addSubview(textView)
         textView.snp.makeConstraints { make in
             make.top.equalTo(questionHolderView.snp.bottom).offset(10)
@@ -191,12 +208,38 @@ fileprivate extension VerificationViewController {
         }
     }
     
+    func prepareQuickTypeView() {
+        quicktypeView.frame = CGRect(origin: .zero, size: CGSize(width: view.frame.width, height: 95))
+        
+        nextButton.title = R.string.localizable.next()
+        nextButton.addTarget(self, action: #selector(nextButtonSelected), for: .touchUpInside)
+        nextButton.titleColor = Stylesheet.color(.white)
+        nextButton.backgroundColor = Stylesheet.color(.cyan)
+        
+        quicktypeView.addSubview(nextButton)
+        nextButton.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+            make.height.equalTo(50)
+        }
+        
+        collectionView?.delegate = self
+        collectionView?.dataSource = self
+        collectionView?.backgroundColor = Stylesheet.color(.lightGray)
+        
+        quicktypeView.addSubview(collectionView!)
+        collectionView?.snp.makeConstraints { make in
+            make.bottom.left.right.equalToSuperview()
+            make.top.equalTo(nextButton.snp.bottom)
+            make.height.equalTo(45)
+        }
+    }
+    
     func setupView() {
-        collectionView.register(WordSuggestionCell.self, forCellWithReuseIdentifier: WordSuggestionCell.cellIdentifier)
+        collectionView?.register(WordSuggestionCell.self, forCellWithReuseIdentifier: WordSuggestionCell.cellIdentifier)
         
         switch type {
         case .confirmation:
-            navigationItem.title = "Re-enter Your Phrase"
+            navigationItem.titleLabel.text = "Re-enter Your Phrase"
             
             questionViewHeight = 0.0
             textViewHeight = defaultTextViewHeight
@@ -206,7 +249,7 @@ fileprivate extension VerificationViewController {
             
             setQuestion(animated: false)
         default:
-            navigationItem.title = "Enter Recovery Phrase"
+            navigationItem.titleLabel.text = "Enter Recovery Phrase"
             
             questionViewHeight = 0.0
             textViewHeight = defaultTextViewHeight
@@ -215,18 +258,20 @@ fileprivate extension VerificationViewController {
         let image = UIImage(named:"close")
         let leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(self.dismissView))
         navigationItem.leftBarButtonItem = leftBarButtonItem
+        navigationItem.titleLabel.textColor = Stylesheet.color(.white)
         
         textView.textContainerInset = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0);
         textView.inputAccessoryView = quicktypeView
         
-        progressView.backgroundColor = Stylesheet.color(.darkGray)
+        progressView.progressTintColor = Stylesheet.color(.cyan)
+        progressView.trackTintColor = Stylesheet.color(.lightGray)
         textView.textColor = Stylesheet.color(.darkGray)
-        questionHolderView.backgroundColor = Stylesheet.color(.lightGray)
+//        questionHolderView.backgroundColor = Stylesheet.color(.lightGray)
         questionTitleLabel.textColor = Stylesheet.color(.darkGray)
         questionTitleLabel.textAlignment = .center
         questionSubtitleLabel.textColor = Stylesheet.color(.darkGray)
         questionSubtitleLabel.textAlignment = .center
-        view.backgroundColor = Stylesheet.color(.lightGray)
+        view.backgroundColor = Stylesheet.color(.white)
     }
     
     func getWords(string: String) -> [String] {
@@ -239,15 +284,18 @@ fileprivate extension VerificationViewController {
         suggestions.removeAll()
         
         if reload {
-            collectionView.reloadData()
+            collectionView?.reloadData()
         }
     }
     
     func getAutocompleteSuggestions(userText: String) -> [String]{
         var possibleMatches: [String] = []
-        let wordList: WordList = .english
+        // TODO: use this after sdk fix
+//        let wordList: WordList = .english
+        let mnemonicLocal = "Kids Prefer Cheese Over Fried Green Spinach My Very Excited Mother Just Served Us Nine Pies Bad Beer Rots Our Young Guts But Vodka Goes Well"
+        let words = mnemonicLocal.components(separatedBy: " ")
         
-        for item in wordList.words {
+        for item in words {
             let myString:NSString! = item as NSString
             let substringRange :NSRange! = myString.range(of: userText)
             
@@ -255,7 +303,7 @@ fileprivate extension VerificationViewController {
                 possibleMatches.append(item)
             }
         }
-        return possibleMatches.enumerated().flatMap{ $0.offset < 3 ? $0.element : nil }
+        return possibleMatches.enumerated().compactMap{ $0.offset < 3 ? $0.element : nil }
     }
     
     func validateAnswer() {
@@ -295,15 +343,9 @@ fileprivate extension VerificationViewController {
     }
     
     func setProgress(animated: Bool) {
-        progressView.progress = Float(questionsAnswered/totalQuestionCount)
+        progressView.progress = Float(questionsAnswered-1)/Float(totalQuestionCount)
         
-        navigationItem.title = "Question \(questionsAnswered) of \(totalQuestionCount)"
-        
-        if animated {
-            UIView.animate(withDuration: 0.3) {
-                self.view.layoutIfNeeded()
-            }
-        }
+        navigationItem.titleLabel.text = "Question \(questionsAnswered) of \(totalQuestionCount)"
     }
     
     func setPin(mnemonic: String) {
