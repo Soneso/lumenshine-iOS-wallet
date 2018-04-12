@@ -51,22 +51,22 @@ class MnemonicViewController: UIViewController {
         view.backgroundColor = Stylesheet.color(.white)
         
         titleLabel.text = R.string.localizable.lbl_mnemonic_title()
-        titleLabel.font = Stylesheet.font(.title3)
+        titleLabel.font = Stylesheet.font(.headline)
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
         
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.left.equalTo(10)
+            make.top.left.equalTo(5)
             make.right.equalTo(-10)
         }
         
         view.addSubview(mnemonicHolderView)
         mnemonicHolderView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.top.equalTo(titleLabel.snp.bottom).offset(5)
             make.left.equalTo(16)
             make.right.equalTo(-16)
-            make.bottom.equalTo(-10)
+            make.bottom.equalTo(-50)
         }
         
         nextButton.title = R.string.localizable.lbl_mnemonic_button_title()
