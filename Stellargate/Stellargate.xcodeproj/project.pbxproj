@@ -525,7 +525,6 @@
 				7445E9BE2019CF7200470E0A /* Frameworks */,
 				7445E9BF2019CF7200470E0A /* Resources */,
 				C5462C68818F6346BD32CEEB /* [CP] Embed Pods Frameworks */,
-				F3DCCDC04EBC4BFF275E5F52 /* [CP] Copy Pods Resources */,
 				74DABE68201B1455007FB701 /* CopyFiles */,
 				43FF90192059581C00650ED5 /* Compile R.swift resources */,
 			);
@@ -546,8 +545,6 @@
 				7445E9D12019CF7300470E0A /* Sources */,
 				7445E9D22019CF7300470E0A /* Frameworks */,
 				7445E9D32019CF7300470E0A /* Resources */,
-				460174F21E85AB6EC34932A2 /* [CP] Embed Pods Frameworks */,
-				6CB3FF993B3713D60095BC20 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -567,8 +564,6 @@
 				7445E9DC2019CF7300470E0A /* Sources */,
 				7445E9DD2019CF7300470E0A /* Frameworks */,
 				7445E9DE2019CF7300470E0A /* Resources */,
-				A8A738B49B372FDDDFA1AA47 /* [CP] Embed Pods Frameworks */,
-				47C93DFEBA3605D283A78432 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -678,36 +673,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/$PRODUCT_NAME/Resources/\"";
 		};
-		460174F21E85AB6EC34932A2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StellargateTests/Pods-StellargateTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		47C93DFEBA3605D283A78432 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StellargateUITests/Pods-StellargateUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		59C22924C213DC0486F3907D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -726,21 +691,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6CB3FF993B3713D60095BC20 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StellargateTests/Pods-StellargateTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		94A081DDD30835BE15C027B8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -757,21 +707,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A8A738B49B372FDDDFA1AA47 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StellargateUITests/Pods-StellargateUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A90755CA218A8113A9E7F7BE /* [CP] Check Pods Manifest.lock */ = {
@@ -807,6 +742,7 @@
 				"${BUILT_PRODUCTS_DIR}/Motion/Motion.framework",
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/stellar-ios-mac-sdk/stellarsdk.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -818,25 +754,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Motion.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/stellarsdk.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Stellargate/Pods-Stellargate-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F3DCCDC04EBC4BFF275E5F52 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Stellargate/Pods-Stellargate-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

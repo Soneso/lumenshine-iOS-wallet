@@ -6,9 +6,9 @@
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
-//import stellarsdk
 import UIKit
 import Material
+import stellarsdk
 
 class VerificationViewController: UIViewController {
     
@@ -290,12 +290,9 @@ fileprivate extension VerificationViewController {
     
     func getAutocompleteSuggestions(userText: String) -> [String]{
         var possibleMatches: [String] = []
-        // TODO: use this after sdk fix
-//        let wordList: WordList = .english
-        let mnemonicLocal = "Kids Prefer Cheese Over Fried Green Spinach My Very Excited Mother Just Served Us Nine Pies Bad Beer Rots Our Young Guts But Vodka Goes Well"
-        let words = mnemonicLocal.components(separatedBy: " ")
+        let wordList: WordList = .english
         
-        for item in words {
+        for item in wordList.words {
             let myString:NSString! = item as NSString
             let substringRange :NSRange! = myString.range(of: userText)
             
