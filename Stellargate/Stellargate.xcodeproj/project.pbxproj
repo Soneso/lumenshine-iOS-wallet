@@ -13,6 +13,11 @@
 		43044918206BE85D00349B51 /* PillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43044917206BE85D00349B51 /* PillView.swift */; };
 		4304491A206BF22A00349B51 /* WordSuggestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43044919206BF22A00349B51 /* WordSuggestionCell.swift */; };
 		4304491C206BF47400349B51 /* UIView+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4304491B206BF47400349B51 /* UIView+Shake.swift */; };
+		43088DA82087987E008AE1AB /* CryptoUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43088DA72087987E008AE1AB /* CryptoUtil.swift */; };
+		43088DAA20879AC7008AE1AB /* RandomBytesSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43088DA920879AC7008AE1AB /* RandomBytesSequence.swift */; };
+		43088DAC2087AB23008AE1AB /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43088DAB2087AB23008AE1AB /* AuthService.swift */; };
+		43088DAE2087AD2A008AE1AB /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43088DAD2087AD2A008AE1AB /* Account.swift */; };
+		43088DB02087C4B8008AE1AB /* Dictionary+HTTPParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43088DAF2087C4B8008AE1AB /* Dictionary+HTTPParams.swift */; };
 		431437EF2047FF4500189C83 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431437EE2047FF4500189C83 /* MenuViewController.swift */; };
 		431437F22047FF9100189C83 /* AppNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431437F12047FF9100189C83 /* AppNavigationController.swift */; };
 		431437F42047FFB400189C83 /* AppNavigationDrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431437F32047FFB400189C83 /* AppNavigationDrawerController.swift */; };
@@ -32,6 +37,7 @@
 		4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA2E205BD69F007FEB5E /* ServerMock.swift */; };
 		4322BA33205BDB6E007FEB5E /* CardsResponsesMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA32205BDB6E007FEB5E /* CardsResponsesMock.swift */; };
 		4322BA35205BDD58007FEB5E /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA34205BDD58007FEB5E /* Card.swift */; };
+		4337C4E72081BAA400F4585A /* RegistrationFormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4337C4E62081BAA400F4585A /* RegistrationFormTableViewController.swift */; };
 		436B366E20512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436B366820512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift */; };
 		436B366F20512114009F7C21 /* FlexibleHeightBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436B366920512114009F7C21 /* FlexibleHeightBar.swift */; };
 		436B367020512114009F7C21 /* FlexibleHeightBarBehaviorDefiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436B366A20512114009F7C21 /* FlexibleHeightBarBehaviorDefiner.swift */; };
@@ -106,6 +112,11 @@
 		43044917206BE85D00349B51 /* PillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillView.swift; sourceTree = "<group>"; };
 		43044919206BF22A00349B51 /* WordSuggestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSuggestionCell.swift; sourceTree = "<group>"; };
 		4304491B206BF47400349B51 /* UIView+Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shake.swift"; sourceTree = "<group>"; };
+		43088DA72087987E008AE1AB /* CryptoUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoUtil.swift; sourceTree = "<group>"; };
+		43088DA920879AC7008AE1AB /* RandomBytesSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomBytesSequence.swift; sourceTree = "<group>"; };
+		43088DAB2087AB23008AE1AB /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		43088DAD2087AD2A008AE1AB /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		43088DAF2087C4B8008AE1AB /* Dictionary+HTTPParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+HTTPParams.swift"; sourceTree = "<group>"; };
 		431437EE2047FF4500189C83 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		431437F12047FF9100189C83 /* AppNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigationController.swift; sourceTree = "<group>"; };
 		431437F32047FFB400189C83 /* AppNavigationDrawerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigationDrawerController.swift; sourceTree = "<group>"; };
@@ -125,6 +136,7 @@
 		4322BA2E205BD69F007FEB5E /* ServerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerMock.swift; sourceTree = "<group>"; };
 		4322BA32205BDB6E007FEB5E /* CardsResponsesMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsResponsesMock.swift; sourceTree = "<group>"; };
 		4322BA34205BDD58007FEB5E /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		4337C4E62081BAA400F4585A /* RegistrationFormTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationFormTableViewController.swift; sourceTree = "<group>"; };
 		436B366820512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexibleHeightBarSubviewLayoutAttributes.swift; sourceTree = "<group>"; };
 		436B366920512114009F7C21 /* FlexibleHeightBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexibleHeightBar.swift; sourceTree = "<group>"; };
 		436B366A20512114009F7C21 /* FlexibleHeightBarBehaviorDefiner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexibleHeightBarBehaviorDefiner.swift; sourceTree = "<group>"; };
@@ -223,6 +235,15 @@
 			path = Mnemonic;
 			sourceTree = "<group>";
 		};
+		43088DA620879874008AE1AB /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				43088DA72087987E008AE1AB /* CryptoUtil.swift */,
+				43088DA920879AC7008AE1AB /* RandomBytesSequence.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		431437EB2047FEEC00189C83 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,6 +261,7 @@
 		431437EC2047FF1A00189C83 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4337C4E52081BA6A00F4585A /* Registration */,
 				43044912206BE7A400349B51 /* Mnemonic */,
 				4370E23B20655F6F004C62C3 /* Settings */,
 				4319B17C2063EDFA007CE18D /* Login */,
@@ -273,6 +295,7 @@
 		4314B9EB204805D4006DBE63 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				43088DA620879874008AE1AB /* Utils */,
 				4319B1872063FA22007CE18D /* TouchID */,
 				4322BA2C205BD69F007FEB5E /* ServerMock */,
 				436B366720512114009F7C21 /* FlexibleHeightBar */,
@@ -342,8 +365,17 @@
 				4322BA32205BDB6E007FEB5E /* CardsResponsesMock.swift */,
 				4322BA34205BDD58007FEB5E /* Card.swift */,
 				4319B1852063F1B0007CE18D /* User.swift */,
+				43088DAD2087AD2A008AE1AB /* Account.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		4337C4E52081BA6A00F4585A /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				4337C4E62081BAA400F4585A /* RegistrationFormTableViewController.swift */,
+			);
+			path = Registration;
 			sourceTree = "<group>";
 		};
 		436B366720512114009F7C21 /* FlexibleHeightBar */ = {
@@ -417,6 +449,7 @@
 				4390D57B205FA4EF00383BB2 /* HomeService.swift */,
 				4390D57D205FA5FC00383BB2 /* BaseService.swift */,
 				4390D581205FBD6E00383BB2 /* Services.swift */,
+				43088DAB2087AB23008AE1AB /* AuthService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -435,6 +468,7 @@
 			children = (
 				43EFF203204939F700B1887C /* UIColor+Utils.swift */,
 				4304491B206BF47400349B51 /* UIView+Shake.swift */,
+				43088DAF2087C4B8008AE1AB /* Dictionary+HTTPParams.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -778,19 +812,24 @@
 				4319B1892063FA46007CE18D /* BiometricIDAuth.swift in Sources */,
 				431437F22047FF9100189C83 /* AppNavigationController.swift in Sources */,
 				4314B9F9204812BC006DBE63 /* MenuTableViewCell.swift in Sources */,
+				43088DA82087987E008AE1AB /* CryptoUtil.swift in Sources */,
 				43044918206BE85D00349B51 /* PillView.swift in Sources */,
 				431437F42047FFB400189C83 /* AppNavigationDrawerController.swift in Sources */,
 				4314B9EF2048060F006DBE63 /* MaterialIcon.swift in Sources */,
+				43088DAA20879AC7008AE1AB /* RandomBytesSequence.swift in Sources */,
 				43D131E82056EAC6000483C4 /* ChartCard.swift in Sources */,
 				4376F4A0204D9E2700B179C3 /* CoordinatorProtocol.swift in Sources */,
 				4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */,
+				4337C4E72081BAA400F4585A /* RegistrationFormTableViewController.swift in Sources */,
 				4390D57E205FA5FC00383BB2 /* BaseService.swift in Sources */,
 				438BE842204D51FD007EBFB9 /* HamburgerButton.swift in Sources */,
+				43088DAC2087AB23008AE1AB /* AuthService.swift in Sources */,
 				4319B1842063F00C007CE18D /* MenuViewModel.swift in Sources */,
 				43D7A77E205A90CC00238E29 /* MenuCoordinator.swift in Sources */,
 				436FE5082052634300CFE788 /* WebCard.swift in Sources */,
 				436B366F20512114009F7C21 /* FlexibleHeightBar.swift in Sources */,
 				4319B1822063EF72007CE18D /* LoginCoordinator.swift in Sources */,
+				43088DB02087C4B8008AE1AB /* Dictionary+HTTPParams.swift in Sources */,
 				4390D57C205FA4EF00383BB2 /* HomeService.swift in Sources */,
 				43FBEE452062853A004E2BB1 /* ScanViewController.swift in Sources */,
 				4376F4A3204D9F9D00B179C3 /* HomeViewModel.swift in Sources */,
@@ -809,6 +848,7 @@
 				436B367120512114009F7C21 /* FacebookBarBehaviorDefiner.swift in Sources */,
 				436B367020512114009F7C21 /* FlexibleHeightBarBehaviorDefiner.swift in Sources */,
 				43D131E62056E3BD000483C4 /* CardViewModel.swift in Sources */,
+				43088DAE2087AD2A008AE1AB /* Account.swift in Sources */,
 				431437EF2047FF4500189C83 /* MenuViewController.swift in Sources */,
 				4322BA33205BDB6E007FEB5E /* CardsResponsesMock.swift in Sources */,
 				43044916206BE7E800349B51 /* VerificationViewController.swift in Sources */,
