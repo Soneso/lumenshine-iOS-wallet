@@ -25,6 +25,7 @@
 		4314B9F2204806E5006DBE63 /* MaterialIcons.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4314B9F1204806E5006DBE63 /* MaterialIcons.bundle */; };
 		4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4314B9F320480813006DBE63 /* MenuViewProtocol.swift */; };
 		4314B9F9204812BC006DBE63 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4314B9F8204812BC006DBE63 /* MenuTableViewCell.swift */; };
+		4316ED9D208DE00800A40F97 /* RegistrationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4316ED9C208DE00800A40F97 /* RegistrationCoordinator.swift */; };
 		4319B17E2063EE0E007CE18D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4319B17D2063EE0E007CE18D /* LoginViewController.swift */; };
 		4319B1802063EEA9007CE18D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4319B17F2063EEA9007CE18D /* LoginViewModel.swift */; };
 		4319B1822063EF72007CE18D /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4319B1812063EF72007CE18D /* LoginCoordinator.swift */; };
@@ -63,6 +64,8 @@
 		43D7A77B205A892E00238E29 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43D7A777205A892E00238E29 /* Localizable.strings */; };
 		43D7A77C205A892E00238E29 /* Common.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43D7A779205A892E00238E29 /* Common.strings */; };
 		43D7A77E205A90CC00238E29 /* MenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D7A77D205A90CC00238E29 /* MenuCoordinator.swift */; };
+		43ECA9CA208B3C4400CB571E /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ECA9C9208B3C4400CB571E /* RegistrationViewModel.swift */; };
+		43ECA9CC208B530000CB571E /* RegistrationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ECA9CB208B530000CB571E /* RegistrationTableViewCell.swift */; };
 		43EFF204204939F700B1887C /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EFF203204939F700B1887C /* UIColor+Utils.swift */; };
 		43EFF20620493B4900B1887C /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EFF20520493B4900B1887C /* Stylesheet.swift */; };
 		43FBEE452062853A004E2BB1 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FBEE442062853A004E2BB1 /* ScanViewController.swift */; };
@@ -124,6 +127,7 @@
 		4314B9F1204806E5006DBE63 /* MaterialIcons.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MaterialIcons.bundle; sourceTree = "<group>"; };
 		4314B9F320480813006DBE63 /* MenuViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewProtocol.swift; sourceTree = "<group>"; };
 		4314B9F8204812BC006DBE63 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
+		4316ED9C208DE00800A40F97 /* RegistrationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCoordinator.swift; sourceTree = "<group>"; };
 		4319B17D2063EE0E007CE18D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4319B17F2063EEA9007CE18D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		4319B1812063EF72007CE18D /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
@@ -163,6 +167,8 @@
 		43D7A778205A892E00238E29 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		43D7A77A205A892E00238E29 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Common.strings; sourceTree = "<group>"; };
 		43D7A77D205A90CC00238E29 /* MenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCoordinator.swift; sourceTree = "<group>"; };
+		43ECA9C9208B3C4400CB571E /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
+		43ECA9CB208B530000CB571E /* RegistrationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTableViewCell.swift; sourceTree = "<group>"; };
 		43EFF203204939F700B1887C /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
 		43EFF20520493B4900B1887C /* Stylesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stylesheet.swift; sourceTree = "<group>"; };
 		43F55646204FEDB200FD32E0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -374,6 +380,7 @@
 			isa = PBXGroup;
 			children = (
 				4337C4E62081BAA400F4585A /* RegistrationFormTableViewController.swift */,
+				43ECA9CB208B530000CB571E /* RegistrationTableViewCell.swift */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -406,6 +413,7 @@
 				4376F49D204D9DF800B179C3 /* HomeCoordinator.swift */,
 				43D7A77D205A90CC00238E29 /* MenuCoordinator.swift */,
 				4319B1812063EF72007CE18D /* LoginCoordinator.swift */,
+				4316ED9C208DE00800A40F97 /* RegistrationCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -417,6 +425,7 @@
 				43D131E52056E3BD000483C4 /* CardViewModel.swift */,
 				4319B17F2063EEA9007CE18D /* LoginViewModel.swift */,
 				4319B1832063F00C007CE18D /* MenuViewModel.swift */,
+				43ECA9C9208B3C4400CB571E /* RegistrationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -804,6 +813,7 @@
 			files = (
 				4322BA26205BAA60007FEB5E /* HeaderMenuViewController.swift in Sources */,
 				4387980A20584335005261C8 /* InternalCard.swift in Sources */,
+				43ECA9CC208B530000CB571E /* RegistrationTableViewCell.swift in Sources */,
 				43D131E42056D439000483C4 /* CardTableViewCell.swift in Sources */,
 				43EFF204204939F700B1887C /* UIColor+Utils.swift in Sources */,
 				4376F49E204D9DF800B179C3 /* HomeCoordinator.swift in Sources */,
@@ -822,8 +832,10 @@
 				4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */,
 				4337C4E72081BAA400F4585A /* RegistrationFormTableViewController.swift in Sources */,
 				4390D57E205FA5FC00383BB2 /* BaseService.swift in Sources */,
+				4316ED9D208DE00800A40F97 /* RegistrationCoordinator.swift in Sources */,
 				438BE842204D51FD007EBFB9 /* HamburgerButton.swift in Sources */,
 				43088DAC2087AB23008AE1AB /* AuthService.swift in Sources */,
+				43ECA9CA208B3C4400CB571E /* RegistrationViewModel.swift in Sources */,
 				4319B1842063F00C007CE18D /* MenuViewModel.swift in Sources */,
 				43D7A77E205A90CC00238E29 /* MenuCoordinator.swift in Sources */,
 				436FE5082052634300CFE788 /* WebCard.swift in Sources */,

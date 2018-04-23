@@ -24,6 +24,8 @@ class LoginCoordinator: CoordinatorType {
         switch transition {
         case .showMain(let user):
             showMain(user: user)
+        case .showSignUp:
+            showSignUp()
         default: break
         }
     }
@@ -44,6 +46,11 @@ fileprivate extension LoginCoordinator {
 //        }
 //
 //        self.baseController.dismiss(animated: true)
+    }
+    
+    func showSignUp() {
+        let registrationCoordinator = RegistrationCoordinator()
+        (baseController as! AppNavigationController).pushViewController(registrationCoordinator.baseController, animated: true)
     }
 }
 

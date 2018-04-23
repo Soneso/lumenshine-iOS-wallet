@@ -15,15 +15,12 @@ class LoginViewController: UIViewController {
     
     fileprivate let viewModel: LoginViewModelType
     
-    fileprivate let createLoginButtonTag = 0
-    fileprivate let loginButtonTag = 1
-    
     // MARK: - UI properties
     fileprivate let loginButton = RaisedButton()
     fileprivate let usernameTextField = TextField()
     fileprivate let passwordTextField = TextField()
-    fileprivate let createInfoLabel = UILabel()
     fileprivate let touchIDButton = Button()
+    fileprivate let signUpButton = Button()
     
     init(viewModel: LoginViewModelType) {
         self.viewModel = viewModel
@@ -71,19 +68,17 @@ extension LoginViewController {
         usernameTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
         
-        if sender.tag == createLoginButtonTag {
-            viewModel.createAccount(username: newAccountName, password: newPassword)
+        if viewModel.checkLogin(username: newAccountName, password: newPassword) {
             viewModel.loginCompleted()
-            loginButton.tag = loginButtonTag
             passwordTextField.text = nil
-        } else if sender.tag == loginButtonTag {
-            if viewModel.checkLogin(username: newAccountName, password: newPassword) {
-                viewModel.loginCompleted()
-                passwordTextField.text = nil
-            } else {
-                showLoginFailedAlert()
-            }
+        } else {
+            showLoginFailedAlert()
         }
+    }
+    
+    @objc
+    func signupAction(sender: UIButton) {
+        viewModel.signUpClick()
     }
     
     @objc
@@ -108,15 +103,15 @@ extension LoginViewController {
 fileprivate extension LoginViewController {
     func prepareView() {
         
-        prepareLabel()
-        prepareButton()
+        prepareLoginButton()
+        prepareSignupButton()
         prepareTouchButton()
         prepareTextFields()
         
         let subViews = [usernameTextField,
                         passwordTextField,
                         loginButton,
-                        createInfoLabel,
+                        signUpButton,
                         touchIDButton]
         let stack = UIStackView(arrangedSubviews: subViews)
         stack.frame = view.frame
@@ -135,8 +130,8 @@ fileprivate extension LoginViewController {
         if let storedUsername = UserDefaults.standard.value(forKey: "username") as? String {
             usernameTextField.text = storedUsername
         }
-        usernameTextField.placeholder = "username"
-        passwordTextField.placeholder = "password"
+        usernameTextField.placeholder = R.string.localizable.username()
+        passwordTextField.placeholder = R.string.localizable.password()
         passwordTextField.isSecureTextEntry = true
         
         usernameTextField.dividerActiveColor = Stylesheet.color(.cyan)
@@ -145,20 +140,18 @@ fileprivate extension LoginViewController {
         passwordTextField.placeholderActiveColor = Stylesheet.color(.cyan)
     }
     
-    func prepareButton() {
+    func prepareLoginButton() {
+        loginButton.title = R.string.localizable.login()
         loginButton.backgroundColor = Stylesheet.color(.cyan)
-        let hasLogin = UserDefaults.standard.bool(forKey: "hasLoginKey")
-        
-        if hasLogin {
-            loginButton.setTitle("Login", for: .normal)
-            loginButton.tag = loginButtonTag
-            createInfoLabel.isHidden = true
-        } else {
-            loginButton.setTitle("Create", for: .normal)
-            loginButton.tag = createLoginButtonTag
-            createInfoLabel.isHidden = false
-        }
+        loginButton.titleColor = Stylesheet.color(.white)
         loginButton.addTarget(self, action: #selector(loginAction(sender:)), for: .touchUpInside)
+    }
+    
+    func prepareSignupButton() {
+        signUpButton.title = R.string.localizable.signup()
+        signUpButton.backgroundColor = Stylesheet.color(.cyan)
+        signUpButton.titleColor = Stylesheet.color(.white)
+        signUpButton.addTarget(self, action: #selector(signupAction(sender:)), for: .touchUpInside)
     }
     
     func prepareTouchButton() {
@@ -173,18 +166,11 @@ fileprivate extension LoginViewController {
         touchIDButton.addTarget(self, action: #selector(touchIDLoginAction), for: .touchUpInside)
     }
     
-    func prepareLabel() {
-        createInfoLabel.text = "Start by creating a username and password"
-        createInfoLabel.textColor = Stylesheet.color(.black)
-        createInfoLabel.adjustsFontSizeToFitWidth = true
-        createInfoLabel.numberOfLines = 0
-    }
-    
     func showLoginFailedAlert() {
         let alertView = UIAlertController(title: R.string.localizable.sign_in_error_msg(),
-                                          message: "Wrong username or password.",
+                                          message: R.string.localizable.bad_credentials(),
                                           preferredStyle:. alert)
-        let okAction = UIAlertAction(title: "Failed Again!", style: .default)
+        let okAction = UIAlertAction(title: R.string.localizable.ok(), style: .default)
         alertView.addAction(okAction)
         present(alertView, animated: true)
     }

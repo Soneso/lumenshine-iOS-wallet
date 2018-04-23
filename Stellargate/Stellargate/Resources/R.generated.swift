@@ -147,7 +147,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 45 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 49 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -225,6 +225,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let logout = Rswift.StringResource(key: "logout", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Login
+      /// 
+      /// Locales: en
+      static let login = Rswift.StringResource(key: "login", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Message
       /// 
       /// Locales: en
@@ -241,6 +245,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let ok = Rswift.StringResource(key: "ok", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Password
+      /// 
+      /// Locales: en
+      static let password = Rswift.StringResource(key: "password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Please write down and safely store this phrase. It's the ONLY WAY to retrieve your wallet.
       /// 
       /// Locales: en
@@ -277,6 +285,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let settings = Rswift.StringResource(key: "settings", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Sign up
+      /// 
+      /// Locales: en
+      static let signup = Rswift.StringResource(key: "signup", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Something went wrong. Try again, please.
       /// 
       /// Locales: en
@@ -293,6 +305,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let user_not_logged_in = Rswift.StringResource(key: "user_not_logged_in", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Username
+      /// 
+      /// Locales: en
+      static let username = Rswift.StringResource(key: "username", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Withdraw money
       /// 
       /// Locales: en
@@ -300,7 +316,7 @@ struct R: Rswift.Validatable {
       /// en translation: Wrong account or password
       /// 
       /// Locales: en
-      static let bad_Credentials = Rswift.StringResource(key: "bad_ credentials", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      static let bad_credentials = Rswift.StringResource(key: "bad_credentials", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: one day ago
       /// 
       /// Locales: en
@@ -463,6 +479,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("logout", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Login
+      /// 
+      /// Locales: en
+      static func login(_: Void = ()) -> String {
+        return NSLocalizedString("login", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Message
       /// 
       /// Locales: en
@@ -489,6 +512,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func ok(_: Void = ()) -> String {
         return NSLocalizedString("ok", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Password
+      /// 
+      /// Locales: en
+      static func password(_: Void = ()) -> String {
+        return NSLocalizedString("password", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Please write down and safely store this phrase. It's the ONLY WAY to retrieve your wallet.
@@ -554,6 +584,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("settings", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Sign up
+      /// 
+      /// Locales: en
+      static func signup(_: Void = ()) -> String {
+        return NSLocalizedString("signup", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Something went wrong. Try again, please.
       /// 
       /// Locales: en
@@ -582,6 +619,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("user_not_logged_in", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Username
+      /// 
+      /// Locales: en
+      static func username(_: Void = ()) -> String {
+        return NSLocalizedString("username", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Withdraw money
       /// 
       /// Locales: en
@@ -592,8 +636,8 @@ struct R: Rswift.Validatable {
       /// en translation: Wrong account or password
       /// 
       /// Locales: en
-      static func bad_Credentials(_: Void = ()) -> String {
-        return NSLocalizedString("bad_ credentials", bundle: R.hostingBundle, comment: "")
+      static func bad_credentials(_: Void = ()) -> String {
+        return NSLocalizedString("bad_credentials", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: one day ago

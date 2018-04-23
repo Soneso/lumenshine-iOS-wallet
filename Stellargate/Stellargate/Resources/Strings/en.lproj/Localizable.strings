@@ -32,7 +32,13 @@
 "send" = "Send";
 
 /*  */
+"login" = "Login";
+
+/*  */
 "logout" = "Log Out";
+
+/*  */
+"signup" = "Sign up";
 
 /*  */
 "cancel" = "Cancel";
@@ -54,6 +60,12 @@
 
 /*  */
 "more" = "More";
+
+/*  */
+"username" = "Username";
+
+/*  */
+"password" = "Password";
 
 /*  */
 "deposit" = "Deposit money";
@@ -140,4 +152,4 @@
 "invalid_request" = "Invalid request";
 
 /*  */
-"bad_ credentials" = "Wrong account or password";
+"bad_credentials" = "Wrong account or password";

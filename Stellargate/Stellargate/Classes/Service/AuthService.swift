@@ -74,6 +74,7 @@ class AuthService: BaseService {
                            encryptedMnemonic: encryptedMnemonic,
                            mnemonicIV: mnemonicIV)
         } catch {
+//            fatalError(error.localizedDescription)
             return nil
         }
     }

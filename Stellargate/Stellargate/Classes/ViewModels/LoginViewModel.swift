@@ -22,6 +22,8 @@ protocol LoginViewModelType: Transitionable {
     func biometricType() -> BiometricType
     func canEvaluatePolicy() -> Bool
     func authenticateUser(completion: @escaping (String?) -> Void)
+    
+    func signUpClick()
 }
 
 class LoginViewModel : LoginViewModelType {
@@ -77,6 +79,10 @@ class LoginViewModel : LoginViewModelType {
             fatalError("Error reading password from keychain - \(error)")
         }
         return false
+    }
+    
+    func signUpClick() {
+        self.navigationCoordinator?.performTransition(transition: .showSignUp)
     }
     
     // MARK: Biometric authentication

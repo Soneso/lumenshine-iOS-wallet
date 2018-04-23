@@ -21,6 +21,7 @@ protocol CoordinatorType: class {
 
 public enum Transition {
     case showMain(User)
+    case showSignUp
     case showHome
     case showSettings
     case showHeaderMenu([String],[UIImage?])

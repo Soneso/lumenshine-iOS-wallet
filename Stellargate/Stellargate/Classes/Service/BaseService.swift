@@ -25,7 +25,7 @@ extension ServiceError: LocalizedError {
         case .invalidRequest:
             return R.string.localizable.invalid_request()
         case .badCredentials:
-            return R.string.localizable.bad_Credentials()
+            return R.string.localizable.bad_credentials()
         }
     }
 }
