@@ -11,14 +11,12 @@ import stellarsdk
 
 class CryptoUtil {
     
-    private static let EMPTY_SPACE = 32
-    
-    private static let MASTER_KEY_LENGTH = 256 / 8 // 128 if invalid key length
+    private static let KEY_LENGTH = 256 / 8
     private static let IV_LENGTH = 16
     private static var SALT_LENGTH: Int {
-        return MASTER_KEY_LENGTH
+        return KEY_LENGTH
     }
-    private static let PBE_ITERATION_COUNT = 20000
+    private static let PBE_ITERATION_COUNT = 10000
     private static let PBKDF2_DERIVATION_ALGORITHM = "PBKDF2WithHmacSHA1"
     private static let CIPHER_ALGORITHM = "AES/CBC/NoPadding"
     
@@ -58,7 +56,7 @@ class CryptoUtil {
     
     static func generateMasterKey() -> Array<UInt8> {
         
-        let byteCount = MASTER_KEY_LENGTH
+        let byteCount = KEY_LENGTH
         var bytes = Data(count: byteCount)
         _ = bytes.withUnsafeMutableBytes { SecRandomCopyBytes(kSecRandomDefault, byteCount, $0) }
         
@@ -69,7 +67,7 @@ class CryptoUtil {
         let output: [UInt8]
         do {
             // TODO: check variant param
-            output = try PKCS5.PBKDF2(password: password.bytes, salt: salt, iterations: PBE_ITERATION_COUNT, keyLength: MASTER_KEY_LENGTH, variant: .sha1).calculate()
+            output = try PKCS5.PBKDF2(password: password.bytes, salt: salt, iterations: PBE_ITERATION_COUNT, keyLength: KEY_LENGTH, variant: .sha1).calculate()
         } catch let error {
             fatalError("PKCS5.PBKDF2 faild: \(error.localizedDescription)")
         }
@@ -81,13 +79,25 @@ class CryptoUtil {
         let size = 16
         let x = source.count % size
         let extensionLength = size - x
-        
         var result = source
         
-        if let emptyUnicode = UnicodeScalar(EMPTY_SPACE){
-            for _ in 1...extensionLength {
-                result.append(Character(emptyUnicode))
-            }
+        for _ in 1...extensionLength {
+            result.append(" ")
+        }
+        return result
+    }
+    
+    static func applyPadding(blockSize: Int, source: Array<UInt8>) -> Array<UInt8> {
+        var result = source
+        result.append(0x80)
+        
+        var extensionLength = 0
+        if result.count % blockSize != 0 {
+            extensionLength = (result.count/blockSize + 1) * blockSize - result.count
+        }
+        
+        for _ in 1...extensionLength {
+            result.append(0x00)
         }
         return result
     }

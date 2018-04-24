@@ -62,8 +62,8 @@ public class AuthService: BaseService {
             
             // encrypt the mnemonic
             let mnemonicIV = CryptoUtil.generateIV()
-            let mnemonic16bytes = CryptoUtil.padCharsTo16BytesFormat(source: mnemonic)
-            let encryptedMnemonic = try CryptoUtil.encryptValue(plainValue: mnemonic16bytes.bytes, key: masterKey, iv: mnemonicIV)
+            let mnemonic16bytes = CryptoUtil.applyPadding(blockSize: 16, source: mnemonic.bytes)
+            let encryptedMnemonic = try CryptoUtil.encryptValue(plainValue: mnemonic16bytes, key: masterKey, iv: mnemonicIV)
             
             // generate public keys
             let publicKeyIndex0 = try Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: 0).accountId
