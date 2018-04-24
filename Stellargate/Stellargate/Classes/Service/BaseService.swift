@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ServiceError: Error {
+public enum ServiceError: Error {
     case userNotLoggedIn
     case unexpectedDataType
     case invalidRequest
@@ -16,7 +16,7 @@ enum ServiceError: Error {
 }
 
 extension ServiceError: LocalizedError {
-    var errorDescription: String? {
+    public var errorDescription: String? {
         switch self {
         case .userNotLoggedIn:
             return R.string.localizable.user_not_logged_in()
@@ -31,21 +31,21 @@ extension ServiceError: LocalizedError {
 }
 
 /// An enum for HTTP methods
-enum HTTPMethod {
+public enum HTTPMethod {
     case get
     case post
 }
 
 /// An enum to diferentiate between succesful and failed responses
-enum Result {
+public enum Result {
     case success(data: Data)
     case failure(error: ServiceError)
 }
 
 /// A closure to be called when a HTTP response is received
-typealias ResponseClosure = (_ response:Result) -> (Void)
+public typealias ResponseClosure = (_ response:Result) -> (Void)
 
-class BaseService: NSObject {
+public class BaseService: NSObject {
     
     internal let baseURL: String
     internal let jsonDecoder = JSONDecoder()

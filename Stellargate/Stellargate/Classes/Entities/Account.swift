@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct Account {
+public struct Account {
     let publicKeyIndex0: String
     let publicKeyIndex188: String
-    let passwordSalt: Array<UInt8>
-    let encryptedMasterKey: Array<UInt8>
-    let masterKeyIV: Array<UInt8>
-    let encryptedMnemonic: Array<UInt8>
-    let mnemonicIV: Array<UInt8>
+    public let passwordSalt: Array<UInt8>
+    public let encryptedMasterKey: Array<UInt8>
+    public let masterKeyIV: Array<UInt8>
+    public let encryptedMnemonic: Array<UInt8>
+    public let mnemonicIV: Array<UInt8>
 }

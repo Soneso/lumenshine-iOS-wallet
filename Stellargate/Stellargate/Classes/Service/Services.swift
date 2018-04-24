@@ -8,12 +8,14 @@
 
 import Foundation
 
-final class Services {
+public final class Services {
 
     let baseURL = "https://service.stellar.org"
     let home: HomeService
+    public let auth: AuthService
 
-    init() {
+    public init() {
         home = HomeService(baseURL: baseURL)
+        auth = AuthService(baseURL: baseURL)
     }
 }

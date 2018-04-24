@@ -13,10 +13,10 @@ class CryptoUtil {
     
     private static let EMPTY_SPACE = 32
     
-    private static let MASTER_KEY_LENGTH = 256 // 128 if invalid key length
+    private static let MASTER_KEY_LENGTH = 256 / 8 // 128 if invalid key length
     private static let IV_LENGTH = 16
     private static var SALT_LENGTH: Int {
-        return MASTER_KEY_LENGTH / 8
+        return MASTER_KEY_LENGTH
     }
     private static let PBE_ITERATION_COUNT = 20000
     private static let PBKDF2_DERIVATION_ALGORITHM = "PBKDF2WithHmacSHA1"
@@ -58,7 +58,7 @@ class CryptoUtil {
     
     static func generateMasterKey() -> Array<UInt8> {
         
-        let byteCount = MASTER_KEY_LENGTH / 8
+        let byteCount = MASTER_KEY_LENGTH
         var bytes = Data(count: byteCount)
         _ = bytes.withUnsafeMutableBytes { SecRandomCopyBytes(kSecRandomDefault, byteCount, $0) }
         
@@ -85,7 +85,7 @@ class CryptoUtil {
         var result = source
         
         if let emptyUnicode = UnicodeScalar(EMPTY_SPACE){
-            for _ in 0...extensionLength {
+            for _ in 1...extensionLength {
                 result.append(Character(emptyUnicode))
             }
         }

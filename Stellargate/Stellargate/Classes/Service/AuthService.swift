@@ -9,13 +9,16 @@
 import Foundation
 import stellarsdk
 
-class AuthService: BaseService {
+public class AuthService: BaseService {
     
-    func generateAccount(email: String, password: String, response: @escaping (Account?) -> Void) {
+    open func generateAccount(email: String, password: String, response: @escaping (Account?) -> Void) {
         guard let account = createAccountForPassword(password) else {
             response(nil)
             return
         }
+        
+        // TODO: remove it, only for testing purpose
+        response(account)
         
         var params = Dictionary<String,String>()
         params["email"] = email
