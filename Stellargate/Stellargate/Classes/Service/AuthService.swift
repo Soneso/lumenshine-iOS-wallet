@@ -18,7 +18,7 @@ public class AuthService: BaseService {
         }
         
         // TODO: remove it, only for testing purpose
-        response(account)
+        // response(account)
         
         var params = Dictionary<String,String>()
         params["email"] = email

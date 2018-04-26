@@ -68,6 +68,12 @@
 "password" = "Password";
 
 /*  */
+"account_data_title" = "Account specific data";
+
+/*  */
+"user_data_title" = "User specific data";
+
+/*  */
 "deposit" = "Deposit money";
 
 /*  */

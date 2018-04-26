@@ -10,18 +10,23 @@ import Foundation
 
 protocol RegistrationViewModelType: Transitionable {
     var items: [[String]] { get }
+    var values: [[String?]] { get }
+    var sectionTitles: [String] { get }
     
+    func textChanged(_ text: String, itemForRowAt indexPath: IndexPath)
 }
 
 class RegistrationViewModel : RegistrationViewModelType {
     
-    
     init() {
-        
+        values = items.map { value in
+            return Array<String?>(repeating: nil, count: value.count)
+        }
     }
     
     var navigationCoordinator: CoordinatorType?
     
+    var values: [[String?]]
     var items: [[String]] = [
         ["Email", "Password"],
         ["Forename", "Last name", "Company name", "Salutation", "Title",
@@ -29,6 +34,13 @@ class RegistrationViewModel : RegistrationViewModelType {
          "Country", "Nationality", "Mobile phone", "Birth day", "Birth place"]
     ]
     
+    var sectionTitles: [String] = [
+        R.string.localizable.account_data_title(),
+        R.string.localizable.user_data_title()
+    ]
     
+    func textChanged(_ text: String, itemForRowAt indexPath: IndexPath) {
+        values[indexPath.section][indexPath.row] = text
+    }
 }
 

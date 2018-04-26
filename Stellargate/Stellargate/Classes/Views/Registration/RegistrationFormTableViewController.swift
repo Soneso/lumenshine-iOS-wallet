@@ -31,6 +31,16 @@ class RegistrationFormTableViewController: UITableViewController {
         super.viewDidLoad()
         prepare()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -47,28 +57,26 @@ class RegistrationFormTableViewController: UITableViewController {
         return viewModel.items[section].count
     }
     
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: RegistrationFormTableViewController.CellIdentifier, for: indexPath) as! RegistrationTableViewCell
         
         cell.setPlaceholder(viewModel.items[indexPath.section][indexPath.row])
+        cell.setText(viewModel.values[indexPath.section][indexPath.row])
+        cell.textEditingCallback = { changedText in
+            self.viewModel.textChanged(changedText, itemForRowAt: indexPath)
+        }
         
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 0.0 : 10
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return viewModel.sectionTitles[section]
     }
+}
+
+extension RegistrationFormTableViewController {
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 { return nil }
-        let separator = UIView(frame: CGRect(x: 15, y: 5, width:tableView.frame.width-30, height: 1))
-        separator.backgroundColor = UIColor.white
-        let header = UIView()
-        header.addSubview(separator)
-        return header
-    }
-    
+
 }
 
 fileprivate extension RegistrationFormTableViewController {
@@ -77,11 +85,6 @@ fileprivate extension RegistrationFormTableViewController {
         tableView.rowHeight = 70.0
         tableView.estimatedRowHeight = 70.0
         tableView.separatorStyle = .none
-        if let colorImg = UIImage(named: "MenuColor") {
-            tableView.backgroundView = UIImageView(image: colorImg)
-        } else {
-            tableView.backgroundColor = Stylesheet.color(.cyan)
-        }
         tableView.tableHeaderView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
     }
 }

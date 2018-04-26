@@ -147,7 +147,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 49 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 51 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -177,6 +177,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let xMoment_years = Rswift.StringResource(key: "x-moment_years", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Account specific data
+      /// 
+      /// Locales: en
+      static let account_data_title = Rswift.StringResource(key: "account_data_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Anonymous
       /// 
       /// Locales: en
@@ -305,6 +309,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let user_not_logged_in = Rswift.StringResource(key: "user_not_logged_in", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: User specific data
+      /// 
+      /// Locales: en
+      static let user_data_title = Rswift.StringResource(key: "user_data_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Username
       /// 
       /// Locales: en
@@ -393,6 +401,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func xMoment_years(_ value1: Int) -> String {
         return String(format: NSLocalizedString("x-moment_years", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
+      }
+      
+      /// en translation: Account specific data
+      /// 
+      /// Locales: en
+      static func account_data_title(_: Void = ()) -> String {
+        return NSLocalizedString("account_data_title", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Anonymous
@@ -617,6 +632,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func user_not_logged_in(_: Void = ()) -> String {
         return NSLocalizedString("user_not_logged_in", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: User specific data
+      /// 
+      /// Locales: en
+      static func user_data_title(_: Void = ()) -> String {
+        return NSLocalizedString("user_data_title", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Username
