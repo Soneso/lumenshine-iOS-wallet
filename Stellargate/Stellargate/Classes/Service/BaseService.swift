@@ -13,6 +13,8 @@ public enum ServiceError: Error {
     case unexpectedDataType
     case invalidRequest
     case badCredentials
+    case parsingFailed(message: String)
+    case encryptionFailed(message: String)
 }
 
 extension ServiceError: LocalizedError {
@@ -26,6 +28,10 @@ extension ServiceError: LocalizedError {
             return R.string.localizable.invalid_request()
         case .badCredentials:
             return R.string.localizable.bad_credentials()
+        case .parsingFailed(let message):
+            return message
+        case .encryptionFailed(let message):
+            return message
         }
     }
 }
@@ -49,6 +55,8 @@ public class BaseService: NSObject {
     
     internal let baseURL: String
     internal let jsonDecoder = JSONDecoder()
+    
+    fileprivate static var jwtToken: String?
     
     private override init() {
         baseURL = ""
@@ -93,6 +101,8 @@ public class BaseService: NSObject {
         case .post:
             urlRequest.httpMethod = "POST"
             urlRequest.httpBody = body
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
         }
         
         let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
@@ -110,6 +120,10 @@ public class BaseService: NSObject {
                     }
                 } else {
                     message = HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode)
+                }
+                
+                if let token = httpResponse.allHeaderFields["Authorization"] as? String {
+                    BaseService.jwtToken = token
                 }
                 
                 switch httpResponse.statusCode {

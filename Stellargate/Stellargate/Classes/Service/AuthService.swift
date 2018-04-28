@@ -9,16 +9,23 @@
 import Foundation
 import stellarsdk
 
+public enum GenerateAccountResponseEnum {
+    case success(response: RegistrationResponse)
+    case failure(error: ServiceError)
+}
+
+public typealias GenerateAccountResponseClosure = (_ response:GenerateAccountResponseEnum) -> (Void)
+
 public class AuthService: BaseService {
     
-    open func generateAccount(email: String, password: String, response: @escaping (Account?) -> Void) {
-        guard let account = createAccountForPassword(password) else {
-            response(nil)
-            return
-        }
+    open func generateAccount(email: String, password: String, response: @escaping GenerateAccountResponseClosure) {
         
-        // TODO: remove it, only for testing purpose
-        // response(account)
+        var account: Account!
+        do {
+            account = try createAccountForPassword(password)
+        } catch {
+            response(.failure(error: .encryptionFailed(message: error.localizedDescription)))
+        }
         
         var params = Dictionary<String,String>()
         params["email"] = email
@@ -33,18 +40,23 @@ public class AuthService: BaseService {
         let pathParams = params.stringFromHttpParameters()
         let bodyData = pathParams?.data(using: .utf8)
         
-        POSTRequestWithPath(path: "/ico/register_user", body: bodyData) { result in
+        POSTRequestWithPath(path: "/ico/register_user", body: bodyData) { (result) -> (Void) in
             switch result {
             case .success(let data):
-                break
+                do {
+                    let registrationResponse = try self.jsonDecoder.decode(RegistrationResponse.self, from: data)
+                    response(.success(response: registrationResponse))
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+                }
             case .failure(let error):
-                break
+                response(.failure(error: error))
             }
         }
         
     }
     
-    private func createAccountForPassword(_ password: String) -> Account? {
+    private func createAccountForPassword(_ password: String) throws -> Account {
         do {
             // generate 256 bit password and salt
             let passwordSalt = CryptoUtil.generateSalt()
@@ -77,8 +89,7 @@ public class AuthService: BaseService {
                            encryptedMnemonic: encryptedMnemonic,
                            mnemonicIV: mnemonicIV)
         } catch {
-//            fatalError(error.localizedDescription)
-            return nil
+            throw error
         }
     }
 }

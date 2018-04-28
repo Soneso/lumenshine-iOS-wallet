@@ -12,7 +12,10 @@ import Material
 class LoginCoordinator: CoordinatorType {
     var baseController: UIViewController
     
+    fileprivate let service: Services
+    
     init() {
+        self.service = Services()
         let viewModel = LoginViewModel()
         let navigation = AppNavigationController(rootViewController: LoginViewController(viewModel: viewModel))
         navigation.setNavigationBarHidden(true, animated: false)
@@ -49,7 +52,7 @@ fileprivate extension LoginCoordinator {
     }
     
     func showSignUp() {
-        let registrationCoordinator = RegistrationCoordinator()
+        let registrationCoordinator = RegistrationCoordinator(service: service.auth)
         (baseController as! AppNavigationController).pushViewController(registrationCoordinator.baseController, animated: true)
     }
 }

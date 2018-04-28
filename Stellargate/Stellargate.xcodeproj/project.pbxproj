@@ -69,6 +69,7 @@
 		43ECA9CC208B530000CB571E /* RegistrationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ECA9CB208B530000CB571E /* RegistrationTableViewCell.swift */; };
 		43EFF204204939F700B1887C /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EFF203204939F700B1887C /* UIColor+Utils.swift */; };
 		43EFF20620493B4900B1887C /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EFF20520493B4900B1887C /* Stylesheet.swift */; };
+		43F74607209494AC003EB5FD /* RegistrationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F74606209494AC003EB5FD /* RegistrationResponse.swift */; };
 		43FBEE452062853A004E2BB1 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FBEE442062853A004E2BB1 /* ScanViewController.swift */; };
 		7445E9C52019CF7200470E0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7445E9C42019CF7200470E0A /* AppDelegate.swift */; };
 		7445E9CC2019CF7200470E0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7445E9CB2019CF7200470E0A /* Assets.xcassets */; };
@@ -174,6 +175,7 @@
 		43EFF203204939F700B1887C /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
 		43EFF20520493B4900B1887C /* Stylesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stylesheet.swift; sourceTree = "<group>"; };
 		43F55646204FEDB200FD32E0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		43F74606209494AC003EB5FD /* RegistrationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationResponse.swift; sourceTree = "<group>"; };
 		43FBEE442062853A004E2BB1 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		5A5A4485ADF2A66A43DCDEFB /* Pods-Stellargate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stellargate.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stellargate/Pods-Stellargate.release.xcconfig"; sourceTree = "<group>"; };
 		7445E9C12019CF7200470E0A /* Stellargate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stellargate.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -378,6 +380,7 @@
 		4322BA31205BDB5A007FEB5E /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				43F746052094948D003EB5FD /* Responses */,
 				4322BA32205BDB6E007FEB5E /* CardsResponsesMock.swift */,
 				4322BA34205BDD58007FEB5E /* Card.swift */,
 				4319B1852063F1B0007CE18D /* User.swift */,
@@ -490,6 +493,14 @@
 				43088DAF2087C4B8008AE1AB /* Dictionary+HTTPParams.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		43F746052094948D003EB5FD /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				43F74606209494AC003EB5FD /* RegistrationResponse.swift */,
+			);
+			path = Responses;
 			sourceTree = "<group>";
 		};
 		43FBEE4320628521004E2BB1 /* Scan */ = {
@@ -861,6 +872,7 @@
 				43D131E220569950000483C4 /* HomeViewController.swift in Sources */,
 				4319B17E2063EE0E007CE18D /* LoginViewController.swift in Sources */,
 				436B367320512114009F7C21 /* TableViewDelegateHandler.swift in Sources */,
+				43F74607209494AC003EB5FD /* RegistrationResponse.swift in Sources */,
 				4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */,
 				4304491A206BF22A00349B51 /* WordSuggestionCell.swift in Sources */,
 				4322BA35205BDD58007FEB5E /* Card.swift in Sources */,

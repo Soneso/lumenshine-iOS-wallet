@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Material
 
 class RegistrationFormTableViewController: UITableViewController {
     
@@ -15,6 +16,8 @@ class RegistrationFormTableViewController: UITableViewController {
     fileprivate static let CellIdentifier = "RegistrationFormCell"
     
     // MARK: - Properties
+    
+    fileprivate let submitButton = RaisedButton()
     
     fileprivate let viewModel: RegistrationViewModelType
 
@@ -30,6 +33,7 @@ class RegistrationFormTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         prepare()
+        prepareSubmitButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,8 +79,10 @@ class RegistrationFormTableViewController: UITableViewController {
 }
 
 extension RegistrationFormTableViewController {
-    
-
+    @objc
+    func submitButtonClicked() {
+        viewModel.submit()
+    }
 }
 
 fileprivate extension RegistrationFormTableViewController {
@@ -86,5 +92,15 @@ fileprivate extension RegistrationFormTableViewController {
         tableView.estimatedRowHeight = 70.0
         tableView.separatorStyle = .none
         tableView.tableHeaderView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
+        tableView.tableFooterView = submitButton
+    }
+    
+    func prepareSubmitButton() {
+        submitButton.frame = CGRect(origin: .zero, size: CGSize(width: tableView.frame.width, height: 50))
+        
+        submitButton.title = R.string.localizable.submit()
+        submitButton.titleColor = Stylesheet.color(.white)
+        submitButton.backgroundColor = Stylesheet.color(.cyan)
+        submitButton.addTarget(self, action: #selector(submitButtonClicked), for: .touchUpInside)
     }
 }

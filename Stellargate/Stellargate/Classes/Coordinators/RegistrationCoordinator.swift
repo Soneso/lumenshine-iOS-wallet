@@ -12,8 +12,8 @@ import Material
 class RegistrationCoordinator: CoordinatorType {
     var baseController: UIViewController
     
-    init() {
-        let viewModel = RegistrationViewModel()
+    init(service: AuthService) {
+        let viewModel = RegistrationViewModel(service: service)
         self.baseController = RegistrationFormTableViewController(viewModel: viewModel)
         viewModel.navigationCoordinator = self
     }

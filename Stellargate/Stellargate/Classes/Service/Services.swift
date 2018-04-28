@@ -10,7 +10,7 @@ import Foundation
 
 public final class Services {
 
-    let baseURL = "https://service.stellar.org"
+    let baseURL = "http://localhost:8000"
     let home: HomeService
     public let auth: AuthService
 

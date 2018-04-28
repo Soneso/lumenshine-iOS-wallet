@@ -14,11 +14,15 @@ protocol RegistrationViewModelType: Transitionable {
     var sectionTitles: [String] { get }
     
     func textChanged(_ text: String, itemForRowAt indexPath: IndexPath)
+    func submit()
 }
 
 class RegistrationViewModel : RegistrationViewModelType {
     
-    init() {
+    fileprivate let service: AuthService
+    
+    init(service: AuthService) {
+        self.service = service
         values = items.map { value in
             return Array<String?>(repeating: nil, count: value.count)
         }
@@ -41,6 +45,19 @@ class RegistrationViewModel : RegistrationViewModelType {
     
     func textChanged(_ text: String, itemForRowAt indexPath: IndexPath) {
         values[indexPath.section][indexPath.row] = text
+    }
+    
+    func submit() {
+        guard let email = values[0][0] else { return }
+        guard let password = values[0][1] else { return }
+        service.generateAccount(email: email, password: password) { response in
+            switch response {
+            case .success(let registrationResponse):
+                print(registrationResponse.tfaSecret)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
 
