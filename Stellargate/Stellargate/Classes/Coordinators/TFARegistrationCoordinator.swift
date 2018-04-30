@@ -12,7 +12,7 @@ class TFARegistrationCoordinator: CoordinatorType {
     var baseController: UIViewController
     
     init(service: AuthService, email: String, response: RegistrationResponse) {
-        let viewModel = TFARegistrationViewModel(email: email, response: response)
+        let viewModel = TFARegistrationViewModel(service: service, email: email, response: response)
         self.baseController = TFARegistrationViewController(viewModel: viewModel)
         viewModel.navigationCoordinator = self
     }

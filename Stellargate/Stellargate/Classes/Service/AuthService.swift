@@ -14,9 +14,38 @@ public enum GenerateAccountResponseEnum {
     case failure(error: ServiceError)
 }
 
+public enum TFAResponseEnum {
+    case success(response: TFAResponse)
+    case failure(error: ServiceError)
+}
+
 public typealias GenerateAccountResponseClosure = (_ response:GenerateAccountResponseEnum) -> (Void)
+public typealias TFAResponseClosure = (_ response:TFAResponseEnum) -> (Void)
 
 public class AuthService: BaseService {
+    
+    open func sendTFA(code: String, response: @escaping TFAResponseClosure) {
+        
+        var params = Dictionary<String,String>()
+        params["tfa_code"] = code
+        
+        let pathParams = params.stringFromHttpParameters()
+        let bodyData = pathParams?.data(using: .utf8)
+        
+        POSTRequestWithPath(path: "/ico/auth/confirm_tfa_registration", body: bodyData, authRequired: true) { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                do {
+                    let tfaResponse = try self.jsonDecoder.decode(TFAResponse.self, from: data)
+                    response(.success(response: tfaResponse))
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+                }
+            case .failure(let error):
+                response(.failure(error: error))
+            }
+        }
+    }
     
     open func generateAccount(email: String, password: String, response: @escaping GenerateAccountResponseClosure) {
         DispatchQueue.global(qos: .userInitiated).async {

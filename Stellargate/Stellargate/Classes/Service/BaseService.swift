@@ -15,6 +15,7 @@ public enum ServiceError: Error {
     case badCredentials
     case parsingFailed(message: String)
     case encryptionFailed(message: String)
+    case validationFailed(error: ErrorResponse)
 }
 
 extension ServiceError: LocalizedError {
@@ -32,6 +33,8 @@ extension ServiceError: LocalizedError {
             return message
         case .encryptionFailed(let message):
             return message
+        case .validationFailed(let error):
+            return error.errorMessage
         }
     }
 }
@@ -87,11 +90,11 @@ public class BaseService: NSObject {
     /// - parameter path:  A path relative to the baseURL. If URL parameters have to be sent they can be encoded in this parameter as you would do it with regular URLs.
     /// - parameter body:  An optional parameter with the data that should be contained in the request body
     /// - parameter response:   The closure to be called upon response.
-    open func POSTRequestWithPath(path: String, body:Data? = nil, completion: @escaping ResponseClosure) {
-        requestFromUrl(url: baseURL + path, method:.post, body:body, completion:completion)
+    open func POSTRequestWithPath(path: String, body:Data? = nil, authRequired: Bool = false, completion: @escaping ResponseClosure) {
+        requestFromUrl(url: baseURL + path, method:.post, body:body, authRequired: authRequired, completion:completion)
     }
     
-    open func requestFromUrl(url: String, method: HTTPMethod, body:Data? = nil, completion: @escaping ResponseClosure) {
+    open func requestFromUrl(url: String, method: HTTPMethod, body:Data? = nil, authRequired: Bool = false, completion: @escaping ResponseClosure) {
         let url = URL(string: url)!
         var urlRequest = URLRequest(url: url)
         
@@ -101,27 +104,16 @@ public class BaseService: NSObject {
         case .post:
             urlRequest.httpMethod = "POST"
             urlRequest.httpBody = body
+            if authRequired == true, let token = BaseService.jwtToken {
+                urlRequest.setValue(token, forHTTPHeaderField: "Authorization")
+            }
 //            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
 //            urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
         }
         
         let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-            if error != nil {
-                completion(.failure(error:.invalidRequest))
-                return
-            }
             
             if let httpResponse = response as? HTTPURLResponse {
-                var message:String!
-                if let data = data {
-                    message = String(data: data, encoding: String.Encoding.utf8)
-                    if message == nil {
-                        message = HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode)
-                    }
-                } else {
-                    message = HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode)
-                }
-                
                 if let token = httpResponse.allHeaderFields["Authorization"] as? String {
                     BaseService.jwtToken = token
                 }
@@ -129,10 +121,28 @@ public class BaseService: NSObject {
                 switch httpResponse.statusCode {
                 case 200:
                     break
+                case 400, 500:
+                    if let errorData = data {
+                        do {
+                            let errorResponses = try self.jsonDecoder.decode(Array<ErrorResponse>.self, from: errorData)
+                            if let err = errorResponses.first {
+                                completion(.failure(error: .validationFailed(error: err)))
+                            } else {
+                                completion(.failure(error: .unexpectedDataType))
+                            }
+                        } catch {
+                            completion(.failure(error: .unexpectedDataType))
+                        }
+                    }
                 default:
                     completion(.failure(error:.invalidRequest))
                     return
                 }
+            }
+            
+            if let error = error {
+                completion(.failure(error: .parsingFailed(message: error.localizedDescription)))
+                return
             }
             
             if let data = data {

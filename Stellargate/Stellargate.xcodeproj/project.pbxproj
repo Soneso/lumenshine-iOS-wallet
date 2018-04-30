@@ -25,6 +25,8 @@
 		4314B9F2204806E5006DBE63 /* MaterialIcons.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4314B9F1204806E5006DBE63 /* MaterialIcons.bundle */; };
 		4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4314B9F320480813006DBE63 /* MenuViewProtocol.swift */; };
 		4314B9F9204812BC006DBE63 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4314B9F8204812BC006DBE63 /* MenuTableViewCell.swift */; };
+		431628CE2097352B00F23A20 /* TFAResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431628CD2097352B00F23A20 /* TFAResponse.swift */; };
+		431628D02097476500F23A20 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431628CF2097476500F23A20 /* ErrorResponse.swift */; };
 		4316ED9D208DE00800A40F97 /* RegistrationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4316ED9C208DE00800A40F97 /* RegistrationCoordinator.swift */; };
 		4316EDA0208E203E00A40F97 /* CreateAccountLocalTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4316ED9F208E203E00A40F97 /* CreateAccountLocalTestCase.swift */; };
 		4319B17E2063EE0E007CE18D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4319B17D2063EE0E007CE18D /* LoginViewController.swift */; };
@@ -132,6 +134,8 @@
 		4314B9F1204806E5006DBE63 /* MaterialIcons.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MaterialIcons.bundle; sourceTree = "<group>"; };
 		4314B9F320480813006DBE63 /* MenuViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewProtocol.swift; sourceTree = "<group>"; };
 		4314B9F8204812BC006DBE63 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
+		431628CD2097352B00F23A20 /* TFAResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFAResponse.swift; sourceTree = "<group>"; };
+		431628CF2097476500F23A20 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		4316ED9C208DE00800A40F97 /* RegistrationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCoordinator.swift; sourceTree = "<group>"; };
 		4316ED9F208E203E00A40F97 /* CreateAccountLocalTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountLocalTestCase.swift; sourceTree = "<group>"; };
 		4319B17D2063EE0E007CE18D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -508,6 +512,8 @@
 			isa = PBXGroup;
 			children = (
 				43F74606209494AC003EB5FD /* RegistrationResponse.swift */,
+				431628CD2097352B00F23A20 /* TFAResponse.swift */,
+				431628CF2097476500F23A20 /* ErrorResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -864,8 +870,10 @@
 				4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */,
 				4337C4E72081BAA400F4585A /* RegistrationFormTableViewController.swift in Sources */,
 				4390D57E205FA5FC00383BB2 /* BaseService.swift in Sources */,
+				431628CE2097352B00F23A20 /* TFAResponse.swift in Sources */,
 				4316ED9D208DE00800A40F97 /* RegistrationCoordinator.swift in Sources */,
 				438BE842204D51FD007EBFB9 /* HamburgerButton.swift in Sources */,
+				431628D02097476500F23A20 /* ErrorResponse.swift in Sources */,
 				43088DAC2087AB23008AE1AB /* AuthService.swift in Sources */,
 				43ECA9CA208B3C4400CB571E /* RegistrationViewModel.swift in Sources */,
 				4319B1842063F00C007CE18D /* MenuViewModel.swift in Sources */,

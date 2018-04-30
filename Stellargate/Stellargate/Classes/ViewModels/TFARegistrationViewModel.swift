@@ -12,14 +12,16 @@ protocol TFARegistrationViewModelType: Transitionable {
     var tfaSecret: String { get }
     var qrCode: Data? { get }
     func openAuthenticator()
-    func submit()
+    func submit(tfaCode: String, response: @escaping TFAResponseClosure)
 }
 
 class TFARegistrationViewModel : TFARegistrationViewModelType {
+    fileprivate let service: AuthService
     fileprivate let email: String
     fileprivate let registrationResponse: RegistrationResponse
     
-    init(email: String, response: RegistrationResponse) {
+    init(service: AuthService, email: String, response: RegistrationResponse) {
+        self.service = service
         self.email = email
         self.registrationResponse = response
     }
@@ -41,8 +43,10 @@ class TFARegistrationViewModel : TFARegistrationViewModelType {
         navigationCoordinator?.performTransition(transition: .showGoogle2FA(url))
     }
     
-    func submit() {
-        
+    func submit(tfaCode: String, response: @escaping TFAResponseClosure) {
+        service.sendTFA(code: tfaCode) { result in
+            response(result)
+        }
     }
 
 }

@@ -59,7 +59,27 @@ extension TFARegistrationViewController {
     
     @objc
     func submitAction(sender: UIButton) {
-        viewModel.submit()
+        guard let code = tfaCodeTextField.text else { return }
+        viewModel.submit(tfaCode: code) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let tfaResponse):
+                    let str = "\(tfaResponse.mailConfirmed); \(tfaResponse.mnemonicConfirmed); \(tfaResponse.tfaEnabled)"
+                    print(str)
+                case .failure(let error):
+                    self.showAlertView(error: error)
+                }
+            }
+        }
+    }
+    
+    func showAlertView(error: ServiceError) {
+        let alertView = UIAlertController(title: "Error",
+                                          message: error.errorDescription,
+                                          preferredStyle: .alert)
+        let okAction = UIAlertAction(title: R.string.localizable.ok(), style: .default)
+        alertView.addAction(okAction)
+        present(alertView, animated: true)
     }
 }
     
