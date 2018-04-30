@@ -101,8 +101,8 @@ public class BaseService: NSObject {
         case .post:
             urlRequest.httpMethod = "POST"
             urlRequest.httpBody = body
-            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+//            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//            urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
         }
         
         let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in

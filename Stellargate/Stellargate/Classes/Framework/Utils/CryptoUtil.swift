@@ -96,8 +96,10 @@ class CryptoUtil {
             extensionLength = (result.count/blockSize + 1) * blockSize - result.count
         }
         
-        for _ in 1...extensionLength {
-            result.append(0x00)
+        if extensionLength > 0 {
+            for _ in 1...extensionLength {
+                result.append(0x00)
+            }
         }
         return result
     }

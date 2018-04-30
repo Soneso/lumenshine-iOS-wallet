@@ -12,6 +12,7 @@ import Material
 protocol RegistrationTableCellProtocol {
     func setPlaceholder(_ placeholder: String?)
     func setText(_ text: String?)
+    func setSecureText(_ isSecure: Bool)
 }
 
 typealias TextChangedClosure = (_ text:String) -> (Void)
@@ -34,7 +35,6 @@ class RegistrationTableViewCell: UITableViewCell {
     func commonInit() {
         
         selectionStyle = .none
-//        textField.isSecureTextEntry = true
         
         textField.dividerActiveColor = Stylesheet.color(.cyan)
         textField.placeholderActiveColor = Stylesheet.color(.cyan)
@@ -70,5 +70,9 @@ extension RegistrationTableViewCell: RegistrationTableCellProtocol {
     
     func setText(_ text: String?) {
         textField.text = text
+    }
+    
+    func setSecureText(_ isSecure: Bool) {
+        textField.isSecureTextEntry = isSecure
     }
 }

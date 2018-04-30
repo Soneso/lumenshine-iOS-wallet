@@ -147,7 +147,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 51 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 54 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -177,6 +177,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let xMoment_years = Rswift.StringResource(key: "x-moment_years", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: 2FA code
+      /// 
+      /// Locales: en
+      static let tfa_code = Rswift.StringResource(key: "tfa_code", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Account specific data
       /// 
       /// Locales: en
@@ -249,6 +253,14 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let ok = Rswift.StringResource(key: "ok", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Open
+      /// 
+      /// Locales: en
+      static let `open` = Rswift.StringResource(key: "open", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Open Google Authenticator to generate 2FA code with secret: %@
+      /// 
+      /// Locales: en
+      static let lbl_tfa_secret_hint = Rswift.StringResource(key: "lbl_tfa_secret_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Password
       /// 
       /// Locales: en
@@ -403,6 +415,13 @@ struct R: Rswift.Validatable {
         return String(format: NSLocalizedString("x-moment_years", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
       }
       
+      /// en translation: 2FA code
+      /// 
+      /// Locales: en
+      static func tfa_code(_: Void = ()) -> String {
+        return NSLocalizedString("tfa_code", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Account specific data
       /// 
       /// Locales: en
@@ -527,6 +546,20 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func ok(_: Void = ()) -> String {
         return NSLocalizedString("ok", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Open
+      /// 
+      /// Locales: en
+      static func `open`(_: Void = ()) -> String {
+        return NSLocalizedString("open", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Open Google Authenticator to generate 2FA code with secret: %@
+      /// 
+      /// Locales: en
+      static func lbl_tfa_secret_hint(_ value1: String) -> String {
+        return String(format: NSLocalizedString("lbl_tfa_secret_hint", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
       }
       
       /// en translation: Password

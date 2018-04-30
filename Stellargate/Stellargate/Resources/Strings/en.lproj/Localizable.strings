@@ -26,6 +26,9 @@
 "close" = "Close";
 
 /*  */
+"open" = "Open";
+
+/*  */
 "delete" = "Delete";
 
 /*  */
@@ -72,6 +75,11 @@
 
 /*  */
 "user_data_title" = "User specific data";
+
+/*  */
+"lbl_tfa_secret_hint" = "Open Google Authenticator to generate 2FA code with secret: %@";
+/*  */
+"tfa_code" = "2FA code";
 
 /*  */
 "deposit" = "Deposit money";

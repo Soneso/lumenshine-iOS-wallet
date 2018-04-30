@@ -34,6 +34,9 @@
 		4319B1862063F1B0007CE18D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4319B1852063F1B0007CE18D /* User.swift */; };
 		4319B1892063FA46007CE18D /* BiometricIDAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4319B1882063FA46007CE18D /* BiometricIDAuth.swift */; };
 		4319B1902063FA8F007CE18D /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4319B18F2063FA8F007CE18D /* KeychainPasswordItem.swift */; };
+		431E7A252095B178003A63B3 /* TFARegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431E7A242095B178003A63B3 /* TFARegistrationViewController.swift */; };
+		431E7A272095B2C0003A63B3 /* TFARegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431E7A262095B2C0003A63B3 /* TFARegistrationViewModel.swift */; };
+		431E7A292095D0E8003A63B3 /* TFARegistrationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431E7A282095D0E8003A63B3 /* TFARegistrationCoordinator.swift */; };
 		4322BA26205BAA60007FEB5E /* HeaderMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA25205BAA60007FEB5E /* HeaderMenuViewController.swift */; };
 		4322BA2F205BD69F007FEB5E /* ResponseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA2D205BD69F007FEB5E /* ResponseMock.swift */; };
 		4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA2E205BD69F007FEB5E /* ServerMock.swift */; };
@@ -138,6 +141,9 @@
 		4319B1852063F1B0007CE18D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4319B1882063FA46007CE18D /* BiometricIDAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricIDAuth.swift; sourceTree = "<group>"; };
 		4319B18F2063FA8F007CE18D /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
+		431E7A242095B178003A63B3 /* TFARegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFARegistrationViewController.swift; sourceTree = "<group>"; };
+		431E7A262095B2C0003A63B3 /* TFARegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFARegistrationViewModel.swift; sourceTree = "<group>"; };
+		431E7A282095D0E8003A63B3 /* TFARegistrationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFARegistrationCoordinator.swift; sourceTree = "<group>"; };
 		4322BA25205BAA60007FEB5E /* HeaderMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMenuViewController.swift; sourceTree = "<group>"; };
 		4322BA2D205BD69F007FEB5E /* ResponseMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseMock.swift; sourceTree = "<group>"; };
 		4322BA2E205BD69F007FEB5E /* ServerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerMock.swift; sourceTree = "<group>"; };
@@ -394,6 +400,7 @@
 			children = (
 				4337C4E62081BAA400F4585A /* RegistrationFormTableViewController.swift */,
 				43ECA9CB208B530000CB571E /* RegistrationTableViewCell.swift */,
+				431E7A242095B178003A63B3 /* TFARegistrationViewController.swift */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -427,6 +434,7 @@
 				43D7A77D205A90CC00238E29 /* MenuCoordinator.swift */,
 				4319B1812063EF72007CE18D /* LoginCoordinator.swift */,
 				4316ED9C208DE00800A40F97 /* RegistrationCoordinator.swift */,
+				431E7A282095D0E8003A63B3 /* TFARegistrationCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -439,6 +447,7 @@
 				4319B17F2063EEA9007CE18D /* LoginViewModel.swift */,
 				4319B1832063F00C007CE18D /* MenuViewModel.swift */,
 				43ECA9C9208B3C4400CB571E /* RegistrationViewModel.swift */,
+				431E7A262095B2C0003A63B3 /* TFARegistrationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -838,6 +847,7 @@
 				43ECA9CC208B530000CB571E /* RegistrationTableViewCell.swift in Sources */,
 				43D131E42056D439000483C4 /* CardTableViewCell.swift in Sources */,
 				43EFF204204939F700B1887C /* UIColor+Utils.swift in Sources */,
+				431E7A252095B178003A63B3 /* TFARegistrationViewController.swift in Sources */,
 				4376F49E204D9DF800B179C3 /* HomeCoordinator.swift in Sources */,
 				43044914206BE7B400349B51 /* MnemonicViewController.swift in Sources */,
 				4319B1902063FA8F007CE18D /* KeychainPasswordItem.swift in Sources */,
@@ -883,10 +893,12 @@
 				436B367120512114009F7C21 /* FacebookBarBehaviorDefiner.swift in Sources */,
 				436B367020512114009F7C21 /* FlexibleHeightBarBehaviorDefiner.swift in Sources */,
 				43D131E62056E3BD000483C4 /* CardViewModel.swift in Sources */,
+				431E7A292095D0E8003A63B3 /* TFARegistrationCoordinator.swift in Sources */,
 				43088DAE2087AD2A008AE1AB /* Account.swift in Sources */,
 				431437EF2047FF4500189C83 /* MenuViewController.swift in Sources */,
 				4322BA33205BDB6E007FEB5E /* CardsResponsesMock.swift in Sources */,
 				43044916206BE7E800349B51 /* VerificationViewController.swift in Sources */,
+				431E7A272095B2C0003A63B3 /* TFARegistrationViewModel.swift in Sources */,
 				4304491C206BF47400349B51 /* UIView+Shake.swift in Sources */,
 				4390D582205FBD6E00383BB2 /* Services.swift in Sources */,
 				7445E9C52019CF7200470E0A /* AppDelegate.swift in Sources */,

@@ -10,7 +10,7 @@ import Foundation
 
 public final class Services {
 
-    let baseURL = "http://localhost:8000"
+    let baseURL = "http://192.168.0.18:8000"
     let home: HomeService
     public let auth: AuthService
 

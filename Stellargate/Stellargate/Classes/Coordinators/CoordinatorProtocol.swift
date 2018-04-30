@@ -27,5 +27,7 @@ public enum Transition {
     case showHeaderMenu([String],[UIImage?])
     case showOnWeb(URL)
     case showScan
+    case show2FA(String, RegistrationResponse)
+    case showGoogle2FA(URL)
 }
 

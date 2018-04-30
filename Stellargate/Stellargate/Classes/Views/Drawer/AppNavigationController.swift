@@ -14,6 +14,7 @@ class AppNavigationController: NavigationController {
         super.prepare()
         navigationBar.isTranslucent = false
         navigationBar.backgroundColor = Stylesheet.color(.cyan)
+        navigationBar.backIndicatorImage = Icon.cm.arrowBack?.tint(with: Stylesheet.color(.white))
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

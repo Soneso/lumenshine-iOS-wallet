@@ -19,41 +19,41 @@ public typealias GenerateAccountResponseClosure = (_ response:GenerateAccountRes
 public class AuthService: BaseService {
     
     open func generateAccount(email: String, password: String, response: @escaping GenerateAccountResponseClosure) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            var account: Account!
+            do {
+                account = try self.createAccountForPassword(password)
+            } catch {
+                response(.failure(error: .encryptionFailed(message: error.localizedDescription)))
+            }
         
-        var account: Account!
-        do {
-            account = try createAccountForPassword(password)
-        } catch {
-            response(.failure(error: .encryptionFailed(message: error.localizedDescription)))
-        }
-        
-        var params = Dictionary<String,String>()
-        params["email"] = email
-        params["kdf_salt"] = account.passwordSalt.toBase64()
-        params["master_key"] = account.encryptedMasterKey.toBase64()
-        params["master_iv"] = account.masterKeyIV.toBase64()
-        params["mnemonic"] = account.encryptedMnemonic.toBase64()
-        params["mnemonic_iv"] = account.mnemonicIV.toBase64()
-        params["public_key_0"] = account.publicKeyIndex0
-        params["public_key_188"] = account.publicKeyIndex188
-        
-        let pathParams = params.stringFromHttpParameters()
-        let bodyData = pathParams?.data(using: .utf8)
-        
-        POSTRequestWithPath(path: "/ico/register_user", body: bodyData) { (result) -> (Void) in
-            switch result {
-            case .success(let data):
-                do {
-                    let registrationResponse = try self.jsonDecoder.decode(RegistrationResponse.self, from: data)
-                    response(.success(response: registrationResponse))
-                } catch {
-                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+            var params = Dictionary<String,String>()
+            params["email"] = email
+            params["kdf_salt"] = account.passwordSalt.toBase64()
+            params["master_key"] = account.encryptedMasterKey.toBase64()
+            params["master_iv"] = account.masterKeyIV.toBase64()
+            params["mnemonic"] = account.encryptedMnemonic.toBase64()
+            params["mnemonic_iv"] = account.mnemonicIV.toBase64()
+            params["public_key_0"] = account.publicKeyIndex0
+            params["public_key_188"] = account.publicKeyIndex188
+            
+            let pathParams = params.stringFromHttpParameters()
+            let bodyData = pathParams?.data(using: .utf8)
+            
+            self.POSTRequestWithPath(path: "/ico/register_user", body: bodyData) { (result) -> (Void) in
+                switch result {
+                case .success(let data):
+                    do {
+                        let registrationResponse = try self.jsonDecoder.decode(RegistrationResponse.self, from: data)
+                        response(.success(response: registrationResponse))
+                    } catch {
+                        response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+                    }
+                case .failure(let error):
+                    response(.failure(error: error))
                 }
-            case .failure(let error):
-                response(.failure(error: error))
             }
         }
-        
     }
     
     private func createAccountForPassword(_ password: String) throws -> Account {

@@ -18,7 +18,6 @@ class LoginCoordinator: CoordinatorType {
         self.service = Services()
         let viewModel = LoginViewModel()
         let navigation = AppNavigationController(rootViewController: LoginViewController(viewModel: viewModel))
-        navigation.setNavigationBarHidden(true, animated: false)
         self.baseController = navigation
         viewModel.navigationCoordinator = self
     }
