@@ -43,7 +43,7 @@ class RegistrationFormTableViewController: UITableViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: true)
+//        navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,6 +66,7 @@ class RegistrationFormTableViewController: UITableViewController {
         
         cell.setPlaceholder(viewModel.items[indexPath.section][indexPath.row])
         cell.setText(viewModel.values[indexPath.section][indexPath.row])
+        cell.setSecureText(viewModel.textIsSecure(at: indexPath))
         cell.textEditingCallback = { changedText in
             self.viewModel.textChanged(changedText, itemForRowAt: indexPath)
         }
@@ -81,7 +82,19 @@ class RegistrationFormTableViewController: UITableViewController {
 extension RegistrationFormTableViewController {
     @objc
     func submitButtonClicked() {
-        viewModel.submit()
+        showActivity()
+        viewModel.submit { result in
+            DispatchQueue.main.async {
+                self.hideActivity(completion: {
+                    switch result {
+                    case .success(let registrationResponse):
+                        self.viewModel.show2FA(response: registrationResponse)
+                    case .failure(let error):
+                        self.showAlertView(error: error)
+                    }
+                })
+            }
+        }
     }
 }
 
@@ -102,5 +115,34 @@ fileprivate extension RegistrationFormTableViewController {
         submitButton.titleColor = Stylesheet.color(.white)
         submitButton.backgroundColor = Stylesheet.color(.cyan)
         submitButton.addTarget(self, action: #selector(submitButtonClicked), for: .touchUpInside)
+    }
+    
+    func showActivity() {
+        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+        
+        let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.startAnimating()
+        
+        alert.view.addSubview(loadingIndicator)
+        loadingIndicator.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalTo(15)
+        }
+        
+        present(alert, animated: true)
+    }
+    
+    func hideActivity(completion: (() -> Void)? = nil) {
+        dismiss(animated: true, completion: completion)
+    }
+    
+    func showAlertView(error: ServiceError) {
+        let alertView = UIAlertController(title: "Error",
+                                          message: error.errorDescription,
+                                          preferredStyle: .alert)
+        let okAction = UIAlertAction(title: R.string.localizable.ok(), style: .default)
+        alertView.addAction(okAction)
+        present(alertView, animated: true)
     }
 }

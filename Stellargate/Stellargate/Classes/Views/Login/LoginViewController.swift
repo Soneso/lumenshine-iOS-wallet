@@ -20,7 +20,7 @@ class LoginViewController: UIViewController {
     fileprivate let usernameTextField = TextField()
     fileprivate let passwordTextField = TextField()
     fileprivate let touchIDButton = Button()
-    fileprivate let signUpButton = Button()
+    fileprivate let signUpButton = RaisedButton()
     
     init(viewModel: LoginViewModelType) {
         self.viewModel = viewModel
@@ -40,10 +40,10 @@ class LoginViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let touchBool = viewModel.canEvaluatePolicy()
-        if touchBool {
-            self.touchIDLoginAction()
-        }
+//        let touchBool = viewModel.canEvaluatePolicy()
+//        if touchBool {
+//            self.touchIDLoginAction()
+//        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -102,28 +102,11 @@ extension LoginViewController {
 
 fileprivate extension LoginViewController {
     func prepareView() {
-        
+        view.backgroundColor = Stylesheet.color(.white)
+        prepareTextFields()
         prepareLoginButton()
         prepareSignupButton()
         prepareTouchButton()
-        prepareTextFields()
-        
-        let subViews = [usernameTextField,
-                        passwordTextField,
-                        loginButton,
-                        signUpButton,
-                        touchIDButton]
-        let stack = UIStackView(arrangedSubviews: subViews)
-        stack.frame = view.frame
-        stack.spacing = 10.0
-        stack.alignment = .fill
-        stack.distribution = .equalCentering
-        stack.axis = .vertical
-        stack.isLayoutMarginsRelativeArrangement = true
-        stack.layoutMargins = UIEdgeInsets(top: 100.0, left: 50.0, bottom: 50.0, right: 50.0)
-        
-        view.addSubview(stack)
-        view.backgroundColor = Stylesheet.color(.white)
     }
     
     func prepareTextFields() {
@@ -138,6 +121,20 @@ fileprivate extension LoginViewController {
         usernameTextField.placeholderActiveColor = Stylesheet.color(.cyan)
         passwordTextField.dividerActiveColor = Stylesheet.color(.cyan)
         passwordTextField.placeholderActiveColor = Stylesheet.color(.cyan)
+        
+        view.addSubview(usernameTextField)
+        usernameTextField.snp.makeConstraints { make in
+            make.top.equalTo(50)
+            make.left.equalTo(40)
+            make.right.equalTo(-40)
+        }
+        
+        view.addSubview(passwordTextField)
+        passwordTextField.snp.makeConstraints { make in
+            make.top.equalTo(usernameTextField.snp.bottom).offset(40)
+            make.left.equalTo(usernameTextField)
+            make.right.equalTo(usernameTextField)
+        }
     }
     
     func prepareLoginButton() {
@@ -145,6 +142,14 @@ fileprivate extension LoginViewController {
         loginButton.backgroundColor = Stylesheet.color(.cyan)
         loginButton.titleColor = Stylesheet.color(.white)
         loginButton.addTarget(self, action: #selector(loginAction(sender:)), for: .touchUpInside)
+        
+        view.addSubview(loginButton)
+        loginButton.snp.makeConstraints { make in
+            make.top.equalTo(passwordTextField.snp.bottom).offset(40)
+            make.left.equalTo(usernameTextField)
+            make.right.equalTo(usernameTextField)
+            make.height.equalTo(50)
+        }
     }
     
     func prepareSignupButton() {
@@ -152,10 +157,18 @@ fileprivate extension LoginViewController {
         signUpButton.backgroundColor = Stylesheet.color(.cyan)
         signUpButton.titleColor = Stylesheet.color(.white)
         signUpButton.addTarget(self, action: #selector(signupAction(sender:)), for: .touchUpInside)
+        
+        view.addSubview(signUpButton)
+        signUpButton.snp.makeConstraints { make in
+            make.top.equalTo(loginButton.snp.bottom).offset(20)
+            make.left.equalTo(usernameTextField)
+            make.right.equalTo(usernameTextField)
+            make.height.equalTo(50)
+        }
     }
     
     func prepareTouchButton() {
-        touchIDButton.isHidden = !viewModel.canEvaluatePolicy()
+        touchIDButton.isHidden = true//!viewModel.canEvaluatePolicy()
         
         switch viewModel.biometricType() {
         case .faceID:
