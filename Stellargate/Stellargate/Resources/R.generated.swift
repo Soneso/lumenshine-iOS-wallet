@@ -147,7 +147,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 54 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 58 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -185,6 +185,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let account_data_title = Rswift.StringResource(key: "account_data_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Already confirmed
+      /// 
+      /// Locales: en
+      static let email_already_confirmed = Rswift.StringResource(key: "email_already_confirmed", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Anonymous
       /// 
       /// Locales: en
@@ -213,6 +217,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let deposit = Rswift.StringResource(key: "deposit", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Error
+      /// 
+      /// Locales: en
+      static let error = Rswift.StringResource(key: "error", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Get Started
       /// 
       /// Locales: en
@@ -265,6 +273,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let password = Rswift.StringResource(key: "password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Please confirm email to continue the registration process
+      /// 
+      /// Locales: en
+      static let lbl_email_confirmation = Rswift.StringResource(key: "lbl_email_confirmation", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Please write down and safely store this phrase. It's the ONLY WAY to retrieve your wallet.
       /// 
       /// Locales: en
@@ -277,6 +289,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let lbl_recommend = Rswift.StringResource(key: "lbl_recommend", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Resend confirmation mail
+      /// 
+      /// Locales: en
+      static let email_resend_confirmation = Rswift.StringResource(key: "email_resend_confirmation", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Save
       /// 
       /// Locales: en
@@ -429,6 +445,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("account_data_title", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Already confirmed
+      /// 
+      /// Locales: en
+      static func email_already_confirmed(_: Void = ()) -> String {
+        return NSLocalizedString("email_already_confirmed", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Anonymous
       /// 
       /// Locales: en
@@ -476,6 +499,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func deposit(_: Void = ()) -> String {
         return NSLocalizedString("deposit", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Error
+      /// 
+      /// Locales: en
+      static func error(_: Void = ()) -> String {
+        return NSLocalizedString("error", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Get Started
@@ -569,6 +599,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("password", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Please confirm email to continue the registration process
+      /// 
+      /// Locales: en
+      static func lbl_email_confirmation(_: Void = ()) -> String {
+        return NSLocalizedString("lbl_email_confirmation", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Please write down and safely store this phrase. It's the ONLY WAY to retrieve your wallet.
       /// 
       /// Locales: en
@@ -588,6 +625,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func lbl_recommend(_: Void = ()) -> String {
         return NSLocalizedString("lbl_recommend", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Resend confirmation mail
+      /// 
+      /// Locales: en
+      static func email_resend_confirmation(_: Void = ()) -> String {
+        return NSLocalizedString("email_resend_confirmation", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Save

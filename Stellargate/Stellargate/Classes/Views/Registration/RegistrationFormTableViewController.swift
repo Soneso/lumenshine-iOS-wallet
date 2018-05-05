@@ -138,7 +138,7 @@ fileprivate extension RegistrationFormTableViewController {
     }
     
     func showAlertView(error: ServiceError) {
-        let alertView = UIAlertController(title: "Error",
+        let alertView = UIAlertController(title: error.errorCode,
                                           message: error.errorDescription,
                                           preferredStyle: .alert)
         let okAction = UIAlertAction(title: R.string.localizable.ok(), style: .default)

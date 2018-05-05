@@ -19,6 +19,16 @@ public enum ServiceError: Error {
 }
 
 extension ServiceError: LocalizedError {
+    
+    public var errorCode: String? {
+        switch self {
+        case .validationFailed(let error):
+            return "Error code: \(error.errorCode ?? 1)"
+        default:
+            return "Error"
+        }
+    }
+    
     public var errorDescription: String? {
         switch self {
         case .userNotLoggedIn:
@@ -34,7 +44,7 @@ extension ServiceError: LocalizedError {
         case .encryptionFailed(let message):
             return message
         case .validationFailed(let error):
-            return error.errorMessage
+            return (error.parameterName ?? "") + "\n" + (error.errorMessage ?? "")
         }
     }
 }
@@ -67,22 +77,23 @@ public class BaseService: NSObject {
     
     init(baseURL: String) {
         self.baseURL = baseURL
+        jsonDecoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601)
     }
     
     /// Performs a get request to the spcified path.
     ///
     /// - parameter path:  A path relative to the baseURL. If URL parameters have to be sent they can be encoded in this parameter as you would do it with regular URLs.
     /// - parameter response:   The closure to be called upon response.
-    open func GETRequestWithPath(path: String, completion: @escaping ResponseClosure) {
-        requestFromUrl(url: baseURL + path, method:.get, completion:completion)
+    open func GETRequestWithPath(path: String, authRequired: Bool = false, completion: @escaping ResponseClosure) {
+        requestFromUrl(url: baseURL + path, method:.get, authRequired: authRequired, completion:completion)
     }
     
     /// Performs a get request to the spcified path.
     ///
     /// - parameter path:  A URL for the request. If URL parameters have to be sent they can be encoded in this parameter as you would do it with regular URLs.
     /// - parameter response:   The closure to be called upon response.
-    open func GETRequestFromUrl(url: String, completion: @escaping ResponseClosure) {
-        requestFromUrl(url: url, method:.get, completion:completion)
+    open func GETRequestFromUrl(url: String, authRequired: Bool = false, completion: @escaping ResponseClosure) {
+        requestFromUrl(url: url, method:.get, authRequired: authRequired, completion:completion)
     }
     
     /// Performs a post request to the spcified path.
@@ -104,11 +115,12 @@ public class BaseService: NSObject {
         case .post:
             urlRequest.httpMethod = "POST"
             urlRequest.httpBody = body
-            if authRequired == true, let token = BaseService.jwtToken {
-                urlRequest.setValue(token, forHTTPHeaderField: "Authorization")
-            }
-//            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-//            urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+//            urlRequest.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+//            urlRequest.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Accept")
+        }
+        
+        if authRequired == true, let token = BaseService.jwtToken {
+            urlRequest.setValue(token, forHTTPHeaderField: "Authorization")
         }
         
         let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
@@ -121,17 +133,20 @@ public class BaseService: NSObject {
                 switch httpResponse.statusCode {
                 case 200:
                     break
-                case 400, 500:
+                case 400...500:
                     if let errorData = data {
                         do {
                             let errorResponses = try self.jsonDecoder.decode(Array<ErrorResponse>.self, from: errorData)
                             if let err = errorResponses.first {
                                 completion(.failure(error: .validationFailed(error: err)))
+                                return
                             } else {
                                 completion(.failure(error: .unexpectedDataType))
+                                return
                             }
                         } catch {
                             completion(.failure(error: .unexpectedDataType))
+                            return
                         }
                     }
                 default:

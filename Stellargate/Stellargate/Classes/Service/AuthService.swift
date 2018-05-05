@@ -19,10 +19,51 @@ public enum TFAResponseEnum {
     case failure(error: ServiceError)
 }
 
+public enum EmptyResponseEnum {
+    case success
+    case failure(error: ServiceError)
+}
+
 public typealias GenerateAccountResponseClosure = (_ response:GenerateAccountResponseEnum) -> (Void)
 public typealias TFAResponseClosure = (_ response:TFAResponseEnum) -> (Void)
+public typealias EmptyResponseClosure = (_ response:EmptyResponseEnum) -> (Void)
 
 public class AuthService: BaseService {
+    
+    open func resendMailConfirmation(email: String, response: @escaping EmptyResponseClosure) {
+        
+        var params = Dictionary<String,String>()
+        params["email"] = email
+        
+        let pathParams = params.stringFromHttpParameters()
+        let bodyData = pathParams?.data(using: .utf8)
+        
+        POSTRequestWithPath(path: "/portal/user/auth/resend_confirmation_mail", body: bodyData) { (result) -> (Void) in
+            switch result {
+            case .success:
+                response(.success)
+            case .failure(let error):
+                response(.failure(error: error))
+            }
+        }
+    }
+    
+    open func registrationStatus(response: @escaping TFAResponseClosure) {
+        
+        GETRequestWithPath(path: "/portal/auth/get_user_registration_status", authRequired: true) { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                do {
+                    let tfaResponse = try self.jsonDecoder.decode(TFAResponse.self, from: data)
+                    response(.success(response: tfaResponse))
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+                }
+            case .failure(let error):
+                response(.failure(error: error))
+            }
+        }
+    }
     
     open func sendTFA(code: String, response: @escaping TFAResponseClosure) {
         
@@ -32,7 +73,7 @@ public class AuthService: BaseService {
         let pathParams = params.stringFromHttpParameters()
         let bodyData = pathParams?.data(using: .utf8)
         
-        POSTRequestWithPath(path: "/ico/auth/confirm_tfa_registration", body: bodyData, authRequired: true) { (result) -> (Void) in
+        POSTRequestWithPath(path: "/portal/user/auth/confirm_tfa_registration", body: bodyData, authRequired: true) { (result) -> (Void) in
             switch result {
             case .success(let data):
                 do {
@@ -69,7 +110,7 @@ public class AuthService: BaseService {
             let pathParams = params.stringFromHttpParameters()
             let bodyData = pathParams?.data(using: .utf8)
             
-            self.POSTRequestWithPath(path: "/ico/register_user", body: bodyData) { (result) -> (Void) in
+            self.POSTRequestWithPath(path: "/portal/user/register_user", body: bodyData) { (result) -> (Void) in
                 switch result {
                 case .success(let data):
                     do {

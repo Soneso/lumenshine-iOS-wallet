@@ -10,10 +10,10 @@ import Foundation
 
 public class ErrorResponse: Decodable {
     
-    let errorCode: Int
-    let parameterName: String
-    let errorMessageKey: String
-    let errorMessage: String
+    let errorCode: Int?
+    let parameterName: String?
+    let errorMessageKey: String?
+    let errorMessage: String?
     
     private enum CodingKeys: String, CodingKey {
         
@@ -25,9 +25,9 @@ public class ErrorResponse: Decodable {
     
     public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        errorCode = try values.decode(Int.self, forKey: .errorCode)
-        parameterName = try values.decode(String.self, forKey: .parameterName)
-        errorMessageKey = try values.decode(String.self, forKey: .errorMessageKey)
-        errorMessage = try values.decode(String.self, forKey: .errorMessage)
+        errorCode = try values.decodeIfPresent(Int.self, forKey: .errorCode)
+        parameterName = try values.decodeIfPresent(String.self, forKey: .parameterName)
+        errorMessageKey = try values.decodeIfPresent(String.self, forKey: .errorMessageKey)
+        errorMessage = try values.decodeIfPresent(String.self, forKey: .errorMessage)
     }
 }

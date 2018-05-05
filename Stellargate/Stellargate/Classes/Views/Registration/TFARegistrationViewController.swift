@@ -64,8 +64,11 @@ extension TFARegistrationViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let tfaResponse):
-                    let str = "\(tfaResponse.mailConfirmed); \(tfaResponse.mnemonicConfirmed); \(tfaResponse.tfaEnabled)"
-                    print(str)
+                    if tfaResponse.mailConfirmed == false {
+                        self.showEmailConfirmationAlert()
+                    } else if tfaResponse.mnemonicConfirmed == false {
+                        // TODO: open mnemonic confirmation
+                    }
                 case .failure(let error):
                     self.showAlertView(error: error)
                 }
@@ -73,8 +76,62 @@ extension TFARegistrationViewController {
         }
     }
     
+    func resendMailConfirmation() {
+        viewModel.resendMailConfirmation { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    break
+                case .failure(let error):
+                    self.showAlertView(error: error)
+                }
+            }
+        }
+    }
+    
+    func checkMailConfirmation() {
+        viewModel.checkMailConfirmation { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let tfaResponse):
+                    if tfaResponse.mailConfirmed == false {
+                        self.showEmailConfirmationAlert()
+                    } else if tfaResponse.mnemonicConfirmed == false {
+                        // TODO: open mnemonic confirmation
+                    }
+                case .failure(let error):
+                    self.showAlertView(error: error)
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Alerts
+extension TFARegistrationViewController {
+    func showEmailConfirmationAlert() {
+        let alertView = UIAlertController(title: nil,
+                                          message: R.string.localizable.lbl_email_confirmation(),
+                                          preferredStyle: .alert)
+        let alreadyAction = UIAlertAction(title: R.string.localizable.email_already_confirmed(),
+                                          style: .default,
+                                          handler: { action in
+                                            self.checkMailConfirmation()
+        })
+        alertView.addAction(alreadyAction)
+        
+        let resendAction = UIAlertAction(title: R.string.localizable.email_resend_confirmation(),
+                                         style: .default,
+                                         handler: { action in
+                                            self.resendMailConfirmation()
+        })
+        alertView.addAction(resendAction)
+        
+        present(alertView, animated: true)
+    }
+    
     func showAlertView(error: ServiceError) {
-        let alertView = UIAlertController(title: "Error",
+        let alertView = UIAlertController(title: R.string.localizable.error(),
                                           message: error.errorDescription,
                                           preferredStyle: .alert)
         let okAction = UIAlertAction(title: R.string.localizable.ok(), style: .default)

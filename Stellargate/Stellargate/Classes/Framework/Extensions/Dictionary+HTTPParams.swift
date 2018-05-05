@@ -22,7 +22,7 @@ extension Dictionary {
         let parameterArray = map { key, value -> String in
             guard let key = key as? String else { return "" }
             guard let value = value as? String else { return "" }
-            return "\(key)=\(value)"
+            return "\(key)=\(value)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         }
         return parameterArray.filter{$0.count > 0}.joined(separator: "&").addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
     }
