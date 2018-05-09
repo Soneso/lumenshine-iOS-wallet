@@ -22,16 +22,16 @@ class RegistrationCoordinator: CoordinatorType {
     
     func performTransition(transition: Transition) {
         switch transition {
-        case .show2FA(let email, let registrationResponse):
-            show2FA(email: email, response: registrationResponse)
+        case .show2FA(let email, let registrationResponse, let mnemonic):
+            show2FA(email: email, response: registrationResponse, mnemonic: mnemonic)
         default: break
         }
     }
 }
 
 fileprivate extension RegistrationCoordinator {
-    func show2FA(email: String, response: RegistrationResponse) {
-        let tfaCoordinator = TFARegistrationCoordinator(service: service, email: email, response: response)
+    func show2FA(email: String, response: RegistrationResponse, mnemonic: String) {
+        let tfaCoordinator = TFARegistrationCoordinator(service: service, email: email, response: response, mnemonic: mnemonic)
         baseController.navigationController?.pushViewController(tfaCoordinator.baseController, animated: true)
     }
     

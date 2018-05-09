@@ -37,7 +37,7 @@ class LoginViewModel : LoginViewModelType {
     func loginCompleted() {
         guard let username = UserDefaults.standard.value(forKey: "username") as? String else { return }
         let user = User(id: "1", name: username)
-        self.navigationCoordinator?.performTransition(transition: .showMain(user))
+        self.navigationCoordinator?.performTransition(transition: .showDashboard(user))
         touchMe.invalidate()
     }
     

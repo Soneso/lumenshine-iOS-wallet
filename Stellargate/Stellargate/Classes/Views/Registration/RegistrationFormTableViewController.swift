@@ -87,8 +87,8 @@ extension RegistrationFormTableViewController {
             DispatchQueue.main.async {
                 self.hideActivity(completion: {
                     switch result {
-                    case .success(let registrationResponse):
-                        self.viewModel.show2FA(response: registrationResponse)
+                    case .success(let registrationResponse, let mnemonic):
+                        self.viewModel.show2FA(response: registrationResponse, mnemonic: mnemonic)
                     case .failure(let error):
                         self.showAlertView(error: error)
                     }

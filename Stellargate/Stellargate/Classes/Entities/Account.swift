@@ -16,4 +16,5 @@ public struct Account {
     public let masterKeyIV: Array<UInt8>
     public let encryptedMnemonic: Array<UInt8>
     public let mnemonicIV: Array<UInt8>
+    let mnemonic24Word: String
 }

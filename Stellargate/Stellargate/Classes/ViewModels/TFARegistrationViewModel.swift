@@ -15,17 +15,20 @@ protocol TFARegistrationViewModelType: Transitionable {
     func submit(tfaCode: String, response: @escaping TFAResponseClosure)
     func checkMailConfirmation(response: @escaping TFAResponseClosure)
     func resendMailConfirmation(response: @escaping EmptyResponseClosure)
+    func showMnemonicConfirmation()
 }
 
 class TFARegistrationViewModel : TFARegistrationViewModelType {
     fileprivate let service: AuthService
     fileprivate let email: String
     fileprivate let registrationResponse: RegistrationResponse
+    fileprivate let mnemonic: String
     
-    init(service: AuthService, email: String, response: RegistrationResponse) {
+    init(service: AuthService, email: String, response: RegistrationResponse, mnemonic: String) {
         self.service = service
         self.email = email
         self.registrationResponse = response
+        self.mnemonic = mnemonic
     }
     
     var navigationCoordinator: CoordinatorType?
@@ -61,5 +64,9 @@ class TFARegistrationViewModel : TFARegistrationViewModelType {
         service.resendMailConfirmation(email: email) { result in
             response(result)
         }
+    }
+    
+    func showMnemonicConfirmation() {
+        navigationCoordinator?.performTransition(transition: .showMnemonic(mnemonic))
     }
 }

@@ -12,25 +12,22 @@ import Material
 
 class MnemonicViewController: UIViewController {
     
+    // MARK: - Properties
+    
+    fileprivate let viewModel: MnemonicViewModelType
+    
+    // MARK: - UI properties
     fileprivate let titleLabel = UILabel()
     fileprivate let mnemonicHolderView = UIView()
     fileprivate let nextButton = FlatButton()
     
-    fileprivate var mnemonic = ""
-    
-    @objc
-    func confirmPhrase() {
-        let verificationViewController = VerificationViewController(type: .questions, mnemonic: mnemonic)
-        
-        navigationController?.pushViewController(verificationViewController, animated: true)
+    init(viewModel: MnemonicViewModelType) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    init() {
-        super.init(nibName: nil, bundle: nil)
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -43,10 +40,6 @@ class MnemonicViewController: UIViewController {
     func setupView() {
         navigationItem.titleLabel.text = "Secret Phrase"
         navigationItem.titleLabel.textColor = Stylesheet.color(.white)
-        
-//        let image = Icon.close
-//        let leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(self.dismissView))
-//        navigationItem.leftBarButtonItem = leftBarButtonItem
         
         view.backgroundColor = Stylesheet.color(.white)
         
@@ -84,6 +77,15 @@ class MnemonicViewController: UIViewController {
     }
     
     @objc
+    func confirmPhrase() {
+        let verificationViewController = VerificationViewController(type: .questions, mnemonic: viewModel.mnemonic24Word)
+        verificationViewController.delegate = self
+        
+        present(AppNavigationController(rootViewController:verificationViewController), animated: true, completion: nil)
+//        navigationController?.pushViewController(verificationViewController, animated: true)
+    }
+    
+    @objc
     func dismissView() {
         view.endEditing(true)
         
@@ -92,7 +94,7 @@ class MnemonicViewController: UIViewController {
     
     func generateMnemonic() {
         
-        mnemonic = Wallet.generate24WordMnemonic()
+        let mnemonic = viewModel.mnemonic24Word
         let words = mnemonic.components(separatedBy: " ")
         
         var originX: CGFloat = 0.0
@@ -118,6 +120,32 @@ class MnemonicViewController: UIViewController {
                 mnemonicHolderView.addSubview(pillView)
                 
                 originX += pillView.frame.size.width
+            }
+        }
+    }
+    
+    func showAlertView(error: ServiceError) {
+        let alertView = UIAlertController(title: R.string.localizable.error(),
+                                          message: error.errorDescription,
+                                          preferredStyle: .alert)
+        let okAction = UIAlertAction(title: R.string.localizable.ok(), style: .default)
+        alertView.addAction(okAction)
+        present(alertView, animated: true)
+    }
+}
+
+extension MnemonicViewController: VerificationViewControllerDelegate {
+    func verification(_ viewController: VerificationViewController, didFinishWithSuccess success: Bool) {
+        if success {
+            viewModel.confirmMnemonic { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success:
+                        self.viewModel.showDashboard()
+                    case .failure(let error):
+                        self.showAlertView(error: error)
+                    }
+                }
             }
         }
     }

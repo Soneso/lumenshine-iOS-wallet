@@ -11,7 +11,6 @@
 		43044914206BE7B400349B51 /* MnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43044913206BE7B400349B51 /* MnemonicViewController.swift */; };
 		43044916206BE7E800349B51 /* VerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43044915206BE7E800349B51 /* VerificationViewController.swift */; };
 		43044918206BE85D00349B51 /* PillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43044917206BE85D00349B51 /* PillView.swift */; };
-		4304491A206BF22A00349B51 /* WordSuggestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43044919206BF22A00349B51 /* WordSuggestionCell.swift */; };
 		4304491C206BF47400349B51 /* UIView+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4304491B206BF47400349B51 /* UIView+Shake.swift */; };
 		43088DA82087987E008AE1AB /* CryptoUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43088DA72087987E008AE1AB /* CryptoUtil.swift */; };
 		43088DAA20879AC7008AE1AB /* RandomBytesSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43088DA920879AC7008AE1AB /* RandomBytesSequence.swift */; };
@@ -39,6 +38,8 @@
 		431E7A252095B178003A63B3 /* TFARegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431E7A242095B178003A63B3 /* TFARegistrationViewController.swift */; };
 		431E7A272095B2C0003A63B3 /* TFARegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431E7A262095B2C0003A63B3 /* TFARegistrationViewModel.swift */; };
 		431E7A292095D0E8003A63B3 /* TFARegistrationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431E7A282095D0E8003A63B3 /* TFARegistrationCoordinator.swift */; };
+		431F8AB420A0586100B1E0F1 /* MnemonicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F8AB320A0586100B1E0F1 /* MnemonicViewModel.swift */; };
+		431F8AB620A074BA00B1E0F1 /* MnemonicCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F8AB520A074BA00B1E0F1 /* MnemonicCoordinator.swift */; };
 		4322BA26205BAA60007FEB5E /* HeaderMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA25205BAA60007FEB5E /* HeaderMenuViewController.swift */; };
 		4322BA2F205BD69F007FEB5E /* ResponseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA2D205BD69F007FEB5E /* ResponseMock.swift */; };
 		4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA2E205BD69F007FEB5E /* ServerMock.swift */; };
@@ -120,7 +121,6 @@
 		43044913206BE7B400349B51 /* MnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicViewController.swift; sourceTree = "<group>"; };
 		43044915206BE7E800349B51 /* VerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationViewController.swift; sourceTree = "<group>"; };
 		43044917206BE85D00349B51 /* PillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillView.swift; sourceTree = "<group>"; };
-		43044919206BF22A00349B51 /* WordSuggestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSuggestionCell.swift; sourceTree = "<group>"; };
 		4304491B206BF47400349B51 /* UIView+Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shake.swift"; sourceTree = "<group>"; };
 		43088DA72087987E008AE1AB /* CryptoUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoUtil.swift; sourceTree = "<group>"; };
 		43088DA920879AC7008AE1AB /* RandomBytesSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomBytesSequence.swift; sourceTree = "<group>"; };
@@ -148,6 +148,8 @@
 		431E7A242095B178003A63B3 /* TFARegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFARegistrationViewController.swift; sourceTree = "<group>"; };
 		431E7A262095B2C0003A63B3 /* TFARegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFARegistrationViewModel.swift; sourceTree = "<group>"; };
 		431E7A282095D0E8003A63B3 /* TFARegistrationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFARegistrationCoordinator.swift; sourceTree = "<group>"; };
+		431F8AB320A0586100B1E0F1 /* MnemonicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicViewModel.swift; sourceTree = "<group>"; };
+		431F8AB520A074BA00B1E0F1 /* MnemonicCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicCoordinator.swift; sourceTree = "<group>"; };
 		4322BA25205BAA60007FEB5E /* HeaderMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMenuViewController.swift; sourceTree = "<group>"; };
 		4322BA2D205BD69F007FEB5E /* ResponseMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseMock.swift; sourceTree = "<group>"; };
 		4322BA2E205BD69F007FEB5E /* ServerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerMock.swift; sourceTree = "<group>"; };
@@ -250,7 +252,6 @@
 				43044913206BE7B400349B51 /* MnemonicViewController.swift */,
 				43044915206BE7E800349B51 /* VerificationViewController.swift */,
 				43044917206BE85D00349B51 /* PillView.swift */,
-				43044919206BF22A00349B51 /* WordSuggestionCell.swift */,
 			);
 			path = Mnemonic;
 			sourceTree = "<group>";
@@ -439,6 +440,7 @@
 				4319B1812063EF72007CE18D /* LoginCoordinator.swift */,
 				4316ED9C208DE00800A40F97 /* RegistrationCoordinator.swift */,
 				431E7A282095D0E8003A63B3 /* TFARegistrationCoordinator.swift */,
+				431F8AB520A074BA00B1E0F1 /* MnemonicCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -452,6 +454,7 @@
 				4319B1832063F00C007CE18D /* MenuViewModel.swift */,
 				43ECA9C9208B3C4400CB571E /* RegistrationViewModel.swift */,
 				431E7A262095B2C0003A63B3 /* TFARegistrationViewModel.swift */,
+				431F8AB320A0586100B1E0F1 /* MnemonicViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -870,6 +873,7 @@
 				4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */,
 				4337C4E72081BAA400F4585A /* RegistrationFormTableViewController.swift in Sources */,
 				4390D57E205FA5FC00383BB2 /* BaseService.swift in Sources */,
+				431F8AB420A0586100B1E0F1 /* MnemonicViewModel.swift in Sources */,
 				431628CE2097352B00F23A20 /* TFAResponse.swift in Sources */,
 				4316ED9D208DE00800A40F97 /* RegistrationCoordinator.swift in Sources */,
 				438BE842204D51FD007EBFB9 /* HamburgerButton.swift in Sources */,
@@ -882,6 +886,7 @@
 				436B366F20512114009F7C21 /* FlexibleHeightBar.swift in Sources */,
 				4319B1822063EF72007CE18D /* LoginCoordinator.swift in Sources */,
 				43088DB02087C4B8008AE1AB /* Dictionary+HTTPParams.swift in Sources */,
+				431F8AB620A074BA00B1E0F1 /* MnemonicCoordinator.swift in Sources */,
 				4390D57C205FA4EF00383BB2 /* HomeService.swift in Sources */,
 				43FBEE452062853A004E2BB1 /* ScanViewController.swift in Sources */,
 				4376F4A3204D9F9D00B179C3 /* HomeViewModel.swift in Sources */,
@@ -892,7 +897,6 @@
 				436B367320512114009F7C21 /* TableViewDelegateHandler.swift in Sources */,
 				43F74607209494AC003EB5FD /* RegistrationResponse.swift in Sources */,
 				4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */,
-				4304491A206BF22A00349B51 /* WordSuggestionCell.swift in Sources */,
 				4322BA35205BDD58007FEB5E /* Card.swift in Sources */,
 				4319B1802063EEA9007CE18D /* LoginViewModel.swift in Sources */,
 				43920D9A2057EECA0040003C /* CardView.swift in Sources */,

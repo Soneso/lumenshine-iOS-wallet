@@ -16,7 +16,7 @@ protocol RegistrationViewModelType: Transitionable {
     
     func textChanged(_ text: String, itemForRowAt indexPath: IndexPath)
     func submit(response: @escaping GenerateAccountResponseClosure)
-    func show2FA(response: RegistrationResponse)
+    func show2FA(response: RegistrationResponse, mnemonic: String)
 }
 
 class RegistrationViewModel : RegistrationViewModelType {
@@ -70,9 +70,9 @@ class RegistrationViewModel : RegistrationViewModelType {
         }
     }
     
-    func show2FA(response: RegistrationResponse) {
+    func show2FA(response: RegistrationResponse, mnemonic: String) {
         guard let email = values[0][0] else { return }
-        self.navigationCoordinator?.performTransition(transition: .show2FA(email, response))
+        self.navigationCoordinator?.performTransition(transition: .show2FA(email, response, mnemonic))
     }
 }
 

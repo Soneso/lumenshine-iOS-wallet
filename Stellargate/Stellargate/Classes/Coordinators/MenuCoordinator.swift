@@ -51,8 +51,7 @@ fileprivate extension MenuCoordinator {
     }
     
     func showSettings() {
-//        let settingsVC = SettingsTableViewController()
-        let settingsVC = MnemonicViewController()
+        let settingsVC = SettingsTableViewController()
         let navigationController = AppNavigationController(rootViewController: settingsVC)
         drawer.setCenter(navigationController, withCloseAnimation: true, completion: nil)
         (baseController as! MenuViewController).present(settingsVC)

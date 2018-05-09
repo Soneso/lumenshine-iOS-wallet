@@ -10,6 +10,10 @@ import UIKit
 import Material
 import stellarsdk
 
+protocol VerificationViewControllerDelegate {
+    func verification(_ viewController:VerificationViewController, didFinishWithSuccess success: Bool)
+}
+
 class VerificationViewController: UIViewController {
     
     fileprivate let textView = UITextView()
@@ -17,9 +21,6 @@ class VerificationViewController: UIViewController {
     fileprivate let questionHolderView = UIView()
     fileprivate let questionTitleLabel = UILabel()
     fileprivate let questionSubtitleLabel = UILabel()
-    
-    fileprivate let quicktypeView = UIView()
-    fileprivate var collectionView: UICollectionView?
     fileprivate let nextButton = FlatButton()
     
     fileprivate var textViewHeight: CGFloat = 0
@@ -41,11 +42,11 @@ class VerificationViewController: UIViewController {
     }
     
     var type: VerificationType = .recovery
-    let zeroSuggestions = ["", "" , ""]
-    var suggestions: [String] = []
     var questionWords: [String] = []
-    var currentWord: String = ""
+    var randomIndices: [Int] = []
     var mnemonic: String = ""
+    
+    var delegate: VerificationViewControllerDelegate?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -56,7 +57,6 @@ class VerificationViewController: UIViewController {
         
         self.type = type
         self.mnemonic = mnemonic
-        self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     }
     
     override func viewDidLoad() {
@@ -77,7 +77,7 @@ class VerificationViewController: UIViewController {
     @objc
     func dismissView() {
         view.endEditing(true)
-        
+        delegate?.verification(self, didFinishWithSuccess: false)
         dismiss(animated: true, completion: nil)
     }
     
@@ -95,71 +95,14 @@ class VerificationViewController: UIViewController {
             if lastCharater == " " {
                 mnemonicString = String(mnemonicString.dropLast())
             }
-            setPin(mnemonic: mnemonicString)
+//            setPin(mnemonic: mnemonicString)
         }
     }
 }
 
 extension VerificationViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        clearSuggestions(reload: false)
-        
-        let subString = (textView.text! as NSString).replacingCharacters(in: range, with: text)
-        
-        if let lastWord = getWords(string: String(subString)).last {
-            suggestions.append(contentsOf: getAutocompleteSuggestions(userText: lastWord))
-        }
-        
-        for i in 0...2 {
-            if suggestions.count == i {
-                suggestions.append("")
-            }
-        }
-        
-        collectionView?.reloadData()
-        
         return true
-    }
-}
-
-extension VerificationViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return suggestions.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WordSuggestionCell.cellIdentifier, for: indexPath) as! WordSuggestionCell
-        cell.setTitle(suggestions[indexPath.row])
-        return cell
-    }
-}
-
-extension VerificationViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let suggestion = suggestions[indexPath.row]
-        var words = getWords(string: textView.text)
-        if words.count > 0 {
-            words.removeLast()
-        }
-        words.append(suggestion)
-        
-        textView.text = words.joined(separator: " ")
-        
-        if type != .questions {
-            textView.text.append(" ")
-        }
-        
-        clearSuggestions(reload: true)
-    }
-}
-
-extension VerificationViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width/3 - 1, height: collectionView.frame.height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 1
     }
 }
 
@@ -167,7 +110,7 @@ fileprivate extension VerificationViewController {
     func prepareViews() {
         prepareQuestionHolder()
         prepareTextView()
-        prepareQuickTypeView()
+        prepareNextButton()
     }
     
     func prepareQuestionHolder() {
@@ -208,35 +151,22 @@ fileprivate extension VerificationViewController {
         }
     }
     
-    func prepareQuickTypeView() {
-        quicktypeView.frame = CGRect(origin: .zero, size: CGSize(width: view.frame.width, height: 95))
-        
+    func prepareNextButton() {
         nextButton.title = R.string.localizable.next()
         nextButton.addTarget(self, action: #selector(nextButtonSelected), for: .touchUpInside)
         nextButton.titleColor = Stylesheet.color(.white)
         nextButton.backgroundColor = Stylesheet.color(.cyan)
         
-        quicktypeView.addSubview(nextButton)
-        nextButton.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
-            make.height.equalTo(50)
-        }
+        nextButton.frame = CGRect(origin: .zero, size: CGSize(width: view.frame.width, height: 50))
         
-        collectionView?.delegate = self
-        collectionView?.dataSource = self
-        collectionView?.backgroundColor = Stylesheet.color(.lightGray)
-        
-        quicktypeView.addSubview(collectionView!)
-        collectionView?.snp.makeConstraints { make in
-            make.bottom.left.right.equalToSuperview()
-            make.top.equalTo(nextButton.snp.bottom)
-            make.height.equalTo(45)
-        }
+//        view.addSubview(nextButton)
+//        nextButton.snp.makeConstraints { make in
+//            make.bottom.left.right.equalToSuperview()
+//            make.height.equalTo(50)
+//        }
     }
     
     func setupView() {
-        collectionView?.register(WordSuggestionCell.self, forCellWithReuseIdentifier: WordSuggestionCell.cellIdentifier)
-        
         switch type {
         case .confirmation:
             navigationItem.titleLabel.text = "Re-enter Your Phrase"
@@ -246,6 +176,7 @@ fileprivate extension VerificationViewController {
         case .questions:
             questionViewHeight = defaultQuestionViewHeight
             textViewHeight = questionTextViewHeight
+            randomIndices = generateRandomIndices()
             
             setQuestion(animated: false)
         default:
@@ -255,13 +186,13 @@ fileprivate extension VerificationViewController {
             textViewHeight = defaultTextViewHeight
         }
         
-        let image = UIImage(named:"close")
-        let leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(self.dismissView))
+        let icon = Icon.close?.tint(with: Stylesheet.color(.white))
+        let leftBarButtonItem = UIBarButtonItem(image: icon, style: .plain, target: self, action: #selector(self.dismissView))
         navigationItem.leftBarButtonItem = leftBarButtonItem
         navigationItem.titleLabel.textColor = Stylesheet.color(.white)
         
         textView.textContainerInset = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0);
-        textView.inputAccessoryView = quicktypeView
+        textView.inputAccessoryView = nextButton
         
         progressView.progressTintColor = Stylesheet.color(.cyan)
         progressView.trackTintColor = Stylesheet.color(.lightGray)
@@ -280,33 +211,15 @@ fileprivate extension VerificationViewController {
         return components.filter { !$0.isEmpty }
     }
     
-    func clearSuggestions(reload: Bool) {
-        suggestions.removeAll()
-        
-        if reload {
-            collectionView?.reloadData()
-        }
-    }
-    
-    func getAutocompleteSuggestions(userText: String) -> [String]{
-        var possibleMatches: [String] = []
-        let wordList: WordList = .english
-        
-        for item in wordList.words {
-            let myString:NSString! = item as NSString
-            let substringRange :NSRange! = myString.range(of: userText)
-            
-            if (substringRange.location == 0) {
-                possibleMatches.append(item)
-            }
-        }
-        return possibleMatches.enumerated().compactMap{ $0.offset < 3 ? $0.element : nil }
-    }
-    
     func validateAnswer() {
-        if textView.text == currentWord {
+        if let index = Int(textView.text),
+            index-1 == randomIndices[questionsAnswered-1] {
             if questionsAnswered == 4 {
-                setPin(mnemonic: mnemonic)
+                questionsAnswered += 1
+                setProgress(animated: true)                
+                dismiss(animated: true, completion: {
+                    self.delegate?.verification(self, didFinishWithSuccess: true)
+                })
             } else {
                 textView.text = ""
                 setQuestion(animated: true)
@@ -324,19 +237,15 @@ fileprivate extension VerificationViewController {
     
     func setQuestion(animated: Bool) {
         if questionWords.count == 0 {
-            questionWords = mnemonic.components(separatedBy: " ")
+            questionWords = mnemonic.components(separatedBy:" ")
         }
         
-        let randomIndex = Int(arc4random_uniform(UInt32(questionWords.count)))
-        currentWord = questionWords[randomIndex]
+        let currentWord = questionWords[randomIndices[questionsAnswered]]
         
-        if let indexOfWord = mnemonic.components(separatedBy: " ").index(of: currentWord) {
-            questionTitleLabel.text = "What was the word \(String(describing: indexOfWord + 1))?"
-            questionWords.remove(at: randomIndex)
-            questionsAnswered += 1
-            
-            setProgress(animated: animated)
-        }
+        questionTitleLabel.text = "What was the index of \"\(currentWord)\"?"
+        questionsAnswered += 1
+        
+        setProgress(animated: animated)
     }
     
     func setProgress(animated: Bool) {
@@ -345,10 +254,19 @@ fileprivate extension VerificationViewController {
         navigationItem.titleLabel.text = "Question \(questionsAnswered) of \(totalQuestionCount)"
     }
     
-    func setPin(mnemonic: String) {
-        //        let pinViewController = PinViewController(pin: nil, mnemonic: mnemonic)
-        //
-        //        navigationController?.pushViewController(pinViewController, animated: true)
+    func generateRandomIndices() -> [Int] {
+        if questionWords.count == 0 {
+            questionWords = mnemonic.components(separatedBy: " ")
+        }
+        var numbers: [Int] = []
+        for _ in 1...totalQuestionCount {
+            var n: Int
+            repeat {
+                n = Int(arc4random_uniform(UInt32(questionWords.count)))
+            } while numbers.contains(n)
+            numbers.append(n)
+        }
+        return numbers
     }
 }
 

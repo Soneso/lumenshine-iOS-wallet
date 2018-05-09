@@ -24,8 +24,8 @@ class LoginCoordinator: CoordinatorType {
     
     func performTransition(transition: Transition) {
         switch transition {
-        case .showMain(let user):
-            showMain(user: user)
+        case .showDashboard(let user):
+            showDashboard(user: user)
         case .showSignUp:
             showSignUp()
         default: break
@@ -34,7 +34,7 @@ class LoginCoordinator: CoordinatorType {
 }
 
 fileprivate extension LoginCoordinator {
-    func showMain(user: User) {
+    func showDashboard(user: User) {
         let menuCoordinator = MenuCoordinator(user: user)
         
         if let mainNavigation = menuCoordinator.baseController.evo_drawerController {

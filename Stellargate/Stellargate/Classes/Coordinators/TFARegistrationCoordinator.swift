@@ -10,9 +10,11 @@ import UIKit
 
 class TFARegistrationCoordinator: CoordinatorType {
     var baseController: UIViewController
+    fileprivate let service: AuthService
     
-    init(service: AuthService, email: String, response: RegistrationResponse) {
-        let viewModel = TFARegistrationViewModel(service: service, email: email, response: response)
+    init(service: AuthService, email: String, response: RegistrationResponse, mnemonic: String) {
+        self.service = service
+        let viewModel = TFARegistrationViewModel(service: service, email: email, response: response, mnemonic: mnemonic)
         self.baseController = TFARegistrationViewController(viewModel: viewModel)
         viewModel.navigationCoordinator = self
     }
@@ -21,6 +23,8 @@ class TFARegistrationCoordinator: CoordinatorType {
         switch transition {
         case .showGoogle2FA(let url):
             showGoogleAuthenticator(url: url)
+        case .showMnemonic(let mnemonic):
+            showMnemonicQuiz(mnemonic)
         default: break
         }
     }
@@ -37,6 +41,11 @@ fileprivate extension TFARegistrationCoordinator {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         }
+    }
+    
+    func showMnemonicQuiz(_ mnemonic: String) {
+        let mnemonicCoordinator = MnemonicCoordinator(service: service, mnemonic: mnemonic)
+        baseController.navigationController?.pushViewController(mnemonicCoordinator.baseController, animated: true)
     }
 }
 

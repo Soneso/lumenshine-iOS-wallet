@@ -10,7 +10,7 @@ import Foundation
 import stellarsdk
 
 public enum GenerateAccountResponseEnum {
-    case success(response: RegistrationResponse)
+    case success(response: RegistrationResponse, mnemonic: String)
     case failure(error: ServiceError)
 }
 
@@ -29,6 +29,17 @@ public typealias TFAResponseClosure = (_ response:TFAResponseEnum) -> (Void)
 public typealias EmptyResponseClosure = (_ response:EmptyResponseEnum) -> (Void)
 
 public class AuthService: BaseService {
+    
+    open func confirmMnemonic(response: @escaping EmptyResponseClosure) {
+        GETRequestWithPath(path: "/portal/user/dashboard/confirm_mnemonic", authRequired: true) { (result) -> (Void) in
+            switch result {
+            case .success:
+                response(.success)
+            case .failure(let error):
+                response(.failure(error: error))
+            }
+        }
+    }
     
     open func resendMailConfirmation(email: String, response: @escaping EmptyResponseClosure) {
         
@@ -115,7 +126,7 @@ public class AuthService: BaseService {
                 case .success(let data):
                     do {
                         let registrationResponse = try self.jsonDecoder.decode(RegistrationResponse.self, from: data)
-                        response(.success(response: registrationResponse))
+                        response(.success(response: registrationResponse, mnemonic: account.mnemonic24Word))
                     } catch {
                         response(.failure(error: .parsingFailed(message: error.localizedDescription)))
                     }
@@ -157,7 +168,8 @@ public class AuthService: BaseService {
                            encryptedMasterKey: encryptedMasterKey,
                            masterKeyIV: masterKeyIV,
                            encryptedMnemonic: encryptedMnemonic,
-                           mnemonicIV: mnemonicIV)
+                           mnemonicIV: mnemonicIV,
+                           mnemonic24Word: mnemonic)
         } catch {
             throw error
         }

@@ -68,6 +68,7 @@ extension TFARegistrationViewController {
                         self.showEmailConfirmationAlert()
                     } else if tfaResponse.mnemonicConfirmed == false {
                         // TODO: open mnemonic confirmation
+                        self.viewModel.showMnemonicConfirmation()
                     }
                 case .failure(let error):
                     self.showAlertView(error: error)
@@ -98,6 +99,7 @@ extension TFARegistrationViewController {
                         self.showEmailConfirmationAlert()
                     } else if tfaResponse.mnemonicConfirmed == false {
                         // TODO: open mnemonic confirmation
+                        self.viewModel.showMnemonicConfirmation()
                     }
                 case .failure(let error):
                     self.showAlertView(error: error)
