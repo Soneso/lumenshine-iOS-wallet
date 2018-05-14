@@ -24,11 +24,41 @@ public enum EmptyResponseEnum {
     case failure(error: ServiceError)
 }
 
+public enum Login1ResponseEnum {
+    case success(response: LoginStep1Response)
+    case failure(error: ServiceError)
+}
+
 public typealias GenerateAccountResponseClosure = (_ response:GenerateAccountResponseEnum) -> (Void)
 public typealias TFAResponseClosure = (_ response:TFAResponseEnum) -> (Void)
 public typealias EmptyResponseClosure = (_ response:EmptyResponseEnum) -> (Void)
+public typealias Login1ResponseClosure = (_ response:Login1ResponseEnum) -> (Void)
 
 public class AuthService: BaseService {
+    
+    open func loginStep1(email: String, tfaCode:String, response: @escaping Login1ResponseClosure) {
+        
+        var params = Dictionary<String,String>()
+        params["email"] = email
+        params["tfa_code"] = tfaCode
+        
+        let pathParams = params.stringFromHttpParameters()
+        let bodyData = pathParams?.data(using: .utf8)
+        
+        POSTRequestWithPath(path: "/portal/user/login_step1", body: bodyData) { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                do {
+                    let loginResponse = try self.jsonDecoder.decode(LoginStep1Response.self, from: data)
+                    response(.success(response: loginResponse))
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+                }
+            case .failure(let error):
+                response(.failure(error: error))
+            }
+        }
+    }
     
     open func confirmMnemonic(response: @escaping EmptyResponseClosure) {
         GETRequestWithPath(path: "/portal/user/dashboard/confirm_mnemonic", authRequired: true) { (result) -> (Void) in
@@ -101,22 +131,26 @@ public class AuthService: BaseService {
     
     open func generateAccount(email: String, password: String, response: @escaping GenerateAccountResponseClosure) {
         DispatchQueue.global(qos: .userInitiated).async {
-            var account: Account!
+            var userSecurity: UserSecurity!
             do {
-                account = try self.createAccountForPassword(password)
+                userSecurity = try UserSecurityHelper.generateUserSecurity(email: email, password: password)
             } catch {
                 response(.failure(error: .encryptionFailed(message: error.localizedDescription)))
             }
         
             var params = Dictionary<String,String>()
             params["email"] = email
-            params["kdf_salt"] = account.passwordSalt.toBase64()
-            params["master_key"] = account.encryptedMasterKey.toBase64()
-            params["master_iv"] = account.masterKeyIV.toBase64()
-            params["mnemonic"] = account.encryptedMnemonic.toBase64()
-            params["mnemonic_iv"] = account.mnemonicIV.toBase64()
-            params["public_key_0"] = account.publicKeyIndex0
-            params["public_key_188"] = account.publicKeyIndex188
+            params["kdf_salt"] = userSecurity.passwordKdfSalt.toBase64()
+            params["mnemonic_master_key"] = userSecurity.encryptedMnemonicMasterKey.toBase64()
+            params["mnemonic_master_iv"] = userSecurity.mnemonicMasterKeyEncryptionIV.toBase64()
+            params["wordlist_master_key"] = userSecurity.encryptedWordListMasterKey.toBase64()
+            params["wordlist_master_iv"] = userSecurity.wordListMasterKeyEncryptionIV.toBase64()
+            params["mnemonic"] = userSecurity.encryptedMnemonic.toBase64()
+            params["mnemonic_iv"] = userSecurity.mnemonicEncryptionIV.toBase64()
+            params["wordlist"] = userSecurity.encryptedWordList.toBase64()
+            params["wordlist_iv"] = userSecurity.wordListEncryptionIV.toBase64()
+            params["public_key_0"] = userSecurity.publicKeyIndex0
+            params["public_key_188"] = userSecurity.publicKeyIndex188
             
             let pathParams = params.stringFromHttpParameters()
             let bodyData = pathParams?.data(using: .utf8)
@@ -126,7 +160,7 @@ public class AuthService: BaseService {
                 case .success(let data):
                     do {
                         let registrationResponse = try self.jsonDecoder.decode(RegistrationResponse.self, from: data)
-                        response(.success(response: registrationResponse, mnemonic: account.mnemonic24Word))
+                        response(.success(response: registrationResponse, mnemonic: userSecurity.mnemonic24Word))
                     } catch {
                         response(.failure(error: .parsingFailed(message: error.localizedDescription)))
                     }
@@ -137,41 +171,42 @@ public class AuthService: BaseService {
         }
     }
     
-    private func createAccountForPassword(_ password: String) throws -> Account {
-        do {
-            // generate 256 bit password and salt
-            let passwordSalt = CryptoUtil.generateSalt()
-            let derivedPassword = CryptoUtil.deriveKeyPbkdf2(password: password, salt: passwordSalt)
-            
-            // generate master key
-            let masterKey = CryptoUtil.generateMasterKey()
-            
-            // encrypt master key
-            let masterKeyIV = CryptoUtil.generateIV()
-            let encryptedMasterKey = try CryptoUtil.encryptValue(plainValue: masterKey, key: derivedPassword, iv: masterKeyIV)
-            
-            // generate mnemonic
-            let mnemonic = Wallet.generate24WordMnemonic()
-            
-            // encrypt the mnemonic
-            let mnemonicIV = CryptoUtil.generateIV()
-            let mnemonic16bytes = CryptoUtil.applyPadding(blockSize: 16, source: mnemonic.bytes)
-            let encryptedMnemonic = try CryptoUtil.encryptValue(plainValue: mnemonic16bytes, key: masterKey, iv: mnemonicIV)
-            
-            // generate public keys
-            let publicKeyIndex0 = try Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: 0).accountId
-            let publicKeyIndex188 = try Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: 188).accountId
-            
-            return Account(publicKeyIndex0: publicKeyIndex0,
-                           publicKeyIndex188: publicKeyIndex188,
-                           passwordSalt: passwordSalt,
-                           encryptedMasterKey: encryptedMasterKey,
-                           masterKeyIV: masterKeyIV,
-                           encryptedMnemonic: encryptedMnemonic,
-                           mnemonicIV: mnemonicIV,
-                           mnemonic24Word: mnemonic)
-        } catch {
-            throw error
-        }
-    }
+//    private func createAccountForPassword(_ password: String) throws -> UserSecurity {
+//        do {
+//            // generate 256 bit password and salt
+//            let passwordSalt = CryptoUtil.generateSalt()
+//            let derivedPassword = CryptoUtil.deriveKeyPbkdf2(password: password, salt: passwordSalt)
+//
+//            // generate master key
+//            let masterKey = CryptoUtil.generateMasterKey()
+//
+//            // encrypt master key
+//            let masterKeyIV = CryptoUtil.generateIV()
+//            let encryptedMasterKey = try CryptoUtil.encryptValue(plainValue: masterKey, key: derivedPassword, iv: masterKeyIV)
+//
+//            // generate mnemonic
+//            let mnemonic = Wallet.generate24WordMnemonic()
+//
+//            // encrypt the mnemonic
+//            let mnemonicIV = CryptoUtil.generateIV()
+//            let mnemonic16bytes = CryptoUtil.applyPadding(blockSize: 16, source: mnemonic.bytes)
+//            let encryptedMnemonic = try CryptoUtil.encryptValue(plainValue: mnemonic16bytes, key: masterKey, iv: mnemonicIV)
+//
+//            // generate public keys
+//            let publicKeyIndex0 = try Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: 0).accountId
+//            let publicKeyIndex188 = try Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: 188).accountId
+//
+//
+//            return UserSecurity(publicKeyIndex0: publicKeyIndex0,
+//                                publicKeyIndex188: publicKeyIndex188,
+//                                passwordSalt: passwordSalt,
+//                                encryptedMasterKey: encryptedMasterKey,
+//                                masterKeyIV: masterKeyIV,
+//                                encryptedMnemonic: encryptedMnemonic,
+//                                mnemonicIV: mnemonicIV,
+//                                mnemonic24Word: mnemonic)
+//        } catch {
+//            throw error
+//        }
+//    }
 }

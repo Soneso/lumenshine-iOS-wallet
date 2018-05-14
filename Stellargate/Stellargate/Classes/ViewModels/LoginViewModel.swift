@@ -19,19 +19,23 @@ protocol LoginViewModelType: Transitionable {
     func checkLogin(username: String, password: String) -> Bool
     func loginCompleted()
     
+    func loginStep1(email: String, tfaCode: String, response: @escaping Login1ResponseClosure)
+    
+    func signUpClick()
+    
     func biometricType() -> BiometricType
     func canEvaluatePolicy() -> Bool
     func authenticateUser(completion: @escaping (String?) -> Void)
-    
-    func signUpClick()
 }
 
 class LoginViewModel : LoginViewModelType {
     fileprivate let touchMe = BiometricIDAuth()
+    fileprivate let service: AuthService
     
-    weak var navigationCoordinator: CoordinatorType?
+    var navigationCoordinator: CoordinatorType?
     
-    init() {
+    init(service: AuthService) {
+        self.service = service
     }
     
     func loginCompleted() {
@@ -85,7 +89,15 @@ class LoginViewModel : LoginViewModelType {
         self.navigationCoordinator?.performTransition(transition: .showSignUp)
     }
     
-    // MARK: Biometric authentication
+    func loginStep1(email: String, tfaCode: String, response: @escaping Login1ResponseClosure) {
+        service.loginStep1(email: email, tfaCode: tfaCode) { result in
+            response(result)
+        }
+    }
+}
+
+// MARK: Biometric authentication
+extension LoginViewModel {
     
     func biometricType() -> BiometricType {
         return touchMe.biometricType()

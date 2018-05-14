@@ -177,10 +177,6 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let xMoment_years = Rswift.StringResource(key: "x-moment_years", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
-      /// en translation: 2FA code
-      /// 
-      /// Locales: en
-      static let tfa_code = Rswift.StringResource(key: "tfa_code", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Account specific data
       /// 
       /// Locales: en
@@ -329,6 +325,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let submit = Rswift.StringResource(key: "submit", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Two Factor code
+      /// 
+      /// Locales: en
+      static let tfa_code = Rswift.StringResource(key: "tfa_code", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Unexpected data type
       /// 
       /// Locales: en
@@ -429,13 +429,6 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func xMoment_years(_ value1: Int) -> String {
         return String(format: NSLocalizedString("x-moment_years", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
-      }
-      
-      /// en translation: 2FA code
-      /// 
-      /// Locales: en
-      static func tfa_code(_: Void = ()) -> String {
-        return NSLocalizedString("tfa_code", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Account specific data
@@ -695,6 +688,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func submit(_: Void = ()) -> String {
         return NSLocalizedString("submit", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Two Factor code
+      /// 
+      /// Locales: en
+      static func tfa_code(_: Void = ()) -> String {
+        return NSLocalizedString("tfa_code", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Unexpected data type

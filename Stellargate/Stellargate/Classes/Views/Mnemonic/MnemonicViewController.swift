@@ -123,15 +123,6 @@ class MnemonicViewController: UIViewController {
             }
         }
     }
-    
-    func showAlertView(error: ServiceError) {
-        let alertView = UIAlertController(title: R.string.localizable.error(),
-                                          message: error.errorDescription,
-                                          preferredStyle: .alert)
-        let okAction = UIAlertAction(title: R.string.localizable.ok(), style: .default)
-        alertView.addAction(okAction)
-        present(alertView, animated: true)
-    }
 }
 
 extension MnemonicViewController: VerificationViewControllerDelegate {
@@ -143,7 +134,8 @@ extension MnemonicViewController: VerificationViewControllerDelegate {
                     case .success:
                         self.viewModel.showDashboard()
                     case .failure(let error):
-                        self.showAlertView(error: error)
+                        let alert = AlertFactory.createAlert(error: error)
+                        self.present(alert, animated: true)
                     }
                 }
             }

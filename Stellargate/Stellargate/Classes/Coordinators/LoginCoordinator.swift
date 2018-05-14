@@ -16,7 +16,7 @@ class LoginCoordinator: CoordinatorType {
     
     init() {
         self.service = Services()
-        let viewModel = LoginViewModel()
+        let viewModel = LoginViewModel(service: service.auth)
         let navigation = AppNavigationController(rootViewController: LoginViewController(viewModel: viewModel))
         self.baseController = navigation
         viewModel.navigationCoordinator = self

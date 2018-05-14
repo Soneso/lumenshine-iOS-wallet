@@ -75,14 +75,18 @@ class CryptoUtil {
         return output
     }
     
-    static func padCharsTo16BytesFormat(source: String) -> String {
-        let size = 16
-        let x = source.count % size
-        let extensionLength = size - x
+    static func padToBlocks(blockSize: Int = 16, source: String) -> String {
         var result = source
         
-        for _ in 1...extensionLength {
-            result.append(" ")
+        var extensionLength = 0
+        if result.count % blockSize != 0 {
+            extensionLength = (result.count/blockSize + 1) * blockSize - result.count
+        }
+        
+        if extensionLength > 0 {
+            for _ in 1...extensionLength {
+                result.append(" ")
+            }
         }
         return result
     }

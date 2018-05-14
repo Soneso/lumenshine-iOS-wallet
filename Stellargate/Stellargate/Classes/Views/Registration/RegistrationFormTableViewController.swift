@@ -90,7 +90,8 @@ extension RegistrationFormTableViewController {
                     case .success(let registrationResponse, let mnemonic):
                         self.viewModel.show2FA(response: registrationResponse, mnemonic: mnemonic)
                     case .failure(let error):
-                        self.showAlertView(error: error)
+                        let alert = AlertFactory.createAlert(error: error)
+                        self.present(alert, animated: true)
                     }
                 })
             }
@@ -135,14 +136,5 @@ fileprivate extension RegistrationFormTableViewController {
     
     func hideActivity(completion: (() -> Void)? = nil) {
         dismiss(animated: true, completion: completion)
-    }
-    
-    func showAlertView(error: ServiceError) {
-        let alertView = UIAlertController(title: error.errorCode,
-                                          message: error.errorDescription,
-                                          preferredStyle: .alert)
-        let okAction = UIAlertAction(title: R.string.localizable.ok(), style: .default)
-        alertView.addAction(okAction)
-        present(alertView, animated: true)
     }
 }

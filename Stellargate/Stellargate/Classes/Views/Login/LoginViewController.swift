@@ -19,6 +19,7 @@ class LoginViewController: UIViewController {
     fileprivate let loginButton = RaisedButton()
     fileprivate let usernameTextField = TextField()
     fileprivate let passwordTextField = TextField()
+    fileprivate let tfaCodeTextField = TextField()
     fileprivate let touchIDButton = Button()
     fileprivate let signUpButton = RaisedButton()
     
@@ -57,22 +58,34 @@ extension LoginViewController {
     @objc
     func loginAction(sender: UIButton) {
         // Check that text has been entered into both the username and password fields.
-        guard let newAccountName = usernameTextField.text,
-            let newPassword = passwordTextField.text,
-            !newAccountName.isEmpty,
-            !newPassword.isEmpty else {
+        guard let accountName = usernameTextField.text,
+            let password = passwordTextField.text,
+            !accountName.isEmpty,
+            !password.isEmpty else {
                 showLoginFailedAlert()
                 return
         }
         
         usernameTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
+        tfaCodeTextField.resignFirstResponder()
         
-        if viewModel.checkLogin(username: newAccountName, password: newPassword) {
-            viewModel.loginCompleted()
-            passwordTextField.text = nil
+        if let tfaCode = tfaCodeTextField.text, !tfaCode.isEmpty {
+            // login step 1
+            viewModel.loginStep1(email: accountName, tfaCode: tfaCode) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let login1Response):
+                        break
+                    case .failure(let error):
+                        let alert = AlertFactory.createAlert(error: error)
+                        self.present(alert, animated: true)
+                    }
+                }
+            }
         } else {
-            showLoginFailedAlert()
+            // login step 2
+            
         }
     }
     
@@ -115,12 +128,15 @@ fileprivate extension LoginViewController {
         }
         usernameTextField.placeholder = R.string.localizable.username()
         passwordTextField.placeholder = R.string.localizable.password()
+        tfaCodeTextField.placeholder = R.string.localizable.tfa_code()
         passwordTextField.isSecureTextEntry = true
         
         usernameTextField.dividerActiveColor = Stylesheet.color(.cyan)
         usernameTextField.placeholderActiveColor = Stylesheet.color(.cyan)
         passwordTextField.dividerActiveColor = Stylesheet.color(.cyan)
         passwordTextField.placeholderActiveColor = Stylesheet.color(.cyan)
+        tfaCodeTextField.dividerActiveColor = Stylesheet.color(.cyan)
+        tfaCodeTextField.placeholderActiveColor = Stylesheet.color(.cyan)
         
         view.addSubview(usernameTextField)
         usernameTextField.snp.makeConstraints { make in
@@ -135,6 +151,13 @@ fileprivate extension LoginViewController {
             make.left.equalTo(usernameTextField)
             make.right.equalTo(usernameTextField)
         }
+        
+        view.addSubview(tfaCodeTextField)
+        tfaCodeTextField.snp.makeConstraints { make in
+            make.top.equalTo(passwordTextField.snp.bottom).offset(40)
+            make.left.equalTo(usernameTextField)
+            make.right.equalTo(usernameTextField)
+        }
     }
     
     func prepareLoginButton() {
@@ -145,7 +168,7 @@ fileprivate extension LoginViewController {
         
         view.addSubview(loginButton)
         loginButton.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(40)
+            make.top.equalTo(tfaCodeTextField.snp.bottom).offset(40)
             make.left.equalTo(usernameTextField)
             make.right.equalTo(usernameTextField)
             make.height.equalTo(50)

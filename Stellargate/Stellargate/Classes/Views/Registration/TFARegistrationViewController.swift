@@ -71,7 +71,8 @@ extension TFARegistrationViewController {
                         self.viewModel.showMnemonicConfirmation()
                     }
                 case .failure(let error):
-                    self.showAlertView(error: error)
+                    let alert = AlertFactory.createAlert(error: error)
+                    self.present(alert, animated: true)
                 }
             }
         }
@@ -84,7 +85,8 @@ extension TFARegistrationViewController {
                 case .success:
                     break
                 case .failure(let error):
-                    self.showAlertView(error: error)
+                    let alert = AlertFactory.createAlert(error: error)
+                    self.present(alert, animated: true)
                 }
             }
         }
@@ -102,7 +104,8 @@ extension TFARegistrationViewController {
                         self.viewModel.showMnemonicConfirmation()
                     }
                 case .failure(let error):
-                    self.showAlertView(error: error)
+                    let alert = AlertFactory.createAlert(error: error)
+                    self.present(alert, animated: true)
                 }
             }
         }
@@ -129,15 +132,6 @@ extension TFARegistrationViewController {
         })
         alertView.addAction(resendAction)
         
-        present(alertView, animated: true)
-    }
-    
-    func showAlertView(error: ServiceError) {
-        let alertView = UIAlertController(title: R.string.localizable.error(),
-                                          message: error.errorDescription,
-                                          preferredStyle: .alert)
-        let okAction = UIAlertAction(title: R.string.localizable.ok(), style: .default)
-        alertView.addAction(okAction)
         present(alertView, animated: true)
     }
 }

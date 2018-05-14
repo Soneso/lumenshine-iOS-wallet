@@ -83,7 +83,7 @@
 "lbl_tfa_secret_hint" = "Open Google Authenticator to generate 2FA code with secret: %@";
 
 /*  */
-"tfa_code" = "2FA code";
+"tfa_code" = "Two Factor code";
 
 /*  */
 "lbl_email_confirmation" = "Please confirm email to continue the registration process";
@@ -93,9 +93,6 @@
 
 /*  */
 "email_resend_confirmation" = "Resend confirmation mail";
-
-/*  */
-"tfa_code" = "2FA code";
 
 /*  */
 "deposit" = "Deposit money";
