@@ -70,23 +70,29 @@ extension LoginViewController {
         passwordTextField.resignFirstResponder()
         tfaCodeTextField.resignFirstResponder()
         
-        if let tfaCode = tfaCodeTextField.text, !tfaCode.isEmpty {
-            // login step 1
-            viewModel.loginStep1(email: accountName, tfaCode: tfaCode) { result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(let login1Response):
-                        break
-                    case .failure(let error):
-                        let alert = AlertFactory.createAlert(error: error)
-                        self.present(alert, animated: true)
+        viewModel.loginStep1(email: accountName, tfaCode: tfaCodeTextField.text) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let login1Response):
+                    self.viewModel.verifyLogin1Response(login1Response, password: password) { response in
+                        DispatchQueue.main.async {
+                            switch response {
+                            case .success(let login2Response):
+                                self.viewModel.verifyLogin2Response(login2Response)
+                            case .failure(let error):
+                                let alert = AlertFactory.createAlert(error: error)
+                                self.present(alert, animated: true)
+                            }
+                        }
                     }
+                //TODO: check whether if 2FA code is missing and it was confirmed
+                case .failure(let error):
+                    let alert = AlertFactory.createAlert(error: error)
+                    self.present(alert, animated: true)
                 }
             }
-        } else {
-            // login step 2
-            
         }
+
     }
     
     @objc

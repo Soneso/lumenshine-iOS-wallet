@@ -12,7 +12,7 @@ class TFARegistrationCoordinator: CoordinatorType {
     var baseController: UIViewController
     fileprivate let service: AuthService
     
-    init(service: AuthService, email: String, response: RegistrationResponse, mnemonic: String) {
+    init(service: AuthService, email: String, response: RegistrationResponse, mnemonic: String?) {
         self.service = service
         let viewModel = TFARegistrationViewModel(service: service, email: email, response: response, mnemonic: mnemonic)
         self.baseController = TFARegistrationViewController(viewModel: viewModel)

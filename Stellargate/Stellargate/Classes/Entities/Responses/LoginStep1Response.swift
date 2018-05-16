@@ -12,20 +12,28 @@ public class LoginStep1Response: Decodable {
     
     let status: String
     let kdfPasswordSalt: String
-    let encryptedMasterKey: String
-    let masterKeyIV: String
+    let encryptedMnemonicMasterKey: String
+    let mnemonicMasterKeyEncryptionIV: String
     let encryptedMnemonic: String
-    let mnemonicIV: String
+    let mnemonicEncryptionIV: String
+    let encryptedWordlistMasterKey: String
+    let wordlistMasterKeyEncryptionIV: String
+    let encryptedWordlist: String
+    let wordlistEncryptionIV: String
     let publicKeyIndex0: String
     
     private enum CodingKeys: String, CodingKey {
         
         case status = "login_step1_status"
         case kdfPasswordSalt = "kdf_password_salt"
-        case encryptedMasterKey = "encrypted_master_key"
-        case masterKeyIV = "master_key_encryption_iv"
+        case encryptedMnemonicMasterKey = "encrypted_mnemonic_master_key"
+        case mnemonicMasterKeyEncryptionIV = "mnemonic_master_key_encryption_iv"
         case encryptedMnemonic = "encrypted_mnemonic"
-        case mnemonicIV = "mnemonic_encryption_iv"
+        case mnemonicEncryptionIV = "mnemonic_encryption_iv"
+        case encryptedWordlistMasterKey = "encrypted_wordlist_master_key"
+        case wordlistMasterKeyEncryptionIV = "wordlist_master_key_encryption_iv"
+        case encryptedWordlist = "encrypted_wordlist"
+        case wordlistEncryptionIV = "wordlist_encryption_iv"
         case publicKeyIndex0 = "public_key_index0"
     }
     
@@ -33,10 +41,14 @@ public class LoginStep1Response: Decodable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         status = try values.decode(String.self, forKey: .status)
         kdfPasswordSalt = try values.decode(String.self, forKey: .kdfPasswordSalt)
-        encryptedMasterKey = try values.decode(String.self, forKey: .encryptedMasterKey)
-        masterKeyIV = try values.decode(String.self, forKey: .masterKeyIV)
+        encryptedMnemonicMasterKey = try values.decode(String.self, forKey: .encryptedMnemonicMasterKey)
+        mnemonicMasterKeyEncryptionIV = try values.decode(String.self, forKey: .mnemonicMasterKeyEncryptionIV)
         encryptedMnemonic = try values.decode(String.self, forKey: .encryptedMnemonic)
-        mnemonicIV = try values.decode(String.self, forKey: .mnemonicIV)
+        mnemonicEncryptionIV = try values.decode(String.self, forKey: .mnemonicEncryptionIV)
+        encryptedWordlistMasterKey = try values.decode(String.self, forKey: .encryptedWordlistMasterKey)
+        wordlistMasterKeyEncryptionIV = try values.decode(String.self, forKey: .wordlistMasterKeyEncryptionIV)
+        encryptedWordlist = try values.decode(String.self, forKey: .encryptedWordlist)
+        wordlistEncryptionIV = try values.decode(String.self, forKey: .wordlistEncryptionIV)
         publicKeyIndex0 = try values.decode(String.self, forKey: .publicKeyIndex0)
     }
 }

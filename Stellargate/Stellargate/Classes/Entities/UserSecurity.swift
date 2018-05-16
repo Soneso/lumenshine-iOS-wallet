@@ -22,4 +22,25 @@ public struct UserSecurity {
     let encryptedWordList: Array<UInt8>
     let wordListEncryptionIV: Array<UInt8>
     let mnemonic24Word: String
+    
+}
+
+extension UserSecurity {
+    
+    init(from loginResponse: LoginStep1Response) {
+        username = ""
+        publicKeyIndex188 = ""
+        mnemonic24Word = ""
+        
+        publicKeyIndex0 = loginResponse.publicKeyIndex0
+        passwordKdfSalt = loginResponse.kdfPasswordSalt.bytes
+        encryptedMnemonicMasterKey = loginResponse.encryptedMnemonicMasterKey.bytes
+        mnemonicMasterKeyEncryptionIV = loginResponse.mnemonicMasterKeyEncryptionIV.bytes
+        encryptedMnemonic = loginResponse.encryptedMnemonic.bytes
+        mnemonicEncryptionIV = loginResponse.mnemonicEncryptionIV.bytes
+        encryptedWordListMasterKey = loginResponse.encryptedWordlistMasterKey.bytes
+        wordListMasterKeyEncryptionIV = loginResponse.wordlistMasterKeyEncryptionIV.bytes
+        encryptedWordList = loginResponse.encryptedWordlist.bytes
+        wordListEncryptionIV = loginResponse.wordlistEncryptionIV.bytes
+    }
 }

@@ -15,7 +15,7 @@ extension Array {
         var items = Array(self)
         
         for _ in 0..<items.count {
-            let rand = Int(arc4random_uniform(UInt32(self.count)))
+            let rand = Int(arc4random_uniform(UInt32(items.count)))
             shuffled.append(items[rand])
             items.remove(at: rand)
         }

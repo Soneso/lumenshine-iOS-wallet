@@ -22,9 +22,9 @@ class TFARegistrationViewModel : TFARegistrationViewModelType {
     fileprivate let service: AuthService
     fileprivate let email: String
     fileprivate let registrationResponse: RegistrationResponse
-    fileprivate let mnemonic: String
+    fileprivate let mnemonic: String?
     
-    init(service: AuthService, email: String, response: RegistrationResponse, mnemonic: String) {
+    init(service: AuthService, email: String, response: RegistrationResponse, mnemonic: String?) {
         self.service = service
         self.email = email
         self.registrationResponse = response
@@ -67,6 +67,7 @@ class TFARegistrationViewModel : TFARegistrationViewModelType {
     }
     
     func showMnemonicConfirmation() {
+        guard let mnemonic = self.mnemonic else { return }
         navigationCoordinator?.performTransition(transition: .showMnemonic(mnemonic))
     }
 }

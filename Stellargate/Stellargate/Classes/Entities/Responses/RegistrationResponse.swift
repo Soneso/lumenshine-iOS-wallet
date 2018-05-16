@@ -24,4 +24,9 @@ public class RegistrationResponse: Decodable {
         tfaSecret = try values.decode(String.self, forKey: .tfaSecret)
         qrCode = try values.decode(String.self, forKey: .qrCode)
     }
+    
+    init(tfaSecret: String, qrCode: String) {
+        self.tfaSecret = tfaSecret
+        self.qrCode = qrCode
+    }
 }

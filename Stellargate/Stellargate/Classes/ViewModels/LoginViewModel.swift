@@ -8,20 +8,14 @@
 
 import Foundation
 
-struct KeychainConfiguration {
-    static let serviceName = "TouchMeIn"
-    static let accessGroup: String? = nil
-}
-
 protocol LoginViewModelType: Transitionable {
-    
-    func createAccount(username: String, password: String)
-    func checkLogin(username: String, password: String) -> Bool
     func loginCompleted()
     
-    func loginStep1(email: String, tfaCode: String, response: @escaping Login1ResponseClosure)
+    func loginStep1(email: String, tfaCode: String?, response: @escaping Login1ResponseClosure)
     
     func signUpClick()
+    func verifyLogin1Response(_ login1Response: LoginStep1Response, password: String, response: @escaping Login2ResponseClosure)
+    func verifyLogin2Response(_ login2Response: LoginStep2Response)
     
     func biometricType() -> BiometricType
     func canEvaluatePolicy() -> Bool
@@ -31,6 +25,7 @@ protocol LoginViewModelType: Transitionable {
 class LoginViewModel : LoginViewModelType {
     fileprivate let touchMe = BiometricIDAuth()
     fileprivate let service: AuthService
+    fileprivate var email: String?
     
     var navigationCoordinator: CoordinatorType?
     
@@ -45,53 +40,41 @@ class LoginViewModel : LoginViewModelType {
         touchMe.invalidate()
     }
     
-    func createAccount(username: String, password: String) {
-        let hasLoginKey = UserDefaults.standard.bool(forKey: "hasLoginKey")
-        if !hasLoginKey && username.count > 0 {
-            UserDefaults.standard.setValue(username, forKey: "username")
-        }
-        
-        do {
-            
-            // This is a new account, create a new keychain item with the account name.
-            let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
-                                                    account: username,
-                                                    accessGroup: KeychainConfiguration.accessGroup)
-            
-            // Save the password for the new item.
-            try passwordItem.savePassword(password)
-        } catch {
-            fatalError("Error updating keychain - \(error)")
-        }
-        
-        UserDefaults.standard.set(true, forKey: "hasLoginKey")
-    }
-    
-    func checkLogin(username: String, password: String) -> Bool {
-        guard username == UserDefaults.standard.value(forKey: "username") as? String else {
-            return false
-        }
-        
-        do {
-            let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
-                                                    account: username,
-                                                    accessGroup: KeychainConfiguration.accessGroup)
-            let keychainPassword = try passwordItem.readPassword()
-            return password == keychainPassword
-        }
-        catch {
-            fatalError("Error reading password from keychain - \(error)")
-        }
-        return false
-    }
-    
     func signUpClick() {
         self.navigationCoordinator?.performTransition(transition: .showSignUp)
     }
     
-    func loginStep1(email: String, tfaCode: String, response: @escaping Login1ResponseClosure) {
+    func loginStep1(email: String, tfaCode: String?, response: @escaping Login1ResponseClosure) {
+        self.email = email
         service.loginStep1(email: email, tfaCode: tfaCode) { result in
             response(result)
+        }
+    }
+    
+    func verifyLogin1Response(_ login1Response: LoginStep1Response, password: String, response: @escaping Login2ResponseClosure) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            do {
+                let userSecurity = UserSecurity(from: login1Response)
+                if let publicKeyIndex188 = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: password) {
+                    self.service.loginStep2(publicKeyIndex188: publicKeyIndex188) { result in
+                        response(result)
+                    }
+                } else {
+                    response(.failure(error: .badCredentials))
+                }
+            } catch {
+                response(.failure(error: .encryptionFailed(message: error.localizedDescription)))
+            }
+        }
+    }
+    
+    func verifyLogin2Response(_ login2Response: LoginStep2Response) {
+        if let tfaSecret = login2Response.tfaSecret,
+            let qrCode = login2Response.qrCode,
+            let email = self.email {
+            
+            let response = RegistrationResponse(tfaSecret: tfaSecret, qrCode: qrCode)
+            self.navigationCoordinator?.performTransition(transition: .show2FA(email, response, nil))
         }
     }
 }

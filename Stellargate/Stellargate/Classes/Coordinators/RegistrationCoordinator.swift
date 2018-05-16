@@ -30,7 +30,7 @@ class RegistrationCoordinator: CoordinatorType {
 }
 
 fileprivate extension RegistrationCoordinator {
-    func show2FA(email: String, response: RegistrationResponse, mnemonic: String) {
+    func show2FA(email: String, response: RegistrationResponse, mnemonic: String?) {
         let tfaCoordinator = TFARegistrationCoordinator(service: service, email: email, response: response, mnemonic: mnemonic)
         baseController.navigationController?.pushViewController(tfaCoordinator.baseController, animated: true)
     }
