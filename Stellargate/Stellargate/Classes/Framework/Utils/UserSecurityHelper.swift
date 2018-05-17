@@ -27,17 +27,17 @@ struct UserSecurityHelper {
             let encryptedMnemonicMasterKey = try CryptoUtil.encryptValue(plainValue: mnemonicMasterKey, key: derivedPassword, iv: mnemonicMasterKeyEncryptionIV)
             
             let mnemonic = Wallet.generate24WordMnemonic()
-            let mnemonicWords = mnemonic.components(separatedBy:" ")
-            let mnemonicIndices = mnemonicWords.map { (word) -> UInt16 in
-                if let index = wordList.index(of: word) {
-                    return UInt16(index)
+            let mnemonicWords = mnemonic.components(separatedBy:" ")            
+            var mnemonicBytes = Array<UInt8>()
+            mnemonicWords.forEach {
+                if let index = wordList.index(of: $0) {
+                    mnemonicBytes.append(UInt8(index >> 8 & 0x00ff))
+                    mnemonicBytes.append(UInt8(index & 0x00ff))
                 }
-                return UInt16(0)
             }
-            let mnemonicData = Data(bytes: UnsafePointer(mnemonicIndices), count: 2*mnemonicIndices.count)
 
             let mnemonicEncryptionIV = CryptoUtil.generateIV()
-            let encryptedMnemonic = try CryptoUtil.encryptValue(plainValue: mnemonicData.bytes, key: mnemonicMasterKey, iv: mnemonicEncryptionIV)
+            let encryptedMnemonic = try CryptoUtil.encryptValue(plainValue: mnemonicBytes, key: mnemonicMasterKey, iv: mnemonicEncryptionIV)
             
             // generate public keys
             let publicKeyIndex0 = try Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: 0).accountId
@@ -81,11 +81,12 @@ struct UserSecurityHelper {
             
             if mnemonicBytes.count != 48 { return nil }
             
-            let mnemonicIndices: Array<UInt16> = Data(bytes: mnemonicBytes).toArray(type: UInt16.self)
-            
             var mnemonic = ""
-            mnemonicIndices.forEach {
-                let index = Int($0)
+            for i in 0..<mnemonicBytes.count/2 {
+                let a = UInt16(mnemonicBytes[i*2])
+                let b = UInt16(mnemonicBytes[i*2+1])
+                let index = Int((a << 8) + b)
+                
                 if index >= 0, index < wordList.count {
                     mnemonic.append(wordList[index] + " ")
                 }
@@ -101,15 +102,6 @@ struct UserSecurityHelper {
             
         } catch {
             throw error
-        }
-    }
-}
-
-extension Data {
-    
-    func toArray<T>(type: T.Type) -> [T] {
-        return self.withUnsafeBytes {
-            [T](UnsafeBufferPointer(start: $0, count: self.count/MemoryLayout<T>.stride))
         }
     }
 }

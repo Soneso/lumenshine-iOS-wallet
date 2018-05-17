@@ -9,7 +9,7 @@
 import Foundation
 import stellarsdk
 
-class CryptoUtil {
+public class CryptoUtil {
     
     private static let KEY_LENGTH = 256 / 8
     private static let IV_LENGTH = 16
@@ -28,7 +28,7 @@ class CryptoUtil {
         return result
     }
     
-    static func encryptValue(plainValue: Array<UInt8>, key: Array<UInt8>, iv: Array<UInt8>) throws -> Array<UInt8> {
+    public static func encryptValue(plainValue: Array<UInt8>, key: Array<UInt8>, iv: Array<UInt8>) throws -> Array<UInt8> {
         
         var result = Array<UInt8>()
         let aes = try AES(key: key, blockMode: .CBC(iv: iv), padding: .noPadding)
@@ -75,7 +75,7 @@ class CryptoUtil {
         return output
     }
     
-    static func padToBlocks(blockSize: Int = 16, source: String) -> String {
+    public static func padToBlocks(blockSize: Int = 16, source: String) -> String {
         var result = source
         
         var extensionLength = 0
