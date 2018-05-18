@@ -115,8 +115,8 @@ public class BaseService: NSObject {
         case .post:
             urlRequest.httpMethod = "POST"
             urlRequest.httpBody = body
-//            urlRequest.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-//            urlRequest.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Accept")
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
         }
         
         if authRequired == true, let token = BaseService.jwtToken {
