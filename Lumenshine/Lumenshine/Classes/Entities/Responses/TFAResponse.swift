@@ -11,20 +11,20 @@ import Foundation
 public class TFAResponse: Decodable {
     
     let mailConfirmed: Bool
-    let tfaEnabled: Bool
+    let tfaConfirmed: Bool
     let mnemonicConfirmed: Bool
     
     private enum CodingKeys: String, CodingKey {
         
         case mailConfirmed = "mail_confirmed"
-        case tfaEnabled = "tfa_confirmed"
+        case tfaConfirmed = "tfa_confirmed"
         case mnemonicConfirmed = "mnemonic_confirmed"
     }
     
     public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         mailConfirmed = try values.decode(Bool.self, forKey: .mailConfirmed)
-        tfaEnabled = try values.decode(Bool.self, forKey: .tfaEnabled)
+        tfaConfirmed = try values.decode(Bool.self, forKey: .tfaConfirmed)
         mnemonicConfirmed = try values.decode(Bool.self, forKey: .mnemonicConfirmed)
     }
 }

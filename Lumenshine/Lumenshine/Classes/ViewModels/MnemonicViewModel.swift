@@ -10,7 +10,7 @@ import Foundation
 
 protocol MnemonicViewModelType: Transitionable {
     var mnemonic24Word: String { get }
-    func confirmMnemonic(response: @escaping EmptyResponseClosure)
+    func confirmMnemonic(response: @escaping TFAResponseClosure)
     func showDashboard()
 }
 
@@ -29,7 +29,7 @@ class MnemonicViewModel: MnemonicViewModelType {
         return mnemonic
     }
     
-    func confirmMnemonic(response: @escaping EmptyResponseClosure) {
+    func confirmMnemonic(response: @escaping TFAResponseClosure) {
         service.confirmMnemonic { result in
             response(result)
         }

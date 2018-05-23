@@ -97,11 +97,16 @@ public class AuthService: BaseService {
         }
     }
     
-    open func confirmMnemonic(response: @escaping EmptyResponseClosure) {
-        GETRequestWithPath(path: "/portal/user/dashboard/confirm_mnemonic", jwtToken: BaseService.jwtTokenFull) { (result) -> (Void) in
+    open func confirmMnemonic(response: @escaping TFAResponseClosure) {
+        POSTRequestWithPath(path: "/portal/user/dashboard/confirm_mnemonic", jwtToken: BaseService.jwtTokenFull) { (result) -> (Void) in
             switch result {
-            case .success:
-                response(.success)
+            case .success(let data, _):
+                do {
+                    let tfaResponse = try self.jsonDecoder.decode(TFAResponse.self, from: data)
+                    response(.success(response: tfaResponse))
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+                }
             case .failure(let error):
                 response(.failure(error: error))
             }

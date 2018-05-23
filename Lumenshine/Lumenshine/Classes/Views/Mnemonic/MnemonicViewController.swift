@@ -131,8 +131,12 @@ extension MnemonicViewController: VerificationViewControllerDelegate {
             viewModel.confirmMnemonic { result in
                 DispatchQueue.main.async {
                     switch result {
-                    case .success:
-                        self.viewModel.showDashboard()
+                    case .success(let tfaResponse):
+                        if tfaResponse.mailConfirmed == true,
+                            tfaResponse.mnemonicConfirmed == true,
+                            tfaResponse.tfaConfirmed == true {
+                                self.viewModel.showDashboard()
+                        }
                     case .failure(let error):
                         let alert = AlertFactory.createAlert(error: error)
                         self.present(alert, animated: true)

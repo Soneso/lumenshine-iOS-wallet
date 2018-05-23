@@ -31,8 +31,9 @@ fileprivate extension MnemonicCoordinator {
         let menuCoordinator = MenuCoordinator(user: user)
         
         if let mainNavigation = menuCoordinator.baseController.evo_drawerController,
-            let navigation = baseController as? AppNavigationController {
+            let navigation = baseController.navigationController {
             navigation.popToRootViewController(animated: false)
+            navigation.setNavigationBarHidden(true, animated: false)
             navigation.pushViewController(mainNavigation, animated: true)
         }
     }
