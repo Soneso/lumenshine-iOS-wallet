@@ -27,20 +27,38 @@ public struct UserSecurity {
 
 extension UserSecurity {
     
-    init(from loginResponse: LoginStep1Response) {
+    init?(from loginResponse: LoginStep1Response) {
         username = ""
         publicKeyIndex188 = ""
         mnemonic24Word = ""
         
         publicKeyIndex0 = loginResponse.publicKeyIndex0
-        passwordKdfSalt = loginResponse.kdfPasswordSalt.bytes
-        encryptedMnemonicMasterKey = loginResponse.encryptedMnemonicMasterKey.bytes
-        mnemonicMasterKeyEncryptionIV = loginResponse.mnemonicMasterKeyEncryptionIV.bytes
-        encryptedMnemonic = loginResponse.encryptedMnemonic.bytes
-        mnemonicEncryptionIV = loginResponse.mnemonicEncryptionIV.bytes
-        encryptedWordListMasterKey = loginResponse.encryptedWordlistMasterKey.bytes
-        wordListMasterKeyEncryptionIV = loginResponse.wordlistMasterKeyEncryptionIV.bytes
-        encryptedWordList = loginResponse.encryptedWordlist.bytes
-        wordListEncryptionIV = loginResponse.wordlistEncryptionIV.bytes
+        
+        guard let kdfSaltData = Data(base64Encoded: loginResponse.kdfPasswordSalt) else { return nil }
+        passwordKdfSalt = kdfSaltData.bytes
+        
+        guard let encryptedMnemonicMasterKeyData = Data(base64Encoded: loginResponse.encryptedMnemonicMasterKey) else { return nil }
+        encryptedMnemonicMasterKey = encryptedMnemonicMasterKeyData.bytes
+        
+        guard let mnemonicMasterKeyEncryptionIVData = Data(base64Encoded: loginResponse.mnemonicMasterKeyEncryptionIV) else { return nil }
+        mnemonicMasterKeyEncryptionIV = mnemonicMasterKeyEncryptionIVData.bytes
+        
+        guard let encryptedMnemonicData = Data(base64Encoded: loginResponse.encryptedMnemonic) else { return nil }
+        encryptedMnemonic = encryptedMnemonicData.bytes
+        
+        guard let mnemonicEncryptionIVData = Data(base64Encoded: loginResponse.mnemonicEncryptionIV) else { return nil }
+        mnemonicEncryptionIV = mnemonicEncryptionIVData.bytes
+        
+        guard let encryptedWordListMasterKeyData = Data(base64Encoded: loginResponse.encryptedWordlistMasterKey) else { return nil }
+        encryptedWordListMasterKey = encryptedWordListMasterKeyData.bytes
+        
+        guard let wordListMasterKeyEncryptionIVData = Data(base64Encoded: loginResponse.wordlistMasterKeyEncryptionIV) else { return nil }
+        wordListMasterKeyEncryptionIV = wordListMasterKeyEncryptionIVData.bytes
+        
+        guard let encryptedWordListData = Data(base64Encoded: loginResponse.encryptedWordlist) else { return nil }
+        encryptedWordList = encryptedWordListData.bytes
+        
+        guard let wordListEncryptionIVData = Data(base64Encoded: loginResponse.wordlistEncryptionIV) else { return nil }
+        wordListEncryptionIV = wordListEncryptionIVData.bytes
     }
 }

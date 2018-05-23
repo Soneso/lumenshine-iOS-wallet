@@ -10,7 +10,7 @@ import Foundation
 
 public class LoginStep1Response: Decodable {
     
-    let status: String
+    let status: String?
     let kdfPasswordSalt: String
     let encryptedMnemonicMasterKey: String
     let mnemonicMasterKeyEncryptionIV: String
@@ -39,7 +39,7 @@ public class LoginStep1Response: Decodable {
     
     public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        status = try values.decode(String.self, forKey: .status)
+        status = try values.decodeIfPresent(String.self, forKey: .status)
         kdfPasswordSalt = try values.decode(String.self, forKey: .kdfPasswordSalt)
         encryptedMnemonicMasterKey = try values.decode(String.self, forKey: .encryptedMnemonicMasterKey)
         mnemonicMasterKeyEncryptionIV = try values.decode(String.self, forKey: .mnemonicMasterKeyEncryptionIV)

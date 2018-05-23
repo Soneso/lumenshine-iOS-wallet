@@ -27,8 +27,8 @@ class TFARegistrationCoordinator: CoordinatorType {
             showGoogleAuthenticator(url: url)
         case .showMnemonic(let mnemonic):
             showMnemonicQuiz(mnemonic)
-        case .showEmailConfirmation(let email):
-            showEmailConfirmation(email)
+        case .showEmailConfirmation(let email, let mnemonic):
+            showEmailConfirmation(email, mnemonic: mnemonic)
         default: break
         }
     }
@@ -52,7 +52,7 @@ fileprivate extension TFARegistrationCoordinator {
         baseController.navigationController?.pushViewController(mnemonicCoordinator.baseController, animated: true)
     }
     
-    func showEmailConfirmation(_ email: String) {
+    func showEmailConfirmation(_ email: String, mnemonic: String?) {
         let emailCoordinator = EmailConfirmationCoordinator(service: service, email: email, mnemonic: mnemonic)
         baseController.navigationController?.pushViewController(emailCoordinator.baseController, animated: true)
     }

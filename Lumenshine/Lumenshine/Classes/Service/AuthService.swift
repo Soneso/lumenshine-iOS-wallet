@@ -50,9 +50,10 @@ public class AuthService: BaseService {
             
             let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
         
-            POSTRequestWithPath(path: "/portal/user/auth/login_step2", body: bodyData, jwtToken: BaseService.jwtTokenFull) { (result) -> (Void) in
+            POSTRequestWithPath(path: "/portal/user/auth/login_step2", body: bodyData, jwtToken: BaseService.jwtTokenPartial) { (result) -> (Void) in
                 switch result {
                 case .success(let data, let token):
+                    BaseService.jwtTokenFull = token
                     do {
                         let loginResponse = try self.jsonDecoder.decode(LoginStep2Response.self, from: data)
                         response(.success(response: loginResponse))
@@ -82,6 +83,7 @@ public class AuthService: BaseService {
             POSTRequestWithPath(path: "/portal/user/login_step1", body: bodyData) { (result) -> (Void) in
                 switch result {
                 case .success(let data, let token):
+                    BaseService.jwtTokenPartial = token
                     do {
                         let loginResponse = try self.jsonDecoder.decode(LoginStep1Response.self, from: data)
                         response(.success(response: loginResponse))

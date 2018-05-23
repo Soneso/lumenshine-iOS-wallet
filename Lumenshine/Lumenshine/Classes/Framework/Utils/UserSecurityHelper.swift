@@ -67,7 +67,7 @@ struct UserSecurityHelper {
         }
     }
     
-    static func decryptUserSecurity(_ userSecurity: UserSecurity, password: String) throws -> String? {
+    static func decryptUserSecurity(_ userSecurity: UserSecurity, password: String) throws -> (String, String)? {
         do {
             let derivedPassword = CryptoUtil.deriveKeyPbkdf2(password: password, salt: userSecurity.passwordKdfSalt)
             
@@ -98,7 +98,7 @@ struct UserSecurityHelper {
             
             let publicKeyIndex188 = try Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: 188).accountId
             
-            return publicKeyIndex188
+            return (publicKeyIndex188, mnemonic)
             
         } catch {
             throw error

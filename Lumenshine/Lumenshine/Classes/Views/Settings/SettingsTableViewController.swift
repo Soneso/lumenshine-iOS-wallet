@@ -46,6 +46,7 @@ class SettingsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        evo_drawerController?.navigationController?.setNavigationBarHidden(false, animated: true)
         evo_drawerController?.navigationController?.popViewController(animated: true)
     }
 }

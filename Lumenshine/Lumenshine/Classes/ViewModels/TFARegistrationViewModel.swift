@@ -59,6 +59,6 @@ class TFARegistrationViewModel : TFARegistrationViewModelType {
     }
     
     func showEmailConfirmation() {
-        navigationCoordinator?.performTransition(transition: .showEmailConfirmation(email))
+        navigationCoordinator?.performTransition(transition: .showEmailConfirmation(email, mnemonic))
     }
 }

@@ -26,6 +26,7 @@ class LoginViewModel : LoginViewModelType {
     fileprivate let touchMe = BiometricIDAuth()
     fileprivate let service: AuthService
     fileprivate var email: String?
+    fileprivate var mnemonic: String?
     
     var navigationCoordinator: CoordinatorType?
     
@@ -54,8 +55,9 @@ class LoginViewModel : LoginViewModelType {
     func verifyLogin1Response(_ login1Response: LoginStep1Response, password: String, response: @escaping Login2ResponseClosure) {
         DispatchQueue.global(qos: .userInitiated).async {
             do {
-                let userSecurity = UserSecurity(from: login1Response)
-                if let publicKeyIndex188 = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: password) {
+                if let userSecurity = UserSecurity(from: login1Response),
+                    let (publicKeyIndex188, mnemonic) = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: password) {
+                    self.mnemonic = mnemonic
                     self.service.loginStep2(publicKeyIndex188: publicKeyIndex188) { result in
                         response(result)
                     }
@@ -69,12 +71,21 @@ class LoginViewModel : LoginViewModelType {
     }
     
     func verifyLogin2Response(_ login2Response: LoginStep2Response) {
-        if let tfaSecret = login2Response.tfaSecret,
-            let qrCode = login2Response.qrCode,
-            let email = self.email {
-            
-            let response = RegistrationResponse(tfaSecret: tfaSecret, qrCode: qrCode)
-            self.navigationCoordinator?.performTransition(transition: .show2FA(email, response, nil))
+        guard let email = self.email else { return }
+        if login2Response.tfaConfirmed == nil || login2Response.tfaConfirmed == false {
+            if let tfaSecret = login2Response.tfaSecret,
+                let qrCode = login2Response.qrCode {
+                
+                let response = RegistrationResponse(tfaSecret: tfaSecret, qrCode: qrCode)
+                self.navigationCoordinator?.performTransition(transition: .show2FA(email, response, mnemonic))
+            }
+        } else if login2Response.mailConfirmed == nil || login2Response.mailConfirmed == false {
+            self.navigationCoordinator?.performTransition(transition: .showEmailConfirmation(email, mnemonic) )
+        } else if login2Response.mnemonicConfirmed == nil || login2Response.mnemonicConfirmed == false {
+            guard let mnemonic = self.mnemonic else { return }
+            self.navigationCoordinator?.performTransition(transition: .showMnemonic(mnemonic))
+        } else {
+            loginCompleted()
         }
     }
 }

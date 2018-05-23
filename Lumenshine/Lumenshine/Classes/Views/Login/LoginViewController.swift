@@ -66,6 +66,8 @@ extension LoginViewController {
                 return
         }
         
+        UserDefaults.standard.setValue(accountName, forKey: "username")
+        
         usernameTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
         tfaCodeTextField.resignFirstResponder()
@@ -74,18 +76,20 @@ extension LoginViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let login1Response):
+                    self.showActivity()
                     self.viewModel.verifyLogin1Response(login1Response, password: password) { response in
                         DispatchQueue.main.async {
-                            switch response {
-                            case .success(let login2Response):
-                                self.viewModel.verifyLogin2Response(login2Response)
-                            case .failure(let error):
-                                let alert = AlertFactory.createAlert(error: error)
-                                self.present(alert, animated: true)
-                            }
+                            self.hideActivity(completion: {
+                                switch response {
+                                case .success(let login2Response):
+                                    self.viewModel.verifyLogin2Response(login2Response)
+                                case .failure(let error):
+                                    let alert = AlertFactory.createAlert(error: error)
+                                    self.present(alert, animated: true)
+                                }
+                            })
                         }
                     }
-                //TODO: check whether if 2FA code is missing and it was confirmed
                 case .failure(let error):
                     let alert = AlertFactory.createAlert(error: error)
                     self.present(alert, animated: true)
@@ -135,7 +139,10 @@ fileprivate extension LoginViewController {
         usernameTextField.placeholder = R.string.localizable.username()
         passwordTextField.placeholder = R.string.localizable.password()
         tfaCodeTextField.placeholder = R.string.localizable.tfa_code()
+        
         passwordTextField.isSecureTextEntry = true
+        usernameTextField.keyboardType = .emailAddress
+        usernameTextField.autocapitalizationType = .none
         
         usernameTextField.dividerActiveColor = Stylesheet.color(.cyan)
         usernameTextField.placeholderActiveColor = Stylesheet.color(.cyan)
@@ -215,6 +222,26 @@ fileprivate extension LoginViewController {
         let okAction = UIAlertAction(title: R.string.localizable.ok(), style: .default)
         alertView.addAction(okAction)
         present(alertView, animated: true)
+    }
+    
+    func showActivity() {
+        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+        
+        let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.startAnimating()
+        
+        alert.view.addSubview(loadingIndicator)
+        loadingIndicator.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalTo(15)
+        }
+        
+        present(alert, animated: true)
+    }
+    
+    func hideActivity(completion: (() -> Void)? = nil) {
+        dismiss(animated: true, completion: completion)
     }
 }
 
