@@ -50,9 +50,9 @@ public class AuthService: BaseService {
             
             let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
         
-            POSTRequestWithPath(path: "/portal/user/auth/login_step2", body: bodyData, authRequired: true) { (result) -> (Void) in
+            POSTRequestWithPath(path: "/portal/user/auth/login_step2", body: bodyData, jwtToken: BaseService.jwtTokenFull) { (result) -> (Void) in
                 switch result {
-                case .success(let data):
+                case .success(let data, let token):
                     do {
                         let loginResponse = try self.jsonDecoder.decode(LoginStep2Response.self, from: data)
                         response(.success(response: loginResponse))
@@ -81,7 +81,7 @@ public class AuthService: BaseService {
         
             POSTRequestWithPath(path: "/portal/user/login_step1", body: bodyData) { (result) -> (Void) in
                 switch result {
-                case .success(let data):
+                case .success(let data, let token):
                     do {
                         let loginResponse = try self.jsonDecoder.decode(LoginStep1Response.self, from: data)
                         response(.success(response: loginResponse))
@@ -98,7 +98,7 @@ public class AuthService: BaseService {
     }
     
     open func confirmMnemonic(response: @escaping EmptyResponseClosure) {
-        GETRequestWithPath(path: "/portal/user/dashboard/confirm_mnemonic", authRequired: true) { (result) -> (Void) in
+        GETRequestWithPath(path: "/portal/user/dashboard/confirm_mnemonic", jwtToken: BaseService.jwtTokenFull) { (result) -> (Void) in
             switch result {
             case .success:
                 response(.success)
@@ -116,7 +116,7 @@ public class AuthService: BaseService {
             
             let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
         
-            POSTRequestWithPath(path: "/portal/user/auth/resend_confirmation_mail", body: bodyData) { (result) -> (Void) in
+            POSTRequestWithPath(path: "/portal/user/resend_confirmation_mail", body: bodyData) { (result) -> (Void) in
                 switch result {
                 case .success:
                     response(.success)
@@ -131,9 +131,9 @@ public class AuthService: BaseService {
     
     open func registrationStatus(response: @escaping TFAResponseClosure) {
         
-        GETRequestWithPath(path: "/portal/auth/get_user_registration_status", authRequired: true) { (result) -> (Void) in
+        GETRequestWithPath(path: "/portal/user/dashboard/get_user_registration_status", jwtToken: BaseService.jwtTokenFull) { (result) -> (Void) in
             switch result {
-            case .success(let data):
+            case .success(let data, _):
                 do {
                     let tfaResponse = try self.jsonDecoder.decode(TFAResponse.self, from: data)
                     response(.success(response: tfaResponse))
@@ -154,9 +154,10 @@ public class AuthService: BaseService {
             
             let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
         
-            POSTRequestWithPath(path: "/portal/user/auth/confirm_tfa_registration", body: bodyData, authRequired: true) { (result) -> (Void) in
+            POSTRequestWithPath(path: "/portal/user/auth/confirm_tfa_registration", body: bodyData, jwtToken: BaseService.jwtTokenPartial) { (result) -> (Void) in
                 switch result {
-                case .success(let data):
+                case .success(let data, let token):
+                    BaseService.jwtTokenFull = token
                     do {
                         let tfaResponse = try self.jsonDecoder.decode(TFAResponse.self, from: data)
                         response(.success(response: tfaResponse))
@@ -200,7 +201,8 @@ public class AuthService: BaseService {
                 
                 self.POSTRequestWithPath(path: "/portal/user/register_user", body: bodyData) { (result) -> (Void) in
                     switch result {
-                    case .success(let data):
+                    case .success(let data, let token):
+                        BaseService.jwtTokenPartial = token
                         do {
                             let registrationResponse = try self.jsonDecoder.decode(RegistrationResponse.self, from: data)
                             response(.success(response: registrationResponse, mnemonic: userSecurity.mnemonic24Word))

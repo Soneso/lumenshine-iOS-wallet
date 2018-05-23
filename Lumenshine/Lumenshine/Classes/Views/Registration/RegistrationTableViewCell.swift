@@ -40,6 +40,8 @@ class RegistrationTableViewCell: UITableViewCell {
         textField.placeholderActiveColor = Stylesheet.color(.cyan)
         textField.placeholderAnimation = .hidden
         textField.addTarget(self, action: #selector(editingDidChange(_:)), for: .editingChanged)
+        textField.keyboardType = .emailAddress
+        textField.autocapitalizationType = .none
         
         contentView.addSubview(textField)
         textField.snp.makeConstraints { (make) in

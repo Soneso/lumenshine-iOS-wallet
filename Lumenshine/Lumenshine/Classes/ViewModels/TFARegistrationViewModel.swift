@@ -13,9 +13,8 @@ protocol TFARegistrationViewModelType: Transitionable {
     var qrCode: Data? { get }
     func openAuthenticator()
     func submit(tfaCode: String, response: @escaping TFAResponseClosure)
-    func checkMailConfirmation(response: @escaping TFAResponseClosure)
-    func resendMailConfirmation(response: @escaping EmptyResponseClosure)
     func showMnemonicConfirmation()
+    func showEmailConfirmation()
 }
 
 class TFARegistrationViewModel : TFARegistrationViewModelType {
@@ -54,20 +53,12 @@ class TFARegistrationViewModel : TFARegistrationViewModelType {
         }
     }
     
-    func checkMailConfirmation(response: @escaping TFAResponseClosure) {
-        service.registrationStatus { result in
-            response(result)
-        }
-    }
-    
-    func resendMailConfirmation(response: @escaping EmptyResponseClosure) {
-        service.resendMailConfirmation(email: email) { result in
-            response(result)
-        }
-    }
-    
     func showMnemonicConfirmation() {
         guard let mnemonic = self.mnemonic else { return }
         navigationCoordinator?.performTransition(transition: .showMnemonic(mnemonic))
+    }
+    
+    func showEmailConfirmation() {
+        navigationCoordinator?.performTransition(transition: .showEmailConfirmation(email))
     }
 }

@@ -82,6 +82,9 @@
 		43EFF204204939F700B1887C /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EFF203204939F700B1887C /* UIColor+Utils.swift */; };
 		43EFF20620493B4900B1887C /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EFF20520493B4900B1887C /* Stylesheet.swift */; };
 		43F74607209494AC003EB5FD /* RegistrationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F74606209494AC003EB5FD /* RegistrationResponse.swift */; };
+		43FA7D3520B45CA3006BD513 /* EmailConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FA7D3420B45CA3006BD513 /* EmailConfirmationViewController.swift */; };
+		43FA7D3720B46157006BD513 /* EmailConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FA7D3620B46157006BD513 /* EmailConfirmationViewModel.swift */; };
+		43FA7D3920B4924B006BD513 /* EmailConfirmationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FA7D3820B4924B006BD513 /* EmailConfirmationCoordinator.swift */; };
 		43FBEE452062853A004E2BB1 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FBEE442062853A004E2BB1 /* ScanViewController.swift */; };
 		7445E9C52019CF7200470E0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7445E9C42019CF7200470E0A /* AppDelegate.swift */; };
 		7445E9CC2019CF7200470E0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7445E9CB2019CF7200470E0A /* Assets.xcassets */; };
@@ -202,6 +205,9 @@
 		43EFF20520493B4900B1887C /* Stylesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stylesheet.swift; sourceTree = "<group>"; };
 		43F55646204FEDB200FD32E0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43F74606209494AC003EB5FD /* RegistrationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationResponse.swift; sourceTree = "<group>"; };
+		43FA7D3420B45CA3006BD513 /* EmailConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailConfirmationViewController.swift; sourceTree = "<group>"; };
+		43FA7D3620B46157006BD513 /* EmailConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailConfirmationViewModel.swift; sourceTree = "<group>"; };
+		43FA7D3820B4924B006BD513 /* EmailConfirmationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailConfirmationCoordinator.swift; sourceTree = "<group>"; };
 		43FBEE442062853A004E2BB1 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		53B53160C459ED4AC2A32F09 /* Pods-Lumenshine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lumenshine.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine.release.xcconfig"; sourceTree = "<group>"; };
 		5A5A4485ADF2A66A43DCDEFB /* Pods-Stellargate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stellargate.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stellargate/Pods-Stellargate.release.xcconfig"; sourceTree = "<group>"; };
@@ -418,6 +424,7 @@
 				4337C4E62081BAA400F4585A /* RegistrationFormTableViewController.swift */,
 				43ECA9CB208B530000CB571E /* RegistrationTableViewCell.swift */,
 				431E7A242095B178003A63B3 /* TFARegistrationViewController.swift */,
+				43FA7D3420B45CA3006BD513 /* EmailConfirmationViewController.swift */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -480,6 +487,7 @@
 				4316ED9C208DE00800A40F97 /* RegistrationCoordinator.swift */,
 				431E7A282095D0E8003A63B3 /* TFARegistrationCoordinator.swift */,
 				431F8AB520A074BA00B1E0F1 /* MnemonicCoordinator.swift */,
+				43FA7D3820B4924B006BD513 /* EmailConfirmationCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -494,6 +502,7 @@
 				43ECA9C9208B3C4400CB571E /* RegistrationViewModel.swift */,
 				431E7A262095B2C0003A63B3 /* TFARegistrationViewModel.swift */,
 				431F8AB320A0586100B1E0F1 /* MnemonicViewModel.swift */,
+				43FA7D3620B46157006BD513 /* EmailConfirmationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -889,6 +898,7 @@
 				4316ED9D208DE00800A40F97 /* RegistrationCoordinator.swift in Sources */,
 				438BE842204D51FD007EBFB9 /* HamburgerButton.swift in Sources */,
 				431628D02097476500F23A20 /* ErrorResponse.swift in Sources */,
+				43FA7D3720B46157006BD513 /* EmailConfirmationViewModel.swift in Sources */,
 				43088DAC2087AB23008AE1AB /* AuthService.swift in Sources */,
 				43ECA9CA208B3C4400CB571E /* RegistrationViewModel.swift in Sources */,
 				4319B1842063F00C007CE18D /* MenuViewModel.swift in Sources */,
@@ -906,6 +916,7 @@
 				4322BA2F205BD69F007FEB5E /* ResponseMock.swift in Sources */,
 				43D131E220569950000483C4 /* HomeViewController.swift in Sources */,
 				4319B17E2063EE0E007CE18D /* LoginViewController.swift in Sources */,
+				43FA7D3920B4924B006BD513 /* EmailConfirmationCoordinator.swift in Sources */,
 				436B367320512114009F7C21 /* TableViewDelegateHandler.swift in Sources */,
 				43F74607209494AC003EB5FD /* RegistrationResponse.swift in Sources */,
 				4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */,
@@ -923,6 +934,7 @@
 				4322BA33205BDB6E007FEB5E /* CardsResponsesMock.swift in Sources */,
 				43044916206BE7E800349B51 /* VerificationViewController.swift in Sources */,
 				431E7A272095B2C0003A63B3 /* TFARegistrationViewModel.swift in Sources */,
+				43FA7D3520B45CA3006BD513 /* EmailConfirmationViewController.swift in Sources */,
 				4304491C206BF47400349B51 /* UIView+Shake.swift in Sources */,
 				4390D582205FBD6E00383BB2 /* Services.swift in Sources */,
 				7445E9C52019CF7200470E0A /* AppDelegate.swift in Sources */,

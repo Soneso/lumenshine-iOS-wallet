@@ -17,8 +17,8 @@ public class TFAResponse: Decodable {
     private enum CodingKeys: String, CodingKey {
         
         case mailConfirmed = "mail_confirmed"
-        case tfaEnabled = "tfa_enabled"
-        case mnemonicConfirmed = "menmonic_confirmed"
+        case tfaEnabled = "tfa_confirmed"
+        case mnemonicConfirmed = "mnemonic_confirmed"
     }
     
     public required init(from decoder: Decoder) throws {

@@ -30,5 +30,6 @@ public enum Transition {
     case show2FA(String, RegistrationResponse, String?)
     case showGoogle2FA(URL)
     case showMnemonic(String)
+    case showEmailConfirmation(String)
 }
 

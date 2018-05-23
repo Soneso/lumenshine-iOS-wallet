@@ -65,42 +65,9 @@ extension TFARegistrationViewController {
                 switch result {
                 case .success(let tfaResponse):
                     if tfaResponse.mailConfirmed == false {
-                        self.showEmailConfirmationAlert()
-                    } else if tfaResponse.mnemonicConfirmed == false {
-                        // TODO: open mnemonic confirmation
-                        self.viewModel.showMnemonicConfirmation()
-                    }
-                case .failure(let error):
-                    let alert = AlertFactory.createAlert(error: error)
-                    self.present(alert, animated: true)
-                }
-            }
-        }
-    }
-    
-    func resendMailConfirmation() {
-        viewModel.resendMailConfirmation { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    break
-                case .failure(let error):
-                    let alert = AlertFactory.createAlert(error: error)
-                    self.present(alert, animated: true)
-                }
-            }
-        }
-    }
-    
-    func checkMailConfirmation() {
-        viewModel.checkMailConfirmation { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let tfaResponse):
-                    if tfaResponse.mailConfirmed == false {
-                        self.showEmailConfirmationAlert()
-                    } else if tfaResponse.mnemonicConfirmed == false {
-                        // TODO: open mnemonic confirmation
+                        self.viewModel.showEmailConfirmation()
+                    } else
+                        if tfaResponse.mnemonicConfirmed == false {
                         self.viewModel.showMnemonicConfirmation()
                     }
                 case .failure(let error):
@@ -111,31 +78,6 @@ extension TFARegistrationViewController {
         }
     }
 }
-
-// MARK: - Alerts
-extension TFARegistrationViewController {
-    func showEmailConfirmationAlert() {
-        let alertView = UIAlertController(title: nil,
-                                          message: R.string.localizable.lbl_email_confirmation(),
-                                          preferredStyle: .alert)
-        let alreadyAction = UIAlertAction(title: R.string.localizable.email_already_confirmed(),
-                                          style: .default,
-                                          handler: { action in
-                                            self.checkMailConfirmation()
-        })
-        alertView.addAction(alreadyAction)
-        
-        let resendAction = UIAlertAction(title: R.string.localizable.email_resend_confirmation(),
-                                         style: .default,
-                                         handler: { action in
-                                            self.resendMailConfirmation()
-        })
-        alertView.addAction(resendAction)
-        
-        present(alertView, animated: true)
-    }
-}
-    
 
 fileprivate extension TFARegistrationViewController {
     func prepareView() {
