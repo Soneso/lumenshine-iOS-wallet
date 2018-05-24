@@ -66,11 +66,12 @@ extension LoginViewController {
                 return
         }
         
-        UserDefaults.standard.setValue(accountName, forKey: "username")
-        
         usernameTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
         tfaCodeTextField.resignFirstResponder()
+        
+        UserDefaults.standard.setValue(accountName, forKey: "username")
+        passwordTextField.text = nil
         
         viewModel.loginStep1(email: accountName, tfaCode: tfaCodeTextField.text) { result in
             DispatchQueue.main.async {

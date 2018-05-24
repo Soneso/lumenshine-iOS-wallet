@@ -23,6 +23,8 @@ class EmailConfirmationCoordinator: CoordinatorType {
         switch transition {
         case .showMnemonic(let mnemonic):
             showMnemonicQuiz(mnemonic)
+        case .showDashboard(let user):
+            showDashboard(user: user)
         default: break
         }
     }
@@ -32,5 +34,16 @@ fileprivate extension EmailConfirmationCoordinator {
     func showMnemonicQuiz(_ mnemonic: String) {
         let mnemonicCoordinator = MnemonicCoordinator(service: service, mnemonic: mnemonic)
         baseController.navigationController?.pushViewController(mnemonicCoordinator.baseController, animated: true)
+    }
+    
+    func showDashboard(user: User) {
+        let menuCoordinator = MenuCoordinator(user: user)
+        
+        if let mainNavigation = menuCoordinator.baseController.evo_drawerController,
+            let navigation = baseController.navigationController {
+            navigation.popToRootViewController(animated: false)
+            navigation.setNavigationBarHidden(true, animated: false)
+            navigation.pushViewController(mainNavigation, animated: true)
+        }
     }
 }

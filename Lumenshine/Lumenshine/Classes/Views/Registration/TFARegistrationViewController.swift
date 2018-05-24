@@ -66,9 +66,10 @@ extension TFARegistrationViewController {
                 case .success(let tfaResponse):
                     if tfaResponse.mailConfirmed == false {
                         self.viewModel.showEmailConfirmation()
-                    } else
-                        if tfaResponse.mnemonicConfirmed == false {
+                    } else if tfaResponse.mnemonicConfirmed == false {
                         self.viewModel.showMnemonicConfirmation()
+                    } else {
+                        self.viewModel.showDashboard()
                     }
                 case .failure(let error):
                     let alert = AlertFactory.createAlert(error: error)

@@ -22,7 +22,7 @@ public class LoginStep2Response: Decodable {
         case qrCode = "tfa_qr_image"
         case mailConfirmed = "mail_confirmed"
         case tfaConfirmed = "tfa_confirmed"
-        case mnemonicConfirmed = "menmonic_confirmed"
+        case mnemonicConfirmed = "mnemonic_confirmed"
     }
     
     public required init(from decoder: Decoder) throws {

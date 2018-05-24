@@ -15,6 +15,7 @@ protocol TFARegistrationViewModelType: Transitionable {
     func submit(tfaCode: String, response: @escaping TFAResponseClosure)
     func showMnemonicConfirmation()
     func showEmailConfirmation()
+    func showDashboard()
 }
 
 class TFARegistrationViewModel : TFARegistrationViewModelType {
@@ -60,5 +61,10 @@ class TFARegistrationViewModel : TFARegistrationViewModelType {
     
     func showEmailConfirmation() {
         navigationCoordinator?.performTransition(transition: .showEmailConfirmation(email, mnemonic))
+    }
+    
+    func showDashboard() {
+        let user = User(id: "1", name: "username")
+        navigationCoordinator?.performTransition(transition: .showDashboard(user))
     }
 }

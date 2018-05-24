@@ -29,6 +29,8 @@ class TFARegistrationCoordinator: CoordinatorType {
             showMnemonicQuiz(mnemonic)
         case .showEmailConfirmation(let email, let mnemonic):
             showEmailConfirmation(email, mnemonic: mnemonic)
+        case .showDashboard(let user):
+            showDashboard(user: user)
         default: break
         }
     }
@@ -55,6 +57,17 @@ fileprivate extension TFARegistrationCoordinator {
     func showEmailConfirmation(_ email: String, mnemonic: String?) {
         let emailCoordinator = EmailConfirmationCoordinator(service: service, email: email, mnemonic: mnemonic)
         baseController.navigationController?.pushViewController(emailCoordinator.baseController, animated: true)
+    }
+    
+    func showDashboard(user: User) {
+        let menuCoordinator = MenuCoordinator(user: user)
+        
+        if let mainNavigation = menuCoordinator.baseController.evo_drawerController,
+            let navigation = baseController.navigationController {
+            navigation.popToRootViewController(animated: false)
+            navigation.setNavigationBarHidden(true, animated: false)
+            navigation.pushViewController(mainNavigation, animated: true)
+        }
     }
 }
 

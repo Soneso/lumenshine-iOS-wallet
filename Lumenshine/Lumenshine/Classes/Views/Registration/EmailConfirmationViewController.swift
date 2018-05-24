@@ -60,6 +60,8 @@ class EmailConfirmationViewController: UIViewController {
                         self.showEmailConfirmationAlert()
                     } else if tfaResponse.mnemonicConfirmed == false {
                         self.viewModel.showMnemonicConfirmation()
+                    } else {
+                        self.viewModel.showDashboard()
                     }
                 case .failure(let error):
                     let alert = AlertFactory.createAlert(error: error)

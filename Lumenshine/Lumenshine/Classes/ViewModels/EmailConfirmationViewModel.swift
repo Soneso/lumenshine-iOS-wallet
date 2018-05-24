@@ -12,6 +12,7 @@ protocol EmailConfirmationViewModelType: Transitionable {
     func checkMailConfirmation(response: @escaping TFAResponseClosure)
     func resendMailConfirmation(response: @escaping EmptyResponseClosure)
     func showMnemonicConfirmation()
+    func showDashboard()
 }
 
 class EmailConfirmationViewModel : EmailConfirmationViewModelType {
@@ -42,5 +43,10 @@ class EmailConfirmationViewModel : EmailConfirmationViewModelType {
     func showMnemonicConfirmation() {
         guard let mnemonic = self.mnemonic else { return }
         navigationCoordinator?.performTransition(transition: .showMnemonic(mnemonic))
+    }
+    
+    func showDashboard() {
+        let user = User(id: "1", name: "username")
+        navigationCoordinator?.performTransition(transition: .showDashboard(user))
     }
 }
