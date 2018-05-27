@@ -36,6 +36,7 @@ class TFARegistrationViewController: UIViewController {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: .UIApplicationWillEnterForeground, object: nil)
         prepareView()
+        prepareTimer()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -85,9 +86,16 @@ fileprivate extension TFARegistrationViewController {
         view.backgroundColor = Stylesheet.color(.white)
         prepareLabel()
         prepareImageView()
-        prepareOpenButton()
+//        prepareOpenButton()
         prepareSubmitButton()
         prepareCodeTextField()
+    }
+    
+    func prepareTimer() {
+        let timer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true) { (timer) in
+            self.tfaCodeTextField.text = self.viewModel.generateToken()
+        }
+        timer.fire()
     }
     
     func prepareLabel() {

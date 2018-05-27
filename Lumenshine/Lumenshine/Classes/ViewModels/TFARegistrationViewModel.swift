@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import OneTimePassword
 
 protocol TFARegistrationViewModelType: Transitionable {
     var tfaSecret: String { get }
@@ -16,6 +17,7 @@ protocol TFARegistrationViewModelType: Transitionable {
     func showMnemonicConfirmation()
     func showEmailConfirmation()
     func showDashboard()
+    func generateToken() -> String?
 }
 
 class TFARegistrationViewModel : TFARegistrationViewModelType {
@@ -29,6 +31,8 @@ class TFARegistrationViewModel : TFARegistrationViewModelType {
         self.email = email
         self.registrationResponse = response
         self.mnemonic = mnemonic
+        
+        createToken()
     }
     
     var navigationCoordinator: CoordinatorType?
@@ -39,6 +43,45 @@ class TFARegistrationViewModel : TFARegistrationViewModelType {
     
     var qrCode: Data? {
         return Data(base64Encoded: registrationResponse.qrCode)
+    }
+    
+    func createToken() {
+        guard let secretData = registrationResponse.tfaSecret.data(using: .ascii),
+            !secretData.isEmpty else {
+                print("Invalid secret")
+                return
+        }
+        
+        guard let generator = Generator(
+            factor: .timer(period: 30),
+            secret: secretData,
+            algorithm: .sha1,
+            digits: 6) else {
+                print("Invalid generator parameters")
+                return
+        }
+        
+        let token = Token(name: email, issuer: "Lumenshine", generator: generator)
+        do {
+            let keychain = Keychain.sharedInstance
+            let persistentTokens = try keychain.allPersistentTokens()
+            for token in persistentTokens {
+                try keychain.delete(token)
+            }
+            _ = try keychain.add(token)
+        } catch {
+            print("Keychain error: \(error)")
+        }
+    }
+    
+    func generateToken() -> String? {
+        do {
+            let persistentToken = try Keychain.sharedInstance.allPersistentTokens().first
+            return persistentToken?.token.currentPassword
+        } catch {
+            print("Generate password error: \(error)")
+            return nil
+        }
     }
     
     func openAuthenticator() {

@@ -90,6 +90,8 @@
 		7445E9CC2019CF7200470E0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7445E9CB2019CF7200470E0A /* Assets.xcassets */; };
 		7445E9CF2019CF7200470E0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7445E9CD2019CF7200470E0A /* LaunchScreen.storyboard */; };
 		BE1BE9194EE90B972C6F3F56 /* Pods_Lumenshine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87045A682AF681437374FA65 /* Pods_Lumenshine.framework */; };
+		BFCAFB4D1D63F029879C9F5C /* Pods_LumenshineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D48A75090BDABE81E7E14ADE /* Pods_LumenshineTests.framework */; };
+		E78C005639A7F69FFB95463A /* Pods_LumenshineUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD2BA88016EDF74DB539699D /* Pods_LumenshineUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -236,6 +238,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFCAFB4D1D63F029879C9F5C /* Pods_LumenshineTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +246,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E78C005639A7F69FFB95463A /* Pods_LumenshineUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,6 +645,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4360484A20AEFCFD00CF781A /* Build configuration list for PBXNativeTarget "LumenshineTests" */;
 			buildPhases = (
+				CD1470B4FC5D53B31C1386A6 /* [CP] Check Pods Manifest.lock */,
 				4360483F20AEFCFD00CF781A /* Sources */,
 				4360484020AEFCFD00CF781A /* Frameworks */,
 				4360484120AEFCFD00CF781A /* Resources */,
@@ -659,6 +664,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4360485820AEFD9A00CF781A /* Build configuration list for PBXNativeTarget "LumenshineUITests" */;
 			buildPhases = (
+				9F29271F055CF0B2EC79541D /* [CP] Check Pods Manifest.lock */,
 				4360484D20AEFD9A00CF781A /* Sources */,
 				4360484E20AEFD9A00CF781A /* Frameworks */,
 				4360484F20AEFD9A00CF781A /* Resources */,
@@ -792,6 +798,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/$PRODUCT_NAME/Resources/\"";
 		};
+		9F29271F055CF0B2EC79541D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LumenshineUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A90755CA218A8113A9E7F7BE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -817,24 +841,28 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Base32/Base32.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/DGElasticPullToRefresh/DGElasticPullToRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/DrawerController/DrawerController.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Material/Material.framework",
 				"${BUILT_PRODUCTS_DIR}/Motion/Motion.framework",
+				"${BUILT_PRODUCTS_DIR}/OneTimePassword/OneTimePassword.framework",
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/stellar-ios-mac-sdk/stellarsdk.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Base32.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DGElasticPullToRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DrawerController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Material.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Motion.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OneTimePassword.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/stellarsdk.framework",
@@ -842,6 +870,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CD1470B4FC5D53B31C1386A6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LumenshineTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -990,6 +1036,7 @@
 /* Begin XCBuildConfiguration section */
 		4360484B20AEFCFD00CF781A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0C15D7E686EB104F860EC67 /* Pods-LumenshineTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -1008,6 +1055,7 @@
 		};
 		4360484C20AEFCFD00CF781A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5F66F162A6266B7300FE61DC /* Pods-LumenshineTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -1026,6 +1074,7 @@
 		};
 		4360485920AEFD9A00CF781A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9FC43ACF656E680A2638772 /* Pods-LumenshineUITests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1043,6 +1092,7 @@
 		};
 		4360485A20AEFD9A00CF781A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A37687665F61FCA54F330B1 /* Pods-LumenshineUITests.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
