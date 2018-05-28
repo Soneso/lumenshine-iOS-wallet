@@ -86,6 +86,12 @@
 		43FA7D3720B46157006BD513 /* EmailConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FA7D3620B46157006BD513 /* EmailConfirmationViewModel.swift */; };
 		43FA7D3920B4924B006BD513 /* EmailConfirmationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FA7D3820B4924B006BD513 /* EmailConfirmationCoordinator.swift */; };
 		43FBEE452062853A004E2BB1 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FBEE442062853A004E2BB1 /* ScanViewController.swift */; };
+		7435EA6D20BACE71008CC667 /* ForgotPasswordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7435EA6C20BACE71008CC667 /* ForgotPasswordCoordinator.swift */; };
+		7435EA6F20BAD124008CC667 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7435EA6E20BAD124008CC667 /* ForgotPasswordViewModel.swift */; };
+		7435EA7220BAD452008CC667 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7435EA7020BAD452008CC667 /* ForgotPasswordViewController.swift */; };
+		7435EA7320BAD452008CC667 /* ForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7435EA7120BAD452008CC667 /* ForgotPasswordViewController.xib */; };
+		7435EA7520BAD95F008CC667 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7435EA7420BAD95F008CC667 /* String+Utils.swift */; };
+		7435EA7720BADF2C008CC667 /* UIViewController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7435EA7620BADF2C008CC667 /* UIViewController+Utils.swift */; };
 		7445E9C52019CF7200470E0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7445E9C42019CF7200470E0A /* AppDelegate.swift */; };
 		7445E9CC2019CF7200470E0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7445E9CB2019CF7200470E0A /* Assets.xcassets */; };
 		7445E9CF2019CF7200470E0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7445E9CD2019CF7200470E0A /* LaunchScreen.storyboard */; };
@@ -125,6 +131,7 @@
 
 /* Begin PBXFileReference section */
 		134821A0A729CE3C02C022E4 /* Pods_Stellargate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stellargate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A7CAE5FC313BC2F26F3B1BD /* Pods-LumenshineTests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineTests.development.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineTests/Pods-LumenshineTests.development.xcconfig"; sourceTree = "<group>"; };
 		1C5E9D71329C9F6FF75B440F /* Pods_StellargateTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StellargateTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43044913206BE7B400349B51 /* MnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicViewController.swift; sourceTree = "<group>"; };
 		43044915206BE7E800349B51 /* VerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationViewController.swift; sourceTree = "<group>"; };
@@ -214,12 +221,19 @@
 		53B53160C459ED4AC2A32F09 /* Pods-Lumenshine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lumenshine.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine.release.xcconfig"; sourceTree = "<group>"; };
 		5A5A4485ADF2A66A43DCDEFB /* Pods-Stellargate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stellargate.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stellargate/Pods-Stellargate.release.xcconfig"; sourceTree = "<group>"; };
 		5F66F162A6266B7300FE61DC /* Pods-LumenshineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineTests/Pods-LumenshineTests.release.xcconfig"; sourceTree = "<group>"; };
+		7435EA6C20BACE71008CC667 /* ForgotPasswordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordCoordinator.swift; sourceTree = "<group>"; };
+		7435EA6E20BAD124008CC667 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
+		7435EA7020BAD452008CC667 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		7435EA7120BAD452008CC667 /* ForgotPasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgotPasswordViewController.xib; sourceTree = "<group>"; };
+		7435EA7420BAD95F008CC667 /* String+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Utils.swift"; sourceTree = "<group>"; };
+		7435EA7620BADF2C008CC667 /* UIViewController+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utils.swift"; sourceTree = "<group>"; };
 		7445E9C12019CF7200470E0A /* Lumenshine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lumenshine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7445E9C42019CF7200470E0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7445E9CB2019CF7200470E0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7445E9CE2019CF7200470E0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7A37687665F61FCA54F330B1 /* Pods-LumenshineUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineUITests/Pods-LumenshineUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7ABD95F3251A5C0C359EE30B /* Pods-StellargateUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StellargateUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StellargateUITests/Pods-StellargateUITests.release.xcconfig"; sourceTree = "<group>"; };
+		7C7553203ED27AD3DAFFB199 /* Pods-Lumenshine.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lumenshine.development.xcconfig"; path = "Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine.development.xcconfig"; sourceTree = "<group>"; };
 		7E69C44D1FFFB9D07E9DF5C0 /* Pods_StellargateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StellargateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		87045A682AF681437374FA65 /* Pods_Lumenshine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lumenshine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A732A5DFCB4D0614C745824D /* Pods-StellargateUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StellargateUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StellargateUITests/Pods-StellargateUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -228,6 +242,7 @@
 		C0C15D7E686EB104F860EC67 /* Pods-LumenshineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineTests/Pods-LumenshineTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D48A75090BDABE81E7E14ADE /* Pods_LumenshineTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LumenshineTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD63FE5AB755CC7789C9DBAD /* Pods-Stellargate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stellargate.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stellargate/Pods-Stellargate.debug.xcconfig"; sourceTree = "<group>"; };
+		E0382415204B6258E7E942B9 /* Pods-LumenshineUITests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineUITests.development.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineUITests/Pods-LumenshineUITests.development.xcconfig"; sourceTree = "<group>"; };
 		E169DCF7E710153B0F7E9A59 /* Pods-Lumenshine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lumenshine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine.debug.xcconfig"; sourceTree = "<group>"; };
 		EF6E1F4EA99DA29109C2DC93 /* Pods-StellargateTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StellargateTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StellargateTests/Pods-StellargateTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FD2BA88016EDF74DB539699D /* Pods_LumenshineUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LumenshineUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -388,6 +403,8 @@
 			isa = PBXGroup;
 			children = (
 				4319B17D2063EE0E007CE18D /* LoginViewController.swift */,
+				7435EA7020BAD452008CC667 /* ForgotPasswordViewController.swift */,
+				7435EA7120BAD452008CC667 /* ForgotPasswordViewController.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -492,6 +509,7 @@
 				431E7A282095D0E8003A63B3 /* TFARegistrationCoordinator.swift */,
 				431F8AB520A074BA00B1E0F1 /* MnemonicCoordinator.swift */,
 				43FA7D3820B4924B006BD513 /* EmailConfirmationCoordinator.swift */,
+				7435EA6C20BACE71008CC667 /* ForgotPasswordCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -507,6 +525,7 @@
 				431E7A262095B2C0003A63B3 /* TFARegistrationViewModel.swift */,
 				431F8AB320A0586100B1E0F1 /* MnemonicViewModel.swift */,
 				43FA7D3620B46157006BD513 /* EmailConfirmationViewModel.swift */,
+				7435EA6E20BAD124008CC667 /* ForgotPasswordViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -560,6 +579,8 @@
 				4304491B206BF47400349B51 /* UIView+Shake.swift */,
 				43088DAF2087C4B8008AE1AB /* Dictionary+HTTPParams.swift */,
 				4359985020A5920200007F27 /* Array+Shuffle.swift */,
+				7435EA7420BAD95F008CC667 /* String+Utils.swift */,
+				7435EA7620BADF2C008CC667 /* UIViewController+Utils.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -634,6 +655,9 @@
 				5F66F162A6266B7300FE61DC /* Pods-LumenshineTests.release.xcconfig */,
 				B9FC43ACF656E680A2638772 /* Pods-LumenshineUITests.debug.xcconfig */,
 				7A37687665F61FCA54F330B1 /* Pods-LumenshineUITests.release.xcconfig */,
+				7C7553203ED27AD3DAFFB199 /* Pods-Lumenshine.development.xcconfig */,
+				1A7CAE5FC313BC2F26F3B1BD /* Pods-LumenshineTests.development.xcconfig */,
+				E0382415204B6258E7E942B9 /* Pods-LumenshineUITests.development.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -649,6 +673,8 @@
 				4360483F20AEFCFD00CF781A /* Sources */,
 				4360484020AEFCFD00CF781A /* Frameworks */,
 				4360484120AEFCFD00CF781A /* Resources */,
+				C1E30669A08FEA75EF48E421 /* [CP] Embed Pods Frameworks */,
+				F3E5D88F28A5D7511B0CE335 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -668,6 +694,8 @@
 				4360484D20AEFD9A00CF781A /* Sources */,
 				4360484E20AEFD9A00CF781A /* Frameworks */,
 				4360484F20AEFD9A00CF781A /* Resources */,
+				1CBED6A6BA32F35D758C1888 /* [CP] Embed Pods Frameworks */,
+				06A9AB024535A04DADC3A5C8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -690,6 +718,7 @@
 				C5462C68818F6346BD32CEEB /* [CP] Embed Pods Frameworks */,
 				74DABE68201B1455007FB701 /* CopyFiles */,
 				43FF90192059581C00650ED5 /* Compile R.swift resources */,
+				B72B6715F30F725300E6B0BF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -773,6 +802,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7435EA7320BAD452008CC667 /* ForgotPasswordViewController.xib in Resources */,
 				43D7A77B205A892E00238E29 /* Localizable.strings in Resources */,
 				7445E9CF2019CF7200470E0A /* LaunchScreen.storyboard in Resources */,
 				7445E9CC2019CF7200470E0A /* Assets.xcassets in Resources */,
@@ -784,6 +814,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		06A9AB024535A04DADC3A5C8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LumenshineUITests/Pods-LumenshineUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1CBED6A6BA32F35D758C1888 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LumenshineUITests/Pods-LumenshineUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		43FF90192059581C00650ED5 /* Compile R.swift resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -832,6 +892,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B72B6715F30F725300E6B0BF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C1E30669A08FEA75EF48E421 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LumenshineTests/Pods-LumenshineTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C5462C68818F6346BD32CEEB /* [CP] Embed Pods Frameworks */ = {
@@ -890,6 +980,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F3E5D88F28A5D7511B0CE335 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LumenshineTests/Pods-LumenshineTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -917,6 +1022,7 @@
 				4322BA26205BAA60007FEB5E /* HeaderMenuViewController.swift in Sources */,
 				4359984D20A492FF00007F27 /* AlertFactory.swift in Sources */,
 				4387980A20584335005261C8 /* InternalCard.swift in Sources */,
+				7435EA7720BADF2C008CC667 /* UIViewController+Utils.swift in Sources */,
 				4359985120A5920200007F27 /* Array+Shuffle.swift in Sources */,
 				43ECA9CC208B530000CB571E /* RegistrationTableViewCell.swift in Sources */,
 				43D131E42056D439000483C4 /* CardTableViewCell.swift in Sources */,
@@ -930,6 +1036,7 @@
 				4314B9F9204812BC006DBE63 /* MenuTableViewCell.swift in Sources */,
 				43088DA82087987E008AE1AB /* CryptoUtil.swift in Sources */,
 				4359984F20A4A14000007F27 /* UserSecurityHelper.swift in Sources */,
+				7435EA6F20BAD124008CC667 /* ForgotPasswordViewModel.swift in Sources */,
 				43044918206BE85D00349B51 /* PillView.swift in Sources */,
 				431437F42047FFB400189C83 /* AppNavigationDrawerController.swift in Sources */,
 				4314B9EF2048060F006DBE63 /* MaterialIcon.swift in Sources */,
@@ -966,9 +1073,11 @@
 				436B367320512114009F7C21 /* TableViewDelegateHandler.swift in Sources */,
 				43F74607209494AC003EB5FD /* RegistrationResponse.swift in Sources */,
 				4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */,
+				7435EA6D20BACE71008CC667 /* ForgotPasswordCoordinator.swift in Sources */,
 				4322BA35205BDD58007FEB5E /* Card.swift in Sources */,
 				4319B1802063EEA9007CE18D /* LoginViewModel.swift in Sources */,
 				43920D9A2057EECA0040003C /* CardView.swift in Sources */,
+				7435EA7220BAD452008CC667 /* ForgotPasswordViewController.swift in Sources */,
 				436B366E20512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift in Sources */,
 				43EFF20620493B4900B1887C /* Stylesheet.swift in Sources */,
 				436B367120512114009F7C21 /* FacebookBarBehaviorDefiner.swift in Sources */,
@@ -979,6 +1088,7 @@
 				431437EF2047FF4500189C83 /* MenuViewController.swift in Sources */,
 				4322BA33205BDB6E007FEB5E /* CardsResponsesMock.swift in Sources */,
 				43044916206BE7E800349B51 /* VerificationViewController.swift in Sources */,
+				7435EA7520BAD95F008CC667 /* String+Utils.swift in Sources */,
 				431E7A272095B2C0003A63B3 /* TFARegistrationViewModel.swift in Sources */,
 				43FA7D3520B45CA3006BD513 /* EmailConfirmationViewController.swift in Sources */,
 				4304491C206BF47400349B51 /* UIView+Shake.swift in Sources */,
@@ -1107,6 +1217,122 @@
 				TEST_TARGET_NAME = Lumenshine;
 			};
 			name = Release;
+		};
+		7435EA7820BBE02B008CC667 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Development;
+		};
+		7435EA7920BBE02B008CC667 /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E169DCF7E710153B0F7E9A59 /* Pods-Lumenshine.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Lumenshine/Lumenshine.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WZYAY65GLB;
+				INFOPLIST_FILE = Lumenshine/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
+				PRODUCT_BUNDLE_IDENTIFIER = com.soneso.stellarr;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEVELOPMENT;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Development;
+		};
+		7435EA7A20BBE02B008CC667 /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0C15D7E686EB104F860EC67 /* Pods-LumenshineTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QN6AY4TH84;
+				INFOPLIST_FILE = LumenshineTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mycompany.LumenshineTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lumenshine.app/Lumenshine";
+			};
+			name = Development;
+		};
+		7435EA7B20BBE02B008CC667 /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9FC43ACF656E680A2638772 /* Pods-LumenshineUITests.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QN6AY4TH84;
+				INFOPLIST_FILE = LumenshineUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mycompany.LumenshineUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Lumenshine;
+			};
+			name = Development;
 		};
 		7445E9E72019CF7300470E0A /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1262,6 +1488,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4360484B20AEFCFD00CF781A /* Debug */,
+				7435EA7A20BBE02B008CC667 /* Development */,
 				4360484C20AEFCFD00CF781A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1271,6 +1498,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4360485920AEFD9A00CF781A /* Debug */,
+				7435EA7B20BBE02B008CC667 /* Development */,
 				4360485A20AEFD9A00CF781A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1280,6 +1508,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7445E9E72019CF7300470E0A /* Debug */,
+				7435EA7820BBE02B008CC667 /* Development */,
 				7445E9E82019CF7300470E0A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1289,6 +1518,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7445E9EA2019CF7300470E0A /* Debug */,
+				7435EA7920BBE02B008CC667 /* Development */,
 				7445E9EB2019CF7300470E0A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

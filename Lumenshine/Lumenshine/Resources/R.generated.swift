@@ -67,8 +67,16 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.nib` struct is generated, and contains static references to 0 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 1 nibs.
   struct nib {
+    /// Nib `ForgotPasswordViewController`.
+    static let forgotPasswordViewController = _R.nib._ForgotPasswordViewController()
+    
+    /// `UINib(name: "ForgotPasswordViewController", in: bundle)`
+    static func forgotPasswordViewController(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.forgotPasswordViewController)
+    }
+    
     fileprivate init() {}
   }
   
@@ -147,7 +155,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 59 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 61 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -217,10 +225,18 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let deposit = Rswift.StringResource(key: "deposit", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Email
+      /// 
+      /// Locales: en
+      static let email = Rswift.StringResource(key: "email", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Error
       /// 
       /// Locales: en
       static let error = Rswift.StringResource(key: "error", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Forgot password
+      /// 
+      /// Locales: en
+      static let forgot_password = Rswift.StringResource(key: "forgot_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Get Started
       /// 
       /// Locales: en
@@ -505,11 +521,25 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("deposit", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Email
+      /// 
+      /// Locales: en
+      static func email(_: Void = ()) -> String {
+        return NSLocalizedString("email", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Error
       /// 
       /// Locales: en
       static func error(_: Void = ()) -> String {
         return NSLocalizedString("error", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Forgot password
+      /// 
+      /// Locales: en
+      static func forgot_password(_: Void = ()) -> String {
+        return NSLocalizedString("forgot_password", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Get Started
@@ -820,6 +850,17 @@ struct R: Rswift.Validatable {
 
 struct _R {
   struct nib {
+    struct _ForgotPasswordViewController: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "ForgotPasswordViewController"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      }
+      
+      fileprivate init() {}
+    }
+    
     fileprivate init() {}
   }
   

@@ -10,10 +10,10 @@ import Foundation
 
 public class ErrorResponse: Decodable {
     
-    let errorCode: Int?
-    let parameterName: String?
-    let errorMessageKey: String?
-    let errorMessage: String?
+    var errorCode: Int?
+    var parameterName: String?
+    var errorMessageKey: String?
+    var errorMessage: String?
     
     private enum CodingKeys: String, CodingKey {
         
@@ -21,6 +21,9 @@ public class ErrorResponse: Decodable {
         case parameterName = "parameter_name"
         case errorMessageKey = "user_error_message_key"
         case errorMessage = "error_message"
+    }
+    
+    init() {
     }
     
     public required init(from decoder: Decoder) throws {

@@ -22,6 +22,7 @@ protocol CoordinatorType: class {
 public enum Transition {
     case showDashboard(User)
     case showSignUp
+    case showForgotPassword
     case showHome
     case showSettings
     case showHeaderMenu([String],[UIImage?])

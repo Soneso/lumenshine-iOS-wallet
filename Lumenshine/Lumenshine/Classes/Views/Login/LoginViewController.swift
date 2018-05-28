@@ -22,6 +22,7 @@ class LoginViewController: UIViewController {
     fileprivate let tfaCodeTextField = TextField()
     fileprivate let touchIDButton = Button()
     fileprivate let signUpButton = RaisedButton()
+    fileprivate let forgotPasswordButton = RaisedButton()
     
     init(viewModel: LoginViewModelType) {
         self.viewModel = viewModel
@@ -106,6 +107,11 @@ extension LoginViewController {
     }
     
     @objc
+    func forgotPasswordAction(sender: UIButton) {
+        viewModel.forgotPasswordClick()
+    }
+    
+    @objc
     func touchIDLoginAction() {
         viewModel.authenticateUser() { [weak self] error in
             if let message = error {
@@ -130,6 +136,7 @@ fileprivate extension LoginViewController {
         prepareTextFields()
         prepareLoginButton()
         prepareSignupButton()
+        prepareForgotPasswordButton()
         prepareTouchButton()
     }
     
@@ -204,6 +211,21 @@ fileprivate extension LoginViewController {
         }
     }
     
+    func prepareForgotPasswordButton() {
+        forgotPasswordButton.title = R.string.localizable.forgot_password()
+        forgotPasswordButton.backgroundColor = Stylesheet.color(.cyan)
+        forgotPasswordButton.titleColor = Stylesheet.color(.white)
+        forgotPasswordButton.addTarget(self, action: #selector(forgotPasswordAction(sender:)), for: .touchUpInside)
+        
+        view.addSubview(forgotPasswordButton)
+        forgotPasswordButton.snp.makeConstraints { make in
+            make.top.equalTo(signUpButton.snp.bottom).offset(20)
+            make.left.equalTo(usernameTextField)
+            make.right.equalTo(usernameTextField)
+            make.height.equalTo(50)
+        }
+    }
+    
     func prepareTouchButton() {
         touchIDButton.isHidden = true//!viewModel.canEvaluatePolicy()
         
@@ -223,26 +245,6 @@ fileprivate extension LoginViewController {
         let okAction = UIAlertAction(title: R.string.localizable.ok(), style: .default)
         alertView.addAction(okAction)
         present(alertView, animated: true)
-    }
-    
-    func showActivity() {
-        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
-        
-        let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.startAnimating()
-        
-        alert.view.addSubview(loadingIndicator)
-        loadingIndicator.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.left.equalTo(15)
-        }
-        
-        present(alert, animated: true)
-    }
-    
-    func hideActivity(completion: (() -> Void)? = nil) {
-        dismiss(animated: true, completion: completion)
     }
 }
 

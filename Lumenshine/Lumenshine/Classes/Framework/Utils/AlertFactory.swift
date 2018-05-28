@@ -17,4 +17,13 @@ struct AlertFactory {
         alertView.addAction(okAction)
         return alertView
     }
+    
+    static func createAlert(title: String, message: String) -> UIAlertController {
+        let alertView = UIAlertController(title: title,
+                                          message: message,
+                                          preferredStyle: .alert)
+        let okAction = UIAlertAction(title: R.string.localizable.ok(), style: .default)
+        alertView.addAction(okAction)
+        return alertView
+    }
 }
