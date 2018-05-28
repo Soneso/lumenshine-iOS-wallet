@@ -28,6 +28,8 @@ class LoginCoordinator: CoordinatorType {
             showDashboard(user: user)
         case .showSignUp:
             showSignUp()
+        case .showForgotPassword:
+            showForgotPassword()
         case .show2FA(let email, let registrationResponse, let mnemonic):
             show2FA(email: email, response: registrationResponse, mnemonic: mnemonic)
         case .showMnemonic(let mnemonic):
@@ -63,6 +65,11 @@ fileprivate extension LoginCoordinator {
     func showSignUp() {
         let registrationCoordinator = RegistrationCoordinator(service: service.auth)
         (baseController as! AppNavigationController).pushViewController(registrationCoordinator.baseController, animated: true)
+    }
+    
+    func showForgotPassword() {
+        let forgotPasswordCoordinator = ForgotPasswordCoordinator(service: service.auth)
+        (baseController as! AppNavigationController).pushViewController(forgotPasswordCoordinator.baseController, animated: true)
     }
     
     func show2FA(email: String, response: RegistrationResponse, mnemonic: String?) {
