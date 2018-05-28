@@ -17,7 +17,7 @@ protocol TFARegistrationViewModelType: Transitionable {
     func showMnemonicConfirmation()
     func showEmailConfirmation()
     func showDashboard()
-    func generateToken() -> String?
+    func generatePassword() -> String?
 }
 
 class TFARegistrationViewModel : TFARegistrationViewModelType {
@@ -74,7 +74,7 @@ class TFARegistrationViewModel : TFARegistrationViewModelType {
         }
     }
     
-    func generateToken() -> String? {
+    func generatePassword() -> String? {
         do {
             let persistentToken = try Keychain.sharedInstance.allPersistentTokens().first
             return persistentToken?.token.currentPassword
