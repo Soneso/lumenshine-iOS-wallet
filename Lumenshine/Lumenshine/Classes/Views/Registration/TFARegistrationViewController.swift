@@ -93,7 +93,7 @@ fileprivate extension TFARegistrationViewController {
     
     func prepareTimer() {
         let timer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true) { (timer) in
-            self.tfaCodeTextField.text = self.viewModel.generateToken()
+            self.tfaCodeTextField.text = self.viewModel.generatePassword()
         }
         timer.fire()
     }
