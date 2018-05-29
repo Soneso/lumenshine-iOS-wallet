@@ -16,6 +16,7 @@ protocol LoginViewModelType: Transitionable {
     
     func signUpClick()
     func forgotPasswordClick()
+    func lost2faClick()
     func verifyLogin1Response(_ login1Response: LoginStep1Response, password: String, response: @escaping Login2ResponseClosure)
     func verifyLogin2Response(_ login2Response: LoginStep2Response)
     
@@ -48,6 +49,10 @@ class LoginViewModel : LoginViewModelType {
     
     func forgotPasswordClick() {
         self.navigationCoordinator?.performTransition(transition: .showForgotPassword)
+    }
+    
+    func lost2faClick() {
+        self.navigationCoordinator?.performTransition(transition: .showLost2fa)
     }
     
     func loginStep1(email: String, tfaCode: String?, response: @escaping Login1ResponseClosure) {

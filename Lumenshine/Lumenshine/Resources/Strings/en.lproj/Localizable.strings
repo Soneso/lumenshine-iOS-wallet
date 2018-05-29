@@ -50,6 +50,15 @@
 "forgot_password" = "Forgot password";
 
 /*  */
+"reset_password" = "Reset password";
+
+/*  */
+"lost_2fa" = "Lost 2fa";
+
+/*  */
+"reset_2fa" = "Reset 2fa";
+
+/*  */
 "email" = "Email";
 
 /*  */

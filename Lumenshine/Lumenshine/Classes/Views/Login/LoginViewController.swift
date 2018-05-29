@@ -23,6 +23,7 @@ class LoginViewController: UIViewController {
     fileprivate let touchIDButton = Button()
     fileprivate let signUpButton = RaisedButton()
     fileprivate let forgotPasswordButton = RaisedButton()
+    fileprivate let forgot2faButton = RaisedButton()
     
     init(viewModel: LoginViewModelType) {
         self.viewModel = viewModel
@@ -124,6 +125,11 @@ extension LoginViewController {
     }
     
     @objc
+    func forgot2faAction(sender: UIButton) {
+        viewModel.lost2faClick()
+    }
+    
+    @objc
     func touchIDLoginAction() {
         viewModel.authenticateUser() { [weak self] error in
             if let message = error {
@@ -149,6 +155,7 @@ fileprivate extension LoginViewController {
         prepareLoginButton()
         prepareSignupButton()
         prepareForgotPasswordButton()
+        prepareForgot2faButton()
         prepareTouchButton()
     }
     
@@ -171,23 +178,26 @@ fileprivate extension LoginViewController {
         tfaCodeTextField.dividerActiveColor = Stylesheet.color(.cyan)
         tfaCodeTextField.placeholderActiveColor = Stylesheet.color(.cyan)
         
+        let marginTop = UIDevice.current.screenType == .iPhone5 ? 25 : 50
+        let spacing = UIDevice.current.screenType == .iPhone5 ? 30 : 40
+        
         view.addSubview(usernameTextField)
         usernameTextField.snp.makeConstraints { make in
-            make.top.equalTo(50)
+            make.top.equalTo(marginTop)
             make.left.equalTo(40)
             make.right.equalTo(-40)
         }
         
         view.addSubview(passwordTextField)
         passwordTextField.snp.makeConstraints { make in
-            make.top.equalTo(usernameTextField.snp.bottom).offset(40)
+            make.top.equalTo(usernameTextField.snp.bottom).offset(spacing)
             make.left.equalTo(usernameTextField)
             make.right.equalTo(usernameTextField)
         }
         
         view.addSubview(tfaCodeTextField)
         tfaCodeTextField.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(40)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(spacing)
             make.left.equalTo(usernameTextField)
             make.right.equalTo(usernameTextField)
         }
@@ -232,6 +242,21 @@ fileprivate extension LoginViewController {
         view.addSubview(forgotPasswordButton)
         forgotPasswordButton.snp.makeConstraints { make in
             make.top.equalTo(signUpButton.snp.bottom).offset(20)
+            make.left.equalTo(usernameTextField)
+            make.right.equalTo(usernameTextField)
+            make.height.equalTo(50)
+        }
+    }
+    
+    func prepareForgot2faButton() {
+        forgot2faButton.title = R.string.localizable.lost_2fa()
+        forgot2faButton.backgroundColor = Stylesheet.color(.cyan)
+        forgot2faButton.titleColor = Stylesheet.color(.white)
+        forgot2faButton.addTarget(self, action: #selector(forgot2faAction(sender:)), for: .touchUpInside)
+        
+        view.addSubview(forgot2faButton)
+        forgot2faButton.snp.makeConstraints { make in
+            make.top.equalTo(forgotPasswordButton.snp.bottom).offset(20)
             make.left.equalTo(usernameTextField)
             make.right.equalTo(usernameTextField)
             make.height.equalTo(50)

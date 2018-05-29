@@ -67,14 +67,21 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.nib` struct is generated, and contains static references to 1 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 2 nibs.
   struct nib {
     /// Nib `ForgotPasswordViewController`.
     static let forgotPasswordViewController = _R.nib._ForgotPasswordViewController()
+    /// Nib `Lost2faViewController`.
+    static let lost2faViewController = _R.nib._Lost2faViewController()
     
     /// `UINib(name: "ForgotPasswordViewController", in: bundle)`
     static func forgotPasswordViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.forgotPasswordViewController)
+    }
+    
+    /// `UINib(name: "Lost2faViewController", in: bundle)`
+    static func lost2faViewController(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.lost2faViewController)
     }
     
     fileprivate init() {}
@@ -155,7 +162,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 61 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 64 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -261,6 +268,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let login = Rswift.StringResource(key: "login", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Lost 2fa
+      /// 
+      /// Locales: en
+      static let lost_2fa = Rswift.StringResource(key: "lost_2fa", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Message
       /// 
       /// Locales: en
@@ -309,6 +320,14 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let email_resend_confirmation = Rswift.StringResource(key: "email_resend_confirmation", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Reset 2fa
+      /// 
+      /// Locales: en
+      static let reset_2fa = Rswift.StringResource(key: "reset_2fa", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Reset password
+      /// 
+      /// Locales: en
+      static let reset_password = Rswift.StringResource(key: "reset_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Save
       /// 
       /// Locales: en
@@ -584,6 +603,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("login", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Lost 2fa
+      /// 
+      /// Locales: en
+      static func lost_2fa(_: Void = ()) -> String {
+        return NSLocalizedString("lost_2fa", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Message
       /// 
       /// Locales: en
@@ -666,6 +692,20 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func email_resend_confirmation(_: Void = ()) -> String {
         return NSLocalizedString("email_resend_confirmation", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Reset 2fa
+      /// 
+      /// Locales: en
+      static func reset_2fa(_: Void = ()) -> String {
+        return NSLocalizedString("reset_2fa", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Reset password
+      /// 
+      /// Locales: en
+      static func reset_password(_: Void = ()) -> String {
+        return NSLocalizedString("reset_password", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Save
@@ -853,6 +893,17 @@ struct _R {
     struct _ForgotPasswordViewController: Rswift.NibResourceType {
       let bundle = R.hostingBundle
       let name = "ForgotPasswordViewController"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _Lost2faViewController: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "Lost2faViewController"
       
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView

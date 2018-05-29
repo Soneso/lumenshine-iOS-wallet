@@ -23,6 +23,7 @@ public enum Transition {
     case showDashboard(User)
     case showSignUp
     case showForgotPassword
+    case showLost2fa
     case showHome
     case showSettings
     case showHeaderMenu([String],[UIImage?])

@@ -265,7 +265,7 @@ public class AuthService: BaseService {
 //        }
 //    }
     
-    func forgotPassword(email: String, response: @escaping EmptyResponseClosure) {
+    func resetPassword(email: String, response: @escaping EmptyResponseClosure) {
         do {
             var params = Dictionary<String,String>()
             params["email"] = email
@@ -273,6 +273,28 @@ public class AuthService: BaseService {
             let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
             
             POSTRequestWithPath(path: "/portal/user/lost_password", body: bodyData) { (result) -> (Void) in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(_):
+                        response(.success)
+                    case .failure(let error):
+                        response(.failure(error: error))
+                    }
+                }
+            }
+        } catch {
+            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+        }
+    }
+    
+    func reset2fa(email: String, response: @escaping EmptyResponseClosure) {
+        do {
+            var params = Dictionary<String,String>()
+            params["email"] = email
+            
+            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+            
+            POSTRequestWithPath(path: "/portal/user/lost_tfa", body: bodyData) { (result) -> (Void) in
                 DispatchQueue.main.async {
                     switch result {
                     case .success(_):
