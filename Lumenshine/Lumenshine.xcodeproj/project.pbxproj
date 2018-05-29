@@ -68,6 +68,7 @@
 		4390D57E205FA5FC00383BB2 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4390D57D205FA5FC00383BB2 /* BaseService.swift */; };
 		4390D582205FBD6E00383BB2 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4390D581205FBD6E00383BB2 /* Services.swift */; };
 		43920D9A2057EECA0040003C /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43920D992057EECA0040003C /* CardView.swift */; };
+		43973A8C20BD4B87000145DD /* TFAGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43973A8B20BD4B87000145DD /* TFAGeneration.swift */; };
 		43A8633820A9F0E6007C46E2 /* LoginStep2Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A8633720A9F0E6007C46E2 /* LoginStep2Response.swift */; };
 		43D131E220569950000483C4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E120569950000483C4 /* HomeViewController.swift */; };
 		43D131E42056D439000483C4 /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E32056D439000483C4 /* CardTableViewCell.swift */; };
@@ -199,6 +200,7 @@
 		4390D57D205FA5FC00383BB2 /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		4390D581205FBD6E00383BB2 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		43920D992057EECA0040003C /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		43973A8B20BD4B87000145DD /* TFAGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFAGeneration.swift; sourceTree = "<group>"; };
 		43A8633720A9F0E6007C46E2 /* LoginStep2Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStep2Response.swift; sourceTree = "<group>"; };
 		43D131E120569950000483C4 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		43D131E32056D439000483C4 /* CardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 				43088DA920879AC7008AE1AB /* RandomBytesSequence.swift */,
 				4359984C20A492FF00007F27 /* AlertFactory.swift */,
 				4359984E20A4A14000007F27 /* UserSecurityHelper.swift */,
+				43973A8B20BD4B87000145DD /* TFAGeneration.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1072,6 +1075,7 @@
 				43FA7D3920B4924B006BD513 /* EmailConfirmationCoordinator.swift in Sources */,
 				436B367320512114009F7C21 /* TableViewDelegateHandler.swift in Sources */,
 				43F74607209494AC003EB5FD /* RegistrationResponse.swift in Sources */,
+				43973A8C20BD4B87000145DD /* TFAGeneration.swift in Sources */,
 				4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */,
 				7435EA6D20BACE71008CC667 /* ForgotPasswordCoordinator.swift in Sources */,
 				4322BA35205BDD58007FEB5E /* Card.swift in Sources */,

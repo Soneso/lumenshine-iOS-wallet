@@ -28,9 +28,9 @@ public enum Transition {
     case showHeaderMenu([String],[UIImage?])
     case showOnWeb(URL)
     case showScan
-    case show2FA(String, RegistrationResponse, String?)
+    case show2FA(User, RegistrationResponse)
     case showGoogle2FA(URL)
-    case showMnemonic(String)
-    case showEmailConfirmation(String, String?)
+    case showMnemonic(User)
+    case showEmailConfirmation(User)
 }
 

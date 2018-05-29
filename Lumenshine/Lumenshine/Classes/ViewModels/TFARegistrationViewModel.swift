@@ -22,17 +22,15 @@ protocol TFARegistrationViewModelType: Transitionable {
 
 class TFARegistrationViewModel : TFARegistrationViewModelType {
     fileprivate let service: AuthService
-    fileprivate let email: String
+    fileprivate let user: User
     fileprivate let registrationResponse: RegistrationResponse
-    fileprivate let mnemonic: String?
     
-    init(service: AuthService, email: String, response: RegistrationResponse, mnemonic: String?) {
+    init(service: AuthService, user: User, response: RegistrationResponse) {
         self.service = service
-        self.email = email
+        self.user = user
         self.registrationResponse = response
-        self.mnemonic = mnemonic
         
-        createToken()
+//        TFAGeneration.createToken(tfaSecret: response.tfaSecret, email: email)
     }
     
     var navigationCoordinator: CoordinatorType?
@@ -45,48 +43,14 @@ class TFARegistrationViewModel : TFARegistrationViewModelType {
         return Data(base64Encoded: registrationResponse.qrCode)
     }
     
-    func createToken() {
-        guard let secretData = registrationResponse.tfaSecret.data(using: .ascii),
-            !secretData.isEmpty else {
-                print("Invalid secret")
-                return
-        }
-        
-        guard let generator = Generator(
-            factor: .timer(period: 30),
-            secret: secretData,
-            algorithm: .sha1,
-            digits: 6) else {
-                print("Invalid generator parameters")
-                return
-        }
-        
-        let token = Token(name: email, issuer: "Lumenshine", generator: generator)
-        do {
-            let keychain = Keychain.sharedInstance
-            let persistentTokens = try keychain.allPersistentTokens()
-            for token in persistentTokens {
-                try keychain.delete(token)
-            }
-            _ = try keychain.add(token)
-        } catch {
-            print("Keychain error: \(error)")
-        }
-    }
     
     func generatePassword() -> String? {
-        do {
-            let persistentToken = try Keychain.sharedInstance.allPersistentTokens().first
-            return persistentToken?.token.currentPassword
-        } catch {
-            print("Generate password error: \(error)")
-            return nil
-        }
+        return TFAGeneration.generatePassword(email: user.email)
     }
     
     func openAuthenticator() {
         guard let tfaSecret = registrationResponse.tfaSecret.base32EncodedString else { return }
-        let urlString = "otpauth://totp/stellargate:\(email)?secret=\(tfaSecret)&issuer=stellargate"
+        let urlString = "otpauth://totp/stellargate:\(user.email)?secret=\(tfaSecret)&issuer=stellargate"
         guard let url = URL(string: urlString) else { return }
         navigationCoordinator?.performTransition(transition: .showGoogle2FA(url))
     }
@@ -98,16 +62,14 @@ class TFARegistrationViewModel : TFARegistrationViewModelType {
     }
     
     func showMnemonicConfirmation() {
-        guard let mnemonic = self.mnemonic else { return }
-        navigationCoordinator?.performTransition(transition: .showMnemonic(mnemonic))
+        navigationCoordinator?.performTransition(transition: .showMnemonic(user))
     }
     
     func showEmailConfirmation() {
-        navigationCoordinator?.performTransition(transition: .showEmailConfirmation(email, mnemonic))
+        navigationCoordinator?.performTransition(transition: .showEmailConfirmation(user))
     }
     
     func showDashboard() {
-        let user = User(id: "1", name: "username")
         navigationCoordinator?.performTransition(transition: .showDashboard(user))
     }
 }

@@ -16,17 +16,17 @@ protocol MnemonicViewModelType: Transitionable {
 
 class MnemonicViewModel: MnemonicViewModelType {
     fileprivate let service: AuthService
-    fileprivate let mnemonic: String
+    fileprivate let user: User
     
-    init(service: AuthService, mnemonic: String) {
+    init(service: AuthService, user: User) {
         self.service = service
-        self.mnemonic = mnemonic
+        self.user = user
     }
     
     var navigationCoordinator: CoordinatorType?
     
     var mnemonic24Word: String {
-        return mnemonic
+        return user.mnemonic
     }
     
     func confirmMnemonic(response: @escaping TFAResponseClosure) {
@@ -36,7 +36,6 @@ class MnemonicViewModel: MnemonicViewModelType {
     }
     
     func showDashboard() {
-        let user = User(id: "1", name: "username")
         navigationCoordinator?.performTransition(transition: .showDashboard(user))
     }
 }

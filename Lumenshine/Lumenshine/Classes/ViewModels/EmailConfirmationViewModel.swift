@@ -17,13 +17,11 @@ protocol EmailConfirmationViewModelType: Transitionable {
 
 class EmailConfirmationViewModel : EmailConfirmationViewModelType {
     fileprivate let service: AuthService
-    fileprivate let email: String
-    fileprivate let mnemonic: String?
+    fileprivate let user: User
     
-    init(service: AuthService, email: String, mnemonic: String?) {
+    init(service: AuthService, user: User) {
         self.service = service
-        self.email = email
-        self.mnemonic = mnemonic
+        self.user = user
     }
     
     var navigationCoordinator: CoordinatorType?
@@ -35,18 +33,16 @@ class EmailConfirmationViewModel : EmailConfirmationViewModelType {
     }
     
     func resendMailConfirmation(response: @escaping EmptyResponseClosure) {
-        service.resendMailConfirmation(email: email) { result in
+        service.resendMailConfirmation(email: user.email) { result in
             response(result)
         }
     }
     
     func showMnemonicConfirmation() {
-        guard let mnemonic = self.mnemonic else { return }
-        navigationCoordinator?.performTransition(transition: .showMnemonic(mnemonic))
+        navigationCoordinator?.performTransition(transition: .showMnemonic(user))
     }
     
     func showDashboard() {
-        let user = User(id: "1", name: "username")
         navigationCoordinator?.performTransition(transition: .showDashboard(user))
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 import stellarsdk
 
 public enum GenerateAccountResponseEnum {
-    case success(response: RegistrationResponse, mnemonic: String)
+    case success(response: RegistrationResponse, userSecurity: UserSecurity)
     case failure(error: ServiceError)
 }
 
@@ -212,7 +212,7 @@ public class AuthService: BaseService {
                         BaseService.jwtTokenPartial = token
                         do {
                             let registrationResponse = try self.jsonDecoder.decode(RegistrationResponse.self, from: data)
-                            response(.success(response: registrationResponse, mnemonic: userSecurity.mnemonic24Word))
+                            response(.success(response: registrationResponse, userSecurity: userSecurity))
                         } catch {
                             response(.failure(error: .parsingFailed(message: error.localizedDescription)))
                         }

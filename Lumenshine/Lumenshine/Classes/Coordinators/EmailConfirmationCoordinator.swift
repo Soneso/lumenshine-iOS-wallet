@@ -12,17 +12,17 @@ class EmailConfirmationCoordinator: CoordinatorType {
     var baseController: UIViewController
     fileprivate let service: AuthService
     
-    init(service: AuthService, email: String, mnemonic: String?) {
+    init(service: AuthService, user: User) {
         self.service = service
-        let viewModel = EmailConfirmationViewModel(service: service, email: email, mnemonic: mnemonic)
+        let viewModel = EmailConfirmationViewModel(service: service, user: user)
         self.baseController = EmailConfirmationViewController(viewModel: viewModel)
         viewModel.navigationCoordinator = self
     }
     
     func performTransition(transition: Transition) {
         switch transition {
-        case .showMnemonic(let mnemonic):
-            showMnemonicQuiz(mnemonic)
+        case .showMnemonic(let user):
+            showMnemonicQuiz(user: user)
         case .showDashboard(let user):
             showDashboard(user: user)
         default: break
@@ -31,8 +31,8 @@ class EmailConfirmationCoordinator: CoordinatorType {
 }
 
 fileprivate extension EmailConfirmationCoordinator {
-    func showMnemonicQuiz(_ mnemonic: String) {
-        let mnemonicCoordinator = MnemonicCoordinator(service: service, mnemonic: mnemonic)
+    func showMnemonicQuiz(user: User) {
+        let mnemonicCoordinator = MnemonicCoordinator(service: service, user: user)
         baseController.navigationController?.pushViewController(mnemonicCoordinator.baseController, animated: true)
     }
     

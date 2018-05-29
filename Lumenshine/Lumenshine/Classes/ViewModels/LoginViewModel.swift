@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import OneTimePassword
 
 protocol LoginViewModelType: Transitionable {
     func loginCompleted()
@@ -27,7 +28,7 @@ class LoginViewModel : LoginViewModelType {
     fileprivate let touchMe = BiometricIDAuth()
     fileprivate let service: AuthService
     fileprivate var email: String?
-    fileprivate var mnemonic: String?
+    fileprivate var user: User?
     
     var navigationCoordinator: CoordinatorType?
     
@@ -36,8 +37,7 @@ class LoginViewModel : LoginViewModelType {
     }
     
     func loginCompleted() {
-        guard let username = UserDefaults.standard.value(forKey: "username") as? String else { return }
-        let user = User(id: "1", name: username)
+        guard let user = self.user else { return }
         self.navigationCoordinator?.performTransition(transition: .showDashboard(user))
         touchMe.invalidate()
     }
@@ -52,7 +52,13 @@ class LoginViewModel : LoginViewModelType {
     
     func loginStep1(email: String, tfaCode: String?, response: @escaping Login1ResponseClosure) {
         self.email = email
-        service.loginStep1(email: email, tfaCode: tfaCode) { result in
+        var token: String?
+        if let tfa = tfaCode, !tfa.isEmpty {
+            token = tfa
+        } else {
+            token = TFAGeneration.generatePassword(email: email)
+        }
+        service.loginStep1(email: email, tfaCode: token) { result in
             response(result)
         }
     }
@@ -62,7 +68,7 @@ class LoginViewModel : LoginViewModelType {
             do {
                 if let userSecurity = UserSecurity(from: login1Response),
                     let (publicKeyIndex188, mnemonic) = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: password) {
-                    self.mnemonic = mnemonic
+                    self.user = User(id: "1", email: self.email!, publicKeyIndex188: publicKeyIndex188, mnemonic: mnemonic)
                     self.service.loginStep2(publicKeyIndex188: publicKeyIndex188) { result in
                         response(result)
                     }
@@ -76,19 +82,18 @@ class LoginViewModel : LoginViewModelType {
     }
     
     func verifyLogin2Response(_ login2Response: LoginStep2Response) {
-        guard let email = self.email else { return }
+        guard let user = self.user else { return }
         if login2Response.tfaConfirmed == nil || login2Response.tfaConfirmed == false {
             if let tfaSecret = login2Response.tfaSecret,
                 let qrCode = login2Response.qrCode {
                 
                 let response = RegistrationResponse(tfaSecret: tfaSecret, qrCode: qrCode)
-                self.navigationCoordinator?.performTransition(transition: .show2FA(email, response, mnemonic))
+                self.navigationCoordinator?.performTransition(transition: .show2FA(user, response))
             }
         } else if login2Response.mailConfirmed == nil || login2Response.mailConfirmed == false {
-            self.navigationCoordinator?.performTransition(transition: .showEmailConfirmation(email, mnemonic) )
+            self.navigationCoordinator?.performTransition(transition: .showEmailConfirmation(user) )
         } else if login2Response.mnemonicConfirmed == nil || login2Response.mnemonicConfirmed == false {
-            guard let mnemonic = self.mnemonic else { return }
-            self.navigationCoordinator?.performTransition(transition: .showMnemonic(mnemonic))
+            self.navigationCoordinator?.performTransition(transition: .showMnemonic(user))
         } else {
             loginCompleted()
         }

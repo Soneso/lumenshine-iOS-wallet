@@ -36,7 +36,7 @@ class TFARegistrationViewController: UIViewController {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: .UIApplicationWillEnterForeground, object: nil)
         prepareView()
-        prepareTimer()
+//        prepareTimer()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -46,7 +46,11 @@ class TFARegistrationViewController: UIViewController {
     @objc
     func appWillEnterForeground(notification: Notification) {
         if UIPasteboard.general.hasStrings {
-            tfaCodeTextField.text = UIPasteboard.general.string
+            if let tfaCode = UIPasteboard.general.string,
+                tfaCode.count == 6,
+                CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: tfaCode)) {
+                tfaCodeTextField.text = tfaCode
+            }
         }
     }
 }
@@ -86,7 +90,7 @@ fileprivate extension TFARegistrationViewController {
         view.backgroundColor = Stylesheet.color(.white)
         prepareLabel()
         prepareImageView()
-//        prepareOpenButton()
+        prepareOpenButton()
         prepareSubmitButton()
         prepareCodeTextField()
     }
@@ -99,7 +103,7 @@ fileprivate extension TFARegistrationViewController {
     }
     
     func prepareLabel() {
-        authenticatorLabel.text = R.string.localizable.lbl_tfa_secret_hint(viewModel.tfaSecret)
+        authenticatorLabel.text = R.string.localizable.lbl_tfa_secret_authenticator(viewModel.tfaSecret)
         authenticatorLabel.font = Stylesheet.font(.headline)
         authenticatorLabel.textAlignment = .center
         authenticatorLabel.numberOfLines = 0

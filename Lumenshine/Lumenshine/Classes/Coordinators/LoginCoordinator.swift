@@ -30,12 +30,12 @@ class LoginCoordinator: CoordinatorType {
             showSignUp()
         case .showForgotPassword:
             showForgotPassword()
-        case .show2FA(let email, let registrationResponse, let mnemonic):
-            show2FA(email: email, response: registrationResponse, mnemonic: mnemonic)
-        case .showMnemonic(let mnemonic):
-            showMnemonicQuiz(mnemonic)
-        case .showEmailConfirmation(let email, let mnemonic):
-            showEmailConfirmation(email, mnemonic: mnemonic)
+        case .show2FA(let user, let registrationResponse):
+            show2FA(user: user, response: registrationResponse)
+        case .showMnemonic(let user):
+            showMnemonicQuiz(user: user)
+        case .showEmailConfirmation(let user):
+            showEmailConfirmation(user: user)
         default:
             break
         }
@@ -72,18 +72,18 @@ fileprivate extension LoginCoordinator {
         (baseController as! AppNavigationController).pushViewController(forgotPasswordCoordinator.baseController, animated: true)
     }
     
-    func show2FA(email: String, response: RegistrationResponse, mnemonic: String?) {
-        let tfaCoordinator = TFARegistrationCoordinator(service: service.auth, email: email, response: response, mnemonic: mnemonic)
+    func show2FA(user: User, response: RegistrationResponse) {
+        let tfaCoordinator = TFARegistrationCoordinator(service: service.auth, user: user, response: response)
         (baseController as! AppNavigationController).pushViewController(tfaCoordinator.baseController, animated: true)
     }
     
-    func showMnemonicQuiz(_ mnemonic: String) {
-        let mnemonicCoordinator = MnemonicCoordinator(service: service.auth, mnemonic: mnemonic)
+    func showMnemonicQuiz(user: User) {
+        let mnemonicCoordinator = MnemonicCoordinator(service: service.auth, user: user)
         (baseController as! AppNavigationController).pushViewController(mnemonicCoordinator.baseController, animated: true)
     }
     
-    func showEmailConfirmation(_ email: String, mnemonic: String?) {
-        let emailCoordinator = EmailConfirmationCoordinator(service: service.auth, email: email, mnemonic: mnemonic)
+    func showEmailConfirmation(user: User) {
+        let emailCoordinator = EmailConfirmationCoordinator(service: service.auth, user: user)
         (baseController as! AppNavigationController).pushViewController(emailCoordinator.baseController, animated: true)
     }
 }

@@ -11,12 +11,12 @@ import UIKit
 class TFARegistrationCoordinator: CoordinatorType {
     var baseController: UIViewController
     fileprivate let service: AuthService
-    fileprivate let mnemonic: String?
+    fileprivate let user: User
     
-    init(service: AuthService, email: String, response: RegistrationResponse, mnemonic: String?) {
+    init(service: AuthService, user: User, response: RegistrationResponse) {
         self.service = service
-        self.mnemonic = mnemonic
-        let viewModel = TFARegistrationViewModel(service: service, email: email, response: response, mnemonic: mnemonic)
+        self.user = user
+        let viewModel = TFARegistrationViewModel(service: service, user: user, response: response)
         self.baseController = TFARegistrationViewController(viewModel: viewModel)
         viewModel.navigationCoordinator = self
     }
@@ -25,10 +25,10 @@ class TFARegistrationCoordinator: CoordinatorType {
         switch transition {
         case .showGoogle2FA(let url):
             showGoogleAuthenticator(url: url)
-        case .showMnemonic(let mnemonic):
-            showMnemonicQuiz(mnemonic)
-        case .showEmailConfirmation(let email, let mnemonic):
-            showEmailConfirmation(email, mnemonic: mnemonic)
+        case .showMnemonic(let user):
+            showMnemonicQuiz(user: user)
+        case .showEmailConfirmation(let user):
+            showEmailConfirmation(user: user)
         case .showDashboard(let user):
             showDashboard(user: user)
         default: break
@@ -49,13 +49,13 @@ fileprivate extension TFARegistrationCoordinator {
         }
     }
     
-    func showMnemonicQuiz(_ mnemonic: String) {
-        let mnemonicCoordinator = MnemonicCoordinator(service: service, mnemonic: mnemonic)
+    func showMnemonicQuiz(user: User) {
+        let mnemonicCoordinator = MnemonicCoordinator(service: service, user: user)
         baseController.navigationController?.pushViewController(mnemonicCoordinator.baseController, animated: true)
     }
     
-    func showEmailConfirmation(_ email: String, mnemonic: String?) {
-        let emailCoordinator = EmailConfirmationCoordinator(service: service, email: email, mnemonic: mnemonic)
+    func showEmailConfirmation(user: User) {
+        let emailCoordinator = EmailConfirmationCoordinator(service: service, user: user)
         baseController.navigationController?.pushViewController(emailCoordinator.baseController, animated: true)
     }
     

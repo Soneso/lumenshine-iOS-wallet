@@ -9,7 +9,8 @@
 import Foundation
 
 public struct User {
-    let id: String?
-    let name: String?
-    
+    let id: String
+    let email: String
+    let publicKeyIndex188: String
+    let mnemonic: String
 }

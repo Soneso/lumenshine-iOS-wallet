@@ -38,6 +38,18 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         prepareView()
+        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: .UIApplicationWillEnterForeground, object: nil)
+    }
+    
+    @objc
+    func appWillEnterForeground(notification: Notification) {
+        if UIPasteboard.general.hasStrings {
+            if let tfaCode = UIPasteboard.general.string,
+                tfaCode.count == 6,
+                CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: tfaCode)) {
+                tfaCodeTextField.text = tfaCode
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

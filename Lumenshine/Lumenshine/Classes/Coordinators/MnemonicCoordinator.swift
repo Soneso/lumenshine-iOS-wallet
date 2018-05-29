@@ -11,8 +11,8 @@ import UIKit
 class MnemonicCoordinator: CoordinatorType {
     var baseController: UIViewController
     
-    init(service: AuthService, mnemonic: String) {
-        let viewModel = MnemonicViewModel(service: service, mnemonic: mnemonic)
+    init(service: AuthService, user: User) {
+        let viewModel = MnemonicViewModel(service: service, user: user)
         self.baseController = MnemonicViewController(viewModel: viewModel)
         viewModel.navigationCoordinator = self
     }
