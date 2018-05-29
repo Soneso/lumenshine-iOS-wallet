@@ -1,19 +1,19 @@
 //
-//  ForgotPasswordViewController.swift
+//  Lost2faViewController.swift
 //  Lumenshine
 //
-//  Created by Razvan Chelemen on 27/05/2018.
+//  Created by Razvan Chelemen on 29/05/2018.
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
 import UIKit
 import Material
 
-class ForgotPasswordViewController: UIViewController {
+class Lost2faViewController: UIViewController {
     @IBOutlet weak var emailTextField: TextField!
     @IBOutlet weak var resetButton: RaisedButton!
     
-    var viewModel: ForgotPasswordViewModelType!
+    var viewModel: Lost2faViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,18 +29,18 @@ class ForgotPasswordViewController: UIViewController {
     }
     
     func prepareResetButton() {
-        resetButton.title = R.string.localizable.forgot_password()
+        resetButton.title = R.string.localizable.reset_2fa()
         resetButton.backgroundColor = Stylesheet.color(.cyan)
         resetButton.titleColor = Stylesheet.color(.white)
     }
     
     @IBAction func didTapResetButton(_ sender: Any) {
         showActivity()
-        viewModel.resetPassword(email: emailTextField.text) { (result) -> (Void) in
+        viewModel.reset2fa(email: emailTextField.text) { (result) -> (Void) in
             self.hideActivity(completion: {
                 switch result {
                 case .success:
-                    let alert = AlertFactory.createAlert(title: "Password reset", message:"Password successfully reset. Please check your email.")
+                    let alert = AlertFactory.createAlert(title: "2fa reset", message:"2fa successfully reset. Please check your email.")
                     self.present(alert, animated: true)
                 case .failure(let error):
                     let alert = AlertFactory.createAlert(error: error)
@@ -49,4 +49,5 @@ class ForgotPasswordViewController: UIViewController {
             })
         }
     }
+    
 }

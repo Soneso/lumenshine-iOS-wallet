@@ -95,6 +95,11 @@
 		7445E9C52019CF7200470E0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7445E9C42019CF7200470E0A /* AppDelegate.swift */; };
 		7445E9CC2019CF7200470E0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7445E9CB2019CF7200470E0A /* Assets.xcassets */; };
 		7445E9CF2019CF7200470E0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7445E9CD2019CF7200470E0A /* LaunchScreen.storyboard */; };
+		744DE2D720BD7A8A003BC216 /* UIDevice+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744DE2D620BD7A8A003BC216 /* UIDevice+Additions.swift */; };
+		744DE2D920BD7F10003BC216 /* Lost2faCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744DE2D820BD7F10003BC216 /* Lost2faCoordinator.swift */; };
+		744DE2DD20BD7FAE003BC216 /* Lost2faViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744DE2DB20BD7FAE003BC216 /* Lost2faViewController.swift */; };
+		744DE2DE20BD7FAE003BC216 /* Lost2faViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 744DE2DC20BD7FAE003BC216 /* Lost2faViewController.xib */; };
+		744DE2E020BD8006003BC216 /* Lost2faViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744DE2DF20BD8006003BC216 /* Lost2faViewModel.swift */; };
 		BE1BE9194EE90B972C6F3F56 /* Pods_Lumenshine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87045A682AF681437374FA65 /* Pods_Lumenshine.framework */; };
 		BFCAFB4D1D63F029879C9F5C /* Pods_LumenshineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D48A75090BDABE81E7E14ADE /* Pods_LumenshineTests.framework */; };
 		E78C005639A7F69FFB95463A /* Pods_LumenshineUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD2BA88016EDF74DB539699D /* Pods_LumenshineUITests.framework */; };
@@ -231,6 +236,11 @@
 		7445E9C42019CF7200470E0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7445E9CB2019CF7200470E0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7445E9CE2019CF7200470E0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		744DE2D620BD7A8A003BC216 /* UIDevice+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Additions.swift"; sourceTree = "<group>"; };
+		744DE2D820BD7F10003BC216 /* Lost2faCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lost2faCoordinator.swift; sourceTree = "<group>"; };
+		744DE2DB20BD7FAE003BC216 /* Lost2faViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lost2faViewController.swift; sourceTree = "<group>"; };
+		744DE2DC20BD7FAE003BC216 /* Lost2faViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Lost2faViewController.xib; sourceTree = "<group>"; };
+		744DE2DF20BD8006003BC216 /* Lost2faViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lost2faViewModel.swift; sourceTree = "<group>"; };
 		7A37687665F61FCA54F330B1 /* Pods-LumenshineUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineUITests/Pods-LumenshineUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7ABD95F3251A5C0C359EE30B /* Pods-StellargateUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StellargateUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StellargateUITests/Pods-StellargateUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7C7553203ED27AD3DAFFB199 /* Pods-Lumenshine.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lumenshine.development.xcconfig"; path = "Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine.development.xcconfig"; sourceTree = "<group>"; };
@@ -327,6 +337,7 @@
 		431437EC2047FF1A00189C83 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				744DE2DA20BD7F74003BC216 /* RecoverAccount */,
 				4337C4E52081BA6A00F4585A /* Registration */,
 				43044912206BE7A400349B51 /* Mnemonic */,
 				4370E23B20655F6F004C62C3 /* Settings */,
@@ -403,8 +414,6 @@
 			isa = PBXGroup;
 			children = (
 				4319B17D2063EE0E007CE18D /* LoginViewController.swift */,
-				7435EA7020BAD452008CC667 /* ForgotPasswordViewController.swift */,
-				7435EA7120BAD452008CC667 /* ForgotPasswordViewController.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -510,6 +519,7 @@
 				431F8AB520A074BA00B1E0F1 /* MnemonicCoordinator.swift */,
 				43FA7D3820B4924B006BD513 /* EmailConfirmationCoordinator.swift */,
 				7435EA6C20BACE71008CC667 /* ForgotPasswordCoordinator.swift */,
+				744DE2D820BD7F10003BC216 /* Lost2faCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -526,6 +536,7 @@
 				431F8AB320A0586100B1E0F1 /* MnemonicViewModel.swift */,
 				43FA7D3620B46157006BD513 /* EmailConfirmationViewModel.swift */,
 				7435EA6E20BAD124008CC667 /* ForgotPasswordViewModel.swift */,
+				744DE2DF20BD8006003BC216 /* Lost2faViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -581,6 +592,7 @@
 				4359985020A5920200007F27 /* Array+Shuffle.swift */,
 				7435EA7420BAD95F008CC667 /* String+Utils.swift */,
 				7435EA7620BADF2C008CC667 /* UIViewController+Utils.swift */,
+				744DE2D620BD7A8A003BC216 /* UIDevice+Additions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -638,6 +650,17 @@
 				7445E9CD2019CF7200470E0A /* LaunchScreen.storyboard */,
 			);
 			path = Lumenshine;
+			sourceTree = "<group>";
+		};
+		744DE2DA20BD7F74003BC216 /* RecoverAccount */ = {
+			isa = PBXGroup;
+			children = (
+				7435EA7020BAD452008CC667 /* ForgotPasswordViewController.swift */,
+				7435EA7120BAD452008CC667 /* ForgotPasswordViewController.xib */,
+				744DE2DB20BD7FAE003BC216 /* Lost2faViewController.swift */,
+				744DE2DC20BD7FAE003BC216 /* Lost2faViewController.xib */,
+			);
+			path = RecoverAccount;
 			sourceTree = "<group>";
 		};
 		9169CF69C4CB8B1BD51496E4 /* Pods */ = {
@@ -802,6 +825,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				744DE2DE20BD7FAE003BC216 /* Lost2faViewController.xib in Resources */,
 				7435EA7320BAD452008CC667 /* ForgotPasswordViewController.xib in Resources */,
 				43D7A77B205A892E00238E29 /* Localizable.strings in Resources */,
 				7445E9CF2019CF7200470E0A /* LaunchScreen.storyboard in Resources */,
@@ -1046,8 +1070,10 @@
 				4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */,
 				4337C4E72081BAA400F4585A /* RegistrationFormTableViewController.swift in Sources */,
 				4390D57E205FA5FC00383BB2 /* BaseService.swift in Sources */,
+				744DE2D720BD7A8A003BC216 /* UIDevice+Additions.swift in Sources */,
 				431F8AB420A0586100B1E0F1 /* MnemonicViewModel.swift in Sources */,
 				431628CE2097352B00F23A20 /* TFAResponse.swift in Sources */,
+				744DE2D920BD7F10003BC216 /* Lost2faCoordinator.swift in Sources */,
 				4316ED9D208DE00800A40F97 /* RegistrationCoordinator.swift in Sources */,
 				438BE842204D51FD007EBFB9 /* HamburgerButton.swift in Sources */,
 				431628D02097476500F23A20 /* ErrorResponse.swift in Sources */,
@@ -1087,12 +1113,14 @@
 				43088DAE2087AD2A008AE1AB /* UserSecurity.swift in Sources */,
 				431437EF2047FF4500189C83 /* MenuViewController.swift in Sources */,
 				4322BA33205BDB6E007FEB5E /* CardsResponsesMock.swift in Sources */,
+				744DE2E020BD8006003BC216 /* Lost2faViewModel.swift in Sources */,
 				43044916206BE7E800349B51 /* VerificationViewController.swift in Sources */,
 				7435EA7520BAD95F008CC667 /* String+Utils.swift in Sources */,
 				431E7A272095B2C0003A63B3 /* TFARegistrationViewModel.swift in Sources */,
 				43FA7D3520B45CA3006BD513 /* EmailConfirmationViewController.swift in Sources */,
 				4304491C206BF47400349B51 /* UIView+Shake.swift in Sources */,
 				4390D582205FBD6E00383BB2 /* Services.swift in Sources */,
+				744DE2DD20BD7FAE003BC216 /* Lost2faViewController.swift in Sources */,
 				7445E9C52019CF7200470E0A /* AppDelegate.swift in Sources */,
 				436B367220512114009F7C21 /* SquareCashBarBehaviorDefiner.swift in Sources */,
 				43A8633820A9F0E6007C46E2 /* LoginStep2Response.swift in Sources */,
@@ -1456,6 +1484,7 @@
 				INFOPLIST_FILE = Lumenshine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.soneso.stellar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
