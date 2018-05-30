@@ -13,6 +13,19 @@ class SettingsTableViewController: UITableViewController {
     // MARK: - Parameters & Constants
     
     fileprivate static let CellIdentifier = "SettingsCell"
+    
+    // MARK: - Properties
+    
+    fileprivate let viewModel: SettingsViewModelType
+    
+    init(viewModel: SettingsViewModelType) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +59,7 @@ class SettingsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.logout()
         evo_drawerController?.navigationController?.setNavigationBarHidden(false, animated: true)
         evo_drawerController?.navigationController?.popViewController(animated: true)
     }

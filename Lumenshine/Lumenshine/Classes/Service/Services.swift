@@ -10,7 +10,7 @@ import Foundation
 
 public final class Services {
 #if DEBUG
-    let baseURL = "http://192.168.0.18:8000"
+    let baseURL = "http://192.168.0.17:9000"
 #elseif DEVELOPMENT
     let baseURL = "http://api.stellargate.net"
 #endif

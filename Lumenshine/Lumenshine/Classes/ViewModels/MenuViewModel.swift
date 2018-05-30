@@ -17,11 +17,25 @@ protocol MenuViewModelType: Transitionable {
 }
 
 class MenuViewModel : MenuViewModelType {
-    
+    fileprivate let service: AuthService
+    fileprivate let user: User
     fileprivate var lastIndex = IndexPath(row: 0, section: 1)
     
-    init() {
+    init(service: AuthService, user: User) {
+        self.service = service
+        self.user = user
         
+        if let tokenExists = TFAGeneration.isTokenExists(email: user.email),
+            tokenExists == false {
+            service.tfaSecret(publicKeyIndex188: user.publicKeyIndex188) { result in
+                switch result {
+                case .success(let response):
+                    TFAGeneration.createToken(tfaSecret: response.tfaSecret, email: user.email)
+                case .failure(let error):
+                    print("Tfa secret request error: \(error)")
+                }
+            }
+        }
     }
     
     var items: [[String?]] = [

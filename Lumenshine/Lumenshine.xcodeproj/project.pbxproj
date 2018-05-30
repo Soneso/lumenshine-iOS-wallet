@@ -68,6 +68,8 @@
 		4390D57E205FA5FC00383BB2 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4390D57D205FA5FC00383BB2 /* BaseService.swift */; };
 		4390D582205FBD6E00383BB2 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4390D581205FBD6E00383BB2 /* Services.swift */; };
 		43920D9A2057EECA0040003C /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43920D992057EECA0040003C /* CardView.swift */; };
+		4394911C20BEB845008D4FA2 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4394911B20BEB845008D4FA2 /* SettingsViewModel.swift */; };
+		4394911E20BEBDFA008D4FA2 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4394911D20BEBDFA008D4FA2 /* SettingsCoordinator.swift */; };
 		43973A8C20BD4B87000145DD /* TFAGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43973A8B20BD4B87000145DD /* TFAGeneration.swift */; };
 		43A8633820A9F0E6007C46E2 /* LoginStep2Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A8633720A9F0E6007C46E2 /* LoginStep2Response.swift */; };
 		43D131E220569950000483C4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E120569950000483C4 /* HomeViewController.swift */; };
@@ -205,6 +207,8 @@
 		4390D57D205FA5FC00383BB2 /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		4390D581205FBD6E00383BB2 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		43920D992057EECA0040003C /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		4394911B20BEB845008D4FA2 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		4394911D20BEBDFA008D4FA2 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
 		43973A8B20BD4B87000145DD /* TFAGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFAGeneration.swift; sourceTree = "<group>"; };
 		43A8633720A9F0E6007C46E2 /* LoginStep2Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStep2Response.swift; sourceTree = "<group>"; };
 		43D131E120569950000483C4 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -523,6 +527,7 @@
 				43FA7D3820B4924B006BD513 /* EmailConfirmationCoordinator.swift */,
 				7435EA6C20BACE71008CC667 /* ForgotPasswordCoordinator.swift */,
 				744DE2D820BD7F10003BC216 /* Lost2faCoordinator.swift */,
+				4394911D20BEBDFA008D4FA2 /* SettingsCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -540,6 +545,7 @@
 				43FA7D3620B46157006BD513 /* EmailConfirmationViewModel.swift */,
 				7435EA6E20BAD124008CC667 /* ForgotPasswordViewModel.swift */,
 				744DE2DF20BD8006003BC216 /* Lost2faViewModel.swift */,
+				4394911B20BEB845008D4FA2 /* SettingsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1057,6 +1063,7 @@
 				431E7A252095B178003A63B3 /* TFARegistrationViewController.swift in Sources */,
 				4376F49E204D9DF800B179C3 /* HomeCoordinator.swift in Sources */,
 				43044914206BE7B400349B51 /* MnemonicViewController.swift in Sources */,
+				4394911E20BEBDFA008D4FA2 /* SettingsCoordinator.swift in Sources */,
 				4319B1902063FA8F007CE18D /* KeychainPasswordItem.swift in Sources */,
 				4319B1892063FA46007CE18D /* BiometricIDAuth.swift in Sources */,
 				431437F22047FF9100189C83 /* AppNavigationController.swift in Sources */,
@@ -1071,6 +1078,7 @@
 				43D131E82056EAC6000483C4 /* ChartCard.swift in Sources */,
 				4376F4A0204D9E2700B179C3 /* CoordinatorProtocol.swift in Sources */,
 				4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */,
+				4394911C20BEB845008D4FA2 /* SettingsViewModel.swift in Sources */,
 				4337C4E72081BAA400F4585A /* RegistrationFormTableViewController.swift in Sources */,
 				4390D57E205FA5FC00383BB2 /* BaseService.swift in Sources */,
 				744DE2D720BD7A8A003BC216 /* UIDevice+Additions.swift in Sources */,

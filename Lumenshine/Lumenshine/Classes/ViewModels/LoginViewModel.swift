@@ -13,6 +13,7 @@ protocol LoginViewModelType: Transitionable {
     func loginCompleted()
     
     func loginStep1(email: String, tfaCode: String?, response: @escaping Login1ResponseClosure)
+    func enableTfaCode(email: String) -> Bool
     
     func signUpClick()
     func forgotPasswordClick()
@@ -53,6 +54,13 @@ class LoginViewModel : LoginViewModelType {
     
     func lost2faClick() {
         self.navigationCoordinator?.performTransition(transition: .showLost2fa)
+    }
+    
+    func enableTfaCode(email: String) -> Bool {
+        if let tokenExists = TFAGeneration.isTokenExists(email: email) {
+            return tokenExists
+        }
+        return false
     }
     
     func loginStep1(email: String, tfaCode: String?, response: @escaping Login1ResponseClosure) {

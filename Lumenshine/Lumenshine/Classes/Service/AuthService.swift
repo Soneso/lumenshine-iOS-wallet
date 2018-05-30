@@ -34,13 +34,44 @@ public enum Login2ResponseEnum {
     case failure(error: ServiceError)
 }
 
+public enum TfaSecretResponseEnum {
+    case success(response: RegistrationResponse)
+    case failure(error: ServiceError)
+}
+
 public typealias GenerateAccountResponseClosure = (_ response:GenerateAccountResponseEnum) -> (Void)
 public typealias TFAResponseClosure = (_ response:TFAResponseEnum) -> (Void)
 public typealias EmptyResponseClosure = (_ response:EmptyResponseEnum) -> (Void)
 public typealias Login1ResponseClosure = (_ response:Login1ResponseEnum) -> (Void)
 public typealias Login2ResponseClosure = (_ response:Login2ResponseEnum) -> (Void)
+public typealias TfaSecretResponseClosure = (_ response:TfaSecretResponseEnum) -> (Void)
 
 public class AuthService: BaseService {
+    
+    open func tfaSecret(publicKeyIndex188: String, response: @escaping TfaSecretResponseClosure) {
+        do {
+            var params = Dictionary<String,String>()
+            params["key"] = publicKeyIndex188
+            
+            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+            
+            POSTRequestWithPath(path: "/portal/dashboard/tfa_secret", body: bodyData, jwtToken: BaseService.jwtTokenFull) { (result) -> (Void) in
+                switch result {
+                case .success(let data, _):
+                    do {
+                        let tfaResponse = try self.jsonDecoder.decode(RegistrationResponse.self, from: data)
+                        response(.success(response: tfaResponse))
+                    } catch {
+                        response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+                    }
+                case .failure(let error):
+                    response(.failure(error: error))
+                }
+            }
+        } catch {
+            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+        }
+    }
     
     open func loginStep2(publicKeyIndex188: String, response: @escaping Login2ResponseClosure) {
         

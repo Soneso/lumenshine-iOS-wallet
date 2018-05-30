@@ -29,8 +29,6 @@ class TFARegistrationViewModel : TFARegistrationViewModelType {
         self.service = service
         self.user = user
         self.registrationResponse = response
-        
-//        TFAGeneration.createToken(tfaSecret: response.tfaSecret, email: email)
     }
     
     var navigationCoordinator: CoordinatorType?
@@ -40,7 +38,8 @@ class TFARegistrationViewModel : TFARegistrationViewModelType {
     }
     
     var qrCode: Data? {
-        return Data(base64Encoded: registrationResponse.qrCode)
+        guard  let qr = registrationResponse.qrCode else { return nil }
+        return Data(base64Encoded: qr)
     }
     
     
@@ -50,7 +49,7 @@ class TFARegistrationViewModel : TFARegistrationViewModelType {
     
     func openAuthenticator() {
         guard let tfaSecret = registrationResponse.tfaSecret.base32EncodedString else { return }
-        let urlString = "otpauth://totp/stellargate:\(user.email)?secret=\(tfaSecret)&issuer=stellargate"
+        let urlString = "otpauth://totp/lumenshine:\(user.email)?secret=\(tfaSecret)&issuer=lumenshine"
         guard let url = URL(string: urlString) else { return }
         navigationCoordinator?.performTransition(transition: .showGoogle2FA(url))
     }

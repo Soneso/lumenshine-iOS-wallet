@@ -20,7 +20,7 @@ class MenuCoordinator: CoordinatorType {
         self.user = user
         self.service = Services()
         
-        let viewModel = MenuViewModel()
+        let viewModel = MenuViewModel(service: service.auth, user: user)
         let menuView = MenuViewController(viewModel: viewModel)
         
         drawer = AppNavigationDrawerController(centerViewController: UIViewController(), leftDrawerViewController: menuView, rightDrawerViewController: nil)
@@ -51,10 +51,10 @@ fileprivate extension MenuCoordinator {
     }
     
     func showSettings() {
-        let settingsVC = SettingsTableViewController()
-        let navigationController = AppNavigationController(rootViewController: settingsVC)
+        let coordinator = SettingsCoordinator(service: service.auth, user: user)
+        let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
         drawer.setCenter(navigationController, withCloseAnimation: true, completion: nil)
-        (baseController as! MenuViewController).present(settingsVC)
+        (baseController as! MenuViewController).present(coordinator.baseController)
         
     }
 }

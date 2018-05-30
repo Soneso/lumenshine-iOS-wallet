@@ -11,7 +11,7 @@ import Foundation
 public class RegistrationResponse: Decodable {
     
     let tfaSecret: String
-    let qrCode: String
+    let qrCode: String?
     
     private enum CodingKeys: String, CodingKey {
         
@@ -22,7 +22,7 @@ public class RegistrationResponse: Decodable {
     public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         tfaSecret = try values.decode(String.self, forKey: .tfaSecret)
-        qrCode = try values.decode(String.self, forKey: .qrCode)
+        qrCode = try values.decodeIfPresent(String.self, forKey: .qrCode)
     }
     
     init(tfaSecret: String, qrCode: String) {
