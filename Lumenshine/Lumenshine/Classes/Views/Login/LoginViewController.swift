@@ -16,6 +16,8 @@ class LoginViewController: UIViewController {
     fileprivate let viewModel: LoginViewModelType
     
     // MARK: - UI properties
+    fileprivate let contentView = UIView()
+    fileprivate let scrollView = UIScrollView()
     fileprivate let loginButton = RaisedButton()
     fileprivate let usernameTextField = TextField()
     fileprivate let passwordTextField = TextField()
@@ -50,6 +52,14 @@ class LoginViewController: UIViewController {
                 CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: tfaCode)) {
                 tfaCodeTextField.text = tfaCode
             }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let storedUsername = UserDefaults.standard.value(forKey: "username") as? String {
+            usernameTextField.text = storedUsername
+            tfaCodeTextField.isHidden = viewModel.enableTfaCode(email: storedUsername)
         }
     }
     
@@ -148,9 +158,19 @@ extension LoginViewController {
     }
 }
 
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let email = usernameTextField.text,
+            !email.isEmpty {
+            tfaCodeTextField.isHidden = viewModel.enableTfaCode(email: email)
+        }
+    }
+}
+
 fileprivate extension LoginViewController {
     func prepareView() {
         view.backgroundColor = Stylesheet.color(.white)
+        prepareContentView()
         prepareTextFields()
         prepareLoginButton()
         prepareSignupButton()
@@ -159,10 +179,22 @@ fileprivate extension LoginViewController {
         prepareTouchButton()
     }
     
-    func prepareTextFields() {
-        if let storedUsername = UserDefaults.standard.value(forKey: "username") as? String {
-            usernameTextField.text = storedUsername
+    func prepareContentView() {
+        view.addSubview(scrollView)
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
+        
+        scrollView.addSubview(contentView)
+        contentView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.left.equalToSuperview()
+            make.width.equalTo(view)
+        }
+    }
+    
+    func prepareTextFields() {
         usernameTextField.placeholder = R.string.localizable.username()
         passwordTextField.placeholder = R.string.localizable.password()
         tfaCodeTextField.placeholder = R.string.localizable.tfa_code()
@@ -170,6 +202,7 @@ fileprivate extension LoginViewController {
         passwordTextField.isSecureTextEntry = true
         usernameTextField.keyboardType = .emailAddress
         usernameTextField.autocapitalizationType = .none
+        usernameTextField.delegate = self
         
         usernameTextField.dividerActiveColor = Stylesheet.color(.cyan)
         usernameTextField.placeholderActiveColor = Stylesheet.color(.cyan)
@@ -178,24 +211,24 @@ fileprivate extension LoginViewController {
         tfaCodeTextField.dividerActiveColor = Stylesheet.color(.cyan)
         tfaCodeTextField.placeholderActiveColor = Stylesheet.color(.cyan)
         
-        let marginTop = UIDevice.current.screenType == .iPhone5 ? 25 : 50
-        let spacing = UIDevice.current.screenType == .iPhone5 ? 30 : 40
         
-        view.addSubview(usernameTextField)
+        let spacing = 40
+        
+        contentView.addSubview(usernameTextField)
         usernameTextField.snp.makeConstraints { make in
-            make.top.equalTo(marginTop)
+            make.top.equalTo(50)
             make.left.equalTo(40)
             make.right.equalTo(-40)
         }
         
-        view.addSubview(passwordTextField)
+        contentView.addSubview(passwordTextField)
         passwordTextField.snp.makeConstraints { make in
             make.top.equalTo(usernameTextField.snp.bottom).offset(spacing)
             make.left.equalTo(usernameTextField)
             make.right.equalTo(usernameTextField)
         }
         
-        view.addSubview(tfaCodeTextField)
+        contentView.addSubview(tfaCodeTextField)
         tfaCodeTextField.snp.makeConstraints { make in
             make.top.equalTo(passwordTextField.snp.bottom).offset(spacing)
             make.left.equalTo(usernameTextField)
@@ -209,9 +242,9 @@ fileprivate extension LoginViewController {
         loginButton.titleColor = Stylesheet.color(.white)
         loginButton.addTarget(self, action: #selector(loginAction(sender:)), for: .touchUpInside)
         
-        view.addSubview(loginButton)
+        contentView.addSubview(loginButton)
         loginButton.snp.makeConstraints { make in
-            make.top.equalTo(tfaCodeTextField.snp.bottom).offset(40)
+            make.top.equalTo(tfaCodeTextField.snp.bottom).offset(30)
             make.left.equalTo(usernameTextField)
             make.right.equalTo(usernameTextField)
             make.height.equalTo(50)
@@ -224,7 +257,7 @@ fileprivate extension LoginViewController {
         signUpButton.titleColor = Stylesheet.color(.white)
         signUpButton.addTarget(self, action: #selector(signupAction(sender:)), for: .touchUpInside)
         
-        view.addSubview(signUpButton)
+        contentView.addSubview(signUpButton)
         signUpButton.snp.makeConstraints { make in
             make.top.equalTo(loginButton.snp.bottom).offset(20)
             make.left.equalTo(usernameTextField)
@@ -239,7 +272,7 @@ fileprivate extension LoginViewController {
         forgotPasswordButton.titleColor = Stylesheet.color(.white)
         forgotPasswordButton.addTarget(self, action: #selector(forgotPasswordAction(sender:)), for: .touchUpInside)
         
-        view.addSubview(forgotPasswordButton)
+        contentView.addSubview(forgotPasswordButton)
         forgotPasswordButton.snp.makeConstraints { make in
             make.top.equalTo(signUpButton.snp.bottom).offset(20)
             make.left.equalTo(usernameTextField)
@@ -254,12 +287,13 @@ fileprivate extension LoginViewController {
         forgot2faButton.titleColor = Stylesheet.color(.white)
         forgot2faButton.addTarget(self, action: #selector(forgot2faAction(sender:)), for: .touchUpInside)
         
-        view.addSubview(forgot2faButton)
+        contentView.addSubview(forgot2faButton)
         forgot2faButton.snp.makeConstraints { make in
             make.top.equalTo(forgotPasswordButton.snp.bottom).offset(20)
             make.left.equalTo(usernameTextField)
             make.right.equalTo(usernameTextField)
             make.height.equalTo(50)
+            make.bottom.equalTo(-20)
         }
     }
     
