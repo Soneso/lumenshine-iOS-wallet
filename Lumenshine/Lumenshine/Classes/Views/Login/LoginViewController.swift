@@ -59,7 +59,6 @@ class LoginViewController: UIViewController {
         super.viewWillAppear(animated)
         if let storedUsername = UserDefaults.standard.value(forKey: "username") as? String {
             usernameTextField.text = storedUsername
-            tfaCodeTextField.isHidden = viewModel.enableTfaCode(email: storedUsername)
         }
     }
     
@@ -86,7 +85,9 @@ extension LoginViewController {
             let password = passwordTextField.text,
             !accountName.isEmpty,
             !password.isEmpty else {
-                showLoginFailedAlert()
+                let alert = AlertFactory.createAlert(title: R.string.localizable.sign_in_error_msg(),
+                                         message: R.string.localizable.bad_credentials())
+                present(alert, animated: true)
                 return
         }
         
@@ -95,7 +96,6 @@ extension LoginViewController {
         tfaCodeTextField.resignFirstResponder()
         
         UserDefaults.standard.setValue(accountName, forKey: "username")
-        passwordTextField.text = nil
         
         viewModel.loginStep1(email: accountName, tfaCode: tfaCodeTextField.text) { result in
             DispatchQueue.main.async {
@@ -121,7 +121,8 @@ extension LoginViewController {
                 }
             }
         }
-
+        passwordTextField.text = nil
+        tfaCodeTextField.text = nil
     }
     
     @objc
@@ -160,10 +161,10 @@ extension LoginViewController {
 
 extension LoginViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if let email = usernameTextField.text,
-            !email.isEmpty {
-            tfaCodeTextField.isHidden = viewModel.enableTfaCode(email: email)
-        }
+//        if let email = usernameTextField.text,
+//            !email.isEmpty {
+//            tfaCodeTextField.isHidden = viewModel.enableTfaCode(email: email)
+//        }
     }
 }
 
@@ -307,15 +308,6 @@ fileprivate extension LoginViewController {
             touchIDButton.setImage(UIImage(named: "Touch-icon-lg"),  for: .normal)
         }
         touchIDButton.addTarget(self, action: #selector(touchIDLoginAction), for: .touchUpInside)
-    }
-    
-    func showLoginFailedAlert() {
-        let alertView = UIAlertController(title: R.string.localizable.sign_in_error_msg(),
-                                          message: R.string.localizable.bad_credentials(),
-                                          preferredStyle:. alert)
-        let okAction = UIAlertAction(title: R.string.localizable.ok(), style: .default)
-        alertView.addAction(okAction)
-        present(alertView, animated: true)
     }
 }
 

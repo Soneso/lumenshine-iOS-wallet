@@ -33,6 +33,10 @@ class MenuViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         prepare()
+    
+        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: .UIApplicationWillEnterForeground, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground(notification:)), name: .UIApplicationDidEnterBackground, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,6 +46,16 @@ class MenuViewController: UITableViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
+    }
+    
+    @objc
+    func appWillEnterForeground(notification: Notification) {
+        viewModel.showRelogin()
+    }
+    
+    @objc
+    func appDidEnterBackground(notification: Notification) {
+        viewModel.countBackgroundTime()
     }
 
     // MARK: - Table view data source

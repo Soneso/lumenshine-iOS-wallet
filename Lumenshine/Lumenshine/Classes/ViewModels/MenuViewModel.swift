@@ -13,13 +13,15 @@ protocol MenuViewModelType: Transitionable {
     var items: [[String?]] { get }
     var icons: [[UIImage?]] { get }
     func menuItemSelected(at indexPath: IndexPath)
-    
+    func showRelogin()
+    func countBackgroundTime()
 }
 
 class MenuViewModel : MenuViewModelType {
     fileprivate let service: AuthService
     fileprivate let user: User
     fileprivate var lastIndex = IndexPath(row: 0, section: 1)
+    fileprivate var backgroundTime: Date?
     
     init(service: AuthService, user: User) {
         self.service = service
@@ -68,5 +70,15 @@ class MenuViewModel : MenuViewModelType {
         default: break
         }
         lastIndex = indexPath
+    }
+    
+    func showRelogin() {
+        if let time = backgroundTime, time.addingTimeInterval(10) < Date() {
+            navigationCoordinator?.performTransition(transition: .showRelogin)
+        }
+    }
+    
+    func countBackgroundTime() {
+        backgroundTime = Date()
     }
 }

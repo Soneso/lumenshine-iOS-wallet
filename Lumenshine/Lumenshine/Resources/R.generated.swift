@@ -162,7 +162,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 64 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 65 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -372,6 +372,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let unexpected_data_type = Rswift.StringResource(key: "unexpected_data_type", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Use another account
+      /// 
+      /// Locales: en
+      static let account_different = Rswift.StringResource(key: "account_different", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: User is not logged in
       /// 
       /// Locales: en
@@ -783,6 +787,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func unexpected_data_type(_: Void = ()) -> String {
         return NSLocalizedString("unexpected_data_type", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Use another account
+      /// 
+      /// Locales: en
+      static func account_different(_: Void = ()) -> String {
+        return NSLocalizedString("account_different", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: User is not logged in

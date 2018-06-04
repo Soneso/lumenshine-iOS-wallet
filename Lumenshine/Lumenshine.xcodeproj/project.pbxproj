@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4301312A20C049CB00E47E83 /* ReLoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4301312920C049CB00E47E83 /* ReLoginCoordinator.swift */; };
 		43044914206BE7B400349B51 /* MnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43044913206BE7B400349B51 /* MnemonicViewController.swift */; };
 		43044916206BE7E800349B51 /* VerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43044915206BE7E800349B51 /* VerificationViewController.swift */; };
 		43044918206BE85D00349B51 /* PillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43044917206BE85D00349B51 /* PillView.swift */; };
@@ -72,6 +73,7 @@
 		4394911E20BEBDFA008D4FA2 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4394911D20BEBDFA008D4FA2 /* SettingsCoordinator.swift */; };
 		43973A8C20BD4B87000145DD /* TFAGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43973A8B20BD4B87000145DD /* TFAGeneration.swift */; };
 		43A8633820A9F0E6007C46E2 /* LoginStep2Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A8633720A9F0E6007C46E2 /* LoginStep2Response.swift */; };
+		43C6377A20BEFF2B00498FC5 /* ReLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C6377920BEFF2B00498FC5 /* ReLoginViewController.swift */; };
 		43D131E220569950000483C4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E120569950000483C4 /* HomeViewController.swift */; };
 		43D131E42056D439000483C4 /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E32056D439000483C4 /* CardTableViewCell.swift */; };
 		43D131E62056E3BD000483C4 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E52056E3BD000483C4 /* CardViewModel.swift */; };
@@ -141,6 +143,7 @@
 		134821A0A729CE3C02C022E4 /* Pods_Stellargate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stellargate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A7CAE5FC313BC2F26F3B1BD /* Pods-LumenshineTests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineTests.development.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineTests/Pods-LumenshineTests.development.xcconfig"; sourceTree = "<group>"; };
 		1C5E9D71329C9F6FF75B440F /* Pods_StellargateTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StellargateTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4301312920C049CB00E47E83 /* ReLoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginCoordinator.swift; sourceTree = "<group>"; };
 		43044913206BE7B400349B51 /* MnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicViewController.swift; sourceTree = "<group>"; };
 		43044915206BE7E800349B51 /* VerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationViewController.swift; sourceTree = "<group>"; };
 		43044917206BE85D00349B51 /* PillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillView.swift; sourceTree = "<group>"; };
@@ -211,6 +214,7 @@
 		4394911D20BEBDFA008D4FA2 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
 		43973A8B20BD4B87000145DD /* TFAGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFAGeneration.swift; sourceTree = "<group>"; };
 		43A8633720A9F0E6007C46E2 /* LoginStep2Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStep2Response.swift; sourceTree = "<group>"; };
+		43C6377920BEFF2B00498FC5 /* ReLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginViewController.swift; sourceTree = "<group>"; };
 		43D131E120569950000483C4 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		43D131E32056D439000483C4 /* CardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
 		43D131E52056E3BD000483C4 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
@@ -421,6 +425,7 @@
 			isa = PBXGroup;
 			children = (
 				4319B17D2063EE0E007CE18D /* LoginViewController.swift */,
+				43C6377920BEFF2B00498FC5 /* ReLoginViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -528,6 +533,7 @@
 				7435EA6C20BACE71008CC667 /* ForgotPasswordCoordinator.swift */,
 				744DE2D820BD7F10003BC216 /* Lost2faCoordinator.swift */,
 				4394911D20BEBDFA008D4FA2 /* SettingsCoordinator.swift */,
+				4301312920C049CB00E47E83 /* ReLoginCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -705,8 +711,6 @@
 				4360483F20AEFCFD00CF781A /* Sources */,
 				4360484020AEFCFD00CF781A /* Frameworks */,
 				4360484120AEFCFD00CF781A /* Resources */,
-				C1E30669A08FEA75EF48E421 /* [CP] Embed Pods Frameworks */,
-				F3E5D88F28A5D7511B0CE335 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -726,8 +730,6 @@
 				4360484D20AEFD9A00CF781A /* Sources */,
 				4360484E20AEFD9A00CF781A /* Frameworks */,
 				4360484F20AEFD9A00CF781A /* Resources */,
-				1CBED6A6BA32F35D758C1888 /* [CP] Embed Pods Frameworks */,
-				06A9AB024535A04DADC3A5C8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -750,7 +752,6 @@
 				C5462C68818F6346BD32CEEB /* [CP] Embed Pods Frameworks */,
 				74DABE68201B1455007FB701 /* CopyFiles */,
 				43FF90192059581C00650ED5 /* Compile R.swift resources */,
-				B72B6715F30F725300E6B0BF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -847,36 +848,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		06A9AB024535A04DADC3A5C8 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LumenshineUITests/Pods-LumenshineUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1CBED6A6BA32F35D758C1888 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LumenshineUITests/Pods-LumenshineUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		43FF90192059581C00650ED5 /* Compile R.swift resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -925,36 +896,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B72B6715F30F725300E6B0BF /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C1E30669A08FEA75EF48E421 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LumenshineTests/Pods-LumenshineTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C5462C68818F6346BD32CEEB /* [CP] Embed Pods Frameworks */ = {
@@ -1011,21 +952,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F3E5D88F28A5D7511B0CE335 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LumenshineTests/Pods-LumenshineTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1091,8 +1017,10 @@
 				43FA7D3720B46157006BD513 /* EmailConfirmationViewModel.swift in Sources */,
 				43088DAC2087AB23008AE1AB /* AuthService.swift in Sources */,
 				43ECA9CA208B3C4400CB571E /* RegistrationViewModel.swift in Sources */,
+				4301312A20C049CB00E47E83 /* ReLoginCoordinator.swift in Sources */,
 				4319B1842063F00C007CE18D /* MenuViewModel.swift in Sources */,
 				4359984B20A438EF00007F27 /* LoginStep1Response.swift in Sources */,
+				43C6377A20BEFF2B00498FC5 /* ReLoginViewController.swift in Sources */,
 				43D7A77E205A90CC00238E29 /* MenuCoordinator.swift in Sources */,
 				436FE5082052634300CFE788 /* WebCard.swift in Sources */,
 				436B366F20512114009F7C21 /* FlexibleHeightBar.swift in Sources */,
@@ -1319,7 +1247,7 @@
 		};
 		7435EA7920BBE02B008CC667 /* Development */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E169DCF7E710153B0F7E9A59 /* Pods-Lumenshine.debug.xcconfig */;
+			baseConfigurationReference = 7C7553203ED27AD3DAFFB199 /* Pods-Lumenshine.development.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Lumenshine/Lumenshine.entitlements;
@@ -1339,7 +1267,7 @@
 		};
 		7435EA7A20BBE02B008CC667 /* Development */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C0C15D7E686EB104F860EC67 /* Pods-LumenshineTests.debug.xcconfig */;
+			baseConfigurationReference = 1A7CAE5FC313BC2F26F3B1BD /* Pods-LumenshineTests.development.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -1358,7 +1286,7 @@
 		};
 		7435EA7B20BBE02B008CC667 /* Development */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B9FC43ACF656E680A2638772 /* Pods-LumenshineUITests.debug.xcconfig */;
+			baseConfigurationReference = E0382415204B6258E7E942B9 /* Pods-LumenshineUITests.development.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;

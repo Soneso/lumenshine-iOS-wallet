@@ -89,6 +89,9 @@
 "password" = "Password";
 
 /*  */
+"account_different" = "Use another account";
+
+/*  */
 "account_data_title" = "Account specific data";
 
 /*  */

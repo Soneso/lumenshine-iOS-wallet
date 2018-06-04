@@ -37,6 +37,8 @@ class MenuCoordinator: CoordinatorType {
             showHome()
         case .showSettings:
             showSettings()
+        case .showRelogin:
+            showRelogin()
         default: break
         }
     }
@@ -55,6 +57,13 @@ fileprivate extension MenuCoordinator {
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
         drawer.setCenter(navigationController, withCloseAnimation: true, completion: nil)
         (baseController as! MenuViewController).present(coordinator.baseController)
-        
+    }
+    
+    func showRelogin() {
+        let coordinator = ReLoginCoordinator(service: service.auth)
+        let loginView = drawer.navigationController?.viewControllers.first
+        drawer.navigationController?.setNavigationBarHidden(false, animated: false)
+        drawer.navigationController?.popToRootViewController(animated: false)
+        loginView?.present(coordinator.baseController, animated: true, completion: nil)
     }
 }

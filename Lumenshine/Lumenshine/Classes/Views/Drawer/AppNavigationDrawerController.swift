@@ -16,11 +16,17 @@ class AppNavigationDrawerController: DrawerController {
 //        minimumAnimationDuration = 0.4
         openDrawerGestureModeMask = [.panningCenterView, .panningNavigationBar]
         closeDrawerGestureModeMask = [.panningCenterView, .panningNavigationBar]
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: .UIApplicationWillEnterForeground, object: nil)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
     
+    @objc
+    func appWillEnterForeground(notification: Notification) {
+        
+    }
 }
 
