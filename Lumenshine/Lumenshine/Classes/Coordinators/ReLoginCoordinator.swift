@@ -36,10 +36,11 @@ fileprivate extension ReLoginCoordinator {
     
     func logout() {
         let loginCoordinator = LoginCoordinator()
-        let window = UIApplication.shared.delegate?.window ?? baseController.view.window
         
-        UIView.transition(with: window!, duration: 0.3, options: .transitionFlipFromTop, animations: {
-            window!.rootViewController = loginCoordinator.baseController
-        }, completion: nil)
+        if let window = UIApplication.shared.delegate?.window ?? baseController.view.window {
+            UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromTop, animations: {
+                window.rootViewController = loginCoordinator.baseController
+            }, completion: nil)
+        }
     }
 }
