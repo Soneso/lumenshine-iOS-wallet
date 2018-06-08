@@ -82,7 +82,6 @@ class MnemonicViewController: UIViewController {
         verificationViewController.delegate = self
         
         present(AppNavigationController(rootViewController:verificationViewController), animated: true, completion: nil)
-//        navigationController?.pushViewController(verificationViewController, animated: true)
     }
     
     @objc

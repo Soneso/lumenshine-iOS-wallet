@@ -18,10 +18,21 @@ class SettingsCoordinator: CoordinatorType {
     }
     
     func performTransition(transition: Transition) {
-        
+        switch transition {
+        case .logout:
+            logout()
+        default: break
+        }
     }
 }
 
 fileprivate extension SettingsCoordinator {
-
+    func logout() {
+        let loginCoordinator = LoginCoordinator()
+        let window = UIApplication.shared.delegate?.window ?? baseController.view.window
+        
+        UIView.transition(with: window!, duration: 0.3, options: .transitionFlipFromTop, animations: {
+            window!.rootViewController = loginCoordinator.baseController
+        }, completion: nil)
+    }
 }

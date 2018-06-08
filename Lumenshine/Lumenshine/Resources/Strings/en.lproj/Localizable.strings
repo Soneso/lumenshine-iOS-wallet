@@ -89,6 +89,15 @@
 "password" = "Password";
 
 /*  */
+"touch_id" = "Touch ID";
+
+/*  */
+"enabled" = "Enabled";
+
+/*  */
+"disabled" = "Disabled";
+
+/*  */
 "account_different" = "Use another account";
 
 /*  */

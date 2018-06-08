@@ -18,10 +18,28 @@ class ReLoginCoordinator: CoordinatorType {
     }
     
     func performTransition(transition: Transition) {
-        
+        switch transition {
+        case .openDashboard:
+            openDashboard()
+        case .logout:
+            logout()
+        default:
+            break
+        }
     }
 }
 
 fileprivate extension ReLoginCoordinator {
+    func openDashboard() {
+        baseController.dismiss(animated: true, completion: nil)
+    }
     
+    func logout() {
+        let loginCoordinator = LoginCoordinator()
+        let window = UIApplication.shared.delegate?.window ?? baseController.view.window
+        
+        UIView.transition(with: window!, duration: 0.3, options: .transitionFlipFromTop, animations: {
+            window!.rootViewController = loginCoordinator.baseController
+        }, completion: nil)
+    }
 }

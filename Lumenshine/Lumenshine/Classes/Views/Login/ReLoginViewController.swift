@@ -20,6 +20,7 @@ class ReLoginViewController: UIViewController {
     fileprivate let accountButton = RaisedButton()
     fileprivate let usernameTextField = TextField()
     fileprivate let passwordTextField = TextField()
+    fileprivate let touchIDButton = Button()
     
     init(viewModel: LoginViewModelType) {
         self.viewModel = viewModel
@@ -43,6 +44,10 @@ class ReLoginViewController: UIViewController {
         if let storedUsername = UserDefaults.standard.value(forKey: "username") as? String {
             usernameTextField.text = storedUsername
         }
+        if let touchEnabled = UserDefaults.standard.value(forKey: "touchEnabled") as? Bool,
+            touchEnabled == true {
+            touchIDLogin()
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -54,7 +59,7 @@ class ReLoginViewController: UIViewController {
 extension ReLoginViewController {
     @objc
     func changeAccountAction(sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        viewModel.showLoginForm()
     }
     
     @objc
@@ -97,6 +102,20 @@ extension ReLoginViewController {
             }
         }
     }
+    
+    @objc
+    func touchIDLogin() {
+        viewModel.authenticateUser() { [weak self] error in
+            if let message = error {
+                guard !message.isEmpty else { return }
+                let alert = AlertFactory.createAlert(title: R.string.localizable.error(),
+                                         message: message)
+                self?.present(alert, animated: true)
+            } else {
+                self?.viewModel.loginCompleted()
+            }
+        }
+    }
 }
 
 fileprivate extension ReLoginViewController {
@@ -105,6 +124,12 @@ fileprivate extension ReLoginViewController {
         prepareTextFields()
         prepareLoginButton()
         prepareAccountButton()
+        
+        if let touchEnabled = UserDefaults.standard.value(forKey: "touchEnabled") as? Bool,
+            touchEnabled == true,
+            viewModel.canEvaluatePolicy() {
+            prepareTouchButton()
+        }
     }
     
     func prepareTextFields() {
@@ -163,6 +188,22 @@ fileprivate extension ReLoginViewController {
             make.left.equalTo(usernameTextField)
             make.right.equalTo(usernameTextField)
             make.height.equalTo(50)
+        }
+    }
+    
+    func prepareTouchButton() {
+        switch viewModel.biometricType() {
+        case .faceID:
+            touchIDButton.setImage(UIImage(named: "FaceIcon"),  for: .normal)
+        default:
+            touchIDButton.setImage(UIImage(named: "Touch-icon-lg"),  for: .normal)
+        }
+        touchIDButton.addTarget(self, action: #selector(touchIDLogin), for: .touchUpInside)
+        
+        view.addSubview(touchIDButton)
+        touchIDButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(-20)
         }
     }
 }

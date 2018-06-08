@@ -162,7 +162,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 65 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 68 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -232,10 +232,18 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let deposit = Rswift.StringResource(key: "deposit", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Disabled
+      /// 
+      /// Locales: en
+      static let disabled = Rswift.StringResource(key: "disabled", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Email
       /// 
       /// Locales: en
       static let email = Rswift.StringResource(key: "email", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Enabled
+      /// 
+      /// Locales: en
+      static let enabled = Rswift.StringResource(key: "enabled", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Error
       /// 
       /// Locales: en
@@ -364,6 +372,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let submit = Rswift.StringResource(key: "submit", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Touch ID
+      /// 
+      /// Locales: en
+      static let touch_id = Rswift.StringResource(key: "touch_id", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Two Factor code
       /// 
       /// Locales: en
@@ -544,11 +556,25 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("deposit", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Disabled
+      /// 
+      /// Locales: en
+      static func disabled(_: Void = ()) -> String {
+        return NSLocalizedString("disabled", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Email
       /// 
       /// Locales: en
       static func email(_: Void = ()) -> String {
         return NSLocalizedString("email", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Enabled
+      /// 
+      /// Locales: en
+      static func enabled(_: Void = ()) -> String {
+        return NSLocalizedString("enabled", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Error
@@ -773,6 +799,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func submit(_: Void = ()) -> String {
         return NSLocalizedString("submit", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Touch ID
+      /// 
+      /// Locales: en
+      static func touch_id(_: Void = ()) -> String {
+        return NSLocalizedString("touch_id", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Two Factor code

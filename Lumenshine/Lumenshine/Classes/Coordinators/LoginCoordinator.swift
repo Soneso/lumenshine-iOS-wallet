@@ -48,20 +48,13 @@ fileprivate extension LoginCoordinator {
     func showDashboard(user: User) {
         let menuCoordinator = MenuCoordinator(user: user)
         
-        if let mainNavigation = menuCoordinator.baseController.evo_drawerController,
-            let navigation = baseController as? AppNavigationController {
-            navigation.popToRootViewController(animated: false)
-            navigation.setNavigationBarHidden(true, animated: false)
-            navigation.pushViewController(mainNavigation, animated: true)
+        if let mainNavigation = menuCoordinator.baseController.evo_drawerController {            
+            let window = UIApplication.shared.delegate?.window ?? baseController.view.window
+            
+            UIView.transition(with: window!, duration: 0.3, options: .transitionFlipFromBottom, animations: {
+                window!.rootViewController = mainNavigation
+            }, completion: nil)
         }
-//        if let window = self.baseController.view.window {
-//            window.rootViewController = mainNavigation
-//        } else {
-//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//            appDelegate.window?.rootViewController = mainNavigation
-//        }
-//
-//        self.baseController.dismiss(animated: true)
     }
     
     func showSignUp() {

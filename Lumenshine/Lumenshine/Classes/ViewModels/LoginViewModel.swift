@@ -11,6 +11,7 @@ import OneTimePassword
 
 protocol LoginViewModelType: Transitionable {
     func loginCompleted()
+    func showLoginForm()
     
     func loginStep1(email: String, tfaCode: String?, response: @escaping Login1ResponseClosure)
     func enableTfaCode(email: String) -> Bool
@@ -27,7 +28,7 @@ protocol LoginViewModelType: Transitionable {
 }
 
 class LoginViewModel : LoginViewModelType {
-    fileprivate let touchMe = BiometricIDAuth()
+    fileprivate let touchMe: BiometricIDAuth
     fileprivate let service: AuthService
     fileprivate var email: String?
     fileprivate var user: User?
@@ -36,12 +37,20 @@ class LoginViewModel : LoginViewModelType {
     
     init(service: AuthService) {
         self.service = service
+        touchMe = BiometricIDAuth()
     }
     
     func loginCompleted() {
-        guard let user = self.user else { return }
-        self.navigationCoordinator?.performTransition(transition: .showDashboard(user))
+        if let user = self.user {
+            navigationCoordinator?.performTransition(transition: .showDashboard(user))
+        } else {
+            navigationCoordinator?.performTransition(transition: .openDashboard)
+        }
         touchMe.invalidate()
+    }
+    
+    func showLoginForm() {
+        navigationCoordinator?.performTransition(transition: .logout)
     }
     
     func signUpClick() {

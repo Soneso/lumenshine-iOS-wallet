@@ -61,9 +61,7 @@ fileprivate extension MenuCoordinator {
     
     func showRelogin() {
         let coordinator = ReLoginCoordinator(service: service.auth)
-        let loginView = drawer.navigationController?.viewControllers.first
-        drawer.navigationController?.setNavigationBarHidden(false, animated: false)
-        drawer.navigationController?.popToRootViewController(animated: false)
-        loginView?.present(coordinator.baseController, animated: true, completion: nil)
+        let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
+        drawer.present(navigationController, animated: true, completion: nil)
     }
 }

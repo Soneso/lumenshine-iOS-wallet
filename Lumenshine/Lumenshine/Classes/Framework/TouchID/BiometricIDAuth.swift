@@ -64,7 +64,7 @@ class BiometricIDAuth {
                 case LAError.authenticationFailed?:
                     message = "There was a problem verifying your identity."
                 case LAError.userCancel?:
-                    message = "You pressed cancel."
+                    message = ""
                 case LAError.userFallback?:
                     message = "You pressed password."
                 case LAError.biometryNotAvailable?:

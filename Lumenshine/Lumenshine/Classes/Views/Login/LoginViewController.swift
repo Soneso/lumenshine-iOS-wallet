@@ -22,7 +22,6 @@ class LoginViewController: UIViewController {
     fileprivate let usernameTextField = TextField()
     fileprivate let passwordTextField = TextField()
     fileprivate let tfaCodeTextField = TextField()
-    fileprivate let touchIDButton = Button()
     fileprivate let signUpButton = RaisedButton()
     fileprivate let forgotPasswordButton = RaisedButton()
     fileprivate let forgot2faButton = RaisedButton()
@@ -60,14 +59,6 @@ class LoginViewController: UIViewController {
         if let storedUsername = UserDefaults.standard.value(forKey: "username") as? String {
             usernameTextField.text = storedUsername
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-//        let touchBool = viewModel.canEvaluatePolicy()
-//        if touchBool {
-//            self.touchIDLoginAction()
-//        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -139,24 +130,6 @@ extension LoginViewController {
     func forgot2faAction(sender: UIButton) {
         viewModel.lost2faClick()
     }
-    
-    @objc
-    func touchIDLoginAction() {
-        viewModel.authenticateUser() { [weak self] error in
-            if let message = error {
-                // if the completion is not nil show an alert
-                let alertView = UIAlertController(title: "Error",
-                                                  message: message,
-                                                  preferredStyle: .alert)
-                let okAction = UIAlertAction(title: R.string.localizable.ok(), style: .default)
-                alertView.addAction(okAction)
-                self?.present(alertView, animated: true)
-                
-            } else {
-                self?.viewModel.loginCompleted()
-            }
-        }
-    }
 }
 
 extension LoginViewController: UITextFieldDelegate {
@@ -177,7 +150,6 @@ fileprivate extension LoginViewController {
         prepareSignupButton()
         prepareForgotPasswordButton()
         prepareForgot2faButton()
-        prepareTouchButton()
     }
     
     func prepareContentView() {
@@ -296,18 +268,6 @@ fileprivate extension LoginViewController {
             make.height.equalTo(50)
             make.bottom.equalTo(-20)
         }
-    }
-    
-    func prepareTouchButton() {
-        touchIDButton.isHidden = true//!viewModel.canEvaluatePolicy()
-        
-        switch viewModel.biometricType() {
-        case .faceID:
-            touchIDButton.setImage(UIImage(named: "FaceIcon"),  for: .normal)
-        default:
-            touchIDButton.setImage(UIImage(named: "Touch-icon-lg"),  for: .normal)
-        }
-        touchIDButton.addTarget(self, action: #selector(touchIDLoginAction), for: .touchUpInside)
     }
 }
 

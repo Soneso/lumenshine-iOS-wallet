@@ -21,6 +21,7 @@ protocol CoordinatorType: class {
 
 public enum Transition {
     case showDashboard(User)
+    case openDashboard
     case showSignUp
     case showForgotPassword
     case showLost2fa
@@ -34,5 +35,6 @@ public enum Transition {
     case showMnemonic(User)
     case showEmailConfirmation(User)
     case showRelogin
+    case logout
 }
 
