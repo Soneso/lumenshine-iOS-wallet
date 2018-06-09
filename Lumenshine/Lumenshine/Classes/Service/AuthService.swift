@@ -48,6 +48,60 @@ public typealias TfaSecretResponseClosure = (_ response:TfaSecretResponseEnum) -
 
 public class AuthService: BaseService {
     
+    private static var timer: Timer?
+    
+    override init(baseURL: String) {
+        super.init(baseURL: baseURL)
+        
+        if AuthService.timer == nil {
+            // 5 minutes repetition
+            AuthService.timer = Timer.scheduledTimer(withTimeInterval: 5*60.0, repeats: true) { [weak self] timer in
+                DispatchQueue.global(qos: .userInitiated).async {
+                    self?.refreshToken() { response in
+                        switch response {
+                        case .success:
+                            print("Token refreshed")
+                        case .failure(let error):
+                            print("Token refresh failed: \(error.localizedDescription)")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private func refreshToken(response: @escaping EmptyResponseClosure) {
+        guard let tokenType = BaseService.jwtTokenType else { return }
+        var path: String = ""
+        switch tokenType {
+        case .full:
+            path = "/portal/user/dashboard/refresh"
+        case .partial:
+            path = "/portal/user/auth/refresh"
+        case .lost:
+            path = "/portal/user/auth2/refresh"
+        }
+        
+        GETRequestWithPath(path: path) { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                do {
+                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String:AnyObject],
+                        let token = json["token"] as? String {
+                        BaseService.jwtToken = token
+                        response(.success)
+                    } else {
+                        response(.failure(error: .unexpectedDataType))
+                    }
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+                }
+            case .failure(let error):
+                response(.failure(error: error))
+            }
+        }
+    }
+    
     open func tfaSecret(publicKeyIndex188: String, response: @escaping TfaSecretResponseClosure) {
         do {
             var params = Dictionary<String,String>()
@@ -55,9 +109,9 @@ public class AuthService: BaseService {
             
             let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
             
-            POSTRequestWithPath(path: "/portal/dashboard/tfa_secret", body: bodyData, jwtToken: BaseService.jwtTokenFull) { (result) -> (Void) in
+            POSTRequestWithPath(path: "/portal/dashboard/tfa_secret", body: bodyData) { (result) -> (Void) in
                 switch result {
-                case .success(let data, _):
+                case .success(let data):
                     do {
                         let tfaResponse = try self.jsonDecoder.decode(RegistrationResponse.self, from: data)
                         response(.success(response: tfaResponse))
@@ -81,10 +135,10 @@ public class AuthService: BaseService {
             
             let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
         
-            POSTRequestWithPath(path: "/portal/user/auth/login_step2", body: bodyData, jwtToken: BaseService.jwtTokenPartial) { (result) -> (Void) in
+            POSTRequestWithPath(path: "/portal/user/auth/login_step2", body: bodyData) { (result) -> (Void) in
                 switch result {
-                case .success(let data, let token):
-                    BaseService.jwtTokenFull = token
+                case .success(let data):
+                    BaseService.jwtTokenType = .full
                     do {
                         let loginResponse = try self.jsonDecoder.decode(LoginStep2Response.self, from: data)
                         response(.success(response: loginResponse))
@@ -113,8 +167,8 @@ public class AuthService: BaseService {
         
             POSTRequestWithPath(path: "/portal/user/login_step1", body: bodyData) { (result) -> (Void) in
                 switch result {
-                case .success(let data, let token):
-                    BaseService.jwtTokenPartial = token
+                case .success(let data):
+                    BaseService.jwtTokenType = .partial
                     do {
                         let loginResponse = try self.jsonDecoder.decode(LoginStep1Response.self, from: data)
                         response(.success(response: loginResponse))
@@ -131,9 +185,9 @@ public class AuthService: BaseService {
     }
     
     open func confirmMnemonic(response: @escaping TFAResponseClosure) {
-        POSTRequestWithPath(path: "/portal/user/dashboard/confirm_mnemonic", jwtToken: BaseService.jwtTokenFull) { (result) -> (Void) in
+        POSTRequestWithPath(path: "/portal/user/dashboard/confirm_mnemonic") { (result) -> (Void) in
             switch result {
-            case .success(let data, _):
+            case .success(let data):
                 do {
                     let tfaResponse = try self.jsonDecoder.decode(TFAResponse.self, from: data)
                     response(.success(response: tfaResponse))
@@ -169,9 +223,9 @@ public class AuthService: BaseService {
     
     open func registrationStatus(response: @escaping TFAResponseClosure) {
         
-        GETRequestWithPath(path: "/portal/user/dashboard/get_user_registration_status", jwtToken: BaseService.jwtTokenFull) { (result) -> (Void) in
+        GETRequestWithPath(path: "/portal/user/dashboard/get_user_registration_status") { (result) -> (Void) in
             switch result {
-            case .success(let data, _):
+            case .success(let data):
                 do {
                     let tfaResponse = try self.jsonDecoder.decode(TFAResponse.self, from: data)
                     response(.success(response: tfaResponse))
@@ -192,10 +246,10 @@ public class AuthService: BaseService {
             
             let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
         
-            POSTRequestWithPath(path: "/portal/user/auth/confirm_tfa_registration", body: bodyData, jwtToken: BaseService.jwtTokenPartial) { (result) -> (Void) in
+            POSTRequestWithPath(path: "/portal/user/auth/confirm_tfa_registration", body: bodyData) { (result) -> (Void) in
                 switch result {
-                case .success(let data, let token):
-                    BaseService.jwtTokenFull = token
+                case .success(let data):
+                    BaseService.jwtTokenType = .full
                     do {
                         let tfaResponse = try self.jsonDecoder.decode(TFAResponse.self, from: data)
                         response(.success(response: tfaResponse))
@@ -239,8 +293,8 @@ public class AuthService: BaseService {
                 
                 self.POSTRequestWithPath(path: "/portal/user/register_user", body: bodyData) { (result) -> (Void) in
                     switch result {
-                    case .success(let data, let token):
-                        BaseService.jwtTokenPartial = token
+                    case .success(let data):
+                        BaseService.jwtTokenType = .partial
                         do {
                             let registrationResponse = try self.jsonDecoder.decode(RegistrationResponse.self, from: data)
                             response(.success(response: registrationResponse, userSecurity: userSecurity))

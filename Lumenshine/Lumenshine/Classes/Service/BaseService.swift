@@ -57,8 +57,14 @@ public enum HTTPMethod {
 
 /// An enum to diferentiate between succesful and failed responses
 public enum Result {
-    case success(data: Data, token: String?)
+    case success(data: Data)
     case failure(error: ServiceError)
+}
+
+enum JwtTokenType {
+    case partial
+    case full
+    case lost
 }
 
 /// A closure to be called when a HTTP response is received
@@ -69,8 +75,8 @@ public class BaseService: NSObject {
     internal let baseURL: String
     internal let jsonDecoder = JSONDecoder()
     
-    static var jwtTokenFull: String?
-    static var jwtTokenPartial: String?
+    static var jwtToken: String?
+    static var jwtTokenType: JwtTokenType?
     
     private override init() {
         baseURL = ""
@@ -81,20 +87,25 @@ public class BaseService: NSObject {
         jsonDecoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601)
     }
     
+    static func removeToken() {
+        jwtToken = nil
+        jwtTokenType = nil
+    }
+    
     /// Performs a get request to the spcified path.
     ///
     /// - parameter path:  A path relative to the baseURL. If URL parameters have to be sent they can be encoded in this parameter as you would do it with regular URLs.
     /// - parameter response:   The closure to be called upon response.
-    open func GETRequestWithPath(path: String, jwtToken: String? = nil, completion: @escaping ResponseClosure) {
-        requestFromUrl(url: baseURL + path, method:.get, jwtToken: jwtToken, completion:completion)
+    open func GETRequestWithPath(path: String, completion: @escaping ResponseClosure) {
+        requestFromUrl(url: baseURL + path, method:.get, completion:completion)
     }
     
     /// Performs a get request to the spcified path.
     ///
     /// - parameter path:  A URL for the request. If URL parameters have to be sent they can be encoded in this parameter as you would do it with regular URLs.
     /// - parameter response:   The closure to be called upon response.
-    open func GETRequestFromUrl(url: String, jwtToken: String? = nil, completion: @escaping ResponseClosure) {
-        requestFromUrl(url: url, method:.get, jwtToken: jwtToken, completion:completion)
+    open func GETRequestFromUrl(url: String, completion: @escaping ResponseClosure) {
+        requestFromUrl(url: url, method:.get, completion:completion)
     }
     
     /// Performs a post request to the spcified path.
@@ -102,11 +113,11 @@ public class BaseService: NSObject {
     /// - parameter path:  A path relative to the baseURL. If URL parameters have to be sent they can be encoded in this parameter as you would do it with regular URLs.
     /// - parameter body:  An optional parameter with the data that should be contained in the request body
     /// - parameter response:   The closure to be called upon response.
-    open func POSTRequestWithPath(path: String, body:Data? = nil, jwtToken: String? = nil, completion: @escaping ResponseClosure) {
-        requestFromUrl(url: baseURL + path, method:.post, body:body, jwtToken: jwtToken, completion:completion)
+    open func POSTRequestWithPath(path: String, body:Data? = nil, completion: @escaping ResponseClosure) {
+        requestFromUrl(url: baseURL + path, method:.post, body:body, completion:completion)
     }
     
-    open func requestFromUrl(url: String, method: HTTPMethod, body:Data? = nil, jwtToken: String? = nil, completion: @escaping ResponseClosure) {
+    open func requestFromUrl(url: String, method: HTTPMethod, body:Data? = nil, completion: @escaping ResponseClosure) {
         let url = URL(string: url)!
         var urlRequest = URLRequest(url: url)
         
@@ -120,15 +131,14 @@ public class BaseService: NSObject {
             urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
         }
         
-        if let jwt = jwtToken {
-            urlRequest.setValue(jwt, forHTTPHeaderField: "Authorization")
-        }
+        urlRequest.setValue(BaseService.jwtToken, forHTTPHeaderField: "Authorization")
         
         let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             
-            var token:String?
             if let httpResponse = response as? HTTPURLResponse {
-                token = httpResponse.allHeaderFields["Authorization"] as? String
+                if let token = httpResponse.allHeaderFields["Authorization"] as? String {
+                    BaseService.jwtToken = token
+                }
                 
                 switch httpResponse.statusCode {
                 case 200:
@@ -167,7 +177,7 @@ public class BaseService: NSObject {
             }
             
             if let data = data {
-                completion(.success(data: data, token: token))
+                completion(.success(data: data))
             } else {
                 completion(.failure(error:.invalidRequest))
             }

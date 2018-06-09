@@ -50,6 +50,7 @@ class LoginViewModel : LoginViewModelType {
     }
     
     func showLoginForm() {
+        BaseService.removeToken()
         navigationCoordinator?.performTransition(transition: .logout)
     }
     

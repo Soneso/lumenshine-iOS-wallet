@@ -13,7 +13,7 @@ class HomeService: BaseService {
     func getCards(response: @escaping ([Card]) -> Void) {
         GETRequestWithPath(path: "/cards") { result in
             switch result {
-            case .success(let data, _):
+            case .success(let data):
                 do {
                     let dict = try self.jsonDecoder.decode(Dictionary<String, Array<Card>>.self, from: data)
                     let cards = dict["cards"] ?? []
