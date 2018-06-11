@@ -35,8 +35,9 @@ class LoginViewModel : LoginViewModelType {
     
     var navigationCoordinator: CoordinatorType?
     
-    init(service: AuthService) {
+    init(service: AuthService, user: User? = nil) {
         self.service = service
+        self.user = user
         touchMe = BiometricIDAuth()
     }
     
