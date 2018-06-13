@@ -9,10 +9,12 @@
 import Foundation
 
 protocol RegistrationViewModelType: Transitionable {
-    var items: [[String]] { get }
-    var values: [[String?]] { get }
+    var itemDistribution: [Int] { get }
     var sectionTitles: [String] { get }
     func textIsSecure(at indexPath: IndexPath) -> Bool
+    func placeholder(at indexPath: IndexPath) -> String?
+    func textValue(at indexPath: IndexPath) -> String?
+    func inputViewOptions(at indexPath: IndexPath) -> [String]?
     
     func textChanged(_ text: String, itemForRowAt indexPath: IndexPath)
     func submit(response: @escaping GenerateAccountResponseClosure)
@@ -23,34 +25,76 @@ protocol RegistrationViewModelType: Transitionable {
 class RegistrationViewModel : RegistrationViewModelType {
     
     fileprivate let service: AuthService
+    fileprivate let entries: [[RegistrationEntry]]
+    fileprivate var values: [[String?]]
+    fileprivate var countries: [CountryResponse]?
+    fileprivate var salutations: [String]?
     
     var navigationCoordinator: CoordinatorType?
     
     init(service: AuthService) {
         self.service = service
-        values = items.map { value in
+        self.entries = [[.email, .password],
+                        [.forename, .lastname, .company, .salutation, .title, .street, .streetNr,
+                         .zipCode, .city, .state, .country, .nationality, .phone, .birthday, .birthplace]]
+        
+        values = entries.map { value in
             return Array<String?>(repeating: nil, count: value.count)
+        }
+        
+        self.service.countryList { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.countries = response.countries
+            case .failure(let error):
+                print("Get country list failure: \(error.localizedDescription)")
+            }
+        }
+        
+        self.service.salutationList { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.salutations = response.salutations
+            case .failure(let error):
+                print("Get salutations failure: \(error.localizedDescription)")
+            }
         }
     }
     
-    var values: [[String?]]
-    var items: [[String]] = [
-        ["Email", "Password"],
-        ["Forename", "Last name", "Company name", "Salutation", "Title",
-         "Street address", "Street number", "Zip code", "City", "State",
-         "Country", "Nationality", "Mobile phone", "Birth day", "Birth place"]
-    ]
+    var itemDistribution: [Int] {
+        return entries.map {
+            $0.count
+        }
+    }
     
     var sectionTitles: [String] = [
         R.string.localizable.account_data_title(),
         R.string.localizable.user_data_title()
     ]
     
+    func placeholder(at indexPath: IndexPath) -> String? {
+        return entry(at: indexPath).placeholder
+    }
+    
     func textIsSecure(at indexPath: IndexPath) -> Bool {
-        if indexPath.section == 0, indexPath.row == 1 {
-            return true
+        return entry(at: indexPath).secureText
+    }
+    
+    func textValue(at indexPath: IndexPath) -> String? {
+        return values[indexPath.section][indexPath.row]
+    }
+    
+    func inputViewOptions(at indexPath: IndexPath) -> [String]? {
+        switch entry(at: indexPath) {
+        case .country, .nationality:
+            return countries?.map {
+                $0.name
+            }
+        case .salutation:
+            return salutations
+        default: break
         }
-        return false
+        return nil
     }
     
     func textChanged(_ text: String, itemForRowAt indexPath: IndexPath) {
@@ -92,6 +136,12 @@ class RegistrationViewModel : RegistrationViewModelType {
                 }
             }
         }
+    }
+}
+
+fileprivate extension RegistrationViewModel {
+    func entry(at indexPath: IndexPath) -> RegistrationEntry {
+        return entries[indexPath.section][indexPath.row]
     }
 }
 

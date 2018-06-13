@@ -54,19 +54,20 @@ class RegistrationFormTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.items.count
+        return viewModel.itemDistribution.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.items[section].count
+        return viewModel.itemDistribution[section]
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: RegistrationFormTableViewController.CellIdentifier, for: indexPath) as! RegistrationTableViewCell
         
-        cell.setPlaceholder(viewModel.items[indexPath.section][indexPath.row])
-        cell.setText(viewModel.values[indexPath.section][indexPath.row])
+        cell.setPlaceholder(viewModel.placeholder(at: indexPath))
+        cell.setText(viewModel.textValue(at: indexPath))
         cell.setSecureText(viewModel.textIsSecure(at: indexPath))
+        cell.setInputViewOptions(viewModel.inputViewOptions(at: indexPath))
         cell.textEditingCallback = { changedText in
             self.viewModel.textChanged(changedText, itemForRowAt: indexPath)
         }

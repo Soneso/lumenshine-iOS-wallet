@@ -69,6 +69,11 @@
 		4390D57C205FA4EF00383BB2 /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4390D57B205FA4EF00383BB2 /* HomeService.swift */; };
 		4390D57E205FA5FC00383BB2 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4390D57D205FA5FC00383BB2 /* BaseService.swift */; };
 		4390D582205FBD6E00383BB2 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4390D581205FBD6E00383BB2 /* Services.swift */; };
+		4391A52B20D139D60015A6DA /* CountryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4391A52A20D139D60015A6DA /* CountryResponse.swift */; };
+		4391A52E20D141300015A6DA /* EnumPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4391A52D20D141300015A6DA /* EnumPicker.swift */; };
+		4391A53020D159190015A6DA /* RegistrationEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4391A52F20D159190015A6DA /* RegistrationEntry.swift */; };
+		4391A53220D170420015A6DA /* CountryListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4391A53120D170420015A6DA /* CountryListResponse.swift */; };
+		4391A53420D175D40015A6DA /* SalutationsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4391A53320D175D40015A6DA /* SalutationsResponse.swift */; };
 		43920D9A2057EECA0040003C /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43920D992057EECA0040003C /* CardView.swift */; };
 		4394911C20BEB845008D4FA2 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4394911B20BEB845008D4FA2 /* SettingsViewModel.swift */; };
 		4394911E20BEBDFA008D4FA2 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4394911D20BEBDFA008D4FA2 /* SettingsCoordinator.swift */; };
@@ -211,6 +216,11 @@
 		4390D57B205FA4EF00383BB2 /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
 		4390D57D205FA5FC00383BB2 /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		4390D581205FBD6E00383BB2 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
+		4391A52A20D139D60015A6DA /* CountryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryResponse.swift; sourceTree = "<group>"; };
+		4391A52D20D141300015A6DA /* EnumPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumPicker.swift; sourceTree = "<group>"; };
+		4391A52F20D159190015A6DA /* RegistrationEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationEntry.swift; sourceTree = "<group>"; };
+		4391A53120D170420015A6DA /* CountryListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListResponse.swift; sourceTree = "<group>"; };
+		4391A53320D175D40015A6DA /* SalutationsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalutationsResponse.swift; sourceTree = "<group>"; };
 		43920D992057EECA0040003C /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		4394911B20BEB845008D4FA2 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		4394911D20BEBDFA008D4FA2 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
@@ -385,6 +395,7 @@
 		4314B9EB204805D4006DBE63 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				4391A52C20D141130015A6DA /* ReusableComponents */,
 				43088DA620879874008AE1AB /* Utils */,
 				4319B1872063FA22007CE18D /* TouchID */,
 				4322BA2C205BD69F007FEB5E /* ServerMock */,
@@ -458,6 +469,7 @@
 				4322BA34205BDD58007FEB5E /* Card.swift */,
 				4319B1852063F1B0007CE18D /* User.swift */,
 				43088DAD2087AD2A008AE1AB /* UserSecurity.swift */,
+				4391A52F20D159190015A6DA /* RegistrationEntry.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -592,6 +604,14 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		4391A52C20D141130015A6DA /* ReusableComponents */ = {
+			isa = PBXGroup;
+			children = (
+				4391A52D20D141300015A6DA /* EnumPicker.swift */,
+			);
+			path = ReusableComponents;
+			sourceTree = "<group>";
+		};
 		43D7A776205A892E00238E29 /* Strings */ = {
 			isa = PBXGroup;
 			children = (
@@ -623,6 +643,9 @@
 				431628CF2097476500F23A20 /* ErrorResponse.swift */,
 				4359984A20A438EF00007F27 /* LoginStep1Response.swift */,
 				43A8633720A9F0E6007C46E2 /* LoginStep2Response.swift */,
+				4391A52A20D139D60015A6DA /* CountryResponse.swift */,
+				4391A53120D170420015A6DA /* CountryListResponse.swift */,
+				4391A53320D175D40015A6DA /* SalutationsResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -987,6 +1010,7 @@
 				7435EA7720BADF2C008CC667 /* UIViewController+Utils.swift in Sources */,
 				4359985120A5920200007F27 /* Array+Shuffle.swift in Sources */,
 				43ECA9CC208B530000CB571E /* RegistrationTableViewCell.swift in Sources */,
+				4391A53420D175D40015A6DA /* SalutationsResponse.swift in Sources */,
 				43D131E42056D439000483C4 /* CardTableViewCell.swift in Sources */,
 				43EFF204204939F700B1887C /* UIColor+Utils.swift in Sources */,
 				431E7A252095B178003A63B3 /* TFARegistrationViewController.swift in Sources */,
@@ -1028,9 +1052,11 @@
 				436FE5082052634300CFE788 /* WebCard.swift in Sources */,
 				436B366F20512114009F7C21 /* FlexibleHeightBar.swift in Sources */,
 				4319B1822063EF72007CE18D /* LoginCoordinator.swift in Sources */,
+				4391A53220D170420015A6DA /* CountryListResponse.swift in Sources */,
 				43088DB02087C4B8008AE1AB /* Dictionary+HTTPParams.swift in Sources */,
 				431F8AB620A074BA00B1E0F1 /* MnemonicCoordinator.swift in Sources */,
 				4390D57C205FA4EF00383BB2 /* HomeService.swift in Sources */,
+				4391A52E20D141300015A6DA /* EnumPicker.swift in Sources */,
 				43FBEE452062853A004E2BB1 /* ScanViewController.swift in Sources */,
 				4376F4A3204D9F9D00B179C3 /* HomeViewModel.swift in Sources */,
 				43D7A775205A84B300238E29 /* R.generated.swift in Sources */,
@@ -1044,6 +1070,7 @@
 				4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */,
 				7435EA6D20BACE71008CC667 /* ForgotPasswordCoordinator.swift in Sources */,
 				4322BA35205BDD58007FEB5E /* Card.swift in Sources */,
+				4391A52B20D139D60015A6DA /* CountryResponse.swift in Sources */,
 				4319B1802063EEA9007CE18D /* LoginViewModel.swift in Sources */,
 				43920D9A2057EECA0040003C /* CardView.swift in Sources */,
 				7435EA7220BAD452008CC667 /* ForgotPasswordViewController.swift in Sources */,
@@ -1062,6 +1089,7 @@
 				7435EA7520BAD95F008CC667 /* String+Utils.swift in Sources */,
 				431E7A272095B2C0003A63B3 /* TFARegistrationViewModel.swift in Sources */,
 				43FA7D3520B45CA3006BD513 /* EmailConfirmationViewController.swift in Sources */,
+				4391A53020D159190015A6DA /* RegistrationEntry.swift in Sources */,
 				4304491C206BF47400349B51 /* UIView+Shake.swift in Sources */,
 				4390D582205FBD6E00383BB2 /* Services.swift in Sources */,
 				744DE2DD20BD7FAE003BC216 /* Lost2faViewController.swift in Sources */,

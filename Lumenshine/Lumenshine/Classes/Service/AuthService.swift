@@ -39,12 +39,24 @@ public enum TfaSecretResponseEnum {
     case failure(error: ServiceError)
 }
 
+public enum CountryListResponseEnum {
+    case success(response: CountryListResponse)
+    case failure(error: ServiceError)
+}
+
+public enum SalutationsResponseEnum {
+    case success(response: SalutationsResponse)
+    case failure(error: ServiceError)
+}
+
 public typealias GenerateAccountResponseClosure = (_ response:GenerateAccountResponseEnum) -> (Void)
 public typealias TFAResponseClosure = (_ response:TFAResponseEnum) -> (Void)
 public typealias EmptyResponseClosure = (_ response:EmptyResponseEnum) -> (Void)
 public typealias Login1ResponseClosure = (_ response:Login1ResponseEnum) -> (Void)
 public typealias Login2ResponseClosure = (_ response:Login2ResponseEnum) -> (Void)
 public typealias TfaSecretResponseClosure = (_ response:TfaSecretResponseEnum) -> (Void)
+public typealias CountryListResponseClosure = (_ response:CountryListResponseEnum) -> (Void)
+public typealias SalutationsResponseClosure = (_ response:SalutationsResponseEnum) -> (Void)
 
 public class AuthService: BaseService {
     
@@ -93,6 +105,40 @@ public class AuthService: BaseService {
                     } else {
                         response(.failure(error: .unexpectedDataType))
                     }
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+                }
+            case .failure(let error):
+                response(.failure(error: error))
+            }
+        }
+    }
+    
+    open func countryList(response: @escaping CountryListResponseClosure) {
+        
+        GETRequestWithPath(path: "/portal/user/country_list") { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                do {
+                    let countryListResponse = try self.jsonDecoder.decode(CountryListResponse.self, from: data)
+                    response(.success(response: countryListResponse))
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+                }
+            case .failure(let error):
+                response(.failure(error: error))
+            }
+        }
+    }
+    
+    open func salutationList(response: @escaping SalutationsResponseClosure) {
+        
+        GETRequestWithPath(path: "/portal/user/salutation_list") { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                do {
+                    let salutationsResponse = try self.jsonDecoder.decode(SalutationsResponse.self, from: data)
+                    response(.success(response: salutationsResponse))
                 } catch {
                     response(.failure(error: .parsingFailed(message: error.localizedDescription)))
                 }

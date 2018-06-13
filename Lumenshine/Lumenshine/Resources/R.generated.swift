@@ -162,7 +162,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 68 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 83 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -212,14 +212,34 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let back = Rswift.StringResource(key: "back", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Birth day
+      /// 
+      /// Locales: en
+      static let birthday = Rswift.StringResource(key: "birthday", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Birth place
+      /// 
+      /// Locales: en
+      static let birthplace = Rswift.StringResource(key: "birthplace", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Cancel
       /// 
       /// Locales: en
       static let cancel = Rswift.StringResource(key: "cancel", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: City
+      /// 
+      /// Locales: en
+      static let city = Rswift.StringResource(key: "city", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Close
       /// 
       /// Locales: en
       static let close = Rswift.StringResource(key: "close", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Company name
+      /// 
+      /// Locales: en
+      static let company_name = Rswift.StringResource(key: "company_name", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Country
+      /// 
+      /// Locales: en
+      static let country = Rswift.StringResource(key: "country", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Delete
       /// 
       /// Locales: en
@@ -248,6 +268,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let error = Rswift.StringResource(key: "error", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Forename
+      /// 
+      /// Locales: en
+      static let forename = Rswift.StringResource(key: "forename", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Forgot password
       /// 
       /// Locales: en
@@ -264,6 +288,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let invalid_request = Rswift.StringResource(key: "invalid_request", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Lastname
+      /// 
+      /// Locales: en
+      static let lastname = Rswift.StringResource(key: "lastname", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Let's go
       /// 
       /// Locales: en
@@ -284,10 +312,18 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let lbl_message = Rswift.StringResource(key: "lbl_message", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Mobile phone
+      /// 
+      /// Locales: en
+      static let mobile_phone = Rswift.StringResource(key: "mobile_phone", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: More
       /// 
       /// Locales: en
       static let more = Rswift.StringResource(key: "more", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Nationality
+      /// 
+      /// Locales: en
+      static let nationality = Rswift.StringResource(key: "nationality", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Next
       /// 
       /// Locales: en
@@ -336,6 +372,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let reset_password = Rswift.StringResource(key: "reset_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Salutation
+      /// 
+      /// Locales: en
+      static let salutation = Rswift.StringResource(key: "salutation", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Save
       /// 
       /// Locales: en
@@ -368,10 +408,26 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let sign_in_error_msg = Rswift.StringResource(key: "sign_in_error_msg", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: State
+      /// 
+      /// Locales: en
+      static let state = Rswift.StringResource(key: "state", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Street address
+      /// 
+      /// Locales: en
+      static let street_address = Rswift.StringResource(key: "street_address", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Street number
+      /// 
+      /// Locales: en
+      static let street_number = Rswift.StringResource(key: "street_number", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Submit
       /// 
       /// Locales: en
       static let submit = Rswift.StringResource(key: "submit", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Title
+      /// 
+      /// Locales: en
+      static let title = Rswift.StringResource(key: "title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Touch ID
       /// 
       /// Locales: en
@@ -408,6 +464,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let bad_credentials = Rswift.StringResource(key: "bad_credentials", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Zip code
+      /// 
+      /// Locales: en
+      static let zip_code = Rswift.StringResource(key: "zip_code", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: one day ago
       /// 
       /// Locales: en
@@ -521,6 +581,20 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("back", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Birth day
+      /// 
+      /// Locales: en
+      static func birthday(_: Void = ()) -> String {
+        return NSLocalizedString("birthday", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Birth place
+      /// 
+      /// Locales: en
+      static func birthplace(_: Void = ()) -> String {
+        return NSLocalizedString("birthplace", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Cancel
       /// 
       /// Locales: en
@@ -528,11 +602,32 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("cancel", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: City
+      /// 
+      /// Locales: en
+      static func city(_: Void = ()) -> String {
+        return NSLocalizedString("city", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Close
       /// 
       /// Locales: en
       static func close(_: Void = ()) -> String {
         return NSLocalizedString("close", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Company name
+      /// 
+      /// Locales: en
+      static func company_name(_: Void = ()) -> String {
+        return NSLocalizedString("company_name", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Country
+      /// 
+      /// Locales: en
+      static func country(_: Void = ()) -> String {
+        return NSLocalizedString("country", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Delete
@@ -584,6 +679,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("error", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Forename
+      /// 
+      /// Locales: en
+      static func forename(_: Void = ()) -> String {
+        return NSLocalizedString("forename", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Forgot password
       /// 
       /// Locales: en
@@ -610,6 +712,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func invalid_request(_: Void = ()) -> String {
         return NSLocalizedString("invalid_request", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Lastname
+      /// 
+      /// Locales: en
+      static func lastname(_: Void = ()) -> String {
+        return NSLocalizedString("lastname", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Let's go
@@ -647,11 +756,25 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("lbl_message", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Mobile phone
+      /// 
+      /// Locales: en
+      static func mobile_phone(_: Void = ()) -> String {
+        return NSLocalizedString("mobile_phone", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: More
       /// 
       /// Locales: en
       static func more(_: Void = ()) -> String {
         return NSLocalizedString("more", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Nationality
+      /// 
+      /// Locales: en
+      static func nationality(_: Void = ()) -> String {
+        return NSLocalizedString("nationality", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Next
@@ -738,6 +861,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("reset_password", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Salutation
+      /// 
+      /// Locales: en
+      static func salutation(_: Void = ()) -> String {
+        return NSLocalizedString("salutation", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Save
       /// 
       /// Locales: en
@@ -794,11 +924,39 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("sign_in_error_msg", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: State
+      /// 
+      /// Locales: en
+      static func state(_: Void = ()) -> String {
+        return NSLocalizedString("state", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Street address
+      /// 
+      /// Locales: en
+      static func street_address(_: Void = ()) -> String {
+        return NSLocalizedString("street_address", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Street number
+      /// 
+      /// Locales: en
+      static func street_number(_: Void = ()) -> String {
+        return NSLocalizedString("street_number", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Submit
       /// 
       /// Locales: en
       static func submit(_: Void = ()) -> String {
         return NSLocalizedString("submit", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Title
+      /// 
+      /// Locales: en
+      static func title(_: Void = ()) -> String {
+        return NSLocalizedString("title", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Touch ID
@@ -862,6 +1020,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func bad_credentials(_: Void = ()) -> String {
         return NSLocalizedString("bad_credentials", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Zip code
+      /// 
+      /// Locales: en
+      static func zip_code(_: Void = ()) -> String {
+        return NSLocalizedString("zip_code", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: one day ago

@@ -13,6 +13,7 @@ protocol RegistrationTableCellProtocol {
     func setPlaceholder(_ placeholder: String?)
     func setText(_ text: String?)
     func setSecureText(_ isSecure: Bool)
+    func setInputViewOptions(_ options: [String]?, selectedIndex: Int?)
 }
 
 typealias TextChangedClosure = (_ text:String) -> (Void)
@@ -66,6 +67,19 @@ class RegistrationTableViewCell: UITableViewCell {
 }
 
 extension RegistrationTableViewCell: RegistrationTableCellProtocol {
+    func setInputViewOptions(_ options: [String]?, selectedIndex: Int? = nil) {
+        if let opt = options {
+            let enumPicker = EnumPicker()
+            enumPicker.setValues(opt, currentSelection: selectedIndex) { (newIndex) in
+                self.textField.text = opt[newIndex]
+                self.editingDidChange(self.textField)
+            }
+            textField.inputView = enumPicker
+        } else {
+            textField.inputView = nil
+        }
+    }
+    
     func setPlaceholder(_ placeholder: String?) {
         textField.placeholder = placeholder
     }

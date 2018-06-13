@@ -89,6 +89,51 @@
 "password" = "Password";
 
 /*  */
+"forename" = "Forename";
+
+/*  */
+"lastname" = "Lastname";
+
+/*  */
+"company_name" = "Company name";
+
+/*  */
+"salutation" = "Salutation";
+
+/*  */
+"title" = "Title";
+
+/*  */
+"street_address" = "Street address";
+
+/*  */
+"street_number" = "Street number";
+
+/*  */
+"zip_code" = "Zip code";
+
+/*  */
+"city" = "City";
+
+/*  */
+"state" = "State";
+
+/*  */
+"country" = "Country";
+
+/*  */
+"nationality" = "Nationality";
+
+/*  */
+"mobile_phone" = "Mobile phone";
+
+/*  */
+"birthday" = "Birth day";
+
+/*  */
+"birthplace" = "Birth place";
+
+/*  */
 "touch_id" = "Touch ID";
 
 /*  */
