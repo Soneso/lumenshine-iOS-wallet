@@ -93,39 +93,16 @@ class RegistrationViewModel : RegistrationViewModelType {
         selectedValues[entry(at: indexPath)] = text
     }
     
-    func submit(response: @escaping GenerateAccountResponseClosure) {
-        guard let email = selectedValues[.email] else {
-            response(.failure(error: .unexpectedDataType))
-            return
-        }
-        guard let password = selectedValues.removeValue(forKey: .password) else {
-            response(.failure(error: .unexpectedDataType))
+    func submit(response: @escaping GenerateAccountResponseClosure) {        
+        let (error, validatedData) = validateUserData()
+        if let err = error {
+            response(.failure(error: .validationFailed(error: err)))
             return
         }
         
-        if let error = validateUserData() {
-            response(.failure(error: .validationFailed(error: error)))
-            return
-        }
+        let password = selectedValues.removeValue(forKey: .password)
         
-        let tupleArray = selectedValues.map { ($0.rawValue, $1) }
-        var userData = Dictionary(uniqueKeysWithValues: tupleArray)
-        
-        if let countryName = userData[RegistrationEntry.country.rawValue] {
-            let country = countries?.filter {
-                $0.name == countryName
-            }
-            userData[RegistrationEntry.country.rawValue] = country?.first?.code
-        }
-        
-        if let nationalityName = userData[RegistrationEntry.nationality.rawValue] {
-            let nationality = countries?.filter {
-                $0.name == nationalityName
-            }
-            userData[RegistrationEntry.nationality.rawValue] = nationality?.first?.code
-        }
-        
-        service.generateAccount(email: email, password: password, userData: userData) { result in
+        service.generateAccount(email: selectedValues[.email]!, password: password!, userData: validatedData!) { result in
             response(result)
         }
     }
@@ -159,11 +136,53 @@ fileprivate extension RegistrationViewModel {
         return entries[indexPath.section][indexPath.row]
     }
     
-    func validateUserData() -> ErrorResponse? {
-        if let email = selectedValues[.email], !email.isEmail() {
-            return ErrorResponse()
+    func validateUserData() -> (ErrorResponse?, Dictionary<String,String>?) {
+        var validatedData = Dictionary<RegistrationEntry,String>()
+        validatedData.merge(selectedValues, uniquingKeysWith: {(_, last) in last})
+        
+        guard let email = validatedData[.email], email.isEmail() else {
+            let error = ErrorResponse()
+            error.errorMessage = R.string.localizable.invalid_email()
+            return (error, nil)
         }
-        return nil
+        
+        guard let password = validatedData[.password], password.isValidPassword() else {
+            let error = ErrorResponse()
+            error.errorMessage = R.string.localizable.invalid_password()
+            return (error, nil)
+        }
+        
+        if let phone = validatedData[.phone] {
+            let charSet = CharacterSet(charactersIn: "()-").union(.whitespaces)
+            let components = phone.components(separatedBy: charSet)
+            let phoneNr = components.joined(separator: "")
+            if !phoneNr.isMobilePhone() {
+                let error = ErrorResponse()
+                error.errorMessage = R.string.localizable.invalid_phone()
+                return (error, nil)
+            }
+            validatedData[.phone] = phoneNr
+        }
+        
+        if let countryName = validatedData[.country] {
+            let country = countries?.filter {
+                $0.name == countryName
+            }
+            validatedData[.country] = country?.first?.code
+        }
+        
+        if let nationalityName = validatedData[.nationality] {
+            let nationality = countries?.filter {
+                $0.name == nationalityName
+            }
+            validatedData[.nationality] = nationality?.first?.code
+        }
+        
+        validatedData.removeValue(forKey: .password)
+        let tupleArray = validatedData.map { ($0.rawValue, $1) }
+        let userData = Dictionary(uniqueKeysWithValues: tupleArray)
+        
+        return (nil, userData)
     }
 }
 

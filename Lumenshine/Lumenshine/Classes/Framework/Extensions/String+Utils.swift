@@ -21,4 +21,12 @@ extension String  {
         
         return NSPredicate(format: "SELF MATCHES[c] %@", sRegex).evaluate(with: self)
     }
+    
+    func isValidPassword() -> Bool {
+        let sRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{9,}"
+        // with special character
+        //let regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&]{8,}"
+        
+        return NSPredicate(format: "SELF MATCHES %@", sRegex).evaluate(with: self)
+    }
 }

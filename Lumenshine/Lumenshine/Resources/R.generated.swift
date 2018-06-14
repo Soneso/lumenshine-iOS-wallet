@@ -162,7 +162,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 83 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 86 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -284,6 +284,18 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let lbl_mnemonic_button_title = Rswift.StringResource(key: "lbl_mnemonic_button_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Invalid email.
+      /// 
+      /// Locales: en
+      static let invalid_email = Rswift.StringResource(key: "invalid_email", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Invalid mobile phone number.
+      /// 
+      /// Locales: en
+      static let invalid_phone = Rswift.StringResource(key: "invalid_phone", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Invalid password.
+      /// 
+      /// Locales: en
+      static let invalid_password = Rswift.StringResource(key: "invalid_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Invalid request
       /// 
       /// Locales: en
@@ -705,6 +717,27 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func lbl_mnemonic_button_title(_: Void = ()) -> String {
         return NSLocalizedString("lbl_mnemonic_button_title", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Invalid email.
+      /// 
+      /// Locales: en
+      static func invalid_email(_: Void = ()) -> String {
+        return NSLocalizedString("invalid_email", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Invalid mobile phone number.
+      /// 
+      /// Locales: en
+      static func invalid_phone(_: Void = ()) -> String {
+        return NSLocalizedString("invalid_phone", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Invalid password.
+      /// 
+      /// Locales: en
+      static func invalid_password(_: Void = ()) -> String {
+        return NSLocalizedString("invalid_password", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Invalid request

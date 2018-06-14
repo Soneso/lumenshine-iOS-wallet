@@ -254,4 +254,13 @@
 "invalid_request" = "Invalid request";
 
 /*  */
+"invalid_email" = "Invalid email.";
+
+/*  */
+"invalid_password" = "Invalid password.";
+
+/*  */
+"invalid_phone" = "Invalid mobile phone number.";
+
+/*  */
 "bad_credentials" = "Wrong account or password";

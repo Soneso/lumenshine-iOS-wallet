@@ -27,7 +27,7 @@ class ForgotPasswordViewModel: ForgotPasswordViewModelType {
             service.resetPassword(email: email, response: response)
         } else {
             let error = ErrorResponse()
-            error.errorMessage = "Invalid email."
+            error.errorMessage = R.string.localizable.invalid_email()
             response(.failure(error: .validationFailed(error: error)))
         }
     }
