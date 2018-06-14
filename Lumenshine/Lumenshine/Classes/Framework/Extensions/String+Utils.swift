@@ -15,4 +15,10 @@ extension String  {
 
         return NSPredicate(format: "SELF MATCHES[c] %@", sRegex).evaluate(with: self)
     }
+    
+    func isMobilePhone() -> Bool {
+        let sRegex = "^[+]?[0-9]{11,16}$"
+        
+        return NSPredicate(format: "SELF MATCHES[c] %@", sRegex).evaluate(with: self)
+    }
 }

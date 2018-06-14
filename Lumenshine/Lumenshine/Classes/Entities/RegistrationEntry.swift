@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum RegistrationEntry: Int {
+enum RegistrationEntry: String {
     case email
     case password
     case forename
@@ -16,16 +16,16 @@ enum RegistrationEntry: Int {
     case company
     case salutation
     case title
-    case street
-    case streetNr
-    case zipCode
+    case street = "street_address"
+    case streetNr = "street_number"
+    case zipCode = "zip_code"
     case city
     case state
-    case country
+    case country = "country_code"
     case nationality
-    case phone
-    case birthday
-    case birthplace
+    case phone = "mobile_nr"
+    case birthday = "birth_day"
+    case birthplace = "birth_place"
     
     var placeholder: String? {
         switch self {
