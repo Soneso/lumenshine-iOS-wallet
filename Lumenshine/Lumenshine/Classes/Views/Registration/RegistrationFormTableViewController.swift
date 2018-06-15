@@ -67,7 +67,9 @@ class RegistrationFormTableViewController: UITableViewController {
         cell.setPlaceholder(viewModel.placeholder(at: indexPath))
         cell.setText(viewModel.textValue(at: indexPath))
         cell.setSecureText(viewModel.textIsSecure(at: indexPath))
-        cell.setInputViewOptions(viewModel.inputViewOptions(at: indexPath))
+        let (options, isDate, selectedIndex) = viewModel.inputViewOptions(at: indexPath)
+        cell.setInputViewOptions(options, isDate: isDate, selectedIndex: selectedIndex)
+        cell.setKeyboardType(viewModel.keyboardType(at: indexPath))
         cell.textEditingCallback = { changedText in
             self.viewModel.textChanged(changedText, itemForRowAt: indexPath)
         }

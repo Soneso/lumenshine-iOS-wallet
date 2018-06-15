@@ -162,7 +162,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 86 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 94 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -300,6 +300,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let invalid_request = Rswift.StringResource(key: "invalid_request", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Just now
+      /// 
+      /// Locales: en
+      static let lbl_now_suffix = Rswift.StringResource(key: "lbl_now_suffix", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Lastname
       /// 
       /// Locales: en
@@ -320,6 +324,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let lost_2fa = Rswift.StringResource(key: "lost_2fa", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: M
+      /// 
+      /// Locales: en
+      static let lbl_month_suffix = Rswift.StringResource(key: "lbl_month_suffix", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Message
       /// 
       /// Locales: en
@@ -440,6 +448,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let title = Rswift.StringResource(key: "title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Today
+      /// 
+      /// Locales: en
+      static let lbl_today = Rswift.StringResource(key: "lbl_today", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Touch ID
       /// 
       /// Locales: en
@@ -468,6 +480,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let username = Rswift.StringResource(key: "username", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: W
+      /// 
+      /// Locales: en
+      static let lbl_week_suffix = Rswift.StringResource(key: "lbl_week_suffix", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Withdraw money
       /// 
       /// Locales: en
@@ -480,6 +496,18 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let zip_code = Rswift.StringResource(key: "zip_code", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: d
+      /// 
+      /// Locales: en
+      static let lbl_day_suffix = Rswift.StringResource(key: "lbl_day_suffix", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: h
+      /// 
+      /// Locales: en
+      static let lbl_hour_suffix = Rswift.StringResource(key: "lbl_hour_suffix", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: m
+      /// 
+      /// Locales: en
+      static let lbl_minute_suffix = Rswift.StringResource(key: "lbl_minute_suffix", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: one day ago
       /// 
       /// Locales: en
@@ -508,6 +536,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let lbl_moment_year_count = Rswift.StringResource(key: "lbl_moment_year_count", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: y
+      /// 
+      /// Locales: en
+      static let lbl_year_suffix = Rswift.StringResource(key: "lbl_year_suffix", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       
       /// en translation: %1$d days ago
       /// 
@@ -747,6 +779,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("invalid_request", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Just now
+      /// 
+      /// Locales: en
+      static func lbl_now_suffix(_: Void = ()) -> String {
+        return NSLocalizedString("lbl_now_suffix", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Lastname
       /// 
       /// Locales: en
@@ -780,6 +819,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func lost_2fa(_: Void = ()) -> String {
         return NSLocalizedString("lost_2fa", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: M
+      /// 
+      /// Locales: en
+      static func lbl_month_suffix(_: Void = ()) -> String {
+        return NSLocalizedString("lbl_month_suffix", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Message
@@ -992,6 +1038,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("title", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Today
+      /// 
+      /// Locales: en
+      static func lbl_today(_: Void = ()) -> String {
+        return NSLocalizedString("lbl_today", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Touch ID
       /// 
       /// Locales: en
@@ -1041,6 +1094,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("username", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: W
+      /// 
+      /// Locales: en
+      static func lbl_week_suffix(_: Void = ()) -> String {
+        return NSLocalizedString("lbl_week_suffix", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Withdraw money
       /// 
       /// Locales: en
@@ -1060,6 +1120,27 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func zip_code(_: Void = ()) -> String {
         return NSLocalizedString("zip_code", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: d
+      /// 
+      /// Locales: en
+      static func lbl_day_suffix(_: Void = ()) -> String {
+        return NSLocalizedString("lbl_day_suffix", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: h
+      /// 
+      /// Locales: en
+      static func lbl_hour_suffix(_: Void = ()) -> String {
+        return NSLocalizedString("lbl_hour_suffix", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: m
+      /// 
+      /// Locales: en
+      static func lbl_minute_suffix(_: Void = ()) -> String {
+        return NSLocalizedString("lbl_minute_suffix", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: one day ago
@@ -1109,6 +1190,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func lbl_moment_year_count(_: Void = ()) -> String {
         return NSLocalizedString("lbl_moment_year_count", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: y
+      /// 
+      /// Locales: en
+      static func lbl_year_suffix(_: Void = ()) -> String {
+        return NSLocalizedString("lbl_year_suffix", bundle: R.hostingBundle, comment: "")
       }
       
       fileprivate init() {}

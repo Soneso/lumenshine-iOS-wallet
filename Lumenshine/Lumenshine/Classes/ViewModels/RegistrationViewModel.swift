@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit.UITextInputTraits
 
 protocol RegistrationViewModelType: Transitionable {
     var itemDistribution: [Int] { get }
@@ -14,7 +15,8 @@ protocol RegistrationViewModelType: Transitionable {
     func textIsSecure(at indexPath: IndexPath) -> Bool
     func placeholder(at indexPath: IndexPath) -> String?
     func textValue(at indexPath: IndexPath) -> String?
-    func inputViewOptions(at indexPath: IndexPath) -> [String]?
+    func inputViewOptions(at indexPath: IndexPath) -> ([String]?, Bool?, Int?)
+    func keyboardType(at indexPath: IndexPath) -> UIKeyboardType
     
     func textChanged(_ text: String, itemForRowAt indexPath: IndexPath)
     func submit(response: @escaping GenerateAccountResponseClosure)
@@ -78,15 +80,30 @@ class RegistrationViewModel : RegistrationViewModelType {
         return selectedValues[entry(at: indexPath)]
     }
     
-    func inputViewOptions(at indexPath: IndexPath) -> [String]? {
+    func inputViewOptions(at indexPath: IndexPath) -> ([String]?, Bool?, Int?) {
         switch entry(at: indexPath) {
         case .country, .nationality:
-            return countries?.map { $0.name }
+            return (countries?.map { $0.name }, nil, nil)
         case .salutation:
-            return salutations
+            return (salutations, nil, nil)
+        case .birthday:
+            return (nil, true, nil)
         default: break
         }
-        return nil
+        return (nil, nil, nil)
+    }
+    
+    func keyboardType(at indexPath: IndexPath) -> UIKeyboardType {
+        switch entry(at: indexPath) {
+        case .email:
+            return .emailAddress
+        case .zipCode:
+            return .decimalPad
+        case .phone:
+            return .phonePad
+        default:
+            return .default
+        }
     }
     
     func textChanged(_ text: String, itemForRowAt indexPath: IndexPath) {

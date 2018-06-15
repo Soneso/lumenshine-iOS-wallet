@@ -245,6 +245,30 @@
 "x-moment_seconds" = "%1$d seconds ago";
 
 /*  */
+"lbl_year_suffix" = "y";
+
+/*  */
+"lbl_month_suffix" = "M";
+
+/*  */
+"lbl_week_suffix" = "W";
+
+/*  */
+"lbl_day_suffix" = "d";
+
+/*  */
+"lbl_hour_suffix" = "h";
+
+/*  */
+"lbl_minute_suffix" = "m";
+
+/*  */
+"lbl_now_suffix" = "Just now";
+
+/*  */
+"lbl_today" = "Today";
+
+/*  */
 "user_not_logged_in" = "User is not logged in";
 
 /*  */
