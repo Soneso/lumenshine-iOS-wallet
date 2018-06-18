@@ -7,11 +7,13 @@
 //
 
 import Foundation
-import UIKit.UIImage
 
 protocol MenuViewModelType: Transitionable {
-    var items: [[String?]] { get }
-    var icons: [[UIImage?]] { get }
+    var itemDistribution: [Int] { get }
+    func name(at indexPath: IndexPath) -> String?
+    func iconName(at indexPath: IndexPath) -> String
+    func isAvatar(at indexPath: IndexPath) -> Bool
+    
     func menuItemSelected(at indexPath: IndexPath)
     func showRelogin()
     func countBackgroundTime()
@@ -20,12 +22,19 @@ protocol MenuViewModelType: Transitionable {
 class MenuViewModel : MenuViewModelType {
     fileprivate let service: AuthService
     fileprivate let user: User
+    fileprivate let entries: [[MenuEntry]]
     fileprivate var lastIndex = IndexPath(row: 0, section: 1)
     fileprivate var backgroundTime: Date?
+    
+    var navigationCoordinator: CoordinatorType?
     
     init(service: AuthService, user: User) {
         self.service = service
         self.user = user
+        
+        self.entries = [[.avatar],
+                        [.home, .wallets, .transactions, .currencies, .contacts, .extras],
+                        [.settings, .help]]
         
         if let tokenExists = TFAGeneration.isTokenExists(email: user.email),
             tokenExists == false {
@@ -40,33 +49,32 @@ class MenuViewModel : MenuViewModelType {
         }
     }
     
-    var items: [[String?]] = [
-        [nil, "name@email.com"],
-        ["Home", "Wallets", "Transactions", "Promotions"],
-        ["Settings", "Help Center"]
-    ]
+    var itemDistribution: [Int] {
+        return entries.map { $0.count }
+    }
     
-    var icons: [[UIImage?]] = [
-        [MaterialIcon.account.size48pt, nil],
-        [MaterialIcon.home.size24pt, MaterialIcon.wallets.size24pt, MaterialIcon.transactions.size24pt, MaterialIcon.promotions.size24pt],
-        [MaterialIcon.settings.size24pt, MaterialIcon.help.size24pt]
-    ]
+    func name(at indexPath: IndexPath) -> String? {
+        if entry(at: indexPath) == .avatar {
+            return user.email
+        }
+        return entry(at: indexPath).name
+    }
     
-    var navigationCoordinator: CoordinatorType?
+    func iconName(at indexPath: IndexPath) -> String {
+        return entry(at: indexPath).icon.name
+    }
+    
+    func isAvatar(at indexPath: IndexPath) -> Bool {
+        return entry(at: indexPath) == .avatar
+    }
     
     func menuItemSelected(at indexPath:IndexPath) {
         if indexPath == lastIndex { return }
-        switch indexPath.section {
-        case 0:
+        switch entry(at: indexPath) {
+        case .avatar, .settings:
             navigationCoordinator?.performTransition(transition: .showSettings)
-        case 1:
-            if indexPath.row == 0 {
-                navigationCoordinator?.performTransition(transition: .showHome)
-            }
-        case 2:
-            if indexPath.row == 0 {
-                navigationCoordinator?.performTransition(transition: .showSettings)
-            }
+        case .home:
+            navigationCoordinator?.performTransition(transition: .showHome)
         default: break
         }
         lastIndex = indexPath
@@ -80,5 +88,11 @@ class MenuViewModel : MenuViewModelType {
     
     func countBackgroundTime() {
         backgroundTime = Date()
+    }
+}
+
+fileprivate extension MenuViewModel {
+    func entry(at indexPath: IndexPath) -> MenuEntry {
+        return entries[indexPath.section][indexPath.row]
     }
 }

@@ -12,7 +12,7 @@ import Material
 class MenuCoordinator: CoordinatorType {
     var baseController: UIViewController
     
-    fileprivate let drawer: AppNavigationDrawerController
+    fileprivate let menuView: MenuViewController
     fileprivate let service: Services
     fileprivate let user: User
     
@@ -21,12 +21,12 @@ class MenuCoordinator: CoordinatorType {
         self.service = Services()
         
         let viewModel = MenuViewModel(service: service.auth, user: user)
-        let menuView = MenuViewController(viewModel: viewModel)
+        menuView = MenuViewController(viewModel: viewModel)
         
-        drawer = AppNavigationDrawerController(centerViewController: UIViewController(), leftDrawerViewController: menuView, rightDrawerViewController: nil)
+        let drawer = AppNavigationDrawerController(centerViewController: UIViewController(), leftDrawerViewController: menuView, rightDrawerViewController: nil)
         drawer.maximumLeftDrawerWidth = 260
         
-        self.baseController = menuView
+        self.baseController = drawer
         viewModel.navigationCoordinator = self
         showHome(updateMenu: false)
     }
@@ -48,20 +48,20 @@ fileprivate extension MenuCoordinator {
     func showHome(updateMenu: Bool = true) {
         let coordinator = HomeCoordinator(service: service.home)
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
-        drawer.setCenter(navigationController, withCloseAnimation: true, completion: nil)
-        (baseController as! MenuViewController).present(coordinator.baseController, updateMenu: updateMenu)
+        (baseController as! AppNavigationDrawerController).setCenter(navigationController, withCloseAnimation: true, completion: nil)
+        menuView.present(coordinator.baseController, updateMenu: updateMenu)
     }
     
     func showSettings() {
         let coordinator = SettingsCoordinator(service: service.auth, user: user)
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
-        drawer.setCenter(navigationController, withCloseAnimation: true, completion: nil)
-        (baseController as! MenuViewController).present(coordinator.baseController)
+        (baseController as! AppNavigationDrawerController).setCenter(navigationController, withCloseAnimation: true, completion: nil)
+        menuView.present(coordinator.baseController)
     }
     
     func showRelogin() {
         let coordinator = ReLoginCoordinator(service: service.auth)
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
-        drawer.present(navigationController, animated: true, completion: nil)
+        (baseController as! AppNavigationDrawerController).present(navigationController, animated: true, completion: nil)
     }
 }

@@ -46,6 +46,7 @@
 		4322BA35205BDD58007FEB5E /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA34205BDD58007FEB5E /* Card.swift */; };
 		4337C4E72081BAA400F4585A /* RegistrationFormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4337C4E62081BAA400F4585A /* RegistrationFormTableViewController.swift */; };
 		434E049B20D3DC8A00D3235A /* DateUtils+Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434E049A20D3DC8A00D3235A /* DateUtils+Format.swift */; };
+		434E049D20D4154700D3235A /* MenuEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434E049C20D4154700D3235A /* MenuEntry.swift */; };
 		4359984B20A438EF00007F27 /* LoginStep1Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4359984A20A438EF00007F27 /* LoginStep1Response.swift */; };
 		4359984D20A492FF00007F27 /* AlertFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4359984C20A492FF00007F27 /* AlertFactory.swift */; };
 		4359984F20A4A14000007F27 /* UserSecurityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4359984E20A4A14000007F27 /* UserSecurityHelper.swift */; };
@@ -79,6 +80,7 @@
 		4394911C20BEB845008D4FA2 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4394911B20BEB845008D4FA2 /* SettingsViewModel.swift */; };
 		4394911E20BEBDFA008D4FA2 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4394911D20BEBDFA008D4FA2 /* SettingsCoordinator.swift */; };
 		43973A8C20BD4B87000145DD /* TFAGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43973A8B20BD4B87000145DD /* TFAGeneration.swift */; };
+		439C476E20D6770900C5DC97 /* AvatarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439C476D20D6770900C5DC97 /* AvatarTableViewCell.swift */; };
 		43A8633820A9F0E6007C46E2 /* LoginStep2Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A8633720A9F0E6007C46E2 /* LoginStep2Response.swift */; };
 		43C6377A20BEFF2B00498FC5 /* ReLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C6377920BEFF2B00498FC5 /* ReLoginViewController.swift */; };
 		43D131E220569950000483C4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E120569950000483C4 /* HomeViewController.swift */; };
@@ -189,6 +191,7 @@
 		4322BA34205BDD58007FEB5E /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		4337C4E62081BAA400F4585A /* RegistrationFormTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationFormTableViewController.swift; sourceTree = "<group>"; };
 		434E049A20D3DC8A00D3235A /* DateUtils+Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateUtils+Format.swift"; sourceTree = "<group>"; };
+		434E049C20D4154700D3235A /* MenuEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuEntry.swift; sourceTree = "<group>"; };
 		4359984A20A438EF00007F27 /* LoginStep1Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStep1Response.swift; sourceTree = "<group>"; };
 		4359984C20A492FF00007F27 /* AlertFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFactory.swift; sourceTree = "<group>"; };
 		4359984E20A4A14000007F27 /* UserSecurityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSecurityHelper.swift; sourceTree = "<group>"; };
@@ -227,6 +230,7 @@
 		4394911B20BEB845008D4FA2 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		4394911D20BEBDFA008D4FA2 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
 		43973A8B20BD4B87000145DD /* TFAGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFAGeneration.swift; sourceTree = "<group>"; };
+		439C476D20D6770900C5DC97 /* AvatarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarTableViewCell.swift; sourceTree = "<group>"; };
 		43A8633720A9F0E6007C46E2 /* LoginStep2Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStep2Response.swift; sourceTree = "<group>"; };
 		43C6377920BEFF2B00498FC5 /* ReLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginViewController.swift; sourceTree = "<group>"; };
 		43D131E120569950000483C4 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -382,6 +386,7 @@
 				431437EE2047FF4500189C83 /* MenuViewController.swift */,
 				4314B9F320480813006DBE63 /* MenuViewProtocol.swift */,
 				4314B9F8204812BC006DBE63 /* MenuTableViewCell.swift */,
+				439C476D20D6770900C5DC97 /* AvatarTableViewCell.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -473,6 +478,7 @@
 				4319B1852063F1B0007CE18D /* User.swift */,
 				43088DAD2087AD2A008AE1AB /* UserSecurity.swift */,
 				4391A52F20D159190015A6DA /* RegistrationEntry.swift */,
+				434E049C20D4154700D3235A /* MenuEntry.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1070,6 +1076,7 @@
 				43FA7D3920B4924B006BD513 /* EmailConfirmationCoordinator.swift in Sources */,
 				436B367320512114009F7C21 /* TableViewDelegateHandler.swift in Sources */,
 				43F74607209494AC003EB5FD /* RegistrationResponse.swift in Sources */,
+				439C476E20D6770900C5DC97 /* AvatarTableViewCell.swift in Sources */,
 				43973A8C20BD4B87000145DD /* TFAGeneration.swift in Sources */,
 				4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */,
 				7435EA6D20BACE71008CC667 /* ForgotPasswordCoordinator.swift in Sources */,
@@ -1088,6 +1095,7 @@
 				431437EF2047FF4500189C83 /* MenuViewController.swift in Sources */,
 				4322BA33205BDB6E007FEB5E /* CardsResponsesMock.swift in Sources */,
 				744DE2E020BD8006003BC216 /* Lost2faViewModel.swift in Sources */,
+				434E049D20D4154700D3235A /* MenuEntry.swift in Sources */,
 				435A1CA920C846EC00CE3365 /* SettingsTableViewCell.swift in Sources */,
 				43044916206BE7E800349B51 /* VerificationViewController.swift in Sources */,
 				7435EA7520BAD95F008CC667 /* String+Utils.swift in Sources */,

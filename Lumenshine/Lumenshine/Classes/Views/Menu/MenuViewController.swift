@@ -14,7 +14,8 @@ class MenuViewController: UITableViewController {
     
     // MARK: - Parameters & Constants
     
-    fileprivate static let CellIdentifier = "MenuCell"
+    fileprivate static let MenuCellIdentifier = "MenuCell"
+    fileprivate static let AvatarCellIdentifier = "AvatarCell"
     
     // MARK: - Properties
     
@@ -61,19 +62,22 @@ class MenuViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.items.count
+        return viewModel.itemDistribution.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.items[section].count
+        return viewModel.itemDistribution[section]
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: MenuViewController.CellIdentifier, for: indexPath)
+        let identifier = viewModel.isAvatar(at: indexPath) ? MenuViewController.AvatarCellIdentifier : MenuViewController.MenuCellIdentifier
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
 
-        cell.textLabel?.text = viewModel.items[indexPath.section][indexPath.row]
-        cell.imageView?.image = viewModel.icons[indexPath.section][indexPath.row]
+        if let menuCell = cell as? MenuCellProtocol {
+            menuCell.setText(viewModel.name(at: indexPath))
+            menuCell.setImage(UIImage(named: viewModel.iconName(at: indexPath))?.tint(with: Stylesheet.color(.white)))
+        }
 
         return cell
     }
@@ -84,15 +88,11 @@ class MenuViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 { return nil }
-        let separator = UIView(frame: CGRect(x: 15, y: 5, width:tableView.frame.width-30, height: 1))
-        separator.backgroundColor = UIColor.white
+        let separator = UIView(frame: CGRect(x: 0, y: 4, width:tableView.frame.width, height: 1))
+        separator.backgroundColor = Stylesheet.color(.white)
         let header = UIView()
         header.addSubview(separator)
         return header
-    }
-    
-    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return indexPath.section != 0
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -103,14 +103,11 @@ class MenuViewController: UITableViewController {
 
 fileprivate extension MenuViewController {
     func prepare() {
-        tableView.register(MenuTableViewCell.self, forCellReuseIdentifier: MenuViewController.CellIdentifier)
+        tableView.register(MenuTableViewCell.self, forCellReuseIdentifier: MenuViewController.MenuCellIdentifier)
+        tableView.register(AvatarTableViewCell.self, forCellReuseIdentifier: MenuViewController.AvatarCellIdentifier)
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.separatorStyle = .none
-        if let colorImg = UIImage(named: "MenuColor") {
-            tableView.backgroundView = UIImageView(image: colorImg)
-        } else {
-            tableView.backgroundColor = Stylesheet.color(.cyan)
-        }
+        tableView.backgroundColor = Stylesheet.color(.darkBlue)
         tableView.tableHeaderView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         prepareMenuButton()
     }

@@ -11,3 +11,8 @@ import UIKit
 protocol MenuViewProtocol {
     func present(_ viewController: UIViewController, updateMenu: Bool)
 }
+
+protocol MenuCellProtocol {
+    func setText(_ text: String?)
+    func setImage(_ image: UIImage?)
+}

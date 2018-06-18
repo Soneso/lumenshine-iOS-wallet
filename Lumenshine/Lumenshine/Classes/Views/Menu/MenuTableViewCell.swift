@@ -29,3 +29,13 @@ class MenuTableViewCell: UITableViewCell {
         selectedBackgroundView = selection
     }
 }
+
+extension MenuTableViewCell: MenuCellProtocol {
+    func setText(_ text: String?) {
+        textLabel?.text = text
+    }
+    
+    func setImage(_ image: UIImage?) {
+        imageView?.image = image
+    }
+}

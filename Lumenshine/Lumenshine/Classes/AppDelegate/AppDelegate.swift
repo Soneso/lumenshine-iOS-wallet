@@ -15,7 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    fileprivate let loginCoordinator = LoginCoordinator()
+//    fileprivate let loginCoordinator = LoginCoordinator()
+    fileprivate let loginCoordinator = MenuCoordinator(user: User(id: "1", email: "isti@isti.com", publicKeyIndex188: "publicKeyIndex188", mnemonic: "mnemonic"))
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

@@ -134,6 +134,30 @@
 "birthplace" = "Birth place";
 
 /*  */
+"home" = "Home";
+
+/*  */
+"wallets" = "Wallets";
+
+/*  */
+"transactions" = "Transactions";
+
+/*  */
+"currencies" = "Currencies";
+
+/*  */
+"contacts" = "Contacts";
+
+/*  */
+"extras" = "Extras";
+
+/*  */
+"settings" = "Settings";
+
+/*  */
+"help" = "Help";
+
+/*  */
 "touch_id" = "Touch ID";
 
 /*  */
@@ -186,9 +210,6 @@
 
 /*  */
 "unknown" = "Anonymous";
-
-/*  */
-"settings" = "Settings";
 
 /*  */
 "lbl_save" = "Save";
