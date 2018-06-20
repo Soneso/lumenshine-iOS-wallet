@@ -48,7 +48,7 @@ class TFARegistrationViewModel : TFARegistrationViewModelType {
     }
     
     func openAuthenticator() {
-        guard let tfaSecret = registrationResponse.tfaSecret.base32EncodedString else { return }
+        let tfaSecret = registrationResponse.tfaSecret.base32EncodedString 
         let urlString = "otpauth://totp/lumenshine:\(user.email)?secret=\(tfaSecret)&issuer=lumenshine"
         guard let url = URL(string: urlString) else { return }
         navigationCoordinator?.performTransition(transition: .showGoogle2FA(url))
