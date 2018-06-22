@@ -46,7 +46,7 @@ class MenuCoordinator: CoordinatorType {
 
 fileprivate extension MenuCoordinator {
     func showHome(updateMenu: Bool = true) {
-        let coordinator = HomeCoordinator(service: service.home)
+        let coordinator = HomeCoordinator(service: service.home, user: user)
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
         (baseController as! AppNavigationDrawerController).setCenter(navigationController, withCloseAnimation: true, completion: nil)
         menuView.present(coordinator.baseController, updateMenu: updateMenu)

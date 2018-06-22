@@ -26,7 +26,7 @@ class ResponsesMock {
             return self?.resourceMissingResponse()
         }
         
-        return RequestMock(host: "service.stellar.org",
+        return RequestMock(host: "http://192.168.0.17:9000",
                            path: "/path/${variable}",
                            httpMethod: "GET",
                            mockHandler: handler)

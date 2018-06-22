@@ -225,7 +225,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 101 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 103 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -323,6 +323,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let deposit = Rswift.StringResource(key: "deposit", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Details
+      /// 
+      /// Locales: en
+      static let details = Rswift.StringResource(key: "details", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Disabled
       /// 
       /// Locales: en
@@ -351,6 +355,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let forgot_password = Rswift.StringResource(key: "forgot_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Fund Wallet
+      /// 
+      /// Locales: en
+      static let fund_wallet = Rswift.StringResource(key: "fund_wallet", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Get Started
       /// 
       /// Locales: en
@@ -800,6 +808,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("deposit", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Details
+      /// 
+      /// Locales: en
+      static func details(_: Void = ()) -> String {
+        return NSLocalizedString("details", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Disabled
       /// 
       /// Locales: en
@@ -847,6 +862,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func forgot_password(_: Void = ()) -> String {
         return NSLocalizedString("forgot_password", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Fund Wallet
+      /// 
+      /// Locales: en
+      static func fund_wallet(_: Void = ()) -> String {
+        return NSLocalizedString("fund_wallet", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Get Started

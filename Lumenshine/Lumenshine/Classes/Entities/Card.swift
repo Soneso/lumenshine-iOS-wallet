@@ -9,10 +9,11 @@
 import Foundation
 
 enum CardType: Int {
-    case web = 0
-    case intern = 1
-    case chart = 2
-    case account = 3
+    case web
+    case intern
+    case chart
+    case account
+    case wallet
 }
 
 class Card: NSObject, Decodable {

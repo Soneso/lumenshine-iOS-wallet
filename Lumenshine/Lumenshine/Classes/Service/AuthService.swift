@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import stellarsdk
 
 public enum GenerateAccountResponseEnum {
     case success(response: RegistrationResponse, userSecurity: UserSecurity)

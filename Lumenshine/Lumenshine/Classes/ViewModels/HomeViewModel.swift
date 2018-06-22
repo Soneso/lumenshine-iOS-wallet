@@ -19,6 +19,41 @@ protocol HomeViewModelType: Transitionable {
 }
 
 class HomeViewModel : HomeViewModelType {
+    
+    fileprivate let service: HomeService
+    fileprivate var responsesMock: CardsResponsesMock?
+    fileprivate let user: User
+    
+    var navigationCoordinator: CoordinatorType?
+    
+    init(service: HomeService, user: User) {
+        self.service = service
+        self.user = user
+        cardViewModels = []
+        
+        // TODO: remove mock when service is ready
+//        mockService()
+        
+        self.service.getCards() { response in
+            self.cardViewModels = response.map {
+                let viewModel = CardViewModel(card: $0)
+                viewModel.navigationCoordinator = self.navigationCoordinator
+                return viewModel
+            }
+            
+            let viewModel = WalletCardViewModel(user: user)
+            viewModel.navigationCoordinator = self.navigationCoordinator
+            self.cardViewModels.append(viewModel)
+            
+            if let reload = self.reloadClosure {
+                reload()
+            }
+        }
+    }
+    
+    var cardViewModels: [CardViewModelType]
+    var reloadClosure: (() -> ())?
+    
     var barTitles: [String] {
         return [
             R.string.localizable.send(),
@@ -38,34 +73,6 @@ class HomeViewModel : HomeViewModelType {
             MaterialIcon.received.size24pt,
             MaterialIcon.moreHorizontal.size24pt
         ]
-    }
-    
-    fileprivate let service: HomeService
-    
-    fileprivate var responsesMock: CardsResponsesMock?
-    
-    var navigationCoordinator: CoordinatorType?
-    
-    var cardViewModels: [CardViewModelType]
-    var reloadClosure: (() -> ())?
-    
-    init(service: HomeService) {
-        self.service = service
-        cardViewModels = []
-        
-        // TODO: remove mock when service is ready
-        mockService()
-        
-        self.service.getCards() { response in
-            self.cardViewModels = response.map {
-                let viewModel = CardViewModel(card: $0)
-                viewModel.navigationCoordinator = self.navigationCoordinator
-                return viewModel
-            }
-            if let reload = self.reloadClosure {
-                reload()
-            }
-        }
     }
     
     func barItemSelected(at index:Int) {
@@ -147,6 +154,12 @@ fileprivate extension HomeViewModel {
                       "description": "Stellar | Move Money Across Borders Quickly, Reliably, And For Fractions Of A Penny.",
                       "detail": "Stellar is a platform that connects banks, payments systems, and people. Integrate to move money quickly, reliably, and at almost no cost."
                     },
+                    {
+                      "type": 4,
+                      "title": "Wallet card",
+                      "description": "Stellar | Move Money Across Borders Quickly, Reliably, And For Fractions Of A Penny.",
+                      "detail": "Stellar is a platform that connects banks, payments systems, and people. Integrate to move money quickly, reliably, and at almost no cost."
+                    }
                   ]
                 }
             """

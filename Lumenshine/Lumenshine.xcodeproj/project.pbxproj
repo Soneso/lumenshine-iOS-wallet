@@ -66,6 +66,7 @@
 		4376F49E204D9DF800B179C3 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4376F49D204D9DF800B179C3 /* HomeCoordinator.swift */; };
 		4376F4A0204D9E2700B179C3 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4376F49F204D9E2700B179C3 /* CoordinatorProtocol.swift */; };
 		4376F4A3204D9F9D00B179C3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4376F4A2204D9F9D00B179C3 /* HomeViewModel.swift */; };
+		4386717420DAA77E00459EA8 /* WalletCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4386717320DAA77E00459EA8 /* WalletCardViewModel.swift */; };
 		4387980A20584335005261C8 /* InternalCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4387980920584335005261C8 /* InternalCard.swift */; };
 		438BE842204D51FD007EBFB9 /* HamburgerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438BE841204D51FD007EBFB9 /* HamburgerButton.swift */; };
 		4390D57C205FA4EF00383BB2 /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4390D57B205FA4EF00383BB2 /* HomeService.swift */; };
@@ -91,6 +92,7 @@
 		43D7A77B205A892E00238E29 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43D7A777205A892E00238E29 /* Localizable.strings */; };
 		43D7A77C205A892E00238E29 /* Common.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43D7A779205A892E00238E29 /* Common.strings */; };
 		43D7A77E205A90CC00238E29 /* MenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D7A77D205A90CC00238E29 /* MenuCoordinator.swift */; };
+		43E13E8820D97DA000409129 /* WalletCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E13E8720D97DA000409129 /* WalletCard.swift */; };
 		43ECA9CA208B3C4400CB571E /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ECA9C9208B3C4400CB571E /* RegistrationViewModel.swift */; };
 		43ECA9CC208B530000CB571E /* RegistrationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ECA9CB208B530000CB571E /* RegistrationTableViewCell.swift */; };
 		43EFF204204939F700B1887C /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EFF203204939F700B1887C /* UIColor+Utils.swift */; };
@@ -216,6 +218,7 @@
 		4376F49D204D9DF800B179C3 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		4376F49F204D9E2700B179C3 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		4376F4A2204D9F9D00B179C3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		4386717320DAA77E00459EA8 /* WalletCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCardViewModel.swift; sourceTree = "<group>"; };
 		4387980920584335005261C8 /* InternalCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalCard.swift; sourceTree = "<group>"; };
 		438BE841204D51FD007EBFB9 /* HamburgerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HamburgerButton.swift; sourceTree = "<group>"; };
 		4390D57B205FA4EF00383BB2 /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
@@ -241,6 +244,7 @@
 		43D7A778205A892E00238E29 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		43D7A77A205A892E00238E29 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Common.strings; sourceTree = "<group>"; };
 		43D7A77D205A90CC00238E29 /* MenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCoordinator.swift; sourceTree = "<group>"; };
+		43E13E8720D97DA000409129 /* WalletCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCard.swift; sourceTree = "<group>"; };
 		43ECA9C9208B3C4400CB571E /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		43ECA9CB208B530000CB571E /* RegistrationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTableViewCell.swift; sourceTree = "<group>"; };
 		43EFF203204939F700B1887C /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
@@ -576,6 +580,7 @@
 				7435EA6E20BAD124008CC667 /* ForgotPasswordViewModel.swift */,
 				744DE2DF20BD8006003BC216 /* Lost2faViewModel.swift */,
 				4394911B20BEB845008D4FA2 /* SettingsViewModel.swift */,
+				4386717320DAA77E00459EA8 /* WalletCardViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -590,6 +595,7 @@
 				43920D992057EECA0040003C /* CardView.swift */,
 				4387980920584335005261C8 /* InternalCard.swift */,
 				4322BA25205BAA60007FEB5E /* HeaderMenuViewController.swift */,
+				43E13E8720D97DA000409129 /* WalletCard.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -950,6 +956,7 @@
 				"${BUILT_PRODUCTS_DIR}/OneTimePassword/OneTimePassword.framework",
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftRichString/SwiftRichString.framework",
 				"${BUILT_PRODUCTS_DIR}/stellar-ios-mac-sdk/stellarsdk.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -964,6 +971,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OneTimePassword.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftRichString.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/stellarsdk.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1047,6 +1055,7 @@
 				431F8AB420A0586100B1E0F1 /* MnemonicViewModel.swift in Sources */,
 				431628CE2097352B00F23A20 /* TFAResponse.swift in Sources */,
 				744DE2D920BD7F10003BC216 /* Lost2faCoordinator.swift in Sources */,
+				43E13E8820D97DA000409129 /* WalletCard.swift in Sources */,
 				4316ED9D208DE00800A40F97 /* RegistrationCoordinator.swift in Sources */,
 				438BE842204D51FD007EBFB9 /* HamburgerButton.swift in Sources */,
 				431628D02097476500F23A20 /* ErrorResponse.swift in Sources */,
@@ -1095,6 +1104,7 @@
 				431437EF2047FF4500189C83 /* MenuViewController.swift in Sources */,
 				4322BA33205BDB6E007FEB5E /* CardsResponsesMock.swift in Sources */,
 				744DE2E020BD8006003BC216 /* Lost2faViewModel.swift in Sources */,
+				4386717420DAA77E00459EA8 /* WalletCardViewModel.swift in Sources */,
 				434E049D20D4154700D3235A /* MenuEntry.swift in Sources */,
 				435A1CA920C846EC00CE3365 /* SettingsTableViewCell.swift in Sources */,
 				43044916206BE7E800349B51 /* VerificationViewController.swift in Sources */,

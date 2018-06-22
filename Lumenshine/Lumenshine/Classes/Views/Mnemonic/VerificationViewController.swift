@@ -8,7 +8,6 @@
 
 import UIKit
 import Material
-import stellarsdk
 
 protocol VerificationViewControllerDelegate {
     func verification(_ viewController:VerificationViewController, didFinishWithSuccess success: Bool)

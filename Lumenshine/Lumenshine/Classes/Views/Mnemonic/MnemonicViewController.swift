@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import stellarsdk
 import Material
 
 class MnemonicViewController: UIViewController {

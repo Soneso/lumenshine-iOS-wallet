@@ -80,6 +80,12 @@
 "receive" = "Receive";
 
 /*  */
+"details" = "Details";
+
+/*  */
+"fund_wallet" = "Fund Wallet";
+
+/*  */
 "more" = "More";
 
 /*  */

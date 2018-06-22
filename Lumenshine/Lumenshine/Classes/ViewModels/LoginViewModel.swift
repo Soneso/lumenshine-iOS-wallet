@@ -92,7 +92,7 @@ class LoginViewModel : LoginViewModelType {
             do {
                 if let userSecurity = UserSecurity(from: login1Response),
                     let (publicKeyIndex188, mnemonic) = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: password) {
-                    self.user = User(id: "1", email: self.email!, publicKeyIndex188: publicKeyIndex188, mnemonic: mnemonic)
+                    self.user = User(id: "1", email: self.email!, publicKeyIndex0: login1Response.publicKeyIndex0, publicKeyIndex188: publicKeyIndex188, mnemonic: mnemonic)
                     self.service.loginStep2(publicKeyIndex188: publicKeyIndex188) { result in
                         response(result)
                     }

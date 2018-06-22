@@ -126,7 +126,7 @@ class RegistrationViewModel : RegistrationViewModelType {
     
     func show2FA(response: RegistrationResponse, userSecurity: UserSecurity) {
         guard let email = selectedValues[.email] else { return }
-        let user = User(id: "1", email: email, publicKeyIndex188: userSecurity.publicKeyIndex188, mnemonic: userSecurity.mnemonic24Word)
+        let user = User(id: "1", email: email, publicKeyIndex0: userSecurity.publicKeyIndex0, publicKeyIndex188: userSecurity.publicKeyIndex188, mnemonic: userSecurity.mnemonic24Word)
         self.navigationCoordinator?.performTransition(transition: .show2FA(user, response))
     }
     
@@ -136,7 +136,7 @@ class RegistrationViewModel : RegistrationViewModelType {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let login2Response):
-                    let user = User(id: "1", email: email, publicKeyIndex188: userSecurity.publicKeyIndex188, mnemonic: userSecurity.mnemonic24Word)
+                    let user = User(id: "1", email: email, publicKeyIndex0: userSecurity.publicKeyIndex0, publicKeyIndex188: userSecurity.publicKeyIndex188, mnemonic: userSecurity.mnemonic24Word)
                     let loginViewModel = LoginViewModel(service: self.service, user: user)
                     loginViewModel.navigationCoordinator = self.navigationCoordinator
                     loginViewModel.verifyLogin2Response(login2Response)

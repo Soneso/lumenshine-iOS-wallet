@@ -62,12 +62,10 @@ fileprivate extension TFARegistrationCoordinator {
     func showDashboard(user: User) {
         let menuCoordinator = MenuCoordinator(user: user)
         
-        if let mainNavigation = menuCoordinator.baseController.evo_drawerController {
-            if let window = UIApplication.shared.delegate?.window ?? baseController.view.window {
-                UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromBottom, animations: {
-                    window.rootViewController = mainNavigation
-                }, completion: nil)
-            }
+        if let window = UIApplication.shared.delegate?.window ?? baseController.view.window {
+            UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromBottom, animations: {
+                window.rootViewController = menuCoordinator.baseController
+            }, completion: nil)
         }
     }
 }

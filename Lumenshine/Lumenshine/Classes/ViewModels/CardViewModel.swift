@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 protocol CardViewModelType: Transitionable {
     var type: CardType { get }
     var imageURL: URL? { get }
@@ -63,6 +62,8 @@ class CardViewModel : CardViewModelType {
             return ["Send feedback", "View FAQ"]
         case .account:
             return ["Learn more"]
+        case .wallet:
+            return [R.string.localizable.fund_wallet()]
         }
     }
     
