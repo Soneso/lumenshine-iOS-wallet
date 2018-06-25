@@ -8,7 +8,7 @@
 
 import UIKit
 import Material
-import DrawerController
+import KWDrawerController
 
 class MenuViewController: UITableViewController {
     
@@ -115,12 +115,13 @@ fileprivate extension MenuViewController {
     func prepareMenuButton() {
         menuButton.transform = menuButton.transform.scaledBy(x: 1.35, y: 1.35)
         menuButton.addTarget(self, action: #selector(onMenuButtonTap(_:event:)), for: .touchUpInside)
-        evo_drawerController?.gestureCompletionBlock = { (drawer, gesture) in
-            let action = drawer.openSide == DrawerSide.none
-            if action != self.menuButton.showsMenu {
-                self.menuButton.showsMenu = action
-            }
-        }
+        drawerController?.delegate = self
+    }
+}
+
+extension MenuViewController: DrawerControllerDelegate {
+    func drawerWillFinishAnimation(drawerController: DrawerController, side: DrawerSide) {
+        menuButton.showsMenu = side == .none
     }
 }
 
@@ -128,7 +129,7 @@ extension MenuViewController: MenuViewProtocol {
     func present(_ viewController: UIViewController, updateMenu: Bool = true) {
         linkMenuButton(to: viewController)
         if updateMenu {
-            menuButton.showsMenu = evo_drawerController?.openSide != DrawerSide.none
+            menuButton.showsMenu = drawerController?.drawerSide == .none
         }
     }
 }
@@ -136,13 +137,12 @@ extension MenuViewController: MenuViewProtocol {
 extension MenuViewController {
     @objc
     func onMenuButtonTap(_ sender: UIButton, event: UIEvent) {
-        evo_drawerController?.toggleLeftDrawerSide(animated: true, completion: nil)
-        menuButton.showsMenu = evo_drawerController?.openSide != DrawerSide.none
+        drawerController?.openSide(.left)
+        menuButton.showsMenu = drawerController?.drawerSide == .none
     }
 }
 
 fileprivate extension MenuViewController {
-    
     func linkMenuButton(to controller: UIViewController) {
         controller.navigationItem.leftViews = [menuButton]
     }

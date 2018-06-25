@@ -7,7 +7,7 @@ use_frameworks!
 def ui_components_and_helper_pods
     pod 'Material'
     pod 'SnapKit'
-    pod 'DrawerController'
+    pod 'KWDrawerController'
     pod 'DGElasticPullToRefresh'
     pod 'Charts'
 end

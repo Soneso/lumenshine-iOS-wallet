@@ -22,9 +22,10 @@ class LoginCoordinator: CoordinatorType {
         
         let menuViewModel = LoginMenuViewModel(service: service.auth)
         menuView = MenuViewController(viewModel: menuViewModel)
-
-        let drawer = AppNavigationDrawerController(centerViewController: UIViewController(), leftDrawerViewController: menuView, rightDrawerViewController: nil)
-        drawer.maximumLeftDrawerWidth = 260
+        
+        let drawer = AppNavigationDrawerController()
+        drawer.drawerWidth = 260
+        drawer.setViewController(menuView, for: .left)
         
         self.baseController = drawer
         menuViewModel.navigationCoordinator = self
@@ -56,10 +57,9 @@ class LoginCoordinator: CoordinatorType {
 fileprivate extension LoginCoordinator {
     func showLogin(updateMenu: Bool = true) {
         let viewModel = LoginViewModel(service: service.auth)
-        viewModel.navigationCoordinator = self
         let loginView = LoginViewController(viewModel: viewModel)
         let navigationController = AppNavigationController(rootViewController: loginView)
-        (baseController as! AppNavigationDrawerController).setCenter(navigationController, withCloseAnimation: true, completion: nil)
+        (baseController as! AppNavigationDrawerController).setViewController(navigationController, for: .none)
         menuView.present(loginView, updateMenu: updateMenu)
     }
     
