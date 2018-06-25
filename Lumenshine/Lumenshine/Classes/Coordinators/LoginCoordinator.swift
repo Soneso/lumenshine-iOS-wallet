@@ -13,13 +13,22 @@ class LoginCoordinator: CoordinatorType {
     var baseController: UIViewController
     
     fileprivate let service: Services
+    fileprivate let menuView: MenuViewController
     
     init() {
         self.service = Services()
-        let viewModel = LoginViewModel(service: service.auth)
-        let navigation = AppNavigationController(rootViewController: LoginViewController(viewModel: viewModel))
-        self.baseController = navigation
-        viewModel.navigationCoordinator = self
+//        let viewModel = LoginViewModel(service: service.auth)
+//        let navigation = AppNavigationController(rootViewController: LoginViewController(viewModel: viewModel))
+        
+        let menuViewModel = LoginMenuViewModel(service: service.auth)
+        menuView = MenuViewController(viewModel: menuViewModel)
+
+        let drawer = AppNavigationDrawerController(centerViewController: UIViewController(), leftDrawerViewController: menuView, rightDrawerViewController: nil)
+        drawer.maximumLeftDrawerWidth = 260
+        
+        self.baseController = drawer
+        menuViewModel.navigationCoordinator = self
+        showLogin(updateMenu: false)
     }
     
     func performTransition(transition: Transition) {
@@ -45,6 +54,15 @@ class LoginCoordinator: CoordinatorType {
 }
 
 fileprivate extension LoginCoordinator {
+    func showLogin(updateMenu: Bool = true) {
+        let viewModel = LoginViewModel(service: service.auth)
+        viewModel.navigationCoordinator = self
+        let loginView = LoginViewController(viewModel: viewModel)
+        let navigationController = AppNavigationController(rootViewController: loginView)
+        (baseController as! AppNavigationDrawerController).setCenter(navigationController, withCloseAnimation: true, completion: nil)
+        menuView.present(loginView, updateMenu: updateMenu)
+    }
+    
     func showDashboard(user: User) {
         let menuCoordinator = MenuCoordinator(user: user)
         

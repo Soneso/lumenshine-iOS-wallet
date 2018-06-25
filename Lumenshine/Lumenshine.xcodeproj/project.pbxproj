@@ -18,6 +18,8 @@
 		43088DAC2087AB23008AE1AB /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43088DAB2087AB23008AE1AB /* AuthService.swift */; };
 		43088DAE2087AD2A008AE1AB /* UserSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43088DAD2087AD2A008AE1AB /* UserSecurity.swift */; };
 		43088DB02087C4B8008AE1AB /* Dictionary+HTTPParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43088DAF2087C4B8008AE1AB /* Dictionary+HTTPParams.swift */; };
+		431082B020DE3F8D00852502 /* LoginMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431082AF20DE3F8D00852502 /* LoginMenuViewModel.swift */; };
+		431082B220DE426900852502 /* LoginMenuEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431082B120DE426900852502 /* LoginMenuEntry.swift */; };
 		431437EF2047FF4500189C83 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431437EE2047FF4500189C83 /* MenuViewController.swift */; };
 		431437F22047FF9100189C83 /* AppNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431437F12047FF9100189C83 /* AppNavigationController.swift */; };
 		431437F42047FFB400189C83 /* AppNavigationDrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431437F32047FFB400189C83 /* AppNavigationDrawerController.swift */; };
@@ -162,6 +164,8 @@
 		43088DAB2087AB23008AE1AB /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		43088DAD2087AD2A008AE1AB /* UserSecurity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSecurity.swift; sourceTree = "<group>"; };
 		43088DAF2087C4B8008AE1AB /* Dictionary+HTTPParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+HTTPParams.swift"; sourceTree = "<group>"; };
+		431082AF20DE3F8D00852502 /* LoginMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMenuViewModel.swift; sourceTree = "<group>"; };
+		431082B120DE426900852502 /* LoginMenuEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMenuEntry.swift; sourceTree = "<group>"; };
 		431437EE2047FF4500189C83 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		431437F12047FF9100189C83 /* AppNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigationController.swift; sourceTree = "<group>"; };
 		431437F32047FFB400189C83 /* AppNavigationDrawerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigationDrawerController.swift; sourceTree = "<group>"; };
@@ -461,6 +465,7 @@
 				43088DAD2087AD2A008AE1AB /* UserSecurity.swift */,
 				4391A52F20D159190015A6DA /* RegistrationEntry.swift */,
 				434E049C20D4154700D3235A /* MenuEntry.swift */,
+				431082B120DE426900852502 /* LoginMenuEntry.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -550,6 +555,7 @@
 				4376F4A2204D9F9D00B179C3 /* HomeViewModel.swift */,
 				43D131E52056E3BD000483C4 /* CardViewModel.swift */,
 				4319B17F2063EEA9007CE18D /* LoginViewModel.swift */,
+				431082AF20DE3F8D00852502 /* LoginMenuViewModel.swift */,
 				4319B1832063F00C007CE18D /* MenuViewModel.swift */,
 				43ECA9C9208B3C4400CB571E /* RegistrationViewModel.swift */,
 				431E7A262095B2C0003A63B3 /* TFARegistrationViewModel.swift */,
@@ -1120,6 +1126,7 @@
 				43E13E8820D97DA000409129 /* WalletCard.swift in Sources */,
 				4316ED9D208DE00800A40F97 /* RegistrationCoordinator.swift in Sources */,
 				438BE842204D51FD007EBFB9 /* HamburgerButton.swift in Sources */,
+				431082B020DE3F8D00852502 /* LoginMenuViewModel.swift in Sources */,
 				431628D02097476500F23A20 /* ErrorResponse.swift in Sources */,
 				43FA7D3720B46157006BD513 /* EmailConfirmationViewModel.swift in Sources */,
 				43088DAC2087AB23008AE1AB /* AuthService.swift in Sources */,
@@ -1134,6 +1141,7 @@
 				4319B1822063EF72007CE18D /* LoginCoordinator.swift in Sources */,
 				434E049B20D3DC8A00D3235A /* DateUtils+Format.swift in Sources */,
 				4391A53220D170420015A6DA /* CountryListResponse.swift in Sources */,
+				431082B220DE426900852502 /* LoginMenuEntry.swift in Sources */,
 				43088DB02087C4B8008AE1AB /* Dictionary+HTTPParams.swift in Sources */,
 				431F8AB620A074BA00B1E0F1 /* MnemonicCoordinator.swift in Sources */,
 				4390D57C205FA4EF00383BB2 /* HomeService.swift in Sources */,

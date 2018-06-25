@@ -47,16 +47,22 @@
 "signup" = "Sign up";
 
 /*  */
+"lost_password" = "Lost password";
+
+/*  */
 "forgot_password" = "Forgot password";
 
 /*  */
 "reset_password" = "Reset password";
 
 /*  */
-"lost_2fa" = "Lost 2fa";
+"lost_2fa" = "Lost 2FA Secret";
 
 /*  */
 "reset_2fa" = "Reset 2fa";
+
+/*  */
+"import_mnemonic" = "Import mnemonic";
 
 /*  */
 "email" = "Email";
@@ -162,6 +168,9 @@
 
 /*  */
 "help" = "Help";
+
+/*  */
+"about" = "About";
 
 /*  */
 "touch_id" = "Touch ID";
@@ -297,6 +306,9 @@
 
 /*  */
 "user_not_logged_in" = "User is not logged in";
+
+/*  */
+"not_logged_in" = "Not logged in";
 
 /*  */
 "unexpected_data_type" = "Unexpected data type";

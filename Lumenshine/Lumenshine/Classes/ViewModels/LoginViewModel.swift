@@ -10,6 +10,8 @@ import Foundation
 import OneTimePassword
 
 protocol LoginViewModelType: Transitionable {
+    var barItems: [(String, String)] { get }
+    
     func loginCompleted()
     func showLoginForm()
     
@@ -32,6 +34,7 @@ class LoginViewModel : LoginViewModelType {
     fileprivate let service: AuthService
     fileprivate var email: String?
     fileprivate var user: User?
+    fileprivate let entries: [LoginMenuEntry]
     
     var navigationCoordinator: CoordinatorType?
     
@@ -39,6 +42,14 @@ class LoginViewModel : LoginViewModelType {
         self.service = service
         self.user = user
         touchMe = BiometricIDAuth()
+        
+        self.entries = [.login, .signUp, .lostPassword, .lost2FA, .importMnemonic, .about, .help]
+    }
+    
+    var barItems: [(String, String)] {
+        return [(entries[0].name, entries[0].icon.name),
+                (entries[1].name, entries[1].icon.name),
+                (R.string.localizable.more(), R.image.more.name)]
     }
     
     func loginCompleted() {

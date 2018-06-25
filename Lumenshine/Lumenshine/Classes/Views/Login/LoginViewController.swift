@@ -22,9 +22,7 @@ class LoginViewController: UIViewController {
     fileprivate let usernameTextField = TextField()
     fileprivate let passwordTextField = TextField()
     fileprivate let tfaCodeTextField = TextField()
-    fileprivate let signUpButton = RaisedButton()
-    fileprivate let forgotPasswordButton = RaisedButton()
-    fileprivate let forgot2faButton = RaisedButton()
+    fileprivate let headerBar = UIView()
     
     init(viewModel: LoginViewModelType) {
         self.viewModel = viewModel
@@ -141,15 +139,19 @@ extension LoginViewController: UITextFieldDelegate {
     }
 }
 
+extension LoginViewController: UITabBarDelegate {
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        
+    }
+}
+
 fileprivate extension LoginViewController {
     func prepareView() {
         view.backgroundColor = Stylesheet.color(.white)
         prepareContentView()
+        prepareHeader()
         prepareTextFields()
         prepareLoginButton()
-        prepareSignupButton()
-        prepareForgotPasswordButton()
-        prepareForgot2faButton()
     }
     
     func prepareContentView() {
@@ -164,6 +166,66 @@ fileprivate extension LoginViewController {
             make.bottom.equalToSuperview()
             make.left.equalToSuperview()
             make.width.equalTo(view)
+        }
+    }
+    
+    func prepareHeader() {
+        
+        headerBar.backgroundColor = Stylesheet.color(.cyan)
+        
+        contentView.addSubview(headerBar)
+        headerBar.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+        }
+        
+        let label = UILabel()
+        label.text = "Lumenshine"
+        label.font = UIFont.systemFont(ofSize: 25.0)
+        label.textColor = Stylesheet.color(.orange)
+        label.textAlignment = .center
+        label.sizeToFit()
+        
+        headerBar.addSubview(label)
+        label.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+        }
+        
+        let label2 = UILabel()
+        label2.text = "Welcome"
+        label2.font = UIFont.systemFont(ofSize: 18.0)
+        label2.textColor = Stylesheet.color(.white)
+        label2.textAlignment = .center
+        label2.sizeToFit()
+        
+        headerBar.addSubview(label2)
+        label2.snp.makeConstraints { make in
+            make.top.equalTo(label.snp.bottom)
+            make.left.right.equalToSuperview()
+        }
+        
+        let tabBar = UITabBar()
+        tabBar.delegate = self
+        tabBar.backgroundImage = UIImage.image(with: Stylesheet.color(.clear), size: CGSize(width: 10, height: 10))
+        tabBar.tintColor = Stylesheet.color(.white)
+        tabBar.unselectedItemTintColor = Stylesheet.color(.white)
+        tabBar.shadowImage = UIImage.image(with: Stylesheet.color(.clear), size: CGSize(width: 10, height: 10))
+        tabBar.itemWidth = 90
+        tabBar.itemSpacing = 50
+        
+        var items = [UITabBarItem]()
+        for (index, value) in viewModel.barItems.enumerated() {
+            let image = UIImage(named: value.1)
+            let item = UITabBarItem(title: value.0, image: image, tag: index)
+            items.append(item)
+        }
+        tabBar.items = items
+        
+        headerBar.addSubview(tabBar)
+        tabBar.snp.makeConstraints { make in
+            make.top.equalTo(label2.snp.bottom).offset(10)
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+            make.bottom.equalTo(-10)
         }
     }
     
@@ -189,7 +251,7 @@ fileprivate extension LoginViewController {
         
         contentView.addSubview(usernameTextField)
         usernameTextField.snp.makeConstraints { make in
-            make.top.equalTo(50)
+            make.top.equalTo(headerBar.snp.bottom).offset(spacing)
             make.left.equalTo(40)
             make.right.equalTo(-40)
         }
@@ -221,52 +283,6 @@ fileprivate extension LoginViewController {
             make.left.equalTo(usernameTextField)
             make.right.equalTo(usernameTextField)
             make.height.equalTo(50)
-        }
-    }
-    
-    func prepareSignupButton() {
-        signUpButton.title = R.string.localizable.signup()
-        signUpButton.backgroundColor = Stylesheet.color(.cyan)
-        signUpButton.titleColor = Stylesheet.color(.white)
-        signUpButton.addTarget(self, action: #selector(signupAction(sender:)), for: .touchUpInside)
-        
-        contentView.addSubview(signUpButton)
-        signUpButton.snp.makeConstraints { make in
-            make.top.equalTo(loginButton.snp.bottom).offset(20)
-            make.left.equalTo(usernameTextField)
-            make.right.equalTo(usernameTextField)
-            make.height.equalTo(50)
-        }
-    }
-    
-    func prepareForgotPasswordButton() {
-        forgotPasswordButton.title = R.string.localizable.forgot_password()
-        forgotPasswordButton.backgroundColor = Stylesheet.color(.cyan)
-        forgotPasswordButton.titleColor = Stylesheet.color(.white)
-        forgotPasswordButton.addTarget(self, action: #selector(forgotPasswordAction(sender:)), for: .touchUpInside)
-        
-        contentView.addSubview(forgotPasswordButton)
-        forgotPasswordButton.snp.makeConstraints { make in
-            make.top.equalTo(signUpButton.snp.bottom).offset(20)
-            make.left.equalTo(usernameTextField)
-            make.right.equalTo(usernameTextField)
-            make.height.equalTo(50)
-        }
-    }
-    
-    func prepareForgot2faButton() {
-        forgot2faButton.title = R.string.localizable.lost_2fa()
-        forgot2faButton.backgroundColor = Stylesheet.color(.cyan)
-        forgot2faButton.titleColor = Stylesheet.color(.white)
-        forgot2faButton.addTarget(self, action: #selector(forgot2faAction(sender:)), for: .touchUpInside)
-        
-        contentView.addSubview(forgot2faButton)
-        forgot2faButton.snp.makeConstraints { make in
-            make.top.equalTo(forgotPasswordButton.snp.bottom).offset(20)
-            make.left.equalTo(usernameTextField)
-            make.right.equalTo(usernameTextField)
-            make.height.equalTo(50)
-            make.bottom.equalTo(-20)
         }
     }
 }
