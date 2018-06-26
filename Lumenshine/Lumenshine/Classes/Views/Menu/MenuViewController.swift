@@ -121,7 +121,15 @@ fileprivate extension MenuViewController {
 
 extension MenuViewController: DrawerControllerDelegate {
     func drawerWillFinishAnimation(drawerController: DrawerController, side: DrawerSide) {
-        menuButton.showsMenu = side == .none
+        drawerController.getViewController(for: .none)?.resignFirstResponder()
+    }
+    
+    func drawerWillOpenSide(drawerController: DrawerController, side: DrawerSide) {
+        menuButton.showsMenu = side != .left
+    }
+    
+    func drawerWillCloseSide(drawerController: DrawerController, side: DrawerSide) {
+        menuButton.showsMenu = side == .left
     }
 }
 
@@ -138,7 +146,7 @@ extension MenuViewController {
     @objc
     func onMenuButtonTap(_ sender: UIButton, event: UIEvent) {
         drawerController?.openSide(.left)
-        menuButton.showsMenu = drawerController?.drawerSide == .none
+        menuButton.showsMenu = false
     }
 }
 

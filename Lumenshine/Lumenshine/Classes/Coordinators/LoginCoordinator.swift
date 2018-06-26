@@ -24,7 +24,6 @@ class LoginCoordinator: CoordinatorType {
         menuView = MenuViewController(viewModel: menuViewModel)
         
         let drawer = AppNavigationDrawerController()
-        drawer.drawerWidth = 260
         drawer.setViewController(menuView, for: .left)
         
         self.baseController = drawer

@@ -17,6 +17,17 @@ class AppNavigationDrawerController: DrawerController {
 //        openDrawerGestureModeMask = [.panningCenterView, .panningNavigationBar]
 //        closeDrawerGestureModeMask = [.panningCenterView, .panningNavigationBar]
         
+        setDrawerWidth(260, for: .left)
+        
+        options.isTapToClose = true
+        options.isGesture = true
+        options.isAnimation = true
+        options.isOverflowAnimation = true
+        options.isShadow = false
+        options.isFadeScreen = false
+        options.isBlur = false
+        options.isEnable = true
+        
         NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: .UIApplicationWillEnterForeground, object: nil)
     }
     

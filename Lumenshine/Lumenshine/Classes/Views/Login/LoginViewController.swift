@@ -62,6 +62,13 @@ class LoginViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
+    
+    override func resignFirstResponder() -> Bool {
+        usernameTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+        tfaCodeTextField.resignFirstResponder()
+        return super.resignFirstResponder()
+    }
 
 }
 
@@ -80,10 +87,7 @@ extension LoginViewController {
                 return
         }
         
-        usernameTextField.resignFirstResponder()
-        passwordTextField.resignFirstResponder()
-        tfaCodeTextField.resignFirstResponder()
-        
+        _ = resignFirstResponder()
         UserDefaults.standard.setValue(accountName, forKey: "username")
         
         viewModel.loginStep1(email: accountName, tfaCode: tfaCodeTextField.text) { result in
@@ -114,28 +118,25 @@ extension LoginViewController {
         tfaCodeTextField.text = nil
     }
     
-    @objc
-    func signupAction(sender: UIButton) {
-        viewModel.signUpClick()
-    }
-    
-    @objc
-    func forgotPasswordAction(sender: UIButton) {
-        viewModel.forgotPasswordClick()
-    }
-    
-    @objc
-    func forgot2faAction(sender: UIButton) {
-        viewModel.lost2faClick()
-    }
+//    @objc
+//    func signupAction(sender: UIButton) {
+//        viewModel.signUpClick()
+//    }
+//
+//    @objc
+//    func forgotPasswordAction(sender: UIButton) {
+//        viewModel.forgotPasswordClick()
+//    }
+//    
+//    @objc
+//    func forgot2faAction(sender: UIButton) {
+//        viewModel.lost2faClick()
+//    }
 }
 
 extension LoginViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-//        if let email = usernameTextField.text,
-//            !email.isEmpty {
-//            tfaCodeTextField.isHidden = viewModel.enableTfaCode(email: email)
-//        }
+
     }
 }
 
@@ -206,7 +207,7 @@ fileprivate extension LoginViewController {
         let tabBar = UITabBar()
         tabBar.delegate = self
         tabBar.backgroundImage = UIImage.image(with: Stylesheet.color(.clear), size: CGSize(width: 10, height: 10))
-        tabBar.tintColor = Stylesheet.color(.white)
+        tabBar.tintColor = Stylesheet.color(.yellow)
         tabBar.unselectedItemTintColor = Stylesheet.color(.white)
         tabBar.shadowImage = UIImage.image(with: Stylesheet.color(.clear), size: CGSize(width: 10, height: 10))
         tabBar.itemWidth = 90
@@ -237,7 +238,7 @@ fileprivate extension LoginViewController {
         passwordTextField.isSecureTextEntry = true
         usernameTextField.keyboardType = .emailAddress
         usernameTextField.autocapitalizationType = .none
-        usernameTextField.delegate = self
+//        usernameTextField.delegate = self
         
         usernameTextField.dividerActiveColor = Stylesheet.color(.cyan)
         usernameTextField.placeholderActiveColor = Stylesheet.color(.cyan)
@@ -280,9 +281,10 @@ fileprivate extension LoginViewController {
         contentView.addSubview(loginButton)
         loginButton.snp.makeConstraints { make in
             make.top.equalTo(tfaCodeTextField.snp.bottom).offset(30)
-            make.left.equalTo(usernameTextField)
-            make.right.equalTo(usernameTextField)
+            make.left.equalTo(40)
+            make.right.equalTo(-40)
             make.height.equalTo(50)
+            make.bottom.lessThanOrEqualToSuperview()
         }
     }
 }

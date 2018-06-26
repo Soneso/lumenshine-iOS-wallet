@@ -20,4 +20,9 @@ class AppNavigationController: NavigationController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
+    
+    override func resignFirstResponder() -> Bool {
+        topViewController?.resignFirstResponder()
+        return super.resignFirstResponder()
+    }
 }
