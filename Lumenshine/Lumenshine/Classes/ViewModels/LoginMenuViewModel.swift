@@ -42,10 +42,12 @@ class LoginMenuViewModel : MenuViewModelType {
     func menuItemSelected(at indexPath:IndexPath) {
         if indexPath == lastIndex { return }
         switch entry(at: indexPath) {
-        case .avatar:
-            break
         case .login:
-            break
+            navigationCoordinator?.performTransition(transition: .showLogin)
+        case .lostPassword:
+            navigationCoordinator?.performTransition(transition: .showForgotPassword)
+        case .lost2FA:
+            navigationCoordinator?.performTransition(transition: .showLost2fa)
         default: break
         }
         lastIndex = indexPath

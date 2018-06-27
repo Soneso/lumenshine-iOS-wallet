@@ -69,6 +69,7 @@
 		4376F49E204D9DF800B179C3 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4376F49D204D9DF800B179C3 /* HomeCoordinator.swift */; };
 		4376F4A0204D9E2700B179C3 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4376F49F204D9E2700B179C3 /* CoordinatorProtocol.swift */; };
 		4376F4A3204D9F9D00B179C3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4376F4A2204D9F9D00B179C3 /* HomeViewModel.swift */; };
+		4384C70C20E27C72000C7201 /* LoginMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4384C70B20E27C72000C7201 /* LoginMenuCoordinator.swift */; };
 		4386717420DAA77E00459EA8 /* WalletCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4386717320DAA77E00459EA8 /* WalletCardViewModel.swift */; };
 		4387980A20584335005261C8 /* InternalCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4387980920584335005261C8 /* InternalCard.swift */; };
 		438BE842204D51FD007EBFB9 /* HamburgerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438BE841204D51FD007EBFB9 /* HamburgerButton.swift */; };
@@ -220,6 +221,7 @@
 		4376F49D204D9DF800B179C3 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		4376F49F204D9E2700B179C3 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		4376F4A2204D9F9D00B179C3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		4384C70B20E27C72000C7201 /* LoginMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMenuCoordinator.swift; sourceTree = "<group>"; };
 		4386717320DAA77E00459EA8 /* WalletCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCardViewModel.swift; sourceTree = "<group>"; };
 		4387980920584335005261C8 /* InternalCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalCard.swift; sourceTree = "<group>"; };
 		438BE841204D51FD007EBFB9 /* HamburgerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HamburgerButton.swift; sourceTree = "<group>"; };
@@ -537,6 +539,7 @@
 				4376F49D204D9DF800B179C3 /* HomeCoordinator.swift */,
 				43D7A77D205A90CC00238E29 /* MenuCoordinator.swift */,
 				4319B1812063EF72007CE18D /* LoginCoordinator.swift */,
+				4384C70B20E27C72000C7201 /* LoginMenuCoordinator.swift */,
 				4316ED9C208DE00800A40F97 /* RegistrationCoordinator.swift */,
 				431F8AB520A074BA00B1E0F1 /* MnemonicCoordinator.swift */,
 				43FA7D3820B4924B006BD513 /* EmailConfirmationCoordinator.swift */,
@@ -1070,6 +1073,7 @@
 				4376F4A3204D9F9D00B179C3 /* HomeViewModel.swift in Sources */,
 				43D7A775205A84B300238E29 /* R.generated.swift in Sources */,
 				4322BA2F205BD69F007FEB5E /* ResponseMock.swift in Sources */,
+				4384C70C20E27C72000C7201 /* LoginMenuCoordinator.swift in Sources */,
 				43D131E220569950000483C4 /* HomeViewController.swift in Sources */,
 				4319B17E2063EE0E007CE18D /* LoginViewController.swift in Sources */,
 				43FA7D3920B4924B006BD513 /* EmailConfirmationCoordinator.swift in Sources */,

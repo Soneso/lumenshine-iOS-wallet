@@ -11,6 +11,7 @@ import OneTimePassword
 
 protocol LoginViewModelType: Transitionable {
     var barItems: [(String, String)] { get }
+    func barItemSelected(at index:Int)
     
     func loginCompleted()
     func showLoginForm()
@@ -52,6 +53,18 @@ class LoginViewModel : LoginViewModelType {
                 (R.string.localizable.more(), R.image.more.name)]
     }
     
+    func barItemSelected(at index:Int) {
+        switch index {
+        case 0:
+            break
+        case 1:
+            break
+        case 2:
+            showHeaderMenu()
+        default: break
+        }
+    }
+    
     func loginCompleted() {
         if let user = self.user {
             navigationCoordinator?.performTransition(transition: .showDashboard(user))
@@ -87,13 +100,7 @@ class LoginViewModel : LoginViewModelType {
     
     func loginStep1(email: String, tfaCode: String?, response: @escaping Login1ResponseClosure) {
         self.email = email
-        var token: String?
-        if let tfa = tfaCode, !tfa.isEmpty {
-            token = tfa
-        } else {
-            token = TFAGeneration.generatePassword(email: email)
-        }
-        service.loginStep1(email: email, tfaCode: token) { result in
+        service.loginStep1(email: email, tfaCode: tfaCode) { result in
             response(result)
         }
     }
@@ -108,7 +115,10 @@ class LoginViewModel : LoginViewModelType {
                         response(result)
                     }
                 } else {
-                    response(.failure(error: .badCredentials))
+                    let error = ErrorResponse()
+                    error.parameterName = "password"
+                    error.errorMessage = R.string.localizable.invalid_password()
+                    response(.failure(error: .validationFailed(error: error)))
                 }
             } catch {
                 response(.failure(error: .encryptionFailed(message: error.localizedDescription)))
@@ -148,5 +158,15 @@ extension LoginViewModel {
     
     func authenticateUser(completion: @escaping (String?) -> Void) {
         touchMe.authenticateUser(completion: completion)
+    }
+}
+
+
+fileprivate extension LoginViewModel {
+    func showHeaderMenu() {
+        let items = entries[2...].map {
+            ($0.name, $0.icon.name)
+        }
+        navigationCoordinator?.performTransition(transition: .showHeaderMenu(items))
     }
 }

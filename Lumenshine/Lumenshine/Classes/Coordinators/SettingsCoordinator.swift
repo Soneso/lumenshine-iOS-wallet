@@ -28,7 +28,7 @@ class SettingsCoordinator: CoordinatorType {
 
 fileprivate extension SettingsCoordinator {
     func logout() {
-        let loginCoordinator = LoginCoordinator()
+        let loginCoordinator = LoginMenuCoordinator()
         if let window = UIApplication.shared.delegate?.window ?? baseController.view.window {        
             UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromTop, animations: {
                 window.rootViewController = loginCoordinator.baseController

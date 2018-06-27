@@ -134,11 +134,9 @@ extension MenuViewController: DrawerControllerDelegate {
 }
 
 extension MenuViewController: MenuViewProtocol {
-    func present(_ viewController: UIViewController, updateMenu: Bool = true) {
+    func present(_ viewController: UIViewController) {
         linkMenuButton(to: viewController)
-        if updateMenu {
-            menuButton.showsMenu = drawerController?.drawerSide == .none
-        }
+        menuButton.showsMenu = true
     }
 }
 

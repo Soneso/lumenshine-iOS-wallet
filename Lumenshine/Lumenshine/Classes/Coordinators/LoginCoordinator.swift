@@ -12,23 +12,13 @@ import Material
 class LoginCoordinator: CoordinatorType {
     var baseController: UIViewController
     
-    fileprivate let service: Services
-    fileprivate let menuView: MenuViewController
+    fileprivate let service: AuthService
     
-    init() {
-        self.service = Services()
-//        let viewModel = LoginViewModel(service: service.auth)
-//        let navigation = AppNavigationController(rootViewController: LoginViewController(viewModel: viewModel))
-        
-        let menuViewModel = LoginMenuViewModel(service: service.auth)
-        menuView = MenuViewController(viewModel: menuViewModel)
-        
-        let drawer = AppNavigationDrawerController()
-        drawer.setViewController(menuView, for: .left)
-        
-        self.baseController = drawer
-        menuViewModel.navigationCoordinator = self
-        showLogin(updateMenu: false)
+    init(service: AuthService) {
+        self.service = service
+        let viewModel = LoginViewModel(service: service)
+        self.baseController = LoginViewController(viewModel: viewModel)
+        viewModel.navigationCoordinator = self
     }
     
     func performTransition(transition: Transition) {
@@ -37,16 +27,14 @@ class LoginCoordinator: CoordinatorType {
             showDashboard(user: user)
         case .showSignUp:
             showSignUp()
-        case .showForgotPassword:
-            showForgotPassword()
-        case .showLost2fa:
-            showLost2fa()
         case .show2FA(let user, let registrationResponse):
             show2FA(user: user, response: registrationResponse)
         case .showMnemonic(let user):
             showMnemonicQuiz(user: user)
         case .showEmailConfirmation(let user):
             showEmailConfirmation(user: user)
+        case .showHeaderMenu(let items):
+            showHeaderMenu(items: items)
         default:
             break
         }
@@ -54,12 +42,13 @@ class LoginCoordinator: CoordinatorType {
 }
 
 fileprivate extension LoginCoordinator {
-    func showLogin(updateMenu: Bool = true) {
-        let viewModel = LoginViewModel(service: service.auth)
-        let loginView = LoginViewController(viewModel: viewModel)
-        let navigationController = AppNavigationController(rootViewController: loginView)
-        (baseController as! AppNavigationDrawerController).setViewController(navigationController, for: .none)
-        menuView.present(loginView, updateMenu: updateMenu)
+    func showHeaderMenu(items: [(String, String)]) {
+        let headerVC = HeaderMenuViewController(items: items)
+        headerVC.delegate = self.baseController as! LoginViewController
+        
+        headerVC.modalPresentationStyle = .overCurrentContext
+        
+        self.baseController.present(headerVC, animated: true)
     }
     
     func showDashboard(user: User) {
@@ -73,33 +62,23 @@ fileprivate extension LoginCoordinator {
     }
     
     func showSignUp() {
-        let registrationCoordinator = RegistrationCoordinator(service: service.auth)
+        let registrationCoordinator = RegistrationCoordinator(service: service)
         (baseController as! AppNavigationController).pushViewController(registrationCoordinator.baseController, animated: true)
     }
     
-    func showForgotPassword() {
-        let forgotPasswordCoordinator = ForgotPasswordCoordinator(service: service.auth)
-        (baseController as! AppNavigationController).pushViewController(forgotPasswordCoordinator.baseController, animated: true)
-    }
-    
-    func showLost2fa() {
-        let forgotPasswordCoordinator = Lost2faCoordinator(service: service.auth)
-        (baseController as! AppNavigationController).pushViewController(forgotPasswordCoordinator.baseController, animated: true)
-    }
-    
     func show2FA(user: User, response: RegistrationResponse) {
-        let tfaCoordinator = TFARegistrationCoordinator(service: service.auth, user: user, response: response)
-        (baseController as! AppNavigationController).pushViewController(tfaCoordinator.baseController, animated: true)
+        let tfaCoordinator = TFARegistrationCoordinator(service: service, user: user, response: response)
+        baseController.navigationController?.pushViewController(tfaCoordinator.baseController, animated: true)
     }
     
     func showMnemonicQuiz(user: User) {
-        let mnemonicCoordinator = MnemonicCoordinator(service: service.auth, user: user)
-        (baseController as! AppNavigationController).pushViewController(mnemonicCoordinator.baseController, animated: true)
+        let mnemonicCoordinator = MnemonicCoordinator(service: service, user: user)
+        baseController.navigationController?.pushViewController(mnemonicCoordinator.baseController, animated: true)
     }
     
     func showEmailConfirmation(user: User) {
-        let emailCoordinator = EmailConfirmationCoordinator(service: service.auth, user: user)
-        (baseController as! AppNavigationController).pushViewController(emailCoordinator.baseController, animated: true)
+        let emailCoordinator = EmailConfirmationCoordinator(service: service, user: user)
+        baseController.navigationController?.pushViewController(emailCoordinator.baseController, animated: true)
     }
 }
 

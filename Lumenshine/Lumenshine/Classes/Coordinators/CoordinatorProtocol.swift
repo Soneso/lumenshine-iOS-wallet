@@ -22,19 +22,20 @@ protocol CoordinatorType: class {
 public enum Transition {
     case showDashboard(User)
     case openDashboard
+    case showLogin
+    case showRelogin
     case showSignUp
     case showForgotPassword
     case showLost2fa
     case showHome
     case showSettings
-    case showHeaderMenu([String],[UIImage?])
+    case showHeaderMenu([(String, String)])
     case showOnWeb(URL)
     case showScan
     case show2FA(User, RegistrationResponse)
     case showGoogle2FA(URL)
     case showMnemonic(User)
     case showEmailConfirmation(User)
-    case showRelogin
     case logout
 }
 

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MenuViewProtocol {
-    func present(_ viewController: UIViewController, updateMenu: Bool)
+    func present(_ viewController: UIViewController)
 }
 
 protocol MenuCellProtocol {

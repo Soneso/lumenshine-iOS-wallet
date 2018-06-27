@@ -19,15 +19,13 @@ class HeaderMenuViewController: UIViewController {
     
     // MARK: - Properties
     
-    fileprivate let titles: [String]
-    fileprivate let icons: [UIImage?]
+    fileprivate let items: [(String, String)]
     fileprivate let tableView: UITableView
     
     var delegate: HeaderMenuDelegate?
     
-    init(titles:[String], icons:[UIImage?]) {
-        self.icons = icons
-        self.titles = titles
+    init(items: [(String, String)]) {
+        self.items = items
         tableView = UITableView(frame: .zero, style: .plain)
         super.init(nibName: nil, bundle: nil)
     }
@@ -59,14 +57,15 @@ class HeaderMenuViewController: UIViewController {
 extension HeaderMenuViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return titles.count
+        return items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HeaderMenuViewController.CellIdentifier, for: indexPath)
         
-        cell.textLabel?.text = titles[indexPath.row]
-        cell.imageView?.image = icons[indexPath.row]?.tint(with: Stylesheet.color(.black))
+        cell.textLabel?.text = items[indexPath.row].0
+        let image = UIImage(named: items[indexPath.row].1)
+        cell.imageView?.image =  image?.tint(with: Stylesheet.color(.black))
         cell.selectionStyle = .none
         
         return cell

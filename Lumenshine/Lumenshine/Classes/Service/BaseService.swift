@@ -29,6 +29,16 @@ extension ServiceError: LocalizedError {
         }
     }
     
+    public var parameterName: String? {
+        switch self {
+        case .validationFailed(let error):
+            return error.parameterName
+        default:
+            return nil
+        }
+    }
+    
+    
     public var errorDescription: String? {
         switch self {
         case .userNotLoggedIn:
@@ -44,7 +54,7 @@ extension ServiceError: LocalizedError {
         case .encryptionFailed(let message):
             return message
         case .validationFailed(let error):
-            return (error.parameterName ?? "") + "\n" + (error.errorMessage ?? "")
+            return error.errorMessage ?? ""
         }
     }
 }

@@ -21,8 +21,8 @@ class HomeCoordinator: CoordinatorType {
     
     func performTransition(transition: Transition) {
         switch transition {
-        case .showHeaderMenu(let titles, let icons):
-            showHeaderMenu(titles: titles, icons: icons)
+        case .showHeaderMenu(let items):
+            showHeaderMenu(items: items)
         case .showOnWeb(let url):
             showOnWeb(url: url)
         case .showScan:
@@ -33,8 +33,8 @@ class HomeCoordinator: CoordinatorType {
 }
 
 fileprivate extension HomeCoordinator {
-    func showHeaderMenu(titles: [String], icons: [UIImage?]) {
-        let headerVC = HeaderMenuViewController(titles: titles, icons: icons)
+    func showHeaderMenu(items: [(String, String)]) {
+        let headerVC = HeaderMenuViewController(items: items)
         headerVC.delegate = self.baseController as! HomeViewController
         
         headerVC.modalPresentationStyle = .overCurrentContext
