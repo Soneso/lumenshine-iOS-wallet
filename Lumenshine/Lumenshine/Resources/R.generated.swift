@@ -40,18 +40,22 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 19 images.
+  /// This `R.image` struct is generated, and contains static references to 22 images.
   struct image {
     /// Image `FaceIcon`.
     static let faceIcon = Rswift.ImageResource(bundle: R.hostingBundle, name: "FaceIcon")
     /// Image `MenuColor`.
     static let menuColor = Rswift.ImageResource(bundle: R.hostingBundle, name: "MenuColor")
-    /// Image `Touch-icon-lg`.
-    static let touchIconLg = Rswift.ImageResource(bundle: R.hostingBundle, name: "Touch-icon-lg")
+    /// Image `TouchIcon`.
+    static let touchIcon = Rswift.ImageResource(bundle: R.hostingBundle, name: "TouchIcon")
     /// Image `combination_lock`.
     static let combination_lock = Rswift.ImageResource(bundle: R.hostingBundle, name: "combination_lock")
     /// Image `compose`.
     static let compose = Rswift.ImageResource(bundle: R.hostingBundle, name: "compose")
+    /// Image `face_recognition`.
+    static let face_recognition = Rswift.ImageResource(bundle: R.hostingBundle, name: "face_recognition")
+    /// Image `fingerprint`.
+    static let fingerprint = Rswift.ImageResource(bundle: R.hostingBundle, name: "fingerprint")
     /// Image `gear`.
     static let gear = Rswift.ImageResource(bundle: R.hostingBundle, name: "gear")
     /// Image `home`.
@@ -70,8 +74,10 @@ struct R: Rswift.Validatable {
     static let question = Rswift.ImageResource(bundle: R.hostingBundle, name: "question")
     /// Image `rocket`.
     static let rocket = Rswift.ImageResource(bundle: R.hostingBundle, name: "rocket")
-    /// Image `sign`.
-    static let sign = Rswift.ImageResource(bundle: R.hostingBundle, name: "sign")
+    /// Image `signIn`.
+    static let signIn = Rswift.ImageResource(bundle: R.hostingBundle, name: "signIn")
+    /// Image `signOut`.
+    static let signOut = Rswift.ImageResource(bundle: R.hostingBundle, name: "signOut")
     /// Image `star`.
     static let star = Rswift.ImageResource(bundle: R.hostingBundle, name: "star")
     /// Image `top_list`.
@@ -91,9 +97,9 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.menuColor, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "Touch-icon-lg", bundle: ..., traitCollection: ...)`
-    static func touchIconLg(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.touchIconLg, compatibleWith: traitCollection)
+    /// `UIImage(named: "TouchIcon", bundle: ..., traitCollection: ...)`
+    static func touchIcon(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.touchIcon, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "combination_lock", bundle: ..., traitCollection: ...)`
@@ -104,6 +110,16 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "compose", bundle: ..., traitCollection: ...)`
     static func compose(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.compose, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "face_recognition", bundle: ..., traitCollection: ...)`
+    static func face_recognition(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.face_recognition, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "fingerprint", bundle: ..., traitCollection: ...)`
+    static func fingerprint(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.fingerprint, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "gear", bundle: ..., traitCollection: ...)`
@@ -151,9 +167,14 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.rocket, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "sign", bundle: ..., traitCollection: ...)`
-    static func sign(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.sign, compatibleWith: traitCollection)
+    /// `UIImage(named: "signIn", bundle: ..., traitCollection: ...)`
+    static func signIn(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.signIn, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "signOut", bundle: ..., traitCollection: ...)`
+    static func signOut(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.signOut, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "star", bundle: ..., traitCollection: ...)`
@@ -274,7 +295,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 107 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 112 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -476,6 +497,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let lost_password = Rswift.StringResource(key: "lost_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Lumenshine
+      /// 
+      /// Locales: en
+      static let app_name = Rswift.StringResource(key: "app_name", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: M
       /// 
       /// Locales: en
@@ -576,6 +601,18 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let settings = Rswift.StringResource(key: "settings", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Setup Face Recognition
+      /// 
+      /// Locales: en
+      static let face_recognition = Rswift.StringResource(key: "face_recognition", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Setup Fingerprint
+      /// 
+      /// Locales: en
+      static let fingerprint = Rswift.StringResource(key: "fingerprint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Sign Out
+      /// 
+      /// Locales: en
+      static let signout = Rswift.StringResource(key: "signout", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Sign up
       /// 
       /// Locales: en
@@ -648,6 +685,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let wallets = Rswift.StringResource(key: "wallets", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Welcome
+      /// 
+      /// Locales: en
+      static let welcome = Rswift.StringResource(key: "welcome", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Withdraw money
       /// 
       /// Locales: en
@@ -1055,6 +1096,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("lost_password", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Lumenshine
+      /// 
+      /// Locales: en
+      static func app_name(_: Void = ()) -> String {
+        return NSLocalizedString("app_name", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: M
       /// 
       /// Locales: en
@@ -1230,6 +1278,27 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("settings", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Setup Face Recognition
+      /// 
+      /// Locales: en
+      static func face_recognition(_: Void = ()) -> String {
+        return NSLocalizedString("face_recognition", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Setup Fingerprint
+      /// 
+      /// Locales: en
+      static func fingerprint(_: Void = ()) -> String {
+        return NSLocalizedString("fingerprint", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Sign Out
+      /// 
+      /// Locales: en
+      static func signout(_: Void = ()) -> String {
+        return NSLocalizedString("signout", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Sign up
       /// 
       /// Locales: en
@@ -1354,6 +1423,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func wallets(_: Void = ()) -> String {
         return NSLocalizedString("wallets", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Welcome
+      /// 
+      /// Locales: en
+      static func welcome(_: Void = ()) -> String {
+        return NSLocalizedString("welcome", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Withdraw money

@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
     fileprivate let usernameTextField = TextField()
     fileprivate let passwordTextField = TextField()
     fileprivate let tfaCodeTextField = TextField()
-    fileprivate let headerBar = UIView()
+    fileprivate let headerBar = ToolbarHeader()
     fileprivate let verticalSpacing = 40.0
     
     init(viewModel: LoginViewModelType) {
@@ -128,9 +128,9 @@ extension LoginViewController: UITextFieldDelegate {
     }
 }
 
-extension LoginViewController: UITabBarDelegate {
-    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        viewModel.barItemSelected(at: item.tag)
+extension LoginViewController: ToolbarHeaderDelegate {
+    func toolbar(_ toolbar: ToolbarHeader, didSelectAt index: Int) {
+        viewModel.barItemSelected(at: index)
     }
 }
 
@@ -165,63 +165,14 @@ fileprivate extension LoginViewController {
     }
     
     func prepareHeader() {
-        
-        headerBar.backgroundColor = Stylesheet.color(.cyan)
+        headerBar.delegate = self
+        headerBar.setTitle(viewModel.headerTitle)
+        headerBar.setDetail(viewModel.headerDetail)
+        headerBar.setItems(viewModel.barItems)
         
         contentView.addSubview(headerBar)
         headerBar.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
-        }
-        
-        let label = UILabel()
-        label.text = "Lumenshine"
-        label.font = UIFont.systemFont(ofSize: 25.0)
-        label.textColor = Stylesheet.color(.orange)
-        label.textAlignment = .center
-        label.sizeToFit()
-        
-        headerBar.addSubview(label)
-        label.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
-        }
-        
-        let label2 = UILabel()
-        label2.text = "Welcome"
-        label2.font = UIFont.systemFont(ofSize: 18.0)
-        label2.textColor = Stylesheet.color(.white)
-        label2.textAlignment = .center
-        label2.sizeToFit()
-        
-        headerBar.addSubview(label2)
-        label2.snp.makeConstraints { make in
-            make.top.equalTo(label.snp.bottom)
-            make.left.right.equalToSuperview()
-        }
-        
-        let tabBar = UITabBar()
-        tabBar.delegate = self
-        tabBar.backgroundImage = UIImage.image(with: Stylesheet.color(.clear), size: CGSize(width: 10, height: 10))
-        tabBar.tintColor = Stylesheet.color(.yellow)
-        tabBar.unselectedItemTintColor = Stylesheet.color(.white)
-        tabBar.shadowImage = UIImage.image(with: Stylesheet.color(.clear), size: CGSize(width: 10, height: 10))
-        tabBar.itemWidth = 90
-        tabBar.itemSpacing = 50
-        
-        var items = [UITabBarItem]()
-        for (index, value) in viewModel.barItems.enumerated() {
-            let image = UIImage(named: value.1)
-            let item = UITabBarItem(title: value.0, image: image, tag: index)
-            items.append(item)
-        }
-        tabBar.items = items
-        tabBar.selectedItem = items.first
-        
-        headerBar.addSubview(tabBar)
-        tabBar.snp.makeConstraints { make in
-            make.top.equalTo(label2.snp.bottom).offset(10)
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
-            make.bottom.equalTo(-10)
         }
     }
     

@@ -19,7 +19,6 @@
 		43088DAE2087AD2A008AE1AB /* UserSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43088DAD2087AD2A008AE1AB /* UserSecurity.swift */; };
 		43088DB02087C4B8008AE1AB /* Dictionary+HTTPParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43088DAF2087C4B8008AE1AB /* Dictionary+HTTPParams.swift */; };
 		431082B020DE3F8D00852502 /* LoginMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431082AF20DE3F8D00852502 /* LoginMenuViewModel.swift */; };
-		431082B220DE426900852502 /* LoginMenuEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431082B120DE426900852502 /* LoginMenuEntry.swift */; };
 		431437EF2047FF4500189C83 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431437EE2047FF4500189C83 /* MenuViewController.swift */; };
 		431437F22047FF9100189C83 /* AppNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431437F12047FF9100189C83 /* AppNavigationController.swift */; };
 		431437F42047FFB400189C83 /* AppNavigationDrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431437F32047FFB400189C83 /* AppNavigationDrawerController.swift */; };
@@ -69,6 +68,8 @@
 		4376F49E204D9DF800B179C3 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4376F49D204D9DF800B179C3 /* HomeCoordinator.swift */; };
 		4376F4A0204D9E2700B179C3 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4376F49F204D9E2700B179C3 /* CoordinatorProtocol.swift */; };
 		4376F4A3204D9F9D00B179C3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4376F4A2204D9F9D00B179C3 /* HomeViewModel.swift */; };
+		43844F3E20E3FE2600C352E5 /* ReLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43844F3D20E3FE2600C352E5 /* ReLoginViewModel.swift */; };
+		43844F4020E401B500C352E5 /* ReLoginMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43844F3F20E401B500C352E5 /* ReLoginMenuViewModel.swift */; };
 		4384C70C20E27C72000C7201 /* LoginMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4384C70B20E27C72000C7201 /* LoginMenuCoordinator.swift */; };
 		4386717420DAA77E00459EA8 /* WalletCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4386717320DAA77E00459EA8 /* WalletCardViewModel.swift */; };
 		4387980A20584335005261C8 /* InternalCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4387980920584335005261C8 /* InternalCard.swift */; };
@@ -96,6 +97,9 @@
 		43D7A77B205A892E00238E29 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43D7A777205A892E00238E29 /* Localizable.strings */; };
 		43D7A77C205A892E00238E29 /* Common.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43D7A779205A892E00238E29 /* Common.strings */; };
 		43D7A77E205A90CC00238E29 /* MenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D7A77D205A90CC00238E29 /* MenuCoordinator.swift */; };
+		43DAC65420E4BA3900E491D8 /* BiometricAuthenticationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DAC65320E4BA3900E491D8 /* BiometricAuthenticationProtocol.swift */; };
+		43DAC65620E4EB2C00E491D8 /* ReLoginMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DAC65520E4EB2C00E491D8 /* ReLoginMenuCoordinator.swift */; };
+		43DAC65820E4FF0A00E491D8 /* ToolbarHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DAC65720E4FF0A00E491D8 /* ToolbarHeader.swift */; };
 		43E13E8820D97DA000409129 /* WalletCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E13E8720D97DA000409129 /* WalletCard.swift */; };
 		43ECA9CA208B3C4400CB571E /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ECA9C9208B3C4400CB571E /* RegistrationViewModel.swift */; };
 		43ECA9CC208B530000CB571E /* RegistrationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ECA9CB208B530000CB571E /* RegistrationTableViewCell.swift */; };
@@ -166,7 +170,6 @@
 		43088DAD2087AD2A008AE1AB /* UserSecurity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSecurity.swift; sourceTree = "<group>"; };
 		43088DAF2087C4B8008AE1AB /* Dictionary+HTTPParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+HTTPParams.swift"; sourceTree = "<group>"; };
 		431082AF20DE3F8D00852502 /* LoginMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMenuViewModel.swift; sourceTree = "<group>"; };
-		431082B120DE426900852502 /* LoginMenuEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMenuEntry.swift; sourceTree = "<group>"; };
 		431437EE2047FF4500189C83 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		431437F12047FF9100189C83 /* AppNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigationController.swift; sourceTree = "<group>"; };
 		431437F32047FFB400189C83 /* AppNavigationDrawerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigationDrawerController.swift; sourceTree = "<group>"; };
@@ -221,6 +224,8 @@
 		4376F49D204D9DF800B179C3 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		4376F49F204D9E2700B179C3 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		4376F4A2204D9F9D00B179C3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		43844F3D20E3FE2600C352E5 /* ReLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginViewModel.swift; sourceTree = "<group>"; };
+		43844F3F20E401B500C352E5 /* ReLoginMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginMenuViewModel.swift; sourceTree = "<group>"; };
 		4384C70B20E27C72000C7201 /* LoginMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMenuCoordinator.swift; sourceTree = "<group>"; };
 		4386717320DAA77E00459EA8 /* WalletCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCardViewModel.swift; sourceTree = "<group>"; };
 		4387980920584335005261C8 /* InternalCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalCard.swift; sourceTree = "<group>"; };
@@ -248,6 +253,9 @@
 		43D7A778205A892E00238E29 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		43D7A77A205A892E00238E29 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Common.strings; sourceTree = "<group>"; };
 		43D7A77D205A90CC00238E29 /* MenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCoordinator.swift; sourceTree = "<group>"; };
+		43DAC65320E4BA3900E491D8 /* BiometricAuthenticationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricAuthenticationProtocol.swift; sourceTree = "<group>"; };
+		43DAC65520E4EB2C00E491D8 /* ReLoginMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginMenuCoordinator.swift; sourceTree = "<group>"; };
+		43DAC65720E4FF0A00E491D8 /* ToolbarHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarHeader.swift; sourceTree = "<group>"; };
 		43E13E8720D97DA000409129 /* WalletCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCard.swift; sourceTree = "<group>"; };
 		43ECA9C9208B3C4400CB571E /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		43ECA9CB208B530000CB571E /* RegistrationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTableViewCell.swift; sourceTree = "<group>"; };
@@ -444,6 +452,7 @@
 			children = (
 				4319B18F2063FA8F007CE18D /* KeychainPasswordItem.swift */,
 				4319B1882063FA46007CE18D /* BiometricIDAuth.swift */,
+				43DAC65320E4BA3900E491D8 /* BiometricAuthenticationProtocol.swift */,
 			);
 			path = TouchID;
 			sourceTree = "<group>";
@@ -467,7 +476,6 @@
 				43088DAD2087AD2A008AE1AB /* UserSecurity.swift */,
 				4391A52F20D159190015A6DA /* RegistrationEntry.swift */,
 				434E049C20D4154700D3235A /* MenuEntry.swift */,
-				431082B120DE426900852502 /* LoginMenuEntry.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -548,6 +556,7 @@
 				4394911D20BEBDFA008D4FA2 /* SettingsCoordinator.swift */,
 				431E7A282095D0E8003A63B3 /* TFARegistrationCoordinator.swift */,
 				4301312920C049CB00E47E83 /* ReLoginCoordinator.swift */,
+				43DAC65520E4EB2C00E491D8 /* ReLoginMenuCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -557,8 +566,10 @@
 			children = (
 				4376F4A2204D9F9D00B179C3 /* HomeViewModel.swift */,
 				43D131E52056E3BD000483C4 /* CardViewModel.swift */,
-				4319B17F2063EEA9007CE18D /* LoginViewModel.swift */,
 				431082AF20DE3F8D00852502 /* LoginMenuViewModel.swift */,
+				43844F3F20E401B500C352E5 /* ReLoginMenuViewModel.swift */,
+				4319B17F2063EEA9007CE18D /* LoginViewModel.swift */,
+				43844F3D20E3FE2600C352E5 /* ReLoginViewModel.swift */,
 				4319B1832063F00C007CE18D /* MenuViewModel.swift */,
 				43ECA9C9208B3C4400CB571E /* RegistrationViewModel.swift */,
 				431E7A262095B2C0003A63B3 /* TFARegistrationViewModel.swift */,
@@ -610,6 +621,7 @@
 			isa = PBXGroup;
 			children = (
 				4391A52D20D141300015A6DA /* EnumPicker.swift */,
+				43DAC65720E4FF0A00E491D8 /* ToolbarHeader.swift */,
 			);
 			path = ReusableComponents;
 			sourceTree = "<group>";
@@ -1022,6 +1034,7 @@
 				43D131E42056D439000483C4 /* CardTableViewCell.swift in Sources */,
 				43EFF204204939F700B1887C /* UIColor+Utils.swift in Sources */,
 				431E7A252095B178003A63B3 /* TFARegistrationViewController.swift in Sources */,
+				43DAC65820E4FF0A00E491D8 /* ToolbarHeader.swift in Sources */,
 				4376F49E204D9DF800B179C3 /* HomeCoordinator.swift in Sources */,
 				43044914206BE7B400349B51 /* MnemonicViewController.swift in Sources */,
 				4394911E20BEBDFA008D4FA2 /* SettingsCoordinator.swift in Sources */,
@@ -1036,6 +1049,7 @@
 				431437F42047FFB400189C83 /* AppNavigationDrawerController.swift in Sources */,
 				4314B9EF2048060F006DBE63 /* MaterialIcon.swift in Sources */,
 				43088DAA20879AC7008AE1AB /* RandomBytesSequence.swift in Sources */,
+				43DAC65620E4EB2C00E491D8 /* ReLoginMenuCoordinator.swift in Sources */,
 				43D131E82056EAC6000483C4 /* ChartCard.swift in Sources */,
 				4376F4A0204D9E2700B179C3 /* CoordinatorProtocol.swift in Sources */,
 				4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */,
@@ -1058,15 +1072,17 @@
 				4319B1842063F00C007CE18D /* MenuViewModel.swift in Sources */,
 				4359984B20A438EF00007F27 /* LoginStep1Response.swift in Sources */,
 				43C6377A20BEFF2B00498FC5 /* ReLoginViewController.swift in Sources */,
+				43844F4020E401B500C352E5 /* ReLoginMenuViewModel.swift in Sources */,
+				43844F3E20E3FE2600C352E5 /* ReLoginViewModel.swift in Sources */,
 				43D7A77E205A90CC00238E29 /* MenuCoordinator.swift in Sources */,
 				436FE5082052634300CFE788 /* WebCard.swift in Sources */,
 				436B366F20512114009F7C21 /* FlexibleHeightBar.swift in Sources */,
 				4319B1822063EF72007CE18D /* LoginCoordinator.swift in Sources */,
 				434E049B20D3DC8A00D3235A /* DateUtils+Format.swift in Sources */,
 				4391A53220D170420015A6DA /* CountryListResponse.swift in Sources */,
-				431082B220DE426900852502 /* LoginMenuEntry.swift in Sources */,
 				43088DB02087C4B8008AE1AB /* Dictionary+HTTPParams.swift in Sources */,
 				431F8AB620A074BA00B1E0F1 /* MnemonicCoordinator.swift in Sources */,
+				43DAC65420E4BA3900E491D8 /* BiometricAuthenticationProtocol.swift in Sources */,
 				4390D57C205FA4EF00383BB2 /* HomeService.swift in Sources */,
 				4391A52E20D141300015A6DA /* EnumPicker.swift in Sources */,
 				43FBEE452062853A004E2BB1 /* ScanViewController.swift in Sources */,

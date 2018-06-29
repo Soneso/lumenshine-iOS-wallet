@@ -10,8 +10,8 @@ import Foundation
 
 class LoginMenuViewModel : MenuViewModelType {
     fileprivate let service: AuthService
-    fileprivate let entries: [[LoginMenuEntry]]
-    fileprivate var lastIndex = IndexPath(row: 0, section: 1)
+    var entries: [[MenuEntry]]
+    var lastIndex: IndexPath?
     
     var navigationCoordinator: CoordinatorType?
     
@@ -58,8 +58,8 @@ class LoginMenuViewModel : MenuViewModelType {
     func countBackgroundTime() {}
 }
 
-fileprivate extension LoginMenuViewModel {
-    func entry(at indexPath: IndexPath) -> LoginMenuEntry {
+extension LoginMenuViewModel {
+    func entry(at indexPath: IndexPath) -> MenuEntry {
         return entries[indexPath.section][indexPath.row]
     }
 }

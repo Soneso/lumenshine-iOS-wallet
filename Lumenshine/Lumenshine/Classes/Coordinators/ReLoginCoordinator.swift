@@ -11,8 +11,8 @@ import UIKit
 class ReLoginCoordinator: CoordinatorType {
     var baseController: UIViewController
     
-    init(service: AuthService) {
-        let viewModel = LoginViewModel(service: service)
+    init(service: AuthService, user: User) {
+        let viewModel = ReLoginViewModel(service: service, user: user)
         self.baseController = ReLoginViewController(viewModel: viewModel)
         viewModel.navigationCoordinator = self
     }
@@ -21,8 +21,10 @@ class ReLoginCoordinator: CoordinatorType {
         switch transition {
         case .openDashboard:
             openDashboard()
-        case .logout:
-            logout()
+        case .logout(let transition):
+            logout(transtion: transition)
+        case .showRelogin:
+            showRelogin()
         default:
             break
         }
@@ -34,13 +36,16 @@ fileprivate extension ReLoginCoordinator {
         baseController.dismiss(animated: true, completion: nil)
     }
     
-    func logout() {
-        let loginCoordinator = LoginMenuCoordinator()
-        
+    func logout(transtion: Transition?) {
+        let loginCoordinator = LoginMenuCoordinator(transition: transtion)
         if let window = UIApplication.shared.delegate?.window ?? baseController.view.window {
             UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromTop, animations: {
                 window.rootViewController = loginCoordinator.baseController
             }, completion: nil)
         }
+    }
+    
+    func showRelogin() {
+
     }
 }

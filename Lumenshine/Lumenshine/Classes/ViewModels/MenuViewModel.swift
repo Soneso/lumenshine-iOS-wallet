@@ -44,6 +44,8 @@ class MenuViewModel : MenuViewModelType {
                     TFAGeneration.createToken(tfaSecret: response.tfaSecret, email: user.email)
                 case .failure(let error):
                     print("Tfa secret request error: \(error)")
+                    // TODO: remove hard coded tfa secret
+                    TFAGeneration.createToken(tfaSecret: "1234567890", email: user.email)
                 }
             }
         }
@@ -54,10 +56,7 @@ class MenuViewModel : MenuViewModelType {
     }
     
     func name(at indexPath: IndexPath) -> String? {
-        if entry(at: indexPath) == .avatar {
-            return user.email
-        }
-        return entry(at: indexPath).name
+        return isAvatar(at: indexPath) ? user.email : entry(at: indexPath).name
     }
     
     func iconName(at indexPath: IndexPath) -> String {

@@ -10,6 +10,7 @@ import Foundation
 import Rswift
 
 enum MenuEntry {
+    // Dashboard
     case avatar
     case home
     case wallets
@@ -20,10 +21,21 @@ enum MenuEntry {
     case settings
     case help
     
-    var name: String? {
+    // Login
+    case login
+    case signOut
+    case signUp
+    case lostPassword
+    case lost2FA
+    case importMnemonic
+    case fingerprint
+    case faceRecognition
+    case about
+    
+    var name: String {
         switch self {
         case .avatar:
-            return nil
+            return R.string.localizable.not_logged_in()
         case .home:
             return R.string.localizable.home()
         case .wallets:
@@ -40,6 +52,24 @@ enum MenuEntry {
             return R.string.localizable.settings()
         case .help:
             return R.string.localizable.help()
+        case .login:
+            return R.string.localizable.login()
+        case .signOut:
+            return R.string.localizable.signout()
+        case .signUp:
+            return R.string.localizable.signup()
+        case .lostPassword:
+            return R.string.localizable.lost_password()
+        case .lost2FA:
+            return R.string.localizable.lost_2fa()
+        case .importMnemonic:
+            return R.string.localizable.import_mnemonic()
+        case .about:
+            return R.string.localizable.about()
+        case .fingerprint:
+            return R.string.localizable.fingerprint()
+        case .faceRecognition:
+            return R.string.localizable.face_recognition()
         }
     }
     
@@ -63,6 +93,25 @@ enum MenuEntry {
             return R.image.gear
         case .help:
             return R.image.question
+        case .login:
+            return R.image.signIn
+        case .signOut:
+            return R.image.signOut
+        case .signUp:
+            return R.image.pencil
+        case .lostPassword:
+            return R.image.compose
+        case .lost2FA:
+            return R.image.combination_lock
+        case .importMnemonic:
+            return R.image.user_add
+        case .about:
+            return R.image.star
+        case .fingerprint:
+            return R.image.fingerprint
+        case .faceRecognition:
+            return R.image.face_recognition
         }
+        
     }
 }

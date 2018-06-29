@@ -15,7 +15,7 @@ class LoginMenuCoordinator: CoordinatorType {
     fileprivate let service: Services
     fileprivate let menuView: MenuViewController
     
-    init() {
+    init(transition: Transition? = .showLogin) {
         self.service = Services()
         
         let menuViewModel = LoginMenuViewModel(service: service.auth)
@@ -26,7 +26,7 @@ class LoginMenuCoordinator: CoordinatorType {
         
         self.baseController = drawer
         menuViewModel.navigationCoordinator = self
-        showLogin()
+        performTransition(transition: transition ?? .showLogin)
     }
     
     func performTransition(transition: Transition) {

@@ -17,10 +17,10 @@ class ReLoginViewController: UIViewController {
     
     // MARK: - UI properties
     fileprivate let loginButton = RaisedButton()
-    fileprivate let accountButton = RaisedButton()
-    fileprivate let usernameTextField = TextField()
+    fileprivate let forgotPasswordButton = RaisedButton()
     fileprivate let passwordTextField = TextField()
     fileprivate let touchIDButton = Button()
+    fileprivate let headerBar = ToolbarHeader()
     
     init(viewModel: LoginViewModelType) {
         self.viewModel = viewModel
@@ -41,17 +41,20 @@ class ReLoginViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let storedUsername = UserDefaults.standard.value(forKey: "username") as? String {
-            usernameTextField.text = storedUsername
-        }
         if let touchEnabled = UserDefaults.standard.value(forKey: "touchEnabled") as? Bool,
-            touchEnabled == true {
+            touchEnabled == true,
+            viewModel.canEvaluatePolicy() {
             touchIDLogin()
         }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
+    }
+    
+    override func resignFirstResponder() -> Bool {
+        passwordTextField.resignFirstResponder()
+        return super.resignFirstResponder()
     }
 }
 
@@ -64,20 +67,16 @@ extension ReLoginViewController {
     
     @objc
     func reloginAction(sender: UIButton) {
-        guard let accountName = usernameTextField.text,
-            let password = passwordTextField.text,
-            !accountName.isEmpty,
+        guard let password = passwordTextField.text,
             !password.isEmpty else {
-                let alert = AlertFactory.createAlert(title: R.string.localizable.sign_in_error_msg(),
-                                                     message: R.string.localizable.bad_credentials())
-                present(alert, animated: true)
+                passwordTextField.detail = R.string.localizable.invalid_password()
                 return
         }
         
         passwordTextField.resignFirstResponder()
         passwordTextField.text = nil
         
-        viewModel.loginStep1(email: accountName, tfaCode: nil) { result in
+        viewModel.loginStep1(email: "", tfaCode: nil) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let login1Response):
@@ -89,15 +88,13 @@ extension ReLoginViewController {
                                 case .success(let login2Response):
                                     self.viewModel.verifyLogin2Response(login2Response)
                                 case .failure(let error):
-                                    let alert = AlertFactory.createAlert(error: error)
-                                    self.present(alert, animated: true)
+                                    self.present(error: error)
                                 }
                             })
                         }
                     }
                 case .failure(let error):
-                    let alert = AlertFactory.createAlert(error: error)
-                    self.present(alert, animated: true)
+                    self.present(error: error)
                 }
             }
         }
@@ -106,24 +103,31 @@ extension ReLoginViewController {
     @objc
     func touchIDLogin() {
         viewModel.authenticateUser() { [weak self] error in
-            if let message = error {
-                guard !message.isEmpty else { return }
-                let alert = AlertFactory.createAlert(title: R.string.localizable.error(),
-                                         message: message)
-                self?.present(alert, animated: true)
-            } else {
+            if error == nil {
                 self?.viewModel.loginCompleted()
             }
         }
+    }
+    
+    @objc
+    func forgotPasswordAction(sender: UIButton) {
+        viewModel.forgotPasswordClick()
+    }
+}
+
+extension ReLoginViewController: ToolbarHeaderDelegate {
+    func toolbar(_ toolbar: ToolbarHeader, didSelectAt index: Int) {
+        viewModel.barItemSelected(at: index)
     }
 }
 
 fileprivate extension ReLoginViewController {
     func prepareView() {
         view.backgroundColor = Stylesheet.color(.white)
+        prepareHeader()
         prepareTextFields()
         prepareLoginButton()
-        prepareAccountButton()
+        prepareForgotPasswordButton()
         
         if let touchEnabled = UserDefaults.standard.value(forKey: "touchEnabled") as? Bool,
             touchEnabled == true,
@@ -132,62 +136,63 @@ fileprivate extension ReLoginViewController {
         }
     }
     
+    func prepareHeader() {
+        headerBar.delegate = self
+        headerBar.setTitle(viewModel.headerTitle)
+        headerBar.setDetail(viewModel.headerDetail)
+        headerBar.setItems(viewModel.barItems, selectedAt: 1)
+        
+        view.addSubview(headerBar)
+        headerBar.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+        }
+    }
+    
     func prepareTextFields() {
-        usernameTextField.placeholder = R.string.localizable.username()
-        passwordTextField.placeholder = R.string.localizable.password()
         
         passwordTextField.isSecureTextEntry = true
-        usernameTextField.keyboardType = .emailAddress
-        usernameTextField.autocapitalizationType = .none
-        usernameTextField.isEnabled = false
-        
-        usernameTextField.dividerActiveColor = Stylesheet.color(.cyan)
-        usernameTextField.placeholderActiveColor = Stylesheet.color(.cyan)
+        passwordTextField.placeholder = R.string.localizable.password()
+        passwordTextField.detailColor = Stylesheet.color(.red)
         passwordTextField.dividerActiveColor = Stylesheet.color(.cyan)
         passwordTextField.placeholderActiveColor = Stylesheet.color(.cyan)
         
-        view.addSubview(usernameTextField)
-        usernameTextField.snp.makeConstraints { make in
-            make.top.equalTo(50)
-            make.left.equalTo(40)
-            make.right.equalTo(-40)
-        }
-        
         view.addSubview(passwordTextField)
         passwordTextField.snp.makeConstraints { make in
-            make.top.equalTo(usernameTextField.snp.bottom).offset(40)
-            make.left.equalTo(usernameTextField)
-            make.right.equalTo(usernameTextField)
+            make.top.equalTo(headerBar.snp.bottom).offset(40)
+            make.left.equalTo(40)
+            make.right.equalTo(-40)
         }
     }
     
     func prepareLoginButton() {
-        loginButton.title = R.string.localizable.login()
+        loginButton.title = R.string.localizable.submit()
         loginButton.backgroundColor = Stylesheet.color(.cyan)
         loginButton.titleColor = Stylesheet.color(.white)
+        loginButton.titleLabel?.adjustsFontSizeToFitWidth = true
         loginButton.addTarget(self, action: #selector(reloginAction(sender:)), for: .touchUpInside)
         
         view.addSubview(loginButton)
         loginButton.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(30)
-            make.left.equalTo(usernameTextField)
-            make.right.equalTo(usernameTextField)
-            make.height.equalTo(50)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(40)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(110)
+            make.height.equalTo(44)
         }
     }
     
-    func prepareAccountButton() {
-        accountButton.title = R.string.localizable.account_different()
-        accountButton.backgroundColor = Stylesheet.color(.cyan)
-        accountButton.titleColor = Stylesheet.color(.white)
-        accountButton.addTarget(self, action: #selector(changeAccountAction(sender:)), for: .touchUpInside)
+    func prepareForgotPasswordButton() {
+        forgotPasswordButton.title = R.string.localizable.lost_password()
+        forgotPasswordButton.backgroundColor = Stylesheet.color(.cyan)
+        forgotPasswordButton.titleColor = Stylesheet.color(.white)
+        forgotPasswordButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        forgotPasswordButton.addTarget(self, action: #selector(forgotPasswordAction(sender:)), for: .touchUpInside)
         
-        view.addSubview(accountButton)
-        accountButton.snp.makeConstraints { make in
+        view.addSubview(forgotPasswordButton)
+        forgotPasswordButton.snp.makeConstraints { make in
             make.top.equalTo(loginButton.snp.bottom).offset(20)
-            make.left.equalTo(usernameTextField)
-            make.right.equalTo(usernameTextField)
-            make.height.equalTo(50)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(160)
+            make.height.equalTo(44)
         }
     }
     
@@ -205,6 +210,10 @@ fileprivate extension ReLoginViewController {
             make.centerX.equalToSuperview()
             make.bottom.equalTo(-20)
         }
+    }
+    
+    func present(error: ServiceError) {
+        passwordTextField.detail = error.errorDescription
     }
 }
 

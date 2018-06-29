@@ -15,8 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    fileprivate let loginCoordinator = LoginMenuCoordinator()
+//    fileprivate let loginCoordinator = LoginMenuCoordinator()
 //    fileprivate let loginCoordinator = MenuCoordinator(user: User(id: "1", email: "isti@isti.com", publicKeyIndex0: "publicKeyIndex0", publicKeyIndex188: "publicKeyIndex188", mnemonic: "mnemonic"))
+    fileprivate let loginCoordinator = ReLoginMenuCoordinator(service: Services().auth, user: User(id: "1", email: "isti@isti.com", publicKeyIndex0: "publicKeyIndex0", publicKeyIndex188: "publicKeyIndex188", mnemonic: "mnemonic"))
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

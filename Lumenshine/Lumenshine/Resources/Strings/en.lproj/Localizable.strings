@@ -44,6 +44,9 @@
 "logout" = "Log Out";
 
 /*  */
+"signout" = "Sign Out";
+
+/*  */
 "signup" = "Sign up";
 
 /*  */
@@ -116,6 +119,12 @@
 "title" = "Title";
 
 /*  */
+"app_name" = "Lumenshine";
+
+/*  */
+"welcome" = "Welcome";
+
+/*  */
 "street_address" = "Street address";
 
 /*  */
@@ -171,6 +180,12 @@
 
 /*  */
 "about" = "About";
+
+/*  */
+"fingerprint" = "Setup Fingerprint";
+
+/*  */
+"face_recognition" = "Setup Face Recognition";
 
 /*  */
 "touch_id" = "Touch ID";

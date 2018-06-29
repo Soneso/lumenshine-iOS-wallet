@@ -73,6 +73,6 @@ fileprivate extension SettingsViewModel {
     func logout() {
         TFAGeneration.removeToken(email: user.email)
         BaseService.removeToken()
-        navigationCoordinator?.performTransition(transition: .logout)
+        navigationCoordinator?.performTransition(transition: .logout(nil))
     }
 }

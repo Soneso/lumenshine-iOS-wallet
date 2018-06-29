@@ -19,7 +19,7 @@ protocol CoordinatorType: class {
     func performTransition(transition: Transition)
 }
 
-public enum Transition {
+public indirect enum Transition {
     case showDashboard(User)
     case openDashboard
     case showLogin
@@ -36,6 +36,6 @@ public enum Transition {
     case showGoogle2FA(URL)
     case showMnemonic(User)
     case showEmailConfirmation(User)
-    case logout
+    case logout(Transition?)
 }
 

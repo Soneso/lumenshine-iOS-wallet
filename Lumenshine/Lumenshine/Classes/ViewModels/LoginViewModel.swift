@@ -9,9 +9,12 @@
 import Foundation
 import OneTimePassword
 
-protocol LoginViewModelType: Transitionable {
+protocol LoginViewModelType: Transitionable, BiometricAuthenticationProtocol {
     var barItems: [(String, String)] { get }
     func barItemSelected(at index:Int)
+    
+    var headerTitle: String { get }
+    var headerDetail: String { get }
     
     func loginCompleted()
     func showLoginForm()
@@ -24,25 +27,19 @@ protocol LoginViewModelType: Transitionable {
     func lost2faClick()
     func verifyLogin1Response(_ login1Response: LoginStep1Response, password: String, response: @escaping Login2ResponseClosure)
     func verifyLogin2Response(_ login2Response: LoginStep2Response)
-    
-    func biometricType() -> BiometricType
-    func canEvaluatePolicy() -> Bool
-    func authenticateUser(completion: @escaping (String?) -> Void)
 }
 
 class LoginViewModel : LoginViewModelType {
-    fileprivate let touchMe: BiometricIDAuth
     fileprivate let service: AuthService
     fileprivate var email: String?
     fileprivate var user: User?
-    fileprivate let entries: [LoginMenuEntry]
+    var entries: [MenuEntry]
     
     var navigationCoordinator: CoordinatorType?
     
     init(service: AuthService, user: User? = nil) {
         self.service = service
         self.user = user
-        touchMe = BiometricIDAuth()
         
         self.entries = [.login, .signUp, .lostPassword, .lost2FA, .importMnemonic, .about, .help]
     }
@@ -65,18 +62,23 @@ class LoginViewModel : LoginViewModelType {
         }
     }
     
+    var headerTitle: String {
+        return R.string.localizable.app_name()
+    }
+    
+    var headerDetail: String {
+        return R.string.localizable.welcome()
+    }
+    
     func loginCompleted() {
         if let user = self.user {
             navigationCoordinator?.performTransition(transition: .showDashboard(user))
-        } else {
-            navigationCoordinator?.performTransition(transition: .openDashboard)
         }
-        touchMe.invalidate()
     }
     
     func showLoginForm() {
         BaseService.removeToken()
-        navigationCoordinator?.performTransition(transition: .logout)
+        navigationCoordinator?.performTransition(transition: .logout(nil))
     }
     
     func signUpClick() {
@@ -143,24 +145,17 @@ class LoginViewModel : LoginViewModelType {
             loginCompleted()
         }
     }
-}
-
-// MARK: Biometric authentication
-extension LoginViewModel {
     
     func biometricType() -> BiometricType {
-        return touchMe.biometricType()
+        return .none
     }
     
     func canEvaluatePolicy() -> Bool {
-        return touchMe.canEvaluatePolicy()
+        return false
     }
     
-    func authenticateUser(completion: @escaping (String?) -> Void) {
-        touchMe.authenticateUser(completion: completion)
-    }
+    func authenticateUser(completion: @escaping (String?) -> Void) {}
 }
-
 
 fileprivate extension LoginViewModel {
     func showHeaderMenu() {
