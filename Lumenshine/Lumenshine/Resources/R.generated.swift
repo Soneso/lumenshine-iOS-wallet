@@ -295,7 +295,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 112 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 113 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -449,6 +449,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let lbl_mnemonic_button_title = Rswift.StringResource(key: "lbl_mnemonic_button_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: If you make this setup, the app will request your %@ instead of password when opened. Entering the password will not be required each time you open the app. To setup %@ please first insert your password below.
+      /// 
+      /// Locales: en
+      static let hint_face_fingerprint = Rswift.StringResource(key: "hint_face_fingerprint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Import mnemonic
       /// 
       /// Locales: en
@@ -1010,6 +1014,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func lbl_mnemonic_button_title(_: Void = ()) -> String {
         return NSLocalizedString("lbl_mnemonic_button_title", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: If you make this setup, the app will request your %@ instead of password when opened. Entering the password will not be required each time you open the app. To setup %@ please first insert your password below.
+      /// 
+      /// Locales: en
+      static func hint_face_fingerprint(_ value1: String, _ value2: String) -> String {
+        return String(format: NSLocalizedString("hint_face_fingerprint", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1, value2)
       }
       
       /// en translation: Import mnemonic

@@ -21,9 +21,10 @@ protocol CoordinatorType: class {
 
 public indirect enum Transition {
     case showDashboard(User)
-    case openDashboard
+    case openDashboard(Transition?)
     case showLogin
     case showRelogin
+    case showFingerprint
     case showSignUp
     case showForgotPassword
     case showLost2fa

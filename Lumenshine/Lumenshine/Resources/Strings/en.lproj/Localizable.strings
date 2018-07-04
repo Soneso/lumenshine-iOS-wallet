@@ -188,6 +188,9 @@
 "face_recognition" = "Setup Face Recognition";
 
 /*  */
+"hint_face_fingerprint" = "If you make this setup, the app will request your %@ instead of password when opened. Entering the password will not be required each time you open the app. To setup %@ please first insert your password below.";
+
+/*  */
 "touch_id" = "Touch ID";
 
 /*  */

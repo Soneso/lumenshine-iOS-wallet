@@ -15,6 +15,7 @@ protocol LoginViewModelType: Transitionable, BiometricAuthenticationProtocol {
     
     var headerTitle: String { get }
     var headerDetail: String { get }
+    var hintText: String? { get }
     
     func loginCompleted()
     func showLoginForm()
@@ -68,6 +69,10 @@ class LoginViewModel : LoginViewModelType {
     
     var headerDetail: String {
         return R.string.localizable.welcome()
+    }
+    
+    var hintText: String? {
+        return nil
     }
     
     func loginCompleted() {

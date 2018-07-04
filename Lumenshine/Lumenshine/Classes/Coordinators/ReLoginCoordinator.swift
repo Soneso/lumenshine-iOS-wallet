@@ -25,6 +25,8 @@ class ReLoginCoordinator: CoordinatorType {
             logout(transtion: transition)
         case .showRelogin:
             showRelogin()
+        case .showFingerprint:
+            showFingerprint()
         default:
             break
         }
@@ -46,6 +48,10 @@ fileprivate extension ReLoginCoordinator {
     }
     
     func showRelogin() {
-
+        (baseController as! ReLoginViewController).showHome()
+    }
+    
+    func showFingerprint() {
+        (baseController as! ReLoginViewController).showFingerprint()
     }
 }

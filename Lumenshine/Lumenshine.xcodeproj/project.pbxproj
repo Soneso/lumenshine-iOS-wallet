@@ -47,6 +47,8 @@
 		4322BA33205BDB6E007FEB5E /* CardsResponsesMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA32205BDB6E007FEB5E /* CardsResponsesMock.swift */; };
 		4322BA35205BDD58007FEB5E /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA34205BDD58007FEB5E /* Card.swift */; };
 		4337C4E72081BAA400F4585A /* RegistrationFormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4337C4E62081BAA400F4585A /* RegistrationFormTableViewController.swift */; };
+		4341251120EBC2C700267260 /* ReLoginHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4341251020EBC2C700267260 /* ReLoginHomeView.swift */; };
+		4341251320EBC2E900267260 /* ReLoginFingerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4341251220EBC2E900267260 /* ReLoginFingerView.swift */; };
 		434E049B20D3DC8A00D3235A /* DateUtils+Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434E049A20D3DC8A00D3235A /* DateUtils+Format.swift */; };
 		434E049D20D4154700D3235A /* MenuEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434E049C20D4154700D3235A /* MenuEntry.swift */; };
 		4359984B20A438EF00007F27 /* LoginStep1Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4359984A20A438EF00007F27 /* LoginStep1Response.swift */; };
@@ -198,6 +200,8 @@
 		4322BA32205BDB6E007FEB5E /* CardsResponsesMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsResponsesMock.swift; sourceTree = "<group>"; };
 		4322BA34205BDD58007FEB5E /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		4337C4E62081BAA400F4585A /* RegistrationFormTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationFormTableViewController.swift; sourceTree = "<group>"; };
+		4341251020EBC2C700267260 /* ReLoginHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginHomeView.swift; sourceTree = "<group>"; };
+		4341251220EBC2E900267260 /* ReLoginFingerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginFingerView.swift; sourceTree = "<group>"; };
 		434E049A20D3DC8A00D3235A /* DateUtils+Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateUtils+Format.swift"; sourceTree = "<group>"; };
 		434E049C20D4154700D3235A /* MenuEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuEntry.swift; sourceTree = "<group>"; };
 		4359984A20A438EF00007F27 /* LoginStep1Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStep1Response.swift; sourceTree = "<group>"; };
@@ -443,6 +447,8 @@
 			children = (
 				4319B17D2063EE0E007CE18D /* LoginViewController.swift */,
 				43C6377920BEFF2B00498FC5 /* ReLoginViewController.swift */,
+				4341251020EBC2C700267260 /* ReLoginHomeView.swift */,
+				4341251220EBC2E900267260 /* ReLoginFingerView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1084,6 +1090,7 @@
 				431F8AB620A074BA00B1E0F1 /* MnemonicCoordinator.swift in Sources */,
 				43DAC65420E4BA3900E491D8 /* BiometricAuthenticationProtocol.swift in Sources */,
 				4390D57C205FA4EF00383BB2 /* HomeService.swift in Sources */,
+				4341251320EBC2E900267260 /* ReLoginFingerView.swift in Sources */,
 				4391A52E20D141300015A6DA /* EnumPicker.swift in Sources */,
 				43FBEE452062853A004E2BB1 /* ScanViewController.swift in Sources */,
 				4376F4A3204D9F9D00B179C3 /* HomeViewModel.swift in Sources */,
@@ -1103,6 +1110,7 @@
 				4391A52B20D139D60015A6DA /* CountryResponse.swift in Sources */,
 				4319B1802063EEA9007CE18D /* LoginViewModel.swift in Sources */,
 				43920D9A2057EECA0040003C /* CardView.swift in Sources */,
+				4341251120EBC2C700267260 /* ReLoginHomeView.swift in Sources */,
 				7435EA7220BAD452008CC667 /* ForgotPasswordViewController.swift in Sources */,
 				436B366E20512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift in Sources */,
 				43EFF20620493B4900B1887C /* Stylesheet.swift in Sources */,

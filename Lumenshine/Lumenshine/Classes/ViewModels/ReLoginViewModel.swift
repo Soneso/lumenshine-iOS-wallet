@@ -41,7 +41,7 @@ class ReLoginViewModel : LoginViewModel {
         case 1:
             navigationCoordinator?.performTransition(transition: .showRelogin)
         case 2:
-            break
+            navigationCoordinator?.performTransition(transition: .showFingerprint)
         default: break
         }
     }
@@ -54,8 +54,14 @@ class ReLoginViewModel : LoginViewModel {
         return "\(R.string.localizable.welcome()) \(R.string.localizable.back())\n\(user.email)"
     }
     
+    override var hintText: String? {
+        let text = biometricType() == .faceID ? "face recognition" : "fingerprint"
+        return R.string.localizable.hint_face_fingerprint(text, text)
+    }
+    
+    
     override func loginCompleted() {
-        navigationCoordinator?.performTransition(transition: .openDashboard)
+        navigationCoordinator?.performTransition(transition: .openDashboard(.showSettings))
         touchMe.invalidate()
     }
     
