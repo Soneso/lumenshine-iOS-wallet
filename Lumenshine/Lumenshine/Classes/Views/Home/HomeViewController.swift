@@ -129,7 +129,7 @@ fileprivate extension HomeViewController {
     }
     
     func prepareHeader() {
-        headerBar = FlexibleHeightBar(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: 150.0))
+        headerBar = FlexibleHeightBar(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: 185.0))
         headerBar.minimumBarHeight = 0.0
 
         headerBar.backgroundColor = Stylesheet.color(.cyan)
@@ -146,32 +146,22 @@ fileprivate extension HomeViewController {
         label.textAlignment = .center
         label.sizeToFit()
         
-        headerBar.addSubview(label)
-        
-        let tabBar = UITabBar()
-        tabBar.delegate = self
-        tabBar.backgroundImage = UIImage.image(with: Stylesheet.color(.clear), size: CGSize(width: 10, height: 10))
-        tabBar.tintColor = Stylesheet.color(.white)
-        tabBar.unselectedItemTintColor = Stylesheet.color(.white)
-        tabBar.shadowImage = UIImage.image(with: Stylesheet.color(.clear), size: CGSize(width: 10, height: 10))
-
-        var items = [UITabBarItem]()
-        for (index, value) in viewModel.barTitles.enumerated() {
-            let image = viewModel.barIcons[index]
-            let item = UITabBarItem(title: value, image: image, tag: index)
-            items.append(item)
+        let header = HomeHeaderView()
+        header.type = .unfounded
+        header.unfoundedView.foundAction = {(button) in
+            self.viewModel.foundAccount()
         }
-        tabBar.items = items
         
-        headerBar.addSubview(tabBar)
-        tabBar.snp.makeConstraints { make in
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
-            make.bottom.equalTo(-10)
+        headerBar.addSubview(header)
+        header.snp.makeConstraints { make in
+            make.left.equalTo(0)
+            make.right.equalTo(0)
+            make.top.equalTo(0)
+            make.bottom.equalTo(0)
         }
         
         let initialLayoutAttributes = FlexibleHeightBarSubviewLayoutAttributes()
-        initialLayoutAttributes.size = label.frame.size
+        initialLayoutAttributes.size = headerBar.frame.size
         initialLayoutAttributes.center = CGPoint(x: headerBar.bounds.midX, y: headerBar.bounds.minY + 10.0)
         
         // This is what we want the bar to look like at its maximum height (progress == 0.0)
@@ -201,11 +191,5 @@ fileprivate extension HomeViewController {
             }, loadingView: loadingView)
         tableView.dg_setPullToRefreshFillColor(Stylesheet.color(.cyan))
         tableView.dg_setPullToRefreshBackgroundColor(tableView.backgroundColor!)
-    }
-}
-
-extension HomeViewController: UITabBarDelegate {
-    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        viewModel.barItemSelected(at: item.tag)
     }
 }

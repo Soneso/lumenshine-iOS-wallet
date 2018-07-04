@@ -10,6 +10,7 @@ def ui_components_and_helper_pods
     pod 'KWDrawerController'
     pod 'DGElasticPullToRefresh'
     pod 'Charts'
+    pod 'LTMorphingLabel'
 end
 
 target 'Lumenshine' do
@@ -18,7 +19,7 @@ target 'Lumenshine' do
   ui_components_and_helper_pods
   
   pod 'R.swift'
-  pod 'stellar-ios-mac-sdk'
+  pod 'stellar-ios-mac-sdk', '~> 1.1.4'
   pod 'IQKeyboardManagerSwift'
   pod 'OneTimePassword'
   pod 'SwiftRichString'

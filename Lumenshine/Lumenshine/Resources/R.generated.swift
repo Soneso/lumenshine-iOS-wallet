@@ -200,16 +200,37 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.nib` struct is generated, and contains static references to 2 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 5 nibs.
   struct nib {
     /// Nib `ForgotPasswordViewController`.
     static let forgotPasswordViewController = _R.nib._ForgotPasswordViewController()
+    /// Nib `HomeFoundedHeaderView`.
+    static let homeFoundedHeaderView = _R.nib._HomeFoundedHeaderView()
+    /// Nib `HomeUnfoundedHeaderView`.
+    static let homeUnfoundedHeaderView = _R.nib._HomeUnfoundedHeaderView()
+    /// Nib `IconView`.
+    static let iconView = _R.nib._IconView()
     /// Nib `Lost2faViewController`.
     static let lost2faViewController = _R.nib._Lost2faViewController()
     
     /// `UINib(name: "ForgotPasswordViewController", in: bundle)`
     static func forgotPasswordViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.forgotPasswordViewController)
+    }
+    
+    /// `UINib(name: "HomeFoundedHeaderView", in: bundle)`
+    static func homeFoundedHeaderView(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.homeFoundedHeaderView)
+    }
+    
+    /// `UINib(name: "HomeUnfoundedHeaderView", in: bundle)`
+    static func homeUnfoundedHeaderView(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.homeUnfoundedHeaderView)
+    }
+    
+    /// `UINib(name: "IconView", in: bundle)`
+    static func iconView(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.iconView)
     }
     
     /// `UINib(name: "Lost2faViewController", in: bundle)`
@@ -295,7 +316,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 113 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 115 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -429,6 +450,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let forgot_password = Rswift.StringResource(key: "forgot_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Found your wallet
+      /// 
+      /// Locales: en
+      static let homeScreenFoundWallet = Rswift.StringResource(key: "home-screen-found-wallet", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Fund Wallet
       /// 
       /// Locales: en
@@ -505,6 +530,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let app_name = Rswift.StringResource(key: "app_name", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Lumenshine
+      /// 
+      /// Locales: en
+      static let homeScreenTitle = Rswift.StringResource(key: "home-screen-title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: M
       /// 
       /// Locales: en
@@ -981,6 +1010,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("forgot_password", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Found your wallet
+      /// 
+      /// Locales: en
+      static func homeScreenFoundWallet(_: Void = ()) -> String {
+        return NSLocalizedString("home-screen-found-wallet", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Fund Wallet
       /// 
       /// Locales: en
@@ -1112,6 +1148,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func app_name(_: Void = ()) -> String {
         return NSLocalizedString("app_name", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Lumenshine
+      /// 
+      /// Locales: en
+      static func homeScreenTitle(_: Void = ()) -> String {
+        return NSLocalizedString("home-screen-title", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: M
@@ -1565,6 +1608,39 @@ struct _R {
     struct _ForgotPasswordViewController: Rswift.NibResourceType {
       let bundle = R.hostingBundle
       let name = "ForgotPasswordViewController"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _HomeFoundedHeaderView: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "HomeFoundedHeaderView"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> HomeFoundedHeaderView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HomeFoundedHeaderView
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _HomeUnfoundedHeaderView: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "HomeUnfoundedHeaderView"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> HomeUnfoundedHeaderView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HomeUnfoundedHeaderView
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _IconView: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "IconView"
       
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView

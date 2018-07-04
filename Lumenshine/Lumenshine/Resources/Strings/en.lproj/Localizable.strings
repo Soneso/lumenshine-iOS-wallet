@@ -345,3 +345,9 @@
 
 /*  */
 "bad_credentials" = "Wrong account or password";
+
+/*  */
+"home-screen-title" = "Lumenshine";
+
+/*  */
+"home-screen-found-wallet" = "Found your wallet";

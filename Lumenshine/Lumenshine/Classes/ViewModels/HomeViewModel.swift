@@ -9,13 +9,11 @@
 import UIKit
 
 protocol HomeViewModelType: Transitionable {
-    
-    var barTitles: [String] { get }
-    var barIcons: [UIImage?] { get }
+
     var cardViewModels: [CardViewModelType] { get }
     var reloadClosure: (() -> ())? { get set }
     
-    func barItemSelected(at index:Int)
+    func foundAccount()
 }
 
 class HomeViewModel : HomeViewModelType {
@@ -50,7 +48,7 @@ class HomeViewModel : HomeViewModelType {
             }
         }
     }
-    
+
     var cardViewModels: [CardViewModelType]
     var reloadClosure: (() -> ())?
     
@@ -85,6 +83,10 @@ class HomeViewModel : HomeViewModelType {
             showHeaderMenu()
         default: break
         }
+    }
+    
+    func foundAccount() {
+        showScan()
     }
 }
 
