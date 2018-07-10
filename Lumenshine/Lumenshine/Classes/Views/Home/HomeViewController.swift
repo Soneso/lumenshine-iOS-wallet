@@ -18,6 +18,7 @@ class HomeViewController: UIViewController {
     
     fileprivate let viewModel: HomeViewModelType
     fileprivate var headerBar: FlexibleHeightBar!
+    fileprivate var header: HomeHeaderView!
     fileprivate var titleLabel = UILabel()
     fileprivate let tableView: UITableView
     
@@ -33,6 +34,14 @@ class HomeViewController: UIViewController {
                     CardView.create(viewModel: $0)
                 }
                 self.tableView.reloadData()
+            }
+        }
+        
+        viewModel.totalNativeFoundsClosure = { (nativeFounds) in
+            if nativeFounds > 0 {
+                self.header.type = .founded
+            } else {
+                self.header.type = .unfounded
             }
         }
     }
@@ -146,7 +155,7 @@ fileprivate extension HomeViewController {
         label.textAlignment = .center
         label.sizeToFit()
         
-        let header = HomeHeaderView()
+        header = HomeHeaderView()
         header.type = .unfounded
         header.unfoundedView.foundAction = {(button) in
             self.viewModel.foundAccount()

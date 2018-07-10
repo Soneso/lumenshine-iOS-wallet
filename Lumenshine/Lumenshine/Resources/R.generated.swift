@@ -40,7 +40,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 22 images.
+  /// This `R.image` struct is generated, and contains static references to 25 images.
   struct image {
     /// Image `FaceIcon`.
     static let faceIcon = Rswift.ImageResource(bundle: R.hostingBundle, name: "FaceIcon")
@@ -48,6 +48,8 @@ struct R: Rswift.Validatable {
     static let menuColor = Rswift.ImageResource(bundle: R.hostingBundle, name: "MenuColor")
     /// Image `TouchIcon`.
     static let touchIcon = Rswift.ImageResource(bundle: R.hostingBundle, name: "TouchIcon")
+    /// Image `close`.
+    static let close = Rswift.ImageResource(bundle: R.hostingBundle, name: "close")
     /// Image `combination_lock`.
     static let combination_lock = Rswift.ImageResource(bundle: R.hostingBundle, name: "combination_lock")
     /// Image `compose`.
@@ -56,6 +58,8 @@ struct R: Rswift.Validatable {
     static let face_recognition = Rswift.ImageResource(bundle: R.hostingBundle, name: "face_recognition")
     /// Image `fingerprint`.
     static let fingerprint = Rswift.ImageResource(bundle: R.hostingBundle, name: "fingerprint")
+    /// Image `found_account`.
+    static let found_account = Rswift.ImageResource(bundle: R.hostingBundle, name: "found_account")
     /// Image `gear`.
     static let gear = Rswift.ImageResource(bundle: R.hostingBundle, name: "gear")
     /// Image `home`.
@@ -70,6 +74,8 @@ struct R: Rswift.Validatable {
     static let pencil = Rswift.ImageResource(bundle: R.hostingBundle, name: "pencil")
     /// Image `puzzle-piece`.
     static let puzzlePiece = Rswift.ImageResource(bundle: R.hostingBundle, name: "puzzle-piece")
+    /// Image `qr_placeholder`.
+    static let qr_placeholder = Rswift.ImageResource(bundle: R.hostingBundle, name: "qr_placeholder")
     /// Image `question`.
     static let question = Rswift.ImageResource(bundle: R.hostingBundle, name: "question")
     /// Image `rocket`.
@@ -102,6 +108,11 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.touchIcon, compatibleWith: traitCollection)
     }
     
+    /// `UIImage(named: "close", bundle: ..., traitCollection: ...)`
+    static func close(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.close, compatibleWith: traitCollection)
+    }
+    
     /// `UIImage(named: "combination_lock", bundle: ..., traitCollection: ...)`
     static func combination_lock(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.combination_lock, compatibleWith: traitCollection)
@@ -120,6 +131,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "fingerprint", bundle: ..., traitCollection: ...)`
     static func fingerprint(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.fingerprint, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "found_account", bundle: ..., traitCollection: ...)`
+    static func found_account(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.found_account, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "gear", bundle: ..., traitCollection: ...)`
@@ -155,6 +171,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "puzzle-piece", bundle: ..., traitCollection: ...)`
     static func puzzlePiece(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.puzzlePiece, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "qr_placeholder", bundle: ..., traitCollection: ...)`
+    static func qr_placeholder(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.qr_placeholder, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "question", bundle: ..., traitCollection: ...)`
@@ -200,10 +221,12 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.nib` struct is generated, and contains static references to 5 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 6 nibs.
   struct nib {
     /// Nib `ForgotPasswordViewController`.
     static let forgotPasswordViewController = _R.nib._ForgotPasswordViewController()
+    /// Nib `FoundAccountViewController`.
+    static let foundAccountViewController = _R.nib._FoundAccountViewController()
     /// Nib `HomeFoundedHeaderView`.
     static let homeFoundedHeaderView = _R.nib._HomeFoundedHeaderView()
     /// Nib `HomeUnfoundedHeaderView`.
@@ -216,6 +239,11 @@ struct R: Rswift.Validatable {
     /// `UINib(name: "ForgotPasswordViewController", in: bundle)`
     static func forgotPasswordViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.forgotPasswordViewController)
+    }
+    
+    /// `UINib(name: "FoundAccountViewController", in: bundle)`
+    static func foundAccountViewController(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.foundAccountViewController)
     }
     
     /// `UINib(name: "HomeFoundedHeaderView", in: bundle)`
@@ -1592,7 +1620,7 @@ struct R: Rswift.Validatable {
   
   fileprivate struct intern: Rswift.Validatable {
     fileprivate static func validate() throws {
-      // There are no resources to validate
+      try _R.validate()
     }
     
     fileprivate init() {}
@@ -1603,14 +1631,39 @@ struct R: Rswift.Validatable {
   fileprivate init() {}
 }
 
-struct _R {
-  struct nib {
+struct _R: Rswift.Validatable {
+  static func validate() throws {
+    try nib.validate()
+  }
+  
+  struct nib: Rswift.Validatable {
+    static func validate() throws {
+      try _FoundAccountViewController.validate()
+    }
+    
     struct _ForgotPasswordViewController: Rswift.NibResourceType {
       let bundle = R.hostingBundle
       let name = "ForgotPasswordViewController"
       
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _FoundAccountViewController: Rswift.NibResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "FoundAccountViewController"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      }
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "qr_placeholder", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'qr_placeholder' is used in nib 'FoundAccountViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'close' is used in nib 'FoundAccountViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "compose", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'compose' is used in nib 'FoundAccountViewController', but couldn't be loaded.") }
       }
       
       fileprivate init() {}
