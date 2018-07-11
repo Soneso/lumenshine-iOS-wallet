@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0DED82B5E5F4511B406E4F3C /* Pods_LumenshineUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E96EA88565EED8E5E6D02D38 /* Pods_LumenshineUITests.framework */; };
-		33BC1B0B39134888B13400EA /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		33BC1B0B39134888B13400EA /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		4301312A20C049CB00E47E83 /* ReLoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4301312920C049CB00E47E83 /* ReLoginCoordinator.swift */; };
 		43044914206BE7B400349B51 /* MnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43044913206BE7B400349B51 /* MnemonicViewController.swift */; };
 		43044916206BE7E800349B51 /* VerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43044915206BE7E800349B51 /* VerificationViewController.swift */; };
@@ -136,6 +136,11 @@
 		74C08FF320EE1FE6000A809D /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C08FF220EE1FE6000A809D /* UserManager.swift */; };
 		74C08FF820EF6F2F000A809D /* FoundAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C08FF620EF6F2F000A809D /* FoundAccountViewController.swift */; };
 		74C08FF920EF6F2F000A809D /* FoundAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74C08FF720EF6F2F000A809D /* FoundAccountViewController.xib */; };
+		74C0913320F64002000A809D /* WalletCardContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74C0913220F64002000A809D /* WalletCardContentView.xib */; };
+		74C0913520F64012000A809D /* WalletCardContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C0913420F64012000A809D /* WalletCardContentView.swift */; };
+		74C0913B20F64AF0000A809D /* UnfoundedWalletCardContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74C0913A20F64AF0000A809D /* UnfoundedWalletCardContentView.xib */; };
+		74C0913D20F64B03000A809D /* UnfoundedWalletCardContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C0913C20F64B03000A809D /* UnfoundedWalletCardContentView.swift */; };
+		74C0913F20F65A7A000A809D /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C0913E20F65A7A000A809D /* Wallet.swift */; };
 		74E2057820D1543400E94048 /* HomeFoundedHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E2057720D1543400E94048 /* HomeFoundedHeaderView.swift */; };
 		74E2057A20D1544000E94048 /* HomeFoundedHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74E2057920D1544000E94048 /* HomeFoundedHeaderView.xib */; };
 		74E2057F20D2A3B200E94048 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E2057E20D2A3B200E94048 /* IconButton.swift */; };
@@ -315,6 +320,11 @@
 		74C08FF220EE1FE6000A809D /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		74C08FF620EF6F2F000A809D /* FoundAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundAccountViewController.swift; sourceTree = "<group>"; };
 		74C08FF720EF6F2F000A809D /* FoundAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoundAccountViewController.xib; sourceTree = "<group>"; };
+		74C0913220F64002000A809D /* WalletCardContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletCardContentView.xib; sourceTree = "<group>"; };
+		74C0913420F64012000A809D /* WalletCardContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCardContentView.swift; sourceTree = "<group>"; };
+		74C0913A20F64AF0000A809D /* UnfoundedWalletCardContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UnfoundedWalletCardContentView.xib; sourceTree = "<group>"; };
+		74C0913C20F64B03000A809D /* UnfoundedWalletCardContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnfoundedWalletCardContentView.swift; sourceTree = "<group>"; };
+		74C0913E20F65A7A000A809D /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		74E2057720D1543400E94048 /* HomeFoundedHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFoundedHeaderView.swift; sourceTree = "<group>"; };
 		74E2057920D1544000E94048 /* HomeFoundedHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeFoundedHeaderView.xib; sourceTree = "<group>"; };
 		74E2057E20D2A3B200E94048 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
@@ -337,7 +347,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33BC1B0B39134888B13400EA /* BuildFile in Frameworks */,
+				33BC1B0B39134888B13400EA /* (null) in Frameworks */,
 				0DED82B5E5F4511B406E4F3C /* Pods_LumenshineUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -509,6 +519,7 @@
 				43088DAD2087AD2A008AE1AB /* UserSecurity.swift */,
 				4391A52F20D159190015A6DA /* RegistrationEntry.swift */,
 				434E049C20D4154700D3235A /* MenuEntry.swift */,
+				74C0913E20F65A7A000A809D /* Wallet.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -636,6 +647,10 @@
 				74E2058020D2A3C400E94048 /* IconView.xib */,
 				74C08FF620EF6F2F000A809D /* FoundAccountViewController.swift */,
 				74C08FF720EF6F2F000A809D /* FoundAccountViewController.xib */,
+				74C0913220F64002000A809D /* WalletCardContentView.xib */,
+				74C0913420F64012000A809D /* WalletCardContentView.swift */,
+				74C0913A20F64AF0000A809D /* UnfoundedWalletCardContentView.xib */,
+				74C0913C20F64B03000A809D /* UnfoundedWalletCardContentView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -935,6 +950,7 @@
 				74C08FF920EF6F2F000A809D /* FoundAccountViewController.xib in Resources */,
 				746DC58320D1421400AD0856 /* HomeUnfoundedHeaderView.xib in Resources */,
 				744DE2DE20BD7FAE003BC216 /* Lost2faViewController.xib in Resources */,
+				74C0913B20F64AF0000A809D /* UnfoundedWalletCardContentView.xib in Resources */,
 				7435EA7320BAD452008CC667 /* ForgotPasswordViewController.xib in Resources */,
 				43D7A77B205A892E00238E29 /* Localizable.strings in Resources */,
 				7445E9CF2019CF7200470E0A /* LaunchScreen.storyboard in Resources */,
@@ -942,6 +958,7 @@
 				7445E9CC2019CF7200470E0A /* Assets.xcassets in Resources */,
 				4314B9F2204806E5006DBE63 /* MaterialIcons.bundle in Resources */,
 				43D7A77C205A892E00238E29 /* Common.strings in Resources */,
+				74C0913320F64002000A809D /* WalletCardContentView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1099,6 +1116,7 @@
 				4376F49E204D9DF800B179C3 /* HomeCoordinator.swift in Sources */,
 				43044914206BE7B400349B51 /* MnemonicViewController.swift in Sources */,
 				4394911E20BEBDFA008D4FA2 /* SettingsCoordinator.swift in Sources */,
+				74C0913F20F65A7A000A809D /* Wallet.swift in Sources */,
 				4319B1902063FA8F007CE18D /* KeychainPasswordItem.swift in Sources */,
 				4319B1892063FA46007CE18D /* BiometricIDAuth.swift in Sources */,
 				431437F22047FF9100189C83 /* AppNavigationController.swift in Sources */,
@@ -1112,6 +1130,7 @@
 				43088DAA20879AC7008AE1AB /* RandomBytesSequence.swift in Sources */,
 				43DAC65620E4EB2C00E491D8 /* ReLoginMenuCoordinator.swift in Sources */,
 				43D131E82056EAC6000483C4 /* ChartCard.swift in Sources */,
+				74C0913D20F64B03000A809D /* UnfoundedWalletCardContentView.swift in Sources */,
 				4376F4A0204D9E2700B179C3 /* CoordinatorProtocol.swift in Sources */,
 				4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */,
 				4394911C20BEB845008D4FA2 /* SettingsViewModel.swift in Sources */,
@@ -1152,6 +1171,7 @@
 				4341251320EBC2E900267260 /* ReLoginFingerView.swift in Sources */,
 				4391A52E20D141300015A6DA /* EnumPicker.swift in Sources */,
 				43FBEE452062853A004E2BB1 /* ScanViewController.swift in Sources */,
+				74C0913520F64012000A809D /* WalletCardContentView.swift in Sources */,
 				4376F4A3204D9F9D00B179C3 /* HomeViewModel.swift in Sources */,
 				43D7A775205A84B300238E29 /* R.generated.swift in Sources */,
 				4322BA2F205BD69F007FEB5E /* ResponseMock.swift in Sources */,

@@ -49,8 +49,11 @@ class CardView: UIView {
             card = InternalCard()
         case .account:
             card = InternalCard()
-        case .wallet:
-            card = WalletCard()
+        case .wallet(let status):
+            let walletCard = WalletCard()
+            walletCard.status = status
+            card = walletCard
+            
         }
         card.viewModel = viewModel
         return card

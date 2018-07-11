@@ -19,8 +19,14 @@ public enum CoinEnum {
     case failure(error: ServiceError)
 }
 
+public enum WalletsEnum {
+    case success(response: [Wallet])
+    case failure(error: ServiceError)
+}
+
 public typealias BoolClosure = (_ response:BoolEnum) -> (Void)
 public typealias CoinClosure = (_ response:CoinEnum) -> (Void)
+public typealias WalletsClosure = (_ response:WalletsEnum) -> (Void)
 public typealias CoinUnit = Double
 
 public class UserManager: NSObject {
@@ -42,6 +48,29 @@ public class UserManager: NSObject {
             switch result {
             case .success(let data):
                 self.totalBalance(wallets: data, completion: completion)
+            case .failure(let error):
+                completion(.failure(error: error))
+            }
+        }
+    }
+    
+    func walletsForCurrentUser(completion: @escaping WalletsClosure) {
+        walletService.getWallets { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                self.walletDetailsFor(wallets: data) { (result) -> (Void) in
+                    switch result {
+                    case .success(let wallets):
+                        if !wallets.isEmpty {
+                            completion(.success(response: wallets))
+                        } else {
+                            let unfoundedWallet = UnfoundedWallet()
+                            completion(.success(response: [unfoundedWallet]))
+                        }
+                    case .failure(let error):
+                        completion(.failure(error: error))
+                    }
+                }
             case .failure(let error):
                 completion(.failure(error: error))
             }
@@ -81,7 +110,32 @@ public class UserManager: NSObject {
                 }
             }
         }
+    }
+    
+    private func walletDetailsFor(wallets: [WalletsResponse], completion: @escaping WalletsClosure) {
+        guard wallets.count > 0 else {
+            completion(.success(response: []))
+            return
+        }
         
+        var completed = 0
+        var walletDetails = [Wallet]()
+        for wallet in wallets {
+            stellarSDK.accounts.getAccountDetails(accountId: wallet.publicKey) { (result) -> (Void) in
+                switch result {
+                case .success(let accountDetails):
+                    let walletDetail = FoundedWallet(accountResponse: accountDetails)
+                    walletDetails.append(walletDetail)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+                
+                completed += 1
+                if completed == wallets.count {
+                    completion(.success(response: walletDetails))
+                }
+            }
+        }
     }
     
 }

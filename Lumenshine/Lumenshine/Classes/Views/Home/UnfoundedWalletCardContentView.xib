@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="MEy-Lv-QCt" customClass="UnfoundedWalletCardContentView" customModule="Lumenshine" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="247"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="02c-sm-4KK">
+                    <rect key="frame" x="16" y="16" width="343" height="21.5"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UWs-ZR-OhZ">
+                    <rect key="frame" x="16" y="75.5" width="343" height="18"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wgI-xg-A9r">
+                    <rect key="frame" x="0.0" y="192" width="375" height="55"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U2Y-cq-O7Y">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="Bpp-Yl-zui"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f69-AE-dcV">
+                            <rect key="frame" x="269" y="0.0" width="90" height="55"/>
+                            <state key="normal" title="Found Wallet"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p9g-xS-zVJ">
+                            <rect key="frame" x="16" y="0.0" width="28" height="55"/>
+                            <state key="normal" image="question"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="p9g-xS-zVJ" firstAttribute="leading" secondItem="VWl-F4-CNx" secondAttribute="leading" constant="16" id="Ev4-4b-jyY"/>
+                        <constraint firstItem="f69-AE-dcV" firstAttribute="top" secondItem="VWl-F4-CNx" secondAttribute="top" id="J7e-ld-zxZ"/>
+                        <constraint firstItem="VWl-F4-CNx" firstAttribute="trailing" secondItem="f69-AE-dcV" secondAttribute="trailing" constant="16" id="JqJ-cW-erC"/>
+                        <constraint firstAttribute="height" constant="55" id="KJq-7H-bHl"/>
+                        <constraint firstItem="f69-AE-dcV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="p9g-xS-zVJ" secondAttribute="trailing" constant="16" id="NEd-k8-c5P"/>
+                        <constraint firstItem="U2Y-cq-O7Y" firstAttribute="top" secondItem="wgI-xg-A9r" secondAttribute="top" id="Reh-Cq-Mgz"/>
+                        <constraint firstItem="U2Y-cq-O7Y" firstAttribute="leading" secondItem="wgI-xg-A9r" secondAttribute="leading" id="cx5-qG-jai"/>
+                        <constraint firstItem="p9g-xS-zVJ" firstAttribute="top" secondItem="VWl-F4-CNx" secondAttribute="top" id="f8J-L4-h2Q"/>
+                        <constraint firstAttribute="trailing" secondItem="U2Y-cq-O7Y" secondAttribute="trailing" id="rNB-Dj-bHI"/>
+                        <constraint firstItem="VWl-F4-CNx" firstAttribute="bottom" secondItem="f69-AE-dcV" secondAttribute="bottom" id="rgI-eA-2qO"/>
+                        <constraint firstItem="VWl-F4-CNx" firstAttribute="bottom" secondItem="p9g-xS-zVJ" secondAttribute="bottom" id="v9S-Vk-gJu"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="VWl-F4-CNx"/>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(not founded)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QmJ-VE-oES">
+                    <rect key="frame" x="16" y="41.5" width="343" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.98823529409999999" green="0.047058823530000002" blue="0.1058823529" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="0 XLM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXd-hR-sCL">
+                    <rect key="frame" x="16" y="97.5" width="343" height="62.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="wgI-xg-A9r" firstAttribute="top" secondItem="LXd-hR-sCL" secondAttribute="bottom" constant="32" id="1cB-lU-L18"/>
+                <constraint firstItem="wgI-xg-A9r" firstAttribute="trailing" secondItem="ye4-CW-sVN" secondAttribute="trailing" id="Afm-gH-GVT"/>
+                <constraint firstItem="LXd-hR-sCL" firstAttribute="top" secondItem="UWs-ZR-OhZ" secondAttribute="bottom" constant="4" id="BBO-mC-4gi"/>
+                <constraint firstItem="ye4-CW-sVN" firstAttribute="trailing" secondItem="LXd-hR-sCL" secondAttribute="trailing" constant="16" id="KYi-9N-1hr"/>
+                <constraint firstItem="ye4-CW-sVN" firstAttribute="trailing" secondItem="QmJ-VE-oES" secondAttribute="trailing" constant="16" id="QnV-G6-sgO"/>
+                <constraint firstItem="UWs-ZR-OhZ" firstAttribute="top" secondItem="QmJ-VE-oES" secondAttribute="bottom" constant="16" id="SVa-rd-BiS"/>
+                <constraint firstItem="wgI-xg-A9r" firstAttribute="leading" secondItem="ye4-CW-sVN" secondAttribute="leading" id="V6V-G0-1f0"/>
+                <constraint firstItem="ye4-CW-sVN" firstAttribute="trailing" secondItem="UWs-ZR-OhZ" secondAttribute="trailing" constant="16" id="a1X-rr-aUx"/>
+                <constraint firstItem="ye4-CW-sVN" firstAttribute="trailing" secondItem="02c-sm-4KK" secondAttribute="trailing" constant="16" id="bIO-jH-gwI"/>
+                <constraint firstItem="LXd-hR-sCL" firstAttribute="leading" secondItem="ye4-CW-sVN" secondAttribute="leading" constant="16" id="bTj-J2-x14"/>
+                <constraint firstItem="02c-sm-4KK" firstAttribute="leading" secondItem="ye4-CW-sVN" secondAttribute="leading" constant="16" id="chE-s9-S7I"/>
+                <constraint firstItem="02c-sm-4KK" firstAttribute="top" secondItem="ye4-CW-sVN" secondAttribute="top" constant="16" id="cyH-6k-1AN"/>
+                <constraint firstItem="QmJ-VE-oES" firstAttribute="top" secondItem="02c-sm-4KK" secondAttribute="bottom" constant="4" id="e1z-Fc-obi"/>
+                <constraint firstItem="QmJ-VE-oES" firstAttribute="leading" secondItem="ye4-CW-sVN" secondAttribute="leading" constant="16" id="evS-Nh-wr9"/>
+                <constraint firstItem="wgI-xg-A9r" firstAttribute="bottom" secondItem="ye4-CW-sVN" secondAttribute="bottom" id="gvl-3F-9Zi"/>
+                <constraint firstItem="UWs-ZR-OhZ" firstAttribute="leading" secondItem="ye4-CW-sVN" secondAttribute="leading" constant="16" id="l5Q-dP-pKG"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="ye4-CW-sVN"/>
+            <point key="canvasLocation" x="33.5" y="-119.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="question" width="28" height="28"/>
+    </resources>
+</document>

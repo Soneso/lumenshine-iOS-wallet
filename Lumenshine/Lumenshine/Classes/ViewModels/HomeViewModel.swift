@@ -40,13 +40,24 @@ class HomeViewModel : HomeViewModelType {
                 viewModel.navigationCoordinator = self.navigationCoordinator
                 return viewModel
             }
-            
-            let viewModel = WalletCardViewModel(user: user)
-            viewModel.navigationCoordinator = self.navigationCoordinator
-            self.cardViewModels.append(viewModel)
-            
+
             if let reload = self.reloadClosure {
                 reload()
+            }
+        }
+        
+        userManager.walletsForCurrentUser { (result) -> (Void) in
+            switch result {
+            case .success(let wallets):
+                for wallet in wallets {
+                    let viewModel = WalletCardViewModel(wallet: wallet)
+                    viewModel.navigationCoordinator = self.navigationCoordinator
+                    self.cardViewModels.append(viewModel)
+                    
+                    self.reloadClosure?()
+                }
+            case .failure(_):
+                print("Failed to get wallets")
             }
         }
         

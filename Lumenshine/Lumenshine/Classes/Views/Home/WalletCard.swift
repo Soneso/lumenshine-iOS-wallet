@@ -10,6 +10,11 @@ import UIKit
 import Material
 import SnapKit
 
+enum WalletStatus {
+    case founded
+    case unfounded
+}
+
 protocol WalletCardProtocol {
     
 }
@@ -17,6 +22,19 @@ protocol WalletCardProtocol {
 class WalletCard: CardView {
     
     fileprivate let textLabel = UILabel()
+    
+    var status: WalletStatus! {
+        didSet {
+            switch status {
+            case .founded:
+                addFoundedView()
+            case .unfounded:
+                addUnfoundedView()
+            default:
+                print("error")
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,4 +69,21 @@ fileprivate extension WalletCard {
             make.bottom.right.equalTo(-10)
         }
     }
+    
+    func addFoundedView() {
+        let foundedView = Bundle.main.loadNibNamed("WalletCardContentView", owner: nil, options: nil)![0] as! WalletCardContentView
+        foundedView.frame = contentView.bounds
+        foundedView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        contentView.addSubview(foundedView)
+    }
+    
+    func addUnfoundedView() {
+        let foundedView = Bundle.main.loadNibNamed("UnfoundedWalletCardContentView", owner: nil, options: nil)![0] as! UnfoundedWalletCardContentView
+        foundedView.frame = contentView.bounds
+        foundedView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        contentView.addSubview(foundedView)
+    }
+    
 }

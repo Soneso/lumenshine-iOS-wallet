@@ -8,12 +8,31 @@
 
 import Foundation
 
-enum CardType: Int {
+enum CardType {
     case web
     case intern
     case chart
     case account
-    case wallet
+    case wallet(status: WalletStatus)
+    
+    static func fromInt(value: Int) -> CardType {
+        switch value {
+        case 0:
+            return .web
+        case 1:
+            return .intern
+        case 2:
+            return .chart
+        case 3:
+            return .account
+        case 4:
+            return .wallet(status: .founded)
+        case 5:
+            return .wallet(status: .unfounded)
+        default:
+            fatalError("Invalid card type")
+        }
+    }
 }
 
 class Card: NSObject, Decodable {
@@ -39,7 +58,7 @@ class Card: NSObject, Decodable {
     public required init(from decoder: Decoder) throws {
         
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        type = try CardType(rawValue: values.decode(Int.self, forKey: .type))
+        type = try CardType.fromInt(value: values.decode(Int.self, forKey: .type))
         title = try values.decode(String.self, forKey: .title)
         descript = try values.decode(String.self, forKey: .description)
         detail = try values.decodeIfPresent(String.self, forKey: .detail)

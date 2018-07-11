@@ -221,7 +221,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.nib` struct is generated, and contains static references to 6 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 8 nibs.
   struct nib {
     /// Nib `ForgotPasswordViewController`.
     static let forgotPasswordViewController = _R.nib._ForgotPasswordViewController()
@@ -235,6 +235,10 @@ struct R: Rswift.Validatable {
     static let iconView = _R.nib._IconView()
     /// Nib `Lost2faViewController`.
     static let lost2faViewController = _R.nib._Lost2faViewController()
+    /// Nib `UnfoundedWalletCardContentView`.
+    static let unfoundedWalletCardContentView = _R.nib._UnfoundedWalletCardContentView()
+    /// Nib `WalletCardContentView`.
+    static let walletCardContentView = _R.nib._WalletCardContentView()
     
     /// `UINib(name: "ForgotPasswordViewController", in: bundle)`
     static func forgotPasswordViewController(_: Void = ()) -> UIKit.UINib {
@@ -264,6 +268,16 @@ struct R: Rswift.Validatable {
     /// `UINib(name: "Lost2faViewController", in: bundle)`
     static func lost2faViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.lost2faViewController)
+    }
+    
+    /// `UINib(name: "UnfoundedWalletCardContentView", in: bundle)`
+    static func unfoundedWalletCardContentView(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.unfoundedWalletCardContentView)
+    }
+    
+    /// `UINib(name: "WalletCardContentView", in: bundle)`
+    static func walletCardContentView(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.walletCardContentView)
     }
     
     fileprivate init() {}
@@ -1638,7 +1652,9 @@ struct _R: Rswift.Validatable {
   
   struct nib: Rswift.Validatable {
     static func validate() throws {
+      try _UnfoundedWalletCardContentView.validate()
       try _FoundAccountViewController.validate()
+      try _WalletCardContentView.validate()
     }
     
     struct _ForgotPasswordViewController: Rswift.NibResourceType {
@@ -1708,6 +1724,36 @@ struct _R: Rswift.Validatable {
       
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _UnfoundedWalletCardContentView: Rswift.NibResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "UnfoundedWalletCardContentView"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UnfoundedWalletCardContentView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UnfoundedWalletCardContentView
+      }
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "question", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'question' is used in nib 'UnfoundedWalletCardContentView', but couldn't be loaded.") }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _WalletCardContentView: Rswift.NibResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "WalletCardContentView"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> WalletCardContentView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? WalletCardContentView
+      }
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "question", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'question' is used in nib 'WalletCardContentView', but couldn't be loaded.") }
       }
       
       fileprivate init() {}
