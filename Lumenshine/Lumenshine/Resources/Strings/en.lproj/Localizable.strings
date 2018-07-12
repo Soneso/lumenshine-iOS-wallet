@@ -104,6 +104,9 @@
 "password" = "Password";
 
 /*  */
+"repeat_password" = "Repeat Password";
+
+/*  */
 "forename" = "Forename";
 
 /*  */
@@ -341,6 +344,9 @@
 "invalid_password" = "Invalid password.";
 
 /*  */
+"invalid_repassword" = "Repetition do not match with password.";
+
+/*  */
 "invalid_phone" = "Invalid mobile phone number.";
 
 /*  */
@@ -351,3 +357,10 @@
 
 /*  */
 "home-screen-found-wallet" = "Found your wallet";
+
+/*  */
+"password_hint" = "Your new password must have at least 9 characters.\n\nIt must contain small letters and capitals.";
+
+/*  */
+"password_hint_title" = "Password requirements";
+

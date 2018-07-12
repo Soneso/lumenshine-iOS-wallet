@@ -310,7 +310,7 @@ public class AuthService: BaseService {
         }
     }
     
-    open func generateAccount(email: String, password: String, userData: Dictionary<String,String>, response: @escaping GenerateAccountResponseClosure) {
+    open func generateAccount(email: String, password: String, userData: Dictionary<String,String>?, response: @escaping GenerateAccountResponseClosure) {
         DispatchQueue.global(qos: .userInitiated).async {
             var userSecurity: UserSecurity!
             do {
@@ -333,7 +333,9 @@ public class AuthService: BaseService {
             params["public_key_0"] = userSecurity.publicKeyIndex0
             params["public_key_188"] = userSecurity.publicKeyIndex188
             
-            params.merge(userData, uniquingKeysWith: {(first, _) in first})
+            if let userDict = userData {
+                params.merge(userDict, uniquingKeysWith: {(first, _) in first})
+            }
             
             do {
                 let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)

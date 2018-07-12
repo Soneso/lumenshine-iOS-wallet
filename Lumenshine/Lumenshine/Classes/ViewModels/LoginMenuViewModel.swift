@@ -44,6 +44,8 @@ class LoginMenuViewModel : MenuViewModelType {
         switch entry(at: indexPath) {
         case .login:
             navigationCoordinator?.performTransition(transition: .showLogin)
+        case .signUp:
+            navigationCoordinator?.performTransition(transition: .showSignUp)
         case .lostPassword:
             navigationCoordinator?.performTransition(transition: .showForgotPassword)
         case .lost2FA:

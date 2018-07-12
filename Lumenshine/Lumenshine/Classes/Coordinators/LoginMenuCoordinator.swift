@@ -57,8 +57,13 @@ fileprivate extension LoginMenuCoordinator {
     }
     
     func showSignUp() {
-        let registrationCoordinator = RegistrationCoordinator(service: service.auth)
-        (baseController as! AppNavigationController).pushViewController(registrationCoordinator.baseController, animated: true)
+        let loginCoordinator = LoginCoordinator(service: service.auth, transition: .showSignUp)
+        let navigationController = AppNavigationController(rootViewController: loginCoordinator.baseController)
+        if let drawer = baseController as? AppNavigationDrawerController {
+            drawer.setViewController(navigationController, for: .none)
+            drawer.closeSide()
+            menuView.present(loginCoordinator.baseController)
+        }
     }
     
     func showForgotPassword() {

@@ -316,7 +316,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 115 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 119 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -578,6 +578,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let password = Rswift.StringResource(key: "password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Password requirements
+      /// 
+      /// Locales: en
+      static let password_hint_title = Rswift.StringResource(key: "password_hint_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Please confirm email to continue the registration process
       /// 
       /// Locales: en
@@ -594,6 +598,14 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let lbl_recommend = Rswift.StringResource(key: "lbl_recommend", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Repeat Password
+      /// 
+      /// Locales: en
+      static let repeat_password = Rswift.StringResource(key: "repeat_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Repetition do not match with password.
+      /// 
+      /// Locales: en
+      static let invalid_repassword = Rswift.StringResource(key: "invalid_repassword", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Resend confirmation mail
       /// 
       /// Locales: en
@@ -730,6 +742,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let bad_credentials = Rswift.StringResource(key: "bad_credentials", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Your new password must have at least 9 characters.  It must contain small letters and capitals.
+      /// 
+      /// Locales: en
+      static let password_hint = Rswift.StringResource(key: "password_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Zip code
       /// 
       /// Locales: en
@@ -1234,6 +1250,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("password", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Password requirements
+      /// 
+      /// Locales: en
+      static func password_hint_title(_: Void = ()) -> String {
+        return NSLocalizedString("password_hint_title", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Please confirm email to continue the registration process
       /// 
       /// Locales: en
@@ -1260,6 +1283,20 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func lbl_recommend(_: Void = ()) -> String {
         return NSLocalizedString("lbl_recommend", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Repeat Password
+      /// 
+      /// Locales: en
+      static func repeat_password(_: Void = ()) -> String {
+        return NSLocalizedString("repeat_password", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Repetition do not match with password.
+      /// 
+      /// Locales: en
+      static func invalid_repassword(_: Void = ()) -> String {
+        return NSLocalizedString("invalid_repassword", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Resend confirmation mail
@@ -1498,6 +1535,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func bad_credentials(_: Void = ()) -> String {
         return NSLocalizedString("bad_credentials", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Your new password must have at least 9 characters.  It must contain small letters and capitals.
+      /// 
+      /// Locales: en
+      static func password_hint(_: Void = ()) -> String {
+        return NSLocalizedString("password_hint", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Zip code
