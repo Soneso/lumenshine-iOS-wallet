@@ -47,9 +47,12 @@ fileprivate extension HomeCoordinator {
     }
     
     func showScan() {
-        let scanVC = ScanViewController()
-        scanVC.delegate = self.baseController as! HomeViewController
-        self.baseController.navigationController?.pushViewController(scanVC, animated: true)
+//        let scanVC = ScanViewController()
+//        scanVC.delegate = self.baseController as! HomeViewController
+//        self.baseController.navigationController?.pushViewController(scanVC, animated: true)
+        
+        let foundViewController = FoundAccountViewController(nibName: "FoundAccountViewController", bundle: Bundle.main)
+        self.baseController.present(foundViewController, animated: true)
     }
 }
 

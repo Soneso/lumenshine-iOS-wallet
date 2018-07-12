@@ -12,6 +12,7 @@ protocol HomeViewModelType: Transitionable {
 
     var cardViewModels: [CardViewModelType] { get }
     var reloadClosure: (() -> ())? { get set }
+    var totalNativeFoundsClosure: ((CoinUnit) -> ())? { get set }
     
     func foundAccount()
 }
@@ -21,6 +22,7 @@ class HomeViewModel : HomeViewModelType {
     fileprivate let service: HomeService
     fileprivate var responsesMock: CardsResponsesMock?
     fileprivate let user: User
+    fileprivate let userManager = UserManager()
     
     var navigationCoordinator: CoordinatorType?
     
@@ -38,19 +40,40 @@ class HomeViewModel : HomeViewModelType {
                 viewModel.navigationCoordinator = self.navigationCoordinator
                 return viewModel
             }
-            
-            let viewModel = WalletCardViewModel(user: user)
-            viewModel.navigationCoordinator = self.navigationCoordinator
-            self.cardViewModels.append(viewModel)
-            
+
             if let reload = self.reloadClosure {
                 reload()
+            }
+        }
+        
+        userManager.walletsForCurrentUser { (result) -> (Void) in
+            switch result {
+            case .success(let wallets):
+                for wallet in wallets {
+                    let viewModel = WalletCardViewModel(wallet: wallet)
+                    viewModel.navigationCoordinator = self.navigationCoordinator
+                    self.cardViewModels.append(viewModel)
+                    
+                    self.reloadClosure?()
+                }
+            case .failure(_):
+                print("Failed to get wallets")
+            }
+        }
+        
+        userManager.totalNativeFounds { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                self.totalNativeFoundsClosure?(data)
+            case .failure(_):
+                print("Failed to get wallets")
             }
         }
     }
 
     var cardViewModels: [CardViewModelType]
     var reloadClosure: (() -> ())?
+    var totalNativeFoundsClosure: ((CoinUnit) -> ())?
     
     var barTitles: [String] {
         return [
@@ -71,18 +94,6 @@ class HomeViewModel : HomeViewModelType {
             MaterialIcon.received.size24pt,
             MaterialIcon.moreHorizontal.size24pt
         ]
-    }
-    
-    func barItemSelected(at index:Int) {
-        switch index {
-        case 0:
-            break
-        case 2:
-            showScan()
-        case 4:
-            showHeaderMenu()
-        default: break
-        }
     }
     
     func foundAccount() {

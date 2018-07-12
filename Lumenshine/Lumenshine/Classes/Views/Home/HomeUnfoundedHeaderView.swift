@@ -33,7 +33,7 @@ class HomeUnfoundedHeaderView: UIView {
         titleLabel.textColor = UIColor.white
         
         foundAccountButton.iconLabel.text = R.string.localizable.homeScreenFoundWallet()
-        foundAccountButton.iconImageView.image = MaterialIcon.received.size36pt
+        foundAccountButton.iconImageView.image = UIImage(named: "found_account")
     }
     
 }

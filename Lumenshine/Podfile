@@ -11,6 +11,7 @@ def ui_components_and_helper_pods
     pod 'DGElasticPullToRefresh'
     pod 'Charts'
     pod 'LTMorphingLabel'
+    pod 'TTTAttributedLabel'
 end
 
 target 'Lumenshine' do

@@ -26,7 +26,7 @@ struct UserSecurityHelper {
             let mnemonicMasterKeyEncryptionIV = CryptoUtil.generateIV()
             let encryptedMnemonicMasterKey = try CryptoUtil.encryptValue(plainValue: mnemonicMasterKey, key: derivedPassword, iv: mnemonicMasterKeyEncryptionIV)
             
-            let mnemonic = Wallet.generate24WordMnemonic()
+            let mnemonic = stellarsdk.Wallet.generate24WordMnemonic()
             let mnemonicWords = mnemonic.components(separatedBy:" ")            
             var mnemonicBytes = Array<UInt8>()
             mnemonicWords.forEach {
@@ -40,8 +40,8 @@ struct UserSecurityHelper {
             let encryptedMnemonic = try CryptoUtil.encryptValue(plainValue: mnemonicBytes, key: mnemonicMasterKey, iv: mnemonicEncryptionIV)
             
             // generate public keys
-            let publicKeyIndex0 = try Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: 0).accountId
-            let publicKeyIndex188 = try Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: 188).accountId
+            let publicKeyIndex0 = try stellarsdk.Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: 0).accountId
+            let publicKeyIndex188 = try stellarsdk.Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: 188).accountId
             
             let words = wordList.joined(separator: ",")
             
@@ -93,10 +93,10 @@ struct UserSecurityHelper {
             }
             mnemonic.removeLast()
             
-            let publicKeyIndex0 = try Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: 0).accountId
+            let publicKeyIndex0 = try stellarsdk.Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: 0).accountId
             if publicKeyIndex0 != userSecurity.publicKeyIndex0 { return nil }
             
-            let publicKeyIndex188 = try Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: 188).accountId
+            let publicKeyIndex188 = try stellarsdk.Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: 188).accountId
             
             return (publicKeyIndex188, mnemonic)
             

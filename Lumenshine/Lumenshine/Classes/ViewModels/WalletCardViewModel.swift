@@ -12,9 +12,10 @@ import stellarsdk
 class WalletCardViewModel : CardViewModelType {
     var navigationCoordinator: CoordinatorType?
     
-    fileprivate let card: Card?
+    fileprivate var card: Card?
     fileprivate let stellarSdk: StellarSDK
     fileprivate var funded: Bool = false
+    fileprivate var wallet: Wallet?
     
     init(user: User, card: Card? = nil) {
         self.card = card
@@ -31,8 +32,19 @@ class WalletCardViewModel : CardViewModelType {
         }
     }
     
+    init(wallet: Wallet) {
+        self.stellarSdk = StellarSDK()
+        
+        self.wallet = wallet
+        funded = wallet.isFounded
+    }
+    
     var type: CardType {
-        return .wallet
+        if funded {
+            return .wallet(status: .founded)
+        } else {
+            return .wallet(status: .unfounded)
+        }
     }
     
     var imageURL: URL? {
