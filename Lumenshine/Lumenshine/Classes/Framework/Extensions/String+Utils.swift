@@ -23,10 +23,32 @@ extension String  {
     }
     
     func isValidPassword() -> Bool {
-        let sRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{9,}"
+        
+        if self.count < 9 {
+            return false
+        }
+        
+        let lowerCase = CharacterSet.lowercaseLetters
+        let upperCase = CharacterSet.uppercaseLetters
+        let decimalDigits = CharacterSet.decimalDigits
+        
+        if self.rangeOfCharacter(from: lowerCase) == nil {
+            return false
+        }
+        
+        if self.rangeOfCharacter(from: upperCase) == nil {
+            return false
+        }
+        
+        if self.rangeOfCharacter(from: decimalDigits) == nil {
+            return false
+        }
+        
+        return true
+        //let sRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{9,}"
         // with special character
         //let regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&]{8,}"
         
-        return NSPredicate(format: "SELF MATCHES %@", sRegex).evaluate(with: self)
+        //return NSPredicate(format: "SELF MATCHES %@", sRegex).evaluate(with: self)
     }
 }
