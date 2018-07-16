@@ -39,5 +39,6 @@ public indirect enum Transition {
     case showMnemonic(User)
     case showEmailConfirmation(User)
     case logout(Transition?)
+    case showPasswordHint(String)
 }
 

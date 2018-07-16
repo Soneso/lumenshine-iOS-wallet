@@ -14,17 +14,20 @@ class LoginCoordinator: CoordinatorType {
     
     fileprivate let service: AuthService
     
-    init(service: AuthService) {
+    init(service: AuthService, transition: Transition? = .showLogin) {
         self.service = service
         let viewModel = LoginViewModel(service: service)
         self.baseController = LoginViewController(viewModel: viewModel)
         viewModel.navigationCoordinator = self
+        performTransition(transition: transition ?? .showLogin)
     }
     
     func performTransition(transition: Transition) {
         switch transition {
         case .showDashboard(let user):
             showDashboard(user: user)
+        case .showLogin:
+            showLogin()
         case .showSignUp:
             showSignUp()
         case .show2FA(let user, let registrationResponse):
@@ -35,6 +38,8 @@ class LoginCoordinator: CoordinatorType {
             showEmailConfirmation(user: user)
         case .showHeaderMenu(let items):
             showHeaderMenu(items: items)
+        case .showPasswordHint(let hint):
+            showPasswordHint(hint)
         default:
             break
         }
@@ -61,9 +66,12 @@ fileprivate extension LoginCoordinator {
         }
     }
     
+    func showLogin() {
+        (baseController as! LoginViewController).showLogin()
+    }
+    
     func showSignUp() {
-        let registrationCoordinator = RegistrationCoordinator(service: service)
-        (baseController as! AppNavigationController).pushViewController(registrationCoordinator.baseController, animated: true)
+        (baseController as! LoginViewController).showSignUp()
     }
     
     func show2FA(user: User, response: RegistrationResponse) {
@@ -79,6 +87,11 @@ fileprivate extension LoginCoordinator {
     func showEmailConfirmation(user: User) {
         let emailCoordinator = EmailConfirmationCoordinator(service: service, user: user)
         baseController.navigationController?.pushViewController(emailCoordinator.baseController, animated: true)
+    }
+    
+    func showPasswordHint(_ hint: String) {
+        let textVC = TextViewController(text: hint)
+        baseController.present(AppNavigationController(rootViewController: textVC), animated: true)
     }
 }
 

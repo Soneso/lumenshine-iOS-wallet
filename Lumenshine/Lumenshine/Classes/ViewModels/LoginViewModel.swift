@@ -22,10 +22,11 @@ protocol LoginViewModelType: Transitionable, BiometricAuthenticationProtocol {
     
     func loginStep1(email: String, tfaCode: String?, response: @escaping Login1ResponseClosure)
     func enableTfaCode(email: String) -> Bool
+    func signUp(email: String, password: String, repassword: String, response: @escaping GenerateAccountResponseClosure)
+    func checkUserSecurity(_ userSecurity: UserSecurity, response: @escaping EmptyResponseClosure)
+    func showPasswordHint()
     
-    func signUpClick()
     func forgotPasswordClick()
-    func lost2faClick()
     func verifyLogin1Response(_ login1Response: LoginStep1Response, password: String, response: @escaping Login2ResponseClosure)
     func verifyLogin2Response(_ login2Response: LoginStep2Response)
 }
@@ -54,9 +55,9 @@ class LoginViewModel : LoginViewModelType {
     func barItemSelected(at index:Int) {
         switch index {
         case 0:
-            break
+            navigationCoordinator?.performTransition(transition: .showLogin)
         case 1:
-            break
+            navigationCoordinator?.performTransition(transition: .showSignUp)
         case 2:
             showHeaderMenu()
         default: break
@@ -86,16 +87,8 @@ class LoginViewModel : LoginViewModelType {
         navigationCoordinator?.performTransition(transition: .logout(nil))
     }
     
-    func signUpClick() {
-        self.navigationCoordinator?.performTransition(transition: .showSignUp)
-    }
-    
     func forgotPasswordClick() {
         self.navigationCoordinator?.performTransition(transition: .showForgotPassword)
-    }
-    
-    func lost2faClick() {
-        self.navigationCoordinator?.performTransition(transition: .showLost2fa)
     }
     
     func enableTfaCode(email: String) -> Bool {
@@ -149,6 +142,57 @@ class LoginViewModel : LoginViewModelType {
         } else {
             loginCompleted()
         }
+    }
+    
+    func signUp(email: String, password: String, repassword: String, response: @escaping GenerateAccountResponseClosure) {
+        
+        if !email.isEmail() {
+            let error = ErrorResponse()
+            error.parameterName = "email"
+            error.errorMessage = R.string.localizable.invalid_email()
+            response(.failure(error: .validationFailed(error: error)))
+        }
+        
+        if !password.isValidPassword() {
+            let error = ErrorResponse()
+            error.parameterName = "password"
+            error.errorMessage = R.string.localizable.invalid_password()
+            response(.failure(error: .validationFailed(error: error)))
+        }
+        
+        if password != repassword {
+            let error = ErrorResponse()
+            error.parameterName = "repassword"
+            error.errorMessage = R.string.localizable.invalid_repassword()
+            response(.failure(error: .validationFailed(error: error)))
+        }
+        
+        self.email = email
+        
+        service.generateAccount(email: email, password: password, userData: nil) { result in
+            response(result)
+        }
+    }
+    
+    func checkUserSecurity(_ userSecurity: UserSecurity, response: @escaping EmptyResponseClosure) {
+        self.service.loginStep2(publicKeyIndex188: userSecurity.publicKeyIndex188) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let login2Response):
+                    let user = User(id: "1", email: self.email!, publicKeyIndex0: userSecurity.publicKeyIndex0, publicKeyIndex188: userSecurity.publicKeyIndex188, mnemonic: userSecurity.mnemonic24Word)
+                    let loginViewModel = LoginViewModel(service: self.service, user: user)
+                    loginViewModel.navigationCoordinator = self.navigationCoordinator
+                    loginViewModel.verifyLogin2Response(login2Response)
+                case .failure(let error):
+                    response(EmptyResponseEnum.failure(error: error))
+                }
+            }
+        }
+    }
+    
+    func showPasswordHint() {
+        let hint = R.string.localizable.password_hint()
+        navigationCoordinator?.performTransition(transition: .showPasswordHint(hint))
     }
     
     func biometricType() -> BiometricType {

@@ -16,17 +16,13 @@ class LoginViewController: UIViewController {
     fileprivate let viewModel: LoginViewModelType
     
     // MARK: - UI properties
-    fileprivate let contentView = UIView()
-    fileprivate let scrollView = UIScrollView()
-    fileprivate let loginButton = RaisedButton()
-    fileprivate let usernameTextField = TextField()
-    fileprivate let passwordTextField = TextField()
-    fileprivate let tfaCodeTextField = TextField()
     fileprivate let headerBar = ToolbarHeader()
-    fileprivate let verticalSpacing = 40.0
+    
+    fileprivate var contentView: LoginViewProtocol
     
     init(viewModel: LoginViewModelType) {
         self.viewModel = viewModel
+        self.contentView = LoginView()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -48,15 +44,8 @@ class LoginViewController: UIViewController {
             if let tfaCode = UIPasteboard.general.string,
                 tfaCode.count == 6,
                 CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: tfaCode)) {
-                tfaCodeTextField.text = tfaCode
+                contentView.textField3.text = tfaCode
             }
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if let storedUsername = UserDefaults.standard.value(forKey: "username") as? String {
-            usernameTextField.text = storedUsername
         }
     }
     
@@ -65,39 +54,75 @@ class LoginViewController: UIViewController {
     }
     
     override func resignFirstResponder() -> Bool {
-        usernameTextField.resignFirstResponder()
-        passwordTextField.resignFirstResponder()
-        tfaCodeTextField.resignFirstResponder()
+        contentView.textField1.resignFirstResponder()
+        contentView.textField2.resignFirstResponder()
+        contentView.textField3.resignFirstResponder()
         return super.resignFirstResponder()
     }
+    
+    func setupContentView(_ contentView: LoginViewProtocol) {
+        if let content = contentView as? UIView {
+            let animation = CATransition()
+            animation.duration = 0.3
+            animation.type = kCATransitionMoveIn
+            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+            content.layer.add(animation, forKey: kCATransitionMoveIn)
+            
+            (self.contentView as! UIView).removeFromSuperview()
+            view.addSubview(content)
+            content.snp.makeConstraints { make in
+                make.top.equalTo(headerBar.snp.bottom)
+                make.bottom.left.right.equalToSuperview()
+            }
+            
+            self.contentView = contentView
+        }
+    }
 
+    func showLogin() {
+        let contentView = LoginView()
+        setupContentView(contentView)
+        prepareLoginButton()
+        if let storedUsername = UserDefaults.standard.value(forKey: "username") as? String {
+            contentView.textField1.text = storedUsername
+        }
+        headerBar.selectItem(at: 0)
+    }
+    
+    func showSignUp() {
+        let contentView = SignUpView(viewModel: viewModel)
+        setupContentView(contentView)
+        prepareSignUpButton()
+        headerBar.selectItem(at: 1)
+    }
+    
 }
 
 // MARK: - Action for checking username/password
 extension LoginViewController {
     @objc
     func loginAction(sender: UIButton) {
-        usernameTextField.detail = nil
-        passwordTextField.detail = nil
-        tfaCodeTextField.detail = nil
+        contentView.textField1.detail = nil
+        contentView.textField2.detail = nil
+        contentView.textField3.detail = nil
         
         // Check that text has been entered into both the username and password fields.
-        guard let accountName = usernameTextField.text,
+        guard let accountName = contentView.textField1.text,
             !accountName.isEmpty else {
-                usernameTextField.detail = R.string.localizable.invalid_email()
+                contentView.textField1.detail = R.string.localizable.invalid_email()
                 return
         }
         
-        guard let password = passwordTextField.text,
+        guard let password = contentView.textField2.text,
             !password.isEmpty else {
-                passwordTextField.detail = R.string.localizable.invalid_password()
+                contentView.textField2.detail = R.string.localizable.invalid_password()
                 return
         }
         
         _ = resignFirstResponder()
         UserDefaults.standard.setValue(accountName, forKey: "username")
         
-        viewModel.loginStep1(email: accountName, tfaCode: tfaCodeTextField.text) { result in
+        viewModel.loginStep1(email: accountName, tfaCode: contentView.textField3.text) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let login1Response):
@@ -117,6 +142,51 @@ extension LoginViewController {
                 case .failure(let error):
                     self.present(error: error)
                 }
+            }
+        }
+    }
+    
+    @objc
+    func signUpAction(sender: UIButton) {
+        contentView.textField1.detail = nil
+        contentView.textField2.detail = nil
+        contentView.textField3.detail = nil
+        
+        guard let email = contentView.textField1.text,
+            !email.isEmpty else {
+                contentView.textField1.detail = R.string.localizable.invalid_email()
+                return
+        }
+        
+        guard let password = contentView.textField2.text,
+            !password.isEmpty else {
+                contentView.textField2.detail = R.string.localizable.invalid_password()
+                return
+        }
+        
+        guard let repassword = contentView.textField3.text,
+            !repassword.isEmpty else {
+                contentView.textField3.detail = R.string.localizable.invalid_password()
+                return
+        }
+        
+        showActivity()
+        viewModel.signUp(email: email, password: password, repassword: repassword) { result in
+            DispatchQueue.main.async {
+                self.hideActivity(completion: {
+                    switch result {
+                    case .success( _, let userSecurity):
+                        self.viewModel.checkUserSecurity(userSecurity) { result in
+                            switch result {
+                            case .success: break
+                            case .failure(let error):
+                                self.present(error: error)
+                            }
+                        }
+                    case .failure(let error):
+                        self.present(error: error)
+                    }
+                })
             }
         }
     }
@@ -143,25 +213,8 @@ extension LoginViewController: HeaderMenuDelegate {
 fileprivate extension LoginViewController {
     func prepareView() {
         view.backgroundColor = Stylesheet.color(.white)
-        prepareContentView()
         prepareHeader()
-        prepareTextFields()
         prepareLoginButton()
-    }
-    
-    func prepareContentView() {
-        view.addSubview(scrollView)
-        scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
-        scrollView.addSubview(contentView)
-        contentView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview()
-            make.left.equalToSuperview()
-            make.width.equalTo(view)
-        }
     }
     
     func prepareHeader() {
@@ -170,82 +223,28 @@ fileprivate extension LoginViewController {
         headerBar.setDetail(viewModel.headerDetail)
         headerBar.setItems(viewModel.barItems)
         
-        contentView.addSubview(headerBar)
+        view.addSubview(headerBar)
         headerBar.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
         }
     }
     
-    func prepareTextFields() {
-        passwordTextField.isSecureTextEntry = true
-        usernameTextField.keyboardType = .emailAddress
-        usernameTextField.autocapitalizationType = .none
-//        usernameTextField.delegate = self
-        
-        usernameTextField.placeholder = R.string.localizable.username()
-        usernameTextField.placeholderAnimation = .hidden
-        usernameTextField.detailColor = Stylesheet.color(.red)
-        usernameTextField.dividerActiveColor = Stylesheet.color(.cyan)
-        usernameTextField.placeholderActiveColor = Stylesheet.color(.cyan)
-        
-        passwordTextField.placeholder = R.string.localizable.password()
-        passwordTextField.placeholderAnimation = .hidden
-        passwordTextField.detailColor = Stylesheet.color(.red)
-        passwordTextField.dividerActiveColor = Stylesheet.color(.cyan)
-        passwordTextField.placeholderActiveColor = Stylesheet.color(.cyan)
-        
-        tfaCodeTextField.placeholder = R.string.localizable.tfa_code()
-        tfaCodeTextField.placeholderAnimation = .hidden
-        tfaCodeTextField.detailColor = Stylesheet.color(.red)
-        tfaCodeTextField.dividerActiveColor = Stylesheet.color(.cyan)
-        tfaCodeTextField.placeholderActiveColor = Stylesheet.color(.cyan)
-        
-        contentView.addSubview(usernameTextField)
-        usernameTextField.snp.makeConstraints { make in
-            make.top.equalTo(headerBar.snp.bottom).offset(verticalSpacing)
-            make.left.equalTo(40)
-            make.right.equalTo(-40)
-        }
-        
-        contentView.addSubview(passwordTextField)
-        passwordTextField.snp.makeConstraints { make in
-            make.top.equalTo(usernameTextField.snp.bottom).offset(verticalSpacing)
-            make.left.equalTo(usernameTextField)
-            make.right.equalTo(usernameTextField)
-        }
-        
-        contentView.addSubview(tfaCodeTextField)
-        tfaCodeTextField.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(verticalSpacing)
-            make.left.equalTo(usernameTextField)
-            make.right.equalTo(usernameTextField)
-        }
+    func prepareLoginButton() {
+        contentView.submitButton.addTarget(self, action: #selector(loginAction(sender:)), for: .touchUpInside)
     }
     
-    func prepareLoginButton() {
-        loginButton.title = R.string.localizable.login()
-        loginButton.backgroundColor = Stylesheet.color(.cyan)
-        loginButton.titleColor = Stylesheet.color(.white)
-        loginButton.addTarget(self, action: #selector(loginAction(sender:)), for: .touchUpInside)
-        
-        contentView.addSubview(loginButton)
-        loginButton.snp.makeConstraints { make in
-            make.top.equalTo(tfaCodeTextField.snp.bottom).offset(verticalSpacing)
-            make.left.equalTo(40)
-            make.right.equalTo(-40)
-            make.height.equalTo(50)
-            make.bottom.lessThanOrEqualToSuperview()
-        }
+    func prepareSignUpButton() {
+        contentView.submitButton.addTarget(self, action: #selector(signUpAction(sender:)), for: .touchUpInside)
     }
     
     func present(error: ServiceError) {
         if let parameter = error.parameterName {
             if parameter == "email" {
-                usernameTextField.detail = error.errorDescription
+                contentView.textField1.detail = error.errorDescription
             } else if parameter == "password" {
-                passwordTextField.detail = error.errorDescription
-            } else if parameter == "tfa_code" {
-                tfaCodeTextField.detail = error.errorDescription
+                contentView.textField2.detail = error.errorDescription
+            } else if parameter == "tfa_code" || parameter == "repassword" {
+                contentView.textField3.detail = error.errorDescription
             }
         } else {
             let alert = AlertFactory.createAlert(error: error)

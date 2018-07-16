@@ -12,6 +12,7 @@ protocol ToolbarHeaderProtocol {
     func setTitle(_ title: String?)
     func setDetail(_ detail: String?)
     func setItems(_ items: [(String, String)], selectedAt index: Int)
+    func selectItem(at index: Int)
     
     var delegate: ToolbarHeaderDelegate? { get set }
 }
@@ -25,6 +26,7 @@ class ToolbarHeader: UIView {
     fileprivate let titleLabel = UILabel()
     fileprivate let detailLabel = UILabel()
     fileprivate let tabBar = UITabBar()
+    fileprivate var selectedIndex: Int?
     
     var delegate: ToolbarHeaderDelegate?
     
@@ -40,6 +42,7 @@ class ToolbarHeader: UIView {
     
     func commonInit() {
         
+        selectedIndex = 0
         backgroundColor = Stylesheet.color(.cyan)
         
         titleLabel.font = UIFont.systemFont(ofSize: 25.0)
@@ -84,7 +87,10 @@ class ToolbarHeader: UIView {
 
 extension ToolbarHeader: UITabBarDelegate {
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        delegate?.toolbar(self, didSelectAt: item.tag)
+        if selectedIndex != item.tag {
+            delegate?.toolbar(self, didSelectAt: item.tag)
+            selectedIndex = item.tag
+        }
     }
 }
 
@@ -108,6 +114,11 @@ extension ToolbarHeader: ToolbarHeaderProtocol {
         }
         tabBar.items = barItems
         tabBar.selectedItem = selectedItem
+    }
+    
+    func selectItem(at index: Int) {
+        tabBar.selectedItem = tabBar.items?[index]
+        selectedIndex = index
     }
 }
 
