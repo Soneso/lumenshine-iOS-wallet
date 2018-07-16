@@ -40,7 +40,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 25 images.
+  /// This `R.image` struct is generated, and contains static references to 27 images.
   struct image {
     /// Image `FaceIcon`.
     static let faceIcon = Rswift.ImageResource(bundle: R.hostingBundle, name: "FaceIcon")
@@ -78,8 +78,12 @@ struct R: Rswift.Validatable {
     static let qr_placeholder = Rswift.ImageResource(bundle: R.hostingBundle, name: "qr_placeholder")
     /// Image `question`.
     static let question = Rswift.ImageResource(bundle: R.hostingBundle, name: "question")
+    /// Image `receive`.
+    static let receive = Rswift.ImageResource(bundle: R.hostingBundle, name: "receive")
     /// Image `rocket`.
     static let rocket = Rswift.ImageResource(bundle: R.hostingBundle, name: "rocket")
+    /// Image `send`.
+    static let send = Rswift.ImageResource(bundle: R.hostingBundle, name: "send")
     /// Image `signIn`.
     static let signIn = Rswift.ImageResource(bundle: R.hostingBundle, name: "signIn")
     /// Image `signOut`.
@@ -183,9 +187,19 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.question, compatibleWith: traitCollection)
     }
     
+    /// `UIImage(named: "receive", bundle: ..., traitCollection: ...)`
+    static func receive(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.receive, compatibleWith: traitCollection)
+    }
+    
     /// `UIImage(named: "rocket", bundle: ..., traitCollection: ...)`
     static func rocket(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.rocket, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "send", bundle: ..., traitCollection: ...)`
+    static func send(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.send, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "signIn", bundle: ..., traitCollection: ...)`
@@ -221,7 +235,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.nib` struct is generated, and contains static references to 8 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 9 nibs.
   struct nib {
     /// Nib `ForgotPasswordViewController`.
     static let forgotPasswordViewController = _R.nib._ForgotPasswordViewController()
@@ -239,6 +253,8 @@ struct R: Rswift.Validatable {
     static let unfoundedWalletCardContentView = _R.nib._UnfoundedWalletCardContentView()
     /// Nib `WalletCardContentView`.
     static let walletCardContentView = _R.nib._WalletCardContentView()
+    /// Nib `WalletCardInfoViewController`.
+    static let walletCardInfoViewController = _R.nib._WalletCardInfoViewController()
     
     /// `UINib(name: "ForgotPasswordViewController", in: bundle)`
     static func forgotPasswordViewController(_: Void = ()) -> UIKit.UINib {
@@ -278,6 +294,11 @@ struct R: Rswift.Validatable {
     /// `UINib(name: "WalletCardContentView", in: bundle)`
     static func walletCardContentView(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.walletCardContentView)
+    }
+    
+    /// `UINib(name: "WalletCardInfoViewController", in: bundle)`
+    static func walletCardInfoViewController(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.walletCardInfoViewController)
     }
     
     fileprivate init() {}
@@ -1654,6 +1675,7 @@ struct _R: Rswift.Validatable {
     static func validate() throws {
       try _UnfoundedWalletCardContentView.validate()
       try _FoundAccountViewController.validate()
+      try _WalletCardInfoViewController.validate()
       try _WalletCardContentView.validate()
     }
     
@@ -1754,6 +1776,22 @@ struct _R: Rswift.Validatable {
       
       static func validate() throws {
         if UIKit.UIImage(named: "question", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'question' is used in nib 'WalletCardContentView', but couldn't be loaded.") }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _WalletCardInfoViewController: Rswift.NibResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "WalletCardInfoViewController"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      }
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'close' is used in nib 'WalletCardInfoViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "question", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'question' is used in nib 'WalletCardInfoViewController', but couldn't be loaded.") }
       }
       
       fileprivate init() {}

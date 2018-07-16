@@ -21,6 +21,9 @@ protocol WalletCardProtocol {
 
 class WalletCard: CardView {
     
+    var fundedView: WalletCardContentView?
+    var unfundedView: UnfoundedWalletCardContentView?
+    
     fileprivate let textLabel = UILabel()
     
     var status: WalletStatus! {
@@ -45,11 +48,7 @@ class WalletCard: CardView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override var viewModel: CardViewModelType? {
-        didSet {
-
-        }
-    }
+    
 }
 
 fileprivate extension WalletCard {
@@ -71,19 +70,19 @@ fileprivate extension WalletCard {
     }
     
     func addFoundedView() {
-        let foundedView = Bundle.main.loadNibNamed("WalletCardContentView", owner: nil, options: nil)![0] as! WalletCardContentView
-        foundedView.frame = contentView.bounds
-        foundedView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        fundedView = Bundle.main.loadNibNamed("WalletCardContentView", owner: nil, options: nil)![0] as? WalletCardContentView
+        fundedView!.frame = contentView.bounds
+        fundedView!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        contentView.addSubview(foundedView)
+        contentView.addSubview(fundedView!)
     }
     
     func addUnfoundedView() {
-        let foundedView = Bundle.main.loadNibNamed("UnfoundedWalletCardContentView", owner: nil, options: nil)![0] as! UnfoundedWalletCardContentView
-        foundedView.frame = contentView.bounds
-        foundedView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        unfundedView = Bundle.main.loadNibNamed("UnfoundedWalletCardContentView", owner: nil, options: nil)![0] as? UnfoundedWalletCardContentView
+        unfundedView!.frame = contentView.bounds
+        unfundedView!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        contentView.addSubview(foundedView)
+        contentView.addSubview(unfundedView!)
     }
     
 }

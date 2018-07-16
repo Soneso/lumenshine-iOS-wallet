@@ -13,6 +13,7 @@ protocol HomeViewModelType: Transitionable {
     var cardViewModels: [CardViewModelType] { get }
     var reloadClosure: (() -> ())? { get set }
     var totalNativeFoundsClosure: ((CoinUnit) -> ())? { get set }
+    var currencyRateUpdateClosure: ((Double) -> ())? { get set }
     
     func foundAccount()
 }
@@ -22,7 +23,8 @@ class HomeViewModel : HomeViewModelType {
     fileprivate let service: HomeService
     fileprivate var responsesMock: CardsResponsesMock?
     fileprivate let user: User
-    fileprivate let userManager = UserManager()
+    fileprivate let userManager = Services.shared.userManager
+    fileprivate let currenciesMonitor = CurrenciesMonitor()
     
     var navigationCoordinator: CoordinatorType?
     
@@ -30,6 +32,8 @@ class HomeViewModel : HomeViewModelType {
         self.service = service
         self.user = user
         cardViewModels = []
+        
+        currenciesMonitor.startMonitoring()
         
         // TODO: remove mock when service is ready
 //        mockService()
@@ -65,6 +69,7 @@ class HomeViewModel : HomeViewModelType {
             switch result {
             case .success(let data):
                 self.totalNativeFoundsClosure?(data)
+                self.currencyRateUpdateClosure?(self.currenciesMonitor.currentRate)
             case .failure(_):
                 print("Failed to get wallets")
             }
@@ -74,6 +79,11 @@ class HomeViewModel : HomeViewModelType {
     var cardViewModels: [CardViewModelType]
     var reloadClosure: (() -> ())?
     var totalNativeFoundsClosure: ((CoinUnit) -> ())?
+    var currencyRateUpdateClosure: ((Double) -> ())? {
+        didSet {
+            currenciesMonitor.updateClosure = currencyRateUpdateClosure
+        }
+    }
     
     var barTitles: [String] {
         return [
@@ -99,6 +109,7 @@ class HomeViewModel : HomeViewModelType {
     func foundAccount() {
         showScan()
     }
+
 }
 
 fileprivate extension HomeViewModel {

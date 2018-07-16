@@ -10,12 +10,13 @@ import UIKit
 
 class WalletCardContentView: UIView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var balanceLabel: UILabel!
+    @IBOutlet weak var availableLabel: UILabel!
+    @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var receiveButton: UIButton!
+    @IBOutlet weak var detailsButton: UIButton!
+    @IBOutlet weak var helpButton: UIButton!
+    
 
 }

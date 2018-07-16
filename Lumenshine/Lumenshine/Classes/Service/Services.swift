@@ -24,6 +24,7 @@ public final class Services {
     let home: HomeService
     public let auth: AuthService
     public let walletService: WalletsService
+    public let currenciesService: CurrenciesService
     
     public let userManager: UserManager
     
@@ -33,6 +34,7 @@ public final class Services {
         home = HomeService(baseURL: baseURL)
         auth = AuthService(baseURL: baseURL)
         walletService = WalletsService(baseURL: baseURL)
+        currenciesService = CurrenciesService(baseURL: baseURL)
         
         userManager = UserManager()
         

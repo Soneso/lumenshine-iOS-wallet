@@ -44,6 +44,12 @@ class HomeViewController: UIViewController {
                 self.header.type = .unfounded
             }
         }
+        
+        viewModel.currencyRateUpdateClosure = { (rate) in
+            if let nativeFunds = Services.shared.userManager.totalNativeFunds {
+                self.header.funds = nativeFunds.stringConversionTo(currency: .usd, rate: rate)
+            }
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -156,7 +162,7 @@ fileprivate extension HomeViewController {
         label.sizeToFit()
         
         header = HomeHeaderView()
-        header.type = .unfounded
+        //header.type = .unfounded
         header.unfoundedView.foundAction = {(button) in
             self.viewModel.foundAccount()
         }

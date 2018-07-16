@@ -60,11 +60,15 @@ class WalletCardViewModel : CardViewModelType {
     }
     
     var title: String? {
-        return card?.title
+        return wallet?.name
     }
     
     var detail: String? {
         return card?.detail
+    }
+    
+    var nativeBalance: CoinUnit? {
+        return wallet?.nativeBalance
     }
     
     var bottomTitles: [String]? {
@@ -86,6 +90,27 @@ class WalletCardViewModel : CardViewModelType {
             break
         }
     }
+    
+    @objc func didTapSendButton() {
+        
+    }
+    
+    @objc func didTapReceiveButton() {
+        
+    }
+    
+    @objc func didTapDetailsButton() {
+        
+    }
+    
+    @objc func didTapHelpButton() {
+        navigationCoordinator?.performTransition(transition: .showWalletCardInfo)
+    }
+    
+    @objc func didTapFundButton() {
+        navigationCoordinator?.performTransition(transition: .showScan)
+    }
+    
 }
 
 fileprivate extension WalletCardViewModel {

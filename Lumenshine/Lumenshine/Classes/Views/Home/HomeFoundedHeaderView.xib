@@ -28,16 +28,16 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="HUc-WN-O3T">
-                    <rect key="frame" x="16" y="89" width="312" height="30"/>
+                    <rect key="frame" x="16" y="89" width="312" height="34"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRu-tr-NCf" customClass="IconButton" customModule="Lumenshine" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="104" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRu-tr-NCf" customClass="IconButton" customModule="Lumenshine" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="104" height="34"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eun-8d-ZUO" customClass="IconButton" customModule="Lumenshine" customModuleProvider="target">
-                            <rect key="frame" x="104" y="0.0" width="104" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eun-8d-ZUO" customClass="IconButton" customModule="Lumenshine" customModuleProvider="target">
+                            <rect key="frame" x="104" y="0.0" width="104" height="34"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gCY-Ew-dmc" customClass="IconButton" customModule="Lumenshine" customModuleProvider="target">
-                            <rect key="frame" x="208" y="0.0" width="104" height="30"/>
+                            <rect key="frame" x="208" y="0.0" width="104" height="34"/>
                         </button>
                     </subviews>
                 </stackView>

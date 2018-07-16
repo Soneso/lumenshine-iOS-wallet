@@ -29,11 +29,11 @@ class HomeFoundedHeaderView: UIView {
         titleLabel.textColor = UIColor.white
         
         sendButton.iconLabel.text = R.string.localizable.send()
-        sendButton.iconImageView.image = MaterialIcon.send.size36pt
+        sendButton.iconImageView.image = UIImage(named: "send")
         receiveButton.iconLabel.text = R.string.localizable.receive()
-        receiveButton.iconImageView.image = MaterialIcon.received.size36pt
+        receiveButton.iconImageView.image = UIImage(named: "receive")
         moreButton.iconLabel.text = R.string.localizable.more()
-        moreButton.iconImageView.image = MaterialIcon.moreHorizontal.size36pt
+        moreButton.iconImageView.image = UIImage(named: "more")
     }
     
 }
