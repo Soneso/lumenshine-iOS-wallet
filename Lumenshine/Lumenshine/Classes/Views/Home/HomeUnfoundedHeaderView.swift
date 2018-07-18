@@ -29,11 +29,12 @@ class HomeUnfoundedHeaderView: UIView {
     
     private func setup() {
         titleLabel.text = R.string.localizable.homeScreenTitle()
-        titleLabel.font = UIFont.systemFont(ofSize: 25.0)
-        titleLabel.textColor = UIColor.white
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 40.0)
+        titleLabel.textColor = Stylesheet.color(.white)
         
         foundAccountButton.iconLabel.text = R.string.localizable.homeScreenFoundWallet()
-        foundAccountButton.iconImageView.image = UIImage(named: "found_account")
+        foundAccountButton.iconImageView.image = UIImage(named: "found_account")?.tint(with: Stylesheet.color(.white))
+        foundAccountButton.iconLabel.textColor = Stylesheet.color(.white)
     }
     
 }

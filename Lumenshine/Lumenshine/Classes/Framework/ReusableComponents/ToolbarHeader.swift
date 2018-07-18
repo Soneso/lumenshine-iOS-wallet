@@ -45,8 +45,8 @@ class ToolbarHeader: UIView {
         selectedIndex = 0
         backgroundColor = Stylesheet.color(.cyan)
         
-        titleLabel.font = UIFont.systemFont(ofSize: 25.0)
-        titleLabel.textColor = Stylesheet.color(.orange)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 40.0)
+        titleLabel.textColor = Stylesheet.color(.white)
         titleLabel.textAlignment = .center
         titleLabel.sizeToFit()
         
@@ -55,7 +55,7 @@ class ToolbarHeader: UIView {
             make.top.left.right.equalToSuperview()
         }
         
-        detailLabel.font = UIFont.systemFont(ofSize: 16.0)
+        detailLabel.font = UIFont.systemFont(ofSize: 20.0)
         detailLabel.textColor = Stylesheet.color(.white)
         detailLabel.textAlignment = .center
         detailLabel.numberOfLines = 0
@@ -77,10 +77,10 @@ class ToolbarHeader: UIView {
         
         addSubview(tabBar)
         tabBar.snp.makeConstraints { make in
-            make.top.equalTo(detailLabel.snp.bottom).offset(10)
+            make.top.equalTo(detailLabel.snp.bottom).offset(30)
             make.left.equalTo(10)
             make.right.equalTo(-10)
-            make.bottom.equalTo(-10)
+            make.bottom.equalTo(-20)
         }
     }
 }
