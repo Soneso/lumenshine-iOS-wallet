@@ -25,6 +25,18 @@ class HomeHeaderView: UIView {
         }
     }
     
+    var funds: String! {
+        didSet {
+            if let fundedView = foundedView {
+                fundedView.foundAccountButton.text = funds
+            }
+            
+            if let unfundedView = unfoundedView {
+                unfundedView.xlmPriceLabel.text = funds
+            }
+        }
+    }
+    
     var foundedView: HomeFoundedHeaderView!
     var unfoundedView: HomeUnfoundedHeaderView!
     

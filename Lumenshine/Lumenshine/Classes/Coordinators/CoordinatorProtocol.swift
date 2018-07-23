@@ -33,6 +33,7 @@ public indirect enum Transition {
     case showHeaderMenu([(String, String)])
     case showOnWeb(URL)
     case showScan
+    case showWalletCardInfo
     case show2FA(User, RegistrationResponse)
     case showGoogle2FA(URL)
     case showMnemonic(User)

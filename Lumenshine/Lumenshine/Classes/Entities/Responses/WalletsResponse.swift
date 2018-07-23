@@ -12,13 +12,15 @@ public class WalletsResponse: Decodable {
     let id: Int
     let publicKey: String
     let walletName: String
-    let federationNickname: String
+    let federationAddress: String
+    let showOnHomeScreen: Bool
     
     private enum CodingKeys: String, CodingKey {
         case id = "id"
         case publicKey = "public_key_0"
         case walletName = "wallet_name"
-        case federationNickname = "federation_nickname"
+        case federationAddress = "federation_address"
+        case showOnHomeScreen = "show_on_homescreen"
     }
     
     public required init(from decoder: Decoder) throws {
@@ -26,7 +28,8 @@ public class WalletsResponse: Decodable {
         id = try values.decode(Int.self, forKey: .id)
         publicKey = try values.decode(String.self, forKey: .publicKey)
         walletName = try values.decode(String.self, forKey: .walletName)
-        federationNickname = try values.decode(String.self, forKey: .federationNickname)
+        federationAddress = try values.decode(String.self, forKey: .federationAddress)
+        showOnHomeScreen = try values.decode(Bool.self, forKey: .showOnHomeScreen)
     }
     
 }

@@ -10,16 +10,19 @@ import UIKit
 import stellarsdk
 
 public protocol Wallet {
+    var name: String { get }
     var nativeBalance: CoinUnit { get }
     var isFounded: Bool { get }
 }
 
 public class FoundedWallet: Wallet {
-
+    public var name: String
+    
     var balances: [AccountBalanceResponse]
     
-    init(accountResponse: AccountResponse) {
+    init(walletResponse: WalletsResponse, accountResponse: AccountResponse) {
         self.balances = accountResponse.balances
+        self.name = walletResponse.walletName
     }
     
     public var nativeBalance: CoinUnit {
@@ -49,6 +52,8 @@ public class FoundedWallet: Wallet {
 }
 
 public class UnfoundedWallet: Wallet {
+    public var name: String
+    
     public var nativeBalance: CoinUnit {
         get {
             return 0
@@ -59,5 +64,9 @@ public class UnfoundedWallet: Wallet {
         get {
             return false
         }
+    }
+    
+    init(walletResponse: WalletsResponse) {
+        self.name = walletResponse.walletName
     }
 }

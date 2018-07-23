@@ -9,6 +9,7 @@
 import Foundation
 
 public enum ServiceError: Error {
+    case genericError(message: String)
     case userNotLoggedIn
     case unexpectedDataType
     case invalidRequest
@@ -41,6 +42,8 @@ extension ServiceError: LocalizedError {
     
     public var errorDescription: String? {
         switch self {
+        case .genericError(let message):
+            return message
         case .userNotLoggedIn:
             return R.string.localizable.user_not_logged_in()
         case .unexpectedDataType:

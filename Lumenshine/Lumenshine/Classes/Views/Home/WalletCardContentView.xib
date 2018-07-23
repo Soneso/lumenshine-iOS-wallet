@@ -119,6 +119,15 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="availableLabel" destination="FQg-h4-3mK" id="Lcv-k2-ev8"/>
+                <outlet property="balanceLabel" destination="yva-VC-2hl" id="bSb-ay-9c8"/>
+                <outlet property="detailsButton" destination="QpW-7W-h0z" id="oQ4-6K-uOA"/>
+                <outlet property="helpButton" destination="kFj-Ap-sWm" id="QSK-OZ-XHq"/>
+                <outlet property="nameLabel" destination="dcr-TQ-c9b" id="cft-fm-FwF"/>
+                <outlet property="receiveButton" destination="v69-4U-2Nv" id="71o-S7-Z6c"/>
+                <outlet property="sendButton" destination="FaK-Fg-J3B" id="du6-7g-28S"/>
+            </connections>
             <point key="canvasLocation" x="33.5" y="-119.5"/>
         </view>
     </objects>

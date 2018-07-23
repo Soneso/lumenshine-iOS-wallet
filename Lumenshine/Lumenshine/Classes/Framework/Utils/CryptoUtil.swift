@@ -16,7 +16,7 @@ public class CryptoUtil {
     private static var SALT_LENGTH: Int {
         return KEY_LENGTH
     }
-    private static let PBE_ITERATION_COUNT = 10000
+    private static let PBE_ITERATION_COUNT = 20000
     private static let PBKDF2_DERIVATION_ALGORITHM = "PBKDF2WithHmacSHA1"
     private static let CIPHER_ALGORITHM = "AES/CBC/NoPadding"
     

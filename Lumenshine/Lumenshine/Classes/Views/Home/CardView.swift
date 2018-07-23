@@ -52,6 +52,8 @@ class CardView: UIView {
         case .wallet(let status):
             let walletCard = WalletCard()
             walletCard.status = status
+            CardView.setupWalletCard(card: walletCard, viewModel: viewModel as! WalletCardViewModel)
+            
             card = walletCard
             
         }
@@ -62,6 +64,24 @@ class CardView: UIView {
     @objc
     func barButtonClick(_ sender: FlatButton) {
         viewModel?.barButtonSelected(at: sender.tag)
+    }
+    
+    class func setupWalletCard(card: WalletCard, viewModel: WalletCardViewModel) {
+        if let fundedView = card.fundedView {
+            fundedView.sendButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapSendButton), for: .touchUpInside)
+            fundedView.receiveButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapReceiveButton), for: .touchUpInside)
+            fundedView.detailsButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapDetailsButton), for: .touchUpInside)
+            fundedView.helpButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapHelpButton), for: .touchUpInside)
+            fundedView.nameLabel.text = viewModel.title
+            fundedView.balanceLabel.text = viewModel.nativeBalance?.stringWithUnit
+            fundedView.availableLabel.text = viewModel.nativeBalance?.availableAmount.stringWithUnit
+        }
+        
+        if let unfundedView = card.unfundedView {
+            unfundedView.fundButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapFundButton), for: .touchUpInside)
+            unfundedView.helpButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapHelpButton), for: .touchUpInside)
+            unfundedView.nameLabel.text = viewModel.title
+        }
     }
 }
 

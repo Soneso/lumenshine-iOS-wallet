@@ -44,6 +44,12 @@ class HomeViewController: UIViewController {
                 self.header.type = .unfounded
             }
         }
+        
+        viewModel.currencyRateUpdateClosure = { (rate) in
+            if let nativeFunds = Services.shared.userManager.totalNativeFunds {
+                self.header.funds = nativeFunds.stringConversionTo(currency: .usd, rate: rate)
+            }
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -105,7 +111,7 @@ extension HomeViewController {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         headerBar.behaviorDefiner?.scrollViewDidScroll(scrollView)
-        titleLabel.text = headerBar.progress < 0.50 ? "" : "TrendyStartup.io"
+        titleLabel.text = headerBar.progress < 0.50 ? "" : R.string.localizable.homeScreenTitle()
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -149,14 +155,14 @@ fileprivate extension HomeViewController {
         headerBar.behaviorDefiner = FacebookBarBehaviorDefiner()
         
         let label = UILabel()
-        label.text = "TrendyStartup.io"
+        label.text = R.string.localizable.homeScreenTitle()
         label.font = UIFont.systemFont(ofSize: 25.0)
         label.textColor = UIColor.white
         label.textAlignment = .center
         label.sizeToFit()
         
         header = HomeHeaderView()
-        header.type = .unfounded
+        //header.type = .unfounded
         header.unfoundedView.foundAction = {(button) in
             self.viewModel.foundAccount()
         }

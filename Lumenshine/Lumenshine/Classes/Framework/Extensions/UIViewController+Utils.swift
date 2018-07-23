@@ -11,7 +11,7 @@ import UIKit
 extension UIViewController {
     
     func showActivity() {
-        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: "Loading", preferredStyle: .alert)
         
         let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         loadingIndicator.hidesWhenStopped = true

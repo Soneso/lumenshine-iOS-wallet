@@ -30,7 +30,8 @@ public typealias WalletsClosure = (_ response:WalletsEnum) -> (Void)
 public typealias CoinUnit = Double
 
 public class UserManager: NSObject {
-
+    var totalNativeFunds: CoinUnit?
+    
     var walletService: WalletsService {
         get {
             return Services.shared.walletService
@@ -49,7 +50,9 @@ public class UserManager: NSObject {
             case .success(let data):
                 self.totalBalance(wallets: data, completion: completion)
             case .failure(let error):
-                completion(.failure(error: error))
+                DispatchQueue.main.async {
+                    completion(.failure(error: error))
+                }
             }
         }
     }
@@ -59,20 +62,19 @@ public class UserManager: NSObject {
             switch result {
             case .success(let data):
                 self.walletDetailsFor(wallets: data) { (result) -> (Void) in
-                    switch result {
-                    case .success(let wallets):
-                        if !wallets.isEmpty {
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success(let wallets):
                             completion(.success(response: wallets))
-                        } else {
-                            let unfoundedWallet = UnfoundedWallet()
-                            completion(.success(response: [unfoundedWallet]))
+                        case .failure(let error):
+                            completion(.failure(error: error))
                         }
-                    case .failure(let error):
-                        completion(.failure(error: error))
                     }
                 }
             case .failure(let error):
-                completion(.failure(error: error))
+                DispatchQueue.main.async {
+                    completion(.failure(error: error))
+                }
             }
         }
     }
@@ -84,8 +86,11 @@ public class UserManager: NSObject {
         }
         
         var completed = 0
+        var callFailed = false
         var xlm: CoinUnit = 0
         for wallet in wallets {
+            guard !callFailed else { return }
+            
             stellarSDK.accounts.getAccountDetails(accountId: wallet.publicKey) { (result) -> (Void) in
                 switch result {
                 case .success(let accountDetails):
@@ -101,12 +106,25 @@ public class UserManager: NSObject {
                         }
                     }
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    switch error {
+                    case .notFound(_,_):
+                        print(error.localizedDescription)
+                    default:
+                        guard !callFailed else { return }
+                        callFailed = true
+                        DispatchQueue.main.sync {
+                            completion(.failure(error: .genericError(message: error.localizedDescription)))
+                        }
+                        return
+                    }
                 }
                 
                 completed += 1
                 if completed == wallets.count {
-                    completion(.success(response: xlm))
+                    DispatchQueue.main.async {
+                        self.totalNativeFunds = xlm
+                        completion(.success(response: xlm))
+                    }
                 }
             }
         }
@@ -119,15 +137,27 @@ public class UserManager: NSObject {
         }
         
         var completed = 0
+        var callFailed = false
         var walletDetails = [Wallet]()
         for wallet in wallets {
+            guard !callFailed else { return }
+            
             stellarSDK.accounts.getAccountDetails(accountId: wallet.publicKey) { (result) -> (Void) in
                 switch result {
                 case .success(let accountDetails):
-                    let walletDetail = FoundedWallet(accountResponse: accountDetails)
+                    let walletDetail = FoundedWallet(walletResponse: wallet, accountResponse: accountDetails)
                     walletDetails.append(walletDetail)
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    switch error {
+                    case .notFound(_,_):
+                        let unfoundedWallet = UnfoundedWallet(walletResponse: wallet)
+                        walletDetails.append(unfoundedWallet)
+                    default:
+                        guard !callFailed else { return }
+                        callFailed = true
+                        completion(.failure(error: .genericError(message: error.localizedDescription)))
+                        return
+                    }
                 }
                 
                 completed += 1

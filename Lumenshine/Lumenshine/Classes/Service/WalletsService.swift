@@ -27,8 +27,8 @@ public class WalletsService: BaseService {
                 switch result {
                 case .success(let data):
                     do {
-                        let countryListResponse = try self.jsonDecoder.decode(Array<WalletsResponse>.self, from: data)
-                        response(.success(response: countryListResponse))
+                        let userWalletsResponse = try self.jsonDecoder.decode(Array<WalletsResponse>.self, from: data)
+                        response(.success(response: userWalletsResponse))
                     } catch {
                         response(.failure(error: .parsingFailed(message: error.localizedDescription)))
                     }

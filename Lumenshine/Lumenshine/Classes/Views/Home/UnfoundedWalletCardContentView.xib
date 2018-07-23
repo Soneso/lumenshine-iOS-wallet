@@ -38,8 +38,8 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f69-AE-dcV">
-                            <rect key="frame" x="269" y="0.0" width="90" height="55"/>
-                            <state key="normal" title="Found Wallet"/>
+                            <rect key="frame" x="278" y="0.0" width="81" height="55"/>
+                            <state key="normal" title="Fund Wallet"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p9g-xS-zVJ">
                             <rect key="frame" x="16" y="0.0" width="28" height="55"/>
@@ -96,6 +96,11 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="ye4-CW-sVN"/>
+            <connections>
+                <outlet property="fundButton" destination="f69-AE-dcV" id="lhi-6K-IdI"/>
+                <outlet property="helpButton" destination="p9g-xS-zVJ" id="nfW-JV-hdp"/>
+                <outlet property="nameLabel" destination="02c-sm-4KK" id="mBw-HM-GPS"/>
+            </connections>
             <point key="canvasLocation" x="33.5" y="-119.5"/>
         </view>
     </objects>

@@ -25,15 +25,18 @@ class HomeFoundedHeaderView: UIView {
     
     private func setup() {
         titleLabel.text = R.string.localizable.homeScreenTitle()
-        titleLabel.font = UIFont.systemFont(ofSize: 25.0)
-        titleLabel.textColor = UIColor.white
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 40.0)
+        titleLabel.textColor = Stylesheet.color(.white)
         
         sendButton.iconLabel.text = R.string.localizable.send()
-        sendButton.iconImageView.image = MaterialIcon.send.size36pt
+        sendButton.iconImageView.image = UIImage(named: "send")?.tint(with: Stylesheet.color(.white))
+        sendButton.iconLabel.textColor = Stylesheet.color(.white)
         receiveButton.iconLabel.text = R.string.localizable.receive()
-        receiveButton.iconImageView.image = MaterialIcon.received.size36pt
+        receiveButton.iconImageView.image = UIImage(named: "receive")?.tint(with: Stylesheet.color(.white))
+        receiveButton.iconLabel.textColor = Stylesheet.color(.white)
         moreButton.iconLabel.text = R.string.localizable.more()
-        moreButton.iconImageView.image = MaterialIcon.moreHorizontal.size36pt
+        moreButton.iconImageView.image = UIImage(named: "more")?.tint(with: Stylesheet.color(.white))
+        moreButton.iconLabel.textColor = Stylesheet.color(.white)
     }
     
 }
