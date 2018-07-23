@@ -39,5 +39,8 @@ public indirect enum Transition {
     case showEmailConfirmation(User)
     case logout(Transition?)
     case showPasswordHint(String)
+    case showSetup(User, LoginStep2Response)
+    case nextSetupStep
+    case showMnemonicVerification
 }
 

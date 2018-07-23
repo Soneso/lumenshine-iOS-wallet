@@ -104,26 +104,16 @@ extension ReLoginViewController {
         contentView.passwordTextField.resignFirstResponder()
         contentView.passwordTextField.text = nil
         
-        viewModel.loginStep1(email: "", tfaCode: nil) { result in
+        showActivity()
+        viewModel.loginStep1(email: "", password: password, tfaCode: nil) { result in
             DispatchQueue.main.async {
-                switch result {
-                case .success(let login1Response):
-                    self.showActivity()
-                    self.viewModel.verifyLogin1Response(login1Response, password: password) { response in
-                        DispatchQueue.main.async {
-                            self.hideActivity(completion: {
-                                switch response {
-                                case .success(let login2Response):
-                                    self.viewModel.verifyLogin2Response(login2Response)
-                                case .failure(let error):
-                                    self.present(error: error)
-                                }
-                            })
-                        }
+                self.hideActivity(completion: {
+                    switch result {
+                    case .success: break
+                    case .failure(let error):
+                        self.present(error: error)
                     }
-                case .failure(let error):
-                    self.present(error: error)
-                }
+                })
             }
         }
     }

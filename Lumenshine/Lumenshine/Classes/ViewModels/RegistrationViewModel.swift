@@ -139,7 +139,7 @@ class RegistrationViewModel : RegistrationViewModelType {
                     let user = User(id: "1", email: email, publicKeyIndex0: userSecurity.publicKeyIndex0, publicKeyIndex188: userSecurity.publicKeyIndex188, mnemonic: userSecurity.mnemonic24Word)
                     let loginViewModel = LoginViewModel(service: self.service, user: user)
                     loginViewModel.navigationCoordinator = self.navigationCoordinator
-                    loginViewModel.verifyLogin2Response(login2Response)
+//                    loginViewModel.verifyLogin2Response(login2Response)
                 case .failure(let error):
                     response(EmptyResponseEnum.failure(error: error))
                 }

@@ -65,9 +65,9 @@ class ReLoginViewModel : LoginViewModel {
         touchMe.invalidate()
     }
     
-    override func loginStep1(email: String, tfaCode: String?, response: @escaping Login1ResponseClosure) {
+    override func loginStep1(email: String, password: String, tfaCode: String?, response: @escaping EmptyResponseClosure) {
         let tfa = TFAGeneration.generatePassword(email: user.email)
-        super.loginStep1(email: user.email, tfaCode: tfa, response: response)
+        super.loginStep1(email: user.email, password: password, tfaCode: tfa, response: response)
     }
     
     override func forgotPasswordClick() {

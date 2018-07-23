@@ -15,8 +15,10 @@ class TextViewController: UIViewController {
     
     // MARK: - UI properties
     fileprivate let textLabel = UILabel()
+    fileprivate let titleText: String
     
-    init(text: String) {
+    init(title: String, text: String) {
+        self.titleText = title
         super.init(nibName: nil, bundle: nil)
         textLabel.text = text
     }
@@ -52,7 +54,7 @@ fileprivate extension TextViewController {
     }
     
     func prepareNavigationItem() {
-        navigationItem.titleLabel.text = R.string.localizable.password_hint_title()
+        navigationItem.titleLabel.text = titleText
         navigationItem.titleLabel.textColor = Stylesheet.color(.white)
         
         let backButton = Material.IconButton()

@@ -20,15 +20,12 @@ protocol LoginViewModelType: Transitionable, BiometricAuthenticationProtocol {
     func loginCompleted()
     func showLoginForm()
     
-    func loginStep1(email: String, tfaCode: String?, response: @escaping Login1ResponseClosure)
+    func loginStep1(email: String, password: String, tfaCode: String?, response: @escaping EmptyResponseClosure)
     func enableTfaCode(email: String) -> Bool
-    func signUp(email: String, password: String, repassword: String, response: @escaping GenerateAccountResponseClosure)
-    func checkUserSecurity(_ userSecurity: UserSecurity, response: @escaping EmptyResponseClosure)
+    func signUp(email: String, password: String, repassword: String, response: @escaping EmptyResponseClosure)
     func showPasswordHint()
     
     func forgotPasswordClick()
-    func verifyLogin1Response(_ login1Response: LoginStep1Response, password: String, response: @escaping Login2ResponseClosure)
-    func verifyLogin2Response(_ login2Response: LoginStep2Response)
 }
 
 class LoginViewModel : LoginViewModelType {
@@ -98,53 +95,19 @@ class LoginViewModel : LoginViewModelType {
         return false
     }
     
-    func loginStep1(email: String, tfaCode: String?, response: @escaping Login1ResponseClosure) {
+    func loginStep1(email: String, password: String, tfaCode: String?, response: @escaping EmptyResponseClosure) {
         self.email = email
         service.loginStep1(email: email, tfaCode: tfaCode) { result in
-            response(result)
-        }
-    }
-    
-    func verifyLogin1Response(_ login1Response: LoginStep1Response, password: String, response: @escaping Login2ResponseClosure) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            do {
-                if let userSecurity = UserSecurity(from: login1Response),
-                    let (publicKeyIndex188, mnemonic) = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: password) {
-                    self.user = User(id: "1", email: self.email!, publicKeyIndex0: login1Response.publicKeyIndex0, publicKeyIndex188: publicKeyIndex188, mnemonic: mnemonic)
-                    self.service.loginStep2(publicKeyIndex188: publicKeyIndex188) { result in
-                        response(result)
-                    }
-                } else {
-                    let error = ErrorResponse()
-                    error.parameterName = "password"
-                    error.errorMessage = R.string.localizable.invalid_password()
-                    response(.failure(error: .validationFailed(error: error)))
-                }
-            } catch {
-                response(.failure(error: .encryptionFailed(message: error.localizedDescription)))
+            switch result {
+            case .success(let login1Response):
+                self.verifyLogin1Response(login1Response, password: password, response: response)
+            case .failure(let error):
+                response(.failure(error: error))
             }
         }
     }
     
-    func verifyLogin2Response(_ login2Response: LoginStep2Response) {
-        guard let user = self.user else { return }
-        if login2Response.tfaConfirmed == nil || login2Response.tfaConfirmed == false {
-            if let tfaSecret = login2Response.tfaSecret,
-                let qrCode = login2Response.qrCode {
-                
-                let response = RegistrationResponse(tfaSecret: tfaSecret, qrCode: qrCode)
-                self.navigationCoordinator?.performTransition(transition: .show2FA(user, response))
-            }
-        } else if login2Response.mailConfirmed == nil || login2Response.mailConfirmed == false {
-            self.navigationCoordinator?.performTransition(transition: .showEmailConfirmation(user) )
-        } else if login2Response.mnemonicConfirmed == nil || login2Response.mnemonicConfirmed == false {
-            self.navigationCoordinator?.performTransition(transition: .showMnemonic(user))
-        } else {
-            loginCompleted()
-        }
-    }
-    
-    func signUp(email: String, password: String, repassword: String, response: @escaping GenerateAccountResponseClosure) {
+    func signUp(email: String, password: String, repassword: String, response: @escaping EmptyResponseClosure) {
         
         if !email.isEmail() {
             let error = ErrorResponse()
@@ -170,22 +133,20 @@ class LoginViewModel : LoginViewModelType {
         self.email = email
         
         service.generateAccount(email: email, password: password, userData: nil) { result in
-            response(result)
-        }
-    }
-    
-    func checkUserSecurity(_ userSecurity: UserSecurity, response: @escaping EmptyResponseClosure) {
-        self.service.loginStep2(publicKeyIndex188: userSecurity.publicKeyIndex188) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let login2Response):
-                    let user = User(id: "1", email: self.email!, publicKeyIndex0: userSecurity.publicKeyIndex0, publicKeyIndex188: userSecurity.publicKeyIndex188, mnemonic: userSecurity.mnemonic24Word)
-                    let loginViewModel = LoginViewModel(service: self.service, user: user)
-                    loginViewModel.navigationCoordinator = self.navigationCoordinator
-                    loginViewModel.verifyLogin2Response(login2Response)
-                case .failure(let error):
-                    response(EmptyResponseEnum.failure(error: error))
+            switch result {
+            case .success( _, let userSecurity):
+                self.user = User(id: "1", email: email, publicKeyIndex0: userSecurity.publicKeyIndex0, publicKeyIndex188: userSecurity.publicKeyIndex188, mnemonic: userSecurity.mnemonic24Word)
+                self.service.loginStep2(publicKeyIndex188: userSecurity.publicKeyIndex188) { result in
+                    switch result {
+                    case .success(let login2Response):
+                        self.showSetup(login2Response: login2Response)
+                        response(.success)
+                    case .failure(let error):
+                        response(.failure(error: error))
+                    }
                 }
+            case .failure(let error):
+                response(.failure(error: error))
             }
         }
     }
@@ -212,5 +173,42 @@ fileprivate extension LoginViewModel {
             ($0.name, $0.icon.name)
         }
         navigationCoordinator?.performTransition(transition: .showHeaderMenu(items))
+    }
+    
+    func verifyLogin1Response(_ login1Response: LoginStep1Response, password: String, response: @escaping EmptyResponseClosure) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            do {
+                if let userSecurity = UserSecurity(from: login1Response),
+                    let (publicKeyIndex188, mnemonic) = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: password) {
+                    
+                    self.user = User(id: "1", email: self.email!, publicKeyIndex0: login1Response.publicKeyIndex0, publicKeyIndex188: publicKeyIndex188, mnemonic: mnemonic)
+                    self.service.loginStep2(publicKeyIndex188: publicKeyIndex188) { result in
+                        switch result {
+                        case .success(let login2Response):
+                            self.showSetup(login2Response: login2Response)
+                            response(.success)
+                        case .failure(let error):
+                            response(.failure(error: error))
+                        }
+                    }
+                } else {
+                    let error = ErrorResponse()
+                    error.parameterName = "password"
+                    error.errorMessage = R.string.localizable.invalid_password()
+                    response(.failure(error: .validationFailed(error: error)))
+                }
+            } catch {
+                response(.failure(error: .encryptionFailed(message: error.localizedDescription)))
+            }
+        }
+    }
+    
+    func showSetup(login2Response: LoginStep2Response) {
+        guard let user = self.user else { return }
+        if login2Response.tfaConfirmed && login2Response.mailConfirmed && login2Response.mnemonicConfirmed {
+            navigationCoordinator?.performTransition(transition: .showDashboard(user))
+        } else {
+            navigationCoordinator?.performTransition(transition: .showSetup(user, login2Response))
+        }
     }
 }

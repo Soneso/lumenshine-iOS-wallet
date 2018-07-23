@@ -23,25 +23,23 @@ class LoginCoordinator: CoordinatorType {
     }
     
     func performTransition(transition: Transition) {
-        switch transition {
-        case .showDashboard(let user):
-            showDashboard(user: user)
-        case .showLogin:
-            showLogin()
-        case .showSignUp:
-            showSignUp()
-        case .show2FA(let user, let registrationResponse):
-            show2FA(user: user, response: registrationResponse)
-        case .showMnemonic(let user):
-            showMnemonicQuiz(user: user)
-        case .showEmailConfirmation(let user):
-            showEmailConfirmation(user: user)
-        case .showHeaderMenu(let items):
-            showHeaderMenu(items: items)
-        case .showPasswordHint(let hint):
-            showPasswordHint(hint)
-        default:
-            break
+        DispatchQueue.main.async {
+            switch transition {
+            case .showDashboard(let user):
+                self.showDashboard(user: user)
+            case .showLogin:
+                self.showLogin()
+            case .showSignUp:
+                self.showSignUp()
+            case .showHeaderMenu(let items):
+                self.showHeaderMenu(items: items)
+            case .showPasswordHint(let hint):
+                self.showPasswordHint(hint)
+            case .showSetup(let user, let loginResponse):
+                self.showSetup(user: user, loginResponse: loginResponse)
+            default:
+                break
+            }
         }
     }
 }
@@ -57,13 +55,8 @@ fileprivate extension LoginCoordinator {
     }
     
     func showDashboard(user: User) {
-        let menuCoordinator = MenuCoordinator(user: user)
-        
-        if let window = UIApplication.shared.delegate?.window ?? baseController.view.window {
-            UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromBottom, animations: {
-                window.rootViewController = menuCoordinator.baseController
-            }, completion: nil)
-        }
+        let coordinator = MenuCoordinator(user: user)
+        present(coordinator: coordinator)
     }
     
     func showLogin() {
@@ -74,24 +67,23 @@ fileprivate extension LoginCoordinator {
         (baseController as! LoginViewController).showSignUp()
     }
     
-    func show2FA(user: User, response: RegistrationResponse) {
-        let tfaCoordinator = TFARegistrationCoordinator(service: service, user: user, response: response)
-        baseController.navigationController?.pushViewController(tfaCoordinator.baseController, animated: true)
-    }
-    
-    func showMnemonicQuiz(user: User) {
-        let mnemonicCoordinator = MnemonicCoordinator(service: service, user: user)
-        baseController.navigationController?.pushViewController(mnemonicCoordinator.baseController, animated: true)
-    }
-    
-    func showEmailConfirmation(user: User) {
-        let emailCoordinator = EmailConfirmationCoordinator(service: service, user: user)
-        baseController.navigationController?.pushViewController(emailCoordinator.baseController, animated: true)
-    }
-    
     func showPasswordHint(_ hint: String) {
-        let textVC = TextViewController(text: hint)
+        let title = R.string.localizable.password_hint_title()
+        let textVC = TextViewController(title: title, text: hint)
         baseController.present(AppNavigationController(rootViewController: textVC), animated: true)
+    }
+    
+    func showSetup(user: User, loginResponse: LoginStep2Response) {
+        let coordinator = SetupMenuCoordinator(service: service, user: user, loginResponse: loginResponse)
+        present(coordinator: coordinator)
+    }
+    
+    func present(coordinator: CoordinatorType) {
+        if let window = UIApplication.shared.delegate?.window ?? baseController.view.window {
+            UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromBottom, animations: {
+                window.rootViewController = coordinator.baseController
+            }, completion: nil)
+        }
     }
 }
 

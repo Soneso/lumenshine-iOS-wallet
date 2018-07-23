@@ -122,26 +122,16 @@ extension LoginViewController {
         _ = resignFirstResponder()
         UserDefaults.standard.setValue(accountName, forKey: "username")
         
-        viewModel.loginStep1(email: accountName, tfaCode: contentView.textField3.text) { result in
+        showActivity()
+        viewModel.loginStep1(email: accountName, password: password, tfaCode: contentView.textField3.text) { result in
             DispatchQueue.main.async {
-                switch result {
-                case .success(let login1Response):
-                    self.showActivity()
-                    self.viewModel.verifyLogin1Response(login1Response, password: password) { response in
-                        DispatchQueue.main.async {
-                            self.hideActivity(completion: {
-                                switch response {
-                                case .success(let login2Response):
-                                    self.viewModel.verifyLogin2Response(login2Response)
-                                case .failure(let error):
-                                    self.present(error: error)
-                                }
-                            })
-                        }
+                self.hideActivity(completion: {
+                    switch result {
+                    case .success: break
+                    case .failure(let error):
+                        self.present(error: error)
                     }
-                case .failure(let error):
-                    self.present(error: error)
-                }
+                })
             }
         }
     }
@@ -175,14 +165,7 @@ extension LoginViewController {
             DispatchQueue.main.async {
                 self.hideActivity(completion: {
                     switch result {
-                    case .success( _, let userSecurity):
-                        self.viewModel.checkUserSecurity(userSecurity) { result in
-                            switch result {
-                            case .success: break
-                            case .failure(let error):
-                                self.present(error: error)
-                            }
-                        }
+                    case .success: break
                     case .failure(let error):
                         self.present(error: error)
                     }

@@ -40,7 +40,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 25 images.
+  /// This `R.image` struct is generated, and contains static references to 26 images.
   struct image {
     /// Image `FaceIcon`.
     static let faceIcon = Rswift.ImageResource(bundle: R.hostingBundle, name: "FaceIcon")
@@ -54,6 +54,8 @@ struct R: Rswift.Validatable {
     static let combination_lock = Rswift.ImageResource(bundle: R.hostingBundle, name: "combination_lock")
     /// Image `compose`.
     static let compose = Rswift.ImageResource(bundle: R.hostingBundle, name: "compose")
+    /// Image `copy`.
+    static let copy = Rswift.ImageResource(bundle: R.hostingBundle, name: "copy")
     /// Image `face_recognition`.
     static let face_recognition = Rswift.ImageResource(bundle: R.hostingBundle, name: "face_recognition")
     /// Image `fingerprint`.
@@ -121,6 +123,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "compose", bundle: ..., traitCollection: ...)`
     static func compose(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.compose, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "copy", bundle: ..., traitCollection: ...)`
+    static func copy(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.copy, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "face_recognition", bundle: ..., traitCollection: ...)`
@@ -358,7 +365,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 119 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 143 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -388,6 +395,18 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let xMoment_years = Rswift.StringResource(key: "x-moment_years", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: 2 Factor Authentication (2FA)
+      /// 
+      /// Locales: en
+      static let lbl_tfa = Rswift.StringResource(key: "lbl_tfa", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: 2FA Code
+      /// 
+      /// Locales: en
+      static let tfa_code = Rswift.StringResource(key: "tfa_code", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: 2FA secret copied to clipboard
+      /// 
+      /// Locales: en
+      static let fa_secret_copy = Rswift.StringResource(key: "2FA_secret_copy", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: About
       /// 
       /// Locales: en
@@ -436,10 +455,22 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let company_name = Rswift.StringResource(key: "company_name", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Confirm noting of your mnemonic
+      /// 
+      /// Locales: en
+      static let mnemonic_words_button_lbl = Rswift.StringResource(key: "mnemonic_words_button_lbl", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Confirmation mail resent
+      /// 
+      /// Locales: en
+      static let email_resent = Rswift.StringResource(key: "email_resent", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Contacts
       /// 
       /// Locales: en
       static let contacts = Rswift.StringResource(key: "contacts", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Continue
+      /// 
+      /// Locales: en
+      static let `continue` = Rswift.StringResource(key: "continue", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Country
       /// 
       /// Locales: en
@@ -472,6 +503,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let email = Rswift.StringResource(key: "email", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Email confirmation required
+      /// 
+      /// Locales: en
+      static let lbl_email_confirmation = Rswift.StringResource(key: "lbl_email_confirmation", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Enabled
       /// 
       /// Locales: en
@@ -484,6 +519,14 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let extras = Rswift.StringResource(key: "extras", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Finish setup
+      /// 
+      /// Locales: en
+      static let finish_setup = Rswift.StringResource(key: "finish_setup", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: For security reasons, your wallet will be protected by 2 Factor Authentication (2FA).
+      /// 
+      /// Locales: en
+      static let lbl_tfa_hint = Rswift.StringResource(key: "lbl_tfa_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Forename
       /// 
       /// Locales: en
@@ -504,10 +547,18 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let get_started_button = Rswift.StringResource(key: "get_started_button", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Go back and show mnemonic
+      /// 
+      /// Locales: en
+      static let back_mnemonic = Rswift.StringResource(key: "back_mnemonic", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Help
       /// 
       /// Locales: en
       static let help = Rswift.StringResource(key: "help", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Here are 4 random words from the mnemonic. Please indicate their position within the mnemonic.
+      /// 
+      /// Locales: en
+      static let verify_mnemonic_words_title = Rswift.StringResource(key: "verify_mnemonic_words_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Home
       /// 
       /// Locales: en
@@ -524,10 +575,18 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let import_mnemonic = Rswift.StringResource(key: "import_mnemonic", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: In order to be able continue the setup process, you need to confirm your email address first. A mail with a confirmation link has been sent to your inbox. Please follow the instructions from the received mail to confirm your email-address.
+      /// 
+      /// Locales: en
+      static let email_confirmation_hint = Rswift.StringResource(key: "email_confirmation_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Invalid email.
       /// 
       /// Locales: en
       static let invalid_email = Rswift.StringResource(key: "invalid_email", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Invalid input
+      /// 
+      /// Locales: en
+      static let invalid_input = Rswift.StringResource(key: "invalid_input", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Invalid mobile phone number.
       /// 
       /// Locales: en
@@ -604,6 +663,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let not_logged_in = Rswift.StringResource(key: "not_logged_in", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Note & confirm backup secret (mnemonic)
+      /// 
+      /// Locales: en
+      static let mnemonic_title = Rswift.StringResource(key: "mnemonic_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: OK
       /// 
       /// Locales: en
@@ -624,14 +687,26 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let password_hint_title = Rswift.StringResource(key: "password_hint_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
-      /// en translation: Please confirm email to continue the registration process
-      /// 
-      /// Locales: en
-      static let lbl_email_confirmation = Rswift.StringResource(key: "lbl_email_confirmation", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Please write down and safely store this phrase. It's the ONLY WAY to retrieve your wallet.
       /// 
       /// Locales: en
       static let lbl_mnemonic_title = Rswift.StringResource(key: "lbl_mnemonic_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Please write down your backup secret (mnemonic). You can use it if you lose your password to recover your wallet. It can be also used in other apps / wallets that support import from mnemonic. If you lose your password and the mnemonic you will not be able to access your funds any more. We can not recover your account if you lose both (password and mnemonic). We do not store password and mnemonic.
+      /// 
+      /// Locales: en
+      static let mnemonic_hint_lbl = Rswift.StringResource(key: "mnemonic_hint_lbl", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Position
+      /// 
+      /// Locales: en
+      static let position = Rswift.StringResource(key: "position", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Prove noting of mnemonic
+      /// 
+      /// Locales: en
+      static let verify_mnemonic_title = Rswift.StringResource(key: "verify_mnemonic_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Read more about mnemonics
+      /// 
+      /// Locales: en
+      static let mnemonic_more_lbl = Rswift.StringResource(key: "mnemonic_more_lbl", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Receive
       /// 
       /// Locales: en
@@ -696,6 +771,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let fingerprint = Rswift.StringResource(key: "fingerprint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Setup Wallet
+      /// 
+      /// Locales: en
+      static let setup_wallet = Rswift.StringResource(key: "setup_wallet", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Sign Out
       /// 
       /// Locales: en
@@ -712,6 +791,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let state = Rswift.StringResource(key: "state", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Step %@ of 3
+      /// 
+      /// Locales: en
+      static let step_3 = Rswift.StringResource(key: "step_3", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Street address
       /// 
       /// Locales: en
@@ -724,10 +807,22 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let submit = Rswift.StringResource(key: "submit", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: This step is very important
+      /// 
+      /// Locales: en
+      static let mnemonic_hint_title = Rswift.StringResource(key: "mnemonic_hint_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Title
       /// 
       /// Locales: en
       static let title = Rswift.StringResource(key: "title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: To prove the noting of your mnemonic, please complete following quiz.
+      /// 
+      /// Locales: en
+      static let verify_mnemonic_hint = Rswift.StringResource(key: "verify_mnemonic_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: To setup 2FA, please:  1. download a two-factor authenticator app (like Google Authenticator)  2. copy and enter the above displayed 2FA secret code into the authenticator app  3. enter the generated 2FA code from the authenticator app into the 2FA Code input and press "Next"
+      /// 
+      /// Locales: en
+      static let lbl_tfa_setup = Rswift.StringResource(key: "lbl_tfa_setup", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Today
       /// 
       /// Locales: en
@@ -740,10 +835,6 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let transactions = Rswift.StringResource(key: "transactions", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
-      /// en translation: Two Factor code
-      /// 
-      /// Locales: en
-      static let tfa_code = Rswift.StringResource(key: "tfa_code", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Unexpected data type
       /// 
       /// Locales: en
@@ -784,6 +875,14 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let bad_credentials = Rswift.StringResource(key: "bad_credentials", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Your 2FA secret: %@
+      /// 
+      /// Locales: en
+      static let lbl_tfa_secret = Rswift.StringResource(key: "lbl_tfa_secret", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Your Secret (24 words mnemonic):
+      /// 
+      /// Locales: en
+      static let mnemonic_words_title = Rswift.StringResource(key: "mnemonic_words_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Your new password must have at least 9 characters.  It must contain small letters and capitals.
       /// 
       /// Locales: en
@@ -800,6 +899,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let lbl_hour_suffix = Rswift.StringResource(key: "lbl_hour_suffix", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: here
+      /// 
+      /// Locales: en
+      static let here = Rswift.StringResource(key: "here", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: m
       /// 
       /// Locales: en
@@ -886,6 +989,27 @@ struct R: Rswift.Validatable {
         return String(format: NSLocalizedString("x-moment_years", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
       }
       
+      /// en translation: 2 Factor Authentication (2FA)
+      /// 
+      /// Locales: en
+      static func lbl_tfa(_: Void = ()) -> String {
+        return NSLocalizedString("lbl_tfa", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: 2FA Code
+      /// 
+      /// Locales: en
+      static func tfa_code(_: Void = ()) -> String {
+        return NSLocalizedString("tfa_code", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: 2FA secret copied to clipboard
+      /// 
+      /// Locales: en
+      static func fa_secret_copy(_: Void = ()) -> String {
+        return NSLocalizedString("2FA_secret_copy", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: About
       /// 
       /// Locales: en
@@ -970,11 +1094,32 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("company_name", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Confirm noting of your mnemonic
+      /// 
+      /// Locales: en
+      static func mnemonic_words_button_lbl(_: Void = ()) -> String {
+        return NSLocalizedString("mnemonic_words_button_lbl", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Confirmation mail resent
+      /// 
+      /// Locales: en
+      static func email_resent(_: Void = ()) -> String {
+        return NSLocalizedString("email_resent", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Contacts
       /// 
       /// Locales: en
       static func contacts(_: Void = ()) -> String {
         return NSLocalizedString("contacts", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Continue
+      /// 
+      /// Locales: en
+      static func `continue`(_: Void = ()) -> String {
+        return NSLocalizedString("continue", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Country
@@ -1033,6 +1178,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("email", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Email confirmation required
+      /// 
+      /// Locales: en
+      static func lbl_email_confirmation(_: Void = ()) -> String {
+        return NSLocalizedString("lbl_email_confirmation", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Enabled
       /// 
       /// Locales: en
@@ -1052,6 +1204,20 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func extras(_: Void = ()) -> String {
         return NSLocalizedString("extras", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Finish setup
+      /// 
+      /// Locales: en
+      static func finish_setup(_: Void = ()) -> String {
+        return NSLocalizedString("finish_setup", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: For security reasons, your wallet will be protected by 2 Factor Authentication (2FA).
+      /// 
+      /// Locales: en
+      static func lbl_tfa_hint(_: Void = ()) -> String {
+        return NSLocalizedString("lbl_tfa_hint", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Forename
@@ -1089,11 +1255,25 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("get_started_button", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Go back and show mnemonic
+      /// 
+      /// Locales: en
+      static func back_mnemonic(_: Void = ()) -> String {
+        return NSLocalizedString("back_mnemonic", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Help
       /// 
       /// Locales: en
       static func help(_: Void = ()) -> String {
         return NSLocalizedString("help", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Here are 4 random words from the mnemonic. Please indicate their position within the mnemonic.
+      /// 
+      /// Locales: en
+      static func verify_mnemonic_words_title(_: Void = ()) -> String {
+        return NSLocalizedString("verify_mnemonic_words_title", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Home
@@ -1124,11 +1304,25 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("import_mnemonic", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: In order to be able continue the setup process, you need to confirm your email address first. A mail with a confirmation link has been sent to your inbox. Please follow the instructions from the received mail to confirm your email-address.
+      /// 
+      /// Locales: en
+      static func email_confirmation_hint(_: Void = ()) -> String {
+        return NSLocalizedString("email_confirmation_hint", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Invalid email.
       /// 
       /// Locales: en
       static func invalid_email(_: Void = ()) -> String {
         return NSLocalizedString("invalid_email", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Invalid input
+      /// 
+      /// Locales: en
+      static func invalid_input(_: Void = ()) -> String {
+        return NSLocalizedString("invalid_input", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Invalid mobile phone number.
@@ -1264,6 +1458,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("not_logged_in", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Note & confirm backup secret (mnemonic)
+      /// 
+      /// Locales: en
+      static func mnemonic_title(_: Void = ()) -> String {
+        return NSLocalizedString("mnemonic_title", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: OK
       /// 
       /// Locales: en
@@ -1299,18 +1500,39 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("password_hint_title", bundle: R.hostingBundle, comment: "")
       }
       
-      /// en translation: Please confirm email to continue the registration process
-      /// 
-      /// Locales: en
-      static func lbl_email_confirmation(_: Void = ()) -> String {
-        return NSLocalizedString("lbl_email_confirmation", bundle: R.hostingBundle, comment: "")
-      }
-      
       /// en translation: Please write down and safely store this phrase. It's the ONLY WAY to retrieve your wallet.
       /// 
       /// Locales: en
       static func lbl_mnemonic_title(_: Void = ()) -> String {
         return NSLocalizedString("lbl_mnemonic_title", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Please write down your backup secret (mnemonic). You can use it if you lose your password to recover your wallet. It can be also used in other apps / wallets that support import from mnemonic. If you lose your password and the mnemonic you will not be able to access your funds any more. We can not recover your account if you lose both (password and mnemonic). We do not store password and mnemonic.
+      /// 
+      /// Locales: en
+      static func mnemonic_hint_lbl(_: Void = ()) -> String {
+        return NSLocalizedString("mnemonic_hint_lbl", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Position
+      /// 
+      /// Locales: en
+      static func position(_: Void = ()) -> String {
+        return NSLocalizedString("position", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Prove noting of mnemonic
+      /// 
+      /// Locales: en
+      static func verify_mnemonic_title(_: Void = ()) -> String {
+        return NSLocalizedString("verify_mnemonic_title", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Read more about mnemonics
+      /// 
+      /// Locales: en
+      static func mnemonic_more_lbl(_: Void = ()) -> String {
+        return NSLocalizedString("mnemonic_more_lbl", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Receive
@@ -1425,6 +1647,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("fingerprint", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Setup Wallet
+      /// 
+      /// Locales: en
+      static func setup_wallet(_: Void = ()) -> String {
+        return NSLocalizedString("setup_wallet", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Sign Out
       /// 
       /// Locales: en
@@ -1453,6 +1682,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("state", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Step %@ of 3
+      /// 
+      /// Locales: en
+      static func step_3(_ value1: String) -> String {
+        return String(format: NSLocalizedString("step_3", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
+      }
+      
       /// en translation: Street address
       /// 
       /// Locales: en
@@ -1474,11 +1710,32 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("submit", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: This step is very important
+      /// 
+      /// Locales: en
+      static func mnemonic_hint_title(_: Void = ()) -> String {
+        return NSLocalizedString("mnemonic_hint_title", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Title
       /// 
       /// Locales: en
       static func title(_: Void = ()) -> String {
         return NSLocalizedString("title", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: To prove the noting of your mnemonic, please complete following quiz.
+      /// 
+      /// Locales: en
+      static func verify_mnemonic_hint(_: Void = ()) -> String {
+        return NSLocalizedString("verify_mnemonic_hint", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: To setup 2FA, please:  1. download a two-factor authenticator app (like Google Authenticator)  2. copy and enter the above displayed 2FA secret code into the authenticator app  3. enter the generated 2FA code from the authenticator app into the 2FA Code input and press "Next"
+      /// 
+      /// Locales: en
+      static func lbl_tfa_setup(_: Void = ()) -> String {
+        return NSLocalizedString("lbl_tfa_setup", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Today
@@ -1500,13 +1757,6 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func transactions(_: Void = ()) -> String {
         return NSLocalizedString("transactions", bundle: R.hostingBundle, comment: "")
-      }
-      
-      /// en translation: Two Factor code
-      /// 
-      /// Locales: en
-      static func tfa_code(_: Void = ()) -> String {
-        return NSLocalizedString("tfa_code", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Unexpected data type
@@ -1579,6 +1829,20 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("bad_credentials", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Your 2FA secret: %@
+      /// 
+      /// Locales: en
+      static func lbl_tfa_secret(_ value1: String) -> String {
+        return String(format: NSLocalizedString("lbl_tfa_secret", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
+      }
+      
+      /// en translation: Your Secret (24 words mnemonic):
+      /// 
+      /// Locales: en
+      static func mnemonic_words_title(_: Void = ()) -> String {
+        return NSLocalizedString("mnemonic_words_title", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Your new password must have at least 9 characters.  It must contain small letters and capitals.
       /// 
       /// Locales: en
@@ -1605,6 +1869,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func lbl_hour_suffix(_: Void = ()) -> String {
         return NSLocalizedString("lbl_hour_suffix", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: here
+      /// 
+      /// Locales: en
+      static func here(_: Void = ()) -> String {
+        return NSLocalizedString("here", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: m

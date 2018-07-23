@@ -47,6 +47,8 @@
 		4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA2E205BD69F007FEB5E /* ServerMock.swift */; };
 		4322BA33205BDB6E007FEB5E /* CardsResponsesMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA32205BDB6E007FEB5E /* CardsResponsesMock.swift */; };
 		4322BA35205BDD58007FEB5E /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA34205BDD58007FEB5E /* Card.swift */; };
+		432F11792101C64600FC429B /* MnemonicSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432F11782101C64600FC429B /* MnemonicSetupViewController.swift */; };
+		432F117B2101EEF500FC429B /* VerificationSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432F117A2101EEF500FC429B /* VerificationSetupViewController.swift */; };
 		4337C4E72081BAA400F4585A /* RegistrationFormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4337C4E62081BAA400F4585A /* RegistrationFormTableViewController.swift */; };
 		4341251120EBC2C700267260 /* ReLoginHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4341251020EBC2C700267260 /* ReLoginHomeView.swift */; };
 		4341251320EBC2E900267260 /* ReLoginFingerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4341251220EBC2E900267260 /* ReLoginFingerView.swift */; };
@@ -90,9 +92,18 @@
 		4394911C20BEB845008D4FA2 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4394911B20BEB845008D4FA2 /* SettingsViewModel.swift */; };
 		4394911E20BEBDFA008D4FA2 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4394911D20BEBDFA008D4FA2 /* SettingsCoordinator.swift */; };
 		43973A8C20BD4B87000145DD /* TFAGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43973A8B20BD4B87000145DD /* TFAGeneration.swift */; };
+		439A182F2100CF8D00F7F5FD /* EmailSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439A182E2100CF8D00F7F5FD /* EmailSetupViewController.swift */; };
 		439C476E20D6770900C5DC97 /* AvatarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439C476D20D6770900C5DC97 /* AvatarTableViewCell.swift */; };
 		43A8633820A9F0E6007C46E2 /* LoginStep2Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A8633720A9F0E6007C46E2 /* LoginStep2Response.swift */; };
+		43B144CC20FCA5D40099E3AE /* TitleHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B144CB20FCA5D40099E3AE /* TitleHeader.swift */; };
+		43B144CE20FCAF630099E3AE /* TFASetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B144CD20FCAF630099E3AE /* TFASetupViewController.swift */; };
+		43B8919B2104764600062660 /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B8919A2104764600062660 /* InputField.swift */; };
 		43C6377A20BEFF2B00498FC5 /* ReLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C6377920BEFF2B00498FC5 /* ReLoginViewController.swift */; };
+		43CD7B0E20F7AEBC0014BF69 /* SetupCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CD7B0D20F7AEBC0014BF69 /* SetupCoordinator.swift */; };
+		43CD7B1020F7B0CF0014BF69 /* SetupMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CD7B0F20F7B0CF0014BF69 /* SetupMenuCoordinator.swift */; };
+		43CD7B1220F7B8A70014BF69 /* SetupMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CD7B1120F7B8A70014BF69 /* SetupMenuViewModel.swift */; };
+		43CD7B1420F7BEBF0014BF69 /* SetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CD7B1320F7BEBF0014BF69 /* SetupViewModel.swift */; };
+		43CD7B1720F7C47A0014BF69 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CD7B1620F7C47A0014BF69 /* SetupViewController.swift */; };
 		43D131E220569950000483C4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E120569950000483C4 /* HomeViewController.swift */; };
 		43D131E42056D439000483C4 /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E32056D439000483C4 /* CardTableViewCell.swift */; };
 		43D131E62056E3BD000483C4 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E52056E3BD000483C4 /* CardViewModel.swift */; };
@@ -223,6 +234,8 @@
 		4322BA2E205BD69F007FEB5E /* ServerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerMock.swift; sourceTree = "<group>"; };
 		4322BA32205BDB6E007FEB5E /* CardsResponsesMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsResponsesMock.swift; sourceTree = "<group>"; };
 		4322BA34205BDD58007FEB5E /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		432F11782101C64600FC429B /* MnemonicSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicSetupViewController.swift; sourceTree = "<group>"; };
+		432F117A2101EEF500FC429B /* VerificationSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationSetupViewController.swift; sourceTree = "<group>"; };
 		4337C4E62081BAA400F4585A /* RegistrationFormTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationFormTableViewController.swift; sourceTree = "<group>"; };
 		4341251020EBC2C700267260 /* ReLoginHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginHomeView.swift; sourceTree = "<group>"; };
 		4341251220EBC2E900267260 /* ReLoginFingerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginFingerView.swift; sourceTree = "<group>"; };
@@ -271,9 +284,18 @@
 		4394911B20BEB845008D4FA2 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		4394911D20BEBDFA008D4FA2 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
 		43973A8B20BD4B87000145DD /* TFAGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFAGeneration.swift; sourceTree = "<group>"; };
+		439A182E2100CF8D00F7F5FD /* EmailSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSetupViewController.swift; sourceTree = "<group>"; };
 		439C476D20D6770900C5DC97 /* AvatarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarTableViewCell.swift; sourceTree = "<group>"; };
 		43A8633720A9F0E6007C46E2 /* LoginStep2Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStep2Response.swift; sourceTree = "<group>"; };
+		43B144CB20FCA5D40099E3AE /* TitleHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleHeader.swift; sourceTree = "<group>"; };
+		43B144CD20FCAF630099E3AE /* TFASetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFASetupViewController.swift; sourceTree = "<group>"; };
+		43B8919A2104764600062660 /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
 		43C6377920BEFF2B00498FC5 /* ReLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginViewController.swift; sourceTree = "<group>"; };
+		43CD7B0D20F7AEBC0014BF69 /* SetupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCoordinator.swift; sourceTree = "<group>"; };
+		43CD7B0F20F7B0CF0014BF69 /* SetupMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupMenuCoordinator.swift; sourceTree = "<group>"; };
+		43CD7B1120F7B8A70014BF69 /* SetupMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupMenuViewModel.swift; sourceTree = "<group>"; };
+		43CD7B1320F7BEBF0014BF69 /* SetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewModel.swift; sourceTree = "<group>"; };
+		43CD7B1620F7C47A0014BF69 /* SetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
 		43D131E120569950000483C4 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		43D131E32056D439000483C4 /* CardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
 		43D131E52056E3BD000483C4 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
@@ -410,6 +432,7 @@
 		431437EC2047FF1A00189C83 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				43CD7B1520F7C4680014BF69 /* Setup */,
 				744DE2DA20BD7F74003BC216 /* RecoverAccount */,
 				4337C4E52081BA6A00F4585A /* Registration */,
 				43044912206BE7A400349B51 /* Mnemonic */,
@@ -610,6 +633,8 @@
 				431E7A282095D0E8003A63B3 /* TFARegistrationCoordinator.swift */,
 				4301312920C049CB00E47E83 /* ReLoginCoordinator.swift */,
 				43DAC65520E4EB2C00E491D8 /* ReLoginMenuCoordinator.swift */,
+				43CD7B0D20F7AEBC0014BF69 /* SetupCoordinator.swift */,
+				43CD7B0F20F7B0CF0014BF69 /* SetupMenuCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -632,6 +657,8 @@
 				744DE2DF20BD8006003BC216 /* Lost2faViewModel.swift */,
 				4394911B20BEB845008D4FA2 /* SettingsViewModel.swift */,
 				4386717320DAA77E00459EA8 /* WalletCardViewModel.swift */,
+				43CD7B1120F7B8A70014BF69 /* SetupMenuViewModel.swift */,
+				43CD7B1320F7BEBF0014BF69 /* SetupViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -689,8 +716,22 @@
 			children = (
 				4391A52D20D141300015A6DA /* EnumPicker.swift */,
 				43DAC65720E4FF0A00E491D8 /* ToolbarHeader.swift */,
+				43B144CB20FCA5D40099E3AE /* TitleHeader.swift */,
+				43B8919A2104764600062660 /* InputField.swift */,
 			);
 			path = ReusableComponents;
+			sourceTree = "<group>";
+		};
+		43CD7B1520F7C4680014BF69 /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				43CD7B1620F7C47A0014BF69 /* SetupViewController.swift */,
+				43B144CD20FCAF630099E3AE /* TFASetupViewController.swift */,
+				439A182E2100CF8D00F7F5FD /* EmailSetupViewController.swift */,
+				432F11782101C64600FC429B /* MnemonicSetupViewController.swift */,
+				432F117A2101EEF500FC429B /* VerificationSetupViewController.swift */,
+			);
+			path = Setup;
 			sourceTree = "<group>";
 		};
 		43D7A776205A892E00238E29 /* Strings */ = {
@@ -1111,7 +1152,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4322BA26205BAA60007FEB5E /* HeaderMenuViewController.swift in Sources */,
+				439A182F2100CF8D00F7F5FD /* EmailSetupViewController.swift in Sources */,
 				4359984D20A492FF00007F27 /* AlertFactory.swift in Sources */,
+				432F117B2101EEF500FC429B /* VerificationSetupViewController.swift in Sources */,
 				4387980A20584335005261C8 /* InternalCard.swift in Sources */,
 				7435EA7720BADF2C008CC667 /* UIViewController+Utils.swift in Sources */,
 				74E2057820D1543400E94048 /* HomeFoundedHeaderView.swift in Sources */,
@@ -1119,6 +1162,7 @@
 				43ECA9CC208B530000CB571E /* RegistrationTableViewCell.swift in Sources */,
 				4391A53420D175D40015A6DA /* SalutationsResponse.swift in Sources */,
 				43D131E42056D439000483C4 /* CardTableViewCell.swift in Sources */,
+				43CD7B1220F7B8A70014BF69 /* SetupMenuViewModel.swift in Sources */,
 				43EFF204204939F700B1887C /* UIColor+Utils.swift in Sources */,
 				431E7A252095B178003A63B3 /* TFARegistrationViewController.swift in Sources */,
 				43DAC65820E4FF0A00E491D8 /* ToolbarHeader.swift in Sources */,
@@ -1129,6 +1173,7 @@
 				4319B1902063FA8F007CE18D /* KeychainPasswordItem.swift in Sources */,
 				4319B1892063FA46007CE18D /* BiometricIDAuth.swift in Sources */,
 				431437F22047FF9100189C83 /* AppNavigationController.swift in Sources */,
+				43CD7B0E20F7AEBC0014BF69 /* SetupCoordinator.swift in Sources */,
 				4314B9F9204812BC006DBE63 /* MenuTableViewCell.swift in Sources */,
 				43088DA82087987E008AE1AB /* CryptoUtil.swift in Sources */,
 				4359984F20A4A14000007F27 /* UserSecurityHelper.swift in Sources */,
@@ -1151,9 +1196,12 @@
 				431628CE2097352B00F23A20 /* TFAResponse.swift in Sources */,
 				744DE2D920BD7F10003BC216 /* Lost2faCoordinator.swift in Sources */,
 				43E13E8820D97DA000409129 /* WalletCard.swift in Sources */,
+				43B8919B2104764600062660 /* InputField.swift in Sources */,
+				43CD7B1720F7C47A0014BF69 /* SetupViewController.swift in Sources */,
 				4316ED9D208DE00800A40F97 /* RegistrationCoordinator.swift in Sources */,
 				438BE842204D51FD007EBFB9 /* HamburgerButton.swift in Sources */,
 				431082B020DE3F8D00852502 /* LoginMenuViewModel.swift in Sources */,
+				43CD7B1420F7BEBF0014BF69 /* SetupViewModel.swift in Sources */,
 				74E2057F20D2A3B200E94048 /* IconButton.swift in Sources */,
 				431628D02097476500F23A20 /* ErrorResponse.swift in Sources */,
 				43FA7D3720B46157006BD513 /* EmailConfirmationViewModel.swift in Sources */,
@@ -1161,6 +1209,7 @@
 				43ECA9CA208B3C4400CB571E /* RegistrationViewModel.swift in Sources */,
 				4301312A20C049CB00E47E83 /* ReLoginCoordinator.swift in Sources */,
 				4319B1842063F00C007CE18D /* MenuViewModel.swift in Sources */,
+				43B144CC20FCA5D40099E3AE /* TitleHeader.swift in Sources */,
 				4359984B20A438EF00007F27 /* LoginStep1Response.swift in Sources */,
 				43C6377A20BEFF2B00498FC5 /* ReLoginViewController.swift in Sources */,
 				43844F4020E401B500C352E5 /* ReLoginMenuViewModel.swift in Sources */,
@@ -1173,6 +1222,7 @@
 				4319B1822063EF72007CE18D /* LoginCoordinator.swift in Sources */,
 				434E049B20D3DC8A00D3235A /* DateUtils+Format.swift in Sources */,
 				4391A53220D170420015A6DA /* CountryListResponse.swift in Sources */,
+				432F11792101C64600FC429B /* MnemonicSetupViewController.swift in Sources */,
 				7477F3FB20EE19EE00408934 /* WalletsResponse.swift in Sources */,
 				43088DB02087C4B8008AE1AB /* Dictionary+HTTPParams.swift in Sources */,
 				431F8AB620A074BA00B1E0F1 /* MnemonicCoordinator.swift in Sources */,
@@ -1180,6 +1230,7 @@
 				4390D57C205FA4EF00383BB2 /* HomeService.swift in Sources */,
 				4341251320EBC2E900267260 /* ReLoginFingerView.swift in Sources */,
 				4391A52E20D141300015A6DA /* EnumPicker.swift in Sources */,
+				43CD7B1020F7B0CF0014BF69 /* SetupMenuCoordinator.swift in Sources */,
 				43FBEE452062853A004E2BB1 /* ScanViewController.swift in Sources */,
 				74C0913520F64012000A809D /* WalletCardContentView.swift in Sources */,
 				4376F4A3204D9F9D00B179C3 /* HomeViewModel.swift in Sources */,
@@ -1196,6 +1247,7 @@
 				43973A8C20BD4B87000145DD /* TFAGeneration.swift in Sources */,
 				4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */,
 				7435EA6D20BACE71008CC667 /* ForgotPasswordCoordinator.swift in Sources */,
+				43B144CE20FCAF630099E3AE /* TFASetupViewController.swift in Sources */,
 				4322BA35205BDD58007FEB5E /* Card.swift in Sources */,
 				4391A52B20D139D60015A6DA /* CountryResponse.swift in Sources */,
 				4319B1802063EEA9007CE18D /* LoginViewModel.swift in Sources */,
