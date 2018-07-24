@@ -72,6 +72,11 @@ class SetupViewModel: SetupViewModelType {
         return loginResponse?.tfaSecret ?? "1234567890"
     }
     
+    var qrCode: Data? {
+        guard  let qr = loginResponse?.qrCode else { return nil }
+        return Data(base64Encoded: qr)
+    }
+    
     var mnemonic24Word: String {
         return user.mnemonic
     }
@@ -95,6 +100,13 @@ class SetupViewModel: SetupViewModelType {
             response(result)
         }
     }
+    
+//    func openAuthenticator() {
+//        let tfaSecret = loginResponse?.tfaSecret?.base32EncodedString
+//        let urlString = "otpauth://totp/lumenshine:\(user.email)?secret=\(tfaSecret)&issuer=lumenshine"
+//        guard let url = URL(string: urlString) else { return }
+//        navigationCoordinator?.performTransition(transition: .showGoogle2FA(url))
+//    }
     
     // Email confirmation methods
     func checkMailConfirmation(response: @escaping TFAResponseClosure) {
