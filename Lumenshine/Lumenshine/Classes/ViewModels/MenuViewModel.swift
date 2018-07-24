@@ -34,7 +34,8 @@ class MenuViewModel : MenuViewModelType {
         
         self.entries = [[.avatar],
                         [.home, .wallets, .transactions, .currencies, .contacts, .extras],
-                        [.settings, .help]]
+                        [.settings, .help],
+                        [.signOut]]
         
         if let tokenExists = TFAGeneration.isTokenExists(email: user.email),
             tokenExists == false {
@@ -74,6 +75,8 @@ class MenuViewModel : MenuViewModelType {
             navigationCoordinator?.performTransition(transition: .showSettings)
         case .home:
             navigationCoordinator?.performTransition(transition: .showHome)
+        case .signOut:
+            logout()
         default: break
         }
         lastIndex = indexPath
@@ -93,5 +96,11 @@ class MenuViewModel : MenuViewModelType {
 fileprivate extension MenuViewModel {
     func entry(at indexPath: IndexPath) -> MenuEntry {
         return entries[indexPath.section][indexPath.row]
+    }
+    
+    func logout() {
+        TFAGeneration.removeToken(email: user.email)
+        BaseService.removeToken()
+        navigationCoordinator?.performTransition(transition: .logout(nil))
     }
 }

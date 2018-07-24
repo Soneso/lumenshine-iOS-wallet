@@ -39,6 +39,8 @@ class MenuCoordinator: CoordinatorType {
             showSettings()
         case .showRelogin:
             showRelogin()
+        case .logout:
+            logout()
         default: break
         }
     }
@@ -62,5 +64,14 @@ fileprivate extension MenuCoordinator {
     func showRelogin() {
         let coordinator = ReLoginMenuCoordinator(service: service.auth, user: user)
         baseController.present(coordinator.baseController, animated: true)
+    }
+    
+    func logout() {
+        let loginCoordinator = LoginMenuCoordinator()
+        if let window = UIApplication.shared.delegate?.window ?? baseController.view.window {
+            UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromTop, animations: {
+                window.rootViewController = loginCoordinator.baseController
+            }, completion: nil)
+        }
     }
 }
