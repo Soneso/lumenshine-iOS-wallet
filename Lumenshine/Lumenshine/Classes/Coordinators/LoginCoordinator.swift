@@ -19,7 +19,7 @@ class LoginCoordinator: CoordinatorType {
         let viewModel = LoginViewModel(service: service)
         self.baseController = LoginViewController(viewModel: viewModel)
         viewModel.navigationCoordinator = self
-        performTransition(transition: transition ?? .showLogin)
+//        performTransition(transition: transition ?? .showLogin)
     }
     
     func performTransition(transition: Transition) {

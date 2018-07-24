@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import IHKeyboardAvoiding
 import Rswift
 import UIKit
 
@@ -40,7 +41,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 27 images.
+  /// This `R.image` struct is generated, and contains static references to 28 images.
   struct image {
     /// Image `FaceIcon`.
     static let faceIcon = Rswift.ImageResource(bundle: R.hostingBundle, name: "FaceIcon")
@@ -1998,8 +1999,8 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "ForgotPasswordViewController"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> IHKeyboardAvoiding.KeyboardDismissingView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? IHKeyboardAvoiding.KeyboardDismissingView
       }
       
       fileprivate init() {}

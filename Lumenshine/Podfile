@@ -21,9 +21,11 @@ target 'Lumenshine' do
   
   pod 'R.swift'
   pod 'stellar-ios-mac-sdk', '~> 1.1.4'
-  pod 'IQKeyboardManagerSwift'
   pod 'OneTimePassword'
   pod 'SwiftRichString'
+  
+  pod 'IHKeyboardAvoiding'
+#  pod 'IQKeyboardManagerSwift'
 
   target 'LumenshineTests' do
     inherit! :search_paths

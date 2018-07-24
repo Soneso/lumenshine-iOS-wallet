@@ -72,6 +72,7 @@ class ReLoginViewController: UIViewController {
             }
             
             self.contentView = contentView
+            contentView.passwordTextField.delegate = self
         }
     }
     
@@ -116,6 +117,12 @@ extension ReLoginViewController {
                 })
             }
         }
+    }
+}
+
+extension ReLoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return resignFirstResponder()
     }
 }
 

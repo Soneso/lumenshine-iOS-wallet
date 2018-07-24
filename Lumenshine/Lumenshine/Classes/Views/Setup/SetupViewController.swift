@@ -8,6 +8,7 @@
 
 import UIKit
 import Material
+import IHKeyboardAvoiding
 
 class SetupViewController: UIViewController {
     
@@ -43,17 +44,28 @@ class SetupViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func loadView() {
+        self.view = KeyboardDismissingView()
+    }
+    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         prepareView()
+        KeyboardAvoiding.avoidingView = self.view
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
     
+}
+
+extension SetupViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return resignFirstResponder()
+    }
 }
 
 fileprivate extension SetupViewController {

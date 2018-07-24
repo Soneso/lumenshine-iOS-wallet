@@ -114,6 +114,7 @@ class LoginViewModel : LoginViewModelType {
             error.parameterName = "email"
             error.errorMessage = R.string.localizable.invalid_email()
             response(.failure(error: .validationFailed(error: error)))
+            return
         }
         
         if !password.isValidPassword() {
@@ -121,6 +122,7 @@ class LoginViewModel : LoginViewModelType {
             error.parameterName = "password"
             error.errorMessage = R.string.localizable.invalid_password()
             response(.failure(error: .validationFailed(error: error)))
+            return
         }
         
         if password != repassword {
@@ -128,6 +130,7 @@ class LoginViewModel : LoginViewModelType {
             error.parameterName = "repassword"
             error.errorMessage = R.string.localizable.invalid_repassword()
             response(.failure(error: .validationFailed(error: error)))
+            return
         }
         
         self.email = email

@@ -33,6 +33,11 @@ class TFASetupViewController: SetupViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func resignFirstResponder() -> Bool {
+        tfaCodeTextField.resignFirstResponder()
+        return super.resignFirstResponder()
+    }
+    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -164,6 +169,7 @@ fileprivate extension TFASetupViewController {
         tfaCodeTextField.detailColor = Stylesheet.color(.red)
         tfaCodeTextField.dividerActiveColor = Stylesheet.color(.cyan)
         tfaCodeTextField.placeholderActiveColor = Stylesheet.color(.cyan)
+        tfaCodeTextField.delegate = self
         
         contentView.addSubview(tfaCodeTextField)
         tfaCodeTextField.snp.makeConstraints { make in

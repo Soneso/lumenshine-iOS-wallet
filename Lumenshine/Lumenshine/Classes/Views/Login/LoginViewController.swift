@@ -8,6 +8,7 @@
 
 import UIKit
 import Material
+import IHKeyboardAvoiding
 
 class LoginViewController: UIViewController {
     
@@ -30,12 +31,20 @@ class LoginViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func loadView() {
+        self.view = KeyboardDismissingView()
+    }
+    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         prepareView()
+        showLogin()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: .UIApplicationWillEnterForeground, object: nil)
+        
+        KeyboardAvoiding.avoidingView = self.view
     }
     
     @objc
@@ -76,6 +85,10 @@ class LoginViewController: UIViewController {
             }
             
             self.contentView = contentView
+            
+            contentView.textField1.delegate = self
+            contentView.textField2.delegate = self
+            contentView.textField3.delegate = self
         }
     }
 
@@ -178,6 +191,10 @@ extension LoginViewController {
 extension LoginViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
 
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return resignFirstResponder()
     }
 }
 
