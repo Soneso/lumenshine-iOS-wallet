@@ -40,28 +40,37 @@ class SettingsTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.items.count
+        return viewModel.itemDistribution.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.items[section].count
+        return viewModel.itemDistribution[section]
     }
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewController.CellIdentifier, for: indexPath) as! SettingsTableViewCell
         
-        cell.textLabel?.text = viewModel.items[indexPath.section][indexPath.row]
-        cell.detailTextLabel?.text = viewModel.detailText(forCell: indexPath)
-        
+        cell.delegate = self
+        cell.setText(viewModel.name(at: indexPath))
+        if let switchValue = viewModel.switchValue(at: indexPath) {
+            cell.stateSwitch.isOn = switchValue
+            cell.hideSwitch(false)
+        } else {
+            cell.hideSwitch(true)
+        }
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.didSelect(cellAt: indexPath)
-        let cell = tableView.cellForRow(at: indexPath)
-        cell?.detailTextLabel?.text = viewModel.detailText(forCell: indexPath)
+        viewModel.itemSelected(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+extension SettingsTableViewController: SettingsCellDelegate {
+    func switchStateChanged(cell: SettingsTableViewCell, state: Bool) {
+        if let indexPath = tableView.indexPath(for: cell) {
+            viewModel.switchChanged(value: state, at: indexPath)
+        }
     }
 }
 

@@ -387,7 +387,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 143 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 147 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -449,6 +449,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let lbl_tfa_secret_hint = Rswift.StringResource(key: "lbl_tfa_secret_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Avatar
+      /// 
+      /// Locales: en
+      static let avatar = Rswift.StringResource(key: "avatar", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Back
       /// 
       /// Locales: en
@@ -465,6 +469,14 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let cancel = Rswift.StringResource(key: "cancel", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Change 2FA Secret
+      /// 
+      /// Locales: en
+      static let change_2fa = Rswift.StringResource(key: "change_2fa", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Change password
+      /// 
+      /// Locales: en
+      static let change_password = Rswift.StringResource(key: "change_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: City
       /// 
       /// Locales: en
@@ -541,6 +553,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let extras = Rswift.StringResource(key: "extras", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Fingerprint/Face recognition
+      /// 
+      /// Locales: en
+      static let fingerprint_recognition = Rswift.StringResource(key: "fingerprint_recognition", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Finish setup
       /// 
       /// Locales: en
@@ -1067,6 +1083,13 @@ struct R: Rswift.Validatable {
         return String(format: NSLocalizedString("lbl_tfa_secret_hint", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
       }
       
+      /// en translation: Avatar
+      /// 
+      /// Locales: en
+      static func avatar(_: Void = ()) -> String {
+        return NSLocalizedString("avatar", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Back
       /// 
       /// Locales: en
@@ -1093,6 +1116,20 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func cancel(_: Void = ()) -> String {
         return NSLocalizedString("cancel", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Change 2FA Secret
+      /// 
+      /// Locales: en
+      static func change_2fa(_: Void = ()) -> String {
+        return NSLocalizedString("change_2fa", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Change password
+      /// 
+      /// Locales: en
+      static func change_password(_: Void = ()) -> String {
+        return NSLocalizedString("change_password", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: City
@@ -1226,6 +1263,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func extras(_: Void = ()) -> String {
         return NSLocalizedString("extras", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Fingerprint/Face recognition
+      /// 
+      /// Locales: en
+      static func fingerprint_recognition(_: Void = ()) -> String {
+        return NSLocalizedString("fingerprint_recognition", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Finish setup

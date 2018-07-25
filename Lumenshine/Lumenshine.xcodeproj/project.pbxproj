@@ -90,6 +90,7 @@
 		43973A8C20BD4B87000145DD /* TFAGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43973A8B20BD4B87000145DD /* TFAGeneration.swift */; };
 		439A182F2100CF8D00F7F5FD /* EmailSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439A182E2100CF8D00F7F5FD /* EmailSetupViewController.swift */; };
 		439C476E20D6770900C5DC97 /* AvatarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439C476D20D6770900C5DC97 /* AvatarTableViewCell.swift */; };
+		439E3C8B2107786A0004BB91 /* SettingsEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439E3C8A2107786A0004BB91 /* SettingsEntry.swift */; };
 		43A8633820A9F0E6007C46E2 /* LoginStep2Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A8633720A9F0E6007C46E2 /* LoginStep2Response.swift */; };
 		43B144CC20FCA5D40099E3AE /* TitleHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B144CB20FCA5D40099E3AE /* TitleHeader.swift */; };
 		43B144CE20FCAF630099E3AE /* TFASetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B144CD20FCAF630099E3AE /* TFASetupViewController.swift */; };
@@ -280,6 +281,7 @@
 		43973A8B20BD4B87000145DD /* TFAGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFAGeneration.swift; sourceTree = "<group>"; };
 		439A182E2100CF8D00F7F5FD /* EmailSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSetupViewController.swift; sourceTree = "<group>"; };
 		439C476D20D6770900C5DC97 /* AvatarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarTableViewCell.swift; sourceTree = "<group>"; };
+		439E3C8A2107786A0004BB91 /* SettingsEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsEntry.swift; sourceTree = "<group>"; };
 		43A8633720A9F0E6007C46E2 /* LoginStep2Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStep2Response.swift; sourceTree = "<group>"; };
 		43B144CB20FCA5D40099E3AE /* TitleHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleHeader.swift; sourceTree = "<group>"; };
 		43B144CD20FCAF630099E3AE /* TFASetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFASetupViewController.swift; sourceTree = "<group>"; };
@@ -548,6 +550,7 @@
 				4391A52F20D159190015A6DA /* RegistrationEntry.swift */,
 				434E049C20D4154700D3235A /* MenuEntry.swift */,
 				74C0913E20F65A7A000A809D /* Wallet.swift */,
+				439E3C8A2107786A0004BB91 /* SettingsEntry.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1243,6 +1246,7 @@
 				4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */,
 				7435EA6D20BACE71008CC667 /* ForgotPasswordCoordinator.swift in Sources */,
 				43B144CE20FCAF630099E3AE /* TFASetupViewController.swift in Sources */,
+				439E3C8B2107786A0004BB91 /* SettingsEntry.swift in Sources */,
 				4322BA35205BDD58007FEB5E /* Card.swift in Sources */,
 				4391A52B20D139D60015A6DA /* CountryResponse.swift in Sources */,
 				4319B1802063EEA9007CE18D /* LoginViewModel.swift in Sources */,

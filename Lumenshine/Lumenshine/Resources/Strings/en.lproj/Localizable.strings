@@ -436,3 +436,15 @@
 /*  */
 "password_hint_title" = "Password requirements";
 
+/*  */
+"change_password" = "Change password";
+
+/*  */
+"change_2fa" = "Change 2FA Secret";
+
+/*  */
+"fingerprint_recognition" = "Fingerprint/Face recognition";
+
+/*  */
+"avatar" = "Avatar";
+

@@ -50,15 +50,21 @@ fileprivate extension MenuCoordinator {
     func showHome() {
         let coordinator = HomeCoordinator(service: service.home, user: user)
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
-        (baseController as! AppNavigationDrawerController).setViewController(navigationController, for: .none)
-        menuView.present(coordinator.baseController)
+        if let drawer = baseController as? AppNavigationDrawerController {
+            drawer.setViewController(navigationController, for: .none)
+            drawer.closeSide()
+            menuView.present(coordinator.baseController)
+        }
     }
     
     func showSettings() {
         let coordinator = SettingsCoordinator(service: service.auth, user: user)
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
-        (baseController as! AppNavigationDrawerController).setViewController(navigationController, for: .none)
-        menuView.present(coordinator.baseController)
+        if let drawer = baseController as? AppNavigationDrawerController {
+            drawer.setViewController(navigationController, for: .none)
+            drawer.closeSide()
+            menuView.present(coordinator.baseController)
+        }
     }
     
     func showRelogin() {
