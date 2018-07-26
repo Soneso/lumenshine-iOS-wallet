@@ -45,6 +45,7 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: .UIApplicationWillEnterForeground, object: nil)
         
         KeyboardAvoiding.avoidingView = self.view
+        KeyboardAvoiding.paddingForCurrentAvoidingView = -120.0
     }
     
     @objc
@@ -173,6 +174,7 @@ extension LoginViewController {
                 return
         }
         
+        _ = resignFirstResponder()
         showActivity()
         viewModel.signUp(email: email, password: password, repassword: repassword) { result in
             DispatchQueue.main.async {
@@ -194,7 +196,13 @@ extension LoginViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        return resignFirstResponder()
+        let actions = contentView.submitButton.actions(forTarget: self, forControlEvent: .touchUpInside)
+        if actions?.first == "loginActionWithSender:" {
+            loginAction(sender: contentView.submitButton)
+        } else {
+            signUpAction(sender: contentView.submitButton)
+        }
+        return true
     }
 }
 

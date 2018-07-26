@@ -21,6 +21,8 @@ class ReLoginCoordinator: CoordinatorType {
         switch transition {
         case .openDashboard:
             openDashboard()
+        case .showDashboard(let user):
+            self.showDashboard(user: user)
         case .logout(let transition):
             logout(transtion: transition)
         case .showRelogin:
@@ -35,7 +37,11 @@ class ReLoginCoordinator: CoordinatorType {
 
 fileprivate extension ReLoginCoordinator {
     func openDashboard() {
-        baseController.dismiss(animated: true, completion: nil)
+        baseController.drawerController?.dismiss(animated: true, completion: nil)
+    }
+    
+    func showDashboard(user: User) {
+        baseController.drawerController?.dismiss(animated: true, completion: nil)
     }
     
     func logout(transtion: Transition?) {

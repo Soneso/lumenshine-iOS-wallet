@@ -8,6 +8,7 @@
 
 import UIKit
 import Material
+import IHKeyboardAvoiding
 
 class ReLoginViewController: UIViewController {
     
@@ -40,6 +41,9 @@ class ReLoginViewController: UIViewController {
         
         prepareView()
         setupContentView(contentView)
+        
+        KeyboardAvoiding.avoidingView = self.view
+        KeyboardAvoiding.paddingForCurrentAvoidingView = -120.0
         
     }
     
@@ -122,7 +126,8 @@ extension ReLoginViewController {
 
 extension ReLoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        return resignFirstResponder()
+        reloginAction(sender: contentView.submitButton)
+        return true
     }
 }
 
@@ -154,8 +159,6 @@ fileprivate extension ReLoginViewController {
     func prepareLoginButton() {
         contentView.submitButton.addTarget(self, action: #selector(reloginAction(sender:)), for: .touchUpInside)
     }
-    
-
     
     func present(error: ServiceError) {
         contentView.passwordTextField.detail = error.errorDescription

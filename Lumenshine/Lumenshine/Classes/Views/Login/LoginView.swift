@@ -78,7 +78,7 @@ fileprivate extension LoginView {
         textField2.dividerActiveColor = Stylesheet.color(.cyan)
         textField2.placeholderActiveColor = Stylesheet.color(.cyan)
         
-        textField3.keyboardType = .numberPad
+//        textField3.keyboardType = .numberPad
         textField3.placeholder = R.string.localizable.tfa_code()
         textField3.placeholderAnimation = .hidden
         textField3.detailColor = Stylesheet.color(.red)

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0DED82B5E5F4511B406E4F3C /* Pods_LumenshineUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E96EA88565EED8E5E6D02D38 /* Pods_LumenshineUITests.framework */; };
-		33BC1B0B39134888B13400EA /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		33BC1B0B39134888B13400EA /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		4301312A20C049CB00E47E83 /* ReLoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4301312920C049CB00E47E83 /* ReLoginCoordinator.swift */; };
 		4304491C206BF47400349B51 /* UIView+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4304491B206BF47400349B51 /* UIView+Shake.swift */; };
 		43088DA82087987E008AE1AB /* CryptoUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43088DA72087987E008AE1AB /* CryptoUtil.swift */; };
@@ -363,7 +363,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33BC1B0B39134888B13400EA /* BuildFile in Frameworks */,
+				33BC1B0B39134888B13400EA /* (null) in Frameworks */,
 				0DED82B5E5F4511B406E4F3C /* Pods_LumenshineUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
