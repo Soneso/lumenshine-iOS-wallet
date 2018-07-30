@@ -140,9 +140,9 @@ fileprivate extension SettingsViewModel {
         DispatchQueue.global(qos: .userInitiated).async {
             do {
                 if let userSecurity = UserSecurity(from: authResponse),
-                    let (publicKeyIndex188, _) = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: oldPass) {
+                    let (publicKeyIndex188, _, wordlistMasterKey, mnemonicMasterKey) = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: oldPass) {
                     
-                    let userSec = try userSecurity.updatePassword(newPass, publicKeyIndex188: publicKeyIndex188)
+                    let userSec = try userSecurity.updatePassword(newPass, publicKeyIndex188: publicKeyIndex188, wordlistMasterKey: wordlistMasterKey, mnemonicMasterKey: mnemonicMasterKey)
                     response(.success(response: nil, userSecurity: userSec))
                 } else {
                     let error = ErrorResponse()

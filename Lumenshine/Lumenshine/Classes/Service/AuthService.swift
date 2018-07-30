@@ -360,45 +360,6 @@ public class AuthService: BaseService {
         }
     }
     
-//    private func createAccountForPassword(_ password: String) throws -> UserSecurity {
-//        do {
-//            // generate 256 bit password and salt
-//            let passwordSalt = CryptoUtil.generateSalt()
-//            let derivedPassword = CryptoUtil.deriveKeyPbkdf2(password: password, salt: passwordSalt)
-//
-//            // generate master key
-//            let masterKey = CryptoUtil.generateMasterKey()
-//
-//            // encrypt master key
-//            let masterKeyIV = CryptoUtil.generateIV()
-//            let encryptedMasterKey = try CryptoUtil.encryptValue(plainValue: masterKey, key: derivedPassword, iv: masterKeyIV)
-//
-//            // generate mnemonic
-//            let mnemonic = Wallet.generate24WordMnemonic()
-//
-//            // encrypt the mnemonic
-//            let mnemonicIV = CryptoUtil.generateIV()
-//            let mnemonic16bytes = CryptoUtil.applyPadding(blockSize: 16, source: mnemonic.bytes)
-//            let encryptedMnemonic = try CryptoUtil.encryptValue(plainValue: mnemonic16bytes, key: masterKey, iv: mnemonicIV)
-//
-//            // generate public keys
-//            let publicKeyIndex0 = try Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: 0).accountId
-//            let publicKeyIndex188 = try Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: 188).accountId
-//
-//
-//            return UserSecurity(publicKeyIndex0: publicKeyIndex0,
-//                                publicKeyIndex188: publicKeyIndex188,
-//                                passwordSalt: passwordSalt,
-//                                encryptedMasterKey: encryptedMasterKey,
-//                                masterKeyIV: masterKeyIV,
-//                                encryptedMnemonic: encryptedMnemonic,
-//                                mnemonicIV: mnemonicIV,
-//                                mnemonic24Word: mnemonic)
-//        } catch {
-//            throw error
-//        }
-//    }
-    
     func resetPassword(email: String, response: @escaping EmptyResponseClosure) {
         do {
             var params = Dictionary<String,String>()
