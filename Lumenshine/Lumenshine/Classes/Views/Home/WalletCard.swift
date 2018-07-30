@@ -23,8 +23,29 @@ class WalletCard: CardView {
     
     var fundedView: WalletCardContentView?
     var unfundedView: UnfoundedWalletCardContentView?
+    var viewController: UIViewController?
+    
+    var reloadCellAction: (() -> ())?
+    var expanded = false
     
     fileprivate let textLabel = UILabel()
+    //fileprivate let contentStackView = UIStackView()
+    fileprivate let collapsedContainer = UIView()
+    fileprivate let expandedContainer = UIView()
+    
+    override var viewModel: CardViewModelType? {
+        didSet {
+            if let viewModel = viewModel as? WalletCardViewModel {
+                viewModel.receivePaymentAction = {
+                    guard !self.expanded else {
+                        return
+                    }
+                    self.expanded = true
+                    self.addReceiveViewController()
+                }
+            }
+        }
+    }
     
     var status: WalletStatus! {
         didSet {
@@ -48,25 +69,33 @@ class WalletCard: CardView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
 }
 
 fileprivate extension WalletCard {
     func prepare() {
-        prepareLabel()
+        addContainers()
     }
     
-    func prepareLabel() {
-        textLabel.textColor = Stylesheet.color(.black)
-        textLabel.font = Stylesheet.font(.body)
-        textLabel.textAlignment = .center
-        textLabel.numberOfLines = 0
+    func addContainers() {
+        collapsedContainer.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(collapsedContainer)
+        expandedContainer.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(expandedContainer)
         
-        contentView.addSubview(textLabel)
-        textLabel.snp.makeConstraints { (make) in
-            make.top.left.equalTo(10)
-            make.bottom.right.equalTo(-10)
-        }
+        collapsedContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        collapsedContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        collapsedContainer.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        
+        expandedContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        expandedContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        let topAnchor = expandedContainer.topAnchor.constraint(equalTo: collapsedContainer.bottomAnchor)
+        topAnchor.priority = .defaultHigh
+        topAnchor.isActive = true
+        expandedContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        
+        let heightConstraint = expandedContainer.heightAnchor.constraint(equalToConstant: 0)
+        heightConstraint.priority = .defaultLow
+        heightConstraint.isActive = true
     }
     
     func addFoundedView() {
@@ -74,7 +103,7 @@ fileprivate extension WalletCard {
         fundedView!.frame = contentView.bounds
         fundedView!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        contentView.addSubview(fundedView!)
+        collapsedContainer.addSubview(fundedView!)
     }
     
     func addUnfoundedView() {
@@ -82,7 +111,32 @@ fileprivate extension WalletCard {
         unfundedView!.frame = contentView.bounds
         unfundedView!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        contentView.addSubview(unfundedView!)
+        collapsedContainer.addSubview(unfundedView!)
+    }
+    
+    func addReceiveViewController() {
+        if let parentViewController = viewController {
+            let viewController = ReceivePaymentCardViewController()
+            viewController.wallet = (viewModel as! WalletCardViewModel).wallet
+            viewController.closeAction = {
+                viewController.willMove(toParentViewController: parentViewController)
+                viewController.view.removeFromSuperview()
+                viewController.removeFromParentViewController()
+                
+                self.reloadCellAction?()
+                self.expanded = false
+            }
+            
+            parentViewController.addChildViewController(viewController)
+            expandedContainer.addSubview(viewController.view)
+            viewController.view.snp.makeConstraints {make in
+                make.edges.equalToSuperview()
+            }
+            viewController.didMove(toParentViewController: parentViewController)
+            
+            
+            reloadCellAction?()
+        }
     }
     
 }
