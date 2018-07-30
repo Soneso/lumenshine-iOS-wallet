@@ -58,7 +58,7 @@ fileprivate extension MenuCoordinator {
     }
     
     func showSettings() {
-        let coordinator = SettingsCoordinator(service: service.auth, user: user)
+        let coordinator = SettingsCoordinator(service: service, user: user)
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
         if let drawer = baseController as? AppNavigationDrawerController {
             drawer.setViewController(navigationController, for: .none)

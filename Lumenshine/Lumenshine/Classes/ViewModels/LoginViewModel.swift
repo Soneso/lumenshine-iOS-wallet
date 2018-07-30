@@ -178,7 +178,7 @@ fileprivate extension LoginViewModel {
         navigationCoordinator?.performTransition(transition: .showHeaderMenu(items))
     }
     
-    func verifyLogin1Response(_ login1Response: LoginStep1Response, password: String, response: @escaping EmptyResponseClosure) {
+    func verifyLogin1Response(_ login1Response: AuthenticationResponse, password: String, response: @escaping EmptyResponseClosure) {
         DispatchQueue.global(qos: .userInitiated).async {
             do {
                 if let userSecurity = UserSecurity(from: login1Response),

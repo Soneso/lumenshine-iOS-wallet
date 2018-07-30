@@ -14,6 +14,10 @@ protocol SettingsViewModelType: Transitionable {
     func switchValue(at indexPath: IndexPath) -> Bool?
     func switchChanged(value: Bool, at indexPath: IndexPath)
     func itemSelected(at indexPath: IndexPath)
+    func showPasswordHint()
+    func changePassword(currentPass: String, newPass: String, repeatPass: String, response: @escaping EmptyResponseClosure)
+    func showHome()
+    func showSettings()
 }
 
 
@@ -24,7 +28,6 @@ class SettingsViewModel: SettingsViewModelType {
     fileprivate let user: User
     fileprivate let entries: [[SettingsEntry]]
     fileprivate var touchEnabled: Bool
-    fileprivate var lastIndex = IndexPath(row: 0, section: 1)
     
     init(service: AuthService, user: User) {
         self.service = service
@@ -63,10 +66,9 @@ class SettingsViewModel: SettingsViewModelType {
     }
     
     func itemSelected(at indexPath:IndexPath) {
-        if indexPath == lastIndex { return }
         switch entry(at: indexPath) {
         case .changePassword:
-            break
+            navigationCoordinator?.performTransition(transition: .showChangePassword)
         case .change2FA:
             break
         case .biometricAuth:
@@ -74,7 +76,53 @@ class SettingsViewModel: SettingsViewModelType {
         case .avatar:
             break
         }
-        lastIndex = indexPath
+    }
+    
+    func showPasswordHint() {
+        let hint = R.string.localizable.password_hint()
+        navigationCoordinator?.performTransition(transition: .showPasswordHint(hint))
+    }
+    
+    func showHome() {
+        navigationCoordinator?.performTransition(transition: .showHome)
+    }
+    
+    func showSettings() {
+        navigationCoordinator?.performTransition(transition: .showSettings)
+    }
+    
+    func changePassword(currentPass: String, newPass: String, repeatPass: String, response: @escaping EmptyResponseClosure) {
+        if !newPass.isValidPassword() {
+            let error = ErrorResponse()
+            error.parameterName = "new_password"
+            error.errorMessage = R.string.localizable.invalid_password()
+            response(.failure(error: .validationFailed(error: error)))
+            return
+        }
+        
+        if newPass != repeatPass {
+            let error = ErrorResponse()
+            error.parameterName = "re_password"
+            error.errorMessage = R.string.localizable.invalid_repassword()
+            response(.failure(error: .validationFailed(error: error)))
+            return
+        }
+        
+        service.authenticationData { result in
+            switch result {
+            case .success(let authResponse):
+                self.changePassword(authResponse: authResponse, oldPass: currentPass, newPass: newPass) { result2 in
+                    switch result2 {
+                    case .success(_, let userSecurity):
+                        self.service.changePassword(userSecurity: userSecurity, response: response)
+                    case .failure(let error):
+                        response(.failure(error: error))
+                    }
+                }
+            case .failure(let error):
+                response(.failure(error: error))
+            }
+        }
     }
 }
 
@@ -86,5 +134,25 @@ fileprivate extension SettingsViewModel {
     
     func entry(at indexPath: IndexPath) -> SettingsEntry {
         return entries[indexPath.section][indexPath.row]
+    }
+    
+    func changePassword(authResponse: AuthenticationResponse, oldPass: String, newPass: String, response: @escaping GenerateAccountResponseClosure) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            do {
+                if let userSecurity = UserSecurity(from: authResponse),
+                    let (publicKeyIndex188, _) = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: oldPass) {
+                    
+                    let userSec = try userSecurity.updatePassword(newPass, publicKeyIndex188: publicKeyIndex188)
+                    response(.success(response: nil, userSecurity: userSec))
+                } else {
+                    let error = ErrorResponse()
+                    error.parameterName = "current_password"
+                    error.errorMessage = R.string.localizable.invalid_password()
+                    response(.failure(error: .validationFailed(error: error)))
+                }
+            } catch {
+                response(.failure(error: .encryptionFailed(message: error.localizedDescription)))
+            }
+        }
     }
 }

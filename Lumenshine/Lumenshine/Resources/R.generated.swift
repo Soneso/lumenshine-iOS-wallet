@@ -387,7 +387,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 147 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 152 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -513,6 +513,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let currencies = Rswift.StringResource(key: "currencies", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Current password
+      /// 
+      /// Locales: en
+      static let current_password = Rswift.StringResource(key: "current_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Delete
       /// 
       /// Locales: en
@@ -541,6 +545,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let lbl_email_confirmation = Rswift.StringResource(key: "lbl_email_confirmation", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Empty password.
+      /// 
+      /// Locales: en
+      static let empty_password = Rswift.StringResource(key: "empty_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Enabled
       /// 
       /// Locales: en
@@ -693,6 +701,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let nationality = Rswift.StringResource(key: "nationality", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: New password
+      /// 
+      /// Locales: en
+      static let new_password = Rswift.StringResource(key: "new_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Next
       /// 
       /// Locales: en
@@ -725,6 +737,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let password_hint_title = Rswift.StringResource(key: "password_hint_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Password successfully changed
+      /// 
+      /// Locales: en
+      static let password_changed = Rswift.StringResource(key: "password_changed", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Please write down and safely store this phrase. It's the ONLY WAY to retrieve your wallet.
       /// 
       /// Locales: en
@@ -757,6 +773,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let repeat_password = Rswift.StringResource(key: "repeat_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Repeat new password
+      /// 
+      /// Locales: en
+      static let repeat_new_password = Rswift.StringResource(key: "repeat_new_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Repetition do not match with password.
       /// 
       /// Locales: en
@@ -1195,6 +1215,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("currencies", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Current password
+      /// 
+      /// Locales: en
+      static func current_password(_: Void = ()) -> String {
+        return NSLocalizedString("current_password", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Delete
       /// 
       /// Locales: en
@@ -1242,6 +1269,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func lbl_email_confirmation(_: Void = ()) -> String {
         return NSLocalizedString("lbl_email_confirmation", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Empty password.
+      /// 
+      /// Locales: en
+      static func empty_password(_: Void = ()) -> String {
+        return NSLocalizedString("empty_password", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Enabled
@@ -1510,6 +1544,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("nationality", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: New password
+      /// 
+      /// Locales: en
+      static func new_password(_: Void = ()) -> String {
+        return NSLocalizedString("new_password", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Next
       /// 
       /// Locales: en
@@ -1566,6 +1607,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("password_hint_title", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Password successfully changed
+      /// 
+      /// Locales: en
+      static func password_changed(_: Void = ()) -> String {
+        return NSLocalizedString("password_changed", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Please write down and safely store this phrase. It's the ONLY WAY to retrieve your wallet.
       /// 
       /// Locales: en
@@ -1620,6 +1668,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func repeat_password(_: Void = ()) -> String {
         return NSLocalizedString("repeat_password", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Repeat new password
+      /// 
+      /// Locales: en
+      static func repeat_new_password(_: Void = ()) -> String {
+        return NSLocalizedString("repeat_new_password", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Repetition do not match with password.

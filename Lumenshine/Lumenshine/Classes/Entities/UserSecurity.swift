@@ -22,12 +22,11 @@ public struct UserSecurity {
     let encryptedWordList: Array<UInt8>
     let wordListEncryptionIV: Array<UInt8>
     let mnemonic24Word: String
-    
 }
 
 extension UserSecurity {
     
-    init?(from loginResponse: LoginStep1Response) {
+    init?(from loginResponse: AuthenticationResponse) {
         username = ""
         publicKeyIndex188 = ""
         mnemonic24Word = ""
@@ -60,5 +59,37 @@ extension UserSecurity {
         
         guard let wordListEncryptionIVData = Data(base64Encoded: loginResponse.wordlistEncryptionIV) else { return nil }
         wordListEncryptionIV = wordListEncryptionIVData.bytes
+    }
+    
+    func updatePassword(_ password: String, publicKeyIndex188: String) throws -> UserSecurity {
+        do {
+            // generate 256 bit password and salt
+            let passwordSalt = CryptoUtil.generateSalt()
+            let derivedPassword = CryptoUtil.deriveKeyPbkdf2(password: password, salt: passwordSalt)
+            
+            let wordListMasterKey = CryptoUtil.generateMasterKey()
+            let wordListMasterKeyEncryptionIV = CryptoUtil.generateIV()
+            let encryptedWordListMasterKey = try CryptoUtil.encryptValue(plainValue: wordListMasterKey, key: derivedPassword, iv: wordListMasterKeyEncryptionIV)
+            
+            let mnemonicMasterKey = CryptoUtil.generateMasterKey()
+            let mnemonicMasterKeyEncryptionIV = CryptoUtil.generateIV()
+            let encryptedMnemonicMasterKey = try CryptoUtil.encryptValue(plainValue: mnemonicMasterKey, key: derivedPassword, iv: mnemonicMasterKeyEncryptionIV)
+            
+            return UserSecurity(username: username,
+                                publicKeyIndex0: publicKeyIndex0,
+                                publicKeyIndex188: publicKeyIndex188,
+                                passwordKdfSalt: passwordSalt,
+                                encryptedMnemonicMasterKey: encryptedMnemonicMasterKey,
+                                mnemonicMasterKeyEncryptionIV: mnemonicMasterKeyEncryptionIV,
+                                encryptedMnemonic: encryptedMnemonic,
+                                mnemonicEncryptionIV: mnemonicEncryptionIV,
+                                encryptedWordListMasterKey: encryptedWordListMasterKey,
+                                wordListMasterKeyEncryptionIV: wordListMasterKeyEncryptionIV,
+                                encryptedWordList: encryptedWordList,
+                                wordListEncryptionIV: wordListEncryptionIV,
+                                mnemonic24Word: mnemonic24Word)
+        } catch {
+            throw error
+        }
     }
 }

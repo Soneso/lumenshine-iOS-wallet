@@ -413,6 +413,9 @@
 "invalid_password" = "Invalid password.";
 
 /*  */
+"empty_password" = "Empty password.";
+
+/*  */
 "invalid_repassword" = "Repetition do not match with password.";
 
 /*  */
@@ -438,6 +441,18 @@
 
 /*  */
 "change_password" = "Change password";
+
+/*  */
+"current_password" = "Current password";
+
+/*  */
+"new_password" = "New password";
+
+/*  */
+"repeat_new_password" = "Repeat new password";
+
+/*  */
+"password_changed" = "Password successfully changed";
 
 /*  */
 "change_2fa" = "Change 2FA Secret";

@@ -9,7 +9,7 @@
 import Foundation
 
 public enum GenerateAccountResponseEnum {
-    case success(response: RegistrationResponse, userSecurity: UserSecurity)
+    case success(response: RegistrationResponse?, userSecurity: UserSecurity)
     case failure(error: ServiceError)
 }
 
@@ -23,8 +23,8 @@ public enum EmptyResponseEnum {
     case failure(error: ServiceError)
 }
 
-public enum Login1ResponseEnum {
-    case success(response: LoginStep1Response)
+public enum AuthResponseEnum {
+    case success(response: AuthenticationResponse)
     case failure(error: ServiceError)
 }
 
@@ -51,7 +51,7 @@ public enum SalutationsResponseEnum {
 public typealias GenerateAccountResponseClosure = (_ response:GenerateAccountResponseEnum) -> (Void)
 public typealias TFAResponseClosure = (_ response:TFAResponseEnum) -> (Void)
 public typealias EmptyResponseClosure = (_ response:EmptyResponseEnum) -> (Void)
-public typealias Login1ResponseClosure = (_ response:Login1ResponseEnum) -> (Void)
+public typealias AuthResponseClosure = (_ response:AuthResponseEnum) -> (Void)
 public typealias Login2ResponseClosure = (_ response:Login2ResponseEnum) -> (Void)
 public typealias TfaSecretResponseClosure = (_ response:TfaSecretResponseEnum) -> (Void)
 public typealias CountryListResponseClosure = (_ response:CountryListResponseEnum) -> (Void)
@@ -199,7 +199,7 @@ public class AuthService: BaseService {
         }
     }
     
-    open func loginStep1(email: String, tfaCode:String?, response: @escaping Login1ResponseClosure) {
+    open func loginStep1(email: String, tfaCode:String?, response: @escaping AuthResponseClosure) {
         
         do {
             var params = Dictionary<String,String>()
@@ -215,7 +215,7 @@ public class AuthService: BaseService {
                 case .success(let data):
                     BaseService.jwtTokenType = .partial
                     do {
-                        let loginResponse = try self.jsonDecoder.decode(LoginStep1Response.self, from: data)
+                        let loginResponse = try self.jsonDecoder.decode(AuthenticationResponse.self, from: data)
                         response(.success(response: loginResponse))
                     } catch {
                         response(.failure(error: .parsingFailed(message: error.localizedDescription)))
@@ -436,6 +436,50 @@ public class AuthService: BaseService {
                     case .failure(let error):
                         response(.failure(error: error))
                     }
+                }
+            }
+        } catch {
+            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+        }
+    }
+    
+    open func authenticationData(response: @escaping AuthResponseClosure) {
+        
+        GETRequestWithPath(path: "/portal/user/dashboard/user_auth_data") { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                do {
+                    let authResponse = try self.jsonDecoder.decode(AuthenticationResponse.self, from: data)
+                    response(.success(response: authResponse))
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+                }
+            case .failure(let error):
+                response(.failure(error: error))
+            }
+        }
+    }
+    
+    open func changePassword(userSecurity: UserSecurity, response: @escaping EmptyResponseClosure) {
+        
+        var params = Dictionary<String,String>()
+        params["kdf_salt"] = userSecurity.passwordKdfSalt.toBase64()
+        params["mnemonic_master_key"] = userSecurity.encryptedMnemonicMasterKey.toBase64()
+        params["mnemonic_master_iv"] = userSecurity.mnemonicMasterKeyEncryptionIV.toBase64()
+        params["wordlist_master_key"] = userSecurity.encryptedWordListMasterKey.toBase64()
+        // key: wordlist_encryption_iv ??
+        params["wordlist_master_iv"] = userSecurity.wordListMasterKeyEncryptionIV.toBase64()
+        params["public_key_188"] = userSecurity.publicKeyIndex188
+        
+        do {
+            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+            
+            self.POSTRequestWithPath(path: "/portal/user/dashboard/change_password", body: bodyData) { (result) -> (Void) in
+                switch result {
+                case .success:
+                    response(.success)
+                case .failure(let error):
+                    response(.failure(error: error))
                 }
             }
         } catch {
