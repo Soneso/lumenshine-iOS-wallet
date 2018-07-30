@@ -137,6 +137,8 @@
 		746DC58520D142EC00AD0856 /* HomeUnfoundedHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746DC58420D142EC00AD0856 /* HomeUnfoundedHeaderView.swift */; };
 		7477F3F920EE188600408934 /* WalletsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7477F3F820EE188600408934 /* WalletsService.swift */; };
 		7477F3FB20EE19EE00408934 /* WalletsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7477F3FA20EE19EE00408934 /* WalletsResponse.swift */; };
+		74A2A2EE210EF3EB007AEE91 /* ReceivePaymentPrintView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74A2A2ED210EF3EB007AEE91 /* ReceivePaymentPrintView.xib */; };
+		74A2A2F0210EF405007AEE91 /* ReceivePaymentPrintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A2A2EF210EF405007AEE91 /* ReceivePaymentPrintView.swift */; };
 		74C08FF320EE1FE6000A809D /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C08FF220EE1FE6000A809D /* UserManager.swift */; };
 		74C08FF820EF6F2F000A809D /* FoundAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C08FF620EF6F2F000A809D /* FoundAccountViewController.swift */; };
 		74C08FF920EF6F2F000A809D /* FoundAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74C08FF720EF6F2F000A809D /* FoundAccountViewController.xib */; };
@@ -150,6 +152,13 @@
 		74C0914820FB3612000A809D /* CoinUnit+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C0914720FB3612000A809D /* CoinUnit+Additions.swift */; };
 		74C0914A20FB3F6F000A809D /* CurrenciesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C0914920FB3F6F000A809D /* CurrenciesService.swift */; };
 		74C0914C20FB4125000A809D /* CurrenciesMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C0914B20FB4125000A809D /* CurrenciesMonitor.swift */; };
+		74C8994B2101DD7C009B13EA /* ReceivePaymentCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C899492101DD7C009B13EA /* ReceivePaymentCardViewController.swift */; };
+		74C8994C2101DD7C009B13EA /* ReceivePaymentCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74C8994A2101DD7C009B13EA /* ReceivePaymentCardViewController.xib */; };
+		74C8994E210205C8009B13EA /* UIApplication+ViewControllerTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C8994D210205C8009B13EA /* UIApplication+ViewControllerTree.swift */; };
+		74C899582107621E009B13EA /* receive_payment.html in Resources */ = {isa = PBXBuildFile; fileRef = 74C899572107621E009B13EA /* receive_payment.html */; };
+		74C8995A2108ACD1009B13EA /* AccountBalanceResponse+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C899592108ACD1009B13EA /* AccountBalanceResponse+Extra.swift */; };
+		74C89996210A3A06009B13EA /* Sequence+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C89995210A3A06009B13EA /* Sequence+Utils.swift */; };
+		74DD4CEB210CE83E00F4D69A /* UIView+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DD4CEA210CE83E00F4D69A /* UIView+Snapshot.swift */; };
 		74E2057820D1543400E94048 /* HomeFoundedHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E2057720D1543400E94048 /* HomeFoundedHeaderView.swift */; };
 		74E2057A20D1544000E94048 /* HomeFoundedHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74E2057920D1544000E94048 /* HomeFoundedHeaderView.xib */; };
 		74E2057F20D2A3B200E94048 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E2057E20D2A3B200E94048 /* IconButton.swift */; };
@@ -330,6 +339,8 @@
 		746DC58420D142EC00AD0856 /* HomeUnfoundedHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUnfoundedHeaderView.swift; sourceTree = "<group>"; };
 		7477F3F820EE188600408934 /* WalletsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsService.swift; sourceTree = "<group>"; };
 		7477F3FA20EE19EE00408934 /* WalletsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletsResponse.swift; sourceTree = "<group>"; };
+		74A2A2ED210EF3EB007AEE91 /* ReceivePaymentPrintView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceivePaymentPrintView.xib; sourceTree = "<group>"; };
+		74A2A2EF210EF405007AEE91 /* ReceivePaymentPrintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivePaymentPrintView.swift; sourceTree = "<group>"; };
 		74C08FF220EE1FE6000A809D /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		74C08FF620EF6F2F000A809D /* FoundAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundAccountViewController.swift; sourceTree = "<group>"; };
 		74C08FF720EF6F2F000A809D /* FoundAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoundAccountViewController.xib; sourceTree = "<group>"; };
@@ -343,6 +354,13 @@
 		74C0914720FB3612000A809D /* CoinUnit+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoinUnit+Additions.swift"; sourceTree = "<group>"; };
 		74C0914920FB3F6F000A809D /* CurrenciesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesService.swift; sourceTree = "<group>"; };
 		74C0914B20FB4125000A809D /* CurrenciesMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesMonitor.swift; sourceTree = "<group>"; };
+		74C899492101DD7C009B13EA /* ReceivePaymentCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivePaymentCardViewController.swift; sourceTree = "<group>"; };
+		74C8994A2101DD7C009B13EA /* ReceivePaymentCardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceivePaymentCardViewController.xib; sourceTree = "<group>"; };
+		74C8994D210205C8009B13EA /* UIApplication+ViewControllerTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+ViewControllerTree.swift"; sourceTree = "<group>"; };
+		74C899572107621E009B13EA /* receive_payment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = receive_payment.html; sourceTree = "<group>"; };
+		74C899592108ACD1009B13EA /* AccountBalanceResponse+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountBalanceResponse+Extra.swift"; sourceTree = "<group>"; };
+		74C89995210A3A06009B13EA /* Sequence+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Utils.swift"; sourceTree = "<group>"; };
+		74DD4CEA210CE83E00F4D69A /* UIView+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Snapshot.swift"; sourceTree = "<group>"; };
 		74E2057720D1543400E94048 /* HomeFoundedHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFoundedHeaderView.swift; sourceTree = "<group>"; };
 		74E2057920D1544000E94048 /* HomeFoundedHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeFoundedHeaderView.xib; sourceTree = "<group>"; };
 		74E2057E20D2A3B200E94048 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
@@ -480,6 +498,7 @@
 		4314B9F02048068B006DBE63 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				74C89956210761EE009B13EA /* Images */,
 				43D7A776205A892E00238E29 /* Strings */,
 				43D7A774205A84B300238E29 /* R.generated.swift */,
 				4314B9F1204806E5006DBE63 /* MaterialIcons.bundle */,
@@ -661,6 +680,10 @@
 				74C0913C20F64B03000A809D /* UnfoundedWalletCardContentView.swift */,
 				74C0914320F7B3CD000A809D /* WalletCardInfoViewController.swift */,
 				74C0914420F7B3CD000A809D /* WalletCardInfoViewController.xib */,
+				74C899492101DD7C009B13EA /* ReceivePaymentCardViewController.swift */,
+				74C8994A2101DD7C009B13EA /* ReceivePaymentCardViewController.xib */,
+				74A2A2ED210EF3EB007AEE91 /* ReceivePaymentPrintView.xib */,
+				74A2A2EF210EF405007AEE91 /* ReceivePaymentPrintView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -729,6 +752,10 @@
 				7435EA7620BADF2C008CC667 /* UIViewController+Utils.swift */,
 				744DE2D620BD7A8A003BC216 /* UIDevice+Additions.swift */,
 				74C0914720FB3612000A809D /* CoinUnit+Additions.swift */,
+				74C8994D210205C8009B13EA /* UIApplication+ViewControllerTree.swift */,
+				74C899592108ACD1009B13EA /* AccountBalanceResponse+Extra.swift */,
+				74C89995210A3A06009B13EA /* Sequence+Utils.swift */,
+				74DD4CEA210CE83E00F4D69A /* UIView+Snapshot.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -812,6 +839,14 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		74C89956210761EE009B13EA /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				74C899572107621E009B13EA /* receive_payment.html */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		ACF964D475AC3012A3F61AED /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -849,8 +884,6 @@
 				4360483F20AEFCFD00CF781A /* Sources */,
 				4360484020AEFCFD00CF781A /* Frameworks */,
 				4360484120AEFCFD00CF781A /* Resources */,
-				CC65632C20368EF3575C3089 /* [CP] Embed Pods Frameworks */,
-				0421D456925FAEBEF6DC3C5B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -870,8 +903,6 @@
 				4360484D20AEFD9A00CF781A /* Sources */,
 				4360484E20AEFD9A00CF781A /* Frameworks */,
 				4360484F20AEFD9A00CF781A /* Resources */,
-				AE7C488C7B84E758B45A5B34 /* [CP] Embed Pods Frameworks */,
-				D22BE9A9323217461094C18A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -894,7 +925,6 @@
 				7445E9BF2019CF7200470E0A /* Resources */,
 				74DABE68201B1455007FB701 /* CopyFiles */,
 				9ECB84A6EE5B215F0AD986FE /* [CP] Embed Pods Frameworks */,
-				BEEF886FE7B178DD036B4146 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -979,11 +1009,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				74E2058120D2A3C400E94048 /* IconView.xib in Resources */,
+				74A2A2EE210EF3EB007AEE91 /* ReceivePaymentPrintView.xib in Resources */,
 				74C08FF920EF6F2F000A809D /* FoundAccountViewController.xib in Resources */,
 				746DC58320D1421400AD0856 /* HomeUnfoundedHeaderView.xib in Resources */,
 				744DE2DE20BD7FAE003BC216 /* Lost2faViewController.xib in Resources */,
 				74C0913B20F64AF0000A809D /* UnfoundedWalletCardContentView.xib in Resources */,
+				74C8994C2101DD7C009B13EA /* ReceivePaymentCardViewController.xib in Resources */,
 				7435EA7320BAD452008CC667 /* ForgotPasswordViewController.xib in Resources */,
+				74C899582107621E009B13EA /* receive_payment.html in Resources */,
 				43D7A77B205A892E00238E29 /* Localizable.strings in Resources */,
 				7445E9CF2019CF7200470E0A /* LaunchScreen.storyboard in Resources */,
 				74C0914620F7B3CD000A809D /* WalletCardInfoViewController.xib in Resources */,
@@ -998,21 +1031,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0421D456925FAEBEF6DC3C5B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LumenshineTests/Pods-LumenshineTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		20574D3B4711A2F4E45F3B56 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1056,6 +1074,7 @@
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/DGElasticPullToRefresh/DGElasticPullToRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/IHKeyboardAvoiding/IHKeyboardAvoiding.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/KWDrawerController/KWDrawerController.framework",
 				"${BUILT_PRODUCTS_DIR}/LTMorphingLabel/LTMorphingLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/Material/Material.framework",
@@ -1073,6 +1092,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DGElasticPullToRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IHKeyboardAvoiding.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KWDrawerController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LTMorphingLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Material.framework",
@@ -1087,51 +1107,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AE7C488C7B84E758B45A5B34 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LumenshineUITests/Pods-LumenshineUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BEEF886FE7B178DD036B4146 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CC65632C20368EF3575C3089 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LumenshineTests/Pods-LumenshineTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CD628029C8C4233BF1BE0D22 /* [CP] Check Pods Manifest.lock */ = {
@@ -1150,21 +1125,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D22BE9A9323217461094C18A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LumenshineUITests/Pods-LumenshineUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D51D50D9A66B1A952F3DE983 /* [CP] Check Pods Manifest.lock */ = {
@@ -1225,10 +1185,12 @@
 				43DAC65820E4FF0A00E491D8 /* ToolbarHeader.swift in Sources */,
 				4376F49E204D9DF800B179C3 /* HomeCoordinator.swift in Sources */,
 				4394911E20BEBDFA008D4FA2 /* SettingsCoordinator.swift in Sources */,
+				74C8995A2108ACD1009B13EA /* AccountBalanceResponse+Extra.swift in Sources */,
 				74C0913F20F65A7A000A809D /* Wallet.swift in Sources */,
 				4319B1902063FA8F007CE18D /* KeychainPasswordItem.swift in Sources */,
 				4319B1892063FA46007CE18D /* BiometricIDAuth.swift in Sources */,
 				431437F22047FF9100189C83 /* AppNavigationController.swift in Sources */,
+				74A2A2F0210EF405007AEE91 /* ReceivePaymentPrintView.swift in Sources */,
 				43CD7B0E20F7AEBC0014BF69 /* SetupCoordinator.swift in Sources */,
 				4314B9F9204812BC006DBE63 /* MenuTableViewCell.swift in Sources */,
 				43088DA82087987E008AE1AB /* CryptoUtil.swift in Sources */,
@@ -1239,6 +1201,7 @@
 				43088DAA20879AC7008AE1AB /* RandomBytesSequence.swift in Sources */,
 				74C0914C20FB4125000A809D /* CurrenciesMonitor.swift in Sources */,
 				43DAC65620E4EB2C00E491D8 /* ReLoginMenuCoordinator.swift in Sources */,
+				74DD4CEB210CE83E00F4D69A /* UIView+Snapshot.swift in Sources */,
 				43D131E82056EAC6000483C4 /* ChartCard.swift in Sources */,
 				74C0913D20F64B03000A809D /* UnfoundedWalletCardContentView.swift in Sources */,
 				4376F4A0204D9E2700B179C3 /* CoordinatorProtocol.swift in Sources */,
@@ -1286,8 +1249,10 @@
 				4391A52E20D141300015A6DA /* EnumPicker.swift in Sources */,
 				43CD7B1020F7B0CF0014BF69 /* SetupMenuCoordinator.swift in Sources */,
 				43FBEE452062853A004E2BB1 /* ScanViewController.swift in Sources */,
+				74C8994B2101DD7C009B13EA /* ReceivePaymentCardViewController.swift in Sources */,
 				74C0913520F64012000A809D /* WalletCardContentView.swift in Sources */,
 				4376F4A3204D9F9D00B179C3 /* HomeViewModel.swift in Sources */,
+				74C8994E210205C8009B13EA /* UIApplication+ViewControllerTree.swift in Sources */,
 				74C0914A20FB3F6F000A809D /* CurrenciesService.swift in Sources */,
 				43D7A775205A84B300238E29 /* R.generated.swift in Sources */,
 				4322BA2F205BD69F007FEB5E /* ResponseMock.swift in Sources */,
@@ -1326,6 +1291,7 @@
 				43F3E36120F3B88E0032D017 /* SignUpView.swift in Sources */,
 				43F3E35F20F3B8780032D017 /* LoginView.swift in Sources */,
 				7435EA7520BAD95F008CC667 /* String+Utils.swift in Sources */,
+				74C89996210A3A06009B13EA /* Sequence+Utils.swift in Sources */,
 				4391A53020D159190015A6DA /* RegistrationEntry.swift in Sources */,
 				4304491C206BF47400349B51 /* UIView+Shake.swift in Sources */,
 				4390D582205FBD6E00383BB2 /* Services.swift in Sources */,

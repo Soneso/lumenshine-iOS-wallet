@@ -9,6 +9,7 @@
 import UIKit
 import Material
 import SnapKit
+import stellarsdk
 
 protocol CardProtocol {
     func setBottomBar(buttons: [Button]?)
@@ -38,7 +39,7 @@ class CardView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    class func create(viewModel:CardViewModelType) -> CardView {
+    class func create(viewModel:CardViewModelType, viewController: UIViewController) -> CardView {
         var card: CardView
         switch viewModel.type {
         case .web:
@@ -52,6 +53,7 @@ class CardView: UIView {
         case .wallet(let status):
             let walletCard = WalletCard()
             walletCard.status = status
+            walletCard.viewController = viewController
             CardView.setupWalletCard(card: walletCard, viewModel: viewModel as! WalletCardViewModel)
             
             card = walletCard
@@ -74,7 +76,9 @@ class CardView: UIView {
             fundedView.helpButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapHelpButton), for: .touchUpInside)
             fundedView.nameLabel.text = viewModel.title
             fundedView.balanceLabel.text = viewModel.nativeBalance?.stringWithUnit
+            CardView.labelsForCustomAssets(wallet: viewModel.wallet!).forEach({ label in fundedView.balanceStackView.addArrangedSubview(label) })
             fundedView.availableLabel.text = viewModel.nativeBalance?.availableAmount.stringWithUnit
+            CardView.labelsForCustomAssets(wallet: viewModel.wallet!).forEach({ label in fundedView.availableStackView.addArrangedSubview(label) })
         }
         
         if let unfundedView = card.unfundedView {
@@ -82,6 +86,24 @@ class CardView: UIView {
             unfundedView.helpButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapHelpButton), for: .touchUpInside)
             unfundedView.nameLabel.text = viewModel.title
         }
+    }
+    
+    class func labelsForCustomAssets(wallet: Wallet) -> [UILabel] {
+        var labels = [UILabel]()
+        
+        if let wallet = wallet as? FoundedWallet {
+            for balance in wallet.balances {
+                if balance.assetType != AssetTypeAsString.NATIVE {
+                    let text = String(format: "%.2f \(balance.assetCode ?? balance.assetType)", CoinUnit(balance.balance)!)
+                    let label = UILabel()
+                    label.font = UIFont.systemFont(ofSize: 15.0)
+                    label.text = text
+                    labels.append(label)
+                }
+            }
+        }
+        
+        return labels
     }
 }
 

@@ -15,7 +15,10 @@ class WalletCardViewModel : CardViewModelType {
     fileprivate var card: Card?
     fileprivate let stellarSdk: StellarSDK
     fileprivate var funded: Bool = false
-    fileprivate var wallet: Wallet?
+    
+    var wallet: Wallet?
+    
+    var receivePaymentAction: (() -> ())?
     
     init(user: User, card: Card? = nil) {
         self.card = card
@@ -96,7 +99,7 @@ class WalletCardViewModel : CardViewModelType {
     }
     
     @objc func didTapReceiveButton() {
-        
+        receivePaymentAction?()
     }
     
     @objc func didTapDetailsButton() {

@@ -33,18 +33,28 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 XLM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yva-VC-2hl">
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="A0f-Us-sOy">
                     <rect key="frame" x="16" y="75.5" width="343" height="18"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="0 XLM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQg-h4-3mK">
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 XLM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yva-VC-2hl">
+                            <rect key="frame" x="0.0" y="0.0" width="343" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Gle-eK-CQB">
                     <rect key="frame" x="16" y="131.5" width="343" height="44.5"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="0 XLM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQg-h4-3mK">
+                            <rect key="frame" x="0.0" y="0.0" width="343" height="44.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ac-Fj-252">
                     <rect key="frame" x="0.0" y="192" width="375" height="55"/>
                     <subviews>
@@ -97,31 +107,33 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="FQg-h4-3mK" secondAttribute="trailing" constant="16" id="2Hp-7d-hM7"/>
-                <constraint firstItem="FQg-h4-3mK" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="372-ss-tjC"/>
-                <constraint firstItem="2ac-Fj-252" firstAttribute="top" secondItem="FQg-h4-3mK" secondAttribute="bottom" constant="16" id="Byz-NQ-fgx"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Gle-eK-CQB" secondAttribute="trailing" constant="16" id="2qC-Rm-VFS"/>
+                <constraint firstItem="Gle-eK-CQB" firstAttribute="top" secondItem="P2V-MJ-cUf" secondAttribute="bottom" constant="4" id="3ut-ab-8hE"/>
+                <constraint firstItem="2ac-Fj-252" firstAttribute="top" secondItem="Gle-eK-CQB" secondAttribute="bottom" constant="16" id="48M-Wz-5Wl"/>
+                <constraint firstItem="P2V-MJ-cUf" firstAttribute="top" secondItem="A0f-Us-sOy" secondAttribute="bottom" constant="16" id="AfP-a4-SCJ"/>
                 <constraint firstItem="AMC-lx-fVN" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="G8z-rR-f0d"/>
                 <constraint firstItem="2ac-Fj-252" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="GPO-s0-WeS"/>
                 <constraint firstItem="AMC-lx-fVN" firstAttribute="top" secondItem="dcr-TQ-c9b" secondAttribute="bottom" constant="16" id="L8R-di-7ed"/>
-                <constraint firstItem="yva-VC-2hl" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="Npv-Ai-yM4"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="yva-VC-2hl" secondAttribute="trailing" constant="16" id="Ov2-c5-695"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="A0f-Us-sOy" secondAttribute="trailing" constant="16" id="MGC-yj-v8C"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="dcr-TQ-c9b" secondAttribute="trailing" constant="16" id="RKK-4B-vbz"/>
                 <constraint firstItem="P2V-MJ-cUf" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="S18-Wq-3SV"/>
                 <constraint firstItem="2ac-Fj-252" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="TtA-MO-mX0"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="AMC-lx-fVN" secondAttribute="trailing" constant="16" id="X9t-9o-wnS"/>
-                <constraint firstItem="FQg-h4-3mK" firstAttribute="top" secondItem="P2V-MJ-cUf" secondAttribute="bottom" constant="4" id="XAW-df-rJQ"/>
                 <constraint firstItem="2ac-Fj-252" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="ZrR-qm-NCP"/>
                 <constraint firstItem="dcr-TQ-c9b" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="fV5-T4-SOz"/>
-                <constraint firstItem="yva-VC-2hl" firstAttribute="top" secondItem="AMC-lx-fVN" secondAttribute="bottom" constant="4" id="jxu-jm-CZo"/>
                 <constraint firstItem="dcr-TQ-c9b" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="opk-ke-0wT"/>
-                <constraint firstItem="P2V-MJ-cUf" firstAttribute="top" secondItem="yva-VC-2hl" secondAttribute="bottom" constant="16" id="sbY-RE-eEu"/>
+                <constraint firstItem="A0f-Us-sOy" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="vWV-hV-lPv"/>
+                <constraint firstItem="A0f-Us-sOy" firstAttribute="top" secondItem="AMC-lx-fVN" secondAttribute="bottom" constant="4" id="vhy-hA-zsQ"/>
+                <constraint firstItem="Gle-eK-CQB" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="wIq-dd-eAo"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="P2V-MJ-cUf" secondAttribute="trailing" constant="16" id="zcy-aK-cZB"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="availableLabel" destination="FQg-h4-3mK" id="Lcv-k2-ev8"/>
+                <outlet property="availableStackView" destination="Gle-eK-CQB" id="SL3-Nn-pgJ"/>
                 <outlet property="balanceLabel" destination="yva-VC-2hl" id="bSb-ay-9c8"/>
+                <outlet property="balanceStackView" destination="A0f-Us-sOy" id="bje-lQ-HrV"/>
                 <outlet property="detailsButton" destination="QpW-7W-h0z" id="oQ4-6K-uOA"/>
                 <outlet property="helpButton" destination="kFj-Ap-sWm" id="QSK-OZ-XHq"/>
                 <outlet property="nameLabel" destination="dcr-TQ-c9b" id="cft-fm-FwF"/>

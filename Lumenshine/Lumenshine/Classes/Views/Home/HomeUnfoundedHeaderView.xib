@@ -16,19 +16,19 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zV4-Ib-O6t">
-                    <rect key="frame" x="16" y="24" width="358" height="21"/>
+                    <rect key="frame" x="16" y="24" width="358" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0 XLM ≈ 0.0 USD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e4r-hr-Tbu">
-                    <rect key="frame" x="16" y="61" width="358" height="21"/>
+                    <rect key="frame" x="16" y="60.5" width="358" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v35-dD-PwH" customClass="IconButton" customModule="Lumenshine" customModuleProvider="target">
-                    <rect key="frame" x="180" y="98" width="30" height="34"/>
+                    <rect key="frame" x="180" y="97" width="30" height="34"/>
                     <connections>
                         <action selector="didTapFoundWallet:" destination="iN0-l3-epB" eventType="touchUpInside" id="pZa-ei-AjF"/>
                     </connections>

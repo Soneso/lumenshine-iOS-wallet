@@ -31,7 +31,7 @@ class HomeViewController: UIViewController {
         viewModel.reloadClosure = {
             DispatchQueue.main.async {
                 self.dataSourceItems = self.viewModel.cardViewModels.map {
-                    CardView.create(viewModel: $0)
+                    CardView.create(viewModel: $0, viewController: self)
                 }
                 self.tableView.reloadData()
             }
@@ -85,6 +85,13 @@ extension HomeViewController: UITableViewDataSource {
         cell.card = dataSourceItems[indexPath.row]
         cell.selectionStyle = .none
 
+        if let card = dataSourceItems[indexPath.row] as? WalletCard {
+            card.reloadCellAction = {
+                //self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                self.tableView.reloadData()
+            }
+        }
+        
         return cell
     }
     
@@ -146,7 +153,8 @@ fileprivate extension HomeViewController {
     func prepareHeader() {
         headerBar = FlexibleHeightBar(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: 185.0))
         headerBar.minimumBarHeight = 0.0
-
+        headerBar.clipsToBounds = true
+        
         headerBar.backgroundColor = Stylesheet.color(.cyan)
         view.addSubview(headerBar)
 
