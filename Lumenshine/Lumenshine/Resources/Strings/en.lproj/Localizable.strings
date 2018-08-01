@@ -455,7 +455,22 @@
 "password_changed" = "Password successfully changed";
 
 /*  */
+"new_2fa_secret" = "New 2FA Secret";
+
+/*  */
+"lbl_new_2fa_secret" = "Your new 2FA secret: %@";
+
+/*  */
+"lbl_2fa_hint" = "1. copy and enter the below displayed 2FA secret code into the authenticator app\n\n2. enter the generated 2FA code from the authenticator app into the 2FA Code input and press \"Next\"";
+
+/*  */
 "change_2fa" = "Change 2FA Secret";
+
+/*  */
+"change_2fa_hint" = "To change your 2FA Secret please insert your password.";
+
+/*  */
+"tfa_secret_changed" = "2FA Secret successfully changed";
 
 /*  */
 "fingerprint_recognition" = "Fingerprint/Face recognition";

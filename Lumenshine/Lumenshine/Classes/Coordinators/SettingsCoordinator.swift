@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Material
 
 class SettingsCoordinator: CoordinatorType {
     var baseController: UIViewController
@@ -35,6 +36,10 @@ class SettingsCoordinator: CoordinatorType {
             showHome()
         case .showSettings:
             showSettings()
+        case .showChange2faSecret:
+            showChange2faSecret()
+        case .showNew2faSecret:
+            showNew2faSecret()
         default: break
         }
     }
@@ -53,6 +58,17 @@ fileprivate extension SettingsCoordinator {
     func showChangePassword() {
         let changeVC = ChangePasswordViewController(viewModel: viewModel)
         baseController.navigationController?.pushViewController(changeVC, animated: true)
+    }
+    
+    func showChange2faSecret() {
+        let changeVC = Change2faSecretViewController(viewModel: viewModel)
+        baseController.navigationController?.pushViewController(changeVC, animated: true)
+    }
+    
+    func showNew2faSecret() {
+        let tfaSecretVC = Confirm2faCodeViewController(viewModel: viewModel)
+        let snackBarVC = SnackbarController(rootViewController: tfaSecretVC)
+        baseController.navigationController?.pushViewController(snackBarVC, animated: true)
     }
     
     func showPasswordHint(_ hint: String) {
@@ -74,6 +90,6 @@ fileprivate extension SettingsCoordinator {
     }
     
     func showSettings() {
-        baseController.navigationController?.popViewController(animated: true)
+        baseController.navigationController?.popToRootViewController(animated: true)
     }
 }

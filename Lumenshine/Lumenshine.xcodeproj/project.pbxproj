@@ -54,6 +54,8 @@
 		4360484620AEFCFD00CF781A /* LumenshineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4360484520AEFCFD00CF781A /* LumenshineTests.swift */; };
 		4360485420AEFD9A00CF781A /* LumenshineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4360485320AEFD9A00CF781A /* LumenshineUITests.swift */; };
 		4360486020AEFEA400CF781A /* CreateAccountLocalTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4360485D20AEFE1900CF781A /* CreateAccountLocalTestCase.swift */; };
+		4365F69A211057B900D4B12C /* Change2faSecretViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4365F699211057B900D4B12C /* Change2faSecretViewController.swift */; };
+		4365F69C2110BB8700D4B12C /* Confirm2faCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4365F69B2110BB8700D4B12C /* Confirm2faCodeViewController.swift */; };
 		436B366E20512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436B366820512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift */; };
 		436B366F20512114009F7C21 /* FlexibleHeightBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436B366920512114009F7C21 /* FlexibleHeightBar.swift */; };
 		436B367020512114009F7C21 /* FlexibleHeightBarBehaviorDefiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436B366A20512114009F7C21 /* FlexibleHeightBarBehaviorDefiner.swift */; };
@@ -250,6 +252,8 @@
 		4360485320AEFD9A00CF781A /* LumenshineUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LumenshineUITests.swift; sourceTree = "<group>"; };
 		4360485520AEFD9A00CF781A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4360485D20AEFE1900CF781A /* CreateAccountLocalTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountLocalTestCase.swift; sourceTree = "<group>"; };
+		4365F699211057B900D4B12C /* Change2faSecretViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Change2faSecretViewController.swift; sourceTree = "<group>"; };
+		4365F69B2110BB8700D4B12C /* Confirm2faCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Confirm2faCodeViewController.swift; sourceTree = "<group>"; };
 		436B366820512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexibleHeightBarSubviewLayoutAttributes.swift; sourceTree = "<group>"; };
 		436B366920512114009F7C21 /* FlexibleHeightBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexibleHeightBar.swift; sourceTree = "<group>"; };
 		436B366A20512114009F7C21 /* FlexibleHeightBarBehaviorDefiner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexibleHeightBarBehaviorDefiner.swift; sourceTree = "<group>"; };
@@ -610,6 +614,8 @@
 				4370E23C20655F9C004C62C3 /* SettingsTableViewController.swift */,
 				435A1CA820C846EC00CE3365 /* SettingsTableViewCell.swift */,
 				439EA26D210AF7240054EA52 /* ChangePasswordViewController.swift */,
+				4365F699211057B900D4B12C /* Change2faSecretViewController.swift */,
+				4365F69B2110BB8700D4B12C /* Confirm2faCodeViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1206,6 +1212,7 @@
 				74C0913D20F64B03000A809D /* UnfoundedWalletCardContentView.swift in Sources */,
 				4376F4A0204D9E2700B179C3 /* CoordinatorProtocol.swift in Sources */,
 				4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */,
+				4365F69C2110BB8700D4B12C /* Confirm2faCodeViewController.swift in Sources */,
 				434FB3F920F78AFD004A4CDB /* TextViewController.swift in Sources */,
 				4394911C20BEB845008D4FA2 /* SettingsViewModel.swift in Sources */,
 				4337C4E72081BAA400F4585A /* RegistrationFormTableViewController.swift in Sources */,
@@ -1237,6 +1244,7 @@
 				43D7A77E205A90CC00238E29 /* MenuCoordinator.swift in Sources */,
 				436FE5082052634300CFE788 /* WebCard.swift in Sources */,
 				436B366F20512114009F7C21 /* FlexibleHeightBar.swift in Sources */,
+				4365F69A211057B900D4B12C /* Change2faSecretViewController.swift in Sources */,
 				4319B1822063EF72007CE18D /* LoginCoordinator.swift in Sources */,
 				434E049B20D3DC8A00D3235A /* DateUtils+Format.swift in Sources */,
 				4391A53220D170420015A6DA /* CountryListResponse.swift in Sources */,

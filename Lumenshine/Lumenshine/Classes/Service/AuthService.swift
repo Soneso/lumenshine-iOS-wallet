@@ -448,4 +448,54 @@ public class AuthService: BaseService {
         }
     }
     
+    open func new2faSecret(publicKeyIndex188: String, response: @escaping TfaSecretResponseClosure) {
+        var params = Dictionary<String,String>()
+        params["public_key_188"] = publicKeyIndex188
+        
+        do {
+            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+            
+            POSTRequestWithPath(path: "/portal/user/auth/new_2fa_secret", body: bodyData) { (result) -> (Void) in
+                switch result {
+                case .success(let data):
+                    do {
+                        let tfaResponse = try self.jsonDecoder.decode(RegistrationResponse.self, from: data)
+                        response(.success(response: tfaResponse))
+                    } catch {
+                        response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+                    }
+                case .failure(let error):
+                    response(.failure(error: error))
+                }
+            }
+        } catch {
+            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+        }
+    }
+    
+    open func confirm2faSecret(tfaCode: String, response: @escaping TFAResponseClosure) {
+        do {
+            var params = Dictionary<String,String>()
+            params["tfa_code"] = tfaCode
+            
+            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+            
+            POSTRequestWithPath(path: "/portal/user/dashboard/confirm_new_2fa_secret", body: bodyData) { (result) -> (Void) in
+                switch result {
+                case .success(let data):
+                    do {
+                        let tfaResponse = try self.jsonDecoder.decode(TFAResponse.self, from: data)
+                        response(.success(response: tfaResponse))
+                    } catch {
+                        response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+                    }
+                case .failure(let error):
+                    response(.failure(error: error))
+                }
+            }
+        } catch {
+            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+        }
+    }
+    
 }

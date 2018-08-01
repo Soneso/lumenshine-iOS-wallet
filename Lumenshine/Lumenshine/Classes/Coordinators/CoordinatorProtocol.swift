@@ -40,5 +40,7 @@ public indirect enum Transition {
     case nextSetupStep
     case showMnemonicVerification
     case showChangePassword
+    case showChange2faSecret
+    case showNew2faSecret
 }
 
