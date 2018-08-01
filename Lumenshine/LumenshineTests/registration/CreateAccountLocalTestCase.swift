@@ -1,6 +1,6 @@
 //
 //  CreateAccountLocalTestCase.swift
-//  StellargateTests
+//  Lumenshine Tests
 //
 //  Created by Istvan Elekes on 4/23/18.
 //  Copyright © 2018 Soneso. All rights reserved.
