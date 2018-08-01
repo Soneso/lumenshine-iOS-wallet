@@ -455,7 +455,7 @@ public class AuthService: BaseService {
         do {
             let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
             
-            POSTRequestWithPath(path: "/portal/user/auth/new_2fa_secret", body: bodyData) { (result) -> (Void) in
+            POSTRequestWithPath(path: "/portal/user/dashboard/new_2fa_secret", body: bodyData) { (result) -> (Void) in
                 switch result {
                 case .success(let data):
                     do {

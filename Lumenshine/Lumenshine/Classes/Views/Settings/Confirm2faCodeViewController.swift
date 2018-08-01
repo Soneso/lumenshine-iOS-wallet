@@ -83,12 +83,8 @@ extension Confirm2faCodeViewController {
         viewModel.confirm2faSecret(tfaCode: code) { result in
             DispatchQueue.main.async {
                 switch result {
-                case .success(let tfaResponse):
-                    if tfaResponse.tfaConfirmed == true {
-                        self.showSuccess()
-                    } else {
-                        
-                    }
+                case .success(_):
+                    self.showSuccess()
                 case .failure(let error):
                     self.tfaCodeTextField.detail = error.errorDescription
                 }
