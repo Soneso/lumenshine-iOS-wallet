@@ -30,7 +30,7 @@
 		<false/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>api.stellargate.net</key>
+			<key>demoapi.lumenshine.com</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
 				<true/>

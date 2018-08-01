@@ -83,7 +83,9 @@ enum JwtTokenType {
 /// A closure to be called when a HTTP response is received
 public typealias ResponseClosure = (_ response:Result) -> (Void)
 
-public class BaseService: NSObject {
+public class BaseService: NSObject, URLSessionDelegate {
+    
+    private var session: URLSession!
     
     internal let baseURL: String
     internal let jsonDecoder = JSONDecoder()
@@ -98,6 +100,19 @@ public class BaseService: NSObject {
     init(baseURL: String) {
         self.baseURL = baseURL
         jsonDecoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601)
+        
+        super.init()
+        
+        session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: nil)
+    }
+    
+    public func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) {
+        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
+            if let trust = challenge.protectionSpace.serverTrust {
+                let credential = URLCredential(trust: trust)
+                completionHandler(.useCredential, credential)
+            }
+        }
     }
     
     static func removeToken() {
@@ -146,7 +161,7 @@ public class BaseService: NSObject {
         
         urlRequest.setValue(BaseService.jwtToken, forHTTPHeaderField: "Authorization")
         
-        let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+        let task = session.dataTask(with: urlRequest) { data, response, error in
             
             if let httpResponse = response as? HTTPURLResponse {
                 if let token = httpResponse.allHeaderFields["Authorization"] as? String {
@@ -158,6 +173,8 @@ public class BaseService: NSObject {
                     break
                 case 400...500:
                     if let errorData = data {
+                         let str = String(data: errorData, encoding: String.Encoding.utf8) as String!
+                        
                         do {
                             let errorResponses = try self.jsonDecoder.decode(Array<ErrorResponse>.self, from: errorData)
                             if let err = errorResponses.first {
