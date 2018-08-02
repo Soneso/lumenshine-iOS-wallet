@@ -15,6 +15,7 @@ class TextViewController: UIViewController {
     
     // MARK: - UI properties
     fileprivate let textLabel = UILabel()
+    fileprivate let infoLabel = UILabel()
     fileprivate let titleText: String
     
     init(title: String, text: String) {
@@ -43,11 +44,41 @@ class TextViewController: UIViewController {
 
 fileprivate extension TextViewController {
     func prepareView() {
+        prepareInfoLabel()
+        prepareTextLabel()
+    }
+    
+    func prepareInfoLabel() {
+        let infoImage = UIImageView()
+        infoImage.image = R.image.question()
+        infoImage.shapePreset = .circle
+        infoImage.backgroundColor = Stylesheet.color(.white)
+        
+        view.addSubview(infoImage)
+        infoImage.snp.makeConstraints { make in
+            make.top.equalTo(20)
+            make.right.equalTo(view.snp.centerX)
+        }
+        
+        infoLabel.text = R.string.localizable.info()
+        infoLabel.font = Stylesheet.font(.body)
+        infoLabel.textAlignment = .left
+        infoLabel.textColor = Stylesheet.color(.black)
+        
+        view.addSubview(infoLabel)
+        infoLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(infoImage)
+            make.left.equalTo(infoImage.snp.right).offset(5)
+        }
+    }
+    
+    func prepareTextLabel() {
         textLabel.numberOfLines = 0
         
         view.addSubview(textLabel)
         textLabel.snp.makeConstraints { make in
-            make.top.left.equalTo(30)
+            make.top.equalTo(infoLabel.snp.bottom).offset(30)
+            make.left.equalTo(30)
             make.right.equalTo(-30)
             make.bottom.lessThanOrEqualToSuperview()
         }
@@ -62,4 +93,6 @@ fileprivate extension TextViewController {
         backButton.addTarget(self, action: #selector(closeAction(sender:)), for: .touchUpInside)
         navigationItem.leftViews = [backButton]
     }
+    
+
 }

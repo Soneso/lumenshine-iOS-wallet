@@ -408,7 +408,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 147 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 158 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -438,6 +438,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let xMoment_years = Rswift.StringResource(key: "x-moment_years", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: 1. copy and enter the below displayed 2FA secret code into the authenticator app  2. enter the generated 2FA code from the authenticator app into the 2FA Code input and press "Next"
+      /// 
+      /// Locales: en
+      static let lbl_2fa_hint = Rswift.StringResource(key: "lbl_2fa_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: 2 Factor Authentication (2FA)
       /// 
       /// Locales: en
@@ -446,6 +450,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let tfa_code = Rswift.StringResource(key: "tfa_code", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: 2FA Secret successfully changed
+      /// 
+      /// Locales: en
+      static let tfa_secret_changed = Rswift.StringResource(key: "tfa_secret_changed", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: 2FA secret copied to clipboard
       /// 
       /// Locales: en
@@ -534,6 +542,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let currencies = Rswift.StringResource(key: "currencies", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Current password
+      /// 
+      /// Locales: en
+      static let current_password = Rswift.StringResource(key: "current_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Delete
       /// 
       /// Locales: en
@@ -562,6 +574,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let lbl_email_confirmation = Rswift.StringResource(key: "lbl_email_confirmation", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Empty password.
+      /// 
+      /// Locales: en
+      static let empty_password = Rswift.StringResource(key: "empty_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Enabled
       /// 
       /// Locales: en
@@ -638,6 +654,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let email_confirmation_hint = Rswift.StringResource(key: "email_confirmation_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Info
+      /// 
+      /// Locales: en
+      static let info = Rswift.StringResource(key: "info", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Invalid email.
       /// 
       /// Locales: en
@@ -714,6 +734,14 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let nationality = Rswift.StringResource(key: "nationality", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: New 2FA Secret
+      /// 
+      /// Locales: en
+      static let new_2fa_secret = Rswift.StringResource(key: "new_2fa_secret", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: New password
+      /// 
+      /// Locales: en
+      static let new_password = Rswift.StringResource(key: "new_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Next
       /// 
       /// Locales: en
@@ -746,6 +774,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let password_hint_title = Rswift.StringResource(key: "password_hint_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Password successfully changed
+      /// 
+      /// Locales: en
+      static let password_changed = Rswift.StringResource(key: "password_changed", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Please write down and safely store this phrase. It's the ONLY WAY to retrieve your wallet.
       /// 
       /// Locales: en
@@ -778,6 +810,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let repeat_password = Rswift.StringResource(key: "repeat_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Repeat new password
+      /// 
+      /// Locales: en
+      static let repeat_new_password = Rswift.StringResource(key: "repeat_new_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Repetition do not match with password.
       /// 
       /// Locales: en
@@ -874,6 +910,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let title = Rswift.StringResource(key: "title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: To change your 2FA Secret please insert your password.
+      /// 
+      /// Locales: en
+      static let change_2fa_hint = Rswift.StringResource(key: "change_2fa_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: To prove the noting of your mnemonic, please complete following quiz.
       /// 
       /// Locales: en
@@ -942,6 +982,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let mnemonic_words_title = Rswift.StringResource(key: "mnemonic_words_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Your new 2FA secret: %@
+      /// 
+      /// Locales: en
+      static let lbl_new_2fa_secret = Rswift.StringResource(key: "lbl_new_2fa_secret", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Your new password must have at least 9 characters.  It must contain small letters and capitals.
       /// 
       /// Locales: en
@@ -1048,6 +1092,13 @@ struct R: Rswift.Validatable {
         return String(format: NSLocalizedString("x-moment_years", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
       }
       
+      /// en translation: 1. copy and enter the below displayed 2FA secret code into the authenticator app  2. enter the generated 2FA code from the authenticator app into the 2FA Code input and press "Next"
+      /// 
+      /// Locales: en
+      static func lbl_2fa_hint(_: Void = ()) -> String {
+        return NSLocalizedString("lbl_2fa_hint", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: 2 Factor Authentication (2FA)
       /// 
       /// Locales: en
@@ -1060,6 +1111,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func tfa_code(_: Void = ()) -> String {
         return NSLocalizedString("tfa_code", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: 2FA Secret successfully changed
+      /// 
+      /// Locales: en
+      static func tfa_secret_changed(_: Void = ()) -> String {
+        return NSLocalizedString("tfa_secret_changed", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: 2FA secret copied to clipboard
@@ -1216,6 +1274,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("currencies", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Current password
+      /// 
+      /// Locales: en
+      static func current_password(_: Void = ()) -> String {
+        return NSLocalizedString("current_password", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Delete
       /// 
       /// Locales: en
@@ -1263,6 +1328,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func lbl_email_confirmation(_: Void = ()) -> String {
         return NSLocalizedString("lbl_email_confirmation", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Empty password.
+      /// 
+      /// Locales: en
+      static func empty_password(_: Void = ()) -> String {
+        return NSLocalizedString("empty_password", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Enabled
@@ -1398,6 +1470,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("email_confirmation_hint", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Info
+      /// 
+      /// Locales: en
+      static func info(_: Void = ()) -> String {
+        return NSLocalizedString("info", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Invalid email.
       /// 
       /// Locales: en
@@ -1531,6 +1610,20 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("nationality", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: New 2FA Secret
+      /// 
+      /// Locales: en
+      static func new_2fa_secret(_: Void = ()) -> String {
+        return NSLocalizedString("new_2fa_secret", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: New password
+      /// 
+      /// Locales: en
+      static func new_password(_: Void = ()) -> String {
+        return NSLocalizedString("new_password", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Next
       /// 
       /// Locales: en
@@ -1587,6 +1680,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("password_hint_title", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Password successfully changed
+      /// 
+      /// Locales: en
+      static func password_changed(_: Void = ()) -> String {
+        return NSLocalizedString("password_changed", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Please write down and safely store this phrase. It's the ONLY WAY to retrieve your wallet.
       /// 
       /// Locales: en
@@ -1641,6 +1741,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func repeat_password(_: Void = ()) -> String {
         return NSLocalizedString("repeat_password", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Repeat new password
+      /// 
+      /// Locales: en
+      static func repeat_new_password(_: Void = ()) -> String {
+        return NSLocalizedString("repeat_new_password", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Repetition do not match with password.
@@ -1811,6 +1918,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("title", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: To change your 2FA Secret please insert your password.
+      /// 
+      /// Locales: en
+      static func change_2fa_hint(_: Void = ()) -> String {
+        return NSLocalizedString("change_2fa_hint", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: To prove the noting of your mnemonic, please complete following quiz.
       /// 
       /// Locales: en
@@ -1928,6 +2042,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func mnemonic_words_title(_: Void = ()) -> String {
         return NSLocalizedString("mnemonic_words_title", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Your new 2FA secret: %@
+      /// 
+      /// Locales: en
+      static func lbl_new_2fa_secret(_ value1: String) -> String {
+        return String(format: NSLocalizedString("lbl_new_2fa_secret", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
       }
       
       /// en translation: Your new password must have at least 9 characters.  It must contain small letters and capitals.

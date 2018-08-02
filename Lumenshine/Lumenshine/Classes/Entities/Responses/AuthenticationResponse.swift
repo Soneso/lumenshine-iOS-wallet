@@ -1,5 +1,5 @@
 //
-//  LoginStep1Response.swift
+//  AuthenticationResponse.swift
 //  Lumenshine
 //
 //  Created by Istvan Elekes on 5/10/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class LoginStep1Response: Decodable {
+public class AuthenticationResponse: Decodable {
     
     let status: String?
     let kdfPasswordSalt: String

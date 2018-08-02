@@ -178,11 +178,11 @@ fileprivate extension LoginViewModel {
         navigationCoordinator?.performTransition(transition: .showHeaderMenu(items))
     }
     
-    func verifyLogin1Response(_ login1Response: LoginStep1Response, password: String, response: @escaping EmptyResponseClosure) {
+    func verifyLogin1Response(_ login1Response: AuthenticationResponse, password: String, response: @escaping EmptyResponseClosure) {
         DispatchQueue.global(qos: .userInitiated).async {
             do {
                 if let userSecurity = UserSecurity(from: login1Response),
-                    let (publicKeyIndex188, mnemonic) = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: password) {
+                    let (publicKeyIndex188, mnemonic, _, _) = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: password) {
                     
                     self.user = User(id: "1", email: self.email!, publicKeyIndex0: login1Response.publicKeyIndex0, publicKeyIndex188: publicKeyIndex188, mnemonic: mnemonic)
                     self.service.loginStep2(publicKeyIndex188: publicKeyIndex188) { result in
