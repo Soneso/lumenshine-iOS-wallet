@@ -8,7 +8,6 @@
 
 import UIKit
 import Material
-import IHKeyboardAvoiding
 
 class Confirm2faCodeViewController: UIViewController {
     
@@ -42,12 +41,6 @@ class Confirm2faCodeViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: .UIApplicationWillEnterForeground, object: nil)
         
         prepareView()
-        KeyboardAvoiding.avoidingView = self.view
-        KeyboardAvoiding.paddingForCurrentAvoidingView = -100.0
-    }
-    
-    override func loadView() {
-        self.view = KeyboardDismissingView()
     }
     
     override func resignFirstResponder() -> Bool {
