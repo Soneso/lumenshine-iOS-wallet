@@ -186,8 +186,9 @@ fileprivate extension ChangePasswordViewController {
         
         view.addSubview(passwordHintButton)
         passwordHintButton.snp.makeConstraints { make in
-            make.left.equalTo(textField2.snp.right).offset(10)
+            make.left.equalTo(textField2.snp.right)
             make.centerY.equalTo(textField2)
+            make.width.height.equalTo(50)
         }
     }
     
@@ -196,13 +197,14 @@ fileprivate extension ChangePasswordViewController {
         submitButton.backgroundColor = Stylesheet.color(.cyan)
         submitButton.titleColor = Stylesheet.color(.white)
         submitButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        submitButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
         submitButton.addTarget(self, action: #selector(submitAction(sender:)), for: .touchUpInside)
         
         view.addSubview(submitButton)
         submitButton.snp.makeConstraints { make in
             make.top.equalTo(textField3.snp.bottom).offset(verticalSpacing)
             make.centerX.equalToSuperview()
-            make.width.equalTo(110)
+            make.width.equalTo(130)
             make.height.equalTo(44)
             make.bottom.lessThanOrEqualToSuperview()
         }
