@@ -7,8 +7,8 @@ use_frameworks!
 def ui_components_and_helper_pods
     pod 'Material'
     pod 'SnapKit'
-    pod 'KWDrawerController'
-    pod 'DGElasticPullToRefresh'
+    pod 'KWDrawerController', :git => 'https://github.com/chelemen-razvan/KWDrawerController.git'
+    pod 'DGElasticPullToRefresh', :git => 'https://github.com/sammygutierrez/DGElasticPullToRefresh.git'
     pod 'Charts'
     pod 'LTMorphingLabel'
     pod 'TTTAttributedLabel'
@@ -24,7 +24,6 @@ target 'Lumenshine' do
   pod 'OneTimePassword'
   pod 'SwiftRichString'
   
-  pod 'IHKeyboardAvoiding'
   pod 'IQKeyboardManagerSwift'
 
   target 'LumenshineTests' do

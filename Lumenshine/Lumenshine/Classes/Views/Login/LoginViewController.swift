@@ -8,7 +8,6 @@
 
 import UIKit
 import Material
-import IHKeyboardAvoiding
 
 class LoginViewController: UIViewController {
     
@@ -31,10 +30,6 @@ class LoginViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func loadView() {
-        self.view = KeyboardDismissingView()
-    }
-    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,9 +38,6 @@ class LoginViewController: UIViewController {
         showLogin()
         
         NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: .UIApplicationWillEnterForeground, object: nil)
-        
-        KeyboardAvoiding.avoidingView = self.view
-        KeyboardAvoiding.paddingForCurrentAvoidingView = -120.0
     }
     
     @objc
@@ -61,13 +53,6 @@ class LoginViewController: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
-    }
-    
-    override func resignFirstResponder() -> Bool {
-        contentView.textField1.resignFirstResponder()
-        contentView.textField2.resignFirstResponder()
-        contentView.textField3.resignFirstResponder()
-        return super.resignFirstResponder()
     }
     
     func setupContentView(_ contentView: LoginViewProtocol) {

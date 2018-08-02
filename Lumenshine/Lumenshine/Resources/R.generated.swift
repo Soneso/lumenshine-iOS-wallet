@@ -4,7 +4,6 @@
 //
 
 import Foundation
-import IHKeyboardAvoiding
 import Rswift
 import UIKit
 
@@ -2066,8 +2065,8 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "ForgotPasswordViewController"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> IHKeyboardAvoiding.KeyboardDismissingView? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? IHKeyboardAvoiding.KeyboardDismissingView
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
       fileprivate init() {}

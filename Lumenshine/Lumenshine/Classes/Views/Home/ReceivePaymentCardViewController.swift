@@ -8,7 +8,6 @@
 
 import UIKit
 import MessageUI
-import IQKeyboardManagerSwift
 
 class ReceivePaymentCardViewController: UIViewController {
     @IBOutlet weak var publicKeyButton: UIButton!
@@ -43,19 +42,6 @@ class ReceivePaymentCardViewController: UIViewController {
         populateViews()
         setCurrencies()
         setupTextFields()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        IQKeyboardManager.shared.enable = true
-        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        IQKeyboardManager.shared.enable = false
     }
     
     override func resignFirstResponder() -> Bool {

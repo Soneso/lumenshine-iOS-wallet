@@ -8,7 +8,6 @@
 
 import UIKit
 import Material
-import IHKeyboardAvoiding
 
 class ReLoginViewController: UIViewController {
     
@@ -41,9 +40,6 @@ class ReLoginViewController: UIViewController {
         
         prepareView()
         setupContentView(contentView)
-        
-        KeyboardAvoiding.avoidingView = self.view
-        KeyboardAvoiding.paddingForCurrentAvoidingView = -120.0
         
     }
     
