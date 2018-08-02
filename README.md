@@ -1,2 +1,2 @@
-# jupiter-wallet
-Stellar wallet for IOS and Mac
+# lumenshine-iOS-wallet
+
