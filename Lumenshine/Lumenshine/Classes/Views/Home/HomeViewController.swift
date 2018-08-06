@@ -70,6 +70,8 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.shadowColor = Stylesheet.color(.clear)
+        
+        viewModel.reloadCards()
     }
 }
 

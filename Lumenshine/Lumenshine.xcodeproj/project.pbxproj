@@ -121,6 +121,12 @@
 		43F74607209494AC003EB5FD /* RegistrationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F74606209494AC003EB5FD /* RegistrationResponse.swift */; };
 		43FBEE452062853A004E2BB1 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FBEE442062853A004E2BB1 /* ScanViewController.swift */; };
 		4B55802868404909494FFA47 /* Pods_Lumenshine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71693C4C31281DE86DD6B9A3 /* Pods_Lumenshine.framework */; };
+		7420BBE6211819AB002FC4C7 /* AccountDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7420BBE4211819AB002FC4C7 /* AccountDetailsViewController.swift */; };
+		7420BBE7211819AB002FC4C7 /* AccountDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7420BBE5211819AB002FC4C7 /* AccountDetailsViewController.xib */; };
+		7420BBE921182D4C002FC4C7 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7420BBE821182D4C002FC4C7 /* TitleView.swift */; };
+		7420BBEB21182D57002FC4C7 /* TitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7420BBEA21182D57002FC4C7 /* TitleView.xib */; };
+		7420BBED211839BB002FC4C7 /* BaseNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7420BBEC211839BB002FC4C7 /* BaseNavigationViewController.swift */; };
+		7420BBF021185366002FC4C7 /* ChangeWalletRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7420BBEF21185366002FC4C7 /* ChangeWalletRequest.swift */; };
 		7435EA6D20BACE71008CC667 /* ForgotPasswordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7435EA6C20BACE71008CC667 /* ForgotPasswordCoordinator.swift */; };
 		7435EA6F20BAD124008CC667 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7435EA6E20BAD124008CC667 /* ForgotPasswordViewModel.swift */; };
 		7435EA7220BAD452008CC667 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7435EA7020BAD452008CC667 /* ForgotPasswordViewController.swift */; };
@@ -325,6 +331,12 @@
 		5A3B293DE10AC625F4114CE3 /* Pods-LumenshineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineTests/Pods-LumenshineTests.release.xcconfig"; sourceTree = "<group>"; };
 		5CDAA2F4AA70C83906AECC3C /* Pods-Lumenshine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lumenshine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine.debug.xcconfig"; sourceTree = "<group>"; };
 		71693C4C31281DE86DD6B9A3 /* Pods_Lumenshine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lumenshine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7420BBE4211819AB002FC4C7 /* AccountDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsViewController.swift; sourceTree = "<group>"; };
+		7420BBE5211819AB002FC4C7 /* AccountDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountDetailsViewController.xib; sourceTree = "<group>"; };
+		7420BBE821182D4C002FC4C7 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		7420BBEA21182D57002FC4C7 /* TitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleView.xib; sourceTree = "<group>"; };
+		7420BBEC211839BB002FC4C7 /* BaseNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationViewController.swift; sourceTree = "<group>"; };
+		7420BBEF21185366002FC4C7 /* ChangeWalletRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeWalletRequest.swift; sourceTree = "<group>"; };
 		7435EA6C20BACE71008CC667 /* ForgotPasswordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordCoordinator.swift; sourceTree = "<group>"; };
 		7435EA6E20BAD124008CC667 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		7435EA7020BAD452008CC667 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
@@ -465,6 +477,7 @@
 			children = (
 				431437F12047FF9100189C83 /* AppNavigationController.swift */,
 				431437F32047FFB400189C83 /* AppNavigationDrawerController.swift */,
+				7420BBEC211839BB002FC4C7 /* BaseNavigationViewController.swift */,
 			);
 			path = Drawer;
 			sourceTree = "<group>";
@@ -548,6 +561,7 @@
 		4322BA31205BDB5A007FEB5E /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				7420BBEE21185335002FC4C7 /* Requests */,
 				43F746052094948D003EB5FD /* Responses */,
 				4322BA32205BDB6E007FEB5E /* CardsResponsesMock.swift */,
 				4322BA34205BDD58007FEB5E /* Card.swift */,
@@ -693,6 +707,10 @@
 				74C8994A2101DD7C009B13EA /* ReceivePaymentCardViewController.xib */,
 				74A2A2ED210EF3EB007AEE91 /* ReceivePaymentPrintView.xib */,
 				74A2A2EF210EF405007AEE91 /* ReceivePaymentPrintView.swift */,
+				7420BBE4211819AB002FC4C7 /* AccountDetailsViewController.swift */,
+				7420BBE5211819AB002FC4C7 /* AccountDetailsViewController.xib */,
+				7420BBE821182D4C002FC4C7 /* TitleView.swift */,
+				7420BBEA21182D57002FC4C7 /* TitleView.xib */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -791,6 +809,14 @@
 				43FBEE442062853A004E2BB1 /* ScanViewController.swift */,
 			);
 			path = Scan;
+			sourceTree = "<group>";
+		};
+		7420BBEE21185335002FC4C7 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				7420BBEF21185366002FC4C7 /* ChangeWalletRequest.swift */,
+			);
+			path = Requests;
 			sourceTree = "<group>";
 		};
 		7445E9B82019CF7200470E0A = {
@@ -1025,10 +1051,12 @@
 				74C0913B20F64AF0000A809D /* UnfoundedWalletCardContentView.xib in Resources */,
 				74C8994C2101DD7C009B13EA /* ReceivePaymentCardViewController.xib in Resources */,
 				7435EA7320BAD452008CC667 /* ForgotPasswordViewController.xib in Resources */,
+				7420BBE7211819AB002FC4C7 /* AccountDetailsViewController.xib in Resources */,
 				74C899582107621E009B13EA /* receive_payment.html in Resources */,
 				43D7A77B205A892E00238E29 /* Localizable.strings in Resources */,
 				7445E9CF2019CF7200470E0A /* LaunchScreen.storyboard in Resources */,
 				74C0914620F7B3CD000A809D /* WalletCardInfoViewController.xib in Resources */,
+				7420BBEB21182D57002FC4C7 /* TitleView.xib in Resources */,
 				74E2057A20D1544000E94048 /* HomeFoundedHeaderView.xib in Resources */,
 				7445E9CC2019CF7200470E0A /* Assets.xcassets in Resources */,
 				4314B9F2204806E5006DBE63 /* MaterialIcons.bundle in Resources */,
@@ -1212,6 +1240,7 @@
 				74DD4CEB210CE83E00F4D69A /* UIView+Snapshot.swift in Sources */,
 				43D131E82056EAC6000483C4 /* ChartCard.swift in Sources */,
 				74C0913D20F64B03000A809D /* UnfoundedWalletCardContentView.swift in Sources */,
+				7420BBE6211819AB002FC4C7 /* AccountDetailsViewController.swift in Sources */,
 				4376F4A0204D9E2700B179C3 /* CoordinatorProtocol.swift in Sources */,
 				4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */,
 				4365F69C2110BB8700D4B12C /* Confirm2faCodeViewController.swift in Sources */,
@@ -1242,6 +1271,7 @@
 				43844F4020E401B500C352E5 /* ReLoginMenuViewModel.swift in Sources */,
 				43844F3E20E3FE2600C352E5 /* ReLoginViewModel.swift in Sources */,
 				746DC58520D142EC00AD0856 /* HomeUnfoundedHeaderView.swift in Sources */,
+				7420BBF021185366002FC4C7 /* ChangeWalletRequest.swift in Sources */,
 				74C08FF320EE1FE6000A809D /* UserManager.swift in Sources */,
 				43D7A77E205A90CC00238E29 /* MenuCoordinator.swift in Sources */,
 				436FE5082052634300CFE788 /* WebCard.swift in Sources */,
@@ -1277,6 +1307,7 @@
 				4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */,
 				7435EA6D20BACE71008CC667 /* ForgotPasswordCoordinator.swift in Sources */,
 				43B144CE20FCAF630099E3AE /* TFASetupViewController.swift in Sources */,
+				7420BBE921182D4C002FC4C7 /* TitleView.swift in Sources */,
 				439E3C8B2107786A0004BB91 /* SettingsEntry.swift in Sources */,
 				4322BA35205BDD58007FEB5E /* Card.swift in Sources */,
 				4391A52B20D139D60015A6DA /* CountryResponse.swift in Sources */,
@@ -1310,6 +1341,7 @@
 				436B367220512114009F7C21 /* SquareCashBarBehaviorDefiner.swift in Sources */,
 				43A8633820A9F0E6007C46E2 /* LoginStep2Response.swift in Sources */,
 				4370E23D20655F9C004C62C3 /* SettingsTableViewController.swift in Sources */,
+				7420BBED211839BB002FC4C7 /* BaseNavigationViewController.swift in Sources */,
 				74C08FF820EF6F2F000A809D /* FoundAccountViewController.swift in Sources */,
 				4319B1862063F1B0007CE18D /* User.swift in Sources */,
 			);

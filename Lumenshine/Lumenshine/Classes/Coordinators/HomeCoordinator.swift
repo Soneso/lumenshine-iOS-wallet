@@ -28,8 +28,10 @@ class HomeCoordinator: CoordinatorType {
             showHeaderMenu(items: items)
         case .showOnWeb(let url):
             showOnWeb(url: url)
-        case .showScan:
-            showScan()
+        case .showScan(let wallet):
+            showScan(wallet: wallet)
+        case .showCardDetails(let wallet):
+            showCardDetails(wallet: wallet)
         case .showWalletCardInfo:
             showWalletCardInfo()
         default: break
@@ -51,14 +53,35 @@ fileprivate extension HomeCoordinator {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
-    func showScan() {
+    func showScan(wallet: Wallet?) {
         let foundViewController = FoundAccountViewController(nibName: "FoundAccountViewController", bundle: Bundle.main)
+        foundViewController.wallet = wallet
         self.baseController.present(foundViewController, animated: true)
+    }
+    
+    func showCardDetails(wallet: Wallet) {
+        let foundViewController = AccountDetailsViewController(nibName: "AccountDetailsViewController", bundle: Bundle.main)
+        foundViewController.flowDelegate = self
+        foundViewController.wallet = wallet
+        let navigationController = BaseNavigationViewController(rootViewController: foundViewController)
+        self.baseController.present(navigationController, animated: true)
     }
     
     func showWalletCardInfo() {
         let infoViewController = WalletCardInfoViewController(nibName: "WalletCardInfoViewController", bundle: Bundle.main)
         self.baseController.present(infoViewController, animated: true)
     }
+}
+
+extension HomeCoordinator: AccountDetailsViewControllerFlow {
+
+    func backButtonPressed(from viewController:UIViewController) {
+        viewController.navigationController?.dismiss(animated: true)
+    }
+    
+    func closeButtonPressed(from viewController:UIViewController) {
+        
+    }
+    
 }
 

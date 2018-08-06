@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="GOTHAM-BOLD.TTF">
+            <string>GothamBold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="RFK-4K-alh" customClass="TitleView" customModule="Lumenshine" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="351" height="90"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REGISTRATION" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RNf-Kd-5r8">
+                    <rect key="frame" x="0.0" y="0.0" width="351" height="90"/>
+                    <fontDescription key="fontDescription" name="GothamBold" family="Gotham Bold" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="RNf-Kd-5r8" firstAttribute="leading" secondItem="K3c-dk-8CS" secondAttribute="leading" id="87Y-44-fZ8"/>
+                <constraint firstItem="K3c-dk-8CS" firstAttribute="trailing" secondItem="RNf-Kd-5r8" secondAttribute="trailing" id="brc-xz-WIt"/>
+                <constraint firstItem="RNf-Kd-5r8" firstAttribute="top" secondItem="K3c-dk-8CS" secondAttribute="top" id="eRe-ze-p83"/>
+                <constraint firstItem="K3c-dk-8CS" firstAttribute="bottom" secondItem="RNf-Kd-5r8" secondAttribute="bottom" id="nDJ-3W-gAW"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="K3c-dk-8CS"/>
+            <connections>
+                <outlet property="label" destination="RNf-Kd-5r8" id="4Rj-bi-0Fy"/>
+            </connections>
+            <point key="canvasLocation" x="21.5" y="-197"/>
+        </view>
+    </objects>
+</document>

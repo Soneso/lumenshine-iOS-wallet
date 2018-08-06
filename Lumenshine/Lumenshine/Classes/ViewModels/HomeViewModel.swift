@@ -16,6 +16,7 @@ protocol HomeViewModelType: Transitionable {
     var currencyRateUpdateClosure: ((Double) -> ())? { get set }
     
     func foundAccount()
+    func reloadCards()
 }
 
 class HomeViewModel : HomeViewModelType {
@@ -34,36 +35,6 @@ class HomeViewModel : HomeViewModelType {
         cardViewModels = []
         
         currenciesMonitor.startMonitoring()
-        
-        // TODO: remove mock when service is ready
-//        mockService()
-        
-        self.service.getCards() { response in
-            self.cardViewModels = response.map {
-                let viewModel = CardViewModel(card: $0)
-                viewModel.navigationCoordinator = self.navigationCoordinator
-                return viewModel
-            }
-
-            if let reload = self.reloadClosure {
-                reload()
-            }
-        }
-        
-        userManager.walletsForCurrentUser { (result) -> (Void) in
-            switch result {
-            case .success(let wallets):
-                for wallet in wallets {
-                    let viewModel = WalletCardViewModel(wallet: wallet)
-                    viewModel.navigationCoordinator = self.navigationCoordinator
-                    self.cardViewModels.append(viewModel)
-                    
-                    self.reloadClosure?()
-                }
-            case .failure(_):
-                print("Failed to get wallets")
-            }
-        }
         
         userManager.totalNativeFounds { (result) -> (Void) in
             switch result {
@@ -109,6 +80,37 @@ class HomeViewModel : HomeViewModelType {
     func foundAccount() {
         showScan()
     }
+    
+    func reloadCards() {
+        cardViewModels = []
+        
+        self.service.getCards() { response in
+            self.cardViewModels = response.map {
+                let viewModel = CardViewModel(card: $0)
+                viewModel.navigationCoordinator = self.navigationCoordinator
+                return viewModel
+            }
+            
+            if let reload = self.reloadClosure {
+                reload()
+            }
+        }
+        
+        userManager.walletsForCurrentUser { (result) -> (Void) in
+            switch result {
+            case .success(let wallets):
+                for wallet in wallets {
+                    let viewModel = WalletCardViewModel(wallet: wallet)
+                    viewModel.navigationCoordinator = self.navigationCoordinator
+                    self.cardViewModels.append(viewModel)
+                    
+                    self.reloadClosure?()
+                }
+            case .failure(_):
+                print("Failed to get wallets")
+            }
+        }
+    }
 
 }
 
@@ -126,7 +128,7 @@ fileprivate extension HomeViewModel {
     }
     
     func showScan() {
-        navigationCoordinator?.performTransition(transition: .showScan)
+        navigationCoordinator?.performTransition(transition: .showScan(nil))
     }
 }
 
