@@ -103,7 +103,7 @@ class WalletCardViewModel : CardViewModelType {
     }
     
     @objc func didTapDetailsButton() {
-        
+        navigationCoordinator?.performTransition(transition: .showCardDetails(wallet!))
     }
     
     @objc func didTapHelpButton() {
@@ -111,7 +111,7 @@ class WalletCardViewModel : CardViewModelType {
     }
     
     @objc func didTapFundButton() {
-        navigationCoordinator?.performTransition(transition: .showScan)
+        navigationCoordinator?.performTransition(transition: .showScan(wallet))
     }
     
 }

@@ -14,6 +14,8 @@ class FoundAccountViewController: UIViewController {
     @IBOutlet weak var publicKeyButton: UIButton!
     @IBOutlet weak var descriptionLabel: TTTAttributedLabel!
     
+    var wallet: Wallet?
+    
     var walletService: WalletsService {
         get {
             return Services.shared.walletService
@@ -25,7 +27,11 @@ class FoundAccountViewController: UIViewController {
 
         publicKeyButton.titleLabel?.numberOfLines = 0
         
-        loadWallet()
+        if let wallet = wallet {
+            publicKeyButton.setTitle(wallet.publicKey, for: .normal)
+        } else {
+            loadWallet()
+        }
         setDescription()
     }
 

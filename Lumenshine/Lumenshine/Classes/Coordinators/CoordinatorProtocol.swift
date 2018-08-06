@@ -32,7 +32,8 @@ public indirect enum Transition {
     case showSettings
     case showHeaderMenu([(String, String)])
     case showOnWeb(URL)
-    case showScan
+    case showScan(Wallet?)
+    case showCardDetails(Wallet)
     case showWalletCardInfo
     case logout(Transition?)
     case showPasswordHint(String)

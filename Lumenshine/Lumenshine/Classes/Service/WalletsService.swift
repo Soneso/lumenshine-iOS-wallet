@@ -13,7 +13,13 @@ public enum GetWalletsEnum {
     case failure(error: ServiceError)
 }
 
+public enum ChangeWalletDataEnum {
+    case success
+    case failure(error: ServiceError)
+}
+
 public typealias GetWalletsClosure = (_ response:GetWalletsEnum) -> (Void)
+public typealias ChangeWalletDataClosure = (_ response:ChangeWalletDataEnum) -> (Void)
 
 public class WalletsService: BaseService {
     
@@ -32,6 +38,22 @@ public class WalletsService: BaseService {
                     } catch {
                         response(.failure(error: .parsingFailed(message: error.localizedDescription)))
                     }
+                case .failure(let error):
+                    response(.failure(error: error))
+                }
+            }
+        }
+    }
+    
+    func changeWalletData(request: ChangeWalletRequest, response: @escaping ChangeWalletDataClosure) {
+        let encoder = JSONEncoder()
+        let params = try! encoder.encode(request)
+        
+        POSTRequestWithPath(path: "/portal/user/dashboard/change_wallet_data", body: params) { (result) -> (Void) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    response(.success)
                 case .failure(let error):
                     response(.failure(error: error))
                 }
