@@ -45,7 +45,7 @@ class SetupViewModel: SetupViewModelType {
     fileprivate var currentSetupStep: SetupStep
     fileprivate var randomIndices = [Int]()
     
-    var navigationCoordinator: CoordinatorType?
+    weak var navigationCoordinator: CoordinatorType?
     
     init(service: AuthService, user: User, loginResponse: LoginStep2Response?) {
         self.service = service

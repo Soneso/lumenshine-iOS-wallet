@@ -14,7 +14,7 @@ protocol ForgotPasswordViewModelType: Transitionable {
 
 
 class ForgotPasswordViewModel: ForgotPasswordViewModelType {
-    var navigationCoordinator: CoordinatorType?
+    weak var navigationCoordinator: CoordinatorType?
     
     fileprivate let service: AuthService
     

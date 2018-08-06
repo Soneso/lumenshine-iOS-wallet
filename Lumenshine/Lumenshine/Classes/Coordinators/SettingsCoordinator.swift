@@ -11,17 +11,20 @@ import Material
 
 class SettingsCoordinator: CoordinatorType {
     var baseController: UIViewController
+    unowned var mainCoordinator: MainCoordinator
     
     fileprivate let viewModel: SettingsViewModel
     fileprivate let service: Services
     fileprivate let user: User
     
-    init(service: Services, user: User) {
+    init(mainCoordinator: MainCoordinator, service: Services, user: User) {
         self.service = service
         self.user = user
+        self.mainCoordinator = mainCoordinator
         self.viewModel = SettingsViewModel(service: service.auth, user: user)
         self.baseController = SettingsTableViewController(viewModel: viewModel)
         viewModel.navigationCoordinator = self
+        mainCoordinator.currentCoordinator = self
     }
     
     func performTransition(transition: Transition) {
@@ -47,7 +50,7 @@ class SettingsCoordinator: CoordinatorType {
 
 fileprivate extension SettingsCoordinator {
     func logout() {
-        let loginCoordinator = LoginMenuCoordinator()
+        let loginCoordinator = LoginMenuCoordinator(mainCoordinator: mainCoordinator)
         if let window = UIApplication.shared.delegate?.window ?? baseController.view.window {        
             UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromTop, animations: {
                 window.rootViewController = loginCoordinator.baseController
@@ -78,7 +81,7 @@ fileprivate extension SettingsCoordinator {
     }
     
     func showHome() {
-        let coordinator = HomeCoordinator(service: service.home, user: user)
+        let coordinator = HomeCoordinator(mainCoordinator: mainCoordinator, service: service.home, user: user)
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
         if let drawer = baseController.drawerController {
             drawer.setViewController(navigationController, for: .none)

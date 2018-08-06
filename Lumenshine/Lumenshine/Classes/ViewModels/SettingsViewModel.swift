@@ -28,7 +28,7 @@ protocol SettingsViewModelType: Transitionable {
 
 class SettingsViewModel: SettingsViewModelType {
     
-    var navigationCoordinator: CoordinatorType?
+    weak var navigationCoordinator: CoordinatorType?
     
     fileprivate let service: AuthService
     fileprivate let user: User

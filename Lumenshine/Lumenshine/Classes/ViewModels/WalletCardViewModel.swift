@@ -10,7 +10,7 @@ import Foundation
 import stellarsdk
 
 class WalletCardViewModel : CardViewModelType {
-    var navigationCoordinator: CoordinatorType?
+    weak var navigationCoordinator: CoordinatorType?
     
     fileprivate var card: Card?
     fileprivate let stellarSdk: StellarSDK

@@ -13,7 +13,7 @@ class LoginMenuViewModel : MenuViewModelType {
     var entries: [[MenuEntry]]
     var lastIndex: IndexPath?
     
-    var navigationCoordinator: CoordinatorType?
+    weak var navigationCoordinator: CoordinatorType?
     
     init(service: AuthService) {
         self.service = service
@@ -54,10 +54,6 @@ class LoginMenuViewModel : MenuViewModelType {
         }
         lastIndex = indexPath
     }
-    
-    func showRelogin() {}
-    
-    func countBackgroundTime() {}
 }
 
 extension LoginMenuViewModel {

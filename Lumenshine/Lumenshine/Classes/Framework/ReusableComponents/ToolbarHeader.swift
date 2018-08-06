@@ -17,7 +17,7 @@ protocol ToolbarHeaderProtocol {
     var delegate: ToolbarHeaderDelegate? { get set }
 }
 
-protocol ToolbarHeaderDelegate {
+protocol ToolbarHeaderDelegate: NSObjectProtocol {
     func toolbar(_ toolbar: ToolbarHeader, didSelectAt index: Int)
 }
 
@@ -28,7 +28,7 @@ class ToolbarHeader: UIView {
     fileprivate let tabBar = UITabBar()
     fileprivate var selectedIndex: Int?
     
-    var delegate: ToolbarHeaderDelegate?
+    weak var delegate: ToolbarHeaderDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)

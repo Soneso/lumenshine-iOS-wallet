@@ -9,16 +9,18 @@
 import UIKit
 import Material
 
-class SetupMenuCoordinator: CoordinatorType {
+class SetupMenuCoordinator: MenuCoordinatorType {
     var baseController: UIViewController
+    unowned var mainCoordinator: MainCoordinator
     
     fileprivate let service: AuthService
     fileprivate let user: User
     fileprivate let menuView: MenuViewController
     
-    init(service: AuthService, user: User, loginResponse: LoginStep2Response?) {
+    init(mainCoordinator: MainCoordinator, service: AuthService, user: User, loginResponse: LoginStep2Response?) {
         self.service = service
         self.user = user
+        self.mainCoordinator = mainCoordinator
         
         let menuViewModel = SetupMenuViewModel(service: service, user: user)
         menuView = MenuViewController(viewModel: menuViewModel)
@@ -29,6 +31,7 @@ class SetupMenuCoordinator: CoordinatorType {
         self.baseController = drawer
         menuViewModel.navigationCoordinator = self
         showSetup(loginResponse: loginResponse)
+        mainCoordinator.currentMenuCoordinator = self
     }
     
     func performTransition(transition: Transition) {
@@ -43,7 +46,7 @@ class SetupMenuCoordinator: CoordinatorType {
 
 fileprivate extension SetupMenuCoordinator {
     func logout(transtion: Transition?) {
-        let loginCoordinator = LoginMenuCoordinator(transition: transtion)
+        let loginCoordinator = LoginMenuCoordinator(mainCoordinator: mainCoordinator, transition: transtion)
         if let window = UIApplication.shared.delegate?.window ?? baseController.view.window {
             UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromTop, animations: {
                 window.rootViewController = loginCoordinator.baseController
@@ -52,7 +55,7 @@ fileprivate extension SetupMenuCoordinator {
     }
     
     func showSetup(loginResponse: LoginStep2Response?) {
-        let coordinator = SetupCoordinator(service: service, user: user, loginResponse: loginResponse)
+        let coordinator = SetupCoordinator(mainCoordinator: mainCoordinator, service: service, user: user, loginResponse: loginResponse)
         
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
         if let drawer = baseController as? AppNavigationDrawerController {

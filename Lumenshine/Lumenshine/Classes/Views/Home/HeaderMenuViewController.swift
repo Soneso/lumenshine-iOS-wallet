@@ -9,7 +9,7 @@
 import UIKit
 import Material
 
-protocol HeaderMenuDelegate {
+protocol HeaderMenuDelegate: NSObjectProtocol {
     func menuSelected(at index: Int)
 }
 
@@ -22,7 +22,7 @@ class HeaderMenuViewController: UIViewController {
     fileprivate let items: [(String, String)]
     fileprivate let tableView: UITableView
     
-    var delegate: HeaderMenuDelegate?
+    weak var delegate: HeaderMenuDelegate?
     
     init(items: [(String, String)]) {
         self.items = items

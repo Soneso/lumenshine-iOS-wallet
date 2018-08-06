@@ -12,13 +12,16 @@ import KWDrawerController
 
 class SetupCoordinator: CoordinatorType {
     var baseController: UIViewController
+    unowned var mainCoordinator: MainCoordinator
+    
     fileprivate let service: AuthService
     fileprivate let viewModel: SetupViewModel
     fileprivate let user: User
     
-    init(service: AuthService, user: User, loginResponse: LoginStep2Response?) {
+    init(mainCoordinator: MainCoordinator, service: AuthService, user: User, loginResponse: LoginStep2Response?) {
         self.service = service
         self.user = user
+        self.mainCoordinator = mainCoordinator
         self.viewModel = SetupViewModel(service: service, user: user, loginResponse: loginResponse)
         if let setup = SetupViewController.initialize(viewModel: viewModel) {
             self.baseController = SnackbarController(rootViewController: setup)
@@ -27,6 +30,7 @@ class SetupCoordinator: CoordinatorType {
             self.baseController = SetupViewController(viewModel: viewModel)
             showDashboard()
         }
+        mainCoordinator.currentCoordinator = self
     }
     
     func performTransition(transition: Transition) {
@@ -57,7 +61,7 @@ fileprivate extension SetupCoordinator {
     }
     
     func showDashboard() {
-        let coordinator = MenuCoordinator(user: user)
+        let coordinator = MenuCoordinator(mainCoordinator: mainCoordinator, user: user)
         if let window = UIApplication.shared.delegate?.window ?? baseController.view.window {
             UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromTop, animations: {
                 window.rootViewController = coordinator.baseController

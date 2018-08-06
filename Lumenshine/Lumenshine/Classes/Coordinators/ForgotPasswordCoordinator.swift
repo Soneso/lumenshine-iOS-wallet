@@ -10,16 +10,20 @@ import UIKit
 
 class ForgotPasswordCoordinator: CoordinatorType {
     var baseController: UIViewController
+    unowned var mainCoordinator: MainCoordinator
+    
     fileprivate let service: AuthService
     
-    init(service: AuthService) {
+    init(mainCoordinator: MainCoordinator, service: AuthService) {
         self.service = service
+        self.mainCoordinator = mainCoordinator
         let viewModel = ForgotPasswordViewModel(service: service)
         
         let viewController = ForgotPasswordViewController(nibName: "ForgotPasswordViewController", bundle: Bundle.main)
         viewController.viewModel = viewModel
         self.baseController = viewController
         viewModel.navigationCoordinator = self
+        mainCoordinator.currentCoordinator = self
     }
     
     func performTransition(transition: Transition) {

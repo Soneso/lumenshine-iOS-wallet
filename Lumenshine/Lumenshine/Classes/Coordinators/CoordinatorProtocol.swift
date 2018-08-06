@@ -16,7 +16,12 @@ protocol CoordinatorType: class {
     
     var baseController: UIViewController { get }
     
+    var mainCoordinator: MainCoordinator { get }
+    
     func performTransition(transition: Transition)
+}
+
+protocol MenuCoordinatorType: CoordinatorType {
 }
 
 public indirect enum Transition {

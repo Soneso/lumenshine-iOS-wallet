@@ -9,14 +9,16 @@
 import UIKit
 import Material
 
-class LoginMenuCoordinator: CoordinatorType {
+class LoginMenuCoordinator: MenuCoordinatorType {
     var baseController: UIViewController
+    unowned var mainCoordinator: MainCoordinator
     
     fileprivate let service: Services
     fileprivate let menuView: MenuViewController
     
-    init(transition: Transition? = .showLogin) {
+    init(mainCoordinator: MainCoordinator, transition: Transition? = .showLogin) {
         self.service = Services()
+        self.mainCoordinator = mainCoordinator
         
         let menuViewModel = LoginMenuViewModel(service: service.auth)
         menuView = MenuViewController(viewModel: menuViewModel)
@@ -27,6 +29,7 @@ class LoginMenuCoordinator: CoordinatorType {
         self.baseController = drawer
         menuViewModel.navigationCoordinator = self
         performTransition(transition: transition ?? .showLogin)
+        mainCoordinator.currentMenuCoordinator = self
     }
     
     func performTransition(transition: Transition) {
@@ -47,7 +50,7 @@ class LoginMenuCoordinator: CoordinatorType {
 
 fileprivate extension LoginMenuCoordinator {
     func showLogin() {
-        let loginCoordinator = LoginCoordinator(service: service.auth)
+        let loginCoordinator = LoginCoordinator(mainCoordinator: mainCoordinator, service: service.auth)
         let navigationController = AppNavigationController(rootViewController: loginCoordinator.baseController)
         if let drawer = baseController as? AppNavigationDrawerController {
             drawer.setViewController(navigationController, for: .none)
@@ -57,7 +60,7 @@ fileprivate extension LoginMenuCoordinator {
     }
     
     func showSignUp() {
-        let loginCoordinator = LoginCoordinator(service: service.auth, transition: .showSignUp)
+        let loginCoordinator = LoginCoordinator(mainCoordinator: mainCoordinator, service: service.auth, transition: .showSignUp)
         let navigationController = AppNavigationController(rootViewController: loginCoordinator.baseController)
         if let drawer = baseController as? AppNavigationDrawerController {
             drawer.setViewController(navigationController, for: .none)
@@ -67,7 +70,7 @@ fileprivate extension LoginMenuCoordinator {
     }
     
     func showForgotPassword() {
-        let forgotPasswordCoordinator = ForgotPasswordCoordinator(service: service.auth)
+        let forgotPasswordCoordinator = ForgotPasswordCoordinator(mainCoordinator: mainCoordinator, service: service.auth)
         let navigationController = AppNavigationController(rootViewController: forgotPasswordCoordinator.baseController)
         if let drawer = baseController as? AppNavigationDrawerController {
             drawer.setViewController(navigationController, for: .none)
@@ -77,7 +80,7 @@ fileprivate extension LoginMenuCoordinator {
     }
     
     func showLost2fa() {
-        let forgotPasswordCoordinator = Lost2faCoordinator(service: service.auth)
+        let forgotPasswordCoordinator = Lost2faCoordinator(mainCoordinator: mainCoordinator, service: service.auth)
         let navigationController = AppNavigationController(rootViewController: forgotPasswordCoordinator.baseController)
         if let drawer = baseController as? AppNavigationDrawerController {
             drawer.setViewController(navigationController, for: .none)

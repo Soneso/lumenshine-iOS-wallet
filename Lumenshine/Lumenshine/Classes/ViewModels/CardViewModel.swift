@@ -20,7 +20,7 @@ protocol CardViewModelType: Transitionable {
 }
 
 class CardViewModel : CardViewModelType {
-    var navigationCoordinator: CoordinatorType?
+    weak var navigationCoordinator: CoordinatorType?
     
     fileprivate let card: Card
     

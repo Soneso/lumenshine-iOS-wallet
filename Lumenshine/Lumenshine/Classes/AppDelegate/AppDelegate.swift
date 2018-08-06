@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    fileprivate let loginCoordinator = LoginMenuCoordinator()
+    fileprivate let mainCoordinator = MainCoordinator()
     
     // for testing purpose
     //fileprivate let loginCoordinator = MenuCoordinator(user: User(id: "1", email: "isti@isti.com", publicKeyIndex0: "publicKeyIndex0", publicKeyIndex188: "publicKeyIndex188", mnemonic: "mnemonic"))
@@ -41,6 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             completionHandler: {_, _ in })
         
         application.registerForRemoteNotifications()
+        
+        let loginCoordinator = LoginMenuCoordinator(mainCoordinator: mainCoordinator)
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = loginCoordinator.baseController

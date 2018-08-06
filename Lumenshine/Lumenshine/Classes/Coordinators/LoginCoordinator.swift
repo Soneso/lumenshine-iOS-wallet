@@ -11,14 +11,17 @@ import Material
 
 class LoginCoordinator: CoordinatorType {
     var baseController: UIViewController
+    unowned var mainCoordinator: MainCoordinator
     
     fileprivate let service: AuthService
     
-    init(service: AuthService, transition: Transition? = .showLogin) {
+    init(mainCoordinator: MainCoordinator, service: AuthService, transition: Transition? = .showLogin) {
         self.service = service
+        self.mainCoordinator = mainCoordinator
         let viewModel = LoginViewModel(service: service)
         self.baseController = LoginViewController(viewModel: viewModel)
         viewModel.navigationCoordinator = self
+        mainCoordinator.currentCoordinator = self
 //        performTransition(transition: transition ?? .showLogin)
     }
     
@@ -55,7 +58,7 @@ fileprivate extension LoginCoordinator {
     }
     
     func showDashboard(user: User) {
-        let coordinator = MenuCoordinator(user: user)
+        let coordinator = MenuCoordinator(mainCoordinator: mainCoordinator, user: user)
         present(coordinator: coordinator)
     }
     
@@ -74,7 +77,7 @@ fileprivate extension LoginCoordinator {
     }
     
     func showSetup(user: User, loginResponse: LoginStep2Response) {
-        let coordinator = SetupMenuCoordinator(service: service, user: user, loginResponse: loginResponse)
+        let coordinator = SetupMenuCoordinator(mainCoordinator: mainCoordinator, service: service, user: user, loginResponse: loginResponse)
         present(coordinator: coordinator)
     }
     

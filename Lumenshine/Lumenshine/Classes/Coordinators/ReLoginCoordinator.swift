@@ -10,11 +10,14 @@ import UIKit
 
 class ReLoginCoordinator: CoordinatorType {
     var baseController: UIViewController
+    unowned var mainCoordinator: MainCoordinator
     
-    init(service: AuthService, user: User) {
+    init(mainCoordinator: MainCoordinator, service: AuthService, user: User) {
         let viewModel = ReLoginViewModel(service: service, user: user)
+        self.mainCoordinator = mainCoordinator
         self.baseController = ReLoginViewController(viewModel: viewModel)
         viewModel.navigationCoordinator = self
+        mainCoordinator.currentCoordinator = self
     }
     
     func performTransition(transition: Transition) {
@@ -45,7 +48,7 @@ fileprivate extension ReLoginCoordinator {
     }
     
     func logout(transtion: Transition?) {
-        let loginCoordinator = LoginMenuCoordinator(transition: transtion)
+        let loginCoordinator = LoginMenuCoordinator(mainCoordinator: mainCoordinator, transition: transtion)
         if let window = UIApplication.shared.delegate?.window ?? baseController.view.window {
             UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromTop, animations: {
                 window.rootViewController = loginCoordinator.baseController

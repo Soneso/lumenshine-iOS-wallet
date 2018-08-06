@@ -15,8 +15,6 @@ protocol MenuViewModelType: Transitionable {
     func isAvatar(at indexPath: IndexPath) -> Bool
     
     func menuItemSelected(at indexPath: IndexPath)
-    func showRelogin()
-    func countBackgroundTime()
 }
 
 class MenuViewModel : MenuViewModelType {
@@ -26,7 +24,7 @@ class MenuViewModel : MenuViewModelType {
     fileprivate var lastIndex = IndexPath(row: 0, section: 1)
     fileprivate var backgroundTime: Date?
     
-    var navigationCoordinator: CoordinatorType?
+    weak var navigationCoordinator: CoordinatorType?
     
     init(service: AuthService, user: User) {
         self.service = service
@@ -50,6 +48,25 @@ class MenuViewModel : MenuViewModelType {
                 }
             }
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: .UIApplicationWillEnterForeground, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground(notification:)), name: .UIApplicationDidEnterBackground, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIApplicationDidEnterBackground, object: nil)
+    }
+    
+    @objc
+    func appWillEnterForeground(notification: Notification) {
+        showRelogin()
+    }
+    
+    @objc
+    func appDidEnterBackground(notification: Notification) {
+        countBackgroundTime()
     }
     
     var itemDistribution: [Int] {
@@ -81,6 +98,21 @@ class MenuViewModel : MenuViewModelType {
         }
         lastIndex = indexPath
     }
+}
+
+fileprivate extension MenuViewModel {
+    func entry(at indexPath: IndexPath) -> MenuEntry {
+        return entries[indexPath.section][indexPath.row]
+    }
+    
+    func logout() {
+        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIApplicationDidEnterBackground, object: nil)
+        
+        TFAGeneration.removeToken(email: user.email)
+        BaseService.removeToken()
+        navigationCoordinator?.performTransition(transition: .logout(nil))
+    }
     
     func showRelogin() {
         if let time = backgroundTime, time.addingTimeInterval(10) < Date() {
@@ -90,17 +122,5 @@ class MenuViewModel : MenuViewModelType {
     
     func countBackgroundTime() {
         backgroundTime = Date()
-    }
-}
-
-fileprivate extension MenuViewModel {
-    func entry(at indexPath: IndexPath) -> MenuEntry {
-        return entries[indexPath.section][indexPath.row]
-    }
-    
-    func logout() {
-        TFAGeneration.removeToken(email: user.email)
-        BaseService.removeToken()
-        navigationCoordinator?.performTransition(transition: .logout(nil))
     }
 }

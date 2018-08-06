@@ -32,7 +32,7 @@ class RegistrationViewModel : RegistrationViewModelType {
     fileprivate var countries: [CountryResponse]?
     fileprivate var salutations: [String]?
     
-    var navigationCoordinator: CoordinatorType?
+    weak var navigationCoordinator: CoordinatorType?
     
     init(service: AuthService) {
         self.service = service

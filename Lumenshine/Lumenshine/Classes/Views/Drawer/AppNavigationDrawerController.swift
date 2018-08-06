@@ -27,17 +27,10 @@ class AppNavigationDrawerController: DrawerController {
         options.isFadeScreen = false
         options.isBlur = false
         options.isEnable = true
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: .UIApplicationWillEnterForeground, object: nil)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
-    }
-    
-    @objc
-    func appWillEnterForeground(notification: Notification) {
-        
     }
 }
 

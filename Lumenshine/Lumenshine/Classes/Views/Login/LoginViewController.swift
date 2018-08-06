@@ -122,7 +122,7 @@ extension LoginViewController {
         UserDefaults.standard.setValue(accountName, forKey: "username")
         
         showActivity()
-        viewModel.loginStep1(email: accountName, password: password, tfaCode: contentView.textField3.text) { result in
+        viewModel.loginStep1(email: accountName, password: password, tfaCode: contentView.textField3.text) { [unowned self] result in
             DispatchQueue.main.async {
                 self.hideActivity(completion: {
                     switch result {
@@ -161,7 +161,7 @@ extension LoginViewController {
         
         _ = resignFirstResponder()
         showActivity()
-        viewModel.signUp(email: email, password: password, repassword: repassword) { result in
+        viewModel.signUp(email: email, password: password, repassword: repassword) { [unowned self] result in
             DispatchQueue.main.async {
                 self.hideActivity(completion: {
                     switch result {

@@ -14,7 +14,7 @@ protocol Lost2faViewModelType: Transitionable {
 
 
 class Lost2faViewModel: Lost2faViewModelType {
-    var navigationCoordinator: CoordinatorType?
+    weak var navigationCoordinator: CoordinatorType?
     
     fileprivate let service: AuthService
     

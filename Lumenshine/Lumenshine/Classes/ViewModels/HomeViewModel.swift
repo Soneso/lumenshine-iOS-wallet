@@ -26,7 +26,7 @@ class HomeViewModel : HomeViewModelType {
     fileprivate let userManager = Services.shared.userManager
     fileprivate let currenciesMonitor = CurrenciesMonitor()
     
-    var navigationCoordinator: CoordinatorType?
+    weak var navigationCoordinator: CoordinatorType?
     
     init(service: HomeService, user: User) {
         self.service = service

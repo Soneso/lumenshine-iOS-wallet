@@ -9,16 +9,20 @@
 import UIKit
 import Material
 
-class ReLoginMenuCoordinator: CoordinatorType {
+class ReLoginMenuCoordinator: MenuCoordinatorType {
     var baseController: UIViewController
+    
+//    var baseController: UIViewController
+    unowned var mainCoordinator: MainCoordinator
     
     fileprivate let service: AuthService
     fileprivate let user: User
     fileprivate let menuView: MenuViewController
     
-    init(service: AuthService, user: User) {
+    init(mainCoordinator: MainCoordinator, service: AuthService, user: User) {
         self.service = service
         self.user = user
+        self.mainCoordinator = mainCoordinator
         
         let menuViewModel = ReLoginMenuViewModel(service: service, user: user)
         menuView = MenuViewController(viewModel: menuViewModel)
@@ -29,6 +33,7 @@ class ReLoginMenuCoordinator: CoordinatorType {
         self.baseController = drawer
         menuViewModel.navigationCoordinator = self
         showRelogin()
+        mainCoordinator.currentMenuCoordinator = self
     }
     
     func performTransition(transition: Transition) {
@@ -45,7 +50,7 @@ class ReLoginMenuCoordinator: CoordinatorType {
 
 fileprivate extension ReLoginMenuCoordinator {
     func logout(transtion: Transition?) {
-        let loginCoordinator = LoginMenuCoordinator(transition: transtion)
+        let loginCoordinator = LoginMenuCoordinator(mainCoordinator: mainCoordinator, transition: transtion)
         if let window = UIApplication.shared.delegate?.window ?? baseController.view.window {
             UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromTop, animations: {
                 window.rootViewController = loginCoordinator.baseController
@@ -54,7 +59,7 @@ fileprivate extension ReLoginMenuCoordinator {
     }
     
     func showRelogin() {
-        let loginCoordinator = ReLoginCoordinator(service: service, user: user)
+        let loginCoordinator = ReLoginCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
         let navigationController = AppNavigationController(rootViewController: loginCoordinator.baseController)
         if let drawer = baseController as? AppNavigationDrawerController {
             drawer.setViewController(navigationController, for: .none)

@@ -34,7 +34,7 @@ class LoginViewModel : LoginViewModelType {
     fileprivate var user: User?
     var entries: [MenuEntry]
     
-    var navigationCoordinator: CoordinatorType?
+    weak var navigationCoordinator: CoordinatorType?
     
     init(service: AuthService, user: User? = nil) {
         self.service = service
@@ -97,10 +97,10 @@ class LoginViewModel : LoginViewModelType {
     
     func loginStep1(email: String, password: String, tfaCode: String?, response: @escaping EmptyResponseClosure) {
         self.email = email
-        service.loginStep1(email: email, tfaCode: tfaCode) { result in
+        service.loginStep1(email: email, tfaCode: tfaCode) { [weak self] result in
             switch result {
             case .success(let login1Response):
-                self.verifyLogin1Response(login1Response, password: password, response: response)
+                self?.verifyLogin1Response(login1Response, password: password, response: response)
             case .failure(let error):
                 response(.failure(error: error))
             }
@@ -135,14 +135,14 @@ class LoginViewModel : LoginViewModelType {
         
         self.email = email
         
-        service.generateAccount(email: email, password: password, userData: nil) { result in
+        service.generateAccount(email: email, password: password, userData: nil) { [weak self] result in
             switch result {
             case .success( _, let userSecurity):
-                self.user = User(id: "1", email: email, publicKeyIndex0: userSecurity.publicKeyIndex0, publicKeyIndex188: userSecurity.publicKeyIndex188, mnemonic: userSecurity.mnemonic24Word)
-                self.service.loginStep2(publicKeyIndex188: userSecurity.publicKeyIndex188) { result in
+                self?.user = User(id: "1", email: email, publicKeyIndex0: userSecurity.publicKeyIndex0, publicKeyIndex188: userSecurity.publicKeyIndex188, mnemonic: userSecurity.mnemonic24Word)
+                self?.service.loginStep2(publicKeyIndex188: userSecurity.publicKeyIndex188) { [weak self] result in
                     switch result {
                     case .success(let login2Response):
-                        self.showSetup(login2Response: login2Response)
+                        self?.showSetup(login2Response: login2Response)
                         response(.success)
                     case .failure(let error):
                         response(.failure(error: error))
@@ -185,10 +185,10 @@ fileprivate extension LoginViewModel {
                     let (publicKeyIndex188, mnemonic, _, _) = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: password) {
                     
                     self.user = User(id: "1", email: self.email!, publicKeyIndex0: login1Response.publicKeyIndex0, publicKeyIndex188: publicKeyIndex188, mnemonic: mnemonic)
-                    self.service.loginStep2(publicKeyIndex188: publicKeyIndex188) { result in
+                    self.service.loginStep2(publicKeyIndex188: publicKeyIndex188) { [weak self] result in
                         switch result {
                         case .success(let login2Response):
-                            self.showSetup(login2Response: login2Response)
+                            self?.showSetup(login2Response: login2Response)
                             response(.success)
                         case .failure(let error):
                             response(.failure(error: error))
