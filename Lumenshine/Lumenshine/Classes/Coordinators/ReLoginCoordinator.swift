@@ -44,16 +44,13 @@ fileprivate extension ReLoginCoordinator {
     }
     
     func showDashboard(user: User) {
-        baseController.drawerController?.dismiss(animated: true, completion: nil)
+        let coordinator = MenuCoordinator(mainCoordinator: mainCoordinator, user: user)
+        present(coordinator: coordinator)
     }
     
     func logout(transtion: Transition?) {
         let loginCoordinator = LoginMenuCoordinator(mainCoordinator: mainCoordinator, transition: transtion)
-        if let window = UIApplication.shared.delegate?.window ?? baseController.view.window {
-            UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromTop, animations: {
-                window.rootViewController = loginCoordinator.baseController
-            }, completion: nil)
-        }
+        present(coordinator: loginCoordinator)
     }
     
     func showRelogin() {
@@ -62,5 +59,13 @@ fileprivate extension ReLoginCoordinator {
     
     func showFingerprint() {
         (baseController as! ReLoginViewController).showFingerprint()
+    }
+    
+    func present(coordinator: CoordinatorType) {
+        if let window = UIApplication.shared.delegate?.window ?? baseController.view.window {
+            UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromBottom, animations: {
+                window.rootViewController = coordinator.baseController
+            }, completion: nil)
+        }
     }
 }

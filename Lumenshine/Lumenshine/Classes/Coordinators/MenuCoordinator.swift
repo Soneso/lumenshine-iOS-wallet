@@ -72,14 +72,18 @@ fileprivate extension MenuCoordinator {
     
     func showRelogin() {
         let coordinator = ReLoginMenuCoordinator(mainCoordinator: mainCoordinator, service: service.auth, user: user)
-        baseController.present(coordinator.baseController, animated: true)
+        present(coordinator: coordinator)
     }
     
     func logout() {
         let loginCoordinator = LoginMenuCoordinator(mainCoordinator: mainCoordinator)
+        present(coordinator: loginCoordinator)
+    }
+    
+    func present(coordinator: CoordinatorType) {
         if let window = UIApplication.shared.delegate?.window ?? baseController.view.window {
-            UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromTop, animations: {
-                window.rootViewController = loginCoordinator.baseController
+            UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromBottom, animations: {
+                window.rootViewController = coordinator.baseController
             }, completion: nil)
         }
     }

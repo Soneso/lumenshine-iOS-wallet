@@ -61,7 +61,7 @@ class ReLoginViewModel : LoginViewModel {
     
     
     override func loginCompleted() {
-        navigationCoordinator?.performTransition(transition: .openDashboard(.showSettings))
+        navigationCoordinator?.performTransition(transition: .showDashboard(user))
         touchMe.invalidate()
     }
     

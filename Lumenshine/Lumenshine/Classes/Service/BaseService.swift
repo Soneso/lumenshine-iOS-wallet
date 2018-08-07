@@ -173,8 +173,6 @@ public class BaseService: NSObject, URLSessionDelegate {
                     break
                 case 400...500:
                     if let errorData = data {
-                         let str = String(data: errorData, encoding: String.Encoding.utf8) as String!
-                        
                         do {
                             let errorResponses = try self.jsonDecoder.decode(Array<ErrorResponse>.self, from: errorData)
                             if let err = errorResponses.first {

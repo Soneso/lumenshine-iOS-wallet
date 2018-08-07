@@ -208,10 +208,12 @@ fileprivate extension LoginViewModel {
     
     func showSetup(login2Response: LoginStep2Response) {
         guard let user = self.user else { return }
-        if login2Response.tfaConfirmed && login2Response.mailConfirmed && login2Response.mnemonicConfirmed {
-            navigationCoordinator?.performTransition(transition: .showDashboard(user))
-        } else {
-            navigationCoordinator?.performTransition(transition: .showSetup(user, login2Response))
+        DispatchQueue.main.async {
+            if login2Response.tfaConfirmed && login2Response.mailConfirmed && login2Response.mnemonicConfirmed {
+                self.navigationCoordinator?.performTransition(transition: .showDashboard(user))
+            } else {
+                self.navigationCoordinator?.performTransition(transition: .showSetup(user, login2Response))
+            }
         }
     }
 }
