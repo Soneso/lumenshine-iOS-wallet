@@ -18,11 +18,11 @@ class SetupCoordinator: CoordinatorType {
     fileprivate let viewModel: SetupViewModel
     fileprivate let user: User
     
-    init(mainCoordinator: MainCoordinator, service: AuthService, user: User, loginResponse: LoginStep2Response?) {
+    init(mainCoordinator: MainCoordinator, service: AuthService, user: User, mnemonic: String, loginResponse: LoginStep2Response?) {
         self.service = service
         self.user = user
         self.mainCoordinator = mainCoordinator
-        self.viewModel = SetupViewModel(service: service, user: user, loginResponse: loginResponse)
+        self.viewModel = SetupViewModel(service: service, user: user, mnemonic: mnemonic, loginResponse: loginResponse)
         if let setup = SetupViewController.initialize(viewModel: viewModel) {
             self.baseController = SnackbarController(rootViewController: setup)
             viewModel.navigationCoordinator = self

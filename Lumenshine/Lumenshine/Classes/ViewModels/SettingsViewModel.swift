@@ -23,6 +23,8 @@ protocol SettingsViewModelType: Transitionable {
     func showHome()
     func showSettings()
     func showConfirm2faSecret(tfaResponse: RegistrationResponse)
+    func showBackupMnemonic(password: String, response: @escaping DecryptedUserDataResponseClosure)
+    func showMnemonic(_ mnemonic: String)
 }
 
 
@@ -40,7 +42,7 @@ class SettingsViewModel: SettingsViewModelType {
         self.service = service
         self.user = user
         
-        self.entries = [[.changePassword, .change2FA, .biometricAuth, .avatar]]
+        self.entries = [[.changePassword, .change2FA, .biometricAuth, .backupMnemonic, .avatar]]
         
         if let touchEnabled = UserDefaults.standard.value(forKey: "touchEnabled") as? Bool {
             self.touchEnabled = touchEnabled
@@ -86,6 +88,8 @@ class SettingsViewModel: SettingsViewModelType {
             break
         case .avatar:
             break
+        case .backupMnemonic:
+            navigationCoordinator?.performTransition(transition: .showBackupMnemonic)
         }
     }
     
@@ -155,6 +159,21 @@ class SettingsViewModel: SettingsViewModelType {
         self.tfaResponse = tfaResponse
         navigationCoordinator?.performTransition(transition: .showNew2faSecret)
     }
+    
+    func showBackupMnemonic(password: String, response: @escaping DecryptedUserDataResponseClosure) {
+        service.authenticationData { result in
+            switch result {
+            case .success(let authResponse):
+                self.backupMnemonic(authResponse: authResponse, password: password, response: response)
+            case .failure(let error):
+                response(.failure(error: error))
+            }
+        }
+    }
+    
+    func showMnemonic(_ mnemonic: String) {
+        navigationCoordinator?.performTransition(transition: .showMnemonic(mnemonic))
+    }
 }
 
 fileprivate extension SettingsViewModel {
@@ -171,9 +190,12 @@ fileprivate extension SettingsViewModel {
         DispatchQueue.global(qos: .userInitiated).async {
             do {
                 if let userSecurity = UserSecurity(from: authResponse),
-                    let (publicKeyIndex188, _, wordlistMasterKey, mnemonicMasterKey) = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: oldPass) {
+                    let decryptedUserData = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: oldPass) {
                     
-                    let userSec = try userSecurity.updatePassword(newPass, publicKeyIndex188: publicKeyIndex188, wordlistMasterKey: wordlistMasterKey, mnemonicMasterKey: mnemonicMasterKey)
+                    let userSec = try userSecurity.updatePassword(newPass,
+                                                                  publicKeyIndex188: decryptedUserData.publicKeyIndex188,
+                                                                  wordlistMasterKey: decryptedUserData.wordListMasterKey,
+                                                                  mnemonicMasterKey: decryptedUserData.mnemonicMasterKey)
                     response(.success(response: nil, userSecurity: userSec))
                 } else {
                     let error = ErrorResponse()
@@ -191,8 +213,26 @@ fileprivate extension SettingsViewModel {
         DispatchQueue.global(qos: .userInitiated).async {
             do {
                 if let userSecurity = UserSecurity(from: authResponse),
-                    let (publicKeyIndex188, _, _, _) = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: password) {
-                    self.service.new2faSecret(publicKeyIndex188: publicKeyIndex188, response: response)
+                    let decryptedUserData = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: password) {
+                    self.service.new2faSecret(publicKeyIndex188: decryptedUserData.publicKeyIndex188, response: response)
+                } else {
+                    let error = ErrorResponse()
+                    error.parameterName = "current_password"
+                    error.errorMessage = R.string.localizable.invalid_password()
+                    response(.failure(error: .validationFailed(error: error)))
+                }
+            } catch {
+                response(.failure(error: .encryptionFailed(message: error.localizedDescription)))
+            }
+        }
+    }
+    
+    func backupMnemonic(authResponse: AuthenticationResponse, password: String, response: @escaping DecryptedUserDataResponseClosure) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            do {
+                if let userSecurity = UserSecurity(from: authResponse),
+                    let decryptedUserData = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: password) {
+                    response(.success(response: decryptedUserData))
                 } else {
                     let error = ErrorResponse()
                     error.parameterName = "current_password"

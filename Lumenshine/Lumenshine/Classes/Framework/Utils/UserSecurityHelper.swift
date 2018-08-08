@@ -67,7 +67,7 @@ struct UserSecurityHelper {
         }
     }
     
-    static func decryptUserSecurity(_ userSecurity: UserSecurity, password: String) throws -> (String, String, Array<UInt8>, Array<UInt8>)? {
+    static func decryptUserSecurity(_ userSecurity: UserSecurity, password: String) throws -> DecryptedUserData? {
         do {
             let derivedPassword = CryptoUtil.deriveKeyPbkdf2(password: password, salt: userSecurity.passwordKdfSalt)
             
@@ -98,7 +98,10 @@ struct UserSecurityHelper {
             
             let publicKeyIndex188 = try stellarsdk.Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: 188).accountId
             
-            return (publicKeyIndex188, mnemonic, wordListMasterKey, mnemonicMasterKey)
+            return DecryptedUserData(mnemonic: mnemonic,
+                                     publicKeyIndex188: publicKeyIndex188,
+                                     wordListMasterKey: wordListMasterKey,
+                                     mnemonicMasterKey: mnemonicMasterKey)
             
         } catch {
             throw error

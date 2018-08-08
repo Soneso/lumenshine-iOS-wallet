@@ -429,7 +429,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 158 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 161 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -507,6 +507,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let back = Rswift.StringResource(key: "back", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Backup Secret/Mnemonic
+      /// 
+      /// Locales: en
+      static let backup_mnemonic = Rswift.StringResource(key: "backup_mnemonic", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Birth day
       /// 
       /// Locales: en
@@ -851,6 +855,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let reset_password = Rswift.StringResource(key: "reset_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Reveal
+      /// 
+      /// Locales: en
+      static let reveal = Rswift.StringResource(key: "reveal", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Salutation
       /// 
       /// Locales: en
@@ -939,6 +947,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let verify_mnemonic_hint = Rswift.StringResource(key: "verify_mnemonic_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: To reveal your backup secret/mnemonic please provide your password.
+      /// 
+      /// Locales: en
+      static let reveal_backup_mnemonic = Rswift.StringResource(key: "reveal_backup_mnemonic", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: To setup 2FA, please:  1. download a two-factor authenticator app (like Google Authenticator)  2. copy and enter the above displayed 2FA secret code into the authenticator app  3. enter the generated 2FA code from the authenticator app into the 2FA Code input and press "Next"
       /// 
       /// Locales: en
@@ -1195,6 +1207,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func back(_: Void = ()) -> String {
         return NSLocalizedString("back", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Backup Secret/Mnemonic
+      /// 
+      /// Locales: en
+      static func backup_mnemonic(_: Void = ()) -> String {
+        return NSLocalizedString("backup_mnemonic", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Birth day
@@ -1799,6 +1818,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("reset_password", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Reveal
+      /// 
+      /// Locales: en
+      static func reveal(_: Void = ()) -> String {
+        return NSLocalizedString("reveal", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Salutation
       /// 
       /// Locales: en
@@ -1951,6 +1977,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func verify_mnemonic_hint(_: Void = ()) -> String {
         return NSLocalizedString("verify_mnemonic_hint", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: To reveal your backup secret/mnemonic please provide your password.
+      /// 
+      /// Locales: en
+      static func reveal_backup_mnemonic(_: Void = ()) -> String {
+        return NSLocalizedString("reveal_backup_mnemonic", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: To setup 2FA, please:  1. download a two-factor authenticator app (like Google Authenticator)  2. copy and enter the above displayed 2FA secret code into the authenticator app  3. enter the generated 2FA code from the authenticator app into the 2FA Code input and press "Next"

@@ -41,15 +41,17 @@ class SetupViewModel: SetupViewModelType {
     
     fileprivate let service: AuthService
     fileprivate let user: User
+    fileprivate let mnemonic: String
     fileprivate let loginResponse: LoginStep2Response?
     fileprivate var currentSetupStep: SetupStep
     fileprivate var randomIndices = [Int]()
     
     weak var navigationCoordinator: CoordinatorType?
     
-    init(service: AuthService, user: User, loginResponse: LoginStep2Response?) {
+    init(service: AuthService, user: User, mnemonic: String, loginResponse: LoginStep2Response?) {
         self.service = service
         self.user = user
+        self.mnemonic = mnemonic
         self.loginResponse = loginResponse
         self.currentSetupStep = .none
         self.randomIndices = generateRandomIndices()
@@ -78,7 +80,7 @@ class SetupViewModel: SetupViewModelType {
     }
     
     var mnemonic24Word: String {
-        return user.mnemonic
+        return mnemonic
     }
     
     func setupStep() -> SetupStep {
@@ -86,7 +88,7 @@ class SetupViewModel: SetupViewModelType {
     }
     
     var verificationWords: [String] {
-        let questionWords = user.mnemonic.components(separatedBy: " ")
+        let questionWords = mnemonic.components(separatedBy: " ")
         var words = [String]()
         for i in randomIndices {
             words.append(questionWords[i])
@@ -163,7 +165,7 @@ fileprivate extension SetupViewModel {
     }
     
     func generateRandomIndices() -> [Int] {
-        let questionWords = user.mnemonic.components(separatedBy: " ")
+        let questionWords = mnemonic.components(separatedBy: " ")
         var numbers = [Int]()
         for _ in 1...4 {
             var n: Int

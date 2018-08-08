@@ -48,6 +48,11 @@ public enum SalutationsResponseEnum {
     case failure(error: ServiceError)
 }
 
+public enum DecryptedUserDataResponseEnum {
+    case success(response: DecryptedUserData)
+    case failure(error: ServiceError)
+}
+
 public typealias GenerateAccountResponseClosure = (_ response:GenerateAccountResponseEnum) -> (Void)
 public typealias TFAResponseClosure = (_ response:TFAResponseEnum) -> (Void)
 public typealias EmptyResponseClosure = (_ response:EmptyResponseEnum) -> (Void)
@@ -56,6 +61,7 @@ public typealias Login2ResponseClosure = (_ response:Login2ResponseEnum) -> (Voi
 public typealias TfaSecretResponseClosure = (_ response:TfaSecretResponseEnum) -> (Void)
 public typealias CountryListResponseClosure = (_ response:CountryListResponseEnum) -> (Void)
 public typealias SalutationsResponseClosure = (_ response:SalutationsResponseEnum) -> (Void)
+public typealias DecryptedUserDataResponseClosure = (_ response:DecryptedUserDataResponseEnum) -> (Void)
 
 public class AuthService: BaseService {
     

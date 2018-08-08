@@ -42,11 +42,13 @@ public indirect enum Transition {
     case showWalletCardInfo
     case logout(Transition?)
     case showPasswordHint(String)
-    case showSetup(User, LoginStep2Response)
+    case showSetup(User, String, LoginStep2Response)
     case nextSetupStep
     case showMnemonicVerification
     case showChangePassword
     case showChange2faSecret
     case showNew2faSecret
+    case showBackupMnemonic
+    case showMnemonic(String)
 }
 

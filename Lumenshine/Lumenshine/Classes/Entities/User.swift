@@ -13,5 +13,4 @@ public struct User {
     let email: String
     let publicKeyIndex0: String
     let publicKeyIndex188: String
-    let mnemonic: String
 }

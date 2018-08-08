@@ -32,6 +32,7 @@ class LoginViewModel : LoginViewModelType {
     fileprivate let service: AuthService
     fileprivate var email: String?
     fileprivate var user: User?
+    fileprivate var mnemonic: String?
     var entries: [MenuEntry]
     
     weak var navigationCoordinator: CoordinatorType?
@@ -138,7 +139,8 @@ class LoginViewModel : LoginViewModelType {
         service.generateAccount(email: email, password: password, userData: nil) { [weak self] result in
             switch result {
             case .success( _, let userSecurity):
-                self?.user = User(id: "1", email: email, publicKeyIndex0: userSecurity.publicKeyIndex0, publicKeyIndex188: userSecurity.publicKeyIndex188, mnemonic: userSecurity.mnemonic24Word)
+                self?.user = User(id: "1", email: email, publicKeyIndex0: userSecurity.publicKeyIndex0, publicKeyIndex188: userSecurity.publicKeyIndex188)
+                self?.mnemonic = userSecurity.mnemonic24Word
                 self?.service.loginStep2(publicKeyIndex188: userSecurity.publicKeyIndex188) { [weak self] result in
                     switch result {
                     case .success(let login2Response):
@@ -182,10 +184,14 @@ fileprivate extension LoginViewModel {
         DispatchQueue.global(qos: .userInitiated).async {
             do {
                 if let userSecurity = UserSecurity(from: login1Response),
-                    let (publicKeyIndex188, mnemonic, _, _) = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: password) {
+                    let decryptedUserData = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: password) {
                     
-                    self.user = User(id: "1", email: self.email!, publicKeyIndex0: login1Response.publicKeyIndex0, publicKeyIndex188: publicKeyIndex188, mnemonic: mnemonic)
-                    self.service.loginStep2(publicKeyIndex188: publicKeyIndex188) { [weak self] result in
+                    self.user = User(id: "1",
+                                     email: self.email!,
+                                     publicKeyIndex0: login1Response.publicKeyIndex0,
+                                     publicKeyIndex188: decryptedUserData.publicKeyIndex188)
+                    self.mnemonic = decryptedUserData.mnemonic
+                    self.service.loginStep2(publicKeyIndex188: decryptedUserData.publicKeyIndex188) { [weak self] result in
                         switch result {
                         case .success(let login2Response):
                             self?.showSetup(login2Response: login2Response)
@@ -212,7 +218,8 @@ fileprivate extension LoginViewModel {
             if login2Response.tfaConfirmed && login2Response.mailConfirmed && login2Response.mnemonicConfirmed {
                 self.navigationCoordinator?.performTransition(transition: .showDashboard(user))
             } else {
-                self.navigationCoordinator?.performTransition(transition: .showSetup(user, login2Response))
+                guard let mnemonic = self.mnemonic else { return }
+                self.navigationCoordinator?.performTransition(transition: .showSetup(user, mnemonic, login2Response))
             }
         }
     }

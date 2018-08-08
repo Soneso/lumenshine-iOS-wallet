@@ -12,6 +12,7 @@ enum SettingsEntry {
     case changePassword
     case change2FA
     case biometricAuth
+    case backupMnemonic
     case avatar
     
     var name: String {
@@ -24,6 +25,8 @@ enum SettingsEntry {
             return R.string.localizable.fingerprint_recognition()
         case .avatar:
             return R.string.localizable.avatar()
+        case .backupMnemonic:
+            return R.string.localizable.backup_mnemonic()
         }
     }
 }

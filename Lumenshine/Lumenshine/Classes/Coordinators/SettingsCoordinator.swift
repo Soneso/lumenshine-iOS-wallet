@@ -43,6 +43,10 @@ class SettingsCoordinator: CoordinatorType {
             showChange2faSecret()
         case .showNew2faSecret:
             showNew2faSecret()
+        case .showBackupMnemonic:
+            showBackupMnemonic()
+        case .showMnemonic(let mnemonic):
+            showMnemonic(mnemonic)
         default: break
         }
     }
@@ -94,5 +98,16 @@ fileprivate extension SettingsCoordinator {
     
     func showSettings() {
         baseController.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func showBackupMnemonic() {
+        let backupVC = RevealMnemonicViewController(viewModel: viewModel)
+        baseController.navigationController?.pushViewController(backupVC, animated: true)
+    }
+    
+    func showMnemonic(_ mnemonic: String) {
+        let backupVC = BackupMnemonicViewController(mnemonic: mnemonic)
+        baseController.navigationController?.popViewController(animated: false)
+        baseController.navigationController?.pushViewController(backupVC, animated: true)
     }
 }

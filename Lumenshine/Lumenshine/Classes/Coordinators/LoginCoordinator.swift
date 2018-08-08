@@ -38,8 +38,8 @@ class LoginCoordinator: CoordinatorType {
                 self.showHeaderMenu(items: items)
             case .showPasswordHint(let hint):
                 self.showPasswordHint(hint)
-            case .showSetup(let user, let loginResponse):
-                self.showSetup(user: user, loginResponse: loginResponse)
+            case .showSetup(let user, let mnemonic, let loginResponse):
+                self.showSetup(user: user, mnemonic: mnemonic, loginResponse: loginResponse)
             default:
                 break
             }
@@ -76,8 +76,8 @@ fileprivate extension LoginCoordinator {
         baseController.present(AppNavigationController(rootViewController: textVC), animated: true)
     }
     
-    func showSetup(user: User, loginResponse: LoginStep2Response) {
-        let coordinator = SetupMenuCoordinator(mainCoordinator: mainCoordinator, service: service, user: user, loginResponse: loginResponse)
+    func showSetup(user: User, mnemonic: String, loginResponse: LoginStep2Response) {
+        let coordinator = SetupMenuCoordinator(mainCoordinator: mainCoordinator, service: service, user: user, mnemonic: mnemonic, loginResponse: loginResponse)
         present(coordinator: coordinator)
     }
     

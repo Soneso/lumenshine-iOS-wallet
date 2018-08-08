@@ -32,6 +32,9 @@
 "save" = "Save";
 
 /*  */
+"reveal" = "Reveal";
+
+/*  */
 "close" = "Close";
 
 /*  */
@@ -480,4 +483,9 @@
 
 /*  */
 "avatar" = "Avatar";
+
+/*  */
+"backup_mnemonic" = "Backup Secret/Mnemonic";
+/*  */
+"reveal_backup_mnemonic" = "To reveal your backup secret/mnemonic please provide your password.";
 

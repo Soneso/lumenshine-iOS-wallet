@@ -33,6 +33,9 @@
 		4319B1862063F1B0007CE18D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4319B1852063F1B0007CE18D /* User.swift */; };
 		4319B1892063FA46007CE18D /* BiometricIDAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4319B1882063FA46007CE18D /* BiometricIDAuth.swift */; };
 		4319B1902063FA8F007CE18D /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4319B18F2063FA8F007CE18D /* KeychainPasswordItem.swift */; };
+		4319B4CC2119FB59002E45F0 /* RevealMnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4319B4CB2119FB59002E45F0 /* RevealMnemonicViewController.swift */; };
+		4319B4CE211A0347002E45F0 /* BackupMnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4319B4CD211A0347002E45F0 /* BackupMnemonicViewController.swift */; };
+		4319B4D0211B0987002E45F0 /* DecryptedUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4319B4CF211B0987002E45F0 /* DecryptedUserData.swift */; };
 		4322BA26205BAA60007FEB5E /* HeaderMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA25205BAA60007FEB5E /* HeaderMenuViewController.swift */; };
 		4322BA2F205BD69F007FEB5E /* ResponseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA2D205BD69F007FEB5E /* ResponseMock.swift */; };
 		4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA2E205BD69F007FEB5E /* ServerMock.swift */; };
@@ -233,6 +236,9 @@
 		4319B1852063F1B0007CE18D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4319B1882063FA46007CE18D /* BiometricIDAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricIDAuth.swift; sourceTree = "<group>"; };
 		4319B18F2063FA8F007CE18D /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
+		4319B4CB2119FB59002E45F0 /* RevealMnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealMnemonicViewController.swift; sourceTree = "<group>"; };
+		4319B4CD211A0347002E45F0 /* BackupMnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupMnemonicViewController.swift; sourceTree = "<group>"; };
+		4319B4CF211B0987002E45F0 /* DecryptedUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecryptedUserData.swift; sourceTree = "<group>"; };
 		4322BA25205BAA60007FEB5E /* HeaderMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMenuViewController.swift; sourceTree = "<group>"; };
 		4322BA2D205BD69F007FEB5E /* ResponseMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseMock.swift; sourceTree = "<group>"; };
 		4322BA2E205BD69F007FEB5E /* ServerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerMock.swift; sourceTree = "<group>"; };
@@ -571,6 +577,7 @@
 				434E049C20D4154700D3235A /* MenuEntry.swift */,
 				74C0913E20F65A7A000A809D /* Wallet.swift */,
 				439E3C8A2107786A0004BB91 /* SettingsEntry.swift */,
+				4319B4CF211B0987002E45F0 /* DecryptedUserData.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -632,6 +639,8 @@
 				439EA26D210AF7240054EA52 /* ChangePasswordViewController.swift */,
 				4365F699211057B900D4B12C /* Change2faSecretViewController.swift */,
 				4365F69B2110BB8700D4B12C /* Confirm2faCodeViewController.swift */,
+				4319B4CB2119FB59002E45F0 /* RevealMnemonicViewController.swift */,
+				4319B4CD211A0347002E45F0 /* BackupMnemonicViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1220,6 +1229,7 @@
 				43DAC65820E4FF0A00E491D8 /* ToolbarHeader.swift in Sources */,
 				4376F49E204D9DF800B179C3 /* HomeCoordinator.swift in Sources */,
 				4394911E20BEBDFA008D4FA2 /* SettingsCoordinator.swift in Sources */,
+				4319B4CE211A0347002E45F0 /* BackupMnemonicViewController.swift in Sources */,
 				74C8995A2108ACD1009B13EA /* AccountBalanceResponse+Extra.swift in Sources */,
 				43B81D5C21174B1F0039BC3D /* MainCoordinator.swift in Sources */,
 				74C0913F20F65A7A000A809D /* Wallet.swift in Sources */,
@@ -1286,6 +1296,7 @@
 				43DAC65420E4BA3900E491D8 /* BiometricAuthenticationProtocol.swift in Sources */,
 				4390D57C205FA4EF00383BB2 /* HomeService.swift in Sources */,
 				4341251320EBC2E900267260 /* ReLoginFingerView.swift in Sources */,
+				4319B4CC2119FB59002E45F0 /* RevealMnemonicViewController.swift in Sources */,
 				4391A52E20D141300015A6DA /* EnumPicker.swift in Sources */,
 				43CD7B1020F7B0CF0014BF69 /* SetupMenuCoordinator.swift in Sources */,
 				43FBEE452062853A004E2BB1 /* ScanViewController.swift in Sources */,
@@ -1328,6 +1339,7 @@
 				4386717420DAA77E00459EA8 /* WalletCardViewModel.swift in Sources */,
 				439EA26E210AF7240054EA52 /* ChangePasswordViewController.swift in Sources */,
 				434E049D20D4154700D3235A /* MenuEntry.swift in Sources */,
+				4319B4D0211B0987002E45F0 /* DecryptedUserData.swift in Sources */,
 				435A1CA920C846EC00CE3365 /* SettingsTableViewCell.swift in Sources */,
 				43F3E36120F3B88E0032D017 /* SignUpView.swift in Sources */,
 				43F3E35F20F3B8780032D017 /* LoginView.swift in Sources */,
