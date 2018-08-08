@@ -25,6 +25,18 @@ class AccountDetailsViewController: UIViewController {
     @IBOutlet weak var walletNameLabel: UILabel!
     @IBOutlet weak var walletNameTextField: UITextField!
     
+    @IBOutlet weak var publicKeyLabel: UILabel!
+    
+    
+    @IBOutlet weak var stellarAddressStackView: UIStackView!
+    @IBOutlet var stellarAddressNotSetupView: UIView!
+    @IBOutlet var stellarAddressEditView: UIView!
+    @IBOutlet var stellarAddressRemoveView: UIView!
+    
+    @IBOutlet weak var stellarAddressEditErrorLabel: UILabel!
+    @IBOutlet weak var stellarAddressEditTextField: UITextField!
+    @IBOutlet weak var removeViewAddressLabel: UILabel!
+    
     weak var flowDelegate: AccountDetailsViewControllerFlow?
     
     private let walletService = Services.shared.walletService
@@ -37,6 +49,8 @@ class AccountDetailsViewController: UIViewController {
 
         setupNavigationItem()
         setupWalletNameView()
+        publicKeyLabel.text = wallet.publicKey
+        setupStellarAddress()
     }
     
     // MARK: Actions
@@ -85,6 +99,55 @@ class AccountDetailsViewController: UIViewController {
         }
     }
     
+    @IBAction func didTapCopyPublicKey(_ sender: Any) {
+        if let key = publicKeyLabel.text {
+            UIPasteboard.general.string = key
+        }
+    }
+    
+    @IBAction func didTapSetAddress(_ sender: Any) {
+        stellarAddressNotSetupView.removeFromSuperview()
+        stellarAddressStackView.addArrangedSubview(stellarAddressEditView)
+    }
+    
+    @IBAction func didTapCancelEditStellarAddress(_ sender: Any) {
+        setStellarAddressView()
+    }
+    
+    @IBAction func didTapSubmitEditStellarAddress(_ sender: Any) {
+        var request = ChangeWalletRequest(id: wallet.id)
+        let stellarAddress = (stellarAddressEditTextField.text ?? "") + "*lumenshine.com"
+        request.federationAddress = stellarAddress
+        
+        view.isUserInteractionEnabled = false
+        walletService.changeWalletData(request: request) { (result) -> (Void) in
+            self.view.isUserInteractionEnabled = true
+            switch result {
+            case .success:
+                self.removeViewAddressLabel.text = stellarAddress
+                self.stellarAddressEditView.removeFromSuperview()
+                self.stellarAddressStackView.addArrangedSubview(self.stellarAddressRemoveView)
+            case .failure(let error):
+                self.stellarAddressEditErrorLabel.text = error.localizedDescription
+            }
+        }
+    }
+    
+    @IBAction func didTapRemoveStellarAddress(_ sender: Any) {
+        view.isUserInteractionEnabled = false
+        walletService.removeFederationAddress(walletId: wallet.id) { (result) -> (Void) in
+            self.view.isUserInteractionEnabled = true
+            switch result {
+            case .success:
+                self.stellarAddressRemoveView.removeFromSuperview()
+                self.stellarAddressStackView.addArrangedSubview(self.stellarAddressNotSetupView)
+            case .failure(let error):
+                self.stellarAddressEditErrorLabel.text = error.localizedDescription
+            }
+        }
+    }
+    
+    
     // MARK: Private methods
     
     private func setupNavigationItem() {
@@ -106,6 +169,26 @@ class AccountDetailsViewController: UIViewController {
         walletNameEditView.removeFromSuperview()
         walletNameLabel.text = wallet.name
         walletNameTextField.placeholder = wallet.name
+    }
+    
+    private func setupStellarAddress() {
+        if wallet.federationAddress.isEmpty {
+            stellarAddressEditView.removeFromSuperview()
+            stellarAddressRemoveView.removeFromSuperview()
+        } else {
+            removeViewAddressLabel.text = wallet.federationAddress
+            stellarAddressNotSetupView.removeFromSuperview()
+            stellarAddressEditView.removeFromSuperview()
+        }
+    }
+    
+    private func setStellarAddressView() {
+        stellarAddressEditView.removeFromSuperview()
+        if wallet.federationAddress.isEmpty {
+            stellarAddressStackView.addArrangedSubview(stellarAddressNotSetupView)
+        } else {
+            stellarAddressStackView.addArrangedSubview(stellarAddressRemoveView)
+        }
     }
     
 }

@@ -144,6 +144,7 @@
 		744DE2DD20BD7FAE003BC216 /* Lost2faViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744DE2DB20BD7FAE003BC216 /* Lost2faViewController.swift */; };
 		744DE2DE20BD7FAE003BC216 /* Lost2faViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 744DE2DC20BD7FAE003BC216 /* Lost2faViewController.xib */; };
 		744DE2E020BD8006003BC216 /* Lost2faViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744DE2DF20BD8006003BC216 /* Lost2faViewModel.swift */; };
+		7459815F211AC73200488999 /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7459815E211AC73200488999 /* UIAlertController+Extension.swift */; };
 		746DC58120D141FE00AD0856 /* HomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746DC58020D141FE00AD0856 /* HomeHeaderView.swift */; };
 		746DC58320D1421400AD0856 /* HomeUnfoundedHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 746DC58220D1421400AD0856 /* HomeUnfoundedHeaderView.xib */; };
 		746DC58520D142EC00AD0856 /* HomeUnfoundedHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746DC58420D142EC00AD0856 /* HomeUnfoundedHeaderView.swift */; };
@@ -358,6 +359,7 @@
 		744DE2DB20BD7FAE003BC216 /* Lost2faViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lost2faViewController.swift; sourceTree = "<group>"; };
 		744DE2DC20BD7FAE003BC216 /* Lost2faViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Lost2faViewController.xib; sourceTree = "<group>"; };
 		744DE2DF20BD8006003BC216 /* Lost2faViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lost2faViewModel.swift; sourceTree = "<group>"; };
+		7459815E211AC73200488999 /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
 		746DC58020D141FE00AD0856 /* HomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderView.swift; sourceTree = "<group>"; };
 		746DC58220D1421400AD0856 /* HomeUnfoundedHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeUnfoundedHeaderView.xib; sourceTree = "<group>"; };
 		746DC58420D142EC00AD0856 /* HomeUnfoundedHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUnfoundedHeaderView.swift; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 		431437EB2047FEEC00189C83 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				7459815D2119D53400488999 /* Persistance */,
 				74C08FF120EE1FD3000A809D /* Managers */,
 				4390D572205EC5CF00383BB2 /* Service */,
 				4314B9EC204805F6006DBE63 /* AppDelegate */,
@@ -792,6 +795,7 @@
 				74C899592108ACD1009B13EA /* AccountBalanceResponse+Extra.swift */,
 				74C89995210A3A06009B13EA /* Sequence+Utils.swift */,
 				74DD4CEA210CE83E00F4D69A /* UIView+Snapshot.swift */,
+				7459815E211AC73200488999 /* UIAlertController+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -872,6 +876,13 @@
 				744DE2DC20BD7FAE003BC216 /* Lost2faViewController.xib */,
 			);
 			path = RecoverAccount;
+			sourceTree = "<group>";
+		};
+		7459815D2119D53400488999 /* Persistance */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Persistance;
 			sourceTree = "<group>";
 		};
 		74C08FF120EE1FD3000A809D /* Managers */ = {
@@ -1322,6 +1333,7 @@
 				439E3C8B2107786A0004BB91 /* SettingsEntry.swift in Sources */,
 				4322BA35205BDD58007FEB5E /* Card.swift in Sources */,
 				4391A52B20D139D60015A6DA /* CountryResponse.swift in Sources */,
+				7459815F211AC73200488999 /* UIAlertController+Extension.swift in Sources */,
 				4319B1802063EEA9007CE18D /* LoginViewModel.swift in Sources */,
 				43920D9A2057EECA0040003C /* CardView.swift in Sources */,
 				4341251120EBC2C700267260 /* ReLoginHomeView.swift in Sources */,

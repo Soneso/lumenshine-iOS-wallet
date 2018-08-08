@@ -11,12 +11,12 @@ import UIKit
 struct ChangeWalletRequest: Codable {
     var id: Int
     var walletName: String?
-    var federationNickname: String?
+    var federationAddress: String?
     
     private enum CodingKeys: String, CodingKey {
         case id
         case walletName = "wallet_name"
-        case federationNickname = "federation_nick_name"
+        case federationAddress = "federation_address"
         
     }
     

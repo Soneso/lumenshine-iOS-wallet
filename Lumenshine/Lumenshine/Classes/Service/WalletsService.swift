@@ -61,4 +61,20 @@ public class WalletsService: BaseService {
         }
     }
     
+    func removeFederationAddress(walletId: Int, response: @escaping ChangeWalletDataClosure) {
+        let params = ["id": walletId]
+        let bodyData = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+        
+        POSTRequestWithPath(path: "/portal/user/dashboard/remove_wallet_federation_address", body: bodyData) { (result) -> (Void) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    response(.success)
+                case .failure(let error):
+                    response(.failure(error: error))
+                }
+            }
+        }
+    }
+    
 }
