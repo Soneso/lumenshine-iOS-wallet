@@ -41,6 +41,7 @@
 		4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA2E205BD69F007FEB5E /* ServerMock.swift */; };
 		4322BA33205BDB6E007FEB5E /* CardsResponsesMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA32205BDB6E007FEB5E /* CardsResponsesMock.swift */; };
 		4322BA35205BDD58007FEB5E /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA34205BDD58007FEB5E /* Card.swift */; };
+		432E298B211CA098005C7F9E /* EmailConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432E298A211CA098005C7F9E /* EmailConfirmationViewController.swift */; };
 		432F11792101C64600FC429B /* MnemonicSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432F11782101C64600FC429B /* MnemonicSetupViewController.swift */; };
 		432F117B2101EEF500FC429B /* VerificationSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432F117A2101EEF500FC429B /* VerificationSetupViewController.swift */; };
 		4337C4E72081BAA400F4585A /* RegistrationFormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4337C4E62081BAA400F4585A /* RegistrationFormTableViewController.swift */; };
@@ -92,6 +93,7 @@
 		439C476E20D6770900C5DC97 /* AvatarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439C476D20D6770900C5DC97 /* AvatarTableViewCell.swift */; };
 		439E3C8B2107786A0004BB91 /* SettingsEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439E3C8A2107786A0004BB91 /* SettingsEntry.swift */; };
 		439EA26E210AF7240054EA52 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439EA26D210AF7240054EA52 /* ChangePasswordViewController.swift */; };
+		43A51719211D8FBD0034AA46 /* LostPasswordSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A51718211D8FBD0034AA46 /* LostPasswordSuccessViewController.swift */; };
 		43A8633820A9F0E6007C46E2 /* LoginStep2Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A8633720A9F0E6007C46E2 /* LoginStep2Response.swift */; };
 		43B144CC20FCA5D40099E3AE /* TitleHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B144CB20FCA5D40099E3AE /* TitleHeader.swift */; };
 		43B144CE20FCAF630099E3AE /* TFASetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B144CD20FCAF630099E3AE /* TFASetupViewController.swift */; };
@@ -245,6 +247,7 @@
 		4322BA2E205BD69F007FEB5E /* ServerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerMock.swift; sourceTree = "<group>"; };
 		4322BA32205BDB6E007FEB5E /* CardsResponsesMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsResponsesMock.swift; sourceTree = "<group>"; };
 		4322BA34205BDD58007FEB5E /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		432E298A211CA098005C7F9E /* EmailConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailConfirmationViewController.swift; sourceTree = "<group>"; };
 		432F11782101C64600FC429B /* MnemonicSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicSetupViewController.swift; sourceTree = "<group>"; };
 		432F117A2101EEF500FC429B /* VerificationSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationSetupViewController.swift; sourceTree = "<group>"; };
 		4337C4E62081BAA400F4585A /* RegistrationFormTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationFormTableViewController.swift; sourceTree = "<group>"; };
@@ -301,6 +304,7 @@
 		439C476D20D6770900C5DC97 /* AvatarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarTableViewCell.swift; sourceTree = "<group>"; };
 		439E3C8A2107786A0004BB91 /* SettingsEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsEntry.swift; sourceTree = "<group>"; };
 		439EA26D210AF7240054EA52 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		43A51718211D8FBD0034AA46 /* LostPasswordSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostPasswordSuccessViewController.swift; sourceTree = "<group>"; };
 		43A8633720A9F0E6007C46E2 /* LoginStep2Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStep2Response.swift; sourceTree = "<group>"; };
 		43B144CB20FCA5D40099E3AE /* TitleHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleHeader.swift; sourceTree = "<group>"; };
 		43B144CD20FCAF630099E3AE /* TFASetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFASetupViewController.swift; sourceTree = "<group>"; };
@@ -874,6 +878,8 @@
 				7435EA7120BAD452008CC667 /* ForgotPasswordViewController.xib */,
 				744DE2DB20BD7FAE003BC216 /* Lost2faViewController.swift */,
 				744DE2DC20BD7FAE003BC216 /* Lost2faViewController.xib */,
+				432E298A211CA098005C7F9E /* EmailConfirmationViewController.swift */,
+				43A51718211D8FBD0034AA46 /* LostPasswordSuccessViewController.swift */,
 			);
 			path = RecoverAccount;
 			sourceTree = "<group>";
@@ -1267,6 +1273,7 @@
 				4365F69C2110BB8700D4B12C /* Confirm2faCodeViewController.swift in Sources */,
 				434FB3F920F78AFD004A4CDB /* TextViewController.swift in Sources */,
 				4394911C20BEB845008D4FA2 /* SettingsViewModel.swift in Sources */,
+				432E298B211CA098005C7F9E /* EmailConfirmationViewController.swift in Sources */,
 				4337C4E72081BAA400F4585A /* RegistrationFormTableViewController.swift in Sources */,
 				4390D57E205FA5FC00383BB2 /* BaseService.swift in Sources */,
 				744DE2D720BD7A8A003BC216 /* UIDevice+Additions.swift in Sources */,
@@ -1352,6 +1359,7 @@
 				439EA26E210AF7240054EA52 /* ChangePasswordViewController.swift in Sources */,
 				434E049D20D4154700D3235A /* MenuEntry.swift in Sources */,
 				4319B4D0211B0987002E45F0 /* DecryptedUserData.swift in Sources */,
+				43A51719211D8FBD0034AA46 /* LostPasswordSuccessViewController.swift in Sources */,
 				435A1CA920C846EC00CE3365 /* SettingsTableViewCell.swift in Sources */,
 				43F3E36120F3B88E0032D017 /* SignUpView.swift in Sources */,
 				43F3E35F20F3B8780032D017 /* LoginView.swift in Sources */,

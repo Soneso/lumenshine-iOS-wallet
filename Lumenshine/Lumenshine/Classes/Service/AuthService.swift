@@ -366,7 +366,7 @@ public class AuthService: BaseService {
         }
     }
     
-    func resetPassword(email: String, response: @escaping EmptyResponseClosure) {
+    func lostPassword(email: String, response: @escaping EmptyResponseClosure) {
         do {
             var params = Dictionary<String,String>()
             params["email"] = email

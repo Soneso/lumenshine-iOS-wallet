@@ -11,42 +11,56 @@ import Material
 
 class ForgotPasswordViewController: UIViewController {
     @IBOutlet weak var emailTextField: TextField!
-    @IBOutlet weak var resetButton: RaisedButton!
+    @IBOutlet weak var nextButton: RaisedButton!
+    @IBOutlet weak var titleLabel: UILabel!
     
     var viewModel: ForgotPasswordViewModelType!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        prepareTitleLabel()
         prepareEmailTextField()
         prepareResetButton()
+    }
+    
+    func prepareTitleLabel() {
+        titleLabel.text = R.string.localizable.lost_password()
     }
 
     func prepareEmailTextField() {
         emailTextField.placeholder = R.string.localizable.email()
         emailTextField.dividerActiveColor = Stylesheet.color(.cyan)
         emailTextField.placeholderActiveColor = Stylesheet.color(.cyan)
+        emailTextField.detailColor = Stylesheet.color(.red)
     }
     
     func prepareResetButton() {
-        resetButton.title = R.string.localizable.reset_password()
-        resetButton.backgroundColor = Stylesheet.color(.cyan)
-        resetButton.titleColor = Stylesheet.color(.white)
+        nextButton.title = R.string.localizable.next()
+        nextButton.backgroundColor = Stylesheet.color(.cyan)
+        nextButton.titleColor = Stylesheet.color(.white)
     }
     
     @IBAction func didTapResetButton(_ sender: Any) {
+        emailTextField.detail = nil
         showActivity()
-        viewModel.resetPassword(email: emailTextField.text) { (result) -> (Void) in
-            self.hideActivity(completion: {
+        viewModel.lostPassword(email: emailTextField.text) { [weak self] result in
+            self?.hideActivity(completion: {
                 switch result {
                 case .success:
-                    let alert = AlertFactory.createAlert(title: "Password reset", message:"Password successfully reset. Please check your email.")
-                    self.present(alert, animated: true)
+                    self?.viewModel.showSuccess()
                 case .failure(let error):
-                    let alert = AlertFactory.createAlert(error: error)
-                    self.present(alert, animated: true)
+                    self?.present(error: error)
                 }
             })
+        }
+    }
+    
+    func present(error: ServiceError) {
+        if let parameter = error.parameterName, parameter == "email" {
+            viewModel.showEmailConfirmation()
+        } else {
+            emailTextField.detail = error.errorDescription
         }
     }
 }

@@ -436,7 +436,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 161 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 168 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -498,6 +498,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let email_already_confirmed = Rswift.StringResource(key: "email_already_confirmed", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: An email has been sent to your email account. Please check your inbox and confirm your email address first.
+      /// 
+      /// Locales: en
+      static let email_confirmation_hint2 = Rswift.StringResource(key: "email_confirmation_hint2", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Anonymous
       /// 
       /// Locales: en
@@ -557,7 +561,7 @@ struct R: Rswift.Validatable {
       /// en translation: Confirmation mail resent
       /// 
       /// Locales: en
-      static let email_resent = Rswift.StringResource(key: "email_resent", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      static let confirmation_mail_resent = Rswift.StringResource(key: "confirmation_mail_resent", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Contacts
       /// 
       /// Locales: en
@@ -598,6 +602,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let disabled = Rswift.StringResource(key: "disabled", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Done
+      /// 
+      /// Locales: en
+      static let done = Rswift.StringResource(key: "done", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Email
       /// 
       /// Locales: en
@@ -606,6 +614,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let lbl_email_confirmation = Rswift.StringResource(key: "lbl_email_confirmation", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Email resent
+      /// 
+      /// Locales: en
+      static let email_resent = Rswift.StringResource(key: "email_resent", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Empty password.
       /// 
       /// Locales: en
@@ -630,6 +642,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let finish_setup = Rswift.StringResource(key: "finish_setup", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: For resetting your password, an email has been sent to your email account. Please check your inbox and follow the instructions in the received email to reset your password.
+      /// 
+      /// Locales: en
+      static let lost_password_email_hint = Rswift.StringResource(key: "lost_password_email_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: For security reasons, your wallet will be protected by 2 Factor Authentication (2FA).
       /// 
       /// Locales: en
@@ -802,6 +818,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let password = Rswift.StringResource(key: "password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Password lost email sent
+      /// 
+      /// Locales: en
+      static let lost_password_email = Rswift.StringResource(key: "lost_password_email", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Password requirements
       /// 
       /// Locales: en
@@ -854,6 +874,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let email_resend_confirmation = Rswift.StringResource(key: "email_resend_confirmation", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Resend email
+      /// 
+      /// Locales: en
+      static let resend_email = Rswift.StringResource(key: "resend_email", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Reset 2fa
       /// 
       /// Locales: en
@@ -1022,6 +1046,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let mnemonic_words_title = Rswift.StringResource(key: "mnemonic_words_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Your email address is not confirmed.
+      /// 
+      /// Locales: en
+      static let lbl_email_confirmation2 = Rswift.StringResource(key: "lbl_email_confirmation2", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Your new 2FA secret: %@
       /// 
       /// Locales: en
@@ -1188,6 +1216,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("email_already_confirmed", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: An email has been sent to your email account. Please check your inbox and confirm your email address first.
+      /// 
+      /// Locales: en
+      static func email_confirmation_hint2(_: Void = ()) -> String {
+        return NSLocalizedString("email_confirmation_hint2", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Anonymous
       /// 
       /// Locales: en
@@ -1289,8 +1324,8 @@ struct R: Rswift.Validatable {
       /// en translation: Confirmation mail resent
       /// 
       /// Locales: en
-      static func email_resent(_: Void = ()) -> String {
-        return NSLocalizedString("email_resent", bundle: R.hostingBundle, comment: "")
+      static func confirmation_mail_resent(_: Void = ()) -> String {
+        return NSLocalizedString("confirmation_mail_resent", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Contacts
@@ -1363,6 +1398,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("disabled", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Done
+      /// 
+      /// Locales: en
+      static func done(_: Void = ()) -> String {
+        return NSLocalizedString("done", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Email
       /// 
       /// Locales: en
@@ -1375,6 +1417,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func lbl_email_confirmation(_: Void = ()) -> String {
         return NSLocalizedString("lbl_email_confirmation", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Email resent
+      /// 
+      /// Locales: en
+      static func email_resent(_: Void = ()) -> String {
+        return NSLocalizedString("email_resent", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Empty password.
@@ -1417,6 +1466,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func finish_setup(_: Void = ()) -> String {
         return NSLocalizedString("finish_setup", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: For resetting your password, an email has been sent to your email account. Please check your inbox and follow the instructions in the received email to reset your password.
+      /// 
+      /// Locales: en
+      static func lost_password_email_hint(_: Void = ()) -> String {
+        return NSLocalizedString("lost_password_email_hint", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: For security reasons, your wallet will be protected by 2 Factor Authentication (2FA).
@@ -1720,6 +1776,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("password", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Password lost email sent
+      /// 
+      /// Locales: en
+      static func lost_password_email(_: Void = ()) -> String {
+        return NSLocalizedString("lost_password_email", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Password requirements
       /// 
       /// Locales: en
@@ -1809,6 +1872,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func email_resend_confirmation(_: Void = ()) -> String {
         return NSLocalizedString("email_resend_confirmation", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Resend email
+      /// 
+      /// Locales: en
+      static func resend_email(_: Void = ()) -> String {
+        return NSLocalizedString("resend_email", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Reset 2fa
@@ -2103,6 +2173,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func mnemonic_words_title(_: Void = ()) -> String {
         return NSLocalizedString("mnemonic_words_title", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Your email address is not confirmed.
+      /// 
+      /// Locales: en
+      static func lbl_email_confirmation2(_: Void = ()) -> String {
+        return NSLocalizedString("lbl_email_confirmation2", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Your new 2FA secret: %@

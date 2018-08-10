@@ -20,6 +20,9 @@
 "ok" = "OK";
 
 /*  */
+"done" = "Done";
+
+/*  */
 "info" = "Info";
 
 /*  */
@@ -260,13 +263,31 @@
 "email_confirmation_hint" = "In order to be able continue the setup process, you need to confirm your email address first. A mail with a confirmation link has been sent to your inbox. Please follow the instructions from the received mail to confirm your email-address.";
 
 /*  */
+"email_confirmation_hint2" = "An email has been sent to your email account. Please check your inbox and confirm your email address first.";
+
+/*  */
+"lbl_email_confirmation2" = "Your email address is not confirmed.";
+
+/*  */
 "email_already_confirmed" = "Already confirmed";
 
 /*  */
 "email_resend_confirmation" = "Resend confirmation mail";
 
 /*  */
-"email_resent" = "Confirmation mail resent";
+"resend_email" = "Resend email";
+
+/*  */
+"lost_password_email" = "Password lost email sent";
+
+/*  */
+"lost_password_email_hint" = "For resetting your password, an email has been sent to your email account. Please check your inbox and follow the instructions in the received email to reset your password.";
+
+/*  */
+"confirmation_mail_resent" = "Confirmation mail resent";
+
+/*  */
+"email_resent" = "Email resent";
 
 /*  */
 "mnemonic_title" = "Note & confirm backup secret (mnemonic)";

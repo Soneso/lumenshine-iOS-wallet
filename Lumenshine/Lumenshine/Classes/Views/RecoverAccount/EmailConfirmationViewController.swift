@@ -1,17 +1,19 @@
 //
-//  EmailSetupViewController.swift
+//  EmailConfirmationViewController.swift
 //  Lumenshine
 //
-//  Created by Istvan Elekes on 7/19/18.
+//  Created by Istvan Elekes on 8/9/18.
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
 import UIKit
 import Material
 
-class EmailSetupViewController: SetupViewController {
+class EmailConfirmationViewController: UIViewController {
     
     // MARK: - Properties
+    
+    fileprivate let viewModel: ForgotPasswordViewModelType
     
     // MARK: - UI properties
     fileprivate let titleLabel = UILabel()
@@ -20,10 +22,14 @@ class EmailSetupViewController: SetupViewController {
     
     fileprivate let submitButton = RaisedButton()
     fileprivate let resendButton = RaisedButton()
-
     
-    override init(viewModel: SetupViewModelType) {
-        super.init(viewModel: viewModel)
+    fileprivate let contentView = UIView()
+    fileprivate let scrollView = UIScrollView()
+    
+    
+    init(viewModel: ForgotPasswordViewModelType) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -38,17 +44,17 @@ class EmailSetupViewController: SetupViewController {
 }
 
 // MARK: - Actions
-extension EmailSetupViewController {
+extension EmailConfirmationViewController {
     @objc
     func resendAction(sender: UIButton) {
-        viewModel.resendMailConfirmation { result in
+        viewModel.resendMailConfirmation { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success:
-                    self.snackbarController?.animate(snackbar: .visible, delay: 0)
-                    self.snackbarController?.animate(snackbar: .hidden, delay: 3)
+                    self?.snackbarController?.animate(snackbar: .visible, delay: 0)
+                    self?.snackbarController?.animate(snackbar: .hidden, delay: 3)
                 case .failure(let error):
-                    self.errorLabel.text = error.errorDescription
+                    self?.present(error: error)
                 }
             }
         }
@@ -56,66 +62,60 @@ extension EmailSetupViewController {
     
     @objc
     func submitAction(sender: UIButton) {
-        viewModel.checkMailConfirmation { result in
+        viewModel.lostPassword(email: viewModel.email) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
-                case .success(let tfaResponse):
-                    self.viewModel.nextStep(tfaResponse: tfaResponse)
+                case .success:
+                    self?.viewModel.showSuccess()
                 case .failure(let error):
-                    self.errorLabel.text = error.errorDescription
+                    self?.present(error: error)
                 }
             }
         }
     }
 }
 
-fileprivate extension EmailSetupViewController {
+fileprivate extension EmailConfirmationViewController {
     
     func prepareView() {
+        prepareContentView()
         prepareTitleLabel()
         prepareHintLabel()
         prepareButtons()
         snackbarController?.snackbar.text = R.string.localizable.confirmation_mail_resent()
     }
     
+    func prepareContentView() {
+        view.addSubview(scrollView)
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        scrollView.addSubview(contentView)
+        contentView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.left.equalToSuperview()
+            make.width.equalTo(view)
+        }
+    }
+    
     func prepareTitleLabel() {
-        titleLabel.text = R.string.localizable.lbl_email_confirmation()
-        titleLabel.font = Stylesheet.font(.headline)
+        titleLabel.text = R.string.localizable.lost_password()
+        titleLabel.font = Stylesheet.font(.title1)
         titleLabel.textAlignment = .center
-        titleLabel.textColor = Stylesheet.color(.red)
+        titleLabel.textColor = Stylesheet.color(.blue)
         
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(30)
+            make.top.equalTo(20)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-        }
-        
-        let separator = UIView()
-        separator.backgroundColor = Stylesheet.color(.black)
-        contentView.addSubview(separator)
-        separator.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLabel.snp.bottom).offset(20)
-            make.left.right.equalToSuperview()
-            make.height.equalTo(1)
         }
     }
     
     func prepareHintLabel() {
-        hintLabel.text = R.string.localizable.email_confirmation_hint()
-        hintLabel.font = Stylesheet.font(.footnote)
-        hintLabel.textAlignment = .center
-        hintLabel.textColor = Stylesheet.color(.black)
-        hintLabel.numberOfLines = 0
-        
-        contentView.addSubview(hintLabel)
-        hintLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(50)
-            make.left.equalTo(20)
-            make.right.equalTo(-20)
-        }
-        
-
+        errorLabel.text = R.string.localizable.lbl_email_confirmation2()
         errorLabel.font = Stylesheet.font(.footnote)
         errorLabel.textAlignment = .center
         errorLabel.textColor = Stylesheet.color(.red)
@@ -123,11 +123,23 @@ fileprivate extension EmailSetupViewController {
         
         contentView.addSubview(errorLabel)
         errorLabel.snp.makeConstraints { make in
-            make.top.equalTo(hintLabel.snp.bottom).offset(30)
+            make.top.equalTo(titleLabel.snp.bottom).offset(30)
             make.left.equalTo(20)
             make.right.equalTo(-20)
         }
         
+        hintLabel.text = R.string.localizable.email_confirmation_hint2()
+        hintLabel.font = Stylesheet.font(.footnote)
+        hintLabel.textAlignment = .left
+        hintLabel.textColor = Stylesheet.color(.black)
+        hintLabel.numberOfLines = 0
+        
+        contentView.addSubview(hintLabel)
+        hintLabel.snp.makeConstraints { make in
+            make.top.equalTo(errorLabel.snp.bottom).offset(30)
+            make.left.equalTo(20)
+            make.right.equalTo(-20)
+        }
     }
     
     func prepareButtons() {
@@ -142,7 +154,7 @@ fileprivate extension EmailSetupViewController {
         
         contentView.addSubview(submitButton)
         submitButton.snp.makeConstraints { make in
-            make.top.equalTo(errorLabel.snp.bottom).offset(10)
+            make.top.equalTo(hintLabel.snp.bottom).offset(10)
             make.centerX.equalToSuperview()
         }
         
@@ -162,7 +174,6 @@ fileprivate extension EmailSetupViewController {
             make.bottom.lessThanOrEqualToSuperview()
         }
     }
-
     
     func present(error: ServiceError) {
         if let parameter = error.parameterName {
@@ -175,4 +186,5 @@ fileprivate extension EmailSetupViewController {
         }
     }
 }
+
 

@@ -7,17 +7,19 @@
 //
 
 import UIKit
+import Material
 
 class ForgotPasswordCoordinator: CoordinatorType {
     var baseController: UIViewController
     unowned var mainCoordinator: MainCoordinator
     
     fileprivate let service: AuthService
+    fileprivate let viewModel: ForgotPasswordViewModel
     
     init(mainCoordinator: MainCoordinator, service: AuthService) {
         self.service = service
         self.mainCoordinator = mainCoordinator
-        let viewModel = ForgotPasswordViewModel(service: service)
+        self.viewModel = ForgotPasswordViewModel(service: service)
         
         let viewController = ForgotPasswordViewController(nibName: "ForgotPasswordViewController", bundle: Bundle.main)
         viewController.viewModel = viewModel
@@ -28,7 +30,26 @@ class ForgotPasswordCoordinator: CoordinatorType {
     
     func performTransition(transition: Transition) {
         switch transition {
+        case .showLostPasswordSuccess:
+            showSuccess()
+        case .showEmailConfirmation:
+            showEmailConfirmation()
         default: break
         }
+    }
+}
+
+fileprivate extension ForgotPasswordCoordinator {
+    func showSuccess() {
+        let successVC = LostPasswordSuccessViewController(viewModel: viewModel)
+        let snackBarVC = SnackbarController(rootViewController: successVC)
+        baseController.navigationController?.popToRootViewController(animated: false)
+        baseController.navigationController?.pushViewController(snackBarVC, animated: true)
+    }
+    
+    func showEmailConfirmation() {
+        let emailVC = EmailConfirmationViewController(viewModel: viewModel)
+        let snackBarVC = SnackbarController(rootViewController: emailVC)
+        baseController.navigationController?.pushViewController(snackBarVC, animated: true)
     }
 }

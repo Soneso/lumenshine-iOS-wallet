@@ -32,6 +32,8 @@ public indirect enum Transition {
     case showFingerprint
     case showSignUp
     case showForgotPassword
+    case showLostPasswordSuccess
+    case showEmailConfirmation
     case showLost2fa
     case showHome
     case showSettings
