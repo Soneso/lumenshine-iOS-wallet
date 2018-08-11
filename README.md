@@ -26,4 +26,4 @@ $ pod install
 
 ## License
 
-stellar-ios-mac-sdk is licensed under an Apache-2.0 license. See the [LICENSE](https://github.com/soneso/stellar-ios-mac-sdk/blob/master/LICENSE) file for details.
+stellar-iOS-wallet is licensed under an Apache-2.0 license. See the [LICENSE](https://github.com/Soneso/lumenshine-iOS-wallet/blob/master/LICENSE) file for details.
