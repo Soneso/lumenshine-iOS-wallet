@@ -264,12 +264,10 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.nib` struct is generated, and contains static references to 13 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 12 nibs.
   struct nib {
     /// Nib `AccountDetailsViewController`.
     static let accountDetailsViewController = _R.nib._AccountDetailsViewController()
-    /// Nib `ForgotPasswordViewController`.
-    static let forgotPasswordViewController = _R.nib._ForgotPasswordViewController()
     /// Nib `FoundAccountViewController`.
     static let foundAccountViewController = _R.nib._FoundAccountViewController()
     /// Nib `HomeFoundedHeaderView`.
@@ -278,8 +276,8 @@ struct R: Rswift.Validatable {
     static let homeUnfoundedHeaderView = _R.nib._HomeUnfoundedHeaderView()
     /// Nib `IconView`.
     static let iconView = _R.nib._IconView()
-    /// Nib `Lost2faViewController`.
-    static let lost2faViewController = _R.nib._Lost2faViewController()
+    /// Nib `LostSecurityViewController`.
+    static let lostSecurityViewController = _R.nib._LostSecurityViewController()
     /// Nib `ReceivePaymentCardViewController`.
     static let receivePaymentCardViewController = _R.nib._ReceivePaymentCardViewController()
     /// Nib `ReceivePaymentPrintView`.
@@ -296,11 +294,6 @@ struct R: Rswift.Validatable {
     /// `UINib(name: "AccountDetailsViewController", in: bundle)`
     static func accountDetailsViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.accountDetailsViewController)
-    }
-    
-    /// `UINib(name: "ForgotPasswordViewController", in: bundle)`
-    static func forgotPasswordViewController(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.forgotPasswordViewController)
     }
     
     /// `UINib(name: "FoundAccountViewController", in: bundle)`
@@ -323,9 +316,9 @@ struct R: Rswift.Validatable {
       return UIKit.UINib(resource: R.nib.iconView)
     }
     
-    /// `UINib(name: "Lost2faViewController", in: bundle)`
-    static func lost2faViewController(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.lost2faViewController)
+    /// `UINib(name: "LostSecurityViewController", in: bundle)`
+    static func lostSecurityViewController(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.lostSecurityViewController)
     }
     
     /// `UINib(name: "ReceivePaymentCardViewController", in: bundle)`
@@ -436,7 +429,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 168 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 169 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -466,6 +459,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let xMoment_years = Rswift.StringResource(key: "x-moment_years", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: %@ email sent
+      /// 
+      /// Locales: en
+      static let lost_security_email_sent = Rswift.StringResource(key: "lost_security_email_sent", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: 1. copy and enter the below displayed 2FA secret code into the authenticator app  2. enter the generated 2FA code from the authenticator app into the 2FA Code input and press "Next"
       /// 
       /// Locales: en
@@ -478,6 +475,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let tfa_code = Rswift.StringResource(key: "tfa_code", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: 2FA Secret
+      /// 
+      /// Locales: en
+      static let fa_secret = Rswift.StringResource(key: "2fa_secret", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: 2FA Secret successfully changed
       /// 
       /// Locales: en
@@ -642,10 +643,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let finish_setup = Rswift.StringResource(key: "finish_setup", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
-      /// en translation: For resetting your password, an email has been sent to your email account. Please check your inbox and follow the instructions in the received email to reset your password.
+      /// en translation: For resetting your %@, an email has been sent to your email account. Please check your inbox and follow the instructions in the received email to reset your %@.
       /// 
       /// Locales: en
-      static let lost_password_email_hint = Rswift.StringResource(key: "lost_password_email_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      static let lost_security_email_hint = Rswift.StringResource(key: "lost_security_email_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: For security reasons, your wallet will be protected by 2 Factor Authentication (2FA).
       /// 
       /// Locales: en
@@ -818,10 +819,6 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let password = Rswift.StringResource(key: "password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
-      /// en translation: Password lost email sent
-      /// 
-      /// Locales: en
-      static let lost_password_email = Rswift.StringResource(key: "lost_password_email", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Password requirements
       /// 
       /// Locales: en
@@ -1160,6 +1157,13 @@ struct R: Rswift.Validatable {
         return String(format: NSLocalizedString("x-moment_years", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
       }
       
+      /// en translation: %@ email sent
+      /// 
+      /// Locales: en
+      static func lost_security_email_sent(_ value1: String) -> String {
+        return String(format: NSLocalizedString("lost_security_email_sent", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
+      }
+      
       /// en translation: 1. copy and enter the below displayed 2FA secret code into the authenticator app  2. enter the generated 2FA code from the authenticator app into the 2FA Code input and press "Next"
       /// 
       /// Locales: en
@@ -1179,6 +1183,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func tfa_code(_: Void = ()) -> String {
         return NSLocalizedString("tfa_code", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: 2FA Secret
+      /// 
+      /// Locales: en
+      static func fa_secret(_: Void = ()) -> String {
+        return NSLocalizedString("2fa_secret", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: 2FA Secret successfully changed
@@ -1468,11 +1479,11 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("finish_setup", bundle: R.hostingBundle, comment: "")
       }
       
-      /// en translation: For resetting your password, an email has been sent to your email account. Please check your inbox and follow the instructions in the received email to reset your password.
+      /// en translation: For resetting your %@, an email has been sent to your email account. Please check your inbox and follow the instructions in the received email to reset your %@.
       /// 
       /// Locales: en
-      static func lost_password_email_hint(_: Void = ()) -> String {
-        return NSLocalizedString("lost_password_email_hint", bundle: R.hostingBundle, comment: "")
+      static func lost_security_email_hint(_ value1: String, _ value2: String) -> String {
+        return String(format: NSLocalizedString("lost_security_email_hint", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1, value2)
       }
       
       /// en translation: For security reasons, your wallet will be protected by 2 Factor Authentication (2FA).
@@ -1774,13 +1785,6 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func password(_: Void = ()) -> String {
         return NSLocalizedString("password", bundle: R.hostingBundle, comment: "")
-      }
-      
-      /// en translation: Password lost email sent
-      /// 
-      /// Locales: en
-      static func lost_password_email(_: Void = ()) -> String {
-        return NSLocalizedString("lost_password_email", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Password requirements
@@ -2314,10 +2318,10 @@ struct _R: Rswift.Validatable {
   struct nib: Rswift.Validatable {
     static func validate() throws {
       try _AccountDetailsViewController.validate()
-      try _ReceivePaymentCardViewController.validate()
       try _UnfoundedWalletCardContentView.validate()
       try _FoundAccountViewController.validate()
       try _WalletCardInfoViewController.validate()
+      try _ReceivePaymentCardViewController.validate()
       try _WalletCardContentView.validate()
     }
     
@@ -2331,17 +2335,6 @@ struct _R: Rswift.Validatable {
       
       static func validate() throws {
         if UIKit.UIImage(named: "compose", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'compose' is used in nib 'AccountDetailsViewController', but couldn't be loaded.") }
-      }
-      
-      fileprivate init() {}
-    }
-    
-    struct _ForgotPasswordViewController: Rswift.NibResourceType {
-      let bundle = R.hostingBundle
-      let name = "ForgotPasswordViewController"
-      
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
       fileprivate init() {}
@@ -2397,9 +2390,9 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    struct _Lost2faViewController: Rswift.NibResourceType {
+    struct _LostSecurityViewController: Rswift.NibResourceType {
       let bundle = R.hostingBundle
-      let name = "Lost2faViewController"
+      let name = "LostSecurityViewController"
       
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView

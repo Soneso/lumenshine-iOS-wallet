@@ -70,22 +70,20 @@ fileprivate extension LoginMenuCoordinator {
     }
     
     func showForgotPassword() {
-        let forgotPasswordCoordinator = ForgotPasswordCoordinator(mainCoordinator: mainCoordinator, service: service.auth)
-        let navigationController = AppNavigationController(rootViewController: forgotPasswordCoordinator.baseController)
-        if let drawer = baseController as? AppNavigationDrawerController {
-            drawer.setViewController(navigationController, for: .none)
-            drawer.closeSide()
-            menuView.present(forgotPasswordCoordinator.baseController)
-        }
+        showLostSecurity(lostPassword: true)
     }
     
     func showLost2fa() {
-        let forgotPasswordCoordinator = Lost2faCoordinator(mainCoordinator: mainCoordinator, service: service.auth)
-        let navigationController = AppNavigationController(rootViewController: forgotPasswordCoordinator.baseController)
+        showLostSecurity(lostPassword: false)
+    }
+    
+    func showLostSecurity(lostPassword: Bool) {
+        let lostSecurityCoordinator = LostSecurityCoordinator(mainCoordinator: mainCoordinator, service: service.auth, lostPassword: lostPassword)
+        let navigationController = AppNavigationController(rootViewController: lostSecurityCoordinator.baseController)
         if let drawer = baseController as? AppNavigationDrawerController {
             drawer.setViewController(navigationController, for: .none)
             drawer.closeSide()
-            menuView.present(forgotPasswordCoordinator.baseController)
+            menuView.present(lostSecurityCoordinator.baseController)
         }
     }
 }

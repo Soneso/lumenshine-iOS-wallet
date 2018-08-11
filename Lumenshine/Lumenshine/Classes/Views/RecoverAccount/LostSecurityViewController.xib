@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ForgotPasswordViewController" customModule="Lumenshine" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LostSecurityViewController" customModule="Lumenshine" customModuleProvider="target">
             <connections>
                 <outlet property="emailTextField" destination="KGL-iM-84g" id="4c3-SB-qH9"/>
                 <outlet property="nextButton" destination="9tK-va-Ycf" id="GxG-rl-7SW"/>

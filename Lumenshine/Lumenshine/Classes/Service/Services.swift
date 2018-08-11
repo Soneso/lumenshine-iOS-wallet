@@ -11,9 +11,9 @@ import stellarsdk
 
 public final class Services {
 #if DEBUG
-    let baseURL = "http://192.168.0.17:9000"
+    //let baseURL = "http://192.168.0.17:9000"
     //let baseURL = "http://127.0.0.1:8000"
-//    let baseURL = "https://demoapi.lumenshine.com"
+    let baseURL = "https://demoapi.lumenshine.com"
     let horizonURL = "https://horizon-testnet.stellar.org"
 #elseif DEVELOPMENT
     let baseURL = "https://demoapi.lumenshine.com"

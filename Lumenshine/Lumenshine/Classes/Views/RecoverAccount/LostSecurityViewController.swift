@@ -1,5 +1,5 @@
 //
-//  ForgotPasswordViewController.swift
+//  LostSecurityViewController.swift
 //  Lumenshine
 //
 //  Created by Razvan Chelemen on 27/05/2018.
@@ -9,12 +9,12 @@
 import UIKit
 import Material
 
-class ForgotPasswordViewController: UIViewController {
+class LostSecurityViewController: UIViewController {
     @IBOutlet weak var emailTextField: TextField!
     @IBOutlet weak var nextButton: RaisedButton!
     @IBOutlet weak var titleLabel: UILabel!
     
-    var viewModel: ForgotPasswordViewModelType!
+    var viewModel: LostSecurityViewModelType!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,7 @@ class ForgotPasswordViewController: UIViewController {
     }
     
     func prepareTitleLabel() {
-        titleLabel.text = R.string.localizable.lost_password()
+        titleLabel.text = viewModel.title
     }
 
     func prepareEmailTextField() {
@@ -44,7 +44,7 @@ class ForgotPasswordViewController: UIViewController {
     @IBAction func didTapResetButton(_ sender: Any) {
         emailTextField.detail = nil
         showActivity()
-        viewModel.lostPassword(email: emailTextField.text) { [weak self] result in
+        viewModel.lostSecurity(email: emailTextField.text) { [weak self] result in
             self?.hideActivity(completion: {
                 switch result {
                 case .success:

@@ -47,6 +47,7 @@
 		4337C4E72081BAA400F4585A /* RegistrationFormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4337C4E62081BAA400F4585A /* RegistrationFormTableViewController.swift */; };
 		4341251120EBC2C700267260 /* ReLoginHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4341251020EBC2C700267260 /* ReLoginHomeView.swift */; };
 		4341251320EBC2E900267260 /* ReLoginFingerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4341251220EBC2E900267260 /* ReLoginFingerView.swift */; };
+		4347B463211F2F3B004D833B /* LostSecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347B462211F2F3B004D833B /* LostSecurityViewController.swift */; };
 		434E049B20D3DC8A00D3235A /* DateUtils+Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434E049A20D3DC8A00D3235A /* DateUtils+Format.swift */; };
 		434E049D20D4154700D3235A /* MenuEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434E049C20D4154700D3235A /* MenuEntry.swift */; };
 		434FB3F920F78AFD004A4CDB /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434FB3F820F78AFD004A4CDB /* TextViewController.swift */; };
@@ -93,7 +94,8 @@
 		439C476E20D6770900C5DC97 /* AvatarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439C476D20D6770900C5DC97 /* AvatarTableViewCell.swift */; };
 		439E3C8B2107786A0004BB91 /* SettingsEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439E3C8A2107786A0004BB91 /* SettingsEntry.swift */; };
 		439EA26E210AF7240054EA52 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439EA26D210AF7240054EA52 /* ChangePasswordViewController.swift */; };
-		43A51719211D8FBD0034AA46 /* LostPasswordSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A51718211D8FBD0034AA46 /* LostPasswordSuccessViewController.swift */; };
+		43A51719211D8FBD0034AA46 /* LostSecuritySuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A51718211D8FBD0034AA46 /* LostSecuritySuccessViewController.swift */; };
+		43A5171B211DCE600034AA46 /* LostSecurityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A5171A211DCE600034AA46 /* LostSecurityViewModel.swift */; };
 		43A8633820A9F0E6007C46E2 /* LoginStep2Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A8633720A9F0E6007C46E2 /* LoginStep2Response.swift */; };
 		43B144CC20FCA5D40099E3AE /* TitleHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B144CB20FCA5D40099E3AE /* TitleHeader.swift */; };
 		43B144CE20FCAF630099E3AE /* TFASetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B144CD20FCAF630099E3AE /* TFASetupViewController.swift */; };
@@ -132,20 +134,14 @@
 		7420BBEB21182D57002FC4C7 /* TitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7420BBEA21182D57002FC4C7 /* TitleView.xib */; };
 		7420BBED211839BB002FC4C7 /* BaseNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7420BBEC211839BB002FC4C7 /* BaseNavigationViewController.swift */; };
 		7420BBF021185366002FC4C7 /* ChangeWalletRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7420BBEF21185366002FC4C7 /* ChangeWalletRequest.swift */; };
-		7435EA6D20BACE71008CC667 /* ForgotPasswordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7435EA6C20BACE71008CC667 /* ForgotPasswordCoordinator.swift */; };
-		7435EA6F20BAD124008CC667 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7435EA6E20BAD124008CC667 /* ForgotPasswordViewModel.swift */; };
-		7435EA7220BAD452008CC667 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7435EA7020BAD452008CC667 /* ForgotPasswordViewController.swift */; };
-		7435EA7320BAD452008CC667 /* ForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7435EA7120BAD452008CC667 /* ForgotPasswordViewController.xib */; };
+		7435EA6D20BACE71008CC667 /* LostSecurityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7435EA6C20BACE71008CC667 /* LostSecurityCoordinator.swift */; };
+		7435EA7320BAD452008CC667 /* LostSecurityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7435EA7120BAD452008CC667 /* LostSecurityViewController.xib */; };
 		7435EA7520BAD95F008CC667 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7435EA7420BAD95F008CC667 /* String+Utils.swift */; };
 		7435EA7720BADF2C008CC667 /* UIViewController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7435EA7620BADF2C008CC667 /* UIViewController+Utils.swift */; };
 		7445E9C52019CF7200470E0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7445E9C42019CF7200470E0A /* AppDelegate.swift */; };
 		7445E9CC2019CF7200470E0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7445E9CB2019CF7200470E0A /* Assets.xcassets */; };
 		7445E9CF2019CF7200470E0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7445E9CD2019CF7200470E0A /* LaunchScreen.storyboard */; };
 		744DE2D720BD7A8A003BC216 /* UIDevice+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744DE2D620BD7A8A003BC216 /* UIDevice+Additions.swift */; };
-		744DE2D920BD7F10003BC216 /* Lost2faCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744DE2D820BD7F10003BC216 /* Lost2faCoordinator.swift */; };
-		744DE2DD20BD7FAE003BC216 /* Lost2faViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744DE2DB20BD7FAE003BC216 /* Lost2faViewController.swift */; };
-		744DE2DE20BD7FAE003BC216 /* Lost2faViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 744DE2DC20BD7FAE003BC216 /* Lost2faViewController.xib */; };
-		744DE2E020BD8006003BC216 /* Lost2faViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744DE2DF20BD8006003BC216 /* Lost2faViewModel.swift */; };
 		7459815F211AC73200488999 /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7459815E211AC73200488999 /* UIAlertController+Extension.swift */; };
 		746DC58120D141FE00AD0856 /* HomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746DC58020D141FE00AD0856 /* HomeHeaderView.swift */; };
 		746DC58320D1421400AD0856 /* HomeUnfoundedHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 746DC58220D1421400AD0856 /* HomeUnfoundedHeaderView.xib */; };
@@ -253,6 +249,7 @@
 		4337C4E62081BAA400F4585A /* RegistrationFormTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationFormTableViewController.swift; sourceTree = "<group>"; };
 		4341251020EBC2C700267260 /* ReLoginHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginHomeView.swift; sourceTree = "<group>"; };
 		4341251220EBC2E900267260 /* ReLoginFingerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginFingerView.swift; sourceTree = "<group>"; };
+		4347B462211F2F3B004D833B /* LostSecurityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LostSecurityViewController.swift; sourceTree = "<group>"; };
 		434E049A20D3DC8A00D3235A /* DateUtils+Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateUtils+Format.swift"; sourceTree = "<group>"; };
 		434E049C20D4154700D3235A /* MenuEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuEntry.swift; sourceTree = "<group>"; };
 		434FB3F820F78AFD004A4CDB /* TextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
@@ -304,7 +301,8 @@
 		439C476D20D6770900C5DC97 /* AvatarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarTableViewCell.swift; sourceTree = "<group>"; };
 		439E3C8A2107786A0004BB91 /* SettingsEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsEntry.swift; sourceTree = "<group>"; };
 		439EA26D210AF7240054EA52 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
-		43A51718211D8FBD0034AA46 /* LostPasswordSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostPasswordSuccessViewController.swift; sourceTree = "<group>"; };
+		43A51718211D8FBD0034AA46 /* LostSecuritySuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostSecuritySuccessViewController.swift; sourceTree = "<group>"; };
+		43A5171A211DCE600034AA46 /* LostSecurityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostSecurityViewModel.swift; sourceTree = "<group>"; };
 		43A8633720A9F0E6007C46E2 /* LoginStep2Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStep2Response.swift; sourceTree = "<group>"; };
 		43B144CB20FCA5D40099E3AE /* TitleHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleHeader.swift; sourceTree = "<group>"; };
 		43B144CD20FCAF630099E3AE /* TFASetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFASetupViewController.swift; sourceTree = "<group>"; };
@@ -348,10 +346,8 @@
 		7420BBEA21182D57002FC4C7 /* TitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleView.xib; sourceTree = "<group>"; };
 		7420BBEC211839BB002FC4C7 /* BaseNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationViewController.swift; sourceTree = "<group>"; };
 		7420BBEF21185366002FC4C7 /* ChangeWalletRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeWalletRequest.swift; sourceTree = "<group>"; };
-		7435EA6C20BACE71008CC667 /* ForgotPasswordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordCoordinator.swift; sourceTree = "<group>"; };
-		7435EA6E20BAD124008CC667 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
-		7435EA7020BAD452008CC667 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
-		7435EA7120BAD452008CC667 /* ForgotPasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgotPasswordViewController.xib; sourceTree = "<group>"; };
+		7435EA6C20BACE71008CC667 /* LostSecurityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostSecurityCoordinator.swift; sourceTree = "<group>"; };
+		7435EA7120BAD452008CC667 /* LostSecurityViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LostSecurityViewController.xib; sourceTree = "<group>"; };
 		7435EA7420BAD95F008CC667 /* String+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Utils.swift"; sourceTree = "<group>"; };
 		7435EA7620BADF2C008CC667 /* UIViewController+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utils.swift"; sourceTree = "<group>"; };
 		7445E9C12019CF7200470E0A /* Lumenshine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lumenshine.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -359,10 +355,6 @@
 		7445E9CB2019CF7200470E0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7445E9CE2019CF7200470E0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		744DE2D620BD7A8A003BC216 /* UIDevice+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Additions.swift"; sourceTree = "<group>"; };
-		744DE2D820BD7F10003BC216 /* Lost2faCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lost2faCoordinator.swift; sourceTree = "<group>"; };
-		744DE2DB20BD7FAE003BC216 /* Lost2faViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lost2faViewController.swift; sourceTree = "<group>"; };
-		744DE2DC20BD7FAE003BC216 /* Lost2faViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Lost2faViewController.xib; sourceTree = "<group>"; };
-		744DE2DF20BD8006003BC216 /* Lost2faViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lost2faViewModel.swift; sourceTree = "<group>"; };
 		7459815E211AC73200488999 /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
 		746DC58020D141FE00AD0856 /* HomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderView.swift; sourceTree = "<group>"; };
 		746DC58220D1421400AD0856 /* HomeUnfoundedHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeUnfoundedHeaderView.xib; sourceTree = "<group>"; };
@@ -661,8 +653,7 @@
 				43D7A77D205A90CC00238E29 /* MenuCoordinator.swift */,
 				4319B1812063EF72007CE18D /* LoginCoordinator.swift */,
 				4384C70B20E27C72000C7201 /* LoginMenuCoordinator.swift */,
-				7435EA6C20BACE71008CC667 /* ForgotPasswordCoordinator.swift */,
-				744DE2D820BD7F10003BC216 /* Lost2faCoordinator.swift */,
+				7435EA6C20BACE71008CC667 /* LostSecurityCoordinator.swift */,
 				4394911D20BEBDFA008D4FA2 /* SettingsCoordinator.swift */,
 				4301312920C049CB00E47E83 /* ReLoginCoordinator.swift */,
 				43DAC65520E4EB2C00E491D8 /* ReLoginMenuCoordinator.swift */,
@@ -683,12 +674,11 @@
 				43844F3D20E3FE2600C352E5 /* ReLoginViewModel.swift */,
 				4319B1832063F00C007CE18D /* MenuViewModel.swift */,
 				43ECA9C9208B3C4400CB571E /* RegistrationViewModel.swift */,
-				7435EA6E20BAD124008CC667 /* ForgotPasswordViewModel.swift */,
-				744DE2DF20BD8006003BC216 /* Lost2faViewModel.swift */,
 				4394911B20BEB845008D4FA2 /* SettingsViewModel.swift */,
 				4386717320DAA77E00459EA8 /* WalletCardViewModel.swift */,
 				43CD7B1120F7B8A70014BF69 /* SetupMenuViewModel.swift */,
 				43CD7B1320F7BEBF0014BF69 /* SetupViewModel.swift */,
+				43A5171A211DCE600034AA46 /* LostSecurityViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -874,12 +864,10 @@
 		744DE2DA20BD7F74003BC216 /* RecoverAccount */ = {
 			isa = PBXGroup;
 			children = (
-				7435EA7020BAD452008CC667 /* ForgotPasswordViewController.swift */,
-				7435EA7120BAD452008CC667 /* ForgotPasswordViewController.xib */,
-				744DE2DB20BD7FAE003BC216 /* Lost2faViewController.swift */,
-				744DE2DC20BD7FAE003BC216 /* Lost2faViewController.xib */,
+				4347B462211F2F3B004D833B /* LostSecurityViewController.swift */,
+				7435EA7120BAD452008CC667 /* LostSecurityViewController.xib */,
 				432E298A211CA098005C7F9E /* EmailConfirmationViewController.swift */,
-				43A51718211D8FBD0034AA46 /* LostPasswordSuccessViewController.swift */,
+				43A51718211D8FBD0034AA46 /* LostSecuritySuccessViewController.swift */,
 			);
 			path = RecoverAccount;
 			sourceTree = "<group>";
@@ -1073,10 +1061,9 @@
 				74A2A2EE210EF3EB007AEE91 /* ReceivePaymentPrintView.xib in Resources */,
 				74C08FF920EF6F2F000A809D /* FoundAccountViewController.xib in Resources */,
 				746DC58320D1421400AD0856 /* HomeUnfoundedHeaderView.xib in Resources */,
-				744DE2DE20BD7FAE003BC216 /* Lost2faViewController.xib in Resources */,
 				74C0913B20F64AF0000A809D /* UnfoundedWalletCardContentView.xib in Resources */,
 				74C8994C2101DD7C009B13EA /* ReceivePaymentCardViewController.xib in Resources */,
-				7435EA7320BAD452008CC667 /* ForgotPasswordViewController.xib in Resources */,
+				7435EA7320BAD452008CC667 /* LostSecurityViewController.xib in Resources */,
 				7420BBE7211819AB002FC4C7 /* AccountDetailsViewController.xib in Resources */,
 				74C899582107621E009B13EA /* receive_payment.html in Resources */,
 				43D7A77B205A892E00238E29 /* Localizable.strings in Resources */,
@@ -1258,7 +1245,6 @@
 				4314B9F9204812BC006DBE63 /* MenuTableViewCell.swift in Sources */,
 				43088DA82087987E008AE1AB /* CryptoUtil.swift in Sources */,
 				4359984F20A4A14000007F27 /* UserSecurityHelper.swift in Sources */,
-				7435EA6F20BAD124008CC667 /* ForgotPasswordViewModel.swift in Sources */,
 				431437F42047FFB400189C83 /* AppNavigationDrawerController.swift in Sources */,
 				4314B9EF2048060F006DBE63 /* MaterialIcon.swift in Sources */,
 				43088DAA20879AC7008AE1AB /* RandomBytesSequence.swift in Sources */,
@@ -1267,6 +1253,7 @@
 				74DD4CEB210CE83E00F4D69A /* UIView+Snapshot.swift in Sources */,
 				43D131E82056EAC6000483C4 /* ChartCard.swift in Sources */,
 				74C0913D20F64B03000A809D /* UnfoundedWalletCardContentView.swift in Sources */,
+				43A5171B211DCE600034AA46 /* LostSecurityViewModel.swift in Sources */,
 				7420BBE6211819AB002FC4C7 /* AccountDetailsViewController.swift in Sources */,
 				4376F4A0204D9E2700B179C3 /* CoordinatorProtocol.swift in Sources */,
 				4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */,
@@ -1278,7 +1265,6 @@
 				4390D57E205FA5FC00383BB2 /* BaseService.swift in Sources */,
 				744DE2D720BD7A8A003BC216 /* UIDevice+Additions.swift in Sources */,
 				431628CE2097352B00F23A20 /* TFAResponse.swift in Sources */,
-				744DE2D920BD7F10003BC216 /* Lost2faCoordinator.swift in Sources */,
 				74C0914820FB3612000A809D /* CoinUnit+Additions.swift in Sources */,
 				74C0914520F7B3CD000A809D /* WalletCardInfoViewController.swift in Sources */,
 				43E13E8820D97DA000409129 /* WalletCard.swift in Sources */,
@@ -1295,6 +1281,7 @@
 				4319B1842063F00C007CE18D /* MenuViewModel.swift in Sources */,
 				43B144CC20FCA5D40099E3AE /* TitleHeader.swift in Sources */,
 				4359984B20A438EF00007F27 /* AuthenticationResponse.swift in Sources */,
+				4347B463211F2F3B004D833B /* LostSecurityViewController.swift in Sources */,
 				43C6377A20BEFF2B00498FC5 /* ReLoginViewController.swift in Sources */,
 				43844F4020E401B500C352E5 /* ReLoginMenuViewModel.swift in Sources */,
 				43844F3E20E3FE2600C352E5 /* ReLoginViewModel.swift in Sources */,
@@ -1334,7 +1321,7 @@
 				439C476E20D6770900C5DC97 /* AvatarTableViewCell.swift in Sources */,
 				43973A8C20BD4B87000145DD /* TFAGeneration.swift in Sources */,
 				4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */,
-				7435EA6D20BACE71008CC667 /* ForgotPasswordCoordinator.swift in Sources */,
+				7435EA6D20BACE71008CC667 /* LostSecurityCoordinator.swift in Sources */,
 				43B144CE20FCAF630099E3AE /* TFASetupViewController.swift in Sources */,
 				7420BBE921182D4C002FC4C7 /* TitleView.swift in Sources */,
 				439E3C8B2107786A0004BB91 /* SettingsEntry.swift in Sources */,
@@ -1344,7 +1331,6 @@
 				4319B1802063EEA9007CE18D /* LoginViewModel.swift in Sources */,
 				43920D9A2057EECA0040003C /* CardView.swift in Sources */,
 				4341251120EBC2C700267260 /* ReLoginHomeView.swift in Sources */,
-				7435EA7220BAD452008CC667 /* ForgotPasswordViewController.swift in Sources */,
 				746DC58120D141FE00AD0856 /* HomeHeaderView.swift in Sources */,
 				436B366E20512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift in Sources */,
 				43EFF20620493B4900B1887C /* Stylesheet.swift in Sources */,
@@ -1354,12 +1340,11 @@
 				43088DAE2087AD2A008AE1AB /* UserSecurity.swift in Sources */,
 				431437EF2047FF4500189C83 /* MenuViewController.swift in Sources */,
 				4322BA33205BDB6E007FEB5E /* CardsResponsesMock.swift in Sources */,
-				744DE2E020BD8006003BC216 /* Lost2faViewModel.swift in Sources */,
 				4386717420DAA77E00459EA8 /* WalletCardViewModel.swift in Sources */,
 				439EA26E210AF7240054EA52 /* ChangePasswordViewController.swift in Sources */,
 				434E049D20D4154700D3235A /* MenuEntry.swift in Sources */,
 				4319B4D0211B0987002E45F0 /* DecryptedUserData.swift in Sources */,
-				43A51719211D8FBD0034AA46 /* LostPasswordSuccessViewController.swift in Sources */,
+				43A51719211D8FBD0034AA46 /* LostSecuritySuccessViewController.swift in Sources */,
 				435A1CA920C846EC00CE3365 /* SettingsTableViewCell.swift in Sources */,
 				43F3E36120F3B88E0032D017 /* SignUpView.swift in Sources */,
 				43F3E35F20F3B8780032D017 /* LoginView.swift in Sources */,
@@ -1368,7 +1353,6 @@
 				4391A53020D159190015A6DA /* RegistrationEntry.swift in Sources */,
 				4304491C206BF47400349B51 /* UIView+Shake.swift in Sources */,
 				4390D582205FBD6E00383BB2 /* Services.swift in Sources */,
-				744DE2DD20BD7FAE003BC216 /* Lost2faViewController.swift in Sources */,
 				7445E9C52019CF7200470E0A /* AppDelegate.swift in Sources */,
 				436B367220512114009F7C21 /* SquareCashBarBehaviorDefiner.swift in Sources */,
 				43A8633820A9F0E6007C46E2 /* LoginStep2Response.swift in Sources */,

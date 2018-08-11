@@ -71,6 +71,9 @@
 "reset_password" = "Reset password";
 
 /*  */
+"2fa_secret" = "2FA Secret";
+
+/*  */
 "lost_2fa" = "Lost 2FA Secret";
 
 /*  */
@@ -278,10 +281,10 @@
 "resend_email" = "Resend email";
 
 /*  */
-"lost_password_email" = "Password lost email sent";
+"lost_security_email_sent" = "%@ email sent";
 
 /*  */
-"lost_password_email_hint" = "For resetting your password, an email has been sent to your email account. Please check your inbox and follow the instructions in the received email to reset your password.";
+"lost_security_email_hint" = "For resetting your %@, an email has been sent to your email account. Please check your inbox and follow the instructions in the received email to reset your %@.";
 
 /*  */
 "confirmation_mail_resent" = "Confirmation mail resent";

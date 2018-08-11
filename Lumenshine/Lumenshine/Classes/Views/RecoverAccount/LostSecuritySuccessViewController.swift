@@ -1,5 +1,5 @@
 //
-//  LostPasswordSuccessViewController.swift
+//  LostSecuritySuccessViewController.swift
 //  Lumenshine
 //
 //  Created by Istvan Elekes on 8/10/18.
@@ -9,11 +9,11 @@
 import UIKit
 import Material
 
-class LostPasswordSuccessViewController: UIViewController {
+class LostSecuritySuccessViewController: UIViewController {
     
     // MARK: - Properties
     
-    fileprivate let viewModel: ForgotPasswordViewModelType
+    fileprivate let viewModel: LostSecurityViewModelType
     
     // MARK: - UI properties
     fileprivate let titleLabel = UILabel()
@@ -27,7 +27,7 @@ class LostPasswordSuccessViewController: UIViewController {
     fileprivate let scrollView = UIScrollView()
     
     
-    init(viewModel: ForgotPasswordViewModelType) {
+    init(viewModel: LostSecurityViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -44,10 +44,10 @@ class LostPasswordSuccessViewController: UIViewController {
 }
 
 // MARK: - Actions
-extension LostPasswordSuccessViewController {
+extension LostSecuritySuccessViewController {
     @objc
     func resendAction(sender: UIButton) {
-        viewModel.lostPassword(email: viewModel.email) { [weak self] result in
+        viewModel.lostSecurity(email: viewModel.email) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success:
@@ -66,7 +66,7 @@ extension LostPasswordSuccessViewController {
     }
 }
 
-fileprivate extension LostPasswordSuccessViewController {
+fileprivate extension LostSecuritySuccessViewController {
     
     func prepareView() {
         prepareContentView()
@@ -92,7 +92,7 @@ fileprivate extension LostPasswordSuccessViewController {
     }
     
     func prepareTitleLabel() {
-        titleLabel.text = R.string.localizable.lost_password()
+        titleLabel.text = viewModel.title
         titleLabel.font = Stylesheet.font(.title1)
         titleLabel.textAlignment = .center
         titleLabel.textColor = Stylesheet.color(.blue)
@@ -106,7 +106,7 @@ fileprivate extension LostPasswordSuccessViewController {
     }
     
     func prepareHintLabel() {
-        errorLabel.text = R.string.localizable.lost_password_email()
+        errorLabel.text = viewModel.successDetail
         errorLabel.font = Stylesheet.font(.footnote)
         errorLabel.textAlignment = .center
         errorLabel.textColor = Stylesheet.color(.green)
@@ -119,7 +119,7 @@ fileprivate extension LostPasswordSuccessViewController {
             make.right.equalTo(-20)
         }
         
-        hintLabel.text = R.string.localizable.lost_password_email_hint()
+        hintLabel.text = viewModel.successHint
         hintLabel.font = Stylesheet.font(.footnote)
         hintLabel.textAlignment = .left
         hintLabel.textColor = Stylesheet.color(.black)

@@ -13,7 +13,7 @@ class EmailConfirmationViewController: UIViewController {
     
     // MARK: - Properties
     
-    fileprivate let viewModel: ForgotPasswordViewModelType
+    fileprivate let viewModel: LostSecurityViewModelType
     
     // MARK: - UI properties
     fileprivate let titleLabel = UILabel()
@@ -27,7 +27,7 @@ class EmailConfirmationViewController: UIViewController {
     fileprivate let scrollView = UIScrollView()
     
     
-    init(viewModel: ForgotPasswordViewModelType) {
+    init(viewModel: LostSecurityViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -62,7 +62,7 @@ extension EmailConfirmationViewController {
     
     @objc
     func submitAction(sender: UIButton) {
-        viewModel.lostPassword(email: viewModel.email) { [weak self] result in
+        viewModel.lostSecurity(email: viewModel.email) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success:
@@ -101,7 +101,7 @@ fileprivate extension EmailConfirmationViewController {
     }
     
     func prepareTitleLabel() {
-        titleLabel.text = R.string.localizable.lost_password()
+        titleLabel.text = viewModel.title
         titleLabel.font = Stylesheet.font(.title1)
         titleLabel.textAlignment = .center
         titleLabel.textColor = Stylesheet.color(.blue)

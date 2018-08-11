@@ -1,5 +1,5 @@
 //
-//  ForgotPasswordCoordinator.swift
+//  LostSecurityCoordinator.swift
 //  Lumenshine
 //
 //  Created by Razvan Chelemen on 27/05/2018.
@@ -9,19 +9,19 @@
 import UIKit
 import Material
 
-class ForgotPasswordCoordinator: CoordinatorType {
+class LostSecurityCoordinator: CoordinatorType {
     var baseController: UIViewController
     unowned var mainCoordinator: MainCoordinator
     
     fileprivate let service: AuthService
-    fileprivate let viewModel: ForgotPasswordViewModel
+    fileprivate let viewModel: LostSecurityViewModel
     
-    init(mainCoordinator: MainCoordinator, service: AuthService) {
+    init(mainCoordinator: MainCoordinator, service: AuthService, lostPassword: Bool) {
         self.service = service
         self.mainCoordinator = mainCoordinator
-        self.viewModel = ForgotPasswordViewModel(service: service)
+        self.viewModel = LostSecurityViewModel(service: service, lostPassword: lostPassword)
         
-        let viewController = ForgotPasswordViewController(nibName: "ForgotPasswordViewController", bundle: Bundle.main)
+        let viewController = LostSecurityViewController(nibName: "LostSecurityViewController", bundle: Bundle.main)
         viewController.viewModel = viewModel
         self.baseController = viewController
         viewModel.navigationCoordinator = self
@@ -39,9 +39,9 @@ class ForgotPasswordCoordinator: CoordinatorType {
     }
 }
 
-fileprivate extension ForgotPasswordCoordinator {
+fileprivate extension LostSecurityCoordinator {
     func showSuccess() {
-        let successVC = LostPasswordSuccessViewController(viewModel: viewModel)
+        let successVC = LostSecuritySuccessViewController(viewModel: viewModel)
         let snackBarVC = SnackbarController(rootViewController: successVC)
         baseController.navigationController?.popToRootViewController(animated: false)
         baseController.navigationController?.pushViewController(snackBarVC, animated: true)
