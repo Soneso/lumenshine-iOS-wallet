@@ -1,5 +1,5 @@
 //
-//  EmailConfirmationViewController.swift
+//  EmailConfirmationView.swift
 //  Lumenshine
 //
 //  Created by Istvan Elekes on 8/9/18.
@@ -9,7 +9,12 @@
 import UIKit
 import Material
 
-class EmailConfirmationViewController: UIViewController {
+protocol EmailConfirmationViewDelegate: class {
+    func didTapResendButton()
+    func didTapDoneButton(email: String?)
+}
+
+class EmailConfirmationView: UIView {
     
     // MARK: - Properties
     
@@ -26,67 +31,51 @@ class EmailConfirmationViewController: UIViewController {
     fileprivate let contentView = UIView()
     fileprivate let scrollView = UIScrollView()
     
+    weak var delegate: EmailConfirmationViewDelegate?
     
     init(viewModel: LostSecurityViewModelType) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init(frame: .zero)
+        prepareView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - View Life Cycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        prepareView()
-    }
 }
 
 // MARK: - Actions
-extension EmailConfirmationViewController {
+extension EmailConfirmationView {
     @objc
     func resendAction(sender: UIButton) {
-        viewModel.resendMailConfirmation { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    self?.snackbarController?.animate(snackbar: .visible, delay: 0)
-                    self?.snackbarController?.animate(snackbar: .hidden, delay: 3)
-                case .failure(let error):
-                    self?.present(error: error)
-                }
-            }
-        }
+        delegate?.didTapResendButton()
     }
     
     @objc
     func submitAction(sender: UIButton) {
-        viewModel.lostSecurity(email: viewModel.email) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    self?.viewModel.showSuccess()
-                case .failure(let error):
-                    self?.present(error: error)
-                }
-            }
+        delegate?.didTapDoneButton(email: viewModel.email)
+    }
+}
+
+extension EmailConfirmationView: LostSecurityContentViewProtocol {
+    func present(error: ServiceError) {
+        if let parameter = error.parameterName, parameter == "email" {
+            errorLabel.text = error.errorDescription
         }
     }
 }
 
-fileprivate extension EmailConfirmationViewController {
+fileprivate extension EmailConfirmationView {
     
     func prepareView() {
         prepareContentView()
         prepareTitleLabel()
         prepareHintLabel()
         prepareButtons()
-        snackbarController?.snackbar.text = R.string.localizable.confirmation_mail_resent()
     }
     
     func prepareContentView() {
-        view.addSubview(scrollView)
+        addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -96,7 +85,7 @@ fileprivate extension EmailConfirmationViewController {
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
             make.left.equalToSuperview()
-            make.width.equalTo(view)
+            make.width.equalTo(self)
         }
     }
     
@@ -174,17 +163,5 @@ fileprivate extension EmailConfirmationViewController {
             make.bottom.lessThanOrEqualToSuperview()
         }
     }
-    
-    func present(error: ServiceError) {
-        if let parameter = error.parameterName {
-            if parameter == "email" {
-                errorLabel.text = error.errorDescription
-            }
-        } else {
-            let alert = AlertFactory.createAlert(error: error)
-            self.present(alert, animated: true)
-        }
-    }
 }
-
 

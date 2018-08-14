@@ -21,9 +21,7 @@ class LostSecurityCoordinator: CoordinatorType {
         self.mainCoordinator = mainCoordinator
         self.viewModel = LostSecurityViewModel(service: service, lostPassword: lostPassword)
         
-        let viewController = LostSecurityViewController(nibName: "LostSecurityViewController", bundle: Bundle.main)
-        viewController.viewModel = viewModel
-        self.baseController = viewController
+        self.baseController = LostSecurityViewController(viewModel: viewModel)
         viewModel.navigationCoordinator = self
         mainCoordinator.currentCoordinator = self
     }
@@ -34,6 +32,12 @@ class LostSecurityCoordinator: CoordinatorType {
             showSuccess()
         case .showEmailConfirmation:
             showEmailConfirmation()
+        case .showHeaderMenu(let items):
+            showHeaderMenu(items: items)
+        case .showLogin:
+            self.showLogin()
+        case .showSignUp:
+            self.showSignUp()
         default: break
         }
     }
@@ -41,15 +45,27 @@ class LostSecurityCoordinator: CoordinatorType {
 
 fileprivate extension LostSecurityCoordinator {
     func showSuccess() {
-        let successVC = LostSecuritySuccessViewController(viewModel: viewModel)
-        let snackBarVC = SnackbarController(rootViewController: successVC)
-        baseController.navigationController?.popToRootViewController(animated: false)
-        baseController.navigationController?.pushViewController(snackBarVC, animated: true)
+        (baseController as! LostSecurityViewController).showSuccess()
     }
     
     func showEmailConfirmation() {
-        let emailVC = EmailConfirmationViewController(viewModel: viewModel)
-        let snackBarVC = SnackbarController(rootViewController: emailVC)
-        baseController.navigationController?.pushViewController(snackBarVC, animated: true)
+        (baseController as! LostSecurityViewController).showEmailConfirmation()
+    }
+    
+    func showHeaderMenu(items: [(String, String)]) {
+        let headerVC = HeaderMenuViewController(items: items)
+        headerVC.delegate = self.baseController as? LostSecurityViewController
+        
+        headerVC.modalPresentationStyle = .overCurrentContext
+        
+        self.baseController.present(headerVC, animated: true)
+    }
+    
+    func showLogin() {
+        mainCoordinator.currentMenuCoordinator?.performTransition(transition: .showLogin)
+    }
+    
+    func showSignUp() {
+        mainCoordinator.currentMenuCoordinator?.performTransition(transition: .showSignUp)
     }
 }

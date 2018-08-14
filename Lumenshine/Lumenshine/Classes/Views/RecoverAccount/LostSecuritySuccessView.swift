@@ -1,5 +1,5 @@
 //
-//  LostSecuritySuccessViewController.swift
+//  LostSecuritySuccessView.swift
 //  Lumenshine
 //
 //  Created by Istvan Elekes on 8/10/18.
@@ -9,7 +9,11 @@
 import UIKit
 import Material
 
-class LostSecuritySuccessViewController: UIViewController {
+protocol LostSecuritySuccessViewDelegate: class {
+    func didTapResendButton(email: String?)
+}
+
+class LostSecuritySuccessView: UIView {
     
     // MARK: - Properties
     
@@ -26,38 +30,24 @@ class LostSecuritySuccessViewController: UIViewController {
     fileprivate let contentView = UIView()
     fileprivate let scrollView = UIScrollView()
     
+    weak var delegate: LostSecuritySuccessViewDelegate?
     
     init(viewModel: LostSecurityViewModelType) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init(frame: .zero)
+        prepareView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - View Life Cycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        prepareView()
-    }
 }
 
 // MARK: - Actions
-extension LostSecuritySuccessViewController {
+extension LostSecuritySuccessView {
     @objc
     func resendAction(sender: UIButton) {
-        viewModel.lostSecurity(email: viewModel.email) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    self?.snackbarController?.animate(snackbar: .visible, delay: 0)
-                    self?.snackbarController?.animate(snackbar: .hidden, delay: 3)
-                case .failure(let error):
-                    self?.present(error: error)
-                }
-            }
-        }
+        delegate?.didTapResendButton(email: viewModel.email)
     }
     
     @objc
@@ -66,18 +56,22 @@ extension LostSecuritySuccessViewController {
     }
 }
 
-fileprivate extension LostSecuritySuccessViewController {
+extension LostSecuritySuccessView: LostSecurityContentViewProtocol {
+    func present(error: ServiceError) {
+    }
+}
+
+fileprivate extension LostSecuritySuccessView {
     
     func prepareView() {
         prepareContentView()
         prepareTitleLabel()
         prepareHintLabel()
         prepareButtons()
-        snackbarController?.snackbar.text = R.string.localizable.email_resent()
     }
     
     func prepareContentView() {
-        view.addSubview(scrollView)
+        addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -87,7 +81,7 @@ fileprivate extension LostSecuritySuccessViewController {
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
             make.left.equalToSuperview()
-            make.width.equalTo(view)
+            make.width.equalTo(self)
         }
     }
     
@@ -164,10 +158,5 @@ fileprivate extension LostSecuritySuccessViewController {
             make.centerX.equalToSuperview()
             make.bottom.lessThanOrEqualToSuperview()
         }
-    }
-    
-    func present(error: ServiceError) {
-        let alert = AlertFactory.createAlert(error: error)
-        self.present(alert, animated: true)
     }
 }

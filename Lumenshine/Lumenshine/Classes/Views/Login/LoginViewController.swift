@@ -63,7 +63,9 @@ class LoginViewController: UIViewController {
             animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
             content.layer.add(animation, forKey: kCATransitionMoveIn)
             
-            (self.contentView as! UIView).removeFromSuperview()
+            if let oldContent = self.contentView as? UIView {
+                oldContent.removeFromSuperview()
+            }
             view.addSubview(content)
             content.snp.makeConstraints { make in
                 make.top.equalTo(headerBar.snp.bottom)

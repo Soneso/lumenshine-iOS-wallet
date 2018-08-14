@@ -19,6 +19,11 @@ protocol LostSecurityViewModelType: Transitionable {
     func showEmailConfirmation()
     func showSuccess()
     func showLogin()
+    
+    var barItems: [(String, String)] { get }
+    var headerTitle: String { get }
+    var headerDetail: String { get }
+    func barItemSelected(at index:Int)
 }
 
 
@@ -82,5 +87,39 @@ class LostSecurityViewModel: LostSecurityViewModelType {
     
     func showLogin() {
         navigationCoordinator?.mainCoordinator.currentMenuCoordinator?.performTransition(transition: .showLogin)
+    }
+    
+    func showHeaderMenu() {
+        let entries:[MenuEntry] = [.lostPassword, .lost2FA, .importMnemonic, .about, .help]
+        let items = entries.map {
+            ($0.name, $0.icon.name)
+        }
+        navigationCoordinator?.performTransition(transition: .showHeaderMenu(items))
+    }
+    
+    var barItems: [(String, String)] {
+        return [(MenuEntry.login.name, MenuEntry.login.icon.name),
+                (MenuEntry.signUp.name, MenuEntry.signUp.icon.name),
+                (R.string.localizable.more(), R.image.more.name)]
+    }
+    
+    func barItemSelected(at index:Int) {
+        switch index {
+        case 0:
+            navigationCoordinator?.performTransition(transition: .showLogin)
+        case 1:
+            navigationCoordinator?.performTransition(transition: .showSignUp)
+        case 2:
+            showHeaderMenu()
+        default: break
+        }
+    }
+    
+    var headerTitle: String {
+        return R.string.localizable.app_name()
+    }
+    
+    var headerDetail: String {
+        return R.string.localizable.welcome()
     }
 }

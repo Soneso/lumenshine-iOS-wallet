@@ -79,11 +79,12 @@ fileprivate extension LoginMenuCoordinator {
     
     func showLostSecurity(lostPassword: Bool) {
         let lostSecurityCoordinator = LostSecurityCoordinator(mainCoordinator: mainCoordinator, service: service.auth, lostPassword: lostPassword)
-        let navigationController = AppNavigationController(rootViewController: lostSecurityCoordinator.baseController)
+        let snackBar = SnackbarController(rootViewController: lostSecurityCoordinator.baseController)
+        let navigationController = AppNavigationController(rootViewController: snackBar)
         if let drawer = baseController as? AppNavigationDrawerController {
             drawer.setViewController(navigationController, for: .none)
             drawer.closeSide()
-            menuView.present(lostSecurityCoordinator.baseController)
+            menuView.present(snackBar)
         }
     }
 }

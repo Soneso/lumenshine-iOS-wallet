@@ -50,7 +50,7 @@ class LoginCoordinator: CoordinatorType {
 fileprivate extension LoginCoordinator {
     func showHeaderMenu(items: [(String, String)]) {
         let headerVC = HeaderMenuViewController(items: items)
-        headerVC.delegate = self.baseController as! LoginViewController
+        headerVC.delegate = self.baseController as? LoginViewController
         
         headerVC.modalPresentationStyle = .overCurrentContext
         

@@ -11,7 +11,7 @@ import UIKit
 protocol ToolbarHeaderProtocol {
     func setTitle(_ title: String?)
     func setDetail(_ detail: String?)
-    func setItems(_ items: [(String, String)], selectedAt index: Int)
+    func setItems(_ items: [(String, String)], selectedAt index: Int?)
     func selectItem(at index: Int)
     
     var delegate: ToolbarHeaderDelegate? { get set }
@@ -42,7 +42,6 @@ class ToolbarHeader: UIView {
     
     func commonInit() {
         
-        selectedIndex = 0
         backgroundColor = Stylesheet.color(.cyan)
         
         titleLabel.font = UIFont.boldSystemFont(ofSize: 40.0)
@@ -103,14 +102,17 @@ extension ToolbarHeader: ToolbarHeaderProtocol {
         detailLabel.text = detail
     }
     
-    func setItems(_ items: [(String, String)], selectedAt index: Int = 0) {
+    func setItems(_ items: [(String, String)], selectedAt index: Int? = 0) {
         var barItems = [UITabBarItem]()
         var selectedItem: UITabBarItem?
         for (i, value) in items.enumerated() {
             let image = UIImage(named: value.1)
             let item = UITabBarItem(title: value.0, image: image, tag: i)
             barItems.append(item)
-            if i == index { selectedItem = item }
+            if i == index {
+                selectedItem = item
+                selectedIndex = index
+            }
         }
         tabBar.items = barItems
         tabBar.selectedItem = selectedItem
