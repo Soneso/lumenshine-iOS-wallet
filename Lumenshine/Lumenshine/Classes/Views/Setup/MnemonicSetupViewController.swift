@@ -51,9 +51,8 @@ extension MnemonicSetupViewController {
     
     @objc
     func moreAction(sender: UIButton) {
-        let title = R.string.localizable.mnemonic_title()
         let hint = R.string.localizable.mnemonic_hint_lbl()
-        let textVC = TextViewController(title: title, text: hint)
+        let textVC = InfoViewController(info: hint)
         present(AppNavigationController(rootViewController: textVC), animated: true)
     }
 }

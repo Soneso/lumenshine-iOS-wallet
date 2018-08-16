@@ -1,5 +1,5 @@
 //
-//  TextViewController.swift
+//  InfoViewController.swift
 //  Lumenshine
 //
 //  Created by Istvan Elekes on 7/12/18.
@@ -9,19 +9,18 @@
 import UIKit
 import Material
 
-class TextViewController: UIViewController {
+class InfoViewController: UIViewController {
     
     // MARK: - Properties
     
     // MARK: - UI properties
     fileprivate let textLabel = UILabel()
-    fileprivate let infoLabel = UILabel()
-    fileprivate let titleText: String
+    fileprivate let titleStr: String?
     
-    init(title: String, text: String) {
-        self.titleText = title
+    init(info: String, title: String? = nil) {
+        self.titleStr = title
         super.init(nibName: nil, bundle: nil)
-        textLabel.text = text
+        textLabel.text = info
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -42,34 +41,9 @@ class TextViewController: UIViewController {
     }
 }
 
-fileprivate extension TextViewController {
+fileprivate extension InfoViewController {
     func prepareView() {
-        prepareInfoLabel()
         prepareTextLabel()
-    }
-    
-    func prepareInfoLabel() {
-        let infoImage = UIImageView()
-        infoImage.image = R.image.question()
-        infoImage.shapePreset = .circle
-        infoImage.backgroundColor = Stylesheet.color(.white)
-        
-        view.addSubview(infoImage)
-        infoImage.snp.makeConstraints { make in
-            make.top.equalTo(20)
-            make.right.equalTo(view.snp.centerX)
-        }
-        
-        infoLabel.text = R.string.localizable.info()
-        infoLabel.font = Stylesheet.font(.body)
-        infoLabel.textAlignment = .left
-        infoLabel.textColor = Stylesheet.color(.black)
-        
-        view.addSubview(infoLabel)
-        infoLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(infoImage)
-            make.left.equalTo(infoImage.snp.right).offset(5)
-        }
     }
     
     func prepareTextLabel() {
@@ -77,7 +51,7 @@ fileprivate extension TextViewController {
         
         view.addSubview(textLabel)
         textLabel.snp.makeConstraints { make in
-            make.top.equalTo(infoLabel.snp.bottom).offset(30)
+            make.top.equalTo(20)
             make.left.equalTo(30)
             make.right.equalTo(-30)
             make.bottom.lessThanOrEqualToSuperview()
@@ -85,8 +59,19 @@ fileprivate extension TextViewController {
     }
     
     func prepareNavigationItem() {
-        navigationItem.titleLabel.text = titleText
-        navigationItem.titleLabel.textColor = Stylesheet.color(.white)
+        let color = Stylesheet.color(.white)
+        if let title = titleStr {
+            navigationItem.titleLabel.text = title
+            navigationItem.titleLabel.textColor = color
+        } else {
+            let button = Button(image: R.image.question()?.tint(with: color))
+            button.isEnabled = false
+            button.title = R.string.localizable.info()
+            button.titleLabel?.font = Stylesheet.font(.body)
+            button.titleColor = color
+            button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+            navigationItem.centerViews = [button]
+        }
         
         let backButton = Material.IconButton()
         backButton.image = Icon.close?.tint(with: Stylesheet.color(.white))

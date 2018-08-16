@@ -72,7 +72,7 @@ fileprivate extension LoginCoordinator {
     
     func showPasswordHint(_ hint: String) {
         let title = R.string.localizable.password_hint_title()
-        let textVC = TextViewController(title: title, text: hint)
+        let textVC = InfoViewController(info: hint, title: title)
         baseController.present(AppNavigationController(rootViewController: textVC), animated: true)
     }
     
