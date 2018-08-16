@@ -20,13 +20,17 @@ public final class Services {
     let horizonURL = "https://horizon-testnet.stellar.org"
 #endif
     
+    public var isTestURL: Bool {
+        return horizonURL == "https://horizon-testnet.stellar.org"
+    }
+    
     static let shared = Services()
     
     let home: HomeService
     public let auth: AuthService
     public let walletService: WalletsService
     public let currenciesService: CurrenciesService
-    
+    public let chartsService: ChartsService
     public let userManager: UserManager
     
     public let stellarSdk: StellarSDK
@@ -36,7 +40,7 @@ public final class Services {
         auth = AuthService(baseURL: baseURL)
         walletService = WalletsService(baseURL: baseURL)
         currenciesService = CurrenciesService(baseURL: baseURL)
-        
+        chartsService = ChartsService(baseURL: baseURL)
         userManager = UserManager()
         
         stellarSdk = StellarSDK(withHorizonUrl: horizonURL)

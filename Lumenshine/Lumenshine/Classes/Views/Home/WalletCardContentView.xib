@@ -132,6 +132,7 @@
             <connections>
                 <outlet property="availableLabel" destination="FQg-h4-3mK" id="Lcv-k2-ev8"/>
                 <outlet property="availableStackView" destination="Gle-eK-CQB" id="SL3-Nn-pgJ"/>
+                <outlet property="balanceDescriptionLabel" destination="AMC-lx-fVN" id="N0w-DJ-9PH"/>
                 <outlet property="balanceLabel" destination="yva-VC-2hl" id="bSb-ay-9c8"/>
                 <outlet property="balanceStackView" destination="A0f-Us-sOy" id="bje-lQ-HrV"/>
                 <outlet property="detailsButton" destination="QpW-7W-h0z" id="oQ4-6K-uOA"/>

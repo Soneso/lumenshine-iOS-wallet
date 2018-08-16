@@ -14,54 +14,37 @@ class FoundAccountViewController: UIViewController {
     @IBOutlet weak var publicKeyButton: UIButton!
     @IBOutlet weak var descriptionLabel: TTTAttributedLabel!
     
-    var wallet: Wallet?
+    var wallet: Wallet!
     
-    var walletService: WalletsService {
-        get {
-            return Services.shared.walletService
-        }
+    public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, forWallet wallet: Wallet) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.wallet = wallet
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         publicKeyButton.titleLabel?.numberOfLines = 0
         
-        if let wallet = wallet {
-            publicKeyButton.setTitle(wallet.publicKey, for: .normal)
-        } else {
-            loadWallet()
-        }
         setDescription()
+        publicKeyButton.setTitle(wallet.publicKey, for: .normal)
     }
 
     @IBAction func didTapPublicKey(_ sender: Any) {
-        
+        if let key = publicKeyButton.titleLabel?.text {
+            UIPasteboard.general.string = key
+        }
     }
     
     @IBAction func didTapClose(_ sender: Any) {
         self.dismiss(animated: true)
     }
     
-    private func loadWallet() {
-        walletService.getWallets { (result) -> (Void) in
-            switch result {
-            case .success(let data):
-                if data.count == 1 {
-                    let wallet = data[0]
-                    self.publicKeyButton.setTitle(wallet.publicKey, for: .normal)
-                } else {
-                    print("Invalid wallets")
-                }
-            case .failure(let error):
-                print("Failed to get wallets: \(error.localizedDescription)")
-            }
-        }
-    }
-    
     private func setDescription() {
         let linkAttributes = [ NSAttributedStringKey.foregroundColor: UIColor.blue, NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue ] as [NSAttributedStringKey : Any]
-        
         
         let text = "In order to prevent people from making a huge number of unnecessary accounts, each account in the stellar blockchain must have a minimum balance of 1 XLM (Stellar Lumen). Please send your Stellar Lumens (XLM) to the above displayed Account ID / Public key. At least 1 XLM is needed to found your wallet in the stellar blockchain. We recommend a minimum of 2 XLM.\n\nQ: I don't have Stellar Lumens. Where can I get Stellar Lumens (XLM)?\n\nA: You can pay an exchange that sells lumens in order to found your wallet. CoinMarketCap maintains a list of exchanges that sell Stellar Lumens (XLM). After purchasing the lumens withdraw them from the exchange to your wallet by sending them to the above displayed Account ID / Public key in order to found your wallet."
         
@@ -74,5 +57,4 @@ class FoundAccountViewController: UIViewController {
             descriptionLabel.addLink(to: URL(string: "https://coinmarketcap.com/"), with: objcRange)
         }
     }
-    
 }

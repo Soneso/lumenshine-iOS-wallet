@@ -9,7 +9,7 @@
 import UIKit
 
 class CurrenciesMonitor: NSObject {
-    static var updateInterval: Double = 10.0
+    static var updateInterval: Double = 5
     
     private let currenciesService = Services.shared.currenciesService
     

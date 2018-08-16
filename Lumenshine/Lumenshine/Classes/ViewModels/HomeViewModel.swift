@@ -128,7 +128,9 @@ fileprivate extension HomeViewModel {
     }
     
     func showScan() {
-        navigationCoordinator?.performTransition(transition: .showScan(nil))
+        if let wallet = (self.cardViewModels.first as? WalletCardViewModel)?.wallet {
+            navigationCoordinator?.performTransition(transition: .showScan(wallet))
+        }
     }
 }
 

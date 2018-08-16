@@ -29,10 +29,12 @@ class HomeHeaderView: UIView {
         didSet {
             if let fundedView = foundedView {
                 fundedView.foundAccountButton.text = funds
+                applyTransitionFlip(to: fundedView.foundAccountButton)
             }
             
             if let unfundedView = unfoundedView {
                 unfundedView.xlmPriceLabel.text = funds
+                applyTransitionFlip(to: unfundedView.xlmPriceLabel)
             }
         }
     }
@@ -79,4 +81,7 @@ class HomeHeaderView: UIView {
         unfoundedView = Bundle.main.loadNibNamed("HomeUnfoundedHeaderView", owner: nil, options: nil)![0] as! HomeUnfoundedHeaderView
     }
 
+    private func applyTransitionFlip(to viewElement: UIView) {
+        UIView.transition(with: viewElement, duration: 1, options: .transitionFlipFromBottom, animations: nil, completion: nil)
+    }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import stellarsdk
 
 class HomeCoordinator: CoordinatorType {
     var baseController: UIViewController
@@ -29,7 +30,7 @@ class HomeCoordinator: CoordinatorType {
         case .showOnWeb(let url):
             showOnWeb(url: url)
         case .showScan(let wallet):
-            showScan(wallet: wallet)
+            showScan(forWallet: wallet)
         case .showCardDetails(let wallet):
             showCardDetails(wallet: wallet)
         case .showWalletCardInfo:
@@ -53,10 +54,16 @@ fileprivate extension HomeCoordinator {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
-    func showScan(wallet: Wallet?) {
-        let foundViewController = FoundAccountViewController(nibName: "FoundAccountViewController", bundle: Bundle.main)
-        foundViewController.wallet = wallet
-        self.baseController.present(foundViewController, animated: true)
+    func showScan(forWallet wallet: Wallet) {
+        var fundWalletViewController: UIViewController
+        
+        if Services.shared.isTestURL {
+            fundWalletViewController = FundTestAccountViewController(nibName: "FundTestAccountViewController", bundle: Bundle.main, forWallet: wallet)
+        } else {
+            fundWalletViewController = FoundAccountViewController(nibName: "FoundAccountViewController", bundle: Bundle.main, forWallet: wallet)
+        }
+    
+        self.baseController.present(fundWalletViewController, animated: true)
     }
     
     func showCardDetails(wallet: Wallet) {

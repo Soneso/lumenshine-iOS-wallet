@@ -15,6 +15,11 @@ protocol CardProtocol {
     func setBottomBar(buttons: [Button]?)
 }
 
+public enum BalanceLabelDescription: String {
+    case onlyNative = "Balance"
+    case extended = "Balances"
+}
+
 class CardView: UIView {
     internal let contentView = UIView()
     internal let bottomBar = Bar()
@@ -76,6 +81,7 @@ class CardView: UIView {
             fundedView.helpButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapHelpButton), for: .touchUpInside)
             fundedView.nameLabel.text = viewModel.title
             fundedView.balanceLabel.text = viewModel.nativeBalance?.stringWithUnit
+            fundedView.balanceDescriptionLabel.text = (viewModel.wallet as! FoundedWallet).balances.count > 1 ? BalanceLabelDescription.extended.rawValue : BalanceLabelDescription.onlyNative.rawValue
             CardView.labelsForCustomAssets(wallet: viewModel.wallet!).forEach({ label in fundedView.balanceStackView.addArrangedSubview(label) })
             fundedView.availableLabel.text = viewModel.nativeBalance?.availableAmount.stringWithUnit
             CardView.labelsForCustomAssets(wallet: viewModel.wallet!).forEach({ label in fundedView.availableStackView.addArrangedSubview(label) })

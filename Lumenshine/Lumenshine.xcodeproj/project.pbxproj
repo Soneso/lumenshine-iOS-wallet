@@ -176,11 +176,20 @@
 		A4448F24BD6C230D02724766 /* Pods_Lumenshine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6217B40E7420C22B1F8671CF /* Pods_Lumenshine.framework */; };
 		C61244C62113325A00DE1EA9 /* SendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C61244C52113325A00DE1EA9 /* SendViewController.xib */; };
 		C61244C8211332E700DE1EA9 /* SendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61244C7211332E700DE1EA9 /* SendViewController.swift */; };
+		C654AFB42122D3D500FB9686 /* FundTestAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C654AFB32122D3D500FB9686 /* FundTestAccountViewController.xib */; };
+		C654AFB62122D4C900FB9686 /* FundTestAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C654AFB52122D4C900FB9686 /* FundTestAccountViewController.swift */; };
+		C665871021254A78006499A7 /* ChartsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C665870F21254A78006499A7 /* ChartsService.swift */; };
+		C665871221254C9D006499A7 /* ChartsCurrencyPairsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C665871121254C9D006499A7 /* ChartsCurrencyPairsResponse.swift */; };
+		C6658714212555B4006499A7 /* SourceCurrencyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6658713212555B4006499A7 /* SourceCurrencyResponse.swift */; };
+		C665871621255BF2006499A7 /* ChartCurrentRatesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C665871521255BF2006499A7 /* ChartCurrentRatesResponse.swift */; };
+		C665871821255EAB006499A7 /* RatesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C665871721255EAB006499A7 /* RatesResponse.swift */; };
 		C691F68F211C571E00ECA2C4 /* TransactionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C691F68E211C571E00ECA2C4 /* TransactionHelper.swift */; };
 		C69A5141211C16330066A4A0 /* TransactionResultPrintView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C69A5140211C16330066A4A0 /* TransactionResultPrintView.xib */; };
 		C69A5143211C16500066A4A0 /* TransactionResultPrintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69A5142211C16500066A4A0 /* TransactionResultPrintView.swift */; };
 		C6B75F3321182E7500B45BEB /* TransactionResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6B75F3221182E7500B45BEB /* TransactionResultViewController.xib */; };
 		C6B75F35211837AF00B45BEB /* TransactionResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B75F34211837AF00B45BEB /* TransactionResultViewController.swift */; };
+		C6C0E4D921256F2700FF1BA8 /* ChartExchangeRatesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C0E4D821256F2700FF1BA8 /* ChartExchangeRatesResponse.swift */; };
+		C6C0E4DB212570EF00FF1BA8 /* ExchangeRateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C0E4DA212570EF00FF1BA8 /* ExchangeRateResponse.swift */; };
 		C6DBDB7121199FF100FCEC78 /* TransactionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DBDB7021199FF100FCEC78 /* TransactionResult.swift */; };
 		C6DBDB732119CD5000FCEC78 /* TransactionInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DBDB722119CD5000FCEC78 /* TransactionInput.swift */; };
 		CEC6090C23B250170F615B73 /* Pods_LumenshineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF4753428CD10A2476A2DC32 /* Pods_LumenshineTests.framework */; };
@@ -398,11 +407,20 @@
 		B51E0C0375E942937F3506A8 /* Pods-LumenshineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineTests/Pods-LumenshineTests.release.xcconfig"; sourceTree = "<group>"; };
 		C61244C52113325A00DE1EA9 /* SendViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendViewController.xib; sourceTree = "<group>"; };
 		C61244C7211332E700DE1EA9 /* SendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendViewController.swift; sourceTree = "<group>"; };
+		C654AFB32122D3D500FB9686 /* FundTestAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FundTestAccountViewController.xib; sourceTree = "<group>"; };
+		C654AFB52122D4C900FB9686 /* FundTestAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundTestAccountViewController.swift; sourceTree = "<group>"; };
+		C665870F21254A78006499A7 /* ChartsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsService.swift; sourceTree = "<group>"; };
+		C665871121254C9D006499A7 /* ChartsCurrencyPairsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsCurrencyPairsResponse.swift; sourceTree = "<group>"; };
+		C6658713212555B4006499A7 /* SourceCurrencyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceCurrencyResponse.swift; sourceTree = "<group>"; };
+		C665871521255BF2006499A7 /* ChartCurrentRatesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCurrentRatesResponse.swift; sourceTree = "<group>"; };
+		C665871721255EAB006499A7 /* RatesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesResponse.swift; sourceTree = "<group>"; };
 		C691F68E211C571E00ECA2C4 /* TransactionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHelper.swift; sourceTree = "<group>"; };
 		C69A5140211C16330066A4A0 /* TransactionResultPrintView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionResultPrintView.xib; sourceTree = "<group>"; };
 		C69A5142211C16500066A4A0 /* TransactionResultPrintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionResultPrintView.swift; sourceTree = "<group>"; };
 		C6B75F3221182E7500B45BEB /* TransactionResultViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionResultViewController.xib; sourceTree = "<group>"; };
 		C6B75F34211837AF00B45BEB /* TransactionResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionResultViewController.swift; sourceTree = "<group>"; };
+		C6C0E4D821256F2700FF1BA8 /* ChartExchangeRatesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartExchangeRatesResponse.swift; sourceTree = "<group>"; };
+		C6C0E4DA212570EF00FF1BA8 /* ExchangeRateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateResponse.swift; sourceTree = "<group>"; };
 		C6DBDB7021199FF100FCEC78 /* TransactionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionResult.swift; sourceTree = "<group>"; };
 		C6DBDB722119CD5000FCEC78 /* TransactionInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionInput.swift; sourceTree = "<group>"; };
 		C7728CD68F272DC0EA288265 /* Pods-LumenshineUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineUITests/Pods-LumenshineUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -731,6 +749,8 @@
 				74E2057E20D2A3B200E94048 /* IconButton.swift */,
 				74E2058020D2A3C400E94048 /* IconView.xib */,
 				74C08FF620EF6F2F000A809D /* FoundAccountViewController.swift */,
+				C654AFB32122D3D500FB9686 /* FundTestAccountViewController.xib */,
+				C654AFB52122D4C900FB9686 /* FundTestAccountViewController.swift */,
 				74C08FF720EF6F2F000A809D /* FoundAccountViewController.xib */,
 				74C0913220F64002000A809D /* WalletCardContentView.xib */,
 				74C0913420F64012000A809D /* WalletCardContentView.swift */,
@@ -774,6 +794,7 @@
 				43088DAB2087AB23008AE1AB /* AuthService.swift */,
 				7477F3F820EE188600408934 /* WalletsService.swift */,
 				74C0914920FB3F6F000A809D /* CurrenciesService.swift */,
+				C665870F21254A78006499A7 /* ChartsService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -843,6 +864,12 @@
 				4391A53120D170420015A6DA /* CountryListResponse.swift */,
 				4391A53320D175D40015A6DA /* SalutationsResponse.swift */,
 				7477F3FA20EE19EE00408934 /* WalletsResponse.swift */,
+				C665871121254C9D006499A7 /* ChartsCurrencyPairsResponse.swift */,
+				C6658713212555B4006499A7 /* SourceCurrencyResponse.swift */,
+				C665871521255BF2006499A7 /* ChartCurrentRatesResponse.swift */,
+				C665871721255EAB006499A7 /* RatesResponse.swift */,
+				C6C0E4D821256F2700FF1BA8 /* ChartExchangeRatesResponse.swift */,
+				C6C0E4DA212570EF00FF1BA8 /* ExchangeRateResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -1093,6 +1120,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C654AFB42122D3D500FB9686 /* FundTestAccountViewController.xib in Resources */,
 				C69A5141211C16330066A4A0 /* TransactionResultPrintView.xib in Resources */,
 				74E2058120D2A3C400E94048 /* IconView.xib in Resources */,
 				74A2A2EE210EF3EB007AEE91 /* ReceivePaymentPrintView.xib in Resources */,
@@ -1233,6 +1261,7 @@
 				43D131E42056D439000483C4 /* CardTableViewCell.swift in Sources */,
 				43CD7B1220F7B8A70014BF69 /* SetupMenuViewModel.swift in Sources */,
 				43EFF204204939F700B1887C /* UIColor+Utils.swift in Sources */,
+				C665871821255EAB006499A7 /* RatesResponse.swift in Sources */,
 				43DAC65820E4FF0A00E491D8 /* ToolbarHeader.swift in Sources */,
 				4376F49E204D9DF800B179C3 /* HomeCoordinator.swift in Sources */,
 				4394911E20BEBDFA008D4FA2 /* SettingsCoordinator.swift in Sources */,
@@ -1267,6 +1296,7 @@
 				4394911C20BEB845008D4FA2 /* SettingsViewModel.swift in Sources */,
 				432E298B211CA098005C7F9E /* EmailConfirmationView.swift in Sources */,
 				4337C4E72081BAA400F4585A /* RegistrationFormTableViewController.swift in Sources */,
+				C665871621255BF2006499A7 /* ChartCurrentRatesResponse.swift in Sources */,
 				4390D57E205FA5FC00383BB2 /* BaseService.swift in Sources */,
 				744DE2D720BD7A8A003BC216 /* UIDevice+Additions.swift in Sources */,
 				431628CE2097352B00F23A20 /* TFAResponse.swift in Sources */,
@@ -1282,6 +1312,7 @@
 				431628D02097476500F23A20 /* ErrorResponse.swift in Sources */,
 				43088DAC2087AB23008AE1AB /* AuthService.swift in Sources */,
 				43ECA9CA208B3C4400CB571E /* RegistrationViewModel.swift in Sources */,
+				C654AFB62122D4C900FB9686 /* FundTestAccountViewController.swift in Sources */,
 				4301312A20C049CB00E47E83 /* ReLoginCoordinator.swift in Sources */,
 				4319B1842063F00C007CE18D /* MenuViewModel.swift in Sources */,
 				43B144CC20FCA5D40099E3AE /* TitleHeader.swift in Sources */,
@@ -1293,8 +1324,10 @@
 				7420BBF021185366002FC4C7 /* ChangeWalletRequest.swift in Sources */,
 				74C08FF320EE1FE6000A809D /* UserManager.swift in Sources */,
 				43D7A77E205A90CC00238E29 /* MenuCoordinator.swift in Sources */,
+				C6C0E4D921256F2700FF1BA8 /* ChartExchangeRatesResponse.swift in Sources */,
 				436FE5082052634300CFE788 /* WebCard.swift in Sources */,
 				436B366F20512114009F7C21 /* FlexibleHeightBar.swift in Sources */,
+				C6658714212555B4006499A7 /* SourceCurrencyResponse.swift in Sources */,
 				4365F69A211057B900D4B12C /* Change2faSecretViewController.swift in Sources */,
 				4319B1822063EF72007CE18D /* LoginCoordinator.swift in Sources */,
 				434E049B20D3DC8A00D3235A /* DateUtils+Format.swift in Sources */,
@@ -1302,6 +1335,7 @@
 				7406751A2125ABBB00503C84 /* LostSecurityCoordinator.swift in Sources */,
 				432F11792101C64600FC429B /* MnemonicSetupViewController.swift in Sources */,
 				7477F3FB20EE19EE00408934 /* WalletsResponse.swift in Sources */,
+				C665871221254C9D006499A7 /* ChartsCurrencyPairsResponse.swift in Sources */,
 				43088DB02087C4B8008AE1AB /* Dictionary+HTTPParams.swift in Sources */,
 				43DAC65420E4BA3900E491D8 /* BiometricAuthenticationProtocol.swift in Sources */,
 				4390D57C205FA4EF00383BB2 /* HomeService.swift in Sources */,
@@ -1336,6 +1370,7 @@
 				43920D9A2057EECA0040003C /* CardView.swift in Sources */,
 				4341251120EBC2C700267260 /* ReLoginHomeView.swift in Sources */,
 				746DC58120D141FE00AD0856 /* HomeHeaderView.swift in Sources */,
+				C665871021254A78006499A7 /* ChartsService.swift in Sources */,
 				436B366E20512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift in Sources */,
 				43EFF20620493B4900B1887C /* Stylesheet.swift in Sources */,
 				436B367120512114009F7C21 /* FacebookBarBehaviorDefiner.swift in Sources */,
@@ -1356,6 +1391,7 @@
 				43F3E35F20F3B8780032D017 /* LoginView.swift in Sources */,
 				7435EA7520BAD95F008CC667 /* String+Utils.swift in Sources */,
 				74C89996210A3A06009B13EA /* Sequence+Utils.swift in Sources */,
+				C6C0E4DB212570EF00FF1BA8 /* ExchangeRateResponse.swift in Sources */,
 				4391A53020D159190015A6DA /* RegistrationEntry.swift in Sources */,
 				C6DBDB7121199FF100FCEC78 /* TransactionResult.swift in Sources */,
 				4304491C206BF47400349B51 /* UIView+Shake.swift in Sources */,

@@ -9,7 +9,6 @@
 import UIKit
 
 class WalletCardContentView: UIView {
-
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var availableLabel: UILabel!
@@ -17,7 +16,7 @@ class WalletCardContentView: UIView {
     @IBOutlet weak var receiveButton: UIButton!
     @IBOutlet weak var detailsButton: UIButton!
     @IBOutlet weak var helpButton: UIButton!
-    
+    @IBOutlet weak var balanceDescriptionLabel: UILabel!
     @IBOutlet weak var balanceStackView: UIStackView!
     @IBOutlet weak var availableStackView: UIStackView!
 }

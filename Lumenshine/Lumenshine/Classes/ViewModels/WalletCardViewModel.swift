@@ -112,9 +112,10 @@ class WalletCardViewModel : CardViewModelType {
     }
     
     @objc func didTapFundButton() {
-        navigationCoordinator?.performTransition(transition: .showScan(wallet))
+        if let tappedWallet = wallet {
+            navigationCoordinator?.performTransition(transition: .showScan(tappedWallet))
+        }
     }
-    
 }
 
 fileprivate extension WalletCardViewModel {
