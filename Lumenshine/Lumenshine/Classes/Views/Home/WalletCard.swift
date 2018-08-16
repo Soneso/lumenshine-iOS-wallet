@@ -15,8 +15,19 @@ enum WalletStatus {
     case unfounded
 }
 
+enum WalletAction {
+    case receive
+    case send
+    case transactionResult
+}
+
 protocol WalletCardProtocol {
     
+}
+
+protocol WalletActionsProtocol: class {
+    var wallet: Wallet! { get set }
+    var closeAction: (() -> ())? { get set }
 }
 
 class WalletCard: CardView {
@@ -36,12 +47,18 @@ class WalletCard: CardView {
     override var viewModel: CardViewModelType? {
         didSet {
             if let viewModel = viewModel as? WalletCardViewModel {
-                viewModel.receivePaymentAction = {
-                    guard !self.expanded else {
-                        return
+                viewModel.receivePaymentAction = { [weak self] in
+                    if self?.isSafeToAddViewController(forAction: WalletAction.receive) == true {
+                        self?.expanded = true
+                        self?.addViewController(forAction: WalletAction.receive)
                     }
-                    self.expanded = true
-                    self.addReceiveViewController()
+                }
+                
+                viewModel.sendAction = { [weak self] in
+                    if self?.isSafeToAddViewController(forAction: WalletAction.send) == true {
+                        self?.expanded = true
+                        self?.addViewController(forAction: WalletAction.send)
+                    }
                 }
             }
         }
@@ -114,29 +131,118 @@ fileprivate extension WalletCard {
         collapsedContainer.addSubview(unfundedView!)
     }
     
-    func addReceiveViewController() {
+    private func addViewController(forAction: WalletAction, transactionResult: TransactionResult? = nil) {
         if let parentViewController = viewController {
-            let viewController = ReceivePaymentCardViewController()
-            viewController.wallet = (viewModel as! WalletCardViewModel).wallet
-            viewController.closeAction = {
+            var viewController: UIViewController
+            
+            switch (forAction) {
+            case .receive:
+                viewController = ReceivePaymentCardViewController()
+                break
+                
+            case .send:
+                viewController = SendViewController()
+                (viewController as! SendViewController).sendAction = { [weak self] (transactionData) in
+                    let transactionHelper = TransactionHelper(transactionInputData: transactionData, wallet: ((self?.viewModel as! WalletCardViewModel).wallet as! FoundedWallet))
+                    var transactionResult = TransactionResult()
+                    
+                    switch transactionData.transactionType {
+                    case .sendPayment:
+                        transactionResult = transactionHelper.sendPayment()
+                        break
+                        
+                    case .createAndFundAccount:
+                        transactionResult = transactionHelper.createAndFundAccount()
+                        break
+                    }
+                    
+                    self?.addViewController(forAction: WalletAction.transactionResult, transactionResult: transactionResult)
+                }
+                break
+                
+            case .transactionResult:
+                viewController = TransactionResultViewController()
+                (viewController as! TransactionResultViewController).result = transactionResult!
+                (viewController as! TransactionResultViewController).closeAllAction = { [weak self] in
+                   self?.closeAllWalletActionsViewControllers()
+                }
+                (viewController as! TransactionResultViewController).sendOtherAction = { [weak self] in
+                    self?.closeAllWalletActionsViewControllers()
+                    self?.expanded = true
+                    self?.addViewController(forAction: WalletAction.send)
+                }
+                
+                break
+            }
+            
+            (viewController as! WalletActionsProtocol).wallet = (viewModel as! WalletCardViewModel).wallet
+            (viewController as! WalletActionsProtocol).closeAction = { [weak self] in
                 viewController.willMove(toParentViewController: parentViewController)
                 viewController.view.removeFromSuperview()
                 viewController.removeFromParentViewController()
-                
-                self.reloadCellAction?()
-                self.expanded = false
+                self?.reloadCellAction?()
+                self?.expanded = false
             }
             
             parentViewController.addChildViewController(viewController)
             expandedContainer.addSubview(viewController.view)
+            
             viewController.view.snp.makeConstraints {make in
                 make.edges.equalToSuperview()
             }
+            
             viewController.didMove(toParentViewController: parentViewController)
-            
-            
             reloadCellAction?()
+            
+            self.resetScrollView()
         }
     }
     
+    private func resetScrollView() {
+        (viewController as! HomeViewController).tableView.scrollToRow(at: IndexPath(row: (viewController as! HomeViewController).dataSourceItems.index(of: self)!, section: 0), at: UITableViewScrollPosition.none, animated: false)
+    }
+    
+    private func closeAllWalletActionsViewControllers() {
+        if let childControllers = self.viewController?.childViewControllers {
+            for viewController in childControllers {
+                if let walletActionViewController = viewController as? WalletActionsProtocol {
+                    if walletActionViewController.wallet.name == (viewModel as! WalletCardViewModel).wallet?.name {
+                        walletActionViewController.closeAction?()
+                    }
+                }
+            }
+        }
+    }
+    
+    private func isSafeToAddViewController(forAction action: WalletAction) -> Bool {
+        guard !self.expanded else {
+            if let walletActionsViewModel = self.viewController?.childViewControllers.first(where: { (walletActionController) -> Bool in
+                return (walletActionController as! WalletActionsProtocol).wallet.name == (viewModel as! WalletCardViewModel).wallet?.name
+            }) as? WalletActionsProtocol {
+                switch (action) {
+                case .receive:
+                    if (walletActionsViewModel is ReceivePaymentCardViewController) {
+                        return false
+                    }
+                    break
+                
+                case .send:
+                    if (walletActionsViewModel is SendViewController) {
+                        return false
+                    }
+                    break
+                    
+                case .transactionResult:
+                    return true
+                }
+                
+                closeAllWalletActionsViewControllers()
+                return true
+            }
+            
+            return false
+        }
+        
+        return true
+    }
 }

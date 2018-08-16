@@ -19,6 +19,7 @@ class WalletCardViewModel : CardViewModelType {
     var wallet: Wallet?
     
     var receivePaymentAction: (() -> ())?
+    var sendAction: (() -> ())?
     
     init(user: User, card: Card? = nil) {
         self.card = card
@@ -95,7 +96,7 @@ class WalletCardViewModel : CardViewModelType {
     }
     
     @objc func didTapSendButton() {
-        
+        sendAction?()
     }
     
     @objc func didTapReceiveButton() {

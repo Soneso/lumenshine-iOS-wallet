@@ -134,8 +134,36 @@ extension FoundedWallet {
         }
     }
     
+    func getAvailableCurrencies() -> [String] {
+        var availableCurrencies = [String]()
+        for currency in self.uniqueAssetCodeBalances {
+            if let balance = CoinUnit(currency.balance), let displayCode = currency.displayCode {
+            if (balance != 0) {
+                    availableCurrencies.append(displayCode)
+                }
+            }
+        }
+        
+        return availableCurrencies
+    }
+    
+    func isCurrencyDuplicate(withAssetCode assetCode: String) -> Bool {
+        var alreadyFoundOnce: Bool = false
+        
+        for currency in balances {
+            if currency.assetCode == assetCode && CoinUnit(currency.balance)?.availableAmount != 0 {
+                if !alreadyFoundOnce {
+                    alreadyFoundOnce = true
+                } else {
+                    return true
+                }
+            }
+        }
+        
+        return false
+    }
 }
-
+    
 public class UnfoundedWallet: Wallet {
     private var walletResponse: WalletsResponse
     
@@ -178,5 +206,4 @@ public class UnfoundedWallet: Wallet {
             return walletResponse.federationAddress
         }
     }
-    
 }

@@ -9,7 +9,7 @@
 import UIKit
 import MessageUI
 
-class ReceivePaymentCardViewController: UIViewController {
+class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol {
     @IBOutlet weak var publicKeyButton: UIButton!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var defaultCurrencyView: UIStackView!
@@ -245,5 +245,6 @@ extension ReceivePaymentCardViewController: MFMailComposeViewControllerDelegate 
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
     }
+    
     
 }

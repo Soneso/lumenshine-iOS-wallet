@@ -8,6 +8,12 @@
 
 import Foundation
 
+enum MemoTextValidationResult {
+    case Valid
+    case InvalidEncoding
+    case InvalidLength
+}
+
 extension String  {
     
     func isEmail() -> Bool {
@@ -50,5 +56,109 @@ extension String  {
         //let regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&]{8,}"
         
         //return NSPredicate(format: "SELF MATCHES %@", sRegex).evaluate(with: self)
+    }
+    
+    func isMandatoryValid() -> Bool {
+        return !self.isEmpty
+    }
+    
+    func isBase64Valid() -> Bool {
+        return NSData(base64Encoded: self) != nil
+    }
+    
+    func isAmountValid(forBalance balance: String) -> Bool {
+        if let availableFunds = CoinUnit(balance), let requestedFunds = CoinUnit(self) {
+            if (availableFunds.isLess(than: requestedFunds) || requestedFunds == 0) {
+                return false
+            }
+            
+            return true
+        }
+        
+        return false
+    }
+        
+    func isMemoTextValid(limitNrOfBytes: Int) -> MemoTextValidationResult {
+        var isASCIIEncoded: Bool = false
+        var isUTF8Encoded: Bool = false
+        var nonASCIIFound: Bool = false
+        var isTextLengthValid: Bool = false
+        
+        for scalar in self.unicodeScalars {
+            if (!scalar.isASCII) {
+                nonASCIIFound = true
+                break
+            }
+        }
+        
+        if (!nonASCIIFound) {
+            isASCIIEncoded = true
+            
+            var byteCount: Int = 0
+            for _ in String(self) {
+                byteCount += 1
+            }
+            
+            if (byteCount <= limitNrOfBytes) {
+                isTextLengthValid = true
+            }
+        }
+        
+        if self.utf8.count == 0 && isASCIIEncoded == false {
+            return MemoTextValidationResult.InvalidEncoding
+        }
+        
+        if isASCIIEncoded == false {
+            isUTF8Encoded = true
+            var byteArray = [UInt8]()
+            for char in self.utf8{
+                byteArray += [char]
+            }
+            
+            if byteArray.count <= limitNrOfBytes {
+                isTextLengthValid = true
+            }
+        }
+        
+        if !isASCIIEncoded && !isUTF8Encoded {
+            return MemoTextValidationResult.InvalidEncoding
+        }
+
+        if !isTextLengthValid {
+            return MemoTextValidationResult.InvalidLength
+        }
+        
+        return MemoTextValidationResult.Valid
+    }
+    
+    func isMemoIDValid() -> Bool {
+        if UInt64(self) != nil {
+            return true
+        }
+        
+        return false
+    }
+    
+    func isMemoHashValid() -> Bool {
+        var byteArray = [UInt8]()
+        for char in self.utf8{
+            byteArray += [char]
+        }
+        
+        if byteArray.count == 32 {
+            return true
+        }
+        
+        return false
+    }
+    
+    func isMemoReturnValid() -> Bool {
+        return isMemoHashValid()
+    }
+    
+    func isFederationAddress() -> Bool {
+        let sRegex = "[a-zA-Z\\_]+[*][a-zA-Z]+[.][a-zA-Z]+"
+        
+        return NSPredicate(format: "SELF MATCHES[c] %@", sRegex).evaluate(with: self)
     }
 }

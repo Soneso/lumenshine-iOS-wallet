@@ -20,9 +20,8 @@ class HomeViewController: UIViewController {
     fileprivate var headerBar: FlexibleHeightBar!
     fileprivate var header: HomeHeaderView!
     fileprivate var titleLabel = UILabel()
-    fileprivate let tableView: UITableView
-    
-    fileprivate var dataSourceItems = [CardView]()
+    public let tableView: UITableView
+    public var dataSourceItems = [CardView]()
     
     init(viewModel: HomeViewModelType) {
         self.viewModel = viewModel
