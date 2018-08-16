@@ -27,7 +27,6 @@ class AccountDetailsViewController: UIViewController {
     
     @IBOutlet weak var publicKeyLabel: UILabel!
     
-    
     @IBOutlet weak var stellarAddressStackView: UIStackView!
     @IBOutlet var stellarAddressNotSetupView: UIView!
     @IBOutlet var stellarAddressEditView: UIView!
@@ -37,10 +36,13 @@ class AccountDetailsViewController: UIViewController {
     @IBOutlet weak var stellarAddressEditTextField: UITextField!
     @IBOutlet weak var removeViewAddressLabel: UILabel!
     
+    @IBOutlet weak var accountCurrencyContainer: UIView!
+    
     weak var flowDelegate: AccountDetailsViewControllerFlow?
     
     private let walletService = Services.shared.walletService
     private var titleView: TitleView!
+    private var accountCurrenciesViewController: AccountCurrenciesViewController!
     
     var wallet: Wallet!
     
@@ -51,6 +53,8 @@ class AccountDetailsViewController: UIViewController {
         setupWalletNameView()
         publicKeyLabel.text = wallet.publicKey
         setupStellarAddress()
+        setupAccountCurrency()
+        
     }
     
     // MARK: Actions
@@ -189,6 +193,20 @@ class AccountDetailsViewController: UIViewController {
         } else {
             stellarAddressStackView.addArrangedSubview(stellarAddressRemoveView)
         }
+    }
+    
+    private func setupAccountCurrency() {
+        let viewController = AccountCurrenciesViewController(nibName: "AccountCurrenciesViewController", bundle: Bundle.main)
+        if let wallet = wallet as? FoundedWallet {
+            viewController.wallet = wallet
+        }
+        
+        addChildViewController(viewController)
+        accountCurrencyContainer.addSubview(viewController.view)
+        viewController.view.snp.makeConstraints {make in
+            make.edges.equalToSuperview()
+        }
+        viewController.didMove(toParentViewController: self)
     }
     
 }
