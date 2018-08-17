@@ -51,7 +51,7 @@ class MenuCoordinator: MenuCoordinatorType {
 
 fileprivate extension MenuCoordinator {
     func showHome() {
-        let coordinator = HomeCoordinator(mainCoordinator: mainCoordinator, service: service.home, user: user)
+        let coordinator = HomeCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
         if let drawer = baseController as? AppNavigationDrawerController {
             drawer.setViewController(navigationController, for: .none)

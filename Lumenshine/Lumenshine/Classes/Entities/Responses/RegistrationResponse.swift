@@ -10,7 +10,7 @@ import Foundation
 
 public class RegistrationResponse: Decodable {
     
-    let tfaSecret: String
+    let tfaSecret: String?
     let qrCode: String?
     
     private enum CodingKeys: String, CodingKey {

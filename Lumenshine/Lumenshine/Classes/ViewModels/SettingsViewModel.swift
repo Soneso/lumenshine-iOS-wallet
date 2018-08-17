@@ -10,7 +10,7 @@ import Foundation
 
 protocol SettingsViewModelType: Transitionable {
     var itemDistribution: [Int] { get }
-    var tfaSecret: String { get }
+    var tfaSecret: String? { get }
     
     func name(at indexPath: IndexPath) -> String
     func switchValue(at indexPath: IndexPath) -> Bool?
@@ -51,8 +51,8 @@ class SettingsViewModel: SettingsViewModelType {
         }
     }
     
-    var tfaSecret: String {
-        return tfaResponse?.tfaSecret ?? "1234567890"
+    var tfaSecret: String? {
+        return tfaResponse?.tfaSecret
     }
     
     var itemDistribution: [Int] {
@@ -152,7 +152,17 @@ class SettingsViewModel: SettingsViewModelType {
     }
     
     func confirm2faSecret(tfaCode: String, response: @escaping TFAResponseClosure) {
-        service.confirm2faSecret(tfaCode: tfaCode, response: response)
+        service.confirm2faSecret(tfaCode: tfaCode) { [weak self] result in
+            switch result {
+            case .success:
+                if let secret = self?.tfaResponse?.tfaSecret,
+                    let email = self?.user.email {
+                    TFAGeneration.createToken(tfaSecret: secret, email: email)
+                }
+            default: break
+            }
+            response(result)
+        }
     }
     
     func showConfirm2faSecret(tfaResponse: RegistrationResponse) {

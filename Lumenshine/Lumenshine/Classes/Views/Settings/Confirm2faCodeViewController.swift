@@ -144,8 +144,11 @@ fileprivate extension Confirm2faCodeViewController {
     
     func prepareSecretLabel() {
         snackbarController?.snackbar.text = R.string.localizable.fa_secret_copy()
-        
-        tfaSecretLabel.text = R.string.localizable.lbl_new_2fa_secret(viewModel.tfaSecret)
+        if let secret = viewModel.tfaSecret {
+            tfaSecretLabel.text = R.string.localizable.lbl_new_2fa_secret(secret)
+        } else {
+            present(error: .parsingFailed(message: R.string.localizable.fa_secret()))
+        }
         tfaSecretLabel.font = Stylesheet.font(.footnote)
         tfaSecretLabel.textAlignment = .center
         tfaSecretLabel.textColor = Stylesheet.color(.black)

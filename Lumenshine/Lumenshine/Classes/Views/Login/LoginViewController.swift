@@ -201,7 +201,7 @@ extension LoginViewController: ToolbarHeaderDelegate {
 
 extension LoginViewController: HeaderMenuDelegate {
     func menuSelected(at index: Int) {
-        
+        viewModel.headerMenuSelected(at: index)
     }
 }
 

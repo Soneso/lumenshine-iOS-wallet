@@ -76,9 +76,8 @@ extension HeaderMenuViewController: UITableViewDataSource {
 extension HeaderMenuViewController:UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        dismiss(animated: true, completion: {
-            self.delegate?.menuSelected(at: indexPath.row)
-        })
+        self.delegate?.menuSelected(at: indexPath.row)
+        dismiss(animated: true, completion:nil)
     }
 }
 
@@ -99,7 +98,7 @@ fileprivate extension HeaderMenuViewController {
         tableView.estimatedRowHeight = UITableViewAutomaticDimension
         tableView.separatorStyle = .none
 
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewTap(_:))))
+//        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewTap(_:))))
     }
     
     @IBAction

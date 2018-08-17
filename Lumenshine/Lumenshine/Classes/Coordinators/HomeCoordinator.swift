@@ -13,7 +13,7 @@ class HomeCoordinator: CoordinatorType {
     var baseController: UIViewController
     unowned var mainCoordinator: MainCoordinator
     
-    init(mainCoordinator: MainCoordinator, service: HomeService, user: User) {
+    init(mainCoordinator: MainCoordinator, service: Services, user: User) {
         let viewModel = HomeViewModel(service: service, user: user)
         let homeView = HomeViewController(viewModel: viewModel)
         

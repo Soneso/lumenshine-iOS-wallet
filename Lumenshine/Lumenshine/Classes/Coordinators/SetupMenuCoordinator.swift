@@ -17,7 +17,7 @@ class SetupMenuCoordinator: MenuCoordinatorType {
     fileprivate let user: User
     fileprivate let menuView: MenuViewController
     
-    init(mainCoordinator: MainCoordinator, service: AuthService, user: User, mnemonic: String, loginResponse: LoginStep2Response?) {
+    init(mainCoordinator: MainCoordinator, service: AuthService, user: User, mnemonic: String, loginResponse: LoginStep2Response) {
         self.service = service
         self.user = user
         self.mainCoordinator = mainCoordinator
@@ -54,7 +54,7 @@ fileprivate extension SetupMenuCoordinator {
         }
     }
     
-    func showSetup(mnemonic: String, loginResponse: LoginStep2Response?) {
+    func showSetup(mnemonic: String, loginResponse: LoginStep2Response) {
         let coordinator = SetupCoordinator(mainCoordinator: mainCoordinator, service: service, user: user, mnemonic: mnemonic, loginResponse: loginResponse)
         
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)

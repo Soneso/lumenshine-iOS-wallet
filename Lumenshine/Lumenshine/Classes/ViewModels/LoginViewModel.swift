@@ -25,6 +25,8 @@ protocol LoginViewModelType: Transitionable, BiometricAuthenticationProtocol {
     func signUp(email: String, password: String, repassword: String, response: @escaping EmptyResponseClosure)
     func showPasswordHint()
     
+    func headerMenuSelected(at index: Int)
+    
     func forgotPasswordClick()
 }
 
@@ -153,6 +155,16 @@ class LoginViewModel : LoginViewModelType {
             case .failure(let error):
                 response(.failure(error: error))
             }
+        }
+    }
+    
+    func headerMenuSelected(at index: Int) {
+        switch entries[index+2] {
+        case .lostPassword:
+            navigationCoordinator?.mainCoordinator.currentMenuCoordinator?.performTransition(transition: .showForgotPassword)
+        case .lost2FA:
+            navigationCoordinator?.mainCoordinator.currentMenuCoordinator?.performTransition(transition: .showLost2fa)
+        default: break
         }
     }
     

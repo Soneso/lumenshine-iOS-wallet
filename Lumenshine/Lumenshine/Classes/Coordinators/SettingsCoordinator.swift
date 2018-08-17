@@ -85,7 +85,7 @@ fileprivate extension SettingsCoordinator {
     }
     
     func showHome() {
-        let coordinator = HomeCoordinator(mainCoordinator: mainCoordinator, service: service.home, user: user)
+        let coordinator = HomeCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
         if let drawer = baseController.drawerController {
             drawer.setViewController(navigationController, for: .none)

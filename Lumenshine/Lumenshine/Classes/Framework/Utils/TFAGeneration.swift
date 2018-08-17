@@ -23,7 +23,9 @@ struct TFAGeneration {
     }
     
     static func createToken(tfaSecret: String, email: String) {
-        guard let secretData = tfaSecret.data(using: .ascii),
+        
+        guard let secret = tfaSecret.base32DecodedString(),
+            let secretData = secret.data(using: .ascii),
             !secretData.isEmpty else {
                 print("Invalid secret")
                 return

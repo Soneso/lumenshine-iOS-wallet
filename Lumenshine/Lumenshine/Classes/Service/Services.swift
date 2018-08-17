@@ -26,7 +26,6 @@ public final class Services {
     
     static let shared = Services()
     
-    let home: HomeService
     public let auth: AuthService
     public let walletService: WalletsService
     public let currenciesService: CurrenciesService
@@ -36,7 +35,6 @@ public final class Services {
     public let stellarSdk: StellarSDK
     
     public init() {
-        home = HomeService(baseURL: baseURL)
         auth = AuthService(baseURL: baseURL)
         walletService = WalletsService(baseURL: baseURL)
         currenciesService = CurrenciesService(baseURL: baseURL)

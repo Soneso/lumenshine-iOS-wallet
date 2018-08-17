@@ -20,7 +20,7 @@ protocol SetupViewModelType: Transitionable {
     var headerTitle: String { get }
     var headerDetail: String { get }
     var headerText: String? { get }
-    var tfaSecret: String { get }
+    var tfaSecret: String? { get }
     var mnemonic24Word: String { get }
     var verificationWords: [String] { get }
     
@@ -42,13 +42,13 @@ class SetupViewModel: SetupViewModelType {
     fileprivate let service: AuthService
     fileprivate let user: User
     fileprivate let mnemonic: String
-    fileprivate let loginResponse: LoginStep2Response?
+    fileprivate let loginResponse: LoginStep2Response
     fileprivate var currentSetupStep: SetupStep
     fileprivate var randomIndices = [Int]()
     
     weak var navigationCoordinator: CoordinatorType?
     
-    init(service: AuthService, user: User, mnemonic: String, loginResponse: LoginStep2Response?) {
+    init(service: AuthService, user: User, mnemonic: String, loginResponse: LoginStep2Response) {
         self.service = service
         self.user = user
         self.mnemonic = mnemonic
@@ -70,12 +70,12 @@ class SetupViewModel: SetupViewModelType {
         return R.string.localizable.setup_wallet()
     }
     
-    var tfaSecret: String {
-        return loginResponse?.tfaSecret ?? "1234567890"
+    var tfaSecret: String? {
+        return loginResponse.tfaSecret
     }
     
     var qrCode: Data? {
-        guard  let qr = loginResponse?.qrCode else { return nil }
+        guard  let qr = loginResponse.qrCode else { return nil }
         return Data(base64Encoded: qr)
     }
     

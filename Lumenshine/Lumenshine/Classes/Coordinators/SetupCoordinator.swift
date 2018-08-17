@@ -18,7 +18,7 @@ class SetupCoordinator: CoordinatorType {
     fileprivate let viewModel: SetupViewModel
     fileprivate let user: User
     
-    init(mainCoordinator: MainCoordinator, service: AuthService, user: User, mnemonic: String, loginResponse: LoginStep2Response?) {
+    init(mainCoordinator: MainCoordinator, service: AuthService, user: User, mnemonic: String, loginResponse: LoginStep2Response) {
         self.service = service
         self.user = user
         self.mainCoordinator = mainCoordinator

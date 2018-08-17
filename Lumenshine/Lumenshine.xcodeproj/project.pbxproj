@@ -79,7 +79,6 @@
 		4386717420DAA77E00459EA8 /* WalletCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4386717320DAA77E00459EA8 /* WalletCardViewModel.swift */; };
 		4387980A20584335005261C8 /* InternalCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4387980920584335005261C8 /* InternalCard.swift */; };
 		438BE842204D51FD007EBFB9 /* HamburgerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438BE841204D51FD007EBFB9 /* HamburgerButton.swift */; };
-		4390D57C205FA4EF00383BB2 /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4390D57B205FA4EF00383BB2 /* HomeService.swift */; };
 		4390D57E205FA5FC00383BB2 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4390D57D205FA5FC00383BB2 /* BaseService.swift */; };
 		4390D582205FBD6E00383BB2 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4390D581205FBD6E00383BB2 /* Services.swift */; };
 		4391A52B20D139D60015A6DA /* CountryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4391A52A20D139D60015A6DA /* CountryResponse.swift */; };
@@ -310,7 +309,6 @@
 		4386717320DAA77E00459EA8 /* WalletCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCardViewModel.swift; sourceTree = "<group>"; };
 		4387980920584335005261C8 /* InternalCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalCard.swift; sourceTree = "<group>"; };
 		438BE841204D51FD007EBFB9 /* HamburgerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HamburgerButton.swift; sourceTree = "<group>"; };
-		4390D57B205FA4EF00383BB2 /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
 		4390D57D205FA5FC00383BB2 /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		4390D581205FBD6E00383BB2 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		4391A52A20D139D60015A6DA /* CountryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryResponse.swift; sourceTree = "<group>"; };
@@ -805,7 +803,6 @@
 		4390D572205EC5CF00383BB2 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				4390D57B205FA4EF00383BB2 /* HomeService.swift */,
 				4390D57D205FA5FC00383BB2 /* BaseService.swift */,
 				4390D581205FBD6E00383BB2 /* Services.swift */,
 				43088DAB2087AB23008AE1AB /* AuthService.swift */,
@@ -1488,7 +1485,6 @@
 				C665871221254C9D006499A7 /* ChartsCurrencyPairsResponse.swift in Sources */,
 				43088DB02087C4B8008AE1AB /* Dictionary+HTTPParams.swift in Sources */,
 				43DAC65420E4BA3900E491D8 /* BiometricAuthenticationProtocol.swift in Sources */,
-				4390D57C205FA4EF00383BB2 /* HomeService.swift in Sources */,
 				7491BE4C211C450F0058877E /* WalletManager.swift in Sources */,
 				4341251320EBC2E900267260 /* ReLoginFingerView.swift in Sources */,
 				4319B4CC2119FB59002E45F0 /* RevealMnemonicViewController.swift in Sources */,
