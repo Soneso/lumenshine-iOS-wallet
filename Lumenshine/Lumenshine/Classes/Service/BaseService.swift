@@ -168,10 +168,14 @@ public class BaseService: NSObject, URLSessionDelegate {
                     BaseService.jwtToken = token
                 }
                 
+                
                 switch httpResponse.statusCode {
                 case 200:
                     break
                 case 400...500:
+                    
+                    print("error response status code: \(httpResponse.statusCode) for url \(url)")
+                    
                     if let errorData = data {
                         do {
                             let errorResponses = try self.jsonDecoder.decode(Array<ErrorResponse>.self, from: errorData)

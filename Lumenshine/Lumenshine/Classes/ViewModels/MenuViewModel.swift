@@ -43,8 +43,6 @@ class MenuViewModel : MenuViewModelType {
                     TFAGeneration.createToken(tfaSecret: response.tfaSecret, email: user.email)
                 case .failure(let error):
                     print("Tfa secret request error: \(error)")
-                    // TODO: remove hard coded tfa secret
-                    TFAGeneration.createToken(tfaSecret: "1234567890", email: user.email)
                 }
             }
         }

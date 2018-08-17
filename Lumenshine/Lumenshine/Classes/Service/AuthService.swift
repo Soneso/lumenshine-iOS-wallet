@@ -156,11 +156,11 @@ public class AuthService: BaseService {
     open func tfaSecret(publicKeyIndex188: String, response: @escaping TfaSecretResponseClosure) {
         do {
             var params = Dictionary<String,String>()
-            params["key"] = publicKeyIndex188
+            params["public_key_188"] = publicKeyIndex188
             
             let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
             
-            POSTRequestWithPath(path: "/portal/dashboard/tfa_secret", body: bodyData) { (result) -> (Void) in
+            POSTRequestWithPath(path: "/portal/user/dashboard/tfa_secret", body: bodyData) { (result) -> (Void) in
                 switch result {
                 case .success(let data):
                     do {

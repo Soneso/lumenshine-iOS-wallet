@@ -47,7 +47,7 @@ struct TFAGeneration {
         }
     }
     
-    static func generatePassword(email: String) -> String? {
+    static func generate2FACode(email: String) -> String? {
         do {
             let persistentTokens = try Keychain.sharedInstance.allPersistentTokens()
             for token in persistentTokens {

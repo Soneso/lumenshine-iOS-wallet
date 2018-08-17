@@ -66,7 +66,7 @@ class ReLoginViewModel : LoginViewModel {
     }
     
     override func loginStep1(email: String, password: String, tfaCode: String?, response: @escaping EmptyResponseClosure) {
-        let tfa = TFAGeneration.generatePassword(email: user.email)
+        let tfa = TFAGeneration.generate2FACode(email: user.email)
         super.loginStep1(email: user.email, password: password, tfaCode: tfa, response: response)
     }
     
