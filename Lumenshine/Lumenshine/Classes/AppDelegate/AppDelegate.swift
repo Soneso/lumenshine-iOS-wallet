@@ -45,6 +45,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let loginCoordinator = LoginMenuCoordinator(mainCoordinator: mainCoordinator)
         
+        // for testing purpose
+//        let loginCoordinator = MenuCoordinator(mainCoordinator: mainCoordinator, user: User(id: "1", email: "isti@isti.com", publicKeyIndex0: "publicKeyIndex0", publicKeyIndex188: "publicKeyIndex188"))
+
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = loginCoordinator.baseController
         window?.makeKeyAndVisible()

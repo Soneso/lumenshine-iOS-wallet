@@ -44,7 +44,13 @@
 "open" = "Open";
 
 /*  */
+"updated" = "Updated %@";
+
+/*  */
 "delete" = "Delete";
+
+/*  */
+"remove" = "Remove";
 
 /*  */
 "send" = "Send";
@@ -150,6 +156,9 @@
 
 /*  */
 "app_name" = "Lumenshine";
+
+/*  */
+"chart_card_title" = "Stellar Lumens (XLM)";
 
 /*  */
 "welcome" = "Welcome";
@@ -423,6 +432,12 @@
 
 /*  */
 "lbl_today" = "Today";
+
+/*  */
+"lbl_day" = "day";
+
+/*  */
+"lbl_days" = "days";
 
 /*  */
 "user_not_logged_in" = "User is not logged in";

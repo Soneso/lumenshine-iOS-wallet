@@ -464,7 +464,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 169 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 174 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -890,6 +890,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let lbl_recommend = Rswift.StringResource(key: "lbl_recommend", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Remove
+      /// 
+      /// Locales: en
+      static let remove = Rswift.StringResource(key: "remove", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Repeat Password
       /// 
       /// Locales: en
@@ -978,6 +982,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let state = Rswift.StringResource(key: "state", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Stellar Lumens (XLM)
+      /// 
+      /// Locales: en
+      static let chart_card_title = Rswift.StringResource(key: "chart_card_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Step %@ of 3
       /// 
       /// Locales: en
@@ -1034,6 +1042,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let unexpected_data_type = Rswift.StringResource(key: "unexpected_data_type", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Updated %@
+      /// 
+      /// Locales: en
+      static let updated = Rswift.StringResource(key: "updated", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Use another account
       /// 
       /// Locales: en
@@ -1098,6 +1110,14 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let lbl_day_suffix = Rswift.StringResource(key: "lbl_day_suffix", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: day
+      /// 
+      /// Locales: en
+      static let lbl_day = Rswift.StringResource(key: "lbl_day", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: days
+      /// 
+      /// Locales: en
+      static let lbl_days = Rswift.StringResource(key: "lbl_days", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: h
       /// 
       /// Locales: en
@@ -1885,6 +1905,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("lbl_recommend", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Remove
+      /// 
+      /// Locales: en
+      static func remove(_: Void = ()) -> String {
+        return NSLocalizedString("remove", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Repeat Password
       /// 
       /// Locales: en
@@ -2039,6 +2066,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("state", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Stellar Lumens (XLM)
+      /// 
+      /// Locales: en
+      static func chart_card_title(_: Void = ()) -> String {
+        return NSLocalizedString("chart_card_title", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Step %@ of 3
       /// 
       /// Locales: en
@@ -2135,6 +2169,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func unexpected_data_type(_: Void = ()) -> String {
         return NSLocalizedString("unexpected_data_type", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Updated %@
+      /// 
+      /// Locales: en
+      static func updated(_ value1: String) -> String {
+        return String(format: NSLocalizedString("updated", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
       }
       
       /// en translation: Use another account
@@ -2247,6 +2288,20 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func lbl_day_suffix(_: Void = ()) -> String {
         return NSLocalizedString("lbl_day_suffix", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: day
+      /// 
+      /// Locales: en
+      static func lbl_day(_: Void = ()) -> String {
+        return NSLocalizedString("lbl_day", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: days
+      /// 
+      /// Locales: en
+      static func lbl_days(_: Void = ()) -> String {
+        return NSLocalizedString("lbl_days", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: h

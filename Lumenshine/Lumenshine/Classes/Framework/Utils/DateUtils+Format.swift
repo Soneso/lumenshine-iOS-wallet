@@ -76,11 +76,41 @@ extension DateUtils {
 }
 
 extension DateUtils {
+    static func longString(from fromDate: Date, to toDate: Date = Date()) -> String {
+        let components = NSCalendar.current.dateComponents([.hour, .minute, .second, .day, .weekOfMonth, .month, .year], from: fromDate, to: toDate)
+        var dateString  = ""
+        if let year = components.year, year > 0 {
+            dateString = R.string.plurals.moment_year_count(year)
+        } else if let month = components.month, month > 0 {
+            dateString = R.string.plurals.moment_month_count(month)
+        } else if let weekOfMonth = components.weekOfMonth, weekOfMonth > 0 {
+            dateString = R.string.plurals.moment_week_count(weekOfMonth)
+        } else if let day = components.day, day > 0 {
+            dateString = R.string.plurals.moment_day_count(day)
+        } else if let hour = components.hour, hour > 0 {
+            dateString = R.string.plurals.moment_hour_count(hour)
+        } else if let minute = components.minute, minute > 0 {
+            dateString = R.string.plurals.moment_minute_count(minute)
+        } else if let second = components.second, second > 0 {
+            dateString = R.string.plurals.moment_second_count(second)
+        } else {
+            dateString = R.string.localizable.lbl_now_suffix()
+        }
+        return dateString
+    }
+}
+
+extension DateUtils {
     private static let formatter = DateFormatter()
     
     static func format(_ date: Date?, in format: Format) -> String? {
         guard let date = date else { return  nil }
         formatter.dateFormat = format.rawValue
         return formatter.string(from: date)
+    }
+    
+    static func format(_ date: String, in format: Format) -> Date? {
+        formatter.dateFormat = format.rawValue
+        return formatter.date(from: date)
     }
 }

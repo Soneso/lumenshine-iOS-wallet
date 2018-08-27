@@ -51,6 +51,7 @@ class CardView: UIView {
              card = WebCard()
         case .chart:
             card = ChartCard()
+            card.viewModel = viewModel
         case .intern:
             card = InternalCard()
         case .account:
@@ -142,7 +143,7 @@ fileprivate extension CardView {
         bottomBar.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.bottom.equalToSuperview()
-            make.height.equalTo(50)
+            make.height.equalTo(45)
         }
         
         let separator = UIView()

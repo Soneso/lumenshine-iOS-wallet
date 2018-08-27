@@ -98,6 +98,11 @@ class HomeViewModel : HomeViewModelType {
                 print("Failed to get wallets")
             }
         }
+                        
+        let viewModel = ChartCardViewModel(service: service.chartsService)
+        viewModel.navigationCoordinator = self.navigationCoordinator
+        self.cardViewModels.append(viewModel)
+        self.reloadClosure?()
     }
 
 }

@@ -60,6 +60,7 @@
 		4360484620AEFCFD00CF781A /* LumenshineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4360484520AEFCFD00CF781A /* LumenshineTests.swift */; };
 		4360485420AEFD9A00CF781A /* LumenshineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4360485320AEFD9A00CF781A /* LumenshineUITests.swift */; };
 		4360486020AEFEA400CF781A /* CreateAccountLocalTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4360485D20AEFE1900CF781A /* CreateAccountLocalTestCase.swift */; };
+		436201C0212DDC5300CF4495 /* R+Plurals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436201BF212DDC5300CF4495 /* R+Plurals.swift */; };
 		4365F69A211057B900D4B12C /* Change2faSecretViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4365F699211057B900D4B12C /* Change2faSecretViewController.swift */; };
 		4365F69C2110BB8700D4B12C /* Confirm2faCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4365F69B2110BB8700D4B12C /* Confirm2faCodeViewController.swift */; };
 		436B366E20512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436B366820512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift */; };
@@ -111,6 +112,7 @@
 		43D131E42056D439000483C4 /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E32056D439000483C4 /* CardTableViewCell.swift */; };
 		43D131E62056E3BD000483C4 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E52056E3BD000483C4 /* CardViewModel.swift */; };
 		43D131E82056EAC6000483C4 /* ChartCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E72056EAC6000483C4 /* ChartCard.swift */; };
+		43D15E48212AE53A00415CE5 /* ChartCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D15E47212AE53A00415CE5 /* ChartCardViewModel.swift */; };
 		43D7A775205A84B300238E29 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D7A774205A84B300238E29 /* R.generated.swift */; };
 		43D7A77B205A892E00238E29 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43D7A777205A892E00238E29 /* Localizable.strings */; };
 		43D7A77C205A892E00238E29 /* Common.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43D7A779205A892E00238E29 /* Common.strings */; };
@@ -290,6 +292,7 @@
 		4360485320AEFD9A00CF781A /* LumenshineUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LumenshineUITests.swift; sourceTree = "<group>"; };
 		4360485520AEFD9A00CF781A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4360485D20AEFE1900CF781A /* CreateAccountLocalTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountLocalTestCase.swift; sourceTree = "<group>"; };
+		436201BF212DDC5300CF4495 /* R+Plurals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+Plurals.swift"; sourceTree = "<group>"; };
 		4365F699211057B900D4B12C /* Change2faSecretViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Change2faSecretViewController.swift; sourceTree = "<group>"; };
 		4365F69B2110BB8700D4B12C /* Confirm2faCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Confirm2faCodeViewController.swift; sourceTree = "<group>"; };
 		436B366820512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexibleHeightBarSubviewLayoutAttributes.swift; sourceTree = "<group>"; };
@@ -341,6 +344,7 @@
 		43D131E32056D439000483C4 /* CardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
 		43D131E52056E3BD000483C4 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		43D131E72056EAC6000483C4 /* ChartCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCard.swift; sourceTree = "<group>"; };
+		43D15E47212AE53A00415CE5 /* ChartCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCardViewModel.swift; sourceTree = "<group>"; };
 		43D7A774205A84B300238E29 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		43D7A778205A892E00238E29 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		43D7A77A205A892E00238E29 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Common.strings; sourceTree = "<group>"; };
@@ -574,6 +578,7 @@
 			children = (
 				4314B9EE2048060F006DBE63 /* MaterialIcon.swift */,
 				43EFF20520493B4900B1887C /* Stylesheet.swift */,
+				436201BF212DDC5300CF4495 /* R+Plurals.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -739,6 +744,7 @@
 				43CD7B1120F7B8A70014BF69 /* SetupMenuViewModel.swift */,
 				43CD7B1320F7BEBF0014BF69 /* SetupViewModel.swift */,
 				43A5171A211DCE600034AA46 /* LostSecurityViewModel.swift */,
+				43D15E47212AE53A00415CE5 /* ChartCardViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1020,8 +1026,6 @@
 				4360483F20AEFCFD00CF781A /* Sources */,
 				4360484020AEFCFD00CF781A /* Frameworks */,
 				4360484120AEFCFD00CF781A /* Resources */,
-				2E1F204EB0E935DF7B49AED2 /* [CP] Embed Pods Frameworks */,
-				FD1614473A597A3012FC3103 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1041,8 +1045,6 @@
 				4360484D20AEFD9A00CF781A /* Sources */,
 				4360484E20AEFD9A00CF781A /* Frameworks */,
 				4360484F20AEFD9A00CF781A /* Resources */,
-				E83308176AC402F6CFCD1865 /* [CP] Embed Pods Frameworks */,
-				EF9C76E01541B990BA1B7F07 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1065,7 +1067,6 @@
 				7445E9BF2019CF7200470E0A /* Resources */,
 				74DABE68201B1455007FB701 /* CopyFiles */,
 				9ECB84A6EE5B215F0AD986FE /* [CP] Embed Pods Frameworks */,
-				A9633CFF44F2752EBED27C22 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1199,21 +1200,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2E1F204EB0E935DF7B49AED2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LumenshineTests/Pods-LumenshineTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		43FF90192059581C00650ED5 /* Compile R.swift resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1308,66 +1294,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A9633CFF44F2752EBED27C22 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E83308176AC402F6CFCD1865 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LumenshineUITests/Pods-LumenshineUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EF9C76E01541B990BA1B7F07 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LumenshineUITests/Pods-LumenshineUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FD1614473A597A3012FC3103 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LumenshineTests/Pods-LumenshineTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1403,6 +1329,7 @@
 				74E2057820D1543400E94048 /* HomeFoundedHeaderView.swift in Sources */,
 				4359985120A5920200007F27 /* Array+Shuffle.swift in Sources */,
 				43ECA9CC208B530000CB571E /* RegistrationTableViewCell.swift in Sources */,
+				436201C0212DDC5300CF4495 /* R+Plurals.swift in Sources */,
 				4391A53420D175D40015A6DA /* SalutationsResponse.swift in Sources */,
 				43D131E42056D439000483C4 /* CardTableViewCell.swift in Sources */,
 				43CD7B1220F7B8A70014BF69 /* SetupMenuViewModel.swift in Sources */,
@@ -1545,6 +1472,7 @@
 				4304491C206BF47400349B51 /* UIView+Shake.swift in Sources */,
 				C691F68F211C571E00ECA2C4 /* TransactionHelper.swift in Sources */,
 				4390D582205FBD6E00383BB2 /* Services.swift in Sources */,
+				43D15E48212AE53A00415CE5 /* ChartCardViewModel.swift in Sources */,
 				C6B75F35211837AF00B45BEB /* TransactionResultViewController.swift in Sources */,
 				7445E9C52019CF7200470E0A /* AppDelegate.swift in Sources */,
 				436B367220512114009F7C21 /* SquareCashBarBehaviorDefiner.swift in Sources */,
