@@ -30,14 +30,17 @@ class AccountCurrenciesViewController: UIViewController {
             switch response {
             case .success(let balances):
                 for balance in balances {
-                    let currencyView = Bundle.main.loadNibNamed("CurrencyView", owner:self, options:nil)![0] as! CurrencyView
-                    currencyView.currencyLabel.text = balance.assetCode ?? ""
-                    currencyView.issuerLabel.text = "Issuer public key: \(balance.assetIssuer)"
+                    DispatchQueue.main.async {
+                        let currencyView = Bundle.main.loadNibNamed("CurrencyView", owner:self, options:nil)![0] as! CurrencyView
+                        currencyView.currencyLabel.text = balance.assetCode ?? ""
+                        if let assetIssuer = balance.assetIssuer {
+                            currencyView.issuerLabel.text = "Issuer public key: \(assetIssuer)"
+                        }
+                    }
                 }
             case .failure(let error):
                 self.displayErrorAlertView(message: error.localizedDescription)
             }
         }
     }
-    
 }

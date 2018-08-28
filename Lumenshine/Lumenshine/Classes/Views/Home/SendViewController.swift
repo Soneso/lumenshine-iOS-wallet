@@ -2,7 +2,7 @@
 //  SendViewController.swift
 //  Lumenshine
 //
-//  Created by Ionut Teslovan on 02/08/2018.
+//  Created by Soneso on 02/08/2018.
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 

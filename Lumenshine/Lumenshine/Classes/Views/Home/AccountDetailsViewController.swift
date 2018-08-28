@@ -37,6 +37,7 @@ class AccountDetailsViewController: UIViewController {
     @IBOutlet weak var removeViewAddressLabel: UILabel!
     
     @IBOutlet weak var accountCurrencyContainer: UIView!
+    @IBOutlet weak var transactionsHistoryContainer: UIView!
     
     weak var flowDelegate: AccountDetailsViewControllerFlow?
     
@@ -54,7 +55,7 @@ class AccountDetailsViewController: UIViewController {
         publicKeyLabel.text = wallet.publicKey
         setupStellarAddress()
         setupAccountCurrency()
-        
+        setupTransactionsHistory()
     }
     
     // MARK: Actions
@@ -209,4 +210,18 @@ class AccountDetailsViewController: UIViewController {
         viewController.didMove(toParentViewController: self)
     }
     
+    private func setupTransactionsHistory() {
+        let viewController = TransactionHistoryTableViewController(nibName: "TransactionHistoryTableViewController", bundle: Bundle.main)
+        if let wallet = wallet as? FoundedWallet {
+            viewController.wallet = wallet
+        }
+        
+        addChildViewController(viewController)
+        transactionsHistoryContainer.addSubview(viewController.view)
+        viewController.view.snp.makeConstraints({ (make) in
+            make.edges.equalToSuperview()
+        })
+        
+        viewController.didMove(toParentViewController: self)
+    }
 }

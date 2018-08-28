@@ -2,7 +2,7 @@
 //  TransactionResultViewController.swift
 //  Lumenshine
 //
-//  Created by Ionut Teslovan on 06/08/2018.
+//  Created by Soneso on 06/08/2018.
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -54,7 +54,7 @@ class TransactionResultViewController: UIViewController, WalletActionsProtocol {
     @IBOutlet weak var sendOtherOrPrintButton: UIButton!
     @IBOutlet weak var printOrDoneButton: UIButton!
     
-    var wallet: Wallet!
+    public var wallet: Wallet!
     var result: TransactionResult!
     var closeAction: (() -> ())?
     var sendOtherAction: (() -> ())?

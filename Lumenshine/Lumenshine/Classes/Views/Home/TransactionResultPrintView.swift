@@ -2,7 +2,7 @@
 //  TransactionResultPrintView.swift
 //  Lumenshine
 //
-//  Created by Ionut Teslovan on 09/08/2018.
+//  Created by Soneso on 09/08/2018.
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 

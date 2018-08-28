@@ -2,7 +2,7 @@
 //  FundTestAccountViewController.swift
 //  Lumenshine
 //
-//  Created by Ionut Teslovan on 14/08/2018.
+//  Created by Soneso on 14/08/2018.
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
