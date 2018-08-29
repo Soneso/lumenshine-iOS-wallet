@@ -59,7 +59,8 @@ class LostSecurityViewController: UIViewController {
             view.addSubview(content)
             content.snp.makeConstraints { make in
                 make.top.equalTo(headerBar.snp.bottom)
-                make.bottom.left.right.equalToSuperview()
+                make.left.right.equalToSuperview()
+                make.bottom.lessThanOrEqualTo(-50)
             }
             
             self.contentView = contentView
@@ -145,7 +146,7 @@ extension LostSecurityViewController: ToolbarHeaderDelegate {
 
 fileprivate extension LostSecurityViewController {
     func prepareView() {
-        view.backgroundColor = Stylesheet.color(.white)
+        view.backgroundColor = Stylesheet.color(.lightGray)
         prepareHeader()
     }
     

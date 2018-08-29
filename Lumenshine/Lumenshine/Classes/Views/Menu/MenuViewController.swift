@@ -99,7 +99,8 @@ fileprivate extension MenuViewController {
     }
     
     func prepareMenuButton() {
-        menuButton.transform = menuButton.transform.scaledBy(x: 1.35, y: 1.35)
+        menuButton.color = Stylesheet.color(.blue)
+//        menuButton.transform = menuButton.transform.scaledBy(x: 1.35, y: 1.35)
         menuButton.addTarget(self, action: #selector(onMenuButtonTap(_:event:)), for: .touchUpInside)
         drawerController?.delegate = self
     }

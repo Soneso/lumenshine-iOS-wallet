@@ -13,6 +13,7 @@ struct R: Rswift.Validatable {
   fileprivate static let hostingBundle = Bundle(for: R.Class.self)
   
   static func validate() throws {
+    try font.validate()
     try intern.validate()
   }
   
@@ -21,12 +22,452 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.file` struct is generated, and contains static references to 2 files.
+  /// This `R.file` struct is generated, and contains static references to 57 files.
   struct file {
+    /// Resource file `EncodeSans-Black.ttf`.
+    static let encodeSansBlackTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSans-Black", pathExtension: "ttf")
+    /// Resource file `EncodeSans-Bold.ttf`.
+    static let encodeSansBoldTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSans-Bold", pathExtension: "ttf")
+    /// Resource file `EncodeSans-ExtraBold.ttf`.
+    static let encodeSansExtraBoldTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSans-ExtraBold", pathExtension: "ttf")
+    /// Resource file `EncodeSans-ExtraLight.ttf`.
+    static let encodeSansExtraLightTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSans-ExtraLight", pathExtension: "ttf")
+    /// Resource file `EncodeSans-Light.ttf`.
+    static let encodeSansLightTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSans-Light", pathExtension: "ttf")
+    /// Resource file `EncodeSans-Medium.ttf`.
+    static let encodeSansMediumTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSans-Medium", pathExtension: "ttf")
+    /// Resource file `EncodeSans-Regular.ttf`.
+    static let encodeSansRegularTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSans-Regular", pathExtension: "ttf")
+    /// Resource file `EncodeSans-SemiBold.ttf`.
+    static let encodeSansSemiBoldTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSans-SemiBold", pathExtension: "ttf")
+    /// Resource file `EncodeSans-Thin.ttf`.
+    static let encodeSansThinTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSans-Thin", pathExtension: "ttf")
+    /// Resource file `EncodeSansCondensed-Black.ttf`.
+    static let encodeSansCondensedBlackTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansCondensed-Black", pathExtension: "ttf")
+    /// Resource file `EncodeSansCondensed-Bold.ttf`.
+    static let encodeSansCondensedBoldTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansCondensed-Bold", pathExtension: "ttf")
+    /// Resource file `EncodeSansCondensed-ExtraBold.ttf`.
+    static let encodeSansCondensedExtraBoldTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansCondensed-ExtraBold", pathExtension: "ttf")
+    /// Resource file `EncodeSansCondensed-ExtraLight.ttf`.
+    static let encodeSansCondensedExtraLightTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansCondensed-ExtraLight", pathExtension: "ttf")
+    /// Resource file `EncodeSansCondensed-Light.ttf`.
+    static let encodeSansCondensedLightTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansCondensed-Light", pathExtension: "ttf")
+    /// Resource file `EncodeSansCondensed-Medium.ttf`.
+    static let encodeSansCondensedMediumTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansCondensed-Medium", pathExtension: "ttf")
+    /// Resource file `EncodeSansCondensed-Regular.ttf`.
+    static let encodeSansCondensedRegularTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansCondensed-Regular", pathExtension: "ttf")
+    /// Resource file `EncodeSansCondensed-SemiBold.ttf`.
+    static let encodeSansCondensedSemiBoldTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansCondensed-SemiBold", pathExtension: "ttf")
+    /// Resource file `EncodeSansCondensed-Thin.ttf`.
+    static let encodeSansCondensedThinTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansCondensed-Thin", pathExtension: "ttf")
+    /// Resource file `EncodeSansExpanded-Black.ttf`.
+    static let encodeSansExpandedBlackTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansExpanded-Black", pathExtension: "ttf")
+    /// Resource file `EncodeSansExpanded-Bold.ttf`.
+    static let encodeSansExpandedBoldTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansExpanded-Bold", pathExtension: "ttf")
+    /// Resource file `EncodeSansExpanded-ExtraBold.ttf`.
+    static let encodeSansExpandedExtraBoldTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansExpanded-ExtraBold", pathExtension: "ttf")
+    /// Resource file `EncodeSansExpanded-ExtraLight.ttf`.
+    static let encodeSansExpandedExtraLightTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansExpanded-ExtraLight", pathExtension: "ttf")
+    /// Resource file `EncodeSansExpanded-Light.ttf`.
+    static let encodeSansExpandedLightTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansExpanded-Light", pathExtension: "ttf")
+    /// Resource file `EncodeSansExpanded-Medium.ttf`.
+    static let encodeSansExpandedMediumTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansExpanded-Medium", pathExtension: "ttf")
+    /// Resource file `EncodeSansExpanded-Regular.ttf`.
+    static let encodeSansExpandedRegularTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansExpanded-Regular", pathExtension: "ttf")
+    /// Resource file `EncodeSansExpanded-SemiBold.ttf`.
+    static let encodeSansExpandedSemiBoldTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansExpanded-SemiBold", pathExtension: "ttf")
+    /// Resource file `EncodeSansExpanded-Thin.ttf`.
+    static let encodeSansExpandedThinTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansExpanded-Thin", pathExtension: "ttf")
+    /// Resource file `EncodeSansSemiCondensed-Black.ttf`.
+    static let encodeSansSemiCondensedBlackTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansSemiCondensed-Black", pathExtension: "ttf")
+    /// Resource file `EncodeSansSemiCondensed-Bold.ttf`.
+    static let encodeSansSemiCondensedBoldTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansSemiCondensed-Bold", pathExtension: "ttf")
+    /// Resource file `EncodeSansSemiCondensed-ExtraBold.ttf`.
+    static let encodeSansSemiCondensedExtraBoldTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansSemiCondensed-ExtraBold", pathExtension: "ttf")
+    /// Resource file `EncodeSansSemiCondensed-ExtraLight.ttf`.
+    static let encodeSansSemiCondensedExtraLightTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansSemiCondensed-ExtraLight", pathExtension: "ttf")
+    /// Resource file `EncodeSansSemiCondensed-Light.ttf`.
+    static let encodeSansSemiCondensedLightTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansSemiCondensed-Light", pathExtension: "ttf")
+    /// Resource file `EncodeSansSemiCondensed-Medium.ttf`.
+    static let encodeSansSemiCondensedMediumTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansSemiCondensed-Medium", pathExtension: "ttf")
+    /// Resource file `EncodeSansSemiCondensed-Regular.ttf`.
+    static let encodeSansSemiCondensedRegularTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansSemiCondensed-Regular", pathExtension: "ttf")
+    /// Resource file `EncodeSansSemiCondensed-SemiBold.ttf`.
+    static let encodeSansSemiCondensedSemiBoldTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansSemiCondensed-SemiBold", pathExtension: "ttf")
+    /// Resource file `EncodeSansSemiCondensed-Thin.ttf`.
+    static let encodeSansSemiCondensedThinTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansSemiCondensed-Thin", pathExtension: "ttf")
+    /// Resource file `EncodeSansSemiExpanded-Black.ttf`.
+    static let encodeSansSemiExpandedBlackTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansSemiExpanded-Black", pathExtension: "ttf")
+    /// Resource file `EncodeSansSemiExpanded-Bold.ttf`.
+    static let encodeSansSemiExpandedBoldTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansSemiExpanded-Bold", pathExtension: "ttf")
+    /// Resource file `EncodeSansSemiExpanded-ExtraBold.ttf`.
+    static let encodeSansSemiExpandedExtraBoldTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansSemiExpanded-ExtraBold", pathExtension: "ttf")
+    /// Resource file `EncodeSansSemiExpanded-ExtraLight.ttf`.
+    static let encodeSansSemiExpandedExtraLightTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansSemiExpanded-ExtraLight", pathExtension: "ttf")
+    /// Resource file `EncodeSansSemiExpanded-Light.ttf`.
+    static let encodeSansSemiExpandedLightTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansSemiExpanded-Light", pathExtension: "ttf")
+    /// Resource file `EncodeSansSemiExpanded-Medium.ttf`.
+    static let encodeSansSemiExpandedMediumTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansSemiExpanded-Medium", pathExtension: "ttf")
+    /// Resource file `EncodeSansSemiExpanded-Regular.ttf`.
+    static let encodeSansSemiExpandedRegularTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansSemiExpanded-Regular", pathExtension: "ttf")
+    /// Resource file `EncodeSansSemiExpanded-SemiBold.ttf`.
+    static let encodeSansSemiExpandedSemiBoldTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansSemiExpanded-SemiBold", pathExtension: "ttf")
+    /// Resource file `EncodeSansSemiExpanded-Thin.ttf`.
+    static let encodeSansSemiExpandedThinTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "EncodeSansSemiExpanded-Thin", pathExtension: "ttf")
+    /// Resource file `Lato-Black.ttf`.
+    static let latoBlackTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "Lato-Black", pathExtension: "ttf")
+    /// Resource file `Lato-BlackItalic.ttf`.
+    static let latoBlackItalicTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "Lato-BlackItalic", pathExtension: "ttf")
+    /// Resource file `Lato-Bold.ttf`.
+    static let latoBoldTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "Lato-Bold", pathExtension: "ttf")
+    /// Resource file `Lato-BoldItalic.ttf`.
+    static let latoBoldItalicTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "Lato-BoldItalic", pathExtension: "ttf")
+    /// Resource file `Lato-Hairline.ttf`.
+    static let latoHairlineTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "Lato-Hairline", pathExtension: "ttf")
+    /// Resource file `Lato-HairlineItalic.ttf`.
+    static let latoHairlineItalicTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "Lato-HairlineItalic", pathExtension: "ttf")
+    /// Resource file `Lato-Italic.ttf`.
+    static let latoItalicTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "Lato-Italic", pathExtension: "ttf")
+    /// Resource file `Lato-Light.ttf`.
+    static let latoLightTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "Lato-Light", pathExtension: "ttf")
+    /// Resource file `Lato-LightItalic.ttf`.
+    static let latoLightItalicTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "Lato-LightItalic", pathExtension: "ttf")
+    /// Resource file `Lato-Regular.ttf`.
+    static let latoRegularTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "Lato-Regular", pathExtension: "ttf")
     /// Resource file `MaterialIcons.bundle`.
     static let materialIconsBundle = Rswift.FileResource(bundle: R.hostingBundle, name: "MaterialIcons", pathExtension: "bundle")
     /// Resource file `receive_payment.html`.
     static let receive_paymentHtml = Rswift.FileResource(bundle: R.hostingBundle, name: "receive_payment", pathExtension: "html")
+    
+    /// `bundle.url(forResource: "EncodeSans-Black", withExtension: "ttf")`
+    static func encodeSansBlackTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansBlackTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSans-Bold", withExtension: "ttf")`
+    static func encodeSansBoldTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansBoldTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSans-ExtraBold", withExtension: "ttf")`
+    static func encodeSansExtraBoldTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansExtraBoldTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSans-ExtraLight", withExtension: "ttf")`
+    static func encodeSansExtraLightTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansExtraLightTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSans-Light", withExtension: "ttf")`
+    static func encodeSansLightTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansLightTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSans-Medium", withExtension: "ttf")`
+    static func encodeSansMediumTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansMediumTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSans-Regular", withExtension: "ttf")`
+    static func encodeSansRegularTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansRegularTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSans-SemiBold", withExtension: "ttf")`
+    static func encodeSansSemiBoldTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansSemiBoldTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSans-Thin", withExtension: "ttf")`
+    static func encodeSansThinTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansThinTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansCondensed-Black", withExtension: "ttf")`
+    static func encodeSansCondensedBlackTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansCondensedBlackTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansCondensed-Bold", withExtension: "ttf")`
+    static func encodeSansCondensedBoldTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansCondensedBoldTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansCondensed-ExtraBold", withExtension: "ttf")`
+    static func encodeSansCondensedExtraBoldTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansCondensedExtraBoldTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansCondensed-ExtraLight", withExtension: "ttf")`
+    static func encodeSansCondensedExtraLightTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansCondensedExtraLightTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansCondensed-Light", withExtension: "ttf")`
+    static func encodeSansCondensedLightTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansCondensedLightTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansCondensed-Medium", withExtension: "ttf")`
+    static func encodeSansCondensedMediumTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansCondensedMediumTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansCondensed-Regular", withExtension: "ttf")`
+    static func encodeSansCondensedRegularTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansCondensedRegularTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansCondensed-SemiBold", withExtension: "ttf")`
+    static func encodeSansCondensedSemiBoldTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansCondensedSemiBoldTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansCondensed-Thin", withExtension: "ttf")`
+    static func encodeSansCondensedThinTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansCondensedThinTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansExpanded-Black", withExtension: "ttf")`
+    static func encodeSansExpandedBlackTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansExpandedBlackTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansExpanded-Bold", withExtension: "ttf")`
+    static func encodeSansExpandedBoldTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansExpandedBoldTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansExpanded-ExtraBold", withExtension: "ttf")`
+    static func encodeSansExpandedExtraBoldTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansExpandedExtraBoldTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansExpanded-ExtraLight", withExtension: "ttf")`
+    static func encodeSansExpandedExtraLightTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansExpandedExtraLightTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansExpanded-Light", withExtension: "ttf")`
+    static func encodeSansExpandedLightTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansExpandedLightTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansExpanded-Medium", withExtension: "ttf")`
+    static func encodeSansExpandedMediumTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansExpandedMediumTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansExpanded-Regular", withExtension: "ttf")`
+    static func encodeSansExpandedRegularTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansExpandedRegularTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansExpanded-SemiBold", withExtension: "ttf")`
+    static func encodeSansExpandedSemiBoldTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansExpandedSemiBoldTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansExpanded-Thin", withExtension: "ttf")`
+    static func encodeSansExpandedThinTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansExpandedThinTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansSemiCondensed-Black", withExtension: "ttf")`
+    static func encodeSansSemiCondensedBlackTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansSemiCondensedBlackTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansSemiCondensed-Bold", withExtension: "ttf")`
+    static func encodeSansSemiCondensedBoldTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansSemiCondensedBoldTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansSemiCondensed-ExtraBold", withExtension: "ttf")`
+    static func encodeSansSemiCondensedExtraBoldTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansSemiCondensedExtraBoldTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansSemiCondensed-ExtraLight", withExtension: "ttf")`
+    static func encodeSansSemiCondensedExtraLightTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansSemiCondensedExtraLightTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansSemiCondensed-Light", withExtension: "ttf")`
+    static func encodeSansSemiCondensedLightTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansSemiCondensedLightTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansSemiCondensed-Medium", withExtension: "ttf")`
+    static func encodeSansSemiCondensedMediumTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansSemiCondensedMediumTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansSemiCondensed-Regular", withExtension: "ttf")`
+    static func encodeSansSemiCondensedRegularTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansSemiCondensedRegularTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansSemiCondensed-SemiBold", withExtension: "ttf")`
+    static func encodeSansSemiCondensedSemiBoldTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansSemiCondensedSemiBoldTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansSemiCondensed-Thin", withExtension: "ttf")`
+    static func encodeSansSemiCondensedThinTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansSemiCondensedThinTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansSemiExpanded-Black", withExtension: "ttf")`
+    static func encodeSansSemiExpandedBlackTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansSemiExpandedBlackTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansSemiExpanded-Bold", withExtension: "ttf")`
+    static func encodeSansSemiExpandedBoldTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansSemiExpandedBoldTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansSemiExpanded-ExtraBold", withExtension: "ttf")`
+    static func encodeSansSemiExpandedExtraBoldTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansSemiExpandedExtraBoldTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansSemiExpanded-ExtraLight", withExtension: "ttf")`
+    static func encodeSansSemiExpandedExtraLightTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansSemiExpandedExtraLightTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansSemiExpanded-Light", withExtension: "ttf")`
+    static func encodeSansSemiExpandedLightTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansSemiExpandedLightTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansSemiExpanded-Medium", withExtension: "ttf")`
+    static func encodeSansSemiExpandedMediumTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansSemiExpandedMediumTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansSemiExpanded-Regular", withExtension: "ttf")`
+    static func encodeSansSemiExpandedRegularTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansSemiExpandedRegularTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansSemiExpanded-SemiBold", withExtension: "ttf")`
+    static func encodeSansSemiExpandedSemiBoldTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansSemiExpandedSemiBoldTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "EncodeSansSemiExpanded-Thin", withExtension: "ttf")`
+    static func encodeSansSemiExpandedThinTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.encodeSansSemiExpandedThinTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "Lato-Black", withExtension: "ttf")`
+    static func latoBlackTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.latoBlackTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "Lato-BlackItalic", withExtension: "ttf")`
+    static func latoBlackItalicTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.latoBlackItalicTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "Lato-Bold", withExtension: "ttf")`
+    static func latoBoldTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.latoBoldTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "Lato-BoldItalic", withExtension: "ttf")`
+    static func latoBoldItalicTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.latoBoldItalicTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "Lato-Hairline", withExtension: "ttf")`
+    static func latoHairlineTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.latoHairlineTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "Lato-HairlineItalic", withExtension: "ttf")`
+    static func latoHairlineItalicTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.latoHairlineItalicTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "Lato-Italic", withExtension: "ttf")`
+    static func latoItalicTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.latoItalicTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "Lato-Light", withExtension: "ttf")`
+    static func latoLightTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.latoLightTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "Lato-LightItalic", withExtension: "ttf")`
+    static func latoLightItalicTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.latoLightItalicTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "Lato-Regular", withExtension: "ttf")`
+    static func latoRegularTtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.latoRegularTtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
     
     /// `bundle.url(forResource: "MaterialIcons", withExtension: "bundle")`
     static func materialIconsBundle(_: Void = ()) -> Foundation.URL? {
@@ -43,12 +484,456 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.font` struct is generated, and contains static references to 0 fonts.
-  struct font {
+  /// This `R.font` struct is generated, and contains static references to 55 fonts.
+  struct font: Rswift.Validatable {
+    /// Font `EncodeSans-Black`.
+    static let encodeSansBlack = Rswift.FontResource(fontName: "EncodeSans-Black")
+    /// Font `EncodeSans-Bold`.
+    static let encodeSansBold = Rswift.FontResource(fontName: "EncodeSans-Bold")
+    /// Font `EncodeSans-ExtraBold`.
+    static let encodeSansExtraBold = Rswift.FontResource(fontName: "EncodeSans-ExtraBold")
+    /// Font `EncodeSans-ExtraLight`.
+    static let encodeSansExtraLight = Rswift.FontResource(fontName: "EncodeSans-ExtraLight")
+    /// Font `EncodeSans-Light`.
+    static let encodeSansLight = Rswift.FontResource(fontName: "EncodeSans-Light")
+    /// Font `EncodeSans-Medium`.
+    static let encodeSansMedium = Rswift.FontResource(fontName: "EncodeSans-Medium")
+    /// Font `EncodeSans-Regular`.
+    static let encodeSansRegular = Rswift.FontResource(fontName: "EncodeSans-Regular")
+    /// Font `EncodeSans-SemiBold`.
+    static let encodeSansSemiBold = Rswift.FontResource(fontName: "EncodeSans-SemiBold")
+    /// Font `EncodeSans-Thin`.
+    static let encodeSansThin = Rswift.FontResource(fontName: "EncodeSans-Thin")
+    /// Font `EncodeSansCondensed-Black`.
+    static let encodeSansCondensedBlack = Rswift.FontResource(fontName: "EncodeSansCondensed-Black")
+    /// Font `EncodeSansCondensed-Bold`.
+    static let encodeSansCondensedBold = Rswift.FontResource(fontName: "EncodeSansCondensed-Bold")
+    /// Font `EncodeSansCondensed-ExtraBold`.
+    static let encodeSansCondensedExtraBold = Rswift.FontResource(fontName: "EncodeSansCondensed-ExtraBold")
+    /// Font `EncodeSansCondensed-ExtraLight`.
+    static let encodeSansCondensedExtraLight = Rswift.FontResource(fontName: "EncodeSansCondensed-ExtraLight")
+    /// Font `EncodeSansCondensed-Light`.
+    static let encodeSansCondensedLight = Rswift.FontResource(fontName: "EncodeSansCondensed-Light")
+    /// Font `EncodeSansCondensed-Medium`.
+    static let encodeSansCondensedMedium = Rswift.FontResource(fontName: "EncodeSansCondensed-Medium")
+    /// Font `EncodeSansCondensed-Regular`.
+    static let encodeSansCondensedRegular = Rswift.FontResource(fontName: "EncodeSansCondensed-Regular")
+    /// Font `EncodeSansCondensed-SemiBold`.
+    static let encodeSansCondensedSemiBold = Rswift.FontResource(fontName: "EncodeSansCondensed-SemiBold")
+    /// Font `EncodeSansCondensed-Thin`.
+    static let encodeSansCondensedThin = Rswift.FontResource(fontName: "EncodeSansCondensed-Thin")
+    /// Font `EncodeSansExpanded-Black`.
+    static let encodeSansExpandedBlack = Rswift.FontResource(fontName: "EncodeSansExpanded-Black")
+    /// Font `EncodeSansExpanded-Bold`.
+    static let encodeSansExpandedBold = Rswift.FontResource(fontName: "EncodeSansExpanded-Bold")
+    /// Font `EncodeSansExpanded-ExtraBold`.
+    static let encodeSansExpandedExtraBold = Rswift.FontResource(fontName: "EncodeSansExpanded-ExtraBold")
+    /// Font `EncodeSansExpanded-ExtraLight`.
+    static let encodeSansExpandedExtraLight = Rswift.FontResource(fontName: "EncodeSansExpanded-ExtraLight")
+    /// Font `EncodeSansExpanded-Light`.
+    static let encodeSansExpandedLight = Rswift.FontResource(fontName: "EncodeSansExpanded-Light")
+    /// Font `EncodeSansExpanded-Medium`.
+    static let encodeSansExpandedMedium = Rswift.FontResource(fontName: "EncodeSansExpanded-Medium")
+    /// Font `EncodeSansExpanded-Regular`.
+    static let encodeSansExpandedRegular = Rswift.FontResource(fontName: "EncodeSansExpanded-Regular")
+    /// Font `EncodeSansExpanded-SemiBold`.
+    static let encodeSansExpandedSemiBold = Rswift.FontResource(fontName: "EncodeSansExpanded-SemiBold")
+    /// Font `EncodeSansExpanded-Thin`.
+    static let encodeSansExpandedThin = Rswift.FontResource(fontName: "EncodeSansExpanded-Thin")
+    /// Font `EncodeSansSemiCondensed-Black`.
+    static let encodeSansSemiCondensedBlack = Rswift.FontResource(fontName: "EncodeSansSemiCondensed-Black")
+    /// Font `EncodeSansSemiCondensed-Bold`.
+    static let encodeSansSemiCondensedBold = Rswift.FontResource(fontName: "EncodeSansSemiCondensed-Bold")
+    /// Font `EncodeSansSemiCondensed-ExtraBold`.
+    static let encodeSansSemiCondensedExtraBold = Rswift.FontResource(fontName: "EncodeSansSemiCondensed-ExtraBold")
+    /// Font `EncodeSansSemiCondensed-ExtraLight`.
+    static let encodeSansSemiCondensedExtraLight = Rswift.FontResource(fontName: "EncodeSansSemiCondensed-ExtraLight")
+    /// Font `EncodeSansSemiCondensed-Light`.
+    static let encodeSansSemiCondensedLight = Rswift.FontResource(fontName: "EncodeSansSemiCondensed-Light")
+    /// Font `EncodeSansSemiCondensed-Medium`.
+    static let encodeSansSemiCondensedMedium = Rswift.FontResource(fontName: "EncodeSansSemiCondensed-Medium")
+    /// Font `EncodeSansSemiCondensed-Regular`.
+    static let encodeSansSemiCondensedRegular = Rswift.FontResource(fontName: "EncodeSansSemiCondensed-Regular")
+    /// Font `EncodeSansSemiCondensed-SemiBold`.
+    static let encodeSansSemiCondensedSemiBold = Rswift.FontResource(fontName: "EncodeSansSemiCondensed-SemiBold")
+    /// Font `EncodeSansSemiCondensed-Thin`.
+    static let encodeSansSemiCondensedThin = Rswift.FontResource(fontName: "EncodeSansSemiCondensed-Thin")
+    /// Font `EncodeSansSemiExpanded-Black`.
+    static let encodeSansSemiExpandedBlack = Rswift.FontResource(fontName: "EncodeSansSemiExpanded-Black")
+    /// Font `EncodeSansSemiExpanded-Bold`.
+    static let encodeSansSemiExpandedBold = Rswift.FontResource(fontName: "EncodeSansSemiExpanded-Bold")
+    /// Font `EncodeSansSemiExpanded-ExtraBold`.
+    static let encodeSansSemiExpandedExtraBold = Rswift.FontResource(fontName: "EncodeSansSemiExpanded-ExtraBold")
+    /// Font `EncodeSansSemiExpanded-ExtraLight`.
+    static let encodeSansSemiExpandedExtraLight = Rswift.FontResource(fontName: "EncodeSansSemiExpanded-ExtraLight")
+    /// Font `EncodeSansSemiExpanded-Light`.
+    static let encodeSansSemiExpandedLight = Rswift.FontResource(fontName: "EncodeSansSemiExpanded-Light")
+    /// Font `EncodeSansSemiExpanded-Medium`.
+    static let encodeSansSemiExpandedMedium = Rswift.FontResource(fontName: "EncodeSansSemiExpanded-Medium")
+    /// Font `EncodeSansSemiExpanded-Regular`.
+    static let encodeSansSemiExpandedRegular = Rswift.FontResource(fontName: "EncodeSansSemiExpanded-Regular")
+    /// Font `EncodeSansSemiExpanded-SemiBold`.
+    static let encodeSansSemiExpandedSemiBold = Rswift.FontResource(fontName: "EncodeSansSemiExpanded-SemiBold")
+    /// Font `EncodeSansSemiExpanded-Thin`.
+    static let encodeSansSemiExpandedThin = Rswift.FontResource(fontName: "EncodeSansSemiExpanded-Thin")
+    /// Font `Lato-BlackItalic`.
+    static let latoBlackItalic = Rswift.FontResource(fontName: "Lato-BlackItalic")
+    /// Font `Lato-Black`.
+    static let latoBlack = Rswift.FontResource(fontName: "Lato-Black")
+    /// Font `Lato-BoldItalic`.
+    static let latoBoldItalic = Rswift.FontResource(fontName: "Lato-BoldItalic")
+    /// Font `Lato-Bold`.
+    static let latoBold = Rswift.FontResource(fontName: "Lato-Bold")
+    /// Font `Lato-HairlineItalic`.
+    static let latoHairlineItalic = Rswift.FontResource(fontName: "Lato-HairlineItalic")
+    /// Font `Lato-Hairline`.
+    static let latoHairline = Rswift.FontResource(fontName: "Lato-Hairline")
+    /// Font `Lato-Italic`.
+    static let latoItalic = Rswift.FontResource(fontName: "Lato-Italic")
+    /// Font `Lato-LightItalic`.
+    static let latoLightItalic = Rswift.FontResource(fontName: "Lato-LightItalic")
+    /// Font `Lato-Light`.
+    static let latoLight = Rswift.FontResource(fontName: "Lato-Light")
+    /// Font `Lato-Regular`.
+    static let latoRegular = Rswift.FontResource(fontName: "Lato-Regular")
+    
+    /// `UIFont(name: "EncodeSans-Black", size: ...)`
+    static func encodeSansBlack(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansBlack, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSans-Bold", size: ...)`
+    static func encodeSansBold(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansBold, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSans-ExtraBold", size: ...)`
+    static func encodeSansExtraBold(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansExtraBold, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSans-ExtraLight", size: ...)`
+    static func encodeSansExtraLight(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansExtraLight, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSans-Light", size: ...)`
+    static func encodeSansLight(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansLight, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSans-Medium", size: ...)`
+    static func encodeSansMedium(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansMedium, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSans-Regular", size: ...)`
+    static func encodeSansRegular(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansRegular, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSans-SemiBold", size: ...)`
+    static func encodeSansSemiBold(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansSemiBold, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSans-Thin", size: ...)`
+    static func encodeSansThin(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansThin, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansCondensed-Black", size: ...)`
+    static func encodeSansCondensedBlack(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansCondensedBlack, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansCondensed-Bold", size: ...)`
+    static func encodeSansCondensedBold(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansCondensedBold, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansCondensed-ExtraBold", size: ...)`
+    static func encodeSansCondensedExtraBold(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansCondensedExtraBold, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansCondensed-ExtraLight", size: ...)`
+    static func encodeSansCondensedExtraLight(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansCondensedExtraLight, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansCondensed-Light", size: ...)`
+    static func encodeSansCondensedLight(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansCondensedLight, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansCondensed-Medium", size: ...)`
+    static func encodeSansCondensedMedium(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansCondensedMedium, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansCondensed-Regular", size: ...)`
+    static func encodeSansCondensedRegular(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansCondensedRegular, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansCondensed-SemiBold", size: ...)`
+    static func encodeSansCondensedSemiBold(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansCondensedSemiBold, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansCondensed-Thin", size: ...)`
+    static func encodeSansCondensedThin(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansCondensedThin, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansExpanded-Black", size: ...)`
+    static func encodeSansExpandedBlack(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansExpandedBlack, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansExpanded-Bold", size: ...)`
+    static func encodeSansExpandedBold(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansExpandedBold, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansExpanded-ExtraBold", size: ...)`
+    static func encodeSansExpandedExtraBold(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansExpandedExtraBold, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansExpanded-ExtraLight", size: ...)`
+    static func encodeSansExpandedExtraLight(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansExpandedExtraLight, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansExpanded-Light", size: ...)`
+    static func encodeSansExpandedLight(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansExpandedLight, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansExpanded-Medium", size: ...)`
+    static func encodeSansExpandedMedium(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansExpandedMedium, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansExpanded-Regular", size: ...)`
+    static func encodeSansExpandedRegular(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansExpandedRegular, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansExpanded-SemiBold", size: ...)`
+    static func encodeSansExpandedSemiBold(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansExpandedSemiBold, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansExpanded-Thin", size: ...)`
+    static func encodeSansExpandedThin(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansExpandedThin, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansSemiCondensed-Black", size: ...)`
+    static func encodeSansSemiCondensedBlack(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansSemiCondensedBlack, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansSemiCondensed-Bold", size: ...)`
+    static func encodeSansSemiCondensedBold(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansSemiCondensedBold, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansSemiCondensed-ExtraBold", size: ...)`
+    static func encodeSansSemiCondensedExtraBold(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansSemiCondensedExtraBold, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansSemiCondensed-ExtraLight", size: ...)`
+    static func encodeSansSemiCondensedExtraLight(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansSemiCondensedExtraLight, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansSemiCondensed-Light", size: ...)`
+    static func encodeSansSemiCondensedLight(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansSemiCondensedLight, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansSemiCondensed-Medium", size: ...)`
+    static func encodeSansSemiCondensedMedium(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansSemiCondensedMedium, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansSemiCondensed-Regular", size: ...)`
+    static func encodeSansSemiCondensedRegular(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansSemiCondensedRegular, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansSemiCondensed-SemiBold", size: ...)`
+    static func encodeSansSemiCondensedSemiBold(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansSemiCondensedSemiBold, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansSemiCondensed-Thin", size: ...)`
+    static func encodeSansSemiCondensedThin(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansSemiCondensedThin, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansSemiExpanded-Black", size: ...)`
+    static func encodeSansSemiExpandedBlack(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansSemiExpandedBlack, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansSemiExpanded-Bold", size: ...)`
+    static func encodeSansSemiExpandedBold(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansSemiExpandedBold, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansSemiExpanded-ExtraBold", size: ...)`
+    static func encodeSansSemiExpandedExtraBold(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansSemiExpandedExtraBold, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansSemiExpanded-ExtraLight", size: ...)`
+    static func encodeSansSemiExpandedExtraLight(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansSemiExpandedExtraLight, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansSemiExpanded-Light", size: ...)`
+    static func encodeSansSemiExpandedLight(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansSemiExpandedLight, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansSemiExpanded-Medium", size: ...)`
+    static func encodeSansSemiExpandedMedium(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansSemiExpandedMedium, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansSemiExpanded-Regular", size: ...)`
+    static func encodeSansSemiExpandedRegular(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansSemiExpandedRegular, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansSemiExpanded-SemiBold", size: ...)`
+    static func encodeSansSemiExpandedSemiBold(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansSemiExpandedSemiBold, size: size)
+    }
+    
+    /// `UIFont(name: "EncodeSansSemiExpanded-Thin", size: ...)`
+    static func encodeSansSemiExpandedThin(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: encodeSansSemiExpandedThin, size: size)
+    }
+    
+    /// `UIFont(name: "Lato-Black", size: ...)`
+    static func latoBlack(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: latoBlack, size: size)
+    }
+    
+    /// `UIFont(name: "Lato-BlackItalic", size: ...)`
+    static func latoBlackItalic(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: latoBlackItalic, size: size)
+    }
+    
+    /// `UIFont(name: "Lato-Bold", size: ...)`
+    static func latoBold(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: latoBold, size: size)
+    }
+    
+    /// `UIFont(name: "Lato-BoldItalic", size: ...)`
+    static func latoBoldItalic(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: latoBoldItalic, size: size)
+    }
+    
+    /// `UIFont(name: "Lato-Hairline", size: ...)`
+    static func latoHairline(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: latoHairline, size: size)
+    }
+    
+    /// `UIFont(name: "Lato-HairlineItalic", size: ...)`
+    static func latoHairlineItalic(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: latoHairlineItalic, size: size)
+    }
+    
+    /// `UIFont(name: "Lato-Italic", size: ...)`
+    static func latoItalic(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: latoItalic, size: size)
+    }
+    
+    /// `UIFont(name: "Lato-Light", size: ...)`
+    static func latoLight(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: latoLight, size: size)
+    }
+    
+    /// `UIFont(name: "Lato-LightItalic", size: ...)`
+    static func latoLightItalic(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: latoLightItalic, size: size)
+    }
+    
+    /// `UIFont(name: "Lato-Regular", size: ...)`
+    static func latoRegular(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: latoRegular, size: size)
+    }
+    
+    static func validate() throws {
+      if R.font.encodeSansMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Medium' could not be loaded, is 'EncodeSans-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Bold' could not be loaded, is 'EncodeSansExpanded-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-SemiBold' could not be loaded, is 'EncodeSansSemiExpanded-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Bold' could not be loaded, is 'Lato-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Light' could not be loaded, is 'EncodeSansExpanded-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-SemiBold' could not be loaded, is 'EncodeSansExpanded-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Thin' could not be loaded, is 'EncodeSansCondensed-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Light' could not be loaded, is 'EncodeSansSemiExpanded-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Bold' could not be loaded, is 'EncodeSansSemiCondensed-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Black' could not be loaded, is 'EncodeSansSemiCondensed-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Bold' could not be loaded, is 'EncodeSansSemiExpanded-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Black' could not be loaded, is 'EncodeSansSemiExpanded-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoHairlineItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-HairlineItalic' could not be loaded, is 'Lato-HairlineItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoBlackItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-BlackItalic' could not be loaded, is 'Lato-BlackItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Regular' could not be loaded, is 'EncodeSans-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-ExtraLight' could not be loaded, is 'EncodeSansCondensed-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-SemiBold' could not be loaded, is 'EncodeSansCondensed-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoBoldItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-BoldItalic' could not be loaded, is 'Lato-BoldItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Regular' could not be loaded, is 'Lato-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Bold' could not be loaded, is 'EncodeSans-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Italic' could not be loaded, is 'Lato-Italic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Regular' could not be loaded, is 'EncodeSansSemiCondensed-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoHairline(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Hairline' could not be loaded, is 'Lato-Hairline.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-ExtraLight' could not be loaded, is 'EncodeSans-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoLightItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-LightItalic' could not be loaded, is 'Lato-LightItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-SemiBold' could not be loaded, is 'EncodeSans-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-ExtraBold' could not be loaded, is 'EncodeSansExpanded-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Medium' could not be loaded, is 'EncodeSansExpanded-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-SemiBold' could not be loaded, is 'EncodeSansSemiCondensed-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Black' could not be loaded, is 'EncodeSansExpanded-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Regular' could not be loaded, is 'EncodeSansExpanded-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Regular' could not be loaded, is 'EncodeSansSemiExpanded-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Light' could not be loaded, is 'EncodeSans-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Thin' could not be loaded, is 'EncodeSansExpanded-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Medium' could not be loaded, is 'EncodeSansCondensed-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Light' could not be loaded, is 'EncodeSansCondensed-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-ExtraBold' could not be loaded, is 'EncodeSans-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Bold' could not be loaded, is 'EncodeSansCondensed-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Black' could not be loaded, is 'EncodeSans-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Regular' could not be loaded, is 'EncodeSansCondensed-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Black' could not be loaded, is 'Lato-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Medium' could not be loaded, is 'EncodeSansSemiExpanded-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-ExtraBold' could not be loaded, is 'EncodeSansCondensed-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Thin' could not be loaded, is 'EncodeSansSemiExpanded-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-ExtraLight' could not be loaded, is 'EncodeSansExpanded-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Light' could not be loaded, is 'Lato-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-ExtraLight' could not be loaded, is 'EncodeSansSemiCondensed-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Light' could not be loaded, is 'EncodeSansSemiCondensed-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Thin' could not be loaded, is 'EncodeSansSemiCondensed-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Medium' could not be loaded, is 'EncodeSansSemiCondensed-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-ExtraBold' could not be loaded, is 'EncodeSansSemiCondensed-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-ExtraLight' could not be loaded, is 'EncodeSansSemiExpanded-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Black' could not be loaded, is 'EncodeSansCondensed-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Thin' could not be loaded, is 'EncodeSans-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-ExtraBold' could not be loaded, is 'EncodeSansSemiExpanded-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+    }
+    
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 30 images.
+  /// This `R.image` struct is generated, and contains static references to 33 images.
   struct image {
     /// Image `FaceIcon`.
     static let faceIcon = Rswift.ImageResource(bundle: R.hostingBundle, name: "FaceIcon")
@@ -74,10 +959,14 @@ struct R: Rswift.Validatable {
     static let found_account = Rswift.ImageResource(bundle: R.hostingBundle, name: "found_account")
     /// Image `gear`.
     static let gear = Rswift.ImageResource(bundle: R.hostingBundle, name: "gear")
+    /// Image `header_background`.
+    static let header_background = Rswift.ImageResource(bundle: R.hostingBundle, name: "header_background")
     /// Image `home`.
     static let home = Rswift.ImageResource(bundle: R.hostingBundle, name: "home")
     /// Image `lock`.
     static let lock = Rswift.ImageResource(bundle: R.hostingBundle, name: "lock")
+    /// Image `logo`.
+    static let logo = Rswift.ImageResource(bundle: R.hostingBundle, name: "logo")
     /// Image `money-1`.
     static let money1 = Rswift.ImageResource(bundle: R.hostingBundle, name: "money-1")
     /// Image `money-2`.
@@ -102,6 +991,8 @@ struct R: Rswift.Validatable {
     static let signIn = Rswift.ImageResource(bundle: R.hostingBundle, name: "signIn")
     /// Image `signOut`.
     static let signOut = Rswift.ImageResource(bundle: R.hostingBundle, name: "signOut")
+    /// Image `soneso`.
+    static let soneso = Rswift.ImageResource(bundle: R.hostingBundle, name: "soneso")
     /// Image `star`.
     static let star = Rswift.ImageResource(bundle: R.hostingBundle, name: "star")
     /// Image `top_list`.
@@ -171,6 +1062,11 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.gear, compatibleWith: traitCollection)
     }
     
+    /// `UIImage(named: "header_background", bundle: ..., traitCollection: ...)`
+    static func header_background(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.header_background, compatibleWith: traitCollection)
+    }
+    
     /// `UIImage(named: "home", bundle: ..., traitCollection: ...)`
     static func home(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.home, compatibleWith: traitCollection)
@@ -179,6 +1075,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "lock", bundle: ..., traitCollection: ...)`
     static func lock(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.lock, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "logo", bundle: ..., traitCollection: ...)`
+    static func logo(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.logo, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "money-1", bundle: ..., traitCollection: ...)`
@@ -241,6 +1142,11 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.signOut, compatibleWith: traitCollection)
     }
     
+    /// `UIImage(named: "soneso", bundle: ..., traitCollection: ...)`
+    static func soneso(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.soneso, compatibleWith: traitCollection)
+    }
+    
     /// `UIImage(named: "star", bundle: ..., traitCollection: ...)`
     static func star(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.star, compatibleWith: traitCollection)
@@ -264,7 +1170,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.nib` struct is generated, and contains static references to 17 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 21 nibs.
   struct nib {
     /// Nib `AccountCurrenciesViewController`.
     static let accountCurrenciesViewController = _R.nib._AccountCurrenciesViewController()
@@ -282,6 +1188,8 @@ struct R: Rswift.Validatable {
     static let homeUnfoundedHeaderView = _R.nib._HomeUnfoundedHeaderView()
     /// Nib `IconView`.
     static let iconView = _R.nib._IconView()
+    /// Nib `LoadTransactionsHistoryViewController`.
+    static let loadTransactionsHistoryViewController = _R.nib._LoadTransactionsHistoryViewController()
     /// Nib `ReceivePaymentCardViewController`.
     static let receivePaymentCardViewController = _R.nib._ReceivePaymentCardViewController()
     /// Nib `ReceivePaymentPrintView`.
@@ -290,10 +1198,16 @@ struct R: Rswift.Validatable {
     static let sendViewController = _R.nib._SendViewController()
     /// Nib `TitleView`.
     static let titleView = _R.nib._TitleView()
+    /// Nib `TransactionHistoryDetailsViewController`.
+    static let transactionHistoryDetailsViewController = _R.nib._TransactionHistoryDetailsViewController()
+    /// Nib `TransactionHistoryTableViewController`.
+    static let transactionHistoryTableViewController = _R.nib._TransactionHistoryTableViewController()
     /// Nib `TransactionResultPrintView`.
     static let transactionResultPrintView = _R.nib._TransactionResultPrintView()
     /// Nib `TransactionResultViewController`.
     static let transactionResultViewController = _R.nib._TransactionResultViewController()
+    /// Nib `TransactionTableViewCell`.
+    static let transactionTableViewCell = _R.nib._TransactionTableViewCell()
     /// Nib `UnfoundedWalletCardContentView`.
     static let unfoundedWalletCardContentView = _R.nib._UnfoundedWalletCardContentView()
     /// Nib `WalletCardContentView`.
@@ -341,6 +1255,11 @@ struct R: Rswift.Validatable {
       return UIKit.UINib(resource: R.nib.iconView)
     }
     
+    /// `UINib(name: "LoadTransactionsHistoryViewController", in: bundle)`
+    static func loadTransactionsHistoryViewController(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.loadTransactionsHistoryViewController)
+    }
+    
     /// `UINib(name: "ReceivePaymentCardViewController", in: bundle)`
     static func receivePaymentCardViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.receivePaymentCardViewController)
@@ -361,6 +1280,16 @@ struct R: Rswift.Validatable {
       return UIKit.UINib(resource: R.nib.titleView)
     }
     
+    /// `UINib(name: "TransactionHistoryDetailsViewController", in: bundle)`
+    static func transactionHistoryDetailsViewController(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.transactionHistoryDetailsViewController)
+    }
+    
+    /// `UINib(name: "TransactionHistoryTableViewController", in: bundle)`
+    static func transactionHistoryTableViewController(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.transactionHistoryTableViewController)
+    }
+    
     /// `UINib(name: "TransactionResultPrintView", in: bundle)`
     static func transactionResultPrintView(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.transactionResultPrintView)
@@ -369,6 +1298,11 @@ struct R: Rswift.Validatable {
     /// `UINib(name: "TransactionResultViewController", in: bundle)`
     static func transactionResultViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.transactionResultViewController)
+    }
+    
+    /// `UINib(name: "TransactionTableViewCell", in: bundle)`
+    static func transactionTableViewCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.transactionTableViewCell)
     }
     
     /// `UINib(name: "UnfoundedWalletCardContentView", in: bundle)`
@@ -464,7 +1398,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 174 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 178 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -506,6 +1440,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let lbl_tfa = Rswift.StringResource(key: "lbl_tfa", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: 2 Factor Authentication Code
+      /// 
+      /// Locales: en
+      static let lbl_tfa_code = Rswift.StringResource(key: "lbl_tfa_code", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: 2FA Code
       /// 
       /// Locales: en
@@ -782,6 +1720,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let login = Rswift.StringResource(key: "login", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Login to continue
+      /// 
+      /// Locales: en
+      static let login_continue = Rswift.StringResource(key: "login_continue", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Lost 2FA Secret
       /// 
       /// Locales: en
@@ -862,6 +1804,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let password_changed = Rswift.StringResource(key: "password_changed", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Please fill in the form below with valid information
+      /// 
+      /// Locales: en
+      static let login_fill = Rswift.StringResource(key: "login_fill", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Please write down and safely store this phrase. It's the ONLY WAY to retrieve your wallet.
       /// 
       /// Locales: en
@@ -874,6 +1820,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let position = Rswift.StringResource(key: "position", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Powered by
+      /// 
+      /// Locales: en
+      static let powered_by = Rswift.StringResource(key: "powered_by", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Prove noting of mnemonic
       /// 
       /// Locales: en
@@ -1231,6 +2181,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func lbl_tfa(_: Void = ()) -> String {
         return NSLocalizedString("lbl_tfa", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: 2 Factor Authentication Code
+      /// 
+      /// Locales: en
+      static func lbl_tfa_code(_: Void = ()) -> String {
+        return NSLocalizedString("lbl_tfa_code", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: 2FA Code
@@ -1716,6 +2673,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("login", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Login to continue
+      /// 
+      /// Locales: en
+      static func login_continue(_: Void = ()) -> String {
+        return NSLocalizedString("login_continue", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Lost 2FA Secret
       /// 
       /// Locales: en
@@ -1856,6 +2820,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("password_changed", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Please fill in the form below with valid information
+      /// 
+      /// Locales: en
+      static func login_fill(_: Void = ()) -> String {
+        return NSLocalizedString("login_fill", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Please write down and safely store this phrase. It's the ONLY WAY to retrieve your wallet.
       /// 
       /// Locales: en
@@ -1875,6 +2846,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func position(_: Void = ()) -> String {
         return NSLocalizedString("position", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Powered by
+      /// 
+      /// Locales: en
+      static func powered_by(_: Void = ()) -> String {
+        return NSLocalizedString("powered_by", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Prove noting of mnemonic
@@ -2521,6 +3499,17 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
     
+    struct _LoadTransactionsHistoryViewController: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "LoadTransactionsHistoryViewController"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      }
+      
+      fileprivate init() {}
+    }
+    
     struct _ReceivePaymentCardViewController: Rswift.NibResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "ReceivePaymentCardViewController"
@@ -2578,6 +3567,28 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
     
+    struct _TransactionHistoryDetailsViewController: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "TransactionHistoryDetailsViewController"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _TransactionHistoryTableViewController: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "TransactionHistoryTableViewController"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      }
+      
+      fileprivate init() {}
+    }
+    
     struct _TransactionResultPrintView: Rswift.NibResourceType {
       let bundle = R.hostingBundle
       let name = "TransactionResultPrintView"
@@ -2599,6 +3610,17 @@ struct _R: Rswift.Validatable {
       
       static func validate() throws {
         if UIKit.UIImage(named: "close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'close' is used in nib 'TransactionResultViewController', but couldn't be loaded.") }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _TransactionTableViewCell: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "TransactionTableViewCell"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> TransactionTableViewCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? TransactionTableViewCell
       }
       
       fileprivate init() {}

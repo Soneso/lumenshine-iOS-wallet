@@ -33,11 +33,13 @@ enum FontStyle {
 
 enum ColorStyle {
     case clear
+    case gray
     case lightGray
     case darkGray
     case green
     case orange
     case blue
+    case lightBlue
     case darkBlue
     case red
     case yellow
@@ -109,20 +111,24 @@ struct Stylesheet {
     
     static func color(_ style: ColorStyle) -> UIColor {
         switch style {
+        case .gray:
+            return UIColor(red: 168/255.0, green: 168/255.0, blue: 168/255.0, alpha: 1.0)
         case .lightGray:
-            return UIColor.lightGray
+            return UIColor(red: 225/255.0, green: 225/255.0, blue: 225/255.0, alpha: 1.0)
         case .darkGray:
-            return UIColor.darkGray
+            return UIColor(red: 137/255.0, green: 137/255.0, blue: 137/255.0, alpha: 1.0)
         case .green:
-            return UIColor.green
+            return UIColor(red: 145/255.0, green: 199/255.0, blue: 74/255.0, alpha: 1.0)
         case .orange:
             return UIColor.orange
-        case .blue:
-            return UIColor.blue
         case .darkBlue:
-            return UIColor(red: 16/255.0, green: 85/255.0, blue: 146/255.0, alpha: 1.0)
+            return UIColor(red: 51/255.0, green: 122/255.0, blue: 189/255.0, alpha: 1.0)
+        case .blue:
+            return UIColor(red: 57/255.0, green: 172/255.0, blue: 225/255.0, alpha: 1.0)
+        case .lightBlue:
+            return UIColor(red: 178/255.0, green: 231/255.0, blue: 255/255.0, alpha: 1.0)
         case .red:
-            return UIColor.red
+            return UIColor(red: 236/255.0, green: 28/255.0, blue: 35/255.0, alpha: 1.0)
         case .yellow:
             return UIColor.yellow
         case .cyan:

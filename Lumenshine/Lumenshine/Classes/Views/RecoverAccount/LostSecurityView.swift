@@ -49,6 +49,7 @@ extension LostSecurityView: LostSecurityContentViewProtocol {
 fileprivate extension LostSecurityView {
     
     func prepare() {
+        backgroundColor = Stylesheet.color(.white)
         prepareTitleLabel()
         prepareEmailTextField()
         prepareResetButton()
@@ -100,6 +101,7 @@ fileprivate extension LostSecurityView {
         nextButton.snp.makeConstraints { make in
             make.top.equalTo(emailTextField.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
+            make.bottom.equalTo(-20)
         }
     }
     

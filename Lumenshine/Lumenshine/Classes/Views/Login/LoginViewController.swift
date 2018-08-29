@@ -55,22 +55,32 @@ class LoginViewController: UIViewController {
         return .default
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     func setupContentView(_ contentView: LoginViewProtocol) {
         if let content = contentView as? UIView {
             let animation = CATransition()
             animation.duration = 0.3
-            animation.type = kCATransitionMoveIn
+            animation.type = kCATransitionReveal
             animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-            content.layer.add(animation, forKey: kCATransitionMoveIn)
+            content.layer.add(animation, forKey: kCATransitionReveal)
             
             if let oldContent = self.contentView as? UIView {
                 oldContent.removeFromSuperview()
             }
+            let topOffset = UIScreen.main.scale > 2 ? 25 : 10
             view.addSubview(content)
             content.snp.makeConstraints { make in
-                make.top.equalTo(headerBar.snp.bottom)
-                make.bottom.left.right.equalToSuperview()
+                make.top.equalTo(headerBar.snp.bottom).offset(topOffset)
+                make.left.equalTo(10)
+                make.right.equalTo(-10)
+                make.bottom.lessThanOrEqualTo(-10)
             }
+            
+            content.cornerRadiusPreset = .cornerRadius2
+            content.depthPreset = .depth2
             
             self.contentView = contentView
             
@@ -207,20 +217,44 @@ extension LoginViewController: HeaderMenuDelegate {
 
 fileprivate extension LoginViewController {
     func prepareView() {
-        view.backgroundColor = Stylesheet.color(.white)
+        view.backgroundColor = Stylesheet.color(.lightGray)
         prepareHeader()
+        prepareCopyright()
         prepareLoginButton()
     }
     
     func prepareHeader() {
         headerBar.delegate = self
         headerBar.setTitle(viewModel.headerTitle)
-        headerBar.setDetail(viewModel.headerDetail)
+//        headerBar.setDetail(viewModel.headerDetail)
         headerBar.setItems(viewModel.barItems)
         
         view.addSubview(headerBar)
         headerBar.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
+        }
+    }
+    
+    func prepareCopyright() {
+        let imageView = UIImageView(image: R.image.soneso())
+        imageView.backgroundColor = Stylesheet.color(.clear)
+        
+        view.addSubview(imageView)
+        imageView.snp.makeConstraints { make in
+            make.bottom.equalTo(-10)
+            make.centerX.equalToSuperview()
+        }
+        
+        let label = UILabel()
+        label.text = R.string.localizable.powered_by().uppercased()
+        label.textColor = Stylesheet.color(.gray)
+        label.font = R.font.encodeSansRegular(size: 8.5)
+//        label.textAlignment = .center
+        
+        view.addSubview(label)
+        label.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(imageView.snp.top).offset(-5)
         }
     }
     

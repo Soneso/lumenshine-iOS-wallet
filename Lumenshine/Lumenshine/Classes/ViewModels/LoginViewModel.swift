@@ -65,7 +65,7 @@ class LoginViewModel : LoginViewModelType {
     }
     
     var headerTitle: String {
-        return R.string.localizable.app_name()
+        return R.string.localizable.welcome().uppercased()
     }
     
     var headerDetail: String {

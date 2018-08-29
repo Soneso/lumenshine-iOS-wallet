@@ -12,12 +12,16 @@ import Material
 class AppNavigationController: NavigationController {
     override func prepare() {
         super.prepare()
-        navigationBar.isTranslucent = false
-        navigationBar.backgroundColor = Stylesheet.color(.cyan)
+        navigationBar.isTranslucent = true
+//        navigationBar.backgroundColor = Stylesheet.color(.cyan)
         navigationBar.backIndicatorImage = Icon.cm.arrowBack?.tint(with: Stylesheet.color(.white))
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
 }

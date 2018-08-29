@@ -23,6 +23,8 @@ protocol ToolbarHeaderDelegate: NSObjectProtocol {
 
 class ToolbarHeader: UIView {
     
+    fileprivate let backgroundImage = UIImageView()
+    fileprivate let logoImage = UIImageView()
     fileprivate let titleLabel = UILabel()
     fileprivate let detailLabel = UILabel()
     fileprivate let tabBar = UITabBar()
@@ -41,24 +43,37 @@ class ToolbarHeader: UIView {
     }
     
     func commonInit() {
+        backgroundImage.image = R.image.header_background()
         
-        backgroundColor = Stylesheet.color(.cyan)
+        addSubview(backgroundImage)
+        backgroundImage.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalToSuperview()
+        }
         
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 40.0)
-        titleLabel.textColor = Stylesheet.color(.white)
+        logoImage.image = R.image.logo()
+        logoImage.contentMode = .scaleAspectFit
+        
+        let topOffset = UIScreen.main.scale > 2 ? 46.0 : 10.0
+        addSubview(logoImage)
+        logoImage.snp.makeConstraints { make in
+            make.top.equalTo(topOffset)
+            make.centerX.equalToSuperview()
+        }
+        
+        titleLabel.font = R.font.encodeSansBold(size: 22)
+        titleLabel.textColor = Stylesheet.color(.blue)
         titleLabel.textAlignment = .center
-        titleLabel.sizeToFit()
         
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
+            make.top.equalTo(logoImage.snp.bottom).offset(10)
+            make.left.right.equalToSuperview()
         }
         
-        detailLabel.font = UIFont.systemFont(ofSize: 20.0)
+        detailLabel.font = R.font.encodeSansBold(size: 16)
         detailLabel.textColor = Stylesheet.color(.white)
         detailLabel.textAlignment = .center
         detailLabel.numberOfLines = 0
-        detailLabel.sizeToFit()
         
         addSubview(detailLabel)
         detailLabel.snp.makeConstraints { make in
@@ -68,18 +83,19 @@ class ToolbarHeader: UIView {
         
         tabBar.delegate = self
         tabBar.backgroundImage = UIImage.image(with: Stylesheet.color(.clear), size: CGSize(width: 10, height: 10))
-        tabBar.tintColor = Stylesheet.color(.yellow)
-        tabBar.unselectedItemTintColor = Stylesheet.color(.white)
+        tabBar.tintColor = Stylesheet.color(.lightBlue)
+        tabBar.unselectedItemTintColor = Stylesheet.color(.darkBlue)
         tabBar.shadowImage = UIImage.image(with: Stylesheet.color(.clear), size: CGSize(width: 10, height: 10))
         tabBar.itemWidth = 90
         tabBar.itemSpacing = 50
         
+        let offset = UIScreen.main.scale > 2 ? 30.0 : 15.0
         addSubview(tabBar)
         tabBar.snp.makeConstraints { make in
-            make.top.equalTo(detailLabel.snp.bottom).offset(30)
+            make.top.equalTo(detailLabel.snp.bottom).offset(offset)
             make.left.equalTo(10)
             make.right.equalTo(-10)
-            make.bottom.equalTo(-20)
+            make.bottom.equalTo(-10)
         }
     }
 }
@@ -99,15 +115,24 @@ extension ToolbarHeader: ToolbarHeaderProtocol {
     }
     
     func setDetail(_ detail: String?) {
+        if detail?.isEmpty == false {
+            titleLabel.font = R.font.encodeSansBold(size: 19)
+        }
         detailLabel.text = detail
     }
     
     func setItems(_ items: [(String, String)], selectedAt index: Int? = 0) {
+        var attributes: Dictionary<NSAttributedStringKey, Any>? = nil
+        if let font = R.font.encodeSansRegular(size: 10) {
+            attributes = [NSAttributedStringKey.font : font]
+        }
         var barItems = [UITabBarItem]()
         var selectedItem: UITabBarItem?
         for (i, value) in items.enumerated() {
             let image = UIImage(named: value.1)
-            let item = UITabBarItem(title: value.0, image: image, tag: i)
+            let item = UITabBarItem(title: value.0.uppercased(), image: image, tag: i)
+            item.setTitleTextAttributes(attributes, for: .normal)
+            item.setTitleTextAttributes(attributes, for: .selected)
             barItems.append(item)
             if i == index {
                 selectedItem = item

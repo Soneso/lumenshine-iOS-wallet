@@ -32,6 +32,9 @@
 "continue" = "Continue";
 
 /*  */
+"powered_by" = "Powered by";
+
+/*  */
 "save" = "Save";
 
 /*  */
@@ -57,6 +60,12 @@
 
 /*  */
 "login" = "Login";
+
+/*  */
+"login_continue" = "Login to continue";
+
+/*  */
+"login_fill" = "Please fill in the form below with valid information";
 
 /*  */
 "logout" = "Log Out";
@@ -255,6 +264,9 @@
 
 /*  */
 "lbl_tfa" = "2 Factor Authentication (2FA)";
+
+/*  */
+"lbl_tfa_code" = "2 Factor Authentication Code";
 
 /*  */
 "lbl_tfa_secret" = "Your 2FA secret: %@";
