@@ -52,6 +52,7 @@ fileprivate extension LoginMenuCoordinator {
     func showLogin() {
         let loginCoordinator = LoginCoordinator(mainCoordinator: mainCoordinator, service: service.auth)
         let navigationController = AppNavigationController(rootViewController: loginCoordinator.baseController)
+        navigationController.navigationBar.isTranslucent = true
         if let drawer = baseController as? AppNavigationDrawerController {
             drawer.setViewController(navigationController, for: .none)
             drawer.closeSide()
@@ -62,6 +63,7 @@ fileprivate extension LoginMenuCoordinator {
     func showSignUp() {
         let loginCoordinator = LoginCoordinator(mainCoordinator: mainCoordinator, service: service.auth, transition: .showSignUp)
         let navigationController = AppNavigationController(rootViewController: loginCoordinator.baseController)
+        navigationController.navigationBar.isTranslucent = true
         if let drawer = baseController as? AppNavigationDrawerController {
             drawer.setViewController(navigationController, for: .none)
             drawer.closeSide()

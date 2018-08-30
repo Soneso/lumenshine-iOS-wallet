@@ -12,8 +12,7 @@ import Material
 class AppNavigationController: NavigationController {
     override func prepare() {
         super.prepare()
-        navigationBar.isTranslucent = true
-//        navigationBar.backgroundColor = Stylesheet.color(.cyan)
+        navigationBar.backgroundColor = Stylesheet.color(.blue)
         navigationBar.backIndicatorImage = Icon.cm.arrowBack?.tint(with: Stylesheet.color(.white))
     }
     
