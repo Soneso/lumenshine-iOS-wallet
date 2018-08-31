@@ -51,7 +51,6 @@
 		434E049D20D4154700D3235A /* MenuEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434E049C20D4154700D3235A /* MenuEntry.swift */; };
 		434FB3F920F78AFD004A4CDB /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434FB3F820F78AFD004A4CDB /* InfoViewController.swift */; };
 		435130962121A2DD00168DD3 /* LostSecurityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435130952121A2DD00168DD3 /* LostSecurityView.swift */; };
-		435130982121AA5B00168DD3 /* LostSecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435130972121AA5B00168DD3 /* LostSecurityViewController.swift */; };
 		4359984B20A438EF00007F27 /* AuthenticationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4359984A20A438EF00007F27 /* AuthenticationResponse.swift */; };
 		4359984D20A492FF00007F27 /* AlertFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4359984C20A492FF00007F27 /* AlertFactory.swift */; };
 		4359984F20A4A14000007F27 /* UserSecurityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4359984E20A4A14000007F27 /* UserSecurityHelper.swift */; };
@@ -96,7 +95,6 @@
 		439E3C8B2107786A0004BB91 /* SettingsEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439E3C8A2107786A0004BB91 /* SettingsEntry.swift */; };
 		439EA26E210AF7240054EA52 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439EA26D210AF7240054EA52 /* ChangePasswordViewController.swift */; };
 		43A51719211D8FBD0034AA46 /* LostSecuritySuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A51718211D8FBD0034AA46 /* LostSecuritySuccessView.swift */; };
-		43A5171B211DCE600034AA46 /* LostSecurityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A5171A211DCE600034AA46 /* LostSecurityViewModel.swift */; };
 		43A8633820A9F0E6007C46E2 /* LoginStep2Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A8633720A9F0E6007C46E2 /* LoginStep2Response.swift */; };
 		43AE63252135A19300B7A904 /* EncodeSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 43AE62E32135A19200B7A904 /* EncodeSans-Medium.ttf */; };
 		43AE63262135A19300B7A904 /* EncodeSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 43AE62E42135A19200B7A904 /* EncodeSans-Regular.ttf */; };
@@ -184,7 +182,6 @@
 		43F3E36120F3B88E0032D017 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F3E36020F3B88E0032D017 /* SignUpView.swift */; };
 		43F74607209494AC003EB5FD /* RegistrationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F74606209494AC003EB5FD /* RegistrationResponse.swift */; };
 		43FBEE452062853A004E2BB1 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FBEE442062853A004E2BB1 /* ScanViewController.swift */; };
-		7406751A2125ABBB00503C84 /* LostSecurityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740675192125ABBB00503C84 /* LostSecurityCoordinator.swift */; };
 		7420BBE6211819AB002FC4C7 /* AccountDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7420BBE4211819AB002FC4C7 /* AccountDetailsViewController.swift */; };
 		7420BBE7211819AB002FC4C7 /* AccountDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7420BBE5211819AB002FC4C7 /* AccountDetailsViewController.xib */; };
 		7420BBE921182D4C002FC4C7 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7420BBE821182D4C002FC4C7 /* TitleView.swift */; };
@@ -342,7 +339,6 @@
 		434E049C20D4154700D3235A /* MenuEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuEntry.swift; sourceTree = "<group>"; };
 		434FB3F820F78AFD004A4CDB /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		435130952121A2DD00168DD3 /* LostSecurityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostSecurityView.swift; sourceTree = "<group>"; };
-		435130972121AA5B00168DD3 /* LostSecurityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostSecurityViewController.swift; sourceTree = "<group>"; };
 		4359984A20A438EF00007F27 /* AuthenticationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationResponse.swift; sourceTree = "<group>"; };
 		4359984C20A492FF00007F27 /* AlertFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFactory.swift; sourceTree = "<group>"; };
 		4359984E20A4A14000007F27 /* UserSecurityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSecurityHelper.swift; sourceTree = "<group>"; };
@@ -392,7 +388,6 @@
 		439E3C8A2107786A0004BB91 /* SettingsEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsEntry.swift; sourceTree = "<group>"; };
 		439EA26D210AF7240054EA52 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		43A51718211D8FBD0034AA46 /* LostSecuritySuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostSecuritySuccessView.swift; sourceTree = "<group>"; };
-		43A5171A211DCE600034AA46 /* LostSecurityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostSecurityViewModel.swift; sourceTree = "<group>"; };
 		43A8633720A9F0E6007C46E2 /* LoginStep2Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStep2Response.swift; sourceTree = "<group>"; };
 		43AE62E32135A19200B7A904 /* EncodeSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "EncodeSans-Medium.ttf"; sourceTree = "<group>"; };
 		43AE62E42135A19200B7A904 /* EncodeSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "EncodeSans-Regular.ttf"; sourceTree = "<group>"; };
@@ -483,7 +478,6 @@
 		43FBEE442062853A004E2BB1 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		56AF365907D01F4688A1A23B /* Pods-Lumenshine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lumenshine.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine.release.xcconfig"; sourceTree = "<group>"; };
 		6217B40E7420C22B1F8671CF /* Pods_Lumenshine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lumenshine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		740675192125ABBB00503C84 /* LostSecurityCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LostSecurityCoordinator.swift; sourceTree = "<group>"; };
 		7420BBE4211819AB002FC4C7 /* AccountDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsViewController.swift; sourceTree = "<group>"; };
 		7420BBE5211819AB002FC4C7 /* AccountDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountDetailsViewController.xib; sourceTree = "<group>"; };
 		7420BBE821182D4C002FC4C7 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
@@ -645,7 +639,6 @@
 			children = (
 				7491BE46211C32040058877E /* Wallet */,
 				43CD7B1520F7C4680014BF69 /* Setup */,
-				744DE2DA20BD7F74003BC216 /* RecoverAccount */,
 				4337C4E52081BA6A00F4585A /* Registration */,
 				4370E23B20655F6F004C62C3 /* Settings */,
 				4319B17C2063EDFA007CE18D /* Login */,
@@ -726,9 +719,8 @@
 		4319B17C2063EDFA007CE18D /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				43C6377920BEFF2B00498FC5 /* ReLoginViewController.swift */,
-				4341251020EBC2C700267260 /* ReLoginHomeView.swift */,
-				4341251220EBC2E900267260 /* ReLoginFingerView.swift */,
+				744DE2DA20BD7F74003BC216 /* RecoverAccount */,
+				4368468A2139246200B3A179 /* Relogin */,
 				4319B17D2063EE0E007CE18D /* LoginViewController.swift */,
 				43F3E35E20F3B8780032D017 /* LoginView.swift */,
 				43F3E36020F3B88E0032D017 /* SignUpView.swift */,
@@ -812,6 +804,16 @@
 			path = registration;
 			sourceTree = "<group>";
 		};
+		4368468A2139246200B3A179 /* Relogin */ = {
+			isa = PBXGroup;
+			children = (
+				43C6377920BEFF2B00498FC5 /* ReLoginViewController.swift */,
+				4341251020EBC2C700267260 /* ReLoginHomeView.swift */,
+				4341251220EBC2E900267260 /* ReLoginFingerView.swift */,
+			);
+			path = Relogin;
+			sourceTree = "<group>";
+		};
 		436B366720512114009F7C21 /* FlexibleHeightBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -842,7 +844,6 @@
 		4376F49C204D9DEA00B179C3 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				740675192125ABBB00503C84 /* LostSecurityCoordinator.swift */,
 				43B81D5B21174B1F0039BC3D /* MainCoordinator.swift */,
 				4376F49F204D9E2700B179C3 /* CoordinatorProtocol.swift */,
 				4376F49D204D9DF800B179C3 /* HomeCoordinator.swift */,
@@ -873,7 +874,6 @@
 				4386717320DAA77E00459EA8 /* WalletCardViewModel.swift */,
 				43CD7B1120F7B8A70014BF69 /* SetupMenuViewModel.swift */,
 				43CD7B1320F7BEBF0014BF69 /* SetupViewModel.swift */,
-				43A5171A211DCE600034AA46 /* LostSecurityViewModel.swift */,
 				43D15E47212AE53A00415CE5 /* ChartCardViewModel.swift */,
 			);
 			path = ViewModels;
@@ -1221,7 +1221,6 @@
 		744DE2DA20BD7F74003BC216 /* RecoverAccount */ = {
 			isa = PBXGroup;
 			children = (
-				435130972121AA5B00168DD3 /* LostSecurityViewController.swift */,
 				435130952121A2DD00168DD3 /* LostSecurityView.swift */,
 				432E298A211CA098005C7F9E /* EmailConfirmationView.swift */,
 				43A51718211D8FBD0034AA46 /* LostSecuritySuccessView.swift */,
@@ -1656,7 +1655,6 @@
 				4319B1892063FA46007CE18D /* BiometricIDAuth.swift in Sources */,
 				431437F22047FF9100189C83 /* AppNavigationController.swift in Sources */,
 				74A2A2F0210EF405007AEE91 /* ReceivePaymentPrintView.swift in Sources */,
-				435130982121AA5B00168DD3 /* LostSecurityViewController.swift in Sources */,
 				43CD7B0E20F7AEBC0014BF69 /* SetupCoordinator.swift in Sources */,
 				4314B9F9204812BC006DBE63 /* MenuTableViewCell.swift in Sources */,
 				C695564D2126B11800B0E110 /* LoadTransactionsHistoryViewController.swift in Sources */,
@@ -1670,7 +1668,6 @@
 				74DD4CEB210CE83E00F4D69A /* UIView+Snapshot.swift in Sources */,
 				43D131E82056EAC6000483C4 /* ChartCard.swift in Sources */,
 				74C0913D20F64B03000A809D /* UnfoundedWalletCardContentView.swift in Sources */,
-				43A5171B211DCE600034AA46 /* LostSecurityViewModel.swift in Sources */,
 				7420BBE6211819AB002FC4C7 /* AccountDetailsViewController.swift in Sources */,
 				4376F4A0204D9E2700B179C3 /* CoordinatorProtocol.swift in Sources */,
 				4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */,
@@ -1716,7 +1713,6 @@
 				4319B1822063EF72007CE18D /* LoginCoordinator.swift in Sources */,
 				434E049B20D3DC8A00D3235A /* DateUtils+Format.swift in Sources */,
 				4391A53220D170420015A6DA /* CountryListResponse.swift in Sources */,
-				7406751A2125ABBB00503C84 /* LostSecurityCoordinator.swift in Sources */,
 				432F11792101C64600FC429B /* MnemonicSetupViewController.swift in Sources */,
 				7477F3FB20EE19EE00408934 /* WalletsResponse.swift in Sources */,
 				C665871221254C9D006499A7 /* ChartsCurrencyPairsResponse.swift in Sources */,

@@ -1,20 +1,19 @@
 //
-//  EmailConfirmationView.swift
+//  LostSecuritySuccessView.swift
 //  Lumenshine
 //
-//  Created by Istvan Elekes on 8/9/18.
+//  Created by Istvan Elekes on 8/10/18.
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
 import UIKit
 import Material
 
-protocol EmailConfirmationViewDelegate: class {
-    func didTapResendButton()
-    func didTapDoneButton(email: String?)
+protocol LostSecuritySuccessViewDelegate: class {
+    func didTapResendButton(email: String?)
 }
 
-class EmailConfirmationView: UIView {
+class LostSecuritySuccessView: UIView {
     
     // MARK: - Properties
     
@@ -31,7 +30,7 @@ class EmailConfirmationView: UIView {
     fileprivate let contentView = UIView()
     fileprivate let scrollView = UIScrollView()
     
-    weak var delegate: EmailConfirmationViewDelegate?
+    weak var delegate: LostSecuritySuccessViewDelegate?
     
     init(viewModel: LostSecurityViewModelType) {
         self.viewModel = viewModel
@@ -45,27 +44,25 @@ class EmailConfirmationView: UIView {
 }
 
 // MARK: - Actions
-extension EmailConfirmationView {
+extension LostSecuritySuccessView {
     @objc
     func resendAction(sender: UIButton) {
-        delegate?.didTapResendButton()
+        delegate?.didTapResendButton(email: viewModel.lostEmail)
     }
     
     @objc
     func submitAction(sender: UIButton) {
-        delegate?.didTapDoneButton(email: viewModel.email)
+        viewModel.showLogin()
     }
 }
 
-extension EmailConfirmationView: LostSecurityContentViewProtocol {
-    func present(error: ServiceError) {
-        if let parameter = error.parameterName, parameter == "email" {
-            errorLabel.text = error.errorDescription
-        }
+extension LostSecuritySuccessView: LoginViewContentProtocol {
+    func present(error: ServiceError) -> Bool {
+        return false
     }
 }
 
-fileprivate extension EmailConfirmationView {
+fileprivate extension LostSecuritySuccessView {
     
     func prepareView() {
         prepareContentView()
@@ -104,10 +101,10 @@ fileprivate extension EmailConfirmationView {
     }
     
     func prepareHintLabel() {
-        errorLabel.text = R.string.localizable.lbl_email_confirmation2()
+        errorLabel.text = viewModel.successDetail
         errorLabel.font = Stylesheet.font(.footnote)
         errorLabel.textAlignment = .center
-        errorLabel.textColor = Stylesheet.color(.red)
+        errorLabel.textColor = Stylesheet.color(.green)
         errorLabel.numberOfLines = 0
         
         contentView.addSubview(errorLabel)
@@ -117,7 +114,7 @@ fileprivate extension EmailConfirmationView {
             make.right.equalTo(-20)
         }
         
-        hintLabel.text = R.string.localizable.email_confirmation_hint2()
+        hintLabel.text = viewModel.successHint
         hintLabel.font = Stylesheet.font(.footnote)
         hintLabel.textAlignment = .left
         hintLabel.textColor = Stylesheet.color(.black)
@@ -132,22 +129,7 @@ fileprivate extension EmailConfirmationView {
     }
     
     func prepareButtons() {
-        submitButton.title = R.string.localizable.continue()
-        submitButton.titleColor = Stylesheet.color(.black)
-        submitButton.titleLabel?.font = Stylesheet.font(.caption2)
-        submitButton.contentEdgeInsets = UIEdgeInsets(top: 7, left: 10, bottom: 7, right: 10)
-        submitButton.cornerRadiusPreset = .none
-        submitButton.borderWidthPreset = .border2
-        submitButton.depthPreset = .depth2
-        submitButton.addTarget(self, action: #selector(submitAction(sender:)), for: .touchUpInside)
-        
-        contentView.addSubview(submitButton)
-        submitButton.snp.makeConstraints { make in
-            make.top.equalTo(hintLabel.snp.bottom).offset(10)
-            make.centerX.equalToSuperview()
-        }
-        
-        resendButton.title = R.string.localizable.email_resend_confirmation()
+        resendButton.title = R.string.localizable.resend_email()
         resendButton.titleColor = Stylesheet.color(.black)
         resendButton.titleLabel?.font = Stylesheet.font(.caption2)
         resendButton.contentEdgeInsets = UIEdgeInsets(top: 7, left: 10, bottom: 7, right: 10)
@@ -158,10 +140,24 @@ fileprivate extension EmailConfirmationView {
         
         contentView.addSubview(resendButton)
         resendButton.snp.makeConstraints { make in
-            make.top.equalTo(submitButton.snp.bottom).offset(20)
+            make.top.equalTo(hintLabel.snp.bottom).offset(10)
+            make.centerX.equalToSuperview()
+        }
+        
+        submitButton.title = R.string.localizable.done()
+        submitButton.titleColor = Stylesheet.color(.black)
+        submitButton.titleLabel?.font = Stylesheet.font(.caption2)
+        submitButton.contentEdgeInsets = UIEdgeInsets(top: 7, left: 10, bottom: 7, right: 10)
+        submitButton.cornerRadiusPreset = .none
+        submitButton.borderWidthPreset = .border2
+        submitButton.depthPreset = .depth2
+        submitButton.addTarget(self, action: #selector(submitAction(sender:)), for: .touchUpInside)
+        
+        contentView.addSubview(submitButton)
+        submitButton.snp.makeConstraints { make in
+            make.top.equalTo(resendButton.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
             make.bottom.lessThanOrEqualToSuperview()
         }
     }
 }
-

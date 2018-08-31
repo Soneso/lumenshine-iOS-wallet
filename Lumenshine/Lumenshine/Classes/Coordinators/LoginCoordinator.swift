@@ -34,6 +34,14 @@ class LoginCoordinator: CoordinatorType {
                 self.showLogin()
             case .showSignUp:
                 self.showSignUp()
+            case .showForgotPassword:
+                self.showLostPassword()
+            case .showLost2fa:
+                self.showLost2FA()
+            case .showLostPasswordSuccess:
+                self.showSuccess()
+            case .showEmailConfirmation:
+                self.showEmailConfirmation()
             case .showHeaderMenu(let items):
                 self.showHeaderMenu(items: items)
             case .showPasswordHint(let hint):
@@ -68,6 +76,22 @@ fileprivate extension LoginCoordinator {
     
     func showSignUp() {
         (baseController as! LoginViewController).showSignUp()
+    }
+    
+    func showLostPassword() {
+        (baseController as! LoginViewController).showLostPassword()
+    }
+    
+    func showLost2FA() {
+        (baseController as! LoginViewController).showLost2FA()
+    }
+    
+    func showSuccess() {
+        (baseController as! LoginViewController).showSuccess()
+    }
+    
+    func showEmailConfirmation() {
+        (baseController as! LoginViewController).showEmailConfirmation()
     }
     
     func showPasswordHint(_ hint: String) {

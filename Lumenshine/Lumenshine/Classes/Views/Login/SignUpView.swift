@@ -9,7 +9,11 @@
 import UIKit
 import Material
 
-class SignUpView: UIView, LoginViewProtocol {
+protocol SignUpViewDelegate: class {
+    func didTapSubmitButton(email: String, password: String, repassword: String)
+}
+
+class SignUpView: UIView {
     
     // MARK: - Properties
     fileprivate let viewModel: LoginViewModelType
@@ -19,10 +23,12 @@ class SignUpView: UIView, LoginViewProtocol {
     fileprivate let detailLabel = UILabel()
     
     // MARK: - UI properties
-    var textField1 = TextField()
-    var textField2 = TextField()
-    var textField3 = TextField()
-    var submitButton = RaisedButton()
+    fileprivate let textField1 = TextField()
+    fileprivate let textField2 = TextField()
+    fileprivate let textField3 = TextField()
+    fileprivate let submitButton = RaisedButton()
+    
+    weak var delegate: SignUpViewDelegate?
     
     init(viewModel: LoginViewModelType) {
         self.viewModel = viewModel
@@ -34,9 +40,68 @@ class SignUpView: UIView, LoginViewProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func resignFirstResponder() -> Bool {
+        textField1.resignFirstResponder()
+        textField2.resignFirstResponder()
+        textField3.resignFirstResponder()
+        return super.resignFirstResponder()
+    }
+}
+
+extension SignUpView: LoginViewContentProtocol {
+    func present(error: ServiceError) -> Bool {
+        if let parameter = error.parameterName {
+            if parameter == "email" {
+                textField1.detail = error.errorDescription
+            } else if parameter == "password" {
+                textField2.detail = error.errorDescription
+            } else if parameter == "repassword" {
+                textField3.detail = error.errorDescription
+            }
+            return true
+        }
+        return false
+    }
+}
+
+extension SignUpView {
     @objc
     func hintAction(sender: UIButton) {
         viewModel.showPasswordHint()
+    }
+    
+    @objc
+    func signUpAction(sender: UIButton) {
+        textField1.detail = nil
+        textField2.detail = nil
+        textField3.detail = nil
+        
+        guard let email = textField1.text,
+            !email.isEmpty else {
+                textField1.detail = R.string.localizable.invalid_email()
+                return
+        }
+        
+        guard let password = textField2.text,
+            !password.isEmpty else {
+                textField2.detail = R.string.localizable.invalid_password()
+                return
+        }
+        
+        guard let repassword = textField3.text,
+            !repassword.isEmpty else {
+                textField3.detail = R.string.localizable.invalid_password()
+                return
+        }
+        _ = resignFirstResponder()
+        delegate?.didTapSubmitButton(email: email, password: password, repassword: repassword)
+    }
+}
+
+extension SignUpView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        signUpAction(sender: submitButton)
+        return true
     }
 }
 
@@ -82,6 +147,10 @@ fileprivate extension SignUpView {
     }
     
     func prepareTextFields() {
+        textField1.delegate = self
+        textField2.delegate = self
+        textField3.delegate = self
+        
         textField1.keyboardType = .emailAddress
         textField1.autocapitalizationType = .none
         textField1.placeholder = R.string.localizable.email().uppercased()
@@ -155,6 +224,7 @@ fileprivate extension SignUpView {
         submitButton.titleLabel?.adjustsFontSizeToFitWidth = true
         submitButton.cornerRadiusPreset = .cornerRadius6
         submitButton.titleLabel?.font = R.font.encodeSansRegular(size: 20)
+        submitButton.addTarget(self, action: #selector(signUpAction(sender:)), for: .touchUpInside)
         
         addSubview(submitButton)
         submitButton.snp.makeConstraints { make in

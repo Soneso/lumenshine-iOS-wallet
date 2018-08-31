@@ -35,13 +35,14 @@ class LostSecurityView: UIView {
     }
 }
 
-extension LostSecurityView: LostSecurityContentViewProtocol {
-    func present(error: ServiceError) {
+extension LostSecurityView: LoginViewContentProtocol {
+    func present(error: ServiceError) -> Bool {
         if let parameter = error.parameterName, parameter == "email" {
             viewModel.showEmailConfirmation()
         } else {
             emailTextField.detail = error.errorDescription
         }
+        return true
     }
 }
 

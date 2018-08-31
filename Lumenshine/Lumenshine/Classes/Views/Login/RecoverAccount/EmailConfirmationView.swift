@@ -1,19 +1,20 @@
 //
-//  LostSecuritySuccessView.swift
+//  EmailConfirmationView.swift
 //  Lumenshine
 //
-//  Created by Istvan Elekes on 8/10/18.
+//  Created by Istvan Elekes on 8/9/18.
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
 import UIKit
 import Material
 
-protocol LostSecuritySuccessViewDelegate: class {
-    func didTapResendButton(email: String?)
+protocol EmailConfirmationViewDelegate: class {
+    func didTapResendButton()
+    func didTapDoneButton(email: String?)
 }
 
-class LostSecuritySuccessView: UIView {
+class EmailConfirmationView: UIView {
     
     // MARK: - Properties
     
@@ -30,7 +31,7 @@ class LostSecuritySuccessView: UIView {
     fileprivate let contentView = UIView()
     fileprivate let scrollView = UIScrollView()
     
-    weak var delegate: LostSecuritySuccessViewDelegate?
+    weak var delegate: EmailConfirmationViewDelegate?
     
     init(viewModel: LostSecurityViewModelType) {
         self.viewModel = viewModel
@@ -44,24 +45,29 @@ class LostSecuritySuccessView: UIView {
 }
 
 // MARK: - Actions
-extension LostSecuritySuccessView {
+extension EmailConfirmationView {
     @objc
     func resendAction(sender: UIButton) {
-        delegate?.didTapResendButton(email: viewModel.email)
+        delegate?.didTapResendButton()
     }
     
     @objc
     func submitAction(sender: UIButton) {
-        viewModel.showLogin()
+        delegate?.didTapDoneButton(email: viewModel.lostEmail)
     }
 }
 
-extension LostSecuritySuccessView: LostSecurityContentViewProtocol {
-    func present(error: ServiceError) {
+extension EmailConfirmationView: LoginViewContentProtocol {
+    func present(error: ServiceError) -> Bool {
+        if let parameter = error.parameterName, parameter == "email" {
+            errorLabel.text = error.errorDescription
+            return true
+        }
+        return false
     }
 }
 
-fileprivate extension LostSecuritySuccessView {
+fileprivate extension EmailConfirmationView {
     
     func prepareView() {
         prepareContentView()
@@ -100,10 +106,10 @@ fileprivate extension LostSecuritySuccessView {
     }
     
     func prepareHintLabel() {
-        errorLabel.text = viewModel.successDetail
+        errorLabel.text = R.string.localizable.lbl_email_confirmation2()
         errorLabel.font = Stylesheet.font(.footnote)
         errorLabel.textAlignment = .center
-        errorLabel.textColor = Stylesheet.color(.green)
+        errorLabel.textColor = Stylesheet.color(.red)
         errorLabel.numberOfLines = 0
         
         contentView.addSubview(errorLabel)
@@ -113,7 +119,7 @@ fileprivate extension LostSecuritySuccessView {
             make.right.equalTo(-20)
         }
         
-        hintLabel.text = viewModel.successHint
+        hintLabel.text = R.string.localizable.email_confirmation_hint2()
         hintLabel.font = Stylesheet.font(.footnote)
         hintLabel.textAlignment = .left
         hintLabel.textColor = Stylesheet.color(.black)
@@ -128,22 +134,7 @@ fileprivate extension LostSecuritySuccessView {
     }
     
     func prepareButtons() {
-        resendButton.title = R.string.localizable.resend_email()
-        resendButton.titleColor = Stylesheet.color(.black)
-        resendButton.titleLabel?.font = Stylesheet.font(.caption2)
-        resendButton.contentEdgeInsets = UIEdgeInsets(top: 7, left: 10, bottom: 7, right: 10)
-        resendButton.cornerRadiusPreset = .none
-        resendButton.borderWidthPreset = .border2
-        resendButton.depthPreset = .depth2
-        resendButton.addTarget(self, action: #selector(resendAction(sender:)), for: .touchUpInside)
-        
-        contentView.addSubview(resendButton)
-        resendButton.snp.makeConstraints { make in
-            make.top.equalTo(hintLabel.snp.bottom).offset(10)
-            make.centerX.equalToSuperview()
-        }
-        
-        submitButton.title = R.string.localizable.done()
+        submitButton.title = R.string.localizable.continue()
         submitButton.titleColor = Stylesheet.color(.black)
         submitButton.titleLabel?.font = Stylesheet.font(.caption2)
         submitButton.contentEdgeInsets = UIEdgeInsets(top: 7, left: 10, bottom: 7, right: 10)
@@ -154,9 +145,25 @@ fileprivate extension LostSecuritySuccessView {
         
         contentView.addSubview(submitButton)
         submitButton.snp.makeConstraints { make in
-            make.top.equalTo(resendButton.snp.bottom).offset(20)
+            make.top.equalTo(hintLabel.snp.bottom).offset(10)
+            make.centerX.equalToSuperview()
+        }
+        
+        resendButton.title = R.string.localizable.email_resend_confirmation()
+        resendButton.titleColor = Stylesheet.color(.black)
+        resendButton.titleLabel?.font = Stylesheet.font(.caption2)
+        resendButton.contentEdgeInsets = UIEdgeInsets(top: 7, left: 10, bottom: 7, right: 10)
+        resendButton.cornerRadiusPreset = .none
+        resendButton.borderWidthPreset = .border2
+        resendButton.depthPreset = .depth2
+        resendButton.addTarget(self, action: #selector(resendAction(sender:)), for: .touchUpInside)
+        
+        contentView.addSubview(resendButton)
+        resendButton.snp.makeConstraints { make in
+            make.top.equalTo(submitButton.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
             make.bottom.lessThanOrEqualToSuperview()
         }
     }
 }
+

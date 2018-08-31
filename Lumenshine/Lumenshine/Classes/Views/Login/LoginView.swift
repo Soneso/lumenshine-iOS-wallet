@@ -9,30 +9,28 @@
 import UIKit
 import Material
 
-protocol LoginViewProtocol {
-    
-    var textField1: TextField { get }
-    var textField2: TextField { get }
-    var textField3: TextField { get }
-    var submitButton: RaisedButton { get }
+protocol LoginViewDelegate: class {
+    func didTapSubmitButton(email: String, password: String, tfaCode: String?)
 }
 
-class LoginView: UIView, LoginViewProtocol {
+class LoginView: UIView {
 
     // MARK: - Properties
+    fileprivate let viewModel: LoginViewModelType
     fileprivate let verticalSpacing = UIScreen.main.scale > 2 ? 40.0 : 20.0
-    fileprivate let contentView = UIView()
-    fileprivate let scrollView = UIScrollView()
     fileprivate let titleLabel = UILabel()
     fileprivate let detailLabel = UILabel()
     
     // MARK: - UI properties
-    var textField1 = TextField()
-    var textField2 = TextField()
-    var textField3 = TextField()
-    var submitButton = RaisedButton()
+    fileprivate let textField1 = TextField()
+    fileprivate let textField2 = TextField()
+    fileprivate let textField3 = TextField()
+    fileprivate let submitButton = RaisedButton()
     
-    init() {
+    weak var delegate: LoginViewDelegate?
+    
+    init(viewModel: LoginViewModelType) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
         prepare()
     }
@@ -40,33 +38,75 @@ class LoginView: UIView, LoginViewProtocol {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func resignFirstResponder() -> Bool {
+        textField1.resignFirstResponder()
+        textField2.resignFirstResponder()
+        textField3.resignFirstResponder()
+        return super.resignFirstResponder()
+    }
+}
+
+extension LoginView: LoginViewContentProtocol {
+    func present(error: ServiceError) -> Bool {
+        if let parameter = error.parameterName {
+            if parameter == "email" {
+                textField1.detail = error.errorDescription
+            } else if parameter == "password" {
+                textField2.detail = error.errorDescription
+            } else if parameter == "tfa_code" {
+                textField3.detail = error.errorDescription
+            }
+            return true
+        }
+        return false
+    }
+}
+
+extension LoginView {
+    @objc
+    func loginAction(sender: UIButton) {
+        textField1.detail = nil
+        textField2.detail = nil
+        textField3.detail = nil
+        
+        // Check that text has been entered into both the username and password fields.
+        guard let accountName = textField1.text,
+            !accountName.isEmpty else {
+                textField1.detail = R.string.localizable.invalid_email()
+                return
+        }
+        
+        guard let password = textField2.text,
+            !password.isEmpty else {
+                textField2.detail = R.string.localizable.invalid_password()
+                return
+        }
+        _ = resignFirstResponder()
+        UserDefaults.standard.setValue(accountName, forKey: "username")
+        delegate?.didTapSubmitButton(email: accountName, password: password, tfaCode: textField3.text)
+    }
+}
+
+extension LoginView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        loginAction(sender: submitButton)
+        return true
+    }
 }
 
 fileprivate extension LoginView {
     func prepare() {
         backgroundColor = Stylesheet.color(.white)
-//        prepareContentView()
         prepareTitle()
         prepareDetail()
         prepareTextFields()
         prepareLoginButton()
-    }
-    
-    func prepareContentView() {
-        addSubview(scrollView)
-        scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
         
-        scrollView.addSubview(contentView)
-        contentView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview()
-            make.left.equalToSuperview()
-            make.width.equalTo(self)
+        if let storedUsername = UserDefaults.standard.value(forKey: "username") as? String {
+            textField1.text = storedUsername
         }
     }
-    
     
     func prepareTitle() {
         titleLabel.text = R.string.localizable.login_continue().uppercased()
@@ -100,6 +140,10 @@ fileprivate extension LoginView {
     }
     
     func prepareTextFields() {
+        textField1.delegate = self
+        textField2.delegate = self
+        textField3.delegate = self
+        
         textField1.keyboardType = .emailAddress
         textField1.autocapitalizationType = .none
         textField1.placeholder = R.string.localizable.email().uppercased()
@@ -161,7 +205,7 @@ fileprivate extension LoginView {
         submitButton.titleLabel?.adjustsFontSizeToFitWidth = true
         submitButton.cornerRadiusPreset = .cornerRadius6
         submitButton.titleLabel?.font = R.font.encodeSansRegular(size: 20)
-        //        submitButton.addTarget(self, action: #selector(reloginAction(sender:)), for: .touchUpInside)
+        submitButton.addTarget(self, action: #selector(loginAction(sender:)), for: .touchUpInside)
         
         self.addSubview(submitButton)
         submitButton.snp.makeConstraints { make in

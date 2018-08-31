@@ -30,18 +30,33 @@ protocol LoginViewModelType: Transitionable, BiometricAuthenticationProtocol {
     func forgotPasswordClick()
 }
 
+protocol LostSecurityViewModelType: Transitionable {
+    var lostEmail: String? { get }
+    var title: String { get }
+    var successHint: String { get }
+    var successDetail: String { get }
+    
+    func lostSecurity(email:String?, response: @escaping EmptyResponseClosure)
+    func resendMailConfirmation(response: @escaping EmptyResponseClosure)
+    func showEmailConfirmation()
+    func showSuccess()
+    func showLogin()
+}
+
 class LoginViewModel : LoginViewModelType {
     fileprivate let service: AuthService
     fileprivate var email: String?
     fileprivate var user: User?
     fileprivate var mnemonic: String?
     var entries: [MenuEntry]
+    var lostPassword: Bool
     
     weak var navigationCoordinator: CoordinatorType?
     
     init(service: AuthService, user: User? = nil) {
         self.service = service
         self.user = user
+        self.lostPassword = true
         
         self.entries = [.login, .signUp, .lostPassword, .lost2FA, .importMnemonic, .about, .help]
     }
@@ -161,9 +176,9 @@ class LoginViewModel : LoginViewModelType {
     func headerMenuSelected(at index: Int) {
         switch entries[index+2] {
         case .lostPassword:
-            navigationCoordinator?.mainCoordinator.currentMenuCoordinator?.performTransition(transition: .showForgotPassword)
+            navigationCoordinator?.performTransition(transition: .showForgotPassword)
         case .lost2FA:
-            navigationCoordinator?.mainCoordinator.currentMenuCoordinator?.performTransition(transition: .showLost2fa)
+            navigationCoordinator?.performTransition(transition: .showLost2fa)
         default: break
         }
     }
@@ -182,6 +197,58 @@ class LoginViewModel : LoginViewModelType {
     }
     
     func authenticateUser(completion: @escaping (String?) -> Void) {}
+}
+
+extension LoginViewModel: LostSecurityViewModelType {
+    var lostEmail: String? {
+        return self.email
+    }
+    
+    var title: String {
+        return lostPassword ? R.string.localizable.lost_password() : R.string.localizable.lost_2fa()
+    }
+    
+    var successHint: String {
+        let hint = lostPassword ? R.string.localizable.password() : R.string.localizable.fa_secret()
+        return R.string.localizable.lost_security_email_hint(hint, hint)
+    }
+    
+    var successDetail: String {
+        return R.string.localizable.lost_security_email_sent(title)
+    }
+    
+    func lostSecurity(email:String?, response: @escaping EmptyResponseClosure) {
+        if let email = email, email.isEmail() {
+            self.email = email
+            if lostPassword {
+                service.lostPassword(email: email, response: response)
+            } else {
+                service.reset2fa(email: email, response: response)
+            }
+        } else {
+            let error = ErrorResponse()
+            error.errorMessage = R.string.localizable.invalid_email()
+            response(.failure(error: .validationFailed(error: error)))
+        }
+    }
+    
+    func resendMailConfirmation(response: @escaping EmptyResponseClosure) {
+        service.resendMailConfirmation(email: email!) { result in
+            response(result)
+        }
+    }
+    
+    func showEmailConfirmation() {
+        navigationCoordinator?.performTransition(transition: .showEmailConfirmation)
+    }
+    
+    func showSuccess() {
+        navigationCoordinator?.performTransition(transition: .showLostPasswordSuccess)
+    }
+    
+    func showLogin() {
+        navigationCoordinator?.performTransition(transition: .showLogin)
+    }
 }
 
 fileprivate extension LoginViewModel {
