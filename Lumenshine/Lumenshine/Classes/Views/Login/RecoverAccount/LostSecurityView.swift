@@ -58,9 +58,10 @@ fileprivate extension LostSecurityView {
     
     func prepareTitleLabel() {
         titleLabel.text = viewModel.title
-        titleLabel.font = Stylesheet.font(.title1)
+        titleLabel.font = R.font.encodeSansRegular(size: 24)
         titleLabel.textAlignment = .center
-        titleLabel.textColor = Stylesheet.color(.blue)
+        titleLabel.textColor = Stylesheet.color(.darkBlue)
+        titleLabel.numberOfLines = 0
         
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
@@ -75,33 +76,36 @@ fileprivate extension LostSecurityView {
         emailTextField.autocapitalizationType = .none
         emailTextField.autocorrectionType = .no
         emailTextField.placeholder = R.string.localizable.email()
-        emailTextField.dividerActiveColor = Stylesheet.color(.cyan)
-        emailTextField.placeholderActiveColor = Stylesheet.color(.cyan)
+        emailTextField.dividerActiveColor = Stylesheet.color(.gray)
+        emailTextField.placeholderActiveColor = Stylesheet.color(.gray)
         emailTextField.detailColor = Stylesheet.color(.red)
         emailTextField.placeholderAnimation = .hidden
+        emailTextField.font = R.font.encodeSansRegular(size: 15)
+        emailTextField.detailLabel.font = R.font.encodeSansRegular(size: 13)
         
         addSubview(emailTextField)
         emailTextField.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(30)
-            make.left.equalTo(40)
-            make.right.equalTo(-40)
+            make.left.equalTo(80)
+            make.right.equalTo(-80)
         }
     }
     
     func prepareResetButton() {
-        nextButton.title = R.string.localizable.next()
-        nextButton.titleColor = Stylesheet.color(.black)
-        nextButton.titleLabel?.font = Stylesheet.font(.caption2)
-        nextButton.contentEdgeInsets = UIEdgeInsets(top: 7, left: 10, bottom: 7, right: 10)
-        nextButton.cornerRadiusPreset = .none
-        nextButton.borderWidthPreset = .border2
-        nextButton.depthPreset = .depth2
+        nextButton.title = R.string.localizable.next().uppercased()
+        nextButton.titleColor = Stylesheet.color(.white)
+        nextButton.backgroundColor = Stylesheet.color(.cyan)
+        nextButton.titleLabel?.font = R.font.encodeSansRegular(size: 20)
+        nextButton.cornerRadiusPreset = .cornerRadius6
+        nextButton.titleLabel?.adjustsFontSizeToFitWidth = true
         nextButton.addTarget(self, action: #selector(didTapResetButton(sender:)), for: .touchUpInside)
         
         addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
             make.top.equalTo(emailTextField.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
+            make.width.equalTo(120)
+            make.height.equalTo(40)
             make.bottom.equalTo(-20)
         }
     }
