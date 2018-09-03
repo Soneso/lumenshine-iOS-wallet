@@ -933,7 +933,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 33 images.
+  /// This `R.image` struct is generated, and contains static references to 34 images.
   struct image {
     /// Image `FaceIcon`.
     static let faceIcon = Rswift.ImageResource(bundle: R.hostingBundle, name: "FaceIcon")
@@ -945,8 +945,6 @@ struct R: Rswift.Validatable {
     static let arrowLeft = Rswift.ImageResource(bundle: R.hostingBundle, name: "arrow-left")
     /// Image `close`.
     static let close = Rswift.ImageResource(bundle: R.hostingBundle, name: "close")
-    /// Image `combination_lock`.
-    static let combination_lock = Rswift.ImageResource(bundle: R.hostingBundle, name: "combination_lock")
     /// Image `compose`.
     static let compose = Rswift.ImageResource(bundle: R.hostingBundle, name: "compose")
     /// Image `copy`.
@@ -967,6 +965,8 @@ struct R: Rswift.Validatable {
     static let lock = Rswift.ImageResource(bundle: R.hostingBundle, name: "lock")
     /// Image `logo`.
     static let logo = Rswift.ImageResource(bundle: R.hostingBundle, name: "logo")
+    /// Image `lost_2fa`.
+    static let lost_2fa = Rswift.ImageResource(bundle: R.hostingBundle, name: "lost_2fa")
     /// Image `money-1`.
     static let money1 = Rswift.ImageResource(bundle: R.hostingBundle, name: "money-1")
     /// Image `money-2`.
@@ -995,10 +995,12 @@ struct R: Rswift.Validatable {
     static let soneso = Rswift.ImageResource(bundle: R.hostingBundle, name: "soneso")
     /// Image `star`.
     static let star = Rswift.ImageResource(bundle: R.hostingBundle, name: "star")
-    /// Image `top_list`.
-    static let top_list = Rswift.ImageResource(bundle: R.hostingBundle, name: "top_list")
+    /// Image `transactions`.
+    static let transactions = Rswift.ImageResource(bundle: R.hostingBundle, name: "transactions")
     /// Image `user_add`.
     static let user_add = Rswift.ImageResource(bundle: R.hostingBundle, name: "user_add")
+    /// Image `user`.
+    static let user = Rswift.ImageResource(bundle: R.hostingBundle, name: "user")
     /// Image `users`.
     static let users = Rswift.ImageResource(bundle: R.hostingBundle, name: "users")
     
@@ -1025,11 +1027,6 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "close", bundle: ..., traitCollection: ...)`
     static func close(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.close, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "combination_lock", bundle: ..., traitCollection: ...)`
-    static func combination_lock(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.combination_lock, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "compose", bundle: ..., traitCollection: ...)`
@@ -1080,6 +1077,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "logo", bundle: ..., traitCollection: ...)`
     static func logo(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.logo, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "lost_2fa", bundle: ..., traitCollection: ...)`
+    static func lost_2fa(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.lost_2fa, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "money-1", bundle: ..., traitCollection: ...)`
@@ -1152,9 +1154,14 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.star, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "top_list", bundle: ..., traitCollection: ...)`
-    static func top_list(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.top_list, compatibleWith: traitCollection)
+    /// `UIImage(named: "transactions", bundle: ..., traitCollection: ...)`
+    static func transactions(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.transactions, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "user", bundle: ..., traitCollection: ...)`
+    static func user(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.user, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "user_add", bundle: ..., traitCollection: ...)`

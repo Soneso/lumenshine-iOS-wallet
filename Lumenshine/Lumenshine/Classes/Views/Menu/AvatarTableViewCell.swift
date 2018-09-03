@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Material
 
 class AvatarTableViewCell: UITableViewCell {
     
@@ -28,18 +29,28 @@ class AvatarTableViewCell: UITableViewCell {
         contentView.addSubview(_imageView)
         _imageView.snp.makeConstraints { make in
             make.top.equalTo(30)
-            make.left.equalTo(separatorInset.left)
+            make.centerX.equalToSuperview()
+            make.height.width.equalTo(80)
         }
         
         contentView.addSubview(_textLabel)
         _textLabel.snp.makeConstraints { make in
             make.top.equalTo(_imageView.snp.bottom).offset(10)
-            make.left.equalTo(separatorInset.left)
+            make.centerX.equalToSuperview()
             make.bottom.equalTo(-10)
         }
         
         _textLabel.textColor = Stylesheet.color(.white)
+        _textLabel.font = R.font.encodeSansRegular(size: 21)
+        _textLabel.textAlignment = .center
+        
         _imageView.tintColor = Stylesheet.color(.white)
+        _imageView.shapePreset = .circle
+        _imageView.borderColor = Stylesheet.color(.white)
+        _imageView.borderWidthPreset = .border2
+        _imageView.clipsToBounds = true
+        _imageView.layer.cornerRadius = 40
+        
         
         let selection = UIView()
         selection.backgroundColor = Stylesheet.color(.whiteWith(alpha: 0.3))

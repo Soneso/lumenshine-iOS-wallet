@@ -114,7 +114,7 @@ fileprivate extension HomeViewModel {
             (R.string.localizable.send(), R.image.pencil.name),
             (R.string.localizable.receive(), R.image.compose.name),
             (R.string.localizable.scan(), R.image.question.name),
-            (R.string.localizable.deposit(), R.image.combination_lock.name),
+            (R.string.localizable.deposit(), R.image.lost_2fa.name),
             (R.string.localizable.withdraw(), R.image.money2.name)
         ]
         navigationCoordinator?.performTransition(transition: .showHeaderMenu(items))

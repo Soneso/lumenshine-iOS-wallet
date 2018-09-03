@@ -22,6 +22,7 @@ class MenuTableViewCell: UITableViewCell {
     
     func commonInit() {
         textLabel?.textColor = Stylesheet.color(.white)
+        textLabel?.font = R.font.encodeSansRegular(size: 18)
         backgroundColor = Stylesheet.color(.clear)
         imageView?.tintColor = Stylesheet.color(.white)
         let selection = UIView()

@@ -93,7 +93,7 @@ fileprivate extension MenuViewController {
         tableView.register(AvatarTableViewCell.self, forCellReuseIdentifier: MenuViewController.AvatarCellIdentifier)
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.separatorStyle = .none
-        tableView.backgroundColor = Stylesheet.color(.darkBlue)
+        tableView.backgroundColor = Stylesheet.color(.lightCyan)
         tableView.tableHeaderView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         prepareMenuButton()
     }

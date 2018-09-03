@@ -76,13 +76,13 @@ enum MenuEntry {
     var icon: ImageResource {
         switch self {
         case .avatar:
-            return R.image.rocket
+            return R.image.user
         case .home:
             return R.image.home
         case .wallets:
             return R.image.money1
         case .transactions:
-            return R.image.top_list
+            return R.image.transactions
         case .currencies:
             return R.image.money2
         case .contacts:
@@ -102,9 +102,9 @@ enum MenuEntry {
         case .lostPassword:
             return R.image.compose
         case .lost2FA:
-            return R.image.combination_lock
+            return R.image.lost_2fa
         case .importMnemonic:
-            return R.image.user_add
+            return R.image.user
         case .about:
             return R.image.star
         case .fingerprint:

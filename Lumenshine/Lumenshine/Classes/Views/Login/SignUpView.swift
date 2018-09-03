@@ -204,7 +204,7 @@ fileprivate extension SignUpView {
     }
     
     func prepareHintButton() {
-        passwordHintButton.image = R.image.question()
+        passwordHintButton.image = R.image.question()?.tint(with: .black)
         passwordHintButton.shapePreset = .circle
         passwordHintButton.backgroundColor = Stylesheet.color(.white)
         passwordHintButton.addTarget(self, action: #selector(hintAction(sender:)), for: .touchUpInside)

@@ -19,8 +19,7 @@ class LoginMenuViewModel : MenuViewModelType {
         self.service = service
         
         self.entries = [[.avatar],
-                        [.login, .signUp, .lostPassword, .lost2FA, .importMnemonic],
-                        [.about, .help]]
+                        [.login, .signUp, .lostPassword, .lost2FA, .importMnemonic, .about, .help]]
     }
     
     var itemDistribution: [Int] {

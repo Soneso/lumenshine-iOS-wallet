@@ -44,6 +44,7 @@ enum ColorStyle {
     case red
     case yellow
     case cyan
+    case lightCyan
     
     case white
     case whiteWith(alpha: CGFloat)
@@ -133,6 +134,8 @@ struct Stylesheet {
             return UIColor.yellow
         case .cyan:
             return UIColor(red: 71/255.0, green: 175/255.0, blue: 222/255.0, alpha: 1.0)
+        case .lightCyan:
+            return UIColor(red: 41/255.0, green: 171/255.0, blue: 226/255.0, alpha: 1.0)
         case .clear:
             return UIColor.clear
         case .white:

@@ -17,7 +17,7 @@ class AppNavigationDrawerController: DrawerController {
 //        openDrawerGestureModeMask = [.panningCenterView, .panningNavigationBar]
 //        closeDrawerGestureModeMask = [.panningCenterView, .panningNavigationBar]
         
-        setDrawerWidth(260, for: .left)
+        setDrawerWidth(200, for: .left)
         
         options.isTapToClose = true
         options.isGesture = true
