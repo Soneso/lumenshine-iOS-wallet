@@ -47,7 +47,12 @@ class LoginViewModel : LoginViewModelType {
     fileprivate let service: AuthService
     fileprivate var email: String?
     fileprivate var user: User?
-    fileprivate var mnemonic: String?
+    fileprivate var mnemonic: String? {
+        didSet {
+            BiometricHelper.UserMnemonic = mnemonic
+        }
+    }
+    
     var entries: [MenuEntry]
     var lostPassword: Bool
     

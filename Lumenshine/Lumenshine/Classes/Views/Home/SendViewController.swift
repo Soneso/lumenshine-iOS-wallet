@@ -20,6 +20,7 @@ enum ValidationErrors: String {
     case CurrencyNoTrust = "Recipient can not receive selected currency"
     case AddressNotFound = "Address not found"
     case InvalidPassword = "Invalid password"
+    case MandatoryPassword = "Password required"
 }
 
 enum MemoTypeValues: String {
@@ -89,12 +90,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     var sendAction: ((TransactionInput) -> ())?
     
     private var scanViewController: ScanViewController!
-    
-    private var stellarSDK: StellarSDK {
-        get {
-            return Services.shared.stellarSdk
-        }
-    }
+    private let inputDataValidator = InputDataValidator()
     
     private var memoTypes: [MemoTypeValues] = [MemoTypeValues.MEMO_TEXT, MemoTypeValues.MEMO_ID, MemoTypeValues.MEMO_HASH, MemoTypeValues.MEMO_RETURN]
     
@@ -110,37 +106,79 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     @IBAction func sendButtonAction(_ sender: UIButton) {
-            resetValidations()
-            sendButton.setTitle(SendButtonTitles.validating.rawValue, for: UIControlState.normal)
-            sendButton.isEnabled = false
-            DispatchQueue.global().async {
-                if self.validateInsertedData() {
-                    DispatchQueue.main.async {
-                        let transactionData = TransactionInput(currency: self.selectedCurrency,
-                                                               issuer: self.issuerTextField.text ?? nil,
-                                                               address: self.addressTextField.text ?? "",
-                                                               amount: self.amountTextField.text ?? "",
-                                                               memo: self.memoInputTextField.text?.isEmpty == false ? self.memoInputTextField.text! : nil,
-                                                               memoType: self.memoTypes.first(where: { (memoType) -> Bool in
-                                                                if let memoTypeTextFieldValue = self.memoTypeTextField.text {
-                                                                    return memoType.rawValue == memoTypeTextFieldValue
-                                                                }
-                                                                
-                                                                return memoType.rawValue == MemoTypeValues.MEMO_TEXT.rawValue
-                                                               }),
-                                                               password: self.passwordTextField.text ?? "",
-                                                               userMnemonic: self.userMnemonic,
-                                                               transactionType: !self.isSendAnywayRequired ? TransactionActionType.sendPayment : TransactionActionType.createAndFundAccount )
-                        
-                        self.sendAction?(transactionData)
+        resetValidations()
+        sendButton.setTitle(SendButtonTitles.validating.rawValue, for: UIControlState.normal)
+        sendButton.isEnabled = false
+            if validateInsertedData() {
+                if let address = addressTextField.text,
+                    let password = passwordTextField.text,
+                    let currency = (wallet as! FoundedWallet).balances.first(where: { (currency) -> Bool in return currency.displayCode == selectedCurrency }) {
+                    
+                    inputDataValidator.validatePasswordAndDestinationAddress(address: address, password: password, currency: currency) { (result) -> (Void) in
+                        switch result {
+                        case .success(passwordResponse: let passwordResponse, addressResponse: let addressResponse):
+                            switch passwordResponse {
+                                case .success(mnemonic: let mnemonic):
+                                    self.userMnemonic = mnemonic
+                                case .failure(error: let error):
+                                    print("Error: \(error)")
+                                    self.setValidationError(stackView: self.passwordErrorStackView, label: self.passwordErrorLabel, errorMessage: ValidationErrors.InvalidPassword)
+                                }
+                            
+                            switch addressResponse {
+                                case .success(isFunded: let isFunded, isTrusted: let isTrusted):
+                                    if !isFunded {
+                                        self.setValidationError(stackView: self.sendErrorStackView, label: self.sendErrorLabel, errorMessage: ValidationErrors.RecipientAccount)
+                
+                                        if self.selectedCurrency == NativeCurrencyNames.xlm.rawValue {
+                                            self.isSendAnywayRequired = true
+                                        }
+                                    } else if let isTrusted = isTrusted, !isTrusted {
+                                       self.setValidationError(stackView: self.addressErrorStackView, label: self.addressErrorLabel, errorMessage: ValidationErrors.CurrencyNoTrust)
+                                    }
+                                
+                                case .failure:
+                                    print("Account not found")
+                                    if self.selectedCurrency == NativeCurrencyNames.xlm.rawValue {
+                                        self.setValidationError(stackView: self.sendErrorStackView, label: self.sendErrorLabel, errorMessage: ValidationErrors.RecipientAccount)
+                                        self.isSendAnywayRequired = true
+                                    } else {
+                                    self.setValidationError(stackView: self.addressErrorStackView, label: self.addressErrorLabel, errorMessage: ValidationErrors.AddressNotFound)
+                                }
+                            }
+                            
+                            self.checkForRecipientAccount()
+                            
+                            if self.isInputDataValid {
+                                let transactionData = TransactionInput(currency: self.selectedCurrency,
+                                                                       issuer: self.issuerTextField.text ?? nil,
+                                                                       address: self.addressTextField.text ?? "",
+                                                                       amount: self.amountTextField.text ?? "",
+                                                                       memo: self.memoInputTextField.text?.isEmpty == false ? self.memoInputTextField.text! : nil,
+                                                                       memoType: self.memoTypes.first(where: { (memoType) -> Bool in
+                                                                        if let memoTypeTextFieldValue = self.memoTypeTextField.text {
+                                                                            return memoType.rawValue == memoTypeTextFieldValue
+                                                                        }
+                                                                        
+                                                                        return memoType.rawValue == MemoTypeValues.MEMO_TEXT.rawValue
+                                                                       }),
+                                                                       userMnemonic: self.userMnemonic,
+                                                                       transactionType: !self.isSendAnywayRequired ? TransactionActionType.sendPayment : TransactionActionType.createAndFundAccount )
+                                
+                                self.sendAction?(transactionData)
+                            } else {
+                                self.resetSendButtonToNormal()
+                            }
+                            
+                        case .failure:
+                            break
+                        }
                     }
                 }
-                
-                DispatchQueue.main.async {
-                    self.sendButton.setTitle(self.isSendAnywayRequired ? SendButtonTitles.sendAnyway.rawValue : self.getSendButtonDefaultTitle(), for: UIControlState.normal)
-                    self.sendButton.isEnabled = true
-                }
             }
+            else {
+                resetSendButtonToNormal()
+        }
     }
 
     private var selectedMemoType: MemoTypeValues! = MemoTypeValues.MEMO_TEXT {
@@ -285,160 +323,107 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     private func setValidationError(stackView: UIStackView, label: UILabel, errorMessage: ValidationErrors) {
-        DispatchQueue.main.async {
-            stackView.isHidden = false
-            label.text = errorMessage.rawValue
-        }
+        stackView.isHidden = false
+        label.text = errorMessage.rawValue
         
         isInputDataValid = false
     }
     
     private func validateAddress() {
-        var addressToValidate = ""
-        DispatchQueue.main.sync {
-            if let address = self.addressTextField.text {
-                addressToValidate = address
+        if let address = addressTextField.text {
+            if !address.isMandatoryValid() {
+                setValidationError(stackView: addressErrorStackView, label: addressErrorLabel, errorMessage: ValidationErrors.Mandatory)
+                return
             }
-        }
-        
-        if !addressToValidate.isMandatoryValid() {
-            setValidationError(stackView: addressErrorStackView, label: addressErrorLabel, errorMessage: ValidationErrors.Mandatory)
-            return
-        }
-        
-        if !addressToValidate.isBase64Valid() || addressToValidate.isFederationAddress(){
-            setValidationError(stackView: addressErrorStackView, label: addressErrorLabel, errorMessage: ValidationErrors.InvalidAddress)
+            
+            if address.isFederationAddress() {
+                return
+            }
+            
+            if !address.isBase64Valid() {
+                setValidationError(stackView: addressErrorStackView, label: addressErrorLabel, errorMessage: ValidationErrors.InvalidAddress)
+            }
         }
     }
     
     private func validateAmount() {
-        var amountToValidate = ""
-        
-        DispatchQueue.main.sync {
-            if let amount = self.amountTextField.text {
-                amountToValidate = amount
+        if let amountToValidate = self.amountTextField.text {
+            if !amountToValidate.isMandatoryValid() {
+                setValidationError(stackView: amountErrorStackView, label: amountErrorLabel, errorMessage: ValidationErrors.Mandatory)
+                return
             }
-        }
-        
-        if !amountToValidate.isMandatoryValid() {
-            setValidationError(stackView: amountErrorStackView, label: amountErrorLabel, errorMessage: ValidationErrors.Mandatory)
-            return
-        }
-        
-        if let balance: String = (wallet as! FoundedWallet).balances.first(where: { (balance) -> Bool in
-            return balance.displayCode == selectedCurrency})?.balance {
-        if !amountToValidate.isAmountValid(forBalance: balance) {
-            amountErrorStackView.isHidden = false
-            amountErrorLabel.text = "Insufficient \(selectedCurrency) available"
-            isInputDataValid = false
+            
+            if let balance: String = (wallet as! FoundedWallet).balances.first(where: { (balance) -> Bool in
+                return balance.displayCode == selectedCurrency})?.balance {
+            if !amountToValidate.isAmountValid(forBalance: balance) {
+                amountErrorStackView.isHidden = false
+                amountErrorLabel.text = "Insufficient \(selectedCurrency) available"
+                isInputDataValid = false
+                }
             }
         }
     }
     
     private func validateMemo() {
-        var memoText = ""
-        DispatchQueue.main.sync {
-            if let memo = self.memoInputTextField.text {
-                memoText = memo
-            }
-        }
-        
-        if memoText.isEmpty == true {
-            return
-        }
-        
-        switch selectedMemoType.rawValue {
-        case MemoTypeValues.MEMO_TEXT.rawValue:
-            let memoTextValidationResult: MemoTextValidationResult = memoText.isMemoTextValid(limitNrOfBytes: MaximumLengthInBytesForMemoText)
-            
-            if memoTextValidationResult == MemoTextValidationResult.InvalidEncoding {
-                setValidationError(stackView: memoInputErrorStackView, label: memoInputErrorLabel, errorMessage: ValidationErrors.InvalidMemo)
+        if let memoText = self.memoInputTextField.text {
+            if memoText.isEmpty == true {
                 return
             }
             
-            if memoTextValidationResult == MemoTextValidationResult.InvalidLength {
-                setValidationError(stackView: memoInputErrorStackView, label: memoInputErrorLabel, errorMessage: ValidationErrors.MemoLength)
-                return
-            }
-            
-            break
-            
-        case MemoTypeValues.MEMO_ID.rawValue:
-            if !memoText.isMemoIDValid() {
-                setValidationError(stackView: memoInputErrorStackView, label: memoInputErrorLabel, errorMessage: ValidationErrors.InvalidMemo)
-            }
-            
-            break
-            
-        case MemoTypeValues.MEMO_HASH.rawValue:
-            if !memoText.isMemoHashValid() {
-                setValidationError(stackView: memoInputErrorStackView, label: memoInputErrorLabel, errorMessage: ValidationErrors.InvalidMemo)
-            }
-            
-            break
-            
-        case MemoTypeValues.MEMO_RETURN.rawValue:
-            if !memoText.isMemoReturnValid() {
-                setValidationError(stackView: memoInputErrorStackView, label: memoInputErrorLabel, errorMessage: ValidationErrors.InvalidMemo)
-            }
-            
-            break
-        default:
-            break
-        }
-    }
-    
-    private func isInsertedPasswordCorrect(authResponse: AuthenticationResponse, password: String) -> Bool {
-        if let userSecurity = UserSecurity(from: authResponse), let decryptUserSecurity = try? UserSecurityHelper.decryptUserSecurity(userSecurity, password: password) {
-            if let decryptedUserSecurity = decryptUserSecurity {
-                userMnemonic = decryptedUserSecurity.mnemonic
-                return true
-            }
-        }
-        
-        return false
-    }
-    
-    private func validatePassword() {
-        var currentPassword = ""
-        
-        DispatchQueue.main.sync {
-            if let password = self.passwordTextField.text {
-                currentPassword = password
-            }
-        }
-        
-        if !currentPassword.isMandatoryValid() {
-            setValidationError(stackView: passwordErrorStackView, label: passwordErrorLabel, errorMessage: ValidationErrors.Mandatory)
-            return
-        }
-        
-        if !isInputDataValid {
-            return
-        }
-        
-        var isPasswordCorrect = false
-        
-        let semaphore = DispatchSemaphore(value: 0)
-        Services.shared.auth.authenticationData { result in
-            switch result {
-            case .success(let authResponse):
-                if self.isInsertedPasswordCorrect(authResponse: authResponse, password: currentPassword) {
-                    isPasswordCorrect = true
+            switch selectedMemoType.rawValue {
+            case MemoTypeValues.MEMO_TEXT.rawValue:
+                let memoTextValidationResult: MemoTextValidationResult = memoText.isMemoTextValid(limitNrOfBytes: MaximumLengthInBytesForMemoText)
+                
+                if memoTextValidationResult == MemoTextValidationResult.InvalidEncoding {
+                    setValidationError(stackView: memoInputErrorStackView, label: memoInputErrorLabel, errorMessage: ValidationErrors.InvalidMemo)
+                    return
+                }
+                
+                if memoTextValidationResult == MemoTextValidationResult.InvalidLength {
+                    setValidationError(stackView: memoInputErrorStackView, label: memoInputErrorLabel, errorMessage: ValidationErrors.MemoLength)
+                    return
                 }
                 
                 break
-            case .failure(_):
+                
+            case MemoTypeValues.MEMO_ID.rawValue:
+                if !memoText.isMemoIDValid() {
+                    setValidationError(stackView: memoInputErrorStackView, label: memoInputErrorLabel, errorMessage: ValidationErrors.InvalidMemo)
+                }
+                
+                break
+                
+            case MemoTypeValues.MEMO_HASH.rawValue:
+                if !memoText.isMemoHashValid() {
+                    setValidationError(stackView: memoInputErrorStackView, label: memoInputErrorLabel, errorMessage: ValidationErrors.InvalidMemo)
+                }
+                
+                break
+                
+            case MemoTypeValues.MEMO_RETURN.rawValue:
+                if !memoText.isMemoReturnValid() {
+                    setValidationError(stackView: memoInputErrorStackView, label: memoInputErrorLabel, errorMessage: ValidationErrors.InvalidMemo)
+                }
+                
+                break
+            default:
                 break
             }
-            
-            semaphore.signal()
         }
-        
-        semaphore.wait()
-        
-        if !isPasswordCorrect {
-            setValidationError(stackView: passwordErrorStackView, label: passwordErrorLabel, errorMessage: ValidationErrors.InvalidPassword)
+    }
+    
+    
+    
+    private func validatePassword() {
+        if let currentPassword = passwordTextField.text {
+            if !currentPassword.isMandatoryValid() {
+                setValidationError(stackView: passwordErrorStackView, label: passwordErrorLabel, errorMessage: ValidationErrors.Mandatory)
+                return
+            }
+            
+            if !isInputDataValid {
+                return
+            }
         }
     }
     
@@ -447,64 +432,8 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             if isSendAnywayRequired {
                 isInputDataValid = true
             }
-            
-            return
-        }
-        
-        var accountId = ""
-        
-        DispatchQueue.main.sync {
-            if let id = self.addressTextField.text {
-                accountId = id
-            }
-        }
 
-        var isTrusted: Bool = false
-        var isValid = false
-        var accountExists = true
-        
-        if let currency = (wallet as! FoundedWallet).balances.first(where: { (currency) -> Bool in return currency.displayCode == selectedCurrency }) {
-            let semaphore = DispatchSemaphore(value: 0)
-            stellarSDK.accounts.getAccountDetails(accountId: accountId) { response in
-                switch response {
-                case .success(let accountDetails):
-                    if accountDetails.balances.count > 0 {
-                        isValid = true
-                    }
-                    
-                    for balance in accountDetails.balances {
-                        if balance.assetCode == currency.assetCode &&
-                            balance.assetIssuer == currency.assetIssuer {
-                            isTrusted = true
-                        }
-                    }
-                    
-                    break
-                case .failure(_):
-                    accountExists = false
-                    break
-                }
-                
-                semaphore.signal()
-            }
-            
-            semaphore.wait()
-        }
-        
-        if !accountExists {
-            setValidationError(stackView: addressErrorStackView, label: addressErrorLabel, errorMessage: ValidationErrors.AddressNotFound)
-        }
-        
-        if !isValid && accountExists || !accountExists {
-            setValidationError(stackView: sendErrorStackView, label: sendErrorLabel, errorMessage: ValidationErrors.RecipientAccount)
-            
-            if selectedCurrency == NativeCurrencyNames.xlm.rawValue {
-                isSendAnywayRequired = true
-            }
-        }
-        
-        if !isTrusted && accountExists && isValid {
-            setValidationError(stackView: addressErrorStackView, label: addressErrorLabel, errorMessage: ValidationErrors.CurrencyNoTrust)
+            return
         }
     }
     
@@ -615,5 +544,10 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         } else if pickerView == issuerPickerView {
             issuerTextField.text = (wallet as! FoundedWallet).issuersFor(assetCode: selectedCurrency)[row]
         }
+    }
+    
+    private func resetSendButtonToNormal() {
+        sendButton.setTitle(isSendAnywayRequired ? SendButtonTitles.sendAnyway.rawValue : getSendButtonDefaultTitle(), for: UIControlState.normal)
+        sendButton.isEnabled = true
     }
 }

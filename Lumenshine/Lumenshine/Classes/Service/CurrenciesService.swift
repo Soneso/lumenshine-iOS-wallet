@@ -30,7 +30,31 @@ public enum GetRateEnum {
     case failure(error: ServiceError)
 }
 
+public enum GetKnownCurrencyEnum {
+    case success(response: KnownCurrencyResponse)
+    case failure(error: ServiceError)
+}
+
+public enum GetKnownCurrenciesEnum {
+    case success(response: [KnownCurrencyResponse])
+    case failure(error: ServiceError)
+}
+
+public enum GetKnownInflationDestinationEnum {
+    case success(response: KnownInflationDestinationResponse)
+    case failure(error: ServiceError)
+}
+
+public enum GetKnownInflationDestinationsEnum {
+    case success(response: [KnownInflationDestinationResponse])
+    case failure(error: ServiceError)
+}
+
 public typealias GetRateClosure = (_ response:GetRateEnum) -> (Void)
+public typealias GetKnownCurrencyClosure = (_ response: GetKnownCurrencyEnum) -> (Void)
+public typealias GetKnownCurrenciesClosure = (_ response: GetKnownCurrenciesEnum) -> (Void)
+public typealias GetKnownInflationDestinationClosure = (_ response: GetKnownInflationDestinationEnum) -> (Void)
+public typealias GetKnownInflationDestinationsClosure = (_ response: GetKnownInflationDestinationsEnum) -> (Void)
 
 public class CurrenciesService: BaseService {
 
@@ -66,4 +90,73 @@ public class CurrenciesService: BaseService {
 //        }
     }
     
+    open func getKnownInflationDestinations(response: @escaping GetKnownInflationDestinationsClosure) {
+        POSTRequestWithPath(path: "/portal/user/dashboard/get_known_inflation_destinations") { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                do {
+                    let knownInflationDestinations = try self.jsonDecoder.decode(Array<KnownInflationDestinationResponse>.self, from: data)
+                    response(.success(response: knownInflationDestinations))
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+                }
+            case .failure(let error):
+                response(.failure(error: error))
+            }
+        }
+    }
+    
+    open func getKnownInflationDestination(forID ID: Int, response: @escaping GetKnownInflationDestinationClosure) {
+        var params = Dictionary<String,Any>()
+        params["id"] = ID
+        let bodyData = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+        POSTRequestWithPath(path: "/portal/user/dashboard/get_known_inflation_destination", body: bodyData) { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                do {
+                    let knownInflationDestination = try self.jsonDecoder.decode(KnownInflationDestinationResponse.self, from: data)
+                    response(.success(response: knownInflationDestination))
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+                }
+            case .failure(let error):
+                response(.failure(error: error))
+            }
+        }
+    }
+    
+    open func getKnownCurrencies(response: @escaping GetKnownCurrenciesClosure) {
+        POSTRequestWithPath(path: "/portal/user/dashboard/get_known_currencies") { (result) -> (Void) in
+            switch result {
+            case .success(data: let data):
+                do {
+                    let knownCurrenciesResponse = try self.jsonDecoder.decode(Array<KnownCurrencyResponse>.self, from: data)
+                    response(.success(response: knownCurrenciesResponse))
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+                }
+            case .failure(error: let error):
+                response(.failure(error: error))
+            }
+        }
+    }
+    
+    open func getKnownCurrency(forID ID: Int, response: @escaping GetKnownCurrencyClosure) {
+        var params = Dictionary<String,Any>()
+        params["id"] = ID
+        let bodyData = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+        POSTRequestWithPath(path: "/portal/user/dashboard/get_known_currency", body: bodyData) { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                do {
+                    let knownCurrencyResponse = try self.jsonDecoder.decode(KnownCurrencyResponse.self, from: data)
+                    response(.success(response: knownCurrencyResponse))
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+                }
+            case .failure(let error):
+                response(.failure(error: error))
+            }
+        }
+    }
 }

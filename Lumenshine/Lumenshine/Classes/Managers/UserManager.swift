@@ -24,9 +24,15 @@ public enum WalletsEnum {
     case failure(error: ServiceError)
 }
 
+public enum AddressStatusEnum {
+    case success(isFunded: Bool, isTrusted: Bool?)
+    case failure
+}
+
 public typealias BoolClosure = (_ response:BoolEnum) -> (Void)
 public typealias CoinClosure = (_ response:CoinEnum) -> (Void)
 public typealias WalletsClosure = (_ response:WalletsEnum) -> (Void)
+public typealias AddressStatusClosure = (_ response: AddressStatusEnum) -> (Void)
 public typealias CoinUnit = Double
 
 public class UserManager: NSObject {
@@ -73,6 +79,64 @@ public class UserManager: NSObject {
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
+                    completion(.failure(error: error))
+                }
+            }
+        }
+    }
+    
+    func checkAddressStatus(forAccountID accountID: String, asset: AccountBalanceResponse, completion: @escaping AddressStatusClosure) {
+        stellarSDK.accounts.getAccountDetails(accountId: accountID) { response in
+            switch response {
+            case .success(let accountDetails):
+                var isFunded = false
+                var isTrusted = false
+        
+                if accountDetails.balances.count > 0 {
+                    isFunded = true
+                }
+                
+                if asset.assetIssuer == accountID {
+                    isTrusted = true
+                } else {
+                    for balance in accountDetails.balances {
+                        if balance.assetCode == asset.assetCode &&
+                            balance.assetIssuer == asset.assetIssuer {
+                            isTrusted = true
+                        }
+                    }
+                }
+                DispatchQueue.main.async {
+                    completion(.success(isFunded: isFunded, isTrusted: isTrusted))
+                }
+            case .failure(_):
+                DispatchQueue.main.async {
+                    completion(.failure)
+                }
+            }
+        }
+    }
+    
+    func checkIfAccountExists(forAccountID accountID: String, completion: @escaping AddressStatusClosure) {
+        stellarSDK.accounts.getAccountDetails(accountId: accountID) { (accountResponse) -> (Void) in
+            DispatchQueue.main.async {
+                switch accountResponse {
+                case .success(details: let accountDetails):
+                    completion(.success(isFunded: accountDetails.balances.count > 0, isTrusted: nil))
+                case .failure(_):
+                    completion(.failure)
+                }
+            }
+        }
+    }
+    
+    func createTestAccount(withAccountID accountID: String, completion: @escaping CreateTestAccountClosure) {
+        stellarSDK.accounts.createTestAccount(accountId: accountID) { (response) -> (Void) in
+            DispatchQueue.main.async {
+                switch response {
+                case .success(details: let details):
+                    completion(.success(details: details))
+                case .failure(error: let error):
                     completion(.failure(error: error))
                 }
             }
@@ -167,5 +231,4 @@ public class UserManager: NSObject {
             }
         }
     }
-    
 }
