@@ -1,0 +1,20 @@
+//
+//  Common.strings
+//  Lumenshine
+//
+//  Created by Istvan Elekes on 3/14/18.
+//  Copyright © 2018 Yuor. All rights reserved.
+//
+
+
+/*  */
+"cancel" = "Cancel";
+
+/*  */
+"no" = "No";
+
+/*  */
+"ok" = "Ok";
+
+/*  */
+"yes" = "Yes";

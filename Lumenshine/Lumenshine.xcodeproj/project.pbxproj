@@ -351,6 +351,8 @@
 		432F11782101C64600FC429B /* MnemonicSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicSetupViewController.swift; sourceTree = "<group>"; };
 		432F117A2101EEF500FC429B /* VerificationSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationSetupViewController.swift; sourceTree = "<group>"; };
 		4337C4E62081BAA400F4585A /* RegistrationFormTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationFormTableViewController.swift; sourceTree = "<group>"; };
+		4339B907213D810D00D1BE0E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4339B908213D810D00D1BE0E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Common.strings; sourceTree = "<group>"; };
 		4341251020EBC2C700267260 /* ReLoginHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginHomeView.swift; sourceTree = "<group>"; };
 		4341251220EBC2E900267260 /* ReLoginFingerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginFingerView.swift; sourceTree = "<group>"; };
 		434E049A20D3DC8A00D3235A /* DateUtils+Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateUtils+Format.swift"; sourceTree = "<group>"; };
@@ -1422,6 +1424,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = 7445E9B82019CF7200470E0A;
 			productRefGroup = 7445E9C22019CF7200470E0A /* Products */;
@@ -1884,6 +1887,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				43D7A778205A892E00238E29 /* en */,
+				4339B907213D810D00D1BE0E /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1892,6 +1896,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				43D7A77A205A892E00238E29 /* en */,
+				4339B908213D810D00D1BE0E /* de */,
 			);
 			name = Common.strings;
 			sourceTree = "<group>";
@@ -1985,6 +1990,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -2102,6 +2108,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -2162,6 +2169,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
