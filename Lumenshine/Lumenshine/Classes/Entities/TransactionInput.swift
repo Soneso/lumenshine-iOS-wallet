@@ -20,7 +20,6 @@ public struct TransactionInput {
     let amount: String
     let memo: String?
     let memoType: MemoTypeValues?
-    let password: String
     let userMnemonic: String
     let transactionType: TransactionActionType
 }

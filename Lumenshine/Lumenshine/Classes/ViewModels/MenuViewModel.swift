@@ -113,6 +113,7 @@ fileprivate extension MenuViewModel {
         
         TFAGeneration.removeToken(email: user.email)
         BaseService.removeToken()
+        BiometricHelper.UserMnemonic = nil
         navigationCoordinator?.performTransition(transition: .logout(nil))
     }
     

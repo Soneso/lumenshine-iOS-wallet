@@ -21,6 +21,7 @@ public class FundTestAccountViewController: UIViewController {
     @IBOutlet weak var fundButton: UIButton!
     
     private var wallet: Wallet!
+    private let userManager = UserManager()
     
     @IBAction func publicKeyButtonAction(_ sender: UIButton) {
         if let key = publicKeyButton.titleLabel?.text {
@@ -53,10 +54,8 @@ public class FundTestAccountViewController: UIViewController {
     }
     
     private func setFundButtonTitle(titleEnum: FundButtonTitles) {
-        DispatchQueue.main.async {
-            self.fundButton.setTitle(titleEnum.rawValue, for: UIControlState.normal)
-            self.fundButton.isEnabled = false
-        }
+        fundButton.setTitle(titleEnum.rawValue, for: UIControlState.normal)
+        fundButton.isEnabled = false
     }
     
     private func setContent() {
@@ -64,28 +63,18 @@ public class FundTestAccountViewController: UIViewController {
     }
     
     private func fundTestAccount() {
-        DispatchQueue.global().async {
-            self.setFundButtonTitle(titleEnum: FundButtonTitles.funding)
-            let semaphore = DispatchSemaphore(value: 0)
-            Services.shared.stellarSdk.accounts.createTestAccount(accountId: self.wallet.publicKey) { (response) -> (Void) in
-                switch response {
-                case .success(_):
-                    print("Success!")
-                    self.setFundButtonTitle(titleEnum: .success)
-                    break
-                case .failure(let error):
-                    print("Failure, error: \(error.localizedDescription)")
-                    self.setFundButtonTitle(titleEnum: .failure)
-                    break
-                }
-    
-                semaphore.signal()
+        setFundButtonTitle(titleEnum: FundButtonTitles.funding)
+        userManager.createTestAccount(withAccountID: wallet.publicKey) { (response) -> (Void) in
+            switch response {
+            case .success(_):
+                print("Success!")
+                self.setFundButtonTitle(titleEnum: .success)
+            case .failure(error: let error):
+                print("Failure, error: \(error.localizedDescription)")
+                self.setFundButtonTitle(titleEnum: .failure)
             }
-    
-            semaphore.wait()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-                self.dismiss(animated: true)
-            })
+            
+            self.dismiss(animated: true)
         }
     }
 }

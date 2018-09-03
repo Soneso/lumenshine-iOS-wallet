@@ -144,21 +144,19 @@ fileprivate extension WalletCard {
                 viewController = SendViewController()
                 (viewController as! SendViewController).sendAction = { [weak self] (transactionData) in
                     let transactionHelper = TransactionHelper(transactionInputData: transactionData, wallet: ((self?.viewModel as! WalletCardViewModel).wallet as! FoundedWallet))
-                    var transactionResult = TransactionResult()
                     
                     switch transactionData.transactionType {
                     case .sendPayment:
-                        transactionResult = transactionHelper.sendPayment()
-                        break
+                        transactionHelper.sendPayment(completion: { (result) in
+                            self?.addViewController(forAction: WalletAction.transactionResult, transactionResult: result)
+                        })
                         
                     case .createAndFundAccount:
-                        transactionResult = transactionHelper.createAndFundAccount()
-                        break
+                        transactionHelper.createAndFundAccount(completion: { (result) in
+                            self?.addViewController(forAction: WalletAction.transactionResult, transactionResult: result)
+                        })
                     }
-                    
-                    self?.addViewController(forAction: WalletAction.transactionResult, transactionResult: transactionResult)
                 }
-                break
                 
             case .transactionResult:
                 viewController = TransactionResultViewController()
@@ -171,8 +169,6 @@ fileprivate extension WalletCard {
                     self?.expanded = true
                     self?.addViewController(forAction: WalletAction.send)
                 }
-                
-                break
             }
             
             (viewController as! WalletActionsProtocol).wallet = (viewModel as! WalletCardViewModel).wallet

@@ -14,6 +14,15 @@ enum MemoTextValidationResult {
     case InvalidLength
 }
 
+enum StringConstants: String {
+    case openParenthesis = "("
+    case closeParenthesis = ")"
+}
+
+enum CharacterConstants: Character {
+    case emptySpace = " "
+}
+
 extension String  {
     
     func isEmail() -> Bool {
@@ -160,5 +169,26 @@ extension String  {
         let sRegex = "[a-zA-Z\\_]+[*][a-zA-Z]+[.][a-zA-Z]+"
         
         return NSPredicate(format: "SELF MATCHES[c] %@", sRegex).evaluate(with: self)
+    }
+    
+    func isAssetCodeValid() -> Bool {
+        let sRegex = "^([a-zA-Z0-9]){1,12}$"
+        
+        return NSPredicate(format: "SELF MATCHES[c] %@", sRegex).evaluate(with: self)
+    }
+    
+    func getAssetCode() -> String? {
+        let separatedStrings = self.split(separator: CharacterConstants.emptySpace.rawValue)
+        for subString in separatedStrings {
+            if subString.hasPrefix(StringConstants.openParenthesis.rawValue) && subString.hasSuffix(StringConstants.closeParenthesis.rawValue) {
+                var assetCode = subString
+                assetCode.removeFirst()
+                assetCode.removeLast()
+                
+                return !assetCode.isEmpty ? String(assetCode) : nil
+            }
+        }
+        
+        return nil
     }
 }

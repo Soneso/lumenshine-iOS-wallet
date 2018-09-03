@@ -247,6 +247,16 @@
 		C6658714212555B4006499A7 /* SourceCurrencyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6658713212555B4006499A7 /* SourceCurrencyResponse.swift */; };
 		C665871621255BF2006499A7 /* ChartCurrentRatesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C665871521255BF2006499A7 /* ChartCurrentRatesResponse.swift */; };
 		C665871821255EAB006499A7 /* RatesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C665871721255EAB006499A7 /* RatesResponse.swift */; };
+		C66CC2D5212EA2AD00729C09 /* RemoveCurrencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C66CC2D4212EA2AD00729C09 /* RemoveCurrencyViewController.xib */; };
+		C66CC2D7212EA2BD00729C09 /* RemoveCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66CC2D6212EA2BD00729C09 /* RemoveCurrencyViewController.swift */; };
+		C6752A42213806030067F815 /* FederationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6752A41213806030067F815 /* FederationManager.swift */; };
+		C6752A44213808D50067F815 /* PasswordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6752A43213808D50067F815 /* PasswordManager.swift */; };
+		C6752A46213818CD0067F815 /* InputDataValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6752A45213818CD0067F815 /* InputDataValidator.swift */; };
+		C6805B5B2139530C003B2B25 /* TransactionHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6805B5A2139530C003B2B25 /* TransactionHistoryManager.swift */; };
+		C6813DC3213AB6CB007074C2 /* KnownCurrencyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6813DC2213AB6CB007074C2 /* KnownCurrencyResponse.swift */; };
+		C6813DC7213AB708007074C2 /* KnownInflationDestinationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6813DC6213AB708007074C2 /* KnownInflationDestinationResponse.swift */; };
+		C6813DC9213AC725007074C2 /* KnownCurrenciesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6813DC8213AC725007074C2 /* KnownCurrenciesManager.swift */; };
+		C682C002213691A3007705DF /* BiometricHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C682C001213691A3007705DF /* BiometricHelper.swift */; };
 		C691F68F211C571E00ECA2C4 /* TransactionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C691F68E211C571E00ECA2C4 /* TransactionHelper.swift */; };
 		C695564D2126B11800B0E110 /* LoadTransactionsHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C695564C2126B11800B0E110 /* LoadTransactionsHistoryViewController.swift */; };
 		C695564F2126B12D00B0E110 /* LoadTransactionsHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C695564E2126B12D00B0E110 /* LoadTransactionsHistoryViewController.xib */; };
@@ -257,8 +267,16 @@
 		C69A5143211C16500066A4A0 /* TransactionResultPrintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69A5142211C16500066A4A0 /* TransactionResultPrintView.swift */; };
 		C6B75F3321182E7500B45BEB /* TransactionResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6B75F3221182E7500B45BEB /* TransactionResultViewController.xib */; };
 		C6B75F35211837AF00B45BEB /* TransactionResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B75F34211837AF00B45BEB /* TransactionResultViewController.swift */; };
+		C6BEBE6C2130138B000F7435 /* AddCurrencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6BEBE6B2130138B000F7435 /* AddCurrencyViewController.xib */; };
+		C6BEBE6E213013A1000F7435 /* AddCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BEBE6D213013A1000F7435 /* AddCurrencyViewController.swift */; };
+		C6BEBE7021302CAD000F7435 /* ProvideCurrencyDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6BEBE6F21302CAD000F7435 /* ProvideCurrencyDataViewController.xib */; };
+		C6BEBE7221302CC6000F7435 /* ProvideCurrencyDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BEBE7121302CC6000F7435 /* ProvideCurrencyDataViewController.swift */; };
 		C6C0E4D921256F2700FF1BA8 /* ChartExchangeRatesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C0E4D821256F2700FF1BA8 /* ChartExchangeRatesResponse.swift */; };
 		C6C0E4DB212570EF00FF1BA8 /* ExchangeRateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C0E4DA212570EF00FF1BA8 /* ExchangeRateResponse.swift */; };
+		C6D87E742133ECE100154A3B /* KnownCurrenciesTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D87E732133ECE100154A3B /* KnownCurrenciesTableViewController.xib */; };
+		C6D87E762133ECED00154A3B /* KnownCurrenciesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D87E752133ECED00154A3B /* KnownCurrenciesTableViewController.swift */; };
+		C6D87E78213400A000154A3B /* KnownCurrenciesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D87E77213400A000154A3B /* KnownCurrenciesTableViewCell.xib */; };
+		C6D87E7A213400B500154A3B /* KnownCurrenciesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D87E79213400B500154A3B /* KnownCurrenciesTableViewCell.swift */; };
 		C6DBDB7121199FF100FCEC78 /* TransactionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DBDB7021199FF100FCEC78 /* TransactionResult.swift */; };
 		C6DBDB732119CD5000FCEC78 /* TransactionInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DBDB722119CD5000FCEC78 /* TransactionInput.swift */; };
 		CEC6090C23B250170F615B73 /* Pods_LumenshineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF4753428CD10A2476A2DC32 /* Pods_LumenshineTests.framework */; };
@@ -546,6 +564,16 @@
 		C6658713212555B4006499A7 /* SourceCurrencyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceCurrencyResponse.swift; sourceTree = "<group>"; };
 		C665871521255BF2006499A7 /* ChartCurrentRatesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCurrentRatesResponse.swift; sourceTree = "<group>"; };
 		C665871721255EAB006499A7 /* RatesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesResponse.swift; sourceTree = "<group>"; };
+		C66CC2D4212EA2AD00729C09 /* RemoveCurrencyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RemoveCurrencyViewController.xib; sourceTree = "<group>"; };
+		C66CC2D6212EA2BD00729C09 /* RemoveCurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveCurrencyViewController.swift; sourceTree = "<group>"; };
+		C6752A41213806030067F815 /* FederationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FederationManager.swift; sourceTree = "<group>"; };
+		C6752A43213808D50067F815 /* PasswordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordManager.swift; sourceTree = "<group>"; };
+		C6752A45213818CD0067F815 /* InputDataValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputDataValidator.swift; sourceTree = "<group>"; };
+		C6805B5A2139530C003B2B25 /* TransactionHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryManager.swift; sourceTree = "<group>"; };
+		C6813DC2213AB6CB007074C2 /* KnownCurrencyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownCurrencyResponse.swift; sourceTree = "<group>"; };
+		C6813DC6213AB708007074C2 /* KnownInflationDestinationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownInflationDestinationResponse.swift; sourceTree = "<group>"; };
+		C6813DC8213AC725007074C2 /* KnownCurrenciesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownCurrenciesManager.swift; sourceTree = "<group>"; };
+		C682C001213691A3007705DF /* BiometricHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricHelper.swift; sourceTree = "<group>"; };
 		C691F68E211C571E00ECA2C4 /* TransactionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHelper.swift; sourceTree = "<group>"; };
 		C695564C2126B11800B0E110 /* LoadTransactionsHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadTransactionsHistoryViewController.swift; sourceTree = "<group>"; };
 		C695564E2126B12D00B0E110 /* LoadTransactionsHistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadTransactionsHistoryViewController.xib; sourceTree = "<group>"; };
@@ -556,8 +584,16 @@
 		C69A5142211C16500066A4A0 /* TransactionResultPrintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionResultPrintView.swift; sourceTree = "<group>"; };
 		C6B75F3221182E7500B45BEB /* TransactionResultViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionResultViewController.xib; sourceTree = "<group>"; };
 		C6B75F34211837AF00B45BEB /* TransactionResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionResultViewController.swift; sourceTree = "<group>"; };
+		C6BEBE6B2130138B000F7435 /* AddCurrencyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCurrencyViewController.xib; sourceTree = "<group>"; };
+		C6BEBE6D213013A1000F7435 /* AddCurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCurrencyViewController.swift; sourceTree = "<group>"; };
+		C6BEBE6F21302CAD000F7435 /* ProvideCurrencyDataViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProvideCurrencyDataViewController.xib; sourceTree = "<group>"; };
+		C6BEBE7121302CC6000F7435 /* ProvideCurrencyDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvideCurrencyDataViewController.swift; sourceTree = "<group>"; };
 		C6C0E4D821256F2700FF1BA8 /* ChartExchangeRatesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartExchangeRatesResponse.swift; sourceTree = "<group>"; };
 		C6C0E4DA212570EF00FF1BA8 /* ExchangeRateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateResponse.swift; sourceTree = "<group>"; };
+		C6D87E732133ECE100154A3B /* KnownCurrenciesTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KnownCurrenciesTableViewController.xib; sourceTree = "<group>"; };
+		C6D87E752133ECED00154A3B /* KnownCurrenciesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownCurrenciesTableViewController.swift; sourceTree = "<group>"; };
+		C6D87E77213400A000154A3B /* KnownCurrenciesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KnownCurrenciesTableViewCell.xib; sourceTree = "<group>"; };
+		C6D87E79213400B500154A3B /* KnownCurrenciesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownCurrenciesTableViewCell.swift; sourceTree = "<group>"; };
 		C6DBDB7021199FF100FCEC78 /* TransactionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionResult.swift; sourceTree = "<group>"; };
 		C6DBDB722119CD5000FCEC78 /* TransactionInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionInput.swift; sourceTree = "<group>"; };
 		C7728CD68F272DC0EA288265 /* Pods-LumenshineUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineUITests/Pods-LumenshineUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -614,6 +650,7 @@
 				4359984E20A4A14000007F27 /* UserSecurityHelper.swift */,
 				43973A8B20BD4B87000145DD /* TFAGeneration.swift */,
 				434E049A20D3DC8A00D3235A /* DateUtils+Format.swift */,
+				C682C001213691A3007705DF /* BiometricHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -932,6 +969,16 @@
 				C63B4F9D212AB3750003ECE5 /* TransactionTableViewCell.swift */,
 				C6410CD6212C269C00F9C8B3 /* TransactionHistoryDetailsViewController.xib */,
 				C6410CD8212C26B300F9C8B3 /* TransactionHistoryDetailsViewController.swift */,
+				C66CC2D4212EA2AD00729C09 /* RemoveCurrencyViewController.xib */,
+				C66CC2D6212EA2BD00729C09 /* RemoveCurrencyViewController.swift */,
+				C6BEBE6B2130138B000F7435 /* AddCurrencyViewController.xib */,
+				C6BEBE6D213013A1000F7435 /* AddCurrencyViewController.swift */,
+				C6BEBE6F21302CAD000F7435 /* ProvideCurrencyDataViewController.xib */,
+				C6BEBE7121302CC6000F7435 /* ProvideCurrencyDataViewController.swift */,
+				C6D87E732133ECE100154A3B /* KnownCurrenciesTableViewController.xib */,
+				C6D87E752133ECED00154A3B /* KnownCurrenciesTableViewController.swift */,
+				C6D87E77213400A000154A3B /* KnownCurrenciesTableViewCell.xib */,
+				C6D87E79213400B500154A3B /* KnownCurrenciesTableViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1139,6 +1186,8 @@
 				C665871721255EAB006499A7 /* RatesResponse.swift */,
 				C6C0E4D821256F2700FF1BA8 /* ChartExchangeRatesResponse.swift */,
 				C6C0E4DA212570EF00FF1BA8 /* ExchangeRateResponse.swift */,
+				C6813DC2213AB6CB007074C2 /* KnownCurrencyResponse.swift */,
+				C6813DC6213AB708007074C2 /* KnownInflationDestinationResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -1250,6 +1299,11 @@
 				74C08FF220EE1FE6000A809D /* UserManager.swift */,
 				74C0914B20FB4125000A809D /* CurrenciesMonitor.swift */,
 				7491BE4B211C450F0058877E /* WalletManager.swift */,
+				C6752A41213806030067F815 /* FederationManager.swift */,
+				C6752A43213808D50067F815 /* PasswordManager.swift */,
+				C6752A45213818CD0067F815 /* InputDataValidator.swift */,
+				C6805B5A2139530C003B2B25 /* TransactionHistoryManager.swift */,
+				C6813DC8213AC725007074C2 /* KnownCurrenciesManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1402,6 +1456,7 @@
 			files = (
 				43AE63422135A19300B7A904 /* EncodeSansCondensed-ExtraLight.ttf in Resources */,
 				43AE63392135A19300B7A904 /* EncodeSansCondensed-Regular.ttf in Resources */,
+				C6BEBE6C2130138B000F7435 /* AddCurrencyViewController.xib in Resources */,
 				C654AFB42122D3D500FB9686 /* FundTestAccountViewController.xib in Resources */,
 				43AE632C2135A19300B7A904 /* EncodeSans-SemiBold.ttf in Resources */,
 				43AE635D2135A19300B7A904 /* EncodeSansSemiCondensed-SemiBold.ttf in Resources */,
@@ -1432,6 +1487,7 @@
 				43AE63562135A19300B7A904 /* Lato-BoldItalic.ttf in Resources */,
 				43AE63572135A19300B7A904 /* Lato-Light.ttf in Resources */,
 				746DC58320D1421400AD0856 /* HomeUnfoundedHeaderView.xib in Resources */,
+				C6D87E78213400A000154A3B /* KnownCurrenciesTableViewCell.xib in Resources */,
 				74C0913B20F64AF0000A809D /* UnfoundedWalletCardContentView.xib in Resources */,
 				43AE633F2135A19300B7A904 /* EncodeSansCondensed-Light.ttf in Resources */,
 				74C8994C2101DD7C009B13EA /* ReceivePaymentCardViewController.xib in Resources */,
@@ -1439,6 +1495,7 @@
 				C69556512126F6AC00B0E110 /* TransactionHistoryTableViewController.xib in Resources */,
 				43AE632E2135A19300B7A904 /* EncodeSans-ExtraBold.ttf in Resources */,
 				7491BE45211C2E230058877E /* AccountCurrenciesViewController.xib in Resources */,
+				C6BEBE7021302CAD000F7435 /* ProvideCurrencyDataViewController.xib in Resources */,
 				7420BBE7211819AB002FC4C7 /* AccountDetailsViewController.xib in Resources */,
 				43AE63282135A19300B7A904 /* EncodeSans-Thin.ttf in Resources */,
 				C61244C62113325A00DE1EA9 /* SendViewController.xib in Resources */,
@@ -1448,6 +1505,7 @@
 				43AE635F2135A19300B7A904 /* EncodeSansSemiCondensed-ExtraLight.ttf in Resources */,
 				43AE63582135A19300B7A904 /* EncodeSansSemiCondensed-Bold.ttf in Resources */,
 				43AE63372135A19300B7A904 /* EncodeSansSemiExpanded-Regular.ttf in Resources */,
+				C6D87E742133ECE100154A3B /* KnownCurrenciesTableViewController.xib in Resources */,
 				7445E9CF2019CF7200470E0A /* LaunchScreen.storyboard in Resources */,
 				43AE632F2135A19300B7A904 /* EncodeSansSemiExpanded-ExtraBold.ttf in Resources */,
 				74C0914620F7B3CD000A809D /* WalletCardInfoViewController.xib in Resources */,
@@ -1472,6 +1530,7 @@
 				43AE632A2135A19300B7A904 /* EncodeSans-Light.ttf in Resources */,
 				43AE63592135A19300B7A904 /* EncodeSansSemiCondensed-Medium.ttf in Resources */,
 				43AE63542135A19300B7A904 /* Lato-BlackItalic.ttf in Resources */,
+				C66CC2D5212EA2AD00729C09 /* RemoveCurrencyViewController.xib in Resources */,
 				C695564F2126B12D00B0E110 /* LoadTransactionsHistoryViewController.xib in Resources */,
 				43AE633C2135A19300B7A904 /* EncodeSansCondensed-Black.ttf in Resources */,
 				C63B4F9C212AB35D0003ECE5 /* TransactionTableViewCell.xib in Resources */,
@@ -1668,9 +1727,12 @@
 				74DD4CEB210CE83E00F4D69A /* UIView+Snapshot.swift in Sources */,
 				43D131E82056EAC6000483C4 /* ChartCard.swift in Sources */,
 				74C0913D20F64B03000A809D /* UnfoundedWalletCardContentView.swift in Sources */,
+				C6BEBE7221302CC6000F7435 /* ProvideCurrencyDataViewController.swift in Sources */,
+				C6BEBE6E213013A1000F7435 /* AddCurrencyViewController.swift in Sources */,
 				7420BBE6211819AB002FC4C7 /* AccountDetailsViewController.swift in Sources */,
 				4376F4A0204D9E2700B179C3 /* CoordinatorProtocol.swift in Sources */,
 				4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */,
+				C6D87E7A213400B500154A3B /* KnownCurrenciesTableViewCell.swift in Sources */,
 				4365F69C2110BB8700D4B12C /* Confirm2faCodeViewController.swift in Sources */,
 				434FB3F920F78AFD004A4CDB /* InfoViewController.swift in Sources */,
 				4394911C20BEB845008D4FA2 /* SettingsViewModel.swift in Sources */,
@@ -1697,7 +1759,10 @@
 				4319B1842063F00C007CE18D /* MenuViewModel.swift in Sources */,
 				43B144CC20FCA5D40099E3AE /* TitleHeader.swift in Sources */,
 				4359984B20A438EF00007F27 /* AuthenticationResponse.swift in Sources */,
+				C6752A46213818CD0067F815 /* InputDataValidator.swift in Sources */,
+				C6752A44213808D50067F815 /* PasswordManager.swift in Sources */,
 				43C6377A20BEFF2B00498FC5 /* ReLoginViewController.swift in Sources */,
+				C6752A42213806030067F815 /* FederationManager.swift in Sources */,
 				43844F4020E401B500C352E5 /* ReLoginMenuViewModel.swift in Sources */,
 				43844F3E20E3FE2600C352E5 /* ReLoginViewModel.swift in Sources */,
 				746DC58520D142EC00AD0856 /* HomeUnfoundedHeaderView.swift in Sources */,
@@ -1706,20 +1771,25 @@
 				43D7A77E205A90CC00238E29 /* MenuCoordinator.swift in Sources */,
 				C6C0E4D921256F2700FF1BA8 /* ChartExchangeRatesResponse.swift in Sources */,
 				436FE5082052634300CFE788 /* WebCard.swift in Sources */,
+				C6813DC7213AB708007074C2 /* KnownInflationDestinationResponse.swift in Sources */,
 				C6410CD9212C26B300F9C8B3 /* TransactionHistoryDetailsViewController.swift in Sources */,
+				C6813DC3213AB6CB007074C2 /* KnownCurrencyResponse.swift in Sources */,
 				436B366F20512114009F7C21 /* FlexibleHeightBar.swift in Sources */,
 				C6658714212555B4006499A7 /* SourceCurrencyResponse.swift in Sources */,
 				4365F69A211057B900D4B12C /* Change2faSecretViewController.swift in Sources */,
 				4319B1822063EF72007CE18D /* LoginCoordinator.swift in Sources */,
 				434E049B20D3DC8A00D3235A /* DateUtils+Format.swift in Sources */,
+				C66CC2D7212EA2BD00729C09 /* RemoveCurrencyViewController.swift in Sources */,
 				4391A53220D170420015A6DA /* CountryListResponse.swift in Sources */,
 				432F11792101C64600FC429B /* MnemonicSetupViewController.swift in Sources */,
 				7477F3FB20EE19EE00408934 /* WalletsResponse.swift in Sources */,
 				C665871221254C9D006499A7 /* ChartsCurrencyPairsResponse.swift in Sources */,
 				43088DB02087C4B8008AE1AB /* Dictionary+HTTPParams.swift in Sources */,
+				C6813DC9213AC725007074C2 /* KnownCurrenciesManager.swift in Sources */,
 				43DAC65420E4BA3900E491D8 /* BiometricAuthenticationProtocol.swift in Sources */,
 				7491BE4C211C450F0058877E /* WalletManager.swift in Sources */,
 				4341251320EBC2E900267260 /* ReLoginFingerView.swift in Sources */,
+				C6805B5B2139530C003B2B25 /* TransactionHistoryManager.swift in Sources */,
 				4319B4CC2119FB59002E45F0 /* RevealMnemonicViewController.swift in Sources */,
 				4391A52E20D141300015A6DA /* EnumPicker.swift in Sources */,
 				43CD7B1020F7B0CF0014BF69 /* SetupMenuCoordinator.swift in Sources */,
@@ -1727,6 +1797,7 @@
 				74C8994B2101DD7C009B13EA /* ReceivePaymentCardViewController.swift in Sources */,
 				74C0913520F64012000A809D /* WalletCardContentView.swift in Sources */,
 				4376F4A3204D9F9D00B179C3 /* HomeViewModel.swift in Sources */,
+				C6D87E762133ECED00154A3B /* KnownCurrenciesTableViewController.swift in Sources */,
 				74C8994E210205C8009B13EA /* UIApplication+ViewControllerTree.swift in Sources */,
 				74C0914A20FB3F6F000A809D /* CurrenciesService.swift in Sources */,
 				43D7A775205A84B300238E29 /* R.generated.swift in Sources */,
@@ -1762,6 +1833,7 @@
 				43D131E62056E3BD000483C4 /* CardViewModel.swift in Sources */,
 				43088DAE2087AD2A008AE1AB /* UserSecurity.swift in Sources */,
 				C69A5143211C16500066A4A0 /* TransactionResultPrintView.swift in Sources */,
+				C682C002213691A3007705DF /* BiometricHelper.swift in Sources */,
 				431437EF2047FF4500189C83 /* MenuViewController.swift in Sources */,
 				4322BA33205BDB6E007FEB5E /* CardsResponsesMock.swift in Sources */,
 				4386717420DAA77E00459EA8 /* WalletCardViewModel.swift in Sources */,

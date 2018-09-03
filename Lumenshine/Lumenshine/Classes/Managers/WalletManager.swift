@@ -52,7 +52,7 @@ class WalletManager: NSObject {
                 for balance in accountDetails.balances {
                     if let issuer = balance.assetIssuer {
                         assetsWithIssuers += 1
-                        self.balanceAuthorized(publicKey: wallet.publicKey, issuer: issuer, completion: { (authorized, error) in
+                        self.balanceAuthorized(issuer: issuer, completion: { (authorized, error) in
                             guard error == nil else {
                                 return
                             }
@@ -60,29 +60,38 @@ class WalletManager: NSObject {
                             balance.authorized = authorized
                             count += 1
                             if assetsWithIssuers == count {
-                                completion(.success(response: accountDetails.balances))
+                                DispatchQueue.main.async {
+                                    completion(.success(response: accountDetails.balances))
+                                }
                             }
                         })
                     }
                 }
                 
                 if assetsWithIssuers == 0 {
-                    completion(.success(response: accountDetails.balances))
+                    DispatchQueue.main.async {
+                        completion(.success(response: accountDetails.balances))
+                    }
                 }
             case .failure(let error):
-                completion(.failure(error: error))
+                DispatchQueue.main.async {
+                    completion(.failure(error: error))
+                }
             }
         }
-
     }
     
-    private func balanceAuthorized(publicKey: String, issuer: String, completion: @escaping ((Bool, HorizonRequestError?)->())) {
+    func hasWalletEnoughFunding(wallet: Wallet) -> Bool {
+        return !wallet.nativeBalance.availableAmount.isLess(than: CoinUnit.Constants.transactionFee + CoinUnit.Constants.baseReserver)
+    }
+    
+    private func balanceAuthorized(issuer: String, completion: @escaping ((Bool, HorizonRequestError?)->())) {
         stellarSDK.accounts.getAccountDetails(accountId: issuer) { (response) -> (Void) in
             switch response {
             case .success(let accountDetails):
                 print("asd")
                 if accountDetails.flags.authRequired {
-                    self.checkEffectsForAuthorziation(publicKey: publicKey, issuer: issuer, completion: completion)
+                    self.checkEffectsForAuthorziation(issuer: issuer, completion: completion)
                 } else {
                     completion(true, nil)
                 }
@@ -92,13 +101,13 @@ class WalletManager: NSObject {
         }
     }
     
-    private func checkEffectsForAuthorziation(publicKey: String, issuer: String, completion: @escaping ((Bool, HorizonRequestError?)->())) {
+    private func checkEffectsForAuthorziation(issuer: String, completion: @escaping ((Bool, HorizonRequestError?)->())) {
         effectsForWallet(wallet: issuer) { (response) -> (Void) in
             switch response {
             case .success(let effects):
                 for index in stride(from: effects.count - 1, through: 0, by: -1) {
                     let effect = effects[index]
-                    if effect.effectType == .trustlineDeauthorized, let effect = effect as? TrustlineDeauthorizedEffectResponse {
+                    if effect.effectType == .trustlineDeauthorized, let _ = effect as? TrustlineDeauthorizedEffectResponse {
                         completion(true, nil)
                     }
                 }
@@ -124,5 +133,4 @@ class WalletManager: NSObject {
             completion(.success(response: effects))
         }
     }
-    
 }
