@@ -16,6 +16,8 @@ protocol TitleHeaderProtocol {
 
 class TitleHeader: UIView {
     
+    fileprivate let backgroundImage = UIImageView()
+    fileprivate let logoImage = UIImageView()
     fileprivate let titleLabel = UILabel()
     fileprivate let detailLabel = UILabel()
     fileprivate let headerLabel = UILabel()
@@ -31,20 +33,34 @@ class TitleHeader: UIView {
     }
     
     func commonInit() {
+        backgroundImage.image = R.image.header_background()
         
-        backgroundColor = Stylesheet.color(.cyan)
+        addSubview(backgroundImage)
+        backgroundImage.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalToSuperview()
+        }
         
-        titleLabel.font = UIFont.systemFont(ofSize: 25.0)
-        titleLabel.textColor = Stylesheet.color(.orange)
+        logoImage.image = R.image.logo()
+        logoImage.contentMode = .scaleAspectFit
+        
+        let topOffset = UIScreen.main.scale > 2 ? 46.0 : 10.0
+        addSubview(logoImage)
+        logoImage.snp.makeConstraints { make in
+            make.top.equalTo(topOffset)
+            make.centerX.equalToSuperview()
+        }
+        
+        titleLabel.font = R.font.encodeSansRegular(size: 22)
+        titleLabel.textColor = Stylesheet.color(.blue)
         titleLabel.textAlignment = .center
-        titleLabel.sizeToFit()
         
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
+            make.top.equalTo(logoImage.snp.bottom).offset(10)
+            make.left.right.equalToSuperview()
         }
         
-        detailLabel.font = UIFont.systemFont(ofSize: 16.0)
+        detailLabel.font = R.font.encodeSansBold(size: 18)
         detailLabel.textColor = Stylesheet.color(.white)
         detailLabel.textAlignment = .center
         detailLabel.numberOfLines = 0
@@ -56,7 +72,7 @@ class TitleHeader: UIView {
             make.left.right.equalToSuperview()
         }
         
-        headerLabel.font = UIFont.systemFont(ofSize: 26.0)
+        headerLabel.font = R.font.encodeSansRegular(size: 22)
         headerLabel.textColor = Stylesheet.color(.yellow)
         headerLabel.textAlignment = .center
         headerLabel.sizeToFit()

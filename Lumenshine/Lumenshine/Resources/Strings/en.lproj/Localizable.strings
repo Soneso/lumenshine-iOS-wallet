@@ -101,7 +101,7 @@
 "import_mnemonic" = "Import mnemonic";
 
 /*  */
-"step_3" = "Step %@ of 3";
+"step_3" = "step %@ of 3";
 
 /*  */
 "email" = "Email";
@@ -174,6 +174,9 @@
 
 /*  */
 "welcome" = "Welcome";
+
+/*  */
+"welcome_back" = "Welcome back,";
 
 /*  */
 "street_address" = "Street address";
@@ -275,10 +278,10 @@
 "lbl_tfa_secret" = "Your 2FA secret: %@";
 
 /*  */
-"lbl_tfa_hint" = "For security reasons, your wallet will be protected by 2 Factor Authentication (2FA).";
+"lbl_tfa_hint" = "For security reasons, your wallet will be protected by 2FA";
 
 /*  */
-"lbl_tfa_setup" = "To setup 2FA, please:\n\n1. download a two-factor authenticator app (like Google Authenticator)\n\n2. copy and enter the above displayed 2FA secret code into the authenticator app\n\n3. enter the generated 2FA code from the authenticator app into the 2FA Code input and press \"Next\"";
+"lbl_tfa_setup" = "To setup 2FA, please:\n\n1. Download a two-factor authenticator app (like Google Authenticator)\n\n2. Copy and enter the above displayed 2FA secret code into the authenticator app\n\n3. Enter the generated 2FA code from the authenticator app and press \"Next\"";
 
 /*  */
 "tfa_code" = "2FA Code";
@@ -287,13 +290,16 @@
 "lbl_email_confirmation" = "Email confirmation required";
 
 /*  */
-"email_confirmation_hint" = "In order to be able continue the setup process, you need to confirm your email address first. A mail with a confirmation link has been sent to your inbox. Please follow the instructions from the received mail to confirm your email-address.";
+"email_confirmation_hint" = "In order to be able continue the setup process, you need to confirm your email address first. An email with a confirmation link has been sent to your inbox. Please follow the instructions from the mail to confirm your email address.";
 
 /*  */
 "email_confirmation_hint2" = "An email has been sent to your email account. Please check your inbox and confirm your email address first.";
 
 /*  */
 "lbl_email_confirmation2" = "Your email address is not confirmed.";
+
+/*  */
+"lbl_please_confirm" = "Please confirm your email address first.";
 
 /*  */
 "email_already_confirmed" = "Already confirmed";
@@ -345,6 +351,9 @@
 
 /*  */
 "position" = "Position";
+
+/*  */
+"finish" = "Finish";
 
 /*  */
 "finish_setup" = "Finish setup";

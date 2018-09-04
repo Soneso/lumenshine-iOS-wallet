@@ -34,7 +34,7 @@ protocol SetupViewModelType: Transitionable {
     func nextStep(tfaResponse: TFAResponse?)
     func mnemonicVerification()
     
-    func validateSetup(wordsIndices: [String?]) -> Bool
+    func validateSetup(wordsIndices: [String?]) -> [Int]?
 }
 
 class SetupViewModel: SetupViewModelType {
@@ -59,11 +59,11 @@ class SetupViewModel: SetupViewModelType {
     }
     
     var headerTitle: String {
-        return R.string.localizable.app_name()
+        return R.string.localizable.welcome_back()
     }
     
     var headerDetail: String {
-        return "\(R.string.localizable.welcome())\n\(user.email)"
+        return user.email
     }
     
     var headerText: String? {
@@ -139,14 +139,15 @@ class SetupViewModel: SetupViewModelType {
         navigationCoordinator?.performTransition(transition: .showMnemonicVerification)
     }
     
-    func validateSetup(wordsIndices: [String?]) -> Bool {
+    func validateSetup(wordsIndices: [String?]) -> [Int]? {
+        var result = [Int]()
         for i in 0...3 {
             if let index = wordsIndices[i],
                 Int(index) != randomIndices[i]+1 {
-                return false
+                result.append(i)
             }
         }
-        return true
+        return result.count > 0 ? result : nil
     }
 }
 

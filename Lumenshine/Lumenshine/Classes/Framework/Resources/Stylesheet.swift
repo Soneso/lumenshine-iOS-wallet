@@ -49,6 +49,7 @@ enum ColorStyle {
     case white
     case whiteWith(alpha: CGFloat)
     case black
+    case lightBlack
     case blackWith(alpha: CGFloat)
 }
 
@@ -121,7 +122,7 @@ struct Stylesheet {
         case .green:
             return UIColor(red: 145/255.0, green: 199/255.0, blue: 74/255.0, alpha: 1.0)
         case .orange:
-            return UIColor.orange
+            return UIColor(red: 245/255.0, green: 178/255.0, blue: 73/255.0, alpha: 1.0)
         case .darkBlue:
             return UIColor(red: 51/255.0, green: 122/255.0, blue: 189/255.0, alpha: 1.0)
         case .blue:
@@ -142,6 +143,8 @@ struct Stylesheet {
             return UIColor.white
         case .black:
             return UIColor.black
+        case .lightBlack:
+            return UIColor(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1.0)
         case .blackWith(let alpha):
             return UIColor.black.withAlphaComponent(alpha)
         case .whiteWith(let alpha):

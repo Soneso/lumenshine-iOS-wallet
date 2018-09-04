@@ -51,15 +51,13 @@ extension VerificationSetupViewController {
     
     @objc
     func submitAction(sender: UIButton) {
-        let indices = wordInputs.map {
-            $0.textField.text
-        }
-        let result = viewModel.validateSetup(wordsIndices: indices)
-        wordInputs.forEach {
-            $0.makeInvalid(!result)
-        }
-        errorLabel.text = result == false ? R.string.localizable.invalid_input() : nil
-        if result {
+        if let result = viewModel.validateSetup(wordsIndices: wordInputs.map {$0.textField.text}) {
+            for (index, field) in wordInputs.enumerated() {
+                field.makeInvalid(result.contains(index))
+            }
+            errorLabel.text = R.string.localizable.invalid_input()
+        } else {
+            errorLabel.text = nil
             viewModel.confirmMnemonic { result in
                 DispatchQueue.main.async {
                     switch result {
@@ -92,9 +90,9 @@ fileprivate extension VerificationSetupViewController {
     
     func prepareTitleLabel() {
         stepLabel.text = R.string.localizable.step_3("3")
-        stepLabel.font = Stylesheet.font(.headline)
+        stepLabel.font = R.font.encodeSansRegular(size: 11)
         stepLabel.textAlignment = .center
-        stepLabel.textColor = Stylesheet.color(.blue)
+        stepLabel.textColor = Stylesheet.color(.darkGray)
         
         contentView.addSubview(stepLabel)
         stepLabel.snp.makeConstraints { make in
@@ -104,62 +102,52 @@ fileprivate extension VerificationSetupViewController {
         }
         
         titleLabel.text = R.string.localizable.verify_mnemonic_title()
-        titleLabel.font = Stylesheet.font(.headline)
+        titleLabel.font = R.font.encodeSansBold(size: 13)
         titleLabel.textAlignment = .center
         titleLabel.textColor = Stylesheet.color(.red)
-        titleLabel.numberOfLines = 0
         
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(stepLabel.snp.bottom).offset(10)
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
-        }
-        
-        let separator = UIView()
-        separator.backgroundColor = Stylesheet.color(.black)
-        contentView.addSubview(separator)
-        separator.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLabel.snp.bottom).offset(20)
-            make.left.right.equalToSuperview()
-            make.height.equalTo(1)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
         }
     }
     
     func prepareHintLabel() {
         hintLabel.text = R.string.localizable.verify_mnemonic_hint()
-        hintLabel.font = Stylesheet.font(.subhead)
+        hintLabel.font = R.font.encodeSansRegular(size: 13)
         hintLabel.textAlignment = .center
-        hintLabel.textColor = Stylesheet.color(.black)
+        hintLabel.textColor = Stylesheet.color(.lightBlack)
         hintLabel.numberOfLines = 0
         
         contentView.addSubview(hintLabel)
         hintLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(45)
+            make.top.equalTo(titleLabel.snp.bottom).offset(20)
             make.left.equalTo(20)
             make.right.equalTo(-20)
         }
         
         let separator = UIView()
-        separator.backgroundColor = Stylesheet.color(.black)
+        separator.backgroundColor = Stylesheet.color(.lightGray)
         contentView.addSubview(separator)
         separator.snp.makeConstraints { (make) in
-            make.top.equalTo(hintLabel.snp.bottom).offset(25)
+            make.top.equalTo(hintLabel.snp.bottom).offset(20)
             make.left.right.equalToSuperview()
-            make.height.equalTo(1)
+            make.height.equalTo(0.5)
         }
     }
     
     func prepareWordsLabel() {
         wordsTitleLabel.text = R.string.localizable.verify_mnemonic_words_title()
-        wordsTitleLabel.font = Stylesheet.font(.subhead)
+        wordsTitleLabel.font = R.font.encodeSansRegular(size: 13)
         wordsTitleLabel.textAlignment = .center
-        wordsTitleLabel.textColor = Stylesheet.color(.black)
+        wordsTitleLabel.textColor = Stylesheet.color(.lightBlack)
         wordsTitleLabel.numberOfLines = 0
         
         contentView.addSubview(wordsTitleLabel)
         wordsTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(hintLabel.snp.bottom).offset(45)
+            make.top.equalTo(hintLabel.snp.bottom).offset(40)
             make.left.equalTo(20)
             make.right.equalTo(-20)
         }
@@ -182,7 +170,7 @@ fileprivate extension VerificationSetupViewController {
     }
     
     func prepareButtons() {
-        errorLabel.font = Stylesheet.font(.footnote)
+        errorLabel.font = R.font.encodeSansRegular(size: 11)
         errorLabel.textAlignment = .center
         errorLabel.textColor = Stylesheet.color(.red)
         errorLabel.numberOfLines = 0
@@ -194,37 +182,37 @@ fileprivate extension VerificationSetupViewController {
             make.right.equalTo(-20)
         }
         
-        submitButton.title = R.string.localizable.finish_setup()
+        submitButton.title = R.string.localizable.finish()
         submitButton.titleColor = Stylesheet.color(.white)
-        submitButton.backgroundColor = Stylesheet.color(.blue)
-        submitButton.titleLabel?.font = Stylesheet.font(.caption2)
-        submitButton.contentEdgeInsets = UIEdgeInsets(top: 7, left: 10, bottom: 7, right: 10)
-        submitButton.cornerRadiusPreset = .none
-        submitButton.borderWidthPreset = .border2
-        submitButton.depthPreset = .depth2
+        submitButton.backgroundColor = Stylesheet.color(.cyan)
+        submitButton.titleLabel?.font = R.font.encodeSansRegular(size: 16)
+        submitButton.cornerRadiusPreset = .cornerRadius6
         submitButton.addTarget(self, action: #selector(submitAction(sender:)), for: .touchUpInside)
+        
         
         contentView.addSubview(submitButton)
         submitButton.snp.makeConstraints { make in
-            make.top.equalTo(errorLabel.snp.bottom).offset(20)
+            make.top.equalTo(errorLabel.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
+            make.width.equalTo(120)
+            make.height.equalTo(40)
         }
         
         backButton.title = R.string.localizable.back_mnemonic()
-        backButton.titleColor = Stylesheet.color(.black)
-        backButton.backgroundColor = Stylesheet.color(.yellow)
-        backButton.titleLabel?.font = Stylesheet.font(.caption2)
-        backButton.contentEdgeInsets = UIEdgeInsets(top: 7, left: 10, bottom: 7, right: 10)
-        backButton.cornerRadiusPreset = .none
-        backButton.borderWidthPreset = .border2
-        backButton.depthPreset = .depth2
+        backButton.titleColor = Stylesheet.color(.white)
+        backButton.cornerRadiusPreset = .cornerRadius6
+        backButton.backgroundColor = Stylesheet.color(.orange)
+        backButton.titleLabel?.font = R.font.encodeSansRegular(size: 16)
+        backButton.titleLabel?.adjustsFontSizeToFitWidth = true
         backButton.addTarget(self, action: #selector(backAction(sender:)), for: .touchUpInside)
         
         contentView.addSubview(backButton)
         backButton.snp.makeConstraints { make in
             make.top.equalTo(submitButton.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(-10)
+            make.width.greaterThanOrEqualTo(260)
+            make.height.equalTo(40)
+            make.bottom.equalTo(-20)
         }
     }
 }

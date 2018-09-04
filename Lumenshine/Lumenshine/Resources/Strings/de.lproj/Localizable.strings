@@ -176,6 +176,9 @@
 "welcome" = "Welcome";
 
 /*  */
+"welcome_back" = "Welcome back,";
+
+/*  */
 "street_address" = "Street address";
 
 /*  */
@@ -296,6 +299,9 @@
 "lbl_email_confirmation2" = "Your email address is not confirmed.";
 
 /*  */
+"lbl_please_confirm" = "Please confirm your email address first.";
+
+/*  */
 "email_already_confirmed" = "Already confirmed";
 
 /*  */
@@ -345,6 +351,9 @@
 
 /*  */
 "position" = "Position";
+
+/*  */
+"finish" = "Finish";
 
 /*  */
 "finish_setup" = "Finish setup";

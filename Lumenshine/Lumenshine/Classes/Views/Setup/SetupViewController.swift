@@ -64,7 +64,9 @@ extension SetupViewController: UITextFieldDelegate {
 
 fileprivate extension SetupViewController {
     func prepareView() {
+        view.backgroundColor = Stylesheet.color(.lightGray)
         prepareHeader()
+        prepareCopyright()
         prepareContentView()
     }
     
@@ -86,12 +88,40 @@ fileprivate extension SetupViewController {
             make.bottom.left.right.equalToSuperview()
         }
         
+        contentView.cornerRadiusPreset = .cornerRadius2
+        contentView.depthPreset = .depth2
+        contentView.backgroundColor = Stylesheet.color(.white)
+        
+        let topOffset = UIScreen.main.scale > 2 ? 25 : 10
         scrollView.addSubview(contentView)
         contentView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview()
-            make.left.equalToSuperview()
-            make.width.equalTo(view)
+            make.top.equalTo(topOffset)
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+            make.bottom.equalTo(-50)
+            make.width.equalTo(view).offset(-20)
+        }
+    }
+    
+    func prepareCopyright() {
+        let imageView = UIImageView(image: R.image.soneso())
+        imageView.backgroundColor = Stylesheet.color(.clear)
+        
+        view.addSubview(imageView)
+        imageView.snp.makeConstraints { make in
+            make.bottom.equalTo(-10)
+            make.centerX.equalToSuperview()
+        }
+        
+        let label = UILabel()
+        label.text = R.string.localizable.powered_by().uppercased()
+        label.textColor = Stylesheet.color(.gray)
+        label.font = R.font.encodeSansRegular(size: 8.5)
+        
+        view.addSubview(label)
+        label.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(imageView.snp.top).offset(-5)
         }
     }
 }

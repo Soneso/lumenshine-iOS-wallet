@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import Material
 
 class InputField: UIView {
     
-    let textField = UITextField()
+    let textField = TextField()
     let label = UILabel()
     
     override init(frame: CGRect) {
@@ -25,33 +26,40 @@ class InputField: UIView {
     private func commonInit() {
         
         label.adjustsFontSizeToFitWidth = true
+        label.font = R.font.encodeSansRegular(size: 13)
+        label.textColor = Stylesheet.color(.lightBlack)
         
         addSubview(label)
         label.snp.makeConstraints { make in
             make.top.left.bottom.equalToSuperview()
-            make.width.equalTo(80)
+            make.width.equalTo(60)
         }
         
         textField.placeholder = R.string.localizable.position()
-        textField.borderStyle = .bezel
         textField.keyboardType = .decimalPad
-        textField.borderColor = Stylesheet.color(.red)
+        textField.placeholderAnimation = .hidden
+        textField.font = R.font.encodeSansRegular(size: 13)
+        textField.dividerActiveColor = Stylesheet.color(.gray)
+        textField.placeholderActiveColor = Stylesheet.color(.lightBlack)
+        textField.textColor = Stylesheet.color(.lightBlack)
         
         addSubview(textField)
         textField.snp.makeConstraints { make in
             make.top.right.bottom.equalToSuperview()
             make.left.equalTo(label.snp.right).offset(5)
-            make.width.equalTo(80)
+            make.width.equalTo(60)
         }
     }
     
     func makeInvalid(_ invalid: Bool) {
         if invalid {
-            textField.borderWidthPreset = .border3
-            label.textColor = Stylesheet.color(.red)
+            textField.dividerActiveColor = Stylesheet.color(.red)
+            textField.dividerNormalColor = Stylesheet.color(.red)
+            textField.textColor = Stylesheet.color(.red)
         } else {
-            textField.borderWidthPreset = .none
-            label.textColor = Stylesheet.color(.black)
+            textField.dividerActiveColor = Stylesheet.color(.gray)
+            textField.dividerNormalColor = Stylesheet.color(.gray)
+            textField.textColor = Stylesheet.color(.lightBlack)
         }
     }
 }

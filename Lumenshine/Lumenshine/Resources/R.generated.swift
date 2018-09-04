@@ -1394,45 +1394,45 @@ struct R: Rswift.Validatable {
     struct common {
       /// en translation: Cancel
       /// 
-      /// Locales: en
-      static let cancel = Rswift.StringResource(key: "cancel", tableName: "Common", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let cancel = Rswift.StringResource(key: "cancel", tableName: "Common", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: No
       /// 
-      /// Locales: en
-      static let no = Rswift.StringResource(key: "no", tableName: "Common", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let no = Rswift.StringResource(key: "no", tableName: "Common", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Ok
       /// 
-      /// Locales: en
-      static let ok = Rswift.StringResource(key: "ok", tableName: "Common", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let ok = Rswift.StringResource(key: "ok", tableName: "Common", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Yes
       /// 
-      /// Locales: en
-      static let yes = Rswift.StringResource(key: "yes", tableName: "Common", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let yes = Rswift.StringResource(key: "yes", tableName: "Common", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       
       /// en translation: Cancel
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func cancel(_: Void = ()) -> String {
         return NSLocalizedString("cancel", tableName: "Common", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: No
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func no(_: Void = ()) -> String {
         return NSLocalizedString("no", tableName: "Common", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Ok
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func ok(_: Void = ()) -> String {
         return NSLocalizedString("ok", tableName: "Common", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Yes
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func yes(_: Void = ()) -> String {
         return NSLocalizedString("yes", tableName: "Common", bundle: R.hostingBundle, comment: "")
       }
@@ -1440,1974 +1440,2007 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 179 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 182 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
-      /// Locales: en
-      static let xMoment_days = Rswift.StringResource(key: "x-moment_days", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let xMoment_days = Rswift.StringResource(key: "x-moment_days", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: %1$d hours ago
       /// 
-      /// Locales: en
-      static let xMoment_hours = Rswift.StringResource(key: "x-moment_hours", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let xMoment_hours = Rswift.StringResource(key: "x-moment_hours", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: %1$d minutes ago
       /// 
-      /// Locales: en
-      static let xMoment_minutes = Rswift.StringResource(key: "x-moment_minutes", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let xMoment_minutes = Rswift.StringResource(key: "x-moment_minutes", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: %1$d months ago
       /// 
-      /// Locales: en
-      static let xMoment_months = Rswift.StringResource(key: "x-moment_months", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let xMoment_months = Rswift.StringResource(key: "x-moment_months", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: %1$d seconds ago
       /// 
-      /// Locales: en
-      static let xMoment_seconds = Rswift.StringResource(key: "x-moment_seconds", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let xMoment_seconds = Rswift.StringResource(key: "x-moment_seconds", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: %1$d weeks ago
       /// 
-      /// Locales: en
-      static let xMoment_weeks = Rswift.StringResource(key: "x-moment_weeks", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let xMoment_weeks = Rswift.StringResource(key: "x-moment_weeks", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: %1$d years ago
       /// 
-      /// Locales: en
-      static let xMoment_years = Rswift.StringResource(key: "x-moment_years", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let xMoment_years = Rswift.StringResource(key: "x-moment_years", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: %@ email sent
       /// 
-      /// Locales: en
-      static let lost_security_email_sent = Rswift.StringResource(key: "lost_security_email_sent", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lost_security_email_sent = Rswift.StringResource(key: "lost_security_email_sent", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: 1. copy and enter the below displayed 2FA secret code into the authenticator app  2. enter the generated 2FA code from the authenticator app into the 2FA Code input and press "Next"
       /// 
-      /// Locales: en
-      static let lbl_2fa_hint = Rswift.StringResource(key: "lbl_2fa_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_2fa_hint = Rswift.StringResource(key: "lbl_2fa_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: 2 Factor Authentication (2FA)
       /// 
-      /// Locales: en
-      static let lbl_tfa = Rswift.StringResource(key: "lbl_tfa", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_tfa = Rswift.StringResource(key: "lbl_tfa", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: 2 Factor Authentication Code
       /// 
-      /// Locales: en
-      static let lbl_tfa_code = Rswift.StringResource(key: "lbl_tfa_code", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_tfa_code = Rswift.StringResource(key: "lbl_tfa_code", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: 2FA Code
       /// 
-      /// Locales: en
-      static let tfa_code = Rswift.StringResource(key: "tfa_code", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let tfa_code = Rswift.StringResource(key: "tfa_code", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: 2FA Secret
       /// 
-      /// Locales: en
-      static let fa_secret = Rswift.StringResource(key: "2fa_secret", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let fa_secret = Rswift.StringResource(key: "2fa_secret", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: 2FA Secret successfully changed
       /// 
-      /// Locales: en
-      static let tfa_secret_changed = Rswift.StringResource(key: "tfa_secret_changed", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let tfa_secret_changed = Rswift.StringResource(key: "tfa_secret_changed", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: 2FA secret copied to clipboard
       /// 
-      /// Locales: en
-      static let fa_secret_copy = Rswift.StringResource(key: "2FA_secret_copy", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let fa_secret_copy = Rswift.StringResource(key: "2FA_secret_copy", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: About
       /// 
-      /// Locales: en
-      static let about = Rswift.StringResource(key: "about", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let about = Rswift.StringResource(key: "about", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Account specific data
       /// 
-      /// Locales: en
-      static let account_data_title = Rswift.StringResource(key: "account_data_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let account_data_title = Rswift.StringResource(key: "account_data_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Already confirmed
       /// 
-      /// Locales: en
-      static let email_already_confirmed = Rswift.StringResource(key: "email_already_confirmed", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let email_already_confirmed = Rswift.StringResource(key: "email_already_confirmed", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: An email has been sent to your email account. Please check your inbox and confirm your email address first.
       /// 
-      /// Locales: en
-      static let email_confirmation_hint2 = Rswift.StringResource(key: "email_confirmation_hint2", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let email_confirmation_hint2 = Rswift.StringResource(key: "email_confirmation_hint2", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Anonymous
       /// 
-      /// Locales: en
-      static let unknown = Rswift.StringResource(key: "unknown", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let unknown = Rswift.StringResource(key: "unknown", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Autogenerated 2FA code with secret: %@
       /// 
-      /// Locales: en
-      static let lbl_tfa_secret_hint = Rswift.StringResource(key: "lbl_tfa_secret_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_tfa_secret_hint = Rswift.StringResource(key: "lbl_tfa_secret_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Avatar
       /// 
-      /// Locales: en
-      static let avatar = Rswift.StringResource(key: "avatar", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let avatar = Rswift.StringResource(key: "avatar", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Back
       /// 
-      /// Locales: en
-      static let back = Rswift.StringResource(key: "back", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let back = Rswift.StringResource(key: "back", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Backup Secret/Mnemonic
       /// 
-      /// Locales: en
-      static let backup_mnemonic = Rswift.StringResource(key: "backup_mnemonic", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let backup_mnemonic = Rswift.StringResource(key: "backup_mnemonic", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Birth day
       /// 
-      /// Locales: en
-      static let birthday = Rswift.StringResource(key: "birthday", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let birthday = Rswift.StringResource(key: "birthday", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Birth place
       /// 
-      /// Locales: en
-      static let birthplace = Rswift.StringResource(key: "birthplace", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let birthplace = Rswift.StringResource(key: "birthplace", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Cancel
       /// 
-      /// Locales: en
-      static let cancel = Rswift.StringResource(key: "cancel", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let cancel = Rswift.StringResource(key: "cancel", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Change 2FA Secret
       /// 
-      /// Locales: en
-      static let change_2fa = Rswift.StringResource(key: "change_2fa", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let change_2fa = Rswift.StringResource(key: "change_2fa", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Change password
       /// 
-      /// Locales: en
-      static let change_password = Rswift.StringResource(key: "change_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let change_password = Rswift.StringResource(key: "change_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: City
       /// 
-      /// Locales: en
-      static let city = Rswift.StringResource(key: "city", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let city = Rswift.StringResource(key: "city", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Close
       /// 
-      /// Locales: en
-      static let close = Rswift.StringResource(key: "close", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let close = Rswift.StringResource(key: "close", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Company name
       /// 
-      /// Locales: en
-      static let company_name = Rswift.StringResource(key: "company_name", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let company_name = Rswift.StringResource(key: "company_name", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Confirm noting of your mnemonic
       /// 
-      /// Locales: en
-      static let mnemonic_words_button_lbl = Rswift.StringResource(key: "mnemonic_words_button_lbl", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let mnemonic_words_button_lbl = Rswift.StringResource(key: "mnemonic_words_button_lbl", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Confirmation mail resent
       /// 
-      /// Locales: en
-      static let confirmation_mail_resent = Rswift.StringResource(key: "confirmation_mail_resent", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let confirmation_mail_resent = Rswift.StringResource(key: "confirmation_mail_resent", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Contacts
       /// 
-      /// Locales: en
-      static let contacts = Rswift.StringResource(key: "contacts", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let contacts = Rswift.StringResource(key: "contacts", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Continue
       /// 
-      /// Locales: en
-      static let `continue` = Rswift.StringResource(key: "continue", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let `continue` = Rswift.StringResource(key: "continue", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Country
       /// 
-      /// Locales: en
-      static let country = Rswift.StringResource(key: "country", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let country = Rswift.StringResource(key: "country", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Currencies
       /// 
-      /// Locales: en
-      static let currencies = Rswift.StringResource(key: "currencies", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let currencies = Rswift.StringResource(key: "currencies", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Current password
       /// 
-      /// Locales: en
-      static let current_password = Rswift.StringResource(key: "current_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let current_password = Rswift.StringResource(key: "current_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Delete
       /// 
-      /// Locales: en
-      static let delete = Rswift.StringResource(key: "delete", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let delete = Rswift.StringResource(key: "delete", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Delete
       /// 
-      /// Locales: en
-      static let lbl_delete = Rswift.StringResource(key: "lbl_delete", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_delete = Rswift.StringResource(key: "lbl_delete", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Deposit money
       /// 
-      /// Locales: en
-      static let deposit = Rswift.StringResource(key: "deposit", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let deposit = Rswift.StringResource(key: "deposit", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Details
       /// 
-      /// Locales: en
-      static let details = Rswift.StringResource(key: "details", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let details = Rswift.StringResource(key: "details", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Disabled
       /// 
-      /// Locales: en
-      static let disabled = Rswift.StringResource(key: "disabled", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let disabled = Rswift.StringResource(key: "disabled", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Done
       /// 
-      /// Locales: en
-      static let done = Rswift.StringResource(key: "done", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let done = Rswift.StringResource(key: "done", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Email
       /// 
-      /// Locales: en
-      static let email = Rswift.StringResource(key: "email", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let email = Rswift.StringResource(key: "email", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Email confirmation required
       /// 
-      /// Locales: en
-      static let lbl_email_confirmation = Rswift.StringResource(key: "lbl_email_confirmation", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_email_confirmation = Rswift.StringResource(key: "lbl_email_confirmation", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Email resent
       /// 
-      /// Locales: en
-      static let email_resent = Rswift.StringResource(key: "email_resent", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let email_resent = Rswift.StringResource(key: "email_resent", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Empty password.
       /// 
-      /// Locales: en
-      static let empty_password = Rswift.StringResource(key: "empty_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let empty_password = Rswift.StringResource(key: "empty_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Enabled
       /// 
-      /// Locales: en
-      static let enabled = Rswift.StringResource(key: "enabled", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let enabled = Rswift.StringResource(key: "enabled", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Error
       /// 
-      /// Locales: en
-      static let error = Rswift.StringResource(key: "error", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let error = Rswift.StringResource(key: "error", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Extras
       /// 
-      /// Locales: en
-      static let extras = Rswift.StringResource(key: "extras", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let extras = Rswift.StringResource(key: "extras", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Fingerprint/Face recognition
       /// 
-      /// Locales: en
-      static let fingerprint_recognition = Rswift.StringResource(key: "fingerprint_recognition", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let fingerprint_recognition = Rswift.StringResource(key: "fingerprint_recognition", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: Finish
+      /// 
+      /// Locales: en, de
+      static let finish = Rswift.StringResource(key: "finish", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Finish setup
       /// 
-      /// Locales: en
-      static let finish_setup = Rswift.StringResource(key: "finish_setup", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let finish_setup = Rswift.StringResource(key: "finish_setup", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: For resetting your %@, an email has been sent to your email account. Please check your inbox and follow the instructions in the received email to reset your %@.
       /// 
-      /// Locales: en
-      static let lost_security_email_hint = Rswift.StringResource(key: "lost_security_email_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
-      /// en translation: For security reasons, your wallet will be protected by 2 Factor Authentication (2FA).
+      /// Locales: en, de
+      static let lost_security_email_hint = Rswift.StringResource(key: "lost_security_email_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: For security reasons, your wallet will be protected by 2FA
       /// 
-      /// Locales: en
-      static let lbl_tfa_hint = Rswift.StringResource(key: "lbl_tfa_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_tfa_hint = Rswift.StringResource(key: "lbl_tfa_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Forename
       /// 
-      /// Locales: en
-      static let forename = Rswift.StringResource(key: "forename", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let forename = Rswift.StringResource(key: "forename", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Forgot password
       /// 
-      /// Locales: en
-      static let forgot_password = Rswift.StringResource(key: "forgot_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let forgot_password = Rswift.StringResource(key: "forgot_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Found your wallet
       /// 
-      /// Locales: en
-      static let homeScreenFoundWallet = Rswift.StringResource(key: "home-screen-found-wallet", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let homeScreenFoundWallet = Rswift.StringResource(key: "home-screen-found-wallet", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Fund Wallet
       /// 
-      /// Locales: en
-      static let fund_wallet = Rswift.StringResource(key: "fund_wallet", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let fund_wallet = Rswift.StringResource(key: "fund_wallet", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Get Started
       /// 
-      /// Locales: en
-      static let get_started_button = Rswift.StringResource(key: "get_started_button", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let get_started_button = Rswift.StringResource(key: "get_started_button", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Go back and show mnemonic
       /// 
-      /// Locales: en
-      static let back_mnemonic = Rswift.StringResource(key: "back_mnemonic", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let back_mnemonic = Rswift.StringResource(key: "back_mnemonic", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Help
       /// 
-      /// Locales: en
-      static let help = Rswift.StringResource(key: "help", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let help = Rswift.StringResource(key: "help", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Here are 4 random words from the mnemonic. Please indicate their position within the mnemonic.
       /// 
-      /// Locales: en
-      static let verify_mnemonic_words_title = Rswift.StringResource(key: "verify_mnemonic_words_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let verify_mnemonic_words_title = Rswift.StringResource(key: "verify_mnemonic_words_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Home
       /// 
-      /// Locales: en
-      static let home = Rswift.StringResource(key: "home", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let home = Rswift.StringResource(key: "home", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: I have written it down
       /// 
-      /// Locales: en
-      static let lbl_mnemonic_button_title = Rswift.StringResource(key: "lbl_mnemonic_button_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_mnemonic_button_title = Rswift.StringResource(key: "lbl_mnemonic_button_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: If you make this setup, the app will request your %@ instead of password when opened. Entering the password will not be required each time you open the app. To setup %@ please first insert your password below.
       /// 
-      /// Locales: en
-      static let hint_face_fingerprint = Rswift.StringResource(key: "hint_face_fingerprint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let hint_face_fingerprint = Rswift.StringResource(key: "hint_face_fingerprint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Import mnemonic
       /// 
-      /// Locales: en
-      static let import_mnemonic = Rswift.StringResource(key: "import_mnemonic", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
-      /// en translation: In order to be able continue the setup process, you need to confirm your email address first. A mail with a confirmation link has been sent to your inbox. Please follow the instructions from the received mail to confirm your email-address.
+      /// Locales: en, de
+      static let import_mnemonic = Rswift.StringResource(key: "import_mnemonic", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: In order to be able continue the setup process, you need to confirm your email address first. An email with a confirmation link has been sent to your inbox. Please follow the instructions from the mail to confirm your email address.
       /// 
-      /// Locales: en
-      static let email_confirmation_hint = Rswift.StringResource(key: "email_confirmation_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let email_confirmation_hint = Rswift.StringResource(key: "email_confirmation_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Info
       /// 
-      /// Locales: en
-      static let info = Rswift.StringResource(key: "info", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let info = Rswift.StringResource(key: "info", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Invalid email.
       /// 
-      /// Locales: en
-      static let invalid_email = Rswift.StringResource(key: "invalid_email", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let invalid_email = Rswift.StringResource(key: "invalid_email", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Invalid input
       /// 
-      /// Locales: en
-      static let invalid_input = Rswift.StringResource(key: "invalid_input", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let invalid_input = Rswift.StringResource(key: "invalid_input", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Invalid mobile phone number.
       /// 
-      /// Locales: en
-      static let invalid_phone = Rswift.StringResource(key: "invalid_phone", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let invalid_phone = Rswift.StringResource(key: "invalid_phone", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Invalid password.
       /// 
-      /// Locales: en
-      static let invalid_password = Rswift.StringResource(key: "invalid_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let invalid_password = Rswift.StringResource(key: "invalid_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Invalid request
       /// 
-      /// Locales: en
-      static let invalid_request = Rswift.StringResource(key: "invalid_request", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let invalid_request = Rswift.StringResource(key: "invalid_request", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Just now
       /// 
-      /// Locales: en
-      static let lbl_now_suffix = Rswift.StringResource(key: "lbl_now_suffix", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_now_suffix = Rswift.StringResource(key: "lbl_now_suffix", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Lastname
       /// 
-      /// Locales: en
-      static let lastname = Rswift.StringResource(key: "lastname", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lastname = Rswift.StringResource(key: "lastname", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Let's go
       /// 
-      /// Locales: en
-      static let go = Rswift.StringResource(key: "go", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let go = Rswift.StringResource(key: "go", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Log Out
       /// 
-      /// Locales: en
-      static let logout = Rswift.StringResource(key: "logout", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let logout = Rswift.StringResource(key: "logout", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Login
       /// 
-      /// Locales: en
-      static let login = Rswift.StringResource(key: "login", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let login = Rswift.StringResource(key: "login", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Login to continue
       /// 
-      /// Locales: en
-      static let login_continue = Rswift.StringResource(key: "login_continue", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let login_continue = Rswift.StringResource(key: "login_continue", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Lost 2FA Secret
       /// 
-      /// Locales: en
-      static let lost_2fa = Rswift.StringResource(key: "lost_2fa", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lost_2fa = Rswift.StringResource(key: "lost_2fa", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Lost password
       /// 
-      /// Locales: en
-      static let lost_password = Rswift.StringResource(key: "lost_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lost_password = Rswift.StringResource(key: "lost_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Lumenshine
       /// 
-      /// Locales: en
-      static let app_name = Rswift.StringResource(key: "app_name", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let app_name = Rswift.StringResource(key: "app_name", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Lumenshine
       /// 
-      /// Locales: en
-      static let homeScreenTitle = Rswift.StringResource(key: "home-screen-title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let homeScreenTitle = Rswift.StringResource(key: "home-screen-title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: M
       /// 
-      /// Locales: en
-      static let lbl_month_suffix = Rswift.StringResource(key: "lbl_month_suffix", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_month_suffix = Rswift.StringResource(key: "lbl_month_suffix", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Message
       /// 
-      /// Locales: en
-      static let lbl_message = Rswift.StringResource(key: "lbl_message", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_message = Rswift.StringResource(key: "lbl_message", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Mobile phone
       /// 
-      /// Locales: en
-      static let mobile_phone = Rswift.StringResource(key: "mobile_phone", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let mobile_phone = Rswift.StringResource(key: "mobile_phone", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: More
       /// 
-      /// Locales: en
-      static let more = Rswift.StringResource(key: "more", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let more = Rswift.StringResource(key: "more", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Nationality
       /// 
-      /// Locales: en
-      static let nationality = Rswift.StringResource(key: "nationality", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let nationality = Rswift.StringResource(key: "nationality", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: New 2FA Secret
       /// 
-      /// Locales: en
-      static let new_2fa_secret = Rswift.StringResource(key: "new_2fa_secret", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let new_2fa_secret = Rswift.StringResource(key: "new_2fa_secret", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: New password
       /// 
-      /// Locales: en
-      static let new_password = Rswift.StringResource(key: "new_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let new_password = Rswift.StringResource(key: "new_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Next
       /// 
-      /// Locales: en
-      static let next = Rswift.StringResource(key: "next", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let next = Rswift.StringResource(key: "next", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Not logged in
       /// 
-      /// Locales: en
-      static let not_logged_in = Rswift.StringResource(key: "not_logged_in", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let not_logged_in = Rswift.StringResource(key: "not_logged_in", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Note & confirm backup secret (mnemonic)
       /// 
-      /// Locales: en
-      static let mnemonic_title = Rswift.StringResource(key: "mnemonic_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let mnemonic_title = Rswift.StringResource(key: "mnemonic_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: OK
       /// 
-      /// Locales: en
-      static let ok = Rswift.StringResource(key: "ok", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let ok = Rswift.StringResource(key: "ok", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Open
       /// 
-      /// Locales: en
-      static let `open` = Rswift.StringResource(key: "open", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let `open` = Rswift.StringResource(key: "open", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Open Google Authenticator to generate 2FA code with secret: %@
       /// 
-      /// Locales: en
-      static let lbl_tfa_secret_authenticator = Rswift.StringResource(key: "lbl_tfa_secret_authenticator", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_tfa_secret_authenticator = Rswift.StringResource(key: "lbl_tfa_secret_authenticator", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Password
       /// 
-      /// Locales: en
-      static let password = Rswift.StringResource(key: "password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let password = Rswift.StringResource(key: "password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Password requirements
       /// 
-      /// Locales: en
-      static let password_hint_title = Rswift.StringResource(key: "password_hint_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let password_hint_title = Rswift.StringResource(key: "password_hint_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Password successfully changed
       /// 
-      /// Locales: en
-      static let password_changed = Rswift.StringResource(key: "password_changed", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let password_changed = Rswift.StringResource(key: "password_changed", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: Please confirm your email address first.
+      /// 
+      /// Locales: en, de
+      static let lbl_please_confirm = Rswift.StringResource(key: "lbl_please_confirm", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Please fill in the form below with valid information
       /// 
-      /// Locales: en
-      static let login_fill = Rswift.StringResource(key: "login_fill", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let login_fill = Rswift.StringResource(key: "login_fill", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Please write down and safely store this phrase. It's the ONLY WAY to retrieve your wallet.
       /// 
-      /// Locales: en
-      static let lbl_mnemonic_title = Rswift.StringResource(key: "lbl_mnemonic_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_mnemonic_title = Rswift.StringResource(key: "lbl_mnemonic_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Please write down your backup secret (mnemonic). You can use it if you lose your password to recover your wallet. It can be also used in other apps / wallets that support import from mnemonic. If you lose your password and the mnemonic you will not be able to access your funds any more. We can not recover your account if you lose both (password and mnemonic). We do not store password and mnemonic.
       /// 
-      /// Locales: en
-      static let mnemonic_hint_lbl = Rswift.StringResource(key: "mnemonic_hint_lbl", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let mnemonic_hint_lbl = Rswift.StringResource(key: "mnemonic_hint_lbl", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Position
       /// 
-      /// Locales: en
-      static let position = Rswift.StringResource(key: "position", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let position = Rswift.StringResource(key: "position", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Powered by
       /// 
-      /// Locales: en
-      static let powered_by = Rswift.StringResource(key: "powered_by", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let powered_by = Rswift.StringResource(key: "powered_by", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Prove noting of mnemonic
       /// 
-      /// Locales: en
-      static let verify_mnemonic_title = Rswift.StringResource(key: "verify_mnemonic_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let verify_mnemonic_title = Rswift.StringResource(key: "verify_mnemonic_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Read more about mnemonics
       /// 
-      /// Locales: en
-      static let mnemonic_more_lbl = Rswift.StringResource(key: "mnemonic_more_lbl", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let mnemonic_more_lbl = Rswift.StringResource(key: "mnemonic_more_lbl", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Receive
       /// 
-      /// Locales: en
-      static let receive = Rswift.StringResource(key: "receive", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let receive = Rswift.StringResource(key: "receive", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Recommend
       /// 
-      /// Locales: en
-      static let lbl_recommend = Rswift.StringResource(key: "lbl_recommend", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_recommend = Rswift.StringResource(key: "lbl_recommend", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Register
       /// 
-      /// Locales: en
-      static let register = Rswift.StringResource(key: "register", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let register = Rswift.StringResource(key: "register", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Remove
       /// 
-      /// Locales: en
-      static let remove = Rswift.StringResource(key: "remove", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let remove = Rswift.StringResource(key: "remove", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Repeat Password
       /// 
-      /// Locales: en
-      static let repeat_password = Rswift.StringResource(key: "repeat_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let repeat_password = Rswift.StringResource(key: "repeat_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Repeat new password
       /// 
-      /// Locales: en
-      static let repeat_new_password = Rswift.StringResource(key: "repeat_new_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let repeat_new_password = Rswift.StringResource(key: "repeat_new_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Repetition do not match with password.
       /// 
-      /// Locales: en
-      static let invalid_repassword = Rswift.StringResource(key: "invalid_repassword", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let invalid_repassword = Rswift.StringResource(key: "invalid_repassword", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Resend confirmation mail
       /// 
-      /// Locales: en
-      static let email_resend_confirmation = Rswift.StringResource(key: "email_resend_confirmation", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let email_resend_confirmation = Rswift.StringResource(key: "email_resend_confirmation", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Resend email
       /// 
-      /// Locales: en
-      static let resend_email = Rswift.StringResource(key: "resend_email", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let resend_email = Rswift.StringResource(key: "resend_email", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Reset 2fa
       /// 
-      /// Locales: en
-      static let reset_2fa = Rswift.StringResource(key: "reset_2fa", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let reset_2fa = Rswift.StringResource(key: "reset_2fa", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Reset password
       /// 
-      /// Locales: en
-      static let reset_password = Rswift.StringResource(key: "reset_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let reset_password = Rswift.StringResource(key: "reset_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Reveal
       /// 
-      /// Locales: en
-      static let reveal = Rswift.StringResource(key: "reveal", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let reveal = Rswift.StringResource(key: "reveal", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Salutation
       /// 
-      /// Locales: en
-      static let salutation = Rswift.StringResource(key: "salutation", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let salutation = Rswift.StringResource(key: "salutation", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Save
       /// 
-      /// Locales: en
-      static let lbl_save = Rswift.StringResource(key: "lbl_save", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_save = Rswift.StringResource(key: "lbl_save", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Save
       /// 
-      /// Locales: en
-      static let save = Rswift.StringResource(key: "save", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let save = Rswift.StringResource(key: "save", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Scan
       /// 
-      /// Locales: en
-      static let scan = Rswift.StringResource(key: "scan", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let scan = Rswift.StringResource(key: "scan", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Sell
       /// 
-      /// Locales: en
-      static let sell = Rswift.StringResource(key: "sell", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let sell = Rswift.StringResource(key: "sell", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Send
       /// 
-      /// Locales: en
-      static let send = Rswift.StringResource(key: "send", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let send = Rswift.StringResource(key: "send", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Settings
       /// 
-      /// Locales: en
-      static let settings = Rswift.StringResource(key: "settings", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let settings = Rswift.StringResource(key: "settings", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Setup Face Recognition
       /// 
-      /// Locales: en
-      static let face_recognition = Rswift.StringResource(key: "face_recognition", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let face_recognition = Rswift.StringResource(key: "face_recognition", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Setup Fingerprint
       /// 
-      /// Locales: en
-      static let fingerprint = Rswift.StringResource(key: "fingerprint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let fingerprint = Rswift.StringResource(key: "fingerprint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Setup Wallet
       /// 
-      /// Locales: en
-      static let setup_wallet = Rswift.StringResource(key: "setup_wallet", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let setup_wallet = Rswift.StringResource(key: "setup_wallet", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Sign Out
       /// 
-      /// Locales: en
-      static let signout = Rswift.StringResource(key: "signout", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let signout = Rswift.StringResource(key: "signout", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Sign up
       /// 
-      /// Locales: en
-      static let signup = Rswift.StringResource(key: "signup", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let signup = Rswift.StringResource(key: "signup", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Something went wrong. Try again, please.
       /// 
-      /// Locales: en
-      static let sign_in_error_msg = Rswift.StringResource(key: "sign_in_error_msg", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let sign_in_error_msg = Rswift.StringResource(key: "sign_in_error_msg", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: State
       /// 
-      /// Locales: en
-      static let state = Rswift.StringResource(key: "state", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let state = Rswift.StringResource(key: "state", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Stellar Lumens (XLM)
       /// 
-      /// Locales: en
-      static let chart_card_title = Rswift.StringResource(key: "chart_card_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
-      /// en translation: Step %@ of 3
-      /// 
-      /// Locales: en
-      static let step_3 = Rswift.StringResource(key: "step_3", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let chart_card_title = Rswift.StringResource(key: "chart_card_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Street address
       /// 
-      /// Locales: en
-      static let street_address = Rswift.StringResource(key: "street_address", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let street_address = Rswift.StringResource(key: "street_address", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Street number
       /// 
-      /// Locales: en
-      static let street_number = Rswift.StringResource(key: "street_number", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let street_number = Rswift.StringResource(key: "street_number", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Submit
       /// 
-      /// Locales: en
-      static let submit = Rswift.StringResource(key: "submit", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let submit = Rswift.StringResource(key: "submit", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: This step is very important
       /// 
-      /// Locales: en
-      static let mnemonic_hint_title = Rswift.StringResource(key: "mnemonic_hint_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let mnemonic_hint_title = Rswift.StringResource(key: "mnemonic_hint_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Title
       /// 
-      /// Locales: en
-      static let title = Rswift.StringResource(key: "title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let title = Rswift.StringResource(key: "title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: To change your 2FA Secret please insert your password.
       /// 
-      /// Locales: en
-      static let change_2fa_hint = Rswift.StringResource(key: "change_2fa_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let change_2fa_hint = Rswift.StringResource(key: "change_2fa_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: To prove the noting of your mnemonic, please complete following quiz.
       /// 
-      /// Locales: en
-      static let verify_mnemonic_hint = Rswift.StringResource(key: "verify_mnemonic_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let verify_mnemonic_hint = Rswift.StringResource(key: "verify_mnemonic_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: To reveal your backup secret/mnemonic please provide your password.
       /// 
-      /// Locales: en
-      static let reveal_backup_mnemonic = Rswift.StringResource(key: "reveal_backup_mnemonic", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
-      /// en translation: To setup 2FA, please:  1. download a two-factor authenticator app (like Google Authenticator)  2. copy and enter the above displayed 2FA secret code into the authenticator app  3. enter the generated 2FA code from the authenticator app into the 2FA Code input and press "Next"
+      /// Locales: en, de
+      static let reveal_backup_mnemonic = Rswift.StringResource(key: "reveal_backup_mnemonic", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: To setup 2FA, please:  1. Download a two-factor authenticator app (like Google Authenticator)  2. Copy and enter the above displayed 2FA secret code into the authenticator app  3. Enter the generated 2FA code from the authenticator app and press "Next"
       /// 
-      /// Locales: en
-      static let lbl_tfa_setup = Rswift.StringResource(key: "lbl_tfa_setup", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_tfa_setup = Rswift.StringResource(key: "lbl_tfa_setup", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Today
       /// 
-      /// Locales: en
-      static let lbl_today = Rswift.StringResource(key: "lbl_today", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_today = Rswift.StringResource(key: "lbl_today", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Touch ID
       /// 
-      /// Locales: en
-      static let touch_id = Rswift.StringResource(key: "touch_id", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let touch_id = Rswift.StringResource(key: "touch_id", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Transactions
       /// 
-      /// Locales: en
-      static let transactions = Rswift.StringResource(key: "transactions", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let transactions = Rswift.StringResource(key: "transactions", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Unexpected data type
       /// 
-      /// Locales: en
-      static let unexpected_data_type = Rswift.StringResource(key: "unexpected_data_type", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let unexpected_data_type = Rswift.StringResource(key: "unexpected_data_type", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Updated %@
       /// 
-      /// Locales: en
-      static let updated = Rswift.StringResource(key: "updated", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let updated = Rswift.StringResource(key: "updated", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Use another account
       /// 
-      /// Locales: en
-      static let account_different = Rswift.StringResource(key: "account_different", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let account_different = Rswift.StringResource(key: "account_different", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: User is not logged in
       /// 
-      /// Locales: en
-      static let user_not_logged_in = Rswift.StringResource(key: "user_not_logged_in", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let user_not_logged_in = Rswift.StringResource(key: "user_not_logged_in", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: User specific data
       /// 
-      /// Locales: en
-      static let user_data_title = Rswift.StringResource(key: "user_data_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let user_data_title = Rswift.StringResource(key: "user_data_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Username
       /// 
-      /// Locales: en
-      static let username = Rswift.StringResource(key: "username", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let username = Rswift.StringResource(key: "username", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: W
       /// 
-      /// Locales: en
-      static let lbl_week_suffix = Rswift.StringResource(key: "lbl_week_suffix", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_week_suffix = Rswift.StringResource(key: "lbl_week_suffix", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Wallets
       /// 
-      /// Locales: en
-      static let wallets = Rswift.StringResource(key: "wallets", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let wallets = Rswift.StringResource(key: "wallets", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Welcome
       /// 
-      /// Locales: en
-      static let welcome = Rswift.StringResource(key: "welcome", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let welcome = Rswift.StringResource(key: "welcome", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: Welcome back,
+      /// 
+      /// Locales: en, de
+      static let welcome_back = Rswift.StringResource(key: "welcome_back", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Withdraw money
       /// 
-      /// Locales: en
-      static let withdraw = Rswift.StringResource(key: "withdraw", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let withdraw = Rswift.StringResource(key: "withdraw", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Wrong account or password
       /// 
-      /// Locales: en
-      static let bad_credentials = Rswift.StringResource(key: "bad_credentials", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let bad_credentials = Rswift.StringResource(key: "bad_credentials", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Your 2FA secret: %@
       /// 
-      /// Locales: en
-      static let lbl_tfa_secret = Rswift.StringResource(key: "lbl_tfa_secret", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_tfa_secret = Rswift.StringResource(key: "lbl_tfa_secret", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Your Secret (24 words mnemonic):
       /// 
-      /// Locales: en
-      static let mnemonic_words_title = Rswift.StringResource(key: "mnemonic_words_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let mnemonic_words_title = Rswift.StringResource(key: "mnemonic_words_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Your email address is not confirmed.
       /// 
-      /// Locales: en
-      static let lbl_email_confirmation2 = Rswift.StringResource(key: "lbl_email_confirmation2", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_email_confirmation2 = Rswift.StringResource(key: "lbl_email_confirmation2", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Your new 2FA secret: %@
       /// 
-      /// Locales: en
-      static let lbl_new_2fa_secret = Rswift.StringResource(key: "lbl_new_2fa_secret", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_new_2fa_secret = Rswift.StringResource(key: "lbl_new_2fa_secret", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Your new password must have at least 9 characters.  It must contain small letters and capitals.
       /// 
-      /// Locales: en
-      static let password_hint = Rswift.StringResource(key: "password_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let password_hint = Rswift.StringResource(key: "password_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Zip code
       /// 
-      /// Locales: en
-      static let zip_code = Rswift.StringResource(key: "zip_code", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let zip_code = Rswift.StringResource(key: "zip_code", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: d
       /// 
-      /// Locales: en
-      static let lbl_day_suffix = Rswift.StringResource(key: "lbl_day_suffix", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_day_suffix = Rswift.StringResource(key: "lbl_day_suffix", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: day
       /// 
-      /// Locales: en
-      static let lbl_day = Rswift.StringResource(key: "lbl_day", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_day = Rswift.StringResource(key: "lbl_day", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: days
       /// 
-      /// Locales: en
-      static let lbl_days = Rswift.StringResource(key: "lbl_days", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_days = Rswift.StringResource(key: "lbl_days", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: h
       /// 
-      /// Locales: en
-      static let lbl_hour_suffix = Rswift.StringResource(key: "lbl_hour_suffix", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_hour_suffix = Rswift.StringResource(key: "lbl_hour_suffix", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: here
       /// 
-      /// Locales: en
-      static let here = Rswift.StringResource(key: "here", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let here = Rswift.StringResource(key: "here", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: m
       /// 
-      /// Locales: en
-      static let lbl_minute_suffix = Rswift.StringResource(key: "lbl_minute_suffix", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_minute_suffix = Rswift.StringResource(key: "lbl_minute_suffix", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: one day ago
       /// 
-      /// Locales: en
-      static let lbl_moment_day_count = Rswift.StringResource(key: "lbl_moment_day_count", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_moment_day_count = Rswift.StringResource(key: "lbl_moment_day_count", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: one hour ago
       /// 
-      /// Locales: en
-      static let lbl_moment_hour_count = Rswift.StringResource(key: "lbl_moment_hour_count", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_moment_hour_count = Rswift.StringResource(key: "lbl_moment_hour_count", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: one minute ago
       /// 
-      /// Locales: en
-      static let lbl_moment_minute_count = Rswift.StringResource(key: "lbl_moment_minute_count", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_moment_minute_count = Rswift.StringResource(key: "lbl_moment_minute_count", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: one month ago
       /// 
-      /// Locales: en
-      static let lbl_moment_month_count = Rswift.StringResource(key: "lbl_moment_month_count", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_moment_month_count = Rswift.StringResource(key: "lbl_moment_month_count", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: one second ago
       /// 
-      /// Locales: en
-      static let lbl_moment_second_count = Rswift.StringResource(key: "lbl_moment_second_count", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_moment_second_count = Rswift.StringResource(key: "lbl_moment_second_count", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: one week ago
       /// 
-      /// Locales: en
-      static let lbl_moment_week_count = Rswift.StringResource(key: "lbl_moment_week_count", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_moment_week_count = Rswift.StringResource(key: "lbl_moment_week_count", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: one year ago
       /// 
-      /// Locales: en
-      static let lbl_moment_year_count = Rswift.StringResource(key: "lbl_moment_year_count", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_moment_year_count = Rswift.StringResource(key: "lbl_moment_year_count", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: step %@ of 3
+      /// 
+      /// Locales: en, de
+      static let step_3 = Rswift.StringResource(key: "step_3", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: y
       /// 
-      /// Locales: en
-      static let lbl_year_suffix = Rswift.StringResource(key: "lbl_year_suffix", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let lbl_year_suffix = Rswift.StringResource(key: "lbl_year_suffix", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       
       /// en translation: %1$d days ago
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func xMoment_days(_ value1: Int) -> String {
         return String(format: NSLocalizedString("x-moment_days", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
       }
       
       /// en translation: %1$d hours ago
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func xMoment_hours(_ value1: Int) -> String {
         return String(format: NSLocalizedString("x-moment_hours", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
       }
       
       /// en translation: %1$d minutes ago
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func xMoment_minutes(_ value1: Int) -> String {
         return String(format: NSLocalizedString("x-moment_minutes", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
       }
       
       /// en translation: %1$d months ago
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func xMoment_months(_ value1: Int) -> String {
         return String(format: NSLocalizedString("x-moment_months", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
       }
       
       /// en translation: %1$d seconds ago
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func xMoment_seconds(_ value1: Int) -> String {
         return String(format: NSLocalizedString("x-moment_seconds", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
       }
       
       /// en translation: %1$d weeks ago
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func xMoment_weeks(_ value1: Int) -> String {
         return String(format: NSLocalizedString("x-moment_weeks", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
       }
       
       /// en translation: %1$d years ago
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func xMoment_years(_ value1: Int) -> String {
         return String(format: NSLocalizedString("x-moment_years", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
       }
       
       /// en translation: %@ email sent
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lost_security_email_sent(_ value1: String) -> String {
         return String(format: NSLocalizedString("lost_security_email_sent", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
       }
       
       /// en translation: 1. copy and enter the below displayed 2FA secret code into the authenticator app  2. enter the generated 2FA code from the authenticator app into the 2FA Code input and press "Next"
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_2fa_hint(_: Void = ()) -> String {
         return NSLocalizedString("lbl_2fa_hint", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: 2 Factor Authentication (2FA)
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_tfa(_: Void = ()) -> String {
         return NSLocalizedString("lbl_tfa", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: 2 Factor Authentication Code
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_tfa_code(_: Void = ()) -> String {
         return NSLocalizedString("lbl_tfa_code", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: 2FA Code
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func tfa_code(_: Void = ()) -> String {
         return NSLocalizedString("tfa_code", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: 2FA Secret
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func fa_secret(_: Void = ()) -> String {
         return NSLocalizedString("2fa_secret", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: 2FA Secret successfully changed
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func tfa_secret_changed(_: Void = ()) -> String {
         return NSLocalizedString("tfa_secret_changed", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: 2FA secret copied to clipboard
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func fa_secret_copy(_: Void = ()) -> String {
         return NSLocalizedString("2FA_secret_copy", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: About
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func about(_: Void = ()) -> String {
         return NSLocalizedString("about", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Account specific data
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func account_data_title(_: Void = ()) -> String {
         return NSLocalizedString("account_data_title", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Already confirmed
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func email_already_confirmed(_: Void = ()) -> String {
         return NSLocalizedString("email_already_confirmed", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: An email has been sent to your email account. Please check your inbox and confirm your email address first.
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func email_confirmation_hint2(_: Void = ()) -> String {
         return NSLocalizedString("email_confirmation_hint2", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Anonymous
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func unknown(_: Void = ()) -> String {
         return NSLocalizedString("unknown", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Autogenerated 2FA code with secret: %@
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_tfa_secret_hint(_ value1: String) -> String {
         return String(format: NSLocalizedString("lbl_tfa_secret_hint", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
       }
       
       /// en translation: Avatar
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func avatar(_: Void = ()) -> String {
         return NSLocalizedString("avatar", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Back
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func back(_: Void = ()) -> String {
         return NSLocalizedString("back", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Backup Secret/Mnemonic
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func backup_mnemonic(_: Void = ()) -> String {
         return NSLocalizedString("backup_mnemonic", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Birth day
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func birthday(_: Void = ()) -> String {
         return NSLocalizedString("birthday", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Birth place
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func birthplace(_: Void = ()) -> String {
         return NSLocalizedString("birthplace", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Cancel
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func cancel(_: Void = ()) -> String {
         return NSLocalizedString("cancel", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Change 2FA Secret
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func change_2fa(_: Void = ()) -> String {
         return NSLocalizedString("change_2fa", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Change password
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func change_password(_: Void = ()) -> String {
         return NSLocalizedString("change_password", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: City
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func city(_: Void = ()) -> String {
         return NSLocalizedString("city", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Close
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func close(_: Void = ()) -> String {
         return NSLocalizedString("close", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Company name
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func company_name(_: Void = ()) -> String {
         return NSLocalizedString("company_name", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Confirm noting of your mnemonic
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func mnemonic_words_button_lbl(_: Void = ()) -> String {
         return NSLocalizedString("mnemonic_words_button_lbl", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Confirmation mail resent
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func confirmation_mail_resent(_: Void = ()) -> String {
         return NSLocalizedString("confirmation_mail_resent", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Contacts
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func contacts(_: Void = ()) -> String {
         return NSLocalizedString("contacts", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Continue
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func `continue`(_: Void = ()) -> String {
         return NSLocalizedString("continue", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Country
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func country(_: Void = ()) -> String {
         return NSLocalizedString("country", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Currencies
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func currencies(_: Void = ()) -> String {
         return NSLocalizedString("currencies", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Current password
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func current_password(_: Void = ()) -> String {
         return NSLocalizedString("current_password", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Delete
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func delete(_: Void = ()) -> String {
         return NSLocalizedString("delete", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Delete
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_delete(_: Void = ()) -> String {
         return NSLocalizedString("lbl_delete", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Deposit money
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func deposit(_: Void = ()) -> String {
         return NSLocalizedString("deposit", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Details
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func details(_: Void = ()) -> String {
         return NSLocalizedString("details", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Disabled
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func disabled(_: Void = ()) -> String {
         return NSLocalizedString("disabled", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Done
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func done(_: Void = ()) -> String {
         return NSLocalizedString("done", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Email
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func email(_: Void = ()) -> String {
         return NSLocalizedString("email", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Email confirmation required
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_email_confirmation(_: Void = ()) -> String {
         return NSLocalizedString("lbl_email_confirmation", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Email resent
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func email_resent(_: Void = ()) -> String {
         return NSLocalizedString("email_resent", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Empty password.
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func empty_password(_: Void = ()) -> String {
         return NSLocalizedString("empty_password", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Enabled
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func enabled(_: Void = ()) -> String {
         return NSLocalizedString("enabled", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Error
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func error(_: Void = ()) -> String {
         return NSLocalizedString("error", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Extras
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func extras(_: Void = ()) -> String {
         return NSLocalizedString("extras", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Fingerprint/Face recognition
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func fingerprint_recognition(_: Void = ()) -> String {
         return NSLocalizedString("fingerprint_recognition", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Finish
+      /// 
+      /// Locales: en, de
+      static func finish(_: Void = ()) -> String {
+        return NSLocalizedString("finish", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Finish setup
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func finish_setup(_: Void = ()) -> String {
         return NSLocalizedString("finish_setup", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: For resetting your %@, an email has been sent to your email account. Please check your inbox and follow the instructions in the received email to reset your %@.
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lost_security_email_hint(_ value1: String, _ value2: String) -> String {
         return String(format: NSLocalizedString("lost_security_email_hint", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1, value2)
       }
       
-      /// en translation: For security reasons, your wallet will be protected by 2 Factor Authentication (2FA).
+      /// en translation: For security reasons, your wallet will be protected by 2FA
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_tfa_hint(_: Void = ()) -> String {
         return NSLocalizedString("lbl_tfa_hint", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Forename
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func forename(_: Void = ()) -> String {
         return NSLocalizedString("forename", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Forgot password
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func forgot_password(_: Void = ()) -> String {
         return NSLocalizedString("forgot_password", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Found your wallet
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func homeScreenFoundWallet(_: Void = ()) -> String {
         return NSLocalizedString("home-screen-found-wallet", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Fund Wallet
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func fund_wallet(_: Void = ()) -> String {
         return NSLocalizedString("fund_wallet", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Get Started
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func get_started_button(_: Void = ()) -> String {
         return NSLocalizedString("get_started_button", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Go back and show mnemonic
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func back_mnemonic(_: Void = ()) -> String {
         return NSLocalizedString("back_mnemonic", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Help
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func help(_: Void = ()) -> String {
         return NSLocalizedString("help", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Here are 4 random words from the mnemonic. Please indicate their position within the mnemonic.
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func verify_mnemonic_words_title(_: Void = ()) -> String {
         return NSLocalizedString("verify_mnemonic_words_title", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Home
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func home(_: Void = ()) -> String {
         return NSLocalizedString("home", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: I have written it down
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_mnemonic_button_title(_: Void = ()) -> String {
         return NSLocalizedString("lbl_mnemonic_button_title", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: If you make this setup, the app will request your %@ instead of password when opened. Entering the password will not be required each time you open the app. To setup %@ please first insert your password below.
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func hint_face_fingerprint(_ value1: String, _ value2: String) -> String {
         return String(format: NSLocalizedString("hint_face_fingerprint", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1, value2)
       }
       
       /// en translation: Import mnemonic
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func import_mnemonic(_: Void = ()) -> String {
         return NSLocalizedString("import_mnemonic", bundle: R.hostingBundle, comment: "")
       }
       
-      /// en translation: In order to be able continue the setup process, you need to confirm your email address first. A mail with a confirmation link has been sent to your inbox. Please follow the instructions from the received mail to confirm your email-address.
+      /// en translation: In order to be able continue the setup process, you need to confirm your email address first. An email with a confirmation link has been sent to your inbox. Please follow the instructions from the mail to confirm your email address.
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func email_confirmation_hint(_: Void = ()) -> String {
         return NSLocalizedString("email_confirmation_hint", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Info
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func info(_: Void = ()) -> String {
         return NSLocalizedString("info", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Invalid email.
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func invalid_email(_: Void = ()) -> String {
         return NSLocalizedString("invalid_email", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Invalid input
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func invalid_input(_: Void = ()) -> String {
         return NSLocalizedString("invalid_input", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Invalid mobile phone number.
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func invalid_phone(_: Void = ()) -> String {
         return NSLocalizedString("invalid_phone", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Invalid password.
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func invalid_password(_: Void = ()) -> String {
         return NSLocalizedString("invalid_password", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Invalid request
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func invalid_request(_: Void = ()) -> String {
         return NSLocalizedString("invalid_request", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Just now
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_now_suffix(_: Void = ()) -> String {
         return NSLocalizedString("lbl_now_suffix", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Lastname
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lastname(_: Void = ()) -> String {
         return NSLocalizedString("lastname", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Let's go
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func go(_: Void = ()) -> String {
         return NSLocalizedString("go", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Log Out
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func logout(_: Void = ()) -> String {
         return NSLocalizedString("logout", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Login
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func login(_: Void = ()) -> String {
         return NSLocalizedString("login", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Login to continue
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func login_continue(_: Void = ()) -> String {
         return NSLocalizedString("login_continue", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Lost 2FA Secret
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lost_2fa(_: Void = ()) -> String {
         return NSLocalizedString("lost_2fa", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Lost password
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lost_password(_: Void = ()) -> String {
         return NSLocalizedString("lost_password", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Lumenshine
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func app_name(_: Void = ()) -> String {
         return NSLocalizedString("app_name", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Lumenshine
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func homeScreenTitle(_: Void = ()) -> String {
         return NSLocalizedString("home-screen-title", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: M
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_month_suffix(_: Void = ()) -> String {
         return NSLocalizedString("lbl_month_suffix", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Message
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_message(_: Void = ()) -> String {
         return NSLocalizedString("lbl_message", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Mobile phone
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func mobile_phone(_: Void = ()) -> String {
         return NSLocalizedString("mobile_phone", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: More
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func more(_: Void = ()) -> String {
         return NSLocalizedString("more", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Nationality
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func nationality(_: Void = ()) -> String {
         return NSLocalizedString("nationality", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: New 2FA Secret
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func new_2fa_secret(_: Void = ()) -> String {
         return NSLocalizedString("new_2fa_secret", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: New password
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func new_password(_: Void = ()) -> String {
         return NSLocalizedString("new_password", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Next
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func next(_: Void = ()) -> String {
         return NSLocalizedString("next", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Not logged in
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func not_logged_in(_: Void = ()) -> String {
         return NSLocalizedString("not_logged_in", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Note & confirm backup secret (mnemonic)
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func mnemonic_title(_: Void = ()) -> String {
         return NSLocalizedString("mnemonic_title", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: OK
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func ok(_: Void = ()) -> String {
         return NSLocalizedString("ok", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Open
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func `open`(_: Void = ()) -> String {
         return NSLocalizedString("open", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Open Google Authenticator to generate 2FA code with secret: %@
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_tfa_secret_authenticator(_ value1: String) -> String {
         return String(format: NSLocalizedString("lbl_tfa_secret_authenticator", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
       }
       
       /// en translation: Password
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func password(_: Void = ()) -> String {
         return NSLocalizedString("password", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Password requirements
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func password_hint_title(_: Void = ()) -> String {
         return NSLocalizedString("password_hint_title", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Password successfully changed
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func password_changed(_: Void = ()) -> String {
         return NSLocalizedString("password_changed", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Please confirm your email address first.
+      /// 
+      /// Locales: en, de
+      static func lbl_please_confirm(_: Void = ()) -> String {
+        return NSLocalizedString("lbl_please_confirm", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Please fill in the form below with valid information
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func login_fill(_: Void = ()) -> String {
         return NSLocalizedString("login_fill", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Please write down and safely store this phrase. It's the ONLY WAY to retrieve your wallet.
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_mnemonic_title(_: Void = ()) -> String {
         return NSLocalizedString("lbl_mnemonic_title", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Please write down your backup secret (mnemonic). You can use it if you lose your password to recover your wallet. It can be also used in other apps / wallets that support import from mnemonic. If you lose your password and the mnemonic you will not be able to access your funds any more. We can not recover your account if you lose both (password and mnemonic). We do not store password and mnemonic.
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func mnemonic_hint_lbl(_: Void = ()) -> String {
         return NSLocalizedString("mnemonic_hint_lbl", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Position
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func position(_: Void = ()) -> String {
         return NSLocalizedString("position", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Powered by
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func powered_by(_: Void = ()) -> String {
         return NSLocalizedString("powered_by", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Prove noting of mnemonic
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func verify_mnemonic_title(_: Void = ()) -> String {
         return NSLocalizedString("verify_mnemonic_title", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Read more about mnemonics
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func mnemonic_more_lbl(_: Void = ()) -> String {
         return NSLocalizedString("mnemonic_more_lbl", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Receive
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func receive(_: Void = ()) -> String {
         return NSLocalizedString("receive", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Recommend
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_recommend(_: Void = ()) -> String {
         return NSLocalizedString("lbl_recommend", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Register
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func register(_: Void = ()) -> String {
         return NSLocalizedString("register", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Remove
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func remove(_: Void = ()) -> String {
         return NSLocalizedString("remove", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Repeat Password
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func repeat_password(_: Void = ()) -> String {
         return NSLocalizedString("repeat_password", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Repeat new password
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func repeat_new_password(_: Void = ()) -> String {
         return NSLocalizedString("repeat_new_password", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Repetition do not match with password.
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func invalid_repassword(_: Void = ()) -> String {
         return NSLocalizedString("invalid_repassword", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Resend confirmation mail
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func email_resend_confirmation(_: Void = ()) -> String {
         return NSLocalizedString("email_resend_confirmation", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Resend email
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func resend_email(_: Void = ()) -> String {
         return NSLocalizedString("resend_email", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Reset 2fa
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func reset_2fa(_: Void = ()) -> String {
         return NSLocalizedString("reset_2fa", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Reset password
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func reset_password(_: Void = ()) -> String {
         return NSLocalizedString("reset_password", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Reveal
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func reveal(_: Void = ()) -> String {
         return NSLocalizedString("reveal", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Salutation
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func salutation(_: Void = ()) -> String {
         return NSLocalizedString("salutation", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Save
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_save(_: Void = ()) -> String {
         return NSLocalizedString("lbl_save", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Save
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func save(_: Void = ()) -> String {
         return NSLocalizedString("save", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Scan
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func scan(_: Void = ()) -> String {
         return NSLocalizedString("scan", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Sell
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func sell(_: Void = ()) -> String {
         return NSLocalizedString("sell", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Send
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func send(_: Void = ()) -> String {
         return NSLocalizedString("send", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Settings
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func settings(_: Void = ()) -> String {
         return NSLocalizedString("settings", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Setup Face Recognition
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func face_recognition(_: Void = ()) -> String {
         return NSLocalizedString("face_recognition", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Setup Fingerprint
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func fingerprint(_: Void = ()) -> String {
         return NSLocalizedString("fingerprint", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Setup Wallet
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func setup_wallet(_: Void = ()) -> String {
         return NSLocalizedString("setup_wallet", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Sign Out
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func signout(_: Void = ()) -> String {
         return NSLocalizedString("signout", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Sign up
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func signup(_: Void = ()) -> String {
         return NSLocalizedString("signup", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Something went wrong. Try again, please.
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func sign_in_error_msg(_: Void = ()) -> String {
         return NSLocalizedString("sign_in_error_msg", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: State
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func state(_: Void = ()) -> String {
         return NSLocalizedString("state", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Stellar Lumens (XLM)
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func chart_card_title(_: Void = ()) -> String {
         return NSLocalizedString("chart_card_title", bundle: R.hostingBundle, comment: "")
       }
       
-      /// en translation: Step %@ of 3
-      /// 
-      /// Locales: en
-      static func step_3(_ value1: String) -> String {
-        return String(format: NSLocalizedString("step_3", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
-      }
-      
       /// en translation: Street address
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func street_address(_: Void = ()) -> String {
         return NSLocalizedString("street_address", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Street number
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func street_number(_: Void = ()) -> String {
         return NSLocalizedString("street_number", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Submit
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func submit(_: Void = ()) -> String {
         return NSLocalizedString("submit", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: This step is very important
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func mnemonic_hint_title(_: Void = ()) -> String {
         return NSLocalizedString("mnemonic_hint_title", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Title
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func title(_: Void = ()) -> String {
         return NSLocalizedString("title", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: To change your 2FA Secret please insert your password.
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func change_2fa_hint(_: Void = ()) -> String {
         return NSLocalizedString("change_2fa_hint", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: To prove the noting of your mnemonic, please complete following quiz.
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func verify_mnemonic_hint(_: Void = ()) -> String {
         return NSLocalizedString("verify_mnemonic_hint", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: To reveal your backup secret/mnemonic please provide your password.
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func reveal_backup_mnemonic(_: Void = ()) -> String {
         return NSLocalizedString("reveal_backup_mnemonic", bundle: R.hostingBundle, comment: "")
       }
       
-      /// en translation: To setup 2FA, please:  1. download a two-factor authenticator app (like Google Authenticator)  2. copy and enter the above displayed 2FA secret code into the authenticator app  3. enter the generated 2FA code from the authenticator app into the 2FA Code input and press "Next"
+      /// en translation: To setup 2FA, please:  1. Download a two-factor authenticator app (like Google Authenticator)  2. Copy and enter the above displayed 2FA secret code into the authenticator app  3. Enter the generated 2FA code from the authenticator app and press "Next"
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_tfa_setup(_: Void = ()) -> String {
         return NSLocalizedString("lbl_tfa_setup", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Today
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_today(_: Void = ()) -> String {
         return NSLocalizedString("lbl_today", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Touch ID
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func touch_id(_: Void = ()) -> String {
         return NSLocalizedString("touch_id", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Transactions
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func transactions(_: Void = ()) -> String {
         return NSLocalizedString("transactions", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Unexpected data type
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func unexpected_data_type(_: Void = ()) -> String {
         return NSLocalizedString("unexpected_data_type", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Updated %@
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func updated(_ value1: String) -> String {
         return String(format: NSLocalizedString("updated", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
       }
       
       /// en translation: Use another account
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func account_different(_: Void = ()) -> String {
         return NSLocalizedString("account_different", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: User is not logged in
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func user_not_logged_in(_: Void = ()) -> String {
         return NSLocalizedString("user_not_logged_in", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: User specific data
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func user_data_title(_: Void = ()) -> String {
         return NSLocalizedString("user_data_title", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Username
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func username(_: Void = ()) -> String {
         return NSLocalizedString("username", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: W
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_week_suffix(_: Void = ()) -> String {
         return NSLocalizedString("lbl_week_suffix", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Wallets
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func wallets(_: Void = ()) -> String {
         return NSLocalizedString("wallets", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Welcome
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func welcome(_: Void = ()) -> String {
         return NSLocalizedString("welcome", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Welcome back,
+      /// 
+      /// Locales: en, de
+      static func welcome_back(_: Void = ()) -> String {
+        return NSLocalizedString("welcome_back", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Withdraw money
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func withdraw(_: Void = ()) -> String {
         return NSLocalizedString("withdraw", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Wrong account or password
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func bad_credentials(_: Void = ()) -> String {
         return NSLocalizedString("bad_credentials", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Your 2FA secret: %@
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_tfa_secret(_ value1: String) -> String {
         return String(format: NSLocalizedString("lbl_tfa_secret", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
       }
       
       /// en translation: Your Secret (24 words mnemonic):
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func mnemonic_words_title(_: Void = ()) -> String {
         return NSLocalizedString("mnemonic_words_title", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Your email address is not confirmed.
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_email_confirmation2(_: Void = ()) -> String {
         return NSLocalizedString("lbl_email_confirmation2", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Your new 2FA secret: %@
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_new_2fa_secret(_ value1: String) -> String {
         return String(format: NSLocalizedString("lbl_new_2fa_secret", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
       }
       
       /// en translation: Your new password must have at least 9 characters.  It must contain small letters and capitals.
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func password_hint(_: Void = ()) -> String {
         return NSLocalizedString("password_hint", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Zip code
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func zip_code(_: Void = ()) -> String {
         return NSLocalizedString("zip_code", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: d
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_day_suffix(_: Void = ()) -> String {
         return NSLocalizedString("lbl_day_suffix", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: day
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_day(_: Void = ()) -> String {
         return NSLocalizedString("lbl_day", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: days
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_days(_: Void = ()) -> String {
         return NSLocalizedString("lbl_days", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: h
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_hour_suffix(_: Void = ()) -> String {
         return NSLocalizedString("lbl_hour_suffix", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: here
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func here(_: Void = ()) -> String {
         return NSLocalizedString("here", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: m
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_minute_suffix(_: Void = ()) -> String {
         return NSLocalizedString("lbl_minute_suffix", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: one day ago
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_moment_day_count(_: Void = ()) -> String {
         return NSLocalizedString("lbl_moment_day_count", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: one hour ago
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_moment_hour_count(_: Void = ()) -> String {
         return NSLocalizedString("lbl_moment_hour_count", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: one minute ago
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_moment_minute_count(_: Void = ()) -> String {
         return NSLocalizedString("lbl_moment_minute_count", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: one month ago
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_moment_month_count(_: Void = ()) -> String {
         return NSLocalizedString("lbl_moment_month_count", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: one second ago
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_moment_second_count(_: Void = ()) -> String {
         return NSLocalizedString("lbl_moment_second_count", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: one week ago
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_moment_week_count(_: Void = ()) -> String {
         return NSLocalizedString("lbl_moment_week_count", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: one year ago
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_moment_year_count(_: Void = ()) -> String {
         return NSLocalizedString("lbl_moment_year_count", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: step %@ of 3
+      /// 
+      /// Locales: en, de
+      static func step_3(_ value1: String) -> String {
+        return String(format: NSLocalizedString("step_3", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
+      }
+      
       /// en translation: y
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func lbl_year_suffix(_: Void = ()) -> String {
         return NSLocalizedString("lbl_year_suffix", bundle: R.hostingBundle, comment: "")
       }
