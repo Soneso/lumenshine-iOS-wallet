@@ -21,6 +21,8 @@ class LoginViewController: UIViewController {
     
     // MARK: - UI properties
     fileprivate let headerBar = ToolbarHeader()
+    fileprivate let scrollView = UIScrollView()
+    fileprivate let scrollContentView = UIView()
     
     fileprivate var contentView: LoginViewContentProtocol?
     
@@ -76,17 +78,14 @@ extension LoginViewController {
         if let oldContent = self.contentView as? UIView {
             oldContent.removeFromSuperview()
         }
-        let topOffset = UIScreen.main.scale > 2 ? 25 : 10
-        view.addSubview(contentView)
+//        let topOffset = UIScreen.main.scale > 2 ? 25 : 10
+        scrollContentView.addSubview(contentView)
         contentView.snp.makeConstraints { make in
-            make.top.equalTo(headerBar.snp.bottom).offset(topOffset)
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
-            make.bottom.lessThanOrEqualTo(-10)
+            make.edges.equalToSuperview()
         }
         
-        contentView.cornerRadiusPreset = .cornerRadius2
-        contentView.depthPreset = .depth2
+//        contentView.cornerRadiusPreset = .cornerRadius2
+//        contentView.depthPreset = .depth2
         
         self.contentView = contentView as? LoginViewContentProtocol
     }
@@ -255,6 +254,7 @@ fileprivate extension LoginViewController {
         view.backgroundColor = Stylesheet.color(.lightGray)
         prepareHeader()
         prepareCopyright()
+        prepareContentView()
     }
     
     func prepareHeader() {
@@ -266,6 +266,28 @@ fileprivate extension LoginViewController {
         view.addSubview(headerBar)
         headerBar.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
+        }
+    }
+    
+    func prepareContentView() {
+        view.addSubview(scrollView)
+        scrollView.snp.makeConstraints { make in
+            make.top.equalTo(headerBar.snp.bottom)
+            make.bottom.left.right.equalToSuperview()
+        }
+        
+        scrollContentView.cornerRadiusPreset = .cornerRadius2
+        scrollContentView.depthPreset = .depth2
+        scrollContentView.backgroundColor = Stylesheet.color(.white)
+        
+        let topOffset = UIScreen.main.scale > 2 ? 25 : 10
+        scrollView.addSubview(scrollContentView)
+        scrollContentView.snp.makeConstraints { make in
+            make.top.equalTo(topOffset)
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+            make.bottom.equalTo(-50)
+            make.width.equalTo(view).offset(-20)
         }
     }
     

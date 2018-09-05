@@ -238,7 +238,8 @@ extension LoginViewModel: LostSecurityViewModelType {
     }
     
     func resendMailConfirmation(response: @escaping EmptyResponseClosure) {
-        service.resendMailConfirmation(email: email!) { result in
+        guard let email = self.email else { return }
+        service.resendMailConfirmation(email: email) { result in
             response(result)
         }
     }

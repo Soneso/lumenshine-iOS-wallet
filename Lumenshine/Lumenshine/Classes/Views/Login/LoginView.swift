@@ -17,7 +17,7 @@ class LoginView: UIView {
 
     // MARK: - Properties
     fileprivate let viewModel: LoginViewModelType
-    fileprivate let verticalSpacing = UIScreen.main.scale > 2 ? 40.0 : 20.0
+    fileprivate let verticalSpacing = 40.0
     fileprivate let titleLabel = UILabel()
     fileprivate let detailLabel = UILabel()
     
@@ -97,7 +97,6 @@ extension LoginView: UITextFieldDelegate {
 
 fileprivate extension LoginView {
     func prepare() {
-        backgroundColor = Stylesheet.color(.white)
         prepareTitle()
         prepareDetail()
         prepareTextFields()

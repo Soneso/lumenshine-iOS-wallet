@@ -293,7 +293,7 @@
 "email_confirmation_hint" = "In order to be able continue the setup process, you need to confirm your email address first. An email with a confirmation link has been sent to your inbox. Please follow the instructions from the mail to confirm your email address.";
 
 /*  */
-"email_confirmation_hint2" = "An email has been sent to your email account. Please check your inbox and confirm your email address first.";
+"email_confirmation_hint2" = "An email has been sent to your email account. Please check your inbox and confirm your email address first. After doing so, please come back and press the \"Continue\" button to continue.";
 
 /*  */
 "lbl_email_confirmation2" = "Your email address is not confirmed.";

@@ -28,9 +28,6 @@ class EmailConfirmationView: UIView {
     fileprivate let submitButton = RaisedButton()
     fileprivate let resendButton = RaisedButton()
     
-    fileprivate let contentView = UIView()
-    fileprivate let scrollView = UIScrollView()
-    
     weak var delegate: EmailConfirmationViewDelegate?
     
     init(viewModel: LostSecurityViewModelType) {
@@ -70,36 +67,21 @@ extension EmailConfirmationView: LoginViewContentProtocol {
 fileprivate extension EmailConfirmationView {
     
     func prepareView() {
-        prepareContentView()
         prepareTitleLabel()
         prepareHintLabel()
         prepareButtons()
     }
     
-    func prepareContentView() {
-        addSubview(scrollView)
-        scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
-        scrollView.addSubview(contentView)
-        contentView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview()
-            make.left.equalToSuperview()
-            make.width.equalTo(self)
-        }
-    }
-    
     func prepareTitleLabel() {
         titleLabel.text = viewModel.title
-        titleLabel.font = Stylesheet.font(.title1)
+        titleLabel.font = R.font.encodeSansRegular(size: 20)
         titleLabel.textAlignment = .center
-        titleLabel.textColor = Stylesheet.color(.blue)
+        titleLabel.textColor = Stylesheet.color(.darkBlue)
+        titleLabel.numberOfLines = 0
         
-        contentView.addSubview(titleLabel)
+        addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(20)
+            make.top.equalTo(30)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
         }
@@ -107,62 +89,63 @@ fileprivate extension EmailConfirmationView {
     
     func prepareHintLabel() {
         errorLabel.text = R.string.localizable.lbl_email_confirmation2()
-        errorLabel.font = Stylesheet.font(.footnote)
+        errorLabel.font = R.font.encodeSansRegular(size: 12)
         errorLabel.textAlignment = .center
         errorLabel.textColor = Stylesheet.color(.red)
         errorLabel.numberOfLines = 0
         
-        contentView.addSubview(errorLabel)
+        addSubview(errorLabel)
         errorLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(30)
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
             make.left.equalTo(20)
             make.right.equalTo(-20)
         }
         
         hintLabel.text = R.string.localizable.email_confirmation_hint2()
-        hintLabel.font = Stylesheet.font(.footnote)
-        hintLabel.textAlignment = .left
-        hintLabel.textColor = Stylesheet.color(.black)
+        hintLabel.font = R.font.encodeSansRegular(size: 12)
+        hintLabel.textAlignment = .center
+        hintLabel.textColor = Stylesheet.color(.lightBlack)
         hintLabel.numberOfLines = 0
         
-        contentView.addSubview(hintLabel)
+        addSubview(hintLabel)
         hintLabel.snp.makeConstraints { make in
-            make.top.equalTo(errorLabel.snp.bottom).offset(30)
+            make.top.equalTo(errorLabel.snp.bottom).offset(10)
             make.left.equalTo(20)
             make.right.equalTo(-20)
         }
     }
     
     func prepareButtons() {
-        submitButton.title = R.string.localizable.continue()
-        submitButton.titleColor = Stylesheet.color(.black)
-        submitButton.titleLabel?.font = Stylesheet.font(.caption2)
-        submitButton.contentEdgeInsets = UIEdgeInsets(top: 7, left: 10, bottom: 7, right: 10)
-        submitButton.cornerRadiusPreset = .none
-        submitButton.borderWidthPreset = .border2
-        submitButton.depthPreset = .depth2
+        submitButton.title = R.string.localizable.continue().uppercased()
+        submitButton.titleColor = Stylesheet.color(.white)
+        submitButton.backgroundColor = Stylesheet.color(.cyan)
+        submitButton.titleLabel?.font = R.font.encodeSansRegular(size: 16)
+        submitButton.cornerRadiusPreset = .cornerRadius6
         submitButton.addTarget(self, action: #selector(submitAction(sender:)), for: .touchUpInside)
         
-        contentView.addSubview(submitButton)
+        addSubview(submitButton)
         submitButton.snp.makeConstraints { make in
-            make.top.equalTo(hintLabel.snp.bottom).offset(10)
+            make.top.equalTo(hintLabel.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
+            make.width.equalTo(120)
+            make.height.equalTo(40)
         }
         
-        resendButton.title = R.string.localizable.email_resend_confirmation()
-        resendButton.titleColor = Stylesheet.color(.black)
-        resendButton.titleLabel?.font = Stylesheet.font(.caption2)
-        resendButton.contentEdgeInsets = UIEdgeInsets(top: 7, left: 10, bottom: 7, right: 10)
-        resendButton.cornerRadiusPreset = .none
-        resendButton.borderWidthPreset = .border2
-        resendButton.depthPreset = .depth2
+        resendButton.title = R.string.localizable.email_resend_confirmation().uppercased()
+        resendButton.titleColor = Stylesheet.color(.white)
+        resendButton.cornerRadiusPreset = .cornerRadius6
+        resendButton.backgroundColor = Stylesheet.color(.orange)
+        resendButton.titleLabel?.font = R.font.encodeSansRegular(size: 16)
+        resendButton.titleLabel?.adjustsFontSizeToFitWidth = true
         resendButton.addTarget(self, action: #selector(resendAction(sender:)), for: .touchUpInside)
         
-        contentView.addSubview(resendButton)
+        addSubview(resendButton)
         resendButton.snp.makeConstraints { make in
             make.top.equalTo(submitButton.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
-            make.bottom.lessThanOrEqualToSuperview()
+            make.width.greaterThanOrEqualTo(260)
+            make.height.equalTo(40)
+            make.bottom.equalTo(-30)
         }
     }
 }

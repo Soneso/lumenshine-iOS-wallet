@@ -1514,7 +1514,7 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let email_already_confirmed = Rswift.StringResource(key: "email_already_confirmed", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: An email has been sent to your email account. Please check your inbox and confirm your email address first.
+      /// en translation: An email has been sent to your email account. Please check your inbox and confirm your email address first. After doing so, please come back and press the "Continue" button to continue.
       /// 
       /// Locales: en, de
       static let email_confirmation_hint2 = Rswift.StringResource(key: "email_confirmation_hint2", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
@@ -2297,7 +2297,7 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("email_already_confirmed", bundle: R.hostingBundle, comment: "")
       }
       
-      /// en translation: An email has been sent to your email account. Please check your inbox and confirm your email address first.
+      /// en translation: An email has been sent to your email account. Please check your inbox and confirm your email address first. After doing so, please come back and press the "Continue" button to continue.
       /// 
       /// Locales: en, de
       static func email_confirmation_hint2(_: Void = ()) -> String {

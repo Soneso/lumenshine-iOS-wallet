@@ -50,7 +50,6 @@ extension LostSecurityView: LoginViewContentProtocol {
 fileprivate extension LostSecurityView {
     
     func prepare() {
-        backgroundColor = Stylesheet.color(.white)
         prepareTitleLabel()
         prepareEmailTextField()
         prepareResetButton()
@@ -58,7 +57,7 @@ fileprivate extension LostSecurityView {
     
     func prepareTitleLabel() {
         titleLabel.text = viewModel.title
-        titleLabel.font = R.font.encodeSansRegular(size: 24)
+        titleLabel.font = R.font.encodeSansRegular(size: 20)
         titleLabel.textAlignment = .center
         titleLabel.textColor = Stylesheet.color(.darkBlue)
         titleLabel.numberOfLines = 0
@@ -86,8 +85,8 @@ fileprivate extension LostSecurityView {
         addSubview(emailTextField)
         emailTextField.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(30)
-            make.left.equalTo(80)
-            make.right.equalTo(-80)
+            make.left.equalTo(30)
+            make.right.equalTo(-30)
         }
     }
     
@@ -95,7 +94,7 @@ fileprivate extension LostSecurityView {
         nextButton.title = R.string.localizable.next().uppercased()
         nextButton.titleColor = Stylesheet.color(.white)
         nextButton.backgroundColor = Stylesheet.color(.cyan)
-        nextButton.titleLabel?.font = R.font.encodeSansRegular(size: 20)
+        nextButton.titleLabel?.font = R.font.encodeSansRegular(size: 16)
         nextButton.cornerRadiusPreset = .cornerRadius6
         nextButton.titleLabel?.adjustsFontSizeToFitWidth = true
         nextButton.addTarget(self, action: #selector(didTapResetButton(sender:)), for: .touchUpInside)
