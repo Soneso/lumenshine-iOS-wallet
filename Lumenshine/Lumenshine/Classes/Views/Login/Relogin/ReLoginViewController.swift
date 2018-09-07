@@ -9,6 +9,10 @@
 import UIKit
 import Material
 
+protocol ReLoginViewProtocol {
+    func present(error: ServiceError) -> Bool
+}
+
 class ReLoginViewController: UIViewController {
     
     // MARK: - Properties
@@ -17,12 +21,10 @@ class ReLoginViewController: UIViewController {
     
     // MARK: - UI properties
     fileprivate let headerBar = ToolbarHeader()
+    fileprivate let scrollView = UIScrollView()
+    fileprivate let scrollContentView = UIView()
     
-    fileprivate var contentView: ReLoginViewProtocol {
-        didSet {
-            prepareLoginButton()
-        }
-    }
+    fileprivate var contentView: ReLoginViewProtocol?
     
     init(viewModel: LoginViewModelType) {
         self.viewModel = viewModel
@@ -39,8 +41,7 @@ class ReLoginViewController: UIViewController {
         super.viewDidLoad()
         
         prepareView()
-        setupContentView(contentView)
-        
+        showHome(animated: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,40 +52,35 @@ class ReLoginViewController: UIViewController {
         return .default
     }
     
-    override func resignFirstResponder() -> Bool {
-        contentView.passwordTextField.resignFirstResponder()
-        return super.resignFirstResponder()
-    }
-    
-    func setupContentView(_ contentView: ReLoginViewProtocol) {
-        if let content = contentView as? UIView {
+    func setupContentView(_ contentView: UIView, animated: Bool = true) {
+        if animated {
             let animation = CATransition()
             animation.duration = 0.3
-            animation.type = kCATransitionMoveIn
+            animation.type = kCATransitionReveal
             animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-            content.layer.add(animation, forKey: kCATransitionMoveIn)
-            
-            if let oldContent = self.contentView as? UIView {
-                oldContent.removeFromSuperview()
-            }
-            view.addSubview(content)
-            content.snp.makeConstraints { make in
-                make.top.equalTo(headerBar.snp.bottom)
-                make.bottom.left.right.equalToSuperview()
-            }
-            
-            self.contentView = contentView
-            contentView.passwordTextField.delegate = self
+            contentView.layer.add(animation, forKey: kCATransitionReveal)
         }
+        
+        if let oldContent = self.contentView as? UIView {
+            oldContent.removeFromSuperview()
+        }
+        scrollContentView.addSubview(contentView)
+        contentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        self.contentView = contentView as? ReLoginViewProtocol
     }
     
-    func showHome() {
+    func showHome(animated: Bool = true) {
         let contentView = ReLoginHomeView(viewModel: viewModel)
-        setupContentView(contentView)
+        contentView.delegate = self
+        setupContentView(contentView, animated: animated)
     }
     
     func showFingerprint() {
         let contentView = ReLoginFingerView(viewModel: viewModel)
+        contentView.delegate = self
         setupContentView(contentView)
     }
 }
@@ -96,37 +92,6 @@ extension ReLoginViewController {
         viewModel.showLoginForm()
     }
     
-    @objc
-    func reloginAction(sender: UIButton) {
-        guard let password = contentView.passwordTextField.text,
-            !password.isEmpty else {
-                contentView.passwordTextField.detail = R.string.localizable.invalid_password()
-                return
-        }
-        
-        contentView.passwordTextField.resignFirstResponder()
-        contentView.passwordTextField.text = nil
-        
-        showActivity()
-        viewModel.loginStep1(email: "", password: password, tfaCode: nil) { result in
-            DispatchQueue.main.async {
-                self.hideActivity(completion: {
-                    switch result {
-                    case .success: break
-                    case .failure(let error):
-                        self.present(error: error)
-                    }
-                })
-            }
-        }
-    }
-}
-
-extension ReLoginViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        reloginAction(sender: contentView.submitButton)
-        return true
-    }
 }
 
 extension ReLoginViewController: ToolbarHeaderDelegate {
@@ -135,11 +100,29 @@ extension ReLoginViewController: ToolbarHeaderDelegate {
     }
 }
 
+extension ReLoginViewController: ReLoginViewDelegate {
+    func didTapSubmitButton(password: String, tfaCode: String?) {
+        showActivity()
+        viewModel.loginStep1(email: "", password: password, tfaCode: tfaCode) { [weak self] result in
+            DispatchQueue.main.async {
+                self?.hideActivity(completion: {
+                    switch result {
+                    case .success: break
+                    case .failure(let error):
+                        _ = self?.contentView?.present(error: error)
+                    }
+                })
+            }
+        }
+    }
+}
+
 fileprivate extension ReLoginViewController {
     func prepareView() {
-        view.backgroundColor = Stylesheet.color(.white)
+        view.backgroundColor = Stylesheet.color(.lightGray)
         prepareHeader()
-        prepareLoginButton()
+        prepareCopyright()
+        prepareContentView()
     }
     
     func prepareHeader() {
@@ -154,12 +137,48 @@ fileprivate extension ReLoginViewController {
         }
     }
     
-    func prepareLoginButton() {
-        contentView.submitButton.addTarget(self, action: #selector(reloginAction(sender:)), for: .touchUpInside)
+    func prepareContentView() {
+        view.addSubview(scrollView)
+        scrollView.snp.makeConstraints { make in
+            make.top.equalTo(headerBar.snp.bottom)
+            make.bottom.left.right.equalToSuperview()
+        }
+        
+        scrollContentView.cornerRadiusPreset = .cornerRadius2
+        scrollContentView.depthPreset = .depth2
+        scrollContentView.backgroundColor = Stylesheet.color(.white)
+        
+        let topOffset = UIScreen.main.scale > 2 ? 25 : 10
+        scrollView.addSubview(scrollContentView)
+        scrollContentView.snp.makeConstraints { make in
+            make.top.equalTo(topOffset)
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+            make.bottom.equalTo(-50)
+            make.width.equalTo(view).offset(-20)
+        }
     }
     
-    func present(error: ServiceError) {
-        contentView.passwordTextField.detail = error.errorDescription
+    func prepareCopyright() {
+        let imageView = UIImageView(image: R.image.soneso())
+        imageView.backgroundColor = Stylesheet.color(.clear)
+        
+        view.addSubview(imageView)
+        imageView.snp.makeConstraints { make in
+            make.bottom.equalTo(-10)
+            make.centerX.equalToSuperview()
+        }
+        
+        let label = UILabel()
+        label.text = R.string.localizable.powered_by().uppercased()
+        label.textColor = Stylesheet.color(.gray)
+        label.font = R.font.encodeSansRegular(size: 8.5)
+        
+        view.addSubview(label)
+        label.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(imageView.snp.top).offset(-5)
+        }
     }
 }
 

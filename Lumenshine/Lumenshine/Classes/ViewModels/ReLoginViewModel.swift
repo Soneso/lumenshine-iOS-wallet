@@ -47,11 +47,11 @@ class ReLoginViewModel : LoginViewModel {
     }
     
     override var headerTitle: String {
-        return R.string.localizable.app_name()
+        return R.string.localizable.welcome_back()
     }
     
     override var headerDetail: String {
-        return "\(R.string.localizable.welcome()) \(R.string.localizable.back())\n\(user.email)"
+        return user.email
     }
     
     override var hintText: String? {
@@ -66,13 +66,21 @@ class ReLoginViewModel : LoginViewModel {
     }
     
     override func loginStep1(email: String, password: String, tfaCode: String?, response: @escaping EmptyResponseClosure) {
-        let tfa = TFAGeneration.generate2FACode(email: user.email)
-        super.loginStep1(email: user.email, password: password, tfaCode: tfa, response: response)
+        if let tfa = tfaCode, !tfa.isEmpty {
+            super.loginStep1(email: user.email, password: password, tfaCode: tfa, response: response)
+        } else {
+            let tfa = TFAGeneration.generate2FACode(email: user.email)
+            super.loginStep1(email: user.email, password: password, tfaCode: tfa, response: response)
+        }
     }
     
     override func forgotPasswordClick() {
         logout()
         navigationCoordinator?.performTransition(transition: .logout(.showForgotPassword))
+    }
+    
+    override func remove2FASecret() {
+        TFAGeneration.removeToken(email: user.email)
     }
     
     // MARK: Biometric authentication

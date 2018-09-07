@@ -21,6 +21,15 @@ public enum ServiceError: Error {
 
 extension ServiceError: LocalizedError {
     
+    public var code: Int? {
+        switch self {
+        case .validationFailed(let error):
+            return error.errorCode
+        default:
+            return nil
+        }
+    }
+    
     public var errorCode: String? {
         switch self {
         case .validationFailed(let error):

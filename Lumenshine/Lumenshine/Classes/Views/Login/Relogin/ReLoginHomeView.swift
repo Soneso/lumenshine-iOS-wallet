@@ -9,23 +9,24 @@
 import UIKit
 import Material
 
-protocol ReLoginViewProtocol {
-    
-    var passwordTextField: TextField { get }
-    var submitButton: RaisedButton { get }
+protocol ReLoginViewDelegate: class {
+    func didTapSubmitButton(password: String, tfaCode: String?)
 }
 
-class ReLoginHomeView: UIView, ReLoginViewProtocol {
+class ReLoginHomeView: UIView {
     
     // MARK: - Properties
     fileprivate let viewModel: LoginViewModelType
     
     // MARK: - UI properties
+    fileprivate let titleLabel = UILabel()
     fileprivate let forgotPasswordButton = RaisedButton()
     fileprivate let touchIDButton = Button()
+    fileprivate let submitButton = RaisedButton()
+    fileprivate let passwordTextField = TextField()
+    fileprivate let tfaTextField = TextField()
     
-    var submitButton = RaisedButton()
-    var passwordTextField = TextField()
+    weak var delegate: ReLoginViewDelegate?
     
     init(viewModel: LoginViewModelType) {
         self.viewModel = viewModel
@@ -57,10 +58,50 @@ class ReLoginHomeView: UIView, ReLoginViewProtocol {
         viewModel.forgotPasswordClick()
     }
     
+    @objc
+    func reloginAction(sender: UIButton) {
+        passwordTextField.detail = nil
+        tfaTextField.detail = nil
+        
+        guard let password = passwordTextField.text,
+            !password.isEmpty else {
+                passwordTextField.detail = R.string.localizable.invalid_password()
+                return
+        }
+        
+        passwordTextField.resignFirstResponder()
+        
+        self.delegate?.didTapSubmitButton(password: password, tfaCode: tfaTextField.text)
+    }
+}
+
+extension ReLoginHomeView: ReLoginViewProtocol {
+    func present(error: ServiceError) -> Bool {
+        if let code = error.code,
+            code == 1000 {
+            if tfaTextField.isHidden {
+                tfaTextField.isHidden = false
+                viewModel.remove2FASecret()
+            } else {
+                tfaTextField.detail = error.errorDescription
+            }
+        } else {
+            passwordTextField.detail = error.errorDescription
+        }
+        return true
+    }
+}
+
+extension ReLoginHomeView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        reloginAction(sender: submitButton)
+        return true
+    }
 }
 
 fileprivate extension ReLoginHomeView {
     func prepare() {
+        prepareTitle()
         prepareTextFields()
         prepareLoginButton()
         prepareForgotPasswordButton()
@@ -69,54 +110,109 @@ fileprivate extension ReLoginHomeView {
             touchEnabled == true,
             viewModel.canEvaluatePolicy() {
             prepareTouchButton()
+        } else {
+            updateBottomConstraints()
+        }
+    }
+    
+    func prepareTitle() {
+        titleLabel.text = R.string.localizable.password().uppercased()
+        titleLabel.textColor = Stylesheet.color(.darkBlue)
+        titleLabel.font = R.font.encodeSansRegular(size: 20)
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.numberOfLines = 0
+        
+        self.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(30)
+            make.left.equalTo(20)
+            make.right.equalTo(-20)
         }
     }
     
     func prepareTextFields() {
-        
+        passwordTextField.delegate = self
         passwordTextField.isSecureTextEntry = true
-        passwordTextField.placeholder = R.string.localizable.password()
+        passwordTextField.placeholder = R.string.localizable.password().uppercased()
+        passwordTextField.placeholderAnimation = .hidden
+        passwordTextField.font = R.font.encodeSansRegular(size: 15)
         passwordTextField.detailColor = Stylesheet.color(.red)
-        passwordTextField.dividerActiveColor = Stylesheet.color(.cyan)
-        passwordTextField.placeholderActiveColor = Stylesheet.color(.cyan)
+        passwordTextField.detailLabel.font = R.font.encodeSansRegular(size: 12)
+        passwordTextField.dividerActiveColor = Stylesheet.color(.gray)
+        passwordTextField.placeholderActiveColor = Stylesheet.color(.gray)
         
         addSubview(passwordTextField)
         passwordTextField.snp.makeConstraints { make in
-            make.top.equalTo(40)
-            make.left.equalTo(40)
-            make.right.equalTo(-40)
+            make.top.equalTo(titleLabel.snp.bottom).offset(60)
+            make.left.equalTo(20)
+            make.right.equalTo(-20)
+        }
+        
+        tfaTextField.placeholder = R.string.localizable.lbl_tfa_code().uppercased()
+        tfaTextField.placeholderAnimation = .hidden
+        tfaTextField.font = R.font.encodeSansRegular(size: 15)
+        tfaTextField.detailColor = Stylesheet.color(.red)
+        tfaTextField.detailLabel.font = R.font.encodeSansRegular(size: 12)
+        tfaTextField.dividerActiveColor = Stylesheet.color(.gray)
+        tfaTextField.placeholderActiveColor = Stylesheet.color(.gray)
+        tfaTextField.isHidden = true
+        
+        addSubview(tfaTextField)
+        tfaTextField.snp.makeConstraints { make in
+            make.top.equalTo(passwordTextField.snp.bottom).offset(30)
+            make.left.equalTo(20)
+            make.right.equalTo(-20)
         }
     }
     
     func prepareLoginButton() {
-        submitButton.title = R.string.localizable.submit()
-        submitButton.backgroundColor = Stylesheet.color(.cyan)
+        submitButton.title = R.string.localizable.submit().uppercased()
+        submitButton.backgroundColor = Stylesheet.color(.green)
         submitButton.titleColor = Stylesheet.color(.white)
+        submitButton.cornerRadiusPreset = .cornerRadius6
         submitButton.titleLabel?.adjustsFontSizeToFitWidth = true
-//        submitButton.addTarget(self, action: #selector(reloginAction(sender:)), for: .touchUpInside)
+        submitButton.titleLabel?.font = R.font.encodeSansRegular(size: 16)
+        submitButton.addTarget(self, action: #selector(reloginAction(sender:)), for: .touchUpInside)
         
         addSubview(submitButton)
         submitButton.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(40)
+            make.top.equalTo(tfaTextField.snp.bottom).offset(30)
             make.centerX.equalToSuperview()
-            make.width.equalTo(110)
-            make.height.equalTo(44)
+            make.width.equalTo(160)
+            make.height.equalTo(40)
         }
     }
     
     func prepareForgotPasswordButton() {
         forgotPasswordButton.title = R.string.localizable.lost_password()
-        forgotPasswordButton.backgroundColor = Stylesheet.color(.cyan)
-        forgotPasswordButton.titleColor = Stylesheet.color(.white)
+        forgotPasswordButton.backgroundColor = Stylesheet.color(.clear)
+        forgotPasswordButton.titleColor = Stylesheet.color(.blue)
+        forgotPasswordButton.cornerRadiusPreset = .cornerRadius6
+        forgotPasswordButton.borderWidthPreset = .border1
+        forgotPasswordButton.borderColor = Stylesheet.color(.blue)
+        forgotPasswordButton.titleLabel?.font = R.font.encodeSansRegular(size: 16)
         forgotPasswordButton.titleLabel?.adjustsFontSizeToFitWidth = true
         forgotPasswordButton.addTarget(self, action: #selector(forgotPasswordAction(sender:)), for: .touchUpInside)
+        
+        setGradientBackground(view: forgotPasswordButton)
+        forgotPasswordButton.clipsToBounds = true
         
         addSubview(forgotPasswordButton)
         forgotPasswordButton.snp.makeConstraints { make in
             make.top.equalTo(submitButton.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
             make.width.equalTo(160)
-            make.height.equalTo(44)
+            make.height.equalTo(40)
+        }
+    }
+    
+    func updateBottomConstraints() {
+        forgotPasswordButton.snp.remakeConstraints { make in
+            make.top.equalTo(submitButton.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(160)
+            make.height.equalTo(40)
+            make.bottom.equalTo(-20)
         }
     }
     
@@ -135,5 +231,16 @@ fileprivate extension ReLoginHomeView {
             make.centerX.equalToSuperview()
             make.bottom.equalTo(-20)
         }
+    }
+    
+    func setGradientBackground(view: UIView) {
+        let colorTop = Stylesheet.color(.white).cgColor
+        let colorBottom = UIColor(red: 240/255.0, green: 240/255.0, blue: 240/255.0, alpha: 1.0).cgColor
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [colorTop, colorBottom]
+        gradientLayer.frame = CGRect(origin: .zero, size: CGSize(width: 160, height: 40))
+        
+        view.layer.insertSublayer(gradientLayer, at: 0)
     }
 }

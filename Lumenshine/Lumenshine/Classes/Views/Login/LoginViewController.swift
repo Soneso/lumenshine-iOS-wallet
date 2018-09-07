@@ -78,14 +78,10 @@ extension LoginViewController {
         if let oldContent = self.contentView as? UIView {
             oldContent.removeFromSuperview()
         }
-//        let topOffset = UIScreen.main.scale > 2 ? 25 : 10
         scrollContentView.addSubview(contentView)
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
-//        contentView.cornerRadiusPreset = .cornerRadius2
-//        contentView.depthPreset = .depth2
         
         self.contentView = contentView as? LoginViewContentProtocol
     }

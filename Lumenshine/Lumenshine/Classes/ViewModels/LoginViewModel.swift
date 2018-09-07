@@ -28,6 +28,7 @@ protocol LoginViewModelType: Transitionable, BiometricAuthenticationProtocol {
     func headerMenuSelected(at index: Int)
     
     func forgotPasswordClick()
+    func remove2FASecret()
 }
 
 protocol LostSecurityViewModelType: Transitionable {
@@ -202,6 +203,8 @@ class LoginViewModel : LoginViewModelType {
     }
     
     func authenticateUser(completion: @escaping (String?) -> Void) {}
+    
+    func remove2FASecret() {}
 }
 
 extension LoginViewModel: LostSecurityViewModelType {
