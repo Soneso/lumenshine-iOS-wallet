@@ -7,13 +7,20 @@
 //
 
 import Foundation
+import stellarsdk
 
 enum PasswordEnum {
     case success(mnemonic: String)
     case failure(error: String)
 }
 
+enum PrivateKeyEnum {
+    case success(privateKey: String)
+    case failure(error: String)
+}
+
 typealias PasswordClosure = (_ response: PasswordEnum) -> (Void)
+typealias PrivateKeyClosure = (_ response: PrivateKeyEnum) -> (Void)
 
 class PasswordManager {
     private var AuthService: AuthService {
@@ -84,6 +91,27 @@ class PasswordManager {
                     case .failure(let error):
                         completion(.failure(error: error))
                     }
+                }
+            }
+        }
+    }
+    
+    func getPrivateKey(fromPassword password: String, forAccountID accountID: String, completion: @escaping PrivateKeyClosure) {
+        getMnemonic(fromPassword: password) { (response) -> (Void) in
+            switch response {
+            case .success(mnemonic: _):
+                if let keyPair = PrivateKeyManager.getKeyPair(forAccountID: accountID) {
+                    DispatchQueue.main.async {
+                        completion(.success(privateKey: keyPair.secretSeed))
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        completion(.failure(error: "KeyPair not found"))
+                    }
+                }
+            case .failure(error: let error):
+                DispatchQueue.main.async {
+                    completion(.failure(error: error))
                 }
             }
         }

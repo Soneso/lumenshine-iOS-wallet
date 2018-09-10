@@ -1177,7 +1177,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.nib` struct is generated, and contains static references to 26 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 32 nibs.
   struct nib {
     /// Nib `AccountCurrenciesViewController`.
     static let accountCurrenciesViewController = _R.nib._AccountCurrenciesViewController()
@@ -1201,10 +1201,18 @@ struct R: Rswift.Validatable {
     static let knownCurrenciesTableViewCell = _R.nib._KnownCurrenciesTableViewCell()
     /// Nib `KnownCurrenciesTableViewController`.
     static let knownCurrenciesTableViewController = _R.nib._KnownCurrenciesTableViewController()
+    /// Nib `KnownInflationDestinationDetailsViewController`.
+    static let knownInflationDestinationDetailsViewController = _R.nib._KnownInflationDestinationDetailsViewController()
+    /// Nib `KnownInflationDestinationsTableViewCell`.
+    static let knownInflationDestinationsTableViewCell = _R.nib._KnownInflationDestinationsTableViewCell()
+    /// Nib `KnownInflationDestinationsViewController`.
+    static let knownInflationDestinationsViewController = _R.nib._KnownInflationDestinationsViewController()
     /// Nib `LoadTransactionsHistoryViewController`.
     static let loadTransactionsHistoryViewController = _R.nib._LoadTransactionsHistoryViewController()
     /// Nib `ProvideCurrencyDataViewController`.
     static let provideCurrencyDataViewController = _R.nib._ProvideCurrencyDataViewController()
+    /// Nib `ProvideInflationDestinationViewController`.
+    static let provideInflationDestinationViewController = _R.nib._ProvideInflationDestinationViewController()
     /// Nib `ReceivePaymentCardViewController`.
     static let receivePaymentCardViewController = _R.nib._ReceivePaymentCardViewController()
     /// Nib `ReceivePaymentPrintView`.
@@ -1213,6 +1221,8 @@ struct R: Rswift.Validatable {
     static let removeCurrencyViewController = _R.nib._RemoveCurrencyViewController()
     /// Nib `SendViewController`.
     static let sendViewController = _R.nib._SendViewController()
+    /// Nib `SetInflationDestinationViewController`.
+    static let setInflationDestinationViewController = _R.nib._SetInflationDestinationViewController()
     /// Nib `TitleView`.
     static let titleView = _R.nib._TitleView()
     /// Nib `TransactionHistoryDetailsViewController`.
@@ -1231,6 +1241,8 @@ struct R: Rswift.Validatable {
     static let walletCardContentView = _R.nib._WalletCardContentView()
     /// Nib `WalletCardInfoViewController`.
     static let walletCardInfoViewController = _R.nib._WalletCardInfoViewController()
+    /// Nib `WalletDetailsViewController`.
+    static let walletDetailsViewController = _R.nib._WalletDetailsViewController()
     
     /// `UINib(name: "AccountCurrenciesViewController", in: bundle)`
     static func accountCurrenciesViewController(_: Void = ()) -> UIKit.UINib {
@@ -1287,6 +1299,21 @@ struct R: Rswift.Validatable {
       return UIKit.UINib(resource: R.nib.knownCurrenciesTableViewController)
     }
     
+    /// `UINib(name: "KnownInflationDestinationDetailsViewController", in: bundle)`
+    static func knownInflationDestinationDetailsViewController(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.knownInflationDestinationDetailsViewController)
+    }
+    
+    /// `UINib(name: "KnownInflationDestinationsTableViewCell", in: bundle)`
+    static func knownInflationDestinationsTableViewCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.knownInflationDestinationsTableViewCell)
+    }
+    
+    /// `UINib(name: "KnownInflationDestinationsViewController", in: bundle)`
+    static func knownInflationDestinationsViewController(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.knownInflationDestinationsViewController)
+    }
+    
     /// `UINib(name: "LoadTransactionsHistoryViewController", in: bundle)`
     static func loadTransactionsHistoryViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.loadTransactionsHistoryViewController)
@@ -1295,6 +1322,11 @@ struct R: Rswift.Validatable {
     /// `UINib(name: "ProvideCurrencyDataViewController", in: bundle)`
     static func provideCurrencyDataViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.provideCurrencyDataViewController)
+    }
+    
+    /// `UINib(name: "ProvideInflationDestinationViewController", in: bundle)`
+    static func provideInflationDestinationViewController(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.provideInflationDestinationViewController)
     }
     
     /// `UINib(name: "ReceivePaymentCardViewController", in: bundle)`
@@ -1315,6 +1347,11 @@ struct R: Rswift.Validatable {
     /// `UINib(name: "SendViewController", in: bundle)`
     static func sendViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.sendViewController)
+    }
+    
+    /// `UINib(name: "SetInflationDestinationViewController", in: bundle)`
+    static func setInflationDestinationViewController(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.setInflationDestinationViewController)
     }
     
     /// `UINib(name: "TitleView", in: bundle)`
@@ -1360,6 +1397,11 @@ struct R: Rswift.Validatable {
     /// `UINib(name: "WalletCardInfoViewController", in: bundle)`
     static func walletCardInfoViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.walletCardInfoViewController)
+    }
+    
+    /// `UINib(name: "WalletDetailsViewController", in: bundle)`
+    static func walletDetailsViewController(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.walletDetailsViewController)
     }
     
     fileprivate init() {}
@@ -3474,6 +3516,7 @@ struct _R: Rswift.Validatable {
       try _FundTestAccountViewController.validate()
       try _TransactionResultViewController.validate()
       try _UnfoundedWalletCardContentView.validate()
+      try _WalletDetailsViewController.validate()
       try _SendViewController.validate()
       try _WalletCardContentView.validate()
       try _AccountDetailsViewController.validate()
@@ -3618,6 +3661,39 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
     
+    struct _KnownInflationDestinationDetailsViewController: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "KnownInflationDestinationDetailsViewController"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _KnownInflationDestinationsTableViewCell: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "KnownInflationDestinationsTableViewCell"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> KnownInflationDestinationsTableViewCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? KnownInflationDestinationsTableViewCell
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _KnownInflationDestinationsViewController: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "KnownInflationDestinationsViewController"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      }
+      
+      fileprivate init() {}
+    }
+    
     struct _LoadTransactionsHistoryViewController: Rswift.NibResourceType {
       let bundle = R.hostingBundle
       let name = "LoadTransactionsHistoryViewController"
@@ -3632,6 +3708,17 @@ struct _R: Rswift.Validatable {
     struct _ProvideCurrencyDataViewController: Rswift.NibResourceType {
       let bundle = R.hostingBundle
       let name = "ProvideCurrencyDataViewController"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _ProvideInflationDestinationViewController: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "ProvideInflationDestinationViewController"
       
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
@@ -3692,6 +3779,17 @@ struct _R: Rswift.Validatable {
         if UIKit.UIImage(named: "question", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'question' is used in nib 'SendViewController', but couldn't be loaded.") }
         if UIKit.UIImage(named: "close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'close' is used in nib 'SendViewController', but couldn't be loaded.") }
         if UIKit.UIImage(named: "qr_placeholder", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'qr_placeholder' is used in nib 'SendViewController', but couldn't be loaded.") }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _SetInflationDestinationViewController: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "SetInflationDestinationViewController"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
       fileprivate init() {}
@@ -3808,6 +3906,21 @@ struct _R: Rswift.Validatable {
       static func validate() throws {
         if UIKit.UIImage(named: "close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'close' is used in nib 'WalletCardInfoViewController', but couldn't be loaded.") }
         if UIKit.UIImage(named: "question", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'question' is used in nib 'WalletCardInfoViewController', but couldn't be loaded.") }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _WalletDetailsViewController: Rswift.NibResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "WalletDetailsViewController"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      }
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "copy", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'copy' is used in nib 'WalletDetailsViewController', but couldn't be loaded.") }
       }
       
       fileprivate init() {}

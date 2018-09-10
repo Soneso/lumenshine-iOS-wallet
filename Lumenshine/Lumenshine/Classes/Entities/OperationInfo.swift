@@ -21,4 +21,5 @@ class OperationInfo {
     var operationType: String!
     var operationID: String!
     var sign: SignEnum!
+    var responseString: String!
 }

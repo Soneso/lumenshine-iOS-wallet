@@ -2,7 +2,7 @@
 //  InputDataValidator.swift
 //  Lumenshine
 //
-//  Created by Ionut on 30/08/2018.
+//  Created by Soneso on 30/08/2018.
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -34,9 +34,8 @@ class InputDataValidator {
     private let federationManager = FederationManager()
     
     func isPasswordAndDestinationAddresValid(address: String, password: String? = nil, completion: @escaping PasswordAndDestinationAddressValidityClosure) {
-        userManager.checkIfAccountExists(forAccountID: address) { (addressResult) -> (Void) in
-            switch addressResult {
-            case .success(_,_):
+        userManager.checkIfAccountExists(forAccountID: address) { (accountExists) -> (Void) in
+            if accountExists {
                 self.passwordManager.getMnemonic(password: password) { (passwordResult) -> (Void) in
                     DispatchQueue.main.async {
                         switch passwordResult {
@@ -51,7 +50,7 @@ class InputDataValidator {
                         }
                     }
                 }
-            case .failure:
+            } else {
                 DispatchQueue.main.async {
                     completion(.failure(errorCode: .addressNotFound))
                 }

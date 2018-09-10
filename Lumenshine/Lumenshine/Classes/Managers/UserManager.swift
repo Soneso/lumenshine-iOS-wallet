@@ -117,14 +117,14 @@ public class UserManager: NSObject {
         }
     }
     
-    func checkIfAccountExists(forAccountID accountID: String, completion: @escaping AddressStatusClosure) {
+    func checkIfAccountExists(forAccountID accountID: String, completion: @escaping ((Bool) -> (Void))) {
         stellarSDK.accounts.getAccountDetails(accountId: accountID) { (accountResponse) -> (Void) in
             DispatchQueue.main.async {
                 switch accountResponse {
-                case .success(details: let accountDetails):
-                    completion(.success(isFunded: accountDetails.balances.count > 0, isTrusted: nil))
+                case .success(_):
+                    completion(true)
                 case .failure(_):
-                    completion(.failure)
+                    completion(false)
                 }
             }
         }

@@ -23,8 +23,14 @@ class TransactionHistoryManager {
         }
     }
     
+    private var walletService: WalletsService {
+        get {
+            return Services.shared.walletService
+        }
+    }
+    
     func getTransactionsHistory(forAccount account: String, fromCursor cursor: String? = nil, completion: @escaping TransactionsHistoryClosure) {
-        stellarSdk.payments.getPayments(forAccount: account, from: cursor, order: Order.descending) { (response) -> (Void) in
+        stellarSdk.operations.getOperations(forAccount: account, from: cursor, order: Order.descending) { (response) -> (Void) in
             switch response {
             case .success(details: let details):
                 var token: String? = nil
@@ -44,6 +50,21 @@ class TransactionHistoryManager {
                     completion(.failure(error: error))
                 }
                 break
+            }
+        }
+    }
+    
+    private func getTransactionDetailsRsponseAsString(transactionHash: String, forOperation operation: OperationInfo, completion: @escaping (() -> (Void))) {
+        let requestUrl = Services.shared.horizonURL + "/transactions/" + transactionHash
+
+        walletService.GETRequestFromUrl(url: requestUrl) { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                operation.responseString = String(data: data, encoding: String.Encoding.utf8)
+               completion()
+            case .failure(let error):
+                operation.responseString = error.localizedDescription
+                completion()
             }
         }
     }
@@ -84,6 +105,7 @@ class TransactionHistoryManager {
     private func getOperations(forOperations operations: [OperationResponse], forAccount account: String, completion: @escaping (([OperationInfo]) -> (Void))) {
         var operationsToReturn = [OperationInfo]()
         var memosReturned = 0
+        var stringResponsesReturned = 0
         
         if memosReturned == operations.count {
             completion(operationsToReturn)
@@ -215,10 +237,18 @@ class TransactionHistoryManager {
             
             operationsToReturn.append(operation)
             
+            self.getTransactionDetailsRsponseAsString(transactionHash: record.transactionHash, forOperation: operation) {
+                stringResponsesReturned += 1
+                
+                if memosReturned == operations.count && stringResponsesReturned == operations.count{
+                    completion(operationsToReturn)
+                }
+            }
+            
             self.getMemoForTransaction(fromHash: record.transactionHash, forOperation: operation) {
                 memosReturned += 1
 
-                if memosReturned == operations.count {
+                if memosReturned == operations.count && stringResponsesReturned == operations.count{
                     completion(operationsToReturn)
                 }
             }

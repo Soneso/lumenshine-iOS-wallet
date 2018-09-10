@@ -51,6 +51,7 @@ class LoginViewModel : LoginViewModelType {
     fileprivate var mnemonic: String? {
         didSet {
             BiometricHelper.UserMnemonic = mnemonic
+            PrivateKeyManager.getWalletsKeyPairs(fromMnemonic: mnemonic)
         }
     }
     
