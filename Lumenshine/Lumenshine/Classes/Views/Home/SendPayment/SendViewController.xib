@@ -305,9 +305,6 @@
                                     </subviews>
                                 </stackView>
                             </subviews>
-                            <constraints>
-                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="512" id="FG4-ZW-d7b"/>
-                            </constraints>
                         </stackView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DzI-9T-lXH">
                             <rect key="frame" x="0.0" y="8" width="375" height="1"/>
@@ -348,6 +345,6 @@
     <resources>
         <image name="close" width="28" height="28"/>
         <image name="qr_placeholder" width="110" height="110"/>
-        <image name="question" width="28" height="28"/>
+        <image name="question" width="33" height="33"/>
     </resources>
 </document>
