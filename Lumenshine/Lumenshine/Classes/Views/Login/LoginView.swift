@@ -17,7 +17,8 @@ class LoginView: UIView {
 
     // MARK: - Properties
     fileprivate let viewModel: LoginViewModelType
-    fileprivate let verticalSpacing = 40.0
+    fileprivate let verticalSpacing = 31.0
+    fileprivate let horizontalSpacing = 15.0
     fileprivate let titleLabel = UILabel()
     fileprivate let detailLabel = UILabel()
     
@@ -110,21 +111,21 @@ fileprivate extension LoginView {
     func prepareTitle() {
         titleLabel.text = R.string.localizable.login_continue().uppercased()
         titleLabel.textColor = Stylesheet.color(.darkBlue)
-        titleLabel.font = R.font.encodeSansRegular(size: 24)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.numberOfLines = 0
         
         self.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(verticalSpacing-10)
-            make.left.equalTo(30)
-            make.right.equalTo(-30)
+            make.top.equalTo(horizontalSpacing)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
     }
     
     func prepareDetail() {
         detailLabel.text = R.string.localizable.login_fill()
-        detailLabel.textColor = Stylesheet.color(.darkGray)
+        detailLabel.textColor = Stylesheet.color(.lightBlack)
         detailLabel.font = R.font.encodeSansRegular(size: 12)
         detailLabel.textAlignment = .left
         detailLabel.adjustsFontSizeToFitWidth = true
@@ -132,9 +133,9 @@ fileprivate extension LoginView {
         
         self.addSubview(detailLabel)
         detailLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLabel.snp.bottom).offset(5)
-            make.left.equalTo(30)
-            make.right.equalTo(-30)
+            make.top.equalTo(titleLabel.snp.bottom)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
     }
     
@@ -147,39 +148,46 @@ fileprivate extension LoginView {
         textField1.autocapitalizationType = .none
         textField1.placeholder = R.string.localizable.email().uppercased()
         textField1.placeholderAnimation = .hidden
-        textField1.font = R.font.encodeSansRegular(size: 15)
-//        textField1.textColor = Stylesheet.color(.gray)
+        textField1.placeholderActiveColor = Stylesheet.color(.lightBlack)
+        textField1.placeholderNormalColor = Stylesheet.color(.lightBlack)
+        textField1.font = R.font.encodeSansSemiBold(size: 12)
+        textField1.textColor = Stylesheet.color(.lightBlack)
         textField1.detailColor = Stylesheet.color(.red)
-        textField1.detailLabel.font = R.font.encodeSansRegular(size: 13)
+        textField1.detailLabel.font = R.font.encodeSansRegular(size: 11)
+        textField1.detailVerticalOffset = 0
         textField1.dividerActiveColor = Stylesheet.color(.gray)
-        textField1.placeholderActiveColor = Stylesheet.color(.gray)
+ 
         
         textField2.isSecureTextEntry = true
         textField2.isVisibilityIconButtonEnabled = true
         textField2.placeholder = R.string.localizable.password().uppercased()
         textField2.placeholderAnimation = .hidden
-        textField2.font = R.font.encodeSansRegular(size: 15)
-//        textField2.textColor = Stylesheet.color(.gray)
+        textField2.placeholderActiveColor = Stylesheet.color(.lightBlack)
+        textField2.placeholderNormalColor = Stylesheet.color(.lightBlack)
+        textField2.font = R.font.encodeSansSemiBold(size: 12)
+        textField2.textColor = Stylesheet.color(.lightBlack)
         textField2.detailColor = Stylesheet.color(.red)
-        textField2.detailLabel.font = R.font.encodeSansRegular(size: 13)
+        textField2.detailLabel.font = R.font.encodeSansRegular(size: 11)
+        textField2.detailVerticalOffset = 0
         textField2.dividerActiveColor = Stylesheet.color(.gray)
-        textField2.placeholderActiveColor = Stylesheet.color(.gray)
         
 //        textField3.keyboardType = .numberPad
         textField3.placeholder = R.string.localizable.lbl_tfa_code().uppercased()
         textField3.placeholderAnimation = .hidden
-        textField3.font = R.font.encodeSansRegular(size: 15)
-//        textField3.textColor = Stylesheet.color(.gray)
+        textField3.placeholderActiveColor = Stylesheet.color(.lightBlack)
+        textField3.placeholderNormalColor = Stylesheet.color(.lightBlack)
+        textField3.font = R.font.encodeSansSemiBold(size: 12)
+        textField3.textColor = Stylesheet.color(.lightBlack)
         textField3.detailColor = Stylesheet.color(.red)
-        textField3.detailLabel.font = R.font.encodeSansRegular(size: 13)
+        textField3.detailLabel.font = R.font.encodeSansRegular(size: 11)
+        textField3.detailVerticalOffset = 0
         textField3.dividerActiveColor = Stylesheet.color(.gray)
-        textField3.placeholderActiveColor = Stylesheet.color(.gray)
         
         self.addSubview(textField1)
         textField1.snp.makeConstraints { make in
-            make.top.equalTo(detailLabel.snp.bottom).offset(verticalSpacing-10)
-            make.left.equalTo(30)
-            make.right.equalTo(-30)
+            make.top.equalTo(detailLabel.snp.bottom).offset(15)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
         
         self.addSubview(textField2)
@@ -203,15 +211,15 @@ fileprivate extension LoginView {
         submitButton.titleColor = Stylesheet.color(.white)
         submitButton.titleLabel?.adjustsFontSizeToFitWidth = true
         submitButton.cornerRadiusPreset = .cornerRadius6
-        submitButton.titleLabel?.font = R.font.encodeSansRegular(size: 20)
+        submitButton.titleLabel?.font = R.font.encodeSansSemiBold(size: 15)
         submitButton.addTarget(self, action: #selector(loginAction(sender:)), for: .touchUpInside)
         
         self.addSubview(submitButton)
         submitButton.snp.makeConstraints { make in
-            make.top.equalTo(textField3.snp.bottom).offset(verticalSpacing)
+            make.top.equalTo(textField3.snp.bottom).offset(verticalSpacing+10)
             make.centerX.equalToSuperview()
             make.width.equalTo(160)
-            make.height.equalTo(40)
+            make.height.equalTo(38)
             make.bottom.equalTo(-20)
         }
     }

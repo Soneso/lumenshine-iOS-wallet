@@ -933,7 +933,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 34 images.
+  /// This `R.image` struct is generated, and contains static references to 35 images.
   struct image {
     /// Image `FaceIcon`.
     static let faceIcon = Rswift.ImageResource(bundle: R.hostingBundle, name: "FaceIcon")
@@ -991,6 +991,8 @@ struct R: Rswift.Validatable {
     static let signIn = Rswift.ImageResource(bundle: R.hostingBundle, name: "signIn")
     /// Image `signOut`.
     static let signOut = Rswift.ImageResource(bundle: R.hostingBundle, name: "signOut")
+    /// Image `soneso_background`.
+    static let soneso_background = Rswift.ImageResource(bundle: R.hostingBundle, name: "soneso_background")
     /// Image `soneso`.
     static let soneso = Rswift.ImageResource(bundle: R.hostingBundle, name: "soneso")
     /// Image `star`.
@@ -1147,6 +1149,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "soneso", bundle: ..., traitCollection: ...)`
     static func soneso(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.soneso, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "soneso_background", bundle: ..., traitCollection: ...)`
+    static func soneso_background(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.soneso_background, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "star", bundle: ..., traitCollection: ...)`

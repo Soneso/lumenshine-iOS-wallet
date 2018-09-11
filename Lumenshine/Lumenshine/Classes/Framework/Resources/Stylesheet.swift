@@ -144,7 +144,7 @@ struct Stylesheet {
         case .black:
             return UIColor.black
         case .lightBlack:
-            return UIColor(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1.0)
+            return UIColor(red: 85/255.0, green: 85/255.0, blue: 85/255.0, alpha: 1.0)
         case .blackWith(let alpha):
             return UIColor.black.withAlphaComponent(alpha)
         case .whiteWith(let alpha):

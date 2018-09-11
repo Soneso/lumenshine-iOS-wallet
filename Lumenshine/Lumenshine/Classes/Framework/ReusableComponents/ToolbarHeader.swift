@@ -60,13 +60,13 @@ class ToolbarHeader: UIView {
             make.centerX.equalToSuperview()
         }
         
-        titleLabel.font = R.font.encodeSansBold(size: 22)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 19)
         titleLabel.textColor = Stylesheet.color(.blue)
         titleLabel.textAlignment = .center
         
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(logoImage.snp.bottom).offset(10)
+            make.top.equalTo(logoImage.snp.bottom).offset(8)
             make.left.right.equalToSuperview()
         }
         
@@ -89,10 +89,9 @@ class ToolbarHeader: UIView {
         tabBar.itemWidth = 90
         tabBar.itemSpacing = 50
         
-        let offset = UIScreen.main.scale > 2 ? 30.0 : 15.0
         addSubview(tabBar)
         tabBar.snp.makeConstraints { make in
-            make.top.equalTo(detailLabel.snp.bottom).offset(offset)
+            make.top.equalTo(detailLabel.snp.bottom).offset(20)
             make.left.equalTo(10)
             make.right.equalTo(-10)
             make.bottom.equalTo(-10)
