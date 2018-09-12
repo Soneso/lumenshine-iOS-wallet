@@ -18,6 +18,7 @@ class LostSecurityView: UIView {
     fileprivate let viewModel: LostSecurityViewModelType
     
     // MARK: - UI properties
+    fileprivate let horizontalSpacing = 15.0
     fileprivate let emailTextField = TextField()
     fileprivate let nextButton = RaisedButton()
     fileprivate let titleLabel = UILabel()
@@ -57,16 +58,17 @@ fileprivate extension LostSecurityView {
     
     func prepareTitleLabel() {
         titleLabel.text = viewModel.title
-        titleLabel.font = R.font.encodeSansRegular(size: 20)
         titleLabel.textAlignment = .center
         titleLabel.textColor = Stylesheet.color(.darkBlue)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 15)
+        titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.numberOfLines = 0
         
-        addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(20)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
+        self.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(horizontalSpacing)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
     }
     
@@ -75,18 +77,21 @@ fileprivate extension LostSecurityView {
         emailTextField.autocapitalizationType = .none
         emailTextField.autocorrectionType = .no
         emailTextField.placeholder = R.string.localizable.email()
-        emailTextField.dividerActiveColor = Stylesheet.color(.gray)
-        emailTextField.placeholderActiveColor = Stylesheet.color(.gray)
-        emailTextField.detailColor = Stylesheet.color(.red)
         emailTextField.placeholderAnimation = .hidden
-        emailTextField.font = R.font.encodeSansRegular(size: 15)
-        emailTextField.detailLabel.font = R.font.encodeSansRegular(size: 13)
+        emailTextField.placeholderActiveColor = Stylesheet.color(.lightBlack)
+        emailTextField.placeholderNormalColor = Stylesheet.color(.lightBlack)
+        emailTextField.font = R.font.encodeSansRegular(size: 12)
+        emailTextField.textColor = Stylesheet.color(.lightBlack)
+        emailTextField.detailColor = Stylesheet.color(.red)
+        emailTextField.detailLabel.font = R.font.encodeSansRegular(size: 11)
+        emailTextField.detailVerticalOffset = 0
+        emailTextField.dividerActiveColor = Stylesheet.color(.gray)
         
         addSubview(emailTextField)
         emailTextField.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(30)
-            make.left.equalTo(30)
-            make.right.equalTo(-30)
+            make.top.equalTo(titleLabel.snp.bottom).offset(15)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
     }
     
@@ -94,7 +99,7 @@ fileprivate extension LostSecurityView {
         nextButton.title = R.string.localizable.next().uppercased()
         nextButton.titleColor = Stylesheet.color(.white)
         nextButton.backgroundColor = Stylesheet.color(.cyan)
-        nextButton.titleLabel?.font = R.font.encodeSansRegular(size: 16)
+        nextButton.titleLabel?.font = R.font.encodeSansSemiBold(size: 15)
         nextButton.cornerRadiusPreset = .cornerRadius6
         nextButton.titleLabel?.adjustsFontSizeToFitWidth = true
         nextButton.addTarget(self, action: #selector(didTapResetButton(sender:)), for: .touchUpInside)
@@ -103,8 +108,8 @@ fileprivate extension LostSecurityView {
         nextButton.snp.makeConstraints { make in
             make.top.equalTo(emailTextField.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
-            make.width.equalTo(120)
-            make.height.equalTo(40)
+            make.width.equalTo(100)
+            make.height.equalTo(38)
             make.bottom.equalTo(-20)
         }
     }

@@ -1823,7 +1823,7 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let lost_2fa = Rswift.StringResource(key: "lost_2fa", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: Lost password
+      /// en translation: Lost Password
       /// 
       /// Locales: en, de
       static let lost_password = Rswift.StringResource(key: "lost_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
@@ -2801,7 +2801,7 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("lost_2fa", bundle: R.hostingBundle, comment: "")
       }
       
-      /// en translation: Lost password
+      /// en translation: Lost Password
       /// 
       /// Locales: en, de
       static func lost_password(_: Void = ()) -> String {

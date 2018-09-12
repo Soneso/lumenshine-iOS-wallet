@@ -20,6 +20,8 @@ class LostSecuritySuccessView: UIView {
     fileprivate let viewModel: LostSecurityViewModelType
     
     // MARK: - UI properties
+    fileprivate let horizontalSpacing = 15.0
+    fileprivate let verticalSpacing = 14.0
     fileprivate let titleLabel = UILabel()
     fileprivate let hintLabel = UILabel()
     fileprivate let errorLabel = UILabel()
@@ -68,17 +70,18 @@ fileprivate extension LostSecuritySuccessView {
     }
     
     func prepareTitleLabel() {
-        titleLabel.text = viewModel.title
-        titleLabel.font = R.font.encodeSansRegular(size: 20)
+        titleLabel.text = viewModel.title        
         titleLabel.textAlignment = .center
         titleLabel.textColor = Stylesheet.color(.darkBlue)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 15)
+        titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.numberOfLines = 0
         
-        addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(30)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
+        self.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(horizontalSpacing)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
     }
     
@@ -91,9 +94,9 @@ fileprivate extension LostSecuritySuccessView {
         
         addSubview(errorLabel)
         errorLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.left.equalTo(20)
-            make.right.equalTo(-20)
+            make.top.equalTo(titleLabel.snp.bottom).offset(verticalSpacing)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
         
         hintLabel.text = viewModel.successHint
@@ -104,9 +107,9 @@ fileprivate extension LostSecuritySuccessView {
         
         addSubview(hintLabel)
         hintLabel.snp.makeConstraints { make in
-            make.top.equalTo(errorLabel.snp.bottom).offset(10)
-            make.left.equalTo(20)
-            make.right.equalTo(-20)
+            make.top.equalTo(errorLabel.snp.bottom).offset(verticalSpacing)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
     }
     
@@ -115,22 +118,22 @@ fileprivate extension LostSecuritySuccessView {
         resendButton.titleColor = Stylesheet.color(.white)
         resendButton.cornerRadiusPreset = .cornerRadius6
         resendButton.backgroundColor = Stylesheet.color(.orange)
-        resendButton.titleLabel?.font = R.font.encodeSansRegular(size: 16)
+        resendButton.titleLabel?.font = R.font.encodeSansSemiBold(size: 15)
         resendButton.titleLabel?.adjustsFontSizeToFitWidth = true
         resendButton.addTarget(self, action: #selector(resendAction(sender:)), for: .touchUpInside)
         
         addSubview(resendButton)
         resendButton.snp.makeConstraints { make in
-            make.top.equalTo(hintLabel.snp.bottom).offset(40)
+            make.top.equalTo(hintLabel.snp.bottom).offset(30)
             make.centerX.equalToSuperview()
-            make.width.equalTo(180)
-            make.height.equalTo(40)
+            make.width.equalTo(160)
+            make.height.equalTo(38)
         }
         
         submitButton.title = R.string.localizable.done().uppercased()
         submitButton.titleColor = Stylesheet.color(.white)
         submitButton.backgroundColor = Stylesheet.color(.cyan)
-        submitButton.titleLabel?.font = R.font.encodeSansRegular(size: 16)
+        submitButton.titleLabel?.font = R.font.encodeSansSemiBold(size: 15)
         submitButton.cornerRadiusPreset = .cornerRadius6
         submitButton.addTarget(self, action: #selector(submitAction(sender:)), for: .touchUpInside)
         
@@ -138,9 +141,9 @@ fileprivate extension LostSecuritySuccessView {
         submitButton.snp.makeConstraints { make in
             make.top.equalTo(resendButton.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
-            make.width.greaterThanOrEqualTo(120)
-            make.height.equalTo(40)
-            make.bottom.equalTo(-30)
+            make.width.greaterThanOrEqualTo(100)
+            make.height.equalTo(38)
+            make.bottom.equalTo(-20)
         }
     }
 }
