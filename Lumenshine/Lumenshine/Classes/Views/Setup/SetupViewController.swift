@@ -88,18 +88,17 @@ fileprivate extension SetupViewController {
             make.bottom.left.right.equalToSuperview()
         }
         
-        contentView.cornerRadiusPreset = .cornerRadius2
-        contentView.depthPreset = .depth2
+        contentView.cornerRadiusPreset = .cornerRadius4
+        contentView.depthPreset = .depth3
         contentView.backgroundColor = Stylesheet.color(.white)
         
-        let topOffset = UIScreen.main.scale > 2 ? 25 : 10
         scrollView.addSubview(contentView)
         contentView.snp.makeConstraints { make in
-            make.top.equalTo(topOffset)
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
-            make.bottom.equalTo(-50)
-            make.width.equalTo(view).offset(-20)
+            make.top.equalTo(15)
+            make.left.equalTo(15)
+            make.right.equalTo(-15)
+            make.bottom.equalTo(-60)
+            make.width.equalTo(view).offset(-30)
         }
     }
     
@@ -113,15 +112,14 @@ fileprivate extension SetupViewController {
             make.centerX.equalToSuperview()
         }
         
-        let label = UILabel()
-        label.text = R.string.localizable.powered_by().uppercased()
-        label.textColor = Stylesheet.color(.gray)
-        label.font = R.font.encodeSansRegular(size: 8.5)
+        let background = UIImageView(image: R.image.soneso_background())
+        background.contentMode = .scaleAspectFit
         
-        view.addSubview(label)
-        label.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.bottom.equalTo(imageView.snp.top).offset(-5)
+        view.addSubview(background)
+        background.snp.makeConstraints { make in
+            make.top.greaterThanOrEqualTo(headerBar.snp.bottom)
+            make.left.right.equalToSuperview()
+            make.bottom.equalTo(imageView.snp.top)
         }
     }
 }

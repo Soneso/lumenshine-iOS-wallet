@@ -26,6 +26,9 @@ class MnemonicSetupViewController: SetupViewController {
     fileprivate let wordsLabel = UILabel()
     fileprivate let submitButton = RaisedButton()
     
+    fileprivate let verticalSpacing = 26.0
+    fileprivate let horizontalSpacing = 15.0
+    
     override init(viewModel: SetupViewModelType) {
         super.init(viewModel: viewModel)
     }
@@ -68,34 +71,34 @@ fileprivate extension MnemonicSetupViewController {
     
     func prepareTitleLabel() {
         stepLabel.text = R.string.localizable.step_3("2")
-        stepLabel.font = R.font.encodeSansRegular(size: 11)
+        stepLabel.font = R.font.encodeSansRegular(size: 10)
         stepLabel.textAlignment = .center
         stepLabel.textColor = Stylesheet.color(.darkGray)
         
         contentView.addSubview(stepLabel)
         stepLabel.snp.makeConstraints { make in
-            make.top.equalTo(20)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
+            make.top.equalTo(horizontalSpacing)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
         
         titleLabel.text = R.string.localizable.mnemonic_title()
-        titleLabel.font = R.font.encodeSansBold(size: 13)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 12)
         titleLabel.textAlignment = .center
         titleLabel.textColor = Stylesheet.color(.red)
         
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(stepLabel.snp.bottom).offset(10)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
+            make.top.equalTo(stepLabel.snp.bottom).offset(5)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
         
         let separator = UIView()
         separator.backgroundColor = Stylesheet.color(.lightGray)
         contentView.addSubview(separator)
         separator.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.top.equalTo(titleLabel.snp.bottom).offset(13)
             make.left.right.equalToSuperview()
             make.height.equalTo(0.5)
         }
@@ -103,35 +106,34 @@ fileprivate extension MnemonicSetupViewController {
     
     func prepareHintLabel() {
         hintLabel.text = R.string.localizable.mnemonic_hint_title()
-        hintLabel.font = R.font.encodeSansBold(size: 13)
+        hintLabel.font = R.font.encodeSansSemiBold(size: 12)
         hintLabel.textAlignment = .center
         hintLabel.textColor = Stylesheet.color(.red)
         hintLabel.numberOfLines = 0
         
         contentView.addSubview(hintLabel)
         hintLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(40)
-            make.left.equalTo(20)
-            make.right.equalTo(-20)
+            make.top.equalTo(titleLabel.snp.bottom).offset(verticalSpacing)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
         
-        
         descriptionLabel.text = R.string.localizable.mnemonic_hint_lbl()
-        descriptionLabel.font = R.font.encodeSansRegular(size: 13)
+        descriptionLabel.font = R.font.encodeSansRegular(size: 12)
         descriptionLabel.textAlignment = .center
         descriptionLabel.textColor = Stylesheet.color(.lightBlack)
         descriptionLabel.numberOfLines = 0
         
         contentView.addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(hintLabel.snp.bottom).offset(10)
-            make.left.equalTo(20)
-            make.right.equalTo(-20)
+            make.top.equalTo(hintLabel.snp.bottom).offset(15)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
         
         moreLabel.text = R.string.localizable.mnemonic_more_lbl()
-        moreLabel.font = R.font.encodeSansRegular(size: 13)
-        moreLabel.textColor = Stylesheet.color(.black)
+        moreLabel.font = R.font.encodeSansRegular(size: 12)
+        moreLabel.textColor = Stylesheet.color(.lightBlack)
         moreLabel.numberOfLines = 0
         
         contentView.addSubview(moreLabel)
@@ -143,7 +145,7 @@ fileprivate extension MnemonicSetupViewController {
         moreButton.title = R.string.localizable.here()
         moreButton.titleColor = Stylesheet.color(.blue)
         moreButton.backgroundColor = Stylesheet.color(.white)
-        moreButton.titleLabel?.font = R.font.encodeSansRegular(size: 13)
+        moreButton.titleLabel?.font = R.font.encodeSansRegular(size: 12)
         moreButton.contentEdgeInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
         moreButton.addTarget(self, action: #selector(moreAction(sender:)), for: .touchUpInside)
         
@@ -157,7 +159,7 @@ fileprivate extension MnemonicSetupViewController {
         separator.backgroundColor = Stylesheet.color(.lightGray)
         contentView.addSubview(separator)
         separator.snp.makeConstraints { (make) in
-            make.top.equalTo(moreLabel.snp.bottom).offset(20)
+            make.top.equalTo(moreLabel.snp.bottom).offset(10)
             make.left.right.equalToSuperview()
             make.height.equalTo(0.5)
         }
@@ -165,20 +167,20 @@ fileprivate extension MnemonicSetupViewController {
     
     func prepareWordsLabel() {
         wordsTitleLabel.text = R.string.localizable.mnemonic_words_title()
-        wordsTitleLabel.font = R.font.encodeSansBold(size: 13)
+        wordsTitleLabel.font = R.font.encodeSansBold(size: 12)
         wordsTitleLabel.textAlignment = .center
         wordsTitleLabel.textColor = Stylesheet.color(.lightBlack)
         wordsTitleLabel.numberOfLines = 0
         
         contentView.addSubview(wordsTitleLabel)
         wordsTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(moreLabel.snp.bottom).offset(40)
-            make.left.equalTo(20)
-            make.right.equalTo(-20)
+            make.top.equalTo(moreLabel.snp.bottom).offset(verticalSpacing)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
         
         wordsLabel.text = generateMnemonic()
-        wordsLabel.font = R.font.encodeSansRegular(size: 13)
+        wordsLabel.font = R.font.encodeSansRegular(size: 12)
         wordsLabel.textAlignment = .left
         wordsLabel.textColor = Stylesheet.color(.lightBlack)
         wordsLabel.numberOfLines = 0
@@ -195,7 +197,7 @@ fileprivate extension MnemonicSetupViewController {
         submitButton.titleColor = Stylesheet.color(.white)
         submitButton.backgroundColor = Stylesheet.color(.red)
         submitButton.cornerRadiusPreset = .cornerRadius6
-        submitButton.titleLabel?.font = R.font.encodeSansRegular(size: 16)
+        submitButton.titleLabel?.font = R.font.encodeSansSemiBold(size: 15)
         submitButton.titleLabel?.adjustsFontSizeToFitWidth = true
         submitButton.addTarget(self, action: #selector(submitAction(sender:)), for: .touchUpInside)
         
@@ -204,7 +206,7 @@ fileprivate extension MnemonicSetupViewController {
             make.top.equalTo(wordsLabel.snp.bottom).offset(10)
             make.centerX.equalToSuperview()
             make.width.greaterThanOrEqualTo(260)
-            make.height.equalTo(40)
+            make.height.equalTo(38)
             make.bottom.equalTo(-20)
         }
     }

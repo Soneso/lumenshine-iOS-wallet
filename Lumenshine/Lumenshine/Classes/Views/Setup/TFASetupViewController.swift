@@ -25,6 +25,9 @@ class TFASetupViewController: SetupViewController {
     fileprivate let hintLabel = UILabel()
     fileprivate let setupLabel = UILabel()
     
+    fileprivate let verticalSpacing = 31.0
+    fileprivate let horizontalSpacing = 15.0
+    
     override init(viewModel: SetupViewModelType) {
         super.init(viewModel: viewModel)
     }
@@ -94,34 +97,34 @@ fileprivate extension TFASetupViewController {
     
     func prepareTitleLabel() {
         stepLabel.text = R.string.localizable.step_3("1")
-        stepLabel.font = R.font.encodeSansRegular(size: 11)
+        stepLabel.font = R.font.encodeSansRegular(size: 10)
         stepLabel.textAlignment = .center
         stepLabel.textColor = Stylesheet.color(.darkGray)
         
         contentView.addSubview(stepLabel)
         stepLabel.snp.makeConstraints { make in
-            make.top.equalTo(20)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
+            make.top.equalTo(horizontalSpacing)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
         
         titleLabel.text = R.string.localizable.lbl_tfa()
-        titleLabel.font = R.font.encodeSansBold(size: 13)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 12)
         titleLabel.textAlignment = .center
         titleLabel.textColor = Stylesheet.color(.red)
         
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(stepLabel.snp.bottom).offset(10)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
+            make.top.equalTo(stepLabel.snp.bottom).offset(5)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
         
         let separator = UIView()
         separator.backgroundColor = Stylesheet.color(.lightGray)
         contentView.addSubview(separator)
         separator.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.top.equalTo(titleLabel.snp.bottom).offset(15)
             make.left.right.equalToSuperview()
             make.height.equalTo(0.5)
         }
@@ -134,14 +137,14 @@ fileprivate extension TFASetupViewController {
         } else {
             present(error: .parsingFailed(message: R.string.localizable.fa_secret()))
         }
-        tfaSecretLabel.font = R.font.encodeSansBold(size: 13)
+        tfaSecretLabel.font = R.font.encodeSansSemiBold(size: 12)
         tfaSecretLabel.textAlignment = .center
-        tfaSecretLabel.textColor = Stylesheet.color(.lightBlack)
+        tfaSecretLabel.textColor = UIColor(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1.0)
         tfaSecretLabel.adjustsFontSizeToFitWidth = true
         
         contentView.addSubview(tfaSecretLabel)
         tfaSecretLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(50)
+            make.top.equalTo(titleLabel.snp.bottom).offset(35)
             make.left.equalTo(30)
         }
         
@@ -167,21 +170,22 @@ fileprivate extension TFASetupViewController {
     }
     
     func prepare2FACode() {
-        
         tfaCodeTextField.placeholder = R.string.localizable.tfa_code()
         tfaCodeTextField.placeholderAnimation = .hidden
-        tfaCodeTextField.font = R.font.encodeSansRegular(size: 13)
-        tfaCodeTextField.detailColor = Stylesheet.color(.red)
-        tfaCodeTextField.detailLabel.font = R.font.encodeSansRegular(size: 10)
-        tfaCodeTextField.dividerActiveColor = Stylesheet.color(.lightBlack)
         tfaCodeTextField.placeholderActiveColor = Stylesheet.color(.lightBlack)
+        tfaCodeTextField.placeholderNormalColor = Stylesheet.color(.lightBlack)
+        tfaCodeTextField.font = R.font.encodeSansSemiBold(size: 12)
         tfaCodeTextField.textColor = Stylesheet.color(.lightBlack)
+        tfaCodeTextField.detailColor = Stylesheet.color(.red)
+        tfaCodeTextField.detailLabel.font = R.font.encodeSansRegular(size: 11)
+        tfaCodeTextField.detailVerticalOffset = 0
+        tfaCodeTextField.dividerActiveColor = Stylesheet.color(.gray)
         tfaCodeTextField.delegate = self
         
         contentView.addSubview(tfaCodeTextField)
         tfaCodeTextField.snp.makeConstraints { make in
-            make.top.equalTo(tfaSecretLabel.snp.bottom).offset(40)
-            make.width.equalTo(180)
+            make.top.equalTo(tfaSecretLabel.snp.bottom).offset(25)
+            make.width.equalTo(160)
             make.centerX.equalToSuperview()
         }
         
@@ -189,7 +193,7 @@ fileprivate extension TFASetupViewController {
         separator.backgroundColor = Stylesheet.color(.lightGray)
         contentView.addSubview(separator)
         separator.snp.makeConstraints { (make) in
-            make.top.equalTo(tfaCodeTextField.snp.bottom).offset(30)
+            make.top.equalTo(tfaCodeTextField.snp.bottom).offset(20)
             make.left.right.equalToSuperview()
             make.height.equalTo(0.5)
         }
@@ -203,9 +207,9 @@ fileprivate extension TFASetupViewController {
         
         contentView.addSubview(hintLabel)
         hintLabel.snp.makeConstraints { make in
-            make.top.equalTo(tfaCodeTextField.snp.bottom).offset(50)
-            make.left.equalTo(20)
-            make.right.equalTo(-20)
+            make.top.equalTo(tfaCodeTextField.snp.bottom).offset(35)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
         
         setupLabel.text = R.string.localizable.lbl_tfa_setup()
@@ -215,25 +219,25 @@ fileprivate extension TFASetupViewController {
         
         contentView.addSubview(setupLabel)
         setupLabel.snp.makeConstraints { make in
-            make.top.equalTo(hintLabel.snp.bottom).offset(20)
-            make.left.equalTo(20)
-            make.right.equalTo(-20)
+            make.top.equalTo(hintLabel.snp.bottom).offset(10)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
         
         submitButton.title = R.string.localizable.next().uppercased()
         submitButton.titleColor = Stylesheet.color(.white)
         submitButton.cornerRadiusPreset = .cornerRadius6
         submitButton.backgroundColor = Stylesheet.color(.cyan)
-        submitButton.titleLabel?.font = R.font.encodeSansRegular(size: 18)
+        submitButton.titleLabel?.font = R.font.encodeSansSemiBold(size: 15)
         submitButton.addTarget(self, action: #selector(submitAction(sender:)), for: .touchUpInside)
         
         contentView.addSubview(submitButton)
         submitButton.snp.makeConstraints { make in
-            make.top.equalTo(setupLabel.snp.bottom).offset(20)
+            make.top.equalTo(setupLabel.snp.bottom).offset(30)
             make.bottom.equalTo(-20)
             make.centerX.equalToSuperview()
-            make.width.equalTo(110)
-            make.height.equalTo(40)
+            make.width.equalTo(100)
+            make.height.equalTo(38)
         }
     }
     

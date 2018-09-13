@@ -20,6 +20,9 @@ class EmailSetupViewController: SetupViewController {
     
     fileprivate let submitButton = RaisedButton()
     fileprivate let resendButton = RaisedButton()
+    
+    fileprivate let verticalSpacing = 31.0
+    fileprivate let horizontalSpacing = 15.0
 
     
     override init(viewModel: SetupViewModelType) {
@@ -84,43 +87,43 @@ fileprivate extension EmailSetupViewController {
     
     func prepareTitleLabel() {
         titleLabel.text = R.string.localizable.lbl_email_confirmation()
-        titleLabel.font = R.font.encodeSansBold(size: 13)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 12)
         titleLabel.textAlignment = .center
         titleLabel.textColor = Stylesheet.color(.red)
         
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(40)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
+            make.top.equalTo(horizontalSpacing)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
     }
     
     func prepareHintLabel() {
         hintLabel.text = R.string.localizable.email_confirmation_hint()
-        hintLabel.font = R.font.encodeSansRegular(size: 13)
+        hintLabel.font = R.font.encodeSansRegular(size: 12)
         hintLabel.textAlignment = .center
         hintLabel.textColor = Stylesheet.color(.lightBlack)
         hintLabel.numberOfLines = 0
         
         contentView.addSubview(hintLabel)
         hintLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(30)
-            make.left.equalTo(15)
-            make.right.equalTo(-15)
+            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
         
 
-        errorLabel.font = R.font.encodeSansRegular(size: 13)
+        errorLabel.font = R.font.encodeSansRegular(size: 12)
         errorLabel.textAlignment = .center
         errorLabel.textColor = Stylesheet.color(.red)
         errorLabel.numberOfLines = 0
         
         contentView.addSubview(errorLabel)
         errorLabel.snp.makeConstraints { make in
-            make.top.equalTo(hintLabel.snp.bottom).offset(80)
-            make.left.equalTo(20)
-            make.right.equalTo(-20)
+            make.top.equalTo(hintLabel.snp.bottom).offset(70)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
         
     }
@@ -130,22 +133,22 @@ fileprivate extension EmailSetupViewController {
         submitButton.titleColor = Stylesheet.color(.white)
         submitButton.cornerRadiusPreset = .cornerRadius6
         submitButton.backgroundColor = Stylesheet.color(.cyan)
-        submitButton.titleLabel?.font = R.font.encodeSansRegular(size: 16)
+        submitButton.titleLabel?.font = R.font.encodeSansSemiBold(size: 15)
         submitButton.addTarget(self, action: #selector(submitAction(sender:)), for: .touchUpInside)
         
         contentView.addSubview(submitButton)
         submitButton.snp.makeConstraints { make in
             make.top.equalTo(errorLabel.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
-            make.width.equalTo(140)
-            make.height.equalTo(40)
+            make.width.equalTo(120)
+            make.height.equalTo(38)
         }
         
         resendButton.title = R.string.localizable.email_resend_confirmation().uppercased()
         resendButton.titleColor = Stylesheet.color(.white)
         resendButton.cornerRadiusPreset = .cornerRadius6
         resendButton.backgroundColor = Stylesheet.color(.darkBlue)
-        resendButton.titleLabel?.font = R.font.encodeSansRegular(size: 16)
+        resendButton.titleLabel?.font = R.font.encodeSansSemiBold(size: 15)
         resendButton.titleLabel?.adjustsFontSizeToFitWidth = true
         resendButton.addTarget(self, action: #selector(resendAction(sender:)), for: .touchUpInside)
         
@@ -154,11 +157,10 @@ fileprivate extension EmailSetupViewController {
             make.top.equalTo(submitButton.snp.bottom).offset(30)
             make.centerX.equalToSuperview()
             make.width.greaterThanOrEqualTo(260)
-            make.height.equalTo(40)
+            make.height.equalTo(38)
             make.bottom.equalTo(-20)
         }
     }
-
     
     func present(error: ServiceError) {
         if let parameter = error.parameterName {

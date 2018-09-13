@@ -26,7 +26,7 @@ class InputField: UIView {
     private func commonInit() {
         
         label.adjustsFontSizeToFitWidth = true
-        label.font = R.font.encodeSansRegular(size: 13)
+        label.font = R.font.encodeSansRegular(size: 12)
         label.textColor = Stylesheet.color(.lightBlack)
         
         addSubview(label)
@@ -35,19 +35,20 @@ class InputField: UIView {
             make.width.equalTo(60)
         }
         
-        textField.placeholder = R.string.localizable.position()
         textField.keyboardType = .decimalPad
+        textField.placeholder = R.string.localizable.position()
         textField.placeholderAnimation = .hidden
-        textField.font = R.font.encodeSansRegular(size: 13)
-        textField.dividerActiveColor = Stylesheet.color(.gray)
-        textField.placeholderActiveColor = Stylesheet.color(.lightBlack)
+//        textField.placeholderActiveColor = Stylesheet.color(.lightBlack)
+//        textField.placeholderNormalColor = Stylesheet.color(.lightBlack)
+        textField.font = R.font.encodeSansRegular(size: 12)
         textField.textColor = Stylesheet.color(.lightBlack)
+        textField.dividerActiveColor = Stylesheet.color(.gray)
         
         addSubview(textField)
         textField.snp.makeConstraints { make in
             make.top.right.bottom.equalToSuperview()
             make.left.equalTo(label.snp.right).offset(5)
-            make.width.equalTo(60)
+            make.width.equalTo(50)
         }
     }
     
