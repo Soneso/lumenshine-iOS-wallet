@@ -38,14 +38,14 @@ class LoginCoordinator: CoordinatorType {
                 self.showLostPassword()
             case .showLost2fa:
                 self.showLost2FA()
-            case .showLostPasswordSuccess:
+            case .showSuccess:
                 self.showSuccess()
             case .showEmailConfirmation:
                 self.showEmailConfirmation()
             case .showHeaderMenu(let items):
                 self.showHeaderMenu(items: items)
-            case .showPasswordHint(let hint):
-                self.showPasswordHint(hint)
+            case .showPasswordHint(let hint, let attributedText):
+                self.showPasswordHint(hint, attributedText: attributedText)
             case .showSetup(let user, let mnemonic, let loginResponse):
                 self.showSetup(user: user, mnemonic: mnemonic, loginResponse: loginResponse)
             default:
@@ -94,9 +94,9 @@ fileprivate extension LoginCoordinator {
         (baseController as! LoginViewController).showEmailConfirmation()
     }
     
-    func showPasswordHint(_ hint: String) {
+    func showPasswordHint(_ hint: String, attributedText: NSAttributedString?) {
         let title = R.string.localizable.password_hint_title()
-        let textVC = InfoViewController(info: hint, title: title)
+        let textVC = InfoViewController(info: hint, attributedText: attributedText, title: title)
         baseController.present(AppNavigationController(rootViewController: textVC), animated: true)
     }
     

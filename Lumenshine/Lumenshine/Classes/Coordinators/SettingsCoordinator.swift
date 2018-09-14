@@ -33,10 +33,12 @@ class SettingsCoordinator: CoordinatorType {
             logout()
         case .showChangePassword:
             showChangePassword()
-        case .showPasswordHint(let hint):
-            showPasswordHint(hint)
+        case .showPasswordHint(let hint, let attributedText):
+            showPasswordHint(hint, attributedText: attributedText)
         case .showHome:
             showHome()
+        case .showSuccess:
+            showSuccess()
         case .showSettings:
             showSettings()
         case .showChange2faSecret:
@@ -78,10 +80,10 @@ fileprivate extension SettingsCoordinator {
         baseController.navigationController?.pushViewController(snackBarVC, animated: true)
     }
     
-    func showPasswordHint(_ hint: String) {
+    func showPasswordHint(_ hint: String, attributedText: NSAttributedString?) {
         let title = R.string.localizable.password_hint_title()
-        let textVC = InfoViewController(info: hint, title: title)
-        baseController.present(AppNavigationController(rootViewController: textVC), animated: true)
+        let textVC = InfoViewController(info: hint, attributedText: attributedText, title: title)
+        baseController.navigationController?.present(AppNavigationController(rootViewController: textVC), animated: true)
     }
     
     func showHome() {
@@ -94,6 +96,12 @@ fileprivate extension SettingsCoordinator {
                 menu.present(coordinator.baseController)
             }
         }
+    }
+    
+    func showSuccess() {
+        let changeVC = ChangePasswordSuccessViewController(viewModel: viewModel)
+        baseController.navigationController?.popToRootViewController(animated: false)
+        baseController.navigationController?.pushViewController(changeVC, animated: true)
     }
     
     func showSettings() {

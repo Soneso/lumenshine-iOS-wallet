@@ -21,7 +21,8 @@ class RevealMnemonicViewController: UIViewController {
     fileprivate let textField1 = TextField()
     fileprivate let submitButton = RaisedButton()
     
-    fileprivate let verticalSpacing = 40.0
+    fileprivate let verticalSpacing: CGFloat = 42.0
+    fileprivate let horizontalSpacing: CGFloat = 15.0
     
     init(viewModel: SettingsViewModelType) {
         self.viewModel = viewModel
@@ -85,6 +86,7 @@ fileprivate extension RevealMnemonicViewController {
         view.backgroundColor = Stylesheet.color(.white)
         navigationItem.titleLabel.text = R.string.localizable.backup_mnemonic()
         navigationItem.titleLabel.textColor = Stylesheet.color(.white)
+        navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         prepareTitleLabel()
         prepareTextFields()
         prepareSubmitButton()
@@ -92,40 +94,48 @@ fileprivate extension RevealMnemonicViewController {
     
     func prepareTitleLabel() {
         titleLabel.text = R.string.localizable.reveal_backup_mnemonic()
-        titleLabel.font = Stylesheet.font(.subhead)
-        titleLabel.textAlignment = .left
+        titleLabel.textColor = Stylesheet.color(.lightBlack)
+        titleLabel.font = R.font.encodeSansRegular(size: 12)
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
-        titleLabel.textColor = Stylesheet.color(.black)
         
         view.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(verticalSpacing)
-            make.left.equalTo(20)
-            make.right.equalTo(-20)
+        titleLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(horizontalSpacing)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
     }
     
     func prepareTextFields() {
         textField1.isSecureTextEntry = true
-        textField1.placeholder = R.string.localizable.password()
-        textField1.placeholderAnimation = .hidden
-        textField1.detailColor = Stylesheet.color(.red)
-        textField1.dividerActiveColor = Stylesheet.color(.cyan)
-        textField1.placeholderActiveColor = Stylesheet.color(.cyan)
         textField1.isVisibilityIconButtonEnabled = true
+        textField1.placeholder = R.string.localizable.password().uppercased()
+        textField1.placeholderAnimation = .hidden
+        textField1.placeholderActiveColor = Stylesheet.color(.lightBlack)
+        textField1.placeholderNormalColor = Stylesheet.color(.lightBlack)
+        textField1.font = R.font.encodeSansSemiBold(size: 12)
+        textField1.textColor = Stylesheet.color(.lightBlack)
+        textField1.detailColor = Stylesheet.color(.red)
+        textField1.detailLabel.font = R.font.encodeSansRegular(size: 11)
+        textField1.detailVerticalOffset = 0
+        textField1.dividerActiveColor = Stylesheet.color(.gray)
         
         view.addSubview(textField1)
         textField1.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(verticalSpacing)
-            make.left.equalTo(titleLabel)
-            make.right.equalTo(titleLabel)
+            make.top.equalTo(titleLabel.snp.bottom).offset(30)
+            make.left.equalTo(2*horizontalSpacing)
+            make.right.equalTo(-2*horizontalSpacing)
         }
     }
     
     func prepareSubmitButton() {
-        submitButton.title = R.string.localizable.reveal()
+        submitButton.title = R.string.localizable.reveal().uppercased()
         submitButton.backgroundColor = Stylesheet.color(.cyan)
         submitButton.titleColor = Stylesheet.color(.white)
+        submitButton.titleLabel?.font = R.font.encodeSansSemiBold(size: 15)
+        submitButton.cornerRadiusPreset = .cornerRadius6
         submitButton.titleLabel?.adjustsFontSizeToFitWidth = true
         submitButton.addTarget(self, action: #selector(submitAction(sender:)), for: .touchUpInside)
         
@@ -133,8 +143,8 @@ fileprivate extension RevealMnemonicViewController {
         submitButton.snp.makeConstraints { make in
             make.top.equalTo(textField1.snp.bottom).offset(verticalSpacing)
             make.centerX.equalToSuperview()
-            make.width.equalTo(100)
-            make.height.equalTo(44)
+            make.width.equalTo(120)
+            make.height.equalTo(38)
             make.bottom.lessThanOrEqualToSuperview()
         }
     }

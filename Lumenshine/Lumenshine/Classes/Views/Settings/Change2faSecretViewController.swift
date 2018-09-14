@@ -21,7 +21,8 @@ class Change2faSecretViewController: UIViewController {
     fileprivate let textField1 = TextField()
     fileprivate let submitButton = RaisedButton()
     
-    fileprivate let verticalSpacing = 40.0
+    fileprivate let verticalSpacing: CGFloat = 42.0
+    fileprivate let horizontalSpacing: CGFloat = 15.0
     
     init(viewModel: SettingsViewModelType) {
         self.viewModel = viewModel
@@ -62,6 +63,7 @@ extension Change2faSecretViewController {
                 return
         }
         
+        textField1.text = nil
         _ = resignFirstResponder()
         
         showActivity()
@@ -97,47 +99,56 @@ fileprivate extension Change2faSecretViewController {
         view.backgroundColor = Stylesheet.color(.white)
         navigationItem.titleLabel.text = R.string.localizable.change_2fa()
         navigationItem.titleLabel.textColor = Stylesheet.color(.white)
-        prepareTitleLabel()
+        navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
+        prepareTitle()
         prepareTextFields()
         prepareSubmitButton()
     }
     
-    func prepareTitleLabel() {
+    func prepareTitle() {
         titleLabel.text = R.string.localizable.change_2fa_hint()
-        titleLabel.font = Stylesheet.font(.subhead)
+        titleLabel.textColor = Stylesheet.color(.lightBlack)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 12)
+        titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
-        titleLabel.textColor = Stylesheet.color(.black)
         
         view.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(verticalSpacing)
-            make.left.equalTo(40)
-            make.right.equalTo(-40)
+        titleLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(horizontalSpacing)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
     }
     
-    func prepareTextFields() {
+    func prepareTextFields() {        
         textField1.isSecureTextEntry = true
-        textField1.placeholder = R.string.localizable.password()
-        textField1.placeholderAnimation = .hidden
-        textField1.detailColor = Stylesheet.color(.red)
-        textField1.dividerActiveColor = Stylesheet.color(.cyan)
-        textField1.placeholderActiveColor = Stylesheet.color(.cyan)
         textField1.isVisibilityIconButtonEnabled = true
+        textField1.placeholder = R.string.localizable.password().uppercased()
+        textField1.placeholderAnimation = .hidden
+        textField1.placeholderActiveColor = Stylesheet.color(.lightBlack)
+        textField1.placeholderNormalColor = Stylesheet.color(.lightBlack)
+        textField1.font = R.font.encodeSansSemiBold(size: 12)
+        textField1.textColor = Stylesheet.color(.lightBlack)
+        textField1.detailColor = Stylesheet.color(.red)
+        textField1.detailLabel.font = R.font.encodeSansRegular(size: 11)
+        textField1.detailVerticalOffset = 0
+        textField1.dividerActiveColor = Stylesheet.color(.gray)
         
         view.addSubview(textField1)
         textField1.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(verticalSpacing)
-            make.left.equalTo(titleLabel)
-            make.right.equalTo(titleLabel)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
     }
     
     func prepareSubmitButton() {
-        submitButton.title = R.string.localizable.next()
-        submitButton.backgroundColor = Stylesheet.color(.cyan)
+        submitButton.title = R.string.localizable.next().uppercased()
+        submitButton.backgroundColor = Stylesheet.color(.green)
         submitButton.titleColor = Stylesheet.color(.white)
+        submitButton.titleLabel?.font = R.font.encodeSansSemiBold(size: 15)
+        submitButton.cornerRadiusPreset = .cornerRadius6
         submitButton.titleLabel?.adjustsFontSizeToFitWidth = true
         submitButton.addTarget(self, action: #selector(submitAction(sender:)), for: .touchUpInside)
         
@@ -146,7 +157,7 @@ fileprivate extension Change2faSecretViewController {
             make.top.equalTo(textField1.snp.bottom).offset(verticalSpacing)
             make.centerX.equalToSuperview()
             make.width.equalTo(100)
-            make.height.equalTo(44)
+            make.height.equalTo(38)
             make.bottom.lessThanOrEqualToSuperview()
         }
     }

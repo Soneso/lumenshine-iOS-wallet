@@ -21,6 +21,9 @@ class BackupMnemonicViewController: UIViewController {
     fileprivate let scrollView = UIScrollView()
     fileprivate let contentView = UIView()
     
+    fileprivate let verticalSpacing: CGFloat = 42.0
+    fileprivate let horizontalSpacing: CGFloat = 15.0
+    
     init(mnemonic: String) {
         self.mnemonic = mnemonic
         super.init(nibName: nil, bundle: nil)
@@ -51,6 +54,7 @@ fileprivate extension BackupMnemonicViewController {
         view.backgroundColor = Stylesheet.color(.white)
         navigationItem.titleLabel.text = R.string.localizable.backup_mnemonic()
         navigationItem.titleLabel.textColor = Stylesheet.color(.white)
+        navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         prepareContentView()
         prepareTitleLabel()
         prepareWordsLabel()
@@ -73,32 +77,31 @@ fileprivate extension BackupMnemonicViewController {
     
     func prepareTitleLabel() {
         titleLabel.text = R.string.localizable.mnemonic_words_title()
-        titleLabel.font = Stylesheet.font(.headline)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         titleLabel.textAlignment = .center
-        titleLabel.textColor = Stylesheet.color(.black)
+        titleLabel.textColor = Stylesheet.color(.lightBlack)
         titleLabel.numberOfLines = 0
         
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(20)
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
+            make.top.equalTo(horizontalSpacing)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
     }
     
-    
-    
     func prepareWordsLabel() {
         wordsLabel.text = generateMnemonic()
-        wordsLabel.font = Stylesheet.font(.subhead)
+        wordsLabel.font = R.font.encodeSansRegular(size: 12)
         wordsLabel.textAlignment = .left
-        wordsLabel.textColor = Stylesheet.color(.darkGray)
+        wordsLabel.textColor = Stylesheet.color(.lightBlack)
         wordsLabel.numberOfLines = 0
         
         contentView.addSubview(wordsLabel)
         wordsLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(15)
+            make.top.equalTo(titleLabel.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
+            make.bottom.equalTo(-10)
         }
     }
     

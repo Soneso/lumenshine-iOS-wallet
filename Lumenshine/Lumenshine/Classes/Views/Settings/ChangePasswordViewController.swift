@@ -17,13 +17,15 @@ class ChangePasswordViewController: UIViewController {
     
     // MARK: - UI properties
     
+    fileprivate let titleLabel = UILabel()
     fileprivate let textField1 = TextField()
     fileprivate let textField2 = TextField()
     fileprivate let textField3 = TextField()
     fileprivate let submitButton = RaisedButton()
     fileprivate let passwordHintButton = Material.IconButton()
     
-    fileprivate let verticalSpacing = 40.0
+    fileprivate let verticalSpacing: CGFloat = 42.0
+    fileprivate let horizontalSpacing: CGFloat = 15.0
     
     init(viewModel: SettingsViewModelType) {
         self.viewModel = viewModel
@@ -83,14 +85,14 @@ extension ChangePasswordViewController {
         _ = resignFirstResponder()
         
         showActivity()
-        viewModel.changePassword(currentPass: currentPassword, newPass: newPassword, repeatPass: repassword) { result in
+        viewModel.changePassword(currentPass: currentPassword, newPass: newPassword, repeatPass: repassword) { [weak self] result in
             DispatchQueue.main.async {
-                self.hideActivity(completion: {
+                self?.hideActivity(completion: {
                     switch result {
                     case .success:
-                        self.showSuccess()
+                        self?.viewModel.showSuccess()
                     case .failure(let error):
-                        self.present(error: error)
+                        self?.present(error: error)
                     }
                 })
             }
@@ -118,87 +120,122 @@ extension ChangePasswordViewController: UITextFieldDelegate {
 fileprivate extension ChangePasswordViewController {
     func prepareView() {
         view.backgroundColor = Stylesheet.color(.white)
+        navigationItem.titleLabel.text = R.string.localizable.change_password()
+        navigationItem.titleLabel.textColor = Stylesheet.color(.white)
+        navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
+        prepareTitle()
         prepareTextFields()
         prepareSubmitButton()
         prepareHintButton()
     }
     
+    func prepareTitle() {
+        titleLabel.text = R.string.localizable.change_password_hint()
+        titleLabel.textColor = Stylesheet.color(.lightBlack)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 12)
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.textAlignment = .center
+        titleLabel.numberOfLines = 0
+        
+        view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(horizontalSpacing)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
+        }
+    }
+    
     func prepareTextFields() {
         textField1.isSecureTextEntry = true
-        textField1.placeholder = R.string.localizable.current_password()
-        textField1.placeholderAnimation = .hidden
-        textField1.detailColor = Stylesheet.color(.red)
-        textField1.dividerActiveColor = Stylesheet.color(.cyan)
-        textField1.placeholderActiveColor = Stylesheet.color(.cyan)
         textField1.isVisibilityIconButtonEnabled = true
+        textField1.placeholder = R.string.localizable.current_password().uppercased()
+        textField1.placeholderAnimation = .hidden
+        textField1.placeholderActiveColor = Stylesheet.color(.lightBlack)
+        textField1.placeholderNormalColor = Stylesheet.color(.lightBlack)
+        textField1.font = R.font.encodeSansSemiBold(size: 12)
+        textField1.textColor = Stylesheet.color(.lightBlack)
+        textField1.detailColor = Stylesheet.color(.red)
+        textField1.detailLabel.font = R.font.encodeSansRegular(size: 11)
+        textField1.detailVerticalOffset = 0
+        textField1.dividerActiveColor = Stylesheet.color(.gray)
         
         textField2.isSecureTextEntry = true
-        textField2.placeholder = R.string.localizable.new_password()
-        textField2.placeholderAnimation = .hidden
-        textField2.detailColor = Stylesheet.color(.red)
-        textField2.dividerActiveColor = Stylesheet.color(.cyan)
-        textField2.placeholderActiveColor = Stylesheet.color(.cyan)
         textField2.isVisibilityIconButtonEnabled = true
+        textField2.placeholder = R.string.localizable.new_password().uppercased()
+        textField2.placeholderAnimation = .hidden
+        textField2.placeholderActiveColor = Stylesheet.color(.lightBlack)
+        textField2.placeholderNormalColor = Stylesheet.color(.lightBlack)
+        textField2.font = R.font.encodeSansSemiBold(size: 12)
+        textField2.textColor = Stylesheet.color(.lightBlack)
+        textField2.detailColor = Stylesheet.color(.red)
+        textField2.detailLabel.font = R.font.encodeSansRegular(size: 11)
+        textField2.detailVerticalOffset = 0
+        textField2.dividerActiveColor = Stylesheet.color(.gray)
+        textField2.dividerContentEdgeInsets = EdgeInsets(top: 0, left: 0, bottom: 0, right: -2.0*horizontalSpacing)
         
         textField3.isSecureTextEntry = true
-        textField3.placeholder = R.string.localizable.repeat_new_password()
-        textField3.placeholderAnimation = .hidden
-        textField3.detailColor = Stylesheet.color(.red)
-        textField3.dividerActiveColor = Stylesheet.color(.cyan)
-        textField3.placeholderActiveColor = Stylesheet.color(.cyan)
         textField3.isVisibilityIconButtonEnabled = true
+        textField3.placeholder = R.string.localizable.repeat_new_password().uppercased()
+        textField3.placeholderAnimation = .hidden
+        textField3.placeholderActiveColor = Stylesheet.color(.lightBlack)
+        textField3.placeholderNormalColor = Stylesheet.color(.lightBlack)
+        textField3.font = R.font.encodeSansSemiBold(size: 12)
+        textField3.textColor = Stylesheet.color(.lightBlack)
+        textField3.detailColor = Stylesheet.color(.red)
+        textField3.detailLabel.font = R.font.encodeSansRegular(size: 11)
+        textField3.detailVerticalOffset = 0
+        textField3.dividerActiveColor = Stylesheet.color(.gray)
         
         view.addSubview(textField1)
         textField1.snp.makeConstraints { make in
-            make.top.equalTo(verticalSpacing)
-            make.left.equalTo(40)
-            make.right.equalTo(-50)
+            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
         
         view.addSubview(textField2)
         textField2.snp.makeConstraints { make in
             make.top.equalTo(textField1.snp.bottom).offset(verticalSpacing)
-            make.left.equalTo(textField1)
-            make.right.equalTo(textField1)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-3*horizontalSpacing)
         }
         
         view.addSubview(textField3)
         textField3.snp.makeConstraints { make in
             make.top.equalTo(textField2.snp.bottom).offset(verticalSpacing)
-            make.left.equalTo(textField1)
-            make.right.equalTo(textField1)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
     }
     
     func prepareHintButton() {
-        passwordHintButton.image = R.image.question()
-        passwordHintButton.shapePreset = .circle
-        passwordHintButton.backgroundColor = Stylesheet.color(.white)
+        passwordHintButton.image = R.image.question()?.tint(with: Stylesheet.color(.gray))
         passwordHintButton.addTarget(self, action: #selector(hintAction(sender:)), for: .touchUpInside)
         
         view.addSubview(passwordHintButton)
         passwordHintButton.snp.makeConstraints { make in
-            make.left.equalTo(textField2.snp.right)
+            make.right.equalTo(-horizontalSpacing)
             make.centerY.equalTo(textField2)
-            make.width.height.equalTo(50)
+            make.width.height.equalTo(20)
         }
     }
     
     func prepareSubmitButton() {
-        submitButton.title = R.string.localizable.change_password()
-        submitButton.backgroundColor = Stylesheet.color(.cyan)
+        submitButton.title = R.string.localizable.change_password().uppercased()
+        submitButton.backgroundColor = Stylesheet.color(.green)
         submitButton.titleColor = Stylesheet.color(.white)
         submitButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        submitButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+        submitButton.cornerRadiusPreset = .cornerRadius6
+        submitButton.titleLabel?.font = R.font.encodeSansSemiBold(size: 15)
         submitButton.addTarget(self, action: #selector(submitAction(sender:)), for: .touchUpInside)
         
         view.addSubview(submitButton)
         submitButton.snp.makeConstraints { make in
-            make.top.equalTo(textField3.snp.bottom).offset(verticalSpacing)
+            make.top.equalTo(textField3.snp.bottom).offset(verticalSpacing+20)
             make.centerX.equalToSuperview()
-            make.width.equalTo(130)
-            make.height.equalTo(44)
-            make.bottom.lessThanOrEqualToSuperview()
+            make.width.equalTo(240)
+            make.height.equalTo(42)
+            make.bottom.lessThanOrEqualTo(-20)
         }
     }
     
@@ -218,25 +255,6 @@ fileprivate extension ChangePasswordViewController {
             let alert = AlertFactory.createAlert(error: error)
             self.present(alert, animated: true)
         }
-    }
-    
-    func showSuccess() {
-        //show success alert
-        let title = R.string.localizable.password_changed()
-        let alertView = UIAlertController(title: title,
-                                          message: nil,
-                                          preferredStyle: .alert)
-        
-        let homeAction = UIAlertAction(title: R.string.localizable.home(), style: .default, handler: { action in
-            self.viewModel.showHome()
-        })
-        let settingsAction = UIAlertAction(title: R.string.localizable.settings(), style: .default, handler: { action in
-            self.viewModel.showSettings()
-        })
-        alertView.addAction(homeAction)
-        alertView.addAction(settingsAction)
-        
-        present(alertView, animated: true)
     }
 }
 

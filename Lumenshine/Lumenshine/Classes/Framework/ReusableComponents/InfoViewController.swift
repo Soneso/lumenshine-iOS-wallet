@@ -17,10 +17,14 @@ class InfoViewController: UIViewController {
     fileprivate let textLabel = UILabel()
     fileprivate let titleStr: String?
     
-    init(info: String, title: String? = nil) {
+    init(info: String, attributedText: NSAttributedString? = nil, title: String? = nil) {
         self.titleStr = title
         super.init(nibName: nil, bundle: nil)
-        textLabel.text = info
+        if attributedText != nil {
+            textLabel.attributedText = attributedText
+        } else {
+            textLabel.text = info
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

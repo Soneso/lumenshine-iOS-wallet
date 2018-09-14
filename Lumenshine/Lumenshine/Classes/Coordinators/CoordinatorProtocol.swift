@@ -32,7 +32,7 @@ public indirect enum Transition {
     case showFingerprint
     case showSignUp
     case showForgotPassword
-    case showLostPasswordSuccess
+    case showSuccess
     case showEmailConfirmation
     case showLost2fa
     case showHome
@@ -43,7 +43,7 @@ public indirect enum Transition {
     case showScan(Wallet)
     case showWalletCardInfo
     case logout(Transition?)
-    case showPasswordHint(String)
+    case showPasswordHint(String, NSAttributedString?)
     case showSetup(User, String, LoginStep2Response)
     case nextSetupStep
     case showMnemonicVerification

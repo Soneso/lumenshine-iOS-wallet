@@ -192,7 +192,7 @@ class LoginViewModel : LoginViewModelType {
     
     func showPasswordHint() {
         let hint = R.string.localizable.password_hint()
-        navigationCoordinator?.performTransition(transition: .showPasswordHint(hint))
+        navigationCoordinator?.performTransition(transition: .showPasswordHint(hint, nil))
     }
     
     func biometricType() -> BiometricType {
@@ -253,7 +253,7 @@ extension LoginViewModel: LostSecurityViewModelType {
     }
     
     func showSuccess() {
-        navigationCoordinator?.performTransition(transition: .showLostPasswordSuccess)
+        navigationCoordinator?.performTransition(transition: .showSuccess)
     }
     
     func showLogin() {

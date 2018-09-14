@@ -12,11 +12,15 @@ protocol SettingsViewModelType: Transitionable {
     var itemDistribution: [Int] { get }
     var tfaSecret: String? { get }
     
+    var successHeader: String? { get }
+    var successTitle: String? { get }
+    
     func name(at indexPath: IndexPath) -> String
     func switchValue(at indexPath: IndexPath) -> Bool?
     func switchChanged(value: Bool, at indexPath: IndexPath)
     func itemSelected(at indexPath: IndexPath)
     func showPasswordHint()
+    func showSuccess()
     func changePassword(currentPass: String, newPass: String, repeatPass: String, response: @escaping EmptyResponseClosure)
     func change2faSecret(password: String, response: @escaping TfaSecretResponseClosure)
     func confirm2faSecret(tfaCode: String, response: @escaping TFAResponseClosure)
@@ -37,6 +41,7 @@ class SettingsViewModel: SettingsViewModelType {
     fileprivate let entries: [[SettingsEntry]]
     fileprivate var touchEnabled: Bool
     fileprivate var tfaResponse: RegistrationResponse?
+    fileprivate var changePassword: Bool = true
     
     init(service: AuthService, user: User) {
         self.service = service
@@ -57,6 +62,14 @@ class SettingsViewModel: SettingsViewModelType {
     
     var itemDistribution: [Int] {
         return entries.map { $0.count }
+    }
+    
+    var successHeader: String? {
+        return changePassword ? R.string.localizable.change_password() : R.string.localizable.change_2fa()
+    }
+    
+    var successTitle: String? {
+        return changePassword ? R.string.localizable.password_changed() : R.string.localizable.tfa_secret_changed()
     }
     
     func name(at indexPath: IndexPath) -> String {
@@ -81,8 +94,10 @@ class SettingsViewModel: SettingsViewModelType {
     func itemSelected(at indexPath:IndexPath) {
         switch entry(at: indexPath) {
         case .changePassword:
+            changePassword = true
             navigationCoordinator?.performTransition(transition: .showChangePassword)
         case .change2FA:
+            changePassword = false
             navigationCoordinator?.performTransition(transition: .showChange2faSecret)
         case .biometricAuth:
             break
@@ -94,8 +109,30 @@ class SettingsViewModel: SettingsViewModelType {
     }
     
     func showPasswordHint() {
-        let hint = R.string.localizable.password_hint()
-        navigationCoordinator?.performTransition(transition: .showPasswordHint(hint))
+        let font = R.font.encodeSansRegular(size: 12) ?? Stylesheet.font(.body)
+        let hint1 = NSAttributedString(string: R.string.localizable.password_hint1()+"\n",
+                                       attributes: [NSAttributedStringKey.font : font,
+                                                    NSAttributedStringKey.foregroundColor : Stylesheet.color(.green)])
+        let hint2 = NSAttributedString(string: R.string.localizable.password_hint2()+"\n",
+                                       attributes: [NSAttributedStringKey.font : font,
+                                                    NSAttributedStringKey.foregroundColor : Stylesheet.color(.green)])
+        let hint3 = NSAttributedString(string: R.string.localizable.password_hint3()+"\n",
+                                       attributes: [NSAttributedStringKey.font : font,
+                                                    NSAttributedStringKey.foregroundColor : Stylesheet.color(.red)])
+        let hint4 = NSAttributedString(string: R.string.localizable.password_hint4(),
+                                       attributes: [NSAttributedStringKey.font : font,
+                                                    NSAttributedStringKey.foregroundColor : Stylesheet.color(.green)])
+        
+        let hint = NSMutableAttributedString(attributedString: hint1)
+        hint.append(hint2)
+        hint.append(hint3)
+        hint.append(hint4)
+        
+        navigationCoordinator?.performTransition(transition: .showPasswordHint(hint.string, hint))
+    }
+    
+    func showSuccess() {
+        navigationCoordinator?.performTransition(transition: .showSuccess)
     }
     
     func showHome() {

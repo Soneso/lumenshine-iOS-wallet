@@ -171,6 +171,7 @@
 		43DAC65420E4BA3900E491D8 /* BiometricAuthenticationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DAC65320E4BA3900E491D8 /* BiometricAuthenticationProtocol.swift */; };
 		43DAC65620E4EB2C00E491D8 /* ReLoginMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DAC65520E4EB2C00E491D8 /* ReLoginMenuCoordinator.swift */; };
 		43DAC65820E4FF0A00E491D8 /* ToolbarHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DAC65720E4FF0A00E491D8 /* ToolbarHeader.swift */; };
+		43DB1DA8214A8DED00AC0975 /* ChangePasswordSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DB1DA7214A8DED00AC0975 /* ChangePasswordSuccessViewController.swift */; };
 		43E13E8820D97DA000409129 /* WalletCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E13E8720D97DA000409129 /* WalletCard.swift */; };
 		43ECA9CA208B3C4400CB571E /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ECA9C9208B3C4400CB571E /* RegistrationViewModel.swift */; };
 		43ECA9CC208B530000CB571E /* RegistrationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ECA9CB208B530000CB571E /* RegistrationTableViewCell.swift */; };
@@ -499,6 +500,7 @@
 		43DAC65320E4BA3900E491D8 /* BiometricAuthenticationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricAuthenticationProtocol.swift; sourceTree = "<group>"; };
 		43DAC65520E4EB2C00E491D8 /* ReLoginMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginMenuCoordinator.swift; sourceTree = "<group>"; };
 		43DAC65720E4FF0A00E491D8 /* ToolbarHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarHeader.swift; sourceTree = "<group>"; };
+		43DB1DA7214A8DED00AC0975 /* ChangePasswordSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordSuccessViewController.swift; sourceTree = "<group>"; };
 		43E13E8720D97DA000409129 /* WalletCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCard.swift; sourceTree = "<group>"; };
 		43ECA9C9208B3C4400CB571E /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		43ECA9CB208B530000CB571E /* RegistrationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTableViewCell.swift; sourceTree = "<group>"; };
@@ -902,6 +904,7 @@
 				4370E23C20655F9C004C62C3 /* SettingsTableViewController.swift */,
 				435A1CA820C846EC00CE3365 /* SettingsTableViewCell.swift */,
 				439EA26D210AF7240054EA52 /* ChangePasswordViewController.swift */,
+				43DB1DA7214A8DED00AC0975 /* ChangePasswordSuccessViewController.swift */,
 				4365F699211057B900D4B12C /* Change2faSecretViewController.swift */,
 				4365F69B2110BB8700D4B12C /* Confirm2faCodeViewController.swift */,
 				4319B4CB2119FB59002E45F0 /* RevealMnemonicViewController.swift */,
@@ -1864,6 +1867,7 @@
 				4319B1902063FA8F007CE18D /* KeychainPasswordItem.swift in Sources */,
 				4319B1892063FA46007CE18D /* BiometricIDAuth.swift in Sources */,
 				431437F22047FF9100189C83 /* AppNavigationController.swift in Sources */,
+				43DB1DA8214A8DED00AC0975 /* ChangePasswordSuccessViewController.swift in Sources */,
 				74A2A2F0210EF405007AEE91 /* ReceivePaymentPrintView.swift in Sources */,
 				43CD7B0E20F7AEBC0014BF69 /* SetupCoordinator.swift in Sources */,
 				C6725086213FC4D20064F6E3 /* ProvideInflationDestinationViewController.swift in Sources */,

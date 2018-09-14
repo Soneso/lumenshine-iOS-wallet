@@ -21,9 +21,14 @@ class Confirm2faCodeViewController: UIViewController {
     
     fileprivate let tfaSecretLabel = UILabel()
     fileprivate let tfaCopyButton = Button()
-    
-    fileprivate let submitButton = RaisedButton()
     fileprivate let tfaCodeTextField = TextField()
+    
+    fileprivate let cancelButton = RaisedButton()
+    fileprivate let submitButton = RaisedButton()
+    fileprivate let errorLabel = UILabel()
+    
+    fileprivate let verticalSpacing: CGFloat = 42.0
+    fileprivate let horizontalSpacing: CGFloat = 15.0
     
     init(viewModel: SettingsViewModelType) {
         self.viewModel = viewModel
@@ -73,16 +78,21 @@ extension Confirm2faCodeViewController {
     @objc
     func submitAction(sender: UIButton) {
         guard let code = tfaCodeTextField.text else { return }
-        viewModel.confirm2faSecret(tfaCode: code) { result in
+        viewModel.confirm2faSecret(tfaCode: code) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(_):
-                    self.showSuccess()
+                    self?.viewModel.showSuccess()
                 case .failure(let error):
-                    self.tfaCodeTextField.detail = error.errorDescription
+                    self?.tfaCodeTextField.detail = error.errorDescription
                 }
             }
         }
+    }
+    
+    @objc
+    func cancelAction(sender: UIButton) {
+        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -98,64 +108,68 @@ fileprivate extension Confirm2faCodeViewController {
     
     func prepareView() {
         view.backgroundColor = Stylesheet.color(.white)
-        navigationItem.titleLabel.text = R.string.localizable.change_2fa()
-        navigationItem.titleLabel.textColor = Stylesheet.color(.white)
+        snackbarController?.navigationItem.titleLabel.text = R.string.localizable.change_2fa()
+        snackbarController?.navigationItem.titleLabel.textColor = Stylesheet.color(.white)
+        snackbarController?.navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         
         prepareTitleLabel()
         prepareSecretLabel()
         prepare2FACode()
+        prepareButtons()
     }
     
     func prepareTitleLabel() {
         
         titleLabel.text = R.string.localizable.new_2fa_secret()
-        titleLabel.font = Stylesheet.font(.headline)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         titleLabel.textAlignment = .center
         titleLabel.textColor = Stylesheet.color(.green)
         
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(20)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
+            make.top.equalTo(horizontalSpacing)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
         
         hintLabel.text = R.string.localizable.lbl_2fa_hint()
-        hintLabel.font = Stylesheet.font(.body)
-        hintLabel.textColor = Stylesheet.color(.black)
+        hintLabel.font = R.font.encodeSansRegular(size: 12)
+        hintLabel.textColor = Stylesheet.color(.lightBlack)
         hintLabel.numberOfLines = 0
+        hintLabel.adjustsFontSizeToFitWidth = true
+        
         
         view.addSubview(hintLabel)
         hintLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(30)
-            make.left.equalTo(20)
-            make.right.equalTo(-20)
+            make.top.equalTo(titleLabel.snp.bottom).offset(horizontalSpacing)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
         
         let separator = UIView()
-        separator.backgroundColor = Stylesheet.color(.black)
+        separator.backgroundColor = Stylesheet.color(.lightGray)
         view.addSubview(separator)
         separator.snp.makeConstraints { (make) in
-            make.top.equalTo(hintLabel.snp.bottom).offset(30)
+            make.top.equalTo(hintLabel.snp.bottom).offset(20)
             make.left.right.equalToSuperview()
-            make.height.equalTo(1)
+            make.height.equalTo(0.5)
         }
     }
     
     func prepareSecretLabel() {
         snackbarController?.snackbar.text = R.string.localizable.fa_secret_copy()
         if let secret = viewModel.tfaSecret {
-            tfaSecretLabel.text = R.string.localizable.lbl_new_2fa_secret(secret)
+            tfaSecretLabel.text = R.string.localizable.lbl_tfa_secret(secret)
         } else {
             present(error: .parsingFailed(message: R.string.localizable.fa_secret()))
         }
-        tfaSecretLabel.font = Stylesheet.font(.footnote)
+        tfaSecretLabel.font = R.font.encodeSansSemiBold(size: 12)
         tfaSecretLabel.textAlignment = .center
         tfaSecretLabel.textColor = Stylesheet.color(.black)
         
         view.addSubview(tfaSecretLabel)
         tfaSecretLabel.snp.makeConstraints { make in
-            make.top.equalTo(hintLabel.snp.bottom).offset(50)
+            make.top.equalTo(hintLabel.snp.bottom).offset(verticalSpacing)
             make.left.equalTo(40)
         }
         
@@ -171,43 +185,90 @@ fileprivate extension Confirm2faCodeViewController {
         }
         
         let separator = UIView()
-        separator.backgroundColor = Stylesheet.color(.black)
+        separator.backgroundColor = Stylesheet.color(.lightGray)
         view.addSubview(separator)
         separator.snp.makeConstraints { (make) in
             make.top.equalTo(tfaSecretLabel.snp.bottom).offset(20)
             make.left.right.equalToSuperview()
-            make.height.equalTo(1)
+            make.height.equalTo(0.5)
         }
     }
     
     func prepare2FACode() {
-        
         tfaCodeTextField.placeholder = R.string.localizable.tfa_code()
-        tfaCodeTextField.placeholderAnimation = .hidden
-        tfaCodeTextField.detailColor = Stylesheet.color(.red)
-        tfaCodeTextField.dividerActiveColor = Stylesheet.color(.cyan)
-        tfaCodeTextField.placeholderActiveColor = Stylesheet.color(.cyan)
         tfaCodeTextField.delegate = self
+        tfaCodeTextField.placeholderAnimation = .hidden
+        tfaCodeTextField.placeholderActiveColor = Stylesheet.color(.lightBlack)
+        tfaCodeTextField.placeholderNormalColor = Stylesheet.color(.lightBlack)
+        tfaCodeTextField.font = R.font.encodeSansSemiBold(size: 12)
+        tfaCodeTextField.textColor = Stylesheet.color(.lightBlack)
+        tfaCodeTextField.detailColor = Stylesheet.color(.red)
+        tfaCodeTextField.detailLabel.font = R.font.encodeSansRegular(size: 11)
+        tfaCodeTextField.detailVerticalOffset = 0
+        tfaCodeTextField.dividerActiveColor = Stylesheet.color(.gray)
         
         view.addSubview(tfaCodeTextField)
         tfaCodeTextField.snp.makeConstraints { make in
-            make.top.equalTo(tfaSecretLabel.snp.bottom).offset(40)
-            make.left.equalTo(50)
+            make.top.equalTo(tfaSecretLabel.snp.bottom).offset(25)
+            make.left.equalTo(2*horizontalSpacing)
+            make.right.equalTo(-2*horizontalSpacing)
         }
         
-        submitButton.title = R.string.localizable.next()
-        submitButton.titleColor = Stylesheet.color(.black)
-        submitButton.cornerRadiusPreset = .none
-        submitButton.borderWidthPreset = .border2
-        submitButton.depthPreset = .depth2
+        let separator = UIView()
+        separator.backgroundColor = Stylesheet.color(.lightGray)
+        view.addSubview(separator)
+        separator.snp.makeConstraints { (make) in
+            make.top.equalTo(tfaCodeTextField.snp.bottom).offset(30)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(0.5)
+        }
+    }
+    
+    func prepareButtons() {
+        cancelButton.title = R.string.localizable.cancel().uppercased()
+        cancelButton.backgroundColor = Stylesheet.color(.darkGray)
+        cancelButton.titleColor = Stylesheet.color(.white)
+        cancelButton.titleLabel?.font = R.font.encodeSansSemiBold(size: 15)
+        cancelButton.cornerRadiusPreset = .cornerRadius6
+        cancelButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        cancelButton.addTarget(self, action: #selector(cancelAction(sender:)), for: .touchUpInside)
+        
+        submitButton.title = R.string.localizable.next().uppercased()
+        submitButton.backgroundColor = Stylesheet.color(.cyan)
+        submitButton.titleColor = Stylesheet.color(.white)
+        submitButton.titleLabel?.font = R.font.encodeSansSemiBold(size: 15)
+        submitButton.cornerRadiusPreset = .cornerRadius6
+        submitButton.titleLabel?.adjustsFontSizeToFitWidth = true
         submitButton.addTarget(self, action: #selector(submitAction(sender:)), for: .touchUpInside)
+        
+        view.addSubview(cancelButton)
+        cancelButton.snp.makeConstraints { make in
+            make.top.equalTo(tfaCodeTextField.snp.bottom).offset(50)
+            make.right.equalTo(view.snp.centerX).offset(-15)
+            make.width.equalTo(100)
+            make.height.equalTo(38)
+        }
         
         view.addSubview(submitButton)
         submitButton.snp.makeConstraints { make in
-            make.centerY.equalTo(tfaCodeTextField)
-            make.left.equalTo(tfaCodeTextField.snp.right).offset(10)
-            make.right.equalTo(-40)
-            make.width.equalTo(80)
+            make.centerY.equalTo(cancelButton)
+            make.left.equalTo(view.snp.centerX).offset(15)
+            make.width.equalTo(100)
+            make.height.equalTo(38)
+        }
+        
+        errorLabel.text = R.string.localizable.lbl_cancel_2fa_secret()
+        errorLabel.font = R.font.encodeSansRegular(size: 12)
+        errorLabel.textAlignment = .center
+        errorLabel.textColor = Stylesheet.color(.lightBlack)
+        errorLabel.numberOfLines = 0
+        
+        view.addSubview(errorLabel)
+        errorLabel.snp.makeConstraints { make in
+            make.top.equalTo(cancelButton.snp.bottom).offset(20)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
+            make.bottom.lessThanOrEqualTo(-20)
         }
     }
     
@@ -220,21 +281,6 @@ fileprivate extension Confirm2faCodeViewController {
             let alert = AlertFactory.createAlert(error: error)
             self.present(alert, animated: true)
         }
-    }
-    
-    func showSuccess() {
-        //show success alert
-        let title = R.string.localizable.tfa_secret_changed()
-        let alertView = UIAlertController(title: title,
-                                          message: nil,
-                                          preferredStyle: .alert)
-        
-        let settingsAction = UIAlertAction(title: R.string.localizable.settings(), style: .default, handler: { action in
-            self.viewModel.showSettings()
-        })
-        alertView.addAction(settingsAction)
-        
-        present(alertView, animated: true)
     }
 }
 
