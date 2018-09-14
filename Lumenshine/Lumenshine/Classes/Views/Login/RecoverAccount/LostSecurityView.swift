@@ -19,7 +19,7 @@ class LostSecurityView: UIView {
     
     // MARK: - UI properties
     fileprivate let horizontalSpacing = 15.0
-    fileprivate let emailTextField = TextField()
+    fileprivate let emailTextField = LSTextField()
     fileprivate let nextButton = RaisedButton()
     fileprivate let titleLabel = UILabel()
     
@@ -77,15 +77,6 @@ fileprivate extension LostSecurityView {
         emailTextField.autocapitalizationType = .none
         emailTextField.autocorrectionType = .no
         emailTextField.placeholder = R.string.localizable.email()
-        emailTextField.placeholderAnimation = .hidden
-        emailTextField.placeholderActiveColor = Stylesheet.color(.lightBlack)
-        emailTextField.placeholderNormalColor = Stylesheet.color(.lightBlack)
-        emailTextField.font = R.font.encodeSansRegular(size: 12)
-        emailTextField.textColor = Stylesheet.color(.lightBlack)
-        emailTextField.detailColor = Stylesheet.color(.red)
-        emailTextField.detailLabel.font = R.font.encodeSansRegular(size: 11)
-        emailTextField.detailVerticalOffset = 0
-        emailTextField.dividerActiveColor = Stylesheet.color(.gray)
         
         addSubview(emailTextField)
         emailTextField.snp.makeConstraints { make in

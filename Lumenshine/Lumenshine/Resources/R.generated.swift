@@ -1543,7 +1543,7 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let password_hint1 = Rswift.StringResource(key: "password_hint1", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
-      /// en translation: 1. Copy and enter the below displayed 2FA secret code into the authenticator app  2. enter the generated 2FA code from the authenticator app and press "Next"
+      /// en translation: 1. Copy and enter the below displayed 2FA secret code into the authenticator app  2. Enter the generated 2FA code from the authenticator app and press "Next"
       /// 
       /// Locales: en, de
       static let lbl_2fa_hint = Rswift.StringResource(key: "lbl_2fa_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
@@ -2335,7 +2335,7 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("password_hint1", bundle: R.hostingBundle, comment: "")
       }
       
-      /// en translation: 1. Copy and enter the below displayed 2FA secret code into the authenticator app  2. enter the generated 2FA code from the authenticator app and press "Next"
+      /// en translation: 1. Copy and enter the below displayed 2FA secret code into the authenticator app  2. Enter the generated 2FA code from the authenticator app and press "Next"
       /// 
       /// Locales: en, de
       static func lbl_2fa_hint(_: Void = ()) -> String {

@@ -191,8 +191,26 @@ class LoginViewModel : LoginViewModelType {
     }
     
     func showPasswordHint() {
-        let hint = R.string.localizable.password_hint()
-        navigationCoordinator?.performTransition(transition: .showPasswordHint(hint, nil))
+        let font = R.font.encodeSansRegular(size: 12) ?? Stylesheet.font(.body)
+        let hint1 = NSAttributedString(string: R.string.localizable.password_hint1()+"\n",
+                                       attributes: [NSAttributedStringKey.font : font,
+                                                    NSAttributedStringKey.foregroundColor : Stylesheet.color(.green)])
+        let hint2 = NSAttributedString(string: R.string.localizable.password_hint2()+"\n",
+                                       attributes: [NSAttributedStringKey.font : font,
+                                                    NSAttributedStringKey.foregroundColor : Stylesheet.color(.green)])
+        let hint3 = NSAttributedString(string: R.string.localizable.password_hint3()+"\n",
+                                       attributes: [NSAttributedStringKey.font : font,
+                                                    NSAttributedStringKey.foregroundColor : Stylesheet.color(.red)])
+        let hint4 = NSAttributedString(string: R.string.localizable.password_hint4(),
+                                       attributes: [NSAttributedStringKey.font : font,
+                                                    NSAttributedStringKey.foregroundColor : Stylesheet.color(.green)])
+        
+        let hint = NSMutableAttributedString(attributedString: hint1)
+        hint.append(hint2)
+        hint.append(hint3)
+        hint.append(hint4)
+        
+        navigationCoordinator?.performTransition(transition: .showPasswordHint(hint.string, hint))
     }
     
     func biometricType() -> BiometricType {

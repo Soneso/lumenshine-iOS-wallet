@@ -18,7 +18,7 @@ class ReLoginFingerView: UIView {
     fileprivate let hintLabel = UILabel()
     fileprivate let titleLabel = UILabel()
     fileprivate let submitButton = RaisedButton()
-    fileprivate let passwordTextField = TextField()
+    fileprivate let passwordTextField = LSTextField()
     
     weak var delegate: ReLoginViewDelegate?
     
@@ -106,12 +106,6 @@ fileprivate extension ReLoginFingerView {
         passwordTextField.delegate = self
         passwordTextField.isSecureTextEntry = true
         passwordTextField.placeholder = R.string.localizable.password().uppercased()
-        passwordTextField.placeholderAnimation = .hidden
-        passwordTextField.font = R.font.encodeSansRegular(size: 15)
-        passwordTextField.detailColor = Stylesheet.color(.red)
-        passwordTextField.detailLabel.font = R.font.encodeSansRegular(size: 12)
-        passwordTextField.dividerActiveColor = Stylesheet.color(.gray)
-        passwordTextField.placeholderActiveColor = Stylesheet.color(.gray)
         
         addSubview(passwordTextField)
         passwordTextField.snp.makeConstraints { make in

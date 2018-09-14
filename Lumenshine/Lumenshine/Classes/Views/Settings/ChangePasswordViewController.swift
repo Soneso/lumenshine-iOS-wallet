@@ -18,9 +18,9 @@ class ChangePasswordViewController: UIViewController {
     // MARK: - UI properties
     
     fileprivate let titleLabel = UILabel()
-    fileprivate let textField1 = TextField()
-    fileprivate let textField2 = TextField()
-    fileprivate let textField3 = TextField()
+    fileprivate let textField1 = LSTextField()
+    fileprivate let textField2 = LSTextField()
+    fileprivate let textField3 = LSTextField()
     fileprivate let submitButton = RaisedButton()
     fileprivate let passwordHintButton = Material.IconButton()
     
@@ -149,42 +149,15 @@ fileprivate extension ChangePasswordViewController {
         textField1.isSecureTextEntry = true
         textField1.isVisibilityIconButtonEnabled = true
         textField1.placeholder = R.string.localizable.current_password().uppercased()
-        textField1.placeholderAnimation = .hidden
-        textField1.placeholderActiveColor = Stylesheet.color(.lightBlack)
-        textField1.placeholderNormalColor = Stylesheet.color(.lightBlack)
-        textField1.font = R.font.encodeSansSemiBold(size: 12)
-        textField1.textColor = Stylesheet.color(.lightBlack)
-        textField1.detailColor = Stylesheet.color(.red)
-        textField1.detailLabel.font = R.font.encodeSansRegular(size: 11)
-        textField1.detailVerticalOffset = 0
-        textField1.dividerActiveColor = Stylesheet.color(.gray)
         
         textField2.isSecureTextEntry = true
         textField2.isVisibilityIconButtonEnabled = true
         textField2.placeholder = R.string.localizable.new_password().uppercased()
-        textField2.placeholderAnimation = .hidden
-        textField2.placeholderActiveColor = Stylesheet.color(.lightBlack)
-        textField2.placeholderNormalColor = Stylesheet.color(.lightBlack)
-        textField2.font = R.font.encodeSansSemiBold(size: 12)
-        textField2.textColor = Stylesheet.color(.lightBlack)
-        textField2.detailColor = Stylesheet.color(.red)
-        textField2.detailLabel.font = R.font.encodeSansRegular(size: 11)
-        textField2.detailVerticalOffset = 0
-        textField2.dividerActiveColor = Stylesheet.color(.gray)
         textField2.dividerContentEdgeInsets = EdgeInsets(top: 0, left: 0, bottom: 0, right: -2.0*horizontalSpacing)
         
         textField3.isSecureTextEntry = true
         textField3.isVisibilityIconButtonEnabled = true
         textField3.placeholder = R.string.localizable.repeat_new_password().uppercased()
-        textField3.placeholderAnimation = .hidden
-        textField3.placeholderActiveColor = Stylesheet.color(.lightBlack)
-        textField3.placeholderNormalColor = Stylesheet.color(.lightBlack)
-        textField3.font = R.font.encodeSansSemiBold(size: 12)
-        textField3.textColor = Stylesheet.color(.lightBlack)
-        textField3.detailColor = Stylesheet.color(.red)
-        textField3.detailLabel.font = R.font.encodeSansRegular(size: 11)
-        textField3.detailVerticalOffset = 0
-        textField3.dividerActiveColor = Stylesheet.color(.gray)
         
         view.addSubview(textField1)
         textField1.snp.makeConstraints { make in

@@ -24,9 +24,9 @@ class SignUpView: UIView {
     fileprivate let detailLabel = UILabel()
     
     // MARK: - UI properties
-    fileprivate let textField1 = TextField()
-    fileprivate let textField2 = TextField()
-    fileprivate let textField3 = TextField()
+    fileprivate let textField1 = LSTextField()
+    fileprivate let textField2 = LSTextField()
+    fileprivate let textField3 = LSTextField()
     fileprivate let submitButton = RaisedButton()
     
     weak var delegate: SignUpViewDelegate?
@@ -154,41 +154,14 @@ fileprivate extension SignUpView {
         textField1.keyboardType = .emailAddress
         textField1.autocapitalizationType = .none
         textField1.placeholder = R.string.localizable.email().uppercased()
-        textField1.placeholderAnimation = .hidden
-        textField1.placeholderActiveColor = Stylesheet.color(.lightBlack)
-        textField1.placeholderNormalColor = Stylesheet.color(.lightBlack)
-        textField1.font = R.font.encodeSansSemiBold(size: 12)
-        textField1.textColor = Stylesheet.color(.lightBlack)
-        textField1.detailColor = Stylesheet.color(.red)
-        textField1.detailLabel.font = R.font.encodeSansRegular(size: 11)
-        textField1.detailVerticalOffset = 0
-        textField1.dividerActiveColor = Stylesheet.color(.gray)
         
         textField2.isSecureTextEntry = true
 //        textField2.isVisibilityIconButtonEnabled = true
         textField2.placeholder = R.string.localizable.password().uppercased()
-        textField2.placeholderAnimation = .hidden
-        textField2.placeholderActiveColor = Stylesheet.color(.lightBlack)
-        textField2.placeholderNormalColor = Stylesheet.color(.lightBlack)
-        textField2.font = R.font.encodeSansSemiBold(size: 12)
-        textField2.textColor = Stylesheet.color(.lightBlack)
-        textField2.detailColor = Stylesheet.color(.red)
-        textField2.detailLabel.font = R.font.encodeSansRegular(size: 11)
-        textField2.detailVerticalOffset = 0
-        textField2.dividerActiveColor = Stylesheet.color(.gray)
-        
+
         textField3.isSecureTextEntry = true
 //        textField3.isVisibilityIconButtonEnabled = true
         textField3.placeholder = R.string.localizable.repeat_password().uppercased()
-        textField3.placeholderAnimation = .hidden
-        textField3.placeholderActiveColor = Stylesheet.color(.lightBlack)
-        textField3.placeholderNormalColor = Stylesheet.color(.lightBlack)
-        textField3.font = R.font.encodeSansSemiBold(size: 12)
-        textField3.textColor = Stylesheet.color(.lightBlack)
-        textField3.detailColor = Stylesheet.color(.red)
-        textField3.detailLabel.font = R.font.encodeSansRegular(size: 11)
-        textField3.detailVerticalOffset = 0
-        textField3.dividerActiveColor = Stylesheet.color(.gray)
         
         addSubview(textField1)
         textField1.snp.makeConstraints { make in

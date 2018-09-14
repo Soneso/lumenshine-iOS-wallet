@@ -23,8 +23,8 @@ class ReLoginHomeView: UIView {
     fileprivate let forgotPasswordButton = RaisedButton()
     fileprivate let touchIDButton = Button()
     fileprivate let submitButton = RaisedButton()
-    fileprivate let passwordTextField = TextField()
-    fileprivate let tfaTextField = TextField()
+    fileprivate let passwordTextField = LSTextField()
+    fileprivate let tfaTextField = LSTextField()
     
     weak var delegate: ReLoginViewDelegate?
     
@@ -134,12 +134,6 @@ fileprivate extension ReLoginHomeView {
         passwordTextField.delegate = self
         passwordTextField.isSecureTextEntry = true
         passwordTextField.placeholder = R.string.localizable.password().uppercased()
-        passwordTextField.placeholderAnimation = .hidden
-        passwordTextField.font = R.font.encodeSansRegular(size: 15)
-        passwordTextField.detailColor = Stylesheet.color(.red)
-        passwordTextField.detailLabel.font = R.font.encodeSansRegular(size: 12)
-        passwordTextField.dividerActiveColor = Stylesheet.color(.gray)
-        passwordTextField.placeholderActiveColor = Stylesheet.color(.gray)
         
         addSubview(passwordTextField)
         passwordTextField.snp.makeConstraints { make in
@@ -149,12 +143,6 @@ fileprivate extension ReLoginHomeView {
         }
         
         tfaTextField.placeholder = R.string.localizable.lbl_tfa_code().uppercased()
-        tfaTextField.placeholderAnimation = .hidden
-        tfaTextField.font = R.font.encodeSansRegular(size: 15)
-        tfaTextField.detailColor = Stylesheet.color(.red)
-        tfaTextField.detailLabel.font = R.font.encodeSansRegular(size: 12)
-        tfaTextField.dividerActiveColor = Stylesheet.color(.gray)
-        tfaTextField.placeholderActiveColor = Stylesheet.color(.gray)
         tfaTextField.isHidden = true
         
         addSubview(tfaTextField)

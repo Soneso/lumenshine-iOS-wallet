@@ -21,7 +21,7 @@ class Confirm2faCodeViewController: UIViewController {
     
     fileprivate let tfaSecretLabel = UILabel()
     fileprivate let tfaCopyButton = Button()
-    fileprivate let tfaCodeTextField = TextField()
+    fileprivate let tfaCodeTextField = LSTextField()
     
     fileprivate let cancelButton = RaisedButton()
     fileprivate let submitButton = RaisedButton()
@@ -198,14 +198,6 @@ fileprivate extension Confirm2faCodeViewController {
         tfaCodeTextField.placeholder = R.string.localizable.tfa_code()
         tfaCodeTextField.delegate = self
         tfaCodeTextField.placeholderAnimation = .hidden
-        tfaCodeTextField.placeholderActiveColor = Stylesheet.color(.lightBlack)
-        tfaCodeTextField.placeholderNormalColor = Stylesheet.color(.lightBlack)
-        tfaCodeTextField.font = R.font.encodeSansSemiBold(size: 12)
-        tfaCodeTextField.textColor = Stylesheet.color(.lightBlack)
-        tfaCodeTextField.detailColor = Stylesheet.color(.red)
-        tfaCodeTextField.detailLabel.font = R.font.encodeSansRegular(size: 11)
-        tfaCodeTextField.detailVerticalOffset = 0
-        tfaCodeTextField.dividerActiveColor = Stylesheet.color(.gray)
         
         view.addSubview(tfaCodeTextField)
         tfaCodeTextField.snp.makeConstraints { make in

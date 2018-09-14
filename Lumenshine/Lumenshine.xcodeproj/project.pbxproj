@@ -34,6 +34,7 @@
 		4319B4CC2119FB59002E45F0 /* RevealMnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4319B4CB2119FB59002E45F0 /* RevealMnemonicViewController.swift */; };
 		4319B4CE211A0347002E45F0 /* BackupMnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4319B4CD211A0347002E45F0 /* BackupMnemonicViewController.swift */; };
 		4319B4D0211B0987002E45F0 /* DecryptedUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4319B4CF211B0987002E45F0 /* DecryptedUserData.swift */; };
+		431A71D7214C0E5000D44C7E /* LSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431A71D6214C0E5000D44C7E /* LSTextField.swift */; };
 		4322BA26205BAA60007FEB5E /* HeaderMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA25205BAA60007FEB5E /* HeaderMenuViewController.swift */; };
 		4322BA2F205BD69F007FEB5E /* ResponseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA2D205BD69F007FEB5E /* ResponseMock.swift */; };
 		4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA2E205BD69F007FEB5E /* ServerMock.swift */; };
@@ -356,6 +357,7 @@
 		4319B4CB2119FB59002E45F0 /* RevealMnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealMnemonicViewController.swift; sourceTree = "<group>"; };
 		4319B4CD211A0347002E45F0 /* BackupMnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupMnemonicViewController.swift; sourceTree = "<group>"; };
 		4319B4CF211B0987002E45F0 /* DecryptedUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecryptedUserData.swift; sourceTree = "<group>"; };
+		431A71D6214C0E5000D44C7E /* LSTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSTextField.swift; sourceTree = "<group>"; };
 		4322BA25205BAA60007FEB5E /* HeaderMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMenuViewController.swift; sourceTree = "<group>"; };
 		4322BA2D205BD69F007FEB5E /* ResponseMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseMock.swift; sourceTree = "<group>"; };
 		4322BA2E205BD69F007FEB5E /* ServerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerMock.swift; sourceTree = "<group>"; };
@@ -1004,6 +1006,7 @@
 				43DAC65720E4FF0A00E491D8 /* ToolbarHeader.swift */,
 				43B144CB20FCA5D40099E3AE /* TitleHeader.swift */,
 				43B8919A2104764600062660 /* InputField.swift */,
+				431A71D6214C0E5000D44C7E /* LSTextField.swift */,
 			);
 			path = ReusableComponents;
 			sourceTree = "<group>";
@@ -1945,6 +1948,7 @@
 				7477F3FB20EE19EE00408934 /* WalletsResponse.swift in Sources */,
 				C665871221254C9D006499A7 /* ChartsCurrencyPairsResponse.swift in Sources */,
 				43088DB02087C4B8008AE1AB /* Dictionary+HTTPParams.swift in Sources */,
+				431A71D7214C0E5000D44C7E /* LSTextField.swift in Sources */,
 				C6813DC9213AC725007074C2 /* KnownCurrenciesManager.swift in Sources */,
 				43DAC65420E4BA3900E491D8 /* BiometricAuthenticationProtocol.swift in Sources */,
 				7491BE4C211C450F0058877E /* WalletManager.swift in Sources */,

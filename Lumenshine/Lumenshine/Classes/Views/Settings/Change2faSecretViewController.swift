@@ -18,7 +18,7 @@ class Change2faSecretViewController: UIViewController {
     // MARK: - UI properties
     
     fileprivate let titleLabel = UILabel()
-    fileprivate let textField1 = TextField()
+    fileprivate let textField1 = LSTextField()
     fileprivate let submitButton = RaisedButton()
     
     fileprivate let verticalSpacing: CGFloat = 42.0
@@ -125,15 +125,6 @@ fileprivate extension Change2faSecretViewController {
         textField1.isSecureTextEntry = true
         textField1.isVisibilityIconButtonEnabled = true
         textField1.placeholder = R.string.localizable.password().uppercased()
-        textField1.placeholderAnimation = .hidden
-        textField1.placeholderActiveColor = Stylesheet.color(.lightBlack)
-        textField1.placeholderNormalColor = Stylesheet.color(.lightBlack)
-        textField1.font = R.font.encodeSansSemiBold(size: 12)
-        textField1.textColor = Stylesheet.color(.lightBlack)
-        textField1.detailColor = Stylesheet.color(.red)
-        textField1.detailLabel.font = R.font.encodeSansRegular(size: 11)
-        textField1.detailVerticalOffset = 0
-        textField1.dividerActiveColor = Stylesheet.color(.gray)
         
         view.addSubview(textField1)
         textField1.snp.makeConstraints { make in
