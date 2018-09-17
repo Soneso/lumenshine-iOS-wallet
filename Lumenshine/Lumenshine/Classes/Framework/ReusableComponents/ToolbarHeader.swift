@@ -70,8 +70,8 @@ class ToolbarHeader: UIView {
             make.left.right.equalToSuperview()
         }
         
-        detailLabel.font = R.font.encodeSansBold(size: 16)
-        detailLabel.textColor = Stylesheet.color(.white)
+        detailLabel.font = R.font.encodeSansLight(size: 15)
+        detailLabel.textColor = Stylesheet.color(.orange)
         detailLabel.textAlignment = .center
         detailLabel.numberOfLines = 0
         

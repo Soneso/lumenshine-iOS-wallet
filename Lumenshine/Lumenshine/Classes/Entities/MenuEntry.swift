@@ -80,15 +80,15 @@ enum MenuEntry {
         case .home:
             return R.image.home
         case .wallets:
-            return R.image.money1
+            return R.image.wallets
         case .transactions:
             return R.image.transactions
         case .currencies:
-            return R.image.money2
+            return R.image.currencies
         case .contacts:
-            return R.image.users
+            return R.image.user
         case .extras:
-            return R.image.puzzlePiece
+            return R.image.star
         case .settings:
             return R.image.gear
         case .help:
@@ -100,7 +100,7 @@ enum MenuEntry {
         case .signUp:
             return R.image.pencil
         case .lostPassword:
-            return R.image.compose
+            return R.image.link
         case .lost2FA:
             return R.image.lost_2fa
         case .importMnemonic:

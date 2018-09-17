@@ -22,7 +22,7 @@ class MenuTableViewCell: UITableViewCell {
     
     func commonInit() {
         textLabel?.textColor = Stylesheet.color(.white)
-        textLabel?.font = R.font.encodeSansRegular(size: 18)
+        textLabel?.font = R.font.encodeSansRegular(size: 12)
         backgroundColor = Stylesheet.color(.clear)
         imageView?.tintColor = Stylesheet.color(.white)
         let selection = UIView()
@@ -37,6 +37,6 @@ extension MenuTableViewCell: MenuCellProtocol {
     }
     
     func setImage(_ image: UIImage?) {
-        imageView?.image = image
+        imageView?.image = image?.resize(toWidth: 30)
     }
 }

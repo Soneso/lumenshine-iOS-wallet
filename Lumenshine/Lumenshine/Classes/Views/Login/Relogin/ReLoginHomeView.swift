@@ -20,11 +20,15 @@ class ReLoginHomeView: UIView {
     
     // MARK: - UI properties
     fileprivate let titleLabel = UILabel()
-    fileprivate let forgotPasswordButton = RaisedButton()
-    fileprivate let touchIDButton = Button()
-    fileprivate let submitButton = RaisedButton()
+    fileprivate let forgotPasswordButton = LSButton()
+    fileprivate let submitButton = LSButton()
     fileprivate let passwordTextField = LSTextField()
     fileprivate let tfaTextField = LSTextField()
+    
+    fileprivate let touchIDButton = Button()
+    
+    fileprivate let verticalSpacing = 25.0
+    fileprivate let horizontalSpacing = 15.0
     
     weak var delegate: ReLoginViewDelegate?
     
@@ -116,17 +120,17 @@ fileprivate extension ReLoginHomeView {
     }
     
     func prepareTitle() {
-        titleLabel.text = R.string.localizable.password().uppercased()
+        titleLabel.text = R.string.localizable.password().uppercased()        
         titleLabel.textColor = Stylesheet.color(.darkBlue)
-        titleLabel.font = R.font.encodeSansRegular(size: 20)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.numberOfLines = 0
         
         self.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(30)
-            make.left.equalTo(20)
-            make.right.equalTo(-20)
+            make.top.equalTo(horizontalSpacing)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
     }
     
@@ -137,9 +141,9 @@ fileprivate extension ReLoginHomeView {
         
         addSubview(passwordTextField)
         passwordTextField.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(60)
-            make.left.equalTo(20)
-            make.right.equalTo(-20)
+            make.top.equalTo(titleLabel.snp.bottom).offset(verticalSpacing)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
         
         tfaTextField.placeholder = R.string.localizable.lbl_tfa_code().uppercased()
@@ -147,50 +151,40 @@ fileprivate extension ReLoginHomeView {
         
         addSubview(tfaTextField)
         tfaTextField.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(30)
-            make.left.equalTo(20)
-            make.right.equalTo(-20)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(20)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
     }
     
     func prepareLoginButton() {
         submitButton.title = R.string.localizable.submit().uppercased()
-        submitButton.backgroundColor = Stylesheet.color(.green)
-        submitButton.titleColor = Stylesheet.color(.white)
-        submitButton.cornerRadiusPreset = .cornerRadius6
-        submitButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        submitButton.titleLabel?.font = R.font.encodeSansRegular(size: 16)
+        submitButton.setGradientLayer(color: Stylesheet.color(.green))
         submitButton.addTarget(self, action: #selector(reloginAction(sender:)), for: .touchUpInside)
         
         addSubview(submitButton)
         submitButton.snp.makeConstraints { make in
-            make.top.equalTo(tfaTextField.snp.bottom).offset(30)
+            make.top.equalTo(tfaTextField.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
             make.width.equalTo(160)
-            make.height.equalTo(40)
+            make.height.equalTo(38)
         }
     }
     
     func prepareForgotPasswordButton() {
         forgotPasswordButton.title = R.string.localizable.lost_password()
-        forgotPasswordButton.backgroundColor = Stylesheet.color(.clear)
         forgotPasswordButton.titleColor = Stylesheet.color(.blue)
-        forgotPasswordButton.cornerRadiusPreset = .cornerRadius6
         forgotPasswordButton.borderWidthPreset = .border1
         forgotPasswordButton.borderColor = Stylesheet.color(.blue)
-        forgotPasswordButton.titleLabel?.font = R.font.encodeSansRegular(size: 16)
-        forgotPasswordButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        forgotPasswordButton.setGradientLayer(color: Stylesheet.color(.white))
         forgotPasswordButton.addTarget(self, action: #selector(forgotPasswordAction(sender:)), for: .touchUpInside)
-        
-        setGradientBackground(view: forgotPasswordButton)
-        forgotPasswordButton.clipsToBounds = true
         
         addSubview(forgotPasswordButton)
         forgotPasswordButton.snp.makeConstraints { make in
             make.top.equalTo(submitButton.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
             make.width.equalTo(160)
-            make.height.equalTo(40)
+            make.height.equalTo(38)
         }
     }
     
@@ -199,7 +193,7 @@ fileprivate extension ReLoginHomeView {
             make.top.equalTo(submitButton.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
             make.width.equalTo(160)
-            make.height.equalTo(40)
+            make.height.equalTo(38)
             make.bottom.equalTo(-20)
         }
     }
@@ -219,16 +213,5 @@ fileprivate extension ReLoginHomeView {
             make.centerX.equalToSuperview()
             make.bottom.equalTo(-20)
         }
-    }
-    
-    func setGradientBackground(view: UIView) {
-        let colorTop = Stylesheet.color(.white).cgColor
-        let colorBottom = UIColor(red: 240/255.0, green: 240/255.0, blue: 240/255.0, alpha: 1.0).cgColor
-        
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [colorTop, colorBottom]
-        gradientLayer.frame = CGRect(origin: .zero, size: CGSize(width: 160, height: 40))
-        
-        view.layer.insertSublayer(gradientLayer, at: 0)
     }
 }

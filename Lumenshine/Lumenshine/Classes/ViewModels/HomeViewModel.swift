@@ -110,12 +110,12 @@ class HomeViewModel : HomeViewModelType {
 fileprivate extension HomeViewModel {
     func showHeaderMenu() {
         let items = [
-            (R.string.localizable.sell(), R.image.money1.name),
+            (R.string.localizable.sell(), R.image.wallets.name),
             (R.string.localizable.send(), R.image.pencil.name),
-            (R.string.localizable.receive(), R.image.compose.name),
+            (R.string.localizable.receive(), R.image.link.name),
             (R.string.localizable.scan(), R.image.question.name),
             (R.string.localizable.deposit(), R.image.lost_2fa.name),
-            (R.string.localizable.withdraw(), R.image.money2.name)
+            (R.string.localizable.withdraw(), R.image.currencies.name)
         ]
         navigationCoordinator?.performTransition(transition: .showHeaderMenu(items))
     }

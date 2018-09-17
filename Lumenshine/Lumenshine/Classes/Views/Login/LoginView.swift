@@ -26,7 +26,7 @@ class LoginView: UIView {
     fileprivate let textField1 = LSTextField()
     fileprivate let textField2 = LSTextField()
     fileprivate let textField3 = LSTextField()
-    fileprivate let submitButton = RaisedButton()
+    fileprivate let submitButton = LSButton()
     
     weak var delegate: LoginViewDelegate?
     
@@ -179,11 +179,7 @@ fileprivate extension LoginView {
     
     func prepareLoginButton() {
         submitButton.title = R.string.localizable.login().uppercased()
-        submitButton.backgroundColor = Stylesheet.color(.green)
-        submitButton.titleColor = Stylesheet.color(.white)
-        submitButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        submitButton.cornerRadiusPreset = .cornerRadius6
-        submitButton.titleLabel?.font = R.font.encodeSansSemiBold(size: 15)
+        submitButton.setGradientLayer(color: Stylesheet.color(.green))
         submitButton.addTarget(self, action: #selector(loginAction(sender:)), for: .touchUpInside)
         
         self.addSubview(submitButton)

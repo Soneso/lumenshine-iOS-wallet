@@ -122,7 +122,7 @@ struct Stylesheet {
         case .green:
             return UIColor(red: 145/255.0, green: 199/255.0, blue: 74/255.0, alpha: 1.0)
         case .orange:
-            return UIColor(red: 245/255.0, green: 178/255.0, blue: 73/255.0, alpha: 1.0)
+            return UIColor(red: 250/255.0, green: 175/255.0, blue: 58/255.0, alpha: 1.0)
         case .darkBlue:
             return UIColor(red: 51/255.0, green: 122/255.0, blue: 189/255.0, alpha: 1.0)
         case .blue:

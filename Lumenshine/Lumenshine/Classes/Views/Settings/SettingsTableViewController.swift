@@ -76,6 +76,10 @@ extension SettingsTableViewController: SettingsCellDelegate {
 
 fileprivate extension SettingsTableViewController {
     func prepare() {
+        navigationItem.titleLabel.text = R.string.localizable.settings()
+        navigationItem.titleLabel.textColor = Stylesheet.color(.white)
+        navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
+        
         tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewController.CellIdentifier)
         tableView.rowHeight = UITableViewAutomaticDimension
 //        tableView.separatorStyle = .none

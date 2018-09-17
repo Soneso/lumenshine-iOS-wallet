@@ -17,8 +17,11 @@ class ReLoginFingerView: UIView {
     // MARK: - UI properties
     fileprivate let hintLabel = UILabel()
     fileprivate let titleLabel = UILabel()
-    fileprivate let submitButton = RaisedButton()
+    fileprivate let submitButton = LSButton()
     fileprivate let passwordTextField = LSTextField()
+    
+    fileprivate let verticalSpacing = 25.0
+    fileprivate let horizontalSpacing = 15.0
     
     weak var delegate: ReLoginViewDelegate?
     
@@ -74,31 +77,31 @@ fileprivate extension ReLoginFingerView {
     func prepareHintLabel() {
         hintLabel.text = viewModel.hintText
         hintLabel.textColor = Stylesheet.color(.lightBlack)
-        hintLabel.font = R.font.encodeSansRegular(size: 13)
+        hintLabel.font = R.font.encodeSansRegular(size: 12)
         hintLabel.numberOfLines = 0
         hintLabel.textAlignment = .left
         hintLabel.adjustsFontSizeToFitWidth = true
         
         addSubview(hintLabel)
         hintLabel.snp.makeConstraints { make in
-            make.top.equalTo(30)
-            make.left.equalTo(20)
-            make.right.equalTo(-20)
+            make.top.equalTo(horizontalSpacing)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
     }
     
     func prepareTitle() {
         titleLabel.text = R.string.localizable.password().uppercased()
         titleLabel.textColor = Stylesheet.color(.darkBlue)
-        titleLabel.font = R.font.encodeSansRegular(size: 20)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.numberOfLines = 0
         
-        addSubview(titleLabel)
+        self.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(hintLabel.snp.bottom).offset(20)
-            make.left.equalTo(20)
-            make.right.equalTo(-20)
+            make.top.equalTo(hintLabel.snp.bottom).offset(verticalSpacing)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
     }
     
@@ -109,27 +112,23 @@ fileprivate extension ReLoginFingerView {
         
         addSubview(passwordTextField)
         passwordTextField.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(60)
-            make.left.equalTo(20)
-            make.right.equalTo(-20)
+            make.top.equalTo(titleLabel.snp.bottom).offset(verticalSpacing)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
         }
     }
     
     func prepareLoginButton() {
         submitButton.title = R.string.localizable.submit().uppercased()
         submitButton.backgroundColor = Stylesheet.color(.green)
-        submitButton.titleColor = Stylesheet.color(.white)
-        submitButton.cornerRadiusPreset = .cornerRadius6
-        submitButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        submitButton.titleLabel?.font = R.font.encodeSansRegular(size: 16)
         submitButton.addTarget(self, action: #selector(submitAction(sender:)), for: .touchUpInside)
         
         addSubview(submitButton)
         submitButton.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(30)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(35)
             make.centerX.equalToSuperview()
             make.width.equalTo(160)
-            make.height.equalTo(40)
+            make.height.equalTo(38)
             make.bottom.equalTo(-20)
         }
     }

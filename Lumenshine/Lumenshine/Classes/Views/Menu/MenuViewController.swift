@@ -74,8 +74,10 @@ class MenuViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 { return nil }
-        let separator = UIView(frame: CGRect(x: 0, y: 4, width:tableView.frame.width, height: 1))
-        separator.backgroundColor = Stylesheet.color(.white)
+        let separator = GradientView(frame: CGRect(x: 0, y: 4, width:tableView.frame.width, height: 1))
+        separator.gradientLayer.colors = [Stylesheet.color(.white).cgColor, Stylesheet.color(.blue).cgColor]
+        separator.gradientLayer.gradient = GradientPoint.leftRight.draw()
+        
         let header = UIView()
         header.addSubview(separator)
         return header

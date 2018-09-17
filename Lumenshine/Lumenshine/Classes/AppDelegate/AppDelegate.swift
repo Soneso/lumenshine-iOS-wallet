@@ -18,11 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     fileprivate let mainCoordinator = MainCoordinator()
     fileprivate var snapshotView: UIView?
-    
-    // for testing purpose
-    //fileprivate let loginCoordinator = MenuCoordinator(user: User(id: "1", email: "isti@isti.com", publicKeyIndex0: "publicKeyIndex0", publicKeyIndex188: "publicKeyIndex188", mnemonic: "mnemonic"))
-//    fileprivate let loginCoordinator = ReLoginMenuCoordinator(service: Services().auth, user: User(id: "1", email: "isti@isti.com", publicKeyIndex0: "publicKeyIndex0", publicKeyIndex188: "publicKeyIndex188", mnemonic: "mnemonic"))
-//    fileprivate let loginCoordinator = SetupMenuCoordinator(service: Services().auth, user: User(id: "1", email: "isti@isti.com", publicKeyIndex0: "publicKeyIndex0", publicKeyIndex188: "publicKeyIndex188", mnemonic: "mnemonic apple word car bike watch"), loginResponse: nil)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -47,6 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // for testing purpose
 //        let loginCoordinator = MenuCoordinator(mainCoordinator: mainCoordinator, user: User(id: "1", email: "isti@isti.com", publicKeyIndex0: "publicKeyIndex0", publicKeyIndex188: "publicKeyIndex188"))
+//        let loginCoordinator = ReLoginMenuCoordinator(mainCoordinator: mainCoordinator, service: Services.shared.auth, user: User(id: "1", email: "isti@isti.com", publicKeyIndex0: "publicKeyIndex0", publicKeyIndex188: "publicKeyIndex188"))
+//        let loginCoordinator = SetupMenuCoordinator(mainCoordinator: mainCoordinator, service: Services().auth, user: User(id: "1", email: "isti@isti.com", publicKeyIndex0: "publicKeyIndex0", publicKeyIndex188: "publicKeyIndex188"), mnemonic: "mnemonic apple word car bike watch", loginResponse: nil)
 
         
         window = UIWindow(frame: UIScreen.main.bounds)

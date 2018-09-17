@@ -933,7 +933,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 35 images.
+  /// This `R.image` struct is generated, and contains static references to 36 images.
   struct image {
     /// Image `FaceIcon`.
     static let faceIcon = Rswift.ImageResource(bundle: R.hostingBundle, name: "FaceIcon")
@@ -949,6 +949,8 @@ struct R: Rswift.Validatable {
     static let compose = Rswift.ImageResource(bundle: R.hostingBundle, name: "compose")
     /// Image `copy`.
     static let copy = Rswift.ImageResource(bundle: R.hostingBundle, name: "copy")
+    /// Image `currencies`.
+    static let currencies = Rswift.ImageResource(bundle: R.hostingBundle, name: "currencies")
     /// Image `face_recognition`.
     static let face_recognition = Rswift.ImageResource(bundle: R.hostingBundle, name: "face_recognition")
     /// Image `fingerprint`.
@@ -961,16 +963,14 @@ struct R: Rswift.Validatable {
     static let header_background = Rswift.ImageResource(bundle: R.hostingBundle, name: "header_background")
     /// Image `home`.
     static let home = Rswift.ImageResource(bundle: R.hostingBundle, name: "home")
+    /// Image `link`.
+    static let link = Rswift.ImageResource(bundle: R.hostingBundle, name: "link")
     /// Image `lock`.
     static let lock = Rswift.ImageResource(bundle: R.hostingBundle, name: "lock")
     /// Image `logo`.
     static let logo = Rswift.ImageResource(bundle: R.hostingBundle, name: "logo")
     /// Image `lost_2fa`.
     static let lost_2fa = Rswift.ImageResource(bundle: R.hostingBundle, name: "lost_2fa")
-    /// Image `money-1`.
-    static let money1 = Rswift.ImageResource(bundle: R.hostingBundle, name: "money-1")
-    /// Image `money-2`.
-    static let money2 = Rswift.ImageResource(bundle: R.hostingBundle, name: "money-2")
     /// Image `more`.
     static let more = Rswift.ImageResource(bundle: R.hostingBundle, name: "more")
     /// Image `pencil`.
@@ -1005,6 +1005,8 @@ struct R: Rswift.Validatable {
     static let user = Rswift.ImageResource(bundle: R.hostingBundle, name: "user")
     /// Image `users`.
     static let users = Rswift.ImageResource(bundle: R.hostingBundle, name: "users")
+    /// Image `wallets`.
+    static let wallets = Rswift.ImageResource(bundle: R.hostingBundle, name: "wallets")
     
     /// `UIImage(named: "FaceIcon", bundle: ..., traitCollection: ...)`
     static func faceIcon(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
@@ -1041,6 +1043,11 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.copy, compatibleWith: traitCollection)
     }
     
+    /// `UIImage(named: "currencies", bundle: ..., traitCollection: ...)`
+    static func currencies(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.currencies, compatibleWith: traitCollection)
+    }
+    
     /// `UIImage(named: "face_recognition", bundle: ..., traitCollection: ...)`
     static func face_recognition(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.face_recognition, compatibleWith: traitCollection)
@@ -1071,6 +1078,11 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.home, compatibleWith: traitCollection)
     }
     
+    /// `UIImage(named: "link", bundle: ..., traitCollection: ...)`
+    static func link(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.link, compatibleWith: traitCollection)
+    }
+    
     /// `UIImage(named: "lock", bundle: ..., traitCollection: ...)`
     static func lock(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.lock, compatibleWith: traitCollection)
@@ -1084,16 +1096,6 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "lost_2fa", bundle: ..., traitCollection: ...)`
     static func lost_2fa(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.lost_2fa, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "money-1", bundle: ..., traitCollection: ...)`
-    static func money1(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.money1, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "money-2", bundle: ..., traitCollection: ...)`
-    static func money2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.money2, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "more", bundle: ..., traitCollection: ...)`
@@ -1179,6 +1181,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "users", bundle: ..., traitCollection: ...)`
     static func users(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.users, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "wallets", bundle: ..., traitCollection: ...)`
+    static func wallets(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.wallets, compatibleWith: traitCollection)
     }
     
     fileprivate init() {}

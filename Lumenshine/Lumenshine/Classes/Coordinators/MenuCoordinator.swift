@@ -27,6 +27,7 @@ class MenuCoordinator: MenuCoordinatorType {
         
         let drawer = AppNavigationDrawerController()
         drawer.setViewController(menuView, for: .left)
+        drawer.setDrawerWidth(180, for: .left)
         
         self.baseController = drawer
         viewModel.navigationCoordinator = self

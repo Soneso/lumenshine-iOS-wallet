@@ -25,6 +25,7 @@ class LoginMenuCoordinator: MenuCoordinatorType {
         
         let drawer = AppNavigationDrawerController()
         drawer.setViewController(menuView, for: .left)
+        drawer.setDrawerWidth(180, for: .left)
         
         self.baseController = drawer
         menuViewModel.navigationCoordinator = self

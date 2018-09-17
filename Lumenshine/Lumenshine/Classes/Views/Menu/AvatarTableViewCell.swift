@@ -41,7 +41,7 @@ class AvatarTableViewCell: UITableViewCell {
         }
         
         _textLabel.textColor = Stylesheet.color(.white)
-        _textLabel.font = R.font.encodeSansRegular(size: 21)
+        _textLabel.font = R.font.encodeSansRegular(size: 12)
         _textLabel.textAlignment = .center
         
         _imageView.tintColor = Stylesheet.color(.white)
