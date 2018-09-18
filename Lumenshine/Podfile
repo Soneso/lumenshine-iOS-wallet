@@ -9,7 +9,7 @@ def ui_components_and_helper_pods
     pod 'SnapKit'
     pod 'KWDrawerController', :git => 'https://github.com/chelemen-razvan/KWDrawerController.git'
     pod 'DGElasticPullToRefresh', :git => 'https://github.com/sammygutierrez/DGElasticPullToRefresh.git'
-    pod 'Charts'
+    pod 'Charts', :git => 'https://github.com/danielgindi/Charts.git', :commit => '4fca1f7a027c69782522416ef73d9bb92119d1d3'
     pod 'LTMorphingLabel'
     pod 'TTTAttributedLabel'
 end
