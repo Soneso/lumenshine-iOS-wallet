@@ -69,7 +69,8 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.shadowColor = Stylesheet.color(.clear)
-        
+        navigationController?.navigationBar.backgroundColor = Stylesheet.color(.clear)
+        navigationController?.navigationBar.isTranslucent = true
         viewModel.reloadCards()
     }
 }
@@ -152,11 +153,7 @@ fileprivate extension HomeViewController {
     }
     
     func prepareHeader() {
-        headerBar = FlexibleHeightBar(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: 185.0))
-        headerBar.minimumBarHeight = 0.0
-        headerBar.clipsToBounds = true
-        
-        headerBar.backgroundColor = Stylesheet.color(.cyan)
+        setupHeaderBar()
         view.addSubview(headerBar)
 
         tableView.contentInset = UIEdgeInsetsMake(150.0, 0.0, 0.0, 0.0)
@@ -194,9 +191,6 @@ fileprivate extension HomeViewController {
         // Create a final set of layout attributes based on the same values as the initial layout attributes
         let finalLayoutAttributes = FlexibleHeightBarSubviewLayoutAttributes(layoutAttributes: initialLayoutAttributes)
         finalLayoutAttributes.alpha = 0.0
-        let translation = CGAffineTransform(translationX: 0.0, y: -100.0)
-        let scale = CGAffineTransform(scaleX: 0.2, y: 0.2)
-        finalLayoutAttributes.transform = scale.concatenating(translation)
         
         // This is what we want the bar to look like at its minimum height (progress == 1.0)
         headerBar.addLayoutAttributes(finalLayoutAttributes, forSubview: label, forProgress: 1.0)
@@ -213,7 +207,29 @@ fileprivate extension HomeViewController {
             // Do not forget to call dg_stopLoading() at the end
             self?.tableView.dg_stopLoading()
             }, loadingView: loadingView)
-        tableView.dg_setPullToRefreshFillColor(Stylesheet.color(.cyan))
+        tableView.dg_setPullToRefreshFillColor(Stylesheet.color(.white))
         tableView.dg_setPullToRefreshBackgroundColor(tableView.backgroundColor!)
+    }
+    
+    private func setupHeaderBar() {
+        var topSafeAreaInset = CGFloat(0)
+        
+        if let window = UIApplication.shared.keyWindow {
+            topSafeAreaInset = window.safeAreaInsets.top
+        }
+        
+        headerBar = FlexibleHeightBar(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: 230 + topSafeAreaInset))
+        headerBar.minimumBarHeight = 0.0
+        headerBar.clipsToBounds = true
+        let backgroundImage = UIImageView()
+        backgroundImage.image = R.image.header_background()
+        
+        headerBar.insertSubview(backgroundImage, at: 0)
+        backgroundImage.snp.makeConstraints { make in
+            make.left.equalTo(0)
+            make.right.equalTo(1)
+            make.top.equalTo(0)
+            make.bottom.equalTo(0)
+        }
     }
 }

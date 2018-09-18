@@ -78,7 +78,7 @@
                             <state key="normal" title="Send"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kFj-Ap-sWm">
-                            <rect key="frame" x="16" y="0.0" width="28" height="55"/>
+                            <rect key="frame" x="16" y="0.0" width="33" height="55"/>
                             <state key="normal" image="question"/>
                         </button>
                     </subviews>
@@ -145,6 +145,6 @@
         </view>
     </objects>
     <resources>
-        <image name="question" width="28" height="28"/>
+        <image name="question" width="33" height="33"/>
     </resources>
 </document>

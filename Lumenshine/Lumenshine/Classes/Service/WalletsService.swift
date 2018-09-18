@@ -29,18 +29,16 @@ public class WalletsService: BaseService {
     
     open func getWallets(response: @escaping GetWalletsClosure) {
         GETRequestWithPath(path: "/portal/user/dashboard/get_user_wallets") { (result) -> (Void) in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let data):
-                    do {
-                        let userWalletsResponse = try self.jsonDecoder.decode(Array<WalletsResponse>.self, from: data)
-                        response(.success(response: userWalletsResponse))
-                    } catch {
-                        response(.failure(error: .parsingFailed(message: error.localizedDescription)))
-                    }
-                case .failure(let error):
-                    response(.failure(error: error))
+            switch result {
+            case .success(let data):
+                do {
+                    let userWalletsResponse = try self.jsonDecoder.decode(Array<WalletsResponse>.self, from: data)
+                    response(.success(response: userWalletsResponse))
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
                 }
+            case .failure(let error):
+                response(.failure(error: error))
             }
         }
     }

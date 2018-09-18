@@ -40,11 +40,11 @@ class LoadTransactionsHistoryViewController: UIViewController {
         super.viewDidLoad()
         
         switch initialState {
-        case .showLoading:
+        case .showLoading?:
             showLoadingSign()
             break
             
-        case .showButton:
+        case .showButton?:
             showButton()
             break
             

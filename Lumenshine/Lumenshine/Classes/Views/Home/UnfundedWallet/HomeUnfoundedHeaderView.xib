@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,34 +12,39 @@
             <rect key="frame" x="0.0" y="0.0" width="390" height="255"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zV4-Ib-O6t">
-                    <rect key="frame" x="16" y="24" width="358" height="20.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zV4-Ib-O6t" customClass="AppTitleLabel" customModule="Lumenshine" customModuleProvider="target">
+                    <rect key="frame" x="16" y="66" width="358" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0 XLM ≈ 0.0 USD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e4r-hr-Tbu">
-                    <rect key="frame" x="16" y="60.5" width="358" height="20.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A wallet for the Stellar Network by Soneso" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="loC-Nh-15F" userLabel="Slogan" customClass="SloganLabel" customModule="Lumenshine" customModuleProvider="target">
+                    <rect key="frame" x="34.5" y="86.5" width="321" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v35-dD-PwH" customClass="IconButton" customModule="Lumenshine" customModuleProvider="target">
-                    <rect key="frame" x="180" y="97" width="30" height="34"/>
-                    <connections>
-                        <action selector="didTapFoundWallet:" destination="iN0-l3-epB" eventType="touchUpInside" id="pZa-ei-AjF"/>
-                    </connections>
-                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0 XLM ≈ 0.0 USD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e4r-hr-Tbu" customClass="UnfundedHeaderLabel" customModule="Lumenshine" customModuleProvider="target">
+                    <rect key="frame" x="16" y="132.5" width="358" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="fXs-oF-OHn">
+                    <rect key="frame" x="157.5" y="-17" width="75" height="75"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="fXs-oF-OHn" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="47u-g8-0je"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="e4r-hr-Tbu" secondAttribute="trailing" constant="16" id="7dc-d2-0wl"/>
-                <constraint firstItem="v35-dD-PwH" firstAttribute="top" secondItem="e4r-hr-Tbu" secondAttribute="bottom" constant="16" id="E2Y-Np-E0e"/>
-                <constraint firstItem="zV4-Ib-O6t" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="24" id="Ghc-Jy-nog"/>
-                <constraint firstItem="v35-dD-PwH" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="dEp-qQ-pXG"/>
+                <constraint firstItem="fXs-oF-OHn" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="-17" id="9iw-mv-uWg"/>
+                <constraint firstItem="loC-Nh-15F" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="IjC-0E-xfV"/>
+                <constraint firstItem="zV4-Ib-O6t" firstAttribute="top" secondItem="fXs-oF-OHn" secondAttribute="bottom" constant="8" id="Jk3-2J-Wv9"/>
+                <constraint firstItem="loC-Nh-15F" firstAttribute="top" secondItem="zV4-Ib-O6t" secondAttribute="bottom" id="UHS-df-yJz"/>
+                <constraint firstItem="e4r-hr-Tbu" firstAttribute="top" secondItem="loC-Nh-15F" secondAttribute="bottom" constant="25" id="faD-6E-E0E"/>
                 <constraint firstItem="zV4-Ib-O6t" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="h8w-Vx-Tae"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="zV4-Ib-O6t" secondAttribute="trailing" constant="16" id="n8Y-xh-xIM"/>
-                <constraint firstItem="e4r-hr-Tbu" firstAttribute="top" secondItem="zV4-Ib-O6t" secondAttribute="bottom" constant="16" id="pSI-x8-rsx"/>
                 <constraint firstItem="e4r-hr-Tbu" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="zrm-b3-6Fm"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -53,11 +55,13 @@
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
-                <outlet property="foundAccountButton" destination="v35-dD-PwH" id="ywz-xL-BC0"/>
                 <outlet property="titleLabel" destination="zV4-Ib-O6t" id="TB0-5f-s1P"/>
                 <outlet property="xlmPriceLabel" destination="e4r-hr-Tbu" id="haU-2A-vrc"/>
             </connections>
             <point key="canvasLocation" x="41" y="-152.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="logo" width="75" height="75"/>
+    </resources>
 </document>
