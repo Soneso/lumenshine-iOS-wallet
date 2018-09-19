@@ -64,6 +64,8 @@ extension EmailConfirmationView: LoginViewContentProtocol {
         }
         return false
     }
+    
+    func setTFACode(_ tfaCode: String) {}
 }
 
 fileprivate extension EmailConfirmationView {

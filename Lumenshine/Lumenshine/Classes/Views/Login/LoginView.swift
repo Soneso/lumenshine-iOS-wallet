@@ -62,6 +62,10 @@ extension LoginView: LoginViewContentProtocol {
         }
         return false
     }
+    
+    func setTFACode(_ tfaCode: String) {
+        textField3.text = tfaCode
+    }
 }
 
 extension LoginView {
@@ -153,7 +157,7 @@ fileprivate extension LoginView {
         textField2.placeholder = R.string.localizable.password().uppercased()
         
 //        textField3.keyboardType = .numberPad
-        textField3.placeholder = R.string.localizable.lbl_tfa_code().uppercased()
+        textField3.placeholder = R.string.localizable.tfa_code().uppercased()
         
         self.addSubview(textField1)
         textField1.snp.makeConstraints { make in

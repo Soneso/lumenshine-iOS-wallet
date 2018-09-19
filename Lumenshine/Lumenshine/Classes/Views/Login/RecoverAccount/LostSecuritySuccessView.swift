@@ -59,6 +59,8 @@ extension LostSecuritySuccessView: LoginViewContentProtocol {
     func present(error: ServiceError) -> Bool {
         return false
     }
+    
+    func setTFACode(_ tfaCode: String) {}
 }
 
 fileprivate extension LostSecuritySuccessView {

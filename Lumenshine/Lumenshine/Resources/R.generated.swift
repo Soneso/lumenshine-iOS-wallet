@@ -1191,7 +1191,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.nib` struct is generated, and contains static references to 32 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 33 nibs.
   struct nib {
     /// Nib `AccountCurrenciesViewController`.
     static let accountCurrenciesViewController = _R.nib._AccountCurrenciesViewController()
@@ -1223,6 +1223,8 @@ struct R: Rswift.Validatable {
     static let knownInflationDestinationsViewController = _R.nib._KnownInflationDestinationsViewController()
     /// Nib `LoadTransactionsHistoryViewController`.
     static let loadTransactionsHistoryViewController = _R.nib._LoadTransactionsHistoryViewController()
+    /// Nib `LockedView`.
+    static let lockedView = _R.nib._LockedView()
     /// Nib `ProvideCurrencyDataViewController`.
     static let provideCurrencyDataViewController = _R.nib._ProvideCurrencyDataViewController()
     /// Nib `ProvideInflationDestinationViewController`.
@@ -1331,6 +1333,11 @@ struct R: Rswift.Validatable {
     /// `UINib(name: "LoadTransactionsHistoryViewController", in: bundle)`
     static func loadTransactionsHistoryViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.loadTransactionsHistoryViewController)
+    }
+    
+    /// `UINib(name: "LockedView", in: bundle)`
+    static func lockedView(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.lockedView)
     }
     
     /// `UINib(name: "ProvideCurrencyDataViewController", in: bundle)`
@@ -3600,6 +3607,7 @@ struct _R: Rswift.Validatable {
       try _SendViewController.validate()
       try _WalletCardContentView.validate()
       try _AccountDetailsViewController.validate()
+      try _LockedView.validate()
       try _ReceivePaymentCardViewController.validate()
       try _FoundAccountViewController.validate()
       try _WalletCardInfoViewController.validate()
@@ -3780,6 +3788,21 @@ struct _R: Rswift.Validatable {
       
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _LockedView: Rswift.NibResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "LockedView"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      }
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "logo", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'logo' is used in nib 'LockedView', but couldn't be loaded.") }
       }
       
       fileprivate init() {}

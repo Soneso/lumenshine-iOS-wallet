@@ -48,6 +48,16 @@ class Confirm2faCodeViewController: UIViewController {
         prepareView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        MenuViewModel.backgroudTimePeriod = 120
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        MenuViewModel.backgroudTimePeriod = 10
+    }
+    
     override func resignFirstResponder() -> Bool {
         tfaCodeTextField.resignFirstResponder()
         return super.resignFirstResponder()
@@ -201,7 +211,7 @@ fileprivate extension Confirm2faCodeViewController {
         
         view.addSubview(tfaCodeTextField)
         tfaCodeTextField.snp.makeConstraints { make in
-            make.top.equalTo(tfaSecretLabel.snp.bottom).offset(25)
+            make.top.equalTo(tfaSecretLabel.snp.bottom).offset(35)
             make.left.equalTo(2*horizontalSpacing)
             make.right.equalTo(-2*horizontalSpacing)
         }

@@ -81,8 +81,12 @@ public class ChartsService: BaseService {
     }
     
     open func getChartExchangeRates(assetCode: String, issuerPublicKey: String?, destinationCurrency: String, timeRange: Int32, response: @escaping GetChartExchangeRatesClosure) {
+        var params2 = Dictionary<String, Any>()
+        params2["asset_code"] = assetCode
+        params2["issuer_public_key"] = issuerPublicKey
+        
         var params = Dictionary<String, Any>()
-        params["source_currency"] = ["asset_code": assetCode, "issuer_public_key": issuerPublicKey]
+        params["source_currency"] = params2
         params["destination_currency"] = destinationCurrency
         params["range_hours"] = timeRange
         

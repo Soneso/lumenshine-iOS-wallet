@@ -67,8 +67,7 @@ class ChartCardViewModel: CardViewModelType {
     
     var detail: String? {
         var updateStr = exchangeRates?.lastUpdateDate ?? ""
-        // TODO: use lastUpdateDate when format is valid
-        if let date = exchangeRates?.rates.first?.date,
+        if let date = exchangeRates?.lastUpdateDate,
             let updated = DateUtils.format(date, in: .dateAndTime) {
             updateStr = R.string.localizable.updated(DateUtils.longString(from: updated))
         }

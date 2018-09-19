@@ -54,7 +54,6 @@ class ReLoginMenuViewModel : LoginMenuViewModel {
 
 fileprivate extension ReLoginMenuViewModel {
     func logout() {
-        TFAGeneration.removeToken(email: user.email)
-        BaseService.removeToken()
+        LoginViewModel.logout(userEmail: user.email)
     }
 }

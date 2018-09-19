@@ -108,7 +108,7 @@ fileprivate extension SetupViewController {
         
         view.addSubview(imageView)
         imageView.snp.makeConstraints { make in
-            make.bottom.equalTo(-10)
+            make.bottom.equalTo(-20)
             make.centerX.equalToSuperview()
         }
         

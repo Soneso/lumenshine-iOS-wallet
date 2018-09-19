@@ -59,7 +59,6 @@ extension SetupMenuViewModel {
     }
     
     func logout() {
-        TFAGeneration.removeToken(email: user.email)
-        BaseService.removeToken()
+        LoginViewModel.logout(userEmail: user.email)
     }
 }

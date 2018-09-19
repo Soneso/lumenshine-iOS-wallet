@@ -39,6 +39,16 @@ class BackupMnemonicViewController: UIViewController {
         prepareView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        MenuViewModel.backgroudTimePeriod = 60
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        MenuViewModel.backgroudTimePeriod = 10
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }

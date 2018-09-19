@@ -43,10 +43,19 @@ class InfoViewController: UIViewController {
     func closeAction(sender: UIButton) {
         dismiss(animated: true)
     }
+    
+    override var prefersStatusBarHidden: Bool {
+        return false
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.default
+    }
 }
 
 fileprivate extension InfoViewController {
     func prepareView() {
+        view.backgroundColor = Stylesheet.color(.lightGray)
         prepareTextLabel()
     }
     
@@ -63,7 +72,7 @@ fileprivate extension InfoViewController {
     }
     
     func prepareNavigationItem() {
-        let color = Stylesheet.color(.white)
+        let color = Stylesheet.color(.lightBlack)
         if let title = titleStr {
             navigationItem.titleLabel.text = title
             navigationItem.titleLabel.textColor = color
@@ -71,16 +80,19 @@ fileprivate extension InfoViewController {
             let button = Button(image: R.image.question()?.tint(with: color))
             button.isEnabled = false
             button.title = R.string.localizable.info()
-            button.titleLabel?.font = Stylesheet.font(.body)
+            button.titleLabel?.font = R.font.encodeSansSemiBold(size: 15)
             button.titleColor = color
             button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
             navigationItem.centerViews = [button]
         }
         
         let backButton = Material.IconButton()
-        backButton.image = Icon.close?.tint(with: Stylesheet.color(.white))
+        backButton.image = Icon.close?.tint(with: Stylesheet.color(.lightBlack))
         backButton.addTarget(self, action: #selector(closeAction(sender:)), for: .touchUpInside)
         navigationItem.leftViews = [backButton]
+        
+        navigationController?.navigationBar.backgroundColor = Stylesheet.color(.white)
+        navigationController?.navigationBar.depthPreset = .depth2
     }
     
 

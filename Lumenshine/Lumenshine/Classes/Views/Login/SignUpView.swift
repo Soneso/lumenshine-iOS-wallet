@@ -63,6 +63,8 @@ extension SignUpView: LoginViewContentProtocol {
         }
         return false
     }
+    
+    func setTFACode(_ tfaCode: String) {}
 }
 
 extension SignUpView {

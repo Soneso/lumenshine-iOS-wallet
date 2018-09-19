@@ -99,7 +99,6 @@ class ReLoginViewModel : LoginViewModel {
 
 fileprivate extension ReLoginViewModel {
     func logout() {
-        TFAGeneration.removeToken(email: user.email)
-        BaseService.removeToken()
+        LoginViewModel.logout(userEmail: user.email)
     }
 }

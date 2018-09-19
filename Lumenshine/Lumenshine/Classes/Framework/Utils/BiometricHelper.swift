@@ -26,7 +26,18 @@ class BiometricHelper {
                     }
                 }
             }
-            
+            return false
+        }
+    }
+    
+    static func enableTouch(_ touch: Bool) {
+        UserDefaults.standard.setValue(touch, forKey: BiometricHelper.touchIDKey)
+    }
+    
+    static var isTouchEnabled: Bool {
+        if let touchEnabled = UserDefaults.standard.value(forKey: BiometricHelper.touchIDKey) as? Bool {
+            return touchEnabled
+        } else {
             return false
         }
     }

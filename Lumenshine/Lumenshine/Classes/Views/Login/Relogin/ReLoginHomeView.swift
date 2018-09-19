@@ -37,9 +37,7 @@ class ReLoginHomeView: UIView {
         super.init(frame: .zero)
         prepare()
         
-        if let touchEnabled = UserDefaults.standard.value(forKey: "touchEnabled") as? Bool,
-            touchEnabled == true,
-            viewModel.canEvaluatePolicy() {
+        if BiometricHelper.isBiometricAuthEnabled {
             touchIDLogin()
         }
     }
@@ -110,9 +108,7 @@ fileprivate extension ReLoginHomeView {
         prepareLoginButton()
         prepareForgotPasswordButton()
         
-        if let touchEnabled = UserDefaults.standard.value(forKey: "touchEnabled") as? Bool,
-            touchEnabled == true,
-            viewModel.canEvaluatePolicy() {
+        if BiometricHelper.isBiometricAuthEnabled {
             prepareTouchButton()
         } else {
             updateBottomConstraints()
@@ -146,7 +142,7 @@ fileprivate extension ReLoginHomeView {
             make.right.equalTo(-horizontalSpacing)
         }
         
-        tfaTextField.placeholder = R.string.localizable.lbl_tfa_code().uppercased()
+        tfaTextField.placeholder = R.string.localizable.tfa_code().uppercased()
         tfaTextField.isHidden = true
         
         addSubview(tfaTextField)
@@ -201,17 +197,18 @@ fileprivate extension ReLoginHomeView {
     func prepareTouchButton() {
         switch viewModel.biometricType() {
         case .faceID:
-            touchIDButton.setImage(UIImage(named: "FaceIcon"),  for: .normal)
+            touchIDButton.setImage(R.image.faceIcon(),  for: .normal)
         default:
-            touchIDButton.setImage(UIImage(named: "Touch-icon-lg"),  for: .normal)
+            touchIDButton.setImage(R.image.touchIcon(),  for: .normal)
         }
         touchIDButton.addTarget(self, action: #selector(touchIDLogin), for: .touchUpInside)
         
         addSubview(touchIDButton)
         touchIDButton.snp.makeConstraints { make in
-            make.top.greaterThanOrEqualTo(forgotPasswordButton.snp.bottom)
+            make.top.equalTo(forgotPasswordButton.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
             make.bottom.equalTo(-20)
+            make.width.height.equalTo(90)
         }
     }
 }

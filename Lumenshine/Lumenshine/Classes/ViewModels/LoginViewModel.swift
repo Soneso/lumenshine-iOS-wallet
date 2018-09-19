@@ -168,7 +168,7 @@ class LoginViewModel : LoginViewModelType {
                 self?.service.loginStep2(publicKeyIndex188: userSecurity.publicKeyIndex188) { [weak self] result in
                     switch result {
                     case .success(let login2Response):
-                        self?.showSetup(login2Response: login2Response)
+                        self?.checkSetup(login2Response: login2Response)
                         response(.success)
                     case .failure(let error):
                         response(.failure(error: error))
@@ -224,6 +224,13 @@ class LoginViewModel : LoginViewModelType {
     func authenticateUser(completion: @escaping (String?) -> Void) {}
     
     func remove2FASecret() {}
+    
+    class func logout(userEmail: String) {
+        TFAGeneration.removeToken(email: userEmail)
+        BaseService.removeToken()
+        BiometricHelper.UserMnemonic = nil
+        BiometricHelper.enableTouch(false)
+    }
 }
 
 extension LoginViewModel: LostSecurityViewModelType {
@@ -301,7 +308,7 @@ fileprivate extension LoginViewModel {
                     self.service.loginStep2(publicKeyIndex188: decryptedUserData.publicKeyIndex188) { [weak self] result in
                         switch result {
                         case .success(let login2Response):
-                            self?.showSetup(login2Response: login2Response)
+                            self?.checkSetup(login2Response: login2Response)
                             response(.success)
                         case .failure(let error):
                             response(.failure(error: error))
@@ -319,7 +326,7 @@ fileprivate extension LoginViewModel {
         }
     }
     
-    func showSetup(login2Response: LoginStep2Response) {
+    func checkSetup(login2Response: LoginStep2Response) {
         guard let user = self.user else { return }
         DispatchQueue.main.async {
             if login2Response.tfaConfirmed && login2Response.mailConfirmed && login2Response.mnemonicConfirmed {

@@ -11,6 +11,7 @@ import Material
 
 protocol LoginViewContentProtocol {
     func present(error: ServiceError) -> Bool
+    func setTFACode(_ tfaCode: String)
 }
 
 class LoginViewController: UIViewController {
@@ -51,7 +52,7 @@ class LoginViewController: UIViewController {
             if let tfaCode = UIPasteboard.general.string,
                 tfaCode.count == 6,
                 CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: tfaCode)) {
-//                contentView.textField3.text = tfaCode
+                contentView?.setTFACode(tfaCode)
             }
         }
     }
@@ -292,7 +293,7 @@ fileprivate extension LoginViewController {
         
         view.addSubview(imageView)
         imageView.snp.makeConstraints { make in
-            make.bottom.equalTo(-10)
+            make.bottom.equalTo(-20)
             make.centerX.equalToSuperview()
         }
         

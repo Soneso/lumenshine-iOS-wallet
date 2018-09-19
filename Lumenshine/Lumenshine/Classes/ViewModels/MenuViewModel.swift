@@ -18,6 +18,9 @@ protocol MenuViewModelType: Transitionable {
 }
 
 class MenuViewModel : MenuViewModelType {
+    
+    static var backgroudTimePeriod: TimeInterval = 10
+    
     fileprivate let service: AuthService
     fileprivate let user: User
     fileprivate let entries: [[MenuEntry]]
@@ -111,14 +114,12 @@ fileprivate extension MenuViewModel {
         NotificationCenter.default.removeObserver(self, name: .UIApplicationWillEnterForeground, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UIApplicationDidEnterBackground, object: nil)
         
-        TFAGeneration.removeToken(email: user.email)
-        BaseService.removeToken()
-        BiometricHelper.UserMnemonic = nil
+        LoginViewModel.logout(userEmail: user.email)
         navigationCoordinator?.performTransition(transition: .logout(nil))
     }
     
     func showRelogin() {
-        if let time = backgroundTime, time.addingTimeInterval(10) < Date() {
+        if let time = backgroundTime, time.addingTimeInterval(MenuViewModel.backgroudTimePeriod) < Date() {
             navigationCoordinator?.performTransition(transition: .showRelogin)
         }
     }

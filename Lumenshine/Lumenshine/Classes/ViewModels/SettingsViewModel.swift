@@ -46,14 +46,8 @@ class SettingsViewModel: SettingsViewModelType {
     init(service: AuthService, user: User) {
         self.service = service
         self.user = user
-        
         self.entries = [[.changePassword, .change2FA, .biometricAuth, .backupMnemonic, .avatar]]
-        
-        if let touchEnabled = UserDefaults.standard.value(forKey: "touchEnabled") as? Bool {
-            self.touchEnabled = touchEnabled
-        } else {
-            self.touchEnabled = false
-        }
+        self.touchEnabled = BiometricHelper.isTouchEnabled
     }
     
     var tfaSecret: String? {
@@ -86,7 +80,7 @@ class SettingsViewModel: SettingsViewModelType {
     func switchChanged(value: Bool, at indexPath: IndexPath) {
         switch entry(at: indexPath) {
         case .biometricAuth:
-            touchEnable(value: value)
+            enableTouch(value: value)
         default: break
         }
     }
@@ -224,9 +218,9 @@ class SettingsViewModel: SettingsViewModelType {
 }
 
 fileprivate extension SettingsViewModel {
-    func touchEnable(value: Bool) {
+    func enableTouch(value: Bool) {
         touchEnabled = value
-        UserDefaults.standard.setValue(touchEnabled, forKey: "touchEnabled")
+        BiometricHelper.enableTouch(touchEnabled)
     }
     
     func entry(at indexPath: IndexPath) -> SettingsEntry {

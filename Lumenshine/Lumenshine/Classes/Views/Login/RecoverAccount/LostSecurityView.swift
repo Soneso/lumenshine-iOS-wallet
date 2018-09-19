@@ -45,6 +45,8 @@ extension LostSecurityView: LoginViewContentProtocol {
         }
         return true
     }
+    
+    func setTFACode(_ tfaCode: String) {}
 }
 
 
