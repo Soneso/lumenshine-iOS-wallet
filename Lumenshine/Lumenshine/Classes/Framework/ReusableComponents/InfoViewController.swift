@@ -49,13 +49,26 @@ class InfoViewController: UIViewController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIStatusBarStyle.default
+        return .lightContent
+    }
+}
+
+extension InfoViewController: UIViewControllerTransitioningDelegate {
+    
+    func animationController(forPresented presented: UIViewController,
+                             presenting: UIViewController,
+                             source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return ComposePresentTransitionController()
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return ComposeDismissTransitionController()
     }
 }
 
 fileprivate extension InfoViewController {
     func prepareView() {
-        view.backgroundColor = Stylesheet.color(.lightGray)
+        view.backgroundColor = UIColor(red: 243/255.0, green: 243/255.0, blue: 243/255.0, alpha: 1.0)
         prepareTextLabel()
     }
     
@@ -72,28 +85,14 @@ fileprivate extension InfoViewController {
     }
     
     func prepareNavigationItem() {
-        let color = Stylesheet.color(.lightBlack)
-        if let title = titleStr {
-            navigationItem.titleLabel.text = title
-            navigationItem.titleLabel.textColor = color
-        } else {
-            let button = Button(image: R.image.question()?.tint(with: color))
-            button.isEnabled = false
-            button.title = R.string.localizable.info()
-            button.titleLabel?.font = R.font.encodeSansSemiBold(size: 15)
-            button.titleColor = color
-            button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-            navigationItem.centerViews = [button]
-        }
+        
+        navigationItem.titleLabel.text = titleStr
+        navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
+        navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         
         let backButton = Material.IconButton()
-        backButton.image = Icon.close?.tint(with: Stylesheet.color(.lightBlack))
+        backButton.image = Icon.close?.tint(with: Stylesheet.color(.gray))
         backButton.addTarget(self, action: #selector(closeAction(sender:)), for: .touchUpInside)
         navigationItem.leftViews = [backButton]
-        
-        navigationController?.navigationBar.backgroundColor = Stylesheet.color(.white)
-        navigationController?.navigationBar.depthPreset = .depth2
     }
-    
-
 }

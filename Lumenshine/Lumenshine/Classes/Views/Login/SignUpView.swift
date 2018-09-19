@@ -188,15 +188,16 @@ fileprivate extension SignUpView {
     }
     
     func prepareHintButton() {
-        passwordHintButton.image = R.image.question()?.tint(with: Stylesheet.color(.gray))
+        let image = R.image.question()?.resize(toWidth: 20)
+        passwordHintButton.image = image?.tint(with: Stylesheet.color(.gray))
 //        passwordHintButton.shapePreset = .circle
         passwordHintButton.addTarget(self, action: #selector(hintAction(sender:)), for: .touchUpInside)
         
         addSubview(passwordHintButton)
         passwordHintButton.snp.makeConstraints { make in
-            make.right.equalTo(-horizontalSpacing)
+            make.right.equalTo(-8)
             make.centerY.equalTo(textField2)
-            make.width.height.equalTo(20)
+            make.width.height.equalTo(44)
         }
     }
     

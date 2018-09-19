@@ -28,6 +28,7 @@ class HeaderMenuViewController: UIViewController {
         self.items = items
         tableView = UITableView(frame: .zero, style: .plain)
         super.init(nibName: nil, bundle: nil)
+        modalPresentationStyle = .overCurrentContext
     }
     
     required init?(coder aDecoder: NSCoder) {

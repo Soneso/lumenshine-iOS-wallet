@@ -933,7 +933,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 39 images.
+  /// This `R.image` struct is generated, and contains static references to 40 images.
   struct image {
     /// Image `FaceIcon`.
     static let faceIcon = Rswift.ImageResource(bundle: R.hostingBundle, name: "FaceIcon")
@@ -975,6 +975,8 @@ struct R: Rswift.Validatable {
     static let moreActive = Rswift.ImageResource(bundle: R.hostingBundle, name: "moreActive")
     /// Image `more`.
     static let more = Rswift.ImageResource(bundle: R.hostingBundle, name: "more")
+    /// Image `navigation_background`.
+    static let navigation_background = Rswift.ImageResource(bundle: R.hostingBundle, name: "navigation_background")
     /// Image `pencil`.
     static let pencil = Rswift.ImageResource(bundle: R.hostingBundle, name: "pencil")
     /// Image `puzzle-piece`.
@@ -1112,6 +1114,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "moreActive", bundle: ..., traitCollection: ...)`
     static func moreActive(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.moreActive, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "navigation_background", bundle: ..., traitCollection: ...)`
+    static func navigation_background(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.navigation_background, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "pencil", bundle: ..., traitCollection: ...)`

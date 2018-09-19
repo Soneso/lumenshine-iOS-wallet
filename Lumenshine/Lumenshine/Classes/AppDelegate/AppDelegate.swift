@@ -60,12 +60,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             let snapshotView = UINib(nibName: "LockedView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! UIView
             snapshotView.frame = window.frame
-            
-//            let snapshotView = UIView(frame: window.frame)
-//            snapshotView.backgroundColor = Stylesheet.color(.white)
-//            let lockImage = UIImageView(image: R.image.lock()?.tint(with: Stylesheet.color(.cyan)))
-//            snapshotView.addSubview(lockImage)
-//            lockImage.center = snapshotView.center
             window.addSubview(snapshotView)
             self.snapshotView = snapshotView
         }

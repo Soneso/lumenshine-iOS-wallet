@@ -90,6 +90,8 @@
 		4394911E20BEBDFA008D4FA2 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4394911D20BEBDFA008D4FA2 /* SettingsCoordinator.swift */; };
 		43973A8C20BD4B87000145DD /* TFAGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43973A8B20BD4B87000145DD /* TFAGeneration.swift */; };
 		439A182F2100CF8D00F7F5FD /* EmailSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439A182E2100CF8D00F7F5FD /* EmailSetupViewController.swift */; };
+		439BB2FA21527ACE003427A5 /* ComposeTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439BB2F921527ACE003427A5 /* ComposeTransitionController.swift */; };
+		439BB2FC21527B41003427A5 /* ComposeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439BB2FB21527B40003427A5 /* ComposeNavigationController.swift */; };
 		439C476E20D6770900C5DC97 /* AvatarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439C476D20D6770900C5DC97 /* AvatarTableViewCell.swift */; };
 		439E3C8B2107786A0004BB91 /* SettingsEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439E3C8A2107786A0004BB91 /* SettingsEntry.swift */; };
 		439EA26E210AF7240054EA52 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439EA26D210AF7240054EA52 /* ChangePasswordViewController.swift */; };
@@ -425,6 +427,8 @@
 		4394911D20BEBDFA008D4FA2 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
 		43973A8B20BD4B87000145DD /* TFAGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFAGeneration.swift; sourceTree = "<group>"; };
 		439A182E2100CF8D00F7F5FD /* EmailSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSetupViewController.swift; sourceTree = "<group>"; };
+		439BB2F921527ACE003427A5 /* ComposeTransitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeTransitionController.swift; sourceTree = "<group>"; };
+		439BB2FB21527B40003427A5 /* ComposeNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeNavigationController.swift; sourceTree = "<group>"; };
 		439C476D20D6770900C5DC97 /* AvatarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarTableViewCell.swift; sourceTree = "<group>"; };
 		439E3C8A2107786A0004BB91 /* SettingsEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsEntry.swift; sourceTree = "<group>"; };
 		439EA26D210AF7240054EA52 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
@@ -772,6 +776,7 @@
 		4314B9EB204805D4006DBE63 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				439BB2F821527AB0003427A5 /* ComposeTransition */,
 				4391A52C20D141130015A6DA /* ReusableComponents */,
 				43088DA620879874008AE1AB /* Utils */,
 				4319B1872063FA22007CE18D /* TouchID */,
@@ -1037,6 +1042,15 @@
 				43E23995214FA1CB0017AABF /* LSButton.swift */,
 			);
 			path = ReusableComponents;
+			sourceTree = "<group>";
+		};
+		439BB2F821527AB0003427A5 /* ComposeTransition */ = {
+			isa = PBXGroup;
+			children = (
+				439BB2F921527ACE003427A5 /* ComposeTransitionController.swift */,
+				439BB2FB21527B40003427A5 /* ComposeNavigationController.swift */,
+			);
+			path = ComposeTransition;
 			sourceTree = "<group>";
 		};
 		43AE62612135A12100B7A904 /* Fonts */ = {
@@ -2026,6 +2040,7 @@
 				C665871021254A78006499A7 /* ChartsService.swift in Sources */,
 				C69556532126F6F400B0E110 /* TransactionHistoryTableViewController.swift in Sources */,
 				436B366E20512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift in Sources */,
+				439BB2FA21527ACE003427A5 /* ComposeTransitionController.swift in Sources */,
 				43EFF20620493B4900B1887C /* Stylesheet.swift in Sources */,
 				436B367120512114009F7C21 /* FacebookBarBehaviorDefiner.swift in Sources */,
 				435130962121A2DD00168DD3 /* LostSecurityView.swift in Sources */,
@@ -2047,6 +2062,7 @@
 				C672507F213FB5DE0064F6E3 /* InflationManager.swift in Sources */,
 				43F3E36120F3B88E0032D017 /* SignUpView.swift in Sources */,
 				43F3E35F20F3B8780032D017 /* LoginView.swift in Sources */,
+				439BB2FC21527B41003427A5 /* ComposeNavigationController.swift in Sources */,
 				7435EA7520BAD95F008CC667 /* String+Utils.swift in Sources */,
 				74C89996210A3A06009B13EA /* Sequence+Utils.swift in Sources */,
 				C6C0E4DB212570EF00FF1BA8 /* ExchangeRateResponse.swift in Sources */,

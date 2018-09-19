@@ -59,9 +59,6 @@ fileprivate extension LoginCoordinator {
     func showHeaderMenu(items: [(String, String)]) {
         let headerVC = HeaderMenuViewController(items: items)
         headerVC.delegate = self.baseController as? LoginViewController
-        
-        headerVC.modalPresentationStyle = .overCurrentContext
-        
         self.baseController.present(headerVC, animated: true)
     }
     
@@ -97,7 +94,12 @@ fileprivate extension LoginCoordinator {
     func showPasswordHint(_ hint: String, attributedText: NSAttributedString?) {
         let title = R.string.localizable.password_hint_title()
         let textVC = InfoViewController(info: hint, attributedText: attributedText, title: title)
-        baseController.present(AppNavigationController(rootViewController: textVC), animated: true)
+
+        
+        let composeVC = ComposeNavigationController(rootViewController: textVC)
+        composeVC.transitioningDelegate = textVC
+        
+        baseController.present(composeVC, animated: true)
     }
     
     func showSetup(user: User, mnemonic: String, loginResponse: LoginStep2Response) {

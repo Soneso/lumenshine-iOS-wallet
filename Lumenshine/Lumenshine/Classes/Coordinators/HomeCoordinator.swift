@@ -44,9 +44,6 @@ fileprivate extension HomeCoordinator {
     func showHeaderMenu(items: [(String, String)]) {
         let headerVC = HeaderMenuViewController(items: items)
         headerVC.delegate = self.baseController as! HomeViewController
-        
-        headerVC.modalPresentationStyle = .overCurrentContext
-        
         self.baseController.present(headerVC, animated: true)
     }
     
