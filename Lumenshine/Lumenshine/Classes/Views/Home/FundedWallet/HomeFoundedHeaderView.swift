@@ -13,30 +13,47 @@ class HomeFoundedHeaderView: UIView {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var foundAccountButton: UILabel!
-    @IBOutlet weak var sendButton: IconButton!
-    @IBOutlet weak var receiveButton: IconButton!
-    @IBOutlet weak var moreButton: IconButton!
-
+    @IBOutlet weak var sendButton: UITabBarItem!
+    @IBOutlet weak var receiveButton: UITabBarItem!
+    @IBOutlet weak var moreButton: UITabBarItem!
+    @IBOutlet weak var tabBar: UITabBar!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         setup()
     }
     
     private func setup() {
+        setupTabBar()
+        setupButtons()
         titleLabel.text = R.string.localizable.homeScreenTitle()
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 40.0)
-        titleLabel.textColor = Stylesheet.color(.white)
-        
-        sendButton.iconLabel.text = R.string.localizable.send()
-        sendButton.iconImageView.image = UIImage(named: "send")?.tint(with: Stylesheet.color(.white))
-        sendButton.iconLabel.textColor = Stylesheet.color(.white)
-        receiveButton.iconLabel.text = R.string.localizable.receive()
-        receiveButton.iconImageView.image = UIImage(named: "receive")?.tint(with: Stylesheet.color(.white))
-        receiveButton.iconLabel.textColor = Stylesheet.color(.white)
-        moreButton.iconLabel.text = R.string.localizable.more()
-        moreButton.iconImageView.image = UIImage(named: "more")?.tint(with: Stylesheet.color(.white))
-        moreButton.iconLabel.textColor = Stylesheet.color(.white)
     }
     
+    private func setupTabBar() {
+        tabBar.backgroundImage = UIImage.image(with: Stylesheet.color(.clear), size: CGSize(width: 10, height: 10))
+        tabBar.tintColor = Stylesheet.color(.lightBlue)
+        tabBar.unselectedItemTintColor = Stylesheet.color(.darkBlue)
+        tabBar.shadowImage = UIImage.image(with: Stylesheet.color(.clear), size: CGSize(width: 10, height: 10))
+        tabBar.itemWidth = 90
+        tabBar.itemSpacing = 50
+    }
+    
+    private func setupButtons() {
+        var attributes: Dictionary<NSAttributedStringKey, Any>? = nil
+        if let font = R.font.encodeSansRegular(size: 10) {
+            attributes = [NSAttributedStringKey.font : font]
+        }
+        
+        sendButton.setTitleTextAttributes(attributes, for: .normal)
+        sendButton.setTitleTextAttributes(attributes, for: .selected)
+        sendButton.selectedImage = R.image.sendActive()?.tint(with: Stylesheet.color(.white))
+        
+        receiveButton.setTitleTextAttributes(attributes, for: .normal)
+        receiveButton.setTitleTextAttributes(attributes, for: .selected)
+        receiveButton.selectedImage = R.image.receiveActive()?.tint(with: Stylesheet.color(.white))
+        
+        moreButton.setTitleTextAttributes(attributes, for: .normal)
+        moreButton.setTitleTextAttributes(attributes, for: .selected)
+        moreButton.selectedImage = R.image.moreActive()?.tint(with: Stylesheet.color(.white))
+    }
 }

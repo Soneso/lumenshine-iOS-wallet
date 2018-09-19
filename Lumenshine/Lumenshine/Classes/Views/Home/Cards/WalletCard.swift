@@ -67,9 +67,9 @@ class WalletCard: CardView {
     var status: WalletStatus! {
         didSet {
             switch status {
-            case .founded:
+            case .founded?:
                 addFoundedView()
-            case .unfounded:
+            case .unfounded?:
                 addUnfoundedView()
             default:
                 print("error")
@@ -181,11 +181,8 @@ fileprivate extension WalletCard {
             
             (viewController as! WalletActionsProtocol).wallet = (viewModel as! WalletCardViewModel).wallet
             (viewController as! WalletActionsProtocol).closeAction = { [weak self] in
-                viewController.willMove(toParentViewController: parentViewController)
-                viewController.view.removeFromSuperview()
-                viewController.removeFromParentViewController()
-                self?.reloadCellAction?()
-                self?.expanded = false
+                self?.closeViewController(viewController: viewController)
+                self?.resetScrollView()
             }
             
             parentViewController.addChildViewController(viewController)
@@ -203,7 +200,15 @@ fileprivate extension WalletCard {
     }
     
     private func resetScrollView() {
-        (viewController as! HomeViewController).tableView.scrollToRow(at: IndexPath(row: (viewController as! HomeViewController).dataSourceItems.index(of: self)!, section: 0), at: UITableViewScrollPosition.none, animated: false)
+        (viewController as! HomeViewController).tableView.scrollToRow(at: IndexPath(row: (viewController as! HomeViewController).dataSourceItems.index(of: self)!, section: 0), at: UITableViewScrollPosition.none, animated: true)
+    }
+    
+    private func closeViewController(viewController: UIViewController) {
+        viewController.willMove(toParentViewController: viewController)
+        viewController.view.removeFromSuperview()
+        viewController.removeFromParentViewController()
+        reloadCellAction?()
+        expanded = false
     }
     
     private func closeAllWalletActionsViewControllers() {
@@ -211,7 +216,7 @@ fileprivate extension WalletCard {
             for viewController in childControllers {
                 if let walletActionViewController = viewController as? WalletActionsProtocol {
                     if walletActionViewController.wallet.name == (viewModel as! WalletCardViewModel).wallet?.name {
-                        walletActionViewController.closeAction?()
+                        closeViewController(viewController: viewController)
                     }
                 }
             }

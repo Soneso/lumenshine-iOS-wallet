@@ -933,7 +933,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 36 images.
+  /// This `R.image` struct is generated, and contains static references to 39 images.
   struct image {
     /// Image `FaceIcon`.
     static let faceIcon = Rswift.ImageResource(bundle: R.hostingBundle, name: "FaceIcon")
@@ -971,6 +971,8 @@ struct R: Rswift.Validatable {
     static let logo = Rswift.ImageResource(bundle: R.hostingBundle, name: "logo")
     /// Image `lost_2fa`.
     static let lost_2fa = Rswift.ImageResource(bundle: R.hostingBundle, name: "lost_2fa")
+    /// Image `moreActive`.
+    static let moreActive = Rswift.ImageResource(bundle: R.hostingBundle, name: "moreActive")
     /// Image `more`.
     static let more = Rswift.ImageResource(bundle: R.hostingBundle, name: "more")
     /// Image `pencil`.
@@ -981,10 +983,14 @@ struct R: Rswift.Validatable {
     static let qr_placeholder = Rswift.ImageResource(bundle: R.hostingBundle, name: "qr_placeholder")
     /// Image `question`.
     static let question = Rswift.ImageResource(bundle: R.hostingBundle, name: "question")
+    /// Image `receiveActive`.
+    static let receiveActive = Rswift.ImageResource(bundle: R.hostingBundle, name: "receiveActive")
     /// Image `receive`.
     static let receive = Rswift.ImageResource(bundle: R.hostingBundle, name: "receive")
     /// Image `rocket`.
     static let rocket = Rswift.ImageResource(bundle: R.hostingBundle, name: "rocket")
+    /// Image `sendActive`.
+    static let sendActive = Rswift.ImageResource(bundle: R.hostingBundle, name: "sendActive")
     /// Image `send`.
     static let send = Rswift.ImageResource(bundle: R.hostingBundle, name: "send")
     /// Image `signIn`.
@@ -1103,6 +1109,11 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.more, compatibleWith: traitCollection)
     }
     
+    /// `UIImage(named: "moreActive", bundle: ..., traitCollection: ...)`
+    static func moreActive(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.moreActive, compatibleWith: traitCollection)
+    }
+    
     /// `UIImage(named: "pencil", bundle: ..., traitCollection: ...)`
     static func pencil(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.pencil, compatibleWith: traitCollection)
@@ -1128,6 +1139,11 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.receive, compatibleWith: traitCollection)
     }
     
+    /// `UIImage(named: "receiveActive", bundle: ..., traitCollection: ...)`
+    static func receiveActive(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.receiveActive, compatibleWith: traitCollection)
+    }
+    
     /// `UIImage(named: "rocket", bundle: ..., traitCollection: ...)`
     static func rocket(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.rocket, compatibleWith: traitCollection)
@@ -1136,6 +1152,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "send", bundle: ..., traitCollection: ...)`
     static func send(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.send, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "sendActive", bundle: ..., traitCollection: ...)`
+    static func sendActive(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.sendActive, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "signIn", bundle: ..., traitCollection: ...)`
@@ -3608,8 +3629,10 @@ struct _R: Rswift.Validatable {
       try _WalletCardContentView.validate()
       try _AccountDetailsViewController.validate()
       try _LockedView.validate()
+      try _HomeUnfoundedHeaderView.validate()
       try _ReceivePaymentCardViewController.validate()
       try _FoundAccountViewController.validate()
+      try _HomeFoundedHeaderView.validate()
       try _WalletCardInfoViewController.validate()
     }
     
@@ -3694,7 +3717,7 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    struct _HomeFoundedHeaderView: Rswift.NibResourceType {
+    struct _HomeFoundedHeaderView: Rswift.NibResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "HomeFoundedHeaderView"
       
@@ -3702,15 +3725,26 @@ struct _R: Rswift.Validatable {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HomeFoundedHeaderView
       }
       
+      static func validate() throws {
+        if UIKit.UIImage(named: "logo", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'logo' is used in nib 'HomeFoundedHeaderView', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "send", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'send' is used in nib 'HomeFoundedHeaderView', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "receive", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'receive' is used in nib 'HomeFoundedHeaderView', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "more", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'more' is used in nib 'HomeFoundedHeaderView', but couldn't be loaded.") }
+      }
+      
       fileprivate init() {}
     }
     
-    struct _HomeUnfoundedHeaderView: Rswift.NibResourceType {
+    struct _HomeUnfoundedHeaderView: Rswift.NibResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "HomeUnfoundedHeaderView"
       
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> HomeUnfoundedHeaderView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HomeUnfoundedHeaderView
+      }
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "logo", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'logo' is used in nib 'HomeUnfoundedHeaderView', but couldn't be loaded.") }
       }
       
       fileprivate init() {}
