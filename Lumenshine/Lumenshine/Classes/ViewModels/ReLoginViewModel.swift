@@ -55,7 +55,7 @@ class ReLoginViewModel : LoginViewModel {
     }
     
     override var hintText: String? {
-        let text = biometricType() == .faceID ? "face recognition" : "fingerprint"
+        let text = biometricType() == .faceID ? R.string.localizable.face_recognition() : R.string.localizable.fingerprint()
         return R.string.localizable.hint_face_fingerprint(text, text)
     }
     

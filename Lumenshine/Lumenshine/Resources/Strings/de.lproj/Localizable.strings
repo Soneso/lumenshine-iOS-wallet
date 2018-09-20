@@ -227,13 +227,13 @@
 "about" = "Über uns";
 
 /*  */
-"fingerprint" = "Fingerabdruck aktivieren";
+"fingerprint" = "Fingerabdruckerkennung";
 
 /*  */
-"face_recognition" = "Gesichtserkennung aktivieren";
+"face_recognition" = "Gesichtserkennung";
 
 /*  */
-"hint_face_fingerprint" = "Bei Aktivierung wird die App dein %@ anfordern statt dem Passwort. Das Eingeben des Passworts wird nicht mehr bei jedem Start der App gefordert. Um %@ einzurichten gebe bitte als erstes dein Passwort ein.";
+"hint_face_fingerprint" = "Bei Aktivierung wird die App deine %@ anfordern statt dem Passwort. Das Eingeben deines Passworts wird nicht mehr bei jedem Start der App benötigt. Um die %@ zu aktivieren gebe bitte als erstes dein Passwort ein.";
 
 /*  */
 "enabled" = "Eingeschalten";
