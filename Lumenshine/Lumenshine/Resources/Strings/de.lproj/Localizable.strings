@@ -8,157 +8,160 @@
  */
 
 /*  */
-"error" = "Error";
+"error" = "Fehler";
 
 /*  */
 "ok" = "OK";
 
 /*  */
-"done" = "Done";
+"done" = "Fertig";
 
 /*  */
 "info" = "Info";
 
 /*  */
-"next" = "Next";
+"next" = "Weiter";
 
 /*  */
-"continue" = "Continue";
+"continue" = "Fortsetzen";
 
 /*  */
-"powered_by" = "Powered by";
+"powered_by" = "Entwicklt von";
 
 /*  */
-"save" = "Save";
+"save" = "Speichern";
 
 /*  */
-"reveal" = "Reveal";
+"reveal" = "Anzeigen";
 
 /*  */
-"close" = "Close";
+"close" = "Schließen";
 
 /*  */
-"open" = "Open";
+"open" = "Öffnen";
 
 /*  */
-"updated" = "Updated %@";
+"updated" = "Aktualisiert %@";
 
 /*  */
-"delete" = "Delete";
+"delete" = "Löschen";
 
 /*  */
-"remove" = "Remove";
+"remove" = "Entfernen";
 
 /*  */
-"send" = "Send";
+"refresh" = "Refresh";
+
+/*  */
+"send" = "Senden";
 
 /*  */
 "login" = "Login";
 
 /*  */
-"register" = "Register";
+"register" = "Registrieren";
 
 /*  */
-"login_continue" = "Login to continue";
+"login_continue" = "Einloggen um fortzufahren";
 
 /*  */
-"login_fill" = "Please fill in the form below with valid information";
+"login_fill" = "Bitte füllen sie das folgende Formular mit gültigen Daten aus";
 
 /*  */
-"logout" = "Log Out";
+"logout" = "Ausloggen";
 
 /*  */
-"signout" = "Sign Out";
+"signout" = "Ausloggen";
 
 /*  */
-"signup" = "Sign up";
+"signup" = "Registrieren";
 
 /*  */
-"lost_password" = "Lost Password";
+"lost_password" = "Passwort verloren";
 
 /*  */
-"forgot_password" = "Forgot password";
+"forgot_password" = "Passwort vergessen";
 
 /*  */
-"reset_password" = "Reset password";
+"reset_password" = "Passwort zurücksetzen";
 
 /*  */
 "2fa_secret" = "2FA Secret";
 
 /*  */
-"lost_2fa" = "Lost 2FA Secret";
+"lost_2fa" = "2FA Secret verloren";
 
 /*  */
-"reset_2fa" = "Reset 2fa";
+"reset_2fa" = "2FA zurücksetzen";
 
 /*  */
-"import_mnemonic" = "Import mnemonic";
+"import_mnemonic" = "Mnemonic import";
 
 /*  */
-"step_3" = "step %@ of 3";
+"step_3" = "Schritt %@ von 3";
 
 /*  */
 "email" = "Email";
 
 /*  */
-"cancel" = "Cancel";
+"cancel" = "Abbrechen";
 
 /*  */
-"submit" = "Submit";
+"submit" = "Senden";
 
 /*  */
-"back" = "Back";
+"back" = "Zurück";
 
 /*  */
-"sell" = "Sell";
+"sell" = "Verkaufen";
 
 /*  */
-"scan" = "Scan";
+"scan" = "Scannen";
 
 /*  */
-"receive" = "Receive";
+"receive" = "Empfangen";
 
 /*  */
 "details" = "Details";
 
 /*  */
-"fund_wallet" = "Fund Wallet";
+"fund_wallet" = "Wallet finanzieren";
 
 /*  */
-"setup_wallet" = "Setup Wallet";
+"setup_wallet" = "Wallet einrichten";
 
 /*  */
-"2FA_secret_copy" = "2FA secret copied to clipboard";
+"2FA_secret_copy" = "2FA secret wure kopiert";
 
 /*  */
-"more" = "More";
+"more" = "Mehr";
 
 /*  */
-"here" = "here";
+"here" = "hier";
 
 /*  */
 "username" = "Username";
 
 /*  */
-"password" = "Password";
+"password" = "Passwort";
 
 /*  */
-"repeat_password" = "Repeat Password";
+"repeat_password" = "Password wiederholen";
 
 /*  */
-"forename" = "Forename";
+"forename" = "Vorname";
 
 /*  */
-"lastname" = "Lastname";
+"lastname" = "Nachname";
 
 /*  */
-"company_name" = "Company name";
+"company_name" = "Firmenname";
 
 /*  */
-"salutation" = "Salutation";
+"salutation" = "Begrüßung";
 
 /*  */
-"title" = "Title";
+"title" = "Titel";
 
 /*  */
 "app_name" = "Lumenshine";
@@ -167,40 +170,40 @@
 "chart_card_title" = "Stellar Lumens (XLM)";
 
 /*  */
-"welcome" = "Welcome";
+"welcome" = "Willkommen";
 
 /*  */
-"welcome_back" = "Welcome back,";
+"welcome_back" = "Willkommen zurück,";
 
 /*  */
-"street_address" = "Street address";
+"street_address" = "Strasse";
 
 /*  */
-"street_number" = "Street number";
+"street_number" = "Hausnummer";
 
 /*  */
-"zip_code" = "Zip code";
+"zip_code" = "PLZ";
 
 /*  */
-"city" = "City";
+"city" = "Stadt";
 
 /*  */
-"state" = "State";
+"state" = "Bundesland";
 
 /*  */
-"country" = "Country";
+"country" = "Land";
 
 /*  */
-"nationality" = "Nationality";
+"nationality" = "Nationalität";
 
 /*  */
-"mobile_phone" = "Mobile phone";
+"mobile_phone" = "Handynummer";
 
 /*  */
-"birthday" = "Birth day";
+"birthday" = "Geburtsdatum";
 
 /*  */
-"birthplace" = "Birth place";
+"birthplace" = "Geburtsort";
 
 /*  */
 "home" = "Home";
@@ -209,106 +212,94 @@
 "wallets" = "Wallets";
 
 /*  */
-"transactions" = "Transactions";
+"transactions" = "Transaktionen";
 
 /*  */
-"currencies" = "Currencies";
+"currencies" = "Währungen";
 
 /*  */
-"contacts" = "Contacts";
+"contacts" = "Kontakte";
 
 /*  */
 "extras" = "Extras";
 
 /*  */
-"settings" = "Settings";
+"settings" = "Einstellungen";
 
 /*  */
-"help" = "Help";
+"help" = "Hilfe";
 
 /*  */
-"about" = "About";
+"about" = "Über uns";
 
 /*  */
-"fingerprint" = "Setup Fingerprint";
+"fingerprint" = "Fingerabdruck aktivieren";
 
 /*  */
-"face_recognition" = "Setup Face Recognition";
+"face_recognition" = "Gesichtserkennung aktivieren";
 
 /*  */
-"hint_face_fingerprint" = "If you make this setup, the app will request your %@ instead of password when opened. Entering the password will not be required each time you open the app. To setup %@ please first insert your password below.";
+"hint_face_fingerprint" = "Bei Aktivierung wird die App Ihren %@ anfordern statt dem Passwort. Das Eingeben des Passworts wird nicht mehr bei jedem Start der App gefordert. Um %@ einzurichten geben Sie bitte als erstes Ihr Passwort ein.";
 
 /*  */
-"touch_id" = "Touch ID";
+"enabled" = "Eingeschalten";
 
 /*  */
-"enabled" = "Enabled";
+"disabled" = "Ausgeschalten";
 
 /*  */
-"disabled" = "Disabled";
+"account_data_title" = "Account spezifische Daten";
 
 /*  */
-"account_different" = "Use another account";
+"user_data_title" = "User spezifische Daten";
 
 /*  */
-"account_data_title" = "Account specific data";
+"lbl_tfa" = "2 Faktor Authentifizierung (2FA)";
 
 /*  */
-"user_data_title" = "User specific data";
+"lbl_tfa_code" = "2 Faktor Authentifizierungs-Code";
 
 /*  */
-"lbl_tfa_secret_authenticator" = "Open Google Authenticator to generate 2FA code with secret: %@";
+"lbl_tfa_secret" = "Ihr 2FA secret: %@";
 
 /*  */
-"lbl_tfa_secret_hint" = "Autogenerated 2FA code with secret: %@";
+"lbl_tfa_hint" = "Aus Sicherheitsgründen muss Ihre Wallet mit 2FA geschützt werden";
 
 /*  */
-"lbl_tfa" = "2 Factor Authentication (2FA)";
-
-/*  */
-"lbl_tfa_code" = "2 Factor Authentication Code";
-
-/*  */
-"lbl_tfa_secret" = "Your 2FA secret: %@";
-
-/*  */
-"lbl_tfa_hint" = "For security reasons, your wallet will be protected by 2FA";
-
-/*  */
-"lbl_tfa_setup" = "To setup 2FA, please:\n\n1. Download a two-factor authenticator app (like Google Authenticator)\n\n2. Copy and enter the above displayed 2FA secret code into the authenticator app\n\n3. Enter the generated 2FA code from the authenticator app and press \"Next\"";
+"lbl_tfa_setup" = "Um 2FA einzurichten:\n\n1. Laden Sie eine 2 Faktor Authenticator App (z.B. Google Authenticator)\n\n2. Kopieren Sie das oben angezeigte 2FA Secret in ihre Authenticator App\n\n3. Geben Sie hier den von der Authenticator App generieten 2FA Code ein und drücken Sie \"Weiter\"";
 
 /*  */
 "tfa_code" = "2FA Code";
 
 /*  */
-"tfa_code_configured" = "2FA Code (if configured)";
+"tfa_code_configured" = "2FA Code (falls eingerichtet)";
 
 /*  */
-"lbl_email_confirmation" = "Email confirmation required";
+"lbl_email_confirmation" = "Die Bestätigung Ihrer Email-Adresse wird benötigt.";
 
 /*  */
-"email_confirmation_hint" = "In order to be able continue the setup process, you need to confirm your email address first. An email with a confirmation link has been sent to your inbox. Please follow the instructions from the mail to confirm your email address.";
+"email_confirmation_hint" = "Um mit der Einrichtung fortfahren zu können, müssen Sie zuerst Ihre Email-Adresse bestätigen. Aus diesem Grund wurde eine Email an Ihr Postfach gesendet. Drücken Sie den Bestätigungs-Link in der erhaltenen Email um Ihre Email-Addresse zu bestätigen.";
 
 /*  */
-"email_confirmation_hint2" = "An email has been sent to your email account. Please check your inbox and confirm your email address first. After doing so, please come back and press the \"Continue\" button to continue.";
+"email_confirmation_hint2" = "Wir haben Ihnen eine Email gesendet. Bitte überprüfen Sie Ihr Postfach und bestätigen Sie Ihre Email-Addresse zuerst. Nach der Bestätigung kommen Sie wieder zurück und drücken Sie den \"Weiter\" Button um fortzufahren.";
 
 /*  */
-"lbl_email_confirmation2" = "Your email address is not confirmed.";
+"lbl_email_confirmation2" = "Ihre Email-Adresse ist nun bestätigt.";
 
 /*  */
-"lbl_please_confirm" = "Please confirm your email address first.";
+"lbl_please_confirm" = "Bitte bestätigen Sie Ihre Email-Address zuerst.";
 
 /*  */
-"email_already_confirmed" = "Already confirmed";
+"email_already_confirmed" = "Bereits bestätigt";
 
 /*  */
-"email_resend_confirmation" = "Resend confirmation mail";
+"email_resend_confirmation" = "Bestätigungsmail erneut senden";
 
 /*  */
-"resend_email" = "Resend email";
+"resend_email" = "Email erneut senden";
 
 /*  */
-"lost_security_email_sent" = "%@ email sent";
+"lost_security_email_sent" = "%@ Email gesendet";
 
 /*  */
 "lost_security_email_hint" = "For resetting your %@, an email has been sent to your email account. Please check your inbox and follow the instructions in the received email to reset your %@.";
