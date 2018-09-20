@@ -458,10 +458,10 @@
 "lbl_today" = "Today";
 
 /*  */
-"lbl_day" = "day";
+"day" = "day";
 
 /*  */
-"lbl_days" = "days";
+"days" = "days";
 
 /*  */
 "user_not_logged_in" = "User is not logged in";

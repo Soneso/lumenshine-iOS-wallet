@@ -9,21 +9,40 @@
 import Foundation
 
 class ChartCardViewModel: CardViewModelType {
+    
+    static let selectedPeriodKey = "selectedPeriodIndex"
+    
     weak var navigationCoordinator: CoordinatorType?
     
     fileprivate var card: Card?
     fileprivate let service: ChartsService
     private(set) var exchangeRates: ChartExchangeRatesResponse?
-    fileprivate let periodValues: [Int32]
+    fileprivate let periodValues: [Int]
+    fileprivate let periodLabels: [String]
     private(set) var selectedPeriodIndex: Int
     
     var reloadClosure: ((ChartExchangeRatesResponse) -> ())?
     
     init(service: ChartsService) {
         self.service = service
-        self.periodValues = [1,2,3,4,5,6,7]
-        self.selectedPeriodIndex = 6
-        periodSelected(at: 6)
+        self.periodValues = [1, 12, 24, 3*24, 7*24, 2*365, 6*365, 12*365, 24*365]
+        self.periodLabels = [
+            "1 \(R.string.localizable.hour())",
+            "12 \(R.string.localizable.hours())",
+            "1 \(R.string.localizable.day())",
+            "3 \(R.string.localizable.days())",
+            "1 \(R.string.localizable.week())",
+            "1 \(R.string.localizable.month())",
+            "3 \(R.string.localizable.months())",
+            "6 \(R.string.localizable.months())",
+            "1 \(R.string.localizable.year())"
+        ]
+        if let selectedIndex = UserDefaults.standard.value(forKey: ChartCardViewModel.selectedPeriodKey) as? Int {
+            self.selectedPeriodIndex = selectedIndex
+        } else {
+            self.selectedPeriodIndex = 4
+        }
+        periodSelected(at: selectedPeriodIndex)
     }
     
     var type: CardType {
@@ -42,11 +61,7 @@ class ChartCardViewModel: CardViewModelType {
     }
     
     var periodOptions: [String] {
-        var opt = ["1 \(R.string.localizable.lbl_day())"]
-        for i in 2...7 {
-            opt.append("\(i) \(R.string.localizable.lbl_days())")
-        }
-        return opt
+        return periodLabels
     }
     
     var imageURL: URL? {
@@ -67,7 +82,9 @@ class ChartCardViewModel: CardViewModelType {
     
     var detail: String? {
         var updateStr = exchangeRates?.lastUpdateDate ?? ""
-        if let date = exchangeRates?.lastUpdateDate,
+        // TODO: use lastUpdateDate when format is valid
+//        if let date = exchangeRates?.lastUpdateDate,
+        if let date = DateUtils.format(Date(), in: .dateAndTime),
             let updated = DateUtils.format(date, in: .dateAndTime) {
             updateStr = R.string.localizable.updated(DateUtils.longString(from: updated))
         }
@@ -92,23 +109,18 @@ class ChartCardViewModel: CardViewModelType {
     }
     
     var bottomTitles: [String]? {
-        return [R.string.localizable.remove()]
+        return [R.string.localizable.refresh()]
     }
     
     func barButtonSelected(at index: Int) {
-        switch type {
-        case .web:
-            guard let url = linkURL else { return }
-            navigationCoordinator?.performTransition(transition: .showOnWeb(url))
-        default:
-            break
-        }
+        periodSelected(at: selectedPeriodIndex)
     }
     
     func periodSelected(at index: Int) {
         selectedPeriodIndex = index
+        UserDefaults.standard.setValue(index, forKey:ChartCardViewModel.selectedPeriodKey)
         
-        service.getChartExchangeRates(assetCode: "MOBI", issuerPublicKey: "GA6HCMBLTZS5VYYBCATRBRZ3BZJMAFUDKYYF6AH6MVCMGWMRDNSWJPIH", destinationCurrency: "USD", timeRange: periodValues[selectedPeriodIndex]*24) { [weak self] result in
+        service.getChartExchangeRates(assetCode: "MOBI", issuerPublicKey: "GA6HCMBLTZS5VYYBCATRBRZ3BZJMAFUDKYYF6AH6MVCMGWMRDNSWJPIH", destinationCurrency: "USD", timeRange: Int32(periodValues[selectedPeriodIndex])) { [weak self] result in
             switch result {
             case .success(let exchangeRates):
                 self?.exchangeRates = exchangeRates

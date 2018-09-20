@@ -56,6 +56,9 @@
 "remove" = "Remove";
 
 /*  */
+"refresh" = "Refresh";
+
+/*  */
 "send" = "Send";
 
 /*  */
@@ -461,10 +464,34 @@
 "lbl_today" = "Today";
 
 /*  */
-"lbl_day" = "day";
+"hour" = "hour";
 
 /*  */
-"lbl_days" = "days";
+"hours" = "hours";
+
+/*  */
+"day" = "day";
+
+/*  */
+"days" = "days";
+
+/*  */
+"week" = "week";
+
+/*  */
+"weeks" = "weeks";
+
+/*  */
+"month" = "month";
+
+/*  */
+"months" = "months";
+
+/*  */
+"year" = "year";
+
+/*  */
+"years" = "years";
 
 /*  */
 "user_not_logged_in" = "User is not logged in";

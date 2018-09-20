@@ -90,7 +90,7 @@ class HomeViewModel : HomeViewModelType {
                 for wallet in wallets {
                     let viewModel = WalletCardViewModel(wallet: wallet)
                     viewModel.navigationCoordinator = self.navigationCoordinator
-                    self.cardViewModels.append(viewModel)
+                    self.cardViewModels.insert(viewModel, at: 0)
                     
                     self.reloadClosure?()
                 }

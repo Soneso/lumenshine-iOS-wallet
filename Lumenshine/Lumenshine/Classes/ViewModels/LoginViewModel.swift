@@ -230,6 +230,7 @@ class LoginViewModel : LoginViewModelType {
         BaseService.removeToken()
         BiometricHelper.UserMnemonic = nil
         BiometricHelper.enableTouch(false)
+        UserDefaults.standard.setValue(nil, forKey:ChartCardViewModel.selectedPeriodKey)
     }
 }
 
