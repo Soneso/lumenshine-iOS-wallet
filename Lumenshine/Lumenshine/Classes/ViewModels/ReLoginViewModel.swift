@@ -47,7 +47,7 @@ class ReLoginViewModel : LoginViewModel {
     }
     
     override var headerTitle: String {
-        return R.string.localizable.welcome_back()
+        return R.string.localizable.welcome()
     }
     
     override var headerDetail: String {

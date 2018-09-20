@@ -1531,7 +1531,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 195 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 186 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -1593,14 +1593,14 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let lbl_tfa_code = Rswift.StringResource(key: "lbl_tfa_code", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: 2FA CODE (if configured)
+      /// 
+      /// Locales: en, de
+      static let tfa_code_configured = Rswift.StringResource(key: "tfa_code_configured", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: 2FA Code
       /// 
       /// Locales: en, de
       static let tfa_code = Rswift.StringResource(key: "tfa_code", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: 2FA Code (if configured)
-      /// 
-      /// Locales: en, de
-      static let tfa_code_configured = Rswift.StringResource(key: "tfa_code_configured", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: 2FA Secret
       /// 
       /// Locales: en, de
@@ -1633,10 +1633,6 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let email_confirmation_hint2 = Rswift.StringResource(key: "email_confirmation_hint2", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: Anonymous
-      /// 
-      /// Locales: en, de
-      static let unknown = Rswift.StringResource(key: "unknown", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Avatar
       /// 
       /// Locales: en, de
@@ -1645,7 +1641,7 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let back = Rswift.StringResource(key: "back", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: Backup Secret/Mnemonic
+      /// en translation: Backup Secret (Mnemonic)
       /// 
       /// Locales: en, de
       static let backup_mnemonic = Rswift.StringResource(key: "backup_mnemonic", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
@@ -1713,10 +1709,6 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let delete = Rswift.StringResource(key: "delete", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: Delete
-      /// 
-      /// Locales: en, de
-      static let lbl_delete = Rswift.StringResource(key: "lbl_delete", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Deposit money
       /// 
       /// Locales: en, de
@@ -1813,10 +1805,6 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let home = Rswift.StringResource(key: "home", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: I have written it down
-      /// 
-      /// Locales: en, de
-      static let lbl_mnemonic_button_title = Rswift.StringResource(key: "lbl_mnemonic_button_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: If you cancel, the 2FA secret will not be changed
       /// 
       /// Locales: en, de
@@ -1865,10 +1853,6 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let lastname = Rswift.StringResource(key: "lastname", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: Let's go
-      /// 
-      /// Locales: en, de
-      static let go = Rswift.StringResource(key: "go", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Log Out
       /// 
       /// Locales: en, de
@@ -1901,10 +1885,6 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let lbl_month_suffix = Rswift.StringResource(key: "lbl_month_suffix", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: Message
-      /// 
-      /// Locales: en, de
-      static let lbl_message = Rswift.StringResource(key: "lbl_message", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Mobile phone
       /// 
       /// Locales: en, de
@@ -1965,10 +1945,6 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let login_fill = Rswift.StringResource(key: "login_fill", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: Please write down and safely store this phrase. It's the ONLY WAY to retrieve your wallet.
-      /// 
-      /// Locales: en, de
-      static let lbl_mnemonic_title = Rswift.StringResource(key: "lbl_mnemonic_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Please write down your backup secret (mnemonic). You can use it if you lose your password to recover your wallet. It can be also used in other apps / wallets that support import from mnemonic. If you lose your password and the mnemonic you will not be able to access your funds any more. We can not recover your account if you lose both (password and mnemonic). We do not store password and mnemonic.
       /// 
       /// Locales: en, de
@@ -1977,10 +1953,6 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let position = Rswift.StringResource(key: "position", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: Powered by
-      /// 
-      /// Locales: en, de
-      static let powered_by = Rswift.StringResource(key: "powered_by", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Prove noting of mnemonic
       /// 
       /// Locales: en, de
@@ -1993,10 +1965,6 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let receive = Rswift.StringResource(key: "receive", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: Recommend
-      /// 
-      /// Locales: en, de
-      static let lbl_recommend = Rswift.StringResource(key: "lbl_recommend", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Refresh
       /// 
       /// Locales: en, de
@@ -2045,10 +2013,6 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let salutation = Rswift.StringResource(key: "salutation", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: Save
-      /// 
-      /// Locales: en, de
-      static let lbl_save = Rswift.StringResource(key: "lbl_save", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Save
       /// 
       /// Locales: en, de
@@ -2177,10 +2141,6 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let welcome = Rswift.StringResource(key: "welcome", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: Welcome back,
-      /// 
-      /// Locales: en, de
-      static let welcome_back = Rswift.StringResource(key: "welcome_back", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Withdraw money
       /// 
       /// Locales: en, de
@@ -2237,6 +2197,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let hours = Rswift.StringResource(key: "hours", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: loading
+      /// 
+      /// Locales: en, de
+      static let loading = Rswift.StringResource(key: "loading", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: m
       /// 
       /// Locales: en, de
@@ -2419,18 +2383,18 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("lbl_tfa_code", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: 2FA CODE (if configured)
+      /// 
+      /// Locales: en, de
+      static func tfa_code_configured(_: Void = ()) -> String {
+        return NSLocalizedString("tfa_code_configured", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: 2FA Code
       /// 
       /// Locales: en, de
       static func tfa_code(_: Void = ()) -> String {
         return NSLocalizedString("tfa_code", bundle: R.hostingBundle, comment: "")
-      }
-      
-      /// en translation: 2FA Code (if configured)
-      /// 
-      /// Locales: en, de
-      static func tfa_code_configured(_: Void = ()) -> String {
-        return NSLocalizedString("tfa_code_configured", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: 2FA Secret
@@ -2489,13 +2453,6 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("email_confirmation_hint2", bundle: R.hostingBundle, comment: "")
       }
       
-      /// en translation: Anonymous
-      /// 
-      /// Locales: en, de
-      static func unknown(_: Void = ()) -> String {
-        return NSLocalizedString("unknown", bundle: R.hostingBundle, comment: "")
-      }
-      
       /// en translation: Avatar
       /// 
       /// Locales: en, de
@@ -2510,7 +2467,7 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("back", bundle: R.hostingBundle, comment: "")
       }
       
-      /// en translation: Backup Secret/Mnemonic
+      /// en translation: Backup Secret (Mnemonic)
       /// 
       /// Locales: en, de
       static func backup_mnemonic(_: Void = ()) -> String {
@@ -2627,13 +2584,6 @@ struct R: Rswift.Validatable {
       /// Locales: en, de
       static func delete(_: Void = ()) -> String {
         return NSLocalizedString("delete", bundle: R.hostingBundle, comment: "")
-      }
-      
-      /// en translation: Delete
-      /// 
-      /// Locales: en, de
-      static func lbl_delete(_: Void = ()) -> String {
-        return NSLocalizedString("lbl_delete", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Deposit money
@@ -2804,13 +2754,6 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("home", bundle: R.hostingBundle, comment: "")
       }
       
-      /// en translation: I have written it down
-      /// 
-      /// Locales: en, de
-      static func lbl_mnemonic_button_title(_: Void = ()) -> String {
-        return NSLocalizedString("lbl_mnemonic_button_title", bundle: R.hostingBundle, comment: "")
-      }
-      
       /// en translation: If you cancel, the 2FA secret will not be changed
       /// 
       /// Locales: en, de
@@ -2895,13 +2838,6 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("lastname", bundle: R.hostingBundle, comment: "")
       }
       
-      /// en translation: Let's go
-      /// 
-      /// Locales: en, de
-      static func go(_: Void = ()) -> String {
-        return NSLocalizedString("go", bundle: R.hostingBundle, comment: "")
-      }
-      
       /// en translation: Log Out
       /// 
       /// Locales: en, de
@@ -2956,13 +2892,6 @@ struct R: Rswift.Validatable {
       /// Locales: en, de
       static func lbl_month_suffix(_: Void = ()) -> String {
         return NSLocalizedString("lbl_month_suffix", bundle: R.hostingBundle, comment: "")
-      }
-      
-      /// en translation: Message
-      /// 
-      /// Locales: en, de
-      static func lbl_message(_: Void = ()) -> String {
-        return NSLocalizedString("lbl_message", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Mobile phone
@@ -3070,13 +2999,6 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("login_fill", bundle: R.hostingBundle, comment: "")
       }
       
-      /// en translation: Please write down and safely store this phrase. It's the ONLY WAY to retrieve your wallet.
-      /// 
-      /// Locales: en, de
-      static func lbl_mnemonic_title(_: Void = ()) -> String {
-        return NSLocalizedString("lbl_mnemonic_title", bundle: R.hostingBundle, comment: "")
-      }
-      
       /// en translation: Please write down your backup secret (mnemonic). You can use it if you lose your password to recover your wallet. It can be also used in other apps / wallets that support import from mnemonic. If you lose your password and the mnemonic you will not be able to access your funds any more. We can not recover your account if you lose both (password and mnemonic). We do not store password and mnemonic.
       /// 
       /// Locales: en, de
@@ -3089,13 +3011,6 @@ struct R: Rswift.Validatable {
       /// Locales: en, de
       static func position(_: Void = ()) -> String {
         return NSLocalizedString("position", bundle: R.hostingBundle, comment: "")
-      }
-      
-      /// en translation: Powered by
-      /// 
-      /// Locales: en, de
-      static func powered_by(_: Void = ()) -> String {
-        return NSLocalizedString("powered_by", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Prove noting of mnemonic
@@ -3117,13 +3032,6 @@ struct R: Rswift.Validatable {
       /// Locales: en, de
       static func receive(_: Void = ()) -> String {
         return NSLocalizedString("receive", bundle: R.hostingBundle, comment: "")
-      }
-      
-      /// en translation: Recommend
-      /// 
-      /// Locales: en, de
-      static func lbl_recommend(_: Void = ()) -> String {
-        return NSLocalizedString("lbl_recommend", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Refresh
@@ -3208,13 +3116,6 @@ struct R: Rswift.Validatable {
       /// Locales: en, de
       static func salutation(_: Void = ()) -> String {
         return NSLocalizedString("salutation", bundle: R.hostingBundle, comment: "")
-      }
-      
-      /// en translation: Save
-      /// 
-      /// Locales: en, de
-      static func lbl_save(_: Void = ()) -> String {
-        return NSLocalizedString("lbl_save", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Save
@@ -3441,13 +3342,6 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("welcome", bundle: R.hostingBundle, comment: "")
       }
       
-      /// en translation: Welcome back,
-      /// 
-      /// Locales: en, de
-      static func welcome_back(_: Void = ()) -> String {
-        return NSLocalizedString("welcome_back", bundle: R.hostingBundle, comment: "")
-      }
-      
       /// en translation: Withdraw money
       /// 
       /// Locales: en, de
@@ -3544,6 +3438,13 @@ struct R: Rswift.Validatable {
       /// Locales: en
       static func hours(_: Void = ()) -> String {
         return NSLocalizedString("hours", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: loading
+      /// 
+      /// Locales: en, de
+      static func loading(_: Void = ()) -> String {
+        return NSLocalizedString("loading", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: m

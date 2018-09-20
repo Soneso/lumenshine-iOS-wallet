@@ -78,7 +78,7 @@ class SetupViewModel: SetupViewModelType {
     }
     
     var headerTitle: String {
-        return R.string.localizable.welcome_back()
+        return R.string.localizable.welcome()
     }
     
     var headerDetail: String {

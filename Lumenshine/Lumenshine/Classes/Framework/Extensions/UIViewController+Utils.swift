@@ -15,7 +15,7 @@ typealias okActionClosure = () -> Void
 extension UIViewController {
     
     func showActivity() {
-        let alert = UIAlertController(title: nil, message: "Loading", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: R.string.localizable.loading(), preferredStyle: .alert)
         
         let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         loadingIndicator.hidesWhenStopped = true

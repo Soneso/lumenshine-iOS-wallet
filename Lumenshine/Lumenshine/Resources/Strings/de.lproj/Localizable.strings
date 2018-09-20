@@ -26,9 +26,6 @@
 "continue" = "Fortsetzen";
 
 /*  */
-"powered_by" = "Entwicklt von";
-
-/*  */
 "save" = "Speichern";
 
 /*  */
@@ -62,10 +59,10 @@
 "register" = "Registrieren";
 
 /*  */
-"login_continue" = "Einloggen um fortzufahren";
+"login_continue" = "EINLOGGEN";
 
 /*  */
-"login_fill" = "Bitte füllen sie das folgende Formular mit gültigen Daten aus";
+"login_fill" = "Bitte fülle folgendes Formular mit gültigen Daten aus.";
 
 /*  */
 "logout" = "Ausloggen";
@@ -95,7 +92,7 @@
 "reset_2fa" = "2FA zurücksetzen";
 
 /*  */
-"import_mnemonic" = "Mnemonic import";
+"import_mnemonic" = "Mnemonic importieren";
 
 /*  */
 "step_3" = "Schritt %@ von 3";
@@ -173,9 +170,6 @@
 "welcome" = "Willkommen";
 
 /*  */
-"welcome_back" = "Willkommen zurück,";
-
-/*  */
 "street_address" = "Strasse";
 
 /*  */
@@ -239,7 +233,7 @@
 "face_recognition" = "Gesichtserkennung aktivieren";
 
 /*  */
-"hint_face_fingerprint" = "Bei Aktivierung wird die App Ihren %@ anfordern statt dem Passwort. Das Eingeben des Passworts wird nicht mehr bei jedem Start der App gefordert. Um %@ einzurichten geben Sie bitte als erstes Ihr Passwort ein.";
+"hint_face_fingerprint" = "Bei Aktivierung wird die App dein %@ anfordern statt dem Passwort. Das Eingeben des Passworts wird nicht mehr bei jedem Start der App gefordert. Um %@ einzurichten gebe bitte als erstes dein Passwort ein.";
 
 /*  */
 "enabled" = "Eingeschalten";
@@ -260,40 +254,40 @@
 "lbl_tfa_code" = "2 Faktor Authentifizierungs-Code";
 
 /*  */
-"lbl_tfa_secret" = "Ihr 2FA secret: %@";
+"lbl_tfa_secret" = "Dein 2FA Secret: %@";
 
 /*  */
-"lbl_tfa_hint" = "Aus Sicherheitsgründen muss Ihre Wallet mit 2FA geschützt werden";
+"lbl_tfa_hint" = "Aus Sicherheitsgründen muss deine Wallet mit 2FA geschützt werden";
 
 /*  */
-"lbl_tfa_setup" = "Um 2FA einzurichten:\n\n1. Laden Sie eine 2 Faktor Authenticator App (z.B. Google Authenticator)\n\n2. Kopieren Sie das oben angezeigte 2FA Secret in ihre Authenticator App\n\n3. Geben Sie hier den von der Authenticator App generieten 2FA Code ein und drücken Sie \"Weiter\"";
+"lbl_tfa_setup" = "Um 2FA einzurichten:\n\n1. Lade eine 2 Faktor Authenticator App (z.B. Google Authenticator).\n\n2. Kopiere das oben angezeigte 2FA Secret in deine Authenticator App.\n\n3. Gebe hier den von der Authenticator App generieten 2FA Code ein und drücke \"Weiter\".";
 
 /*  */
-"tfa_code" = "2FA Code";
+"tfa_code" = "2FA CODE hier eingeben";
 
 /*  */
-"tfa_code_configured" = "2FA Code (falls eingerichtet)";
+"tfa_code_configured" = "2FA CODE (falls eingerichtet)";
 
 /*  */
-"lbl_email_confirmation" = "Die Bestätigung Ihrer Email-Adresse wird benötigt.";
+"lbl_email_confirmation" = "Die Bestätigung deiner Email-Adresse wird benötigt.";
 
 /*  */
-"email_confirmation_hint" = "Um mit der Einrichtung fortfahren zu können, müssen Sie zuerst Ihre Email-Adresse bestätigen. Aus diesem Grund wurde eine Email an Ihr Postfach gesendet. Drücken Sie den Bestätigungs-Link in der erhaltenen Email um Ihre Email-Addresse zu bestätigen.";
+"email_confirmation_hint" = "Um mit der Einrichtung fortfahren zu können, müsst du zuerst deine Email-Adresse bestätigen. Aus diesem Grund haben wir eine Email an dein Postfach gesendet. Drücke den Bestätigungs-Link in der erhaltenen Email um deine Email-Addresse zu bestätigen.";
 
 /*  */
-"email_confirmation_hint2" = "Wir haben Ihnen eine Email gesendet. Bitte überprüfen Sie Ihr Postfach und bestätigen Sie Ihre Email-Addresse zuerst. Nach der Bestätigung kommen Sie wieder zurück und drücken Sie den \"Weiter\" Button um fortzufahren.";
+"email_confirmation_hint2" = "Wir haben dir eine Email gesendet. Bitte überprüfe dein Postfach und bestätige deine Email-Addresse zuerst. Nach der Bestätigung komm wieder zurück und drücke den \"Weiter\" Button um fortzufahren.";
 
 /*  */
-"lbl_email_confirmation2" = "Ihre Email-Adresse ist nun bestätigt.";
+"lbl_email_confirmation2" = "Deine Email-Adresse ist nun bestätigt.";
 
 /*  */
-"lbl_please_confirm" = "Bitte bestätigen Sie Ihre Email-Address zuerst.";
+"lbl_please_confirm" = "Bitte bestätige Ihre Email-Address zuerst.";
 
 /*  */
 "email_already_confirmed" = "Bereits bestätigt";
 
 /*  */
-"email_resend_confirmation" = "Bestätigungsmail erneut senden";
+"email_resend_confirmation" = "Erneut senden";
 
 /*  */
 "resend_email" = "Email erneut senden";
@@ -302,124 +296,100 @@
 "lost_security_email_sent" = "%@ Email gesendet";
 
 /*  */
-"lost_security_email_hint" = "For resetting your %@, an email has been sent to your email account. Please check your inbox and follow the instructions in the received email to reset your %@.";
+"lost_security_email_hint" = "Um dein %@ zurück zu setzen haben wir dir eine Email gesendet. Bitte überprüfe dein Postfach und folge den Anweisungen in der Email um dein %@ zurück zu setzen.";
 
 /*  */
-"confirmation_mail_resent" = "Confirmation mail resent";
+"confirmation_mail_resent" = "Bestätigungsmail gesendet";
 
 /*  */
-"email_resent" = "Email resent";
+"email_resent" = "Email erneut gesendet";
 
 /*  */
-"mnemonic_title" = "Note & confirm backup secret (mnemonic)";
+"mnemonic_title" = "Notiere und bestätige dein Backup Secret (Mnemonic)";
 
 /*  */
-"mnemonic_hint_title" = "This step is very important";
+"mnemonic_hint_title" = "Diese Schritt ist sehr wichtig";
 
 /*  */
-"mnemonic_hint_lbl" = "Please write down your backup secret (mnemonic). You can use it if you lose your password to recover your wallet. It can be also used in other apps / wallets that support import from mnemonic. If you lose your password and the mnemonic you will not be able to access your funds any more. We can not recover your account if you lose both (password and mnemonic). We do not store password and mnemonic.";
+"mnemonic_hint_lbl" = "Bitte notiere dein Backup Secret (Mnemonic). Falls du dein Passwort verlieren solltest, kannst du das Mnemonic benutzen um deine Wallet wieder herzustellen. Es kann auch in anderen Apps genutzt werden, die einen Import anbieten. Solltest du dein Passwort und Mnemonic verlieren, hast du keinen Zugriff mehr auf deine Konten. Wir können deine Konten/Wallets dann nicht wieder herstellen. Wir speichern aus Sicherheitsgründen nicht dein Passwort und auch nicht dein Mnemonic.";
 
 /*  */
-"mnemonic_more_lbl" = "Read more about mnemonics";
+"mnemonic_more_lbl" = "Lese mehr über Mnemonics";
 
 /*  */
-"mnemonic_words_title" = "Your Secret (24 words mnemonic):";
+"mnemonic_words_title" = "Dein Backup Secret (24 Worte Mnemonic):";
 
 /*  */
-"mnemonic_words_button_lbl" = "Confirm noting of your mnemonic";
+"mnemonic_words_button_lbl" = "Ich habe es aufgeschrieben";
 
 /*  */
-"verify_mnemonic_title" = "Prove noting of mnemonic";
+"verify_mnemonic_title" = "Zeige uns, dass du dein Mnemonic aufgeschrieben hast!";
 
 /*  */
-"verify_mnemonic_hint" = "To prove the noting of your mnemonic, please complete following quiz.";
+"verify_mnemonic_hint" = "Fülle bitte folgendes Quiz aus:";
 
 /*  */
-"verify_mnemonic_words_title" = "Here are 4 random words from the mnemonic. Please indicate their position within the mnemonic.";
+"verify_mnemonic_words_title" = "Hier werden 4 zufällig gewählte Worte aus deinem Mnemonic angezeigt. Bitte gebe deren Position/Index innerhalb deines Mnemonic an.";
 
 /*  */
-"position" = "Position";
+"position" = "Index";
 
 /*  */
-"finish" = "Finish";
+"finish" = "Abschließen";
 
 /*  */
-"finish_setup" = "Finish setup";
+"finish_setup" = "Einrichtung abschließen";
 
 /*  */
-"back_mnemonic" = "Go back and show mnemonic";
+"back_mnemonic" = "Mnemonic erneut anzeigen";
 
 /*  */
-"deposit" = "Deposit money";
+"deposit" = "Geld einzahlen";
 
 /*  */
-"withdraw" = "Withdraw money";
+"withdraw" = "Geld abheben";
 
 /*  */
-"lbl_mnemonic_title" = "Please write down and safely store this phrase. It's the ONLY WAY to retrieve your wallet.";
+"lbl_moment_year_count" = "vor einem Jahr";
 
 /*  */
-"lbl_mnemonic_button_title" = "I have written it down";
+"x-moment_years" = "vor %1$d Jahren";
 
 /*  */
-"go" = "Let's go";
+"lbl_moment_month_count" = "vor einem Monat";
 
 /*  */
-"unknown" = "Anonymous";
+"x-moment_months" = "vor %1$d Monaten";
 
 /*  */
-"lbl_save" = "Save";
+"lbl_moment_week_count" = "vor einer Woche";
 
 /*  */
-"lbl_message" = "Message";
+"x-moment_weeks" = "vor %1$d Wochen";
 
 /*  */
-"lbl_recommend" = "Recommend";
+"lbl_moment_day_count" = "vor einem Tag";
 
 /*  */
-"lbl_delete" = "Delete";
+"x-moment_days" = "vor %1$d Tagen";
 
 /*  */
-"lbl_moment_year_count" = "one year ago";
+"lbl_moment_hour_count" = "vor einer Stunde";
 
 /*  */
-"x-moment_years" = "%1$d years ago";
+"x-moment_hours" = "vor %1$d Stunden";
 
 /*  */
-"lbl_moment_month_count" = "one month ago";
+"lbl_moment_minute_count" = "vor einer Minute";
 
 /*  */
-"x-moment_months" = "%1$d months ago";
+"x-moment_minutes" = "Vor %1$d Minuten";
 
 /*  */
-"lbl_moment_week_count" = "one week ago";
+"lbl_moment_second_count" = "ovor einer Sekunde";
 
 /*  */
-"x-moment_weeks" = "%1$d weeks ago";
-
-/*  */
-"lbl_moment_day_count" = "one day ago";
-
-/*  */
-"x-moment_days" = "%1$d days ago";
-
-/*  */
-"lbl_moment_hour_count" = "one hour ago";
-
-/*  */
-"x-moment_hours" = "%1$d hours ago";
-
-/*  */
-"lbl_moment_minute_count" = "one minute ago";
-
-/*  */
-"x-moment_minutes" = "%1$d minutes ago";
-
-/*  */
-"lbl_moment_second_count" = "one second ago";
-
-/*  */
-"x-moment_seconds" = "%1$d seconds ago";
+"x-moment_seconds" = "vor %1$d Sekunden";
 
 /*  */
 "lbl_year_suffix" = "y";
@@ -440,131 +410,134 @@
 "lbl_minute_suffix" = "m";
 
 /*  */
-"lbl_now_suffix" = "Just now";
+"lbl_now_suffix" = "Gerade eben";
 
 /*  */
-"lbl_today" = "Today";
+"lbl_today" = "Heute";
 
 /*  */
-"day" = "day";
+"day" = "Tag";
 
 /*  */
-"days" = "days";
+"days" = "Tage";
 
 /*  */
-"user_not_logged_in" = "User is not logged in";
+"user_not_logged_in" = "User is nicht eingeloggt";
 
 /*  */
-"not_logged_in" = "Not logged in";
+"not_logged_in" = "Nicht eingeloggt";
 
 /*  */
-"unexpected_data_type" = "Unexpected data type";
+"unexpected_data_type" = "Unerwarteter Datentyp";
 
 /*  */
-"invalid_request" = "Invalid request";
+"invalid_request" = "Ungültige Anfrage";
 
 /*  */
-"invalid_email" = "Invalid email.";
+"invalid_email" = "Ungültige Email-Addresse";
 
 /*  */
-"invalid_password" = "Invalid password.";
+"invalid_password" = "Falsches Passwort";
 
 /*  */
-"empty_password" = "Empty password.";
+"empty_password" = "Leeres Passwort";
 
 /*  */
-"invalid_repassword" = "Repetition do not match with password.";
+"invalid_repassword" = "Passwordwiederholung stimmt mit Passwort nicht überein";
 
 /*  */
-"invalid_phone" = "Invalid mobile phone number.";
+"invalid_phone" = "Ungültige Handynummer";
 
 /*  */
-"invalid_input" = "Invalid input";
+"invalid_input" = "Ungültige Eingabe";
 
 /*  */
-"bad_credentials" = "Wrong account or password";
+"bad_credentials" = "Falscher Account oder falsches Passwort";
 
 /*  */
 "home-screen-title" = "Lumenshine";
 
 /*  */
-"home-screen-found-wallet" = "Found your wallet";
+"home-screen-found-wallet" = "Wallet finanzieren";
 
 /*  */
-"password_hint1_prefix" = "9 characters";
+"password_hint1_prefix" = "9 Zeichen";
 
 /*  */
-"password_hint1" = "*The password must have at least 9 characters";
+"password_hint1" = "*Das Passwort muss mindestens aus 9 Zeichen bestehen";
 
 
 /*  */
-"password_hint2_prefix" = "one small letter";
+"password_hint2_prefix" = "ein Kleinbuchstabe";
 
 /*  */
-"password_hint2" = "*It must contain at least one small letter";
+"password_hint2" = "*Es muss mindestens einen Kleinbuchstaben beinhalten";
 
 /*  */
-"password_hint3_prefix" = "one capital letter";
+"password_hint3_prefix" = "ein Großbuchstabe";
 
 /*  */
-"password_hint3" = "*It must contain at least one capital letter";
+"password_hint3" = "*Es muss mindestens einen Großbuchstaben beinhalten";
 
 /*  */
-"password_hint4_prefix" = "one number";
+"password_hint4_prefix" = "eine Ziffer";
 
 /*  */
-"password_hint4" = "*It must contain at least one number";
+"password_hint4" = "*Es muss mindestens eine Ziffer beinhalten";
 
 /*  */
-"password_hint_title" = "Password requirements";
+"password_hint_title" = "Anforderungen an das Passwort";
 
 /*  */
-"change_password" = "Change Password";
+"change_password" = "Passwort ändern";
 
 /*  */
-"change_password_hint" = "To change your password please provide current and new password.";
+"change_password_hint" = "Um dein Passwort zu ändern gebe dein aktuelles und dein neues Passwort ein.";
 
 /*  */
-"current_password" = "Current password";
+"current_password" = "Aktuelles Passwort";
 
 /*  */
-"new_password" = "New password";
+"new_password" = "Neues Passwort";
 
 /*  */
-"repeat_new_password" = "Repeat new password";
+"repeat_new_password" = "Wiederhole das neue Passwort";
 
 /*  */
-"password_changed" = "Password successfully changed";
+"password_changed" = "Dein Passwort wurde geändert";
 
 /*  */
-"new_2fa_secret" = "New 2FA Secret";
+"new_2fa_secret" = "Neues 2FA Secret";
 
 /*  */
-"lbl_new_2fa_secret" = "Your new 2FA secret: %@";
+"lbl_new_2fa_secret" = "Dein neues 2FA Secret: %@";
 
 /*  */
-"lbl_cancel_2fa_secret" = "If you cancel, the 2FA secret will not be changed";
+"lbl_cancel_2fa_secret" = "Wenn du abbrichst wird dein 2FA Secret nicht geändert.";
 
 /*  */
-"lbl_2fa_hint" = "1. Copy and enter the below displayed 2FA secret code into the authenticator app\n\n2. Enter the generated 2FA code from the authenticator app and press \"Next\"";
+"lbl_2fa_hint" = "1. Kopiere das unten angezeigte 2FA Secret und füge es in deine Authenticato App ein.\n\n2. gebe danach den generierten 2FA Code aus deiner Authenticator App hier ein und drücke \"Weiter\"";
 
 /*  */
-"change_2fa" = "Change 2FA Secret";
+"change_2fa" = "2FA Secret ändern";
 
 /*  */
-"change_2fa_hint" = "To change your 2FA Secret please insert your password.";
+"change_2fa_hint" = "Gebe dein Passwort ein um dein 2FA Secret zu ändern.";
 
 /*  */
-"tfa_secret_changed" = "2FA Secret successfully changed";
+"tfa_secret_changed" = "Du hast dein 2FA Secret erfolgreich geändert";
 
 /*  */
-"fingerprint_recognition" = "Fingerprint/Face recognition";
+"fingerprint_recognition" = "Finger-/Gesichtserkennung";
 
 /*  */
 "avatar" = "Avatar";
 
 /*  */
-"backup_mnemonic" = "Backup Secret/Mnemonic";
+"backup_mnemonic" = "Backup Secret (Mnemonic)";
+
 /*  */
-"reveal_backup_mnemonic" = "To reveal your backup secret/mnemonic please provide your password.";
+"reveal_backup_mnemonic" = "Gebe dein passwort ein um dir dein Backup Secret (Mnemonic) anzeigen zu lassen.";
+
+"loading" = "Wird geladen";
 

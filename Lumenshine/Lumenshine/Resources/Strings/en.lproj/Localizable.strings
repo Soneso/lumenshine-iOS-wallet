@@ -26,9 +26,6 @@
 "continue" = "Continue";
 
 /*  */
-"powered_by" = "Powered by";
-
-/*  */
 "save" = "Save";
 
 /*  */
@@ -173,9 +170,6 @@
 "welcome" = "Welcome";
 
 /*  */
-"welcome_back" = "Welcome back,";
-
-/*  */
 "street_address" = "Street address";
 
 /*  */
@@ -272,7 +266,7 @@
 "tfa_code" = "2FA Code";
 
 /*  */
-"tfa_code_configured" = "2FA Code (if configured)";
+"tfa_code_configured" = "2FA CODE (if configured)";
 
 /*  */
 "lbl_email_confirmation" = "Email confirmation required";
@@ -354,30 +348,6 @@
 
 /*  */
 "withdraw" = "Withdraw money";
-
-/*  */
-"lbl_mnemonic_title" = "Please write down and safely store this phrase. It's the ONLY WAY to retrieve your wallet.";
-
-/*  */
-"lbl_mnemonic_button_title" = "I have written it down";
-
-/*  */
-"go" = "Let's go";
-
-/*  */
-"unknown" = "Anonymous";
-
-/*  */
-"lbl_save" = "Save";
-
-/*  */
-"lbl_message" = "Message";
-
-/*  */
-"lbl_recommend" = "Recommend";
-
-/*  */
-"lbl_delete" = "Delete";
 
 /*  */
 "lbl_moment_year_count" = "one year ago";
@@ -587,7 +557,10 @@
 "avatar" = "Avatar";
 
 /*  */
-"backup_mnemonic" = "Backup Secret/Mnemonic";
+"backup_mnemonic" = "Backup Secret (Mnemonic)";
+
 /*  */
 "reveal_backup_mnemonic" = "To reveal your backup secret/mnemonic please provide your password.";
 
+/*  */
+"loading" = "loading";
