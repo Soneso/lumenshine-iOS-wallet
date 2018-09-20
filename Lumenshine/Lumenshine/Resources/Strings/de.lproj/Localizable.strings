@@ -2,16 +2,10 @@
  * Loco ios export: iOS Localizable.strings
  * Project: strings.xml conversion
  * Release: Working copy
- * Locale: en, English
- * Exported by: Unregistered user
- * Exported at: Thu, 04 Jan 2018 06:53:20 +0000
+ * Locale: de, German
+ * Exported by: chris
+ * Exported at: Thu, 20 Sep 2018 06:53:20 +0000
  */
-
-/*  */
-"get_started_button" = "Get Started";
-
-/*  */
-"sign_in_error_msg" = "Something went wrong. Try again, please.";
 
 /*  */
 "error" = "Error";
@@ -80,7 +74,7 @@
 "signup" = "Sign up";
 
 /*  */
-"lost_password" = "Lost password";
+"lost_password" = "Lost Password";
 
 /*  */
 "forgot_password" = "Forgot password";
@@ -101,7 +95,7 @@
 "import_mnemonic" = "Import mnemonic";
 
 /*  */
-"step_3" = "Step %@ of 3";
+"step_3" = "step %@ of 3";
 
 /*  */
 "email" = "Email";
@@ -278,22 +272,25 @@
 "lbl_tfa_secret" = "Your 2FA secret: %@";
 
 /*  */
-"lbl_tfa_hint" = "For security reasons, your wallet will be protected by 2 Factor Authentication (2FA).";
+"lbl_tfa_hint" = "For security reasons, your wallet will be protected by 2FA";
 
 /*  */
-"lbl_tfa_setup" = "To setup 2FA, please:\n\n1. download a two-factor authenticator app (like Google Authenticator)\n\n2. copy and enter the above displayed 2FA secret code into the authenticator app\n\n3. enter the generated 2FA code from the authenticator app into the 2FA Code input and press \"Next\"";
+"lbl_tfa_setup" = "To setup 2FA, please:\n\n1. Download a two-factor authenticator app (like Google Authenticator)\n\n2. Copy and enter the above displayed 2FA secret code into the authenticator app\n\n3. Enter the generated 2FA code from the authenticator app and press \"Next\"";
 
 /*  */
 "tfa_code" = "2FA Code";
 
 /*  */
+"tfa_code_configured" = "2FA Code (if configured)";
+
+/*  */
 "lbl_email_confirmation" = "Email confirmation required";
 
 /*  */
-"email_confirmation_hint" = "In order to be able continue the setup process, you need to confirm your email address first. A mail with a confirmation link has been sent to your inbox. Please follow the instructions from the received mail to confirm your email-address.";
+"email_confirmation_hint" = "In order to be able continue the setup process, you need to confirm your email address first. An email with a confirmation link has been sent to your inbox. Please follow the instructions from the mail to confirm your email address.";
 
 /*  */
-"email_confirmation_hint2" = "An email has been sent to your email account. Please check your inbox and confirm your email address first.";
+"email_confirmation_hint2" = "An email has been sent to your email account. Please check your inbox and confirm your email address first. After doing so, please come back and press the \"Continue\" button to continue.";
 
 /*  */
 "lbl_email_confirmation2" = "Your email address is not confirmed.";
@@ -503,13 +500,38 @@
 "home-screen-found-wallet" = "Found your wallet";
 
 /*  */
-"password_hint" = "Your new password must have at least 9 characters.\n\nIt must contain small letters and capitals.";
+"password_hint1_prefix" = "9 characters";
+
+/*  */
+"password_hint1" = "*The password must have at least 9 characters";
+
+
+/*  */
+"password_hint2_prefix" = "one small letter";
+
+/*  */
+"password_hint2" = "*It must contain at least one small letter";
+
+/*  */
+"password_hint3_prefix" = "one capital letter";
+
+/*  */
+"password_hint3" = "*It must contain at least one capital letter";
+
+/*  */
+"password_hint4_prefix" = "one number";
+
+/*  */
+"password_hint4" = "*It must contain at least one number";
 
 /*  */
 "password_hint_title" = "Password requirements";
 
 /*  */
-"change_password" = "Change password";
+"change_password" = "Change Password";
+
+/*  */
+"change_password_hint" = "To change your password please provide current and new password.";
 
 /*  */
 "current_password" = "Current password";
@@ -530,7 +552,10 @@
 "lbl_new_2fa_secret" = "Your new 2FA secret: %@";
 
 /*  */
-"lbl_2fa_hint" = "1. copy and enter the below displayed 2FA secret code into the authenticator app\n\n2. enter the generated 2FA code from the authenticator app into the 2FA Code input and press \"Next\"";
+"lbl_cancel_2fa_secret" = "If you cancel, the 2FA secret will not be changed";
+
+/*  */
+"lbl_2fa_hint" = "1. Copy and enter the below displayed 2FA secret code into the authenticator app\n\n2. Enter the generated 2FA code from the authenticator app and press \"Next\"";
 
 /*  */
 "change_2fa" = "Change 2FA Secret";

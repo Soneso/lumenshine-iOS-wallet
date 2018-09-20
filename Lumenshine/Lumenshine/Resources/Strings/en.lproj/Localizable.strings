@@ -8,12 +8,6 @@
  */
 
 /*  */
-"get_started_button" = "Get Started";
-
-/*  */
-"sign_in_error_msg" = "Something went wrong. Try again, please.";
-
-/*  */
 "error" = "Error";
 
 /*  */
@@ -533,13 +527,25 @@
 "home-screen-found-wallet" = "Found your wallet";
 
 /*  */
-"password_hint1" = "*Your new password must have at least 9 characters";
+"password_hint1_prefix" = "9 characters";
+
+/*  */
+"password_hint1" = "*The password must have at least 9 characters";
+
+/*  */
+"password_hint2_prefix" = "one small letter";
 
 /*  */
 "password_hint2" = "*It must contain at least one small letter";
 
 /*  */
+"password_hint3_prefix" = "one capital letter";
+
+/*  */
 "password_hint3" = "*It must contain at least one capital letter";
+
+/*  */
+"password_hint4_prefix" = "one number";
 
 /*  */
 "password_hint4" = "*It must contain at least one number";
