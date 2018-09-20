@@ -21,6 +21,6 @@ class AppNavigationController: NavigationController {
     }
     
     override var prefersStatusBarHidden: Bool {
-        return false
+        return true
     }
 }

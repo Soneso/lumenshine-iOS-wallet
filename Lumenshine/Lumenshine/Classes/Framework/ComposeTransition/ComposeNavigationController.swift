@@ -36,6 +36,6 @@ class ComposeNavigationController: NavigationController {
     }
     
     override var prefersStatusBarHidden: Bool {
-        return false
+        return true
     }
 }

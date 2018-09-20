@@ -32,7 +32,7 @@ class AppNavigationDrawerController: DrawerController {
     }
     
     override var prefersStatusBarHidden: Bool {
-        return true;
+        return true
     }
 }
 

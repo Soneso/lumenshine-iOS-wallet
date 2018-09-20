@@ -45,7 +45,7 @@ class InfoViewController: UIViewController {
     }
     
     override var prefersStatusBarHidden: Bool {
-        return false
+        return true
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
