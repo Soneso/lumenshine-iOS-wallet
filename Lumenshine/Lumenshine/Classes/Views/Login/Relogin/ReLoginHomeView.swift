@@ -79,8 +79,7 @@ class ReLoginHomeView: UIView {
 
 extension ReLoginHomeView: ReLoginViewProtocol {
     func present(error: ServiceError) -> Bool {
-        if let code = error.code,
-            code == 1000 {
+        if error.code == 1009 || error.parameterName == "tfa_code" {
             if tfaTextField.isHidden {
                 tfaTextField.isHidden = false
                 viewModel.remove2FASecret()

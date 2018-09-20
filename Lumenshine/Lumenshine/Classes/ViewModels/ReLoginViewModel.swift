@@ -59,7 +59,6 @@ class ReLoginViewModel : LoginViewModel {
         return R.string.localizable.hint_face_fingerprint(text, text)
     }
     
-    
     override func loginCompleted() {
         navigationCoordinator?.performTransition(transition: .showDashboard(user))
         touchMe.invalidate()

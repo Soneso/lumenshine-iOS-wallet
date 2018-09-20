@@ -1531,7 +1531,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 188 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 189 localization keys.
     struct localizable {
       /// de translation: Your new password must have at least 9 characters.  It must contain small letters and capitals.
       /// 
@@ -1601,6 +1601,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let tfa_code = Rswift.StringResource(key: "tfa_code", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: 2FA Code (if configured)
+      /// 
+      /// Locales: en
+      static let tfa_code_configured = Rswift.StringResource(key: "tfa_code_configured", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: 2FA Secret
       /// 
       /// Locales: en, de
@@ -2403,6 +2407,13 @@ struct R: Rswift.Validatable {
       /// Locales: en, de
       static func tfa_code(_: Void = ()) -> String {
         return NSLocalizedString("tfa_code", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: 2FA Code (if configured)
+      /// 
+      /// Locales: en
+      static func tfa_code_configured(_: Void = ()) -> String {
+        return NSLocalizedString("tfa_code_configured", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: 2FA Secret

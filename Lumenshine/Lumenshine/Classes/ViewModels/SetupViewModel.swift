@@ -45,6 +45,7 @@ class SetupViewModel: SetupViewModelType {
     fileprivate let loginResponse: LoginStep2Response
     fileprivate var currentSetupStep: SetupStep
     fileprivate var randomIndices = [Int]()
+    fileprivate var backgroundTime: Date?
     
     weak var navigationCoordinator: CoordinatorType?
     
@@ -56,6 +57,24 @@ class SetupViewModel: SetupViewModelType {
         self.currentSetupStep = .none
         self.randomIndices = generateRandomIndices()
         updateSetupStep(loginResponse: loginResponse)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: .UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground(notification:)), name: .UIApplicationDidEnterBackground, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIApplicationDidEnterBackground, object: nil)
+    }
+    
+    @objc
+    func appWillEnterForeground(notification: Notification) {
+        showRelogin()
+    }
+    
+    @objc
+    func appDidEnterBackground(notification: Notification) {
+        countBackgroundTime()
     }
     
     var headerTitle: String {
@@ -176,6 +195,16 @@ fileprivate extension SetupViewModel {
             numbers.append(n)
         }
         return numbers
+    }
+    
+    func showRelogin() {
+        if currentSetupStep == .mnemonic, let time = backgroundTime, time.addingTimeInterval(90) < Date() {
+            navigationCoordinator?.performTransition(transition: .showRelogin)
+        }
+    }
+    
+    func countBackgroundTime() {
+        backgroundTime = Date()
     }
 }
 

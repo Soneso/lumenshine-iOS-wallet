@@ -83,7 +83,9 @@ fileprivate extension SettingsCoordinator {
     func showPasswordHint(_ hint: String, attributedText: NSAttributedString?) {
         let title = R.string.localizable.password_hint_title()
         let textVC = InfoViewController(info: hint, attributedText: attributedText, title: title)
-        baseController.navigationController?.present(AppNavigationController(rootViewController: textVC), animated: true)
+        let composeVC = ComposeNavigationController(rootViewController: textVC)
+        composeVC.transitioningDelegate = textVC
+        baseController.navigationController?.present(composeVC, animated: true)
     }
     
     func showHome() {

@@ -26,7 +26,6 @@ protocol MenuCoordinatorType: CoordinatorType {
 
 public indirect enum Transition {
     case showDashboard(User)
-    case openDashboard(Transition?)
     case showLogin
     case showRelogin
     case showFingerprint

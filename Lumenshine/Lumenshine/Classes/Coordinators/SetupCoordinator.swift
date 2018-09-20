@@ -39,6 +39,8 @@ class SetupCoordinator: CoordinatorType {
             nextSetupStep()
         case .showMnemonicVerification:
             showMnemonicVerification()
+        case .showRelogin:
+            showRelogin()
         default: break
         }
     }
@@ -62,11 +64,12 @@ fileprivate extension SetupCoordinator {
     
     func showDashboard() {
         let coordinator = MenuCoordinator(mainCoordinator: mainCoordinator, user: user)
-        if let window = UIApplication.shared.delegate?.window ?? baseController.view.window {
-            UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromTop, animations: {
-                window.rootViewController = coordinator.baseController
-            }, completion: nil)
-        }
+        present(coordinator: coordinator)
+    }
+    
+    func showRelogin() {
+        let coordinator = ReLoginMenuCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
+        present(coordinator: coordinator)
     }
     
     func present(viewController: UIViewController) {
@@ -75,6 +78,14 @@ fileprivate extension SetupCoordinator {
         }
         baseController.navigationController?.setViewControllers([viewController], animated: true)
         baseController = viewController
+    }
+    
+    func present(coordinator: CoordinatorType) {
+        if let window = UIApplication.shared.delegate?.window ?? baseController.view.window {
+            UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromTop, animations: {
+                window.rootViewController = coordinator.baseController
+            }, completion: nil)
+        }
     }
 }
 

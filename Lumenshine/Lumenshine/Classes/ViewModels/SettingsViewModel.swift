@@ -46,7 +46,7 @@ class SettingsViewModel: SettingsViewModelType {
     init(service: AuthService, user: User) {
         self.service = service
         self.user = user
-        self.entries = [[.changePassword, .change2FA, .biometricAuth, .backupMnemonic, .avatar]]
+        self.entries = [[.changePassword, .change2FA, .biometricAuth, .backupMnemonic]]
         self.touchEnabled = BiometricHelper.isTouchEnabled
     }
     
@@ -105,17 +105,17 @@ class SettingsViewModel: SettingsViewModelType {
     func showPasswordHint() {
         let font = R.font.encodeSansRegular(size: 12) ?? Stylesheet.font(.body)
         let hint1 = NSAttributedString(string: R.string.localizable.password_hint1()+"\n",
-                                       attributes: [NSAttributedStringKey.font : font,
-                                                    NSAttributedStringKey.foregroundColor : Stylesheet.color(.green)])
+                                       attributes: [.font : font,
+                                                    .foregroundColor : Stylesheet.color(.green)])
         let hint2 = NSAttributedString(string: R.string.localizable.password_hint2()+"\n",
-                                       attributes: [NSAttributedStringKey.font : font,
-                                                    NSAttributedStringKey.foregroundColor : Stylesheet.color(.green)])
+                                       attributes: [.font : font,
+                                                    .foregroundColor : Stylesheet.color(.green)])
         let hint3 = NSAttributedString(string: R.string.localizable.password_hint3()+"\n",
-                                       attributes: [NSAttributedStringKey.font : font,
-                                                    NSAttributedStringKey.foregroundColor : Stylesheet.color(.red)])
+                                       attributes: [.font : font,
+                                                    .foregroundColor : Stylesheet.color(.red)])
         let hint4 = NSAttributedString(string: R.string.localizable.password_hint4(),
-                                       attributes: [NSAttributedStringKey.font : font,
-                                                    NSAttributedStringKey.foregroundColor : Stylesheet.color(.green)])
+                                       attributes: [.font : font,
+                                                    .foregroundColor : Stylesheet.color(.green)])
         
         let hint = NSMutableAttributedString(attributedString: hint1)
         hint.append(hint2)

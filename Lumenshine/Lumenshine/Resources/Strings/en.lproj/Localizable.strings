@@ -287,6 +287,9 @@
 "tfa_code" = "2FA Code";
 
 /*  */
+"tfa_code_configured" = "2FA Code (if configured)";
+
+/*  */
 "lbl_email_confirmation" = "Email confirmation required";
 
 /*  */
