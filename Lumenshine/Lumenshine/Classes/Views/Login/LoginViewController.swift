@@ -106,7 +106,6 @@ extension LoginViewController {
         let contentView = LostSecurityView(viewModel: viewModel)
         contentView.delegate = self
         setupContentView(contentView)
-        headerBar.selectItem(at: 2)
     }
     
     func showLost2FA() {
@@ -114,7 +113,6 @@ extension LoginViewController {
         let contentView = LostSecurityView(viewModel: viewModel)
         contentView.delegate = self
         setupContentView(contentView)
-        headerBar.selectItem(at: 2)
     }
     
     func showEmailConfirmation() {
@@ -243,6 +241,10 @@ extension LoginViewController: ToolbarHeaderDelegate {
 extension LoginViewController: HeaderMenuDelegate {
     func menuSelected(at index: Int) {
         viewModel.headerMenuSelected(at: index)
+    }
+    
+    func headerMenuDidDismiss(_ headerMenu: HeaderMenuViewController) {
+        headerBar.deselectItem()
     }
 }
 

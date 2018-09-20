@@ -13,6 +13,7 @@ protocol ToolbarHeaderProtocol {
     func setDetail(_ detail: String?)
     func setItems(_ items: [(String, String)], selectedAt index: Int?)
     func selectItem(at index: Int)
+    func deselectItem()
     
     var delegate: ToolbarHeaderDelegate? { get set }
 }
@@ -145,6 +146,11 @@ extension ToolbarHeader: ToolbarHeaderProtocol {
     func selectItem(at index: Int) {
         tabBar.selectedItem = tabBar.items?[index]
         selectedIndex = index
+    }
+    
+    func deselectItem() {
+        tabBar.selectedItem = nil
+        selectedIndex = nil
     }
 }
 

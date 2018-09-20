@@ -17,10 +17,10 @@ class AppNavigationController: NavigationController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .default
+        return .lightContent
     }
     
     override var prefersStatusBarHidden: Bool {
-        return true
+        return false
     }
 }

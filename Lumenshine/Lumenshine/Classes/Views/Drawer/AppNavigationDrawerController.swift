@@ -28,11 +28,11 @@ class AppNavigationDrawerController: DrawerController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIStatusBarStyle.lightContent
+        return .lightContent
     }
     
     override var prefersStatusBarHidden: Bool {
-        return true
+        return false
     }
 }
 

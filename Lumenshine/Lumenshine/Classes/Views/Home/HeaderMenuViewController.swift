@@ -11,6 +11,7 @@ import Material
 
 protocol HeaderMenuDelegate: NSObjectProtocol {
     func menuSelected(at index: Int)
+    func headerMenuDidDismiss(_ headerMenu: HeaderMenuViewController)
 }
 
 class HeaderMenuViewController: UIViewController {
@@ -21,6 +22,7 @@ class HeaderMenuViewController: UIViewController {
     
     fileprivate let items: [(String, String)]
     fileprivate let tableView: UITableView
+    fileprivate let tapView = UIView()
     
     weak var delegate: HeaderMenuDelegate?
     
@@ -29,6 +31,7 @@ class HeaderMenuViewController: UIViewController {
         tableView = UITableView(frame: .zero, style: .plain)
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .overCurrentContext
+        transitioningDelegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,19 +42,18 @@ class HeaderMenuViewController: UIViewController {
         super.viewDidLoad()
         prepareView()
     }
+}
+
+extension HeaderMenuViewController: UIViewControllerTransitioningDelegate {
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        UIView.animate(withDuration: 0.05, animations: {
-            self.view.backgroundColor = Stylesheet.color(.darkGray).withAlphaComponent(0.5)
-        })
+    func animationController(forPresented presented: UIViewController,
+                             presenting: UIViewController,
+                             source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return ComposePresentTransitionController()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        UIView.animate(withDuration: 0.05, animations: {
-            self.view.backgroundColor = Stylesheet.color(.clear)
-        })
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return ComposeDismissTransitionController()
     }
 }
 
@@ -77,8 +79,9 @@ extension HeaderMenuViewController: UITableViewDataSource {
 extension HeaderMenuViewController:UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.delegate?.menuSelected(at: indexPath.row)
         dismiss(animated: true, completion:nil)
+        self.delegate?.menuSelected(at: indexPath.row)
+        self.delegate?.headerMenuDidDismiss(self)
     }
 }
 
@@ -99,11 +102,19 @@ fileprivate extension HeaderMenuViewController {
         tableView.estimatedRowHeight = UITableViewAutomaticDimension
         tableView.separatorStyle = .none
 
-//        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewTap(_:))))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTap(_:)))
+        tapView.addGestureRecognizer(tapGesture)
+        
+        view.addSubview(tapView)
+        tapView.snp.makeConstraints { make in
+            make.bottom.equalTo(view.snp.centerY)
+            make.top.left.right.equalToSuperview()
+        }
     }
     
-    @IBAction
+    @objc
     func viewTap(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true)
+        self.delegate?.headerMenuDidDismiss(self)
     }
 }

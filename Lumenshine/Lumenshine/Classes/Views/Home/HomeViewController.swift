@@ -107,6 +107,10 @@ extension HomeViewController: HeaderMenuDelegate {
     func menuSelected(at index: Int) {
         
     }
+    
+    func headerMenuDidDismiss(_ headerMenu: HeaderMenuViewController) {
+        
+    }
 }
 
 extension HomeViewController: ScanViewControllerDelegate {
