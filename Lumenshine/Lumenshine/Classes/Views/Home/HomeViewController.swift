@@ -138,7 +138,6 @@ extension HomeViewController {
 
 fileprivate extension HomeViewController {
     func prepareView() {
-        view.backgroundColor = Stylesheet.color(.white)
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -146,7 +145,7 @@ fileprivate extension HomeViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = Stylesheet.color(.white)
+        tableView.backgroundColor = Stylesheet.color(.clear)
         tableView.register(CardTableViewCell.self, forCellReuseIdentifier: HomeViewController.CellIdentifier)
         tableView.estimatedRowHeight = UITableViewAutomaticDimension
         tableView.separatorStyle = .none
@@ -154,6 +153,8 @@ fileprivate extension HomeViewController {
         titleLabel.textColor = Stylesheet.color(.white)
         titleLabel.textAlignment = .center
         navigationItem.centerViews = [titleLabel]
+        
+        prepareCopyright()
     }
     
     func prepareHeader() {
@@ -235,5 +236,32 @@ fileprivate extension HomeViewController {
             make.top.equalTo(0)
             make.bottom.equalTo(0)
         }
+    }
+    
+    func prepareCopyright() {
+        
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = Stylesheet.color(.lightGray)
+        
+        let imageView = UIImageView(image: R.image.soneso())
+        imageView.backgroundColor = Stylesheet.color(.clear)
+        
+        backgroundView.addSubview(imageView)
+        imageView.snp.makeConstraints { make in
+            make.bottom.equalTo(-20)
+            make.centerX.equalToSuperview()
+        }
+        
+        let background = UIImageView(image: R.image.soneso_background())
+        background.contentMode = .scaleAspectFit
+        
+        backgroundView.addSubview(background)
+        background.snp.makeConstraints { make in
+            make.top.greaterThanOrEqualToSuperview()
+            make.left.right.equalToSuperview()
+            make.bottom.equalTo(imageView.snp.top)
+        }
+        
+        tableView.backgroundView = backgroundView
     }
 }

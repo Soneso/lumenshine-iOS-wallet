@@ -28,6 +28,8 @@ class CardView: UIView {
         didSet {
             let buttons = viewModel?.bottomTitles?.map { title -> FlatButton in
                 let button = FlatButton(title: title)
+                button.titleColor = Stylesheet.color(.blue)
+                button.titleLabel?.font = R.font.encodeSansSemiBold(size: 13.5)
                 button.addTarget(self, action: #selector(barButtonClick(_:)), for: .touchUpInside)
                 return button
             }
@@ -127,7 +129,7 @@ fileprivate extension CardView {
         contentView.clipsToBounds = true
         contentView.backgroundColor = Stylesheet.color(.white)
         
-        depthPreset = .depth3
+        depthPreset = .depth2
         backgroundColor = Stylesheet.color(.clear)
         
         addSubview(contentView)
@@ -139,6 +141,8 @@ fileprivate extension CardView {
     }
     
     func prepareBottomBar() {
+        bottomBar.contentEdgeInsetsPreset = .square2
+        
         contentView.addSubview(bottomBar)
         bottomBar.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()

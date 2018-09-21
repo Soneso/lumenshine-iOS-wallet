@@ -52,9 +52,10 @@ class ChartCardViewModel: CardViewModelType {
     var currentRate: String? {
         guard let exchange = exchangeRates else { return nil }
         let formatter = NumberFormatter()
-//        formatter.usesGroupingSeparator = true
+//        formatter.decimalSeparator = ","
         formatter.minimumFractionDigits = 5
         formatter.maximumFractionDigits = 6
+        formatter.minimumIntegerDigits = 1
         let rate = formatter.string(from: NSDecimalNumber(decimal: exchange.currentRate)) ?? exchange.currentRate.description
         
         return "\(exchange.destinationCurrency) \(rate)"

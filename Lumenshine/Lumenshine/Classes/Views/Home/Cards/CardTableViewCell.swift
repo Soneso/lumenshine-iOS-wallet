@@ -11,8 +11,12 @@ import SnapKit
 
 class CardTableViewCell: UITableViewCell {
     
+    fileprivate let inset = 15.0
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        backgroundColor = .clear
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -32,10 +36,10 @@ class CardTableViewCell: UITableViewCell {
 
             contentView.addSubview(v)
             v.snp.makeConstraints { (make) in
-                make.top.equalTo(10)
-                make.left.equalTo(10)
-                make.right.equalTo(-10)
-                make.bottom.equalTo(-10)
+                make.top.equalTo(inset)
+                make.left.equalTo(inset)
+                make.right.equalTo(-inset)
+                make.bottom.equalTo(-inset)
             }
         }
     }
