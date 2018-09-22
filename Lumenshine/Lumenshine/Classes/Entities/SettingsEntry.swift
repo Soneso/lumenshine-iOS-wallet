@@ -11,7 +11,8 @@ import Foundation
 enum SettingsEntry {
     case changePassword
     case change2FA
-    case biometricAuth
+    case fingerprint
+    case faceRecognition
     case backupMnemonic
     case avatar
     
@@ -21,8 +22,10 @@ enum SettingsEntry {
             return R.string.localizable.change_password()
         case .change2FA:
             return R.string.localizable.change_2fa()
-        case .biometricAuth:
-            return R.string.localizable.fingerprint_recognition()
+        case .fingerprint:
+            return R.string.localizable.fingerprint()
+        case .faceRecognition:
+            return R.string.localizable.face_recognition()
         case .avatar:
             return R.string.localizable.avatar()
         case .backupMnemonic:

@@ -16,20 +16,18 @@ class ReLoginViewModel : LoginViewModel {
         self.user = user
         self.touchMe = BiometricIDAuth()
         super.init(service: service)
-        self.entries = [.signOut, .home]
-        
-        switch touchMe.biometricType() {
-        case .faceID:
-            entries.append(.faceRecognition)
-        case .touchID:
-            entries.append(.fingerprint)
-        default: break
-        }
+        self.entries = [.signOut,
+                        .home,
+                        BiometricIDAuth().biometricType() == .faceID ? .faceRecognition : .fingerprint]
     }
     
     override var barItems: [(String, String)] {
-        return entries.map {
-            ($0.name, $0.icon.name)
+        return entries.map { x in
+            var name = x.name
+            if x == .faceRecognition || x == .fingerprint {
+                name = "\(R.string.localizable.activate()) \(name)"
+            }
+            return (name, x.icon.name)
         }
     }
     
@@ -64,12 +62,12 @@ class ReLoginViewModel : LoginViewModel {
         touchMe.invalidate()
     }
     
-    override func loginStep1(email: String, password: String, tfaCode: String?, response: @escaping EmptyResponseClosure) {
+    override  func loginStep1(email: String, password: String, tfaCode: String?, checkSetup: Bool? = true, response: @escaping EmptyResponseClosure) {
         if let tfa = tfaCode, !tfa.isEmpty {
-            super.loginStep1(email: user.email, password: password, tfaCode: tfa, response: response)
+            super.loginStep1(email: user.email, password: password, tfaCode: tfa, checkSetup: checkSetup, response: response)
         } else {
             let tfa = TFAGeneration.generate2FACode(email: user.email)
-            super.loginStep1(email: user.email, password: password, tfaCode: tfa, response: response)
+            super.loginStep1(email: user.email, password: password, tfaCode: tfa, checkSetup: checkSetup, response: response)
         }
     }
     

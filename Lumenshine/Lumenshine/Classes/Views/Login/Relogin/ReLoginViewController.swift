@@ -17,7 +17,7 @@ class ReLoginViewController: UIViewController {
     
     // MARK: - Properties
     
-    fileprivate let viewModel: LoginViewModelType
+    fileprivate let viewModel: ReLoginViewModel
     
     // MARK: - UI properties
     fileprivate let headerBar = ToolbarHeader()
@@ -26,7 +26,7 @@ class ReLoginViewController: UIViewController {
     
     fileprivate var contentView: ReLoginViewProtocol?
     
-    init(viewModel: LoginViewModelType) {
+    init(viewModel: ReLoginViewModel) {
         self.viewModel = viewModel
         self.contentView = ReLoginHomeView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
@@ -108,6 +108,25 @@ extension ReLoginViewController: ReLoginViewDelegate {
                 self?.hideActivity(completion: {
                     switch result {
                     case .success: break
+                    case .failure(let error):
+                        _ = self?.contentView?.present(error: error)
+                    }
+                })
+            }
+        }
+    }
+}
+
+extension ReLoginViewController: ReLoginFingerViewDelegate {
+    func didTapActivateButton(password: String, tfaCode: String?) {
+        showActivity()
+        viewModel.loginStep1(email: "", password: password, tfaCode: tfaCode, checkSetup: false) { [weak self] result in
+            DispatchQueue.main.async {
+                self?.hideActivity(completion: {
+                    switch result {
+                    case .success:
+                        BiometricHelper.enableTouch(true)
+                        self?.showHome()
                     case .failure(let error):
                         _ = self?.contentView?.present(error: error)
                     }

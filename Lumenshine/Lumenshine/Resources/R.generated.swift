@@ -1531,7 +1531,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 186 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 187 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -1625,6 +1625,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let account_data_title = Rswift.StringResource(key: "account_data_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: Activate
+      /// 
+      /// Locales: en
+      static let activate = Rswift.StringResource(key: "activate", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Already confirmed
       /// 
       /// Locales: en, de
@@ -1753,6 +1757,14 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let extras = Rswift.StringResource(key: "extras", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: Face Recognition
+      /// 
+      /// Locales: en, de
+      static let face_recognition = Rswift.StringResource(key: "face_recognition", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: Fingerprint
+      /// 
+      /// Locales: en, de
+      static let fingerprint = Rswift.StringResource(key: "fingerprint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Fingerprint/Face recognition
       /// 
       /// Locales: en, de
@@ -1805,14 +1817,14 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let home = Rswift.StringResource(key: "home", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: If you activate, the app will request your %@ instead of password when opened. Entering the password will not be required each time you open the app. To activate %@ please first insert your password below.
+      /// 
+      /// Locales: en, de
+      static let hint_face_fingerprint = Rswift.StringResource(key: "hint_face_fingerprint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: If you cancel, the 2FA secret will not be changed
       /// 
       /// Locales: en, de
       static let lbl_cancel_2fa_secret = Rswift.StringResource(key: "lbl_cancel_2fa_secret", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: If you make this setup, the app will request your %@ instead of password when opened. Entering the password will not be required each time you open the app. To setup %@ please first insert your password below.
-      /// 
-      /// Locales: en, de
-      static let hint_face_fingerprint = Rswift.StringResource(key: "hint_face_fingerprint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Import mnemonic
       /// 
       /// Locales: en, de
@@ -2033,14 +2045,6 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let settings = Rswift.StringResource(key: "settings", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: Setup Face Recognition
-      /// 
-      /// Locales: en, de
-      static let face_recognition = Rswift.StringResource(key: "face_recognition", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: Setup Fingerprint
-      /// 
-      /// Locales: en, de
-      static let fingerprint = Rswift.StringResource(key: "fingerprint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Setup Wallet
       /// 
       /// Locales: en, de
@@ -2439,6 +2443,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("account_data_title", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Activate
+      /// 
+      /// Locales: en
+      static func activate(_: Void = ()) -> String {
+        return NSLocalizedString("activate", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Already confirmed
       /// 
       /// Locales: en, de
@@ -2663,6 +2674,20 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("extras", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Face Recognition
+      /// 
+      /// Locales: en, de
+      static func face_recognition(_: Void = ()) -> String {
+        return NSLocalizedString("face_recognition", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Fingerprint
+      /// 
+      /// Locales: en, de
+      static func fingerprint(_: Void = ()) -> String {
+        return NSLocalizedString("fingerprint", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Fingerprint/Face recognition
       /// 
       /// Locales: en, de
@@ -2754,18 +2779,18 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("home", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: If you activate, the app will request your %@ instead of password when opened. Entering the password will not be required each time you open the app. To activate %@ please first insert your password below.
+      /// 
+      /// Locales: en, de
+      static func hint_face_fingerprint(_ value1: String, _ value2: String) -> String {
+        return String(format: NSLocalizedString("hint_face_fingerprint", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1, value2)
+      }
+      
       /// en translation: If you cancel, the 2FA secret will not be changed
       /// 
       /// Locales: en, de
       static func lbl_cancel_2fa_secret(_: Void = ()) -> String {
         return NSLocalizedString("lbl_cancel_2fa_secret", bundle: R.hostingBundle, comment: "")
-      }
-      
-      /// en translation: If you make this setup, the app will request your %@ instead of password when opened. Entering the password will not be required each time you open the app. To setup %@ please first insert your password below.
-      /// 
-      /// Locales: en, de
-      static func hint_face_fingerprint(_ value1: String, _ value2: String) -> String {
-        return String(format: NSLocalizedString("hint_face_fingerprint", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1, value2)
       }
       
       /// en translation: Import mnemonic
@@ -3151,20 +3176,6 @@ struct R: Rswift.Validatable {
       /// Locales: en, de
       static func settings(_: Void = ()) -> String {
         return NSLocalizedString("settings", bundle: R.hostingBundle, comment: "")
-      }
-      
-      /// en translation: Setup Face Recognition
-      /// 
-      /// Locales: en, de
-      static func face_recognition(_: Void = ()) -> String {
-        return NSLocalizedString("face_recognition", bundle: R.hostingBundle, comment: "")
-      }
-      
-      /// en translation: Setup Fingerprint
-      /// 
-      /// Locales: en, de
-      static func fingerprint(_: Void = ()) -> String {
-        return NSLocalizedString("fingerprint", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Setup Wallet

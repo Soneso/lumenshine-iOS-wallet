@@ -9,6 +9,10 @@
 import UIKit
 import Material
 
+protocol ReLoginFingerViewDelegate: class {
+    func didTapActivateButton(password: String, tfaCode: String?)
+}
+
 class ReLoginFingerView: UIView {
     
     // MARK: - Properties
@@ -23,7 +27,7 @@ class ReLoginFingerView: UIView {
     fileprivate let verticalSpacing = 25.0
     fileprivate let horizontalSpacing = 15.0
     
-    weak var delegate: ReLoginViewDelegate?
+    weak var delegate: ReLoginFingerViewDelegate?
     
     init(viewModel: LoginViewModelType) {
         self.viewModel = viewModel
@@ -55,7 +59,7 @@ extension ReLoginFingerView {
         passwordTextField.resignFirstResponder()
         passwordTextField.text = nil
         
-        self.delegate?.didTapSubmitButton(password: password, tfaCode: nil)
+        self.delegate?.didTapActivateButton(password: password, tfaCode: nil)
     }
 }
 
@@ -119,7 +123,7 @@ fileprivate extension ReLoginFingerView {
     }
     
     func prepareLoginButton() {
-        submitButton.title = R.string.localizable.submit().uppercased()
+        submitButton.title = R.string.localizable.activate().uppercased()
         submitButton.backgroundColor = Stylesheet.color(.green)
         submitButton.addTarget(self, action: #selector(submitAction(sender:)), for: .touchUpInside)
         

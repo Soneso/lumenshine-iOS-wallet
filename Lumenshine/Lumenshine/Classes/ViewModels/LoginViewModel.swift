@@ -20,7 +20,7 @@ protocol LoginViewModelType: Transitionable, BiometricAuthenticationProtocol {
     func loginCompleted()
     func showLoginForm()
     
-    func loginStep1(email: String, password: String, tfaCode: String?, response: @escaping EmptyResponseClosure)
+    func loginStep1(email: String, password: String, tfaCode: String?, checkSetup: Bool?, response: @escaping EmptyResponseClosure)
     func enableTfaCode(email: String) -> Bool
     func signUp(email: String, password: String, repassword: String, response: @escaping EmptyResponseClosure)
     func showPasswordHint()
@@ -120,12 +120,22 @@ class LoginViewModel : LoginViewModelType {
         return false
     }
     
-    func loginStep1(email: String, password: String, tfaCode: String?, response: @escaping EmptyResponseClosure) {
+    func loginStep1(email: String, password: String, tfaCode: String?, checkSetup: Bool? = true, response: @escaping EmptyResponseClosure) {
         self.email = email
         service.loginStep1(email: email, tfaCode: tfaCode) { [weak self] result in
             switch result {
             case .success(let login1Response):
-                self?.verifyLogin1Response(login1Response, password: password, response: response)
+                self?.verifyLogin1Response(login1Response, password: password) { result2 in
+                    switch result2 {
+                    case .success(let login2Response):
+                        if checkSetup == true {
+                            self?.checkSetup(login2Response: login2Response)
+                        }
+                        response(.success)
+                    case .failure(let error):
+                        response(.failure(error: error))
+                    }
+                }
             case .failure(let error):
                 response(.failure(error: error))
             }
@@ -319,7 +329,7 @@ fileprivate extension LoginViewModel {
         navigationCoordinator?.performTransition(transition: .showHeaderMenu(items))
     }
     
-    func verifyLogin1Response(_ login1Response: AuthenticationResponse, password: String, response: @escaping EmptyResponseClosure) {
+    func verifyLogin1Response(_ login1Response: AuthenticationResponse, password: String, response: @escaping Login2ResponseClosure) {
         DispatchQueue.global(qos: .userInitiated).async {
             do {
                 if let userSecurity = UserSecurity(from: login1Response),
@@ -330,15 +340,7 @@ fileprivate extension LoginViewModel {
                                      publicKeyIndex0: login1Response.publicKeyIndex0,
                                      publicKeyIndex188: decryptedUserData.publicKeyIndex188)
                     self.mnemonic = decryptedUserData.mnemonic
-                    self.service.loginStep2(publicKeyIndex188: decryptedUserData.publicKeyIndex188) { [weak self] result in
-                        switch result {
-                        case .success(let login2Response):
-                            self?.checkSetup(login2Response: login2Response)
-                            response(.success)
-                        case .failure(let error):
-                            response(.failure(error: error))
-                        }
-                    }
+                    self.service.loginStep2(publicKeyIndex188: decryptedUserData.publicKeyIndex188, response: response)
                 } else {
                     let error = ErrorResponse()
                     error.parameterName = "password"

@@ -46,7 +46,10 @@ class SettingsViewModel: SettingsViewModelType {
     init(service: AuthService, user: User) {
         self.service = service
         self.user = user
-        self.entries = [[.changePassword, .change2FA, .biometricAuth, .backupMnemonic]]
+        self.entries = [[.changePassword,
+                         .change2FA,
+                         BiometricIDAuth().biometricType() == .faceID ? .faceRecognition : .fingerprint,
+                         .backupMnemonic]]
         self.touchEnabled = BiometricHelper.isTouchEnabled
     }
     
@@ -71,15 +74,17 @@ class SettingsViewModel: SettingsViewModelType {
     }
     
     func switchValue(at indexPath: IndexPath) -> Bool? {
-        if entry(at: indexPath) == .biometricAuth {
+        switch entry(at: indexPath) {
+        case .faceRecognition, .fingerprint:
             return touchEnabled
+        default:
+            return nil
         }
-        return nil
     }
     
     func switchChanged(value: Bool, at indexPath: IndexPath) {
         switch entry(at: indexPath) {
-        case .biometricAuth:
+        case .faceRecognition, .fingerprint:
             enableTouch(value: value)
         default: break
         }
@@ -93,7 +98,7 @@ class SettingsViewModel: SettingsViewModelType {
         case .change2FA:
             changePassword = false
             navigationCoordinator?.performTransition(transition: .showChange2faSecret)
-        case .biometricAuth:
+        case .faceRecognition, .fingerprint:
             break
         case .avatar:
             break
