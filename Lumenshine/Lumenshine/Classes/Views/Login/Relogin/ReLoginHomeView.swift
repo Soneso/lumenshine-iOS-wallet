@@ -199,12 +199,8 @@ fileprivate extension ReLoginHomeView {
     }
     
     func prepareTouchButton() {
-        switch BiometricIDAuth().biometricType() {
-        case .faceID:
-            touchIDButton.setImage(R.image.faceIcon(),  for: .normal)
-        default:
-            touchIDButton.setImage(R.image.touchIcon(),  for: .normal)
-        }
+        let image = UIImage(named: BiometricHelper.touchIcon.name)
+        touchIDButton.setImage(image,  for: .normal)
         touchIDButton.addTarget(self, action: #selector(touchIDLogin), for: .touchUpInside)
         
         addSubview(touchIDButton)

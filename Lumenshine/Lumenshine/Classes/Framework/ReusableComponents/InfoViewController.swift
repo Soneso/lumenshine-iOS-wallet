@@ -53,19 +53,6 @@ class InfoViewController: UIViewController {
     }
 }
 
-extension InfoViewController: UIViewControllerTransitioningDelegate {
-    
-    func animationController(forPresented presented: UIViewController,
-                             presenting: UIViewController,
-                             source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return ComposePresentTransitionController()
-    }
-    
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return ComposeDismissTransitionController()
-    }
-}
-
 fileprivate extension InfoViewController {
     func prepareView() {
         view.backgroundColor = UIColor(red: 243/255.0, green: 243/255.0, blue: 243/255.0, alpha: 1.0)

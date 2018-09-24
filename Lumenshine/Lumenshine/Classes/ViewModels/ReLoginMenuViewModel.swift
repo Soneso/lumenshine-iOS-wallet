@@ -54,6 +54,6 @@ class ReLoginMenuViewModel : LoginMenuViewModel {
 
 fileprivate extension ReLoginMenuViewModel {
     func logout() {
-        LoginViewModel.logout(userEmail: user.email)
+        LoginViewModel.logout(username: user.email)
     }
 }

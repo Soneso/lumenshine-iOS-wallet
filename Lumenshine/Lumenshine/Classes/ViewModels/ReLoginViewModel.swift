@@ -51,7 +51,7 @@ class ReLoginViewModel : LoginViewModel {
     }
     
     override var hintText: String? {
-        let text = BiometricIDAuth().biometricType() == .faceID ? R.string.localizable.face_recognition() : R.string.localizable.fingerprint()
+        let text = entries[2].name
         return R.string.localizable.hint_face_fingerprint(text, text)
     }
     
@@ -81,6 +81,6 @@ class ReLoginViewModel : LoginViewModel {
 
 fileprivate extension ReLoginViewModel {
     func logout() {
-        LoginViewModel.logout(userEmail: user.email)
+        LoginViewModel.logout(username: user.email)
     }
 }

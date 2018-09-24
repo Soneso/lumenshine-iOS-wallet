@@ -40,6 +40,7 @@
 		4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA2E205BD69F007FEB5E /* ServerMock.swift */; };
 		4322BA33205BDB6E007FEB5E /* CardsResponsesMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA32205BDB6E007FEB5E /* CardsResponsesMock.swift */; };
 		4322BA35205BDD58007FEB5E /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322BA34205BDD58007FEB5E /* Card.swift */; };
+		432AAD302158F9E900963619 /* ActivateFingerprintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432AAD2F2158F9E900963619 /* ActivateFingerprintViewController.swift */; };
 		432E298B211CA098005C7F9E /* EmailConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432E298A211CA098005C7F9E /* EmailConfirmationView.swift */; };
 		432F11792101C64600FC429B /* MnemonicSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432F11782101C64600FC429B /* MnemonicSetupViewController.swift */; };
 		432F117B2101EEF500FC429B /* VerificationSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432F117A2101EEF500FC429B /* VerificationSetupViewController.swift */; };
@@ -370,6 +371,7 @@
 		4322BA2E205BD69F007FEB5E /* ServerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerMock.swift; sourceTree = "<group>"; };
 		4322BA32205BDB6E007FEB5E /* CardsResponsesMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsResponsesMock.swift; sourceTree = "<group>"; };
 		4322BA34205BDD58007FEB5E /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		432AAD2F2158F9E900963619 /* ActivateFingerprintViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateFingerprintViewController.swift; sourceTree = "<group>"; };
 		432E298A211CA098005C7F9E /* EmailConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailConfirmationView.swift; sourceTree = "<group>"; };
 		432F11782101C64600FC429B /* MnemonicSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicSetupViewController.swift; sourceTree = "<group>"; };
 		432F117A2101EEF500FC429B /* VerificationSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationSetupViewController.swift; sourceTree = "<group>"; };
@@ -943,6 +945,7 @@
 				4365F69B2110BB8700D4B12C /* Confirm2faCodeViewController.swift */,
 				4319B4CB2119FB59002E45F0 /* RevealMnemonicViewController.swift */,
 				4319B4CD211A0347002E45F0 /* BackupMnemonicViewController.swift */,
+				432AAD2F2158F9E900963619 /* ActivateFingerprintViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1919,6 +1922,7 @@
 				431437F22047FF9100189C83 /* AppNavigationController.swift in Sources */,
 				43DB1DA8214A8DED00AC0975 /* ChangePasswordSuccessViewController.swift in Sources */,
 				74A2A2F0210EF405007AEE91 /* ReceivePaymentPrintView.swift in Sources */,
+				432AAD302158F9E900963619 /* ActivateFingerprintViewController.swift in Sources */,
 				43CD7B0E20F7AEBC0014BF69 /* SetupCoordinator.swift in Sources */,
 				C6725086213FC4D20064F6E3 /* ProvideInflationDestinationViewController.swift in Sources */,
 				4314B9F9204812BC006DBE63 /* MenuTableViewCell.swift in Sources */,

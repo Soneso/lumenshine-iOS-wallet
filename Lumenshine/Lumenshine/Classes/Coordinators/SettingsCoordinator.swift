@@ -49,6 +49,8 @@ class SettingsCoordinator: CoordinatorType {
             showBackupMnemonic()
         case .showMnemonic(let mnemonic):
             showMnemonic(mnemonic)
+        case .showFingerprint:
+            showActivateFingerprint()
         default: break
         }
     }
@@ -84,7 +86,6 @@ fileprivate extension SettingsCoordinator {
         let title = R.string.localizable.password_hint_title()
         let textVC = InfoViewController(info: hint, attributedText: attributedText, title: title)
         let composeVC = ComposeNavigationController(rootViewController: textVC)
-        composeVC.transitioningDelegate = textVC
         baseController.navigationController?.present(composeVC, animated: true)
     }
     
@@ -119,5 +120,12 @@ fileprivate extension SettingsCoordinator {
         let backupVC = BackupMnemonicViewController(mnemonic: mnemonic)
         baseController.navigationController?.popViewController(animated: false)
         baseController.navigationController?.pushViewController(backupVC, animated: true)
+    }
+    
+    func showActivateFingerprint() {
+        let viewModel = ReLoginViewModel(service: service.auth, user: user)
+        let activateVC = ActivateFingerprintViewController(viewModel: viewModel)
+        let composeVC = ComposeNavigationController(rootViewController: activateVC)
+        baseController.navigationController?.present(composeVC, animated: true)
     }
 }

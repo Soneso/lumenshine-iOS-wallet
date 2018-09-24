@@ -39,7 +39,6 @@ class SettingsViewModel: SettingsViewModelType {
     fileprivate let service: AuthService
     fileprivate let user: User
     fileprivate let entries: [[SettingsEntry]]
-    fileprivate var touchEnabled: Bool
     fileprivate var tfaResponse: RegistrationResponse?
     fileprivate var changePassword: Bool = true
     
@@ -50,7 +49,6 @@ class SettingsViewModel: SettingsViewModelType {
                          .change2FA,
                          BiometricIDAuth().biometricType() == .faceID ? .faceRecognition : .fingerprint,
                          .backupMnemonic]]
-        self.touchEnabled = BiometricHelper.isTouchEnabled
     }
     
     var tfaSecret: String? {
@@ -76,7 +74,7 @@ class SettingsViewModel: SettingsViewModelType {
     func switchValue(at indexPath: IndexPath) -> Bool? {
         switch entry(at: indexPath) {
         case .faceRecognition, .fingerprint:
-            return touchEnabled
+            return BiometricHelper.isTouchEnabled
         default:
             return nil
         }
@@ -85,7 +83,13 @@ class SettingsViewModel: SettingsViewModelType {
     func switchChanged(value: Bool, at indexPath: IndexPath) {
         switch entry(at: indexPath) {
         case .faceRecognition, .fingerprint:
-            enableTouch(value: value)
+            // show activate finger
+            if value == true {
+                navigationCoordinator?.performTransition(transition: .showFingerprint)
+            } else {
+                BiometricHelper.enableTouch(false)
+                BiometricHelper.removePassword(username: user.email)
+            }
         default: break
         }
     }
@@ -222,18 +226,12 @@ class SettingsViewModel: SettingsViewModelType {
     }
     
     // MARK: Biometric authentication
-    
     func authenticateUser(completion: @escaping BiometricAuthResponseClosure) {
         BiometricHelper.authenticate(username: user.email, response: completion)
     }
 }
 
 fileprivate extension SettingsViewModel {
-    func enableTouch(value: Bool) {
-        touchEnabled = value
-        BiometricHelper.enableTouch(touchEnabled)
-    }
-    
     func entry(at indexPath: IndexPath) -> SettingsEntry {
         return entries[indexPath.section][indexPath.row]
     }

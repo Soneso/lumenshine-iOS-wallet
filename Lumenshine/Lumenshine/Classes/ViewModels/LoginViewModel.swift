@@ -257,11 +257,12 @@ class LoginViewModel : LoginViewModelType {
         TFAGeneration.removeToken(email: email!)
     }
     
-    class func logout(userEmail: String) {
-        TFAGeneration.removeToken(email: userEmail)
+    class func logout(username: String) {
+        TFAGeneration.removeToken(email: username)
         BaseService.removeToken()
         BiometricHelper.UserMnemonic = nil
         BiometricHelper.enableTouch(false)
+        BiometricHelper.removePassword(username: username)
         UserDefaults.standard.setValue(nil, forKey:ChartCardViewModel.selectedPeriodKey)
     }
 }

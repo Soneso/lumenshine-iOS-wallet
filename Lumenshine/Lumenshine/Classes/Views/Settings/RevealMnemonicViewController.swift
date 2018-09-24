@@ -20,6 +20,7 @@ class RevealMnemonicViewController: UIViewController {
     fileprivate let titleLabel = UILabel()
     fileprivate let textField1 = LSTextField()
     fileprivate let submitButton = RaisedButton()
+    fileprivate let touchIDButton = Button()
     
     fileprivate let verticalSpacing: CGFloat = 42.0
     fileprivate let horizontalSpacing: CGFloat = 15.0
@@ -64,18 +65,20 @@ extension RevealMnemonicViewController {
         }
         
         _ = resignFirstResponder()
-        
-        showActivity()
-        viewModel.showBackupMnemonic(password: password) { result in
+        showBackupMnemonic(password: password)
+    }
+    
+    @objc
+    func touchIDLogin() {
+        viewModel.authenticateUser() { [weak self] result in
             DispatchQueue.main.async {
-                self.hideActivity(completion: {
-                    switch result {
-                    case .success(let decryptedUserData):
-                        self.revealMnemonic(decryptedUserData.mnemonic)
-                    case .failure(let error):
-                        self.present(error: error)
-                    }
-                })
+                switch result {
+                case .success(let password):
+                    self?.showBackupMnemonic(password: password)
+                case .failure(let error):
+                    let alert = AlertFactory.createAlert(title: R.string.localizable.error(), message: error)
+                    self?.present(alert, animated: true)
+                }
             }
         }
     }
@@ -90,6 +93,10 @@ fileprivate extension RevealMnemonicViewController {
         prepareTitleLabel()
         prepareTextFields()
         prepareSubmitButton()
+        
+        if BiometricHelper.isBiometricAuthEnabled {
+            prepareTouchButton()
+        }
     }
     
     func prepareTitleLabel() {
@@ -140,6 +147,20 @@ fileprivate extension RevealMnemonicViewController {
         }
     }
     
+    func prepareTouchButton() {
+        let image = UIImage(named: BiometricHelper.touchIcon.name)
+        touchIDButton.setImage(image,  for: .normal)
+        touchIDButton.addTarget(self, action: #selector(touchIDLogin), for: .touchUpInside)
+        
+        view.addSubview(touchIDButton)
+        touchIDButton.snp.makeConstraints { make in
+            make.top.equalTo(submitButton.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+            make.bottom.lessThanOrEqualToSuperview()
+            make.width.height.equalTo(90)
+        }
+    }
+    
     func present(error: ServiceError) {
         if let parameter = error.parameterName {
             if parameter == "current_password" {
@@ -154,10 +175,20 @@ fileprivate extension RevealMnemonicViewController {
         }
     }
     
-    func revealMnemonic(_ mnemonic: String) {
-        viewModel.showMnemonic(mnemonic)
+    func showBackupMnemonic(password: String) {
+        showActivity()
+        viewModel.showBackupMnemonic(password: password) { [weak self] result in
+            DispatchQueue.main.async {
+                self?.hideActivity(completion: {
+                    switch result {
+                    case .success(let decryptedUserData):
+                        self?.viewModel.showMnemonic(decryptedUserData.mnemonic)
+                    case .failure(let error):
+                        self?.present(error: error)
+                    }
+                })
+            }
+        }
     }
 }
-
-
 

@@ -114,7 +114,7 @@ fileprivate extension MenuViewModel {
         NotificationCenter.default.removeObserver(self, name: .UIApplicationWillEnterForeground, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UIApplicationDidEnterBackground, object: nil)
         
-        LoginViewModel.logout(userEmail: user.email)
+        LoginViewModel.logout(username: user.email)
         navigationCoordinator?.performTransition(transition: .logout(nil))
     }
     

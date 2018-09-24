@@ -67,26 +67,20 @@ extension Change2faSecretViewController {
         textField1.text = nil
         _ = resignFirstResponder()
         
-        showActivity()
-        viewModel.change2faSecret(password: password) { result in
-            DispatchQueue.main.async {
-                self.hideActivity(completion: {
-                    switch result {
-                    case .success(let tfaSecretResponse):
-                        self.show2faSecret(tfaSecretResponse)
-                    case .failure(let error):
-                        self.present(error: error)
-                    }
-                })
-            }
-        }
+        change2FASecret(password: password)
     }
     
     @objc
     func touchIDLogin() {
-        viewModel.authenticateUser() { [weak self] error in
-            if error == nil {
-                self?.viewModel.loginCompleted()
+        viewModel.authenticateUser() { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let password):
+                    self?.change2FASecret(password: password)
+                case .failure(let error):
+                    let alert = AlertFactory.createAlert(title: R.string.localizable.error(), message: error)
+                    self?.present(alert, animated: true)
+                }
             }
         }
     }
@@ -186,20 +180,32 @@ fileprivate extension Change2faSecretViewController {
     }
     
     func prepareTouchButton() {
-        switch BiometricIDAuth().biometricType() {
-        case .faceID:
-            touchIDButton.setImage(R.image.faceIcon(),  for: .normal)
-        default:
-            touchIDButton.setImage(R.image.touchIcon(),  for: .normal)
-        }
+        let image = UIImage(named: BiometricHelper.touchIcon.name)
+        touchIDButton.setImage(image,  for: .normal)
         touchIDButton.addTarget(self, action: #selector(touchIDLogin), for: .touchUpInside)
         
         view.addSubview(touchIDButton)
         touchIDButton.snp.makeConstraints { make in
             make.top.equalTo(submitButton.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(-20)
+            make.bottom.lessThanOrEqualToSuperview()
             make.width.height.equalTo(90)
+        }
+    }
+    
+    func change2FASecret(password: String) {
+        showActivity()
+        viewModel.change2faSecret(password: password) { result in
+            DispatchQueue.main.async {
+                self.hideActivity(completion: {
+                    switch result {
+                    case .success(let tfaSecretResponse):
+                        self.show2faSecret(tfaSecretResponse)
+                    case .failure(let error):
+                        self.present(error: error)
+                    }
+                })
+            }
         }
     }
 }

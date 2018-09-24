@@ -95,8 +95,6 @@ fileprivate extension LoginCoordinator {
         let title = R.string.localizable.password_hint_title()
         let textVC = InfoViewController(info: hint, attributedText: attributedText, title: title)
         let composeVC = ComposeNavigationController(rootViewController: textVC)
-        composeVC.transitioningDelegate = textVC
-        
         baseController.present(composeVC, animated: true)
     }
     

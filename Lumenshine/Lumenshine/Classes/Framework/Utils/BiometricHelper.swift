@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Rswift
 
 enum BiometricAuthResponseEnum {
     case success(response: String)
@@ -35,6 +36,10 @@ class BiometricHelper {
             }
             return false
         }
+    }
+    
+    static var touchIcon: ImageResource {
+        return BiometricIDAuth().biometricType() == .faceID ? R.image.faceIcon : R.image.touchIcon
     }
     
     static func enableTouch(_ touch: Bool) {
@@ -70,6 +75,17 @@ class BiometricHelper {
         } catch {
             print("Error reading password from keychain: \(error)")
             return nil
+        }
+    }
+    
+    static func removePassword(username: String) {
+        do {
+            let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
+                                                    account: username,
+                                                    accessGroup: KeychainConfiguration.accessGroup)
+            try passwordItem.deleteItem()
+        } catch {
+            print("Error deleting password from keychain: \(error)")
         }
     }
     

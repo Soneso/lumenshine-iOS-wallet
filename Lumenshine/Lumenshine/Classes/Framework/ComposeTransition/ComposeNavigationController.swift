@@ -21,6 +21,7 @@ class ComposeNavigationController: NavigationController {
     override func prepare() {
         super.prepare()
         
+        transitioningDelegate = self
         definesPresentationContext = true
         providesPresentationContextTransitionStyle = true
         modalPresentationCapturesStatusBarAppearance = false
@@ -37,5 +38,18 @@ class ComposeNavigationController: NavigationController {
     
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+}
+
+extension ComposeNavigationController: UIViewControllerTransitioningDelegate {
+    
+    func animationController(forPresented presented: UIViewController,
+                             presenting: UIViewController,
+                             source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return ComposePresentTransitionController()
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return ComposeDismissTransitionController()
     }
 }

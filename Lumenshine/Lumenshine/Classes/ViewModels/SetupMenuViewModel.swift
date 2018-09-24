@@ -59,6 +59,6 @@ extension SetupMenuViewModel {
     }
     
     func logout() {
-        LoginViewModel.logout(userEmail: user.email)
+        LoginViewModel.logout(username: user.email)
     }
 }
