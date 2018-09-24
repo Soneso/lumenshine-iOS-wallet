@@ -473,6 +473,9 @@
 "invalid_repassword" = "Repetition do not match with password.";
 
 /*  */
+"missing_password" = "No stored password.";
+
+/*  */
 "invalid_phone" = "Invalid mobile phone number.";
 
 /*  */

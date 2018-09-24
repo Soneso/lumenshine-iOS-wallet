@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SettingsViewModelType: Transitionable {
+protocol SettingsViewModelType: Transitionable, BiometricAuthenticationProtocol {
     var itemDistribution: [Int] { get }
     var tfaSecret: String? { get }
     
@@ -219,6 +219,12 @@ class SettingsViewModel: SettingsViewModelType {
     
     func showMnemonic(_ mnemonic: String) {
         navigationCoordinator?.performTransition(transition: .showMnemonic(mnemonic))
+    }
+    
+    // MARK: Biometric authentication
+    
+    func authenticateUser(completion: @escaping BiometricAuthResponseClosure) {
+        BiometricHelper.authenticate(username: user.email, response: completion)
     }
 }
 

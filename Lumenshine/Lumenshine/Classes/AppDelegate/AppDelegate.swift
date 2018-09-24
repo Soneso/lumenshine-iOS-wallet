@@ -39,11 +39,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         
         // for testing purpose
-//        let loginCoordinator = MenuCoordinator(mainCoordinator: mainCoordinator, user: User(id: "1", email: "isti@isti.com", publicKeyIndex0: "publicKeyIndex0", publicKeyIndex188: "publicKeyIndex188"))
+        let loginCoordinator = MenuCoordinator(mainCoordinator: mainCoordinator, user: User(id: "1", email: "isti@isti.com", publicKeyIndex0: "publicKeyIndex0", publicKeyIndex188: "publicKeyIndex188"))
 //        let loginCoordinator = ReLoginMenuCoordinator(mainCoordinator: mainCoordinator, service: Services.shared.auth, user: User(id: "1", email: "isti@isti.com", publicKeyIndex0: "publicKeyIndex0", publicKeyIndex188: "publicKeyIndex188"))
 //        let loginCoordinator = SetupMenuCoordinator(mainCoordinator: mainCoordinator, service: Services().auth, user: User(id: "1", email: "isti@isti.com", publicKeyIndex0: "publicKeyIndex0", publicKeyIndex188: "publicKeyIndex188"), mnemonic: "mnemonic apple word car bike watch", loginResponse: nil)
         
-        let loginCoordinator = LoginMenuCoordinator(mainCoordinator: mainCoordinator)
+//        let loginCoordinator = LoginMenuCoordinator(mainCoordinator: mainCoordinator)
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = loginCoordinator.baseController

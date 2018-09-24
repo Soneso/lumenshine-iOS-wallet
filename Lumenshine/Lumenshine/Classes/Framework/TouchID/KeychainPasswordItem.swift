@@ -8,6 +8,12 @@
 
 import Foundation
 
+// Keychain Configuration
+struct KeychainConfiguration {
+    static let serviceName = "TouchMeIn"
+    static let accessGroup: String? = nil
+}
+
 struct KeychainPasswordItem {
     // MARK: Types
     

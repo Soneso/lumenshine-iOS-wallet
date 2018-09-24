@@ -124,8 +124,7 @@ extension ReLoginViewController: ReLoginFingerViewDelegate {
             DispatchQueue.main.async {
                 self?.hideActivity(completion: {
                     switch result {
-                    case .success:
-                        BiometricHelper.enableTouch(true)
+                    case .success:                        
                         self?.showHome()
                     case .failure(let error):
                         _ = self?.contentView?.present(error: error)

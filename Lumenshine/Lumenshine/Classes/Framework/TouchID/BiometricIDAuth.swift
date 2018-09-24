@@ -53,10 +53,7 @@ class BiometricIDAuth {
         
         context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: loginReason) { (success, evaluateError) in
             if success {
-                DispatchQueue.main.async {
-                    // User authenticated successfully, take appropriate action
-                    completion(nil)
-                }
+                completion(nil)
             } else {
                 let message: String
                 
@@ -76,7 +73,8 @@ class BiometricIDAuth {
                 default:
                     message = "Face ID/Touch ID may not be configured"
                 }
-                completion(message)                            }
+                completion(message)
+            }
         }
     }
 }

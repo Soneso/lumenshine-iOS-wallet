@@ -130,6 +130,9 @@ class LoginViewModel : LoginViewModelType {
                     case .success(let login2Response):
                         if checkSetup == true {
                             self?.checkSetup(login2Response: login2Response)
+                        } else {
+                            BiometricHelper.enableTouch(true)
+                            BiometricHelper.save(user: email, password: password)
                         }
                         response(.success)
                     case .failure(let error):
@@ -247,17 +250,12 @@ class LoginViewModel : LoginViewModelType {
         navigationCoordinator?.performTransition(transition: .showPasswordHint(hint.string, hint))
     }
     
-    func biometricType() -> BiometricType {
-        return .none
+
+    func authenticateUser(completion: @escaping BiometricAuthResponseClosure) {}
+    
+    func remove2FASecret() {
+        TFAGeneration.removeToken(email: email!)
     }
-    
-    func canEvaluatePolicy() -> Bool {
-        return false
-    }
-    
-    func authenticateUser(completion: @escaping (String?) -> Void) {}
-    
-    func remove2FASecret() {}
     
     class func logout(userEmail: String) {
         TFAGeneration.removeToken(email: userEmail)

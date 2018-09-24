@@ -9,7 +9,5 @@
 import Foundation
 
 protocol BiometricAuthenticationProtocol {
-    func biometricType() -> BiometricType
-    func canEvaluatePolicy() -> Bool
-    func authenticateUser(completion: @escaping (String?) -> Void)
+    func authenticateUser(completion: @escaping BiometricAuthResponseClosure)
 }

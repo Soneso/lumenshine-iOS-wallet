@@ -20,6 +20,7 @@ class Change2faSecretViewController: UIViewController {
     fileprivate let titleLabel = UILabel()
     fileprivate let textField1 = LSTextField()
     fileprivate let submitButton = RaisedButton()
+    fileprivate let touchIDButton = Button()
     
     fileprivate let verticalSpacing: CGFloat = 42.0
     fileprivate let horizontalSpacing: CGFloat = 15.0
@@ -80,6 +81,15 @@ extension Change2faSecretViewController {
             }
         }
     }
+    
+    @objc
+    func touchIDLogin() {
+        viewModel.authenticateUser() { [weak self] error in
+            if error == nil {
+                self?.viewModel.loginCompleted()
+            }
+        }
+    }
 }
 
 extension Change2faSecretViewController: UITextFieldDelegate {
@@ -103,6 +113,10 @@ fileprivate extension Change2faSecretViewController {
         prepareTitle()
         prepareTextFields()
         prepareSubmitButton()
+        
+        if BiometricHelper.isBiometricAuthEnabled {
+            prepareTouchButton()
+        }
     }
     
     func prepareTitle() {
@@ -169,6 +183,24 @@ fileprivate extension Change2faSecretViewController {
     
     func show2faSecret(_ tfaSecretResponse: RegistrationResponse) {
         viewModel.showConfirm2faSecret(tfaResponse: tfaSecretResponse)
+    }
+    
+    func prepareTouchButton() {
+        switch BiometricIDAuth().biometricType() {
+        case .faceID:
+            touchIDButton.setImage(R.image.faceIcon(),  for: .normal)
+        default:
+            touchIDButton.setImage(R.image.touchIcon(),  for: .normal)
+        }
+        touchIDButton.addTarget(self, action: #selector(touchIDLogin), for: .touchUpInside)
+        
+        view.addSubview(touchIDButton)
+        touchIDButton.snp.makeConstraints { make in
+            make.top.equalTo(submitButton.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(-20)
+            make.width.height.equalTo(90)
+        }
     }
 }
 

@@ -1531,7 +1531,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 187 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 188 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -1921,6 +1921,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let next = Rswift.StringResource(key: "next", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: No stored password.
+      /// 
+      /// Locales: en
+      static let missing_password = Rswift.StringResource(key: "missing_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Not logged in
       /// 
       /// Locales: en, de
@@ -2959,6 +2963,13 @@ struct R: Rswift.Validatable {
       /// Locales: en, de
       static func next(_: Void = ()) -> String {
         return NSLocalizedString("next", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: No stored password.
+      /// 
+      /// Locales: en
+      static func missing_password(_: Void = ()) -> String {
+        return NSLocalizedString("missing_password", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Not logged in

@@ -48,9 +48,14 @@ class ReLoginHomeView: UIView {
     
     @objc
     func touchIDLogin() {
-        viewModel.authenticateUser() { [weak self] error in
-            if error == nil {
-                self?.viewModel.loginCompleted()
+        viewModel.authenticateUser() { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let password):
+                    self?.delegate?.didTapSubmitButton(password: password, tfaCode: nil)
+                case .failure(let error):
+                    self?.passwordTextField.detail = error
+                }
             }
         }
     }
@@ -194,7 +199,7 @@ fileprivate extension ReLoginHomeView {
     }
     
     func prepareTouchButton() {
-        switch viewModel.biometricType() {
+        switch BiometricIDAuth().biometricType() {
         case .faceID:
             touchIDButton.setImage(R.image.faceIcon(),  for: .normal)
         default:

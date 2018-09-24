@@ -9,12 +9,10 @@
 import Foundation
 
 class ReLoginViewModel : LoginViewModel {
-    fileprivate let touchMe: BiometricIDAuth
     fileprivate var user: User
     
     init(service: AuthService, user: User) {
         self.user = user
-        self.touchMe = BiometricIDAuth()
         super.init(service: service)
         self.entries = [.signOut,
                         .home,
@@ -53,13 +51,12 @@ class ReLoginViewModel : LoginViewModel {
     }
     
     override var hintText: String? {
-        let text = biometricType() == .faceID ? R.string.localizable.face_recognition() : R.string.localizable.fingerprint()
+        let text = BiometricIDAuth().biometricType() == .faceID ? R.string.localizable.face_recognition() : R.string.localizable.fingerprint()
         return R.string.localizable.hint_face_fingerprint(text, text)
     }
     
     override func loginCompleted() {
         navigationCoordinator?.performTransition(transition: .showDashboard(user))
-        touchMe.invalidate()
     }
     
     override  func loginStep1(email: String, password: String, tfaCode: String?, checkSetup: Bool? = true, response: @escaping EmptyResponseClosure) {
@@ -76,21 +73,9 @@ class ReLoginViewModel : LoginViewModel {
         navigationCoordinator?.performTransition(transition: .logout(.showForgotPassword))
     }
     
-    override func remove2FASecret() {
-        TFAGeneration.removeToken(email: user.email)
-    }
-    
     // MARK: Biometric authentication
-    override func biometricType() -> BiometricType {
-        return touchMe.biometricType()
-    }
-    
-    override func canEvaluatePolicy() -> Bool {
-        return touchMe.canEvaluatePolicy()
-    }
-    
-    override func authenticateUser(completion: @escaping (String?) -> Void) {
-        touchMe.authenticateUser(completion: completion)
+    override func authenticateUser(completion: @escaping BiometricAuthResponseClosure) {
+        BiometricHelper.authenticate(username: user.email, response: completion)
     }
 }
 
