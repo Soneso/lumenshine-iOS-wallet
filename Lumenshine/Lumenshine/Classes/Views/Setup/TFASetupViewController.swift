@@ -54,7 +54,7 @@ class TFASetupViewController: SetupViewController {
             if let tfaCode = UIPasteboard.general.string,
                 tfaCode.count == 6,
                 CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: tfaCode)) {
-                tfaCodeTextField.text = tfaCode
+                tfaCodeTextField.pasteText(tfaCode)
             }
         }
     }

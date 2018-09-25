@@ -64,7 +64,7 @@ extension LoginView: LoginViewContentProtocol {
     }
     
     func setTFACode(_ tfaCode: String) {
-        textField3.text = tfaCode
+        textField3.pasteText(tfaCode)
     }
 }
 

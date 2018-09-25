@@ -69,7 +69,7 @@ class Confirm2faCodeViewController: UIViewController {
             if let tfaCode = UIPasteboard.general.string,
                 tfaCode.count == 6,
                 CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: tfaCode)) {
-                tfaCodeTextField.text = tfaCode
+                tfaCodeTextField.pasteText(tfaCode)
             }
         }
     }
@@ -87,7 +87,10 @@ extension Confirm2faCodeViewController {
     
     @objc
     func submitAction(sender: UIButton) {
-        guard let code = tfaCodeTextField.text else { return }
+        guard let code = tfaCodeTextField.text else {
+            tfaCodeTextField.detail = R.string.localizable.invalid_input()
+            return
+        }
         viewModel.confirm2faSecret(tfaCode: code) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {

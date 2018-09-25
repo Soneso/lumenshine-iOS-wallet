@@ -28,4 +28,11 @@ class LSTextField: TextField {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func pasteText(_ text: String) {
+        self.text = text
+        _ = becomeFirstResponder()
+        shake(for: 0.5)
+        detail = nil
+    }
+    
 }
