@@ -16,6 +16,8 @@ enum MenuEntry {
     case wallets
     case transactions
     case currencies
+    case ICOs
+    case myOrders
     case contacts
     case extras
     case settings
@@ -44,6 +46,10 @@ enum MenuEntry {
             return R.string.localizable.transactions()
         case .currencies:
             return R.string.localizable.currencies()
+        case .myOrders:
+            return R.string.localizable.my_orders()
+        case .ICOs:
+            return R.string.localizable.icos()
         case .contacts:
             return R.string.localizable.contacts()
         case .extras:
@@ -85,6 +91,10 @@ enum MenuEntry {
             return R.image.transactions
         case .currencies:
             return R.image.currencies
+        case .myOrders:
+            return R.image.my_orders
+        case .ICOs:
+            return R.image.ico
         case .contacts:
             return R.image.user
         case .extras:

@@ -933,7 +933,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 40 images.
+  /// This `R.image` struct is generated, and contains static references to 42 images.
   struct image {
     /// Image `FaceIcon`.
     static let faceIcon = Rswift.ImageResource(bundle: R.hostingBundle, name: "FaceIcon")
@@ -963,6 +963,8 @@ struct R: Rswift.Validatable {
     static let header_background = Rswift.ImageResource(bundle: R.hostingBundle, name: "header_background")
     /// Image `home`.
     static let home = Rswift.ImageResource(bundle: R.hostingBundle, name: "home")
+    /// Image `ico`.
+    static let ico = Rswift.ImageResource(bundle: R.hostingBundle, name: "ico")
     /// Image `link`.
     static let link = Rswift.ImageResource(bundle: R.hostingBundle, name: "link")
     /// Image `lock`.
@@ -975,6 +977,8 @@ struct R: Rswift.Validatable {
     static let moreActive = Rswift.ImageResource(bundle: R.hostingBundle, name: "moreActive")
     /// Image `more`.
     static let more = Rswift.ImageResource(bundle: R.hostingBundle, name: "more")
+    /// Image `my_orders`.
+    static let my_orders = Rswift.ImageResource(bundle: R.hostingBundle, name: "my_orders")
     /// Image `navigation_background`.
     static let navigation_background = Rswift.ImageResource(bundle: R.hostingBundle, name: "navigation_background")
     /// Image `pencil`.
@@ -1086,6 +1090,11 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.home, compatibleWith: traitCollection)
     }
     
+    /// `UIImage(named: "ico", bundle: ..., traitCollection: ...)`
+    static func ico(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.ico, compatibleWith: traitCollection)
+    }
+    
     /// `UIImage(named: "link", bundle: ..., traitCollection: ...)`
     static func link(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.link, compatibleWith: traitCollection)
@@ -1114,6 +1123,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "moreActive", bundle: ..., traitCollection: ...)`
     static func moreActive(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.moreActive, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "my_orders", bundle: ..., traitCollection: ...)`
+    static func my_orders(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.my_orders, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "navigation_background", bundle: ..., traitCollection: ...)`
@@ -1531,7 +1545,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 188 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 190 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -1817,6 +1831,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let home = Rswift.StringResource(key: "home", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: ICOs
+      /// 
+      /// Locales: en
+      static let icos = Rswift.StringResource(key: "icos", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: If you activate, the app will request your %@ instead of password when opened. Entering the password will not be required each time you open the app. To activate %@ please first insert your password below.
       /// 
       /// Locales: en, de
@@ -1905,6 +1923,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let more = Rswift.StringResource(key: "more", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: My Orders
+      /// 
+      /// Locales: en
+      static let my_orders = Rswift.StringResource(key: "my_orders", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Nationality
       /// 
       /// Locales: en, de
@@ -2783,6 +2805,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("home", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: ICOs
+      /// 
+      /// Locales: en
+      static func icos(_: Void = ()) -> String {
+        return NSLocalizedString("icos", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: If you activate, the app will request your %@ instead of password when opened. Entering the password will not be required each time you open the app. To activate %@ please first insert your password below.
       /// 
       /// Locales: en, de
@@ -2935,6 +2964,13 @@ struct R: Rswift.Validatable {
       /// Locales: en, de
       static func more(_: Void = ()) -> String {
         return NSLocalizedString("more", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: My Orders
+      /// 
+      /// Locales: en
+      static func my_orders(_: Void = ()) -> String {
+        return NSLocalizedString("my_orders", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Nationality
