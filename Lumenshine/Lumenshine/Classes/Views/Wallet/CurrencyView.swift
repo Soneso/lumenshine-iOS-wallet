@@ -19,7 +19,7 @@ class CurrencyView: UIView {
         didSet {
             currencyLabel.text = currency.assetCode
             if let issuer = currency.assetIssuer {
-                issuerLabel.text = "Issuer public key: \(issuer)"
+                issuerLabel.text = "\(R.string.localizable.issuer_pk()) \(issuer)"
             }
             
             if let isAuthorized = currency.authorized, isAuthorized {

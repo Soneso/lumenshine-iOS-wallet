@@ -55,13 +55,13 @@ class CardViewModel : CardViewModelType {
     var bottomTitles: [String]? {
         switch type {
         case .web:
-            return ["Read more"]
+            return [R.string.localizable.read_more()]
         case .chart:
-            return ["Sell Lumen"]
+            return [R.string.localizable.refresh()]
         case .intern:
-            return ["Send feedback", "View FAQ"]
+            return [R.string.localizable.send_feedback(), R.string.localizable.view_faq()]
         case .account:
-            return ["Learn more"]
+            return [R.string.localizable.learn_more()]
         case .wallet:
             return [R.string.localizable.fund_wallet()]
         }
