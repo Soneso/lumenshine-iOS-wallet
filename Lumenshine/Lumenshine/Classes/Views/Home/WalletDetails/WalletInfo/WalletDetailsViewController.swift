@@ -170,7 +170,7 @@ class WalletDetailsViewController: UIViewController {
           viewController.dismiss(animated: true)
         }
 
-        let navController = BaseNavigationViewController(rootViewController: viewController)
+        let navController = RoundedNavigationController(rootViewController: viewController)
         if let presentedViewController = presentedViewController {
             presentedViewController.present(navController, animated: true)
         } else {

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import stellarsdk
+import Material
 
 enum ValidationErrors: String {
     case Mandatory = "Mandatory"
@@ -46,17 +47,23 @@ enum SendButtonTitles: String {
     case validating = "Validating and sending"
 }
 
+enum AmountSegmentedControlIndexes: Int {
+    case sendAmount = 0
+    case sendAll = 1
+}
+
 public let MaximumLengthInBytesForMemoText = 28
 public let QRCodeSeparationString = " "
 public let QRCodeNativeCurrencyIssuer = "native"
 
-class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, WalletActionsProtocol, ScanViewControllerDelegate, NavigationItemProtocol {
+class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, WalletActionsProtocol, ScanViewControllerDelegate, NavigationItemProtocol, UITextFieldDelegate {
     @IBOutlet weak var currentCurrencyLabel: UILabel!
     @IBOutlet weak var addressErrorLabel: UILabel!
     @IBOutlet weak var amountErrorLabel: UILabel!
     @IBOutlet weak var memoInputErrorLabel: UILabel!
     @IBOutlet weak var passwordErrorLabel: UILabel!
     @IBOutlet weak var sendErrorLabel: UILabel!
+    @IBOutlet weak var availableAmountLabel: UILabel!
     
     @IBOutlet weak var memoTypeTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
@@ -66,23 +73,31 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var issuerTextField: UITextField!
     @IBOutlet weak var currentCurrencyTextField: UITextField!
     
-    @IBOutlet weak var currencyStackView: UIStackView!
-    @IBOutlet weak var addressErrorStackView: UIStackView!
-    @IBOutlet weak var amountErrorStackView: UIStackView!
-    @IBOutlet weak var memoInputErrorStackView: UIStackView!
-    @IBOutlet weak var passwordErrorStackView: UIStackView!
-    @IBOutlet weak var sendErrorStackView: UIStackView!
-    @IBOutlet weak var issuerStackView: UIStackView!
+    @IBOutlet weak var addressErrorView: UIView!
+    @IBOutlet weak var amountErrorView: UIView!
+    @IBOutlet weak var passwordErrorView: UIView!
+    @IBOutlet weak var sendErrorView: UIView!
+    @IBOutlet weak var memoInputErrorStackView: UIView!
+    @IBOutlet weak var currentCurrencyView: UIView!
     
+    @IBOutlet weak var issuerView: UIView!
+    
+    @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var sendButton: UIButton!
-    @IBOutlet weak var qrImageView: UIImageView!
     
     private var currencyPickerView: UIPickerView!
     private var issuerPickerView: UIPickerView!
     private var memoTypePickerView: UIPickerView!
     
-    private var titleView = TitleView()
-    
+    @IBOutlet weak var topSeparator: UIView!
+    @IBOutlet weak var topButtonsView: UIView!
+
+    @IBOutlet weak var sendAllView: UIView!
+    @IBOutlet weak var sendAllValue: UILabel!
+    @IBOutlet weak var sendAllCurrency: UILabel!
+    @IBOutlet weak var sendAmountView: UIView!
+    @IBOutlet weak var amountSegmentedControl: UISegmentedControl!
+
     private var isInputDataValid: Bool = true
     private var isSendAnywayRequired = false
     private var userMnemonic: String!
@@ -97,15 +112,25 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     private var memoTypes: [MemoTypeValues] = [MemoTypeValues.MEMO_TEXT, MemoTypeValues.MEMO_ID, MemoTypeValues.MEMO_HASH, MemoTypeValues.MEMO_RETURN]
     
-    @IBAction func closeButtonAction(_ sender: UIButton) {
-        closeAction?()
+    @IBAction func amountSegmentedControlValueChanged(_ sender: UISegmentedControl) {
+        if amountSegmentedControl.selectedSegmentIndex == AmountSegmentedControlIndexes.sendAmount.rawValue {
+            sendAmountView.isHidden = false
+            sendAllView.isHidden = true
+            availableAmount = nil
+        } else if amountSegmentedControl.selectedSegmentIndex == AmountSegmentedControlIndexes.sendAll.rawValue{
+            sendAmountView.isHidden = true
+            sendAllView.isHidden = false
+            amountErrorView.isHidden = true
+            setAvailableAmount()
+        }
     }
     
-    @objc func addressChanged(_ textField: UITextField) {
-        if isSendAnywayRequired {
-            setSendButtonDefaultTitle()
-            isSendAnywayRequired = false
-        }
+    @IBAction func qrScanButtonAction(_ sender: UIButton) {
+        showQRScanner()
+    }
+    
+    @IBAction func closeButtonAction(_ sender: UIButton) {
+        closeAction?()
     }
     
     @IBAction func sendButtonAction(_ sender: UIButton) {
@@ -115,15 +140,18 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             if validateInsertedData() {
                 if let address = addressTextField.text,
                     let password = passwordTextField.text,
-                    let currency = (wallet as! FoundedWallet).balances.first(where: { (currency) -> Bool in return currency.displayCode == selectedCurrency }) {
+                    let currency = (wallet as! FoundedWallet).balances.first(where: { (currency) -> Bool in
+                        if selectedCurrency == NativeCurrencyNames.xlm.rawValue {
+                            return currency.displayCode == selectedCurrency
+                        }
+                        
+                        return currency.displayCode == selectedCurrency && currency.assetIssuer == issuerTextField.text}) {
                     
                     inputDataValidator.validatePasswordAndDestinationAddress(address: address, password: password, currency: currency) { (result) -> (Void) in
                         switch result {
                         case .success(passwordResponse: let passwordResponse, addressResponse: let addressResponse):
                             self.validatePasswordResponse(passwordResponse: passwordResponse)
                             self.validateAddressResponse(addressResponse: addressResponse)
-                            
-                            self.checkForRecipientAccount()
                             
                             if self.isInputDataValid {
                                 self.sendPayment()
@@ -142,6 +170,13 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
     }
 
+    @objc func addressChanged(_ textField: UITextField) {
+        if isSendAnywayRequired {
+            setSendButtonDefaultTitle()
+            isSendAnywayRequired = false
+        }
+    }
+    
     private var selectedMemoType: MemoTypeValues! = MemoTypeValues.MEMO_TEXT {
         didSet {
             memoTypeTextField.text = selectedMemoType.rawValue
@@ -169,10 +204,16 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         didSet {
             currentCurrencyLabel.text = selectedCurrency
             
+            let currencyIssuer = (wallet as! FoundedWallet).balances.first { (currency) -> Bool in
+                return currency.assetCode == selectedCurrency
+            }?.assetIssuer
+            
             if selectedCurrency == NativeCurrencyNames.xlm.rawValue {
-                currentCurrencyTextField.text = NativeCurrencyNames.stellarLumens.rawValue
+                currentCurrencyTextField.text = nil
+                currentCurrencyTextField.insertText(NativeCurrencyNames.stellarLumens.rawValue)
             } else {
-                currentCurrencyTextField.text = selectedCurrency
+                currentCurrencyTextField.text = nil
+                currentCurrencyTextField.insertText(selectedCurrency)
             }
             
             setSendButtonDefaultTitle()
@@ -186,12 +227,17 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                     issuerTextField.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(issuerDoneButtonTap))
                 }
                 
-                issuerStackView.isHidden = false
-                issuerTextField.text = (wallet as! FoundedWallet).balances.first?.assetIssuer
+                issuerView.isHidden = false
             } else {
-                issuerStackView.isHidden = true
-                issuerTextField.text = nil
+                issuerView.isHidden = true
             }
+            
+            if let currencyIssuer = currencyIssuer {
+                issuerTextField.text = nil
+                issuerTextField.insertText(currencyIssuer)
+            }
+            
+            setAvailableAmount()
         }
     }
     
@@ -202,8 +248,19 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         self.view.addSubview(scanViewController.view)
     }
     
+    private func showQRScanner() {
+        scanViewController = ScanViewController()
+        scanViewController.delegate = self
+        self.addChildViewController(scanViewController)
+        self.view.addSubview(scanViewController.view)
+    }
+        
     override func viewDidLoad() {
         super.viewDidLoad()
+        if navigationSetupRequired {
+            setupNavigationItem()
+        }
+        
         memoTypePickerView = UIPickerView()
         memoTypePickerView.delegate = self
         memoTypePickerView.dataSource = self
@@ -211,16 +268,11 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         memoTypeTextField.inputView = memoTypePickerView
         memoTypeTextField.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(memoTypeDoneButtonTap))
         addressTextField.addTarget(self, action: #selector(addressChanged), for: UIControlEvents.editingChanged)
-        let openQRScannerTap = UITapGestureRecognizer(target: self, action: #selector(qrScannerTapAction))
-        qrImageView.addGestureRecognizer(openQRScannerTap)
-        
-        if navigationSetupRequired {
-            setupNavigationItem()
-        }
+        view.backgroundColor = Stylesheet.color(.veryLightGray)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         availableCurrencies = (wallet as! FoundedWallet).getAvailableCurrencies()
         if selectedCurrency.isEmpty {
             selectedCurrency = availableCurrencies.first!
@@ -228,6 +280,30 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         
         checkForTransactionFeeAvailability()
         resetSendButtonToNormal()
+    }
+    
+    private var availableAmount: CoinUnit?
+    
+    private func setAvailableLabels(currency: AccountBalanceResponse) {
+        if let balance = CoinUnit(currency.balance) {
+            availableAmountLabel.text = "You have \(balance.availableAmount) \(selectedCurrency) available"
+            
+            if amountSegmentedControl.selectedSegmentIndex == AmountSegmentedControlIndexes.sendAll.rawValue {
+                setSendAllLabel(amount: balance.availableAmount)
+            }
+        }
+    }
+    
+    private func setAvailableAmount() {
+        for currency in (wallet as! FoundedWallet).uniqueAssetCodeBalances {
+            if selectedCurrency == NativeCurrencyNames.xlm.rawValue {
+                setAvailableLabels(currency: currency)
+            } else if let currencyIssuer = issuerTextField.text,
+                currency.assetIssuer == currencyIssuer,
+                currency.assetCode == selectedCurrency {
+                setAvailableLabels(currency: currency)
+            }
+        }
     }
     
     private var availableCurrencies: [String] = [""] {
@@ -239,9 +315,15 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 currentCurrencyTextField.inputView = currencyPickerView
                 currentCurrencyTextField.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(currencyDoneButtonTap))
             } else {
-                currencyStackView.isHidden = true
+                currentCurrencyView.isHidden = true
             }
         }
+    }
+    
+    private func setSendAllLabel(amount: CoinUnit) {
+        sendAllValue.text = "\(amount)"
+        sendAllCurrency.text = selectedCurrency
+        availableAmount = amount
     }
     
     @objc func currencyDoneButtonTap(_ sender: Any) {
@@ -260,7 +342,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         let transactionData = TransactionInput(currency: self.selectedCurrency,
                                                issuer: self.issuerTextField.text ?? nil,
                                                address: self.addressTextField.text ?? "",
-                                               amount: self.amountTextField.text ?? "",
+                                               amount: availableAmount != nil ? String(availableAmount!) : (self.amountTextField.text ?? ""),
                                                memo: self.memoInputTextField.text?.isEmpty == false ? self.memoInputTextField.text! : nil,
                                                memoType: self.memoTypes.first(where: { (memoType) -> Bool in
                                                 if let memoTypeTextFieldValue = self.memoTypeTextField.text {
@@ -281,7 +363,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             self.userMnemonic = mnemonic
         case .failure(error: let error):
             print("Error: \(error)")
-            self.setValidationError(stackView: self.passwordErrorStackView, label: self.passwordErrorLabel, errorMessage: ValidationErrors.InvalidPassword)
+            self.setValidationError(stackView: self.passwordErrorView, label: self.passwordErrorLabel, errorMessage: ValidationErrors.InvalidPassword)
         }
     }
     
@@ -289,28 +371,38 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         switch addressResponse {
         case .success(isFunded: let isFunded, isTrusted: let isTrusted):
             if !isFunded {
-                self.setValidationError(stackView: self.sendErrorStackView, label: self.sendErrorLabel, errorMessage: ValidationErrors.RecipientAccount)
+                if self.isSendAnywayRequired && self.selectedCurrency == NativeCurrencyNames.xlm.rawValue{
+                    self.checkForRecipientAccount()
+                    return
+                }
+                
+                self.setValidationError(stackView: self.sendErrorView, label: self.sendErrorLabel, errorMessage: ValidationErrors.RecipientAccount)
                 
                 if self.selectedCurrency == NativeCurrencyNames.xlm.rawValue {
                     self.isSendAnywayRequired = true
                 }
             } else if let isTrusted = isTrusted, !isTrusted {
-                self.setValidationError(stackView: self.addressErrorStackView, label: self.addressErrorLabel, errorMessage: ValidationErrors.CurrencyNoTrust)
+                self.setValidationError(stackView: self.addressErrorView, label: self.addressErrorLabel, errorMessage: ValidationErrors.CurrencyNoTrust)
             }
             
         case .failure:
             print("Account not found")
             if self.selectedCurrency == NativeCurrencyNames.xlm.rawValue {
-                self.setValidationError(stackView: self.sendErrorStackView, label: self.sendErrorLabel, errorMessage: ValidationErrors.RecipientAccount)
+                if self.isSendAnywayRequired {
+                    self.checkForRecipientAccount()
+                    return
+                }
+                
+                self.setValidationError(stackView: self.sendErrorView, label: self.sendErrorLabel, errorMessage: ValidationErrors.RecipientAccount)
                 self.isSendAnywayRequired = true
             } else {
-                self.setValidationError(stackView: self.addressErrorStackView, label: self.addressErrorLabel, errorMessage: ValidationErrors.AddressNotFound)
+                self.setValidationError(stackView: self.addressErrorView, label: self.addressErrorLabel, errorMessage: ValidationErrors.AddressNotFound)
             }
         }
     }
     
     private func getSendButtonDefaultTitle() -> String {
-        return "Send \(selectedCurrency)"
+        return "SEND \(selectedCurrency)"
     }
     
     private func setSendButtonDefaultTitle() {
@@ -320,28 +412,28 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     private func checkForTransactionFeeAvailability() {
         if (wallet as! FoundedWallet).nativeBalance.availableAmount.isLess(than: CoinUnit.Constants.transactionFee + CoinUnit.Constants.baseReserver) {
-            sendErrorStackView.isHidden = false
+            sendErrorView.isHidden = false
             sendErrorLabel.text = ValidationErrors.InsufficientLumens.rawValue
             sendButton.isEnabled = false
         }
     }
     
     private func resetValidations() {
-        addressErrorStackView.isHidden = true
+        addressErrorView.isHidden = true
         addressErrorLabel.text = nil
-        amountErrorStackView.isHidden = true
+        amountErrorView.isHidden = true
         amountErrorLabel.text = nil
         memoInputErrorStackView.isHidden = true
         memoInputErrorLabel.text = nil
-        passwordErrorStackView.isHidden = true
+        passwordErrorView.isHidden = true
         passwordErrorLabel.text = nil
-        sendErrorStackView.isHidden = true
+        sendErrorView.isHidden = true
         sendErrorLabel.text = nil
         isInputDataValid = true
         setSendButtonDefaultTitle()
     }
     
-    private func setValidationError(stackView: UIStackView, label: UILabel, errorMessage: ValidationErrors) {
+    private func setValidationError(stackView: UIView, label: UILabel, errorMessage: ValidationErrors) {
         stackView.isHidden = false
         label.text = errorMessage.rawValue
         
@@ -351,7 +443,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     private func validateAddress() {
         if let address = addressTextField.text {
             if !address.isMandatoryValid() {
-                setValidationError(stackView: addressErrorStackView, label: addressErrorLabel, errorMessage: ValidationErrors.Mandatory)
+                setValidationError(stackView: addressErrorView, label: addressErrorLabel, errorMessage: ValidationErrors.Mandatory)
                 return
             }
             
@@ -360,25 +452,35 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             }
             
             if !address.isBase64Valid() {
-                setValidationError(stackView: addressErrorStackView, label: addressErrorLabel, errorMessage: ValidationErrors.InvalidAddress)
+                setValidationError(stackView: addressErrorView, label: addressErrorLabel, errorMessage: ValidationErrors.InvalidAddress)
             }
         }
     }
     
     private func validateAmount() {
-        if let amountToValidate = self.amountTextField.text {
+        if let amountToValidate = self.amountTextField.text, availableAmount == nil {
             if !amountToValidate.isMandatoryValid() {
-                setValidationError(stackView: amountErrorStackView, label: amountErrorLabel, errorMessage: ValidationErrors.Mandatory)
+                setValidationError(stackView: amountErrorView, label: amountErrorLabel, errorMessage: ValidationErrors.Mandatory)
                 return
             }
             
-            if let balance: String = (wallet as! FoundedWallet).balances.first(where: { (balance) -> Bool in
-                return balance.displayCode == selectedCurrency})?.balance {
-            if !amountToValidate.isAmountValid(forBalance: balance) {
-                amountErrorStackView.isHidden = false
+            validate(amount: amountToValidate)
+        } else if let amountToValidate = availableAmount {
+            validate(amount: String(amountToValidate))
+        }
+    }
+    
+    private func validate(amount: String) {
+        if let balance: String = (wallet as! FoundedWallet).balances.first(where: { (balance) -> Bool in
+            if selectedCurrency == NativeCurrencyNames.xlm.rawValue {
+                return balance.displayCode == selectedCurrency
+            }
+            
+            return balance.displayCode == selectedCurrency && balance.assetIssuer == issuerTextField.text})?.balance {
+            if !amount.isAmountValid(forBalance: balance) {
+                amountErrorView.isHidden = false
                 amountErrorLabel.text = "Insufficient \(selectedCurrency) available"
                 isInputDataValid = false
-                }
             }
         }
     }
@@ -429,7 +531,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     private func validatePassword() {
         if let currentPassword = passwordTextField.text {
             if !currentPassword.isMandatoryValid() {
-                setValidationError(stackView: passwordErrorStackView, label: passwordErrorLabel, errorMessage: ValidationErrors.Mandatory)
+                setValidationError(stackView: passwordErrorView, label: passwordErrorLabel, errorMessage: ValidationErrors.Mandatory)
                 return
             }
             
@@ -480,33 +582,30 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             return
         }
         
-        self.currentCurrencyTextField.text = qrResultArray[0]
-        self.issuerTextField.text = qrResultArray[1] != QRCodeNativeCurrencyIssuer ? qrResultArray[1] : nil
-        self.addressTextField.text = qrResultArray[2]
-        self.amountTextField.text = qrResultArray[3]
+        currentCurrencyTextField.text = nil
+        currentCurrencyTextField.insertText(qrResultArray[0])
+        issuerTextField.text = qrResultArray[1] != QRCodeNativeCurrencyIssuer ? qrResultArray[1] : nil
+        addressTextField.text = qrResultArray[2]
+        amountTextField.text = qrResultArray[3]
         
         switch qrResultArray[4] {
         case MemoTypeAsString.TEXT:
-            self.memoTypeTextField.text = MemoTypeValues.MEMO_TEXT.rawValue
-            break
+            memoTypeTextField.text = MemoTypeValues.MEMO_TEXT.rawValue
         case MemoTypeAsString.ID:
-            self.memoTypeTextField.text = MemoTypeValues.MEMO_ID.rawValue
-            break
+            memoTypeTextField.text = MemoTypeValues.MEMO_ID.rawValue
         case MemoTypeAsString.HASH:
-            self.memoTypeTextField.text = MemoTypeValues.MEMO_HASH.rawValue
-            break
+            memoTypeTextField.text = MemoTypeValues.MEMO_HASH.rawValue
         case MemoTypeAsString.RETURN:
-            self.memoTypeTextField.text = MemoTypeValues.MEMO_RETURN.rawValue
-            break
+            memoTypeTextField.text = MemoTypeValues.MEMO_RETURN.rawValue
         default:
             break
         }
         
         if qrResultArray[5] != MemoTypeAsString.NONE {
-            self.memoInputTextField.text = qrResultArray[5]
+            memoInputTextField.text = qrResultArray[5]
         }
         
-        self.passwordTextField.text = qrResultArray[6]
+        passwordTextField.text = qrResultArray[6]
         scanViewController.view.removeFromSuperview()
         scanViewController = nil
     }
@@ -547,11 +646,16 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     @IBAction func didTapBack(_ sender: Any) {
-        self.dismiss(animated: true)
+        if let scanController = scanViewController {
+            scanController.view.removeFromSuperview()
+            scanViewController = nil
+        } else {
+            self.dismiss(animated: true)
+        }
     }
     
-    @IBAction func didTapHelp(_ sender: Any) {
-        
+    @IBAction func didTapScan(_ sender: Any) {
+        showQRScanner()
     }
     
     private func selectAsset(pickerView: UIPickerView, row: Int) {
@@ -572,17 +676,24 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     private func setupNavigationItem() {
-        titleView = Bundle.main.loadNibNamed("TitleView", owner:self, options:nil)![0] as! TitleView
-        titleView.frame.size = titleView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
-        titleView.label.text = "\(wallet.name)\nSend"
-        navigationItem.titleView = titleView
+        navigationItem.titleLabel.text = "Send"
+        navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
+        navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image:UIImage(named: "arrow-left"), style:.plain, target: self, action: #selector(didTapBack(_:)))
-        navigationItem.leftBarButtonItem?.tintColor = Stylesheet.color(.white)
-        navigationItem.leftBarButtonItem?.imageInsets = UIEdgeInsetsMake(0, 2, 0, -2)
+        let backButton = Material.IconButton()
+        backButton.image = Icon.close?.tint(with: Stylesheet.color(.gray))
+        backButton.addTarget(self, action: #selector(didTapBack(_:)), for: .touchUpInside)
+        navigationItem.leftViews = [backButton]
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image:UIImage(named: "question"), style:.plain, target: self, action: #selector(didTapHelp(_:)))
-        navigationItem.rightBarButtonItem?.tintColor = Stylesheet.color(.white)
-        navigationItem.rightBarButtonItem?.imageInsets = UIEdgeInsetsMake(0, 2, 0, -2)
+        let scanQrButton = Material.IconButton()
+        scanQrButton.image = R.image.qr_placeholder()?.crop(toWidth: 25, toHeight: 25)?.tint(with: Stylesheet.color(.gray))
+        scanQrButton.addTarget(self, action: #selector(didTapScan(_:)), for: .touchUpInside)
+        navigationItem.rightViews = [scanQrButton]
+        
+        topButtonsView.removeFromSuperview()
+        topSeparator.removeFromSuperview()
+        contentView.snp.makeConstraints { (make) in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.topMargin)
+        }
     }
 }
