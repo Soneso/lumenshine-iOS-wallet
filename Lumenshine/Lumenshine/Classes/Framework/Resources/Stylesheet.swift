@@ -45,6 +45,10 @@ enum ColorStyle {
     case yellow
     case cyan
     case lightCyan
+    case veryLightGray
+    case helpButtonGray
+    case borderGray
+    case infoGray
     
     case white
     case whiteWith(alpha: CGFloat)
@@ -149,6 +153,14 @@ struct Stylesheet {
             return UIColor.black.withAlphaComponent(alpha)
         case .whiteWith(let alpha):
             return UIColor.white.withAlphaComponent(alpha)
+        case .veryLightGray:
+            return UIColor(red: 243/255.0, green: 243/255.0, blue: 243/255.0, alpha: 1.0)
+        case .helpButtonGray:
+            return UIColor(red: 204/255.0, green: 204/255.0, blue: 204/255.0, alpha: 1.0)
+        case .borderGray:
+            return UIColor(red: 153/255.0, green: 153/255.0, blue: 153/255.0, alpha: 1.0)
+        case .infoGray:
+            return UIColor(red: 183/255.0, green: 183/255.0, blue: 183/255.0, alpha: 1.0)
         }
     }
 }
