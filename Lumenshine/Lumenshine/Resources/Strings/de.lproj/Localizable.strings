@@ -541,3 +541,56 @@
 
 "loading" = "Wird geladen";
 
+/*  */
+"read_more" = "Weiterlesen";
+
+/*  */
+"send_feedback" = "Feedback senden";
+
+/*  */
+"view_faq" = "FAQ ansehen";
+
+/*  */
+"learn_more" = "Mehr erfahren";
+
+/*  */
+"issuer_pk" = "Issuer public key:";
+
+/*  */
+"send_other" = "Weiteres senden";
+
+/*  */
+"print" = "Drucken";
+
+/*  */
+"edit" = "Editieren";
+
+/*  */
+"success" = "Erfolg";
+
+/*  */
+"status" = "Status";
+
+/*  */
+"message" = "Nachricht";
+
+/*  */
+"currency" = "Währung";
+
+/*  */
+"amount" = "Menge";
+
+/*  */
+"recipient" = "Empfänger";
+
+/*  */
+"memo" = "Memo";
+
+/*  */
+"operation_id" = "Operation ID";
+
+/*  */
+"transaction_fee" = "Transaktionsgebühr";
+
+/*  */
+"transaction_result" = "Transaktionsergebniss";

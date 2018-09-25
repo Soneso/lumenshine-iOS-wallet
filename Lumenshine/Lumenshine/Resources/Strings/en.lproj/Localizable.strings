@@ -588,3 +588,57 @@
 
 /*  */
 "loading" = "loading";
+
+/*  */
+"read_more" = "Read more";
+
+/*  */
+"send_feedback" = "Send Feedback";
+
+/*  */
+"view_faq" = "View FAQ";
+
+/*  */
+"learn_more" = "Learn more";
+
+/*  */
+"issuer_pk" = "Issuer public key:";
+
+/*  */
+"send_other" = "Send other";
+
+/*  */
+"print" = "Print";
+
+/*  */
+"edit" = "Edit";
+
+/*  */
+"success" = "Success";
+
+/*  */
+"status" = "Status";
+
+/*  */
+"message" = "Message";
+
+/*  */
+"currency" = "Currency";
+
+/*  */
+"amount" = "Amount";
+
+/*  */
+"recipient" = "Recipient";
+
+/*  */
+"memo" = "Memo";
+
+/*  */
+"operation_id" = "Operation ID";
+
+/*  */
+"transaction_fee" = "Transaction fee";
+
+/*  */
+"transaction_result" = "Transaction result";

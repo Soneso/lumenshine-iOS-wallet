@@ -126,7 +126,7 @@ class ChartCardViewModel: CardViewModelType {
         selectedPeriodIndex = index
         UserDefaults.standard.setValue(index, forKey:ChartCardViewModel.selectedPeriodKey)
         
-        service.getChartExchangeRates(assetCode: "MOBI", issuerPublicKey: "GA6HCMBLTZS5VYYBCATRBRZ3BZJMAFUDKYYF6AH6MVCMGWMRDNSWJPIH", destinationCurrency: "USD", timeRange: Int32(periodValues[selectedPeriodIndex])) { [weak self] result in
+        service.getChartExchangeRates(assetCode: "XLM", issuerPublicKey: "A", destinationCurrency: "USD", timeRange: Int32(periodValues[selectedPeriodIndex])) { [weak self] result in
             switch result {
             case .success(let exchangeRates):
                 self?.exchangeRates = exchangeRates
