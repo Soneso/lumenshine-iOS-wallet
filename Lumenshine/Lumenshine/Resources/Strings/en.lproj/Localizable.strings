@@ -230,6 +230,18 @@
 "help" = "Help";
 
 /*  */
+"help_feedback" = "Help & Feedback";
+
+/*  */
+"help_hint" = "Need help or have a suggestion?\n\nThe Lumenshine support team is just a quick tap away. Take a look at our FAQ or send us a message.";
+
+/*  */
+"send_feedback" = "Send Feedback";
+
+/*  */
+"view_faq" = "View FAQ";
+
+/*  */
 "about" = "About";
 
 /*  */

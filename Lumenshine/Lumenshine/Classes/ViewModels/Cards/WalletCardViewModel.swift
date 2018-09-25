@@ -57,6 +57,10 @@ class WalletCardViewModel : CardViewModelType {
         return url
     }
     
+    var image: UIImage? {
+        return nil
+    }
+    
     var linkURL: URL? {
         guard let urlString = card?.link else { return nil }
         guard let url = URL(string: urlString) else { return nil}

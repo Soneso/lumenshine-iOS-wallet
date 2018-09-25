@@ -11,6 +11,7 @@ import UIKit
 protocol CardViewModelType: Transitionable {
     var type: CardType { get }
     var imageURL: URL? { get }
+    var image: UIImage? { get }
     var linkURL: URL? { get }
     var title: String? { get }
     var detail: String? { get }
@@ -38,6 +39,10 @@ class CardViewModel : CardViewModelType {
         return url
     }
     
+    var image: UIImage? {
+        return nil
+    }
+    
     var linkURL: URL? {
         guard let urlString = card.link else { return nil }
         guard let url = URL(string: urlString) else { return nil}
@@ -58,7 +63,7 @@ class CardViewModel : CardViewModelType {
             return ["Read more"]
         case .chart:
             return ["Sell Lumen"]
-        case .intern:
+        case .help:
             return ["Send feedback", "View FAQ"]
         case .account:
             return ["Learn more"]

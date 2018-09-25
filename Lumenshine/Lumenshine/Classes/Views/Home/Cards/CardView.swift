@@ -54,10 +54,10 @@ class CardView: UIView {
         case .chart:
             card = ChartCard()
             card.viewModel = viewModel
-        case .intern:
-            card = InternalCard()
+        case .help:
+            card = HelpCard()
         case .account:
-            card = InternalCard()
+            card = HelpCard()
         case .wallet(let status):
             let walletCard = WalletCard()
             walletCard.status = status

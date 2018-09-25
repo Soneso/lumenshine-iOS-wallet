@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit.UIImage
 
 class ChartCardViewModel: CardViewModelType {
     
@@ -69,6 +70,10 @@ class ChartCardViewModel: CardViewModelType {
         guard let urlString = card?.imgUrl else { return nil }
         guard let url = URL(string: urlString) else { return nil}
         return url
+    }
+    
+    var image: UIImage? {
+        return nil
     }
     
     var linkURL: URL? {

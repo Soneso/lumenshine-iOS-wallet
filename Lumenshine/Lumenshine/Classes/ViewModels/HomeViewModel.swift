@@ -99,9 +99,14 @@ class HomeViewModel : HomeViewModelType {
             }
         }
                         
-        let viewModel = ChartCardViewModel(service: service.chartsService)
-        viewModel.navigationCoordinator = self.navigationCoordinator
-        self.cardViewModels.append(viewModel)
+        let chartViewModel = ChartCardViewModel(service: service.chartsService)
+        chartViewModel.navigationCoordinator = self.navigationCoordinator
+        self.cardViewModels.append(chartViewModel)
+        
+        let helpViewModel = HelpCardViewModel()
+        helpViewModel.navigationCoordinator = self.navigationCoordinator
+        self.cardViewModels.append(helpViewModel)
+        
         self.reloadClosure?()
     }
 

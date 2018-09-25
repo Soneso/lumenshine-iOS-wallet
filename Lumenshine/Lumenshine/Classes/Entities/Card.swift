@@ -10,7 +10,7 @@ import Foundation
 
 enum CardType {
     case web
-    case intern
+    case help
     case chart
     case account
     case wallet(status: WalletStatus)
@@ -20,7 +20,7 @@ enum CardType {
         case 0:
             return .web
         case 1:
-            return .intern
+            return .help
         case 2:
             return .chart
         case 3:

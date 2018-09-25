@@ -933,7 +933,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 42 images.
+  /// This `R.image` struct is generated, and contains static references to 43 images.
   struct image {
     /// Image `FaceIcon`.
     static let faceIcon = Rswift.ImageResource(bundle: R.hostingBundle, name: "FaceIcon")
@@ -961,6 +961,8 @@ struct R: Rswift.Validatable {
     static let gear = Rswift.ImageResource(bundle: R.hostingBundle, name: "gear")
     /// Image `header_background`.
     static let header_background = Rswift.ImageResource(bundle: R.hostingBundle, name: "header_background")
+    /// Image `help_card`.
+    static let help_card = Rswift.ImageResource(bundle: R.hostingBundle, name: "help_card")
     /// Image `home`.
     static let home = Rswift.ImageResource(bundle: R.hostingBundle, name: "home")
     /// Image `ico`.
@@ -1083,6 +1085,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "header_background", bundle: ..., traitCollection: ...)`
     static func header_background(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.header_background, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "help_card", bundle: ..., traitCollection: ...)`
+    static func help_card(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.help_card, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "home", bundle: ..., traitCollection: ...)`
@@ -1545,7 +1552,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 190 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 194 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -1823,6 +1830,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let help = Rswift.StringResource(key: "help", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: Help & Feedback
+      /// 
+      /// Locales: en
+      static let help_feedback = Rswift.StringResource(key: "help_feedback", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Here are 4 random words from the mnemonic. Please indicate their position within the mnemonic.
       /// 
       /// Locales: en, de
@@ -1931,6 +1942,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let nationality = Rswift.StringResource(key: "nationality", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: Need help or have a suggestion?  The Lumenshine support team is just a quick tap away. Take a look at our FAQ or send us a message.
+      /// 
+      /// Locales: en
+      static let help_hint = Rswift.StringResource(key: "help_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: New 2FA Secret
       /// 
       /// Locales: en, de
@@ -2067,6 +2082,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let send = Rswift.StringResource(key: "send", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: Send Feedback
+      /// 
+      /// Locales: en
+      static let send_feedback = Rswift.StringResource(key: "send_feedback", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Settings
       /// 
       /// Locales: en, de
@@ -2159,6 +2178,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let username = Rswift.StringResource(key: "username", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: View FAQ
+      /// 
+      /// Locales: en
+      static let view_faq = Rswift.StringResource(key: "view_faq", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: W
       /// 
       /// Locales: en, de
@@ -2791,6 +2814,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("help", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Help & Feedback
+      /// 
+      /// Locales: en
+      static func help_feedback(_: Void = ()) -> String {
+        return NSLocalizedString("help_feedback", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Here are 4 random words from the mnemonic. Please indicate their position within the mnemonic.
       /// 
       /// Locales: en, de
@@ -2978,6 +3008,13 @@ struct R: Rswift.Validatable {
       /// Locales: en, de
       static func nationality(_: Void = ()) -> String {
         return NSLocalizedString("nationality", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Need help or have a suggestion?  The Lumenshine support team is just a quick tap away. Take a look at our FAQ or send us a message.
+      /// 
+      /// Locales: en
+      static func help_hint(_: Void = ()) -> String {
+        return NSLocalizedString("help_hint", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: New 2FA Secret
@@ -3218,6 +3255,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("send", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Send Feedback
+      /// 
+      /// Locales: en
+      static func send_feedback(_: Void = ()) -> String {
+        return NSLocalizedString("send_feedback", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Settings
       /// 
       /// Locales: en, de
@@ -3377,6 +3421,13 @@ struct R: Rswift.Validatable {
       /// Locales: en, de
       static func username(_: Void = ()) -> String {
         return NSLocalizedString("username", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: View FAQ
+      /// 
+      /// Locales: en
+      static func view_faq(_: Void = ()) -> String {
+        return NSLocalizedString("view_faq", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: W

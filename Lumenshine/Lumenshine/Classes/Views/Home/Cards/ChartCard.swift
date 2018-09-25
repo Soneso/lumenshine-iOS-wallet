@@ -21,7 +21,7 @@ class ChartCard: CardView {
     fileprivate let periodPicker = UITextField()
     fileprivate let currentRateLabel = UILabel()
     fileprivate let percentageChangeLabel = UILabel()
-    fileprivate let horizontalSpacing = 15.0    
+    fileprivate let horizontalSpacing = 15.0
     
     override init(frame: CGRect) {
         super.init(frame: frame)

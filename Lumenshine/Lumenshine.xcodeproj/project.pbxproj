@@ -77,7 +77,7 @@
 		43844F4020E401B500C352E5 /* ReLoginMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43844F3F20E401B500C352E5 /* ReLoginMenuViewModel.swift */; };
 		4384C70C20E27C72000C7201 /* LoginMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4384C70B20E27C72000C7201 /* LoginMenuCoordinator.swift */; };
 		4386717420DAA77E00459EA8 /* WalletCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4386717320DAA77E00459EA8 /* WalletCardViewModel.swift */; };
-		4387980A20584335005261C8 /* InternalCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4387980920584335005261C8 /* InternalCard.swift */; };
+		4387980A20584335005261C8 /* HelpCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4387980920584335005261C8 /* HelpCard.swift */; };
 		438BE842204D51FD007EBFB9 /* HamburgerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438BE841204D51FD007EBFB9 /* HamburgerButton.swift */; };
 		4390D57E205FA5FC00383BB2 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4390D57D205FA5FC00383BB2 /* BaseService.swift */; };
 		4390D582205FBD6E00383BB2 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4390D581205FBD6E00383BB2 /* Services.swift */; };
@@ -157,6 +157,7 @@
 		43B144CE20FCAF630099E3AE /* TFASetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B144CD20FCAF630099E3AE /* TFASetupViewController.swift */; };
 		43B81D5C21174B1F0039BC3D /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B81D5B21174B1F0039BC3D /* MainCoordinator.swift */; };
 		43B8919B2104764600062660 /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B8919A2104764600062660 /* InputField.swift */; };
+		43C54039215A66170064BA67 /* HelpCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C54038215A66170064BA67 /* HelpCardViewModel.swift */; };
 		43C6377A20BEFF2B00498FC5 /* ReLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C6377920BEFF2B00498FC5 /* ReLoginViewController.swift */; };
 		43CD7B0E20F7AEBC0014BF69 /* SetupCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CD7B0D20F7AEBC0014BF69 /* SetupCoordinator.swift */; };
 		43CD7B1020F7B0CF0014BF69 /* SetupMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CD7B0F20F7B0CF0014BF69 /* SetupMenuCoordinator.swift */; };
@@ -427,7 +428,7 @@
 		43844F3F20E401B500C352E5 /* ReLoginMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginMenuViewModel.swift; sourceTree = "<group>"; };
 		4384C70B20E27C72000C7201 /* LoginMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMenuCoordinator.swift; sourceTree = "<group>"; };
 		4386717320DAA77E00459EA8 /* WalletCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCardViewModel.swift; sourceTree = "<group>"; };
-		4387980920584335005261C8 /* InternalCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalCard.swift; sourceTree = "<group>"; };
+		4387980920584335005261C8 /* HelpCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCard.swift; sourceTree = "<group>"; };
 		438BE841204D51FD007EBFB9 /* HamburgerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HamburgerButton.swift; sourceTree = "<group>"; };
 		4390D57D205FA5FC00383BB2 /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		4390D581205FBD6E00383BB2 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
@@ -507,6 +508,7 @@
 		43B144CD20FCAF630099E3AE /* TFASetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFASetupViewController.swift; sourceTree = "<group>"; };
 		43B81D5B21174B1F0039BC3D /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		43B8919A2104764600062660 /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
+		43C54038215A66170064BA67 /* HelpCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCardViewModel.swift; sourceTree = "<group>"; };
 		43C6377920BEFF2B00498FC5 /* ReLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginViewController.swift; sourceTree = "<group>"; };
 		43CD7B0D20F7AEBC0014BF69 /* SetupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCoordinator.swift; sourceTree = "<group>"; };
 		43CD7B0F20F7B0CF0014BF69 /* SetupMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupMenuCoordinator.swift; sourceTree = "<group>"; };
@@ -995,8 +997,8 @@
 		4376F4A1204D9F5A00B179C3 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				43C54037215A5B7B0064BA67 /* Cards */,
 				4376F4A2204D9F9D00B179C3 /* HomeViewModel.swift */,
-				43D131E52056E3BD000483C4 /* CardViewModel.swift */,
 				431082AF20DE3F8D00852502 /* LoginMenuViewModel.swift */,
 				43844F3F20E401B500C352E5 /* ReLoginMenuViewModel.swift */,
 				4319B17F2063EEA9007CE18D /* LoginViewModel.swift */,
@@ -1004,10 +1006,8 @@
 				4319B1832063F00C007CE18D /* MenuViewModel.swift */,
 				43ECA9C9208B3C4400CB571E /* RegistrationViewModel.swift */,
 				4394911B20BEB845008D4FA2 /* SettingsViewModel.swift */,
-				4386717320DAA77E00459EA8 /* WalletCardViewModel.swift */,
 				43CD7B1120F7B8A70014BF69 /* SetupMenuViewModel.swift */,
 				43CD7B1320F7BEBF0014BF69 /* SetupViewModel.swift */,
-				43D15E47212AE53A00415CE5 /* ChartCardViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1188,6 +1188,17 @@
 				43AE63242135A19300B7A904 /* EncodeSansSemiCondensed-Light.ttf */,
 			);
 			path = Encode_Sans_Semi_Condensed;
+			sourceTree = "<group>";
+		};
+		43C54037215A5B7B0064BA67 /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				43D131E52056E3BD000483C4 /* CardViewModel.swift */,
+				43D15E47212AE53A00415CE5 /* ChartCardViewModel.swift */,
+				4386717320DAA77E00459EA8 /* WalletCardViewModel.swift */,
+				43C54038215A66170064BA67 /* HelpCardViewModel.swift */,
+			);
+			path = Cards;
 			sourceTree = "<group>";
 		};
 		43CD7B1520F7C4680014BF69 /* Setup */ = {
@@ -1526,7 +1537,7 @@
 				436FE5072052634300CFE788 /* WebCard.swift */,
 				43D131E72056EAC6000483C4 /* ChartCard.swift */,
 				43920D992057EECA0040003C /* CardView.swift */,
-				4387980920584335005261C8 /* InternalCard.swift */,
+				4387980920584335005261C8 /* HelpCard.swift */,
 				43E13E8720D97DA000409129 /* WalletCard.swift */,
 			);
 			path = Cards;
@@ -1912,7 +1923,7 @@
 				439A182F2100CF8D00F7F5FD /* EmailSetupViewController.swift in Sources */,
 				4359984D20A492FF00007F27 /* AlertFactory.swift in Sources */,
 				432F117B2101EEF500FC429B /* VerificationSetupViewController.swift in Sources */,
-				4387980A20584335005261C8 /* InternalCard.swift in Sources */,
+				4387980A20584335005261C8 /* HelpCard.swift in Sources */,
 				C61244C8211332E700DE1EA9 /* SendViewController.swift in Sources */,
 				7491BE48211C322D0058877E /* CurrencyView.swift in Sources */,
 				7435EA7720BADF2C008CC667 /* UIViewController+Utils.swift in Sources */,
@@ -2108,6 +2119,7 @@
 				4390D582205FBD6E00383BB2 /* Services.swift in Sources */,
 				43D15E48212AE53A00415CE5 /* ChartCardViewModel.swift in Sources */,
 				C69F551D2158BC920021EE5C /* AmountSegmentedControl.swift in Sources */,
+				43C54039215A66170064BA67 /* HelpCardViewModel.swift in Sources */,
 				C6B75F35211837AF00B45BEB /* TransactionResultViewController.swift in Sources */,
 				7445E9C52019CF7200470E0A /* AppDelegate.swift in Sources */,
 				436B367220512114009F7C21 /* SquareCashBarBehaviorDefiner.swift in Sources */,
