@@ -527,7 +527,7 @@
                                 <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="4dG-Lb-3yY">
                                     <rect key="frame" x="0.0" y="530" width="375" height="50"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ye-bL-VYE" customClass="PostButton" customModule="Lumenshine" customModuleProvider="target">
+                                        <button opaque="NO" contentMode="scaleAspectFit" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ye-bL-VYE" customClass="PostButton" customModule="Lumenshine" customModuleProvider="target">
                                             <rect key="frame" x="152" y="10" width="71" height="30"/>
                                             <state key="normal" title="Send XLM"/>
                                             <connections>
@@ -549,7 +549,7 @@
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="ifp-Md-gjR" secondAttribute="trailing" id="86E-xx-gzU"/>
-                        <constraint firstAttribute="height" constant="580" id="8qS-HX-rQc"/>
+                        <constraint firstAttribute="height" priority="750" constant="580" id="8qS-HX-rQc"/>
                         <constraint firstAttribute="bottom" secondItem="ifp-Md-gjR" secondAttribute="bottom" id="QQ1-SP-6fd"/>
                         <constraint firstItem="ifp-Md-gjR" firstAttribute="width" secondItem="x1L-CZ-sKm" secondAttribute="width" id="TWb-ms-sdX"/>
                         <constraint firstItem="ifp-Md-gjR" firstAttribute="top" secondItem="x1L-CZ-sKm" secondAttribute="top" constant="16" id="dVg-BM-ODK"/>

@@ -19,7 +19,12 @@ class HomeViewController: UIViewController {
     fileprivate let viewModel: HomeViewModelType
     fileprivate var headerBar: FlexibleHeightBar!
     fileprivate var header: HomeHeaderView!
-    fileprivate var titleLabel = UILabel()
+    fileprivate var userManager: UserManager {
+        get {
+            return Services.shared.userManager
+        }
+    }
+    
     public let tableView: UITableView
     public var dataSourceItems = [CardView]()
     
@@ -33,15 +38,12 @@ class HomeViewController: UIViewController {
                     CardView.create(viewModel: $0, viewController: self)
                 }
                 self.tableView.reloadData()
+                self.refreshHeaderType()
             }
         }
         
         viewModel.totalNativeFoundsClosure = { (nativeFounds) in
-            if nativeFounds > 0 {
-                self.header.type = .founded
-            } else {
-                self.header.type = .unfounded
-            }
+           self.setHeaderType(nativeFounds: nativeFounds)
         }
         
         viewModel.currencyRateUpdateClosure = { (rate) in
@@ -124,7 +126,6 @@ extension HomeViewController {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         headerBar.behaviorDefiner?.scrollViewDidScroll(scrollView)
-        titleLabel.text = headerBar.progress < 0.50 ? "" : R.string.localizable.homeScreenTitle()
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -149,10 +150,6 @@ fileprivate extension HomeViewController {
         tableView.register(CardTableViewCell.self, forCellReuseIdentifier: HomeViewController.CellIdentifier)
         tableView.estimatedRowHeight = UITableViewAutomaticDimension
         tableView.separatorStyle = .none
-        
-        titleLabel.textColor = Stylesheet.color(.white)
-        titleLabel.textAlignment = .center
-        navigationItem.centerViews = [titleLabel]
         
         prepareCopyright()
     }
@@ -263,5 +260,24 @@ fileprivate extension HomeViewController {
         }
         
         tableView.backgroundView = backgroundView
+    }
+    
+    func setHeaderType(nativeFounds: CoinUnit) {
+        if nativeFounds > 0 {
+            self.header.type = .founded
+        } else {
+            self.header.type = .unfounded
+        }
+    }
+    
+    func refreshHeaderType() {
+        userManager.totalNativeFounds { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                self.setHeaderType(nativeFounds: data)
+            case .failure(_):
+                print("Failed to get wallets")
+            }
+        }
     }
 }
