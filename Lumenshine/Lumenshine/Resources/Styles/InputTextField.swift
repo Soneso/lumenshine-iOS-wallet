@@ -18,7 +18,7 @@ class InputTextField: UITextField {
         borderStyle = .none
         layer.borderWidth = 0.33
         layer.borderColor = Stylesheet.color(.borderGray).cgColor
-        font = R.font.encodeSansSemiBold(size: 10)
+        font = R.font.encodeSansSemiBold(size: 12)
         textColor = Stylesheet.color(.lightBlack)
         backgroundColor = Stylesheet.color(.white)
         

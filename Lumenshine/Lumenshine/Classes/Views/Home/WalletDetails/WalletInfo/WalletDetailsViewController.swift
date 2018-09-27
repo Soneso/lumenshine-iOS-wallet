@@ -15,10 +15,6 @@ fileprivate enum CancelRevealButtonTitles: String {
     case revealing = "revealing"
 }
 
-protocol NavigationItemProtocol: class {
-    var navigationSetupRequired: Bool {get set}
-}
-
 class WalletDetailsViewController: UIViewController {
     @IBOutlet weak var balanceTitleLabel: UILabel!
     @IBOutlet weak var balanceValuesLabel: UILabel!
@@ -40,14 +36,13 @@ class WalletDetailsViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
 
     @IBAction func sendButtonAction(_ sender: UIButton) {
-        addViewController(forAction: WalletAction.send)
+        paymentOperationsVCManager.addViewController(forAction: WalletAction.send, wallet: wallet)
     }
     
     @IBAction func receiveButtonAction(_ sender: UIButton) {
-        addViewController(forAction: WalletAction.receive)
+        paymentOperationsVCManager.addViewController(forAction: WalletAction.receive, wallet: wallet)
     }
     
-
     @IBAction func secretRevealButtonAction(_ sender: UIButton) {
         resetPasswordValidation()
         if !isPasswordValid {
@@ -122,11 +117,13 @@ class WalletDetailsViewController: UIViewController {
     private let InflationNoneSet = "none"
     private let InflationNoneSetHint = "Hint: Vote or earn free lumens by setting the inflation destination"
     private var currentInflationDestination: KnownInflationDestinationResponse!
+    private var paymentOperationsVCManager: PaymentOperationsVCManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBalances()
         setupInflationDestination()
+        paymentOperationsVCManager = PaymentOperationsVCManager(parentViewController: self)
     }
     
     private func setupBalances() {
@@ -146,72 +143,6 @@ class WalletDetailsViewController: UIViewController {
         
         balanceValuesLabel.text = String(balanceValues.dropLast())
         availableValuesLabel.text = String(availableValues.dropLast())
-    }
-    
-    private func addViewController(forAction: WalletAction, transactionResult: TransactionResult? = nil) {
-        var viewController: UIViewController
-        switch (forAction) {
-        case .receive:
-            viewController = ReceivePaymentCardViewController()
-            break
-            
-        case .send:
-            viewController = SendViewController()
-            setupSendViewController(viewController: viewController as! SendViewController)
-            
-        case .transactionResult:
-            viewController = TransactionResultViewController()
-            setupTransactionResult(viewController: viewController as! TransactionResultViewController, transactionResult: transactionResult)
-        }
-        
-        (viewController as! NavigationItemProtocol).navigationSetupRequired = true
-        (viewController as! WalletActionsProtocol).wallet = self.wallet
-        (viewController as! WalletActionsProtocol).closeAction = {
-          viewController.dismiss(animated: true)
-        }
-
-        let navController = RoundedNavigationController(rootViewController: viewController)
-        if let presentedViewController = presentedViewController {
-            presentedViewController.present(navController, animated: true)
-        } else {
-            present(navController, animated: true)
-        }
-    }
-    
-    private func setupSendViewController(viewController: SendViewController) {
-        viewController.sendAction = { [weak self] (transactionData) in
-            if let wallet = self?.wallet {
-                let transactionHelper = TransactionHelper(transactionInputData: transactionData, wallet: wallet)
-                
-                switch transactionData.transactionType {
-                case .sendPayment:
-                    transactionHelper.sendPayment(completion: { (result) in
-                        self?.addViewController(forAction: WalletAction.transactionResult, transactionResult: result)
-                    })
-                    
-                case .createAndFundAccount:
-                    transactionHelper.createAndFundAccount(completion: { (result) in
-                        self?.addViewController(forAction: WalletAction.transactionResult, transactionResult: result)
-                    })
-                }
-            }
-        }
-    }
-    
-    private func setupTransactionResult(viewController: TransactionResultViewController, transactionResult: TransactionResult?) {
-        if let transactionResult = transactionResult {
-            viewController.result = transactionResult
-        }
-    
-        viewController.closeAllAction = { [weak self] in
-            self?.dismiss(animated: true)
-        }
-        
-        viewController.sendOtherAction = { [weak self] in
-            self?.dismiss(animated: true, completion: {
-                self?.addViewController(forAction: WalletAction.send)
-            })
-        }
     }
     
     private var isPasswordValid: Bool {

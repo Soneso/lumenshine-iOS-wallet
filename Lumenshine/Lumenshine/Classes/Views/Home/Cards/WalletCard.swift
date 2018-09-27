@@ -43,22 +43,18 @@ class WalletCard: CardView {
     //fileprivate let contentStackView = UIStackView()
     fileprivate let collapsedContainer = UIView()
     fileprivate let expandedContainer = UIView()
-    
+    fileprivate var paymentOperationsVCManager: PaymentOperationsVCManager!
     override var viewModel: CardViewModelType? {
         didSet {
             if let viewModel = viewModel as? WalletCardViewModel {
-                viewModel.receivePaymentAction = { [weak self] in
-                    if self?.isSafeToAddViewController(forAction: WalletAction.receive) == true {
-                        self?.expanded = true
-                        self?.addViewController(forAction: WalletAction.receive)
-                    }
+                viewModel.receivePaymentAction = {
+                    self.setupPaymentOperationsVCManager()
+                    self.paymentOperationsVCManager.addViewController(forAction: WalletAction.receive, wallet: self.wallet)
                 }
                 
-                viewModel.sendAction = { [weak self] in
-                    if self?.isSafeToAddViewController(forAction: WalletAction.send) == true {
-                        self?.expanded = true
-                        self?.addViewController(forAction: WalletAction.send)
-                    }
+                viewModel.sendAction = {
+                    self.setupPaymentOperationsVCManager()
+                    self.paymentOperationsVCManager.addViewController(forAction: WalletAction.send, wallet: self.wallet)
                 }
             }
         }
@@ -86,6 +82,13 @@ class WalletCard: CardView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func setupPaymentOperationsVCManager() {
+        if self.paymentOperationsVCManager == nil {
+            if let viewController = self.viewController {
+                self.paymentOperationsVCManager = PaymentOperationsVCManager(parentViewController: viewController)
+            }
+        }
+    }
 }
 
 fileprivate extension WalletCard {
@@ -135,123 +138,5 @@ fileprivate extension WalletCard {
         get {
             return ((viewModel as! WalletCardViewModel).wallet as! FoundedWallet)
         }
-    }
-    
-    private func addViewController(forAction: WalletAction, transactionResult: TransactionResult? = nil) {
-        if let parentViewController = viewController {
-            var viewController: UIViewController
-            
-            switch (forAction) {
-            case .receive:
-                viewController = ReceivePaymentCardViewController()
-                break
-                
-            case .send:
-                viewController = SendViewController()
-                (viewController as! SendViewController).sendAction = { [weak self] (transactionData) in
-                    if let wallet = self?.wallet {
-                        let transactionHelper = TransactionHelper(transactionInputData: transactionData, wallet: wallet)
-                        
-                        switch transactionData.transactionType {
-                        case .sendPayment:
-                            transactionHelper.sendPayment(completion: { (result) in
-                                self?.addViewController(forAction: WalletAction.transactionResult, transactionResult: result)
-                            })
-                            
-                        case .createAndFundAccount:
-                            transactionHelper.createAndFundAccount(completion: { (result) in
-                                self?.addViewController(forAction: WalletAction.transactionResult, transactionResult: result)
-                            })
-                        }
-                    }
-                }
-                
-            case .transactionResult:
-                viewController = TransactionResultViewController()
-                (viewController as! TransactionResultViewController).result = transactionResult!
-                (viewController as! TransactionResultViewController).closeAllAction = { [weak self] in
-                   self?.closeAllWalletActionsViewControllers()
-                }
-                (viewController as! TransactionResultViewController).sendOtherAction = { [weak self] in
-                    self?.closeAllWalletActionsViewControllers()
-                    self?.expanded = true
-                    self?.addViewController(forAction: WalletAction.send)
-                }
-            }
-            
-            (viewController as! WalletActionsProtocol).wallet = (viewModel as! WalletCardViewModel).wallet
-            (viewController as! WalletActionsProtocol).closeAction = { [weak self] in
-                self?.closeViewController(viewController: viewController)
-                self?.resetScrollView()
-            }
-            
-            parentViewController.addChildViewController(viewController)
-            expandedContainer.addSubview(viewController.view)
-            
-            viewController.view.snp.makeConstraints {make in
-                make.edges.equalToSuperview()
-            }
-            
-            viewController.didMove(toParentViewController: parentViewController)
-            reloadCellAction?()
-            
-            self.resetScrollView()
-        }
-    }
-    
-    private func resetScrollView() {
-        (viewController as! HomeViewController).tableView.scrollToRow(at: IndexPath(row: (viewController as! HomeViewController).dataSourceItems.index(of: self)!, section: 0), at: UITableViewScrollPosition.none, animated: true)
-    }
-    
-    private func closeViewController(viewController: UIViewController) {
-        viewController.willMove(toParentViewController: viewController)
-        viewController.view.removeFromSuperview()
-        viewController.removeFromParentViewController()
-        reloadCellAction?()
-        expanded = false
-    }
-    
-    private func closeAllWalletActionsViewControllers() {
-        if let childControllers = self.viewController?.childViewControllers {
-            for viewController in childControllers {
-                if let walletActionViewController = viewController as? WalletActionsProtocol {
-                    if walletActionViewController.wallet.name == (viewModel as! WalletCardViewModel).wallet?.name {
-                        closeViewController(viewController: viewController)
-                    }
-                }
-            }
-        }
-    }
-    
-    private func isSafeToAddViewController(forAction action: WalletAction) -> Bool {
-        guard !self.expanded else {
-            if let walletActionsViewModel = self.viewController?.childViewControllers.first(where: { (walletActionController) -> Bool in
-                return (walletActionController as! WalletActionsProtocol).wallet.name == (viewModel as! WalletCardViewModel).wallet?.name
-            }) as? WalletActionsProtocol {
-                switch (action) {
-                case .receive:
-                    if (walletActionsViewModel is ReceivePaymentCardViewController) {
-                        return false
-                    }
-                    break
-                
-                case .send:
-                    if (walletActionsViewModel is SendViewController) {
-                        return false
-                    }
-                    break
-                    
-                case .transactionResult:
-                    return true
-                }
-                
-                closeAllWalletActionsViewControllers()
-                return true
-            }
-            
-            return false
-        }
-        
-        return true
     }
 }

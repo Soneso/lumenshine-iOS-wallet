@@ -15,7 +15,7 @@ class ErrorLabel: UILabel {
     }
     
     private func setup() {
-        font = R.font.encodeSansSemiBold(size: 10)
+        font = R.font.encodeSansSemiBold(size: 12)
         textColor = Stylesheet.color(.red)
     }
 }

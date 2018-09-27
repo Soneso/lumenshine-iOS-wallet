@@ -3895,7 +3895,6 @@ struct _R: Rswift.Validatable {
       try _TransactionResultViewController.validate()
       try _UnfoundedWalletCardContentView.validate()
       try _WalletDetailsViewController.validate()
-      try _SendViewController.validate()
       try _WalletCardContentView.validate()
       try _AccountDetailsViewController.validate()
       try _LockedView.validate()
@@ -4174,17 +4173,12 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    struct _SendViewController: Rswift.NibResourceType, Rswift.Validatable {
+    struct _SendViewController: Rswift.NibResourceType {
       let bundle = R.hostingBundle
       let name = "SendViewController"
       
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
-      }
-      
-      static func validate() throws {
-        if UIKit.UIImage(named: "close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'close' is used in nib 'SendViewController', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "qr_placeholder", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'qr_placeholder' is used in nib 'SendViewController', but couldn't be loaded.") }
       }
       
       fileprivate init() {}
