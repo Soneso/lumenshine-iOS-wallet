@@ -17,8 +17,8 @@ class SignUpView: UIView {
     
     // MARK: - Properties
     fileprivate let viewModel: LoginViewModelType
-    fileprivate let verticalSpacing = 31.0
-    fileprivate let horizontalSpacing = 15.0
+    fileprivate let verticalSpacing: CGFloat = 31.0
+    fileprivate let horizontalSpacing: CGFloat = 15.0
     fileprivate let passwordHintButton = Material.IconButton()
     fileprivate let titleLabel = UILabel()
     fileprivate let detailLabel = UILabel()
@@ -158,11 +158,12 @@ fileprivate extension SignUpView {
         textField1.placeholder = R.string.localizable.email().uppercased()
         
         textField2.isSecureTextEntry = true
-//        textField2.isVisibilityIconButtonEnabled = true
+        textField2.isVisibilityIconButtonEnabled = true
         textField2.placeholder = R.string.localizable.password().uppercased()
+        textField2.dividerContentEdgeInsets = EdgeInsets(top: 0, left: 0, bottom: 0, right: -2.0*horizontalSpacing)
 
         textField3.isSecureTextEntry = true
-//        textField3.isVisibilityIconButtonEnabled = true
+        textField3.isVisibilityIconButtonEnabled = true
         textField3.placeholder = R.string.localizable.repeat_password().uppercased()
         
         addSubview(textField1)
@@ -176,7 +177,7 @@ fileprivate extension SignUpView {
         textField2.snp.makeConstraints { make in
             make.top.equalTo(textField1.snp.bottom).offset(verticalSpacing)
             make.left.equalTo(textField1)
-            make.right.equalTo(textField1)
+            make.right.equalTo(-3*horizontalSpacing)
         }
         
         addSubview(textField3)
