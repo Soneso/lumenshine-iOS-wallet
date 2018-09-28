@@ -203,6 +203,15 @@
 "home" = "Home";
 
 /*  */
+"basics" = "Basics";
+
+/*  */
+"security" = "Security";
+
+/*  */
+"stellar" = "Stellar";
+
+/*  */
 "wallets" = "Wallets";
 
 /*  */
@@ -213,6 +222,9 @@
 
 /*  */
 "icos" = "ICOs";
+
+/*  */
+"ico" = "ICO";
 
 /*  */
 "my_orders" = "My Orders";
@@ -228,18 +240,6 @@
 
 /*  */
 "help" = "Help";
-
-/*  */
-"help_feedback" = "Help & Feedback";
-
-/*  */
-"help_hint" = "Need help or have a suggestion?\n\nThe Lumenshine support team is just a quick tap away. Take a look at our FAQ or send us a message.";
-
-/*  */
-"send_feedback" = "Send Feedback";
-
-/*  */
-"view_faq" = "View FAQ";
 
 /*  */
 "about" = "About";
@@ -642,3 +642,54 @@
 
 /*  */
 "transaction_result" = "Transaction result";
+
+/*  */
+"help_feedback" = "Help & Feedback";
+
+/*  */
+"help_hint" = "Need help or have a suggestion?\n\nThe Lumenshine support team is just a quick tap away. Take a look at our FAQ or send us a message.";
+
+/*  */
+"send_feedback" = "Send Feedback";
+
+/*  */
+"view_faq" = "View FAQ";
+
+/*  */
+"help_center" = "Help Center";
+
+/*  */
+"support_inbox" = "Support inbox";
+
+/*  */
+"faq" = "FAQ";
+
+/*  */
+"faq_1" = "How can I fund my wallet?";
+
+/*  */
+"faq_2" = "How can I setup the inflation destination for my wallet?";
+
+/*  */
+"faq_3" = "How can I receive other currencies than lumens?";
+
+/*  */
+"faq_4" = "How can I send lumens and other currencies?";
+
+/*  */
+"topics" = "Topics";
+
+/*  */
+"basics_detail" = "Guide to getting started with Lumenshine";
+
+/*  */
+"security_detail" = "Learn how to keep your Wallets save";
+
+/*  */
+"wallets_detail" = "Learn to master all Wallet features";
+
+/*  */
+"stellar_detail" = "Learn more about Stellar";
+
+/*  */
+"ico_detail" = "Learn how to participate in an ICO";

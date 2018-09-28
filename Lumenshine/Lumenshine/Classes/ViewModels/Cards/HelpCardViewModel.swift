@@ -53,7 +53,12 @@ class HelpCardViewModel: CardViewModelType {
     }
     
     func barButtonSelected(at index: Int) {
-
+        switch index {
+        case 1:
+            navigationCoordinator?.performTransition(transition: .showHelp)
+        default:
+            break
+        }
     }
 }
 

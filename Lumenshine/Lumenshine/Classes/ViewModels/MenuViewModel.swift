@@ -98,6 +98,8 @@ class MenuViewModel : MenuViewModelType {
             navigationCoordinator?.performTransition(transition: .showHome)
         case .signOut:
             logout()
+        case .help:
+            navigationCoordinator?.performTransition(transition: .showHelp)
         default: break
         }
         lastIndex = indexPath

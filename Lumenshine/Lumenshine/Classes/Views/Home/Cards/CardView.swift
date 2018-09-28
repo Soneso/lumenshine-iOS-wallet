@@ -26,8 +26,9 @@ class CardView: UIView {
     
     internal var viewModel: CardViewModelType? {
         didSet {
-            let buttons = viewModel?.bottomTitles?.map { title -> FlatButton in
+            let buttons = viewModel?.bottomTitles?.enumerated().map { (index, title) -> FlatButton in
                 let button = FlatButton(title: title)
+                button.tag = index
                 button.titleColor = Stylesheet.color(.blue)
                 button.titleLabel?.font = R.font.encodeSansSemiBold(size: 13.5)
                 button.addTarget(self, action: #selector(barButtonClick(_:)), for: .touchUpInside)
