@@ -249,7 +249,7 @@
 		C1150D6D17D35DF1B32C6836 /* Pods_LumenshineUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 969B9D07F1C445217EECA145 /* Pods_LumenshineUITests.framework */; };
 		C61244C62113325A00DE1EA9 /* SendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C61244C52113325A00DE1EA9 /* SendViewController.xib */; };
 		C61244C8211332E700DE1EA9 /* SendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61244C7211332E700DE1EA9 /* SendViewController.swift */; };
-		C6171958215520C200F9907A /* PostButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6171957215520C200F9907A /* PostButton.swift */; };
+		C6171958215520C200F9907A /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6171957215520C200F9907A /* RoundedButton.swift */; };
 		C617195A21552E1F00F9907A /* InfoLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C617195921552E1F00F9907A /* InfoLabel.swift */; };
 		C62B0E9C215375A400CF920B /* PickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B0E9B215375A400CF920B /* PickerTextField.swift */; };
 		C62B0E9E215376C800CF920B /* CurrencyPickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B0E9D215376C800CF920B /* CurrencyPickerTextField.swift */; };
@@ -269,7 +269,7 @@
 		C665871821255EAB006499A7 /* RatesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C665871721255EAB006499A7 /* RatesResponse.swift */; };
 		C66CC2D5212EA2AD00729C09 /* RemoveCurrencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C66CC2D4212EA2AD00729C09 /* RemoveCurrencyViewController.xib */; };
 		C66CC2D7212EA2BD00729C09 /* RemoveCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66CC2D6212EA2BD00729C09 /* RemoveCurrencyViewController.swift */; };
-		C66E353D215A082700D39906 /* RoundedNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66E353C215A082700D39906 /* RoundedNavigationController.swift */; };
+		C66E353D215A082700D39906 /* ImageBackgroundNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66E353C215A082700D39906 /* ImageBackgroundNavigationController.swift */; };
 		C672507F213FB5DE0064F6E3 /* InflationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C672507E213FB5DE0064F6E3 /* InflationManager.swift */; };
 		C6725081213FC11F0064F6E3 /* SetInflationDestinationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6725080213FC11F0064F6E3 /* SetInflationDestinationViewController.swift */; };
 		C6725084213FC1380064F6E3 /* SetInflationDestinationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6725083213FC1380064F6E3 /* SetInflationDestinationViewController.xib */; };
@@ -284,6 +284,9 @@
 		C6752A42213806030067F815 /* FederationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6752A41213806030067F815 /* FederationManager.swift */; };
 		C6752A44213808D50067F815 /* PasswordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6752A43213808D50067F815 /* PasswordManager.swift */; };
 		C6752A46213818CD0067F815 /* InputDataValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6752A45213818CD0067F815 /* InputDataValidator.swift */; };
+		C675BC22215CBF8000B663DB /* LeftRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C675BC21215CBF8000B663DB /* LeftRoundedButton.swift */; };
+		C675BC26215CBFE700B663DB /* RightRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C675BC25215CBFE700B663DB /* RightRoundedButton.swift */; };
+		C675BC28215CF86200B663DB /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C675BC27215CF86200B663DB /* BaseButton.swift */; };
 		C67E5D6221526B9A002BCAA1 /* HelpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67E5D6121526B9A002BCAA1 /* HelpButton.swift */; };
 		C67E5D64215271F2002BCAA1 /* InputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67E5D63215271F2002BCAA1 /* InputTextField.swift */; };
 		C6805B5B2139530C003B2B25 /* TransactionHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6805B5A2139530C003B2B25 /* TransactionHistoryManager.swift */; };
@@ -309,6 +312,7 @@
 		C69A5143211C16500066A4A0 /* TransactionResultPrintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69A5142211C16500066A4A0 /* TransactionResultPrintView.swift */; };
 		C69F551D2158BC920021EE5C /* AmountSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69F551C2158BC920021EE5C /* AmountSegmentedControl.swift */; };
 		C6A11D592142721200424DBE /* PrivateKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A11D582142721200424DBE /* PrivateKeyManager.swift */; };
+		C6AF0101215B9F33007C51E5 /* FederationAddressLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AF0100215B9F33007C51E5 /* FederationAddressLabel.swift */; };
 		C6B75F3321182E7500B45BEB /* TransactionResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6B75F3221182E7500B45BEB /* TransactionResultViewController.xib */; };
 		C6B75F35211837AF00B45BEB /* TransactionResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B75F34211837AF00B45BEB /* TransactionResultViewController.swift */; };
 		C6BEBE6C2130138B000F7435 /* AddCurrencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6BEBE6B2130138B000F7435 /* AddCurrencyViewController.xib */; };
@@ -612,7 +616,7 @@
 		969B9D07F1C445217EECA145 /* Pods_LumenshineUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LumenshineUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C61244C52113325A00DE1EA9 /* SendViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendViewController.xib; sourceTree = "<group>"; };
 		C61244C7211332E700DE1EA9 /* SendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendViewController.swift; sourceTree = "<group>"; };
-		C6171957215520C200F9907A /* PostButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostButton.swift; sourceTree = "<group>"; };
+		C6171957215520C200F9907A /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		C617195921552E1F00F9907A /* InfoLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoLabel.swift; sourceTree = "<group>"; };
 		C62B0E9B215375A400CF920B /* PickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
 		C62B0E9D215376C800CF920B /* CurrencyPickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyPickerTextField.swift; sourceTree = "<group>"; };
@@ -632,7 +636,7 @@
 		C665871721255EAB006499A7 /* RatesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesResponse.swift; sourceTree = "<group>"; };
 		C66CC2D4212EA2AD00729C09 /* RemoveCurrencyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RemoveCurrencyViewController.xib; sourceTree = "<group>"; };
 		C66CC2D6212EA2BD00729C09 /* RemoveCurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveCurrencyViewController.swift; sourceTree = "<group>"; };
-		C66E353C215A082700D39906 /* RoundedNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedNavigationController.swift; sourceTree = "<group>"; };
+		C66E353C215A082700D39906 /* ImageBackgroundNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBackgroundNavigationController.swift; sourceTree = "<group>"; };
 		C672507E213FB5DE0064F6E3 /* InflationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InflationManager.swift; sourceTree = "<group>"; };
 		C6725080213FC11F0064F6E3 /* SetInflationDestinationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInflationDestinationViewController.swift; sourceTree = "<group>"; };
 		C6725083213FC1380064F6E3 /* SetInflationDestinationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetInflationDestinationViewController.xib; sourceTree = "<group>"; };
@@ -647,6 +651,9 @@
 		C6752A41213806030067F815 /* FederationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FederationManager.swift; sourceTree = "<group>"; };
 		C6752A43213808D50067F815 /* PasswordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordManager.swift; sourceTree = "<group>"; };
 		C6752A45213818CD0067F815 /* InputDataValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputDataValidator.swift; sourceTree = "<group>"; };
+		C675BC21215CBF8000B663DB /* LeftRoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftRoundedButton.swift; sourceTree = "<group>"; };
+		C675BC25215CBFE700B663DB /* RightRoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightRoundedButton.swift; sourceTree = "<group>"; };
+		C675BC27215CF86200B663DB /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		C67E5D6121526B9A002BCAA1 /* HelpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpButton.swift; sourceTree = "<group>"; };
 		C67E5D63215271F2002BCAA1 /* InputTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextField.swift; sourceTree = "<group>"; };
 		C6805B5A2139530C003B2B25 /* TransactionHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryManager.swift; sourceTree = "<group>"; };
@@ -672,6 +679,7 @@
 		C69A5142211C16500066A4A0 /* TransactionResultPrintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionResultPrintView.swift; sourceTree = "<group>"; };
 		C69F551C2158BC920021EE5C /* AmountSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountSegmentedControl.swift; sourceTree = "<group>"; };
 		C6A11D582142721200424DBE /* PrivateKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeyManager.swift; sourceTree = "<group>"; };
+		C6AF0100215B9F33007C51E5 /* FederationAddressLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FederationAddressLabel.swift; sourceTree = "<group>"; };
 		C6B75F3221182E7500B45BEB /* TransactionResultViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionResultViewController.xib; sourceTree = "<group>"; };
 		C6B75F34211837AF00B45BEB /* TransactionResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionResultViewController.swift; sourceTree = "<group>"; };
 		C6BEBE6B2130138B000F7435 /* AddCurrencyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCurrencyViewController.xib; sourceTree = "<group>"; };
@@ -1436,10 +1444,14 @@
 				C62B0EA12153DBDB00CF920B /* SeparatorView.swift */,
 				C685DE0C2154C09E00F99D81 /* SubtitleLabel.swift */,
 				C685DE0E2154C39E00F99D81 /* ErrorLabel.swift */,
-				C6171957215520C200F9907A /* PostButton.swift */,
+				C6171957215520C200F9907A /* RoundedButton.swift */,
 				C617195921552E1F00F9907A /* InfoLabel.swift */,
 				C69F551C2158BC920021EE5C /* AmountSegmentedControl.swift */,
-				C66E353C215A082700D39906 /* RoundedNavigationController.swift */,
+				C66E353C215A082700D39906 /* ImageBackgroundNavigationController.swift */,
+				C6AF0100215B9F33007C51E5 /* FederationAddressLabel.swift */,
+				C675BC21215CBF8000B663DB /* LeftRoundedButton.swift */,
+				C675BC25215CBFE700B663DB /* RightRoundedButton.swift */,
+				C675BC27215CF86200B663DB /* BaseButton.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
@@ -1978,7 +1990,7 @@
 				C6DBDB732119CD5000FCEC78 /* TransactionInput.swift in Sources */,
 				4319B1902063FA8F007CE18D /* KeychainPasswordItem.swift in Sources */,
 				4319B1892063FA46007CE18D /* BiometricIDAuth.swift in Sources */,
-				C6171958215520C200F9907A /* PostButton.swift in Sources */,
+				C6171958215520C200F9907A /* RoundedButton.swift in Sources */,
 				431437F22047FF9100189C83 /* AppNavigationController.swift in Sources */,
 				43DB1DA8214A8DED00AC0975 /* ChangePasswordSuccessViewController.swift in Sources */,
 				74A2A2F0210EF405007AEE91 /* ReceivePaymentPrintView.swift in Sources */,
@@ -1987,6 +1999,7 @@
 				C6725086213FC4D20064F6E3 /* ProvideInflationDestinationViewController.swift in Sources */,
 				4314B9F9204812BC006DBE63 /* MenuTableViewCell.swift in Sources */,
 				C695564D2126B11800B0E110 /* LoadTransactionsHistoryViewController.swift in Sources */,
+				C675BC22215CBF8000B663DB /* LeftRoundedButton.swift in Sources */,
 				43088DA82087987E008AE1AB /* CryptoUtil.swift in Sources */,
 				4359984F20A4A14000007F27 /* UserSecurityHelper.swift in Sources */,
 				431437F42047FFB400189C83 /* AppNavigationDrawerController.swift in Sources */,
@@ -2032,7 +2045,7 @@
 				4301312A20C049CB00E47E83 /* ReLoginCoordinator.swift in Sources */,
 				4319B1842063F00C007CE18D /* MenuViewModel.swift in Sources */,
 				43B144CC20FCA5D40099E3AE /* TitleHeader.swift in Sources */,
-				C66E353D215A082700D39906 /* RoundedNavigationController.swift in Sources */,
+				C66E353D215A082700D39906 /* ImageBackgroundNavigationController.swift in Sources */,
 				4359984B20A438EF00007F27 /* AuthenticationResponse.swift in Sources */,
 				C6752A46213818CD0067F815 /* InputDataValidator.swift in Sources */,
 				43C7A8F2215BB28D007F4E5E /* HelpCenterViewModel.swift in Sources */,
@@ -2101,6 +2114,7 @@
 				43973A8C20BD4B87000145DD /* TFAGeneration.swift in Sources */,
 				C69556552126FAEF00B0E110 /* OperationInfo.swift in Sources */,
 				4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */,
+				C675BC26215CBFE700B663DB /* RightRoundedButton.swift in Sources */,
 				43B144CE20FCAF630099E3AE /* TFASetupViewController.swift in Sources */,
 				7420BBE921182D4C002FC4C7 /* TitleView.swift in Sources */,
 				439E3C8B2107786A0004BB91 /* SettingsEntry.swift in Sources */,
@@ -2147,6 +2161,7 @@
 				C6DBDB7121199FF100FCEC78 /* TransactionResult.swift in Sources */,
 				4304491C206BF47400349B51 /* UIView+Shake.swift in Sources */,
 				C691F68F211C571E00ECA2C4 /* TransactionHelper.swift in Sources */,
+				C675BC28215CF86200B663DB /* BaseButton.swift in Sources */,
 				4390D582205FBD6E00383BB2 /* Services.swift in Sources */,
 				43D15E48212AE53A00415CE5 /* ChartCardViewModel.swift in Sources */,
 				C69F551D2158BC920021EE5C /* AmountSegmentedControl.swift in Sources */,
@@ -2157,6 +2172,7 @@
 				43A8633820A9F0E6007C46E2 /* LoginStep2Response.swift in Sources */,
 				4370E23D20655F9C004C62C3 /* SettingsTableViewController.swift in Sources */,
 				43C7A8F6215BF736007F4E5E /* HelpCenterCoordinator.swift in Sources */,
+				C6AF0101215B9F33007C51E5 /* FederationAddressLabel.swift in Sources */,
 				7420BBED211839BB002FC4C7 /* BaseNavigationViewController.swift in Sources */,
 				74C08FF820EF6F2F000A809D /* FundWalletViewController.swift in Sources */,
 				4319B1862063F1B0007CE18D /* User.swift in Sources */,

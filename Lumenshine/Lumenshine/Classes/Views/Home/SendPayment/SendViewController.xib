@@ -6,7 +6,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -51,14 +50,14 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x1L-CZ-sKm">
                     <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ifp-Md-gjR">
-                            <rect key="frame" x="0.0" y="16" width="375" height="580"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ifp-Md-gjR">
+                            <rect key="frame" x="0.0" y="16" width="375" height="1000"/>
                             <subviews>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Adu-xn-KHs">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Currency" textAlignment="justified" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AzS-4P-HY9" customClass="CurrencyPickerTextField" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="0.0" width="343" height="50"/>
+                                            <rect key="frame" x="16" y="0.0" width="343" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
@@ -73,10 +72,10 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="FGe-R5-0Sx">
-                                    <rect key="frame" x="0.0" y="58" width="375" height="22.5"/>
+                                    <rect key="frame" x="0.0" y="46" width="375" height="12"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" text="availableAmountLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GVe-V6-JUk" customClass="NormalLabel" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="32" y="0.0" width="327" height="22.5"/>
+                                            <rect key="frame" x="32" y="0.0" width="327" height="12"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -91,7 +90,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="E0k-0q-vLs">
-                                    <rect key="frame" x="0.0" y="88.5" width="375" height="50"/>
+                                    <rect key="frame" x="0.0" y="74" width="375" height="50"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Zmi-Ok-BMh">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="20.5"/>
@@ -130,23 +129,23 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="hwI-K1-Q6G" userLabel="separator" customClass="SeparatorView" customModule="Lumenshine" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="146.5" width="375" height="1"/>
+                                    <rect key="frame" x="0.0" y="140" width="375" height="1"/>
                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="SQ4-oL-Ysf"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="t41-ZG-hfE">
-                                    <rect key="frame" x="0.0" y="155.5" width="375" height="34"/>
+                                    <rect key="frame" x="0.0" y="157" width="375" height="20.5"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Send to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ktV-Bo-Tkn" customClass="SubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="32" y="0.0" width="59.5" height="34"/>
+                                            <rect key="frame" x="32" y="0.0" width="59.5" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HNN-7F-1IC" customClass="HelpButton" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="95.5" y="0.0" width="30" height="34"/>
+                                            <rect key="frame" x="95.5" y="0.0" width="30" height="20.5"/>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -161,7 +160,7 @@
                                     </constraints>
                                 </view>
                                 <view hidden="YES" contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="kbn-Ka-5AT">
-                                    <rect key="frame" x="0.0" y="193.5" width="375" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="185.5" width="375" height="0.0"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" text="Adress Error Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="mSd-Hf-CVB" userLabel="AdressErrorLabel" customClass="ErrorLabel" customModule="Lumenshine" customModuleProvider="target">
                                             <rect key="frame" x="32" y="0.0" width="327" height="0.0"/>
@@ -179,7 +178,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="1BC-RP-GjP">
-                                    <rect key="frame" x="0.0" y="197.5" width="375" height="30"/>
+                                    <rect key="frame" x="0.0" y="193.5" width="375" height="30"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Recepient's public key or address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uok-4u-fpw" customClass="InputTextField" customModule="Lumenshine" customModuleProvider="target">
                                             <rect key="frame" x="16" y="0.0" width="343" height="30"/>
@@ -197,14 +196,14 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="plp-z3-rYY" userLabel="separator" customClass="SeparatorView" customModule="Lumenshine" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="235.5" width="375" height="1"/>
+                                    <rect key="frame" x="0.0" y="239.5" width="375" height="1"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="zwO-NN-178"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Nee-yM-fgi">
-                                    <rect key="frame" x="0.0" y="244.5" width="375" height="28"/>
+                                    <rect key="frame" x="0.0" y="256.5" width="375" height="28"/>
                                     <subviews>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="np5-p3-dds" customClass="AmountSegmentedControl" customModule="Lumenshine" customModuleProvider="target">
                                             <rect key="frame" x="16" y="0.0" width="149" height="29"/>
@@ -225,7 +224,7 @@
                                     </constraints>
                                 </view>
                                 <view hidden="YES" contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="IG5-vw-UEo">
-                                    <rect key="frame" x="0.0" y="276.5" width="375" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="292.5" width="375" height="0.0"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" text="Amount Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bvk-Hw-vfW" userLabel="AmountErrorLabel" customClass="ErrorLabel" customModule="Lumenshine" customModuleProvider="target">
                                             <rect key="frame" x="32" y="0.0" width="327" height="0.0"/>
@@ -243,7 +242,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hCp-4Q-1f2" userLabel="sendValue">
-                                    <rect key="frame" x="0.0" y="280.5" width="375" height="30"/>
+                                    <rect key="frame" x="0.0" y="300.5" width="375" height="30"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="XLM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ee0-h0-WXH" customClass="InfoLabel" customModule="Lumenshine" customModuleProvider="target">
                                             <rect key="frame" x="324" y="0.0" width="35" height="30"/>
@@ -270,7 +269,7 @@
                                     </constraints>
                                 </view>
                                 <view hidden="YES" contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="03w-4M-RAP">
-                                    <rect key="frame" x="0.0" y="314.5" width="375" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="338.5" width="375" height="0.0"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKt-lL-mJG" customClass="NormalLabel" customModule="Lumenshine" customModuleProvider="target">
                                             <rect key="frame" x="32" y="0.0" width="42" height="0.0"/>
@@ -296,20 +295,20 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="hB2-y4-zf9" userLabel="separator" customClass="SeparatorView" customModule="Lumenshine" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="318.5" width="375" height="1"/>
+                                    <rect key="frame" x="0.0" y="346.5" width="375" height="1"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="eG6-Ue-KOY"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Mrz-y5-mPY">
-                                    <rect key="frame" x="0.0" y="327.5" width="375" height="34"/>
+                                    <rect key="frame" x="0.0" y="363.5" width="375" height="20.5"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hT-xb-0R8" customClass="HelpButton" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="162" y="0.0" width="30" height="34"/>
+                                            <rect key="frame" x="162" y="0.0" width="30" height="20.5"/>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="1000" text="Memo (optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MV2-a9-hXA" customClass="SubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="32" y="0.0" width="126" height="34"/>
+                                            <rect key="frame" x="32" y="0.0" width="126" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -326,7 +325,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="DJf-Jp-bqL">
-                                    <rect key="frame" x="0.0" y="369.5" width="375" height="30"/>
+                                    <rect key="frame" x="0.0" y="400" width="375" height="30"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="left" verticalHuggingPriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Memo Type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bU6-dA-gXQ" customClass="PickerTextField" customModule="Lumenshine" customModuleProvider="target">
                                             <rect key="frame" x="16" y="0.0" width="343" height="30"/>
@@ -344,7 +343,7 @@
                                     </constraints>
                                 </view>
                                 <view hidden="YES" contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="is1-DN-WsB">
-                                    <rect key="frame" x="0.0" y="403.5" width="375" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="438" width="375" height="0.0"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="751" text="Memo Input Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIU-uQ-rXM" userLabel="MemoInputErrorLabel" customClass="ErrorLabel" customModule="Lumenshine" customModuleProvider="target">
                                             <rect key="frame" x="32" y="0.0" width="327" height="0.0"/>
@@ -362,7 +361,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="7Fz-4h-4dW">
-                                    <rect key="frame" x="0.0" y="407.5" width="375" height="30"/>
+                                    <rect key="frame" x="0.0" y="446" width="375" height="30"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Up to 28 characters" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bGc-pV-e2A" customClass="InputTextField" customModule="Lumenshine" customModuleProvider="target">
                                             <rect key="frame" x="16" y="0.0" width="343" height="30"/>
@@ -380,14 +379,14 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1000" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="eFu-NU-fkL" userLabel="separator" customClass="SeparatorView" customModule="Lumenshine" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="445.5" width="375" height="1"/>
+                                    <rect key="frame" x="0.0" y="492" width="375" height="1"/>
                                     <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="sjb-IF-ZJh"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="O6z-wC-lKd">
-                                    <rect key="frame" x="0.0" y="454.5" width="375" height="20.5"/>
+                                    <rect key="frame" x="0.0" y="509" width="375" height="20.5"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PeP-mD-Ore" customClass="SubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
                                             <rect key="frame" x="32" y="0.0" width="327" height="20.5"/>
@@ -405,7 +404,7 @@
                                     </constraints>
                                 </view>
                                 <view hidden="YES" contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="riY-B6-6Z8">
-                                    <rect key="frame" x="0.0" y="479" width="375" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="537.5" width="375" height="0.0"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Password Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jo3-C6-mi9" userLabel="PasswordErrorLabel" customClass="ErrorLabel" customModule="Lumenshine" customModuleProvider="target">
                                             <rect key="frame" x="32" y="0.0" width="327" height="0.0"/>
@@ -423,7 +422,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="cwS-hz-IfB">
-                                    <rect key="frame" x="0.0" y="483" width="375" height="30"/>
+                                    <rect key="frame" x="0.0" y="545.5" width="375" height="30"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="85o-Zc-SiF" customClass="InputTextField" customModule="Lumenshine" customModuleProvider="target">
                                             <rect key="frame" x="16" y="0.0" width="343" height="30"/>
@@ -441,14 +440,14 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1000" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="wQj-RC-22O" userLabel="separator" customClass="SeparatorView" customModule="Lumenshine" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="521" width="375" height="1"/>
+                                    <rect key="frame" x="0.0" y="591.5" width="375" height="1"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="dm9-nO-xH6"/>
                                     </constraints>
                                 </view>
                                 <view hidden="YES" contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="zCM-IQ-Pz5">
-                                    <rect key="frame" x="0.0" y="526" width="375" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="600.5" width="375" height="0.0"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" text="Send Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ldh-X0-OlJ" userLabel="SendErrorLabel" customClass="ErrorLabel" customModule="Lumenshine" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
@@ -467,11 +466,11 @@
                                         <constraint firstItem="ldh-X0-OlJ" firstAttribute="leading" secondItem="zCM-IQ-Pz5" secondAttribute="leading" id="wLr-Oa-z67"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="4dG-Lb-3yY">
-                                    <rect key="frame" x="0.0" y="530" width="375" height="50"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4dG-Lb-3yY">
+                                    <rect key="frame" x="0.0" y="608.5" width="375" height="391.5"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleAspectFit" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ye-bL-VYE" customClass="PostButton" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="152" y="10" width="71" height="30"/>
+                                        <button opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ye-bL-VYE" customClass="RoundedButton" customModule="Lumenshine" customModuleProvider="target">
+                                            <rect key="frame" x="152" y="16" width="71" height="30"/>
                                             <state key="normal" title="Send XLM"/>
                                             <connections>
                                                 <action selector="sendButtonAction:" destination="-1" eventType="touchUpInside" id="3xz-fi-BWY"/>
@@ -481,12 +480,12 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="9ye-bL-VYE" firstAttribute="centerX" secondItem="4dG-Lb-3yY" secondAttribute="centerX" id="Fn3-YF-X4Q"/>
-                                        <constraint firstItem="9ye-bL-VYE" firstAttribute="centerY" secondItem="4dG-Lb-3yY" secondAttribute="centerY" id="ZCE-TT-ysr"/>
+                                        <constraint firstItem="9ye-bL-VYE" firstAttribute="top" secondItem="4dG-Lb-3yY" secondAttribute="top" constant="16" id="eII-SN-m2M"/>
                                     </constraints>
                                 </view>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="height" constant="580" id="4cn-wr-liq"/>
+                                <constraint firstAttribute="height" constant="1000" id="4cn-wr-liq"/>
                             </constraints>
                         </stackView>
                     </subviews>

@@ -269,10 +269,5 @@ class TransactionResultViewController: UIViewController, WalletActionsProtocol {
         navigationItem.titleLabel.text = "Transaction result"
         navigationItem.titleLabel.textColor = Stylesheet.color(.white)
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
-        
-        let backButton = Material.IconButton()
-        backButton.image = Icon.close?.tint(with: Stylesheet.color(.white))
-        backButton.addTarget(self, action: #selector(didTapBack(_:)), for: .touchUpInside)
-        navigationItem.leftViews = [backButton]
     }
 }

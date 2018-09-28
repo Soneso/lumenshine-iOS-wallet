@@ -92,7 +92,7 @@ class KnownCurrenciesTableViewController: UIViewController, UITableViewDelegate,
             cell.assetCodeLabel.text = "\(currencyName) (\(currencyAssetCode))"
         }
 
-        cell.authorizationLabel.isHidden = knownCurrency.isAuthorized
+        cell.authorizationLabel.isHidden = knownCurrency.isAuthorized ?? false
         
         if let issuer = knownCurrency.issuerPublicKey {
             cell.issuerPublicKeyLabel.text = "Issuer public key: \n\(issuer)"
