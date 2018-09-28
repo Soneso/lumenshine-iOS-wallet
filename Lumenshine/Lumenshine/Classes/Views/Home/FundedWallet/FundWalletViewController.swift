@@ -1,5 +1,5 @@
 //
-//  FoundAccountViewController.swift
+//  FundWalletViewController.swift
 //  Lumenshine
 //
 //  Created by Razvan Chelemen on 06/07/2018.
@@ -9,7 +9,7 @@
 import UIKit
 import TTTAttributedLabel
 
-class FoundAccountViewController: UIViewController {
+class FundWalletViewController: UIViewController {
 
     @IBOutlet weak var publicKeyButton: UIButton!
     @IBOutlet weak var descriptionLabel: TTTAttributedLabel!

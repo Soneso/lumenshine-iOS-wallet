@@ -100,7 +100,7 @@ class KnownCurrenciesTableViewCell: UITableViewCell {
         passwordErrorLabel.isHidden = true
     }
     
-    private var wallet: FoundedWallet {
+    private var wallet: FundedWallet {
         get {
             return (parentContainerViewController() as! AddCurrencyViewController).wallet
         }

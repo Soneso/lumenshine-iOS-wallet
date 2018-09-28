@@ -1,5 +1,5 @@
 //
-//  FundTestAccountViewController.swift
+//  FundButtonTitles.swift
 //  Lumenshine
 //
 //  Created by Soneso on 14/08/2018.
@@ -15,7 +15,7 @@ public enum FundButtonTitles: String {
     case failure = "Funding failed!"
 }
 
-public class FundTestAccountViewController: UIViewController {
+public class FundTestNetWalletViewController: UIViewController {
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var publicKeyButton: UIButton!
     @IBOutlet weak var fundButton: UIButton!

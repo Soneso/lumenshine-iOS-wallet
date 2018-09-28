@@ -1,5 +1,5 @@
 //
-//  HomeFoundedHeaderView.swift
+//  HomeFundedWalletHeaderView.swift
 //  Lumenshine
 //
 //  Created by Razvan Chelemen on 13/06/2018.
@@ -9,7 +9,7 @@
 import UIKit
 import Material
 
-class HomeFoundedHeaderView: UIView {
+class HomeFundedWalletHeaderView: UIView {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var foundAccountButton: UILabel!

@@ -35,7 +35,7 @@ class RemoveCurrencyViewController: UIViewController {
     }
     
     var currency: AccountBalanceResponse!
-    var wallet: FoundedWallet!
+    var wallet: FundedWallet!
     private var walletManager = WalletManager()
     
     @IBAction func removeButtonAction(_ sender: UIButton) {

@@ -84,7 +84,7 @@ class CardView: UIView {
             fundedView.helpButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapHelpButton), for: .touchUpInside)
             fundedView.nameLabel.text = viewModel.title
             fundedView.balanceLabel.text = viewModel.nativeBalance?.stringWithUnit
-            fundedView.balanceDescriptionLabel.text = (viewModel.wallet as! FoundedWallet).balances.count > 1 ? BalanceLabelDescription.extended.rawValue : BalanceLabelDescription.onlyNative.rawValue
+            fundedView.balanceDescriptionLabel.text = (viewModel.wallet as! FundedWallet).balances.count > 1 ? BalanceLabelDescription.extended.rawValue : BalanceLabelDescription.onlyNative.rawValue
             CardView.labelsForCustomAssets(wallet: viewModel.wallet!).forEach({ label in fundedView.balanceStackView.addArrangedSubview(label) })
             fundedView.availableLabel.text = viewModel.nativeBalance?.availableAmount.stringWithUnit
             CardView.labelsForCustomAssets(wallet: viewModel.wallet!).forEach({ label in fundedView.availableStackView.addArrangedSubview(label) })
@@ -100,7 +100,7 @@ class CardView: UIView {
     class func labelsForCustomAssets(wallet: Wallet) -> [UILabel] {
         var labels = [UILabel]()
         
-        if let wallet = wallet as? FoundedWallet {
+        if let wallet = wallet as? FundedWallet {
             for balance in wallet.balances {
                 if balance.assetType != AssetTypeAsString.NATIVE {
                     let text = String(format: "%.2f \(balance.assetCode ?? balance.assetType)", CoinUnit(balance.balance)!)

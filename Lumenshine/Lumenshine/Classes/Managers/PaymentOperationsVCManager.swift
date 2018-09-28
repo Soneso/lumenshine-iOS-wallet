@@ -46,7 +46,7 @@ class PaymentOperationsVCManager {
     
     private func setupSendViewController(viewController: SendViewController) {
         viewController.sendAction = { [weak self] (transactionData) in
-            if let wallet = viewController.wallet as? FoundedWallet {
+            if let wallet = viewController.wallet as? FundedWallet {
                 let transactionHelper = TransactionHelper(transactionInputData: transactionData, wallet: wallet)
                 
                 switch transactionData.transactionType {

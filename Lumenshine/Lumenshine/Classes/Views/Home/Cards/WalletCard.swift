@@ -11,8 +11,8 @@ import Material
 import SnapKit
 
 enum WalletStatus {
-    case founded
-    case unfounded
+    case funded
+    case unfunded
 }
 
 enum WalletAction {
@@ -33,7 +33,7 @@ protocol WalletActionsProtocol: class {
 class WalletCard: CardView {
     
     var fundedView: WalletCardContentView?
-    var unfundedView: UnfoundedWalletCardContentView?
+    var unfundedView: UnfundedWalletCardContentView?
     var viewController: UIViewController?
     
     var reloadCellAction: (() -> ())?
@@ -63,10 +63,10 @@ class WalletCard: CardView {
     var status: WalletStatus! {
         didSet {
             switch status {
-            case .founded?:
-                addFoundedView()
-            case .unfounded?:
-                addUnfoundedView()
+            case .funded?:
+                addFundedView()
+            case .unfunded?:
+                addUnfundedView()
             default:
                 print("error")
             }
@@ -118,7 +118,7 @@ fileprivate extension WalletCard {
         heightConstraint.isActive = true
     }
     
-    func addFoundedView() {
+    func addFundedView() {
         fundedView = Bundle.main.loadNibNamed("WalletCardContentView", owner: nil, options: nil)![0] as? WalletCardContentView
         fundedView!.frame = contentView.bounds
         fundedView!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -126,17 +126,17 @@ fileprivate extension WalletCard {
         collapsedContainer.addSubview(fundedView!)
     }
     
-    func addUnfoundedView() {
-        unfundedView = Bundle.main.loadNibNamed("UnfoundedWalletCardContentView", owner: nil, options: nil)![0] as? UnfoundedWalletCardContentView
+    func addUnfundedView() {
+        unfundedView = Bundle.main.loadNibNamed("UnfundedWalletCardContentView", owner: nil, options: nil)![0] as? UnfundedWalletCardContentView
         unfundedView!.frame = contentView.bounds
         unfundedView!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         collapsedContainer.addSubview(unfundedView!)
     }
     
-    private var wallet: FoundedWallet {
+    private var wallet: FundedWallet {
         get {
-            return ((viewModel as! WalletCardViewModel).wallet as! FoundedWallet)
+            return ((viewModel as! WalletCardViewModel).wallet as! FundedWallet)
         }
     }
 }

@@ -83,7 +83,7 @@ class ProvideCurrencyDataViewController: UIViewController {
         }
     }
     
-    var wallet: FoundedWallet!
+    var wallet: FundedWallet!
     
     private let passwordManager = PasswordManager()
     

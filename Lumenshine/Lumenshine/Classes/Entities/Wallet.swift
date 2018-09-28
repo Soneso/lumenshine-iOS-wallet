@@ -13,12 +13,12 @@ public protocol Wallet {
     var id: Int { get }
     var name: String { get }
     var nativeBalance: CoinUnit { get }
-    var isFounded: Bool { get }
+    var isFunded: Bool { get }
     var publicKey: String { get }
     var federationAddress: String { get }
 }
 
-public class FoundedWallet: Wallet {
+public class FundedWallet: Wallet {
     private var walletResponse: WalletsResponse
     
     var balances: [AccountBalanceResponse]
@@ -59,7 +59,7 @@ public class FoundedWallet: Wallet {
         }
     }
     
-    public var isFounded: Bool {
+    public var isFunded: Bool {
         get {
             return nativeBalance != 0
         }
@@ -78,7 +78,7 @@ public class FoundedWallet: Wallet {
     }
 }
 
-extension FoundedWallet {
+extension FundedWallet {
     
     public var hasOnlyNative: Bool {
         get {
@@ -164,7 +164,7 @@ extension FoundedWallet {
     }
 }
     
-public class UnfoundedWallet: Wallet {
+public class UnfundedWallet: Wallet {
     private var walletResponse: WalletsResponse
     
     init(walletResponse: WalletsResponse) {
@@ -189,7 +189,7 @@ public class UnfoundedWallet: Wallet {
         }
     }
     
-    public var isFounded: Bool {
+    public var isFunded: Bool {
         get {
             return false
         }

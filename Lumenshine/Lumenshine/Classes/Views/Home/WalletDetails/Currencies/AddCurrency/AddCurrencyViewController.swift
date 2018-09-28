@@ -15,7 +15,7 @@ class AddCurrencyViewController: UIViewController {
     @IBOutlet weak var knownCurrenciesButton: UIButton!
     @IBOutlet weak var provideCurrencyDataButton: UIButton!
     
-    var wallet: FoundedWallet!
+    var wallet: FundedWallet!
     
     private var titleView: TitleView!
     private var provideCurrencyDataViewController: ProvideCurrencyDataViewController!

@@ -129,6 +129,6 @@
     <resources>
         <image name="close" width="28" height="28"/>
         <image name="compose" width="24" height="20"/>
-        <image name="qr_placeholder" width="110" height="110"/>
+        <image name="qr_placeholder" width="50" height="50"/>
     </resources>
 </document>

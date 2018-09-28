@@ -209,13 +209,13 @@ public class UserManager: NSObject {
             stellarSDK.accounts.getAccountDetails(accountId: wallet.publicKey) { (result) -> (Void) in
                 switch result {
                 case .success(let accountDetails):
-                    let walletDetail = FoundedWallet(walletResponse: wallet, accountResponse: accountDetails)
+                    let walletDetail = FundedWallet(walletResponse: wallet, accountResponse: accountDetails)
                     walletDetails.append(walletDetail)
                 case .failure(let error):
                     switch error {
                     case .notFound(_,_):
-                        let unfoundedWallet = UnfoundedWallet(walletResponse: wallet)
-                        walletDetails.append(unfoundedWallet)
+                        let unfundedWallet = UnfundedWallet(walletResponse: wallet)
+                        walletDetails.append(unfundedWallet)
                     default:
                         guard !callFailed else { return }
                         callFailed = true

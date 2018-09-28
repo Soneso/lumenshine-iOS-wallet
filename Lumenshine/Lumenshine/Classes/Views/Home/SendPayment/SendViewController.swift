@@ -128,7 +128,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             if validateInsertedData() {
                 if let address = addressTextField.text,
                     let password = passwordTextField.text,
-                    let currency = (wallet as! FoundedWallet).balances.first(where: { (currency) -> Bool in
+                    let currency = (wallet as! FundedWallet).balances.first(where: { (currency) -> Bool in
                         if selectedCurrency == NativeCurrencyNames.xlm.rawValue {
                             return currency.displayCode == selectedCurrency
                         }
@@ -192,7 +192,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         didSet {
             currentCurrencyLabel.text = selectedCurrency
             
-            let currencyIssuer = (wallet as! FoundedWallet).balances.first { (currency) -> Bool in
+            let currencyIssuer = (wallet as! FundedWallet).balances.first { (currency) -> Bool in
                 return currency.assetCode == selectedCurrency
             }?.assetIssuer
             
@@ -206,7 +206,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             
             setSendButtonDefaultTitle()
             
-            if (wallet as! FoundedWallet).isCurrencyDuplicate(withAssetCode: selectedCurrency) {
+            if (wallet as! FundedWallet).isCurrencyDuplicate(withAssetCode: selectedCurrency) {
                 if issuerPickerView == nil {
                     issuerPickerView = UIPickerView()
                     issuerPickerView.delegate = self
@@ -246,7 +246,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        availableCurrencies = (wallet as! FoundedWallet).getAvailableCurrencies()
+        availableCurrencies = (wallet as! FundedWallet).getAvailableCurrencies()
         if selectedCurrency.isEmpty {
             selectedCurrency = availableCurrencies.first!
         }
@@ -277,7 +277,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     private func setAvailableAmount() {
-        for currency in (wallet as! FoundedWallet).uniqueAssetCodeBalances {
+        for currency in (wallet as! FundedWallet).uniqueAssetCodeBalances {
             if selectedCurrency == NativeCurrencyNames.xlm.rawValue {
                 setAvailableLabels(currency: currency)
             } else if let currencyIssuer = issuerTextField.text,
@@ -393,7 +393,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     private func checkForTransactionFeeAvailability() {
-        if (wallet as! FoundedWallet).nativeBalance.availableAmount.isLess(than: CoinUnit.Constants.transactionFee + CoinUnit.Constants.baseReserver) {
+        if (wallet as! FundedWallet).nativeBalance.availableAmount.isLess(than: CoinUnit.Constants.transactionFee + CoinUnit.Constants.baseReserver) {
             sendErrorView.isHidden = false
             sendErrorLabel.text = ValidationErrors.InsufficientLumens.rawValue
             sendButton.isEnabled = false
@@ -453,7 +453,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     private func validate(amount: String) {
-        if let balance: String = (wallet as! FoundedWallet).balances.first(where: { (balance) -> Bool in
+        if let balance: String = (wallet as! FundedWallet).balances.first(where: { (balance) -> Bool in
             if selectedCurrency == NativeCurrencyNames.xlm.rawValue {
                 return balance.displayCode == selectedCurrency
             }
@@ -602,7 +602,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         } else if pickerView == memoTypePickerView {
             return memoTypes.count
         } else if pickerView == issuerPickerView {
-            return (wallet as! FoundedWallet).issuersFor(assetCode: selectedCurrency).count
+            return (wallet as! FundedWallet).issuersFor(assetCode: selectedCurrency).count
         }
         
         return 0
@@ -617,7 +617,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         } else if pickerView == memoTypePickerView {
             return memoTypes[row].rawValue
         } else if pickerView == issuerPickerView {
-            return (wallet as! FoundedWallet).issuersFor(assetCode: selectedCurrency)[row]
+            return (wallet as! FundedWallet).issuersFor(assetCode: selectedCurrency)[row]
         }
         
         return nil
@@ -648,7 +648,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             selectedMemoType = memoTypes[row]
             return
         } else if pickerView == issuerPickerView {
-            issuerTextField.text = (wallet as! FoundedWallet).issuersFor(assetCode: selectedCurrency)[row]
+            issuerTextField.text = (wallet as! FundedWallet).issuersFor(assetCode: selectedCurrency)[row]
         }
     }
     
