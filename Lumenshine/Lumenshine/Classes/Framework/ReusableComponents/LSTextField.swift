@@ -16,10 +16,10 @@ class LSTextField: TextField {
         placeholderAnimation = .hidden
         placeholderActiveColor = Stylesheet.color(.lightBlack)
         placeholderNormalColor = Stylesheet.color(.lightBlack)
-        font = R.font.encodeSansSemiBold(size: 12)
+        font = R.font.encodeSansSemiBold(size: 14)
         textColor = Stylesheet.color(.lightBlack)
         detailColor = Stylesheet.color(.red)
-        detailLabel.font = R.font.encodeSansRegular(size: 11)
+        detailLabel.font = R.font.encodeSansRegular(size: 13)
         detailVerticalOffset = 0
         dividerActiveColor = Stylesheet.color(.gray)
     }
