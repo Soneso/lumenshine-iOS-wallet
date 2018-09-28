@@ -65,7 +65,7 @@ class ProvideInflationDestinationViewController: UIViewController {
         }
     }
     
-    var wallet: FoundedWallet!
+    var wallet: FundedWallet!
     private let passwordManager = PasswordManager()
     private var inputDataValidator = InputDataValidator()
     private let walletManager = WalletManager()

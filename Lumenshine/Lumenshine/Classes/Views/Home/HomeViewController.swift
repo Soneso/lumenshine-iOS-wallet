@@ -171,8 +171,8 @@ fileprivate extension HomeViewController {
         label.sizeToFit()
         
         header = HomeHeaderView()
-        //header.type = .unfounded
-        header.unfoundedView.foundAction = {(button) in
+        //header.type = .unfunded
+        header.unfundedView.foundAction = {(button) in
             self.viewModel.foundAccount()
         }
         
@@ -265,9 +265,9 @@ fileprivate extension HomeViewController {
     
     func setHeaderType(nativeFounds: CoinUnit) {
         if nativeFounds > 0 {
-            self.header.type = .founded
+            self.header.type = .funded
         } else {
-            self.header.type = .unfounded
+            self.header.type = .unfunded
         }
     }
     

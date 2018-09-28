@@ -109,7 +109,7 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
     }
     
     private func setupTextFields() {
-        if let wallet = wallet as? FoundedWallet {
+        if let wallet = wallet as? FundedWallet {
             currencyPickerView = UIPickerView()
             currencyPickerView.delegate = self
             currencyPickerView.dataSource = self
@@ -129,7 +129,7 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
     }
     
     private func setCurrencies() {
-        if let wallet = wallet as? FoundedWallet {
+        if let wallet = wallet as? FundedWallet {
             if wallet.hasOnlyNative {
                 currencyView.removeFromSuperview()
                 issuerView.removeFromSuperview()
@@ -145,7 +145,7 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
     }
     
     private func emailText() -> String {
-        if let wallet = wallet as? FoundedWallet {
+        if let wallet = wallet as? FundedWallet {
             var text = "Receive public key: \(publicKeyButton.titleLabel?.text ?? "")\n"
             
             if !wallet.federationAddress.isEmpty {
@@ -184,7 +184,7 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
     }
     
     fileprivate func selectAsset(pickerView: UIPickerView, row: Int) {
-        if let wallet = wallet as? FoundedWallet {
+        if let wallet = wallet as? FundedWallet {
             if pickerView == currencyPickerView {
                 currencyTextField.text = wallet.uniqueAssetCodeBalances[row].displayCode
                 currencyLabel.text = wallet.uniqueAssetCodeBalances[row].displayCode
@@ -231,7 +231,7 @@ extension ReceivePaymentCardViewController: UIPickerViewDelegate, UIPickerViewDa
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if let wallet = wallet as? FoundedWallet {
+        if let wallet = wallet as? FundedWallet {
             if pickerView == currencyPickerView {
                 return wallet.uniqueAssetCodeBalances.count
             } else if pickerView == issuerPickerView {
@@ -243,7 +243,7 @@ extension ReceivePaymentCardViewController: UIPickerViewDelegate, UIPickerViewDa
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if let wallet = wallet as? FoundedWallet {
+        if let wallet = wallet as? FundedWallet {
             if pickerView == currencyPickerView {
                 return wallet.uniqueAssetCodeBalances[row].displayCode
             } else if pickerView == issuerPickerView {

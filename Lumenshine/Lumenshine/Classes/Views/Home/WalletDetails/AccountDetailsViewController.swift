@@ -202,7 +202,7 @@ class AccountDetailsViewController: UIViewController {
     
     private func setupAccountCurrency() {
         let viewController = AccountCurrenciesViewController(nibName: "AccountCurrenciesViewController", bundle: Bundle.main)
-        if let wallet = wallet as? FoundedWallet {
+        if let wallet = wallet as? FundedWallet {
             viewController.wallet = wallet
         }
         
@@ -216,7 +216,7 @@ class AccountDetailsViewController: UIViewController {
     
     private func setupTransactionsHistory() {
         let viewController = TransactionHistoryTableViewController(nibName: "TransactionHistoryTableViewController", bundle: Bundle.main)
-        if let wallet = wallet as? FoundedWallet {
+        if let wallet = wallet as? FundedWallet {
             viewController.wallet = wallet
         }
         
@@ -231,7 +231,7 @@ class AccountDetailsViewController: UIViewController {
     
     private func setupWalletDetails() {
         let viewController = WalletDetailsViewController(nibName: "WalletDetailsViewController", bundle: Bundle.main)
-        if let wallet = wallet as? FoundedWallet {
+        if let wallet = wallet as? FundedWallet {
             viewController.wallet = wallet
         }
         

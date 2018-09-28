@@ -1,5 +1,5 @@
 //
-//  UnfoundedWalletCardContentView.swift
+//  UnfundedWalletCardContentView.swift
 //  Lumenshine
 //
 //  Created by Razvan Chelemen on 11/07/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UnfoundedWalletCardContentView: UIView {
+class UnfundedWalletCardContentView: UIView {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var fundButton: UIButton!

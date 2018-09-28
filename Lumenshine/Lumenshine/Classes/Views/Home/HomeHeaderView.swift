@@ -9,38 +9,38 @@
 import UIKit
 
 enum HomeHeaderViewType {
-    case founded
-    case unfounded
+    case funded
+    case unfunded
 }
 
 class HomeHeaderView: UIView {
     var type: HomeHeaderViewType! {
         didSet {
             switch type! {
-            case .founded:
-                showFoundedView()
-            case .unfounded:
-                showUnfoundedView()
+            case .funded:
+                showFundedView()
+            case .unfunded:
+                showUnfundedView()
             }
         }
     }
     
     var funds: String! {
         didSet {
-            if let fundedView = foundedView {
+            if let fundedView = fundedView {
                 fundedView.foundAccountButton.text = funds
                 applyTransitionFlip(to: fundedView.foundAccountButton)
             }
             
-            if let unfundedView = unfoundedView {
+            if let unfundedView = unfundedView {
                 unfundedView.xlmPriceLabel.text = funds
                 applyTransitionFlip(to: unfundedView.xlmPriceLabel)
             }
         }
     }
     
-    var foundedView: HomeFoundedHeaderView!
-    var unfoundedView: HomeUnfoundedHeaderView!
+    var fundedView: HomeFundedWalletHeaderView!
+    var unfundedView: HomeUnfundedWalletHeaderView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -52,11 +52,11 @@ class HomeHeaderView: UIView {
         setup()
     }
     
-    private func showFoundedView() {
-        unfoundedView.removeFromSuperview()
+    private func showFundedView() {
+        unfundedView.removeFromSuperview()
         
-        addSubview(foundedView)
-        foundedView.snp.makeConstraints { make in
+        addSubview(fundedView)
+        fundedView.snp.makeConstraints { make in
             make.left.equalTo(0)
             make.right.equalTo(0)
             make.top.equalTo(0)
@@ -64,11 +64,11 @@ class HomeHeaderView: UIView {
         }
     }
     
-    private func showUnfoundedView() {
-        foundedView.removeFromSuperview()
+    private func showUnfundedView() {
+        fundedView.removeFromSuperview()
         
-        addSubview(unfoundedView)
-        unfoundedView.snp.makeConstraints { make in
+        addSubview(unfundedView)
+        unfundedView.snp.makeConstraints { make in
             make.left.equalTo(0)
             make.right.equalTo(0)
             make.top.equalTo(0)
@@ -77,8 +77,8 @@ class HomeHeaderView: UIView {
     }
     
     private func setup() {
-        foundedView = Bundle.main.loadNibNamed("HomeFoundedHeaderView", owner: nil, options: nil)![0] as! HomeFoundedHeaderView
-        unfoundedView = Bundle.main.loadNibNamed("HomeUnfoundedHeaderView", owner: nil, options: nil)![0] as! HomeUnfoundedHeaderView
+        fundedView = Bundle.main.loadNibNamed("HomeFundedWalletHeaderView", owner: nil, options: nil)![0] as! HomeFundedWalletHeaderView
+        unfundedView = Bundle.main.loadNibNamed("HomeUnfundedWalletHeaderView", owner: nil, options: nil)![0] as! HomeUnfundedWalletHeaderView
     }
 
     private func applyTransitionFlip(to viewElement: UIView) {

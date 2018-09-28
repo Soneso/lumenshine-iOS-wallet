@@ -130,7 +130,7 @@ fileprivate extension LoginView {
     func prepareDetail() {
         detailLabel.text = R.string.localizable.login_fill()
         detailLabel.textColor = Stylesheet.color(.lightBlack)
-        detailLabel.font = R.font.encodeSansRegular(size: 14)
+        detailLabel.font = R.font.encodeSansRegular(size: 13)
         detailLabel.textAlignment = .left
         detailLabel.adjustsFontSizeToFitWidth = true
         detailLabel.numberOfLines = 0

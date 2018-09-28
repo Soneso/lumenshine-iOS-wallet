@@ -1299,14 +1299,14 @@ struct R: Rswift.Validatable {
     static let addCurrencyViewController = _R.nib._AddCurrencyViewController()
     /// Nib `CurrencyView`.
     static let currencyView = _R.nib._CurrencyView()
-    /// Nib `FoundAccountViewController`.
-    static let foundAccountViewController = _R.nib._FoundAccountViewController()
-    /// Nib `FundTestAccountViewController`.
-    static let fundTestAccountViewController = _R.nib._FundTestAccountViewController()
-    /// Nib `HomeFoundedHeaderView`.
-    static let homeFoundedHeaderView = _R.nib._HomeFoundedHeaderView()
-    /// Nib `HomeUnfoundedHeaderView`.
-    static let homeUnfoundedHeaderView = _R.nib._HomeUnfoundedHeaderView()
+    /// Nib `FundTestNetWalletViewController`.
+    static let fundTestNetWalletViewController = _R.nib._FundTestNetWalletViewController()
+    /// Nib `FundWalletViewController`.
+    static let fundWalletViewController = _R.nib._FundWalletViewController()
+    /// Nib `HomeFundedWalletHeaderView`.
+    static let homeFundedWalletHeaderView = _R.nib._HomeFundedWalletHeaderView()
+    /// Nib `HomeUnfundedWalletHeaderView`.
+    static let homeUnfundedWalletHeaderView = _R.nib._HomeUnfundedWalletHeaderView()
     /// Nib `IconView`.
     static let iconView = _R.nib._IconView()
     /// Nib `KnownCurrenciesTableViewCell`.
@@ -1349,8 +1349,8 @@ struct R: Rswift.Validatable {
     static let transactionResultViewController = _R.nib._TransactionResultViewController()
     /// Nib `TransactionTableViewCell`.
     static let transactionTableViewCell = _R.nib._TransactionTableViewCell()
-    /// Nib `UnfoundedWalletCardContentView`.
-    static let unfoundedWalletCardContentView = _R.nib._UnfoundedWalletCardContentView()
+    /// Nib `UnfundedWalletCardContentView`.
+    static let unfundedWalletCardContentView = _R.nib._UnfundedWalletCardContentView()
     /// Nib `WalletCardContentView`.
     static let walletCardContentView = _R.nib._WalletCardContentView()
     /// Nib `WalletCardInfoViewController`.
@@ -1378,24 +1378,24 @@ struct R: Rswift.Validatable {
       return UIKit.UINib(resource: R.nib.currencyView)
     }
     
-    /// `UINib(name: "FoundAccountViewController", in: bundle)`
-    static func foundAccountViewController(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.foundAccountViewController)
+    /// `UINib(name: "FundTestNetWalletViewController", in: bundle)`
+    static func fundTestNetWalletViewController(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.fundTestNetWalletViewController)
     }
     
-    /// `UINib(name: "FundTestAccountViewController", in: bundle)`
-    static func fundTestAccountViewController(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.fundTestAccountViewController)
+    /// `UINib(name: "FundWalletViewController", in: bundle)`
+    static func fundWalletViewController(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.fundWalletViewController)
     }
     
-    /// `UINib(name: "HomeFoundedHeaderView", in: bundle)`
-    static func homeFoundedHeaderView(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.homeFoundedHeaderView)
+    /// `UINib(name: "HomeFundedWalletHeaderView", in: bundle)`
+    static func homeFundedWalletHeaderView(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.homeFundedWalletHeaderView)
     }
     
-    /// `UINib(name: "HomeUnfoundedHeaderView", in: bundle)`
-    static func homeUnfoundedHeaderView(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.homeUnfoundedHeaderView)
+    /// `UINib(name: "HomeUnfundedWalletHeaderView", in: bundle)`
+    static func homeUnfundedWalletHeaderView(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.homeUnfundedWalletHeaderView)
     }
     
     /// `UINib(name: "IconView", in: bundle)`
@@ -1503,9 +1503,9 @@ struct R: Rswift.Validatable {
       return UIKit.UINib(resource: R.nib.transactionTableViewCell)
     }
     
-    /// `UINib(name: "UnfoundedWalletCardContentView", in: bundle)`
-    static func unfoundedWalletCardContentView(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.unfoundedWalletCardContentView)
+    /// `UINib(name: "UnfundedWalletCardContentView", in: bundle)`
+    static func unfundedWalletCardContentView(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.unfundedWalletCardContentView)
     }
     
     /// `UINib(name: "WalletCardContentView", in: bundle)`
@@ -4127,18 +4127,18 @@ struct _R: Rswift.Validatable {
   
   struct nib: Rswift.Validatable {
     static func validate() throws {
-      try _FundTestAccountViewController.validate()
       try _TransactionResultViewController.validate()
-      try _UnfoundedWalletCardContentView.validate()
       try _WalletDetailsViewController.validate()
       try _WalletCardContentView.validate()
+      try _HomeUnfundedWalletHeaderView.validate()
       try _AccountDetailsViewController.validate()
       try _LockedView.validate()
-      try _HomeUnfoundedHeaderView.validate()
+      try _FundTestNetWalletViewController.validate()
       try _ReceivePaymentCardViewController.validate()
-      try _FoundAccountViewController.validate()
-      try _HomeFoundedHeaderView.validate()
+      try _FundWalletViewController.validate()
+      try _HomeFundedWalletHeaderView.validate()
       try _WalletCardInfoViewController.validate()
+      try _UnfundedWalletCardContentView.validate()
     }
     
     struct _AccountCurrenciesViewController: Rswift.NibResourceType {
@@ -4189,67 +4189,67 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    struct _FoundAccountViewController: Rswift.NibResourceType, Rswift.Validatable {
+    struct _FundTestNetWalletViewController: Rswift.NibResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
-      let name = "FoundAccountViewController"
+      let name = "FundTestNetWalletViewController"
       
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
       static func validate() throws {
-        if UIKit.UIImage(named: "qr_placeholder", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'qr_placeholder' is used in nib 'FoundAccountViewController', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'close' is used in nib 'FoundAccountViewController', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "compose", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'compose' is used in nib 'FoundAccountViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'close' is used in nib 'FundTestNetWalletViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "compose", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'compose' is used in nib 'FundTestNetWalletViewController', but couldn't be loaded.") }
       }
       
       fileprivate init() {}
     }
     
-    struct _FundTestAccountViewController: Rswift.NibResourceType, Rswift.Validatable {
+    struct _FundWalletViewController: Rswift.NibResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
-      let name = "FundTestAccountViewController"
+      let name = "FundWalletViewController"
       
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
       static func validate() throws {
-        if UIKit.UIImage(named: "close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'close' is used in nib 'FundTestAccountViewController', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "compose", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'compose' is used in nib 'FundTestAccountViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "qr_placeholder", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'qr_placeholder' is used in nib 'FundWalletViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'close' is used in nib 'FundWalletViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "compose", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'compose' is used in nib 'FundWalletViewController', but couldn't be loaded.") }
       }
       
       fileprivate init() {}
     }
     
-    struct _HomeFoundedHeaderView: Rswift.NibResourceType, Rswift.Validatable {
+    struct _HomeFundedWalletHeaderView: Rswift.NibResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
-      let name = "HomeFoundedHeaderView"
+      let name = "HomeFundedWalletHeaderView"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> HomeFoundedHeaderView? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HomeFoundedHeaderView
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> HomeFundedWalletHeaderView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HomeFundedWalletHeaderView
       }
       
       static func validate() throws {
-        if UIKit.UIImage(named: "logo", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'logo' is used in nib 'HomeFoundedHeaderView', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "send", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'send' is used in nib 'HomeFoundedHeaderView', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "receive", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'receive' is used in nib 'HomeFoundedHeaderView', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "more", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'more' is used in nib 'HomeFoundedHeaderView', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "logo", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'logo' is used in nib 'HomeFundedWalletHeaderView', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "send", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'send' is used in nib 'HomeFundedWalletHeaderView', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "receive", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'receive' is used in nib 'HomeFundedWalletHeaderView', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "more", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'more' is used in nib 'HomeFundedWalletHeaderView', but couldn't be loaded.") }
       }
       
       fileprivate init() {}
     }
     
-    struct _HomeUnfoundedHeaderView: Rswift.NibResourceType, Rswift.Validatable {
+    struct _HomeUnfundedWalletHeaderView: Rswift.NibResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
-      let name = "HomeUnfoundedHeaderView"
+      let name = "HomeUnfundedWalletHeaderView"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> HomeUnfoundedHeaderView? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HomeUnfoundedHeaderView
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> HomeUnfundedWalletHeaderView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HomeUnfundedWalletHeaderView
       }
       
       static func validate() throws {
-        if UIKit.UIImage(named: "logo", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'logo' is used in nib 'HomeUnfoundedHeaderView', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "logo", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'logo' is used in nib 'HomeUnfundedWalletHeaderView', but couldn't be loaded.") }
       }
       
       fileprivate init() {}
@@ -4501,16 +4501,16 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    struct _UnfoundedWalletCardContentView: Rswift.NibResourceType, Rswift.Validatable {
+    struct _UnfundedWalletCardContentView: Rswift.NibResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
-      let name = "UnfoundedWalletCardContentView"
+      let name = "UnfundedWalletCardContentView"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UnfoundedWalletCardContentView? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UnfoundedWalletCardContentView
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UnfundedWalletCardContentView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UnfundedWalletCardContentView
       }
       
       static func validate() throws {
-        if UIKit.UIImage(named: "question", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'question' is used in nib 'UnfoundedWalletCardContentView', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "question", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'question' is used in nib 'UnfundedWalletCardContentView', but couldn't be loaded.") }
       }
       
       fileprivate init() {}

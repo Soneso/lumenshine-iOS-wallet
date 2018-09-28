@@ -1,5 +1,5 @@
 //
-//  HomeUnfoundedHeaderView.swift
+//  HomeUnfundedWalletHeaderView.swift
 //  Lumenshine
 //
 //  Created by Razvan Chelemen on 13/06/2018.
@@ -9,7 +9,7 @@
 import UIKit
 import Material
 
-class HomeUnfoundedHeaderView: UIView {
+class HomeUnfundedWalletHeaderView: UIView {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var xlmPriceLabel: UILabel!

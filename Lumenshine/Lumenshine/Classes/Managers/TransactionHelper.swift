@@ -20,7 +20,7 @@ typealias TrustLineClosure = (_ completion: TrustLineStatus) -> (Void)
 class TransactionHelper {
     private let TransactionDefaultLimit: Decimal = 10000
     private var inputData: TransactionInput!
-    private var wallet: FoundedWallet!
+    private var wallet: FundedWallet!
     private var transactionResult: TransactionResult!
     
     private var stellarSdk: StellarSDK {
@@ -29,7 +29,7 @@ class TransactionHelper {
         }
     }
     
-    init(transactionInputData: TransactionInput, wallet: FoundedWallet) {
+    init(transactionInputData: TransactionInput, wallet: FundedWallet) {
         inputData = transactionInputData
         self.wallet = wallet
         
@@ -39,7 +39,7 @@ class TransactionHelper {
         transactionResult.issuer = inputData.issuer
     }
     
-    init(wallet: FoundedWallet) {
+    init(wallet: FundedWallet) {
         self.wallet = wallet
     }
     

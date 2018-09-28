@@ -109,7 +109,7 @@ class WalletDetailsViewController: UIViewController {
         }
     }
     
-    var wallet: FoundedWallet!
+    var wallet: FundedWallet!
     
     private var passwordManager = PasswordManager()
     private var inflationManager = InflationManager()

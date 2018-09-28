@@ -31,7 +31,7 @@ class SetInflationDestinationViewController: UIViewController {
        showProvideDestinationData()
     }
     
-    var wallet: FoundedWallet!
+    var wallet: FundedWallet!
     var currentInflationDestination: String?
     
     private var titleView: TitleView!

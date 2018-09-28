@@ -57,9 +57,9 @@ fileprivate extension HomeCoordinator {
         var fundWalletViewController: UIViewController
         
         if Services.shared.isTestURL {
-            fundWalletViewController = FundTestAccountViewController(nibName: "FundTestAccountViewController", bundle: Bundle.main, forWallet: wallet)
+            fundWalletViewController = FundTestNetWalletViewController(nibName: "FundTestNetWalletViewController", bundle: Bundle.main, forWallet: wallet)
         } else {
-            fundWalletViewController = FoundAccountViewController(nibName: "FoundAccountViewController", bundle: Bundle.main, forWallet: wallet)
+            fundWalletViewController = FundWalletViewController(nibName: "FundWalletViewController", bundle: Bundle.main, forWallet: wallet)
         }
     
         self.baseController.present(fundWalletViewController, animated: true)

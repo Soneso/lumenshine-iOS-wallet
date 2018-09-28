@@ -40,14 +40,14 @@ class WalletCardViewModel : CardViewModelType {
         self.stellarSdk = StellarSDK()
         
         self.wallet = wallet
-        funded = wallet.isFounded
+        funded = wallet.isFunded
     }
     
     var type: CardType {
         if funded {
-            return .wallet(status: .founded)
+            return .wallet(status: .funded)
         } else {
-            return .wallet(status: .unfounded)
+            return .wallet(status: .unfunded)
         }
     }
     

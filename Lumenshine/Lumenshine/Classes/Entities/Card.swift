@@ -26,9 +26,9 @@ enum CardType {
         case 3:
             return .account
         case 4:
-            return .wallet(status: .founded)
+            return .wallet(status: .funded)
         case 5:
-            return .wallet(status: .unfounded)
+            return .wallet(status: .unfunded)
         default:
             fatalError("Invalid card type")
         }

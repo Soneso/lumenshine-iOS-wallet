@@ -22,7 +22,7 @@ class AccountCurrenciesViewController: UIViewController {
     @IBOutlet weak var loadingCurrenciesStackView: UIStackView!
     @IBOutlet weak var intrinsicView: IntrinsicView!
     
-    var wallet: FoundedWallet!
+    var wallet: FundedWallet!
     let walletManager = WalletManager()
     
     override func viewDidLoad() {

@@ -133,7 +133,7 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
         }
     }
     
-    private var wallet: FoundedWallet {
+    private var wallet: FundedWallet {
         get {
             return (parentContainerViewController() as! SetInflationDestinationViewController).wallet
         }
