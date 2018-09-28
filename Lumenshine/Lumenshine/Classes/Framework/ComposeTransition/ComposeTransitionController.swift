@@ -61,7 +61,6 @@ class ComposeDismissTransitionController: NSObject, UIViewControllerAnimatedTran
                         fromViewController.view.frame = finalFrame
                         toViewController.view.alpha = 1.0
         }) { (finished) in
-            fromViewController.view.removeFromSuperview()
             transitionContext.completeTransition(finished)
         }
     }

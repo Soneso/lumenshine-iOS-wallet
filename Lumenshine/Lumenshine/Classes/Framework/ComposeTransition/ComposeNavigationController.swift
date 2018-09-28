@@ -21,11 +21,11 @@ class ComposeNavigationController: NavigationController {
     override func prepare() {
         super.prepare()
         
-        transitioningDelegate = self
+//        transitioningDelegate = self
         definesPresentationContext = true
         providesPresentationContextTransitionStyle = true
         modalPresentationCapturesStatusBarAppearance = false
-        modalPresentationStyle = .overFullScreen
+        modalPresentationStyle = .custom
         
         navigationBar.backIndicatorImage = Icon.arrowBack?.tint(with: Stylesheet.color(.gray))
         navigationBar.backgroundColor = Stylesheet.color(.white)
