@@ -34,7 +34,7 @@ class SettingsTableViewCell: UITableViewCell {
     
     func commonInit() {
 //        textLabel?.textColor = Stylesheet.color(.white)
-        textLabel?.font = R.font.encodeSansRegular(size: 14)
+        textLabel?.font = R.font.encodeSansRegular(size: 15)
         backgroundColor = Stylesheet.color(.clear)
         stateSwitch.isHidden = true
         stateSwitch.addTarget(self, action: #selector(switchChanged(sender:)), for: .valueChanged)

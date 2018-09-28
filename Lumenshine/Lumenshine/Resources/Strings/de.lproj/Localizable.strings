@@ -290,7 +290,7 @@
 "email_resend_confirmation" = "Erneut senden";
 
 /*  */
-"resend_email" = "Email erneut senden";
+"resend_email" = "Erneut senden";
 
 /*  */
 "lost_security_email_sent" = "%@ Email gesendet";
@@ -537,7 +537,7 @@
 "backup_mnemonic" = "Backup Secret (Mnemonic)";
 
 /*  */
-"reveal_backup_mnemonic" = "Gebe dein passwort ein um dir dein Backup Secret (Mnemonic) anzeigen zu lassen.";
+"reveal_backup_mnemonic" = "Gebe dein Passwort ein um dir dein Backup Secret (Mnemonic) anzeigen zu lassen.";
 
 "loading" = "Wird geladen";
 

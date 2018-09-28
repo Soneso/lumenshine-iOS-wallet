@@ -116,7 +116,7 @@ fileprivate extension Change2faSecretViewController {
     func prepareTitle() {
         titleLabel.text = R.string.localizable.change_2fa_hint()
         titleLabel.textColor = Stylesheet.color(.lightBlack)
-        titleLabel.font = R.font.encodeSansSemiBold(size: 17)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0

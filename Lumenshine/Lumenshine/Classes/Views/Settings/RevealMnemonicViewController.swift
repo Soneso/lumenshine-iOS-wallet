@@ -101,8 +101,8 @@ fileprivate extension RevealMnemonicViewController {
     
     func prepareTitleLabel() {
         titleLabel.text = R.string.localizable.reveal_backup_mnemonic()
-        titleLabel.textColor = Stylesheet.color(.lightBlack)
-        titleLabel.font = R.font.encodeSansRegular(size: 17)
+        titleLabel.textColor = Stylesheet.color(.red)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
@@ -122,7 +122,7 @@ fileprivate extension RevealMnemonicViewController {
         
         view.addSubview(textField1)
         textField1.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(30)
+            make.top.equalTo(titleLabel.snp.bottom).offset(40)
             make.left.equalTo(2*horizontalSpacing)
             make.right.equalTo(-2*horizontalSpacing)
         }
