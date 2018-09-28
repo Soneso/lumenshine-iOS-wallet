@@ -17,7 +17,7 @@ class CurrencyPickerTextField: PickerTextField {
     private func setup() {
         let currencyLabel = UILabel()
         currencyLabel.text = "Currency"
-        currencyLabel.font = R.font.encodeSansSemiBold(size: 10)
+        currencyLabel.font = R.font.encodeSansSemiBold(size: 12)
         currencyLabel.textColor = Stylesheet.color(.lightBlack)
         
         leftView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: frame.height))

@@ -15,7 +15,7 @@ class SubtitleLabel: UILabel {
     }
     
     private func setup() {
-        font = R.font.encodeSansSemiBold(size: 12)
+        font = R.font.encodeSansSemiBold(size: 14)
         textColor = Stylesheet.color(.lightBlack)
     }
 }

@@ -165,11 +165,11 @@ class AccountDetailsViewController: UIViewController {
         titleView.label.text = "\(wallet.name)\nDetails"
         navigationItem.titleView = titleView
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image:UIImage(named: "arrow-left"), style:.plain, target: self, action: #selector(didTapBack(_:)))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image:R.image.arrowLeft()?.crop(toWidth: 15, toHeight: 15), style:.plain, target: self, action: #selector(didTapBack(_:)))
         navigationItem.leftBarButtonItem?.tintColor = Stylesheet.color(.white)
         navigationItem.leftBarButtonItem?.imageInsets = UIEdgeInsetsMake(0, 2, 0, -2)
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image:UIImage(named: "question"), style:.plain, target: self, action: #selector(didTapHelp(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image:R.image.question()?.crop(toWidth: 15, toHeight: 15), style:.plain, target: self, action: #selector(didTapHelp(_:)))
         navigationItem.rightBarButtonItem?.tintColor = Stylesheet.color(.white)
         navigationItem.rightBarButtonItem?.imageInsets = UIEdgeInsetsMake(0, 2, 0, -2)
     }

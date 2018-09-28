@@ -56,7 +56,7 @@ public let MaximumLengthInBytesForMemoText = 28
 public let QRCodeSeparationString = " "
 public let QRCodeNativeCurrencyIssuer = "native"
 
-class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, WalletActionsProtocol, ScanViewControllerDelegate, NavigationItemProtocol, UITextFieldDelegate {
+class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, WalletActionsProtocol, ScanViewControllerDelegate, UITextFieldDelegate {
     @IBOutlet weak var currentCurrencyLabel: UILabel!
     @IBOutlet weak var addressErrorLabel: UILabel!
     @IBOutlet weak var amountErrorLabel: UILabel!
@@ -89,9 +89,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     private var issuerPickerView: UIPickerView!
     private var memoTypePickerView: UIPickerView!
     
-    @IBOutlet weak var topSeparator: UIView!
-    @IBOutlet weak var topButtonsView: UIView!
-
     @IBOutlet weak var sendAllView: UIView!
     @IBOutlet weak var sendAllValue: UILabel!
     @IBOutlet weak var sendAllCurrency: UILabel!
@@ -105,7 +102,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     var wallet: Wallet!
     var closeAction: (() -> ())?
     var sendAction: ((TransactionInput) -> ())?
-    var navigationSetupRequired = false
     
     private var scanViewController: ScanViewController!
     private let inputDataValidator = InputDataValidator()
@@ -123,14 +119,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             amountErrorView.isHidden = true
             setAvailableAmount()
         }
-    }
-    
-    @IBAction func qrScanButtonAction(_ sender: UIButton) {
-        showQRScanner()
-    }
-    
-    @IBAction func closeButtonAction(_ sender: UIButton) {
-        closeAction?()
     }
     
     @IBAction func sendButtonAction(_ sender: UIButton) {
@@ -241,13 +229,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
     }
     
-    @objc func qrScannerTapAction(sender:UITapGestureRecognizer) {
-        scanViewController = ScanViewController()
-        scanViewController.delegate = self
-        self.addChildViewController(scanViewController)
-        self.view.addSubview(scanViewController.view)
-    }
-    
     private func showQRScanner() {
         scanViewController = ScanViewController()
         scanViewController.delegate = self
@@ -257,16 +238,8 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        if navigationSetupRequired {
-            setupNavigationItem()
-        }
-        
-        memoTypePickerView = UIPickerView()
-        memoTypePickerView.delegate = self
-        memoTypePickerView.dataSource = self
-        memoTypeTextField.text = selectedMemoType.rawValue
-        memoTypeTextField.inputView = memoTypePickerView
-        memoTypeTextField.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(memoTypeDoneButtonTap))
+        setupNavigationItem()
+        setupMemoTypePicker()
         addressTextField.addTarget(self, action: #selector(addressChanged), for: UIControlEvents.editingChanged)
         view.backgroundColor = Stylesheet.color(.veryLightGray)
     }
@@ -283,6 +256,15 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     private var availableAmount: CoinUnit?
+    
+    private func setupMemoTypePicker() {
+        memoTypePickerView = UIPickerView()
+        memoTypePickerView.delegate = self
+        memoTypePickerView.dataSource = self
+        memoTypeTextField.text = selectedMemoType.rawValue
+        memoTypeTextField.inputView = memoTypePickerView
+        memoTypeTextField.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(memoTypeDoneButtonTap))
+    }
     
     private func setAvailableLabels(currency: AccountBalanceResponse) {
         if let balance = CoinUnit(currency.balance) {
@@ -677,23 +659,17 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     private func setupNavigationItem() {
         navigationItem.titleLabel.text = "Send"
-        navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
+        navigationItem.titleLabel.textColor = Stylesheet.color(.white)
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         
         let backButton = Material.IconButton()
-        backButton.image = Icon.close?.tint(with: Stylesheet.color(.gray))
+        backButton.image = R.image.arrowLeft()?.crop(toWidth: 15, toHeight: 15)?.tint(with: Stylesheet.color(.white))
         backButton.addTarget(self, action: #selector(didTapBack(_:)), for: .touchUpInside)
         navigationItem.leftViews = [backButton]
         
         let scanQrButton = Material.IconButton()
-        scanQrButton.image = R.image.qr_placeholder()?.crop(toWidth: 25, toHeight: 25)?.tint(with: Stylesheet.color(.gray))
+        scanQrButton.image = R.image.qr_placeholder()?.crop(toWidth: 15, toHeight: 15)?.tint(with: Stylesheet.color(.white))
         scanQrButton.addTarget(self, action: #selector(didTapScan(_:)), for: .touchUpInside)
         navigationItem.rightViews = [scanQrButton]
-        
-        topButtonsView.removeFromSuperview()
-        topSeparator.removeFromSuperview()
-        contentView.snp.makeConstraints { (make) in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.topMargin)
-        }
     }
 }

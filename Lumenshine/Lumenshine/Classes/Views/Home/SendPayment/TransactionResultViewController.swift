@@ -29,7 +29,7 @@ enum StatusLabelText: String {
 
 var TransactionResultPrintJobName = "Transaction result print data"
 
-class TransactionResultViewController: UIViewController, WalletActionsProtocol, NavigationItemProtocol {
+class TransactionResultViewController: UIViewController, WalletActionsProtocol {
     @IBOutlet weak var statusValueLabel: UILabel!
     @IBOutlet weak var messageValueLabel: UILabel!
     @IBOutlet weak var currencyValueLabel: UILabel!
@@ -60,7 +60,6 @@ class TransactionResultViewController: UIViewController, WalletActionsProtocol, 
     var closeAction: (() -> ())?
     var sendOtherAction: (() -> ())?
     var closeAllAction: (() -> ())?
-    var navigationSetupRequired: Bool = false
     
     private var titleView = TitleView()
     
@@ -139,10 +138,7 @@ class TransactionResultViewController: UIViewController, WalletActionsProtocol, 
         setButtonsTitles()
         setStatusLabel()
         populateValues()
-        
-        if navigationSetupRequired {
-            setupNavigationItem()
-        }
+        setupNavigationItem()
     }
     
     private func setStatusLabel() {
@@ -270,18 +266,13 @@ class TransactionResultViewController: UIViewController, WalletActionsProtocol, 
     }
     
     private func setupNavigationItem() {
-        navigationItem.titleLabel.text = "\(wallet.name)\nTransaction result"
-        navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
+        navigationItem.titleLabel.text = "Transaction result"
+        navigationItem.titleLabel.textColor = Stylesheet.color(.white)
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         
         let backButton = Material.IconButton()
-        backButton.image = Icon.close?.tint(with: Stylesheet.color(.gray))
+        backButton.image = Icon.close?.tint(with: Stylesheet.color(.white))
         backButton.addTarget(self, action: #selector(didTapBack(_:)), for: .touchUpInside)
         navigationItem.leftViews = [backButton]
-        
-        let helpButton = Material.IconButton()
-        helpButton.image = R.image.question()?.tint(with: Stylesheet.color(.gray))
-        helpButton.addTarget(self, action: #selector(didTapHelp(_:)), for: .touchUpInside)
-        navigationItem.rightViews = [helpButton]
     }
 }

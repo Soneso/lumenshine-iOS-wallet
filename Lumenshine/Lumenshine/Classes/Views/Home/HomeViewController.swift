@@ -19,13 +19,14 @@ class HomeViewController: UIViewController {
     fileprivate let viewModel: HomeViewModelType
     fileprivate var headerBar: FlexibleHeightBar!
     fileprivate var header: HomeHeaderView!
+
     fileprivate var userManager: UserManager {
         get {
             return Services.shared.userManager
         }
     }
     
-    public let tableView: UITableView
+    fileprivate let tableView: UITableView
     public var dataSourceItems = [CardView]()
     
     init(viewModel: HomeViewModelType) {
