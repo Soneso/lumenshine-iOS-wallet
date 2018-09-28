@@ -87,7 +87,7 @@ fileprivate extension EmailSetupViewController {
     
     func prepareTitleLabel() {
         titleLabel.text = R.string.localizable.lbl_email_confirmation()
-        titleLabel.font = R.font.encodeSansSemiBold(size: 12)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 14)
         titleLabel.textAlignment = .center
         titleLabel.textColor = Stylesheet.color(.red)
         
@@ -101,7 +101,7 @@ fileprivate extension EmailSetupViewController {
     
     func prepareHintLabel() {
         hintLabel.text = R.string.localizable.email_confirmation_hint()
-        hintLabel.font = R.font.encodeSansRegular(size: 12)
+        hintLabel.font = R.font.encodeSansRegular(size: 14)
         hintLabel.textAlignment = .center
         hintLabel.textColor = Stylesheet.color(.lightBlack)
         hintLabel.numberOfLines = 0
@@ -114,7 +114,7 @@ fileprivate extension EmailSetupViewController {
         }
         
 
-        errorLabel.font = R.font.encodeSansRegular(size: 12)
+        errorLabel.font = R.font.encodeSansRegular(size: 14)
         errorLabel.textAlignment = .center
         errorLabel.textColor = Stylesheet.color(.red)
         errorLabel.numberOfLines = 0

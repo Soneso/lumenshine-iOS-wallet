@@ -64,7 +64,7 @@ fileprivate extension ChangePasswordSuccessViewController {
         titleLabel.text = viewModel.successTitle
         titleLabel.textAlignment = .center
         titleLabel.textColor = Stylesheet.color(.green)
-        titleLabel.font = R.font.encodeSansRegular(size: 15)
+        titleLabel.font = R.font.encodeSansRegular(size: 17)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.numberOfLines = 0
         

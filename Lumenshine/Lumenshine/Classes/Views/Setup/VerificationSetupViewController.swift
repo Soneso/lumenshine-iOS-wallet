@@ -93,7 +93,7 @@ fileprivate extension VerificationSetupViewController {
     
     func prepareTitleLabel() {
         stepLabel.text = R.string.localizable.step_3("3")
-        stepLabel.font = R.font.encodeSansRegular(size: 10)
+        stepLabel.font = R.font.encodeSansRegular(size: 12)
         stepLabel.textAlignment = .center
         stepLabel.textColor = Stylesheet.color(.darkGray)
         
@@ -105,7 +105,7 @@ fileprivate extension VerificationSetupViewController {
         }
         
         titleLabel.text = R.string.localizable.verify_mnemonic_title()
-        titleLabel.font = R.font.encodeSansSemiBold(size: 12)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 14)
         titleLabel.textAlignment = .center
         titleLabel.textColor = Stylesheet.color(.red)
         
@@ -119,7 +119,7 @@ fileprivate extension VerificationSetupViewController {
     
     func prepareHintLabel() {
         hintLabel.text = R.string.localizable.verify_mnemonic_hint()
-        hintLabel.font = R.font.encodeSansRegular(size: 12)
+        hintLabel.font = R.font.encodeSansRegular(size: 14)
         hintLabel.textAlignment = .center
         hintLabel.textColor = Stylesheet.color(.lightBlack)
         hintLabel.numberOfLines = 0
@@ -143,7 +143,7 @@ fileprivate extension VerificationSetupViewController {
     
     func prepareWordsLabel() {
         wordsTitleLabel.text = R.string.localizable.verify_mnemonic_words_title()
-        wordsTitleLabel.font = R.font.encodeSansRegular(size: 12)
+        wordsTitleLabel.font = R.font.encodeSansRegular(size: 14)
         wordsTitleLabel.textAlignment = .center
         wordsTitleLabel.textColor = Stylesheet.color(.lightBlack)
         wordsTitleLabel.numberOfLines = 0
@@ -173,7 +173,7 @@ fileprivate extension VerificationSetupViewController {
     }
     
     func prepareButtons() {
-        errorLabel.font = R.font.encodeSansRegular(size: 10)
+        errorLabel.font = R.font.encodeSansRegular(size: 12)
         errorLabel.textAlignment = .center
         errorLabel.textColor = Stylesheet.color(.red)
         errorLabel.numberOfLines = 0

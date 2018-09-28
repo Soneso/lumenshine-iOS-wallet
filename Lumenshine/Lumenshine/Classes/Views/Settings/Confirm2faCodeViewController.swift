@@ -134,7 +134,7 @@ fileprivate extension Confirm2faCodeViewController {
     func prepareTitleLabel() {
         
         titleLabel.text = R.string.localizable.new_2fa_secret()
-        titleLabel.font = R.font.encodeSansSemiBold(size: 15)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 17)
         titleLabel.textAlignment = .center
         titleLabel.textColor = Stylesheet.color(.green)
         
@@ -146,7 +146,7 @@ fileprivate extension Confirm2faCodeViewController {
         }
         
         hintLabel.text = R.string.localizable.lbl_2fa_hint()
-        hintLabel.font = R.font.encodeSansRegular(size: 12)
+        hintLabel.font = R.font.encodeSansRegular(size: 14)
         hintLabel.textColor = Stylesheet.color(.lightBlack)
         hintLabel.numberOfLines = 0
         hintLabel.adjustsFontSizeToFitWidth = true
@@ -176,7 +176,7 @@ fileprivate extension Confirm2faCodeViewController {
         } else {
             present(error: .parsingFailed(message: R.string.localizable.fa_secret()))
         }
-        tfaSecretLabel.font = R.font.encodeSansSemiBold(size: 12)
+        tfaSecretLabel.font = R.font.encodeSansSemiBold(size: 14)
         tfaSecretLabel.textAlignment = .center
         tfaSecretLabel.textColor = Stylesheet.color(.black)
         
@@ -263,7 +263,7 @@ fileprivate extension Confirm2faCodeViewController {
         }
         
         errorLabel.text = R.string.localizable.lbl_cancel_2fa_secret()
-        errorLabel.font = R.font.encodeSansRegular(size: 12)
+        errorLabel.font = R.font.encodeSansRegular(size: 14)
         errorLabel.textAlignment = .center
         errorLabel.textColor = Stylesheet.color(.lightBlack)
         errorLabel.numberOfLines = 0

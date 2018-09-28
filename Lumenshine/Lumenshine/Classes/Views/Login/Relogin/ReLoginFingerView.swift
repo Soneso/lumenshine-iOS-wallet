@@ -81,7 +81,7 @@ fileprivate extension ReLoginFingerView {
     func prepareHintLabel() {
         hintLabel.text = viewModel.hintText
         hintLabel.textColor = Stylesheet.color(.lightBlack)
-        hintLabel.font = R.font.encodeSansRegular(size: 12)
+        hintLabel.font = R.font.encodeSansRegular(size: 14)
         hintLabel.numberOfLines = 0
         hintLabel.textAlignment = .left
         hintLabel.adjustsFontSizeToFitWidth = true
@@ -97,7 +97,7 @@ fileprivate extension ReLoginFingerView {
     func prepareTitle() {
         titleLabel.text = R.string.localizable.password().uppercased()
         titleLabel.textColor = Stylesheet.color(.darkBlue)
-        titleLabel.font = R.font.encodeSansSemiBold(size: 15)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 17)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.numberOfLines = 0
         

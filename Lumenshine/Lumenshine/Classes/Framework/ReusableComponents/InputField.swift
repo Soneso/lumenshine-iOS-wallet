@@ -26,7 +26,7 @@ class InputField: UIView {
     private func commonInit() {
         
         label.adjustsFontSizeToFitWidth = true
-        label.font = R.font.encodeSansRegular(size: 12)
+        label.font = R.font.encodeSansRegular(size: 14)
         label.textColor = Stylesheet.color(.lightBlack)
         
         addSubview(label)
@@ -40,7 +40,7 @@ class InputField: UIView {
         textField.placeholderAnimation = .hidden
 //        textField.placeholderActiveColor = Stylesheet.color(.lightBlack)
 //        textField.placeholderNormalColor = Stylesheet.color(.lightBlack)
-        textField.font = R.font.encodeSansRegular(size: 12)
+        textField.font = R.font.encodeSansRegular(size: 14)
         textField.textColor = Stylesheet.color(.lightBlack)
         textField.dividerActiveColor = Stylesheet.color(.gray)
         

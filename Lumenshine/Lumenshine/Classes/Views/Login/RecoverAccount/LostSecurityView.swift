@@ -62,7 +62,7 @@ fileprivate extension LostSecurityView {
         titleLabel.text = viewModel.title
         titleLabel.textAlignment = .center
         titleLabel.textColor = Stylesheet.color(.darkBlue)
-        titleLabel.font = R.font.encodeSansSemiBold(size: 15)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 17)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.numberOfLines = 0
         

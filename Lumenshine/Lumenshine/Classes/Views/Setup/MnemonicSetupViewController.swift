@@ -71,7 +71,7 @@ fileprivate extension MnemonicSetupViewController {
     
     func prepareTitleLabel() {
         stepLabel.text = R.string.localizable.step_3("2")
-        stepLabel.font = R.font.encodeSansRegular(size: 10)
+        stepLabel.font = R.font.encodeSansRegular(size: 12)
         stepLabel.textAlignment = .center
         stepLabel.textColor = Stylesheet.color(.darkGray)
         
@@ -83,7 +83,7 @@ fileprivate extension MnemonicSetupViewController {
         }
         
         titleLabel.text = R.string.localizable.mnemonic_title()
-        titleLabel.font = R.font.encodeSansSemiBold(size: 12)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 14)
         titleLabel.textAlignment = .center
         titleLabel.textColor = Stylesheet.color(.red)
         
@@ -106,7 +106,7 @@ fileprivate extension MnemonicSetupViewController {
     
     func prepareHintLabel() {
         hintLabel.text = R.string.localizable.mnemonic_hint_title()
-        hintLabel.font = R.font.encodeSansSemiBold(size: 12)
+        hintLabel.font = R.font.encodeSansSemiBold(size: 14)
         hintLabel.textAlignment = .center
         hintLabel.textColor = Stylesheet.color(.red)
         hintLabel.numberOfLines = 0
@@ -119,7 +119,7 @@ fileprivate extension MnemonicSetupViewController {
         }
         
         descriptionLabel.text = R.string.localizable.mnemonic_hint_lbl()
-        descriptionLabel.font = R.font.encodeSansRegular(size: 12)
+        descriptionLabel.font = R.font.encodeSansRegular(size: 14)
         descriptionLabel.textAlignment = .center
         descriptionLabel.textColor = Stylesheet.color(.lightBlack)
         descriptionLabel.numberOfLines = 0
@@ -132,7 +132,7 @@ fileprivate extension MnemonicSetupViewController {
         }
         
         moreLabel.text = R.string.localizable.mnemonic_more_lbl()
-        moreLabel.font = R.font.encodeSansRegular(size: 12)
+        moreLabel.font = R.font.encodeSansRegular(size: 14)
         moreLabel.textColor = Stylesheet.color(.lightBlack)
         moreLabel.numberOfLines = 0
         
@@ -145,7 +145,7 @@ fileprivate extension MnemonicSetupViewController {
         moreButton.title = R.string.localizable.here()
         moreButton.titleColor = Stylesheet.color(.blue)
         moreButton.backgroundColor = Stylesheet.color(.white)
-        moreButton.titleLabel?.font = R.font.encodeSansRegular(size: 12)
+        moreButton.titleLabel?.font = R.font.encodeSansRegular(size: 14)
         moreButton.contentEdgeInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
         moreButton.addTarget(self, action: #selector(moreAction(sender:)), for: .touchUpInside)
         
@@ -167,7 +167,7 @@ fileprivate extension MnemonicSetupViewController {
     
     func prepareWordsLabel() {
         wordsTitleLabel.text = R.string.localizable.mnemonic_words_title()
-        wordsTitleLabel.font = R.font.encodeSansBold(size: 12)
+        wordsTitleLabel.font = R.font.encodeSansBold(size: 14)
         wordsTitleLabel.textAlignment = .center
         wordsTitleLabel.textColor = Stylesheet.color(.lightBlack)
         wordsTitleLabel.numberOfLines = 0
@@ -180,7 +180,7 @@ fileprivate extension MnemonicSetupViewController {
         }
         
         wordsLabel.text = generateMnemonic()
-        wordsLabel.font = R.font.encodeSansRegular(size: 12)
+        wordsLabel.font = R.font.encodeSansRegular(size: 14)
         wordsLabel.textAlignment = .left
         wordsLabel.textColor = Stylesheet.color(.lightBlack)
         wordsLabel.numberOfLines = 0

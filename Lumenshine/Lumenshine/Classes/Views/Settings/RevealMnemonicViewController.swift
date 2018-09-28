@@ -102,7 +102,7 @@ fileprivate extension RevealMnemonicViewController {
     func prepareTitleLabel() {
         titleLabel.text = R.string.localizable.reveal_backup_mnemonic()
         titleLabel.textColor = Stylesheet.color(.lightBlack)
-        titleLabel.font = R.font.encodeSansRegular(size: 12)
+        titleLabel.font = R.font.encodeSansRegular(size: 17)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0

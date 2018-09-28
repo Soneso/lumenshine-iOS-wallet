@@ -97,7 +97,7 @@ fileprivate extension TFASetupViewController {
     
     func prepareTitleLabel() {
         stepLabel.text = R.string.localizable.step_3("1")
-        stepLabel.font = R.font.encodeSansRegular(size: 10)
+        stepLabel.font = R.font.encodeSansRegular(size: 12)
         stepLabel.textAlignment = .center
         stepLabel.textColor = Stylesheet.color(.darkGray)
         
@@ -109,7 +109,7 @@ fileprivate extension TFASetupViewController {
         }
         
         titleLabel.text = R.string.localizable.lbl_tfa()
-        titleLabel.font = R.font.encodeSansSemiBold(size: 12)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 14)
         titleLabel.textAlignment = .center
         titleLabel.textColor = Stylesheet.color(.red)
         
@@ -137,7 +137,7 @@ fileprivate extension TFASetupViewController {
         } else {
             present(error: .parsingFailed(message: R.string.localizable.fa_secret()))
         }
-        tfaSecretLabel.font = R.font.encodeSansSemiBold(size: 12)
+        tfaSecretLabel.font = R.font.encodeSansSemiBold(size: 14)
         tfaSecretLabel.textAlignment = .center
         tfaSecretLabel.textColor = UIColor(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1.0)
         tfaSecretLabel.adjustsFontSizeToFitWidth = true
@@ -192,7 +192,7 @@ fileprivate extension TFASetupViewController {
     
     func prepareSetupLabel() {
         hintLabel.text = R.string.localizable.lbl_tfa_hint()
-        hintLabel.font = R.font.encodeSansRegular(size: 12)
+        hintLabel.font = R.font.encodeSansRegular(size: 14)
         hintLabel.textColor = Stylesheet.color(.red)
         hintLabel.numberOfLines = 0
         
@@ -204,7 +204,7 @@ fileprivate extension TFASetupViewController {
         }
         
         setupLabel.text = R.string.localizable.lbl_tfa_setup()
-        setupLabel.font = R.font.encodeSansRegular(size: 12)
+        setupLabel.font = R.font.encodeSansRegular(size: 14)
         setupLabel.textColor = Stylesheet.color(.lightBlack)
         setupLabel.numberOfLines = 0
         

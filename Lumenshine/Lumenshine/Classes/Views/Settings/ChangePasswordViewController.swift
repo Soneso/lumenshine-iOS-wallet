@@ -132,7 +132,7 @@ fileprivate extension ChangePasswordViewController {
     func prepareTitle() {
         titleLabel.text = R.string.localizable.change_password_hint()
         titleLabel.textColor = Stylesheet.color(.lightBlack)
-        titleLabel.font = R.font.encodeSansSemiBold(size: 12)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 17)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
