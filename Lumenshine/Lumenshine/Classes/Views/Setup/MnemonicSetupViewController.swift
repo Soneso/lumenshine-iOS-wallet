@@ -71,7 +71,7 @@ fileprivate extension MnemonicSetupViewController {
     
     func prepareTitleLabel() {
         stepLabel.text = R.string.localizable.step_3("2")
-        stepLabel.font = R.font.encodeSansRegular(size: 12)
+        stepLabel.font = R.font.encodeSansRegular(size: 13)
         stepLabel.textAlignment = .center
         stepLabel.textColor = Stylesheet.color(.darkGray)
         

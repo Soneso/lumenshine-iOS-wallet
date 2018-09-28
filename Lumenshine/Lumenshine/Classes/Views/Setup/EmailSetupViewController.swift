@@ -90,6 +90,7 @@ fileprivate extension EmailSetupViewController {
         titleLabel.font = R.font.encodeSansSemiBold(size: 14)
         titleLabel.textAlignment = .center
         titleLabel.textColor = Stylesheet.color(.red)
+        titleLabel.numberOfLines = 2
         
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
