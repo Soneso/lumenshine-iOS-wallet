@@ -159,6 +159,10 @@
 		43B8919B2104764600062660 /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B8919A2104764600062660 /* InputField.swift */; };
 		43C54039215A66170064BA67 /* HelpCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C54038215A66170064BA67 /* HelpCardViewModel.swift */; };
 		43C6377A20BEFF2B00498FC5 /* ReLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C6377920BEFF2B00498FC5 /* ReLoginViewController.swift */; };
+		43C7A8F0215B92CA007F4E5E /* HelpCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C7A8EF215B92CA007F4E5E /* HelpCenterViewController.swift */; };
+		43C7A8F2215BB28D007F4E5E /* HelpCenterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C7A8F1215BB28D007F4E5E /* HelpCenterViewModel.swift */; };
+		43C7A8F4215BEE19007F4E5E /* HelpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C7A8F3215BEE19007F4E5E /* HelpTableViewCell.swift */; };
+		43C7A8F6215BF736007F4E5E /* HelpCenterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C7A8F5215BF736007F4E5E /* HelpCenterCoordinator.swift */; };
 		43CD7B0E20F7AEBC0014BF69 /* SetupCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CD7B0D20F7AEBC0014BF69 /* SetupCoordinator.swift */; };
 		43CD7B1020F7B0CF0014BF69 /* SetupMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CD7B0F20F7B0CF0014BF69 /* SetupMenuCoordinator.swift */; };
 		43CD7B1220F7B8A70014BF69 /* SetupMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CD7B1120F7B8A70014BF69 /* SetupMenuViewModel.swift */; };
@@ -177,6 +181,7 @@
 		43DAC65620E4EB2C00E491D8 /* ReLoginMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DAC65520E4EB2C00E491D8 /* ReLoginMenuCoordinator.swift */; };
 		43DAC65820E4FF0A00E491D8 /* ToolbarHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DAC65720E4FF0A00E491D8 /* ToolbarHeader.swift */; };
 		43DB1DA8214A8DED00AC0975 /* ChangePasswordSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DB1DA7214A8DED00AC0975 /* ChangePasswordSuccessViewController.swift */; };
+		43DCF85F215CEF93004F827E /* HelpEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DCF85E215CEF92004F827E /* HelpEntry.swift */; };
 		43E13E8820D97DA000409129 /* WalletCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E13E8720D97DA000409129 /* WalletCard.swift */; };
 		43E23994214F8EF00017AABF /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E23993214F8EF00017AABF /* GradientView.swift */; };
 		43E23996214FA1CB0017AABF /* LSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E23995214FA1CB0017AABF /* LSButton.swift */; };
@@ -510,6 +515,10 @@
 		43B8919A2104764600062660 /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
 		43C54038215A66170064BA67 /* HelpCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCardViewModel.swift; sourceTree = "<group>"; };
 		43C6377920BEFF2B00498FC5 /* ReLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginViewController.swift; sourceTree = "<group>"; };
+		43C7A8EF215B92CA007F4E5E /* HelpCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCenterViewController.swift; sourceTree = "<group>"; };
+		43C7A8F1215BB28D007F4E5E /* HelpCenterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCenterViewModel.swift; sourceTree = "<group>"; };
+		43C7A8F3215BEE19007F4E5E /* HelpTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpTableViewCell.swift; sourceTree = "<group>"; };
+		43C7A8F5215BF736007F4E5E /* HelpCenterCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCenterCoordinator.swift; sourceTree = "<group>"; };
 		43CD7B0D20F7AEBC0014BF69 /* SetupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCoordinator.swift; sourceTree = "<group>"; };
 		43CD7B0F20F7B0CF0014BF69 /* SetupMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupMenuCoordinator.swift; sourceTree = "<group>"; };
 		43CD7B1120F7B8A70014BF69 /* SetupMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupMenuViewModel.swift; sourceTree = "<group>"; };
@@ -528,6 +537,7 @@
 		43DAC65520E4EB2C00E491D8 /* ReLoginMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginMenuCoordinator.swift; sourceTree = "<group>"; };
 		43DAC65720E4FF0A00E491D8 /* ToolbarHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarHeader.swift; sourceTree = "<group>"; };
 		43DB1DA7214A8DED00AC0975 /* ChangePasswordSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordSuccessViewController.swift; sourceTree = "<group>"; };
+		43DCF85E215CEF92004F827E /* HelpEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpEntry.swift; sourceTree = "<group>"; };
 		43E13E8720D97DA000409129 /* WalletCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCard.swift; sourceTree = "<group>"; };
 		43E23993214F8EF00017AABF /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		43E23995214FA1CB0017AABF /* LSButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSButton.swift; sourceTree = "<group>"; };
@@ -767,6 +777,7 @@
 		431437EC2047FF1A00189C83 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				43C7A8EE215B9282007F4E5E /* Help */,
 				7491BE46211C32040058877E /* Wallet */,
 				43CD7B1520F7C4680014BF69 /* Setup */,
 				4337C4E52081BA6A00F4585A /* Registration */,
@@ -891,6 +902,7 @@
 				43088DAD2087AD2A008AE1AB /* UserSecurity.swift */,
 				4391A52F20D159190015A6DA /* RegistrationEntry.swift */,
 				434E049C20D4154700D3235A /* MenuEntry.swift */,
+				43DCF85E215CEF92004F827E /* HelpEntry.swift */,
 				74C0913E20F65A7A000A809D /* Wallet.swift */,
 				439E3C8A2107786A0004BB91 /* SettingsEntry.swift */,
 				4319B4CF211B0987002E45F0 /* DecryptedUserData.swift */,
@@ -990,6 +1002,7 @@
 				43DAC65520E4EB2C00E491D8 /* ReLoginMenuCoordinator.swift */,
 				43CD7B0D20F7AEBC0014BF69 /* SetupCoordinator.swift */,
 				43CD7B0F20F7B0CF0014BF69 /* SetupMenuCoordinator.swift */,
+				43C7A8F5215BF736007F4E5E /* HelpCenterCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1008,6 +1021,7 @@
 				4394911B20BEB845008D4FA2 /* SettingsViewModel.swift */,
 				43CD7B1120F7B8A70014BF69 /* SetupMenuViewModel.swift */,
 				43CD7B1320F7BEBF0014BF69 /* SetupViewModel.swift */,
+				43C7A8F1215BB28D007F4E5E /* HelpCenterViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1199,6 +1213,15 @@
 				43C54038215A66170064BA67 /* HelpCardViewModel.swift */,
 			);
 			path = Cards;
+			sourceTree = "<group>";
+		};
+		43C7A8EE215B9282007F4E5E /* Help */ = {
+			isa = PBXGroup;
+			children = (
+				43C7A8EF215B92CA007F4E5E /* HelpCenterViewController.swift */,
+				43C7A8F3215BEE19007F4E5E /* HelpTableViewCell.swift */,
+			);
+			path = Help;
 			sourceTree = "<group>";
 		};
 		43CD7B1520F7C4680014BF69 /* Setup */ = {
@@ -1930,6 +1953,7 @@
 				C68850E0214BA62600D7D077 /* FundedHeaderValueLabel.swift in Sources */,
 				74E2057820D1543400E94048 /* HomeFoundedHeaderView.swift in Sources */,
 				4359985120A5920200007F27 /* Array+Shuffle.swift in Sources */,
+				43C7A8F4215BEE19007F4E5E /* HelpTableViewCell.swift in Sources */,
 				43ECA9CC208B530000CB571E /* RegistrationTableViewCell.swift in Sources */,
 				C68850E4214BC72900D7D077 /* UnfundedHeaderLabel.swift in Sources */,
 				436201C0212DDC5300CF4495 /* R+Plurals.swift in Sources */,
@@ -2008,6 +2032,7 @@
 				C66E353D215A082700D39906 /* RoundedNavigationController.swift in Sources */,
 				4359984B20A438EF00007F27 /* AuthenticationResponse.swift in Sources */,
 				C6752A46213818CD0067F815 /* InputDataValidator.swift in Sources */,
+				43C7A8F2215BB28D007F4E5E /* HelpCenterViewModel.swift in Sources */,
 				C6752A44213808D50067F815 /* PasswordManager.swift in Sources */,
 				43C6377A20BEFF2B00498FC5 /* ReLoginViewController.swift in Sources */,
 				C6752A42213806030067F815 /* FederationManager.swift in Sources */,
@@ -2057,6 +2082,7 @@
 				C6D87E762133ECED00154A3B /* KnownCurrenciesTableViewController.swift in Sources */,
 				74C8994E210205C8009B13EA /* UIApplication+ViewControllerTree.swift in Sources */,
 				74C0914A20FB3F6F000A809D /* CurrenciesService.swift in Sources */,
+				43C7A8F0215B92CA007F4E5E /* HelpCenterViewController.swift in Sources */,
 				43D7A775205A84B300238E29 /* R.generated.swift in Sources */,
 				4322BA2F205BD69F007FEB5E /* ResponseMock.swift in Sources */,
 				4384C70C20E27C72000C7201 /* LoginMenuCoordinator.swift in Sources */,
@@ -2091,6 +2117,7 @@
 				436B367020512114009F7C21 /* FlexibleHeightBarBehaviorDefiner.swift in Sources */,
 				43D131E62056E3BD000483C4 /* CardViewModel.swift in Sources */,
 				43088DAE2087AD2A008AE1AB /* UserSecurity.swift in Sources */,
+				43DCF85F215CEF93004F827E /* HelpEntry.swift in Sources */,
 				C69A5143211C16500066A4A0 /* TransactionResultPrintView.swift in Sources */,
 				C682C002213691A3007705DF /* BiometricHelper.swift in Sources */,
 				C685DE0D2154C09E00F99D81 /* SubtitleLabel.swift in Sources */,
@@ -2125,6 +2152,7 @@
 				436B367220512114009F7C21 /* SquareCashBarBehaviorDefiner.swift in Sources */,
 				43A8633820A9F0E6007C46E2 /* LoginStep2Response.swift in Sources */,
 				4370E23D20655F9C004C62C3 /* SettingsTableViewController.swift in Sources */,
+				43C7A8F6215BF736007F4E5E /* HelpCenterCoordinator.swift in Sources */,
 				7420BBED211839BB002FC4C7 /* BaseNavigationViewController.swift in Sources */,
 				74C08FF820EF6F2F000A809D /* FoundAccountViewController.swift in Sources */,
 				4319B1862063F1B0007CE18D /* User.swift in Sources */,

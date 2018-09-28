@@ -41,6 +41,8 @@ class MenuCoordinator: MenuCoordinatorType {
             showHome()
         case .showSettings:
             showSettings()
+        case .showHelp:
+            showHelpCenter()
         case .showRelogin:
             showRelogin()
         case .logout:
@@ -63,6 +65,16 @@ fileprivate extension MenuCoordinator {
     
     func showSettings() {
         let coordinator = SettingsCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
+        let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
+        if let drawer = baseController as? AppNavigationDrawerController {
+            drawer.setViewController(navigationController, for: .none)
+            drawer.closeSide()
+            menuView.present(coordinator.baseController)
+        }
+    }
+    
+    func showHelpCenter() {
+        let coordinator = HelpCenterCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
         if let drawer = baseController as? AppNavigationDrawerController {
             drawer.setViewController(navigationController, for: .none)

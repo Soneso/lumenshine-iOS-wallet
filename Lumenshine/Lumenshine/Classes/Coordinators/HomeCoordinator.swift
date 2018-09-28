@@ -35,6 +35,8 @@ class HomeCoordinator: CoordinatorType {
             showCardDetails(wallet: wallet)
         case .showWalletCardInfo:
             showWalletCardInfo()
+        case .showHelp:
+            showHelpCenter()
         default: break
         }
     }
@@ -74,6 +76,10 @@ fileprivate extension HomeCoordinator {
     func showWalletCardInfo() {
         let infoViewController = WalletCardInfoViewController(nibName: "WalletCardInfoViewController", bundle: Bundle.main)
         self.baseController.present(infoViewController, animated: true)
+    }
+    
+    func showHelpCenter() {
+        mainCoordinator.currentMenuCoordinator?.performTransition(transition: .showHelp)
     }
 }
 

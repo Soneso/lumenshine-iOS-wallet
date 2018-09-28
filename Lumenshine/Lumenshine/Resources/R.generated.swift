@@ -933,7 +933,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 43 images.
+  /// This `R.image` struct is generated, and contains static references to 50 images.
   struct image {
     /// Image `FaceIcon`.
     static let faceIcon = Rswift.ImageResource(bundle: R.hostingBundle, name: "FaceIcon")
@@ -943,6 +943,8 @@ struct R: Rswift.Validatable {
     static let touchIcon = Rswift.ImageResource(bundle: R.hostingBundle, name: "TouchIcon")
     /// Image `arrow-left`.
     static let arrowLeft = Rswift.ImageResource(bundle: R.hostingBundle, name: "arrow-left")
+    /// Image `basics`.
+    static let basics = Rswift.ImageResource(bundle: R.hostingBundle, name: "basics")
     /// Image `close`.
     static let close = Rswift.ImageResource(bundle: R.hostingBundle, name: "close")
     /// Image `compose`.
@@ -953,6 +955,8 @@ struct R: Rswift.Validatable {
     static let currencies = Rswift.ImageResource(bundle: R.hostingBundle, name: "currencies")
     /// Image `face_recognition`.
     static let face_recognition = Rswift.ImageResource(bundle: R.hostingBundle, name: "face_recognition")
+    /// Image `faq`.
+    static let faq = Rswift.ImageResource(bundle: R.hostingBundle, name: "faq")
     /// Image `fingerprint`.
     static let fingerprint = Rswift.ImageResource(bundle: R.hostingBundle, name: "fingerprint")
     /// Image `found_account`.
@@ -965,8 +969,12 @@ struct R: Rswift.Validatable {
     static let help_card = Rswift.ImageResource(bundle: R.hostingBundle, name: "help_card")
     /// Image `home`.
     static let home = Rswift.ImageResource(bundle: R.hostingBundle, name: "home")
+    /// Image `ico2`.
+    static let ico2 = Rswift.ImageResource(bundle: R.hostingBundle, name: "ico2")
     /// Image `ico`.
     static let ico = Rswift.ImageResource(bundle: R.hostingBundle, name: "ico")
+    /// Image `inbox`.
+    static let inbox = Rswift.ImageResource(bundle: R.hostingBundle, name: "inbox")
     /// Image `link`.
     static let link = Rswift.ImageResource(bundle: R.hostingBundle, name: "link")
     /// Image `lock`.
@@ -981,8 +989,8 @@ struct R: Rswift.Validatable {
     static let more = Rswift.ImageResource(bundle: R.hostingBundle, name: "more")
     /// Image `my_orders`.
     static let my_orders = Rswift.ImageResource(bundle: R.hostingBundle, name: "my_orders")
-    /// Image `navigation_background`.
-    static let navigation_background = Rswift.ImageResource(bundle: R.hostingBundle, name: "navigation_background")
+    /// Image `nav_background`.
+    static let nav_background = Rswift.ImageResource(bundle: R.hostingBundle, name: "nav_background")
     /// Image `pencil`.
     static let pencil = Rswift.ImageResource(bundle: R.hostingBundle, name: "pencil")
     /// Image `puzzle-piece`.
@@ -997,6 +1005,8 @@ struct R: Rswift.Validatable {
     static let receive = Rswift.ImageResource(bundle: R.hostingBundle, name: "receive")
     /// Image `rocket`.
     static let rocket = Rswift.ImageResource(bundle: R.hostingBundle, name: "rocket")
+    /// Image `security`.
+    static let security = Rswift.ImageResource(bundle: R.hostingBundle, name: "security")
     /// Image `sendActive`.
     static let sendActive = Rswift.ImageResource(bundle: R.hostingBundle, name: "sendActive")
     /// Image `send`.
@@ -1011,6 +1021,8 @@ struct R: Rswift.Validatable {
     static let soneso = Rswift.ImageResource(bundle: R.hostingBundle, name: "soneso")
     /// Image `star`.
     static let star = Rswift.ImageResource(bundle: R.hostingBundle, name: "star")
+    /// Image `stellar`.
+    static let stellar = Rswift.ImageResource(bundle: R.hostingBundle, name: "stellar")
     /// Image `transactions`.
     static let transactions = Rswift.ImageResource(bundle: R.hostingBundle, name: "transactions")
     /// Image `user_add`.
@@ -1019,6 +1031,8 @@ struct R: Rswift.Validatable {
     static let user = Rswift.ImageResource(bundle: R.hostingBundle, name: "user")
     /// Image `users`.
     static let users = Rswift.ImageResource(bundle: R.hostingBundle, name: "users")
+    /// Image `wallets2`.
+    static let wallets2 = Rswift.ImageResource(bundle: R.hostingBundle, name: "wallets2")
     /// Image `wallets`.
     static let wallets = Rswift.ImageResource(bundle: R.hostingBundle, name: "wallets")
     
@@ -1040,6 +1054,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "arrow-left", bundle: ..., traitCollection: ...)`
     static func arrowLeft(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.arrowLeft, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "basics", bundle: ..., traitCollection: ...)`
+    static func basics(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.basics, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "close", bundle: ..., traitCollection: ...)`
@@ -1065,6 +1084,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "face_recognition", bundle: ..., traitCollection: ...)`
     static func face_recognition(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.face_recognition, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "faq", bundle: ..., traitCollection: ...)`
+    static func faq(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.faq, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "fingerprint", bundle: ..., traitCollection: ...)`
@@ -1102,6 +1126,16 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.ico, compatibleWith: traitCollection)
     }
     
+    /// `UIImage(named: "ico2", bundle: ..., traitCollection: ...)`
+    static func ico2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.ico2, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "inbox", bundle: ..., traitCollection: ...)`
+    static func inbox(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.inbox, compatibleWith: traitCollection)
+    }
+    
     /// `UIImage(named: "link", bundle: ..., traitCollection: ...)`
     static func link(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.link, compatibleWith: traitCollection)
@@ -1137,9 +1171,9 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.my_orders, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "navigation_background", bundle: ..., traitCollection: ...)`
-    static func navigation_background(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.navigation_background, compatibleWith: traitCollection)
+    /// `UIImage(named: "nav_background", bundle: ..., traitCollection: ...)`
+    static func nav_background(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.nav_background, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "pencil", bundle: ..., traitCollection: ...)`
@@ -1177,6 +1211,11 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.rocket, compatibleWith: traitCollection)
     }
     
+    /// `UIImage(named: "security", bundle: ..., traitCollection: ...)`
+    static func security(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.security, compatibleWith: traitCollection)
+    }
+    
     /// `UIImage(named: "send", bundle: ..., traitCollection: ...)`
     static func send(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.send, compatibleWith: traitCollection)
@@ -1212,6 +1251,11 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.star, compatibleWith: traitCollection)
     }
     
+    /// `UIImage(named: "stellar", bundle: ..., traitCollection: ...)`
+    static func stellar(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.stellar, compatibleWith: traitCollection)
+    }
+    
     /// `UIImage(named: "transactions", bundle: ..., traitCollection: ...)`
     static func transactions(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.transactions, compatibleWith: traitCollection)
@@ -1235,6 +1279,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "wallets", bundle: ..., traitCollection: ...)`
     static func wallets(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.wallets, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "wallets2", bundle: ..., traitCollection: ...)`
+    static func wallets2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.wallets2, compatibleWith: traitCollection)
     }
     
     fileprivate init() {}
@@ -1552,7 +1601,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 210 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 227 localization keys.
     struct localizable {
       /// en translation: %1$d days ago
       /// 
@@ -1674,6 +1723,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let backup_mnemonic = Rswift.StringResource(key: "backup_mnemonic", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: Basics
+      /// 
+      /// Locales: en
+      static let basics = Rswift.StringResource(key: "basics", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Birth day
       /// 
       /// Locales: en, de
@@ -1790,6 +1843,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let extras = Rswift.StringResource(key: "extras", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: FAQ
+      /// 
+      /// Locales: en
+      static let faq = Rswift.StringResource(key: "faq", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Face Recognition
       /// 
       /// Locales: en, de
@@ -1838,6 +1895,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let back_mnemonic = Rswift.StringResource(key: "back_mnemonic", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: Guide to getting started with Lumenshine
+      /// 
+      /// Locales: en
+      static let basics_detail = Rswift.StringResource(key: "basics_detail", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Help
       /// 
       /// Locales: en, de
@@ -1846,6 +1907,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let help_feedback = Rswift.StringResource(key: "help_feedback", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Help Center
+      /// 
+      /// Locales: en
+      static let help_center = Rswift.StringResource(key: "help_center", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Here are 4 random words from the mnemonic. Please indicate their position within the mnemonic.
       /// 
       /// Locales: en, de
@@ -1854,6 +1919,26 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let home = Rswift.StringResource(key: "home", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: How can I fund my wallet?
+      /// 
+      /// Locales: en
+      static let faq_1 = Rswift.StringResource(key: "faq_1", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: How can I receive other currencies than lumens?
+      /// 
+      /// Locales: en
+      static let faq_3 = Rswift.StringResource(key: "faq_3", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: How can I send lumens and other currencies?
+      /// 
+      /// Locales: en
+      static let faq_4 = Rswift.StringResource(key: "faq_4", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: How can I setup the inflation destination for my wallet?
+      /// 
+      /// Locales: en
+      static let faq_2 = Rswift.StringResource(key: "faq_2", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: ICO
+      /// 
+      /// Locales: en
+      static let ico = Rswift.StringResource(key: "ico", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: ICOs
       /// 
       /// Locales: en
@@ -1910,10 +1995,26 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let lastname = Rswift.StringResource(key: "lastname", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: Learn how to keep your Wallets save
+      /// 
+      /// Locales: en
+      static let security_detail = Rswift.StringResource(key: "security_detail", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Learn how to participate in an ICO
+      /// 
+      /// Locales: en
+      static let ico_detail = Rswift.StringResource(key: "ico_detail", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Learn more
       /// 
       /// Locales: en, de
       static let learn_more = Rswift.StringResource(key: "learn_more", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: Learn more about Stellar
+      /// 
+      /// Locales: en
+      static let stellar_detail = Rswift.StringResource(key: "stellar_detail", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Learn to master all Wallet features
+      /// 
+      /// Locales: en
+      static let wallets_detail = Rswift.StringResource(key: "wallets_detail", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Log Out
       /// 
       /// Locales: en, de
@@ -2118,6 +2219,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let scan = Rswift.StringResource(key: "scan", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: Security
+      /// 
+      /// Locales: en
+      static let security = Rswift.StringResource(key: "security", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Sell
       /// 
       /// Locales: en, de
@@ -2158,6 +2263,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let status = Rswift.StringResource(key: "status", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: Stellar
+      /// 
+      /// Locales: en
+      static let stellar = Rswift.StringResource(key: "stellar", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Stellar Lumens (XLM)
       /// 
       /// Locales: en, de
@@ -2178,6 +2287,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let success = Rswift.StringResource(key: "success", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: Support inbox
+      /// 
+      /// Locales: en
+      static let support_inbox = Rswift.StringResource(key: "support_inbox", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: This step is very important
       /// 
       /// Locales: en, de
@@ -2210,6 +2323,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let lbl_today = Rswift.StringResource(key: "lbl_today", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: Topics
+      /// 
+      /// Locales: en
+      static let topics = Rswift.StringResource(key: "topics", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Transaction fee
       /// 
       /// Locales: en, de
@@ -2605,6 +2722,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("backup_mnemonic", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Basics
+      /// 
+      /// Locales: en
+      static func basics(_: Void = ()) -> String {
+        return NSLocalizedString("basics", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Birth day
       /// 
       /// Locales: en, de
@@ -2808,6 +2932,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("extras", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: FAQ
+      /// 
+      /// Locales: en
+      static func faq(_: Void = ()) -> String {
+        return NSLocalizedString("faq", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Face Recognition
       /// 
       /// Locales: en, de
@@ -2892,6 +3023,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("back_mnemonic", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Guide to getting started with Lumenshine
+      /// 
+      /// Locales: en
+      static func basics_detail(_: Void = ()) -> String {
+        return NSLocalizedString("basics_detail", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Help
       /// 
       /// Locales: en, de
@@ -2906,6 +3044,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("help_feedback", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Help Center
+      /// 
+      /// Locales: en
+      static func help_center(_: Void = ()) -> String {
+        return NSLocalizedString("help_center", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Here are 4 random words from the mnemonic. Please indicate their position within the mnemonic.
       /// 
       /// Locales: en, de
@@ -2918,6 +3063,41 @@ struct R: Rswift.Validatable {
       /// Locales: en, de
       static func home(_: Void = ()) -> String {
         return NSLocalizedString("home", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: How can I fund my wallet?
+      /// 
+      /// Locales: en
+      static func faq_1(_: Void = ()) -> String {
+        return NSLocalizedString("faq_1", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: How can I receive other currencies than lumens?
+      /// 
+      /// Locales: en
+      static func faq_3(_: Void = ()) -> String {
+        return NSLocalizedString("faq_3", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: How can I send lumens and other currencies?
+      /// 
+      /// Locales: en
+      static func faq_4(_: Void = ()) -> String {
+        return NSLocalizedString("faq_4", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: How can I setup the inflation destination for my wallet?
+      /// 
+      /// Locales: en
+      static func faq_2(_: Void = ()) -> String {
+        return NSLocalizedString("faq_2", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: ICO
+      /// 
+      /// Locales: en
+      static func ico(_: Void = ()) -> String {
+        return NSLocalizedString("ico", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: ICOs
@@ -3018,11 +3198,39 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("lastname", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Learn how to keep your Wallets save
+      /// 
+      /// Locales: en
+      static func security_detail(_: Void = ()) -> String {
+        return NSLocalizedString("security_detail", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Learn how to participate in an ICO
+      /// 
+      /// Locales: en
+      static func ico_detail(_: Void = ()) -> String {
+        return NSLocalizedString("ico_detail", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Learn more
       /// 
       /// Locales: en, de
       static func learn_more(_: Void = ()) -> String {
         return NSLocalizedString("learn_more", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Learn more about Stellar
+      /// 
+      /// Locales: en
+      static func stellar_detail(_: Void = ()) -> String {
+        return NSLocalizedString("stellar_detail", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Learn to master all Wallet features
+      /// 
+      /// Locales: en
+      static func wallets_detail(_: Void = ()) -> String {
+        return NSLocalizedString("wallets_detail", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Log Out
@@ -3382,6 +3590,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("scan", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Security
+      /// 
+      /// Locales: en
+      static func security(_: Void = ()) -> String {
+        return NSLocalizedString("security", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Sell
       /// 
       /// Locales: en, de
@@ -3452,6 +3667,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("status", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Stellar
+      /// 
+      /// Locales: en
+      static func stellar(_: Void = ()) -> String {
+        return NSLocalizedString("stellar", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Stellar Lumens (XLM)
       /// 
       /// Locales: en, de
@@ -3485,6 +3707,13 @@ struct R: Rswift.Validatable {
       /// Locales: en, de
       static func success(_: Void = ()) -> String {
         return NSLocalizedString("success", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Support inbox
+      /// 
+      /// Locales: en
+      static func support_inbox(_: Void = ()) -> String {
+        return NSLocalizedString("support_inbox", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: This step is very important
@@ -3541,6 +3770,13 @@ struct R: Rswift.Validatable {
       /// Locales: en, de
       static func lbl_today(_: Void = ()) -> String {
         return NSLocalizedString("lbl_today", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Topics
+      /// 
+      /// Locales: en
+      static func topics(_: Void = ()) -> String {
+        return NSLocalizedString("topics", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Transaction fee
