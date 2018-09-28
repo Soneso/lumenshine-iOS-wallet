@@ -33,15 +33,10 @@ class PaymentOperationsVCManager {
         
         (viewController as! WalletActionsProtocol).wallet = wallet
         (viewController as! WalletActionsProtocol).closeAction = {
-            viewController.dismiss(animated: true)
+            self.parentViewController.navigationController?.popViewController(animated: true)
         }
         
-        let navController = RoundedNavigationController(rootViewController: viewController)
-        if let presentedViewController = parentViewController.presentedViewController {
-            presentedViewController.present(navController, animated: true)
-        } else {
-            parentViewController.present(navController, animated: true)
-        }
+        parentViewController.navigationController?.pushViewController(viewController, animated: true)
     }
     
     private func setupSendViewController(viewController: SendViewController) {
@@ -64,19 +59,22 @@ class PaymentOperationsVCManager {
         }
     }
     
+    private func closeAll() {
+        self.parentViewController.navigationController?.popToRootViewController(animated: true)
+    }
+    
     private func setupTransactionResult(viewController: TransactionResultViewController, transactionResult: TransactionResult?) {
         if let transactionResult = transactionResult {
             viewController.result = transactionResult
         }
         
         viewController.closeAllAction = { [weak self] in
-            self?.parentViewController.dismiss(animated: true)
+            self?.closeAll()
         }
         
         viewController.sendOtherAction = { [weak self] in
-            self?.parentViewController.dismiss(animated: true, completion: {
-                self?.addViewController(forAction: WalletAction.send, wallet: viewController.wallet)
-            })
+            self?.closeAll()
+            self?.addViewController(forAction: WalletAction.send, wallet: viewController.wallet)
         }
     }
 }

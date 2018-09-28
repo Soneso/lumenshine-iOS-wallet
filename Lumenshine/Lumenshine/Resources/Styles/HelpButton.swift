@@ -17,4 +17,9 @@ class HelpButton: UIButton {
     private func setup() {
         setImage(R.image.question()?.crop(toWidth: 16, toHeight: 16)?.tint(with: Stylesheet.color(.helpButtonGray)), for: .normal)
     }
+    
+    override public func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        let hitFrame = UIEdgeInsetsInsetRect(self.bounds, UIEdgeInsetsMake(-10, -10, -10, -10))
+        return hitFrame.contains(point)
+    }
 }

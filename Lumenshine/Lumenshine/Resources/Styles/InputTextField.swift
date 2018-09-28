@@ -30,7 +30,7 @@ class InputTextField: UITextField {
         leftViewMode = UITextFieldViewMode.always
         
         snp.makeConstraints { (make) in
-            make.height.greaterThanOrEqualTo(30)
+            make.height.equalTo(40)
         }
     }
 }

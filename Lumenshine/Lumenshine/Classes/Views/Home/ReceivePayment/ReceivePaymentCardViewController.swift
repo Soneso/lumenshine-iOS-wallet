@@ -9,27 +9,30 @@
 import UIKit
 import MessageUI
 import Material
+import stellarsdk
 
 class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol {
-    @IBOutlet weak var publicKeyButton: UIButton!
-    @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet weak var defaultCurrencyView: UIStackView!
-    @IBOutlet weak var xlmCurrencyView: UIStackView!
-    @IBOutlet weak var currencyView: UIStackView!
-    @IBOutlet weak var issuerView: UIStackView!
-    @IBOutlet weak var currencyValueView: UIStackView!
     @IBOutlet weak var qrImageView: UIImageView!
+    @IBOutlet weak var amountTextField: UITextField!
+    @IBOutlet weak var issuerTextField: UITextField!
+    @IBOutlet weak var currencyTextField: UITextField!
+    
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var assetCodeLabel: UILabel!
+    @IBOutlet weak var publicKeyLabel: UILabel!
     @IBOutlet weak var nativeCurrencyLabel: UILabel!
     @IBOutlet weak var nativeCurrencyValueLabel: UILabel!
-    @IBOutlet weak var fieldsStackView: UIStackView!
     
-    @IBOutlet weak var xlmValueTextField: UITextField!
-    @IBOutlet weak var currencyTextField: UITextField!
-    @IBOutlet weak var issuerTextField: UITextField!
-    @IBOutlet weak var currencyValueTextField: UITextField!
-    @IBOutlet weak var currencyLabel: UILabel!
+    @IBOutlet weak var federationAddressView: UIView!
+    @IBOutlet weak var nativeCurrencyView: UIView!
+    @IBOutlet weak var currencyView: UIView!
+    @IBOutlet weak var issuerSeparatorView: UIView!
+    @IBOutlet weak var issuerSubtitleView: UIView!
+    @IBOutlet weak var issuerValueView: UIView!
     
-    @IBOutlet weak var stellarAddressContainerHeight: NSLayoutConstraint!
+    @IBOutlet weak var sendByEmailButton: UIButton!
+    @IBOutlet weak var printButton: UIButton!
+    @IBOutlet weak var doneButton: UIButton!
     
     private var currencyPickerView: UIPickerView!
     private var issuerPickerView: UIPickerView!
@@ -39,11 +42,12 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupView()
         populateViews()
         setCurrencies()
         setupTextFields()
         setupNavigationItem()
+        view.backgroundColor = Stylesheet.color(.veryLightGray)
     }
     
     override func resignFirstResponder() -> Bool {
@@ -53,9 +57,9 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
     @IBAction func didTapClose(_ sender: Any) {
         closeAction?()
     }
-    
-    @IBAction func didTapPublicKey(_ sender: Any) {
-        if let key = publicKeyButton.titleLabel?.text {
+
+    @IBAction func didTapCopyButton(_ sender: UIButton) {
+        if let key = publicKeyLabel.text {
             UIPasteboard.general.string = key
         }
     }
@@ -98,13 +102,12 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
     }
     
     private func populateViews() {
-        publicKeyButton.titleLabel?.numberOfLines = 0
-        publicKeyButton.setTitle(wallet.publicKey, for: .normal)
-        
+        publicKeyLabel.text = wallet.publicKey
+
         if !wallet.federationAddress.isEmpty {
             emailLabel.text = wallet.federationAddress
         } else {
-            stellarAddressContainerHeight.priority = .required
+            federationAddressView.isHidden = true
         }
     }
     
@@ -114,7 +117,7 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
             currencyPickerView.delegate = self
             currencyPickerView.dataSource = self
             currencyTextField.text = wallet.balances.first?.displayCode
-            currencyLabel.text = wallet.balances.first?.displayCode
+            assetCodeLabel.text = wallet.balances.first?.displayCode
             currencyTextField.inputView = currencyPickerView
             currencyTextField.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(currencyDoneButtonTap))
             if wallet.hasDuplicateNameCurrencies {
@@ -124,21 +127,28 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
                 issuerTextField.text = wallet.balances.first?.assetIssuer
                 issuerTextField.inputView = issuerPickerView
             }
-            currencyValueTextField.text = wallet.balances.first?.balance
         }
+    }
+    
+    private func issuerVisibility(isHidden: Bool) {
+        issuerSubtitleView.isHidden = isHidden
+        issuerSeparatorView.isHidden = isHidden
+        issuerValueView.isHidden = isHidden
+    }
+    
+    private func hideNativeCurrency() {
+        nativeCurrencyView.isHidden = true
     }
     
     private func setCurrencies() {
         if let wallet = wallet as? FundedWallet {
             if wallet.hasOnlyNative {
                 currencyView.removeFromSuperview()
-                issuerView.removeFromSuperview()
-                currencyValueView.removeFromSuperview()
+                issuerVisibility(isHidden: true)
             } else {
-                defaultCurrencyView.removeFromSuperview()
-                xlmCurrencyView.removeFromSuperview()
+                hideNativeCurrency()
                 if !wallet.hasDuplicateNameCurrencies {
-                    issuerView.removeFromSuperview()
+                    issuerVisibility(isHidden: true)
                 }
             }
         }
@@ -146,18 +156,18 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
     
     private func emailText() -> String {
         if let wallet = wallet as? FundedWallet {
-            var text = "Receive public key: \(publicKeyButton.titleLabel?.text ?? "")\n"
+            var text = "Receive public key: \(publicKeyLabel.text ?? "")\n"
             
             if !wallet.federationAddress.isEmpty {
                 text += "Stellar address: \(emailLabel.text ?? "")\n"
             }
             
             if wallet.hasOnlyNative {
-                text += "\(nativeCurrencyLabel.text ?? ""): \(nativeCurrencyValueLabel.text ?? "")\nXLM: \(xlmValueTextField.text ?? "0")"
+                text += "\(nativeCurrencyLabel.text ?? ""): \(nativeCurrencyValueLabel.text ?? "")\nXLM: \(amountTextField.text ?? "0")"
             } else if !wallet.hasDuplicateNameCurrencies {
-                text += "Currency: \(currencyTextField.text ?? "")\n \(currencyTextField.text ?? ""): \(currencyValueTextField.text ?? "0")"
+                text += "Currency: \(currencyTextField.text ?? "")\n \(currencyTextField.text ?? ""): \(amountTextField.text ?? "0")"
             } else {
-                text += "Currency: \(currencyTextField.text ?? "")\nIssuer: \(issuerTextField.text ?? "-")\n\(currencyTextField.text ?? ""): \(currencyValueTextField.text ?? "0")"
+                text += "Currency: \(currencyTextField.text ?? "")\nIssuer: \(issuerTextField.text ?? "-")\n\(currencyTextField.text ?? ""): \(amountTextField.text ?? "0")"
             }
             
             return text
@@ -186,13 +196,22 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
     fileprivate func selectAsset(pickerView: UIPickerView, row: Int) {
         if let wallet = wallet as? FundedWallet {
             if pickerView == currencyPickerView {
-                currencyTextField.text = wallet.uniqueAssetCodeBalances[row].displayCode
-                currencyLabel.text = wallet.uniqueAssetCodeBalances[row].displayCode
+                if let assetCode = wallet.uniqueAssetCodeBalances[row].displayCode {
+                    currencyTextField.text = assetCode
+                    assetCodeLabel.text = assetCode
                 
-                if wallet.uniqueAssetCodeBalances[row].assetType == "native" {
-                    issuerTextField.text = nil
-                } else {
-                    issuerTextField.text = wallet.issuersFor(assetCode: currencyTextField.text!)[0]
+                    if wallet.uniqueAssetCodeBalances[row].assetType == AssetTypeAsString.NATIVE  {
+                        issuerTextField.text = nil
+                        issuerVisibility(isHidden: true)
+                    } else {
+                        if wallet.isCurrencyDuplicate(withAssetCode: assetCode) {
+                            issuerVisibility(isHidden: false)
+                        } else {
+                            issuerVisibility(isHidden: true)
+                        }
+                        
+                        issuerTextField.text = wallet.issuersFor(assetCode: assetCode)[0]
+                    }
                 }
             } else if pickerView == issuerPickerView {
                 issuerTextField.text = wallet.issuersFor(assetCode: currencyTextField.text!)[row]
@@ -216,11 +235,13 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
         navigationItem.titleLabel.text = "Receive"
         navigationItem.titleLabel.textColor = Stylesheet.color(.white)
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
-        
-        let backButton = Material.IconButton()
-        backButton.image = R.image.arrowLeft()?.crop(toWidth: 15, toHeight: 15)?.tint(with: Stylesheet.color(.white))
-        backButton.addTarget(self, action: #selector(didTapBack(_:)), for: .touchUpInside)
-        navigationItem.leftViews = [backButton]
+    }
+    
+    private func setupView() {
+        qrImageView.tintColor = Stylesheet.color(.qrCodeTint)
+        sendByEmailButton.backgroundColor = Stylesheet.color(.green)
+        printButton.backgroundColor = Stylesheet.color(.orange)
+        doneButton.backgroundColor = Stylesheet.color(.blue)
     }
 }
 
@@ -257,7 +278,6 @@ extension ReceivePaymentCardViewController: UIPickerViewDelegate, UIPickerViewDa
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectAsset(pickerView: pickerView, row: row)
     }
-    
 }
 
 extension ReceivePaymentCardViewController: MFMailComposeViewControllerDelegate {
@@ -265,6 +285,4 @@ extension ReceivePaymentCardViewController: MFMailComposeViewControllerDelegate 
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
     }
-    
-    
 }

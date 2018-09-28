@@ -10,6 +10,7 @@ import UIKit
 import KWDrawerController
 
 class AppNavigationDrawerController: DrawerController {
+    var hideStatusBar = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +33,7 @@ class AppNavigationDrawerController: DrawerController {
     }
     
     override var prefersStatusBarHidden: Bool {
-        return true
+        return hideStatusBar
     }
 }
 

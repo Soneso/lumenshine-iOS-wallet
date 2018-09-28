@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Material
 
 protocol BaseViewControllerFlowDelegate: class {
     func backButtonPressed(from viewController:UIViewController)
@@ -63,10 +64,6 @@ class AccountDetailsViewController: UIViewController {
     }
     
     // MARK: Actions
-    
-    @IBAction func didTapBack(_ sender: Any) {
-        flowDelegate?.backButtonPressed(from: self)
-    }
     
     @IBAction func didTapHelp(_ sender: Any) {
         
@@ -160,18 +157,14 @@ class AccountDetailsViewController: UIViewController {
     // MARK: Private methods
     
     private func setupNavigationItem() {
-        titleView = Bundle.main.loadNibNamed("TitleView", owner:self, options:nil)![0] as! TitleView
-        titleView.frame.size = titleView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
-        titleView.label.text = "\(wallet.name)\nDetails"
-        navigationItem.titleView = titleView
+        navigationItem.titleLabel.text = "\(wallet.name)\nDetails"
+        navigationItem.titleLabel.textColor = Stylesheet.color(.white)
+        navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image:R.image.arrowLeft()?.crop(toWidth: 15, toHeight: 15), style:.plain, target: self, action: #selector(didTapBack(_:)))
-        navigationItem.leftBarButtonItem?.tintColor = Stylesheet.color(.white)
-        navigationItem.leftBarButtonItem?.imageInsets = UIEdgeInsetsMake(0, 2, 0, -2)
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image:R.image.question()?.crop(toWidth: 15, toHeight: 15), style:.plain, target: self, action: #selector(didTapHelp(_:)))
-        navigationItem.rightBarButtonItem?.tintColor = Stylesheet.color(.white)
-        navigationItem.rightBarButtonItem?.imageInsets = UIEdgeInsetsMake(0, 2, 0, -2)
+        let helpButton = Material.IconButton()
+        helpButton.image = R.image.question()?.crop(toWidth: 15, toHeight: 15)?.tint(with: Stylesheet.color(.white))
+        helpButton.addTarget(self, action: #selector(didTapHelp(_:)), for: .touchUpInside)
+        navigationItem.rightViews = [helpButton]
     }
     
     private func setupWalletNameView() {

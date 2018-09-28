@@ -232,8 +232,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     private func showQRScanner() {
         scanViewController = ScanViewController()
         scanViewController.delegate = self
-        self.addChildViewController(scanViewController)
-        self.view.addSubview(scanViewController.view)
+        navigationController?.pushViewController(scanViewController, animated: true)
     }
         
     override func viewDidLoad() {
@@ -242,6 +241,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         setupMemoTypePicker()
         addressTextField.addTarget(self, action: #selector(addressChanged), for: UIControlEvents.editingChanged)
         view.backgroundColor = Stylesheet.color(.veryLightGray)
+        sendButton.backgroundColor = Stylesheet.color(.blue)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -627,15 +627,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         selectAsset(pickerView: pickerView, row: row)
     }
     
-    @IBAction func didTapBack(_ sender: Any) {
-        if let scanController = scanViewController {
-            scanController.view.removeFromSuperview()
-            scanViewController = nil
-        } else {
-            self.dismiss(animated: true)
-        }
-    }
-    
     @IBAction func didTapScan(_ sender: Any) {
         showQRScanner()
     }
@@ -661,11 +652,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         navigationItem.titleLabel.text = "Send"
         navigationItem.titleLabel.textColor = Stylesheet.color(.white)
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
-        
-        let backButton = Material.IconButton()
-        backButton.image = R.image.arrowLeft()?.crop(toWidth: 15, toHeight: 15)?.tint(with: Stylesheet.color(.white))
-        backButton.addTarget(self, action: #selector(didTapBack(_:)), for: .touchUpInside)
-        navigationItem.leftViews = [backButton]
         
         let scanQrButton = Material.IconButton()
         scanQrButton.image = R.image.qr_placeholder()?.crop(toWidth: 15, toHeight: 15)?.tint(with: Stylesheet.color(.white))

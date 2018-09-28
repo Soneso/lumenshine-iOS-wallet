@@ -55,7 +55,7 @@ class MenuCoordinator: MenuCoordinatorType {
 fileprivate extension MenuCoordinator {
     func showHome() {
         let coordinator = HomeCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
-        let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
+        let navigationController = ImageBackgroundNavigationController(rootViewController: coordinator.baseController)
         if let drawer = baseController as? AppNavigationDrawerController {
             drawer.setViewController(navigationController, for: .none)
             drawer.closeSide()

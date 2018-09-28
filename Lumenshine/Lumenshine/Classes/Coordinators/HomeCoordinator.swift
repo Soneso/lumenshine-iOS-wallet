@@ -66,11 +66,10 @@ fileprivate extension HomeCoordinator {
     }
     
     func showCardDetails(wallet: Wallet) {
-        let foundViewController = AccountDetailsViewController(nibName: "AccountDetailsViewController", bundle: Bundle.main)
-        foundViewController.flowDelegate = self
-        foundViewController.wallet = wallet
-        let navigationController = BaseNavigationViewController(rootViewController: foundViewController)
-        self.baseController.present(navigationController, animated: true)
+        let accountDetailsViewController = AccountDetailsViewController(nibName: "AccountDetailsViewController", bundle: Bundle.main)
+        accountDetailsViewController.flowDelegate = self
+        accountDetailsViewController.wallet = wallet
+        self.baseController.navigationController?.pushViewController(accountDetailsViewController, animated: true)
     }
     
     func showWalletCardInfo() {
