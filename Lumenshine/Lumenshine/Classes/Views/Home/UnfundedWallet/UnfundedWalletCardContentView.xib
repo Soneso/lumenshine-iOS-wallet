@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="MEy-Lv-QCt" customClass="UnfundedWalletCardContentView">
+        <view contentMode="scaleToFill" id="MEy-Lv-QCt" customClass="UnfundedWalletCardContentView" customModule="Lumenshine" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="247"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -97,7 +97,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="ye4-CW-sVN"/>
             <connections>
-                <outlet property="fundButton" destination="f69-AE-dcV" id="lhi-6K-IdI"/>
+                <outlet property="fundButton" destination="f69-AE-dcV" id="ddL-Kr-4VF"/>
                 <outlet property="helpButton" destination="p9g-xS-zVJ" id="nfW-JV-hdp"/>
                 <outlet property="nameLabel" destination="02c-sm-4KK" id="mBw-HM-GPS"/>
             </connections>
