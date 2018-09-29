@@ -203,6 +203,15 @@
 "home" = "Home";
 
 /*  */
+"basics" = "Basics";
+
+/*  */
+"security" = "Sicherheit";
+
+/*  */
+"stellar" = "Stellar";
+
+/*  */
 "wallets" = "Wallets";
 
 /*  */
@@ -210,6 +219,15 @@
 
 /*  */
 "currencies" = "Währungen";
+
+/*  */
+"icos" = "ICOs";
+
+/*  */
+"ico" = "ICO";
+
+/*  */
+"my_orders" = "Meine Bestellungen";
 
 /*  */
 "contacts" = "Kontakte";
@@ -594,3 +612,54 @@
 
 /*  */
 "transaction_result" = "Transaktionsergebniss";
+
+/*  */
+"help_feedback" = "Hilfe & Feedback";
+
+/*  */
+"help_hint" = "Du benötigst Hilfe oder hast Vorschläge?\n\nDas Lumenshine Support Team is nur einen Klick entfernt. Schau die die FAQ an oder sende uns eine Nachricht.";
+
+/*  */
+"send_feedback" = "Feedback senden";
+
+/*  */
+"view_faq" = "FAQ ansehen";
+
+/*  */
+"help_center" = "Hilfe";
+
+/*  */
+"support_inbox" = "Support Postfach";
+
+/*  */
+"faq" = "FAQ";
+
+/*  */
+"faq_1" = "Wie kann ich meine Wallet finanzieren?";
+
+/*  */
+"faq_2" = "Was ist eine \"inflation destination\" und wie kann ich sie setzen?";
+
+/*  */
+"faq_3" = "Wie kann ich andere Stellar Währungen außer Lumen empfangen?";
+
+/*  */
+"faq_4" = "Wie kann ich Lumens und adere Stellar Währungen senden?";
+
+/*  */
+"topics" = "Themen";
+
+/*  */
+"basics_detail" = "Handbuch zum Start mit Lumenshine";
+
+/*  */
+"security_detail" = "Erfahre wie du deine Wallets sichern kannst.";
+
+/*  */
+"wallets_detail" = "Erfahre mehr über die Features deiner Wallets";
+
+/*  */
+"stellar_detail" = "Erfahre mehr über Stellar";
+
+/*  */
+"ico_detail" = "Erfahre wie du in einem ICO teilnehmen kannst";

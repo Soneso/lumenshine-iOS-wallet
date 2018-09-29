@@ -69,7 +69,9 @@ class HelpCenterViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.section == 2 ? 60 : 38
+        if indexPath.section == 0 {return 20}
+        if indexPath.section == 1 {return 50}
+        return 60
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -85,7 +87,7 @@ class HelpCenterViewController: UITableViewController {
         let label = UILabel()
         label.text = viewModel.headerTitle(at: section)
         label.textColor = Stylesheet.color(.blue)
-        label.font = R.font.encodeSansSemiBold(size: 12)
+        label.font = R.font.encodeSansSemiBold(size: 15)
         
         separator.addSubview(label)
         label.snp.makeConstraints { make in

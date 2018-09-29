@@ -20,7 +20,7 @@ enum HelpEntry {
     case security
     case wallets
     case stellar
-    case ICO
+    //case ICO
     
     var title: String? {
         switch self {
@@ -42,8 +42,8 @@ enum HelpEntry {
             return R.string.localizable.wallets()
         case .stellar:
             return R.string.localizable.stellar()
-        case .ICO:
-            return R.string.localizable.ico()
+        /*case .ICO:
+            return R.string.localizable.ico()*/
         }
     }
     
@@ -57,8 +57,8 @@ enum HelpEntry {
             return R.string.localizable.wallets_detail()
         case .stellar:
             return R.string.localizable.stellar_detail()
-        case .ICO:
-            return R.string.localizable.ico_detail()
+        /*case .ICO:
+            return R.string.localizable.ico_detail()*/
         default:
             return nil
         }
@@ -78,8 +78,8 @@ enum HelpEntry {
             return R.image.wallets2
         case .stellar:
             return R.image.stellar
-        case .ICO:
-            return R.image.ico2
+        /*case .ICO:
+            return R.image.ico2*/
         }
     }
 }

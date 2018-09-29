@@ -32,7 +32,7 @@ class HelpCenterViewModel : HelpCenterViewModelType {
         
         self.entries = [[.inbox],
                         [.FAQ1, .FAQ2, .FAQ3, .FAQ4],
-                        [.basics, .security, .wallets, .stellar, .ICO]]
+                        [.basics, .security, .wallets, .stellar]]//, .ICO]]
     }
     
     var itemDistribution: [Int] {

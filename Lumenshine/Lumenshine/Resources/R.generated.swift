@@ -1725,8 +1725,8 @@ struct R: Rswift.Validatable {
       static let backup_mnemonic = Rswift.StringResource(key: "backup_mnemonic", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Basics
       /// 
-      /// Locales: en
-      static let basics = Rswift.StringResource(key: "basics", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let basics = Rswift.StringResource(key: "basics", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Birth day
       /// 
       /// Locales: en, de
@@ -1845,8 +1845,8 @@ struct R: Rswift.Validatable {
       static let extras = Rswift.StringResource(key: "extras", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: FAQ
       /// 
-      /// Locales: en
-      static let faq = Rswift.StringResource(key: "faq", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let faq = Rswift.StringResource(key: "faq", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Face Recognition
       /// 
       /// Locales: en, de
@@ -1897,20 +1897,20 @@ struct R: Rswift.Validatable {
       static let back_mnemonic = Rswift.StringResource(key: "back_mnemonic", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Guide to getting started with Lumenshine
       /// 
-      /// Locales: en
-      static let basics_detail = Rswift.StringResource(key: "basics_detail", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let basics_detail = Rswift.StringResource(key: "basics_detail", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Help
       /// 
       /// Locales: en, de
       static let help = Rswift.StringResource(key: "help", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Help & Feedback
       /// 
-      /// Locales: en
-      static let help_feedback = Rswift.StringResource(key: "help_feedback", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let help_feedback = Rswift.StringResource(key: "help_feedback", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Help Center
       /// 
-      /// Locales: en
-      static let help_center = Rswift.StringResource(key: "help_center", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let help_center = Rswift.StringResource(key: "help_center", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Here are 4 random words from the mnemonic. Please indicate their position within the mnemonic.
       /// 
       /// Locales: en, de
@@ -1921,28 +1921,28 @@ struct R: Rswift.Validatable {
       static let home = Rswift.StringResource(key: "home", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: How can I fund my wallet?
       /// 
-      /// Locales: en
-      static let faq_1 = Rswift.StringResource(key: "faq_1", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let faq_1 = Rswift.StringResource(key: "faq_1", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: How can I receive other currencies than lumens?
       /// 
-      /// Locales: en
-      static let faq_3 = Rswift.StringResource(key: "faq_3", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let faq_3 = Rswift.StringResource(key: "faq_3", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: How can I send lumens and other currencies?
       /// 
-      /// Locales: en
-      static let faq_4 = Rswift.StringResource(key: "faq_4", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let faq_4 = Rswift.StringResource(key: "faq_4", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: How can I setup the inflation destination for my wallet?
       /// 
-      /// Locales: en
-      static let faq_2 = Rswift.StringResource(key: "faq_2", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let faq_2 = Rswift.StringResource(key: "faq_2", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: ICO
       /// 
-      /// Locales: en
-      static let ico = Rswift.StringResource(key: "ico", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let ico = Rswift.StringResource(key: "ico", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: ICOs
       /// 
-      /// Locales: en
-      static let icos = Rswift.StringResource(key: "icos", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let icos = Rswift.StringResource(key: "icos", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: If you activate, the app will request your %@ instead of password when opened. Entering the password will not be required each time you open the app. To activate %@ please first insert your password below.
       /// 
       /// Locales: en, de
@@ -1997,24 +1997,24 @@ struct R: Rswift.Validatable {
       static let lastname = Rswift.StringResource(key: "lastname", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Learn how to keep your Wallets save
       /// 
-      /// Locales: en
-      static let security_detail = Rswift.StringResource(key: "security_detail", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let security_detail = Rswift.StringResource(key: "security_detail", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Learn how to participate in an ICO
       /// 
-      /// Locales: en
-      static let ico_detail = Rswift.StringResource(key: "ico_detail", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let ico_detail = Rswift.StringResource(key: "ico_detail", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Learn more
       /// 
       /// Locales: en, de
       static let learn_more = Rswift.StringResource(key: "learn_more", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Learn more about Stellar
       /// 
-      /// Locales: en
-      static let stellar_detail = Rswift.StringResource(key: "stellar_detail", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let stellar_detail = Rswift.StringResource(key: "stellar_detail", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Learn to master all Wallet features
       /// 
-      /// Locales: en
-      static let wallets_detail = Rswift.StringResource(key: "wallets_detail", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let wallets_detail = Rswift.StringResource(key: "wallets_detail", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Log Out
       /// 
       /// Locales: en, de
@@ -2065,16 +2065,16 @@ struct R: Rswift.Validatable {
       static let more = Rswift.StringResource(key: "more", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: My Orders
       /// 
-      /// Locales: en
-      static let my_orders = Rswift.StringResource(key: "my_orders", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let my_orders = Rswift.StringResource(key: "my_orders", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Nationality
       /// 
       /// Locales: en, de
       static let nationality = Rswift.StringResource(key: "nationality", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Need help or have a suggestion?  The Lumenshine support team is just a quick tap away. Take a look at our FAQ or send us a message.
       /// 
-      /// Locales: en
-      static let help_hint = Rswift.StringResource(key: "help_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let help_hint = Rswift.StringResource(key: "help_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: New 2FA Secret
       /// 
       /// Locales: en, de
@@ -2221,8 +2221,8 @@ struct R: Rswift.Validatable {
       static let scan = Rswift.StringResource(key: "scan", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Security
       /// 
-      /// Locales: en
-      static let security = Rswift.StringResource(key: "security", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let security = Rswift.StringResource(key: "security", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Sell
       /// 
       /// Locales: en, de
@@ -2265,8 +2265,8 @@ struct R: Rswift.Validatable {
       static let status = Rswift.StringResource(key: "status", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Stellar
       /// 
-      /// Locales: en
-      static let stellar = Rswift.StringResource(key: "stellar", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let stellar = Rswift.StringResource(key: "stellar", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Stellar Lumens (XLM)
       /// 
       /// Locales: en, de
@@ -2289,8 +2289,8 @@ struct R: Rswift.Validatable {
       static let success = Rswift.StringResource(key: "success", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Support inbox
       /// 
-      /// Locales: en
-      static let support_inbox = Rswift.StringResource(key: "support_inbox", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let support_inbox = Rswift.StringResource(key: "support_inbox", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: This step is very important
       /// 
       /// Locales: en, de
@@ -2325,8 +2325,8 @@ struct R: Rswift.Validatable {
       static let lbl_today = Rswift.StringResource(key: "lbl_today", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Topics
       /// 
-      /// Locales: en
-      static let topics = Rswift.StringResource(key: "topics", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// Locales: en, de
+      static let topics = Rswift.StringResource(key: "topics", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Transaction fee
       /// 
       /// Locales: en, de
@@ -2724,7 +2724,7 @@ struct R: Rswift.Validatable {
       
       /// en translation: Basics
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func basics(_: Void = ()) -> String {
         return NSLocalizedString("basics", bundle: R.hostingBundle, comment: "")
       }
@@ -2934,7 +2934,7 @@ struct R: Rswift.Validatable {
       
       /// en translation: FAQ
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func faq(_: Void = ()) -> String {
         return NSLocalizedString("faq", bundle: R.hostingBundle, comment: "")
       }
@@ -3025,7 +3025,7 @@ struct R: Rswift.Validatable {
       
       /// en translation: Guide to getting started with Lumenshine
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func basics_detail(_: Void = ()) -> String {
         return NSLocalizedString("basics_detail", bundle: R.hostingBundle, comment: "")
       }
@@ -3039,14 +3039,14 @@ struct R: Rswift.Validatable {
       
       /// en translation: Help & Feedback
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func help_feedback(_: Void = ()) -> String {
         return NSLocalizedString("help_feedback", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Help Center
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func help_center(_: Void = ()) -> String {
         return NSLocalizedString("help_center", bundle: R.hostingBundle, comment: "")
       }
@@ -3067,42 +3067,42 @@ struct R: Rswift.Validatable {
       
       /// en translation: How can I fund my wallet?
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func faq_1(_: Void = ()) -> String {
         return NSLocalizedString("faq_1", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: How can I receive other currencies than lumens?
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func faq_3(_: Void = ()) -> String {
         return NSLocalizedString("faq_3", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: How can I send lumens and other currencies?
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func faq_4(_: Void = ()) -> String {
         return NSLocalizedString("faq_4", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: How can I setup the inflation destination for my wallet?
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func faq_2(_: Void = ()) -> String {
         return NSLocalizedString("faq_2", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: ICO
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func ico(_: Void = ()) -> String {
         return NSLocalizedString("ico", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: ICOs
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func icos(_: Void = ()) -> String {
         return NSLocalizedString("icos", bundle: R.hostingBundle, comment: "")
       }
@@ -3200,14 +3200,14 @@ struct R: Rswift.Validatable {
       
       /// en translation: Learn how to keep your Wallets save
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func security_detail(_: Void = ()) -> String {
         return NSLocalizedString("security_detail", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Learn how to participate in an ICO
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func ico_detail(_: Void = ()) -> String {
         return NSLocalizedString("ico_detail", bundle: R.hostingBundle, comment: "")
       }
@@ -3221,14 +3221,14 @@ struct R: Rswift.Validatable {
       
       /// en translation: Learn more about Stellar
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func stellar_detail(_: Void = ()) -> String {
         return NSLocalizedString("stellar_detail", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Learn to master all Wallet features
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func wallets_detail(_: Void = ()) -> String {
         return NSLocalizedString("wallets_detail", bundle: R.hostingBundle, comment: "")
       }
@@ -3319,7 +3319,7 @@ struct R: Rswift.Validatable {
       
       /// en translation: My Orders
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func my_orders(_: Void = ()) -> String {
         return NSLocalizedString("my_orders", bundle: R.hostingBundle, comment: "")
       }
@@ -3333,7 +3333,7 @@ struct R: Rswift.Validatable {
       
       /// en translation: Need help or have a suggestion?  The Lumenshine support team is just a quick tap away. Take a look at our FAQ or send us a message.
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func help_hint(_: Void = ()) -> String {
         return NSLocalizedString("help_hint", bundle: R.hostingBundle, comment: "")
       }
@@ -3592,7 +3592,7 @@ struct R: Rswift.Validatable {
       
       /// en translation: Security
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func security(_: Void = ()) -> String {
         return NSLocalizedString("security", bundle: R.hostingBundle, comment: "")
       }
@@ -3669,7 +3669,7 @@ struct R: Rswift.Validatable {
       
       /// en translation: Stellar
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func stellar(_: Void = ()) -> String {
         return NSLocalizedString("stellar", bundle: R.hostingBundle, comment: "")
       }
@@ -3711,7 +3711,7 @@ struct R: Rswift.Validatable {
       
       /// en translation: Support inbox
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func support_inbox(_: Void = ()) -> String {
         return NSLocalizedString("support_inbox", bundle: R.hostingBundle, comment: "")
       }
@@ -3774,7 +3774,7 @@ struct R: Rswift.Validatable {
       
       /// en translation: Topics
       /// 
-      /// Locales: en
+      /// Locales: en, de
       static func topics(_: Void = ()) -> String {
         return NSLocalizedString("topics", bundle: R.hostingBundle, comment: "")
       }

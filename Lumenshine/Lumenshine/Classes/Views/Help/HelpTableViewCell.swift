@@ -33,10 +33,10 @@ class HelpTableViewCell: UITableViewCell {
     
     func commonInit() {
         textLabel?.textColor = Stylesheet.color(.lightBlack)
-        textLabel?.font = R.font.encodeSansSemiBold(size: 13)
+        textLabel?.font = R.font.encodeSansSemiBold(size: 14)
         
-        detailTextLabel?.textColor = Stylesheet.color(.lightBlack)
-        detailTextLabel?.font = R.font.encodeSansSemiBold(size: 13)
+        detailTextLabel?.textColor = Stylesheet.color(.darkGray)
+        detailTextLabel?.font = R.font.encodeSansRegular(size: 14)
         
         textLabel?.numberOfLines = 0
         
@@ -57,7 +57,7 @@ extension HelpTableViewCell: HelpCellProtocol {
     func setDetail(_ detail: String?) {
         detailTextLabel?.text = detail
         if let d = detail, !d.isEmpty {
-            textLabel?.font = R.font.encodeSansBold(size: 13)
+            textLabel?.font = R.font.encodeSansBold(size: 14)
         }
     }
     
