@@ -128,6 +128,9 @@ class LoginViewModel : LoginViewModelType {
                 self?.verifyLogin1Response(login1Response, password: password) { result2 in
                     switch result2 {
                     case .success(let login2Response):
+                        if BiometricHelper.isTouchEnabled {
+                            BiometricHelper.save(user: email, password: password)
+                        }
                         if checkSetup == true {
                             self?.checkSetup(login2Response: login2Response)
                         } else {
