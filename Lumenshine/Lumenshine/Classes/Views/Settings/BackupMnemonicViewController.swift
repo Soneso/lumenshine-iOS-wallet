@@ -79,7 +79,7 @@ fileprivate extension BackupMnemonicViewController {
         titleLabel.text = R.string.localizable.mnemonic_words_title()
         titleLabel.font = R.font.encodeSansSemiBold(size: 17)
         titleLabel.textAlignment = .center
-        titleLabel.textColor = Stylesheet.color(.lightBlack)
+        titleLabel.textColor = Stylesheet.color(.red)
         titleLabel.numberOfLines = 0
         
         contentView.addSubview(titleLabel)
@@ -92,14 +92,14 @@ fileprivate extension BackupMnemonicViewController {
     
     func prepareWordsLabel() {
         wordsLabel.text = generateMnemonic()
-        wordsLabel.font = R.font.encodeSansRegular(size: 14)
+        wordsLabel.font = R.font.encodeSansRegular(size: 15)
         wordsLabel.textAlignment = .left
         wordsLabel.textColor = Stylesheet.color(.lightBlack)
         wordsLabel.numberOfLines = 0
         
         contentView.addSubview(wordsLabel)
         wordsLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.top.equalTo(titleLabel.snp.bottom).offset(30)
             make.centerX.equalToSuperview()
             make.bottom.equalTo(-10)
         }

@@ -93,7 +93,7 @@ fileprivate extension VerificationSetupViewController {
     
     func prepareTitleLabel() {
         stepLabel.text = R.string.localizable.step_3("3")
-        stepLabel.font = R.font.encodeSansRegular(size: 12)
+        stepLabel.font = R.font.encodeSansRegular(size: 13)
         stepLabel.textAlignment = .center
         stepLabel.textColor = Stylesheet.color(.darkGray)
         
@@ -108,6 +108,7 @@ fileprivate extension VerificationSetupViewController {
         titleLabel.font = R.font.encodeSansSemiBold(size: 14)
         titleLabel.textAlignment = .center
         titleLabel.textColor = Stylesheet.color(.red)
+        titleLabel.numberOfLines = 2
         
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in

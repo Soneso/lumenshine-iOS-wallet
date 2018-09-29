@@ -112,23 +112,49 @@ class SettingsViewModel: SettingsViewModelType {
     }
     
     func showPasswordHint() {
-        let font = R.font.encodeSansRegular(size: 12) ?? Stylesheet.font(.body)
-        let hint1 = NSAttributedString(string: R.string.localizable.password_hint1()+"\n",
-                                       attributes: [.font : font,
-                                                    .foregroundColor : Stylesheet.color(.green)])
-        let hint2 = NSAttributedString(string: R.string.localizable.password_hint2()+"\n",
-                                       attributes: [.font : font,
-                                                    .foregroundColor : Stylesheet.color(.green)])
-        let hint3 = NSAttributedString(string: R.string.localizable.password_hint3()+"\n",
-                                       attributes: [.font : font,
-                                                    .foregroundColor : Stylesheet.color(.red)])
-        let hint4 = NSAttributedString(string: R.string.localizable.password_hint4(),
-                                       attributes: [.font : font,
-                                                    .foregroundColor : Stylesheet.color(.green)])
+
+        let prefix_font = R.font.encodeSansBold(size: 15) ?? Stylesheet.font(.body)
+        let font = R.font.encodeSansRegular(size: 15) ?? Stylesheet.font(.body)
         
-        let hint = NSMutableAttributedString(attributedString: hint1)
+        let hint1_prefix = NSAttributedString(string: R.string.localizable.password_hint1_prefix()+"\n",
+                                              attributes: [NSAttributedStringKey.font : prefix_font,
+                                                           NSAttributedStringKey.foregroundColor : Stylesheet.color(.red)])
+        
+        let hint1 = NSAttributedString(string: R.string.localizable.password_hint1()+"\n\n",
+                                       attributes: [NSAttributedStringKey.font : font,
+                                                    NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+        let hint2_prefix = NSAttributedString(string: R.string.localizable.password_hint2_prefix()+"\n",
+                                              attributes: [NSAttributedStringKey.font : prefix_font,
+                                                           NSAttributedStringKey.foregroundColor : Stylesheet.color(.red)])
+        
+        let hint2 = NSAttributedString(string: R.string.localizable.password_hint2()+"\n\n",
+                                       attributes: [NSAttributedStringKey.font : font,
+                                                    NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+        
+        let hint3_prefix = NSAttributedString(string: R.string.localizable.password_hint3_prefix()+"\n",
+                                              attributes: [NSAttributedStringKey.font : prefix_font,
+                                                           NSAttributedStringKey.foregroundColor : Stylesheet.color(.red)])
+        
+        let hint3 = NSAttributedString(string: R.string.localizable.password_hint3()+"\n\n",
+                                       attributes: [NSAttributedStringKey.font : font,
+                                                    NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+        
+        let hint4_prefix = NSAttributedString(string: R.string.localizable.password_hint4_prefix()+"\n",
+                                              attributes: [NSAttributedStringKey.font : prefix_font,
+                                                           NSAttributedStringKey.foregroundColor : Stylesheet.color(.red)])
+        
+        let hint4 = NSAttributedString(string: R.string.localizable.password_hint4(),
+                                       attributes: [NSAttributedStringKey.font : font,
+                                                    NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+        
+        let hint = NSMutableAttributedString(attributedString: hint1_prefix)
+        
+        hint.append(hint1)
+        hint.append(hint2_prefix)
         hint.append(hint2)
+        hint.append(hint3_prefix)
         hint.append(hint3)
+        hint.append(hint4_prefix)
         hint.append(hint4)
         
         navigationCoordinator?.performTransition(transition: .showPasswordHint(hint.string, hint))

@@ -131,8 +131,8 @@ fileprivate extension ChangePasswordViewController {
     
     func prepareTitle() {
         titleLabel.text = R.string.localizable.change_password_hint()
-        titleLabel.textColor = Stylesheet.color(.lightBlack)
-        titleLabel.font = R.font.encodeSansSemiBold(size: 17)
+        titleLabel.textColor = Stylesheet.color(.red)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
@@ -161,7 +161,7 @@ fileprivate extension ChangePasswordViewController {
         
         view.addSubview(textField1)
         textField1.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.top.equalTo(titleLabel.snp.bottom).offset(40)
             make.left.equalTo(horizontalSpacing)
             make.right.equalTo(-horizontalSpacing)
         }
