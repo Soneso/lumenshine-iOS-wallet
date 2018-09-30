@@ -62,6 +62,12 @@
 "login_continue" = "EINLOGGEN";
 
 /*  */
+"unlock_app" = "App Entsperren";
+
+/*   */
+"unlock_button" = "Entsperren";
+
+/*  */
 "login_fill" = "Bitte fülle folgendes Formular mit gültigen Daten aus.";
 
 /*  */

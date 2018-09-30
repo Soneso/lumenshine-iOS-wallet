@@ -19,8 +19,8 @@ target 'Lumenshine' do
   # Pods for jupiter
   ui_components_and_helper_pods
   
-  pod 'R.swift'
-  pod 'stellar-ios-mac-sdk', '~> 1.2.1'
+  pod 'R.swift', '~> 5.0.0.alpha.2'
+  pod 'stellar-ios-mac-sdk'
   pod 'OneTimePassword'
   pod 'SwiftRichString'
   

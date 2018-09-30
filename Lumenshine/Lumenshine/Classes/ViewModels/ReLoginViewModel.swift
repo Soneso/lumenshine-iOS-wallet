@@ -21,11 +21,7 @@ class ReLoginViewModel : LoginViewModel {
     
     override var barItems: [(String, String)] {
         return entries.map { x in
-            var name = x.name
-            if x == .faceRecognition || x == .fingerprint {
-                name = "\(R.string.localizable.activate()) \(name)"
-            }
-            return (name, x.icon.name)
+            return (x.name, x.icon.name)
         }
     }
     

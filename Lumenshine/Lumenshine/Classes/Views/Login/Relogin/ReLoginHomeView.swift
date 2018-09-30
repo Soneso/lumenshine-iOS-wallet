@@ -120,7 +120,7 @@ fileprivate extension ReLoginHomeView {
     }
     
     func prepareTitle() {
-        titleLabel.text = R.string.localizable.password().uppercased()        
+        titleLabel.text = R.string.localizable.unlock_app().uppercased()
         titleLabel.textColor = Stylesheet.color(.darkBlue)
         titleLabel.font = R.font.encodeSansSemiBold(size: 17)
         titleLabel.adjustsFontSizeToFitWidth = true
@@ -158,7 +158,7 @@ fileprivate extension ReLoginHomeView {
     }
     
     func prepareLoginButton() {
-        submitButton.title = R.string.localizable.submit().uppercased()
+        submitButton.title = R.string.localizable.unlock_button().uppercased()
         submitButton.setGradientLayer(color: Stylesheet.color(.green))
         submitButton.addTarget(self, action: #selector(reloginAction(sender:)), for: .touchUpInside)
         
