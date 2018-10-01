@@ -208,6 +208,7 @@ fileprivate extension Confirm2faCodeViewController {
     }
     
     func prepare2FACode() {
+        tfaCodeTextField.keyboardType = .numberPad
         tfaCodeTextField.placeholder = R.string.localizable.tfa_code()
         tfaCodeTextField.delegate = self
         tfaCodeTextField.placeholderAnimation = .hidden

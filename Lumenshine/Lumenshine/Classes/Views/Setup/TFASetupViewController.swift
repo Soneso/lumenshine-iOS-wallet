@@ -170,6 +170,7 @@ fileprivate extension TFASetupViewController {
     }
     
     func prepare2FACode() {
+        tfaCodeTextField.keyboardType = .numberPad
         tfaCodeTextField.placeholder = R.string.localizable.tfa_code()
         tfaCodeTextField.delegate = self
         

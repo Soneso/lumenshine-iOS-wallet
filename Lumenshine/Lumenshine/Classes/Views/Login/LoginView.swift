@@ -156,7 +156,7 @@ fileprivate extension LoginView {
         textField2.isVisibilityIconButtonEnabled = true
         textField2.placeholder = R.string.localizable.password().uppercased()
         
-//        textField3.keyboardType = .numberPad
+        textField3.keyboardType = .numberPad
         textField3.placeholder = R.string.localizable.tfa_code_configured()
         
         self.addSubview(textField1)

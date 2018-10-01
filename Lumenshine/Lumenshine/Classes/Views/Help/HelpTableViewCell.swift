@@ -16,6 +16,12 @@ protocol HelpCellProtocol {
 
 class HelpTableViewCell: UITableViewCell {
     
+    fileprivate let titleLabel = UILabel()
+    fileprivate let iconImageView = UIImageView()
+    
+    fileprivate let verticalSpacing = 31.0
+    fileprivate let horizontalSpacing: CGFloat = 15.0
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         commonInit()
@@ -28,20 +34,32 @@ class HelpTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.frame = UIEdgeInsetsInsetRect(contentView.frame, UIEdgeInsetsMake(0, 15, 0, 15))
+        contentView.frame = UIEdgeInsetsInsetRect(contentView.frame, UIEdgeInsetsMake(0, horizontalSpacing, 0, horizontalSpacing))
     }
     
     func commonInit() {
-        textLabel?.textColor = Stylesheet.color(.lightBlack)
-        textLabel?.font = R.font.encodeSansSemiBold(size: 14)
-        
-        detailTextLabel?.textColor = Stylesheet.color(.darkGray)
-        detailTextLabel?.font = R.font.encodeSansRegular(size: 14)
-        
-        textLabel?.numberOfLines = 0
-        
         contentView.backgroundColor = Stylesheet.color(.white)
         backgroundColor = .clear
+        
+        iconImageView.contentMode = .scaleAspectFit
+        
+        contentView.addSubview(iconImageView)
+        iconImageView.snp.makeConstraints { make in
+            make.left.equalTo(horizontalSpacing)
+            make.top.bottom.equalToSuperview()
+        }
+        
+        titleLabel.textColor = Stylesheet.color(.lightBlack)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 14)
+        titleLabel.numberOfLines = 0
+        
+        contentView.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.left.equalTo(iconImageView.snp.right).offset(horizontalSpacing)
+            make.right.lessThanOrEqualToSuperview()
+            make.bottom.equalToSuperview()
+        }
         
         let selection = UIView()
         selection.backgroundColor = Stylesheet.color(.lightGray)
@@ -51,17 +69,29 @@ class HelpTableViewCell: UITableViewCell {
 
 extension HelpTableViewCell: HelpCellProtocol {
     func setText(_ text: String?) {
-        textLabel?.text = text
+        titleLabel.text = text
     }
     
     func setDetail(_ detail: String?) {
-        detailTextLabel?.text = detail
-        if let d = detail, !d.isEmpty {
-            textLabel?.font = R.font.encodeSansBold(size: 14)
+
+        if let title = titleLabel.text,
+            let d = detail, !d.isEmpty {
+            
+            let prefix_font = R.font.encodeSansBold(size: 14) ?? Stylesheet.font(.body)
+            let font = R.font.encodeSansRegular(size: 14) ?? Stylesheet.font(.body)
+            let attrStr = NSMutableAttributedString(string: title+"\n",
+                                             attributes: [.font : prefix_font,
+                                                          .foregroundColor : Stylesheet.color(.lightBlack)])
+            
+            let attrStr2 = NSAttributedString(string: d,
+                                              attributes: [.font : font,
+                                                           .foregroundColor : Stylesheet.color(.darkGray)])
+            attrStr.append(attrStr2)
+            titleLabel.attributedText = attrStr
         }
     }
     
     func setImage(_ image: UIImage?) {
-        imageView?.image = image?.tint(with: Stylesheet.color(.blue))
+        iconImageView.image = image?.tint(with: Stylesheet.color(.blue))
     }
 }
