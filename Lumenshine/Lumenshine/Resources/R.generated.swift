@@ -17,11 +17,6 @@ struct R: Rswift.Validatable {
     try intern.validate()
   }
   
-  /// This `R.color` struct is generated, and contains static references to 0 colors.
-  struct color {
-    fileprivate init() {}
-  }
-  
   /// This `R.file` struct is generated, and contains static references to 57 files.
   struct file {
     /// Resource file `EncodeSans-Black.ttf`.
@@ -873,61 +868,61 @@ struct R: Rswift.Validatable {
     }
     
     static func validate() throws {
-      if R.font.encodeSansMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Medium' could not be loaded, is 'EncodeSans-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExpandedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Bold' could not be loaded, is 'EncodeSansExpanded-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiExpandedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-SemiBold' could not be loaded, is 'EncodeSansSemiExpanded-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.latoBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Bold' could not be loaded, is 'Lato-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExpandedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Light' could not be loaded, is 'EncodeSansExpanded-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExpandedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-SemiBold' could not be loaded, is 'EncodeSansExpanded-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Thin' could not be loaded, is 'EncodeSansCondensed-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiExpandedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Light' could not be loaded, is 'EncodeSansSemiExpanded-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Bold' could not be loaded, is 'EncodeSansSemiCondensed-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Black' could not be loaded, is 'EncodeSansSemiCondensed-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiExpandedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Bold' could not be loaded, is 'EncodeSansSemiExpanded-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiExpandedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Black' could not be loaded, is 'EncodeSansSemiExpanded-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.latoHairlineItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-HairlineItalic' could not be loaded, is 'Lato-HairlineItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.latoBlackItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-BlackItalic' could not be loaded, is 'Lato-BlackItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Regular' could not be loaded, is 'EncodeSans-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-ExtraLight' could not be loaded, is 'EncodeSansCondensed-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-SemiBold' could not be loaded, is 'EncodeSansCondensed-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.latoBoldItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-BoldItalic' could not be loaded, is 'Lato-BoldItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.latoRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Regular' could not be loaded, is 'Lato-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Bold' could not be loaded, is 'EncodeSans-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
       if R.font.latoItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Italic' could not be loaded, is 'Lato-Italic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Regular' could not be loaded, is 'EncodeSansSemiCondensed-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.latoHairline(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Hairline' could not be loaded, is 'Lato-Hairline.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-ExtraLight' could not be loaded, is 'EncodeSans-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.latoLightItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-LightItalic' could not be loaded, is 'Lato-LightItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-SemiBold' could not be loaded, is 'EncodeSans-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExpandedExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-ExtraBold' could not be loaded, is 'EncodeSansExpanded-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExpandedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Medium' could not be loaded, is 'EncodeSansExpanded-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-SemiBold' could not be loaded, is 'EncodeSansSemiCondensed-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
       if R.font.encodeSansExpandedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Black' could not be loaded, is 'EncodeSansExpanded-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExpandedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Regular' could not be loaded, is 'EncodeSansExpanded-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiExpandedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Regular' could not be loaded, is 'EncodeSansSemiExpanded-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Light' could not be loaded, is 'EncodeSans-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExpandedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Thin' could not be loaded, is 'EncodeSansExpanded-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Medium' could not be loaded, is 'EncodeSansCondensed-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Light' could not be loaded, is 'EncodeSansCondensed-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-ExtraBold' could not be loaded, is 'EncodeSans-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Bold' could not be loaded, is 'EncodeSansCondensed-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Black' could not be loaded, is 'EncodeSans-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Regular' could not be loaded, is 'EncodeSansCondensed-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.latoBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Black' could not be loaded, is 'Lato-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiExpandedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Medium' could not be loaded, is 'EncodeSansSemiExpanded-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-ExtraBold' could not be loaded, is 'EncodeSansCondensed-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiExpandedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Thin' could not be loaded, is 'EncodeSansSemiExpanded-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExpandedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-ExtraLight' could not be loaded, is 'EncodeSansExpanded-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.latoLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Light' could not be loaded, is 'Lato-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-ExtraLight' could not be loaded, is 'EncodeSansSemiCondensed-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Light' could not be loaded, is 'EncodeSansSemiCondensed-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Thin' could not be loaded, is 'EncodeSansSemiCondensed-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Medium' could not be loaded, is 'EncodeSansSemiCondensed-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-ExtraBold' could not be loaded, is 'EncodeSansSemiCondensed-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiExpandedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-ExtraLight' could not be loaded, is 'EncodeSansSemiExpanded-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Black' could not be loaded, is 'EncodeSansCondensed-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
       if R.font.encodeSansThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Thin' could not be loaded, is 'EncodeSans-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Light' could not be loaded, is 'EncodeSansExpanded-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-SemiBold' could not be loaded, is 'EncodeSansSemiCondensed-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Black' could not be loaded, is 'EncodeSansSemiCondensed-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Medium' could not be loaded, is 'EncodeSans-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Light' could not be loaded, is 'EncodeSans-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-ExtraLight' could not be loaded, is 'EncodeSansSemiExpanded-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-SemiBold' could not be loaded, is 'EncodeSans-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Thin' could not be loaded, is 'EncodeSansExpanded-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Thin' could not be loaded, is 'EncodeSansSemiCondensed-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Medium' could not be loaded, is 'EncodeSansSemiExpanded-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-ExtraLight' could not be loaded, is 'EncodeSansSemiCondensed-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-ExtraLight' could not be loaded, is 'EncodeSansExpanded-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Bold' could not be loaded, is 'EncodeSansSemiExpanded-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Light' could not be loaded, is 'EncodeSansCondensed-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Thin' could not be loaded, is 'EncodeSansCondensed-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Regular' could not be loaded, is 'Lato-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Medium' could not be loaded, is 'EncodeSansExpanded-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Bold' could not be loaded, is 'EncodeSans-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Regular' could not be loaded, is 'EncodeSans-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Thin' could not be loaded, is 'EncodeSansSemiExpanded-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoHairlineItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-HairlineItalic' could not be loaded, is 'Lato-HairlineItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Medium' could not be loaded, is 'EncodeSansSemiCondensed-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoBlackItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-BlackItalic' could not be loaded, is 'Lato-BlackItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Light' could not be loaded, is 'EncodeSansSemiExpanded-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Regular' could not be loaded, is 'EncodeSansSemiExpanded-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Black' could not be loaded, is 'EncodeSansCondensed-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Medium' could not be loaded, is 'EncodeSansCondensed-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-ExtraLight' could not be loaded, is 'EncodeSansCondensed-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-SemiBold' could not be loaded, is 'EncodeSansSemiExpanded-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-SemiBold' could not be loaded, is 'EncodeSansExpanded-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Light' could not be loaded, is 'EncodeSansSemiCondensed-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
       if R.font.encodeSansSemiExpandedExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-ExtraBold' could not be loaded, is 'EncodeSansSemiExpanded-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoHairline(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Hairline' could not be loaded, is 'Lato-Hairline.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Regular' could not be loaded, is 'EncodeSansSemiCondensed-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoLightItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-LightItalic' could not be loaded, is 'Lato-LightItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Black' could not be loaded, is 'Lato-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Black' could not be loaded, is 'EncodeSans-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Regular' could not be loaded, is 'EncodeSansExpanded-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Bold' could not be loaded, is 'EncodeSansSemiCondensed-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Regular' could not be loaded, is 'EncodeSansCondensed-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-ExtraBold' could not be loaded, is 'EncodeSans-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-ExtraBold' could not be loaded, is 'EncodeSansSemiCondensed-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-ExtraBold' could not be loaded, is 'EncodeSansExpanded-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-ExtraLight' could not be loaded, is 'EncodeSans-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Light' could not be loaded, is 'Lato-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-ExtraBold' could not be loaded, is 'EncodeSansCondensed-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-SemiBold' could not be loaded, is 'EncodeSansCondensed-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Black' could not be loaded, is 'EncodeSansSemiExpanded-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Bold' could not be loaded, is 'EncodeSansCondensed-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Bold' could not be loaded, is 'EncodeSansExpanded-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoBoldItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-BoldItalic' could not be loaded, is 'Lato-BoldItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Bold' could not be loaded, is 'Lato-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
     }
     
     fileprivate init() {}
@@ -1359,180 +1354,335 @@ struct R: Rswift.Validatable {
     static let walletDetailsViewController = _R.nib._WalletDetailsViewController()
     
     /// `UINib(name: "AccountCurrenciesViewController", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.accountCurrenciesViewController) instead")
     static func accountCurrenciesViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.accountCurrenciesViewController)
     }
     
     /// `UINib(name: "AccountDetailsViewController", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.accountDetailsViewController) instead")
     static func accountDetailsViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.accountDetailsViewController)
     }
     
     /// `UINib(name: "AddCurrencyViewController", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.addCurrencyViewController) instead")
     static func addCurrencyViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.addCurrencyViewController)
     }
     
     /// `UINib(name: "CurrencyView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.currencyView) instead")
     static func currencyView(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.currencyView)
     }
     
     /// `UINib(name: "FundTestNetWalletViewController", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.fundTestNetWalletViewController) instead")
     static func fundTestNetWalletViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.fundTestNetWalletViewController)
     }
     
     /// `UINib(name: "FundWalletViewController", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.fundWalletViewController) instead")
     static func fundWalletViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.fundWalletViewController)
     }
     
     /// `UINib(name: "HomeFundedWalletHeaderView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.homeFundedWalletHeaderView) instead")
     static func homeFundedWalletHeaderView(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.homeFundedWalletHeaderView)
     }
     
     /// `UINib(name: "HomeUnfundedWalletHeaderView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.homeUnfundedWalletHeaderView) instead")
     static func homeUnfundedWalletHeaderView(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.homeUnfundedWalletHeaderView)
     }
     
     /// `UINib(name: "IconView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.iconView) instead")
     static func iconView(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.iconView)
     }
     
     /// `UINib(name: "KnownCurrenciesTableViewCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.knownCurrenciesTableViewCell) instead")
     static func knownCurrenciesTableViewCell(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.knownCurrenciesTableViewCell)
     }
     
     /// `UINib(name: "KnownCurrenciesTableViewController", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.knownCurrenciesTableViewController) instead")
     static func knownCurrenciesTableViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.knownCurrenciesTableViewController)
     }
     
     /// `UINib(name: "KnownInflationDestinationDetailsViewController", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.knownInflationDestinationDetailsViewController) instead")
     static func knownInflationDestinationDetailsViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.knownInflationDestinationDetailsViewController)
     }
     
     /// `UINib(name: "KnownInflationDestinationsTableViewCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.knownInflationDestinationsTableViewCell) instead")
     static func knownInflationDestinationsTableViewCell(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.knownInflationDestinationsTableViewCell)
     }
     
     /// `UINib(name: "KnownInflationDestinationsViewController", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.knownInflationDestinationsViewController) instead")
     static func knownInflationDestinationsViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.knownInflationDestinationsViewController)
     }
     
     /// `UINib(name: "LoadTransactionsHistoryViewController", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.loadTransactionsHistoryViewController) instead")
     static func loadTransactionsHistoryViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.loadTransactionsHistoryViewController)
     }
     
     /// `UINib(name: "LockedView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.lockedView) instead")
     static func lockedView(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.lockedView)
     }
     
     /// `UINib(name: "ProvideCurrencyDataViewController", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.provideCurrencyDataViewController) instead")
     static func provideCurrencyDataViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.provideCurrencyDataViewController)
     }
     
     /// `UINib(name: "ProvideInflationDestinationViewController", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.provideInflationDestinationViewController) instead")
     static func provideInflationDestinationViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.provideInflationDestinationViewController)
     }
     
     /// `UINib(name: "ReceivePaymentCardViewController", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.receivePaymentCardViewController) instead")
     static func receivePaymentCardViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.receivePaymentCardViewController)
     }
     
     /// `UINib(name: "ReceivePaymentPrintView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.receivePaymentPrintView) instead")
     static func receivePaymentPrintView(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.receivePaymentPrintView)
     }
     
     /// `UINib(name: "RemoveCurrencyViewController", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.removeCurrencyViewController) instead")
     static func removeCurrencyViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.removeCurrencyViewController)
     }
     
     /// `UINib(name: "SendViewController", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.sendViewController) instead")
     static func sendViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.sendViewController)
     }
     
     /// `UINib(name: "SetInflationDestinationViewController", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.setInflationDestinationViewController) instead")
     static func setInflationDestinationViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.setInflationDestinationViewController)
     }
     
     /// `UINib(name: "TitleView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.titleView) instead")
     static func titleView(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.titleView)
     }
     
     /// `UINib(name: "TransactionHistoryDetailsViewController", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.transactionHistoryDetailsViewController) instead")
     static func transactionHistoryDetailsViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.transactionHistoryDetailsViewController)
     }
     
     /// `UINib(name: "TransactionHistoryTableViewController", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.transactionHistoryTableViewController) instead")
     static func transactionHistoryTableViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.transactionHistoryTableViewController)
     }
     
     /// `UINib(name: "TransactionResultPrintView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.transactionResultPrintView) instead")
     static func transactionResultPrintView(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.transactionResultPrintView)
     }
     
     /// `UINib(name: "TransactionResultViewController", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.transactionResultViewController) instead")
     static func transactionResultViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.transactionResultViewController)
     }
     
     /// `UINib(name: "TransactionTableViewCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.transactionTableViewCell) instead")
     static func transactionTableViewCell(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.transactionTableViewCell)
     }
     
     /// `UINib(name: "UnfundedWalletCardContentView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.unfundedWalletCardContentView) instead")
     static func unfundedWalletCardContentView(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.unfundedWalletCardContentView)
     }
     
     /// `UINib(name: "WalletCardContentView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.walletCardContentView) instead")
     static func walletCardContentView(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.walletCardContentView)
     }
     
     /// `UINib(name: "WalletCardInfoViewController", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.walletCardInfoViewController) instead")
     static func walletCardInfoViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.walletCardInfoViewController)
     }
     
     /// `UINib(name: "WalletDetailsViewController", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.walletDetailsViewController) instead")
     static func walletDetailsViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.walletDetailsViewController)
     }
     
-    fileprivate init() {}
-  }
-  
-  /// This `R.reuseIdentifier` struct is generated, and contains static references to 0 reuse identifiers.
-  struct reuseIdentifier {
-    fileprivate init() {}
-  }
-  
-  /// This `R.segue` struct is generated, and contains static references to 0 view controllers.
-  struct segue {
+    static func accountCurrenciesViewController(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.accountCurrenciesViewController.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func accountDetailsViewController(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.accountDetailsViewController.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func addCurrencyViewController(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.addCurrencyViewController.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func currencyView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> CurrencyView? {
+      return R.nib.currencyView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? CurrencyView
+    }
+    
+    static func fundTestNetWalletViewController(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.fundTestNetWalletViewController.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func fundWalletViewController(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.fundWalletViewController.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func homeFundedWalletHeaderView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HomeFundedWalletHeaderView? {
+      return R.nib.homeFundedWalletHeaderView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HomeFundedWalletHeaderView
+    }
+    
+    static func homeUnfundedWalletHeaderView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HomeUnfundedWalletHeaderView? {
+      return R.nib.homeUnfundedWalletHeaderView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HomeUnfundedWalletHeaderView
+    }
+    
+    static func iconView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.iconView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func knownCurrenciesTableViewCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> KnownCurrenciesTableViewCell? {
+      return R.nib.knownCurrenciesTableViewCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? KnownCurrenciesTableViewCell
+    }
+    
+    static func knownCurrenciesTableViewController(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.knownCurrenciesTableViewController.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func knownInflationDestinationDetailsViewController(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.knownInflationDestinationDetailsViewController.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func knownInflationDestinationsTableViewCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> KnownInflationDestinationsTableViewCell? {
+      return R.nib.knownInflationDestinationsTableViewCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? KnownInflationDestinationsTableViewCell
+    }
+    
+    static func knownInflationDestinationsViewController(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.knownInflationDestinationsViewController.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func loadTransactionsHistoryViewController(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.loadTransactionsHistoryViewController.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func lockedView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.lockedView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func provideCurrencyDataViewController(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.provideCurrencyDataViewController.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func provideInflationDestinationViewController(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.provideInflationDestinationViewController.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func receivePaymentCardViewController(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.receivePaymentCardViewController.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func receivePaymentPrintView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> ReceivePaymentPrintView? {
+      return R.nib.receivePaymentPrintView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? ReceivePaymentPrintView
+    }
+    
+    static func removeCurrencyViewController(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.removeCurrencyViewController.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func sendViewController(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.sendViewController.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func setInflationDestinationViewController(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.setInflationDestinationViewController.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func titleView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> TitleView? {
+      return R.nib.titleView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? TitleView
+    }
+    
+    static func transactionHistoryDetailsViewController(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.transactionHistoryDetailsViewController.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func transactionHistoryTableViewController(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.transactionHistoryTableViewController.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func transactionResultPrintView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> TransactionResultPrintView? {
+      return R.nib.transactionResultPrintView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? TransactionResultPrintView
+    }
+    
+    static func transactionResultViewController(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.transactionResultViewController.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func transactionTableViewCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> TransactionTableViewCell? {
+      return R.nib.transactionTableViewCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? TransactionTableViewCell
+    }
+    
+    static func unfundedWalletCardContentView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UnfundedWalletCardContentView? {
+      return R.nib.unfundedWalletCardContentView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UnfundedWalletCardContentView
+    }
+    
+    static func walletCardContentView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> WalletCardContentView? {
+      return R.nib.walletCardContentView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? WalletCardContentView
+    }
+    
+    static func walletCardInfoViewController(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.walletCardInfoViewController.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func walletDetailsViewController(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.walletDetailsViewController.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
     fileprivate init() {}
   }
   
@@ -4144,30 +4294,31 @@ struct R: Rswift.Validatable {
 
 struct _R: Rswift.Validatable {
   static func validate() throws {
+    try storyboard.validate()
     try nib.validate()
   }
   
   struct nib: Rswift.Validatable {
     static func validate() throws {
-      try _TransactionResultViewController.validate()
-      try _WalletDetailsViewController.validate()
-      try _WalletCardContentView.validate()
-      try _HomeUnfundedWalletHeaderView.validate()
-      try _AccountDetailsViewController.validate()
       try _LockedView.validate()
       try _FundTestNetWalletViewController.validate()
-      try _ReceivePaymentCardViewController.validate()
-      try _FundWalletViewController.validate()
-      try _HomeFundedWalletHeaderView.validate()
+      try _TransactionResultViewController.validate()
+      try _WalletDetailsViewController.validate()
       try _WalletCardInfoViewController.validate()
+      try _WalletCardContentView.validate()
+      try _HomeUnfundedWalletHeaderView.validate()
+      try _ReceivePaymentCardViewController.validate()
       try _UnfundedWalletCardContentView.validate()
+      try _HomeFundedWalletHeaderView.validate()
+      try _FundWalletViewController.validate()
+      try _AccountDetailsViewController.validate()
     }
     
     struct _AccountCurrenciesViewController: Rswift.NibResourceType {
       let bundle = R.hostingBundle
       let name = "AccountCurrenciesViewController"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
@@ -4178,12 +4329,14 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "AccountDetailsViewController"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
       static func validate() throws {
         if UIKit.UIImage(named: "compose", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'compose' is used in nib 'AccountDetailsViewController', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
       }
       
       fileprivate init() {}
@@ -4193,7 +4346,7 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "AddCurrencyViewController"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
@@ -4204,7 +4357,7 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "CurrencyView"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> CurrencyView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> CurrencyView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? CurrencyView
       }
       
@@ -4215,13 +4368,15 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "FundTestNetWalletViewController"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
       static func validate() throws {
         if UIKit.UIImage(named: "close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'close' is used in nib 'FundTestNetWalletViewController', but couldn't be loaded.") }
         if UIKit.UIImage(named: "compose", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'compose' is used in nib 'FundTestNetWalletViewController', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
       }
       
       fileprivate init() {}
@@ -4231,7 +4386,7 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "FundWalletViewController"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
@@ -4239,6 +4394,8 @@ struct _R: Rswift.Validatable {
         if UIKit.UIImage(named: "qr_placeholder", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'qr_placeholder' is used in nib 'FundWalletViewController', but couldn't be loaded.") }
         if UIKit.UIImage(named: "close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'close' is used in nib 'FundWalletViewController', but couldn't be loaded.") }
         if UIKit.UIImage(named: "compose", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'compose' is used in nib 'FundWalletViewController', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
       }
       
       fileprivate init() {}
@@ -4248,15 +4405,17 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "HomeFundedWalletHeaderView"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> HomeFundedWalletHeaderView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HomeFundedWalletHeaderView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HomeFundedWalletHeaderView
       }
       
       static func validate() throws {
-        if UIKit.UIImage(named: "logo", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'logo' is used in nib 'HomeFundedWalletHeaderView', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "send", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'send' is used in nib 'HomeFundedWalletHeaderView', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "receive", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'receive' is used in nib 'HomeFundedWalletHeaderView', but couldn't be loaded.") }
         if UIKit.UIImage(named: "more", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'more' is used in nib 'HomeFundedWalletHeaderView', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "logo", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'logo' is used in nib 'HomeFundedWalletHeaderView', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "receive", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'receive' is used in nib 'HomeFundedWalletHeaderView', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "send", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'send' is used in nib 'HomeFundedWalletHeaderView', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
       }
       
       fileprivate init() {}
@@ -4266,12 +4425,14 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "HomeUnfundedWalletHeaderView"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> HomeUnfundedWalletHeaderView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> HomeUnfundedWalletHeaderView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? HomeUnfundedWalletHeaderView
       }
       
       static func validate() throws {
         if UIKit.UIImage(named: "logo", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'logo' is used in nib 'HomeUnfundedWalletHeaderView', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
       }
       
       fileprivate init() {}
@@ -4281,7 +4442,7 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "IconView"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
@@ -4292,7 +4453,7 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "KnownCurrenciesTableViewCell"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> KnownCurrenciesTableViewCell? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> KnownCurrenciesTableViewCell? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? KnownCurrenciesTableViewCell
       }
       
@@ -4303,7 +4464,7 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "KnownCurrenciesTableViewController"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
@@ -4314,7 +4475,7 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "KnownInflationDestinationDetailsViewController"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
@@ -4325,7 +4486,7 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "KnownInflationDestinationsTableViewCell"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> KnownInflationDestinationsTableViewCell? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> KnownInflationDestinationsTableViewCell? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? KnownInflationDestinationsTableViewCell
       }
       
@@ -4336,7 +4497,7 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "KnownInflationDestinationsViewController"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
@@ -4347,7 +4508,7 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "LoadTransactionsHistoryViewController"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
@@ -4358,12 +4519,14 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "LockedView"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
       static func validate() throws {
         if UIKit.UIImage(named: "logo", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'logo' is used in nib 'LockedView', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
       }
       
       fileprivate init() {}
@@ -4373,7 +4536,7 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "ProvideCurrencyDataViewController"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
@@ -4384,7 +4547,7 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "ProvideInflationDestinationViewController"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
@@ -4395,14 +4558,16 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "ReceivePaymentCardViewController"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
       static func validate() throws {
+        if UIKit.UIImage(named: "question", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'question' is used in nib 'ReceivePaymentCardViewController', but couldn't be loaded.") }
         if UIKit.UIImage(named: "copy", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'copy' is used in nib 'ReceivePaymentCardViewController', but couldn't be loaded.") }
         if UIKit.UIImage(named: "qr_placeholder", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'qr_placeholder' is used in nib 'ReceivePaymentCardViewController', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "question", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'question' is used in nib 'ReceivePaymentCardViewController', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
       }
       
       fileprivate init() {}
@@ -4412,7 +4577,7 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "ReceivePaymentPrintView"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> ReceivePaymentPrintView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> ReceivePaymentPrintView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? ReceivePaymentPrintView
       }
       
@@ -4423,7 +4588,7 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "RemoveCurrencyViewController"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
@@ -4434,7 +4599,7 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "SendViewController"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
@@ -4445,7 +4610,7 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "SetInflationDestinationViewController"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
@@ -4456,7 +4621,7 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "TitleView"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> TitleView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> TitleView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? TitleView
       }
       
@@ -4467,7 +4632,7 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "TransactionHistoryDetailsViewController"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
@@ -4478,7 +4643,7 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "TransactionHistoryTableViewController"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
@@ -4489,7 +4654,7 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "TransactionResultPrintView"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> TransactionResultPrintView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> TransactionResultPrintView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? TransactionResultPrintView
       }
       
@@ -4500,12 +4665,14 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "TransactionResultViewController"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
       static func validate() throws {
         if UIKit.UIImage(named: "close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'close' is used in nib 'TransactionResultViewController', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
       }
       
       fileprivate init() {}
@@ -4515,7 +4682,7 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "TransactionTableViewCell"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> TransactionTableViewCell? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> TransactionTableViewCell? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? TransactionTableViewCell
       }
       
@@ -4526,12 +4693,14 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "UnfundedWalletCardContentView"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UnfundedWalletCardContentView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UnfundedWalletCardContentView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UnfundedWalletCardContentView
       }
       
       static func validate() throws {
         if UIKit.UIImage(named: "question", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'question' is used in nib 'UnfundedWalletCardContentView', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
       }
       
       fileprivate init() {}
@@ -4541,12 +4710,14 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "WalletCardContentView"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> WalletCardContentView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> WalletCardContentView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? WalletCardContentView
       }
       
       static func validate() throws {
         if UIKit.UIImage(named: "question", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'question' is used in nib 'WalletCardContentView', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
       }
       
       fileprivate init() {}
@@ -4556,13 +4727,15 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "WalletCardInfoViewController"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
       static func validate() throws {
         if UIKit.UIImage(named: "close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'close' is used in nib 'WalletCardInfoViewController', but couldn't be loaded.") }
         if UIKit.UIImage(named: "question", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'question' is used in nib 'WalletCardInfoViewController', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
       }
       
       fileprivate init() {}
@@ -4572,12 +4745,14 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "WalletDetailsViewController"
       
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
       static func validate() throws {
         if UIKit.UIImage(named: "copy", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'copy' is used in nib 'WalletDetailsViewController', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
       }
       
       fileprivate init() {}
@@ -4586,12 +4761,21 @@ struct _R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  struct storyboard {
-    struct launchScreen: Rswift.StoryboardResourceWithInitialControllerType {
+  struct storyboard: Rswift.Validatable {
+    static func validate() throws {
+      try launchScreen.validate()
+    }
+    
+    struct launchScreen: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
       typealias InitialController = UIKit.UIViewController
       
       let bundle = R.hostingBundle
       let name = "LaunchScreen"
+      
+      static func validate() throws {
+        if #available(iOS 11.0, *) {
+        }
+      }
       
       fileprivate init() {}
     }
