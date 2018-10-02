@@ -20,7 +20,7 @@ extension DateUtils {
         case monthNameAndDay = "MMM d"
         case yearAndMonth = "yyyy/MM"
         case date = "yyyy-MM-dd"
-        case dateAndTime = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        case dateAndTime = "yyyy-MM-dd HH:mm:ss"
     }
 }
 

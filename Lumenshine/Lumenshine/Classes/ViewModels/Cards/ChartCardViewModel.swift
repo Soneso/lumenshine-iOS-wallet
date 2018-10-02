@@ -88,9 +88,7 @@ class ChartCardViewModel: CardViewModelType {
     
     var detail: String? {
         var updateStr = exchangeRates?.lastUpdateDate ?? ""
-        // TODO: use lastUpdateDate when format is valid
-//        if let date = exchangeRates?.lastUpdateDate,
-        if let date = DateUtils.format(Date(), in: .dateAndTime),
+        if let date = exchangeRates?.lastUpdateDate,
             let updated = DateUtils.format(date, in: .dateAndTime) {
             updateStr = R.string.localizable.updated(DateUtils.longString(from: updated))
         }
@@ -126,7 +124,7 @@ class ChartCardViewModel: CardViewModelType {
         selectedPeriodIndex = index
         UserDefaults.standard.setValue(index, forKey:ChartCardViewModel.selectedPeriodKey)
         
-        service.getChartExchangeRates(assetCode: "XLM", issuerPublicKey: "A", destinationCurrency: "USD", timeRange: Int32(periodValues[selectedPeriodIndex])) { [weak self] result in
+        service.getChartExchangeRates(assetCode: "XLM", issuerPublicKey: "", destinationCurrency: "USD", timeRange: Int32(periodValues[selectedPeriodIndex])) { [weak self] result in
             switch result {
             case .success(let exchangeRates):
                 self?.exchangeRates = exchangeRates
