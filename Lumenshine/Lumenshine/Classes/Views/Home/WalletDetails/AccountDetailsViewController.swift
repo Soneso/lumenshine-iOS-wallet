@@ -41,6 +41,8 @@ class AccountDetailsViewController: UIViewController {
     @IBOutlet weak var transactionsHistoryContainer: UIView!
     @IBOutlet weak var walletDetailsContainer: UIView!
     
+    @IBOutlet weak var federationDomainLabel: UILabel!
+    
     weak var flowDelegate: AccountDetailsViewControllerFlow?
     
     private let walletService = Services.shared.walletService
@@ -122,7 +124,7 @@ class AccountDetailsViewController: UIViewController {
     
     @IBAction func didTapSubmitEditStellarAddress(_ sender: Any) {
         var request = ChangeWalletRequest(id: wallet.id)
-        let stellarAddress = (stellarAddressEditTextField.text ?? "") + "*lumenshine.com"
+        let stellarAddress = (stellarAddressEditTextField.text ?? "") + federationDomainLabel.text!
         request.federationAddress = stellarAddress
         
         view.isUserInteractionEnabled = false
@@ -174,6 +176,12 @@ class AccountDetailsViewController: UIViewController {
     }
     
     private func setupStellarAddress() {
+        
+        federationDomainLabel.text = "*lumenshine.com"
+        
+        /** live net **/
+        //federationDomainLabel.text = "*alpha.lumenshine.com"
+        
         if wallet.federationAddress.isEmpty {
             stellarAddressEditView.removeFromSuperview()
             stellarAddressRemoveView.removeFromSuperview()

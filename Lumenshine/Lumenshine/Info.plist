@@ -30,6 +30,15 @@
 		<false/>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>alphaapi.lumenshine.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSTemporaryExceptionMinimumTLSVersion</key>
+				<string>TLSv1.1</string>
+			</dict>
 			<key>demoapi.lumenshine.com</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
