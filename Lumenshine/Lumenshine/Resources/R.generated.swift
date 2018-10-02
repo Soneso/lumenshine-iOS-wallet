@@ -1289,7 +1289,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.nib` struct is generated, and contains static references to 33 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 34 nibs.
   struct nib {
     /// Nib `AccountCurrenciesViewController`.
     static let accountCurrenciesViewController = _R.nib._AccountCurrenciesViewController()
@@ -1323,6 +1323,8 @@ struct R: Rswift.Validatable {
     static let loadTransactionsHistoryViewController = _R.nib._LoadTransactionsHistoryViewController()
     /// Nib `LockedView`.
     static let lockedView = _R.nib._LockedView()
+    /// Nib `NoMultiSigSupportViewController`.
+    static let noMultiSigSupportViewController = _R.nib._NoMultiSigSupportViewController()
     /// Nib `ProvideCurrencyDataViewController`.
     static let provideCurrencyDataViewController = _R.nib._ProvideCurrencyDataViewController()
     /// Nib `ProvideInflationDestinationViewController`.
@@ -1436,6 +1438,11 @@ struct R: Rswift.Validatable {
     /// `UINib(name: "LockedView", in: bundle)`
     static func lockedView(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.lockedView)
+    }
+    
+    /// `UINib(name: "NoMultiSigSupportViewController", in: bundle)`
+    static func noMultiSigSupportViewController(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.noMultiSigSupportViewController)
     }
     
     /// `UINib(name: "ProvideCurrencyDataViewController", in: bundle)`
@@ -4364,6 +4371,17 @@ struct _R: Rswift.Validatable {
       
       static func validate() throws {
         if UIKit.UIImage(named: "logo", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'logo' is used in nib 'LockedView', but couldn't be loaded.") }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _NoMultiSigSupportViewController: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "NoMultiSigSupportViewController"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
       
       fileprivate init() {}
