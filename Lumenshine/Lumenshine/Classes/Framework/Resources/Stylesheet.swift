@@ -50,6 +50,7 @@ enum ColorStyle {
     case borderGray
     case infoGray
     case qrCodeTint
+    case purple
     
     case white
     case whiteWith(alpha: CGFloat)
@@ -164,6 +165,8 @@ struct Stylesheet {
             return UIColor(red: 183/255.0, green: 183/255.0, blue: 183/255.0, alpha: 1.0)
         case .qrCodeTint:
             return UIColor(red: 64/255.0, green: 64/255.0, blue: 64/255.0, alpha: 1.0)
+        case .purple:
+            return UIColor(red: 13/255.0, green: 0/255.0, blue: 76/255.0, alpha: 1.0)
         }
     }
 }
