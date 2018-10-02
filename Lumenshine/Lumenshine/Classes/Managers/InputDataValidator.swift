@@ -27,6 +27,7 @@ enum PasswordAndAddressErrorCodes: Int {
 
 typealias PasswordAndDestinationAddressClosure = (_ response: PasswordAndDestinationAddressEnum) -> (Void)
 typealias PasswordAndDestinationAddressValidityClosure = (_ response: PasswordAndDestionationAddressValidityEnum) -> (Void)
+typealias DestinationAddressClosure = (_ response: AddressStatusEnum) -> (Void)
 
 class InputDataValidator {
     private let passwordManager = PasswordManager()
@@ -71,6 +72,22 @@ class InputDataValidator {
                     DispatchQueue.main.async {
                         completion(.success(passwordResponse: passwordResult, addressResponse: addressResult))
                     }
+                }
+            }
+        }
+    }
+    
+    func isDestinationAddressValid(address: String, currency: AccountBalanceResponse, completion: @escaping DestinationAddressClosure) {
+        if address.isFederationAddress() {
+            federationManager.resolveAndCheckFederationAddressStatus(forDomain: address, currency: currency) { (response) -> (Void) in
+                DispatchQueue.main.async {
+                    completion(response)
+                }
+            }
+        } else {
+            userManager.checkAddressStatus(forAccountID: address, asset: currency) { (response) -> (Void) in
+                DispatchQueue.main.async {
+                    completion(response)
                 }
             }
         }

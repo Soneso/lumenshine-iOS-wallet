@@ -17,6 +17,10 @@ enum TrustLineStatus {
 typealias TransactionResultClosure = () -> (Void)
 typealias TrustLineClosure = (_ completion: TrustLineStatus) -> (Void)
 
+enum SignerErorr: Error {
+    case signerMismatch
+}
+
 class TransactionHelper {
     private let TransactionDefaultLimit: Decimal = 10000
     private var inputData: TransactionInput!
@@ -270,7 +274,7 @@ class TransactionHelper {
        return Memo.none
     }
     
-    private func submidPaymentSucceeded(transaction: Transaction, completion: @escaping (() -> (Void))) {
+    private func submitPaymentSucceeded(transaction: Transaction, completion: @escaping (() -> (Void))) {
         print("Success")
         self.transactionResult.status = TransactionStatus.success
         self.transactionResult.transactionFee = String(transaction.fee)
@@ -295,12 +299,12 @@ class TransactionHelper {
             let paymentOperation = PaymentOperation(destination: destinationKeyPair, asset: asset, amount: amount)
             let transaction = try Transaction(sourceAccount: accountResponse, operations: [paymentOperation], memo: memo, timeBounds: nil)
             
-            try transaction.sign(keyPair: sourceKeyPair, network: Network.testnet)
+            try signTransaction(transaction: transaction, sourceKeyPair: sourceKeyPair)
             
             try self.stellarSdk.transactions.submitTransaction(transaction: transaction) { (response) -> (Void) in
                 switch response {
                 case .success(_):
-                    self.submidPaymentSucceeded(transaction: transaction, completion: { () -> (Void) in
+                    self.submitPaymentSucceeded(transaction: transaction, completion: { () -> (Void) in
                         completion()
                     })
                     
@@ -314,6 +318,20 @@ class TransactionHelper {
             }
         } catch {
             completion()
+        }
+    }
+    
+    private func signTransaction(transaction: Transaction, sourceKeyPair: KeyPair) throws{
+        if let signer = inputData.signer, let signerSeed = inputData.signerSeed {
+            let signerKeyPair = try KeyPair.init(secretSeed: signerSeed)
+            
+            if signerKeyPair.accountId != signer {
+                throw SignerErorr.signerMismatch
+            }
+            
+            try transaction.sign(keyPair: signerKeyPair, network: .testnet)
+        } else {
+            try transaction.sign(keyPair: sourceKeyPair, network: .testnet)
         }
     }
     

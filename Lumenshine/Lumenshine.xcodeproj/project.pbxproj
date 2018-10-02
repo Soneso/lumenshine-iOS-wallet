@@ -250,6 +250,9 @@
 		C61244C8211332E700DE1EA9 /* SendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61244C7211332E700DE1EA9 /* SendViewController.swift */; };
 		C6171958215520C200F9907A /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6171957215520C200F9907A /* RoundedButton.swift */; };
 		C617195A21552E1F00F9907A /* InfoLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C617195921552E1F00F9907A /* InfoLabel.swift */; };
+		C6257A6C21620C0000E1B879 /* NoMultiSigSupportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6257A6B21620C0000E1B879 /* NoMultiSigSupportViewController.xib */; };
+		C6257A6E21620C1300E1B879 /* NoMultiSigSupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6257A6D21620C1300E1B879 /* NoMultiSigSupportViewController.swift */; };
+		C6257A70216211DA00E1B879 /* RegularSubtitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6257A6F216211DA00E1B879 /* RegularSubtitleLabel.swift */; };
 		C62B0E9C215375A400CF920B /* PickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B0E9B215375A400CF920B /* PickerTextField.swift */; };
 		C62B0E9E215376C800CF920B /* CurrencyPickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B0E9D215376C800CF920B /* CurrencyPickerTextField.swift */; };
 		C62B0EA02153A81000CF920B /* NormalLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B0E9F2153A81000CF920B /* NormalLabel.swift */; };
@@ -615,6 +618,9 @@
 		C61244C7211332E700DE1EA9 /* SendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendViewController.swift; sourceTree = "<group>"; };
 		C6171957215520C200F9907A /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		C617195921552E1F00F9907A /* InfoLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoLabel.swift; sourceTree = "<group>"; };
+		C6257A6B21620C0000E1B879 /* NoMultiSigSupportViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoMultiSigSupportViewController.xib; sourceTree = "<group>"; };
+		C6257A6D21620C1300E1B879 /* NoMultiSigSupportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMultiSigSupportViewController.swift; sourceTree = "<group>"; };
+		C6257A6F216211DA00E1B879 /* RegularSubtitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularSubtitleLabel.swift; sourceTree = "<group>"; };
 		C62B0E9B215375A400CF920B /* PickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
 		C62B0E9D215376C800CF920B /* CurrencyPickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyPickerTextField.swift; sourceTree = "<group>"; };
 		C62B0E9F2153A81000CF920B /* NormalLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalLabel.swift; sourceTree = "<group>"; };
@@ -1452,6 +1458,7 @@
 				C675BC21215CBF8000B663DB /* LeftRoundedButton.swift */,
 				C675BC25215CBFE700B663DB /* RightRoundedButton.swift */,
 				C675BC27215CF86200B663DB /* BaseButton.swift */,
+				C6257A6F216211DA00E1B879 /* RegularSubtitleLabel.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
@@ -1488,6 +1495,8 @@
 				C6B75F34211837AF00B45BEB /* TransactionResultViewController.swift */,
 				C69A5140211C16330066A4A0 /* TransactionResultPrintView.xib */,
 				C69A5142211C16500066A4A0 /* TransactionResultPrintView.swift */,
+				C6257A6B21620C0000E1B879 /* NoMultiSigSupportViewController.xib */,
+				C6257A6D21620C1300E1B879 /* NoMultiSigSupportViewController.swift */,
 			);
 			path = SendPayment;
 			sourceTree = "<group>";
@@ -1813,6 +1822,7 @@
 				43AE634A2135A19300B7A904 /* EncodeSansExpanded-Light.ttf in Resources */,
 				43D7A77C205A892E00238E29 /* Common.strings in Resources */,
 				74C0913320F64002000A809D /* WalletCardContentView.xib in Resources */,
+				C6257A6C21620C0000E1B879 /* NoMultiSigSupportViewController.xib in Resources */,
 				43AE63262135A19300B7A904 /* EncodeSans-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2047,6 +2057,7 @@
 				43B144CC20FCA5D40099E3AE /* TitleHeader.swift in Sources */,
 				C66E353D215A082700D39906 /* ImageBackgroundNavigationController.swift in Sources */,
 				4359984B20A438EF00007F27 /* AuthenticationResponse.swift in Sources */,
+				C6257A70216211DA00E1B879 /* RegularSubtitleLabel.swift in Sources */,
 				C6752A46213818CD0067F815 /* InputDataValidator.swift in Sources */,
 				43C7A8F2215BB28D007F4E5E /* HelpCenterViewModel.swift in Sources */,
 				C6752A44213808D50067F815 /* PasswordManager.swift in Sources */,
@@ -2138,6 +2149,7 @@
 				43DCF85F215CEF93004F827E /* HelpEntry.swift in Sources */,
 				C69A5143211C16500066A4A0 /* TransactionResultPrintView.swift in Sources */,
 				C682C002213691A3007705DF /* BiometricHelper.swift in Sources */,
+				C6257A6E21620C1300E1B879 /* NoMultiSigSupportViewController.swift in Sources */,
 				C685DE0D2154C09E00F99D81 /* SubtitleLabel.swift in Sources */,
 				431437EF2047FF4500189C83 /* MenuViewController.swift in Sources */,
 				4322BA33205BDB6E007FEB5E /* CardsResponsesMock.swift in Sources */,

@@ -29,10 +29,22 @@ public enum AddressStatusEnum {
     case failure
 }
 
+public enum CanAccountSignEnum {
+    case success(canSign: Bool)
+    case failure(error: HorizonRequestError)
+}
+
+public enum GetSignersListEnum {
+    case success(signersList: [AccountSignerResponse])
+    case failure(error: HorizonRequestError)
+}
+
 public typealias BoolClosure = (_ response:BoolEnum) -> (Void)
 public typealias CoinClosure = (_ response:CoinEnum) -> (Void)
 public typealias WalletsClosure = (_ response:WalletsEnum) -> (Void)
 public typealias AddressStatusClosure = (_ response: AddressStatusEnum) -> (Void)
+public typealias CanAccountSignClosure = (_ response: CanAccountSignEnum) -> (Void)
+public typealias GetSignersListClosure = (_ response: GetSignersListEnum) -> (Void)
 public typealias CoinUnit = Double
 
 public class UserManager: NSObject {
@@ -136,6 +148,38 @@ public class UserManager: NSObject {
                 switch response {
                 case .success(details: let details):
                     completion(.success(details: details))
+                case .failure(error: let error):
+                    completion(.failure(error: error))
+                }
+            }
+        }
+    }
+    
+    func canAccountSign(accountID: String, completion: @escaping CanAccountSignClosure) {
+        stellarSDK.accounts.getAccountDetails(accountId: accountID) { (response) -> (Void) in
+            DispatchQueue.main.async {
+                switch response {
+                case .success(details: let accountDetails):
+                    if accountDetails.signers.first(where: { (account) -> Bool in
+                        return account.publicKey == accountID
+                    })?.weight != 0 {
+                        completion(.success(canSign: true))
+                    } else {
+                        completion(.success(canSign: false))
+                    }
+                case .failure(error: let error):
+                    completion(.failure(error: error))
+                }
+            }
+        }
+    }
+    
+    func getSignersList(accountID: String, completion: @escaping GetSignersListClosure) {
+        stellarSDK.accounts.getAccountDetails(accountId: accountID) { (response) -> (Void) in
+            DispatchQueue.main.async {
+                switch response {
+                case .success(details: let accountDetails):
+                    completion(.success(signersList: accountDetails.signers))
                 case .failure(error: let error):
                     completion(.failure(error: error))
                 }
