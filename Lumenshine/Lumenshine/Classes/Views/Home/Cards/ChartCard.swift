@@ -131,7 +131,7 @@ fileprivate extension ChartCard {
     
     func prepareTitle() {
         titleLabel.textColor = Stylesheet.color(.lightBlack)
-        titleLabel.font = R.font.encodeSansSemiBold(size: 12)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 13)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.numberOfLines = 0
         
@@ -145,7 +145,7 @@ fileprivate extension ChartCard {
     
     func prepareDetail() {
         detailLabel.textColor = Stylesheet.color(.lightBlack)
-        detailLabel.font = R.font.encodeSansRegular(size: 12)
+        detailLabel.font = R.font.encodeSansRegular(size: 13)
         detailLabel.textAlignment = .left
         detailLabel.adjustsFontSizeToFitWidth = true
         detailLabel.numberOfLines = 0
@@ -170,7 +170,7 @@ fileprivate extension ChartCard {
     
     func prepareRate() {
         currentRateLabel.textColor = Stylesheet.color(.lightBlack)
-        currentRateLabel.font = R.font.encodeSansSemiBold(size: 12)
+        currentRateLabel.font = R.font.encodeSansSemiBold(size: 13)
         currentRateLabel.textAlignment = .left
         currentRateLabel.adjustsFontSizeToFitWidth = true
         
@@ -184,7 +184,7 @@ fileprivate extension ChartCard {
     
     func preparePercentage() {
         percentageChangeLabel.textColor = Stylesheet.color(.lightBlack)
-        percentageChangeLabel.font = R.font.encodeSansSemiBold(size: 12)
+        percentageChangeLabel.font = R.font.encodeSansSemiBold(size: 13)
         percentageChangeLabel.textAlignment = .right
         percentageChangeLabel.adjustsFontSizeToFitWidth = true
         
@@ -198,8 +198,8 @@ fileprivate extension ChartCard {
     }
     
     func preparePeriodPicker() {
-        periodPicker.textColor = Stylesheet.color(.blue)
-        periodPicker.font = R.font.encodeSansSemiBold(size: 12)
+        periodPicker.textColor = Stylesheet.color(.darkBlue)
+        periodPicker.font = R.font.encodeSansSemiBold(size: 14)
         periodPicker.adjustsFontSizeToFitWidth = true
         periodPicker.borderStyle = .roundedRect
         periodPicker.rightViewMode = .always

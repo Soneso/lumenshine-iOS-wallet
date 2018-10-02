@@ -13,6 +13,7 @@ class UnfundedWalletCardContentView: UIView {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var fundButton: UIButton!
     @IBOutlet weak var helpButton: UIButton!
-    
-
+    @IBOutlet weak var notFundedLabel: UILabel!
+    @IBOutlet weak var balanceLabel: UILabel!
+    @IBOutlet weak var balanceDescriptionLabel: UILabel!
 }

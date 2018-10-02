@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -45,10 +46,10 @@
                     </subviews>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Gle-eK-CQB">
-                    <rect key="frame" x="16" y="131.5" width="343" height="44.5"/>
+                    <rect key="frame" x="16" y="131.5" width="343" height="54.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="0 XLM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQg-h4-3mK">
-                            <rect key="frame" x="0.0" y="0.0" width="343" height="44.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="343" height="54.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -56,9 +57,9 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ac-Fj-252">
-                    <rect key="frame" x="0.0" y="192" width="375" height="55"/>
+                    <rect key="frame" x="0.0" y="202" width="375" height="45"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c71-49-efD">
+                        <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c71-49-efD">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -66,19 +67,19 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QpW-7W-h0z">
-                            <rect key="frame" x="312" y="0.0" width="47" height="55"/>
+                            <rect key="frame" x="312" y="0.0" width="47" height="45"/>
                             <state key="normal" title="Details"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v69-4U-2Nv">
-                            <rect key="frame" x="242" y="0.0" width="54" height="55"/>
+                            <rect key="frame" x="242" y="0.0" width="54" height="45"/>
                             <state key="normal" title="Receive"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FaK-Fg-J3B">
-                            <rect key="frame" x="190" y="0.0" width="36" height="55"/>
+                            <rect key="frame" x="190" y="0.0" width="36" height="45"/>
                             <state key="normal" title="Send"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kFj-Ap-sWm">
-                            <rect key="frame" x="16" y="0.0" width="33" height="55"/>
+                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kFj-Ap-sWm">
+                            <rect key="frame" x="16" y="0.0" width="28" height="45"/>
                             <state key="normal" image="question"/>
                         </button>
                     </subviews>
@@ -94,7 +95,7 @@
                         <constraint firstItem="KLh-rI-TgG" firstAttribute="trailing" secondItem="QpW-7W-h0z" secondAttribute="trailing" constant="16" id="Uak-iA-raC"/>
                         <constraint firstItem="QpW-7W-h0z" firstAttribute="top" secondItem="KLh-rI-TgG" secondAttribute="top" id="VUP-3d-nwf"/>
                         <constraint firstItem="KLh-rI-TgG" firstAttribute="bottom" secondItem="v69-4U-2Nv" secondAttribute="bottom" id="YbN-OG-4vr"/>
-                        <constraint firstAttribute="height" constant="55" id="Zys-cz-b0f"/>
+                        <constraint firstAttribute="height" constant="45" id="Zys-cz-b0f"/>
                         <constraint firstItem="KLh-rI-TgG" firstAttribute="bottom" secondItem="QpW-7W-h0z" secondAttribute="bottom" id="aGA-Ty-Jbs"/>
                         <constraint firstAttribute="trailing" secondItem="c71-49-efD" secondAttribute="trailing" id="eKJ-PW-HmK"/>
                         <constraint firstItem="QpW-7W-h0z" firstAttribute="leading" secondItem="v69-4U-2Nv" secondAttribute="trailing" constant="16" id="k01-dG-VuV"/>
@@ -130,6 +131,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="availableDescriptionLabel" destination="P2V-MJ-cUf" id="OAc-RY-JFd"/>
                 <outlet property="availableLabel" destination="FQg-h4-3mK" id="Lcv-k2-ev8"/>
                 <outlet property="availableStackView" destination="Gle-eK-CQB" id="SL3-Nn-pgJ"/>
                 <outlet property="balanceDescriptionLabel" destination="AMC-lx-fVN" id="N0w-DJ-9PH"/>
@@ -145,6 +147,6 @@
         </view>
     </objects>
     <resources>
-        <image name="question" width="33" height="33"/>
+        <image name="question" width="28" height="28"/>
     </resources>
 </document>

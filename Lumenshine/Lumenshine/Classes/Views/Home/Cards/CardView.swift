@@ -29,8 +29,8 @@ class CardView: UIView {
             let buttons = viewModel?.bottomTitles?.enumerated().map { (index, title) -> FlatButton in
                 let button = FlatButton(title: title)
                 button.tag = index
-                button.titleColor = Stylesheet.color(.blue)
-                button.titleLabel?.font = R.font.encodeSansSemiBold(size: 13.5)
+                button.titleColor = Stylesheet.color(.darkBlue)
+                button.titleLabel?.font = R.font.encodeSansSemiBold(size: 15)
                 button.addTarget(self, action: #selector(barButtonClick(_:)), for: .touchUpInside)
                 return button
             }
@@ -78,23 +78,63 @@ class CardView: UIView {
     }
     
     class func setupWalletCard(card: WalletCard, viewModel: WalletCardViewModel) {
+        
+        let buttonFont = R.font.encodeSansSemiBold(size: 15)
+        let buttonColor = Stylesheet.color(.darkBlue)
+        
         if let fundedView = card.fundedView {
-            fundedView.sendButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapSendButton), for: .touchUpInside)
-            fundedView.receiveButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapReceiveButton), for: .touchUpInside)
-            fundedView.detailsButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapDetailsButton), for: .touchUpInside)
-            fundedView.helpButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapHelpButton), for: .touchUpInside)
-            fundedView.nameLabel.text = viewModel.title
-            fundedView.balanceLabel.text = viewModel.nativeBalance?.stringWithUnit
+            
+            fundedView.nameLabel.font = R.font.encodeSansBold(size: 16)
+            fundedView.nameLabel.textColor = Stylesheet.color(.darkBlue)
+            fundedView.nameLabel.text = viewModel.title?.uppercased()
+            
             fundedView.balanceDescriptionLabel.text = (viewModel.wallet as! FundedWallet).balances.count > 1 ? BalanceLabelDescription.extended.rawValue : BalanceLabelDescription.onlyNative.rawValue
-            CardView.labelsForCustomAssets(wallet: viewModel.wallet!).forEach({ label in fundedView.balanceStackView.addArrangedSubview(label) })
+            fundedView.balanceDescriptionLabel.font = R.font.encodeSansSemiBold(size: 15)
+            fundedView.balanceLabel.text = viewModel.nativeBalance?.stringWithUnit
+            fundedView.balanceLabel.font = R.font.encodeSansRegular(size: 14)
+            
+            fundedView.availableDescriptionLabel.font = R.font.encodeSansSemiBold(size: 15)
             fundedView.availableLabel.text = viewModel.nativeBalance?.availableAmount.stringWithUnit
+            fundedView.availableLabel.font = R.font.encodeSansRegular(size: 14)
+            CardView.labelsForCustomAssets(wallet: viewModel.wallet!).forEach({ label in fundedView.balanceStackView.addArrangedSubview(label) })
             CardView.labelsForCustomAssets(wallet: viewModel.wallet!).forEach({ label in fundedView.availableStackView.addArrangedSubview(label) })
+            
+            fundedView.helpButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapHelpButton), for: .touchUpInside)
+            fundedView.helpButton.tintColor = buttonColor
+            
+            fundedView.sendButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapSendButton), for: .touchUpInside)
+            fundedView.sendButton.titleLabel?.font = buttonFont
+            fundedView.sendButton.setTitleColor(buttonColor, for: UIControlState.normal)
+            
+            fundedView.receiveButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapReceiveButton), for: .touchUpInside)
+            fundedView.receiveButton.titleLabel?.font = buttonFont
+            fundedView.receiveButton.setTitleColor(buttonColor, for: UIControlState.normal)
+            
+            fundedView.detailsButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapDetailsButton), for: .touchUpInside)
+            fundedView.detailsButton.titleLabel?.font = buttonFont
+            fundedView.detailsButton.setTitleColor(buttonColor, for: UIControlState.normal)
+
         }
         
         if let unfundedView = card.unfundedView {
-            unfundedView.fundButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapFundButton), for: .touchUpInside)
+            
+            unfundedView.nameLabel.font = R.font.encodeSansBold(size: 16)
+            unfundedView.nameLabel.textColor = Stylesheet.color(.darkBlue)
+            unfundedView.nameLabel.text = viewModel.title?.uppercased()
+            
+            unfundedView.notFundedLabel.font = R.font.encodeSansSemiBold(size: 14)
+            unfundedView.notFundedLabel.textColor = Stylesheet.color(.red)
+            
+            unfundedView.balanceDescriptionLabel.font = R.font.encodeSansSemiBold(size: 15)
+            unfundedView.balanceLabel.font = R.font.encodeSansRegular(size: 14)
+            
             unfundedView.helpButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapHelpButton), for: .touchUpInside)
-            unfundedView.nameLabel.text = viewModel.title
+            unfundedView.helpButton.tintColor = buttonColor
+            
+            unfundedView.fundButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapFundButton), for: .touchUpInside)
+            unfundedView.fundButton.titleLabel?.font = buttonFont
+            unfundedView.fundButton.setTitleColor(buttonColor, for: UIControlState.normal)
+
         }
     }
     
@@ -106,7 +146,7 @@ class CardView: UIView {
                 if balance.assetType != AssetTypeAsString.NATIVE {
                     let text = String(format: "%.2f \(balance.assetCode ?? balance.assetType)", CoinUnit(balance.balance)!)
                     let label = UILabel()
-                    label.font = UIFont.systemFont(ofSize: 15.0)
+                    label.font = R.font.encodeSansRegular(size: 14)
                     label.text = text
                     labels.append(label)
                 }

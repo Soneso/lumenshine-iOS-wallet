@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,16 +22,16 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UWs-ZR-OhZ">
-                    <rect key="frame" x="16" y="75.5" width="343" height="18"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Balance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UWs-ZR-OhZ">
+                    <rect key="frame" x="16" y="89.5" width="343" height="18"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wgI-xg-A9r">
-                    <rect key="frame" x="0.0" y="192" width="375" height="55"/>
+                    <rect key="frame" x="0.0" y="202" width="375" height="45"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U2Y-cq-O7Y">
+                        <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U2Y-cq-O7Y">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
                             <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -38,11 +39,11 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f69-AE-dcV">
-                            <rect key="frame" x="278" y="0.0" width="81" height="55"/>
+                            <rect key="frame" x="278" y="0.0" width="81" height="45"/>
                             <state key="normal" title="Fund Wallet"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p9g-xS-zVJ">
-                            <rect key="frame" x="16" y="0.0" width="28" height="55"/>
+                            <rect key="frame" x="16" y="0.0" width="28" height="45"/>
                             <state key="normal" image="question"/>
                         </button>
                     </subviews>
@@ -51,7 +52,7 @@
                         <constraint firstItem="p9g-xS-zVJ" firstAttribute="leading" secondItem="VWl-F4-CNx" secondAttribute="leading" constant="16" id="Ev4-4b-jyY"/>
                         <constraint firstItem="f69-AE-dcV" firstAttribute="top" secondItem="VWl-F4-CNx" secondAttribute="top" id="J7e-ld-zxZ"/>
                         <constraint firstItem="VWl-F4-CNx" firstAttribute="trailing" secondItem="f69-AE-dcV" secondAttribute="trailing" constant="16" id="JqJ-cW-erC"/>
-                        <constraint firstAttribute="height" constant="55" id="KJq-7H-bHl"/>
+                        <constraint firstAttribute="height" constant="45" id="KJq-7H-bHl"/>
                         <constraint firstItem="f69-AE-dcV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="p9g-xS-zVJ" secondAttribute="trailing" constant="16" id="NEd-k8-c5P"/>
                         <constraint firstItem="U2Y-cq-O7Y" firstAttribute="top" secondItem="wgI-xg-A9r" secondAttribute="top" id="Reh-Cq-Mgz"/>
                         <constraint firstItem="U2Y-cq-O7Y" firstAttribute="leading" secondItem="wgI-xg-A9r" secondAttribute="leading" id="cx5-qG-jai"/>
@@ -62,14 +63,14 @@
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="VWl-F4-CNx"/>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(not founded)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QmJ-VE-oES">
-                    <rect key="frame" x="16" y="41.5" width="343" height="18"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="(not funded)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QmJ-VE-oES">
+                    <rect key="frame" x="16" y="47.5" width="343" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.98823529409999999" green="0.047058823530000002" blue="0.1058823529" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="0 XLM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXd-hR-sCL">
-                    <rect key="frame" x="16" y="97.5" width="343" height="62.5"/>
+                    <rect key="frame" x="16" y="97.5" width="343" height="72.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -97,9 +98,12 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="ye4-CW-sVN"/>
             <connections>
+                <outlet property="balanceDescriptionLabel" destination="UWs-ZR-OhZ" id="ccj-Kl-TQx"/>
+                <outlet property="balanceLabel" destination="LXd-hR-sCL" id="Ybg-Bh-Qte"/>
                 <outlet property="fundButton" destination="f69-AE-dcV" id="ddL-Kr-4VF"/>
                 <outlet property="helpButton" destination="p9g-xS-zVJ" id="nfW-JV-hdp"/>
                 <outlet property="nameLabel" destination="02c-sm-4KK" id="mBw-HM-GPS"/>
+                <outlet property="notFundedLabel" destination="QmJ-VE-oES" id="h6B-5M-5b6"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="-119.5"/>
         </view>
