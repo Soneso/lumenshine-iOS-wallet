@@ -25,16 +25,28 @@ private enum StatusLabelText: String {
 private var TransactionResultPrintJobName = "Transaction result print data"
 
 class TransactionResultViewController: UIViewController, WalletActionsProtocol {
+
+    @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var statusValueLabel: UILabel!
+    @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var messageValueLabel: UILabel!
+    @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var currencyValueLabel: UILabel!
+    @IBOutlet weak var issuerLabel: UILabel!
     @IBOutlet weak var issuerValueLabel: UILabel!
+    @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var amountValueLabel: UILabel!
+    @IBOutlet weak var recepientLabel: UILabel!
     @IBOutlet weak var recipientMailValueLabel: UILabel!
     @IBOutlet weak var recipientPKLabel: UILabel!
+    @IBOutlet weak var memoLabel: UILabel!
     @IBOutlet weak var memoValueLabel: UILabel!
+    @IBOutlet weak var memoTypeLabel: UILabel!
     @IBOutlet weak var memoTypeValueLabel: UILabel!
+    @IBOutlet weak var transactionFeeLabel: UILabel!
     @IBOutlet weak var transactionFeeValueLabel: UILabel!
+    @IBOutlet weak var operationIDLabel: UILabel!
     @IBOutlet weak var operationIDValueLabel: UILabel!
     
     @IBOutlet weak var errorMessageStackView: UIStackView!
@@ -98,40 +110,116 @@ class TransactionResultViewController: UIViewController, WalletActionsProtocol {
             memoStackView.isHidden = true
         }
         
+        setLabelsLayout()
         setupButtons()
         setButtonsTitles()
-        setStatusLabel()
         populateValues()
         setupNavigationItem()
     }
     
-    private func setStatusLabel() {
+    private func setLabelsLayout() {
+        
+        let labelColor = Stylesheet.color(.lightBlack)
+        let subTitleLabelFont = R.font.encodeSansSemiBold(size: 17)
+        let labelFont = R.font.encodeSansBold(size: 15)
+        let valueLabelFont = R.font.encodeSansSemiBold(size: 15)
+        
+        // Subtitle
+        subtitleLabel.textColor = labelColor
+        subtitleLabel.font = subTitleLabelFont
+        
+        // Status label & value
+        statusLabel.textColor = labelColor
+        statusLabel.font = labelFont
+        statusValueLabel.font = labelFont
+        
         switch result.status {
         case .error:
-            statusValueLabel.text = StatusLabelText.error.rawValue
+            statusValueLabel.text = StatusLabelText.error.rawValue.uppercased()
             statusValueLabel.textColor = Stylesheet.color(.red)
             break
         case .success:
-            statusValueLabel.text = StatusLabelText.success.rawValue
+            statusValueLabel.text = StatusLabelText.success.rawValue.uppercased()
             statusValueLabel.textColor = Stylesheet.color(.green)
             break
         }
+        
+        // Message label
+        messageLabel.textColor = labelColor
+        messageLabel.font = labelFont
+        messageValueLabel.numberOfLines = 0
+        messageValueLabel.font = valueLabelFont
+        
+        // Currency label
+        currencyLabel.textColor = labelColor
+        currencyLabel.font = labelFont
+        currencyValueLabel.font = valueLabelFont
+        
+        // Issuer label
+        issuerLabel.textColor = labelColor
+        issuerLabel.font = labelFont
+        issuerValueLabel.font = valueLabelFont
+        
+        // Amount label
+        amountLabel.textColor = labelColor
+        amountLabel.font = labelFont
+        amountValueLabel.font = valueLabelFont
+        
+        // Recepient label
+        recepientLabel.textColor = labelColor
+        recepientLabel.font = labelFont
+        recipientMailValueLabel.font = valueLabelFont
+        recipientPKLabel.font = valueLabelFont
+        
+        // Memo label
+        memoLabel.textColor = labelColor
+        memoLabel.font = labelFont
+        memoValueLabel.font = valueLabelFont
+        
+        // Memotype label
+        memoTypeLabel.textColor = labelColor
+        memoTypeLabel.font = labelFont
+        memoTypeValueLabel.font = valueLabelFont
+        
+        // Operation ID label
+        operationIDLabel.textColor = labelColor
+        operationIDLabel.font = labelFont
+        operationIDValueLabel.font = valueLabelFont
+        
+        // Transaction fee label
+        transactionFeeLabel.textColor = labelColor
+        transactionFeeLabel.font = labelFont
+        transactionFeeValueLabel.font = valueLabelFont
+        
     }
     
     private func setupButtons() {
+        
+        let buttonFont = R.font.encodeSansSemiBold(size: 15)
+        
         editButton.backgroundColor = Stylesheet.color(.blue)
+        editButton.titleLabel?.font = buttonFont
+        
         sendOtherSuccessButton.backgroundColor = Stylesheet.color(.green)
+        sendOtherSuccessButton.titleLabel?.font = buttonFont
+        
         sendOtherErrorButton.backgroundColor = Stylesheet.color(.green)
+        sendOtherErrorButton.titleLabel?.font = buttonFont
+        
         printButton.backgroundColor = Stylesheet.color(.orange)
+        printButton.titleLabel?.font = buttonFont
+        
         doneButton.backgroundColor = Stylesheet.color(.blue)
+        doneButton.titleLabel?.font = buttonFont
+        
     }
     
     private func setButtonsTitles() {
-        editButton.setTitle(ButtonsTitles.edit.rawValue, for: .normal)
-        sendOtherErrorButton.setTitle(ButtonsTitles.sendOther.rawValue, for: .normal)
-        sendOtherSuccessButton.setTitle(ButtonsTitles.sendOther.rawValue, for: .normal)
-        printButton.setTitle(ButtonsTitles.print.rawValue, for: .normal)
-        doneButton.setTitle(ButtonsTitles.done.rawValue, for: .normal)
+        editButton.setTitle(ButtonsTitles.edit.rawValue.uppercased(), for: .normal)
+        sendOtherErrorButton.setTitle(ButtonsTitles.sendOther.rawValue.uppercased(), for: .normal)
+        sendOtherSuccessButton.setTitle(ButtonsTitles.sendOther.rawValue.uppercased(), for: .normal)
+        printButton.setTitle(ButtonsTitles.print.rawValue.uppercased(), for: .normal)
+        doneButton.setTitle(ButtonsTitles.done.rawValue.uppercased(), for: .normal)
     }
     
     private func populateValues() {

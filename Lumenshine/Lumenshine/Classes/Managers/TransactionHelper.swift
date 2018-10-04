@@ -172,7 +172,7 @@ class TransactionHelper {
     private func submitTransactionSucceeded(transaction: Transaction, completion: @escaping (() -> (Void))) {
         print("Account successfully created.")
         self.transactionResult.status = TransactionStatus.success
-        self.transactionResult.transactionFee = String(transaction.fee)
+        self.transactionResult.transactionFee = "0.0000" + String(transaction.fee)
         
         if let transactionHash = try? transaction.getTransactionHash(network: Network.testnet) {
             self.stellarSdk.payments.getPayments(forTransaction: transactionHash, response: { (response) -> (Void) in
@@ -210,7 +210,7 @@ class TransactionHelper {
                     StellarSDKLog.printHorizonRequestErrorMessage(tag:"Create account", horizonRequestError: error)
                     self.transactionResult.status = TransactionStatus.error
                     self.transactionResult.message = error.localizedDescription
-                    self.transactionResult.transactionFee = transaction.fee > 0 ? String(transaction.fee) : nil
+                    self.transactionResult.transactionFee = transaction.fee > 0 ? ("0.0000" + String(transaction.fee)) : nil
                     completion()
                 }
             }
@@ -277,7 +277,7 @@ class TransactionHelper {
     private func submitPaymentSucceeded(transaction: Transaction, completion: @escaping (() -> (Void))) {
         print("Success")
         self.transactionResult.status = TransactionStatus.success
-        self.transactionResult.transactionFee = String(transaction.fee)
+        self.transactionResult.transactionFee = "0.0000" + String(transaction.fee)
         
         self.stellarSdk.payments.getPayments(forTransaction: try! transaction.getTransactionHash(network: Network.testnet), response: { (response) -> (Void) in
             switch response {
@@ -312,7 +312,7 @@ class TransactionHelper {
                     StellarSDKLog.printHorizonRequestErrorMessage(tag:"SRP Test", horizonRequestError:error)
                     self.transactionResult.status = TransactionStatus.error
                     self.transactionResult.message = error.localizedDescription
-                    self.transactionResult.transactionFee = transaction.fee > 0 ? String(transaction.fee) : nil
+                    self.transactionResult.transactionFee = transaction.fee > 0 ? ("0.0000" + String(transaction.fee)) : nil
                     completion()
                 }
             }

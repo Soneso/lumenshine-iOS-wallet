@@ -13,25 +13,36 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TransactionResultViewController" customModule="Lumenshine" customModuleProvider="target">
             <connections>
+                <outlet property="amountLabel" destination="F0k-Bt-Z96" id="doR-eX-mXQ"/>
                 <outlet property="amountValueLabel" destination="kBq-wa-6uv" id="CHf-Tv-OeO"/>
+                <outlet property="currencyLabel" destination="Lyf-wG-9dp" id="jya-py-51i"/>
                 <outlet property="currencyValueLabel" destination="pas-ak-tIh" id="B6H-Yy-5pi"/>
                 <outlet property="doneButton" destination="49t-KT-MrH" id="cjf-Gn-eeO"/>
                 <outlet property="editButton" destination="PnW-Yn-a8K" id="v0W-k3-yjk"/>
                 <outlet property="errorMessageStackView" destination="hoc-td-35f" id="gXC-Se-Cq7"/>
+                <outlet property="issuerLabel" destination="eZn-qD-cFJ" id="no5-eh-g6p"/>
                 <outlet property="issuerLabelStackView" destination="avr-Df-0r5" id="bwf-vI-3cC"/>
                 <outlet property="issuerValueLabel" destination="tLA-01-VxM" id="guu-a4-rCO"/>
+                <outlet property="memoLabel" destination="w4U-RT-Or5" id="1i5-Xb-CJ0"/>
                 <outlet property="memoStackView" destination="P8c-3D-kBK" id="Ytc-Zd-7am"/>
+                <outlet property="memoTypeLabel" destination="PSW-gS-Zmb" id="8X0-fA-fKg"/>
                 <outlet property="memoTypeValueLabel" destination="AEN-Ir-aBU" id="Gk0-C9-Zzt"/>
                 <outlet property="memoValueLabel" destination="AWd-F6-NCi" id="eMK-S0-bO6"/>
+                <outlet property="messageLabel" destination="PRN-Nv-o0v" id="9Of-5y-mgn"/>
                 <outlet property="messageValueLabel" destination="r3v-DQ-yvX" id="tUa-hg-dWp"/>
+                <outlet property="operationIDLabel" destination="jR8-xK-TKr" id="3IT-VQ-KW6"/>
                 <outlet property="operationIDStackView" destination="57H-m5-hgR" id="ONB-ye-ZqN"/>
                 <outlet property="operationIDValueLabel" destination="9yv-DF-9PG" id="vkb-OI-nkL"/>
                 <outlet property="printButton" destination="4RG-nc-OvM" id="m5G-Q4-Uc1"/>
+                <outlet property="recepientLabel" destination="dsO-6t-paW" id="3cu-tn-oJo"/>
                 <outlet property="recipientMailValueLabel" destination="DIR-Lb-c3e" id="aH1-LU-ocq"/>
                 <outlet property="recipientPKLabel" destination="Dhw-nb-oNr" id="6lL-Ur-qda"/>
                 <outlet property="sendOtherErrorButton" destination="HxR-BI-Tjw" id="gn1-yO-ETJ"/>
                 <outlet property="sendOtherSuccessButton" destination="fEx-hE-LeM" id="DRh-KB-hLr"/>
-                <outlet property="statusValueLabel" destination="fyr-BF-iIu" id="47j-Jb-mFb"/>
+                <outlet property="statusLabel" destination="8G7-5z-rJL" id="A3d-BJ-JXK"/>
+                <outlet property="statusValueLabel" destination="fyr-BF-iIu" id="Uji-vx-A1g"/>
+                <outlet property="subtitleLabel" destination="BVx-j4-tHm" id="Hh1-y3-AbN"/>
+                <outlet property="transactionFeeLabel" destination="Duz-en-UpM" id="fHx-cz-O1F"/>
                 <outlet property="transactionFeeStackView" destination="S1Z-FQ-tPy" id="ni4-Rd-8QF"/>
                 <outlet property="transactionFeeValueLabel" destination="lJC-3r-CYf" id="JYJ-K2-xyD"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Xda-fR-Ewl"/>
@@ -66,7 +77,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="343" height="574.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="PNj-mf-kIe">
-                                    <rect key="frame" x="0.0" y="0.0" width="343" height="69.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="343" height="45"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Per-cd-xLw">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
@@ -102,8 +113,30 @@
                                                 </label>
                                             </subviews>
                                         </stackView>
+                                    </subviews>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="9Tm-Yd-TMr">
+                                    <rect key="frame" x="0.0" y="61" width="343" height="69.5"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="4f0-Vd-d3x">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Amount:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0k-Bt-Z96" customClass="SubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="70.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="amountValue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kBq-wa-6uv" customClass="InfoLabel" customModule="Lumenshine" customModuleProvider="target">
+                                                    <rect key="frame" x="78.5" y="0.0" width="264.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="eJT-Ds-gSS">
-                                            <rect key="frame" x="0.0" y="49" width="343" height="20.5"/>
+                                            <rect key="frame" x="0.0" y="24.5" width="343" height="20.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Currency:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lyf-wG-9dp" customClass="SubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="81.5" height="20.5"/>
@@ -119,13 +152,8 @@
                                                 </label>
                                             </subviews>
                                         </stackView>
-                                    </subviews>
-                                </stackView>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="9Tm-Yd-TMr">
-                                    <rect key="frame" x="0.0" y="85.5" width="343" height="45"/>
-                                    <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="avr-Df-0r5">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
+                                            <rect key="frame" x="0.0" y="49" width="343" height="20.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Issuer:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZn-qD-cFJ" customClass="SubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="56.5" height="20.5"/>
@@ -135,23 +163,6 @@
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="issuerValue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLA-01-VxM" customClass="InfoLabel" customModule="Lumenshine" customModuleProvider="target">
                                                     <rect key="frame" x="64.5" y="0.0" width="278.5" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </stackView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="4f0-Vd-d3x">
-                                            <rect key="frame" x="0.0" y="24.5" width="343" height="20.5"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Amount:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0k-Bt-Z96" customClass="SubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="70.5" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="amountValue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kBq-wa-6uv" customClass="InfoLabel" customModule="Lumenshine" customModuleProvider="target">
-                                                    <rect key="frame" x="78.5" y="0.0" width="264.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
