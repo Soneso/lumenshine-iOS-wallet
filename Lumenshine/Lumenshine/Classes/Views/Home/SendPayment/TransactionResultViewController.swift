@@ -10,24 +10,19 @@ import Foundation
 import UIKit
 import Material
 
-enum ButtonsSuccessTitles: String {
-    case editOrSendOtherButton = "Send other"
-    case sendOtherOrPrintButton = "Print"
-    case printOrDoneButton = "Done"
+private enum ButtonsTitles: String {
+    case sendOther = "SEND OTHER"
+    case print = "PRINT"
+    case done = "DONE"
+    case edit = "EDIT"
 }
 
-enum ButtonsErrorTitles: String {
-    case editOrSendOtherButton = "Edit"
-    case sendOtherOrPrintButton = "Send other"
-    case printOrDoneButton = "Print"
-}
-
-enum StatusLabelText: String {
+private enum StatusLabelText: String {
     case success = "success"
     case error = "error"
 }
 
-var TransactionResultPrintJobName = "Transaction result print data"
+private var TransactionResultPrintJobName = "Transaction result print data"
 
 class TransactionResultViewController: UIViewController, WalletActionsProtocol {
     @IBOutlet weak var statusValueLabel: UILabel!
@@ -44,17 +39,16 @@ class TransactionResultViewController: UIViewController, WalletActionsProtocol {
     
     @IBOutlet weak var errorMessageStackView: UIStackView!
     @IBOutlet weak var operationIDStackView: UIStackView!
-    @IBOutlet weak var doneWithErrorsStackView: UIStackView!
     @IBOutlet weak var transactionFeeStackView: UIStackView!
     @IBOutlet weak var memoStackView: UIStackView!
-    @IBOutlet weak var memoTypeStackView: UIStackView!
     @IBOutlet weak var issuerLabelStackView: UIStackView!
-    @IBOutlet weak var issuerValueStackView: UIStackView!
     
-    @IBOutlet weak var editOrSendOtherButton: UIButton!
-    @IBOutlet weak var sendOtherOrPrintButton: UIButton!
-    @IBOutlet weak var printOrDoneButton: UIButton!
-    
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var sendOtherSuccessButton: UIButton!
+    @IBOutlet weak var sendOtherErrorButton: UIButton!
+    @IBOutlet weak var printButton: UIButton!
+    @IBOutlet weak var doneButton: UIButton!
+
     var wallet: Wallet!
     var result: TransactionResult!
     var closeAction: (() -> ())?
@@ -63,48 +57,16 @@ class TransactionResultViewController: UIViewController, WalletActionsProtocol {
     
     private var titleView = TitleView()
     
-    @IBAction func closeButtonAction(_ sender: UIButton) {
-        switch result.status {
-        case .error:
-            closeAction?()
-            break
-        case .success:
-            closeAllAction?()
-            break
-        }
-    }
-  
-    @IBAction func editOrSendOtherButtonAction(_ sender: UIButton) {
-        switch result.status {
-        case .error:
-            closeAction?()
-            break
-        case .success:
-            sendOtherAction?()
-            break
-        }
+    @IBAction func editButtonAction(_ sender: UIButton) {
+        closeAction?()
     }
     
-    @IBAction func sendOtherOrPrintButtonAction(_ sender: UIButton) {
-        switch result.status {
-        case .error:
-            sendOtherAction?()
-            break
-        case.success:
-            print()
-            break
-        }
+    @IBAction func sendOtherButtonAction(_ sender: UIButton) {
+        sendOtherAction?()
     }
     
-    @IBAction func printOrDoneButtonAction(_ sender: UIButton) {
-        switch result.status {
-        case .error:
-            print()
-            break
-        case.success:
-            closeAllAction?()
-            break
-        }
+    @IBAction func printButtonAction(_ sender: UIButton) {
+        print()
     }
     
     @IBAction func doneButtonAction(_ sender: UIButton) {
@@ -120,21 +82,23 @@ class TransactionResultViewController: UIViewController, WalletActionsProtocol {
             if result.transactionFee == nil {
                 transactionFeeStackView.isHidden = true
             }
+
+            sendOtherSuccessButton.isHidden = true
         case .success:
-            doneWithErrorsStackView.isHidden = true
             errorMessageStackView.isHidden = true
+            editButton.isHidden = true
+            sendOtherErrorButton.isHidden = true
         }
         
         if result.currency == NativeCurrencyNames.xlm.rawValue {
             issuerLabelStackView.isHidden = true
-            issuerValueStackView.isHidden = true
         }
         
         if result.memo == nil {
             memoStackView.isHidden = true
-            memoTypeStackView.isHidden = true
         }
         
+        setupButtons()
         setButtonsTitles()
         setStatusLabel()
         populateValues()
@@ -154,19 +118,20 @@ class TransactionResultViewController: UIViewController, WalletActionsProtocol {
         }
     }
     
+    private func setupButtons() {
+        editButton.backgroundColor = Stylesheet.color(.blue)
+        sendOtherSuccessButton.backgroundColor = Stylesheet.color(.green)
+        sendOtherErrorButton.backgroundColor = Stylesheet.color(.green)
+        printButton.backgroundColor = Stylesheet.color(.orange)
+        doneButton.backgroundColor = Stylesheet.color(.blue)
+    }
+    
     private func setButtonsTitles() {
-        switch result.status {
-        case .error:
-            editOrSendOtherButton.setTitle(ButtonsErrorTitles.editOrSendOtherButton.rawValue, for: UIControlState.normal)
-            sendOtherOrPrintButton.setTitle(ButtonsErrorTitles.sendOtherOrPrintButton.rawValue, for: UIControlState.normal)
-            printOrDoneButton.setTitle(ButtonsErrorTitles.printOrDoneButton.rawValue, for: UIControlState.normal)
-            break
-        case.success:
-            editOrSendOtherButton.setTitle(ButtonsSuccessTitles.editOrSendOtherButton.rawValue, for: UIControlState.normal)
-            sendOtherOrPrintButton.setTitle(ButtonsSuccessTitles.sendOtherOrPrintButton.rawValue, for: UIControlState.normal)
-            printOrDoneButton.setTitle(ButtonsSuccessTitles.printOrDoneButton.rawValue, for: UIControlState.normal)
-            break
-        }
+        editButton.setTitle(ButtonsTitles.edit.rawValue, for: .normal)
+        sendOtherErrorButton.setTitle(ButtonsTitles.sendOther.rawValue, for: .normal)
+        sendOtherSuccessButton.setTitle(ButtonsTitles.sendOther.rawValue, for: .normal)
+        printButton.setTitle(ButtonsTitles.print.rawValue, for: .normal)
+        doneButton.setTitle(ButtonsTitles.done.rawValue, for: .normal)
     }
     
     private func populateValues() {
@@ -257,16 +222,8 @@ class TransactionResultViewController: UIViewController, WalletActionsProtocol {
         return image
     }
     
-    @IBAction func didTapBack(_ sender: Any) {
-        self.dismiss(animated: true)
-    }
-    
-    @IBAction func didTapHelp(_ sender: Any) {
-        
-    }
-    
     private func setupNavigationItem() {
-        navigationItem.titleLabel.text = "Transaction result"
+        navigationItem.titleLabel.text = "Send"
         navigationItem.titleLabel.textColor = Stylesheet.color(.white)
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
     }
