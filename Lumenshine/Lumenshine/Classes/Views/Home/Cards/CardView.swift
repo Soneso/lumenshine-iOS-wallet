@@ -15,11 +15,6 @@ protocol CardProtocol {
     func setBottomBar(buttons: [Button]?)
 }
 
-public enum BalanceLabelDescription: String {
-    case onlyNative = "Balance"
-    case extended = "Balances"
-}
-
 class CardView: UIView {
     internal let contentView = UIView()
     internal let bottomBar = Bar()
@@ -85,15 +80,20 @@ class CardView: UIView {
         if let fundedView = card.fundedView {
             
             fundedView.nameLabel.font = R.font.encodeSansBold(size: 16)
-            fundedView.nameLabel.textColor = Stylesheet.color(.darkBlue)
+            fundedView.nameLabel.textColor = Stylesheet.color(.lightBlack)
             fundedView.nameLabel.text = viewModel.title?.uppercased()
             
-            fundedView.balanceDescriptionLabel.text = (viewModel.wallet as! FundedWallet).balances.count > 1 ? BalanceLabelDescription.extended.rawValue : BalanceLabelDescription.onlyNative.rawValue
+            fundedView.balanceDescriptionLabel.text = (viewModel.wallet as! FundedWallet).balances.count > 1 ? R.string.localizable.balances().uppercased() : R.string.localizable.balance().uppercased()
             fundedView.balanceDescriptionLabel.font = R.font.encodeSansSemiBold(size: 15)
+            fundedView.balanceDescriptionLabel.textColor = Stylesheet.color(.blue)
+            
             fundedView.balanceLabel.text = viewModel.nativeBalance?.stringWithUnit
             fundedView.balanceLabel.font = R.font.encodeSansRegular(size: 14)
             
             fundedView.availableDescriptionLabel.font = R.font.encodeSansSemiBold(size: 15)
+            fundedView.availableDescriptionLabel.text = R.string.localizable.available().uppercased()
+            fundedView.availableDescriptionLabel.textColor = Stylesheet.color(.blue)
+            
             fundedView.availableLabel.text = viewModel.nativeBalance?.availableAmount.stringWithUnit
             fundedView.availableLabel.font = R.font.encodeSansRegular(size: 14)
             CardView.labelsForCustomAssets(wallet: viewModel.wallet!).forEach({ label in fundedView.balanceStackView.addArrangedSubview(label) })
@@ -119,13 +119,16 @@ class CardView: UIView {
         if let unfundedView = card.unfundedView {
             
             unfundedView.nameLabel.font = R.font.encodeSansBold(size: 16)
-            unfundedView.nameLabel.textColor = Stylesheet.color(.darkBlue)
+            unfundedView.nameLabel.textColor = Stylesheet.color(.lightBlack)
             unfundedView.nameLabel.text = viewModel.title?.uppercased()
             
             unfundedView.notFundedLabel.font = R.font.encodeSansSemiBold(size: 14)
             unfundedView.notFundedLabel.textColor = Stylesheet.color(.red)
             
             unfundedView.balanceDescriptionLabel.font = R.font.encodeSansSemiBold(size: 15)
+            unfundedView.balanceDescriptionLabel.text = R.string.localizable.balance().uppercased()
+            unfundedView.balanceDescriptionLabel.textColor = Stylesheet.color(.blue)
+            
             unfundedView.balanceLabel.font = R.font.encodeSansRegular(size: 14)
             
             unfundedView.helpButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapHelpButton), for: .touchUpInside)

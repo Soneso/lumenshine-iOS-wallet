@@ -127,7 +127,7 @@ class WalletDetailsViewController: UIViewController {
     }
     
     private func setupBalances() {
-        balanceTitleLabel.text = wallet.hasOnlyNative ? BalanceLabelDescription.onlyNative.rawValue : BalanceLabelDescription.extended.rawValue
+        balanceTitleLabel.text = wallet.hasOnlyNative ? R.string.localizable.balance().uppercased() : R.string.localizable.balances().uppercased()
         var balanceValues = String()
         var availableValues = String()
         

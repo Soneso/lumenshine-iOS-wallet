@@ -669,3 +669,12 @@
 
 /*  */
 "ico_detail" = "Erfahre wie du in einem ICO teilnehmen kannst";
+
+/*  */
+"balance" = "Kontostand";
+
+/*  */
+"balances" = "Kontostand";
+
+/*  */
+"available" = "Verfügbar";
