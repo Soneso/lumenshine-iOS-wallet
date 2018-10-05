@@ -38,7 +38,13 @@
 "open" = "Open";
 
 /*  */
+"update" = "Update";
+
+/*  */
 "updated" = "Updated %@";
+
+/*  */
+"add" = "Add";
 
 /*  */
 "delete" = "Delete";
@@ -699,3 +705,36 @@
 
 /*  */
 "ico_detail" = "Learn how to participate in an ICO";
+
+/*  */
+"send_payment" = "Send Payment";
+
+/*  */
+"new_contact" = "New contact";
+
+/*  */
+"edit_contact" = "Edit contact";
+
+/*  */
+"name" = "Name";
+
+/*  */
+"stellar_address" = "Stellar address";
+
+/*  */
+"invalid_address" = "Invalid Stellar address";
+
+/*  */
+"stellar_address_hint" = "     example: max*lumenshine.com";
+
+/*  */
+"stellar_public_key" = "Stellar public key";
+
+/*  */
+"invalid_public_key" = "Invalid Stellar public key";
+
+/*  */
+"stellar_public_key_hint" = "     example: GBABXVQ64GP5JZ3AQFX5FUYLCVY6HIHMTX4HZQ6...";
+
+/*  */
+"stellar_address_error" = "You must enter address OR public key";

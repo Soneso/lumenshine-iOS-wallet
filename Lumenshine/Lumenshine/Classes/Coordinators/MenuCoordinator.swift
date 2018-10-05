@@ -43,6 +43,8 @@ class MenuCoordinator: MenuCoordinatorType {
             showSettings()
         case .showHelp:
             showHelpCenter()
+        case .showContacts:
+            showContacts()
         case .showRelogin:
             showRelogin()
         case .logout:
@@ -56,31 +58,25 @@ fileprivate extension MenuCoordinator {
     func showHome() {
         let coordinator = HomeCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
         let navigationController = ImageBackgroundNavigationController(rootViewController: coordinator.baseController)
-        if let drawer = baseController as? AppNavigationDrawerController {
-            drawer.setViewController(navigationController, for: .none)
-            drawer.closeSide()
-            menuView.present(coordinator.baseController)
-        }
+        present(navigationController: navigationController)
     }
     
     func showSettings() {
         let coordinator = SettingsCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
-        if let drawer = baseController as? AppNavigationDrawerController {
-            drawer.setViewController(navigationController, for: .none)
-            drawer.closeSide()
-            menuView.present(coordinator.baseController)
-        }
+        present(navigationController: navigationController)
     }
     
     func showHelpCenter() {
         let coordinator = HelpCenterCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
-        if let drawer = baseController as? AppNavigationDrawerController {
-            drawer.setViewController(navigationController, for: .none)
-            drawer.closeSide()
-            menuView.present(coordinator.baseController)
-        }
+        present(navigationController: navigationController)
+    }
+    
+    func showContacts() {
+        let coordinator = ContactsCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
+        let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
+        present(navigationController: navigationController)
     }
     
     func showRelogin() {
@@ -98,6 +94,14 @@ fileprivate extension MenuCoordinator {
             UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromBottom, animations: {
                 window.rootViewController = coordinator.baseController
             }, completion: nil)
+        }
+    }
+    
+    func present(navigationController: NavigationController) {
+        if let drawer = baseController as? AppNavigationDrawerController {
+            drawer.setViewController(navigationController, for: .none)
+            drawer.closeSide()
+            menuView.present(navigationController.viewControllers[0])
         }
     }
 }

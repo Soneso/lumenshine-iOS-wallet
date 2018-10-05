@@ -96,6 +96,8 @@ class MenuViewModel : MenuViewModelType {
             navigationCoordinator?.performTransition(transition: .showSettings)
         case .home:
             navigationCoordinator?.performTransition(transition: .showHome)
+        case .contacts:
+            navigationCoordinator?.performTransition(transition: .showContacts)
         case .signOut:
             logout()
         case .help:

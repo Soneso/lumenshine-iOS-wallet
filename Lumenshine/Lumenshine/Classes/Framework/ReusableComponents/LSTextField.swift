@@ -20,6 +20,7 @@ class LSTextField: TextField {
         textColor = Stylesheet.color(.lightBlack)
         detailColor = Stylesheet.color(.red)
         detailLabel.font = R.font.encodeSansRegular(size: 13)
+        detailLabel.adjustsFontSizeToFitWidth = true
         detailVerticalOffset = 0
         dividerActiveColor = Stylesheet.color(.gray)
     }

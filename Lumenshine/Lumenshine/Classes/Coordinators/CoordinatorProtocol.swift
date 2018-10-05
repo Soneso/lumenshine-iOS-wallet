@@ -37,6 +37,8 @@ public indirect enum Transition {
     case showHome
     case showSettings
     case showHelp
+    case showContacts
+    case showAddUpdateContact(ContactResponse?)
     case showHeaderMenu([(String, String)])
     case showOnWeb(URL)
     case showCardDetails(Wallet)

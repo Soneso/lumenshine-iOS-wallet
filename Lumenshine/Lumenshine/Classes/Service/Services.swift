@@ -30,6 +30,7 @@ public final class Services {
     public let walletService: WalletsService
     public let currenciesService: CurrenciesService
     public let chartsService: ChartsService
+    public let contacts: ContactsService
     public let userManager: UserManager
     
     public let stellarSdk: StellarSDK
@@ -39,6 +40,7 @@ public final class Services {
         walletService = WalletsService(baseURL: baseURL)
         currenciesService = CurrenciesService(baseURL: baseURL)
         chartsService = ChartsService(baseURL: baseURL)
+        contacts = ContactsService(baseURL: baseURL)
         userManager = UserManager()
         
         stellarSdk = StellarSDK(withHorizonUrl: horizonURL)

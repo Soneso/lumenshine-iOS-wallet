@@ -51,6 +51,12 @@
 		434E049D20D4154700D3235A /* MenuEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434E049C20D4154700D3235A /* MenuEntry.swift */; };
 		434FB3F920F78AFD004A4CDB /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434FB3F820F78AFD004A4CDB /* InfoViewController.swift */; };
 		435130962121A2DD00168DD3 /* LostSecurityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435130952121A2DD00168DD3 /* LostSecurityView.swift */; };
+		43564BA521635FCC006A7B9F /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43564BA421635FCC006A7B9F /* ContactsViewController.swift */; };
+		43564BA7216360A5006A7B9F /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43564BA6216360A5006A7B9F /* ContactTableViewCell.swift */; };
+		43564BA921637334006A7B9F /* ContactsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43564BA821637334006A7B9F /* ContactsViewModel.swift */; };
+		43564BAB21637630006A7B9F /* ContactsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43564BAA21637630006A7B9F /* ContactsCoordinator.swift */; };
+		43564BAD2163DCB9006A7B9F /* ContactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43564BAC2163DCB9006A7B9F /* ContactsService.swift */; };
+		43564BAF2163DF4A006A7B9F /* ContactResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43564BAE2163DF4A006A7B9F /* ContactResponse.swift */; };
 		4359984B20A438EF00007F27 /* AuthenticationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4359984A20A438EF00007F27 /* AuthenticationResponse.swift */; };
 		4359984D20A492FF00007F27 /* AlertFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4359984C20A492FF00007F27 /* AlertFactory.swift */; };
 		4359984F20A4A14000007F27 /* UserSecurityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4359984E20A4A14000007F27 /* UserSecurityHelper.swift */; };
@@ -168,6 +174,8 @@
 		43CD7B1220F7B8A70014BF69 /* SetupMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CD7B1120F7B8A70014BF69 /* SetupMenuViewModel.swift */; };
 		43CD7B1420F7BEBF0014BF69 /* SetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CD7B1320F7BEBF0014BF69 /* SetupViewModel.swift */; };
 		43CD7B1720F7C47A0014BF69 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CD7B1620F7C47A0014BF69 /* SetupViewController.swift */; };
+		43CF47EB2164CE1400B9E7E2 /* AddUpdateContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CF47EA2164CE1400B9E7E2 /* AddUpdateContactViewController.swift */; };
+		43CF47ED21652B7000B9E7E2 /* AddContactResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CF47EC21652B7000B9E7E2 /* AddContactResponse.swift */; };
 		43D131E220569950000483C4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E120569950000483C4 /* HomeViewController.swift */; };
 		43D131E42056D439000483C4 /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E32056D439000483C4 /* CardTableViewCell.swift */; };
 		43D131E62056E3BD000483C4 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D131E52056E3BD000483C4 /* CardViewModel.swift */; };
@@ -409,6 +417,12 @@
 		434E049C20D4154700D3235A /* MenuEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuEntry.swift; sourceTree = "<group>"; };
 		434FB3F820F78AFD004A4CDB /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		435130952121A2DD00168DD3 /* LostSecurityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostSecurityView.swift; sourceTree = "<group>"; };
+		43564BA421635FCC006A7B9F /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
+		43564BA6216360A5006A7B9F /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
+		43564BA821637334006A7B9F /* ContactsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewModel.swift; sourceTree = "<group>"; };
+		43564BAA21637630006A7B9F /* ContactsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsCoordinator.swift; sourceTree = "<group>"; };
+		43564BAC2163DCB9006A7B9F /* ContactsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsService.swift; sourceTree = "<group>"; };
+		43564BAE2163DF4A006A7B9F /* ContactResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactResponse.swift; sourceTree = "<group>"; };
 		4359984A20A438EF00007F27 /* AuthenticationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationResponse.swift; sourceTree = "<group>"; };
 		4359984C20A492FF00007F27 /* AlertFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFactory.swift; sourceTree = "<group>"; };
 		4359984E20A4A14000007F27 /* UserSecurityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSecurityHelper.swift; sourceTree = "<group>"; };
@@ -531,6 +545,8 @@
 		43CD7B1120F7B8A70014BF69 /* SetupMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupMenuViewModel.swift; sourceTree = "<group>"; };
 		43CD7B1320F7BEBF0014BF69 /* SetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewModel.swift; sourceTree = "<group>"; };
 		43CD7B1620F7C47A0014BF69 /* SetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
+		43CF47EA2164CE1400B9E7E2 /* AddUpdateContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUpdateContactViewController.swift; sourceTree = "<group>"; };
+		43CF47EC21652B7000B9E7E2 /* AddContactResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactResponse.swift; sourceTree = "<group>"; };
 		43D131E120569950000483C4 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		43D131E32056D439000483C4 /* CardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
 		43D131E52056E3BD000483C4 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
@@ -777,6 +793,7 @@
 		431437EC2047FF1A00189C83 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				43564BA321635E44006A7B9F /* Contacts */,
 				43C7A8EE215B9282007F4E5E /* Help */,
 				7491BE46211C32040058877E /* Wallet */,
 				43CD7B1520F7C4680014BF69 /* Setup */,
@@ -922,6 +939,16 @@
 			path = Registration;
 			sourceTree = "<group>";
 		};
+		43564BA321635E44006A7B9F /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				43564BA421635FCC006A7B9F /* ContactsViewController.swift */,
+				43564BA6216360A5006A7B9F /* ContactTableViewCell.swift */,
+				43CF47EA2164CE1400B9E7E2 /* AddUpdateContactViewController.swift */,
+			);
+			path = Contacts;
+			sourceTree = "<group>";
+		};
 		4360484420AEFCFD00CF781A /* LumenshineTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1003,6 +1030,7 @@
 				43CD7B0D20F7AEBC0014BF69 /* SetupCoordinator.swift */,
 				43CD7B0F20F7B0CF0014BF69 /* SetupMenuCoordinator.swift */,
 				43C7A8F5215BF736007F4E5E /* HelpCenterCoordinator.swift */,
+				43564BAA21637630006A7B9F /* ContactsCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1022,6 +1050,7 @@
 				43CD7B1120F7B8A70014BF69 /* SetupMenuViewModel.swift */,
 				43CD7B1320F7BEBF0014BF69 /* SetupViewModel.swift */,
 				43C7A8F1215BB28D007F4E5E /* HelpCenterViewModel.swift */,
+				43564BA821637334006A7B9F /* ContactsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1067,6 +1096,7 @@
 				7477F3F820EE188600408934 /* WalletsService.swift */,
 				74C0914920FB3F6F000A809D /* CurrenciesService.swift */,
 				C665870F21254A78006499A7 /* ChartsService.swift */,
+				43564BAC2163DCB9006A7B9F /* ContactsService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1286,6 +1316,8 @@
 				C6C0E4DA212570EF00FF1BA8 /* ExchangeRateResponse.swift */,
 				C6813DC2213AB6CB007074C2 /* KnownCurrencyResponse.swift */,
 				C6813DC6213AB708007074C2 /* KnownInflationDestinationResponse.swift */,
+				43564BAE2163DF4A006A7B9F /* ContactResponse.swift */,
+				43CF47EC21652B7000B9E7E2 /* AddContactResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -1970,6 +2002,7 @@
 				C63B4F9E212AB3750003ECE5 /* TransactionTableViewCell.swift in Sources */,
 				439A182F2100CF8D00F7F5FD /* EmailSetupViewController.swift in Sources */,
 				4359984D20A492FF00007F27 /* AlertFactory.swift in Sources */,
+				43564BA7216360A5006A7B9F /* ContactTableViewCell.swift in Sources */,
 				432F117B2101EEF500FC429B /* VerificationSetupViewController.swift in Sources */,
 				4387980A20584335005261C8 /* HelpCard.swift in Sources */,
 				C61244C8211332E700DE1EA9 /* SendViewController.swift in Sources */,
@@ -1981,6 +2014,7 @@
 				43C7A8F4215BEE19007F4E5E /* HelpTableViewCell.swift in Sources */,
 				43ECA9CC208B530000CB571E /* RegistrationTableViewCell.swift in Sources */,
 				C68850E4214BC72900D7D077 /* UnfundedHeaderLabel.swift in Sources */,
+				43564BA921637334006A7B9F /* ContactsViewModel.swift in Sources */,
 				436201C0212DDC5300CF4495 /* R+Plurals.swift in Sources */,
 				C68850DE214BA47000D7D077 /* AppTitleLabel.swift in Sources */,
 				4391A53420D175D40015A6DA /* SalutationsResponse.swift in Sources */,
@@ -2007,6 +2041,7 @@
 				432AAD302158F9E900963619 /* ActivateFingerprintViewController.swift in Sources */,
 				43CD7B0E20F7AEBC0014BF69 /* SetupCoordinator.swift in Sources */,
 				C6725086213FC4D20064F6E3 /* ProvideInflationDestinationViewController.swift in Sources */,
+				43564BAF2163DF4A006A7B9F /* ContactResponse.swift in Sources */,
 				4314B9F9204812BC006DBE63 /* MenuTableViewCell.swift in Sources */,
 				C695564D2126B11800B0E110 /* LoadTransactionsHistoryViewController.swift in Sources */,
 				C675BC22215CBF8000B663DB /* LeftRoundedButton.swift in Sources */,
@@ -2065,6 +2100,7 @@
 				C6752A42213806030067F815 /* FederationManager.swift in Sources */,
 				43844F4020E401B500C352E5 /* ReLoginMenuViewModel.swift in Sources */,
 				43844F3E20E3FE2600C352E5 /* ReLoginViewModel.swift in Sources */,
+				43564BAB21637630006A7B9F /* ContactsCoordinator.swift in Sources */,
 				746DC58520D142EC00AD0856 /* HomeUnfundedWalletHeaderView.swift in Sources */,
 				7420BBF021185366002FC4C7 /* ChangeWalletRequest.swift in Sources */,
 				74C08FF320EE1FE6000A809D /* UserManager.swift in Sources */,
@@ -2083,6 +2119,7 @@
 				4365F69A211057B900D4B12C /* Change2faSecretViewController.swift in Sources */,
 				C6725092213FFC580064F6E3 /* KnownInflationDestinationDetailsViewController.swift in Sources */,
 				4319B1822063EF72007CE18D /* LoginCoordinator.swift in Sources */,
+				43CF47ED21652B7000B9E7E2 /* AddContactResponse.swift in Sources */,
 				434E049B20D3DC8A00D3235A /* DateUtils+Format.swift in Sources */,
 				C66CC2D7212EA2BD00729C09 /* RemoveCurrencyViewController.swift in Sources */,
 				4391A53220D170420015A6DA /* CountryListResponse.swift in Sources */,
@@ -2123,6 +2160,7 @@
 				43F74607209494AC003EB5FD /* RegistrationResponse.swift in Sources */,
 				439C476E20D6770900C5DC97 /* AvatarTableViewCell.swift in Sources */,
 				43973A8C20BD4B87000145DD /* TFAGeneration.swift in Sources */,
+				43564BA521635FCC006A7B9F /* ContactsViewController.swift in Sources */,
 				C69556552126FAEF00B0E110 /* OperationInfo.swift in Sources */,
 				4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */,
 				C675BC26215CBFE700B663DB /* RightRoundedButton.swift in Sources */,
@@ -2148,6 +2186,7 @@
 				43088DAE2087AD2A008AE1AB /* UserSecurity.swift in Sources */,
 				43DCF85F215CEF93004F827E /* HelpEntry.swift in Sources */,
 				C69A5143211C16500066A4A0 /* TransactionResultPrintView.swift in Sources */,
+				43CF47EB2164CE1400B9E7E2 /* AddUpdateContactViewController.swift in Sources */,
 				C682C002213691A3007705DF /* BiometricHelper.swift in Sources */,
 				C6257A6E21620C1300E1B879 /* NoMultiSigSupportViewController.swift in Sources */,
 				C685DE0D2154C09E00F99D81 /* SubtitleLabel.swift in Sources */,
@@ -2185,6 +2224,7 @@
 				4370E23D20655F9C004C62C3 /* SettingsTableViewController.swift in Sources */,
 				43C7A8F6215BF736007F4E5E /* HelpCenterCoordinator.swift in Sources */,
 				C6AF0101215B9F33007C51E5 /* FederationAddressLabel.swift in Sources */,
+				43564BAD2163DCB9006A7B9F /* ContactsService.swift in Sources */,
 				7420BBED211839BB002FC4C7 /* BaseNavigationViewController.swift in Sources */,
 				74C08FF820EF6F2F000A809D /* FundWalletViewController.swift in Sources */,
 				4319B1862063F1B0007CE18D /* User.swift in Sources */,
