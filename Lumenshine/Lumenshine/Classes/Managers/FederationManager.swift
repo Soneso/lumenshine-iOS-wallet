@@ -51,6 +51,9 @@ class FederationManager {
                 
             case .failure(error: let error):
                 print("Error: \(error)")
+                DispatchQueue.main.async {
+                    completion( .failure)
+                }
             }
         }
     }

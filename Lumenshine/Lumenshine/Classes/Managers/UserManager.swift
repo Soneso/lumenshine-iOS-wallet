@@ -39,12 +39,18 @@ public enum GetSignersListEnum {
     case failure(error: HorizonRequestError)
 }
 
+public enum GetAccountBalanceResponseEnum {
+    case success(currency: AccountBalanceResponse)
+    case failure(error: HorizonRequestError)
+}
+
 public typealias BoolClosure = (_ response:BoolEnum) -> (Void)
 public typealias CoinClosure = (_ response:CoinEnum) -> (Void)
 public typealias WalletsClosure = (_ response:WalletsEnum) -> (Void)
 public typealias AddressStatusClosure = (_ response: AddressStatusEnum) -> (Void)
 public typealias CanAccountSignClosure = (_ response: CanAccountSignEnum) -> (Void)
 public typealias GetSignersListClosure = (_ response: GetSignersListEnum) -> (Void)
+public typealias GetAccountBalanceResponseClosure = (_ response: GetAccountBalanceResponseEnum) -> (Void)
 public typealias CoinUnit = Double
 
 public class UserManager: NSObject {
@@ -181,6 +187,31 @@ public class UserManager: NSObject {
                 case .success(details: let accountDetails):
                     completion(.success(signersList: accountDetails.signers))
                 case .failure(error: let error):
+                    completion(.failure(error: error))
+                }
+            }
+        }
+    }
+    
+    func getAccountBalanceResponse(forAccount account: String, forAssetCode assetCode: String, forAssetIssuer issuer: String, completion: @escaping GetAccountBalanceResponseClosure) {
+        stellarSDK.accounts.getAccountDetails(accountId: account) { (response) -> (Void) in
+            switch response {
+            case .success(details: let accountDetails):
+                if let currency = accountDetails.balances.first(where: { (accountResponse) -> Bool in
+                    return accountResponse.assetCode == assetCode && accountResponse.assetIssuer == issuer
+                }) {
+                    DispatchQueue.main.async {
+                        completion(.success(currency: currency))
+                    }
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    completion(.failure(error: HorizonRequestError.emptyResponse))
+                }
+                
+            case .failure(error: let error):
+                DispatchQueue.main.async {
                     completion(.failure(error: error))
                 }
             }

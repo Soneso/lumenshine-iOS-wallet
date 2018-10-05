@@ -82,7 +82,7 @@ class WalletManager: NSObject {
     }
     
     func hasWalletEnoughFunding(wallet: Wallet) -> Bool {
-        return !wallet.nativeBalance.availableAmount.isLess(than: CoinUnit.Constants.transactionFee + CoinUnit.Constants.baseReserver)
+        return !wallet.nativeBalance.availableAmount(forWallet: wallet).isLess(than: CoinUnit.minimumReserved(forWallet: wallet))
     }
     
     private func balanceAuthorized(issuer: String, completion: @escaping ((Bool, HorizonRequestError?)->())) {

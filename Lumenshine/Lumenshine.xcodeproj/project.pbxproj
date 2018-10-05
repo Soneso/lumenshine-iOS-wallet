@@ -324,6 +324,7 @@
 		C6BEBE7221302CC6000F7435 /* ProvideCurrencyDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BEBE7121302CC6000F7435 /* ProvideCurrencyDataViewController.swift */; };
 		C6C0E4D921256F2700FF1BA8 /* ChartExchangeRatesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C0E4D821256F2700FF1BA8 /* ChartExchangeRatesResponse.swift */; };
 		C6C0E4DB212570EF00FF1BA8 /* ExchangeRateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C0E4DA212570EF00FF1BA8 /* ExchangeRateResponse.swift */; };
+		C6C1FC6E21673F0900F80F44 /* BiometricAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C1FC6D21673F0900F80F44 /* BiometricAuthButton.swift */; };
 		C6D87E742133ECE100154A3B /* KnownCurrenciesTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D87E732133ECE100154A3B /* KnownCurrenciesTableViewController.xib */; };
 		C6D87E762133ECED00154A3B /* KnownCurrenciesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D87E752133ECED00154A3B /* KnownCurrenciesTableViewController.swift */; };
 		C6D87E78213400A000154A3B /* KnownCurrenciesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D87E77213400A000154A3B /* KnownCurrenciesTableViewCell.xib */; };
@@ -694,6 +695,7 @@
 		C6BEBE7121302CC6000F7435 /* ProvideCurrencyDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvideCurrencyDataViewController.swift; sourceTree = "<group>"; };
 		C6C0E4D821256F2700FF1BA8 /* ChartExchangeRatesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartExchangeRatesResponse.swift; sourceTree = "<group>"; };
 		C6C0E4DA212570EF00FF1BA8 /* ExchangeRateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateResponse.swift; sourceTree = "<group>"; };
+		C6C1FC6D21673F0900F80F44 /* BiometricAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricAuthButton.swift; sourceTree = "<group>"; };
 		C6D87E732133ECE100154A3B /* KnownCurrenciesTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KnownCurrenciesTableViewController.xib; sourceTree = "<group>"; };
 		C6D87E752133ECED00154A3B /* KnownCurrenciesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownCurrenciesTableViewController.swift; sourceTree = "<group>"; };
 		C6D87E77213400A000154A3B /* KnownCurrenciesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KnownCurrenciesTableViewCell.xib; sourceTree = "<group>"; };
@@ -1462,6 +1464,7 @@
 				C675BC25215CBFE700B663DB /* RightRoundedButton.swift */,
 				C675BC27215CF86200B663DB /* BaseButton.swift */,
 				C6257A6F216211DA00E1B879 /* RegularSubtitleLabel.swift */,
+				C6C1FC6D21673F0900F80F44 /* BiometricAuthButton.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
@@ -2097,6 +2100,7 @@
 				43088DB02087C4B8008AE1AB /* Dictionary+HTTPParams.swift in Sources */,
 				431A71D7214C0E5000D44C7E /* LSTextField.swift in Sources */,
 				C6813DC9213AC725007074C2 /* KnownCurrenciesManager.swift in Sources */,
+				C6C1FC6E21673F0900F80F44 /* BiometricAuthButton.swift in Sources */,
 				43DAC65420E4BA3900E491D8 /* BiometricAuthenticationProtocol.swift in Sources */,
 				7491BE4C211C450F0058877E /* WalletManager.swift in Sources */,
 				4341251320EBC2E900267260 /* ReLoginFingerView.swift in Sources */,

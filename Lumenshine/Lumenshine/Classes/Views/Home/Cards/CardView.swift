@@ -105,8 +105,9 @@ class CardView: UIView {
             fundedView.availableDescriptionLabel.text = R.string.localizable.available().uppercased()
             fundedView.availableDescriptionLabel.textColor = Stylesheet.color(.blue)
             
-            fundedView.availableLabel.text = viewModel.nativeBalance?.availableAmount.stringWithUnit
+            fundedView.availableLabel.text = viewModel.nativeBalance?.availableAmount(forWallet: viewModel.wallet).stringWithUnit
             fundedView.availableLabel.font = R.font.encodeSansRegular(size: 15)
+
             CardView.labelsForCustomAssets(wallet: viewModel.wallet!).forEach({ label in fundedView.balanceStackView.addArrangedSubview(label) })
             CardView.labelsForCustomAssets(wallet: viewModel.wallet!).forEach({ label in fundedView.availableStackView.addArrangedSubview(label) })
             

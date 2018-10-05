@@ -23,6 +23,7 @@ enum SignerErorr: Error {
 
 class TransactionHelper {
     private let TransactionDefaultLimit: Decimal = 10000
+    private let transactionFee = String(format: "%.5f", CoinUnit.Constants.transactionFee)
     private var inputData: TransactionInput!
     private var wallet: FundedWallet!
     private var transactionResult: TransactionResult!
@@ -156,7 +157,7 @@ class TransactionHelper {
     }
     
     private func getSelectedCurrency() -> AccountBalanceResponse? {
-        return wallet.balances.first(where: { (asset) -> Bool in
+        return inputData.otherCurrencyAsset ?? wallet.balances.first(where: { (asset) -> Bool in
             if inputData.currency == NativeCurrencyNames.xlm.rawValue {
                 return asset.assetCode == nil
             }
@@ -172,8 +173,8 @@ class TransactionHelper {
     private func submitTransactionSucceeded(transaction: Transaction, completion: @escaping (() -> (Void))) {
         print("Account successfully created.")
         self.transactionResult.status = TransactionStatus.success
-        self.transactionResult.transactionFee = "0.0000" + String(transaction.fee)
-        
+        self.transactionResult.transactionFee = transactionFee
+
         if let transactionHash = try? transaction.getTransactionHash(network: Network.testnet) {
             self.stellarSdk.payments.getPayments(forTransaction: transactionHash, response: { (response) -> (Void) in
                 switch response {
@@ -210,7 +211,7 @@ class TransactionHelper {
                     StellarSDKLog.printHorizonRequestErrorMessage(tag:"Create account", horizonRequestError: error)
                     self.transactionResult.status = TransactionStatus.error
                     self.transactionResult.message = error.localizedDescription
-                    self.transactionResult.transactionFee = transaction.fee > 0 ? ("0.0000" + String(transaction.fee)) : nil
+                    self.transactionResult.transactionFee = transaction.fee > 0 ? self.transactionFee : nil
                     completion()
                 }
             }
@@ -277,7 +278,7 @@ class TransactionHelper {
     private func submitPaymentSucceeded(transaction: Transaction, completion: @escaping (() -> (Void))) {
         print("Success")
         self.transactionResult.status = TransactionStatus.success
-        self.transactionResult.transactionFee = "0.0000" + String(transaction.fee)
+        self.transactionResult.transactionFee = transactionFee
         
         self.stellarSdk.payments.getPayments(forTransaction: try! transaction.getTransactionHash(network: Network.testnet), response: { (response) -> (Void) in
             switch response {
@@ -312,7 +313,7 @@ class TransactionHelper {
                     StellarSDKLog.printHorizonRequestErrorMessage(tag:"SRP Test", horizonRequestError:error)
                     self.transactionResult.status = TransactionStatus.error
                     self.transactionResult.message = error.localizedDescription
-                    self.transactionResult.transactionFee = transaction.fee > 0 ? ("0.0000" + String(transaction.fee)) : nil
+                    self.transactionResult.transactionFee = transaction.fee > 0 ? self.transactionFee : nil
                     completion()
                 }
             }

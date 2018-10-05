@@ -177,6 +177,16 @@ extension String  {
         return NSPredicate(format: "SELF MATCHES[c] %@", sRegex).evaluate(with: self)
     }
     
+    func isPublicKey() -> Bool {
+        return self.hasPrefix("G")
+    }
+    
+    func isNumeric() -> Bool {
+        let sRegex = "^(([0-9]\\.)|([1-9][0-9]*\\.*))[0-9]*$"
+        
+        return NSPredicate(format: "SELF MATCHES[c] %@", sRegex).evaluate(with: self)
+    }
+    
     func getAssetCode() -> String? {
         let separatedStrings = self.split(separator: CharacterConstants.emptySpace.rawValue)
         for subString in separatedStrings {

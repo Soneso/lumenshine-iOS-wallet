@@ -9,6 +9,13 @@
 import Foundation
 
 extension CoinUnit {
+    static func minimumReserved(forWallet wallet: Wallet?) -> CoinUnit {
+        if let fundedWallet = wallet as? FundedWallet {
+            return 1 + CoinUnit(fundedWallet.subentryCount) * Constants.baseReserver + Constants.transactionFee
+        }
+        
+        return 0
+    }
     
     struct Constants {
         static let baseReserver: CoinUnit = 0.5
@@ -21,14 +28,17 @@ extension CoinUnit {
         }
     }
     
-    var availableAmount: CoinUnit {
-        get {
-            return self - Constants.baseReserver - Constants.transactionFee
+    func availableAmount(forWallet wallet: Wallet?) -> CoinUnit {
+        let availableAmount = self - CoinUnit.minimumReserved(forWallet: wallet) - Constants.transactionFee
+        
+        if availableAmount > 0 {
+            return availableAmount
+        } else {
+            return 0
         }
     }
     
     func stringConversionTo(currency: Currency, rate: Double) -> String {
         return "\(stringWithUnit) ≈ \(String(format: "%.2f %@", rate * self, currency.assetCode))"
     }
-    
 }
