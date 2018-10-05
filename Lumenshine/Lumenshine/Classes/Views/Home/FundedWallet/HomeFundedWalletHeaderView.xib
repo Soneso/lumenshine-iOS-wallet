@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,25 +20,25 @@
                     <rect key="frame" x="0.0" y="-44" width="344" height="269"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="IDe-yV-6CR">
-                            <rect key="frame" x="134.5" y="-30" width="75" height="75"/>
+                            <rect key="frame" x="134.5" y="-29" width="75" height="75"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="IDe-yV-6CR" secondAttribute="height" multiplier="1:1" id="xyd-RU-87A"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XhI-yy-lHv" customClass="AppTitleLabel" customModule="Lumenshine" customModuleProvider="target">
-                            <rect key="frame" x="151" y="53" width="42" height="20.5"/>
+                            <rect key="frame" x="151" y="54" width="42" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0 XLM ≈ 0.0 USD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GMo-Qc-Wuw" customClass="FundedHeaderValueLabel" customModule="Lumenshine" customModuleProvider="target">
-                            <rect key="frame" x="99" y="81.5" width="146" height="20.5"/>
+                            <rect key="frame" x="99" y="82.5" width="146" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aqQ-xl-He7">
-                            <rect key="frame" x="16" y="118" width="312" height="49"/>
+                            <rect key="frame" x="16" y="121" width="312" height="49"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <items>
                                 <tabBarItem title="SEND" image="send" id="OGg-q4-4bu"/>
@@ -53,8 +53,8 @@
                         <constraint firstItem="GMo-Qc-Wuw" firstAttribute="centerX" secondItem="n39-Vt-Mdk" secondAttribute="centerX" id="C6G-iA-A31"/>
                         <constraint firstAttribute="trailing" secondItem="aqQ-xl-He7" secondAttribute="trailing" constant="16" id="M3F-dH-yjf"/>
                         <constraint firstItem="aqQ-xl-He7" firstAttribute="leading" secondItem="n39-Vt-Mdk" secondAttribute="leading" constant="16" id="SHO-cW-Gat"/>
-                        <constraint firstItem="IDe-yV-6CR" firstAttribute="top" secondItem="n39-Vt-Mdk" secondAttribute="top" constant="-30" id="UWB-4S-hNM"/>
-                        <constraint firstItem="aqQ-xl-He7" firstAttribute="top" secondItem="GMo-Qc-Wuw" secondAttribute="bottom" constant="16" id="fBw-m8-0OW"/>
+                        <constraint firstItem="IDe-yV-6CR" firstAttribute="top" secondItem="n39-Vt-Mdk" secondAttribute="top" constant="-29" id="UWB-4S-hNM"/>
+                        <constraint firstItem="aqQ-xl-He7" firstAttribute="top" secondItem="GMo-Qc-Wuw" secondAttribute="bottom" constant="18" id="fBw-m8-0OW"/>
                         <constraint firstItem="IDe-yV-6CR" firstAttribute="centerX" secondItem="n39-Vt-Mdk" secondAttribute="centerX" id="mrb-sX-8ID"/>
                         <constraint firstItem="XhI-yy-lHv" firstAttribute="centerX" secondItem="n39-Vt-Mdk" secondAttribute="centerX" id="uxh-uk-2Qs"/>
                         <constraint firstItem="GMo-Qc-Wuw" firstAttribute="top" secondItem="XhI-yy-lHv" secondAttribute="bottom" constant="8" id="wAa-iz-zIC"/>

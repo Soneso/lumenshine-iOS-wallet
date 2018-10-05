@@ -54,11 +54,11 @@ class ToolbarHeader: UIView {
         logoImage.image = R.image.logo()
         logoImage.contentMode = .scaleAspectFit
         
-        let topOffset = UIScreen.main.scale > 2 ? 46.0 : 10.0
         addSubview(logoImage)
         logoImage.snp.makeConstraints { make in
-            make.top.equalTo(topOffset)
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(-29)
             make.centerX.equalToSuperview()
+            make.height.equalTo(logoImage.snp.width)
         }
         
         titleLabel.font = R.font.encodeSansSemiBold(size: 19)
@@ -95,7 +95,7 @@ class ToolbarHeader: UIView {
             make.top.equalTo(detailLabel.snp.bottom).offset(20)
             make.left.equalTo(10)
             make.right.equalTo(-10)
-            make.bottom.equalTo(-10)
+            make.bottom.equalTo(-13)
         }
     }
 }

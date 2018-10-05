@@ -240,6 +240,7 @@
 		74C899582107621E009B13EA /* receive_payment.html in Resources */ = {isa = PBXBuildFile; fileRef = 74C899572107621E009B13EA /* receive_payment.html */; };
 		74C8995A2108ACD1009B13EA /* AccountBalanceResponse+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C899592108ACD1009B13EA /* AccountBalanceResponse+Extra.swift */; };
 		74C89996210A3A06009B13EA /* Sequence+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C89995210A3A06009B13EA /* Sequence+Utils.swift */; };
+		74C954992165F8B4005BA3CD /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C954982165F8B4005BA3CD /* MenuButton.swift */; };
 		74DD4CEB210CE83E00F4D69A /* UIView+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DD4CEA210CE83E00F4D69A /* UIView+Snapshot.swift */; };
 		74E2057820D1543400E94048 /* HomeFundedWalletHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E2057720D1543400E94048 /* HomeFundedWalletHeaderView.swift */; };
 		74E2057A20D1544000E94048 /* HomeFundedWalletHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74E2057920D1544000E94048 /* HomeFundedWalletHeaderView.xib */; };
@@ -606,6 +607,7 @@
 		74C899572107621E009B13EA /* receive_payment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = receive_payment.html; sourceTree = "<group>"; };
 		74C899592108ACD1009B13EA /* AccountBalanceResponse+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountBalanceResponse+Extra.swift"; sourceTree = "<group>"; };
 		74C89995210A3A06009B13EA /* Sequence+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Utils.swift"; sourceTree = "<group>"; };
+		74C954982165F8B4005BA3CD /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		74DD4CEA210CE83E00F4D69A /* UIView+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Snapshot.swift"; sourceTree = "<group>"; };
 		74E2057720D1543400E94048 /* HomeFundedWalletHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFundedWalletHeaderView.swift; sourceTree = "<group>"; };
 		74E2057920D1544000E94048 /* HomeFundedWalletHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeFundedWalletHeaderView.xib; sourceTree = "<group>"; };
@@ -808,6 +810,7 @@
 				431437F12047FF9100189C83 /* AppNavigationController.swift */,
 				431437F32047FFB400189C83 /* AppNavigationDrawerController.swift */,
 				7420BBEC211839BB002FC4C7 /* BaseNavigationViewController.swift */,
+				74C954982165F8B4005BA3CD /* MenuButton.swift */,
 			);
 			path = Drawer;
 			sourceTree = "<group>";
@@ -1989,6 +1992,7 @@
 				43EFF204204939F700B1887C /* UIColor+Utils.swift in Sources */,
 				C665871821255EAB006499A7 /* RatesResponse.swift in Sources */,
 				43DAC65820E4FF0A00E491D8 /* ToolbarHeader.swift in Sources */,
+				74C954992165F8B4005BA3CD /* MenuButton.swift in Sources */,
 				4376F49E204D9DF800B179C3 /* HomeCoordinator.swift in Sources */,
 				4394911E20BEBDFA008D4FA2 /* SettingsCoordinator.swift in Sources */,
 				4319B4CE211A0347002E45F0 /* BackupMnemonicViewController.swift in Sources */,

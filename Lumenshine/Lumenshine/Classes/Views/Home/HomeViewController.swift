@@ -127,7 +127,10 @@ extension HomeViewController: ScanViewControllerDelegate {
 extension HomeViewController {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        headerBar.behaviorDefiner?.scrollViewDidScroll(scrollView)
+        // fix layout subviews scrollviewDidScroll cycle
+        if scrollView.isDragging {
+            headerBar.behaviorDefiner?.scrollViewDidScroll(scrollView)
+        }
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
