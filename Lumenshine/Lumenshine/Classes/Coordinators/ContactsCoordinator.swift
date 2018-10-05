@@ -38,7 +38,6 @@ fileprivate extension ContactsCoordinator {
     func showAddUpdateContact(_ contact: ContactResponse?) {
         viewModel.selectedContact = contact
         let addContactVC = AddUpdateContactViewController(viewModel: viewModel)
-        let navigationVC = AppNavigationController(rootViewController: addContactVC)
-        baseController.navigationController?.present(navigationVC, animated: true)
+        baseController.navigationController?.pushViewController(addContactVC, animated: true)
     }
 }

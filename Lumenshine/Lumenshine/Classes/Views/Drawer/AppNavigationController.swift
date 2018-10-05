@@ -12,8 +12,8 @@ import Material
 class AppNavigationController: NavigationController {
     override func prepare() {
         super.prepare()
-        navigationBar.backgroundColor = Stylesheet.color(.blue)
-        navigationBar.backIndicatorImage = Icon.arrowBack?.tint(with: Stylesheet.color(.white))
+//        navigationBar.backgroundColor = Stylesheet.color(.blue)
+        navigationBar.backIndicatorImage = Icon.arrowBack?.tint(with: Stylesheet.color(.blue))
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

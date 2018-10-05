@@ -728,6 +728,9 @@
 "name" = "Name";
 
 /*  */
+"name_mandatory" = "Name is mandatory";
+
+/*  */
 "stellar_address" = "Stellar address";
 
 /*  */

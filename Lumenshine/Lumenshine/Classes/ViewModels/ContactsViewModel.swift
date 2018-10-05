@@ -142,27 +142,28 @@ class ContactsViewModel : ContactsViewModelType {
     
     func addUpdateContact(name: String, address: String?, publicKey: String?, response: @escaping ContactsResponseClosure) {
         
-//        if (address?.isEmpty ?? true) || (publicKey?.isEmpty ?? true) {
-//            let error = ErrorResponse()
-//            error.errorMessage = R.string.localizable.stellar_address_error()
-//            response(.failure(error: .validationFailed(error: error)))
-//            return
-//        }
-//
-//        guard let address = address, address.isFederationAddress() else {
-//            let error = ErrorResponse()
-//            error.errorMessage = R.string.localizable.invalid_address()
-//            response(.failure(error: .validationFailed(error: error)))
-//            return
-//        }
-//
-//        guard let publicKey = publicKey, publicKey.isPublicKey() else {
-//            let error = ErrorResponse()
-//            error.errorMessage = R.string.localizable.invalid_public_key()
-//            response(.failure(error: .validationFailed(error: error)))
-//            return
-//        }
-        
+        if address?.isEmpty ?? true, publicKey?.isEmpty ?? true {
+            let error = ErrorResponse()
+            error.errorMessage = R.string.localizable.stellar_address_error()
+            response(.failure(error: .validationFailed(error: error)))
+            return
+        }
+
+        if let address = address, !address.isEmpty, !address.isStellarAddress() {
+            let error = ErrorResponse()
+            error.errorMessage = R.string.localizable.invalid_address()
+            error.parameterName = "address"
+            response(.failure(error: .validationFailed(error: error)))
+            return
+        }
+
+        if let publicKey = publicKey, !publicKey.isEmpty, !publicKey.isPublicKey() {
+            let error = ErrorResponse()
+            error.errorMessage = R.string.localizable.invalid_public_key()
+            error.parameterName = "public_key"
+            response(.failure(error: .validationFailed(error: error)))
+            return
+        }
         
         if let contactId = selectedContact?.id {
             service.editContact(id: contactId, name: name, address: address, publicKey: publicKey) { [weak self] result in

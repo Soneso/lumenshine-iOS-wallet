@@ -23,6 +23,10 @@ class AddUpdateContactViewController: UIViewController {
     fileprivate let submitButton = LSButton()
     fileprivate let removeButton = LSButton()
     
+    fileprivate let errorLabel1 = UILabel()
+    fileprivate let errorLabel2 = UILabel()
+    fileprivate let errorLabel3 = UILabel()
+    
     fileprivate let verticalSpacing: CGFloat = 30.0
     fileprivate let horizontalSpacing: CGFloat = 15.0
     
@@ -54,11 +58,13 @@ class AddUpdateContactViewController: UIViewController {
 extension AddUpdateContactViewController {
     @objc
     func submitAction(sender: UIButton) {
-        textField1.detail = nil
+        errorLabel1.text = nil
+        errorLabel2.text = nil
+        errorLabel3.text = nil
         
         guard let name = textField1.text,
             !name.isEmpty else {
-                textField1.detail = R.string.localizable.invalid_input()
+                errorLabel1.text = R.string.localizable.name_mandatory()
                 return
         }
         _ = resignFirstResponder()
@@ -67,10 +73,9 @@ extension AddUpdateContactViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success:
-                    self?.dismiss(animated: true)
+                    self?.navigationController?.popViewController(animated: true)
                 case .failure(let error):
-                    let alert = AlertFactory.createAlert(error: error)
-                    self?.present(alert, animated: true)
+                    self?.present(error: error)
                 }
             }
         }
@@ -82,18 +87,12 @@ extension AddUpdateContactViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success:
-                    self?.dismiss(animated: true)
+                    self?.navigationController?.popViewController(animated: true)
                 case .failure(let error):
-                    let alert = AlertFactory.createAlert(error: error)
-                    self?.present(alert, animated: true)
+                    self?.present(error: error)
                 }
             }
         }
-    }
-
-    @objc
-    func closeAction(sender: UIButton) {
-        dismiss(animated: true, completion: nil)
     }
     
     @objc
@@ -101,6 +100,21 @@ extension AddUpdateContactViewController {
         let cnPicker = CNContactPickerViewController()
         cnPicker.delegate = self
         present(cnPicker, animated: true, completion: nil)
+    }
+    
+    func present(error: ServiceError) {
+        if let parameter = error.parameterName {
+            if parameter == "address" {
+                errorLabel2.text = error.errorDescription
+                return
+            } else if parameter == "public_key" {
+//                errorLabel3.text = error.errorDescription
+                errorLabel3.text = R.string.localizable.invalid_public_key()
+                return
+            }
+        }
+        let alert = AlertFactory.createAlert(error: error)
+        present(alert, animated: true)
     }
 }
 
@@ -117,19 +131,13 @@ fileprivate extension AddUpdateContactViewController {
         view.backgroundColor = Stylesheet.color(.veryLightGray)
         prepareNavigationItem()
         prepareTextFields()
+        prepareLabels()
         prepareButtons()
     }
     
     func prepareNavigationItem() {
-        
-        let backButton = Button()
-        backButton.image = Icon.arrowBack?.tint(with: Stylesheet.color(.white))
-        backButton.addTarget(self, action: #selector(closeAction(sender:)), for: .touchUpInside)
-        
-        navigationItem.leftViews = [backButton]
-        
         navigationItem.titleLabel.text = viewModel.contactTitle
-        navigationItem.titleLabel.textColor = .white
+        navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
         navigationItem.titleLabel.font = R.font.encodeSansBold(size: 15)
     }
     
@@ -205,6 +213,44 @@ fileprivate extension AddUpdateContactViewController {
             make.left.equalTo(textField1)
             make.right.equalTo(textField1)
             make.height.equalTo(textField1)
+        }
+    }
+    
+    func prepareLabels() {
+        errorLabel1.font = R.font.encodeSansRegular(size: 13)
+        errorLabel1.adjustsFontSizeToFitWidth = true
+        errorLabel1.textColor = Stylesheet.color(.red)
+        errorLabel1.backgroundColor = view.backgroundColor
+        
+        view.addSubview(errorLabel1)
+        errorLabel1.snp.makeConstraints { make in
+            make.top.equalTo(textField1.snp.bottom)
+            make.left.equalTo(textField1).offset(horizontalSpacing)
+            make.right.equalTo(textField1)
+        }
+        
+        errorLabel2.font = R.font.encodeSansRegular(size: 13)
+        errorLabel2.adjustsFontSizeToFitWidth = true
+        errorLabel2.textColor = Stylesheet.color(.red)
+        errorLabel2.backgroundColor = view.backgroundColor
+        
+        view.addSubview(errorLabel2)
+        errorLabel2.snp.makeConstraints { make in
+            make.top.equalTo(textField2.snp.bottom)
+            make.left.equalTo(textField2).offset(horizontalSpacing)
+            make.right.equalTo(textField2)
+        }
+        
+        errorLabel3.font = R.font.encodeSansRegular(size: 13)
+        errorLabel3.adjustsFontSizeToFitWidth = true
+        errorLabel3.textColor = Stylesheet.color(.red)
+        errorLabel3.backgroundColor = view.backgroundColor
+        
+        view.addSubview(errorLabel3)
+        errorLabel3.snp.makeConstraints { make in
+            make.top.equalTo(textField3.snp.bottom)
+            make.left.equalTo(textField3).offset(horizontalSpacing)
+            make.right.equalTo(textField3)
         }
     }
     

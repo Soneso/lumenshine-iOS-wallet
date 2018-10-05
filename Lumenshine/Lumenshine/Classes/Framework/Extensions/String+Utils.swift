@@ -177,6 +177,12 @@ extension String  {
         return NSPredicate(format: "SELF MATCHES[c] %@", sRegex).evaluate(with: self)
     }
     
+    func isStellarAddress() -> Bool {
+        let sRegex = "[a-zA-Z0-9!#$%\\&'+/=?\\^_`{|}~-]+[*][a-zA-Z]+[.][a-zA-Z]+"
+        
+        return NSPredicate(format: "SELF MATCHES[c] %@", sRegex).evaluate(with: self)
+    }
+    
     func isPublicKey() -> Bool {
         return self.hasPrefix("G")
     }

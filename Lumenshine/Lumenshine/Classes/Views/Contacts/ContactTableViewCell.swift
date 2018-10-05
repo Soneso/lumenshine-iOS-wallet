@@ -69,7 +69,7 @@ class ContactTableViewCell: UITableViewCell {
             make.right.equalTo(-horizontalSpacing)
         }
         
-        addressLabel.textColor = Stylesheet.color(.lightBlack)
+        addressLabel.textColor = Stylesheet.color(.orange)
         addressLabel.font = R.font.encodeSansRegular(size: 15)
         
         contentView.addSubview(addressLabel)
@@ -79,8 +79,9 @@ class ContactTableViewCell: UITableViewCell {
             make.right.equalTo(-horizontalSpacing)
         }
         
-        publicKeyLabel.textColor = Stylesheet.color(.lightBlack)
+        publicKeyLabel.textColor = Stylesheet.color(.gray)
         publicKeyLabel.font = R.font.encodeSansSemiBold(size: 15)
+        publicKeyLabel.numberOfLines = 0
         
         contentView.addSubview(publicKeyLabel)
         publicKeyLabel.snp.makeConstraints { make in

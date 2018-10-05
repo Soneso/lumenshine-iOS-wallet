@@ -215,16 +215,18 @@ fileprivate extension ContactsViewController {
     }
     
     func prepareSearchController() {
+        definesPresentationContext = false
         searchController.delegate = self
         searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = true
+        searchController.hidesNavigationBarDuringPresentation = false
         navigationItem.searchController = searchController
 //        navigationItem.hidesSearchBarWhenScrolling = false
-        definesPresentationContext = true
         
-//        searchController.searchBar.placeholder = "Search Candies"
-        searchController.searchBar.backgroundColor = UIColor(patternImage: R.image.nav_background()!)
-//        searchController.searchBar.setBackgroundImage(R.image.nav_background(), for: .any, barMetrics: .defaultPrompt)
+        if let backgroundImage = R.image.nav_background() {
+            searchController.searchBar.backgroundColor = UIColor(patternImage: backgroundImage)
+            searchController.searchBar.setBackgroundImage(backgroundImage, for: .any, barMetrics: .defaultPrompt)
+        }
         searchController.searchBar.tintColor = Stylesheet.color(.blue)
         searchController.searchBar.barTintColor = Stylesheet.color(.blue)
     }
