@@ -19,7 +19,8 @@ class HomeViewController: UIViewController {
     fileprivate let viewModel: HomeViewModelType
     fileprivate var headerBar: FlexibleHeightBar!
     fileprivate var header: HomeHeaderView!
-
+    fileprivate var tableViewContainer: UIView!
+    
     fileprivate var userManager: UserManager {
         get {
             return Services.shared.userManager
@@ -64,9 +65,9 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        prepareHeader()
         prepareView()
         prepareRefresh()
-        prepareHeader()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -126,7 +127,10 @@ extension HomeViewController: ScanViewControllerDelegate {
 extension HomeViewController {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        headerBar.behaviorDefiner?.scrollViewDidScroll(scrollView)
+        // fix layout subviews scrollviewDidScroll cycle
+        if scrollView.isDragging {
+            headerBar.behaviorDefiner?.scrollViewDidScroll(scrollView)
+        }
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -140,9 +144,12 @@ extension HomeViewController {
 
 fileprivate extension HomeViewController {
     func prepareView() {
-        view.addSubview(tableView)
+        tableViewContainer.addSubview(tableView)
         tableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
         
         tableView.delegate = self
@@ -158,8 +165,6 @@ fileprivate extension HomeViewController {
     func prepareHeader() {
         setupHeaderBar()
         view.addSubview(headerBar)
-
-        tableView.contentInset = UIEdgeInsetsMake(150.0, 0.0, 0.0, 0.0)
 
         headerBar.behaviorDefiner = FacebookBarBehaviorDefiner()
         
@@ -184,6 +189,16 @@ fileprivate extension HomeViewController {
             make.bottom.equalTo(0)
         }
         
+        tableViewContainer = UIView()
+        view.addSubview(tableViewContainer)
+        tableViewContainer.snp.makeConstraints { (make) in
+            make.left.equalTo(0)
+            make.right.equalTo(0)
+            make.bottom.equalTo(0)
+        }
+        
+        tableViewContainer.topAnchor.constraint(equalTo: headerBar.bottomAnchor, constant: -1).isActive = true
+        
         let initialLayoutAttributes = FlexibleHeightBarSubviewLayoutAttributes()
         initialLayoutAttributes.size = headerBar.frame.size
         initialLayoutAttributes.center = CGPoint(x: headerBar.bounds.midX, y: headerBar.bounds.minY + 10.0)
@@ -201,16 +216,15 @@ fileprivate extension HomeViewController {
     
     
     func prepareRefresh() {
-        
         // Initialize tableView
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
-        loadingView.tintColor = Stylesheet.color(.white)
+        loadingView.tintColor = Stylesheet.color(.blue)
         tableView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
             // Add your logic here
             // Do not forget to call dg_stopLoading() at the end
             self?.tableView.dg_stopLoading()
             }, loadingView: loadingView)
-        tableView.dg_setPullToRefreshFillColor(Stylesheet.color(.white))
+        tableView.dg_setPullToRefreshFillColor(Stylesheet.color(.purple))
         tableView.dg_setPullToRefreshBackgroundColor(tableView.backgroundColor!)
     }
     

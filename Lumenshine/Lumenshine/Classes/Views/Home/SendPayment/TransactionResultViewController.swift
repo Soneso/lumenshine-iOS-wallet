@@ -10,51 +10,57 @@ import Foundation
 import UIKit
 import Material
 
-enum ButtonsSuccessTitles: String {
-    case editOrSendOtherButton = "Send other"
-    case sendOtherOrPrintButton = "Print"
-    case printOrDoneButton = "Done"
+private enum ButtonsTitles: String {
+    case sendOther = "SEND OTHER"
+    case print = "PRINT"
+    case done = "DONE"
+    case edit = "EDIT"
 }
 
-enum ButtonsErrorTitles: String {
-    case editOrSendOtherButton = "Edit"
-    case sendOtherOrPrintButton = "Send other"
-    case printOrDoneButton = "Print"
-}
-
-enum StatusLabelText: String {
+private enum StatusLabelText: String {
     case success = "success"
     case error = "error"
 }
 
-var TransactionResultPrintJobName = "Transaction result print data"
+private var TransactionResultPrintJobName = "Transaction result print data"
 
 class TransactionResultViewController: UIViewController, WalletActionsProtocol {
+
+    @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var statusValueLabel: UILabel!
+    @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var messageValueLabel: UILabel!
+    @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var currencyValueLabel: UILabel!
+    @IBOutlet weak var issuerLabel: UILabel!
     @IBOutlet weak var issuerValueLabel: UILabel!
+    @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var amountValueLabel: UILabel!
+    @IBOutlet weak var recepientLabel: UILabel!
     @IBOutlet weak var recipientMailValueLabel: UILabel!
     @IBOutlet weak var recipientPKLabel: UILabel!
+    @IBOutlet weak var memoLabel: UILabel!
     @IBOutlet weak var memoValueLabel: UILabel!
+    @IBOutlet weak var memoTypeLabel: UILabel!
     @IBOutlet weak var memoTypeValueLabel: UILabel!
+    @IBOutlet weak var transactionFeeLabel: UILabel!
     @IBOutlet weak var transactionFeeValueLabel: UILabel!
+    @IBOutlet weak var operationIDLabel: UILabel!
     @IBOutlet weak var operationIDValueLabel: UILabel!
     
     @IBOutlet weak var errorMessageStackView: UIStackView!
     @IBOutlet weak var operationIDStackView: UIStackView!
-    @IBOutlet weak var doneWithErrorsStackView: UIStackView!
     @IBOutlet weak var transactionFeeStackView: UIStackView!
     @IBOutlet weak var memoStackView: UIStackView!
-    @IBOutlet weak var memoTypeStackView: UIStackView!
     @IBOutlet weak var issuerLabelStackView: UIStackView!
-    @IBOutlet weak var issuerValueStackView: UIStackView!
     
-    @IBOutlet weak var editOrSendOtherButton: UIButton!
-    @IBOutlet weak var sendOtherOrPrintButton: UIButton!
-    @IBOutlet weak var printOrDoneButton: UIButton!
-    
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var sendOtherSuccessButton: UIButton!
+    @IBOutlet weak var sendOtherErrorButton: UIButton!
+    @IBOutlet weak var printButton: UIButton!
+    @IBOutlet weak var doneButton: UIButton!
+
     var wallet: Wallet!
     var result: TransactionResult!
     var closeAction: (() -> ())?
@@ -63,48 +69,16 @@ class TransactionResultViewController: UIViewController, WalletActionsProtocol {
     
     private var titleView = TitleView()
     
-    @IBAction func closeButtonAction(_ sender: UIButton) {
-        switch result.status {
-        case .error:
-            closeAction?()
-            break
-        case .success:
-            closeAllAction?()
-            break
-        }
-    }
-  
-    @IBAction func editOrSendOtherButtonAction(_ sender: UIButton) {
-        switch result.status {
-        case .error:
-            closeAction?()
-            break
-        case .success:
-            sendOtherAction?()
-            break
-        }
+    @IBAction func editButtonAction(_ sender: UIButton) {
+        closeAction?()
     }
     
-    @IBAction func sendOtherOrPrintButtonAction(_ sender: UIButton) {
-        switch result.status {
-        case .error:
-            sendOtherAction?()
-            break
-        case.success:
-            print()
-            break
-        }
+    @IBAction func sendOtherButtonAction(_ sender: UIButton) {
+        sendOtherAction?()
     }
     
-    @IBAction func printOrDoneButtonAction(_ sender: UIButton) {
-        switch result.status {
-        case .error:
-            print()
-            break
-        case.success:
-            closeAllAction?()
-            break
-        }
+    @IBAction func printButtonAction(_ sender: UIButton) {
+        print()
     }
     
     @IBAction func doneButtonAction(_ sender: UIButton) {
@@ -120,53 +94,132 @@ class TransactionResultViewController: UIViewController, WalletActionsProtocol {
             if result.transactionFee == nil {
                 transactionFeeStackView.isHidden = true
             }
+
+            sendOtherSuccessButton.isHidden = true
         case .success:
-            doneWithErrorsStackView.isHidden = true
             errorMessageStackView.isHidden = true
+            editButton.isHidden = true
+            sendOtherErrorButton.isHidden = true
         }
         
         if result.currency == NativeCurrencyNames.xlm.rawValue {
             issuerLabelStackView.isHidden = true
-            issuerValueStackView.isHidden = true
         }
         
         if result.memo == nil {
             memoStackView.isHidden = true
-            memoTypeStackView.isHidden = true
         }
         
+        setLabelsLayout()
+        setupButtons()
         setButtonsTitles()
-        setStatusLabel()
         populateValues()
         setupNavigationItem()
     }
     
-    private func setStatusLabel() {
+    private func setLabelsLayout() {
+        
+        let labelColor = Stylesheet.color(.lightBlack)
+        let subTitleLabelFont = R.font.encodeSansSemiBold(size: 17)
+        let labelFont = R.font.encodeSansBold(size: 15)
+        let valueLabelFont = R.font.encodeSansSemiBold(size: 15)
+        
+        // Subtitle
+        subtitleLabel.textColor = labelColor
+        subtitleLabel.font = subTitleLabelFont
+        
+        // Status label & value
+        statusLabel.textColor = labelColor
+        statusLabel.font = labelFont
+        statusValueLabel.font = labelFont
+        
         switch result.status {
         case .error:
-            statusValueLabel.text = StatusLabelText.error.rawValue
+            statusValueLabel.text = StatusLabelText.error.rawValue.uppercased()
             statusValueLabel.textColor = Stylesheet.color(.red)
             break
         case .success:
-            statusValueLabel.text = StatusLabelText.success.rawValue
+            statusValueLabel.text = StatusLabelText.success.rawValue.uppercased()
             statusValueLabel.textColor = Stylesheet.color(.green)
             break
         }
+        
+        // Message label
+        messageLabel.textColor = labelColor
+        messageLabel.font = labelFont
+        messageValueLabel.numberOfLines = 0
+        messageValueLabel.font = valueLabelFont
+        
+        // Currency label
+        currencyLabel.textColor = labelColor
+        currencyLabel.font = labelFont
+        currencyValueLabel.font = valueLabelFont
+        
+        // Issuer label
+        issuerLabel.textColor = labelColor
+        issuerLabel.font = labelFont
+        issuerValueLabel.font = valueLabelFont
+        
+        // Amount label
+        amountLabel.textColor = labelColor
+        amountLabel.font = labelFont
+        amountValueLabel.font = valueLabelFont
+        
+        // Recepient label
+        recepientLabel.textColor = labelColor
+        recepientLabel.font = labelFont
+        recipientMailValueLabel.font = valueLabelFont
+        recipientPKLabel.font = valueLabelFont
+        
+        // Memo label
+        memoLabel.textColor = labelColor
+        memoLabel.font = labelFont
+        memoValueLabel.font = valueLabelFont
+        
+        // Memotype label
+        memoTypeLabel.textColor = labelColor
+        memoTypeLabel.font = labelFont
+        memoTypeValueLabel.font = valueLabelFont
+        
+        // Operation ID label
+        operationIDLabel.textColor = labelColor
+        operationIDLabel.font = labelFont
+        operationIDValueLabel.font = valueLabelFont
+        
+        // Transaction fee label
+        transactionFeeLabel.textColor = labelColor
+        transactionFeeLabel.font = labelFont
+        transactionFeeValueLabel.font = valueLabelFont
+        
+    }
+    
+    private func setupButtons() {
+        
+        let buttonFont = R.font.encodeSansSemiBold(size: 15)
+        
+        editButton.backgroundColor = Stylesheet.color(.blue)
+        editButton.titleLabel?.font = buttonFont
+        
+        sendOtherSuccessButton.backgroundColor = Stylesheet.color(.green)
+        sendOtherSuccessButton.titleLabel?.font = buttonFont
+        
+        sendOtherErrorButton.backgroundColor = Stylesheet.color(.green)
+        sendOtherErrorButton.titleLabel?.font = buttonFont
+        
+        printButton.backgroundColor = Stylesheet.color(.orange)
+        printButton.titleLabel?.font = buttonFont
+        
+        doneButton.backgroundColor = Stylesheet.color(.blue)
+        doneButton.titleLabel?.font = buttonFont
+        
     }
     
     private func setButtonsTitles() {
-        switch result.status {
-        case .error:
-            editOrSendOtherButton.setTitle(ButtonsErrorTitles.editOrSendOtherButton.rawValue, for: UIControlState.normal)
-            sendOtherOrPrintButton.setTitle(ButtonsErrorTitles.sendOtherOrPrintButton.rawValue, for: UIControlState.normal)
-            printOrDoneButton.setTitle(ButtonsErrorTitles.printOrDoneButton.rawValue, for: UIControlState.normal)
-            break
-        case.success:
-            editOrSendOtherButton.setTitle(ButtonsSuccessTitles.editOrSendOtherButton.rawValue, for: UIControlState.normal)
-            sendOtherOrPrintButton.setTitle(ButtonsSuccessTitles.sendOtherOrPrintButton.rawValue, for: UIControlState.normal)
-            printOrDoneButton.setTitle(ButtonsSuccessTitles.printOrDoneButton.rawValue, for: UIControlState.normal)
-            break
-        }
+        editButton.setTitle(ButtonsTitles.edit.rawValue.uppercased(), for: .normal)
+        sendOtherErrorButton.setTitle(ButtonsTitles.sendOther.rawValue.uppercased(), for: .normal)
+        sendOtherSuccessButton.setTitle(ButtonsTitles.sendOther.rawValue.uppercased(), for: .normal)
+        printButton.setTitle(ButtonsTitles.print.rawValue.uppercased(), for: .normal)
+        doneButton.setTitle(ButtonsTitles.done.rawValue.uppercased(), for: .normal)
     }
     
     private func populateValues() {
@@ -257,16 +310,8 @@ class TransactionResultViewController: UIViewController, WalletActionsProtocol {
         return image
     }
     
-    @IBAction func didTapBack(_ sender: Any) {
-        self.dismiss(animated: true)
-    }
-    
-    @IBAction func didTapHelp(_ sender: Any) {
-        
-    }
-    
     private func setupNavigationItem() {
-        navigationItem.titleLabel.text = "Transaction result"
+        navigationItem.titleLabel.text = "Send"
         navigationItem.titleLabel.textColor = Stylesheet.color(.white)
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
     }

@@ -6,7 +6,7 @@
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
-import Foundation
+import stellarsdk
 
 enum TransactionActionType {
     case sendPayment
@@ -24,4 +24,5 @@ public struct TransactionInput {
     let transactionType: TransactionActionType
     let signer: String?
     let signerSeed: String?
+    let otherCurrencyAsset: AccountBalanceResponse?
 }

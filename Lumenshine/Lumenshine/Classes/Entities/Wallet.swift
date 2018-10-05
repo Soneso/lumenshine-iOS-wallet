@@ -22,9 +22,11 @@ public class FundedWallet: Wallet {
     private var walletResponse: WalletsResponse
     
     var balances: [AccountBalanceResponse]
+    var subentryCount: UInt!
     
     init(walletResponse: WalletsResponse, accountResponse: AccountResponse) {
         self.balances = accountResponse.balances
+        self.subentryCount = accountResponse.subentryCount
         self.walletResponse = walletResponse
     }
     
@@ -138,8 +140,12 @@ extension FundedWallet {
         var availableCurrencies = [String]()
         for currency in self.uniqueAssetCodeBalances {
             if let balance = CoinUnit(currency.balance), let displayCode = currency.displayCode {
-            if (balance != 0) {
-                    availableCurrencies.append(displayCode)
+                if (balance != 0) {
+                    if currency.displayCode == NativeCurrencyNames.xlm.rawValue {
+                        availableCurrencies.insert(displayCode, at: 0)
+                    } else {
+                        availableCurrencies.append(displayCode)
+                    }
                 }
             }
         }
@@ -151,7 +157,7 @@ extension FundedWallet {
         var alreadyFoundOnce: Bool = false
         
         for currency in balances {
-            if currency.assetCode == assetCode && CoinUnit(currency.balance)?.availableAmount != 0 {
+            if currency.assetCode == assetCode && CoinUnit(currency.balance) != 0 {
                 if !alreadyFoundOnce {
                     alreadyFoundOnce = true
                 } else {

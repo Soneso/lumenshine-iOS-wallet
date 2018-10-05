@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,16 +20,22 @@
                 <outlet property="amountSegmentedControl" destination="np5-p3-dds" id="Jhs-bz-k4r"/>
                 <outlet property="amountTextField" destination="AzQ-Ub-nFY" id="3VM-c9-9jW"/>
                 <outlet property="availableAmountLabel" destination="GVe-V6-JUk" id="Mva-sf-hsa"/>
+                <outlet property="availableAmountView" destination="FGe-R5-0Sx" id="vey-VH-eur"/>
+                <outlet property="biometricAuthButton" destination="3G6-hs-CuU" id="IAc-hH-wEf"/>
+                <outlet property="biometricAuthView" destination="kYV-uf-mZD" id="9g9-jr-gy3"/>
                 <outlet property="contentView" destination="x1L-CZ-sKm" id="Iki-Al-l3J"/>
                 <outlet property="currentCurrencyLabel" destination="ee0-h0-WXH" id="LGf-mL-XA1"/>
                 <outlet property="currentCurrencyTextField" destination="AzS-4P-HY9" id="pY9-EL-Hx8"/>
-                <outlet property="currentCurrencyView" destination="Adu-xn-KHs" id="kpH-OQ-3WM"/>
                 <outlet property="issuerTextField" destination="tkU-ev-GZq" id="KsY-gL-moO"/>
                 <outlet property="issuerView" destination="E0k-0q-vLs" id="EPg-is-kYy"/>
                 <outlet property="memoInputErrorLabel" destination="QIU-uQ-rXM" id="lU7-24-DG0"/>
                 <outlet property="memoInputErrorView" destination="is1-DN-WsB" id="f1e-bm-FbD"/>
                 <outlet property="memoInputTextField" destination="bGc-pV-e2A" id="xDe-8q-DHq"/>
                 <outlet property="memoTypeTextField" destination="bU6-dA-gXQ" id="57S-wK-7QY"/>
+                <outlet property="otherCurrencyErrorLabel" destination="zcG-4S-Le0" id="ZCt-oH-SFL"/>
+                <outlet property="otherCurrencyErrorView" destination="Yz2-vw-CHY" id="Emb-l2-sKQ"/>
+                <outlet property="otherCurrencyTextField" destination="bUF-0E-AIs" id="njQ-G3-dgG"/>
+                <outlet property="otherCurrencyView" destination="tqL-hv-gbf" id="t2a-ag-M21"/>
                 <outlet property="passwordErrorLabel" destination="jo3-C6-mi9" id="DvP-VY-1ag"/>
                 <outlet property="passwordErrorView" destination="riY-B6-6Z8" id="lmd-c7-YfB"/>
                 <outlet property="passwordStackView" destination="Kvv-Dp-jyj" id="2Da-sg-k72"/>
@@ -58,7 +64,7 @@
                     <rect key="frame" x="0.0" y="20" width="375" height="873"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ifp-Md-gjR">
-                            <rect key="frame" x="0.0" y="16" width="375" height="674.5"/>
+                            <rect key="frame" x="0.0" y="16" width="375" height="730.5"/>
                             <subviews>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Adu-xn-KHs">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
@@ -94,6 +100,42 @@
                                         <constraint firstItem="GVe-V6-JUk" firstAttribute="leading" secondItem="FGe-R5-0Sx" secondAttribute="leading" constant="32" id="TBW-n9-Fom"/>
                                         <constraint firstAttribute="bottom" secondItem="GVe-V6-JUk" secondAttribute="bottom" id="bOy-xU-VPH"/>
                                         <constraint firstItem="GVe-V6-JUk" firstAttribute="top" secondItem="FGe-R5-0Sx" secondAttribute="top" id="g6f-0Y-Vf6"/>
+                                    </constraints>
+                                </view>
+                                <view hidden="YES" contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Yz2-vw-CHY">
+                                    <rect key="frame" x="0.0" y="66" width="375" height="0.0"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zcG-4S-Le0" customClass="ErrorLabel" customModule="Lumenshine" customModuleProvider="target">
+                                            <rect key="frame" x="32" y="0.0" width="327" height="0.0"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="zcG-4S-Le0" secondAttribute="trailing" constant="16" id="7Ve-fs-QDm"/>
+                                        <constraint firstItem="zcG-4S-Le0" firstAttribute="leading" secondItem="Yz2-vw-CHY" secondAttribute="leading" constant="32" id="WOZ-ez-kfu"/>
+                                        <constraint firstAttribute="bottom" secondItem="zcG-4S-Le0" secondAttribute="bottom" id="Zgb-7s-Zq8"/>
+                                        <constraint firstItem="zcG-4S-Le0" firstAttribute="top" secondItem="Yz2-vw-CHY" secondAttribute="top" id="g3d-fs-uSn"/>
+                                    </constraints>
+                                </view>
+                                <view hidden="YES" contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="tqL-hv-gbf">
+                                    <rect key="frame" x="0.0" y="66" width="375" height="0.0"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Asset code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bUF-0E-AIs" customClass="InputTextField" customModule="Lumenshine" customModuleProvider="target">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="0.0"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="bUF-0E-AIs" secondAttribute="trailing" constant="16" id="6WN-r8-e88"/>
+                                        <constraint firstItem="bUF-0E-AIs" firstAttribute="leading" secondItem="tqL-hv-gbf" secondAttribute="leading" constant="16" id="G1V-vd-vSf"/>
+                                        <constraint firstAttribute="bottom" secondItem="bUF-0E-AIs" secondAttribute="bottom" id="iHU-DD-JUi"/>
+                                        <constraint firstItem="bUF-0E-AIs" firstAttribute="top" secondItem="tqL-hv-gbf" secondAttribute="top" id="tFe-we-vit"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="E0k-0q-vLs">
@@ -261,7 +303,7 @@
                                             <rect key="frame" x="16" y="0.0" width="304" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="postal-code"/>
                                         </textField>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -539,7 +581,7 @@
                                     <rect key="frame" x="0.0" y="600.5" width="375" height="0.0"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" text="Send Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ldh-X0-OlJ" userLabel="SendErrorLabel" customClass="ErrorLabel" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                            <rect key="frame" x="32" y="0.0" width="311" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -547,30 +589,67 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstItem="ldh-X0-OlJ" firstAttribute="centerX" secondItem="zCM-IQ-Pz5" secondAttribute="centerX" id="0Xq-TS-1jC"/>
-                                        <constraint firstItem="ldh-X0-OlJ" firstAttribute="centerY" secondItem="zCM-IQ-Pz5" secondAttribute="centerY" id="GUd-2F-wjb"/>
                                         <constraint firstItem="ldh-X0-OlJ" firstAttribute="top" secondItem="zCM-IQ-Pz5" secondAttribute="top" id="cEk-A2-boW"/>
                                         <constraint firstAttribute="bottom" secondItem="ldh-X0-OlJ" secondAttribute="bottom" id="en3-8g-tIR"/>
-                                        <constraint firstAttribute="trailing" secondItem="ldh-X0-OlJ" secondAttribute="trailing" id="kkI-XX-1k7"/>
-                                        <constraint firstItem="ldh-X0-OlJ" firstAttribute="leading" secondItem="zCM-IQ-Pz5" secondAttribute="leading" id="wLr-Oa-z67"/>
+                                        <constraint firstAttribute="trailing" secondItem="ldh-X0-OlJ" secondAttribute="trailing" constant="32" id="kkI-XX-1k7"/>
+                                        <constraint firstItem="ldh-X0-OlJ" firstAttribute="leading" secondItem="zCM-IQ-Pz5" secondAttribute="leading" constant="32" id="wLr-Oa-z67"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="4dG-Lb-3yY">
-                                    <rect key="frame" x="0.0" y="608.5" width="375" height="66"/>
+                                <view contentMode="scaleToFill" verticalHuggingPriority="1000" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="4dG-Lb-3yY">
+                                    <rect key="frame" x="0.0" y="608.5" width="375" height="122"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ye-bL-VYE" customClass="RoundedButton" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="152" y="16" width="71" height="30"/>
-                                            <state key="normal" title="Send XLM"/>
-                                            <connections>
-                                                <action selector="sendButtonAction:" destination="-1" eventType="touchUpInside" id="3xz-fi-BWY"/>
-                                            </connections>
-                                        </button>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="F1O-db-rKz">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="122"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="gJQ-5D-JRR">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="16"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleAspectFit" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ye-bL-VYE" customClass="RoundedButton" customModule="Lumenshine" customModuleProvider="target">
+                                                            <rect key="frame" x="152" y="0.0" width="71" height="0.0"/>
+                                                            <state key="normal" title="Send XLM"/>
+                                                            <connections>
+                                                                <action selector="sendButtonAction:" destination="-1" eventType="touchUpInside" id="3xz-fi-BWY"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="9ye-bL-VYE" firstAttribute="centerX" secondItem="gJQ-5D-JRR" secondAttribute="centerX" id="1nj-3k-ZRD"/>
+                                                        <constraint firstAttribute="bottom" secondItem="9ye-bL-VYE" secondAttribute="bottom" constant="16" id="9u7-1u-ofq"/>
+                                                        <constraint firstItem="9ye-bL-VYE" firstAttribute="top" secondItem="gJQ-5D-JRR" secondAttribute="top" id="wvd-n4-Jli"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="kYV-uf-mZD">
+                                                    <rect key="frame" x="0.0" y="16" width="375" height="106"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3G6-hs-CuU" customClass="BiometricAuthButton" customModule="Lumenshine" customModuleProvider="target">
+                                                            <rect key="frame" x="142.5" y="0.0" width="90" height="90"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="90" id="3O6-vk-bWH"/>
+                                                                <constraint firstAttribute="width" secondItem="3G6-hs-CuU" secondAttribute="height" multiplier="1:1" id="Eat-n9-L3S"/>
+                                                                <constraint firstAttribute="width" constant="90" id="tta-wR-Ze6"/>
+                                                            </constraints>
+                                                            <connections>
+                                                                <action selector="biometricAuthAction:" destination="-1" eventType="touchUpInside" id="OcQ-Gn-oi7"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="3G6-hs-CuU" firstAttribute="top" secondItem="kYV-uf-mZD" secondAttribute="top" id="XYh-SK-JZ5"/>
+                                                        <constraint firstItem="3G6-hs-CuU" firstAttribute="centerX" secondItem="kYV-uf-mZD" secondAttribute="centerX" id="mk0-b4-Oe5"/>
+                                                        <constraint firstAttribute="bottom" secondItem="3G6-hs-CuU" secondAttribute="bottom" constant="16" id="oRZ-3k-U7G"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                        </stackView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="9ye-bL-VYE" secondAttribute="bottom" constant="20" id="3KF-RK-33w"/>
-                                        <constraint firstItem="9ye-bL-VYE" firstAttribute="centerX" secondItem="4dG-Lb-3yY" secondAttribute="centerX" id="Fn3-YF-X4Q"/>
-                                        <constraint firstItem="9ye-bL-VYE" firstAttribute="top" secondItem="4dG-Lb-3yY" secondAttribute="top" constant="16" id="eII-SN-m2M"/>
+                                        <constraint firstAttribute="trailing" secondItem="F1O-db-rKz" secondAttribute="trailing" id="UeY-7G-Edp"/>
+                                        <constraint firstItem="F1O-db-rKz" firstAttribute="leading" secondItem="4dG-Lb-3yY" secondAttribute="leading" id="kZU-Fv-42V"/>
+                                        <constraint firstItem="F1O-db-rKz" firstAttribute="top" secondItem="4dG-Lb-3yY" secondAttribute="top" id="mAe-iz-54R"/>
+                                        <constraint firstAttribute="bottom" secondItem="F1O-db-rKz" secondAttribute="bottom" id="tDQ-HU-8aA"/>
                                     </constraints>
                                 </view>
                             </subviews>

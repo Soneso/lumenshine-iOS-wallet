@@ -127,17 +127,17 @@ class WalletDetailsViewController: UIViewController {
     }
     
     private func setupBalances() {
-        balanceTitleLabel.text = wallet.hasOnlyNative ? BalanceLabelDescription.onlyNative.rawValue : BalanceLabelDescription.extended.rawValue
+        balanceTitleLabel.text = wallet.hasOnlyNative ? R.string.localizable.balance().uppercased() : R.string.localizable.balances().uppercased()
         var balanceValues = String()
         var availableValues = String()
         
         balanceValues.append("\(wallet.nativeBalance) \(NativeCurrencyNames.xlm.rawValue)\n")
-        availableValues.append("\(wallet.nativeBalance.availableAmount) \(NativeCurrencyNames.xlm.rawValue)\n")
+        availableValues.append("\(wallet.nativeBalance.availableAmount(forWallet: wallet)) \(NativeCurrencyNames.xlm.rawValue)\n")
         
         for currency in wallet.uniqueAssetCodeBalances {
             if let assetCode = currency.assetCode, let balance = CoinUnit(currency.balance){
                 balanceValues.append("\(balance) \(assetCode)\n")
-                availableValues.append("\(balance.availableAmount) \(assetCode)\n")
+                availableValues.append("\(balance) \(assetCode)\n")
             }
         }
         

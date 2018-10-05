@@ -20,7 +20,7 @@ class MenuViewController: UITableViewController {
     // MARK: - Properties
     
     fileprivate let viewModel: MenuViewModelType
-    fileprivate let menuButton = HamburgerButton(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
+    fileprivate let menuButton = MenuButton(frame: .zero)//HamburgerButton(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
     
     init(viewModel: MenuViewModelType) {
         self.viewModel = viewModel
@@ -101,7 +101,7 @@ fileprivate extension MenuViewController {
     }
     
     func prepareMenuButton() {
-        menuButton.color = Stylesheet.color(.blue)
+        //menuButton.color = Stylesheet.color(.blue)
 //        menuButton.transform = menuButton.transform.scaledBy(x: 1.35, y: 1.35)
         menuButton.addTarget(self, action: #selector(onMenuButtonTap(_:event:)), for: .touchUpInside)
         drawerController?.delegate = self

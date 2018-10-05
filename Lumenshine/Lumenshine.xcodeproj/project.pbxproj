@@ -248,6 +248,7 @@
 		74C899582107621E009B13EA /* receive_payment.html in Resources */ = {isa = PBXBuildFile; fileRef = 74C899572107621E009B13EA /* receive_payment.html */; };
 		74C8995A2108ACD1009B13EA /* AccountBalanceResponse+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C899592108ACD1009B13EA /* AccountBalanceResponse+Extra.swift */; };
 		74C89996210A3A06009B13EA /* Sequence+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C89995210A3A06009B13EA /* Sequence+Utils.swift */; };
+		74C954992165F8B4005BA3CD /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C954982165F8B4005BA3CD /* MenuButton.swift */; };
 		74DD4CEB210CE83E00F4D69A /* UIView+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DD4CEA210CE83E00F4D69A /* UIView+Snapshot.swift */; };
 		74E2057820D1543400E94048 /* HomeFundedWalletHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E2057720D1543400E94048 /* HomeFundedWalletHeaderView.swift */; };
 		74E2057A20D1544000E94048 /* HomeFundedWalletHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74E2057920D1544000E94048 /* HomeFundedWalletHeaderView.xib */; };
@@ -331,6 +332,7 @@
 		C6BEBE7221302CC6000F7435 /* ProvideCurrencyDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BEBE7121302CC6000F7435 /* ProvideCurrencyDataViewController.swift */; };
 		C6C0E4D921256F2700FF1BA8 /* ChartExchangeRatesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C0E4D821256F2700FF1BA8 /* ChartExchangeRatesResponse.swift */; };
 		C6C0E4DB212570EF00FF1BA8 /* ExchangeRateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C0E4DA212570EF00FF1BA8 /* ExchangeRateResponse.swift */; };
+		C6C1FC6E21673F0900F80F44 /* BiometricAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C1FC6D21673F0900F80F44 /* BiometricAuthButton.swift */; };
 		C6D87E742133ECE100154A3B /* KnownCurrenciesTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D87E732133ECE100154A3B /* KnownCurrenciesTableViewController.xib */; };
 		C6D87E762133ECED00154A3B /* KnownCurrenciesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D87E752133ECED00154A3B /* KnownCurrenciesTableViewController.swift */; };
 		C6D87E78213400A000154A3B /* KnownCurrenciesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D87E77213400A000154A3B /* KnownCurrenciesTableViewCell.xib */; };
@@ -622,6 +624,7 @@
 		74C899572107621E009B13EA /* receive_payment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = receive_payment.html; sourceTree = "<group>"; };
 		74C899592108ACD1009B13EA /* AccountBalanceResponse+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountBalanceResponse+Extra.swift"; sourceTree = "<group>"; };
 		74C89995210A3A06009B13EA /* Sequence+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Utils.swift"; sourceTree = "<group>"; };
+		74C954982165F8B4005BA3CD /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		74DD4CEA210CE83E00F4D69A /* UIView+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Snapshot.swift"; sourceTree = "<group>"; };
 		74E2057720D1543400E94048 /* HomeFundedWalletHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFundedWalletHeaderView.swift; sourceTree = "<group>"; };
 		74E2057920D1544000E94048 /* HomeFundedWalletHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeFundedWalletHeaderView.xib; sourceTree = "<group>"; };
@@ -708,6 +711,7 @@
 		C6BEBE7121302CC6000F7435 /* ProvideCurrencyDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvideCurrencyDataViewController.swift; sourceTree = "<group>"; };
 		C6C0E4D821256F2700FF1BA8 /* ChartExchangeRatesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartExchangeRatesResponse.swift; sourceTree = "<group>"; };
 		C6C0E4DA212570EF00FF1BA8 /* ExchangeRateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateResponse.swift; sourceTree = "<group>"; };
+		C6C1FC6D21673F0900F80F44 /* BiometricAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricAuthButton.swift; sourceTree = "<group>"; };
 		C6D87E732133ECE100154A3B /* KnownCurrenciesTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KnownCurrenciesTableViewController.xib; sourceTree = "<group>"; };
 		C6D87E752133ECED00154A3B /* KnownCurrenciesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownCurrenciesTableViewController.swift; sourceTree = "<group>"; };
 		C6D87E77213400A000154A3B /* KnownCurrenciesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KnownCurrenciesTableViewCell.xib; sourceTree = "<group>"; };
@@ -825,6 +829,7 @@
 				431437F12047FF9100189C83 /* AppNavigationController.swift */,
 				431437F32047FFB400189C83 /* AppNavigationDrawerController.swift */,
 				7420BBEC211839BB002FC4C7 /* BaseNavigationViewController.swift */,
+				74C954982165F8B4005BA3CD /* MenuButton.swift */,
 			);
 			path = Drawer;
 			sourceTree = "<group>";
@@ -1491,6 +1496,7 @@
 				C675BC25215CBFE700B663DB /* RightRoundedButton.swift */,
 				C675BC27215CF86200B663DB /* BaseButton.swift */,
 				C6257A6F216211DA00E1B879 /* RegularSubtitleLabel.swift */,
+				C6C1FC6D21673F0900F80F44 /* BiometricAuthButton.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
@@ -2023,6 +2029,7 @@
 				43EFF204204939F700B1887C /* UIColor+Utils.swift in Sources */,
 				C665871821255EAB006499A7 /* RatesResponse.swift in Sources */,
 				43DAC65820E4FF0A00E491D8 /* ToolbarHeader.swift in Sources */,
+				74C954992165F8B4005BA3CD /* MenuButton.swift in Sources */,
 				4376F49E204D9DF800B179C3 /* HomeCoordinator.swift in Sources */,
 				4394911E20BEBDFA008D4FA2 /* SettingsCoordinator.swift in Sources */,
 				4319B4CE211A0347002E45F0 /* BackupMnemonicViewController.swift in Sources */,
@@ -2130,6 +2137,7 @@
 				43088DB02087C4B8008AE1AB /* Dictionary+HTTPParams.swift in Sources */,
 				431A71D7214C0E5000D44C7E /* LSTextField.swift in Sources */,
 				C6813DC9213AC725007074C2 /* KnownCurrenciesManager.swift in Sources */,
+				C6C1FC6E21673F0900F80F44 /* BiometricAuthButton.swift in Sources */,
 				43DAC65420E4BA3900E491D8 /* BiometricAuthenticationProtocol.swift in Sources */,
 				7491BE4C211C450F0058877E /* WalletManager.swift in Sources */,
 				4341251320EBC2E900267260 /* ReLoginFingerView.swift in Sources */,

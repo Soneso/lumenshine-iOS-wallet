@@ -707,6 +707,15 @@
 "ico_detail" = "Learn how to participate in an ICO";
 
 /*  */
+"balance" = "Balance";
+
+/*  */
+"balances" = "Balances";
+
+/*  */
+"available" = "Available";
+
+/*  */
 "send_payment" = "Send Payment";
 
 /*  */

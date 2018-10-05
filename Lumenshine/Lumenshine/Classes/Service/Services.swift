@@ -18,6 +18,11 @@ public final class Services {
 #elseif DEVELOPMENT
     let baseURL = "https://demoapi.lumenshine.com"
     let horizonURL = "https://horizon-testnet.stellar.org"
+    
+    /** live net **/
+    //let baseURL = "https://alphaapi.lumenshine.com"
+    //let horizonURL = "https://alphahorizon.lumenshine.com"
+    
 #endif
     
     public var isTestURL: Bool {

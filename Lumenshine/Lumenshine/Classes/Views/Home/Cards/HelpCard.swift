@@ -85,7 +85,7 @@ fileprivate extension HelpCard {
     
     func prepareTitle() {
         titleLabel.textColor = Stylesheet.color(.lightBlack)
-        titleLabel.font = R.font.encodeSansSemiBold(size: 14)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 16)
         titleLabel.textAlignment = .center
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.numberOfLines = 0
@@ -100,7 +100,7 @@ fileprivate extension HelpCard {
     
     func prepareDetail() {
         detailLabel.textColor = Stylesheet.color(.lightBlack)
-        detailLabel.font = R.font.encodeSansSemiBold(size: 12)
+        detailLabel.font = R.font.encodeSansRegular(size: 13)
         detailLabel.textAlignment = .left
         detailLabel.adjustsFontSizeToFitWidth = true
         detailLabel.numberOfLines = 0
