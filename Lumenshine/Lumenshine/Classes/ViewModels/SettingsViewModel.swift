@@ -48,7 +48,7 @@ class SettingsViewModel: SettingsViewModelType {
         self.entries = [[.changePassword,
                          .change2FA,
                          BiometricIDAuth().biometricType() == .faceID ? .faceRecognition : .fingerprint,
-                         .backupMnemonic]]
+                         .backupMnemonic, .notifications, .personalData]]
     }
     
     var tfaSecret: String? {
@@ -108,6 +108,10 @@ class SettingsViewModel: SettingsViewModelType {
             break
         case .backupMnemonic:
             navigationCoordinator?.performTransition(transition: .showBackupMnemonic)
+        case .notifications:
+            break
+        case .personalData:
+            break
         }
     }
     

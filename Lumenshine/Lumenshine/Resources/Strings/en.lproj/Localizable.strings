@@ -593,6 +593,12 @@
 "avatar" = "Avatar";
 
 /*  */
+"notifications" = "Notifications";
+
+/*  */
+"personal_data" = "Personal data";
+
+/*  */
 "backup_mnemonic" = "Backup Secret (Mnemonic)";
 
 /*  */

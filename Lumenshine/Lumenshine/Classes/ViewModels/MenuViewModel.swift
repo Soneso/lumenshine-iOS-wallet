@@ -33,9 +33,13 @@ class MenuViewModel : MenuViewModelType {
         self.service = service
         self.user = user
         
-        self.entries = [[.avatar],
+        /*self.entries = [[.avatar],
                         [.home, .wallets, .transactions, .ICOs, .myOrders, .contacts, .extras, .settings],
-                        [.help, .signOut]]
+                        [.help, .signOut]]*/
+        
+        self.entries = [[.avatar],
+         [.home, .wallets, .transactions, .contacts, .settings],
+         [.help, .signOut]]
         
         if let tokenExists = TFAGeneration.isTokenExists(email: user.email),
             tokenExists == false {

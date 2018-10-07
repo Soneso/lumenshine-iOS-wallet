@@ -14,6 +14,8 @@ enum SettingsEntry {
     case fingerprint
     case faceRecognition
     case backupMnemonic
+    case notifications
+    case personalData
     case avatar
     
     var name: String {
@@ -30,6 +32,10 @@ enum SettingsEntry {
             return R.string.localizable.avatar()
         case .backupMnemonic:
             return R.string.localizable.backup_mnemonic()
+        case .notifications:
+            return R.string.localizable.notifications()
+        case .personalData:
+            return R.string.localizable.personal_data()
         }
     }
 }

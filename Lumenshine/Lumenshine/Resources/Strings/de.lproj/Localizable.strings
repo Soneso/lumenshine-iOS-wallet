@@ -558,6 +558,12 @@
 "avatar" = "Avatar";
 
 /*  */
+"notifications" = "Benachrichtigungen";
+
+/*  */
+"personal_data" = "Persönliche Daten";
+
+/*  */
 "backup_mnemonic" = "Backup Secret (Mnemonic)";
 
 /*  */
