@@ -54,7 +54,7 @@ fileprivate extension ChangePasswordSuccessViewController {
     func prepareView() {
         view.backgroundColor = Stylesheet.color(.white)
         navigationItem.titleLabel.text = viewModel.successHeader
-        navigationItem.titleLabel.textColor = Stylesheet.color(.white)
+        navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         prepareTitleLabel()
         prepareButton()

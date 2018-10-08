@@ -122,7 +122,7 @@ fileprivate extension Confirm2faCodeViewController {
     func prepareView() {
         view.backgroundColor = Stylesheet.color(.white)
         snackbarController?.navigationItem.titleLabel.text = R.string.localizable.change_2fa()
-        snackbarController?.navigationItem.titleLabel.textColor = Stylesheet.color(.white)
+        snackbarController?.navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
         snackbarController?.navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         
         prepareTitleLabel()

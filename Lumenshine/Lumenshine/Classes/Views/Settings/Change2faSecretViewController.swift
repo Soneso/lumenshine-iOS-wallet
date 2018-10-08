@@ -102,7 +102,7 @@ fileprivate extension Change2faSecretViewController {
     func prepareView() {
         view.backgroundColor = Stylesheet.color(.white)
         navigationItem.titleLabel.text = R.string.localizable.change_2fa()
-        navigationItem.titleLabel.textColor = Stylesheet.color(.white)
+        navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         prepareTitle()
         prepareTextFields()

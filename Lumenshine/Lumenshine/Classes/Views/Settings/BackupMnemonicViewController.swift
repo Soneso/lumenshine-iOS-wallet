@@ -53,7 +53,7 @@ fileprivate extension BackupMnemonicViewController {
     func prepareView() {
         view.backgroundColor = Stylesheet.color(.white)
         navigationItem.titleLabel.text = R.string.localizable.backup_mnemonic()
-        navigationItem.titleLabel.textColor = Stylesheet.color(.white)
+        navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         prepareContentView()
         prepareTitleLabel()
