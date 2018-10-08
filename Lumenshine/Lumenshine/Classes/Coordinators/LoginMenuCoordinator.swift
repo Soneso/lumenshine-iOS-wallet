@@ -37,6 +37,8 @@ class LoginMenuCoordinator: MenuCoordinatorType {
         switch transition {
         case .showLogin, .showSignUp, .showForgotPassword, .showLost2fa:
             performLoginTransition(transition)
+        case .showHelp:
+            showHelpCenter()
         default:
             break
         }
@@ -64,6 +66,16 @@ fileprivate extension LoginMenuCoordinator {
             menuView.present(snackBar)
         }
         return loginCoordinator
+    }
+    
+    func showHelpCenter() {
+        let coordinator = HelpCenterCoordinator(mainCoordinator: mainCoordinator, service: service)
+        let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
+        if let drawer = baseController as? AppNavigationDrawerController {
+            drawer.setViewController(navigationController, for: .none)
+            drawer.closeSide()
+            menuView.present(coordinator.baseController)
+        }
     }
 }
 

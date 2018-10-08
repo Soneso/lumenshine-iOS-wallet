@@ -21,18 +21,23 @@ protocol HelpCenterViewModelType: Transitionable {
 class HelpCenterViewModel : HelpCenterViewModelType {
     
     fileprivate let service: AuthService
-    fileprivate let user: User
+    fileprivate let user: User?
     fileprivate let entries: [[HelpEntry]]
     
     weak var navigationCoordinator: CoordinatorType?
     
-    init(service: AuthService, user: User) {
+    init(service: AuthService, user: User?) {
         self.service = service
         self.user = user
         
-        self.entries = [[.inbox],
-                        [.FAQ1, .FAQ2, .FAQ3, .FAQ4],
-                        [.basics, .security, .wallets, .stellar]]//, .ICO]]
+        if user != nil {
+            self.entries = [[.inbox],
+                            [.FAQ1, .FAQ2, .FAQ3, .FAQ4],
+                            [.basics, .security, .wallets, .stellar]]//, .ICO]]
+        } else {
+            self.entries = [[.inbox],
+                            [.FAQ1, .FAQ2, .FAQ3, .FAQ4]]
+        }
     }
     
     var itemDistribution: [Int] {

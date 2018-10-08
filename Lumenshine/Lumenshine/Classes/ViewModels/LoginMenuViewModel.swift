@@ -49,6 +49,8 @@ class LoginMenuViewModel : MenuViewModelType {
             navigationCoordinator?.performTransition(transition: .showForgotPassword)
         case .lost2FA:
             navigationCoordinator?.performTransition(transition: .showLost2fa)
+        case .help:
+            navigationCoordinator?.performTransition(transition: .showHelp)
         default: break
         }
         lastIndex = indexPath
