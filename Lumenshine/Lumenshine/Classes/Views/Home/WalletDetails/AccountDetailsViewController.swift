@@ -42,7 +42,13 @@ class AccountDetailsViewController: UIViewController {
     @IBOutlet weak var walletDetailsContainer: UIView!
     
     @IBOutlet weak var federationDomainLabel: UILabel!
+    @IBOutlet weak var stellarAddressNoneLabel: UILabel!
     
+    @IBOutlet weak var saveWalletNameButton: UIButton!
+    @IBOutlet weak var cancelWalletNameButton: UIButton!
+    
+    @IBOutlet weak var cancelInflationChangeButton: UIButton!
+    @IBOutlet weak var submitInflationChangeButton: UIButton!
     weak var flowDelegate: AccountDetailsViewControllerFlow?
     
     private let walletService = Services.shared.walletService
@@ -58,6 +64,8 @@ class AccountDetailsViewController: UIViewController {
         setupWalletNameView()
         publicKeyLabel.text = wallet.publicKey
         setupStellarAddress()
+        view.backgroundColor = Stylesheet.color(.veryLightGray)
+        setupButtons()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -159,9 +167,12 @@ class AccountDetailsViewController: UIViewController {
     // MARK: Private methods
     
     private func setupNavigationItem() {
-        navigationItem.titleLabel.text = "\(wallet.name)\nDetails"
         navigationItem.titleLabel.textColor = Stylesheet.color(.white)
-        navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
+        let walletName = NSMutableAttributedString(string: wallet.name, attributes: [ NSAttributedStringKey.font: R.font.encodeSansSemiBold(size: 15) ?? Font.systemFont(ofSize: 15) ])
+        let subTitle = NSMutableAttributedString(string: "\nDetails", attributes: [ NSAttributedStringKey.font: R.font.encodeSansSemiBold(size: 13) ?? Font.systemFont(ofSize: 13) ])
+        walletName.append(subTitle)
+        navigationItem.titleLabel.numberOfLines = 2
+        navigationItem.titleLabel.attributedText = walletName
         
         let helpButton = Material.IconButton()
         helpButton.image = R.image.question()?.crop(toWidth: 15, toHeight: 15)?.tint(with: Stylesheet.color(.white))
@@ -190,6 +201,8 @@ class AccountDetailsViewController: UIViewController {
             stellarAddressNotSetupView.removeFromSuperview()
             stellarAddressEditView.removeFromSuperview()
         }
+        
+        stellarAddressNoneLabel.textColor = Stylesheet.color(.red)
     }
     
     private func setStellarAddressView() {
@@ -253,5 +266,13 @@ class AccountDetailsViewController: UIViewController {
         setupAccountCurrency()
         setupWalletDetails()
         setupTransactionsHistory()
+    }
+    
+    private func setupButtons() {
+        saveWalletNameButton.backgroundColor = Stylesheet.color(.blue)
+        submitInflationChangeButton.backgroundColor = Stylesheet.color(.blue)
+        
+        cancelWalletNameButton.backgroundColor = Stylesheet.color(.red)
+        cancelInflationChangeButton.backgroundColor = Stylesheet.color(.red)
     }
 }

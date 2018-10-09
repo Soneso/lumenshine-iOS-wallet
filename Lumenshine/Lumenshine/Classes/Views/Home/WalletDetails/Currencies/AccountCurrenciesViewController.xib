@@ -6,7 +6,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -25,7 +24,7 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kL4-bg-zKJ">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="TsF-Z7-yJN"/>
                     </constraints>
@@ -39,41 +38,42 @@
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="646" translatesAutoresizingMaskIntoConstraints="NO" id="4ja-vC-kBg" customClass="IntrinsicView" customModule="Lumenshine" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="113"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currencies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="plW-Oa-lIr">
-                                            <rect key="frame" x="8" y="16" width="100" height="23"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Currencies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="plW-Oa-lIr" customClass="SubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
+                                            <rect key="frame" x="16" y="0.0" width="100" height="30"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xMc-IC-UJ0">
-                                            <rect key="frame" x="8" y="47" width="359" height="20.5"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="xMc-IC-UJ0">
+                                            <rect key="frame" x="16" y="34" width="351" height="79"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stellar Lumens (XLM)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q0o-1m-ZCB">
-                                                    <rect key="frame" x="0.0" y="0.0" width="359" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Stellar Lumens (XLM)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q0o-1m-ZCB" customClass="RegularSubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="351" height="79"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </stackView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dyZ-e0-HEM">
-                                            <rect key="frame" x="274" y="85" width="91" height="30"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dyZ-e0-HEM" customClass="SimpleButton" customModule="Lumenshine" customModuleProvider="target">
+                                            <rect key="frame" x="120" y="0.0" width="91" height="30"/>
                                             <state key="normal" title="add currency"/>
                                             <connections>
                                                 <action selector="didTapAddCurrency:" destination="-1" eventType="touchUpInside" id="GXJ-rV-rIT"/>
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstItem="dyZ-e0-HEM" firstAttribute="top" secondItem="xMc-IC-UJ0" secondAttribute="bottom" constant="17.5" id="Lsa-Bt-NKR"/>
-                                        <constraint firstItem="xMc-IC-UJ0" firstAttribute="leading" secondItem="4ja-vC-kBg" secondAttribute="leading" constant="8" id="NfN-IO-DMN"/>
-                                        <constraint firstAttribute="trailing" secondItem="dyZ-e0-HEM" secondAttribute="trailing" constant="10" id="TTR-5i-oLz"/>
-                                        <constraint firstItem="plW-Oa-lIr" firstAttribute="top" secondItem="4ja-vC-kBg" secondAttribute="top" constant="16" id="eoG-kn-HYb"/>
-                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="113" id="rVK-Pn-sVA"/>
+                                        <constraint firstItem="dyZ-e0-HEM" firstAttribute="centerY" secondItem="plW-Oa-lIr" secondAttribute="centerY" id="GTf-o8-P01"/>
+                                        <constraint firstItem="xMc-IC-UJ0" firstAttribute="leading" secondItem="4ja-vC-kBg" secondAttribute="leading" constant="16" id="NfN-IO-DMN"/>
+                                        <constraint firstItem="plW-Oa-lIr" firstAttribute="top" secondItem="4ja-vC-kBg" secondAttribute="top" id="eoG-kn-HYb"/>
+                                        <constraint firstItem="dyZ-e0-HEM" firstAttribute="leading" secondItem="plW-Oa-lIr" secondAttribute="trailing" constant="4" id="f2g-C7-Wh1"/>
+                                        <constraint firstAttribute="bottom" secondItem="xMc-IC-UJ0" secondAttribute="bottom" id="hhH-Zs-BQa"/>
                                         <constraint firstAttribute="trailing" secondItem="xMc-IC-UJ0" secondAttribute="trailing" constant="8" id="rgt-kV-cjA"/>
-                                        <constraint firstItem="xMc-IC-UJ0" firstAttribute="top" secondItem="plW-Oa-lIr" secondAttribute="bottom" constant="8" id="v0w-Tw-TC6"/>
-                                        <constraint firstItem="plW-Oa-lIr" firstAttribute="leading" secondItem="4ja-vC-kBg" secondAttribute="leading" constant="8" id="vji-IM-8PZ"/>
+                                        <constraint firstItem="dyZ-e0-HEM" firstAttribute="top" secondItem="4ja-vC-kBg" secondAttribute="top" id="rmN-hu-pdp"/>
+                                        <constraint firstItem="xMc-IC-UJ0" firstAttribute="top" secondItem="plW-Oa-lIr" secondAttribute="bottom" constant="4" id="v0w-Tw-TC6"/>
+                                        <constraint firstItem="plW-Oa-lIr" firstAttribute="leading" secondItem="4ja-vC-kBg" secondAttribute="leading" constant="16" id="vji-IM-8PZ"/>
                                     </constraints>
                                 </view>
                             </subviews>
@@ -98,12 +98,12 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                     </subviews>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="4XH-kI-fQn" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="186-qj-hZW"/>
                 <constraint firstAttribute="bottom" secondItem="qyj-pw-VSj" secondAttribute="bottom" id="2An-RS-pOd"/>

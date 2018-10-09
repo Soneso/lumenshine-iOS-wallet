@@ -39,15 +39,24 @@ class TransactionTableViewCell: UITableViewCell {
         parentContainerViewController()?.present(navigationController, animated: true)
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        backgroundColor = Stylesheet.color(.veryLightGray)
+    }
+    
     func updateAmountLabel() {
         if let text = amountValueLabel.text, let amount = CoinUnit(text), let asset = operationInfo.assetCode {
+            let assetCode = NSMutableAttributedString(string: asset, attributes: [ NSAttributedStringKey.foregroundColor: Stylesheet.color(.gray) ])
+            var amountValue = NSMutableAttributedString()
+            
             if operationInfo.sign == .plus {
-                amountValueLabel.text = "+ \(amount) \(asset)"
-                amountValueLabel.textColor = UIColor.green
+                amountValue = NSMutableAttributedString(string: "\(amount) ", attributes: [ NSAttributedStringKey.foregroundColor: Stylesheet.color(.green) ])
             } else {
-                amountValueLabel.text = "- \(amount) \(asset)"
-                amountValueLabel.textColor = UIColor.red
+                amountValue = NSMutableAttributedString(string: "- \(amount) ", attributes: [ NSAttributedStringKey.foregroundColor: Stylesheet.color(.red) ])
             }
+            
+            amountValue.append(assetCode)
+            amountValueLabel.attributedText = amountValue
         }
     }
 }

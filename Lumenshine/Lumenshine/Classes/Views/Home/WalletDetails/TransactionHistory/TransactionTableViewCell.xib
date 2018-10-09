@@ -16,20 +16,20 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="168"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ncl-PS-ktB">
-                    <rect key="frame" x="10" y="10" width="355" height="148"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ncl-PS-ktB">
+                    <rect key="frame" x="16" y="10" width="343" height="148"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ARu-Cg-Xpi">
-                            <rect key="frame" x="0.0" y="0.0" width="355" height="18"/>
+                            <rect key="frame" x="0.0" y="0.0" width="343" height="26.5"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHg-D8-2hx">
-                                    <rect key="frame" x="0.0" y="0.0" width="41" height="18"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHg-D8-2hx" customClass="CellRegularLabel" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="41" height="26.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="dateValue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBU-0x-ei1">
-                                    <rect key="frame" x="49" y="0.0" width="306" height="18"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="dateValue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBU-0x-ei1" customClass="CellRegularLabel" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="49" y="0.0" width="294" height="26.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -37,16 +37,16 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Epb-k1-CtB">
-                            <rect key="frame" x="0.0" y="26" width="355" height="18"/>
+                            <rect key="frame" x="0.0" y="30.5" width="343" height="26.5"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="Amount:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3DL-dO-DrH">
-                                    <rect key="frame" x="0.0" y="0.0" width="65" height="18"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="Amount:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3DL-dO-DrH" customClass="CellRegularLabel" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="65" height="26.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="amountValue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbI-yd-mTY">
-                                    <rect key="frame" x="73" y="0.0" width="282" height="18"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="amountValue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbI-yd-mTY" customClass="CellRegularLabel" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="73" y="0.0" width="270" height="26.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -54,16 +54,16 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="XKT-V8-5cy">
-                            <rect key="frame" x="0.0" y="52" width="355" height="18"/>
+                            <rect key="frame" x="0.0" y="61" width="343" height="26"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="Memo:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="klE-0d-kVD">
-                                    <rect key="frame" x="0.0" y="0.0" width="53" height="18"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="Memo:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="klE-0d-kVD" customClass="CellRegularLabel" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="53" height="26"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="memoValue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a1s-bO-VSI">
-                                    <rect key="frame" x="61" y="0.0" width="294" height="18"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="memoValue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a1s-bO-VSI" customClass="CellRegularLabel" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="61" y="0.0" width="282" height="26"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -71,16 +71,16 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="kaP-oa-fFC">
-                            <rect key="frame" x="0.0" y="78" width="355" height="18"/>
+                            <rect key="frame" x="0.0" y="91" width="343" height="26.5"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="Operation - Type:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5V-XB-YSs">
-                                    <rect key="frame" x="0.0" y="0.0" width="134.5" height="18"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="Operation Type:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5V-XB-YSs" customClass="CellRegularLabel" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="122.5" height="26.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="operationTypeValue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAI-fV-fwr">
-                                    <rect key="frame" x="142.5" y="0.0" width="212.5" height="18"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="operationTypeValue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAI-fV-fwr" customClass="CellRegularLabel" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="130.5" y="0.0" width="212.5" height="26.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -88,28 +88,23 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="wrk-dr-cBl">
-                            <rect key="frame" x="0.0" y="104" width="355" height="18"/>
+                            <rect key="frame" x="0.0" y="121.5" width="343" height="26.5"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="Operation - ID:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UYf-RA-94g">
-                                    <rect key="frame" x="0.0" y="0.0" width="113.5" height="18"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="Operation ID:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UYf-RA-94g" customClass="CellRegularLabel" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="101.5" height="26.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="operationIDValue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYG-57-AAF">
-                                    <rect key="frame" x="121.5" y="0.0" width="233.5" height="18"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="operationIDValue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYG-57-AAF" customClass="CellRegularLabel" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="109.5" y="0.0" width="130.5" height="26.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                            </subviews>
-                        </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6FN-gB-eou">
-                            <rect key="frame" x="0.0" y="130" width="355" height="18"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XMh-4k-zby">
-                                    <rect key="frame" x="0.0" y="0.0" width="355" height="18"/>
-                                    <state key="normal" title="details"/>
+                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XMh-4k-zby" customClass="SimpleButton" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="248" y="0.0" width="95" height="26.5"/>
+                                    <state key="normal" title="Details"/>
                                     <connections>
                                         <action selector="detailsButtonAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="il3-DX-NpA"/>
                                     </connections>
@@ -119,13 +114,13 @@
                     </subviews>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <accessibility key="accessibilityConfiguration" identifier="TransactionCell"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ncl-PS-ktB" secondAttribute="trailing" constant="10" id="Q3U-3S-kem"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ncl-PS-ktB" secondAttribute="trailing" constant="16" id="Q3U-3S-kem"/>
                 <constraint firstItem="ncl-PS-ktB" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="YiQ-Ms-ZJq"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ncl-PS-ktB" secondAttribute="bottom" constant="10" id="mhv-WJ-ccg"/>
-                <constraint firstItem="ncl-PS-ktB" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="o6I-GU-g7T"/>
+                <constraint firstItem="ncl-PS-ktB" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="o6I-GU-g7T"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

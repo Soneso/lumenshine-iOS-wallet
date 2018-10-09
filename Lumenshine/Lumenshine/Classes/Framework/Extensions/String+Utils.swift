@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum MemoTextValidationResult {
     case Valid
@@ -212,5 +213,10 @@ extension String  {
         }
         
         return nil
+    }
+    
+    func getSize(usingFont font: UIFont) -> CGSize {
+        let fontAttributes = [NSAttributedStringKey.font: font]
+        return self.size(withAttributes: fontAttributes)
     }
 }
