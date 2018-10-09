@@ -84,32 +84,31 @@ class HomeViewModel : HomeViewModelType {
     func reloadCards() {
         cardViewModels = []
         
-        userManager.walletsForCurrentUser { (result) -> (Void) in
+        userManager.walletsForCurrentUser { [weak self] (result) -> (Void) in
             switch result {
             case .success(let wallets):
                 for wallet in wallets {
                     let viewModel = WalletCardViewModel(wallet: wallet)
-                    viewModel.navigationCoordinator = self.navigationCoordinator
-                    self.cardViewModels.insert(viewModel, at: 0)
-                    
-                    self.reloadClosure?()
+                    viewModel.navigationCoordinator = self?.navigationCoordinator
+                    self?.cardViewModels.append(viewModel)
                 }
             case .failure(_):
                 print("Failed to get wallets")
             }
+            
+            if let chartService = self?.service.chartsService {
+                let chartViewModel = ChartCardViewModel(service: chartService)
+                chartViewModel.navigationCoordinator = self?.navigationCoordinator
+                self?.cardViewModels.append(chartViewModel)
+            }
+            
+            let helpViewModel = HelpCardViewModel()
+            helpViewModel.navigationCoordinator = self?.navigationCoordinator
+            self?.cardViewModels.append(helpViewModel)
+            
+            self?.reloadClosure?()
         }
-                        
-        let chartViewModel = ChartCardViewModel(service: service.chartsService)
-        chartViewModel.navigationCoordinator = self.navigationCoordinator
-        self.cardViewModels.append(chartViewModel)
-        
-        let helpViewModel = HelpCardViewModel()
-        helpViewModel.navigationCoordinator = self.navigationCoordinator
-        self.cardViewModels.append(helpViewModel)
-        
-        self.reloadClosure?()
     }
-
 }
 
 fileprivate extension HomeViewModel {

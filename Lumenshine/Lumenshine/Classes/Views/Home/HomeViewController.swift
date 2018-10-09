@@ -93,8 +93,7 @@ extension HomeViewController: UITableViewDataSource {
 
         if let card = dataSourceItems[indexPath.row] as? WalletCard {
             card.reloadCellAction = {
-                //self.tableView.reloadRows(at: [indexPath], with: .automatic)
-                self.tableView.reloadData()
+                self.tableView.reloadRows(at: [indexPath], with: .automatic)
             }
         }
         
@@ -269,7 +268,6 @@ fileprivate extension HomeViewController {
         
         backgroundView.addSubview(background)
         background.snp.makeConstraints { make in
-            make.top.greaterThanOrEqualToSuperview()
             make.left.right.equalToSuperview()
             make.bottom.equalTo(imageView.snp.top)
         }
@@ -292,6 +290,14 @@ fileprivate extension HomeViewController {
                 self.setHeaderType(nativeFounds: data)
             case .failure(_):
                 print("Failed to get wallets")
+            }
+        }
+    }
+    
+    func refreshData() {
+        for card in dataSourceItems {
+            if let walletCard = card as? WalletCard {
+                walletCard.reloadData()
             }
         }
     }

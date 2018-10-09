@@ -94,7 +94,7 @@ class AccountDetailsViewController: UIViewController {
                 self.walletNameStackView.addArrangedSubview(self.walletNameView)
                 self.walletNameLabel.text = self.walletNameTextField.text
                 self.walletNameTextField.placeholder = self.walletNameTextField.text
-                self.titleView.label.text = "\(self.walletNameTextField.text ?? "")\nDetails"
+//                self.titleView.label.text = (self.walletNameTextField.text ?? "") + "\nDetails"
             case .failure(let error):
                 self.view.isUserInteractionEnabled = true
                 let alertView = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)

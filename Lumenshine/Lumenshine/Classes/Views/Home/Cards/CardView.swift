@@ -58,7 +58,7 @@ class CardView: UIView {
             let walletCard = WalletCard()
             walletCard.status = status
             walletCard.viewController = viewController
-            CardView.setupWalletCard(card: walletCard, viewModel: viewModel as! WalletCardViewModel)
+            walletCard.setup(viewModel: viewModel as! WalletCardViewModel)
             
             card = walletCard
             
@@ -70,101 +70,6 @@ class CardView: UIView {
     @objc
     func barButtonClick(_ sender: FlatButton) {
         viewModel?.barButtonSelected(at: sender.tag)
-    }
-    
-    class func setupWalletCard(card: WalletCard, viewModel: WalletCardViewModel) {
-        
-        let buttonFont = R.font.encodeSansSemiBold(size: 15)
-        let buttonColor = Stylesheet.color(.darkBlue)
-        
-        if let fundedView = card.fundedView {
-            
-            fundedView.nameLabel.font = R.font.encodeSansBold(size: 16)
-            fundedView.nameLabel.textColor = Stylesheet.color(.lightBlack)
-            fundedView.nameLabel.text = viewModel.title?.uppercased()
-            
-            fundedView.walletLabel.font = R.font.encodeSansRegular(size: 16)
-            fundedView.walletLabel.textColor = Stylesheet.color(.lightBlack)
-            
-            fundedView.stellarAddressLabel.font = R.font.encodeSansRegular(size: 15)
-            fundedView.stellarAddressLabel.textColor = Stylesheet.color(.orange)
-            //fundedView.stellarAddressLabel.text = "chris.rogobete@lumenshine.com"
-            
-            fundedView.balanceBackgroundView.backgroundColor = Stylesheet.color(.green)
-            fundedView.balanceBackgroundView.layer.cornerRadius = 10
-            
-            fundedView.balanceDescriptionLabel.text = (viewModel.wallet as! FundedWallet).balances.count > 1 ? R.string.localizable.balances().uppercased() : R.string.localizable.balance().uppercased()
-            fundedView.balanceDescriptionLabel.font = R.font.encodeSansSemiBold(size: 16)
-            fundedView.balanceDescriptionLabel.textColor = Stylesheet.color(.white)
-            
-            let balanceLabelFont = R.font.encodeSansSemiBold(size: 15)
-            let balanceLabelColor = Stylesheet.color(.white)
-            fundedView.balanceLabel.text = viewModel.nativeBalance?.stringWithUnit
-            fundedView.balanceLabel.font = balanceLabelFont
-            fundedView.balanceLabel.textColor = balanceLabelColor
-            
-            CardView.labelsForCustomAssets(wallet: viewModel.wallet!, font: balanceLabelFont!, color: balanceLabelColor).forEach({ label in fundedView.balanceStackView.addArrangedSubview(label) })
-            
-            fundedView.availableDescriptionLabel.font = R.font.encodeSansSemiBold(size: 16)
-            fundedView.availableDescriptionLabel.text = R.string.localizable.available().uppercased()
-            fundedView.availableDescriptionLabel.textColor = Stylesheet.color(.blue)
-            
-            let availableLabelFont = R.font.encodeSansRegular(size: 15)
-            let availableLabelColor = Stylesheet.color(.black)
-            
-            fundedView.availableLabel.text = viewModel.nativeBalance?.availableAmount(forWallet: viewModel.wallet).stringWithUnit
-            fundedView.availableLabel.font = availableLabelFont
-            fundedView.availableLabel.textColor = availableLabelColor
-
-            CardView.labelsForCustomAssets(wallet: viewModel.wallet!, font: availableLabelFont!, color: availableLabelColor).forEach({ label in fundedView.availableStackView.addArrangedSubview(label) })
-            
-            fundedView.helpButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapHelpButton), for: .touchUpInside)
-            fundedView.helpButton.tintColor = Stylesheet.color(.gray)
-            
-            fundedView.sendButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapSendButton), for: .touchUpInside)
-            fundedView.sendButton.titleLabel?.font = buttonFont
-            fundedView.sendButton.setTitleColor(buttonColor, for: UIControlState.normal)
-            
-            fundedView.receiveButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapReceiveButton), for: .touchUpInside)
-            fundedView.receiveButton.titleLabel?.font = buttonFont
-            fundedView.receiveButton.setTitleColor(buttonColor, for: UIControlState.normal)
-            
-            fundedView.detailsButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapDetailsButton), for: .touchUpInside)
-            fundedView.detailsButton.titleLabel?.font = buttonFont
-            fundedView.detailsButton.setTitleColor(buttonColor, for: UIControlState.normal)
-
-        }
-        
-        if let unfundedView = card.unfundedView {
-            
-            unfundedView.nameLabel.font = R.font.encodeSansBold(size: 16)
-            unfundedView.nameLabel.textColor = Stylesheet.color(.lightBlack)
-            unfundedView.nameLabel.text = viewModel.title?.uppercased()
-            
-            unfundedView.walletLabel.font = R.font.encodeSansRegular(size: 16)
-            unfundedView.walletLabel.textColor = Stylesheet.color(.lightBlack)
-            
-            unfundedView.notFundedLabel.font = R.font.encodeSansRegular(size: 15)
-            unfundedView.notFundedLabel.textColor = Stylesheet.color(.red)
-            
-            unfundedView.balanceBackgroundView.backgroundColor = Stylesheet.color(.red)
-            unfundedView.balanceBackgroundView.layer.cornerRadius = 10
-            
-            unfundedView.balanceDescriptionLabel.font = R.font.encodeSansSemiBold(size: 16)
-            unfundedView.balanceDescriptionLabel.text = R.string.localizable.balance().uppercased()
-            unfundedView.balanceDescriptionLabel.textColor = Stylesheet.color(.white)
-            
-            unfundedView.balanceLabel.font = R.font.encodeSansSemiBold(size: 15)
-            unfundedView.balanceLabel.textColor = Stylesheet.color(.white)
-            
-            unfundedView.helpButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapHelpButton), for: .touchUpInside)
-            unfundedView.helpButton.tintColor = buttonColor
-            
-            unfundedView.fundButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapFundButton), for: .touchUpInside)
-            unfundedView.fundButton.titleLabel?.font = buttonFont
-            unfundedView.fundButton.setTitleColor(buttonColor, for: UIControlState.normal)
-
-        }
     }
     
     class func labelsForCustomAssets(wallet: Wallet, font: UIFont, color: UIColor ) -> [UILabel] {
