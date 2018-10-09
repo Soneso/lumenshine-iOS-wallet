@@ -23,15 +23,15 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB" userLabel="Load Transactions History">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                    <rect key="frame" x="6" y="0.0" width="369" height="50"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ykl-M6-KOP">
-                            <rect key="frame" x="0.0" y="5" width="375" height="40.5"/>
+                            <rect key="frame" x="0.0" y="5" width="369" height="40.5"/>
                             <subviews>
                                 <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Z0X-ga-pNu">
-                                    <rect key="frame" x="187.5" y="0.0" width="0.0" height="40.5"/>
+                                    <rect key="frame" x="184.5" y="0.0" width="0.0" height="40.5"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kLC-hE-OF1">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kLC-hE-OF1" customClass="SimpleButton" customModule="Lumenshine" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="0.0" height="40.5"/>
                                             <state key="normal" title="Load more"/>
                                             <connections>
@@ -41,10 +41,10 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="left" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZZK-wm-Sed">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="40.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="369" height="40.5"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction History" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQo-Zl-kh1">
-                                            <rect key="frame" x="10" y="8" width="357" height="24.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction History" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQo-Zl-kh1" customClass="SubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
+                                            <rect key="frame" x="10" y="8" width="351" height="24.5"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -53,7 +53,7 @@
                                     <edgeInsets key="layoutMargins" top="8" left="10" bottom="8" right="8"/>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3wp-yZ-ngt">
-                                    <rect key="frame" x="375" y="0.0" width="0.0" height="40.5"/>
+                                    <rect key="frame" x="369" y="0.0" width="0.0" height="40.5"/>
                                     <subviews>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="rGJ-w8-ce0">
                                             <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
@@ -69,7 +69,7 @@
                             </subviews>
                         </stackView>
                     </subviews>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="ZZK-wm-Sed" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="DKD-op-JGP"/>
                         <constraint firstItem="ykl-M6-KOP" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="GKr-mo-O4O"/>
@@ -84,11 +84,11 @@
                     <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="iN0-l3-epB" firstAttribute="bottom" secondItem="edN-Xk-nKp" secondAttribute="bottom" id="OJ6-6a-4nn"/>
                 <constraint firstItem="iN0-l3-epB" firstAttribute="trailing" secondItem="edN-Xk-nKp" secondAttribute="trailing" id="QT5-IB-gMd"/>
-                <constraint firstItem="iN0-l3-epB" firstAttribute="leading" secondItem="edN-Xk-nKp" secondAttribute="leading" id="ok5-eL-S2d"/>
+                <constraint firstItem="iN0-l3-epB" firstAttribute="leading" secondItem="edN-Xk-nKp" secondAttribute="leading" constant="6" id="ok5-eL-S2d"/>
                 <constraint firstItem="iN0-l3-epB" firstAttribute="top" secondItem="edN-Xk-nKp" secondAttribute="top" id="ybX-qN-Cmo"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

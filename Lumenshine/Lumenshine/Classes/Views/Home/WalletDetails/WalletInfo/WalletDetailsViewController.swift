@@ -50,8 +50,8 @@ class WalletDetailsViewController: UIViewController {
         }
         
         if let password = passwordTextField.text {
-            cancelRevealButton.setTitle(CancelRevealButtonTitles.revealing.rawValue, for: UIControlState.normal)
-            cancelRevealButton.isEnabled = false
+            secretRevealButton.setTitle(CancelRevealButtonTitles.revealing.rawValue, for: UIControlState.normal)
+            secretRevealButton.isEnabled = false
             
             passwordManager.getPrivateKey(fromPassword: password, forAccountID: wallet.publicKey) { (response) -> (Void) in
                 switch response {
@@ -62,8 +62,8 @@ class WalletDetailsViewController: UIViewController {
                     self.setPasswordValidationError(validationError: ValidationErrors.InvalidPassword)
                 }
                 
-                self.cancelRevealButton.setTitle(CancelRevealButtonTitles.cancel.rawValue, for: UIControlState.normal)
-                self.cancelRevealButton.isEnabled = true
+                self.secretRevealButton.setTitle(CancelRevealButtonTitles.reveal.rawValue.uppercased(), for: UIControlState.normal)
+                self.secretRevealButton.isEnabled = true
             }
         }
     }
@@ -72,14 +72,12 @@ class WalletDetailsViewController: UIViewController {
         if passwordStackView.isHidden {
             passwordStackView.isHidden = false
             cancelRevealButton.setTitle(CancelRevealButtonTitles.cancel.rawValue, for: UIControlState.normal)
-            cancelRevealButton.setTitleColor(nil, for: UIControlState.normal)
         } else {
             passwordStackView.isHidden = true
             resetPasswordValidation()
             passwordTextField.text = nil
             privateKeyValueLabel.text = PublicKeyLabelInitialValue
             cancelRevealButton.setTitle(CancelRevealButtonTitles.reveal.rawValue, for: UIControlState.normal)
-            cancelRevealButton.setTitleColor(UIColor.red, for: UIControlState.normal)
         }
     }
     
@@ -124,6 +122,7 @@ class WalletDetailsViewController: UIViewController {
         setupBalances()
         setupInflationDestination()
         paymentOperationsVCManager = PaymentOperationsVCManager(parentViewController: self)
+        secretRevealButton.backgroundColor = Stylesheet.color(.blue)
     }
     
     private func setupBalances() {
@@ -172,15 +171,14 @@ class WalletDetailsViewController: UIViewController {
     
     private func setUIForNoInflationSet() {
         inflationCoinLabel.text = InflationNoneSet
-        inflationCoinLabel.textColor = UIColor.red
+        inflationCoinLabel.textColor = Stylesheet.color(.red)
         inflationPublicKeyLabel.isHidden = true
         inflationShortDescriptionLabel.text = InflationNoneSetHint
-        inflationShortDescriptionLabel.textColor = UIColor.green
     }
     
     private func setUIForInflationSet(knownInflationDestination: KnownInflationDestinationResponse) {
         inflationCoinLabel.text = knownInflationDestination.name
-        inflationCoinLabel.textColor = UIColor.green
+        inflationCoinLabel.textColor = Stylesheet.color(.green)
         inflationPublicKeyLabel.text = knownInflationDestination.issuerPublicKey
         inflationShortDescriptionLabel.text = knownInflationDestination.shortDescription
         inflationButtonsStackView.isHidden = false

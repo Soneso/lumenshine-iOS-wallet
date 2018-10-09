@@ -323,6 +323,9 @@
 		C69A5143211C16500066A4A0 /* TransactionResultPrintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69A5142211C16500066A4A0 /* TransactionResultPrintView.swift */; };
 		C69F551D2158BC920021EE5C /* AmountSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69F551C2158BC920021EE5C /* AmountSegmentedControl.swift */; };
 		C6A11D592142721200424DBE /* PrivateKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A11D582142721200424DBE /* PrivateKeyManager.swift */; };
+		C6A87D71216B24DE00658D55 /* SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A87D70216B24DE00658D55 /* SimpleButton.swift */; };
+		C6A87D73216B4D4B00658D55 /* CellRegularLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A87D72216B4D4B00658D55 /* CellRegularLabel.swift */; };
+		C6A87D75216B77EB00658D55 /* LeftCaptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A87D74216B77EB00658D55 /* LeftCaptionTextField.swift */; };
 		C6AF0101215B9F33007C51E5 /* FederationAddressLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AF0100215B9F33007C51E5 /* FederationAddressLabel.swift */; };
 		C6B75F3321182E7500B45BEB /* TransactionResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6B75F3221182E7500B45BEB /* TransactionResultViewController.xib */; };
 		C6B75F35211837AF00B45BEB /* TransactionResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B75F34211837AF00B45BEB /* TransactionResultViewController.swift */; };
@@ -333,6 +336,7 @@
 		C6C0E4D921256F2700FF1BA8 /* ChartExchangeRatesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C0E4D821256F2700FF1BA8 /* ChartExchangeRatesResponse.swift */; };
 		C6C0E4DB212570EF00FF1BA8 /* ExchangeRateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C0E4DA212570EF00FF1BA8 /* ExchangeRateResponse.swift */; };
 		C6C1FC6E21673F0900F80F44 /* BiometricAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C1FC6D21673F0900F80F44 /* BiometricAuthButton.swift */; };
+		C6C1FC702167960400F80F44 /* HintLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C1FC6F2167960400F80F44 /* HintLabel.swift */; };
 		C6D87E742133ECE100154A3B /* KnownCurrenciesTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D87E732133ECE100154A3B /* KnownCurrenciesTableViewController.xib */; };
 		C6D87E762133ECED00154A3B /* KnownCurrenciesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D87E752133ECED00154A3B /* KnownCurrenciesTableViewController.swift */; };
 		C6D87E78213400A000154A3B /* KnownCurrenciesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D87E77213400A000154A3B /* KnownCurrenciesTableViewCell.xib */; };
@@ -702,6 +706,9 @@
 		C69A5142211C16500066A4A0 /* TransactionResultPrintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionResultPrintView.swift; sourceTree = "<group>"; };
 		C69F551C2158BC920021EE5C /* AmountSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountSegmentedControl.swift; sourceTree = "<group>"; };
 		C6A11D582142721200424DBE /* PrivateKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeyManager.swift; sourceTree = "<group>"; };
+		C6A87D70216B24DE00658D55 /* SimpleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleButton.swift; sourceTree = "<group>"; };
+		C6A87D72216B4D4B00658D55 /* CellRegularLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellRegularLabel.swift; sourceTree = "<group>"; };
+		C6A87D74216B77EB00658D55 /* LeftCaptionTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftCaptionTextField.swift; sourceTree = "<group>"; };
 		C6AF0100215B9F33007C51E5 /* FederationAddressLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FederationAddressLabel.swift; sourceTree = "<group>"; };
 		C6B75F3221182E7500B45BEB /* TransactionResultViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionResultViewController.xib; sourceTree = "<group>"; };
 		C6B75F34211837AF00B45BEB /* TransactionResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionResultViewController.swift; sourceTree = "<group>"; };
@@ -712,6 +719,7 @@
 		C6C0E4D821256F2700FF1BA8 /* ChartExchangeRatesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartExchangeRatesResponse.swift; sourceTree = "<group>"; };
 		C6C0E4DA212570EF00FF1BA8 /* ExchangeRateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateResponse.swift; sourceTree = "<group>"; };
 		C6C1FC6D21673F0900F80F44 /* BiometricAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricAuthButton.swift; sourceTree = "<group>"; };
+		C6C1FC6F2167960400F80F44 /* HintLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintLabel.swift; sourceTree = "<group>"; };
 		C6D87E732133ECE100154A3B /* KnownCurrenciesTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KnownCurrenciesTableViewController.xib; sourceTree = "<group>"; };
 		C6D87E752133ECED00154A3B /* KnownCurrenciesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownCurrenciesTableViewController.swift; sourceTree = "<group>"; };
 		C6D87E77213400A000154A3B /* KnownCurrenciesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KnownCurrenciesTableViewCell.xib; sourceTree = "<group>"; };
@@ -1497,6 +1505,10 @@
 				C675BC27215CF86200B663DB /* BaseButton.swift */,
 				C6257A6F216211DA00E1B879 /* RegularSubtitleLabel.swift */,
 				C6C1FC6D21673F0900F80F44 /* BiometricAuthButton.swift */,
+				C6C1FC6F2167960400F80F44 /* HintLabel.swift */,
+				C6A87D70216B24DE00658D55 /* SimpleButton.swift */,
+				C6A87D72216B4D4B00658D55 /* CellRegularLabel.swift */,
+				C6A87D74216B77EB00658D55 /* LeftCaptionTextField.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
@@ -2045,6 +2057,7 @@
 				431437F22047FF9100189C83 /* AppNavigationController.swift in Sources */,
 				43DB1DA8214A8DED00AC0975 /* ChangePasswordSuccessViewController.swift in Sources */,
 				74A2A2F0210EF405007AEE91 /* ReceivePaymentPrintView.swift in Sources */,
+				C6C1FC702167960400F80F44 /* HintLabel.swift in Sources */,
 				432AAD302158F9E900963619 /* ActivateFingerprintViewController.swift in Sources */,
 				43CD7B0E20F7AEBC0014BF69 /* SetupCoordinator.swift in Sources */,
 				C6725086213FC4D20064F6E3 /* ProvideInflationDestinationViewController.swift in Sources */,
@@ -2056,6 +2069,7 @@
 				4359984F20A4A14000007F27 /* UserSecurityHelper.swift in Sources */,
 				431437F42047FFB400189C83 /* AppNavigationDrawerController.swift in Sources */,
 				4314B9EF2048060F006DBE63 /* MaterialIcon.swift in Sources */,
+				C6A87D71216B24DE00658D55 /* SimpleButton.swift in Sources */,
 				43088DAA20879AC7008AE1AB /* RandomBytesSequence.swift in Sources */,
 				74C0914C20FB4125000A809D /* CurrenciesMonitor.swift in Sources */,
 				43DAC65620E4EB2C00E491D8 /* ReLoginMenuCoordinator.swift in Sources */,
@@ -2066,6 +2080,7 @@
 				C6BEBE7221302CC6000F7435 /* ProvideCurrencyDataViewController.swift in Sources */,
 				C6BEBE6E213013A1000F7435 /* AddCurrencyViewController.swift in Sources */,
 				7420BBE6211819AB002FC4C7 /* AccountDetailsViewController.swift in Sources */,
+				C6A87D73216B4D4B00658D55 /* CellRegularLabel.swift in Sources */,
 				4376F4A0204D9E2700B179C3 /* CoordinatorProtocol.swift in Sources */,
 				4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */,
 				C6D87E7A213400B500154A3B /* KnownCurrenciesTableViewCell.swift in Sources */,
@@ -2144,6 +2159,7 @@
 				C6805B5B2139530C003B2B25 /* TransactionHistoryManager.swift in Sources */,
 				4319B4CC2119FB59002E45F0 /* RevealMnemonicViewController.swift in Sources */,
 				C66390F9215B58DC00573B54 /* PaymentOperationsVCManager.swift in Sources */,
+				C6A87D75216B77EB00658D55 /* LeftCaptionTextField.swift in Sources */,
 				4391A52E20D141300015A6DA /* EnumPicker.swift in Sources */,
 				43E23994214F8EF00017AABF /* GradientView.swift in Sources */,
 				43CD7B1020F7B0CF0014BF69 /* SetupMenuCoordinator.swift in Sources */,
