@@ -87,7 +87,8 @@ class HomeViewModel : HomeViewModelType {
         userManager.walletsForCurrentUser { [weak self] (result) -> (Void) in
             switch result {
             case .success(let wallets):
-                for wallet in wallets {
+                let sortedWallets = wallets.sorted(by: { $0.id < $1.id })
+                for wallet in sortedWallets {
                     let viewModel = WalletCardViewModel(wallet: wallet)
                     viewModel.navigationCoordinator = self?.navigationCoordinator
                     self?.cardViewModels.append(viewModel)
@@ -95,17 +96,17 @@ class HomeViewModel : HomeViewModelType {
             case .failure(_):
                 print("Failed to get wallets")
             }
-            
+
             if let chartService = self?.service.chartsService {
                 let chartViewModel = ChartCardViewModel(service: chartService)
                 chartViewModel.navigationCoordinator = self?.navigationCoordinator
                 self?.cardViewModels.append(chartViewModel)
             }
-            
+
             let helpViewModel = HelpCardViewModel()
             helpViewModel.navigationCoordinator = self?.navigationCoordinator
             self?.cardViewModels.append(helpViewModel)
-            
+
             self?.reloadClosure?()
         }
     }
