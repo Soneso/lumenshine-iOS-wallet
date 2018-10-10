@@ -280,18 +280,30 @@ class TransactionHelper {
         self.transactionResult.status = TransactionStatus.success
         self.transactionResult.transactionFee = transactionFee
         
-        self.stellarSdk.payments.getPayments(forTransaction: try! transaction.getTransactionHash(network: Network.testnet), response: { (response) -> (Void) in
-            switch response {
-            case .success(details: let details):
-                self.transactionResult.operationID = details.records.first?.id
-                completion()
-                
-            case .failure(error: let error):
-                self.transactionResult.status = TransactionStatus.error
-                self.transactionResult.message = error.localizedDescription
-                completion()
+        if let transactionHash = try? transaction.getTransactionHash(network: Network.testnet) {
+            let transactionStream = self.stellarSdk.payments.stream(for: PaymentsChange.paymentsForTransaction(transaction: transactionHash, cursor: nil))
+            var alreadySet = false
+            transactionStream.onReceive { (response) -> (Void) in
+                if !alreadySet {
+                    switch response {
+                    case .response(id: let id, data: _):
+                        self.transactionResult.operationID = id
+                        alreadySet = true
+                        completion()
+                    case .error(error: let error):
+                        self.transactionResult.status = TransactionStatus.error
+                        self.transactionResult.message = error?.localizedDescription
+                        alreadySet = true
+                        completion()
+                    case .open:
+                        break
+                    }
+                }
             }
-        })
+        } else {
+            self.transactionResult.status = TransactionStatus.error
+            completion()
+        }
     }
     
     private func submitPaymentTransaction(destinationKeyPair: KeyPair, sourceKeyPair: KeyPair, accountResponse: AccountResponse, asset: Asset, amount: Decimal, memo: Memo,
