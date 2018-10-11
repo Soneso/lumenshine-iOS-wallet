@@ -62,7 +62,8 @@ fileprivate extension HomeCoordinator {
             fundWalletViewController = FundWalletViewController(nibName: "FundWalletViewController", bundle: Bundle.main, forWallet: wallet)
         }
     
-        self.baseController.present(fundWalletViewController, animated: true)
+        let composeVC = ComposeNavigationController(rootViewController: fundWalletViewController)
+        self.baseController.present(composeVC, animated: true)
     }
     
     func showCardDetails(wallet: Wallet) {

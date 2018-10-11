@@ -15,6 +15,7 @@ class WalletCardViewModel : CardViewModelType {
     fileprivate var card: Card?
     fileprivate let stellarSdk: StellarSDK
     fileprivate var funded: Bool = false
+    fileprivate var needsRefresh: Bool = false
     
     var wallet: Wallet?
     
@@ -37,12 +38,12 @@ class WalletCardViewModel : CardViewModelType {
         }
     }
     
-    init(service: Services, walletResponse: WalletsResponse) {
+    init(userManager: UserManager, walletResponse: WalletsResponse) {
         self.stellarSdk = StellarSDK()
         
         self.wallet = EmptyWallet(walletResponse: walletResponse)
         
-        service.userManager.walletDetailsFor(wallets: [walletResponse]) { result in
+        userManager.walletDetailsFor(wallets: [walletResponse]) { result in
             switch result {
             case .success(let wallets):
                 self.wallet = wallets.first
@@ -58,6 +59,22 @@ class WalletCardViewModel : CardViewModelType {
         
         self.wallet = wallet
         funded = wallet.isFunded
+    }
+    
+    func refreshContent(userManager: UserManager) {
+        if needsRefresh == false { return }
+        guard let wallet = wallet?.getWalletResponse() else { return }
+        
+        userManager.walletDetailsFor(wallets: [wallet]) { [weak self] result in
+            switch result {
+            case .success(let wallets):
+                self?.wallet = wallets.first
+                self?.reloadClosure?()
+                self?.needsRefresh = false
+            case .failure(let error):
+                print("Account details failure: \(error)")
+            }
+        }
     }
     
     var type: CardType {
@@ -121,14 +138,17 @@ class WalletCardViewModel : CardViewModelType {
     
     @objc func didTapSendButton() {
         sendAction?()
+        needsRefresh = true
     }
     
     @objc func didTapReceiveButton() {
         receivePaymentAction?()
+        needsRefresh = true
     }
     
     @objc func didTapDetailsButton() {
         navigationCoordinator?.performTransition(transition: .showCardDetails(wallet!))
+        needsRefresh = true
     }
     
     @objc func didTapHelpButton() {
@@ -138,6 +158,7 @@ class WalletCardViewModel : CardViewModelType {
     @objc func didTapFundButton() {
         if let tappedWallet = wallet {
             navigationCoordinator?.performTransition(transition: .showScan(tappedWallet))
+            needsRefresh = true
         }
     }
 }

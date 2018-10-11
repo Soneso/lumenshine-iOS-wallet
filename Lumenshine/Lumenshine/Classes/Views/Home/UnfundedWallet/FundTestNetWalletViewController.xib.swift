@@ -6,8 +6,8 @@
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import Material
 
 public enum FundButtonTitles: String {
     case funding = "Funding"
@@ -29,7 +29,7 @@ public class FundTestNetWalletViewController: UIViewController {
         }
     }
     
-    @IBAction func closeButtonAction(_ sender: UIButton) {
+    @IBAction func closeButtonAction(sender: UIButton) {
         self.dismiss(animated: true)
     }
     
@@ -48,6 +48,7 @@ public class FundTestNetWalletViewController: UIViewController {
     
     override public func viewDidLoad() {
         super.viewDidLoad()
+        prepareNavigationItem()
         setContent()
         publicKeyButton.titleLabel?.numberOfLines = 0
         publicKeyButton.setTitle(wallet.publicKey, for: UIControlState.normal)
@@ -76,5 +77,17 @@ public class FundTestNetWalletViewController: UIViewController {
             
             self.dismiss(animated: true)
         }
+    }
+    
+    private func prepareNavigationItem() {
+        
+        navigationItem.titleLabel.text = R.string.localizable.fund_wallet_test()
+        navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
+        navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
+        
+        let backButton = Material.IconButton()
+        backButton.image = Icon.close?.tint(with: Stylesheet.color(.gray))
+        backButton.addTarget(self, action: #selector(closeButtonAction(sender:)), for: .touchUpInside)
+        navigationItem.leftViews = [backButton]
     }
 }

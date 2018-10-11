@@ -16,6 +16,8 @@ public protocol Wallet {
     var isFunded: Bool { get }
     var publicKey: String { get }
     var federationAddress: String { get }
+    
+    func getWalletResponse() -> WalletsResponse
 }
 
 public class EmptyWallet: Wallet {
@@ -59,6 +61,10 @@ public class EmptyWallet: Wallet {
         get {
             return walletResponse.federationAddress
         }
+    }
+    
+    public func getWalletResponse() -> WalletsResponse {
+        return walletResponse
     }
 }
 
@@ -125,6 +131,10 @@ public class FundedWallet: Wallet {
         get {
             return walletResponse.federationAddress
         }
+    }
+    
+    public func getWalletResponse() -> WalletsResponse {
+        return walletResponse
     }
 }
 
@@ -259,5 +269,9 @@ public class UnfundedWallet: Wallet {
         get {
             return walletResponse.federationAddress
         }
+    }
+    
+    public func getWalletResponse() -> WalletsResponse {
+        return walletResponse
     }
 }

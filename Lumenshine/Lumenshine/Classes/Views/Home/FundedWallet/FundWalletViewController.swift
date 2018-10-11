@@ -8,6 +8,7 @@
 
 import UIKit
 import TTTAttributedLabel
+import Material
 
 class FundWalletViewController: UIViewController {
 
@@ -28,6 +29,7 @@ class FundWalletViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         publicKeyButton.titleLabel?.numberOfLines = 0
+        prepareNavigationItem()
         
         setDescription()
         publicKeyButton.setTitle(wallet.publicKey, for: .normal)
@@ -39,7 +41,7 @@ class FundWalletViewController: UIViewController {
         }
     }
     
-    @IBAction func didTapClose(_ sender: Any) {
+    @IBAction func didTapClose(sender: Any) {
         self.dismiss(animated: true)
     }
     
@@ -56,5 +58,17 @@ class FundWalletViewController: UIViewController {
             let objcRange = NSMakeRange(range.lowerBound.encodedOffset, range.upperBound.encodedOffset - range.lowerBound.encodedOffset)
             descriptionLabel.addLink(to: URL(string: "https://coinmarketcap.com/"), with: objcRange)
         }
+    }
+    
+    private func prepareNavigationItem() {
+        
+        navigationItem.titleLabel.text = R.string.localizable.fund_wallet()
+        navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
+        navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
+        
+        let backButton = Material.IconButton()
+        backButton.image = Icon.close?.tint(with: Stylesheet.color(.gray))
+        backButton.addTarget(self, action: #selector(didTapClose(sender:)), for: .touchUpInside)
+        navigationItem.leftViews = [backButton]
     }
 }

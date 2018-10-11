@@ -17,6 +17,7 @@ protocol HomeViewModelType: Transitionable {
     
     func foundAccount()
     func reloadCards()
+    func refreshWallets()
 }
 
 class HomeViewModel : HomeViewModelType {
@@ -89,7 +90,7 @@ class HomeViewModel : HomeViewModelType {
             case .success(let wallets):
                 let sortedWallets = wallets.sorted(by: { $0.id < $1.id })
                 for wallet in sortedWallets {
-                    let viewModel = WalletCardViewModel(service: (self?.service)!, walletResponse: wallet)
+                    let viewModel = WalletCardViewModel(userManager: (self?.service.userManager)!, walletResponse: wallet)
                     viewModel.navigationCoordinator = self?.navigationCoordinator
                     self?.cardViewModels.append(viewModel)
                 }
@@ -109,32 +110,14 @@ class HomeViewModel : HomeViewModelType {
             
             self?.reloadClosure?()
         }
-        
-//        userManager.walletsForCurrentUser { [weak self] (result) -> (Void) in
-//            switch result {
-//            case .success(let wallets):
-//                let sortedWallets = wallets.sorted(by: { $0.id < $1.id })
-//                for wallet in sortedWallets {
-//                    let viewModel = WalletCardViewModel(wallet: wallet)
-//                    viewModel.navigationCoordinator = self?.navigationCoordinator
-//                    self?.cardViewModels.append(viewModel)
-//                }
-//            case .failure(_):
-//                print("Failed to get wallets")
-//            }
-//
-//            if let chartService = self?.service.chartsService {
-//                let chartViewModel = ChartCardViewModel(service: chartService)
-//                chartViewModel.navigationCoordinator = self?.navigationCoordinator
-//                self?.cardViewModels.append(chartViewModel)
-//            }
-//
-//            let helpViewModel = HelpCardViewModel()
-//            helpViewModel.navigationCoordinator = self?.navigationCoordinator
-//            self?.cardViewModels.append(helpViewModel)
-//
-//            self?.reloadClosure?()
-//        }
+    }
+    
+    func refreshWallets() {
+        for cardViewModel in cardViewModels {
+            if let wallet = cardViewModel as? WalletCardViewModel {
+                wallet.refreshContent(userManager: service.userManager)
+            }
+        }
     }
 }
 

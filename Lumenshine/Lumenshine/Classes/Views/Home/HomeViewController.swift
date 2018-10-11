@@ -77,6 +77,8 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.shadowColor = Stylesheet.color(.clear)
         navigationController?.navigationBar.backgroundColor = Stylesheet.color(.clear)
         navigationController?.navigationBar.isTranslucent = true
+        
+        viewModel.refreshWallets()
     }
 }
 

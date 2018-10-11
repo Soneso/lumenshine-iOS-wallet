@@ -137,6 +137,9 @@
 "fund_wallet" = "Fund Wallet";
 
 /*  */
+"fund_wallet_test" = "Fund Wallet via Friendbot";
+
+/*  */
 "setup_wallet" = "Setup Wallet";
 
 /*  */
