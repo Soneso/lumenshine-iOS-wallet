@@ -27,94 +27,119 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remove Currency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HpY-Dm-i6r">
-                    <rect key="frame" x="10" y="30" width="145" height="20.5"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="dvD-X5-FCZ">
-                    <rect key="frame" x="10" y="58.5" width="355" height="231"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="dvD-X5-FCZ">
+                    <rect key="frame" x="16" y="36" width="343" height="271"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="currencyName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bU9-x7-ZKO">
-                            <rect key="frame" x="0.0" y="0.0" width="113" height="20.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="currencyName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bU9-x7-ZKO" customClass="SubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="issuerPublicKey" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fB-Fg-c9b">
-                            <rect key="frame" x="0.0" y="28.5" width="121" height="20.5"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8p7-bS-Csu">
+                            <rect key="frame" x="0.0" y="28.5" width="343" height="20.5"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" text="Issuer public key:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ruM-NY-ifu" customClass="RegularSubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="132.5" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="issuerPublicKey" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fB-Fg-c9b" customClass="RegularSubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="136.5" y="0.0" width="206.5" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="ruM-NY-ifu" firstAttribute="top" secondItem="8p7-bS-Csu" secondAttribute="top" id="Exx-sb-v53"/>
+                                <constraint firstAttribute="bottom" secondItem="7fB-Fg-c9b" secondAttribute="bottom" id="JMv-Ns-qJe"/>
+                                <constraint firstItem="ruM-NY-ifu" firstAttribute="leading" secondItem="8p7-bS-Csu" secondAttribute="leading" id="KE8-AL-fsZ"/>
+                                <constraint firstItem="7fB-Fg-c9b" firstAttribute="top" secondItem="8p7-bS-Csu" secondAttribute="top" id="naz-t6-1vb"/>
+                                <constraint firstAttribute="trailing" secondItem="7fB-Fg-c9b" secondAttribute="trailing" id="rEH-IE-MMa"/>
+                                <constraint firstItem="7fB-Fg-c9b" firstAttribute="leading" secondItem="ruM-NY-ifu" secondAttribute="trailing" constant="4" id="up0-Si-QIC"/>
+                                <constraint firstAttribute="bottom" secondItem="ruM-NY-ifu" secondAttribute="bottom" id="uvj-hP-L5w"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="balance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Djx-Ik-QUL" customClass="RegularSubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="57" width="343" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="balance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Djx-Ik-QUL">
-                            <rect key="frame" x="0.0" y="57" width="60" height="20.5"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance is not zero. If you remove this currency, your credits will also be removed." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cH-EN-Z0I">
-                            <rect key="frame" x="0.0" y="85.5" width="330" height="41"/>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="validationErrorLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nst-UP-EPQ" customClass="ErrorLabel" customModule="Lumenshine" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="81.5" width="343" height="0.0"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="validationErrorLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nst-UP-EPQ">
-                            <rect key="frame" x="0.0" y="130.5" width="152.5" height="0.0"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hUJ-7S-frQ">
-                            <rect key="frame" x="0.0" y="134.5" width="355" height="30"/>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="hUJ-7S-frQ" customClass="InputTextField" customModule="Lumenshine" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="85.5" width="343" height="30"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                         </textField>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password required to remove currency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L8D-k4-jP1">
-                            <rect key="frame" x="0.0" y="172.5" width="295" height="20.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password required to remove currency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L8D-k4-jP1" customClass="HintLabel" customModule="Lumenshine" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="123.5" width="343" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <stackView opaque="NO" contentMode="right" translatesAutoresizingMaskIntoConstraints="NO" id="yZY-Ge-vke">
-                            <rect key="frame" x="0.0" y="201" width="355" height="30"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0XP-yy-tUd">
+                            <rect key="frame" x="0.0" y="152" width="343" height="30"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKW-Rp-Hkm">
-                                    <rect key="frame" x="0.0" y="0.0" width="304" height="30"/>
-                                    <state key="normal" title="cancel">
-                                        <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="cancelButtonAction:" destination="-1" eventType="touchUpInside" id="dhc-fP-Sh6"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U2z-2A-ANL">
-                                    <rect key="frame" x="304" y="0.0" width="51" height="30"/>
-                                    <state key="normal" title="remove"/>
+                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U2z-2A-ANL" customClass="RoundedButton" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="143.5" y="0.0" width="56" height="30"/>
+                                    <state key="normal" title="SUBMIT"/>
                                     <connections>
                                         <action selector="removeButtonAction:" destination="-1" eventType="touchUpInside" id="3RX-OO-ZYP"/>
                                     </connections>
                                 </button>
                             </subviews>
-                        </stackView>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="U2z-2A-ANL" firstAttribute="centerX" secondItem="0XP-yy-tUd" secondAttribute="centerX" id="10e-Fq-tId"/>
+                                <constraint firstAttribute="bottom" secondItem="U2z-2A-ANL" secondAttribute="bottom" id="eFm-oi-yer"/>
+                                <constraint firstItem="U2z-2A-ANL" firstAttribute="top" secondItem="0XP-yy-tUd" secondAttribute="top" id="ogg-vN-qkn"/>
+                                <constraint firstItem="U2z-2A-ANL" firstAttribute="centerY" secondItem="0XP-yy-tUd" secondAttribute="centerY" id="q6G-bI-DA7"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5pC-gT-sBI">
+                            <rect key="frame" x="0.0" y="190" width="343" height="81"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance is not zero. If you remove this currency, your credits will also be removed." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cH-EN-Z0I" customClass="ErrorLabel" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="343" height="81"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="7cH-EN-Z0I" secondAttribute="trailing" id="8O2-W9-D7Q"/>
+                                <constraint firstAttribute="bottom" secondItem="7cH-EN-Z0I" secondAttribute="bottom" id="Lo4-dk-fFU"/>
+                                <constraint firstItem="7cH-EN-Z0I" firstAttribute="top" secondItem="5pC-gT-sBI" secondAttribute="top" id="YWt-Cm-Hir"/>
+                                <constraint firstItem="7cH-EN-Z0I" firstAttribute="leading" secondItem="5pC-gT-sBI" secondAttribute="leading" id="bW7-p1-R1r"/>
+                                <constraint firstItem="7cH-EN-Z0I" firstAttribute="centerY" secondItem="5pC-gT-sBI" secondAttribute="centerY" id="heN-sD-Bdf"/>
+                                <constraint firstItem="7cH-EN-Z0I" firstAttribute="centerX" secondItem="5pC-gT-sBI" secondAttribute="centerX" id="uff-Am-RUm"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="hUJ-7S-frQ" secondAttribute="trailing" id="9KE-Pn-FZ5"/>
-                        <constraint firstAttribute="trailing" secondItem="yZY-Ge-vke" secondAttribute="trailing" id="Nve-2q-AcQ"/>
                     </constraints>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="dvD-X5-FCZ" firstAttribute="top" secondItem="HpY-Dm-i6r" secondAttribute="bottom" constant="8" id="2jM-4l-erZ"/>
-                <constraint firstItem="dvD-X5-FCZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="LS3-fs-EnJ"/>
-                <constraint firstItem="HpY-Dm-i6r" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="YB5-5D-VkK"/>
-                <constraint firstItem="HpY-Dm-i6r" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="ckr-cU-PIZ"/>
-                <constraint firstAttribute="trailing" secondItem="dvD-X5-FCZ" secondAttribute="trailing" constant="10" id="iSF-3Z-yK8"/>
+                <constraint firstItem="dvD-X5-FCZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="LS3-fs-EnJ"/>
+                <constraint firstAttribute="trailing" secondItem="dvD-X5-FCZ" secondAttribute="trailing" constant="16" id="iSF-3Z-yK8"/>
+                <constraint firstItem="dvD-X5-FCZ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="txI-Nv-HLH"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="33.5" y="53.5"/>
         </view>
     </objects>
 </document>

@@ -35,8 +35,7 @@ class TransactionTableViewCell: UITableViewCell {
     @IBAction func detailsButtonAction(_ sender: UIButton) {
         let transactionDetailsViewController = TransactionHistoryDetailsViewController(nibName: "TransactionHistoryDetailsViewController", bundle: Bundle.main)
         transactionDetailsViewController.operationInfo = operationInfo
-        let navigationController = BaseNavigationViewController(rootViewController: transactionDetailsViewController)
-        parentContainerViewController()?.present(navigationController, animated: true)
+        viewContainingController()?.navigationController?.pushViewController(transactionDetailsViewController, animated: true)
     }
     
     override func awakeFromNib() {

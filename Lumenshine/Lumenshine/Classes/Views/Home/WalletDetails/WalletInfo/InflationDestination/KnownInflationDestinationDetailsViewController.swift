@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Material
 
 class KnownInflationDestinationDetailsViewController: UIViewController {
     private var titleView = TitleView()
@@ -18,26 +19,17 @@ class KnownInflationDestinationDetailsViewController: UIViewController {
         setupNavigationItem()
     }
     
-    @IBAction func didTapBack(_ sender: Any) {
-        self.navigationController?.dismiss(animated: true)
-    }
-    
     @IBAction func didTapHelp(_ sender: Any) {
     }
     
     private func setupNavigationItem() {
-        titleView = Bundle.main.loadNibNamed("TitleView", owner:self, options:nil)![0] as! TitleView
-        titleView.label.text = "\(knownInflationDestination.name)\nInflation destination"
-        titleView.frame.size = titleView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+        navigationItem.titleLabel.text = "Details"
+        navigationItem.titleLabel.textColor = Stylesheet.color(.white)
+        navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         
-        navigationItem.titleView = titleView
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image:UIImage(named: "arrow-left"), style:.plain, target: self, action: #selector(didTapBack(_:)))
-        navigationItem.leftBarButtonItem?.tintColor = Stylesheet.color(.white)
-        navigationItem.leftBarButtonItem?.imageInsets = UIEdgeInsetsMake(0, 2, 0, -2)
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image:UIImage(named: "question"), style:.plain, target: self, action: #selector(didTapHelp(_:)))
-        navigationItem.rightBarButtonItem?.tintColor = Stylesheet.color(.white)
-        navigationItem.rightBarButtonItem?.imageInsets = UIEdgeInsetsMake(0, 2, 0, -2)
+        let helpButton = Material.IconButton()
+        helpButton.image = R.image.question()?.crop(toWidth: 15, toHeight: 15)?.tint(with: Stylesheet.color(.white))
+        helpButton.addTarget(self, action: #selector(didTapHelp(_:)), for: .touchUpInside)
+        navigationItem.rightViews = [helpButton]
     }
 }

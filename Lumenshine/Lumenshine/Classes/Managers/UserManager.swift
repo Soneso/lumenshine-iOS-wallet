@@ -167,11 +167,16 @@ public class UserManager: NSObject {
             DispatchQueue.main.async {
                 switch response {
                 case .success(details: let accountDetails):
-                    if accountDetails.signers.first(where: { (account) -> Bool in
+                    if let masterKeyWeight = accountDetails.signers.first(where: { (account) -> Bool in
                         return account.publicKey == accountID
-                    })?.weight != 0 {
-                        completion(.success(canSign: true))
-                    } else {
+                    })?.weight {
+                        if masterKeyWeight >= accountDetails.thresholds.lowThreshold {
+                            completion(.success(canSign: true))
+                        } else {
+                            completion(.success(canSign: false))
+                        }
+                    }
+                     else {
                         completion(.success(canSign: false))
                     }
                 case .failure(error: let error):

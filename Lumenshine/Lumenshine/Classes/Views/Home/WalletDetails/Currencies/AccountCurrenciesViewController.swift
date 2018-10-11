@@ -34,8 +34,7 @@ class AccountCurrenciesViewController: UIViewController {
     @IBAction func didTapAddCurrency(_ sender: Any) {
         let addCurrencyViewController = AddCurrencyViewController(nibName: "AddCurrencyViewController", bundle: Bundle.main)
         addCurrencyViewController.wallet = wallet
-        let navigationController = BaseNavigationViewController(rootViewController: addCurrencyViewController)
-        present(navigationController, animated: true)
+        navigationController?.pushViewController(addCurrencyViewController, animated: true)
     }
     
     private func setupCurrencies() {
@@ -86,7 +85,6 @@ class AccountCurrenciesViewController: UIViewController {
         let removeCurrencyViewController = RemoveCurrencyViewController(nibName: "RemoveCurrencyViewController", bundle: Bundle.main)
         removeCurrencyViewController.currency = currency
         removeCurrencyViewController.wallet = wallet
-        let navigationController = BaseNavigationViewController(rootViewController: removeCurrencyViewController)
-        present(navigationController, animated: true)
+        navigationController?.pushViewController(removeCurrencyViewController, animated: true)
     }
 }

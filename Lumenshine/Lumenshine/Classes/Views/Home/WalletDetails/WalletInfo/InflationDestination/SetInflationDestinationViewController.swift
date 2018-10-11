@@ -8,27 +8,22 @@
 
 import Foundation
 import UIKit
+import Material
+
+fileprivate enum SegmentedControlIndexes: Int {
+    case knownDestinations = 0
+    case provideDestinationData = 1
+}
 
 class SetInflationDestinationViewController: UIViewController {
     @IBOutlet weak var destinationContainer: UIView!
     
-    @IBOutlet weak var knownDestinationsButton: UIButton!
-    @IBOutlet weak var provideDestinationDataButton: UIButton!
-    
-    @IBAction func knownDestinationsButtonAction(_ sender: UIButton) {
-        if sender.isSelected {
-            return
+    @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == SegmentedControlIndexes.knownDestinations.rawValue {
+            showKnownDestinations()
+        } else {
+            showProvideDestinationData()
         }
-        
-        showKnownDestinations()
-    }
-    
-    @IBAction func provideDestinationDataButtonAction(_ sender: UIButton) {
-        if sender.isSelected {
-            return
-        }
-        
-       showProvideDestinationData()
     }
     
     var wallet: FundedWallet!
@@ -42,12 +37,10 @@ class SetInflationDestinationViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationItem()
         showKnownDestinations()
+        view.backgroundColor = Stylesheet.color(.veryLightGray)
     }
     
     private func showKnownDestinations() {
-        knownDestinationsButton.isSelected = true
-        provideDestinationDataButton.isSelected = false
-        
         if destinationContainer.subviews.count > 0 {
             destinationContainer.subviews[0].removeFromSuperview()
         }
@@ -55,6 +48,7 @@ class SetInflationDestinationViewController: UIViewController {
         if knownInflationDestinationsViewController == nil {
             knownInflationDestinationsViewController = KnownInflationDestinationsViewController(nibName: "KnownInflationDestinationsViewController", bundle: Bundle.main)
             knownInflationDestinationsViewController.currentInflationDestination = currentInflationDestination
+            knownInflationDestinationsViewController.wallet = wallet
         }
         
         if let knownInflationDestinationsViewController = knownInflationDestinationsViewController {
@@ -70,9 +64,6 @@ class SetInflationDestinationViewController: UIViewController {
     }
     
     private func showProvideDestinationData() {
-        knownDestinationsButton.isSelected = false
-        provideDestinationDataButton.isSelected = true
-        
         if destinationContainer.subviews.count > 0 {
             destinationContainer.subviews[0].removeFromSuperview()
         }
@@ -94,26 +85,17 @@ class SetInflationDestinationViewController: UIViewController {
         }
     }
     
-    @IBAction func didTapBack(_ sender: Any) {
-        self.navigationController?.dismiss(animated: true)
-    }
-    
     @IBAction func didTapHelp(_ sender: Any) {
     }
     
     private func setupNavigationItem() {
-        titleView = Bundle.main.loadNibNamed("TitleView", owner:self, options:nil)![0] as! TitleView
-        titleView.label.text = "\(wallet.name)\nInflation destination"
-        titleView.frame.size = titleView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+        navigationItem.titleLabel.text = "Set inflation destination"
+        navigationItem.titleLabel.textColor = Stylesheet.color(.white)
+        navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         
-        navigationItem.titleView = titleView
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image:UIImage(named: "arrow-left"), style:.plain, target: self, action: #selector(didTapBack(_:)))
-        navigationItem.leftBarButtonItem?.tintColor = Stylesheet.color(.white)
-        navigationItem.leftBarButtonItem?.imageInsets = UIEdgeInsetsMake(0, 2, 0, -2)
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image:UIImage(named: "question"), style:.plain, target: self, action: #selector(didTapHelp(_:)))
-        navigationItem.rightBarButtonItem?.tintColor = Stylesheet.color(.white)
-        navigationItem.rightBarButtonItem?.imageInsets = UIEdgeInsetsMake(0, 2, 0, -2)
+        let helpButton = Material.IconButton()
+        helpButton.image = R.image.question()?.crop(toWidth: 15, toHeight: 15)?.tint(with: Stylesheet.color(.white))
+        helpButton.addTarget(self, action: #selector(didTapHelp(_:)), for: .touchUpInside)
+        navigationItem.rightViews = [helpButton]
     }
 }

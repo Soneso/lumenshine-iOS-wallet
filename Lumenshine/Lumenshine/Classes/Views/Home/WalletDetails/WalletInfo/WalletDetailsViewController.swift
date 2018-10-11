@@ -88,8 +88,7 @@ class WalletDetailsViewController: UIViewController {
     @IBAction func inflationDetailsButtonAction(_ sender: UIButton) {
         let knownInflationDestinationDetailsViewController = KnownInflationDestinationDetailsViewController(nibName: "KnownInflationDestinationDetailsViewController", bundle: Bundle.main)
         knownInflationDestinationDetailsViewController.knownInflationDestination = currentInflationDestination
-        let navController = BaseNavigationViewController(rootViewController: knownInflationDestinationDetailsViewController)
-        present(navController, animated: true)
+        navigationController?.pushViewController(knownInflationDestinationDetailsViewController, animated: true)
     }
     
     @IBAction func inflationChangeButtonAction(_ sender: UIButton) {
@@ -229,7 +228,6 @@ class WalletDetailsViewController: UIViewController {
         let setInflationDestinationViewController = SetInflationDestinationViewController(nibName: "SetInflationDestinationViewController", bundle: Bundle.main)
         setInflationDestinationViewController.wallet = wallet
         setInflationDestinationViewController.currentInflationDestination = currentInflationDestination
-        let navController = BaseNavigationViewController(rootViewController: setInflationDestinationViewController)
-        present(navController, animated: true)
+        navigationController?.pushViewController(setInflationDestinationViewController, animated: true)
     }
 }

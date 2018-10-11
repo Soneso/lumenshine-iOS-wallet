@@ -11,7 +11,7 @@ import UIKit
 import stellarsdk
 
 fileprivate enum AddButtonTitles: String {
-    case add = "Add"
+    case add = "SUBMIT"
     case validating = "Validating & adding"
 }
 
@@ -81,6 +81,8 @@ class ProvideCurrencyDataViewController: UIViewController {
         if BiometricHelper.isBiometricAuthEnabled {
             passwordTextField.isHidden = true
         }
+        
+        addButton.backgroundColor = Stylesheet.color(.blue)
     }
     
     var wallet: FundedWallet!
@@ -209,7 +211,7 @@ class ProvideCurrencyDataViewController: UIViewController {
                     self.resetAddButtonToDefault()
                 }
                 
-                self.dismiss(animated: true)
+                self.navigationController?.popViewController(animated: true)
             })
         }
     }

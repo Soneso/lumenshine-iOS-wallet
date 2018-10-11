@@ -9,10 +9,11 @@
 import Foundation
 import UIKit
 import stellarsdk
+import Material
 
 fileprivate enum RemoveButtonDescriptions: String {
-    case Remove = "remove"
-    case RemoveAndAbandon = "remove & abandon credits"
+    case Remove = "SUBMIT"
+    case RemoveAndAbandon = "SUBMIT ANYWAY"
     case ValidatingAndRemoving = "validating & removing"
 }
 
@@ -29,11 +30,7 @@ class RemoveCurrencyViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     
     @IBOutlet weak var removeButton: UIButton!
-    
-    @IBAction func cancelButtonAction(_ sender: UIButton) {
-        self.navigationController?.dismiss(animated: true)
-    }
-    
+        
     var currency: AccountBalanceResponse!
     var wallet: FundedWallet!
     private var walletManager = WalletManager()
@@ -61,7 +58,7 @@ class RemoveCurrencyViewController: UIViewController {
             case .success(mnemonic: let mnemonic):
                 let transactionHelper = TransactionHelper(wallet: self.wallet)
                 transactionHelper.removeTrustLine(currency: self.currency, userMnemonic: mnemonic, completion: { (_) -> (Void) in
-                    self.navigationController?.dismiss(animated: true)
+                    self.navigationController?.popViewController(animated: true)
                 })
                 
             case .failure(error: let error):
@@ -86,12 +83,11 @@ class RemoveCurrencyViewController: UIViewController {
         if BiometricHelper.isBiometricAuthEnabled {
             passwordTextField.isHidden = true
         }
+        
+        view.backgroundColor = Stylesheet.color(.veryLightGray)
+        removeButton.backgroundColor = Stylesheet.color(.blue)
     }
-    
-    @IBAction func didTapBack(_ sender: Any) {
-        self.navigationController?.dismiss(animated: true)
-    }
-    
+        
     @IBAction func didTapHelp(_ sender: Any) {
     }
     
@@ -122,24 +118,19 @@ class RemoveCurrencyViewController: UIViewController {
     }
     
     private func setupNavigationItem() {
-        titleView = Bundle.main.loadNibNamed("TitleView", owner:self, options:nil)![0] as! TitleView
-        titleView.label.text = "\(wallet.name)\nRemove currency"
-        titleView.frame.size = titleView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+        navigationItem.titleLabel.text = "Remove currency"
+        navigationItem.titleLabel.textColor = Stylesheet.color(.white)
+        navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         
-        navigationItem.titleView = titleView
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image:UIImage(named: "arrow-left"), style:.plain, target: self, action: #selector(didTapBack(_:)))
-        navigationItem.leftBarButtonItem?.tintColor = Stylesheet.color(.white)
-        navigationItem.leftBarButtonItem?.imageInsets = UIEdgeInsetsMake(0, 2, 0, -2)
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image:UIImage(named: "question"), style:.plain, target: self, action: #selector(didTapHelp(_:)))
-        navigationItem.rightBarButtonItem?.tintColor = Stylesheet.color(.white)
-        navigationItem.rightBarButtonItem?.imageInsets = UIEdgeInsetsMake(0, 2, 0, -2)
+        let helpButton = Material.IconButton()
+        helpButton.image = R.image.question()?.crop(toWidth: 15, toHeight: 15)?.tint(with: Stylesheet.color(.white))
+        helpButton.addTarget(self, action: #selector(didTapHelp(_:)), for: .touchUpInside)
+        navigationItem.rightViews = [helpButton]
     }
     
     private func setupLabelDescriptions() {
         currencyNameLabel.text = currency.assetCode ?? ""
-        issuerPublicKeyLabel.text = "Issuer public key: \(currency.assetIssuer ?? "")"
+        issuerPublicKeyLabel.text = "\(currency.assetIssuer ?? "")"
         
         if let balance = CoinUnit(currency.balance), let assetCode = currency.assetCode {
             balanceLabel.text = "Balance: \(balance) \(assetCode)"

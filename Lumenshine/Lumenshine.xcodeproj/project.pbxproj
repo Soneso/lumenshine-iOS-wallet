@@ -337,6 +337,7 @@
 		C6C0E4DB212570EF00FF1BA8 /* ExchangeRateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C0E4DA212570EF00FF1BA8 /* ExchangeRateResponse.swift */; };
 		C6C1FC6E21673F0900F80F44 /* BiometricAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C1FC6D21673F0900F80F44 /* BiometricAuthButton.swift */; };
 		C6C1FC702167960400F80F44 /* HintLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C1FC6F2167960400F80F44 /* HintLabel.swift */; };
+		C6CEBCB2216CA66000710ED7 /* TabLikeSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CEBCB1216CA66000710ED7 /* TabLikeSegmentedControl.swift */; };
 		C6D87E742133ECE100154A3B /* KnownCurrenciesTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D87E732133ECE100154A3B /* KnownCurrenciesTableViewController.xib */; };
 		C6D87E762133ECED00154A3B /* KnownCurrenciesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D87E752133ECED00154A3B /* KnownCurrenciesTableViewController.swift */; };
 		C6D87E78213400A000154A3B /* KnownCurrenciesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D87E77213400A000154A3B /* KnownCurrenciesTableViewCell.xib */; };
@@ -720,6 +721,7 @@
 		C6C0E4DA212570EF00FF1BA8 /* ExchangeRateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateResponse.swift; sourceTree = "<group>"; };
 		C6C1FC6D21673F0900F80F44 /* BiometricAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricAuthButton.swift; sourceTree = "<group>"; };
 		C6C1FC6F2167960400F80F44 /* HintLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintLabel.swift; sourceTree = "<group>"; };
+		C6CEBCB1216CA66000710ED7 /* TabLikeSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabLikeSegmentedControl.swift; sourceTree = "<group>"; };
 		C6D87E732133ECE100154A3B /* KnownCurrenciesTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KnownCurrenciesTableViewController.xib; sourceTree = "<group>"; };
 		C6D87E752133ECED00154A3B /* KnownCurrenciesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownCurrenciesTableViewController.swift; sourceTree = "<group>"; };
 		C6D87E77213400A000154A3B /* KnownCurrenciesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KnownCurrenciesTableViewCell.xib; sourceTree = "<group>"; };
@@ -1509,6 +1511,7 @@
 				C6A87D70216B24DE00658D55 /* SimpleButton.swift */,
 				C6A87D72216B4D4B00658D55 /* CellRegularLabel.swift */,
 				C6A87D74216B77EB00658D55 /* LeftCaptionTextField.swift */,
+				C6CEBCB1216CA66000710ED7 /* TabLikeSegmentedControl.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
@@ -2181,6 +2184,7 @@
 				C62B0EA22153DBDB00CF920B /* SeparatorView.swift in Sources */,
 				7477F3F920EE188600408934 /* WalletsService.swift in Sources */,
 				436B367320512114009F7C21 /* TableViewDelegateHandler.swift in Sources */,
+				C6CEBCB2216CA66000710ED7 /* TabLikeSegmentedControl.swift in Sources */,
 				43F74607209494AC003EB5FD /* RegistrationResponse.swift in Sources */,
 				439C476E20D6770900C5DC97 /* AvatarTableViewCell.swift in Sources */,
 				43973A8C20BD4B87000145DD /* TFAGeneration.swift in Sources */,

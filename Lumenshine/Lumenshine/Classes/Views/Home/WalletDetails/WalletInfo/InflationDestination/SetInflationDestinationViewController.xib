@@ -12,8 +12,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SetInflationDestinationViewController">
             <connections>
                 <outlet property="destinationContainer" destination="3Je-yN-75p" id="Bng-oy-cGB"/>
-                <outlet property="knownDestinationsButton" destination="Oej-vS-lYK" id="2WH-rp-cA1"/>
-                <outlet property="provideDestinationDataButton" destination="5e3-7P-yHd" id="6S5-VM-Nhc"/>
                 <outlet property="view" destination="A2d-GC-vOE" id="1g3-PX-aNt"/>
             </connections>
         </placeholder>
@@ -22,67 +20,43 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Inflation destination" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dr2-pP-RfC">
-                    <rect key="frame" x="10" y="30" width="195.5" height="20.5"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Fex-hV-Aax">
-                    <rect key="frame" x="25" y="60" width="325" height="30"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oej-vS-lYK">
-                            <rect key="frame" x="0.0" y="0.0" width="162.5" height="30"/>
-                            <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <state key="normal" title="Known destinations"/>
-                            <connections>
-                                <action selector="knownDestinationsButtonAction:" destination="-1" eventType="touchUpInside" id="0M3-yg-bZk"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5e3-7P-yHd">
-                            <rect key="frame" x="162.5" y="0.0" width="162.5" height="30"/>
-                            <color key="backgroundColor" red="0.57919406890000003" green="0.1280144453" blue="0.57268613580000005" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <state key="normal" title="Provide Destination Data"/>
-                            <connections>
-                                <action selector="provideDestinationDataButtonAction:" destination="-1" eventType="touchUpInside" id="K81-Eu-Zga"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="30" id="8EB-0O-qaD"/>
-                    </constraints>
-                </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="49d-bc-NrT" userLabel="Separator">
-                    <rect key="frame" x="0.0" y="109" width="375" height="1"/>
-                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <rect key="frame" x="0.0" y="80" width="375" height="1"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="rsU-l9-7mM"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Je-yN-75p">
-                    <rect key="frame" x="10" y="120" width="355" height="537"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <rect key="frame" x="10" y="91" width="355" height="566"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="aZe-Nu-5TB" customClass="TabLikeSegmentedControl" customModule="Lumenshine" customModuleProvider="target">
+                    <rect key="frame" x="32" y="36" width="311" height="29"/>
+                    <segments>
+                        <segment title="Known destinations"/>
+                        <segment title="Provide Destination Data"/>
+                    </segments>
+                    <connections>
+                        <action selector="segmentedControlValueChanged:" destination="-1" eventType="valueChanged" id="Vow-1l-e8K"/>
+                    </connections>
+                </segmentedControl>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="aZe-Nu-5TB" firstAttribute="leading" secondItem="0up-7S-to4" secondAttribute="leading" constant="32" id="4V9-Sd-Eqh"/>
                 <constraint firstItem="49d-bc-NrT" firstAttribute="leading" secondItem="A2d-GC-vOE" secondAttribute="leading" id="H1r-kk-O2d"/>
                 <constraint firstItem="0up-7S-to4" firstAttribute="trailing" secondItem="3Je-yN-75p" secondAttribute="trailing" constant="10" id="Ifq-Go-xgy"/>
                 <constraint firstItem="3Je-yN-75p" firstAttribute="leading" secondItem="0up-7S-to4" secondAttribute="leading" constant="10" id="PdN-h8-goK"/>
                 <constraint firstItem="3Je-yN-75p" firstAttribute="leading" secondItem="0up-7S-to4" secondAttribute="leading" constant="10" id="UpN-OG-Xa2"/>
-                <constraint firstItem="Fex-hV-Aax" firstAttribute="top" secondItem="0up-7S-to4" secondAttribute="top" constant="40" id="VQy-h2-9Za"/>
-                <constraint firstItem="Dr2-pP-RfC" firstAttribute="top" secondItem="0up-7S-to4" secondAttribute="top" constant="10" id="YdA-1m-GhI"/>
-                <constraint firstItem="0up-7S-to4" firstAttribute="trailing" secondItem="Fex-hV-Aax" secondAttribute="trailing" constant="25" id="bh6-yv-o8n"/>
-                <constraint firstItem="Fex-hV-Aax" firstAttribute="leading" secondItem="0up-7S-to4" secondAttribute="leading" constant="25" id="djB-r2-tAg"/>
                 <constraint firstItem="3Je-yN-75p" firstAttribute="top" secondItem="49d-bc-NrT" secondAttribute="bottom" constant="10" id="fKM-MM-0Nm"/>
-                <constraint firstItem="Dr2-pP-RfC" firstAttribute="leading" secondItem="0up-7S-to4" secondAttribute="leading" constant="10" id="fLt-MJ-1Uj"/>
+                <constraint firstItem="49d-bc-NrT" firstAttribute="top" secondItem="aZe-Nu-5TB" secondAttribute="bottom" constant="16" id="hCk-yL-OcN"/>
                 <constraint firstItem="3Je-yN-75p" firstAttribute="top" secondItem="49d-bc-NrT" secondAttribute="bottom" constant="10" id="kJD-xW-4hK"/>
+                <constraint firstItem="0up-7S-to4" firstAttribute="trailing" secondItem="aZe-Nu-5TB" secondAttribute="trailing" constant="32" id="khx-Az-MpJ"/>
                 <constraint firstAttribute="trailing" secondItem="49d-bc-NrT" secondAttribute="trailing" id="lvE-F7-hzZ"/>
                 <constraint firstItem="0up-7S-to4" firstAttribute="trailing" secondItem="3Je-yN-75p" secondAttribute="trailing" constant="10" id="u8S-zP-nzm"/>
                 <constraint firstItem="0up-7S-to4" firstAttribute="bottom" secondItem="3Je-yN-75p" secondAttribute="bottom" constant="10" id="vUa-qk-xua"/>
-                <constraint firstItem="49d-bc-NrT" firstAttribute="bottom" secondItem="Fex-hV-Aax" secondAttribute="bottom" constant="20" id="yG5-Pl-FeT"/>
+                <constraint firstItem="aZe-Nu-5TB" firstAttribute="top" secondItem="0up-7S-to4" secondAttribute="top" constant="16" id="z0m-Wm-dOi"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="0up-7S-to4"/>
             <point key="canvasLocation" x="24.5" y="51.5"/>

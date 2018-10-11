@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 fileprivate enum SetOrRemoveButtonTitles: String {
-    case set = "set destination"
-    case remove = "remove"
+    case set = "SET DESTINATION"
+    case remove = "REMOVE"
     case validatingSet = "validating & setting"
     case validatingRemove = "validating & removing"
 }
@@ -28,6 +28,13 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
     @IBOutlet weak var isCurrentlySetSwitch: UISwitch!
     
     @IBOutlet weak var setOrRemoveButton: UIButton!
+    
+    var wallet: FundedWallet!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setupView()
+    }
     
     @IBAction func setOrRemoveButtonAction(_ sender: UIButton) {
         resetValidationError()
@@ -84,7 +91,7 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
     }
     
     private func setInflationDestination(sourceAccountID: String) {
-        if let inflationDestinationAddress = issuerPublicKeyLabel.text?.lines[1] {
+        if let inflationDestinationAddress = issuerPublicKeyLabel.text {
             inflationManager.setInflationDestination(inflationAddress: inflationDestinationAddress, sourceAccountID: sourceAccountID) { (response) -> (Void) in
                 switch response {
                 case .success:
@@ -133,14 +140,8 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
         }
     }
     
-    private var wallet: FundedWallet {
-        get {
-            return (parentContainerViewController() as! SetInflationDestinationViewController).wallet
-        }
-    }
-    
     private func dissmissView() {
-        parentContainerViewController()?.dismiss(animated: true)
+        viewContainingController()?.navigationController?.popViewController(animated: true)
     }
     
     private func showFundingAlert() {
@@ -165,6 +166,11 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
             setOrRemoveButton.setTitle(SetOrRemoveButtonTitles.set.rawValue, for: UIControlState.normal)
             setOrRemoveButton.isEnabled = true
         }
+    }
+    
+    private func setupView() {
+        backgroundColor = Stylesheet.color(.clear)
+        setOrRemoveButton.backgroundColor = Stylesheet.color(.green)
     }
 }
 
