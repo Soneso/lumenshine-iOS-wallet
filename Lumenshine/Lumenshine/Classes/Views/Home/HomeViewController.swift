@@ -95,9 +95,14 @@ extension HomeViewController: UITableViewDataSource {
         cell.selectionStyle = .none
 
         if let card = dataSourceItems[indexPath.row] as? WalletCard {
-            card.reloadCellAction = {
-//                self.tableView.reloadRows(at: [indexPath], with: .automatic)
-                self.tableView.reloadData()
+            card.reloadCellAction = { [weak self] reload in
+                if reload {
+                    self?.tableView.reloadData()
+                } else {
+                    self?.tableView.performBatchUpdates({
+                        self?.tableView.reloadRows(at: [indexPath], with: .automatic)
+                    }, completion: nil)
+                }
             }
         }
         
@@ -297,14 +302,6 @@ fileprivate extension HomeViewController {
                 self.setHeaderType(nativeFounds: data)
             case .failure(_):
                 print("Failed to get wallets")
-            }
-        }
-    }
-    
-    func refreshData() {
-        for card in dataSourceItems {
-            if let walletCard = card as? WalletCard {
-                walletCard.reloadData()
             }
         }
     }

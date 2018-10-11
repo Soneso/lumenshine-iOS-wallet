@@ -21,8 +21,7 @@ class WalletCardViewModel : CardViewModelType {
     
     var receivePaymentAction: (() -> ())?
     var sendAction: (() -> ())?
-    var reloadClosure: (() -> ())?
-    var refreshClosure: (() -> ())?
+    var reloadClosure: ((Bool) -> ())?
     
     init(userManager: UserManager, walletResponse: WalletsResponse) {
         self.stellarSdk = StellarSDK()
@@ -34,7 +33,7 @@ class WalletCardViewModel : CardViewModelType {
             case .success(let wallets):
                 guard let wallet = wallets.first else { return }
                 self.wallet = wallet
-                self.reloadClosure?()
+                self.reloadClosure?(true)
             case .failure(let error):
                 print("Account details failure: \(error)")
             }
@@ -56,7 +55,7 @@ class WalletCardViewModel : CardViewModelType {
             case .success(let wallets):
                 guard let wallet = wallets.first else { return }
                 self?.wallet = wallet
-                self?.reloadClosure?()
+                self?.reloadClosure?(false)
                 self?.needsRefresh = false
             case .failure(let error):
                 print("Account details failure: \(error)")

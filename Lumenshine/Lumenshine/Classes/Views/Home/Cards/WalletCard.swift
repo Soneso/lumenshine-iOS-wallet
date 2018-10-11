@@ -31,7 +31,7 @@ class WalletCard: CardView {
     var unfundedView: UnfundedWalletCardContentView?
     var viewController: UIViewController?
     
-    var reloadCellAction: (() -> ())?
+    var reloadCellAction: ((Bool) -> ())?
     var expanded = false
     
     fileprivate let textLabel = UILabel()
@@ -49,9 +49,10 @@ class WalletCard: CardView {
                     self.setupPaymentOperationsVCManager()
                     self.paymentOperationsVCManager.addViewController(forAction: WalletAction.send, wallet: self.wallet)
                 }
-                viewModel.reloadClosure = {
+                
+                viewModel.reloadClosure = { reload in
                     DispatchQueue.main.async {
-                        self.reloadData()
+                        self.reloadData(reload)
                     }
                 }
             }
@@ -89,7 +90,7 @@ class WalletCard: CardView {
         }
     }
     
-    func reloadData() {
+    func reloadData(_ reload: Bool) {
         if let viewModel = self.viewModel as? WalletCardViewModel {
             
             unfundedView?.removeFromSuperview()
@@ -97,8 +98,7 @@ class WalletCard: CardView {
             
             self.status = (viewModel.wallet.isFunded) ? .funded : .unfunded
             self.setup(viewModel: viewModel)
-            
-            self.reloadCellAction?()
+            self.reloadCellAction?(reload)
         }
     }
     
