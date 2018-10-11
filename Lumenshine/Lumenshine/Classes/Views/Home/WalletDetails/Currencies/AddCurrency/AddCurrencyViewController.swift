@@ -6,53 +6,46 @@
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import Material
+
+fileprivate enum SegmentendControlIndexes: Int {
+    case knownCurrencies = 0
+    case provideCurrencyData = 1
+}
 
 class AddCurrencyViewController: UIViewController {
-    @IBOutlet weak var currencyContainer: UIView!
-    
-    @IBOutlet weak var knownCurrenciesButton: UIButton!
-    @IBOutlet weak var provideCurrencyDataButton: UIButton!
-    
-    var wallet: FundedWallet!
-    
     private var titleView: TitleView!
     private var provideCurrencyDataViewController: ProvideCurrencyDataViewController!
     private var knownCurrenciesTableViewController: KnownCurrenciesTableViewController!
     
-    @IBAction func knownCurrenciesAction(_ sender: UIButton) {
-        if sender.isSelected {
-            return
-        }
-        
-        showKnownCurrencies()
-    }
+    var wallet: FundedWallet!
+
+    @IBOutlet weak var currencyContainer: UIView!
     
-    @IBAction func provideCurrencyDataAction(_ sender: UIButton) {
-        if sender.isSelected {
-            return
+    @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == SegmentendControlIndexes.knownCurrencies.rawValue {
+            showKnownCurrencies()
+        } else {
+            showProvideCurrencyData()
         }
-        
-        showProvideCurrencyData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationItem()
         showKnownCurrencies()
+        view.backgroundColor = Stylesheet.color(.veryLightGray)
     }
     
     private func showKnownCurrencies() {
-        knownCurrenciesButton.isSelected = true
-        provideCurrencyDataButton.isSelected = false
-
         if currencyContainer.subviews.count > 0 {
             currencyContainer.subviews[0].removeFromSuperview()
         }
 
         if knownCurrenciesTableViewController == nil {
             knownCurrenciesTableViewController = KnownCurrenciesTableViewController(nibName: "KnownCurrenciesTableViewController", bundle: Bundle.main)
+            knownCurrenciesTableViewController.wallet = wallet
         }
 
         if let knownCurrenciesTableViewController = knownCurrenciesTableViewController {
@@ -68,9 +61,6 @@ class AddCurrencyViewController: UIViewController {
     }
     
     private func showProvideCurrencyData() {
-        knownCurrenciesButton.isSelected = false
-        provideCurrencyDataButton.isSelected = true
-        
         if currencyContainer.subviews.count > 0 {
             currencyContainer.subviews[0].removeFromSuperview()
         }
@@ -92,26 +82,17 @@ class AddCurrencyViewController: UIViewController {
         }
     }
         
-    @IBAction func didTapBack(_ sender: Any) {
-        self.navigationController?.dismiss(animated: true)
-    }
-    
     @IBAction func didTapHelp(_ sender: Any) {
     }
     
-    private func setupNavigationItem() {
-        titleView = Bundle.main.loadNibNamed("TitleView", owner:self, options:nil)![0] as! TitleView
-        titleView.label.text = "\(wallet.name)\nAdd currency"
-        titleView.frame.size = titleView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+    private func setupNavigationItem() {        
+        navigationItem.titleLabel.text = "Add currency"
+        navigationItem.titleLabel.textColor = Stylesheet.color(.white)
+        navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         
-        navigationItem.titleView = titleView
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image:UIImage(named: "arrow-left"), style:.plain, target: self, action: #selector(didTapBack(_:)))
-        navigationItem.leftBarButtonItem?.tintColor = Stylesheet.color(.white)
-        navigationItem.leftBarButtonItem?.imageInsets = UIEdgeInsetsMake(0, 2, 0, -2)
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image:UIImage(named: "question"), style:.plain, target: self, action: #selector(didTapHelp(_:)))
-        navigationItem.rightBarButtonItem?.tintColor = Stylesheet.color(.white)
-        navigationItem.rightBarButtonItem?.imageInsets = UIEdgeInsetsMake(0, 2, 0, -2)
+        let helpButton = Material.IconButton()
+        helpButton.image = R.image.question()?.crop(toWidth: 15, toHeight: 15)?.tint(with: Stylesheet.color(.white))
+        helpButton.addTarget(self, action: #selector(didTapHelp(_:)), for: .touchUpInside)
+        navigationItem.rightViews = [helpButton]
     }
 }

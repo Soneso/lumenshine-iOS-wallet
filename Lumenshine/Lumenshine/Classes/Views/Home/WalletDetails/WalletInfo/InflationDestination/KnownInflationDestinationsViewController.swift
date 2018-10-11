@@ -42,6 +42,7 @@ class KnownInflationDestinationsViewController: UIViewController, UITableViewDel
     private let inflationManager = InflationManager()
     
     var currentInflationDestination: String?
+    var wallet: FundedWallet!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,9 +81,9 @@ class KnownInflationDestinationsViewController: UIViewController, UITableViewDel
     private func showKnownInflationDestinationDetails(for inflationDestination: KnownInflationDestinationResponse) {
         let knownInflationDestinationDetailsViewController = KnownInflationDestinationDetailsViewController(nibName: "KnownInflationDestinationDetailsViewController", bundle: Bundle.main)
         knownInflationDestinationDetailsViewController.knownInflationDestination = inflationDestination
-        let navController = BaseNavigationViewController(rootViewController: knownInflationDestinationDetailsViewController)
-        present(navController, animated: true)
+        navigationController?.pushViewController(knownInflationDestinationDetailsViewController, animated: true)
     }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return itemsSource.count
     }
@@ -98,7 +99,7 @@ class KnownInflationDestinationsViewController: UIViewController, UITableViewDel
         
         cell.nameLabel.text = knownInflationDestination.name
         cell.shortDescriptionLabel.text = knownInflationDestination.shortDescription
-        cell.issuerPublicKeyLabel.text = "Public key: \n\(knownInflationDestination.issuerPublicKey)"
+        cell.issuerPublicKeyLabel.text = "\(knownInflationDestination.issuerPublicKey)"
         
         if knownInflationDestination.issuerPublicKey == currentInflationDestination {
             cell.isCurrentlySetSwitch.isOn = true
@@ -119,7 +120,8 @@ class KnownInflationDestinationsViewController: UIViewController, UITableViewDel
         if BiometricHelper.isBiometricAuthEnabled {
             cell.passwordTextField.isHidden = true
         }
-
+        
+        cell.wallet = wallet
         cell.selectionStyle = .none
         
         return cell

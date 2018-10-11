@@ -443,9 +443,12 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     private func setupSignersPicker(signerList: [AccountSignerResponse]) {
-        availableSigners = signerList.filter({ (signer) -> Bool in
-            return signer.weight != 0
-        })
+        if let masterKeyWeight = (wallet as? FundedWallet)?.masterKeyWeight {
+            availableSigners = signerList.filter({ (signer) -> Bool in
+                return signer.weight > masterKeyWeight
+            })
+        }
+        
         
         signerPickerView = UIPickerView()
         signerPickerView.delegate = self

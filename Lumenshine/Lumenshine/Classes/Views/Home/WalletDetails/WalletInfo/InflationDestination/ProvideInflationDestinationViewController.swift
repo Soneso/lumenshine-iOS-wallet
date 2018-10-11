@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 fileprivate enum SetButtonTitles: String {
-    case set = "set"
+    case set = "SET"
     case validating = "validating & setting"
 }
 
@@ -20,8 +20,8 @@ fileprivate enum PublicKeyValidationErrors: String {
 }
 
 class ProvideInflationDestinationViewController: UIViewController {
-    @IBOutlet weak var publicKeyValidationStackView: UIStackView!
-    @IBOutlet weak var passwordValidationStackView: UIStackView!
+    @IBOutlet weak var publicKeyValidationView: UIView!
+    @IBOutlet weak var passwordValidationView: UIView!
     
     @IBOutlet weak var publicKeyTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -52,7 +52,7 @@ class ProvideInflationDestinationViewController: UIViewController {
                             self.passwordTextField.isHidden = false
                         } else {
                             print("Error: \(error)")
-                            self.showValidationError(for: self.passwordValidationStackView)
+                            self.showValidationError(for: self.passwordValidationView)
                             self.passwordValidationLabel.text = ValidationErrors.InvalidPassword.rawValue
                         }
                         
@@ -77,11 +77,13 @@ class ProvideInflationDestinationViewController: UIViewController {
         if BiometricHelper.isBiometricAuthEnabled {
             passwordTextField.isHidden = true
         }
+        
+        setButton.backgroundColor = Stylesheet.color(.green)
     }
     
     private func resetValidationErrors() {
-        publicKeyValidationStackView.isHidden = true
-        passwordValidationStackView.isHidden = true
+        publicKeyValidationView.isHidden = true
+        passwordValidationView.isHidden = true
     }
     
     private func resetSetButtonToDefault() {
@@ -89,8 +91,8 @@ class ProvideInflationDestinationViewController: UIViewController {
         setButton.isEnabled = true
     }
     
-    private func showValidationError(for stackView: UIStackView) {
-        stackView.isHidden = false
+    private func showValidationError(for view: UIView) {
+        view.isHidden = false
     }
     
     private func showFundingAlert() {
@@ -104,7 +106,7 @@ class ProvideInflationDestinationViewController: UIViewController {
                 break
             case .failure(error: let error):
                 if error == InflationDestinationErrorCodes.accountNotFound {
-                    self.showValidationError(for: self.publicKeyValidationStackView)
+                    self.showValidationError(for: self.publicKeyValidationView)
                     self.publicKeyValidationLabel.text = ValidationErrors.AddressNotFound.rawValue
                     self.resetSetButtonToDefault()
                     return
@@ -113,7 +115,7 @@ class ProvideInflationDestinationViewController: UIViewController {
                 print("Error: \(error)")
             }
             
-            self.dismiss(animated: true)
+            self.navigationController?.popViewController(animated: true)
         })
     }
     
@@ -130,12 +132,12 @@ class ProvideInflationDestinationViewController: UIViewController {
                     return true
                 }
                 
-                showValidationError(for: publicKeyValidationStackView)
+                showValidationError(for: publicKeyValidationView)
                 publicKeyValidationLabel.text = ValidationErrors.InvalidAddress.rawValue
                 return false
 
             } else {
-                showValidationError(for: publicKeyValidationStackView)
+                showValidationError(for: publicKeyValidationView)
                 publicKeyValidationLabel.text = PublicKeyValidationErrors.mandatory.rawValue
             }
             
@@ -150,10 +152,10 @@ class ProvideInflationDestinationViewController: UIViewController {
                     return true
                 }
                 
-                showValidationError(for: passwordValidationStackView)
+                showValidationError(for: passwordValidationView)
                 passwordValidationLabel.text = ValidationErrors.InvalidPassword.rawValue
             } else {
-                showValidationError(for: passwordValidationStackView)
+                showValidationError(for: passwordValidationView)
                 passwordValidationLabel.text = ValidationErrors.MandatoryPassword.rawValue
             }
             

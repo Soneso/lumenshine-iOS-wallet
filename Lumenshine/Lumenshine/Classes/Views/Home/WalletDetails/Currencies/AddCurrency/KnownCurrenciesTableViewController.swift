@@ -41,6 +41,8 @@ class KnownCurrenciesTableViewController: UIViewController, UITableViewDelegate,
     private var knownCurrenciesManager = KnownCurrenciesManager()
     private var currentExpandedRowIndexPath: IndexPath?
     
+    var wallet: FundedWallet!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: CellIdentifier, bundle: nil), forCellReuseIdentifier: CellIdentifier)
@@ -92,10 +94,10 @@ class KnownCurrenciesTableViewController: UIViewController, UITableViewDelegate,
             cell.assetCodeLabel.text = "\(currencyName) (\(currencyAssetCode))"
         }
 
-        cell.authorizationLabel.isHidden = knownCurrency.isAuthorized ?? false
+        cell.authorizationView.isHidden = knownCurrency.isAuthorized ?? true
         
         if let issuer = knownCurrency.issuerPublicKey {
-            cell.issuerPublicKeyLabel.text = "Issuer public key: \n\(issuer)"
+            cell.issuerPublicKeyLabel.text = "\(issuer)"
         }
         
         if knownCurrency.isExpanded {
@@ -107,7 +109,8 @@ class KnownCurrenciesTableViewController: UIViewController, UITableViewDelegate,
         if BiometricHelper.isBiometricAuthEnabled {
             cell.passwordTextField.isHidden = true
         }
-                
+        
+        cell.wallet = wallet
         cell.selectionStyle = .none
 
         return cell

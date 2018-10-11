@@ -14,10 +14,10 @@
             <connections>
                 <outlet property="passwordTextField" destination="qAw-DC-d5j" id="uyI-hn-BgQ"/>
                 <outlet property="passwordValidationLabel" destination="dEE-6M-1qn" id="3yX-Jp-GyC"/>
-                <outlet property="passwordValidationStackView" destination="QQn-PC-Uu9" id="niR-sp-QIB"/>
+                <outlet property="passwordValidationView" destination="VYD-mR-D7w" id="5Qp-LP-W34"/>
                 <outlet property="publicKeyTextField" destination="Z3N-v9-8E1" id="BE0-sX-Yqm"/>
                 <outlet property="publicKeyValidationLabel" destination="8Vp-qS-VOD" id="oCI-Ml-xuW"/>
-                <outlet property="publicKeyValidationStackView" destination="dlj-CH-JXx" id="AP3-0G-Pm1"/>
+                <outlet property="publicKeyValidationView" destination="RRX-c9-bTe" id="HVF-PU-bKw"/>
                 <outlet property="setButton" destination="gCT-rh-4mv" id="f2x-G8-Cox"/>
                 <outlet property="view" destination="KXl-cX-4EG" id="kjW-PH-wiG"/>
             </connections>
@@ -27,24 +27,31 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="scO-g7-9ue">
-                    <rect key="frame" x="0.0" y="20" width="375" height="144"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="scO-g7-9ue">
+                    <rect key="frame" x="0.0" y="20" width="375" height="163"/>
                     <subviews>
-                        <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dlj-CH-JXx">
-                            <rect key="frame" x="0.0" y="-4" width="156" height="0.0"/>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RRX-c9-bTe">
+                            <rect key="frame" x="0.0" y="-4" width="375" height="0.0"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public key not found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Vp-qS-VOD">
-                                    <rect key="frame" x="0.0" y="0.0" width="156" height="0.0"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Public key not found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Vp-qS-VOD" customClass="ErrorLabel" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="16" y="0.0" width="359" height="0.0"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                        </stackView>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="8Vp-qS-VOD" secondAttribute="trailing" id="2cW-5z-wGz"/>
+                                <constraint firstItem="8Vp-qS-VOD" firstAttribute="leading" secondItem="RRX-c9-bTe" secondAttribute="leading" constant="16" id="JFh-Gj-t3B"/>
+                                <constraint firstAttribute="bottom" secondItem="8Vp-qS-VOD" secondAttribute="bottom" id="eNB-1r-vFg"/>
+                                <constraint firstItem="8Vp-qS-VOD" firstAttribute="top" secondItem="RRX-c9-bTe" secondAttribute="top" id="pDu-li-FP2"/>
+                            </constraints>
+                        </view>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qCu-33-LO2">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
                             <subviews>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Public key of destination account" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z3N-v9-8E1">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Public key of destination account" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="Z3N-v9-8E1" customClass="InputTextField" customModule="Lumenshine" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -52,21 +59,28 @@
                                 </textField>
                             </subviews>
                         </stackView>
-                        <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QQn-PC-Uu9">
-                            <rect key="frame" x="0.0" y="34" width="190" height="0.0"/>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VYD-mR-D7w">
+                            <rect key="frame" x="0.0" y="34" width="375" height="0.0"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="passwordValidationLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEE-6M-1qn">
-                                    <rect key="frame" x="0.0" y="0.0" width="190" height="0.0"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="passwordValidationLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEE-6M-1qn" customClass="ErrorLabel" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="16" y="0.0" width="359" height="0.0"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                        </stackView>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="dEE-6M-1qn" firstAttribute="top" secondItem="VYD-mR-D7w" secondAttribute="top" id="O9E-xo-4GP"/>
+                                <constraint firstAttribute="trailing" secondItem="dEE-6M-1qn" secondAttribute="trailing" id="cvs-pE-pUn"/>
+                                <constraint firstAttribute="bottom" secondItem="dEE-6M-1qn" secondAttribute="bottom" id="qxt-D9-wqf"/>
+                                <constraint firstItem="dEE-6M-1qn" firstAttribute="leading" secondItem="VYD-mR-D7w" secondAttribute="leading" constant="16" id="zW9-7F-4bG"/>
+                            </constraints>
+                        </view>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="h9R-Mk-JKd">
                             <rect key="frame" x="0.0" y="38" width="375" height="30"/>
                             <subviews>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qAw-DC-d5j">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="qAw-DC-d5j" customClass="InputTextField" customModule="Lumenshine" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -74,38 +88,51 @@
                                 </textField>
                             </subviews>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4Og-ew-uxN">
-                            <rect key="frame" x="0.0" y="76" width="291" height="30"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="icl-yb-BIF">
+                            <rect key="frame" x="0.0" y="76" width="375" height="17"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password required to set inflation destination" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Msa-bM-uTE">
-                                    <rect key="frame" x="0.0" y="0.0" width="291" height="30"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Password required to set inflation destination" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Msa-bM-uTE" customClass="HintLabel" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="16" y="0.0" width="359" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                        </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ehf-su-k1O">
-                            <rect key="frame" x="0.0" y="114" width="375" height="30"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="Msa-bM-uTE" firstAttribute="leading" secondItem="icl-yb-BIF" secondAttribute="leading" constant="16" id="X8t-ip-qX7"/>
+                                <constraint firstItem="Msa-bM-uTE" firstAttribute="top" secondItem="icl-yb-BIF" secondAttribute="top" id="Xvh-1A-Pj9"/>
+                                <constraint firstAttribute="trailing" secondItem="Msa-bM-uTE" secondAttribute="trailing" id="nIa-yc-ify"/>
+                                <constraint firstAttribute="bottom" secondItem="Msa-bM-uTE" secondAttribute="bottom" id="v2I-zR-j11"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aX4-df-Vwa">
+                            <rect key="frame" x="0.0" y="101" width="375" height="62"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gCT-rh-4mv">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
-                                    <state key="normal" title="Set"/>
+                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gCT-rh-4mv" customClass="RoundedButton" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="172.5" y="16" width="30" height="30"/>
+                                    <state key="normal" title="SET"/>
                                     <connections>
                                         <action selector="setButtonAction:" destination="-1" eventType="touchUpInside" id="Z3v-eR-ehc"/>
                                     </connections>
                                 </button>
                             </subviews>
-                        </stackView>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="gCT-rh-4mv" firstAttribute="centerY" secondItem="aX4-df-Vwa" secondAttribute="centerY" id="bCh-DD-4q8"/>
+                                <constraint firstAttribute="bottom" secondItem="gCT-rh-4mv" secondAttribute="bottom" constant="16" id="dJq-pc-tnZ"/>
+                                <constraint firstItem="gCT-rh-4mv" firstAttribute="centerX" secondItem="aX4-df-Vwa" secondAttribute="centerX" id="gbA-pj-iUx"/>
+                                <constraint firstItem="gCT-rh-4mv" firstAttribute="top" secondItem="aX4-df-Vwa" secondAttribute="top" constant="16" id="quC-mB-EJy"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="qCu-33-LO2" secondAttribute="trailing" id="AJ6-iO-of9"/>
                         <constraint firstAttribute="trailing" secondItem="h9R-Mk-JKd" secondAttribute="trailing" id="IoB-Vb-hcg"/>
-                        <constraint firstItem="ehf-su-k1O" firstAttribute="centerX" secondItem="scO-g7-9ue" secondAttribute="centerX" id="vqs-pb-xZa"/>
                     </constraints>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="E1z-1L-3Pd" firstAttribute="trailing" secondItem="scO-g7-9ue" secondAttribute="trailing" id="Dgg-Nq-ZGx"/>
                 <constraint firstItem="scO-g7-9ue" firstAttribute="top" secondItem="E1z-1L-3Pd" secondAttribute="top" id="mnm-bA-9Iz"/>

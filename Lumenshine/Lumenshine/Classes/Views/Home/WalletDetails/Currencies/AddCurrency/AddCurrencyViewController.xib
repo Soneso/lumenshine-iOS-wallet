@@ -12,8 +12,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddCurrencyViewController" customModule="Lumenshine" customModuleProvider="target">
             <connections>
                 <outlet property="currencyContainer" destination="AdA-dw-QHQ" id="gD7-3f-WpT"/>
-                <outlet property="knownCurrenciesButton" destination="cna-b1-wls" id="mXL-pW-rW8"/>
-                <outlet property="provideCurrencyDataButton" destination="T6Y-Jk-064" id="lpW-KE-qdW"/>
                 <outlet property="view" destination="iN0-l3-epB" id="tBi-hM-ZHf"/>
             </connections>
         </placeholder>
@@ -22,65 +20,40 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Currency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mfb-Ai-Paw">
-                    <rect key="frame" x="10" y="30" width="113" height="20.5"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="6Rs-93-R9E">
-                    <rect key="frame" x="25" y="60" width="325" height="30"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cna-b1-wls">
-                            <rect key="frame" x="0.0" y="0.0" width="162.5" height="30"/>
-                            <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                            <state key="normal" title="Known currencies"/>
-                            <connections>
-                                <action selector="knownCurrenciesAction:" destination="-1" eventType="touchUpInside" id="Quq-mr-6zc"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6Y-Jk-064">
-                            <rect key="frame" x="162.5" y="0.0" width="162.5" height="30"/>
-                            <color key="backgroundColor" red="0.57919406890000003" green="0.1280144453" blue="0.57268613580000005" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                            <state key="normal" title="Provide Currency Data"/>
-                            <connections>
-                                <action selector="provideCurrencyDataAction:" destination="-1" eventType="touchUpInside" id="uvB-Nj-9WP"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="30" id="o7o-8u-0R4"/>
-                    </constraints>
-                </stackView>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gdS-Bu-wBL" customClass="TabLikeSegmentedControl" customModule="Lumenshine" customModuleProvider="target">
+                    <rect key="frame" x="32" y="36" width="311" height="29"/>
+                    <segments>
+                        <segment title="Known currencies"/>
+                        <segment title="Provide Currency Data"/>
+                    </segments>
+                    <connections>
+                        <action selector="segmentedControlValueChanged:" destination="-1" eventType="valueChanged" id="xdL-G4-hUa"/>
+                    </connections>
+                </segmentedControl>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QWT-8m-Gc4" userLabel="Separator">
-                    <rect key="frame" x="0.0" y="109" width="375" height="1"/>
-                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <rect key="frame" x="0.0" y="80" width="375" height="1"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="lPL-an-SZG"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AdA-dw-QHQ">
-                    <rect key="frame" x="10" y="120" width="355" height="537"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <rect key="frame" x="16" y="91" width="343" height="566"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="AdA-dw-QHQ" secondAttribute="trailing" constant="10" id="0MB-Nz-gsz"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="AdA-dw-QHQ" secondAttribute="trailing" constant="16" id="0MB-Nz-gsz"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="AdA-dw-QHQ" secondAttribute="bottom" constant="10" id="0OC-Be-TfA"/>
                 <constraint firstItem="AdA-dw-QHQ" firstAttribute="top" secondItem="QWT-8m-Gc4" secondAttribute="bottom" constant="10" id="2E6-Ae-gry"/>
-                <constraint firstItem="6Rs-93-R9E" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="3E9-1x-mMw"/>
-                <constraint firstItem="AdA-dw-QHQ" firstAttribute="top" secondItem="QWT-8m-Gc4" secondAttribute="bottom" constant="10" id="7da-yZ-eKx"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="6Rs-93-R9E" secondAttribute="trailing" constant="25" id="8Es-92-BnN"/>
-                <constraint firstItem="Mfb-Ai-Paw" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="MFl-0O-Ani"/>
-                <constraint firstItem="6Rs-93-R9E" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="40" id="PDx-re-VoM"/>
                 <constraint firstAttribute="trailing" secondItem="QWT-8m-Gc4" secondAttribute="trailing" id="YX6-kG-HSG"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="AdA-dw-QHQ" secondAttribute="trailing" constant="10" id="ZN2-pe-XxO"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="gdS-Bu-wBL" secondAttribute="trailing" constant="32" id="ZB6-LM-ZK9"/>
+                <constraint firstItem="gdS-Bu-wBL" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="32" id="e0c-O1-Ua5"/>
                 <constraint firstItem="QWT-8m-Gc4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="gIm-L0-oWn"/>
-                <constraint firstItem="AdA-dw-QHQ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="gbB-eL-2BS"/>
-                <constraint firstItem="AdA-dw-QHQ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="jpi-rf-i36"/>
-                <constraint firstItem="Mfb-Ai-Paw" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="kIv-I2-RF3"/>
-                <constraint firstItem="QWT-8m-Gc4" firstAttribute="bottom" secondItem="6Rs-93-R9E" secondAttribute="bottom" constant="20" id="tlR-3k-8FU"/>
+                <constraint firstItem="AdA-dw-QHQ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="gbB-eL-2BS"/>
+                <constraint firstItem="gdS-Bu-wBL" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="oou-zH-7ks"/>
+                <constraint firstItem="QWT-8m-Gc4" firstAttribute="top" secondItem="gdS-Bu-wBL" secondAttribute="bottom" constant="16" id="rW1-ow-pid"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="24.5" y="51.5"/>

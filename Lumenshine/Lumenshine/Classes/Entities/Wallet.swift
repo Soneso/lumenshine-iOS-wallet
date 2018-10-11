@@ -23,11 +23,15 @@ public class FundedWallet: Wallet {
     
     var balances: [AccountBalanceResponse]
     var subentryCount: UInt!
+    var masterKeyWeight: Int!
     
     init(walletResponse: WalletsResponse, accountResponse: AccountResponse) {
         self.balances = accountResponse.balances
         self.subentryCount = accountResponse.subentryCount
         self.walletResponse = walletResponse
+        self.masterKeyWeight = accountResponse.signers.first(where: { (signer) -> Bool in
+            return signer.publicKey == accountResponse.accountId
+        })?.weight
     }
     
     public var id: Int {
