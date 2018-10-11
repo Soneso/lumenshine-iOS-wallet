@@ -17,36 +17,23 @@ class WalletCardViewModel : CardViewModelType {
     fileprivate var funded: Bool = false
     fileprivate var needsRefresh: Bool = false
     
-    var wallet: Wallet?
+    var wallet: Wallet
     
     var receivePaymentAction: (() -> ())?
     var sendAction: (() -> ())?
     var reloadClosure: (() -> ())?
-    
-    init(user: User, card: Card? = nil) {
-        self.card = card
-        self.stellarSdk = StellarSDK()
-        
-        stellarSdk.accounts.getAccountDetails(accountId: user.publicKeyIndex0) { response in
-            switch response {
-            case .success(let accountDetails):
-                self.funded = accountDetails.balances.count > 0
-                self.showBalances(accountDetails.balances)
-            case .failure(let error):
-                print("Account details failure: \(error)")
-            }
-        }
-    }
+    var refreshClosure: (() -> ())?
     
     init(userManager: UserManager, walletResponse: WalletsResponse) {
         self.stellarSdk = StellarSDK()
         
-        self.wallet = EmptyWallet(walletResponse: walletResponse)
+        self.wallet = Wallet(walletResponse: walletResponse)
         
         userManager.walletDetailsFor(wallets: [walletResponse]) { result in
             switch result {
             case .success(let wallets):
-                self.wallet = wallets.first
+                guard let wallet = wallets.first else { return }
+                self.wallet = wallet
                 self.reloadClosure?()
             case .failure(let error):
                 print("Account details failure: \(error)")
@@ -63,12 +50,12 @@ class WalletCardViewModel : CardViewModelType {
     
     func refreshContent(userManager: UserManager) {
         if needsRefresh == false { return }
-        guard let wallet = wallet?.getWalletResponse() else { return }
         
-        userManager.walletDetailsFor(wallets: [wallet]) { [weak self] result in
+        userManager.walletDetails(wallet: wallet) { [weak self] result in
             switch result {
             case .success(let wallets):
-                self?.wallet = wallets.first
+                guard let wallet = wallets.first else { return }
+                self?.wallet = wallet
                 self?.reloadClosure?()
                 self?.needsRefresh = false
             case .failure(let error):
@@ -78,14 +65,7 @@ class WalletCardViewModel : CardViewModelType {
     }
     
     var type: CardType {
-        if (self.wallet as? EmptyWallet) != nil {
-            return .wallet(status: .none)
-        }
-        if funded {
-            return .wallet(status: .funded)
-        } else {
-            return .wallet(status: .unfunded)
-        }
+        return .wallet(status: wallet.status)
     }
     
     var imageURL: URL? {
@@ -105,7 +85,7 @@ class WalletCardViewModel : CardViewModelType {
     }
     
     var title: String? {
-        return wallet?.name
+        return wallet.name
     }
     
     var detail: String? {
@@ -113,7 +93,7 @@ class WalletCardViewModel : CardViewModelType {
     }
     
     var nativeBalance: CoinUnit? {
-        return wallet?.nativeBalance
+        return wallet.nativeBalance
     }
     
     var bottomTitles: [String]? {
@@ -147,7 +127,7 @@ class WalletCardViewModel : CardViewModelType {
     }
     
     @objc func didTapDetailsButton() {
-        navigationCoordinator?.performTransition(transition: .showCardDetails(wallet!))
+        navigationCoordinator?.performTransition(transition: .showCardDetails(wallet))
         needsRefresh = true
     }
     
@@ -156,10 +136,8 @@ class WalletCardViewModel : CardViewModelType {
     }
     
     @objc func didTapFundButton() {
-        if let tappedWallet = wallet {
-            navigationCoordinator?.performTransition(transition: .showScan(tappedWallet))
-            needsRefresh = true
-        }
+        navigationCoordinator?.performTransition(transition: .showScan(wallet))
+        needsRefresh = true
     }
 }
 

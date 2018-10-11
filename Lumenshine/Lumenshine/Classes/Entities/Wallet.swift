@@ -9,22 +9,32 @@
 import UIKit
 import stellarsdk
 
-public protocol Wallet {
-    var id: Int { get }
-    var name: String { get }
-    var nativeBalance: CoinUnit { get }
-    var isFunded: Bool { get }
-    var publicKey: String { get }
-    var federationAddress: String { get }
-    
-    func getWalletResponse() -> WalletsResponse
+public enum WalletStatus {
+    case none
+    case funded
+    case unfunded
 }
 
-public class EmptyWallet: Wallet {
-    private var walletResponse: WalletsResponse
+public class Wallet {
+    private let walletResponse: WalletsResponse
+    
+    var name: String
+    var federationAddress: String
+    var publicKey: String
+    
+    init(wallet: Wallet) {
+        self.walletResponse = wallet.walletResponse
+        self.name = wallet.name
+        self.federationAddress = wallet.federationAddress
+        self.publicKey = wallet.publicKey
+    }
     
     init(walletResponse: WalletsResponse) {
         self.walletResponse = walletResponse
+        
+        name = walletResponse.walletName
+        federationAddress = walletResponse.federationAddress
+        publicKey = walletResponse.publicKey
     }
     
     public var id: Int {
@@ -33,9 +43,9 @@ public class EmptyWallet: Wallet {
         }
     }
     
-    public var name: String {
+    public var status: WalletStatus {
         get {
-            return walletResponse.walletName
+            return .none
         }
     }
     
@@ -50,26 +60,9 @@ public class EmptyWallet: Wallet {
             return false
         }
     }
-    
-    public var publicKey: String {
-        get {
-            return walletResponse.publicKey
-        }
-    }
-    
-    public var federationAddress: String {
-        get {
-            return walletResponse.federationAddress
-        }
-    }
-    
-    public func getWalletResponse() -> WalletsResponse {
-        return walletResponse
-    }
 }
 
 public class FundedWallet: Wallet {
-    private var walletResponse: WalletsResponse
     
     var balances: [AccountBalanceResponse]
     var subentryCount: UInt!
@@ -78,25 +71,28 @@ public class FundedWallet: Wallet {
     init(walletResponse: WalletsResponse, accountResponse: AccountResponse) {
         self.balances = accountResponse.balances
         self.subentryCount = accountResponse.subentryCount
-        self.walletResponse = walletResponse
         self.masterKeyWeight = accountResponse.signers.first(where: { (signer) -> Bool in
             return signer.publicKey == accountResponse.accountId
         })?.weight
+        super.init(walletResponse: walletResponse)
     }
     
-    public var id: Int {
+    init(wallet: Wallet, accountResponse: AccountResponse) {
+        self.balances = accountResponse.balances
+        self.subentryCount = accountResponse.subentryCount
+        self.masterKeyWeight = accountResponse.signers.first(where: { (signer) -> Bool in
+            return signer.publicKey == accountResponse.accountId
+        })?.weight
+        super.init(wallet: wallet)
+    }
+    
+    override public var status: WalletStatus {
         get {
-            return walletResponse.id
+            return .funded
         }
     }
     
-    public var name: String {
-        get {
-            return walletResponse.walletName
-        }
-    }
-    
-    public var nativeBalance: CoinUnit {
+    override public var nativeBalance: CoinUnit {
         get {
             var amount: CoinUnit = 0
             for balance in balances {
@@ -115,26 +111,10 @@ public class FundedWallet: Wallet {
         }
     }
     
-    public var isFunded: Bool {
+    override public var isFunded: Bool {
         get {
             return nativeBalance != 0
         }
-    }
-    
-    public var publicKey: String {
-        get {
-            return walletResponse.publicKey
-        }
-    }
-    
-    public var federationAddress: String {
-        get {
-            return walletResponse.federationAddress
-        }
-    }
-    
-    public func getWalletResponse() -> WalletsResponse {
-        return walletResponse
     }
 }
 
@@ -229,49 +209,9 @@ extension FundedWallet {
 }
     
 public class UnfundedWallet: Wallet {
-    private var walletResponse: WalletsResponse
-    
-    init(walletResponse: WalletsResponse) {
-        self.walletResponse = walletResponse
-    }
-    
-    public var id: Int {
+    override public var status: WalletStatus {
         get {
-            return walletResponse.id
+            return .unfunded
         }
-    }
-    
-    public var name: String {
-        get {
-            return walletResponse.walletName
-        }
-    }
-    
-    public var nativeBalance: CoinUnit {
-        get {
-            return 0
-        }
-    }
-    
-    public var isFunded: Bool {
-        get {
-            return false
-        }
-    }
-    
-    public var publicKey: String {
-        get {
-            return walletResponse.publicKey
-        }
-    }
-    
-    public var federationAddress: String {
-        get {
-            return walletResponse.federationAddress
-        }
-    }
-    
-    public func getWalletResponse() -> WalletsResponse {
-        return walletResponse
     }
 }

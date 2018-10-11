@@ -10,12 +10,6 @@ import UIKit
 import Material
 import SnapKit
 
-enum WalletStatus {
-    case none
-    case funded
-    case unfunded
-}
-
 enum WalletAction {
     case receive
     case send
@@ -64,22 +58,21 @@ class WalletCard: CardView {
         }
     }
     
-    var status: WalletStatus! {
+    var status: WalletStatus {
         didSet {
             switch status {
-            case .none?:
+            case .none:
                 addEmptyWallet()
-            case .funded?:
+            case .funded:
                 addFundedView()
-            case .unfunded?:
+            case .unfunded:
                 addUnfundedView()
-            default:
-                print("error")
             }
         }
     }
     
     override init(frame: CGRect) {
+        status = .none
         super.init(frame: frame)
         prepare()
     }
@@ -96,15 +89,13 @@ class WalletCard: CardView {
         }
     }
     
-    
-    // TODO: viewModel data is not updated, refresh after update in details
     func reloadData() {
         if let viewModel = self.viewModel as? WalletCardViewModel {
             
             unfundedView?.removeFromSuperview()
             fundedView?.removeFromSuperview()
             
-            self.status = (viewModel.wallet?.isFunded ?? false) ? .funded : .unfunded
+            self.status = (viewModel.wallet.isFunded) ? .funded : .unfunded
             self.setup(viewModel: viewModel)
             
             self.reloadCellAction?()
@@ -121,16 +112,16 @@ class WalletCard: CardView {
             let availableLabelColor = Stylesheet.color(.black)
             
             fundedView.nameLabel.text = viewModel.title?.uppercased()
-            if let addres = viewModel.wallet?.federationAddress, !addres.isEmpty {
-                fundedView.stellarAddressLabel.text = addres
+            if !viewModel.wallet.federationAddress.isEmpty {
+                fundedView.stellarAddressLabel.text = viewModel.wallet.federationAddress
             }
             
             fundedView.balanceDescriptionLabel.text = (viewModel.wallet as! FundedWallet).balances.count > 1 ? R.string.localizable.balances().uppercased() : R.string.localizable.balance().uppercased()
             fundedView.balanceLabel.text = viewModel.nativeBalance?.stringWithUnit
             fundedView.availableLabel.text = viewModel.nativeBalance?.availableAmount(forWallet: viewModel.wallet).stringWithUnit
             
-            CardView.labelsForCustomAssets(wallet: viewModel.wallet!, font: balanceLabelFont!, color: balanceLabelColor).forEach({ label in fundedView.balanceStackView.addArrangedSubview(label) })
-            CardView.labelsForCustomAssets(wallet: viewModel.wallet!, font: availableLabelFont!, color: availableLabelColor).forEach({ label in fundedView.availableStackView.addArrangedSubview(label) })
+            CardView.labelsForCustomAssets(wallet: viewModel.wallet, font: balanceLabelFont!, color: balanceLabelColor).forEach({ label in fundedView.balanceStackView.addArrangedSubview(label) })
+            CardView.labelsForCustomAssets(wallet: viewModel.wallet, font: availableLabelFont!, color: availableLabelColor).forEach({ label in fundedView.availableStackView.addArrangedSubview(label) })
         }
         
         if let unfundedView = self.unfundedView {

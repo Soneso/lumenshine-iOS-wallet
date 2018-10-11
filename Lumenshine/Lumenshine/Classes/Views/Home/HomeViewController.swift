@@ -225,6 +225,8 @@ fileprivate extension HomeViewController {
         loadingView.tintColor = Stylesheet.color(.blue)
         tableView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
             // Add your logic here
+           self?.viewModel.reloadCards()
+            
             // Do not forget to call dg_stopLoading() at the end
             self?.tableView.dg_stopLoading()
             }, loadingView: loadingView)

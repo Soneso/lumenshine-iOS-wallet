@@ -102,7 +102,9 @@ class AccountDetailsViewController: UIViewController {
                 self.walletNameStackView.addArrangedSubview(self.walletNameView)
                 self.walletNameLabel.text = self.walletNameTextField.text
                 self.walletNameTextField.placeholder = self.walletNameTextField.text
-//                self.titleView.label.text = (self.walletNameTextField.text ?? "") + "\nDetails"
+                if let name = self.walletNameTextField.text {
+                    self.wallet.name = name
+                }
             case .failure(let error):
                 self.view.isUserInteractionEnabled = true
                 let alertView = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
@@ -143,6 +145,7 @@ class AccountDetailsViewController: UIViewController {
                 self.removeViewAddressLabel.text = stellarAddress
                 self.stellarAddressEditView.removeFromSuperview()
                 self.stellarAddressStackView.addArrangedSubview(self.stellarAddressRemoveView)
+                self.wallet.federationAddress = stellarAddress
             case .failure(let error):
                 self.stellarAddressEditErrorLabel.text = error.localizedDescription
             }
@@ -157,6 +160,7 @@ class AccountDetailsViewController: UIViewController {
             case .success:
                 self.stellarAddressRemoveView.removeFromSuperview()
                 self.stellarAddressStackView.addArrangedSubview(self.stellarAddressNotSetupView)
+            // TODO: remove stellar address from wallet
             case .failure(let error):
                 self.stellarAddressEditErrorLabel.text = error.localizedDescription
             }

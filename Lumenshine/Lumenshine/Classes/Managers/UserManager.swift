@@ -312,4 +312,22 @@ public class UserManager: NSObject {
             }
         }
     }
+    
+    func walletDetails(wallet: Wallet, completion: @escaping WalletsClosure) {
+        stellarSDK.accounts.getAccountDetails(accountId: wallet.publicKey) { (result) -> (Void) in
+            switch result {
+            case .success(let accountDetails):
+                let walletDetail = FundedWallet(wallet: wallet, accountResponse: accountDetails)
+                completion(.success(response: [walletDetail]))
+            case .failure(let error):
+                switch error {
+                case .notFound(_,_):
+                    let unfundedWallet = UnfundedWallet(wallet: wallet)
+                    completion(.success(response: [unfundedWallet]))
+                default:
+                    completion(.failure(error: .genericError(message: error.localizedDescription)))
+                }
+            }
+        }
+    }
 }
