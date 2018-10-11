@@ -68,6 +68,8 @@ class HomeViewController: UIViewController {
         prepareHeader()
         prepareView()
         prepareRefresh()
+        
+        viewModel.reloadCards()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,7 +77,6 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.shadowColor = Stylesheet.color(.clear)
         navigationController?.navigationBar.backgroundColor = Stylesheet.color(.clear)
         navigationController?.navigationBar.isTranslucent = true
-        viewModel.reloadCards()
     }
 }
 
@@ -93,7 +94,8 @@ extension HomeViewController: UITableViewDataSource {
 
         if let card = dataSourceItems[indexPath.row] as? WalletCard {
             card.reloadCellAction = {
-                self.tableView.reloadRows(at: [indexPath], with: .automatic)
+//                self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                self.tableView.reloadData()
             }
         }
         

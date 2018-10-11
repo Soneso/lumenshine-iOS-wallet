@@ -18,6 +18,50 @@ public protocol Wallet {
     var federationAddress: String { get }
 }
 
+public class EmptyWallet: Wallet {
+    private var walletResponse: WalletsResponse
+    
+    init(walletResponse: WalletsResponse) {
+        self.walletResponse = walletResponse
+    }
+    
+    public var id: Int {
+        get {
+            return walletResponse.id
+        }
+    }
+    
+    public var name: String {
+        get {
+            return walletResponse.walletName
+        }
+    }
+    
+    public var nativeBalance: CoinUnit {
+        get {
+            return 0
+        }
+    }
+    
+    public var isFunded: Bool {
+        get {
+            return false
+        }
+    }
+    
+    public var publicKey: String {
+        get {
+            return walletResponse.publicKey
+        }
+    }
+    
+    public var federationAddress: String {
+        get {
+            return walletResponse.federationAddress
+        }
+    }
+}
+
 public class FundedWallet: Wallet {
     private var walletResponse: WalletsResponse
     

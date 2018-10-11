@@ -20,6 +20,7 @@ class WalletCardViewModel : CardViewModelType {
     
     var receivePaymentAction: (() -> ())?
     var sendAction: (() -> ())?
+    var reloadClosure: (() -> ())?
     
     init(user: User, card: Card? = nil) {
         self.card = card
@@ -36,6 +37,22 @@ class WalletCardViewModel : CardViewModelType {
         }
     }
     
+    init(service: Services, walletResponse: WalletsResponse) {
+        self.stellarSdk = StellarSDK()
+        
+        self.wallet = EmptyWallet(walletResponse: walletResponse)
+        
+        service.userManager.walletDetailsFor(wallets: [walletResponse]) { result in
+            switch result {
+            case .success(let wallets):
+                self.wallet = wallets.first
+                self.reloadClosure?()
+            case .failure(let error):
+                print("Account details failure: \(error)")
+            }
+        }
+    }
+    
     init(wallet: Wallet) {
         self.stellarSdk = StellarSDK()
         
@@ -44,6 +61,9 @@ class WalletCardViewModel : CardViewModelType {
     }
     
     var type: CardType {
+        if (self.wallet as? EmptyWallet) != nil {
+            return .wallet(status: .none)
+        }
         if funded {
             return .wallet(status: .funded)
         } else {

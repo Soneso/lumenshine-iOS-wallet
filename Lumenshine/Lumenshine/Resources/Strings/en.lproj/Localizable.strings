@@ -756,3 +756,6 @@
 
 /*  */
 "stellar_address_error" = "You must enter address OR public key";
+
+/*  */
+"no_stellar_address" = "no stellar address";

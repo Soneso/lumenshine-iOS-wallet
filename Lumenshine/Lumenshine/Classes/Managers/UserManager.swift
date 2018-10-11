@@ -85,7 +85,8 @@ public class UserManager: NSObject {
         walletService.getWallets { (result) -> (Void) in
             switch result {
             case .success(let data):
-                self.walletDetailsFor(wallets: data) { (result) -> (Void) in
+                let sortedWallets = data.sorted(by: { $0.id < $1.id })
+                self.walletDetailsFor(wallets: sortedWallets) { (result) -> (Void) in
                     DispatchQueue.main.async {
                         switch result {
                         case .success(let wallets):
@@ -269,7 +270,7 @@ public class UserManager: NSObject {
         }
     }
     
-    private func walletDetailsFor(wallets: [WalletsResponse], completion: @escaping WalletsClosure) {
+    func walletDetailsFor(wallets: [WalletsResponse], completion: @escaping WalletsClosure) {
         guard wallets.count > 0 else {
             completion(.success(response: []))
             return

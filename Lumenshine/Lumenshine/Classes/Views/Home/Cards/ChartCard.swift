@@ -164,7 +164,7 @@ fileprivate extension ChartCard {
             make.top.equalTo(detailLabel.snp.top).offset(15)
             make.left.equalTo(5)
             make.right.equalTo(-5)
-            make.height.equalTo(170)
+            make.height.greaterThanOrEqualTo(150)
         }
     }
     

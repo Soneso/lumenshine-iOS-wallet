@@ -98,10 +98,20 @@ struct UserSecurityHelper {
             
             let publicKeyIndex188 = try stellarsdk.Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: 188).accountId
             
+//            print("Start public: \(Date())")
+//            var publicKeys = Array<String>()
+//            for index in 1...50 {
+//                let publicKeyIndex = try stellarsdk.Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: index).accountId
+//                publicKeys.append(publicKeyIndex)
+//            }
+//
+//            print("Finish public: \(Date())")
+            
             return DecryptedUserData(mnemonic: mnemonic,
                                      publicKeyIndex188: publicKeyIndex188,
                                      wordListMasterKey: wordListMasterKey,
-                                     mnemonicMasterKey: mnemonicMasterKey)
+                                     mnemonicMasterKey: mnemonicMasterKey,
+                                     publicKeys: nil)
             
         } catch {
             throw error

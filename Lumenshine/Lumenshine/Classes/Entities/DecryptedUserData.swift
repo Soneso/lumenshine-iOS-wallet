@@ -13,4 +13,5 @@ public struct DecryptedUserData {
     let publicKeyIndex188: String
     let wordListMasterKey: Array<UInt8>
     let mnemonicMasterKey: Array<UInt8>
+    let publicKeys: Array<String>?
 }

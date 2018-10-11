@@ -179,7 +179,11 @@ class LoginViewModel : LoginViewModelType {
         service.generateAccount(email: email, password: password, userData: nil) { [weak self] result in
             switch result {
             case .success( _, let userSecurity):
-                self?.user = User(id: "1", email: email, publicKeyIndex0: userSecurity.publicKeyIndex0, publicKeyIndex188: userSecurity.publicKeyIndex188)
+                self?.user = User(id: "1",
+                                  email: email,
+                                  publicKeyIndex0: userSecurity.publicKeyIndex0,
+                                  publicKeyIndex188: userSecurity.publicKeyIndex188,
+                                  publicKeys: nil)
                 self?.mnemonic = userSecurity.mnemonic24Word
                 self?.service.loginStep2(publicKeyIndex188: userSecurity.publicKeyIndex188) { [weak self] result in
                     switch result {
@@ -340,7 +344,8 @@ fileprivate extension LoginViewModel {
                     self.user = User(id: "1",
                                      email: self.email!,
                                      publicKeyIndex0: login1Response.publicKeyIndex0,
-                                     publicKeyIndex188: decryptedUserData.publicKeyIndex188)
+                                     publicKeyIndex188: decryptedUserData.publicKeyIndex188,
+                                     publicKeys: decryptedUserData.publicKeys)
                     self.mnemonic = decryptedUserData.mnemonic
                     self.service.loginStep2(publicKeyIndex188: decryptedUserData.publicKeyIndex188, response: response)
                 } else {
