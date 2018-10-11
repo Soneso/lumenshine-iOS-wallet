@@ -41,9 +41,7 @@ class WalletCard: CardView {
     var expanded = false
     
     fileprivate let textLabel = UILabel()
-    //fileprivate let contentStackView = UIStackView()
-    fileprivate let collapsedContainer = UIView()
-    fileprivate let expandedContainer = UIView()
+    
     fileprivate var paymentOperationsVCManager: PaymentOperationsVCManager!
     override var viewModel: CardViewModelType? {
         didSet {
@@ -143,29 +141,7 @@ class WalletCard: CardView {
 
 fileprivate extension WalletCard {
     func prepare() {
-        addContainers()
-    }
-    
-    func addContainers() {
-        collapsedContainer.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(collapsedContainer)
-        expandedContainer.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(expandedContainer)
         
-        collapsedContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        collapsedContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        collapsedContainer.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        
-        expandedContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        expandedContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        let topAnchor = expandedContainer.topAnchor.constraint(equalTo: collapsedContainer.bottomAnchor)
-        topAnchor.priority = .defaultHigh
-        topAnchor.isActive = true
-        expandedContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        
-        let heightConstraint = expandedContainer.heightAnchor.constraint(equalToConstant: 0)
-        heightConstraint.priority = .defaultLow
-        heightConstraint.isActive = true
     }
     
     func addEmptyWallet() {
@@ -175,7 +151,7 @@ fileprivate extension WalletCard {
         emptyView.frame = contentView.bounds
         emptyView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        collapsedContainer.addSubview(emptyView)
+        contentView.addSubview(emptyView)
         
         emptyView.nameLabel.font = R.font.encodeSansBold(size: 16)
         emptyView.nameLabel.textColor = Stylesheet.color(.lightBlack)
@@ -204,7 +180,7 @@ fileprivate extension WalletCard {
         fundedView.frame = contentView.bounds
         fundedView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        collapsedContainer.addSubview(fundedView)
+        contentView.addSubview(fundedView)
         
         fundedView.nameLabel.font = R.font.encodeSansBold(size: 16)
         fundedView.nameLabel.textColor = Stylesheet.color(.lightBlack)
@@ -263,7 +239,7 @@ fileprivate extension WalletCard {
         unfundedView.frame = contentView.bounds
         unfundedView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        collapsedContainer.addSubview(unfundedView)
+        contentView.addSubview(unfundedView)
         
         unfundedView.nameLabel.font = R.font.encodeSansBold(size: 16)
         unfundedView.nameLabel.textColor = Stylesheet.color(.lightBlack)

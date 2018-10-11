@@ -157,7 +157,8 @@ fileprivate extension HomeViewController {
         tableView.dataSource = self
         tableView.backgroundColor = Stylesheet.color(.clear)
         tableView.register(CardTableViewCell.self, forCellReuseIdentifier: HomeViewController.CellIdentifier)
-        tableView.estimatedRowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 180
         tableView.separatorStyle = .none
         
         prepareCopyright()
