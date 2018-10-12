@@ -45,6 +45,8 @@ extension ReLoginFingerView: ReLoginViewProtocol {
         passwordTextField.detail = error.errorDescription
         return true
     }
+    
+    func setTFACode(_ tfaCode: String) {}
 }
 
 extension ReLoginFingerView {

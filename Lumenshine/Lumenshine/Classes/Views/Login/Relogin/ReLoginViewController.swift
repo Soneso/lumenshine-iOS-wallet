@@ -11,6 +11,7 @@ import Material
 
 protocol ReLoginViewProtocol {
     func present(error: ServiceError) -> Bool
+    func setTFACode(_ tfaCode: String)
 }
 
 class ReLoginViewController: UIViewController {
@@ -42,6 +43,8 @@ class ReLoginViewController: UIViewController {
         
         prepareView()
         showHome(animated: false)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: .UIApplicationWillEnterForeground, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,6 +53,17 @@ class ReLoginViewController: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
+    }
+    
+    @objc
+    func appWillEnterForeground(notification: Notification) {
+        if UIPasteboard.general.hasStrings {
+            if let tfaCode = UIPasteboard.general.string,
+                tfaCode.count == 6,
+                CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: tfaCode)) {
+                contentView?.setTFACode(tfaCode)
+            }
+        }
     }
     
     func setupContentView(_ contentView: UIView, animated: Bool = true) {

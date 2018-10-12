@@ -96,6 +96,12 @@ extension ReLoginHomeView: ReLoginViewProtocol {
         }
         return true
     }
+    
+    func setTFACode(_ tfaCode: String) {
+        if tfaTextField.isHidden == false {
+            tfaTextField.pasteText(tfaCode)
+        }
+    }
 }
 
 extension ReLoginHomeView: UITextFieldDelegate {
