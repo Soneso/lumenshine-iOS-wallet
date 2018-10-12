@@ -114,6 +114,7 @@ fileprivate extension ReLoginFingerView {
     func prepareTextFields() {
         passwordTextField.delegate = self
         passwordTextField.isSecureTextEntry = true
+        passwordTextField.isVisibilityIconButtonEnabled = true
         passwordTextField.placeholder = R.string.localizable.password().uppercased()
         
         addSubview(passwordTextField)
