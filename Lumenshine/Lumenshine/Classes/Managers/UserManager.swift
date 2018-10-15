@@ -224,6 +224,14 @@ public class UserManager: NSObject {
         }
     }
     
+    func getAccountDetails(forAccountID account: String, completion: @escaping AccountResponseClosure) {
+        stellarSDK.accounts.getAccountDetails(accountId: account) { (response) -> (Void) in
+            DispatchQueue.main.async {
+                completion(response)
+            }
+        }
+    }
+    
     private func totalBalance(wallets: [WalletsResponse], completion: @escaping CoinClosure) {
         guard wallets.count > 0 else {
             completion(.success(response: 0))

@@ -329,6 +329,11 @@
 		C6AF0101215B9F33007C51E5 /* FederationAddressLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AF0100215B9F33007C51E5 /* FederationAddressLabel.swift */; };
 		C6B75F3321182E7500B45BEB /* TransactionResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6B75F3221182E7500B45BEB /* TransactionResultViewController.xib */; };
 		C6B75F35211837AF00B45BEB /* TransactionResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B75F34211837AF00B45BEB /* TransactionResultViewController.swift */; };
+		C6BDA2B2216F3ED80076439E /* CurrencyInfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BDA2B1216F3ED80076439E /* CurrencyInfoButton.swift */; };
+		C6BDA2BA216F66760076439E /* CurrencyFeeInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6BDA2B9216F66760076439E /* CurrencyFeeInfoViewController.xib */; };
+		C6BDA2BC216F66870076439E /* CurrencyFeeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BDA2BB216F66870076439E /* CurrencyFeeInfoViewController.swift */; };
+		C6BDA2BE216F66AD0076439E /* NativeCurrencyFeeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BDA2BD216F66AD0076439E /* NativeCurrencyFeeInfoViewController.swift */; };
+		C6BDA2C0216F66BF0076439E /* NativeCurrencyFeeInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6BDA2BF216F66BF0076439E /* NativeCurrencyFeeInfoViewController.xib */; };
 		C6BEBE6C2130138B000F7435 /* AddCurrencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6BEBE6B2130138B000F7435 /* AddCurrencyViewController.xib */; };
 		C6BEBE6E213013A1000F7435 /* AddCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BEBE6D213013A1000F7435 /* AddCurrencyViewController.swift */; };
 		C6BEBE7021302CAD000F7435 /* ProvideCurrencyDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6BEBE6F21302CAD000F7435 /* ProvideCurrencyDataViewController.xib */; };
@@ -713,6 +718,11 @@
 		C6AF0100215B9F33007C51E5 /* FederationAddressLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FederationAddressLabel.swift; sourceTree = "<group>"; };
 		C6B75F3221182E7500B45BEB /* TransactionResultViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionResultViewController.xib; sourceTree = "<group>"; };
 		C6B75F34211837AF00B45BEB /* TransactionResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionResultViewController.swift; sourceTree = "<group>"; };
+		C6BDA2B1216F3ED80076439E /* CurrencyInfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyInfoButton.swift; sourceTree = "<group>"; };
+		C6BDA2B9216F66760076439E /* CurrencyFeeInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencyFeeInfoViewController.xib; sourceTree = "<group>"; };
+		C6BDA2BB216F66870076439E /* CurrencyFeeInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyFeeInfoViewController.swift; sourceTree = "<group>"; };
+		C6BDA2BD216F66AD0076439E /* NativeCurrencyFeeInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeCurrencyFeeInfoViewController.swift; sourceTree = "<group>"; };
+		C6BDA2BF216F66BF0076439E /* NativeCurrencyFeeInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NativeCurrencyFeeInfoViewController.xib; sourceTree = "<group>"; };
 		C6BEBE6B2130138B000F7435 /* AddCurrencyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCurrencyViewController.xib; sourceTree = "<group>"; };
 		C6BEBE6D213013A1000F7435 /* AddCurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCurrencyViewController.swift; sourceTree = "<group>"; };
 		C6BEBE6F21302CAD000F7435 /* ProvideCurrencyDataViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProvideCurrencyDataViewController.xib; sourceTree = "<group>"; };
@@ -1073,6 +1083,7 @@
 		4376F4A4204DA07A00B179C3 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				C6BDA2B3216F66100076439E /* Info */,
 				C68884FD213E68FC0010615D /* SendPayment */,
 				C68884FB213E68B20010615D /* ReceivePayment */,
 				C68884FC213E68CD0010615D /* WalletDetails */,
@@ -1512,6 +1523,7 @@
 				C6A87D72216B4D4B00658D55 /* CellRegularLabel.swift */,
 				C6A87D74216B77EB00658D55 /* LeftCaptionTextField.swift */,
 				C6CEBCB1216CA66000710ED7 /* TabLikeSegmentedControl.swift */,
+				C6BDA2B1216F3ED80076439E /* CurrencyInfoButton.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
@@ -1641,6 +1653,25 @@
 				43E13E8720D97DA000409129 /* WalletCard.swift */,
 			);
 			path = Cards;
+			sourceTree = "<group>";
+		};
+		C6BDA2B3216F66100076439E /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				C6BDA2B4216F661B0076439E /* Fees */,
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
+		C6BDA2B4216F661B0076439E /* Fees */ = {
+			isa = PBXGroup;
+			children = (
+				C6BDA2B9216F66760076439E /* CurrencyFeeInfoViewController.xib */,
+				C6BDA2BB216F66870076439E /* CurrencyFeeInfoViewController.swift */,
+				C6BDA2BD216F66AD0076439E /* NativeCurrencyFeeInfoViewController.swift */,
+				C6BDA2BF216F66BF0076439E /* NativeCurrencyFeeInfoViewController.xib */,
+			);
+			path = Fees;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1831,8 +1862,10 @@
 				7420BBE7211819AB002FC4C7 /* AccountDetailsViewController.xib in Resources */,
 				43AE63282135A19300B7A904 /* EncodeSans-Thin.ttf in Resources */,
 				C61244C62113325A00DE1EA9 /* SendViewController.xib in Resources */,
+				C6BDA2C0216F66BF0076439E /* NativeCurrencyFeeInfoViewController.xib in Resources */,
 				43AE63352135A19300B7A904 /* EncodeSansSemiExpanded-Light.ttf in Resources */,
 				74C899582107621E009B13EA /* receive_payment.html in Resources */,
+				C6BDA2BA216F66760076439E /* CurrencyFeeInfoViewController.xib in Resources */,
 				43D7A77B205A892E00238E29 /* Localizable.strings in Resources */,
 				43AE635F2135A19300B7A904 /* EncodeSansSemiCondensed-ExtraLight.ttf in Resources */,
 				43AE63582135A19300B7A904 /* EncodeSansSemiCondensed-Bold.ttf in Resources */,
@@ -2207,12 +2240,14 @@
 				436B366E20512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift in Sources */,
 				439BB2FA21527ACE003427A5 /* ComposeTransitionController.swift in Sources */,
 				43EFF20620493B4900B1887C /* Stylesheet.swift in Sources */,
+				C6BDA2B2216F3ED80076439E /* CurrencyInfoButton.swift in Sources */,
 				436B367120512114009F7C21 /* FacebookBarBehaviorDefiner.swift in Sources */,
 				435130962121A2DD00168DD3 /* LostSecurityView.swift in Sources */,
 				436B367020512114009F7C21 /* FlexibleHeightBarBehaviorDefiner.swift in Sources */,
 				43D131E62056E3BD000483C4 /* CardViewModel.swift in Sources */,
 				43088DAE2087AD2A008AE1AB /* UserSecurity.swift in Sources */,
 				43DCF85F215CEF93004F827E /* HelpEntry.swift in Sources */,
+				C6BDA2BC216F66870076439E /* CurrencyFeeInfoViewController.swift in Sources */,
 				C69A5143211C16500066A4A0 /* TransactionResultPrintView.swift in Sources */,
 				43CF47EB2164CE1400B9E7E2 /* AddUpdateContactViewController.swift in Sources */,
 				C682C002213691A3007705DF /* BiometricHelper.swift in Sources */,
@@ -2242,6 +2277,7 @@
 				C691F68F211C571E00ECA2C4 /* TransactionHelper.swift in Sources */,
 				C675BC28215CF86200B663DB /* BaseButton.swift in Sources */,
 				4390D582205FBD6E00383BB2 /* Services.swift in Sources */,
+				C6BDA2BE216F66AD0076439E /* NativeCurrencyFeeInfoViewController.swift in Sources */,
 				43D15E48212AE53A00415CE5 /* ChartCardViewModel.swift in Sources */,
 				C69F551D2158BC920021EE5C /* AmountSegmentedControl.swift in Sources */,
 				43C54039215A66170064BA67 /* HelpCardViewModel.swift in Sources */,

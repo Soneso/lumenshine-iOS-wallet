@@ -120,6 +120,14 @@ public class FundedWallet: Wallet {
 
 extension FundedWallet {
     
+    public var nativeAsset: AccountBalanceResponse? {
+        get {
+            return balances.first(where: { (balance) -> Bool in
+                return balance.assetCode == nil
+            })
+        }
+    }
+    
     public var hasOnlyNative: Bool {
         get {
             for balance in balances {
@@ -195,6 +203,22 @@ extension FundedWallet {
         var alreadyFoundOnce: Bool = false
         
         for currency in balances {
+            if currency.assetCode == assetCode {
+                if !alreadyFoundOnce {
+                    alreadyFoundOnce = true
+                } else {
+                    return true
+                }
+            }
+        }
+        
+        return false
+    }
+    
+    func isCurrencyDuplicateAndValid(withAssetCode assetCode: String) -> Bool {
+        var alreadyFoundOnce: Bool = false
+        
+        for currency in balances {
             if currency.assetCode == assetCode && CoinUnit(currency.balance) != 0 {
                 if !alreadyFoundOnce {
                     alreadyFoundOnce = true
@@ -205,6 +229,7 @@ extension FundedWallet {
         }
         
         return false
+
     }
 }
     

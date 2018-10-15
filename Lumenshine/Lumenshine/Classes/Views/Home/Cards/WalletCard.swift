@@ -91,8 +91,7 @@ class WalletCard: CardView {
     }
     
     func reloadData(_ reload: Bool) {
-        if let viewModel = self.viewModel as? WalletCardViewModel {
-            
+        if let viewModel = self.viewModel as? WalletCardViewModel {           
             unfundedView?.removeFromSuperview()
             fundedView?.removeFromSuperview()
             
@@ -108,6 +107,7 @@ class WalletCard: CardView {
             
             let balanceLabelFont = R.font.encodeSansSemiBold(size: 15)
             let balanceLabelColor = Stylesheet.color(.white)
+
             let availableLabelFont = R.font.encodeSansRegular(size: 15)
             let availableLabelColor = Stylesheet.color(.black)
             
@@ -118,10 +118,13 @@ class WalletCard: CardView {
             
             fundedView.balanceDescriptionLabel.text = (viewModel.wallet as! FundedWallet).balances.count > 1 ? R.string.localizable.balances().uppercased() : R.string.localizable.balance().uppercased()
             fundedView.balanceLabel.text = viewModel.nativeBalance?.stringWithUnit
-            fundedView.availableLabel.text = viewModel.nativeBalance?.availableAmount(forWallet: viewModel.wallet).stringWithUnit
+            fundedView.availableLabel.text = viewModel.nativeBalance?.availableAmount(forWallet: viewModel.wallet, forCurrency: (viewModel.wallet as? FundedWallet)?.nativeAsset).stringWithUnit
+            fundedView.currencyInfoButton.currency = (viewModel.wallet as? FundedWallet)?.nativeAsset
+            fundedView.currencyInfoButton.wallet = (viewModel.wallet as? FundedWallet)
+            fundedView.currencyInfoButton.isHidden = viewModel.nativeBalance == viewModel.nativeBalance?.availableAmount(forWallet: viewModel.wallet, forCurrency: (viewModel.wallet as? FundedWallet)?.nativeAsset)
             
-            CardView.labelsForCustomAssets(wallet: viewModel.wallet, font: balanceLabelFont!, color: balanceLabelColor).forEach({ label in fundedView.balanceStackView.addArrangedSubview(label) })
-            CardView.labelsForCustomAssets(wallet: viewModel.wallet, font: availableLabelFont!, color: availableLabelColor).forEach({ label in fundedView.availableStackView.addArrangedSubview(label) })
+            CardView.labelsForCustomAssets(wallet: viewModel.wallet, font: balanceLabelFont!, color: balanceLabelColor).forEach({ view in fundedView.balanceStackView.addArrangedSubview(view) })
+            CardView.labelsForCustomAssets(wallet: viewModel.wallet, font: availableLabelFont!, color: availableLabelColor, forAvailable: true).forEach({ view in fundedView.availableStackView.addArrangedSubview(view) })
         }
         
         if let unfundedView = self.unfundedView {
@@ -205,9 +208,6 @@ fileprivate extension WalletCard {
         
         fundedView.availableLabel.font = availableLabelFont
         fundedView.availableLabel.textColor = availableLabelColor
-        
-        fundedView.helpButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapHelpButton), for: .touchUpInside)
-        fundedView.helpButton.tintColor = Stylesheet.color(.gray)
         
         fundedView.sendButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapSendButton), for: .touchUpInside)
         fundedView.sendButton.titleLabel?.font = buttonFont
