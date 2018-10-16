@@ -73,6 +73,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var sendAllValue: UILabel!
     @IBOutlet weak var seedErrorLabel: UILabel!
     @IBOutlet weak var otherCurrencyErrorLabel: UILabel!
+    @IBOutlet weak var transactionFeeLabel: UILabel!
     
     @IBOutlet weak var memoTypeTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
@@ -357,6 +358,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         addressTextField.addTarget(self, action: #selector(addressChanged), for: .editingChanged)
         view.backgroundColor = Stylesheet.color(.veryLightGray)
         sendButton.backgroundColor = Stylesheet.color(.blue)
+        transactionFeeLabel.text = "Stellar transaction fee: \(String(format: "%.5f", CoinUnit.Constants.transactionFee)) XLM"
         checkIfAccountCanSign()
         
         if !BiometricHelper.isBiometricAuthEnabled {
