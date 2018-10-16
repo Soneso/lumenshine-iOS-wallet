@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit.UIImage
+import stellarsdk
 
 class ChartCardViewModel: CardViewModelType {
     
@@ -18,14 +19,16 @@ class ChartCardViewModel: CardViewModelType {
     fileprivate var card: Card?
     fileprivate let service: ChartsService
     private(set) var exchangeRates: ChartExchangeRatesResponse?
+    fileprivate let balance: AccountBalanceResponse?
     fileprivate let periodValues: [Int]
     fileprivate let periodLabels: [String]
     private(set) var selectedPeriodIndex: Int
     
     var reloadClosure: ((ChartExchangeRatesResponse) -> ())?
     
-    init(service: ChartsService) {
+    init(service: ChartsService, balance: AccountBalanceResponse? = nil) {
         self.service = service
+        self.balance = balance
         self.periodValues = [1, 12, 24, 3*24, 7*24, 2*365, 6*365, 12*365, 24*365]
         self.periodLabels = [
             "1 \(R.string.localizable.hour())",
@@ -83,6 +86,9 @@ class ChartCardViewModel: CardViewModelType {
     }
     
     var title: String? {
+        if let assetCode = balance?.assetCode {
+            return R.string.localizable.chart_card_title2(assetCode)
+        }
         return R.string.localizable.chart_card_title()
     }
     
@@ -124,15 +130,17 @@ class ChartCardViewModel: CardViewModelType {
         selectedPeriodIndex = index
         UserDefaults.standard.setValue(index, forKey:ChartCardViewModel.selectedPeriodKey)
         
-        service.getChartExchangeRates(assetCode: "XLM", issuerPublicKey: "", destinationCurrency: "USD", timeRange: Int32(periodValues[selectedPeriodIndex])) { [weak self] result in
+        let assetCode = balance?.assetCode ?? "XLM"
+        
+        service.getChartExchangeRates(assetCode: assetCode, issuerPublicKey: balance?.assetIssuer, destinationCurrency: "USD", timeRange: Int32(periodValues[selectedPeriodIndex])) { [weak self] result in
             switch result {
             case .success(let exchangeRates):
                 self?.exchangeRates = exchangeRates
                 if let reload = self?.reloadClosure {
                     reload(exchangeRates)
                 }
-            case .failure(_):
-                print("Failed to get exchange rates")
+            case .failure(let error):
+                print("Failed to get exchange rates: \(error)")
             }
         }
     }

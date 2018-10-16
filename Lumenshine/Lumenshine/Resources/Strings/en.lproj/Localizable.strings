@@ -182,6 +182,12 @@
 "chart_card_title" = "Stellar Lumens (XLM)";
 
 /*  */
+"chart_card_title2" = "Stellar Currency (%@)";
+
+/*  */
+"chart_currency" = "Chart destination currency";
+
+/*  */
 "welcome" = "Welcome";
 
 /*  */

@@ -104,13 +104,15 @@ class SettingsViewModel: SettingsViewModelType {
             navigationCoordinator?.performTransition(transition: .showChange2faSecret)
         case .faceRecognition, .fingerprint:
             break
-        case .avatar:
+        case .chartCurrency:
             break
         case .backupMnemonic:
             navigationCoordinator?.performTransition(transition: .showBackupMnemonic)
         case .notifications:
             break
         case .personalData:
+            break
+        default:
             break
         }
     }
