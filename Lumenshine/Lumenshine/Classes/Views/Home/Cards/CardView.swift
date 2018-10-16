@@ -72,23 +72,88 @@ class CardView: UIView {
         viewModel?.barButtonSelected(at: sender.tag)
     }
     
-    class func labelsForCustomAssets(wallet: Wallet, font: UIFont, color: UIColor ) -> [UILabel] {
-        var labels = [UILabel]()
+    class private func setupConstraints(forLabel label: UILabel, forButton button: CurrencyInfoButton) {
+        label.snp.makeConstraints { (make) in
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.left.equalToSuperview()
+        }
         
+        button.snp.makeConstraints { (make) in
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
+        label.rightAnchor.constraint(equalTo: button.leftAnchor, constant: -4).isActive = true
+    }
+    
+    class private func setupCurrencyInfoButton(forCurrency currency: AccountBalanceResponse, wallet: FundedWallet) -> CurrencyInfoButton {
+        let currencyInfoButton = CurrencyInfoButton()
+        currencyInfoButton.currency = currency
+        currencyInfoButton.wallet = wallet
+        
+        return currencyInfoButton
+    }
+    
+    class private func setupLabel(font: UIFont, color: UIColor, text: String) -> UILabel {
+        let label = UILabel()
+        label.font = font
+        label.textColor = color
+        label.text = text
+        
+        return label
+    }
+    
+    class private func getLabelAndInfoButtonView(font: UIFont, color: UIColor, text: String, currency: AccountBalanceResponse, wallet: FundedWallet) -> UIView {
+        let view = UIView()
+        let label = setupLabel(font: font, color: color, text: text)
+        let infoButton = setupCurrencyInfoButton(forCurrency: currency, wallet: wallet)
+        
+        view.addSubview(label)
+        view.addSubview(infoButton)
+        
+        setupConstraints(forLabel: label, forButton: infoButton)
+        
+        return view
+    }
+    
+    class private func getLabelText(forWallet wallet: FundedWallet,
+                                    forCurrency currency: AccountBalanceResponse,
+                                    forAvailable: Bool?,
+                                    balance: CoinUnit,
+                                    availableBalance: CoinUnit,
+                                    assetCode: String) -> String {
+        if wallet.isCurrencyDuplicate(withAssetCode: assetCode), let issuer = currency.assetIssuer {
+            return String(format: "%.2f \(assetCode) (\(issuer.prefix(4))...)", forAvailable == true ? availableBalance : balance)
+        } else {
+            return String(format: "%.2f \(assetCode)", forAvailable == true ? availableBalance : balance)
+        }
+    }
+    
+    class func labelsForCustomAssets(wallet: Wallet, font: UIFont, color: UIColor, forAvailable: Bool? = false) -> [UIView] {
+        var views = [UIView]()
         if let wallet = wallet as? FundedWallet {
-            for balance in wallet.balances {
-                if balance.assetType != AssetTypeAsString.NATIVE {
-                    let text = String(format: "%.2f \(balance.assetCode ?? balance.assetType)", CoinUnit(balance.balance)!)
-                    let label = UILabel()
-                    label.font = font
-                    label.textColor = color
-                    label.text = text
-                    labels.append(label)
+            for currency in wallet.balances {
+                if currency.assetType != AssetTypeAsString.NATIVE {
+                    if let balance = CoinUnit(currency.balance), let assetCode = currency.assetCode {
+                        let availableBalance = balance.availableAmount(forWallet: wallet, forCurrency: currency)
+                        let labelText = getLabelText(forWallet: wallet,
+                                                     forCurrency: currency,
+                                                     forAvailable: forAvailable,
+                                                     balance: balance,
+                                                     availableBalance: availableBalance,
+                                                     assetCode: assetCode)
+                        if forAvailable == true && balance != availableBalance {
+                            views.append(getLabelAndInfoButtonView(font: font, color: color, text: labelText, currency: currency, wallet: wallet))
+                        } else {
+                            views.append(setupLabel(font: font, color: color, text: labelText))
+                        }
+                    }
                 }
             }
         }
         
-        return labels
+        return views
     }
 }
 

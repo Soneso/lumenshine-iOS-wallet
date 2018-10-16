@@ -868,61 +868,61 @@ struct R: Rswift.Validatable {
     }
     
     static func validate() throws {
-      if R.font.encodeSansSemiCondensedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-ExtraLight' could not be loaded, is 'EncodeSansSemiCondensed-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.latoBoldItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-BoldItalic' could not be loaded, is 'Lato-BoldItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-ExtraBold' could not be loaded, is 'EncodeSansCondensed-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExpandedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Regular' could not be loaded, is 'EncodeSansExpanded-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Regular' could not be loaded, is 'EncodeSans-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiExpandedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-ExtraLight' could not be loaded, is 'EncodeSansSemiExpanded-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Light' could not be loaded, is 'EncodeSansCondensed-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Bold' could not be loaded, is 'EncodeSansSemiCondensed-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.latoRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Regular' could not be loaded, is 'Lato-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Thin' could not be loaded, is 'EncodeSans-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Thin' could not be loaded, is 'EncodeSansSemiCondensed-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExpandedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-SemiBold' could not be loaded, is 'EncodeSansExpanded-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Medium' could not be loaded, is 'EncodeSansSemiCondensed-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-SemiBold' could not be loaded, is 'EncodeSans-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiExpandedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Regular' could not be loaded, is 'EncodeSansSemiExpanded-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Black' could not be loaded, is 'EncodeSans-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-ExtraLight' could not be loaded, is 'EncodeSans-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiExpandedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Medium' could not be loaded, is 'EncodeSansSemiExpanded-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.latoBlackItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-BlackItalic' could not be loaded, is 'Lato-BlackItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Bold' could not be loaded, is 'EncodeSans-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.latoItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Italic' could not be loaded, is 'Lato-Italic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExpandedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Bold' could not be loaded, is 'EncodeSansExpanded-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExpandedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-ExtraLight' could not be loaded, is 'EncodeSansExpanded-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiExpandedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Thin' could not be loaded, is 'EncodeSansSemiExpanded-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExpandedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Light' could not be loaded, is 'EncodeSansExpanded-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-SemiBold' could not be loaded, is 'EncodeSansSemiCondensed-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.latoLightItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-LightItalic' could not be loaded, is 'Lato-LightItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Regular' could not be loaded, is 'EncodeSansSemiCondensed-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiExpandedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-SemiBold' could not be loaded, is 'EncodeSansSemiExpanded-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExpandedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Thin' could not be loaded, is 'EncodeSansExpanded-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-SemiBold' could not be loaded, is 'EncodeSansCondensed-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExpandedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Black' could not be loaded, is 'EncodeSansExpanded-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Bold' could not be loaded, is 'EncodeSansCondensed-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Regular' could not be loaded, is 'EncodeSansCondensed-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
       if R.font.encodeSansExpandedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Medium' could not be loaded, is 'EncodeSansExpanded-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.latoHairlineItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-HairlineItalic' could not be loaded, is 'Lato-HairlineItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.latoBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Black' could not be loaded, is 'Lato-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-SemiBold' could not be loaded, is 'EncodeSansSemiExpanded-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Light' could not be loaded, is 'EncodeSansExpanded-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoLightItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-LightItalic' could not be loaded, is 'Lato-LightItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
       if R.font.encodeSansLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Light' could not be loaded, is 'EncodeSans-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
       if R.font.encodeSansCondensedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-ExtraLight' could not be loaded, is 'EncodeSansCondensed-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Medium' could not be loaded, is 'EncodeSans-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExpandedExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-ExtraBold' could not be loaded, is 'EncodeSansExpanded-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
       if R.font.encodeSansSemiExpandedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Black' could not be loaded, is 'EncodeSansSemiExpanded-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-SemiBold' could not be loaded, is 'EncodeSans-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoHairlineItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-HairlineItalic' could not be loaded, is 'Lato-HairlineItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
       if R.font.latoBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Bold' could not be loaded, is 'Lato-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Medium' could not be loaded, is 'EncodeSansCondensed-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Black' could not be loaded, is 'EncodeSansSemiCondensed-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.latoHairline(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Hairline' could not be loaded, is 'Lato-Hairline.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Black' could not be loaded, is 'EncodeSansCondensed-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-ExtraLight' could not be loaded, is 'EncodeSansSemiCondensed-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoBoldItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-BoldItalic' could not be loaded, is 'Lato-BoldItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoBlackItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-BlackItalic' could not be loaded, is 'Lato-BlackItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
       if R.font.encodeSansSemiExpandedExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-ExtraBold' could not be loaded, is 'EncodeSansSemiExpanded-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.latoLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Light' could not be loaded, is 'Lato-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
       if R.font.encodeSansSemiExpandedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Bold' could not be loaded, is 'EncodeSansSemiExpanded-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Light' could not be loaded, is 'EncodeSansSemiCondensed-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Regular' could not be loaded, is 'EncodeSansCondensed-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Thin' could not be loaded, is 'EncodeSansCondensed-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-ExtraBold' could not be loaded, is 'EncodeSansSemiCondensed-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiExpandedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Light' could not be loaded, is 'EncodeSansSemiExpanded-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
       if R.font.encodeSansExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-ExtraBold' could not be loaded, is 'EncodeSans-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Regular' could not be loaded, is 'EncodeSansSemiCondensed-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Bold' could not be loaded, is 'EncodeSansCondensed-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Thin' could not be loaded, is 'EncodeSansExpanded-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Bold' could not be loaded, is 'EncodeSans-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Medium' could not be loaded, is 'EncodeSansSemiCondensed-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Regular' could not be loaded, is 'EncodeSansExpanded-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-ExtraBold' could not be loaded, is 'EncodeSansExpanded-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Thin' could not be loaded, is 'EncodeSansSemiCondensed-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Black' could not be loaded, is 'Lato-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Italic' could not be loaded, is 'Lato-Italic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Regular' could not be loaded, is 'EncodeSans-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-ExtraLight' could not be loaded, is 'EncodeSansSemiExpanded-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Thin' could not be loaded, is 'EncodeSansSemiExpanded-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Bold' could not be loaded, is 'EncodeSansSemiCondensed-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Thin' could not be loaded, is 'EncodeSans-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Light' could not be loaded, is 'EncodeSansSemiExpanded-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-ExtraLight' could not be loaded, is 'EncodeSansExpanded-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-SemiBold' could not be loaded, is 'EncodeSansExpanded-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Black' could not be loaded, is 'EncodeSansCondensed-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Light' could not be loaded, is 'Lato-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Regular' could not be loaded, is 'EncodeSansSemiExpanded-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Thin' could not be loaded, is 'EncodeSansCondensed-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Light' could not be loaded, is 'EncodeSansCondensed-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Medium' could not be loaded, is 'EncodeSans-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-ExtraLight' could not be loaded, is 'EncodeSans-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Black' could not be loaded, is 'EncodeSansExpanded-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Medium' could not be loaded, is 'EncodeSansCondensed-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Medium' could not be loaded, is 'EncodeSansSemiExpanded-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-SemiBold' could not be loaded, is 'EncodeSansCondensed-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Black' could not be loaded, is 'EncodeSansSemiCondensed-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-SemiBold' could not be loaded, is 'EncodeSansSemiCondensed-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoHairline(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Hairline' could not be loaded, is 'Lato-Hairline.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-ExtraBold' could not be loaded, is 'EncodeSansCondensed-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Regular' could not be loaded, is 'Lato-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Bold' could not be loaded, is 'EncodeSansExpanded-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-ExtraBold' could not be loaded, is 'EncodeSansSemiCondensed-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Light' could not be loaded, is 'EncodeSansSemiCondensed-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Black' could not be loaded, is 'EncodeSans-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
     }
     
     fileprivate init() {}
@@ -1305,7 +1305,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.nib` struct is generated, and contains static references to 34 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 36 nibs.
   struct nib {
     /// Nib `AccountCurrenciesViewController`.
     static let accountCurrenciesViewController = _R.nib._AccountCurrenciesViewController()
@@ -1313,6 +1313,8 @@ struct R: Rswift.Validatable {
     static let accountDetailsViewController = _R.nib._AccountDetailsViewController()
     /// Nib `AddCurrencyViewController`.
     static let addCurrencyViewController = _R.nib._AddCurrencyViewController()
+    /// Nib `CurrencyFeeInfoViewController`.
+    static let currencyFeeInfoViewController = _R.nib._CurrencyFeeInfoViewController()
     /// Nib `CurrencyView`.
     static let currencyView = _R.nib._CurrencyView()
     /// Nib `FundTestNetWalletViewController`.
@@ -1339,6 +1341,8 @@ struct R: Rswift.Validatable {
     static let loadTransactionsHistoryViewController = _R.nib._LoadTransactionsHistoryViewController()
     /// Nib `LockedView`.
     static let lockedView = _R.nib._LockedView()
+    /// Nib `NativeCurrencyFeeInfoViewController`.
+    static let nativeCurrencyFeeInfoViewController = _R.nib._NativeCurrencyFeeInfoViewController()
     /// Nib `NoMultiSigSupportViewController`.
     static let noMultiSigSupportViewController = _R.nib._NoMultiSigSupportViewController()
     /// Nib `ProvideCurrencyDataViewController`.
@@ -1392,6 +1396,12 @@ struct R: Rswift.Validatable {
     @available(*, deprecated, message: "Use UINib(resource: R.nib.addCurrencyViewController) instead")
     static func addCurrencyViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.addCurrencyViewController)
+    }
+    
+    /// `UINib(name: "CurrencyFeeInfoViewController", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.currencyFeeInfoViewController) instead")
+    static func currencyFeeInfoViewController(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.currencyFeeInfoViewController)
     }
     
     /// `UINib(name: "CurrencyView", in: bundle)`
@@ -1470,6 +1480,12 @@ struct R: Rswift.Validatable {
     @available(*, deprecated, message: "Use UINib(resource: R.nib.lockedView) instead")
     static func lockedView(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.lockedView)
+    }
+    
+    /// `UINib(name: "NativeCurrencyFeeInfoViewController", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.nativeCurrencyFeeInfoViewController) instead")
+    static func nativeCurrencyFeeInfoViewController(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.nativeCurrencyFeeInfoViewController)
     }
     
     /// `UINib(name: "NoMultiSigSupportViewController", in: bundle)`
@@ -1592,6 +1608,10 @@ struct R: Rswift.Validatable {
       return R.nib.addCurrencyViewController.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
     }
     
+    static func currencyFeeInfoViewController(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.currencyFeeInfoViewController.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
     static func currencyView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> CurrencyView? {
       return R.nib.currencyView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? CurrencyView
     }
@@ -1642,6 +1662,10 @@ struct R: Rswift.Validatable {
     
     static func lockedView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
       return R.nib.lockedView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func nativeCurrencyFeeInfoViewController(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.nativeCurrencyFeeInfoViewController.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
     }
     
     static func noMultiSigSupportViewController(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
@@ -4586,17 +4610,16 @@ struct _R: Rswift.Validatable {
   
   struct nib: Rswift.Validatable {
     static func validate() throws {
-      try _HomeUnfundedWalletHeaderView.validate()
+      try _FundWalletViewController.validate()
+      try _AccountDetailsViewController.validate()
       try _UnfundedWalletCardContentView.validate()
       try _FundTestNetWalletViewController.validate()
-      try _LockedView.validate()
-      try _FundWalletViewController.validate()
-      try _WalletCardContentView.validate()
-      try _ReceivePaymentCardViewController.validate()
+      try _HomeUnfundedWalletHeaderView.validate()
       try _WalletCardInfoViewController.validate()
-      try _AccountDetailsViewController.validate()
       try _WalletDetailsViewController.validate()
+      try _ReceivePaymentCardViewController.validate()
       try _HomeFundedWalletHeaderView.validate()
+      try _LockedView.validate()
     }
     
     struct _AccountCurrenciesViewController: Rswift.NibResourceType {
@@ -4630,6 +4653,17 @@ struct _R: Rswift.Validatable {
     struct _AddCurrencyViewController: Rswift.NibResourceType {
       let bundle = R.hostingBundle
       let name = "AddCurrencyViewController"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _CurrencyFeeInfoViewController: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "CurrencyFeeInfoViewController"
       
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
@@ -4693,8 +4727,8 @@ struct _R: Rswift.Validatable {
       }
       
       static func validate() throws {
-        if UIKit.UIImage(named: "more", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'more' is used in nib 'HomeFundedWalletHeaderView', but couldn't be loaded.") }
         if UIKit.UIImage(named: "receive", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'receive' is used in nib 'HomeFundedWalletHeaderView', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "more", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'more' is used in nib 'HomeFundedWalletHeaderView', but couldn't be loaded.") }
         if UIKit.UIImage(named: "send", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'send' is used in nib 'HomeFundedWalletHeaderView', but couldn't be loaded.") }
         if UIKit.UIImage(named: "logo", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'logo' is used in nib 'HomeFundedWalletHeaderView', but couldn't be loaded.") }
         if #available(iOS 11.0, *) {
@@ -4815,6 +4849,17 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
     
+    struct _NativeCurrencyFeeInfoViewController: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "NativeCurrencyFeeInfoViewController"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      }
+      
+      fileprivate init() {}
+    }
+    
     struct _NoMultiSigSupportViewController: Rswift.NibResourceType {
       let bundle = R.hostingBundle
       let name = "NoMultiSigSupportViewController"
@@ -4857,9 +4902,9 @@ struct _R: Rswift.Validatable {
       }
       
       static func validate() throws {
-        if UIKit.UIImage(named: "question", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'question' is used in nib 'ReceivePaymentCardViewController', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "copy", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'copy' is used in nib 'ReceivePaymentCardViewController', but couldn't be loaded.") }
         if UIKit.UIImage(named: "qr_placeholder", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'qr_placeholder' is used in nib 'ReceivePaymentCardViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "copy", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'copy' is used in nib 'ReceivePaymentCardViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "question", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'question' is used in nib 'ReceivePaymentCardViewController', but couldn't be loaded.") }
         if #available(iOS 11.0, *) {
         }
       }
@@ -4994,18 +5039,12 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    struct _WalletCardContentView: Rswift.NibResourceType, Rswift.Validatable {
+    struct _WalletCardContentView: Rswift.NibResourceType {
       let bundle = R.hostingBundle
       let name = "WalletCardContentView"
       
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> WalletCardContentView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? WalletCardContentView
-      }
-      
-      static func validate() throws {
-        if UIKit.UIImage(named: "question", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'question' is used in nib 'WalletCardContentView', but couldn't be loaded.") }
-        if #available(iOS 11.0, *) {
-        }
       }
       
       fileprivate init() {}
@@ -5020,8 +5059,8 @@ struct _R: Rswift.Validatable {
       }
       
       static func validate() throws {
-        if UIKit.UIImage(named: "question", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'question' is used in nib 'WalletCardInfoViewController', but couldn't be loaded.") }
         if UIKit.UIImage(named: "close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'close' is used in nib 'WalletCardInfoViewController', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "question", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'question' is used in nib 'WalletCardInfoViewController', but couldn't be loaded.") }
         if #available(iOS 11.0, *) {
         }
       }

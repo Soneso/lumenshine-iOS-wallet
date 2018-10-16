@@ -130,12 +130,17 @@ class WalletDetailsViewController: UIViewController {
         var availableValues = String()
         
         balanceValues.append("\(wallet.nativeBalance) \(NativeCurrencyNames.xlm.rawValue)\n")
-        availableValues.append("\(wallet.nativeBalance.availableAmount(forWallet: wallet)) \(NativeCurrencyNames.xlm.rawValue)\n")
+        availableValues.append("\(wallet.nativeBalance.availableAmount(forWallet: wallet, forCurrency: wallet.nativeAsset)) \(NativeCurrencyNames.xlm.rawValue)\n")
         
-        for currency in wallet.uniqueAssetCodeBalances {
-            if let assetCode = currency.assetCode, let balance = CoinUnit(currency.balance){
-                balanceValues.append("\(balance) \(assetCode)\n")
-                availableValues.append("\(balance) \(assetCode)\n")
+        for currency in wallet.balances {
+            if let assetCode = currency.assetCode, let balance = CoinUnit(currency.balance)?.availableAmount(forWallet: wallet, forCurrency: currency){
+                if wallet.isCurrencyDuplicate(withAssetCode: assetCode), let issuer = currency.assetIssuer {
+                    balanceValues.append("\(balance) \(assetCode) (\(issuer.prefix(4))...)\n")
+                    availableValues.append("\(balance) \(assetCode) (\(issuer.prefix(4))...)\n")
+                } else {
+                    balanceValues.append("\(balance) \(assetCode)\n")
+                    availableValues.append("\(balance) \(assetCode)\n")
+                }
             }
         }
         

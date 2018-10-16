@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -64,12 +64,29 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Gle-eK-CQB">
                     <rect key="frame" x="16" y="166" width="343" height="18"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="0 XLM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQg-h4-3mK">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EOp-ad-34e">
                             <rect key="frame" x="0.0" y="0.0" width="343" height="18"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="0 XLM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQg-h4-3mK">
+                                    <rect key="frame" x="0.0" y="0.0" width="44.5" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d4C-YN-0Dj" customClass="CurrencyInfoButton" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="48.5" y="0.0" width="30" height="18"/>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="d4C-YN-0Dj" secondAttribute="bottom" id="0As-PS-1e3"/>
+                                <constraint firstItem="d4C-YN-0Dj" firstAttribute="top" secondItem="EOp-ad-34e" secondAttribute="top" id="4zP-pl-Mmu"/>
+                                <constraint firstItem="FQg-h4-3mK" firstAttribute="top" secondItem="EOp-ad-34e" secondAttribute="top" id="Nwm-Ji-TAr"/>
+                                <constraint firstAttribute="bottom" secondItem="FQg-h4-3mK" secondAttribute="bottom" id="i6c-xm-n30"/>
+                                <constraint firstItem="d4C-YN-0Dj" firstAttribute="leading" secondItem="FQg-h4-3mK" secondAttribute="trailing" constant="4" id="kec-Cx-CiJ"/>
+                                <constraint firstItem="FQg-h4-3mK" firstAttribute="leading" secondItem="EOp-ad-34e" secondAttribute="leading" id="oNS-3D-aUL"/>
+                            </constraints>
+                        </view>
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ac-Fj-252" userLabel="Bottom View">
@@ -94,19 +111,12 @@
                             <rect key="frame" x="190" y="0.0" width="36" height="45"/>
                             <state key="normal" title="Send"/>
                         </button>
-                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kFj-Ap-sWm">
-                            <rect key="frame" x="16" y="0.0" width="28" height="45"/>
-                            <state key="normal" image="question"/>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="v69-4U-2Nv" firstAttribute="leading" secondItem="FaK-Fg-J3B" secondAttribute="trailing" constant="16" id="3Eb-lP-2kh"/>
                         <constraint firstItem="c71-49-efD" firstAttribute="top" secondItem="2ac-Fj-252" secondAttribute="top" id="3Zd-jr-DbI"/>
-                        <constraint firstItem="kFj-Ap-sWm" firstAttribute="top" secondItem="KLh-rI-TgG" secondAttribute="top" id="3n5-lw-OGs"/>
                         <constraint firstItem="c71-49-efD" firstAttribute="leading" secondItem="2ac-Fj-252" secondAttribute="leading" id="9qB-kn-9D0"/>
-                        <constraint firstItem="FaK-Fg-J3B" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kFj-Ap-sWm" secondAttribute="trailing" constant="16" id="EYS-00-2pu"/>
-                        <constraint firstItem="kFj-Ap-sWm" firstAttribute="leading" secondItem="KLh-rI-TgG" secondAttribute="leading" constant="16" id="PXj-tE-t4Z"/>
                         <constraint firstItem="FaK-Fg-J3B" firstAttribute="top" secondItem="KLh-rI-TgG" secondAttribute="top" id="UGI-jW-YV4"/>
                         <constraint firstItem="KLh-rI-TgG" firstAttribute="trailing" secondItem="QpW-7W-h0z" secondAttribute="trailing" constant="16" id="Uak-iA-raC"/>
                         <constraint firstItem="QpW-7W-h0z" firstAttribute="top" secondItem="KLh-rI-TgG" secondAttribute="top" id="VUP-3d-nwf"/>
@@ -117,7 +127,6 @@
                         <constraint firstItem="QpW-7W-h0z" firstAttribute="leading" secondItem="v69-4U-2Nv" secondAttribute="trailing" constant="16" id="k01-dG-VuV"/>
                         <constraint firstAttribute="bottom" secondItem="FaK-Fg-J3B" secondAttribute="bottom" id="qZJ-vm-aPA"/>
                         <constraint firstItem="v69-4U-2Nv" firstAttribute="top" secondItem="KLh-rI-TgG" secondAttribute="top" id="rGF-D6-bio"/>
-                        <constraint firstItem="KLh-rI-TgG" firstAttribute="bottom" secondItem="kFj-Ap-sWm" secondAttribute="bottom" id="zXs-h5-cfd"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="KLh-rI-TgG"/>
                 </view>
@@ -163,8 +172,8 @@
                 <outlet property="balanceDescriptionLabel" destination="AMC-lx-fVN" id="N0w-DJ-9PH"/>
                 <outlet property="balanceLabel" destination="yva-VC-2hl" id="bSb-ay-9c8"/>
                 <outlet property="balanceStackView" destination="A0f-Us-sOy" id="bje-lQ-HrV"/>
+                <outlet property="currencyInfoButton" destination="d4C-YN-0Dj" id="ISf-Qi-1nB"/>
                 <outlet property="detailsButton" destination="QpW-7W-h0z" id="oQ4-6K-uOA"/>
-                <outlet property="helpButton" destination="kFj-Ap-sWm" id="QSK-OZ-XHq"/>
                 <outlet property="nameLabel" destination="dcr-TQ-c9b" id="cft-fm-FwF"/>
                 <outlet property="receiveButton" destination="v69-4U-2Nv" id="71o-S7-Z6c"/>
                 <outlet property="sendButton" destination="FaK-Fg-J3B" id="du6-7g-28S"/>
@@ -174,7 +183,4 @@
             <point key="canvasLocation" x="32.799999999999997" y="-120.08995502248877"/>
         </view>
     </objects>
-    <resources>
-        <image name="question" width="28" height="28"/>
-    </resources>
 </document>

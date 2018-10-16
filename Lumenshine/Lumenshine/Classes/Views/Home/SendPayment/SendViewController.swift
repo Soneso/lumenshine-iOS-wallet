@@ -73,6 +73,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var sendAllValue: UILabel!
     @IBOutlet weak var seedErrorLabel: UILabel!
     @IBOutlet weak var otherCurrencyErrorLabel: UILabel!
+    @IBOutlet weak var transactionFeeLabel: UILabel!
     
     @IBOutlet weak var memoTypeTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
@@ -321,7 +322,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             
             setSendButtonDefaultTitle()
             
-            if (wallet as! FundedWallet).isCurrencyDuplicate(withAssetCode: selectedCurrency) {
+            if (wallet as! FundedWallet).isCurrencyDuplicateAndValid(withAssetCode: selectedCurrency) {
                 if issuerPickerView == nil {
                     issuerPickerView = UIPickerView()
                     issuerPickerView.delegate = self
@@ -357,6 +358,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         addressTextField.addTarget(self, action: #selector(addressChanged), for: .editingChanged)
         view.backgroundColor = Stylesheet.color(.veryLightGray)
         sendButton.backgroundColor = Stylesheet.color(.blue)
+        transactionFeeLabel.text = "Stellar transaction fee: \(String(format: "%.5f", CoinUnit.Constants.transactionFee)) XLM"
         checkIfAccountCanSign()
         
         if !BiometricHelper.isBiometricAuthEnabled {
@@ -469,7 +471,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     private func setAvailableLabels(currency: AccountBalanceResponse) {
         if let balance = CoinUnit(currency.balance) {
-            let availableAmount = currency.assetCode != nil ? balance : balance.availableAmount(forWallet: wallet)
+            let availableAmount = currency.assetCode != nil ? balance : balance.availableAmount(forWallet: wallet, forCurrency: currency)
             availableAmountLabel.text = "You have \(availableAmount) \(selectedCurrency) available"
             
             if amountSegmentedControl.selectedSegmentIndex == AmountSegmentedControlIndexes.sendAll.rawValue {
@@ -613,7 +615,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     private func checkForTransactionFeeAvailability() {
-        if (wallet as! FundedWallet).nativeBalance.availableAmount(forWallet: wallet).isLess(than: CoinUnit.minimumReserved(forWallet: wallet)) {
+        if (wallet as! FundedWallet).nativeBalance.availableAmount(forWallet: wallet, forCurrency: (wallet as? FundedWallet)?.nativeAsset).isLess(than: CoinUnit.minimumAccountBalance(forWallet: wallet)) {
             sendErrorView.isHidden = false
             sendErrorLabel.text = ValidationErrors.InsufficientLumens.rawValue
             sendButton.isEnabled = false
@@ -717,7 +719,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             
             if selectedCurrency == NativeCurrencyNames.xlm.rawValue {
                 if let balance = CoinUnit(balance) {
-                    balanceToValidate = String(balance.availableAmount(forWallet: wallet))
+                    balanceToValidate = String(balance.availableAmount(forWallet: wallet, forCurrency: (wallet as? FundedWallet)?.nativeAsset))
                 }
             }
             

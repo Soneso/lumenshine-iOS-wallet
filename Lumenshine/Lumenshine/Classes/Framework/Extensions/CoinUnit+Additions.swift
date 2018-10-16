@@ -7,11 +7,12 @@
 //
 
 import Foundation
+import stellarsdk
 
 extension CoinUnit {
-    static func minimumReserved(forWallet wallet: Wallet?) -> CoinUnit {
+    static func minimumAccountBalance(forWallet wallet: Wallet?) -> CoinUnit {
         if let fundedWallet = wallet as? FundedWallet {
-            return 1 + CoinUnit(fundedWallet.subentryCount) * Constants.baseReserver + Constants.transactionFee
+            return (2 + CoinUnit(fundedWallet.subentryCount)) * Constants.baseReserver
         }
         
         return 0
@@ -28,11 +29,16 @@ extension CoinUnit {
         }
     }
     
-    func availableAmount(forWallet wallet: Wallet?) -> CoinUnit {
-        let availableAmount = self - CoinUnit.minimumReserved(forWallet: wallet) - Constants.transactionFee
-        
-        if availableAmount > 0 {
-            return availableAmount
+    func availableAmount(forWallet wallet: Wallet?, forCurrency asset: AccountBalanceResponse?) -> CoinUnit {
+        if let asset = asset {
+            let sellingLiabilities = CoinUnit(asset.sellingLiabilities)
+            if let _ = asset.assetCode {
+                //non native
+                return self - (sellingLiabilities ?? 0)
+            } else {
+                //native
+                return self - CoinUnit.minimumAccountBalance(forWallet: wallet) - (sellingLiabilities ?? 0) - Constants.transactionFee
+            }
         } else {
             return 0
         }

@@ -282,22 +282,19 @@ class TransactionHelper {
         
         if let transactionHash = try? transaction.getTransactionHash(network: Network.testnet) {
             let transactionStream = self.stellarSdk.payments.stream(for: PaymentsChange.paymentsForTransaction(transaction: transactionHash, cursor: nil))
-            var alreadySet = false
             transactionStream.onReceive { (response) -> (Void) in
-                if !alreadySet {
-                    switch response {
-                    case .response(id: let id, data: _):
-                        self.transactionResult.operationID = id
-                        alreadySet = true
-                        completion()
-                    case .error(error: let error):
-                        self.transactionResult.status = TransactionStatus.error
-                        self.transactionResult.message = error?.localizedDescription
-                        alreadySet = true
-                        completion()
-                    case .open:
-                        break
-                    }
+                switch response {
+                case .response(id: let id, data: _):
+                    self.transactionResult.operationID = id
+                    transactionStream.closeStream()
+                    completion()
+                case .error(error: let error):
+                    self.transactionResult.status = TransactionStatus.error
+                    self.transactionResult.message = error?.localizedDescription
+                    transactionStream.closeStream()
+                    completion()
+                case .open:
+                    break
                 }
             }
         } else {

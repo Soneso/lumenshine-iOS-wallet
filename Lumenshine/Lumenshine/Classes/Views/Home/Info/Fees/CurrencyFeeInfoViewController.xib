@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CurrencyFeeInfoViewController" customModule="Lumenshine" customModuleProvider="target">
+            <connections>
+                <outlet property="liabilitiesValueLabel" destination="Ce6-Wi-v3k" id="jBj-mB-QhU"/>
+                <outlet property="view" destination="iN0-l3-epB" id="PHu-Sc-Fp7"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selling liabilities" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ceR-v8-IfL" customClass="SubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
+                    <rect key="frame" x="16" y="36" width="121" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tSX-Kp-RRs" customClass="RegularSubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
+                    <rect key="frame" x="16" y="57" width="343" height="81.5"/>
+                    <string key="text">Selling liabilities equal the total amount of this currency offered to sell aggregated over all offers owned by this wallet. This amount can not be spent.</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The amount reserved for selling liabilities in this account is:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LAi-Qh-Lke" customClass="RegularSubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
+                    <rect key="frame" x="16" y="154.5" width="343" height="41"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ce6-Wi-v3k" customClass="RegularSubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
+                    <rect key="frame" x="16" y="211.5" width="343" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Ce6-Wi-v3k" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="7E4-O0-06N"/>
+                <constraint firstItem="ceR-v8-IfL" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="H2h-Ms-k4D"/>
+                <constraint firstItem="tSX-Kp-RRs" firstAttribute="top" secondItem="ceR-v8-IfL" secondAttribute="bottom" id="Kln-NZ-Ase"/>
+                <constraint firstItem="LAi-Qh-Lke" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="L2k-ro-9kR"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="LAi-Qh-Lke" secondAttribute="trailing" constant="16" id="Qkk-uU-0Gr"/>
+                <constraint firstItem="LAi-Qh-Lke" firstAttribute="top" secondItem="tSX-Kp-RRs" secondAttribute="bottom" constant="16" id="SNY-MH-0I6"/>
+                <constraint firstItem="ceR-v8-IfL" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="XKK-Js-6Vm"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Ce6-Wi-v3k" secondAttribute="trailing" constant="16" id="iCt-MX-fC8"/>
+                <constraint firstItem="Ce6-Wi-v3k" firstAttribute="top" secondItem="LAi-Qh-Lke" secondAttribute="bottom" constant="16" id="kE2-7q-HDu"/>
+                <constraint firstItem="tSX-Kp-RRs" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="pNf-r9-RY3"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="tSX-Kp-RRs" secondAttribute="trailing" constant="16" id="u4O-ln-eBb"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+    </objects>
+</document>
