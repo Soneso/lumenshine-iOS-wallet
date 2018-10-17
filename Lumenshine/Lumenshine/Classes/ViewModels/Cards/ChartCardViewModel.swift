@@ -131,8 +131,9 @@ class ChartCardViewModel: CardViewModelType {
         UserDefaults.standard.setValue(index, forKey:ChartCardViewModel.selectedPeriodKey)
         
         let assetCode = balance?.assetCode ?? "XLM"
+        let currency = UserDefaults.standard.value(forKey: SettingsViewModel.DestinationCurrencyKey) as? String ?? "USD"
         
-        service.getChartExchangeRates(assetCode: assetCode, issuerPublicKey: balance?.assetIssuer, destinationCurrency: "USD", timeRange: Int32(periodValues[selectedPeriodIndex])) { [weak self] result in
+        service.getChartExchangeRates(assetCode: assetCode, issuerPublicKey: balance?.assetIssuer, destinationCurrency: currency, timeRange: Int32(periodValues[selectedPeriodIndex])) { [weak self] result in
             switch result {
             case .success(let exchangeRates):
                 self?.exchangeRates = exchangeRates

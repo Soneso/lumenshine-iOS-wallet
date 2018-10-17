@@ -24,6 +24,7 @@
 		4314B9F9204812BC006DBE63 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4314B9F8204812BC006DBE63 /* MenuTableViewCell.swift */; };
 		431628CE2097352B00F23A20 /* TFAResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431628CD2097352B00F23A20 /* TFAResponse.swift */; };
 		431628D02097476500F23A20 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431628CF2097476500F23A20 /* ErrorResponse.swift */; };
+		4317663B2175F83500FDB422 /* ChartCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4317663A2175F83500FDB422 /* ChartCurrencyViewController.swift */; };
 		4319B17E2063EE0E007CE18D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4319B17D2063EE0E007CE18D /* LoginViewController.swift */; };
 		4319B1802063EEA9007CE18D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4319B17F2063EEA9007CE18D /* LoginViewModel.swift */; };
 		4319B1822063EF72007CE18D /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4319B1812063EF72007CE18D /* LoginCoordinator.swift */; };
@@ -400,6 +401,7 @@
 		4314B9F8204812BC006DBE63 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		431628CD2097352B00F23A20 /* TFAResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFAResponse.swift; sourceTree = "<group>"; };
 		431628CF2097476500F23A20 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
+		4317663A2175F83500FDB422 /* ChartCurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCurrencyViewController.swift; sourceTree = "<group>"; };
 		4319B17D2063EE0E007CE18D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4319B17F2063EEA9007CE18D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		4319B1812063EF72007CE18D /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
@@ -1036,6 +1038,7 @@
 				4319B4CB2119FB59002E45F0 /* RevealMnemonicViewController.swift */,
 				4319B4CD211A0347002E45F0 /* BackupMnemonicViewController.swift */,
 				432AAD2F2158F9E900963619 /* ActivateFingerprintViewController.swift */,
+				4317663A2175F83500FDB422 /* ChartCurrencyViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -2290,6 +2293,7 @@
 				C6AF0101215B9F33007C51E5 /* FederationAddressLabel.swift in Sources */,
 				43564BAD2163DCB9006A7B9F /* ContactsService.swift in Sources */,
 				7420BBED211839BB002FC4C7 /* BaseNavigationViewController.swift in Sources */,
+				4317663B2175F83500FDB422 /* ChartCurrencyViewController.swift in Sources */,
 				74C08FF820EF6F2F000A809D /* FundWalletViewController.swift in Sources */,
 				4319B1862063F1B0007CE18D /* User.swift in Sources */,
 			);

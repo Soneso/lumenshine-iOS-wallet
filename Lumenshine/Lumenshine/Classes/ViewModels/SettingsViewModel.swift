@@ -8,6 +8,13 @@
 
 import Foundation
 
+enum DestinationCurrenciesResponseEnum {
+    case success(response: Array<String>)
+    case failure(error: ServiceError)
+}
+
+typealias DestinationCurrenciesResponseClosure = (_ response:DestinationCurrenciesResponseEnum) -> (Void)
+
 protocol SettingsViewModelType: Transitionable, BiometricAuthenticationProtocol {
     var itemDistribution: [Int] { get }
     var tfaSecret: String? { get }
@@ -29,26 +36,32 @@ protocol SettingsViewModelType: Transitionable, BiometricAuthenticationProtocol 
     func showConfirm2faSecret(tfaResponse: RegistrationResponse)
     func showBackupMnemonic(password: String, response: @escaping DecryptedUserDataResponseClosure)
     func showMnemonic(_ mnemonic: String)
+    func destinationCurrencies(response: @escaping DestinationCurrenciesResponseClosure)
+    func destinationCurrencySelected(_ currency: String)
 }
 
 
 class SettingsViewModel: SettingsViewModelType {
     
+    // MARK: - Parameters & Constants
+    
+    static let DestinationCurrencyKey = "DestinationCurrencyKey"
+    
     weak var navigationCoordinator: CoordinatorType?
     
-    fileprivate let service: AuthService
+    fileprivate let services: Services
     fileprivate let user: User
     fileprivate let entries: [[SettingsEntry]]
     fileprivate var tfaResponse: RegistrationResponse?
     fileprivate var changePassword: Bool = true
     
-    init(service: AuthService, user: User) {
-        self.service = service
+    init(services: Services, user: User) {
+        self.services = services
         self.user = user
         self.entries = [[.changePassword,
                          .change2FA,
                          BiometricIDAuth().biometricType() == .faceID ? .faceRecognition : .fingerprint,
-                         .backupMnemonic, .notifications, .personalData]]
+                         .backupMnemonic, .notifications, .personalData, .chartCurrency]]
     }
     
     var tfaSecret: String? {
@@ -105,7 +118,7 @@ class SettingsViewModel: SettingsViewModelType {
         case .faceRecognition, .fingerprint:
             break
         case .chartCurrency:
-            break
+            navigationCoordinator?.performTransition(transition: .showChartCurrency)
         case .backupMnemonic:
             navigationCoordinator?.performTransition(transition: .showBackupMnemonic)
         case .notifications:
@@ -195,13 +208,13 @@ class SettingsViewModel: SettingsViewModelType {
             return
         }
         
-        service.authenticationData { result in
+        services.auth.authenticationData { result in
             switch result {
             case .success(let authResponse):
                 self.changePassword(authResponse: authResponse, oldPass: currentPass, newPass: newPass) { result2 in
                     switch result2 {
                     case .success(_, let userSecurity):
-                        self.service.changePassword(userSecurity: userSecurity, response: response)
+                        self.services.auth.changePassword(userSecurity: userSecurity, response: response)
                     case .failure(let error):
                         response(.failure(error: error))
                     }
@@ -213,7 +226,7 @@ class SettingsViewModel: SettingsViewModelType {
     }
     
     func change2faSecret(password: String, response: @escaping TfaSecretResponseClosure) {
-        service.authenticationData { result in
+        services.auth.authenticationData { result in
             switch result {
             case .success(let authResponse):
                 self.change2faSecret(authResponse: authResponse, password: password, response: response)
@@ -224,7 +237,7 @@ class SettingsViewModel: SettingsViewModelType {
     }
     
     func confirm2faSecret(tfaCode: String, response: @escaping TFAResponseClosure) {
-        service.confirm2faSecret(tfaCode: tfaCode) { [weak self] result in
+        services.auth.confirm2faSecret(tfaCode: tfaCode) { [weak self] result in
             switch result {
             case .success:
                 if let secret = self?.tfaResponse?.tfaSecret,
@@ -243,7 +256,7 @@ class SettingsViewModel: SettingsViewModelType {
     }
     
     func showBackupMnemonic(password: String, response: @escaping DecryptedUserDataResponseClosure) {
-        service.authenticationData { result in
+        services.auth.authenticationData { result in
             switch result {
             case .success(let authResponse):
                 self.backupMnemonic(authResponse: authResponse, password: password, response: response)
@@ -260,6 +273,28 @@ class SettingsViewModel: SettingsViewModelType {
     // MARK: Biometric authentication
     func authenticateUser(completion: @escaping BiometricAuthResponseClosure) {
         BiometricHelper.authenticate(username: user.email, response: completion)
+    }
+    
+    func destinationCurrencies(response: @escaping DestinationCurrenciesResponseClosure) {
+        
+        services.chartsService.getChartsCurrencyPairs { result in
+            switch result {
+            case .success(let currencyPairs):
+                if let currencies = currencyPairs.first?.destinationCurrencies {
+                    response(.success(response: currencies))
+                } else {
+                    // TDOD: remove this, only for test
+                    response(.success(response: ["XML", "USD", "EUR"]))
+                }
+            case .failure(let error):
+                response(.failure(error: error))
+                print("Failed to get chart currency pairs: \(error)")
+            }
+        }
+    }
+    
+    func destinationCurrencySelected(_ currency: String) {
+        UserDefaults.standard.setValue(currency, forKey: SettingsViewModel.DestinationCurrencyKey)
     }
 }
 
@@ -296,7 +331,7 @@ fileprivate extension SettingsViewModel {
             do {
                 if let userSecurity = UserSecurity(from: authResponse),
                     let decryptedUserData = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: password) {
-                    self.service.new2faSecret(publicKeyIndex188: decryptedUserData.publicKeyIndex188, response: response)
+                    self.services.auth.new2faSecret(publicKeyIndex188: decryptedUserData.publicKeyIndex188, response: response)
                 } else {
                     let error = ErrorResponse()
                     error.parameterName = "current_password"

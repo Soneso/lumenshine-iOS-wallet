@@ -21,7 +21,7 @@ class SettingsCoordinator: CoordinatorType {
         self.service = service
         self.user = user
         self.mainCoordinator = mainCoordinator
-        self.viewModel = SettingsViewModel(service: service.auth, user: user)
+        self.viewModel = SettingsViewModel(services: service, user: user)
         self.baseController = SettingsTableViewController(viewModel: viewModel)
         viewModel.navigationCoordinator = self
         mainCoordinator.currentCoordinator = self
@@ -51,6 +51,8 @@ class SettingsCoordinator: CoordinatorType {
             showMnemonic(mnemonic)
         case .showFingerprint:
             showActivateFingerprint()
+        case .showChartCurrency:
+            showChartCurrency()
         default: break
         }
     }
@@ -127,5 +129,10 @@ fileprivate extension SettingsCoordinator {
         let activateVC = ActivateFingerprintViewController(viewModel: viewModel)
         let composeVC = ComposeNavigationController(rootViewController: activateVC)
         baseController.navigationController?.present(composeVC, animated: true)
+    }
+    
+    func showChartCurrency() {
+        let currencyVC = ChartCurrencyViewController(viewModel: viewModel)
+        baseController.navigationController?.pushViewController(currencyVC, animated: true)
     }
 }

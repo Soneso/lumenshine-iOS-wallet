@@ -188,6 +188,9 @@
 "chart_currency" = "Chart destination currency";
 
 /*  */
+"chart_currency_hint" = "Please select the destination currency for Chart cards";
+
+/*  */
 "welcome" = "Welcome";
 
 /*  */
