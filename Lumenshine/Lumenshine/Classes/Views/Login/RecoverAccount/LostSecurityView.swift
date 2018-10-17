@@ -22,6 +22,7 @@ class LostSecurityView: UIView {
     fileprivate let emailTextField = LSTextField()
     fileprivate let nextButton = RaisedButton()
     fileprivate let titleLabel = UILabel()
+    fileprivate let detailLabel = UILabel()
     
     weak var delegate: LostSecurityViewDelegate?
     
@@ -54,13 +55,14 @@ fileprivate extension LostSecurityView {
     
     func prepare() {
         prepareTitleLabel()
+        prepareDetail()
         prepareEmailTextField()
         prepareResetButton()
     }
     
     func prepareTitleLabel() {
         titleLabel.text = viewModel.title
-        titleLabel.textAlignment = .center
+        titleLabel.textAlignment = .left
         titleLabel.textColor = Stylesheet.color(.darkBlue)
         titleLabel.font = R.font.encodeSansSemiBold(size: 17)
         titleLabel.adjustsFontSizeToFitWidth = true
@@ -74,15 +76,31 @@ fileprivate extension LostSecurityView {
         }
     }
     
+    func prepareDetail() {
+     detailLabel.text = viewModel.subtitle
+     detailLabel.textColor = Stylesheet.color(.lightBlack)
+     detailLabel.font = R.font.encodeSansRegular(size: 13)
+     detailLabel.textAlignment = .left
+     detailLabel.adjustsFontSizeToFitWidth = true
+     detailLabel.numberOfLines = 0
+     
+     self.addSubview(detailLabel)
+     detailLabel.snp.makeConstraints { (make) in
+        make.top.equalTo(titleLabel.snp.bottom)
+        make.left.equalTo(horizontalSpacing)
+        make.right.equalTo(-horizontalSpacing)
+     }
+    }
+ 
     func prepareEmailTextField() {
         emailTextField.keyboardType = .emailAddress
         emailTextField.autocapitalizationType = .none
         emailTextField.autocorrectionType = .no
-        emailTextField.placeholder = R.string.localizable.email()
+        emailTextField.placeholder = R.string.localizable.email().uppercased()
         
         addSubview(emailTextField)
         emailTextField.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(15)
+            make.top.equalTo(detailLabel.snp.bottom).offset(15)
             make.left.equalTo(horizontalSpacing)
             make.right.equalTo(-horizontalSpacing)
         }

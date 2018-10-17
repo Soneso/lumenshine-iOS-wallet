@@ -14,10 +14,12 @@ public final class Services {
     //let baseURL = "http://192.168.0.17:9000"
     //let baseURL = "http://127.0.0.1:8000"
     let baseURL = "https://demoapi.lumenshine.com"
-    let horizonURL = "https://horizon-testnet.stellar.org"
+    //let horizonURL = "https://horizon-testnet.stellar.org"
+    let horizonURL = "https://demohorizon.lumenshine.com"
 #elseif DEVELOPMENT
     let baseURL = "https://demoapi.lumenshine.com"
-    let horizonURL = "https://horizon-testnet.stellar.org"
+    //let horizonURL = "https://horizon-testnet.stellar.org"
+    let horizonURL = "https://demohorizon.lumenshine.com"
     
     /** live net **/
     //let baseURL = "https://alphaapi.lumenshine.com"
@@ -26,7 +28,7 @@ public final class Services {
 #endif
     
     public var isTestURL: Bool {
-        return horizonURL == "https://horizon-testnet.stellar.org"
+        return horizonURL == "https://demohorizon.lumenshine.com"
     }
     
     static let shared = Services()

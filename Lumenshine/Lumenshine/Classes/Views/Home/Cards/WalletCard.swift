@@ -154,15 +154,24 @@ fileprivate extension WalletCard {
         emptyView.notFundedLabel.textColor = Stylesheet.color(.orange)
         emptyView.notFundedLabel.text = R.string.localizable.no_stellar_address()
         
-        emptyView.balanceBackgroundView.backgroundColor = Stylesheet.color(.gray)
+        emptyView.balanceBackgroundView.backgroundColor = Stylesheet.color(.white)
         emptyView.balanceBackgroundView.layer.cornerRadius = 10
         
-        let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+        emptyView.balanceDescriptionLabel.font = R.font.encodeSansRegular(size: 16)
+        emptyView.balanceDescriptionLabel.text =  R.string.localizable.loading()
+        emptyView.balanceDescriptionLabel.textColor = Stylesheet.color(.lightBlack)
+        
+        emptyView.balanceLabel.font = R.font.encodeSansSemiBold(size: 15)
+        emptyView.balanceLabel.textColor = Stylesheet.color(.white)
+        emptyView.balanceLabel.text = ""
+        
+        let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         loadingIndicator.startAnimating()
         
         emptyView.balanceBackgroundView.addSubview(loadingIndicator)
         loadingIndicator.snp.makeConstraints { make in
             make.center.equalToSuperview()
+            make.right.equalTo(150)
         }
         
         self.unfundedView = emptyView

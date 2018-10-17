@@ -23,7 +23,7 @@
 "next" = "Weiter";
 
 /*  */
-"continue" = "Fortsetzen";
+"continue" = "Weiter";
 
 /*  */
 "save" = "Speichern";
@@ -56,9 +56,6 @@
 "login" = "Login";
 
 /*  */
-"register" = "Registrieren";
-
-/*  */
 "login_continue" = "EINLOGGEN";
 
 /*  */
@@ -80,7 +77,16 @@
 "signup" = "Registrieren";
 
 /*  */
+"join" = "Registrieren";
+
+/*  */
 "lost_password" = "Passwort verloren";
+
+/*  */
+"reset_password" = "Passwort zurücksetzen";
+
+/*  */
+"reset_enter_email" = "Gebe die Emailadreese ein mit der du dich registriert hast";
 
 /*  */
 "forgot_password" = "Passwort vergessen";
