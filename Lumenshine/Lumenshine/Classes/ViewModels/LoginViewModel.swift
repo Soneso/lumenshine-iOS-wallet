@@ -34,6 +34,7 @@ protocol LoginViewModelType: Transitionable, BiometricAuthenticationProtocol {
 protocol LostSecurityViewModelType: Transitionable {
     var lostEmail: String? { get }
     var title: String { get }
+    var subtitle: String { get }
     var successHint: String { get }
     var successDetail: String { get }
     
@@ -280,7 +281,11 @@ extension LoginViewModel: LostSecurityViewModelType {
     }
     
     var title: String {
-        return lostPassword ? R.string.localizable.lost_password() : R.string.localizable.lost_2fa()
+        return lostPassword ? R.string.localizable.reset_password().uppercased() : R.string.localizable.reset_2fa().uppercased()
+    }
+    
+    var subtitle: String {
+        return R.string.localizable.reset_enter_email()
     }
     
     var successHint: String {

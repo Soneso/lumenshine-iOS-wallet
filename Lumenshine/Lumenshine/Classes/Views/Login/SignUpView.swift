@@ -21,7 +21,7 @@ class SignUpView: UIView {
     fileprivate let horizontalSpacing: CGFloat = 15.0
     fileprivate let passwordHintButton = Material.IconButton()
     fileprivate let titleLabel = UILabel()
-    fileprivate let detailLabel = UILabel()
+    //fileprivate let detailLabel = UILabel()
     
     // MARK: - UI properties
     fileprivate let textField1 = LSTextField()
@@ -111,16 +111,16 @@ extension SignUpView: UITextFieldDelegate {
 fileprivate extension SignUpView {
     func prepare() {
         prepareTitle()
-        prepareDetail()
+        //prepareDetail()
         prepareTextFields()
         prepareLoginButton()
         prepareHintButton()
     }
     
     func prepareTitle() {
-        titleLabel.text = R.string.localizable.signup().uppercased()
+        titleLabel.text = R.string.localizable.join().uppercased()
         titleLabel.textColor = Stylesheet.color(.darkBlue)
-        titleLabel.font = R.font.encodeSansSemiBold(size: 15)
+        titleLabel.font = R.font.encodeSansSemiBold(size: 17)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.numberOfLines = 0
         
@@ -132,7 +132,7 @@ fileprivate extension SignUpView {
         }
     }
     
-    func prepareDetail() {
+    /*func prepareDetail() {
         detailLabel.text = R.string.localizable.login_fill()
         detailLabel.textColor = Stylesheet.color(.lightBlack)
         detailLabel.font = R.font.encodeSansRegular(size: 13)
@@ -146,7 +146,7 @@ fileprivate extension SignUpView {
             make.left.equalTo(horizontalSpacing)
             make.right.equalTo(-horizontalSpacing)
         }
-    }
+    }*/
     
     func prepareTextFields() {
         textField1.delegate = self
@@ -168,7 +168,7 @@ fileprivate extension SignUpView {
         
         addSubview(textField1)
         textField1.snp.makeConstraints { make in
-            make.top.equalTo(detailLabel.snp.bottom).offset(15)
+            make.top.equalTo(titleLabel.snp.bottom).offset(25)
             make.left.equalTo(horizontalSpacing)
             make.right.equalTo(-horizontalSpacing)
         }
@@ -203,7 +203,7 @@ fileprivate extension SignUpView {
     }
     
     func prepareLoginButton() {
-        submitButton.title = R.string.localizable.register().uppercased()
+        submitButton.title = R.string.localizable.signup().uppercased()
         submitButton.backgroundColor = Stylesheet.color(.green)
         submitButton.titleColor = Stylesheet.color(.white)
         submitButton.titleLabel?.adjustsFontSizeToFitWidth = true

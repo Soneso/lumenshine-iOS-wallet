@@ -20,7 +20,7 @@ class LoginView: UIView {
     fileprivate let verticalSpacing = 31.0
     fileprivate let horizontalSpacing = 15.0
     fileprivate let titleLabel = UILabel()
-    fileprivate let detailLabel = UILabel()
+    //fileprivate let detailLabel = UILabel()
     
     // MARK: - UI properties
     fileprivate let textField1 = LSTextField()
@@ -103,7 +103,7 @@ extension LoginView: UITextFieldDelegate {
 fileprivate extension LoginView {
     func prepare() {
         prepareTitle()
-        prepareDetail()
+        //prepareDetail()
         prepareTextFields()
         prepareLoginButton()
         
@@ -127,7 +127,7 @@ fileprivate extension LoginView {
         }
     }
     
-    func prepareDetail() {
+    /*func prepareDetail() {
         detailLabel.text = R.string.localizable.login_fill()
         detailLabel.textColor = Stylesheet.color(.lightBlack)
         detailLabel.font = R.font.encodeSansRegular(size: 13)
@@ -141,7 +141,7 @@ fileprivate extension LoginView {
             make.left.equalTo(horizontalSpacing)
             make.right.equalTo(-horizontalSpacing)
         }
-    }
+    }*/
     
     func prepareTextFields() {
         textField1.delegate = self
@@ -161,7 +161,7 @@ fileprivate extension LoginView {
         
         self.addSubview(textField1)
         textField1.snp.makeConstraints { make in
-            make.top.equalTo(detailLabel.snp.bottom).offset(15)
+            make.top.equalTo(titleLabel.snp.bottom).offset(25)
             make.left.equalTo(horizontalSpacing)
             make.right.equalTo(-horizontalSpacing)
         }

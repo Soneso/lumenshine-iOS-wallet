@@ -59,13 +59,10 @@
 "send" = "Send";
 
 /*  */
-"login" = "Login";
+"login" = "Log in";
 
 /*  */
-"register" = "Register";
-
-/*  */
-"login_continue" = "Login to continue";
+"login_continue" = "Log in to your account";
 
 /*  */
 "unlock_app" = "Unlock app";
@@ -86,7 +83,16 @@
 "signup" = "Sign up";
 
 /*  */
+"join" = "Join Lumenshine";
+
+/*  */
 "lost_password" = "Lost Password";
+
+/*  */
+"reset_password" = "Reset your Password";
+
+/*  */
+"reset_enter_email" = "Enter the email address you used to sign up.";
 
 /*  */
 "forgot_password" = "Forgot password";
