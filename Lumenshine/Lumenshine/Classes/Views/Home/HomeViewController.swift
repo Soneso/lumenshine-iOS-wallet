@@ -103,6 +103,8 @@ extension HomeViewController: UITableViewDataSource {
                         self?.tableView.reloadRows(at: [indexPath], with: .automatic)
                     }, completion: nil)
                 }
+                
+                self?.viewModel.updateCurrencies()
             }
         }
         

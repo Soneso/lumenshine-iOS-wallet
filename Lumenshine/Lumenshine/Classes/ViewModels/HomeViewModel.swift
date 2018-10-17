@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import stellarsdk
 
 protocol HomeViewModelType: Transitionable {
 
@@ -18,6 +19,7 @@ protocol HomeViewModelType: Transitionable {
     func foundAccount()
     func reloadCards()
     func refreshWallets()
+    func updateCurrencies()
 }
 
 class HomeViewModel : HomeViewModelType {
@@ -27,6 +29,9 @@ class HomeViewModel : HomeViewModelType {
     fileprivate let user: User
     fileprivate let userManager = Services.shared.userManager
     fileprivate let currenciesMonitor = CurrenciesMonitor()
+    
+    fileprivate var currencyPairs = Array<ChartsCurrencyPairsResponse>()
+    fileprivate var balances = Array<AccountBalanceResponse>()
     
     weak var navigationCoordinator: CoordinatorType?
     
@@ -44,6 +49,15 @@ class HomeViewModel : HomeViewModelType {
                 self.currencyRateUpdateClosure?(self.currenciesMonitor.currentRate)
             case .failure(_):
                 print("Failed to get wallets")
+            }
+        }
+        
+        service.chartsService.getChartsCurrencyPairs { result in
+            switch result {
+            case .success(let response):
+                self.currencyPairs.append(contentsOf: response)
+            case .failure(let error):
+                print("Failed to get chart currency pairs: \(error)")
             }
         }
     }
@@ -98,11 +112,11 @@ class HomeViewModel : HomeViewModelType {
                 print("Failed to get wallets")
             }
             
-            if let chartService = self?.service.chartsService {
-                let chartViewModel = ChartCardViewModel(service: chartService)
-                chartViewModel.navigationCoordinator = self?.navigationCoordinator
-                self?.cardViewModels.append(chartViewModel)
-            }
+//            if let chartService = self?.service.chartsService {
+//                let chartViewModel = ChartCardViewModel(service: chartService)
+//                chartViewModel.navigationCoordinator = self?.navigationCoordinator
+//                self?.cardViewModels.append(chartViewModel)
+//            }
             
             let helpViewModel = HelpCardViewModel()
             helpViewModel.navigationCoordinator = self?.navigationCoordinator
@@ -116,6 +130,29 @@ class HomeViewModel : HomeViewModelType {
         for cardViewModel in cardViewModels {
             if let wallet = cardViewModel as? WalletCardViewModel {
                 wallet.refreshContent(userManager: service.userManager)
+            }
+        }
+    }
+    
+    func updateCurrencies() {
+        for cardViewModel in cardViewModels {
+            if let viewModel = cardViewModel as? WalletCardViewModel,
+                let wallet = viewModel.wallet as? FundedWallet {
+                
+                for balance in wallet.balances {
+                    if balance.assetType != AssetTypeAsString.NATIVE, !currencyPairs.contains(where: { $0.sourceCurrency.assetCode == balance.assetCode && $0.sourceCurrency.issuerPublicKey == balance.assetIssuer }) {
+                        continue
+                    }
+                    if !balances.contains(where: { $0.assetCode == balance.assetCode }) {
+                        balances.append(balance)
+                        
+                        let chartViewModel = ChartCardViewModel(service: service.chartsService, balance: balance)
+                        chartViewModel.navigationCoordinator = self.navigationCoordinator
+                        cardViewModels.insert(chartViewModel, at: cardViewModels.count-1)
+                        
+                        self.reloadClosure?()
+                    }
+                }
             }
         }
     }

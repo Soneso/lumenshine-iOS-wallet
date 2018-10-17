@@ -868,61 +868,61 @@ struct R: Rswift.Validatable {
     }
     
     static func validate() throws {
-      if R.font.encodeSansSemiExpandedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Light' could not be loaded, is 'EncodeSansSemiExpanded-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExpandedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Black' could not be loaded, is 'EncodeSansExpanded-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExpandedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Thin' could not be loaded, is 'EncodeSansExpanded-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExpandedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Regular' could not be loaded, is 'EncodeSansExpanded-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-ExtraLight' could not be loaded, is 'EncodeSansSemiCondensed-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiExpandedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Regular' could not be loaded, is 'EncodeSansSemiExpanded-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Bold' could not be loaded, is 'EncodeSansCondensed-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiExpandedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Bold' could not be loaded, is 'EncodeSansSemiExpanded-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiExpandedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Thin' could not be loaded, is 'EncodeSansSemiExpanded-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Black' could not be loaded, is 'EncodeSans-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-ExtraLight' could not be loaded, is 'EncodeSansCondensed-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-SemiBold' could not be loaded, is 'EncodeSans-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiExpandedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-ExtraLight' could not be loaded, is 'EncodeSansSemiExpanded-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExpandedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Light' could not be loaded, is 'EncodeSansExpanded-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Medium' could not be loaded, is 'EncodeSansCondensed-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Medium' could not be loaded, is 'EncodeSansSemiExpanded-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Regular' could not be loaded, is 'EncodeSansSemiCondensed-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Thin' could not be loaded, is 'EncodeSansCondensed-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-SemiBold' could not be loaded, is 'EncodeSansCondensed-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Light' could not be loaded, is 'EncodeSans-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Bold' could not be loaded, is 'EncodeSansExpanded-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
       if R.font.latoItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Italic' could not be loaded, is 'Lato-Italic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
       if R.font.latoHairline(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Hairline' could not be loaded, is 'Lato-Hairline.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-SemiBold' could not be loaded, is 'EncodeSansSemiCondensed-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Bold' could not be loaded, is 'EncodeSans-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Medium' could not be loaded, is 'EncodeSans-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Thin' could not be loaded, is 'EncodeSansCondensed-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Light' could not be loaded, is 'EncodeSansCondensed-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-ExtraBold' could not be loaded, is 'EncodeSans-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.latoBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Bold' could not be loaded, is 'Lato-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Thin' could not be loaded, is 'EncodeSans-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
       if R.font.latoBlackItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-BlackItalic' could not be loaded, is 'Lato-BlackItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Regular' could not be loaded, is 'EncodeSans-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Regular' could not be loaded, is 'EncodeSansCondensed-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
       if R.font.encodeSansSemiExpandedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Black' could not be loaded, is 'EncodeSansSemiExpanded-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-ExtraBold' could not be loaded, is 'EncodeSansSemiCondensed-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.latoHairlineItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-HairlineItalic' could not be loaded, is 'Lato-HairlineItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-ExtraBold' could not be loaded, is 'EncodeSansCondensed-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.latoLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Light' could not be loaded, is 'Lato-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.latoBoldItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-BoldItalic' could not be loaded, is 'Lato-BoldItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Light' could not be loaded, is 'EncodeSansSemiCondensed-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExpandedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Bold' could not be loaded, is 'EncodeSansExpanded-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-SemiBold' could not be loaded, is 'EncodeSansCondensed-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.latoBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Black' could not be loaded, is 'Lato-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Medium' could not be loaded, is 'EncodeSansSemiCondensed-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
       if R.font.latoRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Regular' could not be loaded, is 'Lato-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Bold' could not be loaded, is 'EncodeSansSemiCondensed-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansCondensedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Black' could not be loaded, is 'EncodeSansCondensed-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Light' could not be loaded, is 'EncodeSans-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExpandedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-SemiBold' could not be loaded, is 'EncodeSansExpanded-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiExpandedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Medium' could not be loaded, is 'EncodeSansSemiExpanded-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExpandedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Medium' could not be loaded, is 'EncodeSansExpanded-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Medium' could not be loaded, is 'EncodeSansCondensed-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-ExtraBold' could not be loaded, is 'EncodeSansSemiCondensed-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Light' could not be loaded, is 'EncodeSansSemiCondensed-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
       if R.font.encodeSansExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-ExtraLight' could not be loaded, is 'EncodeSans-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Bold' could not be loaded, is 'EncodeSans-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Light' could not be loaded, is 'EncodeSansExpanded-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Medium' could not be loaded, is 'EncodeSansSemiCondensed-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-ExtraLight' could not be loaded, is 'EncodeSansSemiCondensed-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-ExtraLight' could not be loaded, is 'EncodeSansExpanded-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoBoldItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-BoldItalic' could not be loaded, is 'Lato-BoldItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Thin' could not be loaded, is 'EncodeSansSemiExpanded-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-SemiBold' could not be loaded, is 'EncodeSansSemiExpanded-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Medium' could not be loaded, is 'EncodeSans-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Regular' could not be loaded, is 'EncodeSansSemiExpanded-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-SemiBold' could not be loaded, is 'EncodeSansExpanded-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Thin' could not be loaded, is 'EncodeSans-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
       if R.font.encodeSansExpandedExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-ExtraBold' could not be loaded, is 'EncodeSansExpanded-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Bold' could not be loaded, is 'EncodeSansCondensed-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Black' could not be loaded, is 'EncodeSansSemiCondensed-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Medium' could not be loaded, is 'EncodeSansExpanded-Medium.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Bold' could not be loaded, is 'EncodeSansSemiExpanded-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Regular' could not be loaded, is 'EncodeSansExpanded-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
       if R.font.latoLightItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-LightItalic' could not be loaded, is 'Lato-LightItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
       if R.font.encodeSansSemiCondensedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Thin' could not be loaded, is 'EncodeSansSemiCondensed-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Black' could not be loaded, is 'EncodeSansCondensed-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-ExtraLight' could not be loaded, is 'EncodeSansSemiExpanded-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Black' could not be loaded, is 'EncodeSans-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Black' could not be loaded, is 'EncodeSansExpanded-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Black' could not be loaded, is 'Lato-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-ExtraLight' could not be loaded, is 'EncodeSansCondensed-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-SemiBold' could not be loaded, is 'EncodeSansSemiCondensed-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiCondensedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Bold' could not be loaded, is 'EncodeSansSemiCondensed-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiExpandedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-Light' could not be loaded, is 'EncodeSansSemiExpanded-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExpandedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-Thin' could not be loaded, is 'EncodeSansExpanded-Thin.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoHairlineItalic(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-HairlineItalic' could not be loaded, is 'Lato-HairlineItalic.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Bold' could not be loaded, is 'Lato-Bold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-ExtraBold' could not be loaded, is 'EncodeSans-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-SemiBold' could not be loaded, is 'EncodeSans-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-ExtraBold' could not be loaded, is 'EncodeSansCondensed-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSans-Regular' could not be loaded, is 'EncodeSans-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Regular' could not be loaded, is 'EncodeSansCondensed-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.encodeSansCondensedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansCondensed-Light' could not be loaded, is 'EncodeSansCondensed-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
       if R.font.encodeSansSemiExpandedExtraBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-ExtraBold' could not be loaded, is 'EncodeSansSemiExpanded-ExtraBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiExpandedSemiBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiExpanded-SemiBold' could not be loaded, is 'EncodeSansSemiExpanded-SemiBold.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansExpandedExtraLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansExpanded-ExtraLight' could not be loaded, is 'EncodeSansExpanded-ExtraLight.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Regular' could not be loaded, is 'EncodeSansSemiCondensed-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.encodeSansSemiCondensedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'EncodeSansSemiCondensed-Black' could not be loaded, is 'EncodeSansSemiCondensed-Black.ttf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.latoLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'Lato-Light' could not be loaded, is 'Lato-Light.ttf' added to the UIAppFonts array in this targets Info.plist?") }
     }
     
     fileprivate init() {}
@@ -1808,7 +1808,7 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This `R.string.localizable` struct is generated, and contains static references to 250 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 253 localization keys.
     struct localizable {
       /// en translation:      example: GBABXVQ64GP5JZ3AQFX5FUYLCVY6HIHMTX4HZQ6...
       /// 
@@ -1918,10 +1918,18 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en
       static let add = Rswift.StringResource(key: "add", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+      /// en translation: Already confirmed
+      /// 
+      /// Locales: en, de
+      static let email_already_confirmed = Rswift.StringResource(key: "email_already_confirmed", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Amount
       /// 
       /// Locales: en, de
       static let amount = Rswift.StringResource(key: "amount", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: An email has been sent to your email account. Please check your inbox and confirm your email address first. After doing so, please come back and press the "Continue" button to continue.
+      /// 
+      /// Locales: en, de
+      static let email_confirmation_hint2 = Rswift.StringResource(key: "email_confirmation_hint2", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Available
       /// 
       /// Locales: en, de
@@ -1970,14 +1978,14 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let change_password = Rswift.StringResource(key: "change_password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: Chart destination currency
+      /// 
+      /// Locales: en
+      static let chart_currency = Rswift.StringResource(key: "chart_currency", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: City
       /// 
       /// Locales: en, de
       static let city = Rswift.StringResource(key: "city", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: Click the link to verify your email address.
-      /// 
-      /// Locales: en, de
-      static let email_confirmation_posthint = Rswift.StringResource(key: "email_confirmation_posthint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Close
       /// 
       /// Locales: en, de
@@ -2050,6 +2058,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let email = Rswift.StringResource(key: "email", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: Email confirmation required
+      /// 
+      /// Locales: en, de
+      static let lbl_email_confirmation = Rswift.StringResource(key: "lbl_email_confirmation", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Email resent
       /// 
       /// Locales: en, de
@@ -2062,10 +2074,6 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let enabled = Rswift.StringResource(key: "enabled", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: Enter the email address you used to sign up.
-      /// 
-      /// Locales: en, de
-      static let reset_enter_email = Rswift.StringResource(key: "reset_enter_email", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Error
       /// 
       /// Locales: en, de
@@ -2098,7 +2106,7 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let finish_setup = Rswift.StringResource(key: "finish_setup", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: For resetting your %@, we sent a message to your email account. Click the link to reset your %@.
+      /// en translation: For resetting your %@, an email has been sent to your email account. Please check your inbox and follow the instructions in the received email to reset your %@.
       /// 
       /// Locales: en, de
       static let lost_security_email_hint = Rswift.StringResource(key: "lost_security_email_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
@@ -2190,6 +2198,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let import_mnemonic = Rswift.StringResource(key: "import_mnemonic", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: In order to be able continue the setup process, you need to confirm your email address first. An email with a confirmation link has been sent to your inbox. Please follow the instructions from the mail to confirm your email address.
+      /// 
+      /// Locales: en, de
+      static let email_confirmation_hint = Rswift.StringResource(key: "email_confirmation_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Info
       /// 
       /// Locales: en, de
@@ -2226,10 +2238,6 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let issuer_pk = Rswift.StringResource(key: "issuer_pk", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: Join Lumenshine
-      /// 
-      /// Locales: en, de
-      static let join = Rswift.StringResource(key: "join", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Just now
       /// 
       /// Locales: en, de
@@ -2262,11 +2270,11 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let logout = Rswift.StringResource(key: "logout", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: Log in
+      /// en translation: Login
       /// 
       /// Locales: en, de
       static let login = Rswift.StringResource(key: "login", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: Log in to your account
+      /// en translation: Login to continue
       /// 
       /// Locales: en, de
       static let login_continue = Rswift.StringResource(key: "login_continue", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
@@ -2370,6 +2378,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let operation_id = Rswift.StringResource(key: "operation_id", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: Password
+      /// 
+      /// Locales: en, de
+      static let password = Rswift.StringResource(key: "password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Password requirements
       /// 
       /// Locales: en, de
@@ -2382,14 +2394,18 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let personal_data = Rswift.StringResource(key: "personal_data", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: Please confirm your email address first.
+      /// 
+      /// Locales: en, de
+      static let lbl_please_confirm = Rswift.StringResource(key: "lbl_please_confirm", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Please fill in the form below with valid information
       /// 
       /// Locales: en, de
       static let login_fill = Rswift.StringResource(key: "login_fill", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: Please verify your email address first.
+      /// en translation: Please select the destination currency for Chart cards
       /// 
-      /// Locales: en, de
-      static let lbl_please_confirm = Rswift.StringResource(key: "lbl_please_confirm", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// Locales: en
+      static let chart_currency_hint = Rswift.StringResource(key: "chart_currency_hint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Please write down your backup secret (mnemonic). You can use it if you lose your password to recover your wallet. It can be also used in other apps / wallets that support import from mnemonic. If you lose your password and the mnemonic you will not be able to access your funds any more. We can not recover your account if you lose both (password and mnemonic). We do not store password and mnemonic.
       /// 
       /// Locales: en, de
@@ -2426,6 +2442,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let refresh = Rswift.StringResource(key: "refresh", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: Register
+      /// 
+      /// Locales: en, de
+      static let register = Rswift.StringResource(key: "register", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Remove
       /// 
       /// Locales: en, de
@@ -2442,14 +2462,14 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let invalid_repassword = Rswift.StringResource(key: "invalid_repassword", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: Resend confirmation mail
+      /// 
+      /// Locales: en, de
+      static let email_resend_confirmation = Rswift.StringResource(key: "email_resend_confirmation", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Resend email
       /// 
       /// Locales: en, de
       static let resend_email = Rswift.StringResource(key: "resend_email", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: Resend verification link
-      /// 
-      /// Locales: en, de
-      static let email_resend_confirmation = Rswift.StringResource(key: "email_resend_confirmation", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Reset 2fa
       /// 
       /// Locales: en, de
@@ -2526,6 +2546,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let stellar = Rswift.StringResource(key: "stellar", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      /// en translation: Stellar Currency (%@)
+      /// 
+      /// Locales: en
+      static let chart_card_title2 = Rswift.StringResource(key: "chart_card_title2", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
       /// en translation: Stellar Lumens (XLM)
       /// 
       /// Locales: en, de
@@ -2638,10 +2662,6 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let username = Rswift.StringResource(key: "username", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: Verify your email address
-      /// 
-      /// Locales: en, de
-      static let lbl_email_confirmation = Rswift.StringResource(key: "lbl_email_confirmation", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: View FAQ
       /// 
       /// Locales: en, de
@@ -2654,10 +2674,6 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let wallets = Rswift.StringResource(key: "wallets", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: We sent a verification message to
-      /// 
-      /// Locales: en, de
-      static let email_confirmation_prehint = Rswift.StringResource(key: "email_confirmation_prehint", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Welcome
       /// 
       /// Locales: en, de
@@ -2682,10 +2698,10 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let mnemonic_words_title = Rswift.StringResource(key: "mnemonic_words_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: Your email address is not verified. We sent a verification message to your email account. Click the link to verify your email address. After doing so, please come back and press the "Continue" button to finish resetting your password.
+      /// en translation: Your email address is not confirmed.
       /// 
       /// Locales: en, de
-      static let email_confirmation_hint2 = Rswift.StringResource(key: "email_confirmation_hint2", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
+      static let lbl_email_confirmation2 = Rswift.StringResource(key: "lbl_email_confirmation2", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: Your new 2FA secret: %@
       /// 
       /// Locales: en, de
@@ -2782,10 +2798,6 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, de
       static let lbl_moment_year_count = Rswift.StringResource(key: "lbl_moment_year_count", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
-      /// en translation: password
-      /// 
-      /// Locales: en, de
-      static let password = Rswift.StringResource(key: "password", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "de"], comment: nil)
       /// en translation: step %@ of 3
       /// 
       /// Locales: en, de
@@ -3000,11 +3012,25 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("add", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Already confirmed
+      /// 
+      /// Locales: en, de
+      static func email_already_confirmed(_: Void = ()) -> String {
+        return NSLocalizedString("email_already_confirmed", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Amount
       /// 
       /// Locales: en, de
       static func amount(_: Void = ()) -> String {
         return NSLocalizedString("amount", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: An email has been sent to your email account. Please check your inbox and confirm your email address first. After doing so, please come back and press the "Continue" button to continue.
+      /// 
+      /// Locales: en, de
+      static func email_confirmation_hint2(_: Void = ()) -> String {
+        return NSLocalizedString("email_confirmation_hint2", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Available
@@ -3091,18 +3117,18 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("change_password", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Chart destination currency
+      /// 
+      /// Locales: en
+      static func chart_currency(_: Void = ()) -> String {
+        return NSLocalizedString("chart_currency", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: City
       /// 
       /// Locales: en, de
       static func city(_: Void = ()) -> String {
         return NSLocalizedString("city", bundle: R.hostingBundle, comment: "")
-      }
-      
-      /// en translation: Click the link to verify your email address.
-      /// 
-      /// Locales: en, de
-      static func email_confirmation_posthint(_: Void = ()) -> String {
-        return NSLocalizedString("email_confirmation_posthint", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Close
@@ -3231,6 +3257,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("email", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Email confirmation required
+      /// 
+      /// Locales: en, de
+      static func lbl_email_confirmation(_: Void = ()) -> String {
+        return NSLocalizedString("lbl_email_confirmation", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Email resent
       /// 
       /// Locales: en, de
@@ -3250,13 +3283,6 @@ struct R: Rswift.Validatable {
       /// Locales: en, de
       static func enabled(_: Void = ()) -> String {
         return NSLocalizedString("enabled", bundle: R.hostingBundle, comment: "")
-      }
-      
-      /// en translation: Enter the email address you used to sign up.
-      /// 
-      /// Locales: en, de
-      static func reset_enter_email(_: Void = ()) -> String {
-        return NSLocalizedString("reset_enter_email", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Error
@@ -3315,7 +3341,7 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("finish_setup", bundle: R.hostingBundle, comment: "")
       }
       
-      /// en translation: For resetting your %@, we sent a message to your email account. Click the link to reset your %@.
+      /// en translation: For resetting your %@, an email has been sent to your email account. Please check your inbox and follow the instructions in the received email to reset your %@.
       /// 
       /// Locales: en, de
       static func lost_security_email_hint(_ value1: String, _ value2: String) -> String {
@@ -3476,6 +3502,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("import_mnemonic", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: In order to be able continue the setup process, you need to confirm your email address first. An email with a confirmation link has been sent to your inbox. Please follow the instructions from the mail to confirm your email address.
+      /// 
+      /// Locales: en, de
+      static func email_confirmation_hint(_: Void = ()) -> String {
+        return NSLocalizedString("email_confirmation_hint", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Info
       /// 
       /// Locales: en, de
@@ -3539,13 +3572,6 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("issuer_pk", bundle: R.hostingBundle, comment: "")
       }
       
-      /// en translation: Join Lumenshine
-      /// 
-      /// Locales: en, de
-      static func join(_: Void = ()) -> String {
-        return NSLocalizedString("join", bundle: R.hostingBundle, comment: "")
-      }
-      
       /// en translation: Just now
       /// 
       /// Locales: en, de
@@ -3602,14 +3628,14 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("logout", bundle: R.hostingBundle, comment: "")
       }
       
-      /// en translation: Log in
+      /// en translation: Login
       /// 
       /// Locales: en, de
       static func login(_: Void = ()) -> String {
         return NSLocalizedString("login", bundle: R.hostingBundle, comment: "")
       }
       
-      /// en translation: Log in to your account
+      /// en translation: Login to continue
       /// 
       /// Locales: en, de
       static func login_continue(_: Void = ()) -> String {
@@ -3791,6 +3817,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("operation_id", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Password
+      /// 
+      /// Locales: en, de
+      static func password(_: Void = ()) -> String {
+        return NSLocalizedString("password", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Password requirements
       /// 
       /// Locales: en, de
@@ -3812,6 +3845,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("personal_data", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Please confirm your email address first.
+      /// 
+      /// Locales: en, de
+      static func lbl_please_confirm(_: Void = ()) -> String {
+        return NSLocalizedString("lbl_please_confirm", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Please fill in the form below with valid information
       /// 
       /// Locales: en, de
@@ -3819,11 +3859,11 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("login_fill", bundle: R.hostingBundle, comment: "")
       }
       
-      /// en translation: Please verify your email address first.
+      /// en translation: Please select the destination currency for Chart cards
       /// 
-      /// Locales: en, de
-      static func lbl_please_confirm(_: Void = ()) -> String {
-        return NSLocalizedString("lbl_please_confirm", bundle: R.hostingBundle, comment: "")
+      /// Locales: en
+      static func chart_currency_hint(_: Void = ()) -> String {
+        return NSLocalizedString("chart_currency_hint", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Please write down your backup secret (mnemonic). You can use it if you lose your password to recover your wallet. It can be also used in other apps / wallets that support import from mnemonic. If you lose your password and the mnemonic you will not be able to access your funds any more. We can not recover your account if you lose both (password and mnemonic). We do not store password and mnemonic.
@@ -3889,6 +3929,13 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("refresh", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Register
+      /// 
+      /// Locales: en, de
+      static func register(_: Void = ()) -> String {
+        return NSLocalizedString("register", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Remove
       /// 
       /// Locales: en, de
@@ -3917,18 +3964,18 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("invalid_repassword", bundle: R.hostingBundle, comment: "")
       }
       
+      /// en translation: Resend confirmation mail
+      /// 
+      /// Locales: en, de
+      static func email_resend_confirmation(_: Void = ()) -> String {
+        return NSLocalizedString("email_resend_confirmation", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// en translation: Resend email
       /// 
       /// Locales: en, de
       static func resend_email(_: Void = ()) -> String {
         return NSLocalizedString("resend_email", bundle: R.hostingBundle, comment: "")
-      }
-      
-      /// en translation: Resend verification link
-      /// 
-      /// Locales: en, de
-      static func email_resend_confirmation(_: Void = ()) -> String {
-        return NSLocalizedString("email_resend_confirmation", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Reset 2fa
@@ -4062,6 +4109,13 @@ struct R: Rswift.Validatable {
       /// Locales: en, de
       static func stellar(_: Void = ()) -> String {
         return NSLocalizedString("stellar", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// en translation: Stellar Currency (%@)
+      /// 
+      /// Locales: en
+      static func chart_card_title2(_ value1: String) -> String {
+        return String(format: NSLocalizedString("chart_card_title2", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
       }
       
       /// en translation: Stellar Lumens (XLM)
@@ -4260,13 +4314,6 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("username", bundle: R.hostingBundle, comment: "")
       }
       
-      /// en translation: Verify your email address
-      /// 
-      /// Locales: en, de
-      static func lbl_email_confirmation(_: Void = ()) -> String {
-        return NSLocalizedString("lbl_email_confirmation", bundle: R.hostingBundle, comment: "")
-      }
-      
       /// en translation: View FAQ
       /// 
       /// Locales: en, de
@@ -4286,13 +4333,6 @@ struct R: Rswift.Validatable {
       /// Locales: en, de
       static func wallets(_: Void = ()) -> String {
         return NSLocalizedString("wallets", bundle: R.hostingBundle, comment: "")
-      }
-      
-      /// en translation: We sent a verification message to
-      /// 
-      /// Locales: en, de
-      static func email_confirmation_prehint(_: Void = ()) -> String {
-        return NSLocalizedString("email_confirmation_prehint", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Welcome
@@ -4337,11 +4377,11 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("mnemonic_words_title", bundle: R.hostingBundle, comment: "")
       }
       
-      /// en translation: Your email address is not verified. We sent a verification message to your email account. Click the link to verify your email address. After doing so, please come back and press the "Continue" button to finish resetting your password.
+      /// en translation: Your email address is not confirmed.
       /// 
       /// Locales: en, de
-      static func email_confirmation_hint2(_: Void = ()) -> String {
-        return NSLocalizedString("email_confirmation_hint2", bundle: R.hostingBundle, comment: "")
+      static func lbl_email_confirmation2(_: Void = ()) -> String {
+        return NSLocalizedString("lbl_email_confirmation2", bundle: R.hostingBundle, comment: "")
       }
       
       /// en translation: Your new 2FA secret: %@
@@ -4512,13 +4552,6 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("lbl_moment_year_count", bundle: R.hostingBundle, comment: "")
       }
       
-      /// en translation: password
-      /// 
-      /// Locales: en, de
-      static func password(_: Void = ()) -> String {
-        return NSLocalizedString("password", bundle: R.hostingBundle, comment: "")
-      }
-      
       /// en translation: step %@ of 3
       /// 
       /// Locales: en, de
@@ -4589,15 +4622,15 @@ struct _R: Rswift.Validatable {
   struct nib: Rswift.Validatable {
     static func validate() throws {
       try _UnfundedWalletCardContentView.validate()
-      try _LockedView.validate()
-      try _FundWalletViewController.validate()
-      try _ReceivePaymentCardViewController.validate()
-      try _FundTestNetWalletViewController.validate()
-      try _WalletDetailsViewController.validate()
-      try _WalletCardInfoViewController.validate()
-      try _HomeUnfundedWalletHeaderView.validate()
       try _HomeFundedWalletHeaderView.validate()
       try _AccountDetailsViewController.validate()
+      try _FundTestNetWalletViewController.validate()
+      try _ReceivePaymentCardViewController.validate()
+      try _HomeUnfundedWalletHeaderView.validate()
+      try _WalletCardInfoViewController.validate()
+      try _LockedView.validate()
+      try _WalletDetailsViewController.validate()
+      try _FundWalletViewController.validate()
     }
     
     struct _AccountCurrenciesViewController: Rswift.NibResourceType {
@@ -4705,10 +4738,10 @@ struct _R: Rswift.Validatable {
       }
       
       static func validate() throws {
-        if UIKit.UIImage(named: "send", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'send' is used in nib 'HomeFundedWalletHeaderView', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "logo", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'logo' is used in nib 'HomeFundedWalletHeaderView', but couldn't be loaded.") }
         if UIKit.UIImage(named: "receive", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'receive' is used in nib 'HomeFundedWalletHeaderView', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "logo", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'logo' is used in nib 'HomeFundedWalletHeaderView', but couldn't be loaded.") }
         if UIKit.UIImage(named: "more", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'more' is used in nib 'HomeFundedWalletHeaderView', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "send", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'send' is used in nib 'HomeFundedWalletHeaderView', but couldn't be loaded.") }
         if #available(iOS 11.0, *) {
         }
       }
@@ -4880,9 +4913,9 @@ struct _R: Rswift.Validatable {
       }
       
       static func validate() throws {
+        if UIKit.UIImage(named: "question", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'question' is used in nib 'ReceivePaymentCardViewController', but couldn't be loaded.") }
         if UIKit.UIImage(named: "copy", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'copy' is used in nib 'ReceivePaymentCardViewController', but couldn't be loaded.") }
         if UIKit.UIImage(named: "qr_placeholder", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'qr_placeholder' is used in nib 'ReceivePaymentCardViewController', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "question", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'question' is used in nib 'ReceivePaymentCardViewController', but couldn't be loaded.") }
         if #available(iOS 11.0, *) {
         }
       }

@@ -17,6 +17,7 @@ enum SettingsEntry {
     case notifications
     case personalData
     case avatar
+    case chartCurrency
     
     var name: String {
         switch self {
@@ -36,6 +37,8 @@ enum SettingsEntry {
             return R.string.localizable.notifications()
         case .personalData:
             return R.string.localizable.personal_data()
+        case .chartCurrency:
+            return R.string.localizable.chart_currency()
         }
     }
 }
