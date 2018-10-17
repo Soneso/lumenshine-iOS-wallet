@@ -299,22 +299,19 @@
 "tfa_code_configured" = "2FA CODE (falls eingerichtet)";
 
 /*  */
-"lbl_email_confirmation" = "Die Bestätigung deiner Email-Adresse wird benötigt.";
+"lbl_email_confirmation" = "Bestätige deine Email-Adresse";
 
 /*  */
-"email_confirmation_hint" = "Um mit der Einrichtung fortfahren zu können, müsst du zuerst deine Email-Adresse bestätigen. Aus diesem Grund haben wir eine Email an dein Postfach gesendet. Drücke den Bestätigungs-Link in der erhaltenen Email um deine Email-Addresse zu bestätigen.";
+"email_confirmation_prehint" = "Wir haben eine Nachricht an folgende Emailadresse gesendet:";
+
+/*  */
+"email_confirmation_posthint" = "Drücke den Link um deine Emailadresse zu bestätigen.";
 
 /*  */
 "email_confirmation_hint2" = "Wir haben dir eine Email gesendet. Bitte überprüfe dein Postfach und bestätige deine Email-Addresse zuerst. Nach der Bestätigung komm wieder zurück und drücke den \"Weiter\" Button um fortzufahren.";
 
 /*  */
-"lbl_email_confirmation2" = "Deine Email-Adresse ist nun bestätigt.";
-
-/*  */
-"lbl_please_confirm" = "Bitte bestätige Ihre Email-Address zuerst.";
-
-/*  */
-"email_already_confirmed" = "Bereits bestätigt";
+"lbl_please_confirm" = "Bitte bestätige deine Email-Address zuerst.";
 
 /*  */
 "email_resend_confirmation" = "Erneut senden";

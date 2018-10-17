@@ -88,8 +88,8 @@ fileprivate extension LostSecuritySuccessView {
     }
     
     func prepareHintLabel() {
-        errorLabel.text = viewModel.successDetail
-        errorLabel.font = R.font.encodeSansRegular(size: 14)
+        errorLabel.text = viewModel.successDetail.uppercased()
+        errorLabel.font = R.font.encodeSansBold(size: 15)
         errorLabel.textAlignment = .center
         errorLabel.textColor = Stylesheet.color(.green)
         errorLabel.numberOfLines = 0
@@ -102,7 +102,7 @@ fileprivate extension LostSecuritySuccessView {
         }
         
         hintLabel.text = viewModel.successHint
-        hintLabel.font = R.font.encodeSansRegular(size: 14)
+        hintLabel.font = R.font.encodeSansRegular(size: 15)
         hintLabel.textAlignment = .center
         hintLabel.textColor = Stylesheet.color(.lightBlack)
         hintLabel.numberOfLines = 0

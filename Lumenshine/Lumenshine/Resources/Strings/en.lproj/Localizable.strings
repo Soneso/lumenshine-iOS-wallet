@@ -161,10 +161,10 @@
 "username" = "Username";
 
 /*  */
-"password" = "Password";
+"password" = "password";
 
 /*  */
-"repeat_password" = "Repeat Password";
+"repeat_password" = "Repeat password";
 
 /*  */
 "forename" = "Forename";
@@ -311,25 +311,22 @@
 "tfa_code_configured" = "2FA CODE (if configured)";
 
 /*  */
-"lbl_email_confirmation" = "Email confirmation required";
+"lbl_email_confirmation" = "Verify your email address";
 
 /*  */
-"email_confirmation_hint" = "In order to be able continue the setup process, you need to confirm your email address first. An email with a confirmation link has been sent to your inbox. Please follow the instructions from the mail to confirm your email address.";
+"email_confirmation_prehint" = "We sent a verification message to";
 
 /*  */
-"email_confirmation_hint2" = "An email has been sent to your email account. Please check your inbox and confirm your email address first. After doing so, please come back and press the \"Continue\" button to continue.";
+"email_confirmation_posthint" = "Click the link to verify your email address.";
 
 /*  */
-"lbl_email_confirmation2" = "Your email address is not confirmed.";
+"email_confirmation_hint2" = "Your email address is not verified. We sent a verification message to your email account. Click the link to verify your email address. After doing so, please come back and press the \"Continue\" button to finish resetting your password.";
 
 /*  */
-"lbl_please_confirm" = "Please confirm your email address first.";
+"lbl_please_confirm" = "Please verify your email address first.";
 
 /*  */
-"email_already_confirmed" = "Already confirmed";
-
-/*  */
-"email_resend_confirmation" = "Resend confirmation mail";
+"email_resend_confirmation" = "Resend verification link";
 
 /*  */
 "resend_email" = "Resend email";
@@ -338,7 +335,7 @@
 "lost_security_email_sent" = "%@ email sent";
 
 /*  */
-"lost_security_email_hint" = "For resetting your %@, an email has been sent to your email account. Please check your inbox and follow the instructions in the received email to reset your %@.";
+"lost_security_email_hint" = "For resetting your %@, we sent a message to your email account. Click the link to reset your %@.";
 
 /*  */
 "confirmation_mail_resent" = "Confirmation mail resent";

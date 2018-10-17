@@ -93,8 +93,8 @@ fileprivate extension EmailConfirmationView {
     }
     
     func prepareHintLabel() {
-        errorLabel.text = R.string.localizable.lbl_email_confirmation2()
-        errorLabel.font = R.font.encodeSansRegular(size: 14)
+        errorLabel.text = R.string.localizable.lbl_email_confirmation()
+        errorLabel.font = R.font.encodeSansRegular(size: 15)
         errorLabel.textAlignment = .center
         errorLabel.textColor = Stylesheet.color(.red)
         errorLabel.numberOfLines = 0
@@ -107,7 +107,7 @@ fileprivate extension EmailConfirmationView {
         }
         
         hintLabel.text = R.string.localizable.email_confirmation_hint2()
-        hintLabel.font = R.font.encodeSansRegular(size: 14)
+        hintLabel.font = R.font.encodeSansRegular(size: 15)
         hintLabel.textAlignment = .center
         hintLabel.textColor = Stylesheet.color(.lightBlack)
         hintLabel.numberOfLines = 0

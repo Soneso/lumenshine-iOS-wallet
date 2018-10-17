@@ -86,8 +86,8 @@ fileprivate extension EmailSetupViewController {
     }
     
     func prepareTitleLabel() {
-        titleLabel.text = R.string.localizable.lbl_email_confirmation()
-        titleLabel.font = R.font.encodeSansSemiBold(size: 14)
+        titleLabel.text = R.string.localizable.lbl_email_confirmation().uppercased()
+        titleLabel.font = R.font.encodeSansSemiBold(size: 17)
         titleLabel.textAlignment = .center
         titleLabel.textColor = Stylesheet.color(.red)
         titleLabel.numberOfLines = 2
@@ -101,10 +101,28 @@ fileprivate extension EmailSetupViewController {
     }
     
     func prepareHintLabel() {
-        hintLabel.text = R.string.localizable.email_confirmation_hint()
-        hintLabel.font = R.font.encodeSansRegular(size: 14)
+        let text_font = R.font.encodeSansRegular(size: 15) ?? Stylesheet.font(.body)
+        let email_font = R.font.encodeSansBold(size: 15) ?? Stylesheet.font(.body)
+        
+        let pretext = NSAttributedString(string: R.string.localizable.email_confirmation_prehint() + " ",
+                                              attributes: [NSAttributedStringKey.font : text_font,
+                                                           NSAttributedStringKey.foregroundColor : Stylesheet.color(.lightBlack)])
+        
+        let email = NSAttributedString(string: viewModel.userEmail,
+                                       attributes: [NSAttributedStringKey.font : email_font,
+                                                    NSAttributedStringKey.foregroundColor : Stylesheet.color(.lightBlack)])
+        
+        let posttext = NSAttributedString(string: ". " + R.string.localizable.email_confirmation_posthint(),
+                                          attributes: [NSAttributedStringKey.font : text_font,
+                                                       NSAttributedStringKey.foregroundColor : Stylesheet.color(.lightBlack)])
+        
+        
+        let hint = NSMutableAttributedString(attributedString: pretext)
+        hint.append(email)
+        hint.append(posttext)
+        
+        hintLabel.attributedText = hint
         hintLabel.textAlignment = .center
-        hintLabel.textColor = Stylesheet.color(.lightBlack)
         hintLabel.numberOfLines = 0
         
         contentView.addSubview(hintLabel)
@@ -133,7 +151,7 @@ fileprivate extension EmailSetupViewController {
         submitButton.title = R.string.localizable.continue().uppercased()
         submitButton.titleColor = Stylesheet.color(.white)
         submitButton.cornerRadiusPreset = .cornerRadius6
-        submitButton.backgroundColor = Stylesheet.color(.cyan)
+        submitButton.backgroundColor = Stylesheet.color(.green)
         submitButton.titleLabel?.font = R.font.encodeSansSemiBold(size: 15)
         submitButton.addTarget(self, action: #selector(submitAction(sender:)), for: .touchUpInside)
         
@@ -148,7 +166,7 @@ fileprivate extension EmailSetupViewController {
         resendButton.title = R.string.localizable.email_resend_confirmation().uppercased()
         resendButton.titleColor = Stylesheet.color(.white)
         resendButton.cornerRadiusPreset = .cornerRadius6
-        resendButton.backgroundColor = Stylesheet.color(.darkBlue)
+        resendButton.backgroundColor = Stylesheet.color(.cyan)
         resendButton.titleLabel?.font = R.font.encodeSansSemiBold(size: 15)
         resendButton.titleLabel?.adjustsFontSizeToFitWidth = true
         resendButton.addTarget(self, action: #selector(resendAction(sender:)), for: .touchUpInside)

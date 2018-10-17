@@ -23,6 +23,7 @@ protocol SetupViewModelType: Transitionable {
     var tfaSecret: String? { get }
     var mnemonic24Word: String { get }
     var verificationWords: [String] { get }
+    var userEmail: String {get}
     
     func submit(tfaCode: String, response: @escaping TFAResponseClosure)
     
@@ -100,6 +101,10 @@ class SetupViewModel: SetupViewModelType {
     
     var mnemonic24Word: String {
         return mnemonic
+    }
+    
+    var userEmail: String {
+        return user.email
     }
     
     func setupStep() -> SetupStep {
