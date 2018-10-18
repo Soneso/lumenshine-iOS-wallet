@@ -35,12 +35,14 @@ fileprivate extension KnownCurrency {
 class KnownCurrenciesTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     
-    private var headerViewController: LoadTransactionsHistoryViewController!
     private let CellIdentifier = "KnownCurrenciesTableViewCell"
+    private let userManager = UserManager()
+    private var headerViewController: LoadTransactionsHistoryViewController!
     private var itemsSource: [KnownCurrency] = []
     private var knownCurrenciesManager = KnownCurrenciesManager()
     private var currentExpandedRowIndexPath: IndexPath?
-    
+    private var canWalletSign = true
+
     var wallet: FundedWallet!
     
     override func viewDidLoad() {
@@ -49,8 +51,19 @@ class KnownCurrenciesTableViewController: UIViewController, UITableViewDelegate,
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
+        
         setTableViewHeader()
-        getKnownCurrencies()
+
+        userManager.canMasterKeySignOperation(accountID: wallet.publicKey, neededSecurity: .low) { (response) -> (Void) in
+            switch response {
+            case .success(canSign: let canSign):
+                self.canWalletSign = canSign
+            case .failure(error: let error):
+                print(error.localizedDescription)
+            }
+            
+            self.getKnownCurrencies()
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -99,6 +112,11 @@ class KnownCurrenciesTableViewController: UIViewController, UITableViewDelegate,
         if let issuer = knownCurrency.issuerPublicKey {
             cell.issuerPublicKeyLabel.text = "\(issuer)"
         }
+
+        cell.cellIndexPath = indexPath
+        cell.selectionStyle = .none
+        cell.canWalletSign = canWalletSign
+        cell.wallet = wallet
         
         if knownCurrency.isExpanded {
             cell.expand()
@@ -106,13 +124,6 @@ class KnownCurrenciesTableViewController: UIViewController, UITableViewDelegate,
             cell.collapse()
         }
         
-        if BiometricHelper.isBiometricAuthEnabled {
-            cell.passwordTextField.isHidden = true
-        }
-        
-        cell.wallet = wallet
-        cell.selectionStyle = .none
-
         return cell
     }
     

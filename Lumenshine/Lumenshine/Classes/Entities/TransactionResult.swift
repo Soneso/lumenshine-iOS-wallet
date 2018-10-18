@@ -13,7 +13,12 @@ enum TransactionStatus: String {
     case error = "error"
 }
 
-public struct TransactionResult {
+protocol OperationIDValueChangedDelegate {
+    func operationIDChanged(newValue: String?)
+}
+
+public class TransactionResult {
+    var operationIDChangedDelegate: OperationIDValueChangedDelegate?
     var status: TransactionStatus = TransactionStatus.error
     var message: String? = nil
     var currency: String = ""
@@ -24,5 +29,9 @@ public struct TransactionResult {
     var memo: String? = nil
     var memoType: MemoTypeValues = MemoTypeValues.MEMO_TEXT
     var transactionFee: String? = nil
-    var operationID: String? = nil
+    var operationID: String? = nil {
+        didSet {
+            operationIDChangedDelegate?.operationIDChanged(newValue: operationID)
+        }
+    }
 }

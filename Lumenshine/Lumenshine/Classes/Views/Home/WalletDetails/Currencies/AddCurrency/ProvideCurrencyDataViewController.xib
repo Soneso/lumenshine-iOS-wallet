@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,9 +17,7 @@
                 <outlet property="currencyValidationStackView" destination="cCz-zb-Taa" id="NWp-of-jjW"/>
                 <outlet property="issuerValidationLabel" destination="99i-c4-Z84" id="CJE-fB-vaQ"/>
                 <outlet property="issuerValidationStackView" destination="ZO6-jJ-L0q" id="fj6-uW-Eui"/>
-                <outlet property="passwordTextField" destination="3aD-Rb-mEG" id="OGx-ec-bOq"/>
-                <outlet property="passwordValidationLabel" destination="AMb-WX-gkD" id="eDx-78-0Kq"/>
-                <outlet property="passwordValidationStackView" destination="JRP-YY-HhB" id="NKR-lU-Nxu"/>
+                <outlet property="passwordViewContainer" destination="9mO-EW-5D8" id="9b0-Bv-2y9"/>
                 <outlet property="publicKeyTextField" destination="Lrd-AW-vRP" id="9EF-Oa-AZW"/>
                 <outlet property="view" destination="iN0-l3-epB" id="OzS-IZ-Ky5"/>
             </connections>
@@ -29,11 +27,11 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="huj-FQ-jdS">
-                    <rect key="frame" x="0.0" y="20" width="375" height="172.5"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="huj-FQ-jdS">
+                    <rect key="frame" x="0.0" y="20" width="375" height="214.5"/>
                     <subviews>
                         <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cCz-zb-Taa">
-                            <rect key="frame" x="0.0" y="-4" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                             <subviews>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="LTh-hQ-sBr">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
@@ -67,7 +65,7 @@
                             </subviews>
                         </stackView>
                         <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZO6-jJ-L0q">
-                            <rect key="frame" x="0.0" y="34" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="38" width="375" height="0.0"/>
                             <subviews>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="R43-ag-AWl">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
@@ -90,7 +88,7 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ca9-A5-Bto">
-                            <rect key="frame" x="0.0" y="38" width="375" height="30"/>
+                            <rect key="frame" x="0.0" y="46" width="375" height="30"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Public key of currency issuer" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="Lrd-AW-vRP" customClass="InputTextField" customModule="Lumenshine" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
@@ -100,42 +98,12 @@
                                 </textField>
                             </subviews>
                         </stackView>
-                        <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="JRP-YY-HhB">
-                            <rect key="frame" x="0.0" y="72" width="375" height="0.0"/>
-                            <subviews>
-                                <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="3IH-wo-eEx">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="passwordValidationLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMb-WX-gkD" customClass="ErrorLabel" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="0.0" width="359" height="0.0"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="AMb-WX-gkD" secondAttribute="trailing" id="KDt-mm-e3S"/>
-                                        <constraint firstItem="AMb-WX-gkD" firstAttribute="top" secondItem="3IH-wo-eEx" secondAttribute="top" id="RxW-KE-bx4"/>
-                                        <constraint firstAttribute="bottom" secondItem="AMb-WX-gkD" secondAttribute="bottom" id="fM2-7g-Qs2"/>
-                                        <constraint firstItem="AMb-WX-gkD" firstAttribute="leading" secondItem="3IH-wo-eEx" secondAttribute="leading" constant="16" id="ytg-03-K5w"/>
-                                    </constraints>
-                                </view>
-                            </subviews>
-                        </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3Kb-vY-n2V">
-                            <rect key="frame" x="0.0" y="76" width="375" height="30"/>
-                            <subviews>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="3aD-Rb-mEG" customClass="InputTextField" customModule="Lumenshine" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
-                                    <nil key="textColor"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
-                                </textField>
-                            </subviews>
-                        </stackView>
+                        <view contentMode="scaleToFill" verticalHuggingPriority="1000" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="9mO-EW-5D8">
+                            <rect key="frame" x="0.0" y="92" width="375" height="40"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="lDP-Rk-6P5">
-                            <rect key="frame" x="0.0" y="114" width="375" height="20.5"/>
+                            <rect key="frame" x="0.0" y="148" width="375" height="20.5"/>
                             <subviews>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="7sB-Wt-7X1">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="20.5"/>
@@ -158,7 +126,7 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jBa-HS-3JG">
-                            <rect key="frame" x="0.0" y="142.5" width="375" height="30"/>
+                            <rect key="frame" x="0.0" y="184.5" width="375" height="30"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tiY-k1-PPq">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
@@ -184,7 +152,6 @@
                     <constraints>
                         <constraint firstItem="jBa-HS-3JG" firstAttribute="centerX" secondItem="huj-FQ-jdS" secondAttribute="centerX" id="0aq-nE-OqZ"/>
                         <constraint firstAttribute="trailing" secondItem="h45-d7-YgA" secondAttribute="trailing" id="JIi-Wl-HoE"/>
-                        <constraint firstAttribute="trailing" secondItem="3Kb-vY-n2V" secondAttribute="trailing" id="UX5-WZ-aVI"/>
                         <constraint firstAttribute="trailing" secondItem="ca9-A5-Bto" secondAttribute="trailing" id="iZV-OH-qKO"/>
                     </constraints>
                 </stackView>

@@ -35,14 +35,16 @@ fileprivate extension KnownInflationDestinationResponse {
 class KnownInflationDestinationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     
-    private var headerViewController: LoadTransactionsHistoryViewController!
-    private let CellIdentifier = "KnownInflationDestinationsTableViewCell"
-    private var itemsSource: [KnownInflationDestinationResponse] = []
-    private var currentExpandedRowIndexPath: IndexPath?
-    private let inflationManager = InflationManager()
-    
     var currentInflationDestination: String?
     var wallet: FundedWallet!
+    
+    private let userManager = UserManager()
+    private let CellIdentifier = "KnownInflationDestinationsTableViewCell"
+    private let inflationManager = InflationManager()
+    private var headerViewController: LoadTransactionsHistoryViewController!
+    private var itemsSource: [KnownInflationDestinationResponse] = []
+    private var currentExpandedRowIndexPath: IndexPath?
+    private var canWalletSign = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +53,14 @@ class KnownInflationDestinationsViewController: UIViewController, UITableViewDel
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
         setTableViewHeader()
-        getKnownInflationDestinations()
+        userManager.canMasterKeySignOperation(accountID: wallet.publicKey, neededSecurity: .medium) { (response) -> (Void) in
+            switch response {
+            case .success(canSign: let canSign):
+                self.canWalletSign = canSign
+            case .failure(error: let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -99,7 +108,7 @@ class KnownInflationDestinationsViewController: UIViewController, UITableViewDel
         
         cell.nameLabel.text = knownInflationDestination.name
         cell.shortDescriptionLabel.text = knownInflationDestination.shortDescription
-        cell.issuerPublicKeyLabel.text = "\(knownInflationDestination.issuerPublicKey)"
+        cell.issuerPublicKeyLabel.text = knownInflationDestination.issuerPublicKey
         
         if knownInflationDestination.issuerPublicKey == currentInflationDestination {
             cell.isCurrentlySetSwitch.isOn = true
@@ -116,11 +125,8 @@ class KnownInflationDestinationsViewController: UIViewController, UITableViewDel
         } else {
             cell.collapse()
         }
-
-        if BiometricHelper.isBiometricAuthEnabled {
-            cell.passwordTextField.isHidden = true
-        }
         
+        cell.canWalletSign = canWalletSign
         cell.wallet = wallet
         cell.selectionStyle = .none
         

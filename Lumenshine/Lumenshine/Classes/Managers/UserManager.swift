@@ -9,6 +9,12 @@
 import UIKit
 import stellarsdk
 
+public enum MasterKeySecurityLevels {
+    case high
+    case medium
+    case low
+}
+
 public enum BoolEnum {
     case success(response: Bool)
     case failure(error: ServiceError)
@@ -168,7 +174,7 @@ public class UserManager: NSObject {
      Medium Security - "medium": All else (e.g. payments)
      High Security - "high": AccountMerge, SetOptions for Signer and threshold
     **/
-    func canMasterKeySignOperation(accountID: String, neededSecurity: String, completion: @escaping CanMasterKeySignOperationClosure) {
+    func canMasterKeySignOperation(accountID: String, neededSecurity: MasterKeySecurityLevels, completion: @escaping CanMasterKeySignOperationClosure) {
         stellarSDK.accounts.getAccountDetails(accountId: accountID) { (response) -> (Void) in
             DispatchQueue.main.async {
                 switch response {
@@ -179,9 +185,9 @@ public class UserManager: NSObject {
                         
                         var neededThreshold = accountDetails.thresholds.highThreshold
                         
-                        if (neededSecurity == "medium") {
+                        if (neededSecurity == MasterKeySecurityLevels.medium) {
                             neededThreshold = accountDetails.thresholds.medThreshold
-                        } else if (neededSecurity == "low") {
+                        } else if (neededSecurity == MasterKeySecurityLevels.low) {
                             neededThreshold = accountDetails.thresholds.lowThreshold
                         }
                         

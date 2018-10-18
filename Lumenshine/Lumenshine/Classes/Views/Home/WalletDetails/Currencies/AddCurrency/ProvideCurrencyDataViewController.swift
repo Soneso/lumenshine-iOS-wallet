@@ -23,76 +23,114 @@ fileprivate enum AlphanumericTypesMaximumLength: Int {
 class ProvideCurrencyDataViewController: UIViewController {
     @IBOutlet weak var currencyValidationStackView: UIStackView!
     @IBOutlet weak var issuerValidationStackView: UIStackView!
-    @IBOutlet weak var passwordValidationStackView: UIStackView!
     
     @IBOutlet weak var assetCodeTextField: UITextField!
     @IBOutlet weak var publicKeyTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
     
-    @IBOutlet weak var passwordValidationLabel: UILabel!
     @IBOutlet weak var issuerValidationLabel: UILabel!
     
     @IBOutlet weak var addButton: UIButton!
     
+    @IBOutlet weak var passwordViewContainer: UIView!
+    
+    var wallet: FundedWallet!
+    private var walletManager = WalletManager()
+    private var inputDataValidator = InputDataValidator()
+    private var passwordView: PasswordView!
+    private let IssuerDoesntExistValidationError = "Issuer does not exist"
+    private let passwordManager = PasswordManager()
+    private let userManager = UserManager()
+    
     @IBAction func addButtonAction(_ sender: UIButton) {
+        addCurrency()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addButton.backgroundColor = Stylesheet.color(.blue)
+        setupPasswordView()
+    }
+    
+    private func addCurrency(forBiometricAuth biometricAuth: Bool = false) {
         resetValidationErrors()
         
         addButton.setTitle(AddButtonTitles.validating.rawValue, for: UIControlState.normal)
         addButton.isEnabled = false
         
-        if self.isInputDataValid {
-            guard self.hasEnoughFunding else {
+        if isInputDataValid(forBiometricAuth: biometricAuth) {
+            guard hasEnoughFunding else {
                 self.showFundingAlert()
                 return
             }
-
-            if let assetCode = assetCodeTextField.text, let issuer = publicKeyTextField.text {
-                inputDataValidator.isPasswordAndDestinationAddresValid(address: issuer, password: !passwordTextField.isHidden ? passwordTextField.text : nil) { (passwordAndAddressResponse) -> (Void) in
-                    switch passwordAndAddressResponse {
-                    case .success(userMnemonic: let userMnemonic):
-                        self.addTrustLine(issuer: issuer, assetCode: assetCode, userMnemonic: userMnemonic)
-                        
-                    case .failure(errorCode: let errorCode):
-                        switch errorCode {
-                        case .addressNotFound:
-                            self.showValidationError(for: self.issuerValidationStackView)
-                            self.issuerValidationLabel.text = self.IssuerDoesntExistValidationError
-                            
-                        case .incorrectPassword:
-                            self.showValidationError(for: self.passwordValidationStackView)
-                            self.passwordValidationLabel.text = ValidationErrors.InvalidPassword.rawValue
-                            
-                        case .enterPasswordPressed:
-                            self.passwordTextField.isHidden = false
-                        }
-                        
-                        self.resetAddButtonToDefault()
-                    }
-                }
-            }
+            
+            validatePasswordAndDestination(forBiometricAuth: biometricAuth)
         } else {
             resetAddButtonToDefault()
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        if BiometricHelper.isBiometricAuthEnabled {
-            passwordTextField.isHidden = true
+    private func validatePasswordAndDestination(forBiometricAuth biometricAuth: Bool) {
+        if let assetCode = assetCodeTextField.text, let issuer = publicKeyTextField.text {
+            if passwordView.useExternalSigning {
+                validateDestinationForExternalSigning(issuer: issuer, assetCode: assetCode)
+            } else {
+                validateDestinationAndPassword(issuer: issuer, assetCode: assetCode, biometricAuth: biometricAuth)
+            }
         }
-        
-        addButton.backgroundColor = Stylesheet.color(.blue)
     }
     
-    var wallet: FundedWallet!
+    private func validateDestinationForExternalSigning(issuer: String, assetCode: String) {
+        userManager.checkIfAccountExists(forAccountID: issuer) { (result) -> (Void) in
+            if result {
+                self.addTrustLine(issuer: issuer, assetCode: assetCode)
+            } else {
+                self.showValidationError(for: self.issuerValidationStackView)
+                self.issuerValidationLabel.text = self.IssuerDoesntExistValidationError
+                self.resetAddButtonToDefault()
+            }
+        }
+    }
     
-    private let passwordManager = PasswordManager()
+    private func validateDestinationAndPassword(issuer: String, assetCode: String, biometricAuth: Bool) {
+        inputDataValidator.isPasswordAndDestinationAddresValid(address: issuer, password: !biometricAuth ? passwordView.passwordTextField.text : nil) { (passwordAndAddressResponse) -> (Void) in
+            switch passwordAndAddressResponse {
+            case .success(_):
+                self.addTrustLine(issuer: issuer, assetCode: assetCode)
+                
+            case .failure(errorCode: let errorCode):
+                switch errorCode {
+                case .addressNotFound:
+                    self.showValidationError(for: self.issuerValidationStackView)
+                    self.issuerValidationLabel.text = self.IssuerDoesntExistValidationError
+                    
+                case .incorrectPassword:
+                    self.passwordView.showInvalidPasswordError()
+                    
+                case .enterPasswordPressed:
+                    break
+                }
+                
+                self.resetAddButtonToDefault()
+            }
+        }
+    }
     
-    private var walletManager = WalletManager()
-    private var inputDataValidator = InputDataValidator()
-    
-    private let IssuerDoesntExistValidationError = "Issuer does not exist"
+    private func setupPasswordView() {
+        passwordView = Bundle.main.loadNibNamed("PasswordView", owner: self, options: nil)![0] as? PasswordView
+        passwordView.masterKeyNeededSecurity = .low
+        passwordView.hideTitleLabels = true
+        passwordView.wallet = wallet
+        
+        passwordView.biometricAuthAction = {
+            self.addCurrency(forBiometricAuth: true)
+        }
+        
+        passwordViewContainer.addSubview(passwordView)
+        
+        passwordView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+    }
     
     private func showValidationError(for stackView: UIStackView) {
         stackView.isHidden = false
@@ -101,7 +139,7 @@ class ProvideCurrencyDataViewController: UIViewController {
     private func resetValidationErrors() {
         currencyValidationStackView.isHidden = true
         issuerValidationStackView.isHidden = true
-        passwordValidationStackView.isHidden = true
+        passwordView.resetValidationErrors()
     }
     
     private func resetAddButtonToDefault() {
@@ -139,40 +177,16 @@ class ProvideCurrencyDataViewController: UIViewController {
         }
     }
     
-    private var isPasswordValid: Bool {
-        get {
-            if let password = passwordTextField.text, password.isMandatoryValid() {
-                if password.isValidPassword() {
-                    return true
-                }
-                
-                showValidationError(for: passwordValidationStackView)
-                passwordValidationLabel.text = ValidationErrors.InvalidPassword.rawValue
-            } else {
-                showValidationError(for: passwordValidationStackView)
-                passwordValidationLabel.text = ValidationErrors.MandatoryPassword.rawValue
-            }
-            
-            return false
-        }
+    private func isPasswordValid(forBiometricAuth biometricAuth: Bool) -> Bool {
+        return passwordView.validatePassword(biometricAuth: biometricAuth)
     }
     
-    private var isInputDataValid: Bool {
-        get {
-            let isAssetCodeValid = self.isAssetCodeValid
-            let isAddressValid = self.isAddressValid
-            
-            if passwordTextField.isHidden {
-                if !isAssetCodeValid || !isAddressValid {
-                    return false
-                }
-                
-                return true
-            }
-            
-            let isPasswordValid = self.isPasswordValid
-            return isAssetCodeValid && isAddressValid && isPasswordValid
-        }
+    private func isInputDataValid(forBiometricAuth biometricAuth: Bool) -> Bool {
+        let isAssetCodeValid = self.isAssetCodeValid
+        let isAddressValid = self.isAddressValid
+        let isPasswordValid = self.isPasswordValid(forBiometricAuth: biometricAuth)
+        
+        return isAssetCodeValid && isAddressValid && isPasswordValid
     }
     
     private var hasEnoughFunding: Bool {
@@ -185,8 +199,10 @@ class ProvideCurrencyDataViewController: UIViewController {
         self.displaySimpleAlertView(title: "Adding failed", message: "Insufficient funding. Please send lumens to your wallet first.")
     }
     
-    private func addTrustLine(issuer: String, assetCode: String, userMnemonic: String) {
-        let transactionHelper = TransactionHelper(wallet: wallet)
+    private func addTrustLine(issuer: String, assetCode: String) {
+        let signer = passwordView.useExternalSigning ? passwordView.signersTextField.text : nil
+        let seed = passwordView.useExternalSigning ? passwordView.seedTextField.text : nil
+        let transactionHelper = TransactionHelper(wallet: wallet, signer: signer, signerSeed: seed)
         
         var assetType: Int32? = nil
         
@@ -202,7 +218,7 @@ class ProvideCurrencyDataViewController: UIViewController {
             let issuerKeyPair = issuerKeyPair,
             let asset = Asset(type: assetType, code: assetCode, issuer: issuerKeyPair) {
             
-            transactionHelper.addTrustLine(asset: asset, userMnemonic: userMnemonic, completion: { (status) -> (Void) in
+            transactionHelper.addTrustLine(asset: asset, completion: { (status) -> (Void) in
                 switch status {
                 case .success:
                     break

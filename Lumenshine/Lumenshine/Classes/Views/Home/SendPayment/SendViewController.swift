@@ -66,30 +66,23 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var addressErrorLabel: UILabel!
     @IBOutlet weak var amountErrorLabel: UILabel!
     @IBOutlet weak var memoInputErrorLabel: UILabel!
-    @IBOutlet weak var passwordErrorLabel: UILabel!
     @IBOutlet weak var sendErrorLabel: UILabel!
     @IBOutlet weak var availableAmountLabel: UILabel!
     @IBOutlet weak var sendAllCurrency: UILabel!
     @IBOutlet weak var sendAllValue: UILabel!
-    @IBOutlet weak var seedErrorLabel: UILabel!
     @IBOutlet weak var otherCurrencyErrorLabel: UILabel!
     @IBOutlet weak var transactionFeeLabel: UILabel!
     
     @IBOutlet weak var memoTypeTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var amountTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var memoInputTextField: UITextField!
     @IBOutlet weak var issuerTextField: UITextField!
     @IBOutlet weak var currentCurrencyTextField: UITextField!
-    @IBOutlet weak var signerTextField: UITextField!
-    @IBOutlet weak var signerSeedTextField: UITextField!
     @IBOutlet weak var otherCurrencyTextField: UITextField!
     
-    @IBOutlet weak var seedErrorView: UIView!
     @IBOutlet weak var addressErrorView: UIView!
     @IBOutlet weak var amountErrorView: UIView!
-    @IBOutlet weak var passwordErrorView: UIView!
     @IBOutlet weak var sendErrorView: UIView!
     @IBOutlet weak var memoInputErrorView: UIView!
     @IBOutlet weak var issuerView: UIView!
@@ -99,26 +92,20 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var availableAmountView: UIView!
     @IBOutlet weak var otherCurrencyView: UIView!
     @IBOutlet weak var otherCurrencyErrorView: UIView!
-    @IBOutlet weak var biometricAuthView: UIView!
+    @IBOutlet weak var passwordViewContainer: UIView!
     
     @IBOutlet weak var sendButton: UIButton!
-    @IBOutlet weak var biometricAuthButton: UIButton!
     
     @IBOutlet weak var amountSegmentedControl: UISegmentedControl!
-
-    @IBOutlet weak var signerStackView: UIStackView!
-    @IBOutlet weak var passwordStackView: UIStackView!
     
     private var currencyPickerView: UIPickerView!
     private var issuerPickerView: UIPickerView!
     private var memoTypePickerView: UIPickerView!
-    private var signerPickerView: UIPickerView!
     
     private var isInputDataValid: Bool = true
     private var isSendAnywayRequired = false
     private var userMnemonic: String!
     private var availableAmount: CoinUnit?
-    private var availableSigners: [AccountSignerResponse]!
     private var otherCurrencyAsset: AccountBalanceResponse?
     
     private var scanViewController: ScanViewController!
@@ -131,6 +118,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     var sendAction: ((TransactionInput) -> ())?
     
     private var memoTypes: [MemoTypeValues] = [MemoTypeValues.MEMO_TEXT, MemoTypeValues.MEMO_ID, MemoTypeValues.MEMO_HASH, MemoTypeValues.MEMO_RETURN]
+    private var passwordView: PasswordView!
     
     @IBAction func amountSegmentedControlValueChanged(_ sender: UISegmentedControl) {
         if amountSegmentedControl.selectedSegmentIndex == AmountSegmentedControlIndexes.sendAmount.rawValue {
@@ -149,16 +137,12 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         sendActionPreparation()
     }
 
-    @IBAction func biometricAuthAction(_ sender: UIButton) {
-        sendActionPreparation(biometricAuth: true)
-    }
-    
     private func sendActionPreparation(biometricAuth: Bool = false) {
         resetValidations()
         sendButton.setTitle(SendButtonTitles.validating.rawValue, for: UIControlState.normal)
         sendButton.isEnabled = false
         if validateInsertedData(biometricAuth: biometricAuth) {
-            if passwordStackView.isHidden {
+            if passwordView.passwordStackView.isHidden {
                 validateInputForExternalSigning()
             } else {
                 validateInputForMasterKey(biometricAuth: biometricAuth)
@@ -171,7 +155,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     private func validateInputForMasterKey(biometricAuth: Bool) {
         if let address = addressTextField.text {
-            let password = !biometricAuth ? passwordTextField.text : nil
+            let password = !biometricAuth ? passwordView.passwordTextField.text : nil
             if otherCurrencyView.isHidden, let currency = getSelectedCurrency() {
                 validatePasswordAndDestinationAddress(address: address, password: password, currency: currency)
             } else {
@@ -226,7 +210,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                     self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .AddressNotFound)
                     self.setSendButtonDefaultTitle()
                 case .incorrectPassword:
-                    self.setValidationError(view: self.passwordErrorView, label: self.passwordErrorLabel, errorMessage: .InvalidPassword)
+                    self.passwordView.showInvalidPasswordError()
                     self.setSendButtonDefaultTitle()
                 case .enterPasswordPressed:
                     break
@@ -359,11 +343,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         view.backgroundColor = Stylesheet.color(.veryLightGray)
         sendButton.backgroundColor = Stylesheet.color(.blue)
         transactionFeeLabel.text = "Stellar transaction fee: \(String(format: "%.5f", CoinUnit.Constants.transactionFee)) XLM"
-        checkIfMasterKeyCanSignPayment()
-        
-        if !BiometricHelper.isBiometricAuthEnabled {
-            hideBiometricAuthButton()
-        }
+        setupPasswordView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -375,6 +355,25 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         
         checkForTransactionFeeAvailability()
         resetSendButtonToNormal()
+    }
+    
+    private func setupPasswordView() {
+        if let wallet = wallet as? FundedWallet {
+            passwordView = Bundle.main.loadNibNamed("PasswordView", owner: self, options: nil)![0] as? PasswordView
+            passwordView.masterKeyNeededSecurity = .medium
+            passwordView.wallet = wallet
+            passwordView.contentView = contentView
+            
+            passwordView.biometricAuthAction = {
+                self.sendActionPreparation(biometricAuth: true)
+            }
+            
+            passwordViewContainer.addSubview(passwordView)
+            
+            passwordView.snp.makeConstraints { (make) in
+                make.edges.equalToSuperview()
+            }
+        }
     }
     
     private func setupForOtherCurrency() {
@@ -405,59 +404,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             otherCurrencyTextField.text = nil
             otherCurrencyTextField.removeTarget(self, action: #selector(otherCurrencyChanged), for: .editingChanged)
         }
-    }
-    
-    private func checkIfMasterKeyCanSignPayment() {
-        userManager.canMasterKeySignOperation(accountID: wallet.publicKey, neededSecurity: "medium") { (response) -> (Void) in
-            switch response {
-            case .success(canSign: let canSign):
-                if !canSign {
-                    self.passwordStackView.isHidden = true
-                    self.signerStackView.isHidden = false
-                    self.hideBiometricAuthButton()
-                    self.setupSigners()
-                }
-            case .failure(error: let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    private func setupSigners() {
-        userManager.getSignersList(accountID: wallet.publicKey) { (response) -> (Void) in
-            switch response {
-            case .success(signersList: let signersList):
-                if signersList.count == 1 {
-                    self.showNoMultiSigSupportError()
-                } else {
-                    self.setupSignersPicker(signerList: signersList)
-                }
-            case .failure(error: let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    private func showNoMultiSigSupportError() {
-        navigationController?.popViewController(animated: false)
-        let noMultiSigSupportViewController = NoMultiSigSupportViewController()
-        navigationController?.pushViewController(noMultiSigSupportViewController, animated: true)
-    }
-    
-    private func setupSignersPicker(signerList: [AccountSignerResponse]) {
-        if let masterKeyWeight = (wallet as? FundedWallet)?.masterKeyWeight {
-            availableSigners = signerList.filter({ (signer) -> Bool in
-                return signer.weight > masterKeyWeight
-            })
-        }
-        
-        
-        signerPickerView = UIPickerView()
-        signerPickerView.delegate = self
-        signerPickerView.dataSource = self
-        signerTextField.text = availableSigners.first?.publicKey
-        signerTextField.inputView = signerPickerView
-        signerTextField.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(signerDoneButtonTap))
     }
     
     private func setupMemoTypePicker() {
@@ -521,10 +467,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         selectAsset(pickerView: issuerPickerView, row: issuerPickerView.selectedRow(inComponent: 0))
     }
     
-    @objc func signerDoneButtonTap(_ sender: Any) {
-        selectAsset(pickerView: signerPickerView, row: signerPickerView.selectedRow(inComponent: 0))
-    }
-    
     private func sendPayment() {
         let transactionData = TransactionInput(currency: self.selectedCurrency,
                                                issuer: self.issuerTextField.text ?? nil,
@@ -540,16 +482,16 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                                                }),
                                                userMnemonic: self.userMnemonic,
                                                transactionType: !self.isSendAnywayRequired ? TransactionActionType.sendPayment : TransactionActionType.createAndFundAccount,
-                                               signer: !self.signerStackView.isHidden ? self.signerTextField.text : nil,
-                                               signerSeed: !self.signerStackView.isHidden ? self.signerSeedTextField.text : nil,
+                                               signer: self.passwordView.useExternalSigning ? self.passwordView.signersTextField.text : nil,
+                                               signerSeed: self.passwordView.useExternalSigning ? self.passwordView.seedTextField.text : nil,
                                                otherCurrencyAsset: self.otherCurrencyAsset ?? nil)
         self.clearSeedAndPasswordFields()
         self.sendAction?(transactionData)
     }
     
     private func clearSeedAndPasswordFields() {
-        signerSeedTextField.text = nil
-        passwordTextField.text = nil
+        passwordView.seedTextField = nil
+        passwordView.passwordTextField = nil
     }
     
     private func validatePasswordResponse(passwordResponse: PasswordEnum) {
@@ -558,7 +500,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             self.userMnemonic = mnemonic
         case .failure(error: let error):
             print("Error: \(error)")
-            self.setValidationError(view: self.passwordErrorView, label: self.passwordErrorLabel, errorMessage: .InvalidPassword)
+            self.passwordView.showInvalidPasswordError()
         }
     }
     
@@ -629,15 +571,12 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         amountErrorLabel.text = nil
         memoInputErrorView.isHidden = true
         memoInputErrorLabel.text = nil
-        passwordErrorView.isHidden = true
-        passwordErrorLabel.text = nil
         sendErrorView.isHidden = true
         sendErrorLabel.text = nil
-        seedErrorView.isHidden = true
-        seedErrorLabel.text = nil
         otherCurrencyErrorView.isHidden = true
         otherCurrencyErrorLabel.text = nil
         isInputDataValid = true
+        passwordView.resetValidationErrors()
         setSendButtonDefaultTitle()
     }
     
@@ -772,45 +711,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
     }
     
-    private func validateSignersSeed() {
-        if let currentSeed = signerSeedTextField.text {
-            if !currentSeed.isMandatoryValid() {
-                setValidationError(view: seedErrorView, label: seedErrorLabel, errorMessage: .Mandatory)
-                return
-            }
-            
-            if let signerKeyPair = try? KeyPair(secretSeed: currentSeed) {
-                if signerKeyPair.accountId != signerTextField.text {
-                    setValidationError(view: seedErrorView, label: seedErrorLabel, errorMessage: .InvalidSignerSeed)
-                }
-            } else {
-                setValidationError(view: seedErrorView, label: seedErrorLabel, errorMessage: .InvalidSignerSeed)
-            }
-        }
-    }
-    
-    private func validatePassword(biometricAuth: Bool = false) {
-        if biometricAuth {
-            return
-        }
-        
-        if passwordStackView.isHidden {
-            validateSignersSeed()
-            return
-        }
-        
-        if let currentPassword = passwordTextField.text {
-            if !currentPassword.isMandatoryValid() {
-                setValidationError(view: passwordErrorView, label: passwordErrorLabel, errorMessage: .Mandatory)
-                return
-            }
-            
-            if !isInputDataValid {
-                return
-            }
-        }
-    }
-    
     private func checkForRecipientAccount() {
         if !isInputDataValid || isSendAnywayRequired {
             if isSendAnywayRequired {
@@ -826,7 +726,10 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         validateAssetCodeIsFilled()
         validateAmount()
         validateMemo()
-        validatePassword(biometricAuth: biometricAuth)
+        if isInputDataValid {
+            isInputDataValid = passwordView.validatePassword(biometricAuth: biometricAuth)
+        }
+        
         checkForTransactionFeeAvailability()
         checkForRecipientAccount()
         
@@ -876,7 +779,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             memoInputTextField.text = qrResultArray[5]
         }
         
-        passwordTextField.text = qrResultArray[6]
         scanViewController.view.removeFromSuperview()
         scanViewController = nil
     }
@@ -892,8 +794,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             return memoTypes.count
         } else if pickerView == issuerPickerView {
             return (wallet as! FundedWallet).issuersFor(assetCode: selectedCurrency).count
-        } else if pickerView == signerPickerView {
-            return availableSigners.count
         }
         
         return 0
@@ -910,8 +810,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             return memoTypes[row].rawValue
         } else if pickerView == issuerPickerView {
             return (wallet as! FundedWallet).issuersFor(assetCode: selectedCurrency)[row]
-        } else if pickerView == signerPickerView {
-            return availableSigners[row].publicKey
         }
         
         return nil
@@ -941,8 +839,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         } else if pickerView == issuerPickerView {
             issuerTextField.text = (wallet as! FundedWallet).issuersFor(assetCode: selectedCurrency)[row]
             return
-        } else if pickerView == signerPickerView {
-            signerTextField.text = availableSigners[row].publicKey
         }
     }
     
@@ -960,9 +856,5 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         scanQrButton.image = R.image.qr_placeholder()?.crop(toWidth: 15, toHeight: 15)?.tint(with: Stylesheet.color(.white))
         scanQrButton.addTarget(self, action: #selector(didTapScan(_:)), for: .touchUpInside)
         navigationItem.rightViews = [scanQrButton]
-    }
-    
-    private func hideBiometricAuthButton() {
-        biometricAuthView.isHidden = true
     }
 }

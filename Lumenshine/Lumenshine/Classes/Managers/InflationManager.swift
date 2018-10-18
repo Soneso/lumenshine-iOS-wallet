@@ -104,14 +104,18 @@ class InflationManager {
         }
     }
     
-    func setInflationDestination(inflationAddress: String, sourceAccountID: String, completion: @escaping SetInflationDestinationClosure) {
+    func setInflationDestination(inflationAddress: String, sourceAccountID: String, externalSigner: String? = nil, externalSignersSeed: String? = nil, completion: @escaping SetInflationDestinationClosure) {
         if let sourceAccountKeyPair = PrivateKeyManager.getKeyPair(forAccountID: sourceAccountID) {
             userManager.checkIfAccountExists(forAccountID: inflationAddress) { (accountExists) -> (Void) in
                 if accountExists {
                     self.stellarSDK.accounts.getAccountDetails(accountId: sourceAccountKeyPair.accountId) { (response) -> (Void) in
                         switch response {
                         case .success(let accountResponse):
-                            self.submitInflationDestination(accountResponse: accountResponse, sourceAccountKeyPair: sourceAccountKeyPair, inflationAddress: inflationAddress,
+                            self.submitInflationDestination(accountResponse: accountResponse,
+                                                            sourceAccountKeyPair: sourceAccountKeyPair,
+                                                            inflationAddress: inflationAddress,
+                                                            externalSigner: externalSigner,
+                                                            externalSignersSeed: externalSignersSeed,
                                                             completion: { (response) -> (Void) in
                                 DispatchQueue.main.async {
                                     completion(response)
@@ -133,14 +137,30 @@ class InflationManager {
         }
     }
     
-    private func submitInflationDestination(accountResponse: AccountResponse, sourceAccountKeyPair: KeyPair, inflationAddress: String, completion: @escaping SetInflationDestinationClosure) {
+    private func submitInflationDestination(accountResponse: AccountResponse,
+                                            sourceAccountKeyPair: KeyPair,
+                                            inflationAddress: String,
+                                            externalSigner: String? = nil,
+                                            externalSignersSeed: String? = nil,
+                                            completion: @escaping SetInflationDestinationClosure) {
         do {
             let setInflationOperation = try SetOptionsOperation(inflationDestination: KeyPair(accountId: inflationAddress))
             let transaction = try Transaction(sourceAccount: accountResponse,
                                               operations: [setInflationOperation],
                                               memo: Memo.none,
                                               timeBounds:nil)
-            try transaction.sign(keyPair: sourceAccountKeyPair, network: Network.testnet)
+            if let signer = externalSigner, let seed = externalSignersSeed {
+                let signerKeyPair = try KeyPair.init(secretSeed: seed)
+                
+                if signerKeyPair.accountId != signer {
+                    throw SignerErorr.signerMismatch
+                }
+                
+                try transaction.sign(keyPair: signerKeyPair, network: .testnet)
+            } else {
+                try transaction.sign(keyPair: sourceAccountKeyPair, network: Network.testnet)
+            }
+            
             try self.stellarSDK.transactions.submitTransaction(transaction: transaction) { (response) -> (Void) in
                 switch response {
                 case .success(_):

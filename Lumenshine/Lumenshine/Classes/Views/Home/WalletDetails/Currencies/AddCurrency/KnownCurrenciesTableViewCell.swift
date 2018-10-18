@@ -16,20 +16,26 @@ fileprivate enum AddButtonTitles: String {
 }
 
 class KnownCurrenciesTableViewCell: UITableViewCell {
+    static var isReloading: (String, Bool) = ("", false)
     @IBOutlet weak var assetCodeLabel: UILabel!
     @IBOutlet weak var authorizationLabel: UILabel!
     @IBOutlet weak var issuerPublicKeyLabel: UILabel!
-    @IBOutlet weak var passwordErrorLabel: UILabel!
-    
-    @IBOutlet weak var passwordTextField: UITextField!
     
     @IBOutlet weak var addButton: UIButton!
     
     @IBOutlet weak var expansionView: UIView!
     @IBOutlet weak var authorizationView: UIView!
+    @IBOutlet weak var passwordViewContainer: UIView!
     
-    var wallet: FundedWallet!
+    var wallet: FundedWallet! {
+        didSet {
+            setupPasswordView()
+        }
+    }
     
+    var canWalletSign: Bool!
+    var cellIndexPath: IndexPath!
+    var passwordView: PasswordView!
     private let walletManager = WalletManager()
     private let passwordManager = PasswordManager()
     
@@ -45,38 +51,10 @@ class KnownCurrenciesTableViewCell: UITableViewCell {
     }
     
     @IBAction func addButtonAction(_ sender: UIButton) {
-        resetValidationError()
-        setButtonAsValidating()
-    
-        if isPasswordValid, let assetCode = assetCodeLabel.text?.getAssetCode(), let issuerAccountId = issuerPublicKeyLabel.text, let issuerKeyPair = try? KeyPair(accountId: issuerAccountId) {
-            guard hasEnoughFunding else {
-                showFundingAlert()
-                setButtonAsNormal()
-                return
-            }
-            
-            passwordManager.getMnemonic(password: !passwordTextField.isHidden ? passwordTextField.text : nil) { (result) -> (Void) in
-                switch result {
-                case .success(mnemonic: let mnemonic):
-                    self.addTrustLine(assetCode: assetCode, issuerKeyPair: issuerKeyPair, mnemonic: mnemonic)
-                case .failure(error: let error):
-                    if error == BiometricStatus.enterPasswordPressed.rawValue {
-                        self.passwordTextField.isHidden = false
-                    } else {
-                        self.showPasswordValidationError(validationError: ValidationErrors.InvalidPassword)
-                    }
-                    
-                    self.setButtonAsNormal()
-                }
-            }
-        } else {
-            setButtonAsNormal()
-        }
+        addCurrency()
     }
     
     func expand() {
-        resetValidationError()
-        passwordTextField.text = nil
         expansionView.isHidden = false
     }
     
@@ -84,33 +62,43 @@ class KnownCurrenciesTableViewCell: UITableViewCell {
         expansionView.isHidden = true
     }
     
-    private var isPasswordValid: Bool {
-        get {
-            if passwordTextField.isHidden {
-                return true
+    private func addCurrency(biometricAuth: Bool = false) {
+        passwordView.resetValidationErrors()
+        setButtonAsValidating()
+        
+        if isPasswordValid(biometricAuth: biometricAuth), let assetCode = assetCodeLabel.text?.getAssetCode(), let issuerAccountId = issuerPublicKeyLabel.text, let issuerKeyPair = try? KeyPair(accountId: issuerAccountId) {
+            guard hasEnoughFunding else {
+                showFundingAlert()
+                setButtonAsNormal()
+                return
             }
             
-            if let password = passwordTextField.text, password.isMandatoryValid() {
-                if password.isValidPassword() {
-                    return true
-                }
-                
-                showPasswordValidationError(validationError: ValidationErrors.InvalidPassword)
+            if passwordView.useExternalSigning {
+                self.addTrustLine(assetCode: assetCode, issuerKeyPair: issuerKeyPair)
             } else {
-                showPasswordValidationError(validationError: ValidationErrors.MandatoryPassword)
+                validatePasswordAndRemoveCurrency(biometricAuth: biometricAuth, assetCode: assetCode, issuerKeyPair: issuerKeyPair)
             }
             
-            return false
+        } else {
+            setButtonAsNormal()
         }
     }
     
-    private func showPasswordValidationError(validationError: ValidationErrors) {
-        passwordErrorLabel.isHidden = false
-        passwordErrorLabel.text = validationError.rawValue
+    private func validatePasswordAndRemoveCurrency(biometricAuth: Bool, assetCode: String, issuerKeyPair: KeyPair) {
+        passwordManager.getMnemonic(password: !biometricAuth ? passwordView.passwordTextField.text : nil) { (result) -> (Void) in
+            switch result {
+            case .success(_):
+                self.addTrustLine(assetCode: assetCode, issuerKeyPair: issuerKeyPair)
+            case .failure(error: let error):
+                print("Get mnemonic error: \(error)")
+                self.passwordView.showInvalidPasswordError()
+                self.setButtonAsNormal()
+            }
+        }
     }
     
-    private func resetValidationError() {
-        passwordErrorLabel.isHidden = true
+    private func isPasswordValid(biometricAuth: Bool) -> Bool {
+        return passwordView.validatePassword(biometricAuth: biometricAuth)
     }
     
     private var hasEnoughFunding: Bool {
@@ -137,11 +125,13 @@ class KnownCurrenciesTableViewCell: UITableViewCell {
         addButton.isEnabled = true
     }
     
-    private func addTrustLine(assetCode: String, issuerKeyPair: KeyPair, mnemonic: String) {
+    private func addTrustLine(assetCode: String, issuerKeyPair: KeyPair) {
         let assetType: Int32 = assetCode.count < 5 ? AssetType.ASSET_TYPE_CREDIT_ALPHANUM4 : AssetType.ASSET_TYPE_CREDIT_ALPHANUM12
         if let asset = Asset(type: assetType, code: assetCode, issuer: issuerKeyPair) {
-            let transactionHelper = TransactionHelper(wallet: wallet)
-            transactionHelper.addTrustLine(asset: asset, userMnemonic: mnemonic) { (result) -> (Void) in
+            let signer = passwordView.useExternalSigning ? passwordView.signersTextField.text : nil
+            let seed = passwordView.useExternalSigning ? passwordView.seedTextField.text : nil
+            let transactionHelper = TransactionHelper(wallet: wallet, signer: signer, signerSeed: seed)
+            transactionHelper.addTrustLine(asset: asset) { (result) -> (Void) in
                 switch result {
                 case .success:
                     break
@@ -159,5 +149,39 @@ class KnownCurrenciesTableViewCell: UITableViewCell {
         backgroundColor = Stylesheet.color(.clear)
         authorizationLabel.textColor = Stylesheet.color(.red)
         addButton.backgroundColor = Stylesheet.color(.blue)
+    }
+    
+    func setupPasswordView() {
+        passwordView = Bundle.main.loadNibNamed("PasswordView", owner: self, options: nil)![0] as? PasswordView
+        passwordView.masterKeyNeededSecurity = .low
+        passwordView.externalSetup = true
+        passwordView.hideTitleLabels = true
+        passwordView.alwaysShowValidationPlaceholders = true
+        passwordView.wallet = wallet
+    
+        passwordView.biometricAuthAction = {
+            self.addCurrency(biometricAuth: true)
+        }
+        
+        if canWalletSign {
+            passwordView.showPassword()
+        } else {
+            passwordView.showSigners()
+        }
+        
+        passwordViewContainer.addSubview(passwordView)
+        
+        passwordView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        for subView in passwordViewContainer.subviews {
+            subView.removeFromSuperview()
+        }
+
+        passwordView = nil
     }
 }

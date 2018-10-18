@@ -18,71 +18,30 @@ fileprivate enum RemoveButtonDescriptions: String {
 }
 
 class RemoveCurrencyViewController: UIViewController {
-    private var titleView: TitleView!
     private let passwordManager = PasswordManager()
     
     @IBOutlet weak var currencyNameLabel: UILabel!
     @IBOutlet weak var issuerPublicKeyLabel: UILabel!
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var balanceWarningLabel: UILabel!
-    @IBOutlet weak var validationErrorLabel: UILabel!
-    
-    @IBOutlet weak var passwordTextField: UITextField!
     
     @IBOutlet weak var removeButton: UIButton!
-        
+    @IBOutlet weak var passwordViewContainer: UIView!
+    
     var currency: AccountBalanceResponse!
     var wallet: FundedWallet!
     private var walletManager = WalletManager()
+    private var passwordView: PasswordView!
     
     @IBAction func removeButtonAction(_ sender: UIButton) {
-        validationErrorLabel.isHidden = true
-        removeButton.setTitle(RemoveButtonDescriptions.ValidatingAndRemoving.rawValue, for: UIControlState.normal)
-        removeButton.isEnabled = false
-        
-        self.validatePassword()
-        
-        if !self.isInputDataValid {
-            self.resetRemoveButton()
-            return
-        }
-        
-        if !hasEnoughFunding {
-            showFundingAlert()
-            self.resetRemoveButton()
-            return
-        }
-        
-        passwordManager.getMnemonic(password: !passwordTextField.isHidden ? passwordTextField.text : nil) { (result) -> (Void) in
-            switch result {
-            case .success(mnemonic: let mnemonic):
-                let transactionHelper = TransactionHelper(wallet: self.wallet)
-                transactionHelper.removeTrustLine(currency: self.currency, userMnemonic: mnemonic, completion: { (_) -> (Void) in
-                    self.navigationController?.popViewController(animated: true)
-                })
-                
-            case .failure(error: let error):
-                print("Error: \(error)")
-                if error == BiometricStatus.enterPasswordPressed.rawValue {
-                    self.passwordTextField.isHidden = false
-                } else {
-                    self.validationErrorLabel.text = ValidationErrors.InvalidPassword.rawValue
-                    self.validationErrorLabel.isHidden = false
-                }
-
-                self.resetRemoveButton()
-            }
-        }
+        removeCurrency()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationItem()
         setupLabelDescriptions()
-        
-        if BiometricHelper.isBiometricAuthEnabled {
-            passwordTextField.isHidden = true
-        }
+        setupPasswordView()
         
         view.backgroundColor = Stylesheet.color(.veryLightGray)
         removeButton.backgroundColor = Stylesheet.color(.blue)
@@ -97,10 +56,57 @@ class RemoveCurrencyViewController: UIViewController {
         }
     }
     
-    private var isInputDataValid: Bool {
-        get {
-            return validationErrorLabel.isHidden
+    private func removeCurrencyWithExternalSigning() {
+        let signer = passwordView.signersTextField.text
+        let seed = passwordView.seedTextField.text
+        let transactionHelper = TransactionHelper(wallet: self.wallet, signer: signer, signerSeed: seed)
+        transactionHelper.removeTrustLine(currency: self.currency, completion: { (_) -> (Void) in
+            self.navigationController?.popViewController(animated: true)
+        })
+    }
+    
+    private func removeCurrencyWithPassword(biometricAuth: Bool) {
+        passwordManager.getMnemonic(password: !biometricAuth ? passwordView.passwordTextField.text : nil) { (result) -> (Void) in
+            switch result {
+            case .success(mnemonic: _):
+                let transactionHelper = TransactionHelper(wallet: self.wallet)
+                transactionHelper.removeTrustLine(currency: self.currency, completion: { (_) -> (Void) in
+                    self.navigationController?.popViewController(animated: true)
+                })
+
+            case .failure(error: let error):
+                print("Error: \(error)")
+                self.passwordView.showInvalidPasswordError()
+                self.resetRemoveButton()
+            }
         }
+    }
+    
+    private func removeCurrency(biometricAuth: Bool = false) {
+        passwordView.resetValidationErrors()
+        removeButton.setTitle(RemoveButtonDescriptions.ValidatingAndRemoving.rawValue, for: UIControlState.normal)
+        removeButton.isEnabled = false
+        
+        if !isInputDataValid(forBiometricAuth: biometricAuth) {
+            self.resetRemoveButton()
+            return
+        }
+        
+        if !hasEnoughFunding {
+            showFundingAlert()
+            self.resetRemoveButton()
+            return
+        }
+        
+        if passwordView.useExternalSigning {
+         removeCurrencyWithExternalSigning()
+        } else {
+            removeCurrencyWithPassword(biometricAuth: biometricAuth)
+        }
+    }
+    
+    private func isInputDataValid(forBiometricAuth biometricAuth: Bool) -> Bool {
+        return passwordView.validatePassword(biometricAuth: biometricAuth)
     }
     
     private func showFundingAlert() {
@@ -142,18 +148,20 @@ class RemoveCurrencyViewController: UIViewController {
         }
     }
     
-    private func validatePassword() {
-        if passwordTextField.isHidden {
-            return
+    private func setupPasswordView() {
+        passwordView = Bundle.main.loadNibNamed("PasswordView", owner: self, options: nil)![0] as? PasswordView
+        passwordView.masterKeyNeededSecurity = .low
+        passwordView.hideTitleLabels = true
+        passwordView.wallet = wallet
+        
+        passwordView.biometricAuthAction = {
+            self.removeCurrency(biometricAuth: true)
         }
         
-        if let password = self.passwordTextField.text {
-                if !password.isMandatoryValid() {
-                self.validationErrorLabel.text = ValidationErrors.MandatoryPassword.rawValue
-                self.validationErrorLabel.isHidden = false
-
-                return
-            }
+        passwordViewContainer.addSubview(passwordView)
+        
+        passwordView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
         }
     }
 }

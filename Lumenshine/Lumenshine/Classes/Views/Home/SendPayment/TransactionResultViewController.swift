@@ -24,8 +24,7 @@ private enum StatusLabelText: String {
 
 private var TransactionResultPrintJobName = "Transaction result print data"
 
-class TransactionResultViewController: UIViewController, WalletActionsProtocol {
-
+class TransactionResultViewController: UIViewController, WalletActionsProtocol, OperationIDValueChangedDelegate {
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var statusValueLabel: UILabel!
@@ -115,6 +114,11 @@ class TransactionResultViewController: UIViewController, WalletActionsProtocol {
         setButtonsTitles()
         populateValues()
         setupNavigationItem()
+        result.operationIDChangedDelegate = self
+    }
+    
+    func operationIDChanged(newValue: String?) {
+        operationIDValueLabel.text = newValue
     }
     
     private func setLabelsLayout() {

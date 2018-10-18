@@ -34,18 +34,21 @@ class AddCurrencyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationItem()
+        setupSegmentedContent()
         showKnownCurrencies()
         view.backgroundColor = Stylesheet.color(.veryLightGray)
+    }
+    
+    private func setupSegmentedContent() {
+        knownCurrenciesTableViewController = KnownCurrenciesTableViewController(nibName: "KnownCurrenciesTableViewController", bundle: Bundle.main)
+        knownCurrenciesTableViewController.wallet = wallet
+        
+        provideCurrencyDataViewController = ProvideCurrencyDataViewController(nibName: "ProvideCurrencyDataViewController", bundle: Bundle.main)
     }
     
     private func showKnownCurrencies() {
         if currencyContainer.subviews.count > 0 {
             currencyContainer.subviews[0].removeFromSuperview()
-        }
-
-        if knownCurrenciesTableViewController == nil {
-            knownCurrenciesTableViewController = KnownCurrenciesTableViewController(nibName: "KnownCurrenciesTableViewController", bundle: Bundle.main)
-            knownCurrenciesTableViewController.wallet = wallet
         }
 
         if let knownCurrenciesTableViewController = knownCurrenciesTableViewController {
@@ -63,10 +66,6 @@ class AddCurrencyViewController: UIViewController {
     private func showProvideCurrencyData() {
         if currencyContainer.subviews.count > 0 {
             currencyContainer.subviews[0].removeFromSuperview()
-        }
-        
-        if provideCurrencyDataViewController == nil {
-            provideCurrencyDataViewController = ProvideCurrencyDataViewController(nibName: "ProvideCurrencyDataViewController", bundle: Bundle.main)
         }
         
         if let provideCurrencyDataViewController = provideCurrencyDataViewController {
