@@ -359,7 +359,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         view.backgroundColor = Stylesheet.color(.veryLightGray)
         sendButton.backgroundColor = Stylesheet.color(.blue)
         transactionFeeLabel.text = "Stellar transaction fee: \(String(format: "%.5f", CoinUnit.Constants.transactionFee)) XLM"
-        checkIfAccountCanSign()
+        checkIfMasterKeyCanSignPayment()
         
         if !BiometricHelper.isBiometricAuthEnabled {
             hideBiometricAuthButton()
@@ -407,8 +407,8 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
     }
     
-    private func checkIfAccountCanSign() {
-        userManager.canAccountSign(accountID: wallet.publicKey) { (response) -> (Void) in
+    private func checkIfMasterKeyCanSignPayment() {
+        userManager.canMasterKeySignOperation(accountID: wallet.publicKey, neededSecurity: "medium") { (response) -> (Void) in
             switch response {
             case .success(canSign: let canSign):
                 if !canSign {

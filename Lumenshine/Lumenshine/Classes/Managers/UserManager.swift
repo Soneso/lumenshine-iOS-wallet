@@ -29,7 +29,7 @@ public enum AddressStatusEnum {
     case failure
 }
 
-public enum CanAccountSignEnum {
+public enum CanMasterKeySignOperationEnum {
     case success(canSign: Bool)
     case failure(error: HorizonRequestError)
 }
@@ -48,7 +48,7 @@ public typealias BoolClosure = (_ response:BoolEnum) -> (Void)
 public typealias CoinClosure = (_ response:CoinEnum) -> (Void)
 public typealias WalletsClosure = (_ response:WalletsEnum) -> (Void)
 public typealias AddressStatusClosure = (_ response: AddressStatusEnum) -> (Void)
-public typealias CanAccountSignClosure = (_ response: CanAccountSignEnum) -> (Void)
+public typealias CanMasterKeySignOperationClosure = (_ response: CanMasterKeySignOperationEnum) -> (Void)
 public typealias GetSignersListClosure = (_ response: GetSignersListEnum) -> (Void)
 public typealias GetAccountBalanceResponseClosure = (_ response: GetAccountBalanceResponseEnum) -> (Void)
 public typealias CoinUnit = Double
@@ -162,7 +162,13 @@ public class UserManager: NSObject {
         }
     }
     
-    func canAccountSign(accountID: String, completion: @escaping CanAccountSignClosure) {
+    /**
+     neededSecurity:
+     Low Security - "low": AllowTrust
+     Medium Security - "medium": All else (e.g. payments)
+     High Security - "high": AccountMerge, SetOptions for Signer and threshold
+    **/
+    func canMasterKeySignOperation(accountID: String, neededSecurity: String, completion: @escaping CanMasterKeySignOperationClosure) {
         stellarSDK.accounts.getAccountDetails(accountId: accountID) { (response) -> (Void) in
             DispatchQueue.main.async {
                 switch response {
@@ -170,7 +176,16 @@ public class UserManager: NSObject {
                     if let masterKeyWeight = accountDetails.signers.first(where: { (account) -> Bool in
                         return account.publicKey == accountID
                     })?.weight {
-                        if masterKeyWeight >= accountDetails.thresholds.lowThreshold {
+                        
+                        var neededThreshold = accountDetails.thresholds.highThreshold
+                        
+                        if (neededSecurity == "medium") {
+                            neededThreshold = accountDetails.thresholds.medThreshold
+                        } else if (neededSecurity == "low") {
+                            neededThreshold = accountDetails.thresholds.lowThreshold
+                        }
+                        
+                        if masterKeyWeight >= neededThreshold {
                             completion(.success(canSign: true))
                         } else {
                             completion(.success(canSign: false))
