@@ -99,7 +99,7 @@ public class AuthService: BaseService {
             path = "/portal/user/auth2/refresh"
         }
         
-        GETRequestWithPath(path: path) { (result) -> (Void) in
+        POSTRequestWithPath(path: path) { (result) -> (Void) in
             switch result {
             case .success(let data):
                 do {
