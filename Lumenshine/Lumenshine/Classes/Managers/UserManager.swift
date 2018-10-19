@@ -9,7 +9,7 @@
 import UIKit
 import stellarsdk
 
-public enum MasterKeySecurityLevels {
+public enum SigningSecurityLevel {
     case high
     case medium
     case low
@@ -174,24 +174,24 @@ public class UserManager: NSObject {
      Medium Security - "medium": All else (e.g. payments)
      High Security - "high": AccountMerge, SetOptions for Signer and threshold
     **/
-    func canMasterKeySignOperation(accountID: String, neededSecurity: MasterKeySecurityLevels, completion: @escaping CanMasterKeySignOperationClosure) {
+    func canSignerSignOperation(accountID: String, signerPublicKey:String, neededSecurity: SigningSecurityLevel, completion: @escaping CanMasterKeySignOperationClosure) {
         stellarSDK.accounts.getAccountDetails(accountId: accountID) { (response) -> (Void) in
             DispatchQueue.main.async {
                 switch response {
                 case .success(details: let accountDetails):
-                    if let masterKeyWeight = accountDetails.signers.first(where: { (account) -> Bool in
-                        return account.publicKey == accountID
+                    if let signerWeight = accountDetails.signers.first(where: { (nextSigner) -> Bool in
+                        return nextSigner.publicKey == signerPublicKey
                     })?.weight {
                         
                         var neededThreshold = accountDetails.thresholds.highThreshold
                         
-                        if (neededSecurity == MasterKeySecurityLevels.medium) {
+                        if (neededSecurity == SigningSecurityLevel.medium) {
                             neededThreshold = accountDetails.thresholds.medThreshold
-                        } else if (neededSecurity == MasterKeySecurityLevels.low) {
+                        } else if (neededSecurity == SigningSecurityLevel.low) {
                             neededThreshold = accountDetails.thresholds.lowThreshold
                         }
                         
-                        if masterKeyWeight >= neededThreshold {
+                        if signerWeight >= neededThreshold {
                             completion(.success(canSign: true))
                         } else {
                             completion(.success(canSign: false))
@@ -207,12 +207,26 @@ public class UserManager: NSObject {
         }
     }
     
-    func getSignersList(accountID: String, completion: @escaping GetSignersListClosure) {
+    func getSignersThatCanSignOperation(accountID: String, neededSecurity: SigningSecurityLevel, completion: @escaping GetSignersListClosure) {
         stellarSDK.accounts.getAccountDetails(accountId: accountID) { (response) -> (Void) in
             DispatchQueue.main.async {
                 switch response {
                 case .success(details: let accountDetails):
-                    completion(.success(signersList: accountDetails.signers))
+                    var signersThatCanSign: [AccountSignerResponse] = []
+                    for nextSigner in accountDetails.signers {
+                        var neededThreshold = accountDetails.thresholds.highThreshold
+                        
+                        if (neededSecurity == SigningSecurityLevel.medium) {
+                            neededThreshold = accountDetails.thresholds.medThreshold
+                        } else if (neededSecurity == SigningSecurityLevel.low) {
+                            neededThreshold = accountDetails.thresholds.lowThreshold
+                        }
+                        
+                        if nextSigner.weight >= neededThreshold {
+                            signersThatCanSign.append(nextSigner)
+                        }
+                    }
+                    completion(.success(signersList: signersThatCanSign))
                 case .failure(error: let error):
                     completion(.failure(error: error))
                 }

@@ -360,7 +360,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     private func setupPasswordView() {
         if let wallet = wallet as? FundedWallet {
             passwordView = Bundle.main.loadNibNamed("PasswordView", owner: self, options: nil)![0] as? PasswordView
-            passwordView.masterKeyNeededSecurity = .medium
+            passwordView.neededSigningSecurity = .medium
             passwordView.wallet = wallet
             passwordView.contentView = contentView
             

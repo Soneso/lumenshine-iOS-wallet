@@ -117,7 +117,7 @@ class ProvideCurrencyDataViewController: UIViewController {
     
     private func setupPasswordView() {
         passwordView = Bundle.main.loadNibNamed("PasswordView", owner: self, options: nil)![0] as? PasswordView
-        passwordView.masterKeyNeededSecurity = .low
+        passwordView.neededSigningSecurity = .medium
         passwordView.hideTitleLabels = true
         passwordView.wallet = wallet
         

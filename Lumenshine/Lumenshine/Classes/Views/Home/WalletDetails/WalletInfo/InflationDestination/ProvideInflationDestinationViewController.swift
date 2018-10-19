@@ -158,7 +158,7 @@ class ProvideInflationDestinationViewController: UIViewController {
     
     private func setupPasswordView() {
         passwordView = Bundle.main.loadNibNamed("PasswordView", owner: self, options: nil)![0] as? PasswordView
-        passwordView.masterKeyNeededSecurity = .medium
+        passwordView.neededSigningSecurity = .medium
         passwordView.hideTitleLabels = true
         passwordView.wallet = wallet
         

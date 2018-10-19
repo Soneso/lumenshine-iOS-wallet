@@ -53,7 +53,7 @@ class KnownInflationDestinationsViewController: UIViewController, UITableViewDel
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
         setTableViewHeader()
-        userManager.canMasterKeySignOperation(accountID: wallet.publicKey, neededSecurity: .medium) { (response) -> (Void) in
+        userManager.canSignerSignOperation(accountID: wallet.publicKey, signerPublicKey: wallet.publicKey, neededSecurity: .medium) { (response) -> (Void) in
             switch response {
             case .success(canSign: let canSign):
                 self.canWalletSign = canSign

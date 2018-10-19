@@ -54,7 +54,7 @@ class PasswordView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     var externalSetup = false
     var hideTitleLabels: Bool = false
     var alwaysShowValidationPlaceholders = false
-    var masterKeyNeededSecurity: MasterKeySecurityLevels!
+    var neededSigningSecurity: SigningSecurityLevel!
     
     private let emptySpace = " "
     private let userManager = UserManager()
@@ -155,7 +155,7 @@ class PasswordView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     private func checkIfMasterKeyCanSignTransaction() {
-        userManager.canMasterKeySignOperation(accountID: wallet.publicKey, neededSecurity: masterKeyNeededSecurity) { (response) -> (Void) in
+        userManager.canSignerSignOperation(accountID: wallet.publicKey, signerPublicKey: wallet.publicKey, neededSecurity: neededSigningSecurity) { (response) -> (Void) in
             switch response {
             case .success(canSign: let canSign):
                 if !canSign {
@@ -185,10 +185,10 @@ class PasswordView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     private func setupSigners() {
-        userManager.getSignersList(accountID: wallet.publicKey) { (response) -> (Void) in
+        userManager.getSignersThatCanSignOperation(accountID: wallet.publicKey, neededSecurity: neededSigningSecurity) { (response) -> (Void) in
             switch response {
             case .success(signersList: let signersList):
-                if signersList.count == 1 {
+                if signersList.count == 0 {
                     self.showNoMultiSigSupportError()
                 } else {
                     self.setupSignersPicker(signerList: signersList)

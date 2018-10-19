@@ -153,7 +153,7 @@ class KnownCurrenciesTableViewCell: UITableViewCell {
     
     func setupPasswordView() {
         passwordView = Bundle.main.loadNibNamed("PasswordView", owner: self, options: nil)![0] as? PasswordView
-        passwordView.masterKeyNeededSecurity = .low
+        passwordView.neededSigningSecurity = .medium
         passwordView.externalSetup = true
         passwordView.hideTitleLabels = true
         passwordView.alwaysShowValidationPlaceholders = true
