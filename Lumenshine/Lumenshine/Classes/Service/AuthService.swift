@@ -119,40 +119,6 @@ public class AuthService: BaseService {
         }
     }
     
-    open func countryList(response: @escaping CountryListResponseClosure) {
-        
-        GETRequestWithPath(path: "/portal/user/country_list") { (result) -> (Void) in
-            switch result {
-            case .success(let data):
-                do {
-                    let countryListResponse = try self.jsonDecoder.decode(CountryListResponse.self, from: data)
-                    response(.success(response: countryListResponse))
-                } catch {
-                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
-                }
-            case .failure(let error):
-                response(.failure(error: error))
-            }
-        }
-    }
-    
-    open func salutationList(response: @escaping SalutationsResponseClosure) {
-        
-        GETRequestWithPath(path: "/portal/user/salutation_list") { (result) -> (Void) in
-            switch result {
-            case .success(let data):
-                do {
-                    let salutationsResponse = try self.jsonDecoder.decode(SalutationsResponse.self, from: data)
-                    response(.success(response: salutationsResponse))
-                } catch {
-                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
-                }
-            case .failure(let error):
-                response(.failure(error: error))
-            }
-        }
-    }
-    
     open func tfaSecret(publicKeyIndex188: String, response: @escaping TfaSecretResponseClosure) {
         do {
             var params = Dictionary<String,String>()

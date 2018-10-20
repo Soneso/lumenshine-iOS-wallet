@@ -13,7 +13,8 @@ protocol RegistrationTableCellProtocol {
     func setPlaceholder(_ placeholder: String?)
     func setText(_ text: String?)
     func setSecureText(_ isSecure: Bool)
-    func setInputViewOptions(_ options: [String]?, isDate: Bool?, selectedIndex: Int?)
+    func setInputViewOptions(_ options: [String]?, selectedIndex: Int?)
+    func setDateInputView(_ isDate: Bool)
     func setKeyboardType(_ type: UIKeyboardType)
 }
 
@@ -21,8 +22,11 @@ typealias TextChangedClosure = (_ text:String) -> (Void)
 
 class RegistrationTableViewCell: UITableViewCell {
     
-    fileprivate let textField = TextField()
+    fileprivate let horizontalSpacing: CGFloat = 15.0
+    fileprivate let textField = LSTextField()
+    
     var textEditingCallback: TextChangedClosure?
+    var shouldBeginEditingCallback: (() -> (Bool))?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -34,23 +38,27 @@ class RegistrationTableViewCell: UITableViewCell {
         commonInit()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.frame = UIEdgeInsetsInsetRect(contentView.frame, UIEdgeInsetsMake(0, horizontalSpacing, 0, horizontalSpacing))
+    }
+    
     func commonInit() {
-        
         selectionStyle = .none
+        backgroundColor = .clear
+        contentView.backgroundColor = Stylesheet.color(.white)
         
-        textField.dividerActiveColor = Stylesheet.color(.cyan)
-        textField.placeholderActiveColor = Stylesheet.color(.cyan)
-        textField.placeholderAnimation = .hidden
         textField.addTarget(self, action: #selector(editingDidChange(_:)), for: .editingChanged)
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
+        textField.delegate = self
         
         contentView.addSubview(textField)
         textField.snp.makeConstraints { (make) in
-            make.top.equalTo(10)
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
-            make.bottom.equalTo(-10)
+            make.top.equalTo(horizontalSpacing)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
+            make.bottom.equalTo(-horizontalSpacing)
         }
     }
     
@@ -67,12 +75,19 @@ class RegistrationTableViewCell: UITableViewCell {
 
 }
 
+extension RegistrationTableViewCell: UITextFieldDelegate {
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        guard let callback = shouldBeginEditingCallback else {
+            return true
+        }        
+        return callback()
+    }
+    
+}
+
 extension RegistrationTableViewCell: RegistrationTableCellProtocol {
-    func setInputViewOptions(_ options: [String]?, isDate: Bool? = nil, selectedIndex: Int? = nil) {
-        if let isdate = isDate, isdate == true {
-            setDatePickerInputView()
-            return
-        }
+    func setInputViewOptions(_ options: [String]?, selectedIndex: Int? = nil) {
         if let opt = options {
             let enumPicker = EnumPicker()
             enumPicker.setValues(opt, currentSelection: selectedIndex) { (newIndex) in
@@ -82,6 +97,12 @@ extension RegistrationTableViewCell: RegistrationTableCellProtocol {
             textField.inputView = enumPicker
         } else {
             textField.inputView = nil
+        }
+    }
+    
+    func setDateInputView(_ isDate: Bool) {
+        if isDate == true {
+            setDatePickerInputView()
         }
     }
     

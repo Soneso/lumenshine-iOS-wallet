@@ -230,6 +230,54 @@
 "birthplace" = "Birth place";
 
 /*  */
+"additional_name" = "Additional Name";
+
+/*  */
+"birth_country_code" = "Birth Country Code";
+
+/*  */
+"bank_account_number" = "Bank Account Number";
+
+/*  */
+"bank_number" = "Bank Number";
+
+/*  */
+"bank_phone_number" = "Bank Phone Number";
+
+/*  */
+"tax_id" = "Tax Id";
+
+/*  */
+"tax_id_name" = "Tax Id Name";
+
+/*  */
+"occupation" = "Occupation";
+
+/*  */
+"employer_name" = "Employer Name";
+
+/*  */
+"employer_address" = "Employer Address";
+
+/*  */
+"language_code" = "Language Code";
+
+/*  */
+"registration_date" = "Registration Date";
+
+/*  */
+"my_data" = "My Data";
+
+/*  */
+"my_occupation" = "My Occupation";
+
+/*  */
+"my_bank_account" = "My Bank Account";
+
+/*  */
+"my_tax_info" = "My Tax Info";
+
+/*  */
 "home" = "Home";
 
 /*  */

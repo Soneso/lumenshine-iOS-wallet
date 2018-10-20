@@ -14,6 +14,7 @@ class SettingsCoordinator: CoordinatorType {
     unowned var mainCoordinator: MainCoordinator
     
     fileprivate let viewModel: SettingsViewModel
+    fileprivate var personalDataViewModel: PersonalDataViewModel?
     fileprivate let service: Services
     fileprivate let user: User
     
@@ -53,6 +54,10 @@ class SettingsCoordinator: CoordinatorType {
             showActivateFingerprint()
         case .showChartCurrency:
             showChartCurrency()
+        case .showPersonalData:
+            showPersonalData()
+        case .showOccupationList:
+            showOccupationList()
         default: break
         }
     }
@@ -134,5 +139,19 @@ fileprivate extension SettingsCoordinator {
     func showChartCurrency() {
         let currencyVC = ChartCurrencyViewController(viewModel: viewModel)
         baseController.navigationController?.pushViewController(currencyVC, animated: true)
+    }
+    
+    func showPersonalData() {
+        let personalDataViewModel = PersonalDataViewModel(service: service.userData)
+        let personalVC = PersonalDataViewController(viewModel: personalDataViewModel)
+        baseController.navigationController?.pushViewController(personalVC, animated: true)
+        self.personalDataViewModel = personalDataViewModel
+        self.personalDataViewModel?.navigationCoordinator = self
+    }
+    
+    func showOccupationList() {
+        let occupationsVC = OccupationsViewController(viewModel: personalDataViewModel!)
+        let composeVC = ComposeNavigationController(rootViewController: occupationsVC)
+        baseController.navigationController?.present(composeVC, animated: true)
     }
 }

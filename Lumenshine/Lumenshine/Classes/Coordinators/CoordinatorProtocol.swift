@@ -55,5 +55,7 @@ public indirect enum Transition {
     case showBackupMnemonic
     case showMnemonic(String)
     case showChartCurrency
+    case showPersonalData
+    case showOccupationList
 }
 

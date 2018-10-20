@@ -124,7 +124,7 @@ class SettingsViewModel: SettingsViewModelType {
         case .notifications:
             break
         case .personalData:
-            break
+            navigationCoordinator?.performTransition(transition: .showPersonalData)
         default:
             break
         }

@@ -86,6 +86,7 @@
 		4386717420DAA77E00459EA8 /* WalletCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4386717320DAA77E00459EA8 /* WalletCardViewModel.swift */; };
 		4387980A20584335005261C8 /* HelpCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4387980920584335005261C8 /* HelpCard.swift */; };
 		438BE842204D51FD007EBFB9 /* HamburgerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438BE841204D51FD007EBFB9 /* HamburgerButton.swift */; };
+		438F54E3217A3F9300F4B556 /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438F54E2217A3F9300F4B556 /* UserDataService.swift */; };
 		4390D57E205FA5FC00383BB2 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4390D57D205FA5FC00383BB2 /* BaseService.swift */; };
 		4390D582205FBD6E00383BB2 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4390D581205FBD6E00383BB2 /* Services.swift */; };
 		4391A52B20D139D60015A6DA /* CountryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4391A52A20D139D60015A6DA /* CountryResponse.swift */; };
@@ -105,6 +106,7 @@
 		439EA26E210AF7240054EA52 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439EA26D210AF7240054EA52 /* ChangePasswordViewController.swift */; };
 		43A51719211D8FBD0034AA46 /* LostSecuritySuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A51718211D8FBD0034AA46 /* LostSecuritySuccessView.swift */; };
 		43A8633820A9F0E6007C46E2 /* LoginStep2Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A8633720A9F0E6007C46E2 /* LoginStep2Response.swift */; };
+		43AAC6E52178B9C100985DCA /* Occupation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AAC6E42178B9C100985DCA /* Occupation.swift */; };
 		43AE63252135A19300B7A904 /* EncodeSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 43AE62E32135A19200B7A904 /* EncodeSans-Medium.ttf */; };
 		43AE63262135A19300B7A904 /* EncodeSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 43AE62E42135A19200B7A904 /* EncodeSans-Regular.ttf */; };
 		43AE63272135A19300B7A904 /* EncodeSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 43AE62E52135A19200B7A904 /* EncodeSans-Bold.ttf */; };
@@ -162,8 +164,14 @@
 		43AE63612135A19300B7A904 /* EncodeSansSemiCondensed-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 43AE63242135A19300B7A904 /* EncodeSansSemiCondensed-Light.ttf */; };
 		43B144CC20FCA5D40099E3AE /* TitleHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B144CB20FCA5D40099E3AE /* TitleHeader.swift */; };
 		43B144CE20FCAF630099E3AE /* TFASetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B144CD20FCAF630099E3AE /* TFASetupViewController.swift */; };
+		43B78D4821775679006B1EA9 /* PersonalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B78D4721775679006B1EA9 /* PersonalDataViewController.swift */; };
+		43B78D4A2177727D006B1EA9 /* PersonalDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B78D492177727D006B1EA9 /* PersonalDataViewModel.swift */; };
+		43B78D4C21777523006B1EA9 /* PersonalDataEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B78D4B21777523006B1EA9 /* PersonalDataEntry.swift */; };
 		43B81D5C21174B1F0039BC3D /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B81D5B21174B1F0039BC3D /* MainCoordinator.swift */; };
 		43B8919B2104764600062660 /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B8919A2104764600062660 /* InputField.swift */; };
+		43BAAB97217B311800034657 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BAAB96217B311800034657 /* UserData.swift */; };
+		43C08AE82178A9B80079A364 /* OccupationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C08AE72178A9B80079A364 /* OccupationsViewController.swift */; };
+		43C08AEA2178B3EF0079A364 /* occupations.json in Resources */ = {isa = PBXBuildFile; fileRef = 43C08AE92178B3EF0079A364 /* occupations.json */; };
 		43C54039215A66170064BA67 /* HelpCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C54038215A66170064BA67 /* HelpCardViewModel.swift */; };
 		43C6377A20BEFF2B00498FC5 /* ReLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C6377920BEFF2B00498FC5 /* ReLoginViewController.swift */; };
 		43C7A8F0215B92CA007F4E5E /* HelpCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C7A8EF215B92CA007F4E5E /* HelpCenterViewController.swift */; };
@@ -470,6 +478,7 @@
 		4386717320DAA77E00459EA8 /* WalletCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCardViewModel.swift; sourceTree = "<group>"; };
 		4387980920584335005261C8 /* HelpCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCard.swift; sourceTree = "<group>"; };
 		438BE841204D51FD007EBFB9 /* HamburgerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HamburgerButton.swift; sourceTree = "<group>"; };
+		438F54E2217A3F9300F4B556 /* UserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataService.swift; sourceTree = "<group>"; };
 		4390D57D205FA5FC00383BB2 /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		4390D581205FBD6E00383BB2 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		4391A52A20D139D60015A6DA /* CountryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryResponse.swift; sourceTree = "<group>"; };
@@ -489,6 +498,7 @@
 		439EA26D210AF7240054EA52 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		43A51718211D8FBD0034AA46 /* LostSecuritySuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostSecuritySuccessView.swift; sourceTree = "<group>"; };
 		43A8633720A9F0E6007C46E2 /* LoginStep2Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStep2Response.swift; sourceTree = "<group>"; };
+		43AAC6E42178B9C100985DCA /* Occupation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Occupation.swift; sourceTree = "<group>"; };
 		43AE62E32135A19200B7A904 /* EncodeSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "EncodeSans-Medium.ttf"; sourceTree = "<group>"; };
 		43AE62E42135A19200B7A904 /* EncodeSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "EncodeSans-Regular.ttf"; sourceTree = "<group>"; };
 		43AE62E52135A19200B7A904 /* EncodeSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "EncodeSans-Bold.ttf"; sourceTree = "<group>"; };
@@ -546,8 +556,14 @@
 		43AE63242135A19300B7A904 /* EncodeSansSemiCondensed-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "EncodeSansSemiCondensed-Light.ttf"; sourceTree = "<group>"; };
 		43B144CB20FCA5D40099E3AE /* TitleHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleHeader.swift; sourceTree = "<group>"; };
 		43B144CD20FCAF630099E3AE /* TFASetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFASetupViewController.swift; sourceTree = "<group>"; };
+		43B78D4721775679006B1EA9 /* PersonalDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataViewController.swift; sourceTree = "<group>"; };
+		43B78D492177727D006B1EA9 /* PersonalDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataViewModel.swift; sourceTree = "<group>"; };
+		43B78D4B21777523006B1EA9 /* PersonalDataEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataEntry.swift; sourceTree = "<group>"; };
 		43B81D5B21174B1F0039BC3D /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		43B8919A2104764600062660 /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
+		43BAAB96217B311800034657 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		43C08AE72178A9B80079A364 /* OccupationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccupationsViewController.swift; sourceTree = "<group>"; };
+		43C08AE92178B3EF0079A364 /* occupations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = occupations.json; sourceTree = "<group>"; };
 		43C54038215A66170064BA67 /* HelpCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCardViewModel.swift; sourceTree = "<group>"; };
 		43C6377920BEFF2B00498FC5 /* ReLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginViewController.swift; sourceTree = "<group>"; };
 		43C7A8EF215B92CA007F4E5E /* HelpCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCenterViewController.swift; sourceTree = "<group>"; };
@@ -898,8 +914,9 @@
 				43AE62612135A12100B7A904 /* Fonts */,
 				74C89956210761EE009B13EA /* Images */,
 				43D7A776205A892E00238E29 /* Strings */,
-				43D7A774205A84B300238E29 /* R.generated.swift */,
 				4314B9F1204806E5006DBE63 /* MaterialIcons.bundle */,
+				43D7A774205A84B300238E29 /* R.generated.swift */,
+				43C08AE92178B3EF0079A364 /* occupations.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -953,6 +970,9 @@
 				C6DBDB7021199FF100FCEC78 /* TransactionResult.swift */,
 				C6DBDB722119CD5000FCEC78 /* TransactionInput.swift */,
 				C69556542126FAEF00B0E110 /* OperationInfo.swift */,
+				43B78D4B21777523006B1EA9 /* PersonalDataEntry.swift */,
+				43AAC6E42178B9C100985DCA /* Occupation.swift */,
+				43BAAB96217B311800034657 /* UserData.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1029,6 +1049,7 @@
 		4370E23B20655F6F004C62C3 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				43C08AE62178A98E0079A364 /* Personal Data */,
 				4370E23C20655F9C004C62C3 /* SettingsTableViewController.swift */,
 				435A1CA820C846EC00CE3365 /* SettingsTableViewCell.swift */,
 				439EA26D210AF7240054EA52 /* ChangePasswordViewController.swift */,
@@ -1079,6 +1100,7 @@
 				43CD7B1320F7BEBF0014BF69 /* SetupViewModel.swift */,
 				43C7A8F1215BB28D007F4E5E /* HelpCenterViewModel.swift */,
 				43564BA821637334006A7B9F /* ContactsViewModel.swift */,
+				43B78D492177727D006B1EA9 /* PersonalDataViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1126,6 +1148,7 @@
 				74C0914920FB3F6F000A809D /* CurrenciesService.swift */,
 				C665870F21254A78006499A7 /* ChartsService.swift */,
 				43564BAC2163DCB9006A7B9F /* ContactsService.swift */,
+				438F54E2217A3F9300F4B556 /* UserDataService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1261,6 +1284,15 @@
 				43AE63242135A19300B7A904 /* EncodeSansSemiCondensed-Light.ttf */,
 			);
 			path = Encode_Sans_Semi_Condensed;
+			sourceTree = "<group>";
+		};
+		43C08AE62178A98E0079A364 /* Personal Data */ = {
+			isa = PBXGroup;
+			children = (
+				43B78D4721775679006B1EA9 /* PersonalDataViewController.swift */,
+				43C08AE72178A9B80079A364 /* OccupationsViewController.swift */,
+			);
+			path = "Personal Data";
 			sourceTree = "<group>";
 		};
 		43C54037215A5B7B0064BA67 /* Cards */ = {
@@ -1866,6 +1898,7 @@
 				43AE63282135A19300B7A904 /* EncodeSans-Thin.ttf in Resources */,
 				C61244C62113325A00DE1EA9 /* SendViewController.xib in Resources */,
 				C6BDA2C0216F66BF0076439E /* NativeCurrencyFeeInfoViewController.xib in Resources */,
+				43C08AEA2178B3EF0079A364 /* occupations.json in Resources */,
 				43AE63352135A19300B7A904 /* EncodeSansSemiExpanded-Light.ttf in Resources */,
 				74C899582107621E009B13EA /* receive_payment.html in Resources */,
 				C6BDA2BA216F66760076439E /* CurrencyFeeInfoViewController.xib in Resources */,
@@ -2105,6 +2138,7 @@
 				C695564D2126B11800B0E110 /* LoadTransactionsHistoryViewController.swift in Sources */,
 				C675BC22215CBF8000B663DB /* LeftRoundedButton.swift in Sources */,
 				43088DA82087987E008AE1AB /* CryptoUtil.swift in Sources */,
+				43BAAB97217B311800034657 /* UserData.swift in Sources */,
 				4359984F20A4A14000007F27 /* UserSecurityHelper.swift in Sources */,
 				431437F42047FFB400189C83 /* AppNavigationDrawerController.swift in Sources */,
 				4314B9EF2048060F006DBE63 /* MaterialIcon.swift in Sources */,
@@ -2123,6 +2157,7 @@
 				4376F4A0204D9E2700B179C3 /* CoordinatorProtocol.swift in Sources */,
 				4322BA30205BD69F007FEB5E /* ServerMock.swift in Sources */,
 				C6D87E7A213400B500154A3B /* KnownCurrenciesTableViewCell.swift in Sources */,
+				43B78D4821775679006B1EA9 /* PersonalDataViewController.swift in Sources */,
 				4365F69C2110BB8700D4B12C /* Confirm2faCodeViewController.swift in Sources */,
 				434FB3F920F78AFD004A4CDB /* InfoViewController.swift in Sources */,
 				4394911C20BEB845008D4FA2 /* SettingsViewModel.swift in Sources */,
@@ -2150,6 +2185,7 @@
 				C654AFB62122D4C900FB9686 /* FundTestNetWalletViewController.xib.swift in Sources */,
 				4301312A20C049CB00E47E83 /* ReLoginCoordinator.swift in Sources */,
 				4319B1842063F00C007CE18D /* MenuViewModel.swift in Sources */,
+				43AAC6E52178B9C100985DCA /* Occupation.swift in Sources */,
 				43B144CC20FCA5D40099E3AE /* TitleHeader.swift in Sources */,
 				C66E353D215A082700D39906 /* ImageBackgroundNavigationController.swift in Sources */,
 				4359984B20A438EF00007F27 /* AuthenticationResponse.swift in Sources */,
@@ -2168,8 +2204,10 @@
 				43D7A77E205A90CC00238E29 /* MenuCoordinator.swift in Sources */,
 				C672508A213FE8ED0064F6E3 /* KnownInflationDestinationsViewController.swift in Sources */,
 				C672508E213FECD00064F6E3 /* KnownInflationDestinationsTableViewCell.swift in Sources */,
+				43C08AE82178A9B80079A364 /* OccupationsViewController.swift in Sources */,
 				C67E5D64215271F2002BCAA1 /* InputTextField.swift in Sources */,
 				C6C0E4D921256F2700FF1BA8 /* ChartExchangeRatesResponse.swift in Sources */,
+				438F54E3217A3F9300F4B556 /* UserDataService.swift in Sources */,
 				436FE5082052634300CFE788 /* WebCard.swift in Sources */,
 				C6813DC7213AB708007074C2 /* KnownInflationDestinationResponse.swift in Sources */,
 				C6410CD9212C26B300F9C8B3 /* TransactionHistoryDetailsViewController.swift in Sources */,
@@ -2236,6 +2274,7 @@
 				7459815F211AC73200488999 /* UIAlertController+Extension.swift in Sources */,
 				4319B1802063EEA9007CE18D /* LoginViewModel.swift in Sources */,
 				43920D9A2057EECA0040003C /* CardView.swift in Sources */,
+				43B78D4C21777523006B1EA9 /* PersonalDataEntry.swift in Sources */,
 				4341251120EBC2C700267260 /* ReLoginHomeView.swift in Sources */,
 				746DC58120D141FE00AD0856 /* HomeHeaderView.swift in Sources */,
 				C665871021254A78006499A7 /* ChartsService.swift in Sources */,
@@ -2266,6 +2305,7 @@
 				435A1CA920C846EC00CE3365 /* SettingsTableViewCell.swift in Sources */,
 				C6725081213FC11F0064F6E3 /* SetInflationDestinationViewController.swift in Sources */,
 				C6A11D592142721200424DBE /* PrivateKeyManager.swift in Sources */,
+				43B78D4A2177727D006B1EA9 /* PersonalDataViewModel.swift in Sources */,
 				C62B0E9E215376C800CF920B /* CurrencyPickerTextField.swift in Sources */,
 				C672507F213FB5DE0064F6E3 /* InflationManager.swift in Sources */,
 				43F3E36120F3B88E0032D017 /* SignUpView.swift in Sources */,

@@ -39,24 +39,6 @@ class RegistrationViewModel : RegistrationViewModelType {
         self.entries = [[.email, .password],
                         [.forename, .lastname, .company, .salutation, .title, .street, .streetNr,
                          .zipCode, .city, .state, .country, .nationality, .phone, .birthday, .birthplace]]
-        
-        self.service.countryList { [weak self] result in
-            switch result {
-            case .success(let response):
-                self?.countries = response.countries
-            case .failure(let error):
-                print("Get country list failure: \(error.localizedDescription)")
-            }
-        }
-        
-        self.service.salutationList { [weak self] result in
-            switch result {
-            case .success(let response):
-                self?.salutations = response.salutations
-            case .failure(let error):
-                print("Get salutations failure: \(error.localizedDescription)")
-            }
-        }
     }
     
     var itemDistribution: [Int] {
