@@ -27,6 +27,9 @@ class TransactionHelper {
     private var inputData: TransactionInput!
     private var wallet: FundedWallet!
     private var transactionResult: TransactionResult!
+    private var externalSigner: String?
+    private var externalSignerSeed: String?
+    private var transactionStream: OperationsStreamItem!
     
     private var stellarSdk: StellarSDK {
         get {
@@ -44,8 +47,10 @@ class TransactionHelper {
         transactionResult.issuer = inputData.issuer
     }
     
-    init(wallet: FundedWallet) {
+    init(wallet: FundedWallet, signer: String? = nil, signerSeed: String? = nil) {
         self.wallet = wallet
+        self.externalSigner = signer
+        self.externalSignerSeed = signerSeed
     }
     
     func createAndFundAccount(completion: @escaping (TransactionResult) -> ()) {
@@ -115,7 +120,7 @@ class TransactionHelper {
         }
     }
     
-    func removeTrustLine(currency: AccountBalanceResponse, userMnemonic: String, discardingDestination: String? = nil, completion: @escaping TrustLineClosure) {
+    func removeTrustLine(currency: AccountBalanceResponse, discardingDestination: String? = nil, completion: @escaping TrustLineClosure) {
         if let assetIssuer = currency.assetIssuer {
             let issuingAccountKeyPair = try? KeyPair(accountId: assetIssuer)
             
@@ -146,9 +151,9 @@ class TransactionHelper {
         }
     }
     
-    func addTrustLine(asset: Asset, userMnemonic: String, completion: @escaping TrustLineClosure) {
+    func addTrustLine(asset: Asset, completion: @escaping TrustLineClosure) {
         if let trustingAccountKeyPair = PrivateKeyManager.getKeyPair(forAccountID: wallet.publicKey) {
-            addTrustLine(trustingAccountKeyPair: trustingAccountKeyPair, asset: asset, userMnemonic: userMnemonic) { (result) -> (Void) in
+            addTrustLine(trustingAccountKeyPair: trustingAccountKeyPair, asset: asset) { (result) -> (Void) in
                 DispatchQueue.main.async {
                     completion(result)
                 }
@@ -198,7 +203,7 @@ class TransactionHelper {
                                               memo: memo,
                                               timeBounds: nil)
             
-            try transaction.sign(keyPair: sourceKeyPair, network: Network.testnet)
+            try signTransaction(transaction: transaction, sourceKeyPair: sourceKeyPair)
             
             try self.stellarSdk.transactions.submitTransaction(transaction: transaction) { (response) -> (Void) in
                 switch response {
@@ -275,32 +280,26 @@ class TransactionHelper {
        return Memo.none
     }
     
-    private func submitPaymentSucceeded(transaction: Transaction, completion: @escaping (() -> (Void))) {
-        print("Success")
-        self.transactionResult.status = TransactionStatus.success
-        self.transactionResult.transactionFee = transactionFee
-        
+    private func openStreamToGetOperationID(forTransaction transaction: Transaction) {
         if let transactionHash = try? transaction.getTransactionHash(network: Network.testnet) {
-            let transactionStream = self.stellarSdk.payments.stream(for: PaymentsChange.paymentsForTransaction(transaction: transactionHash, cursor: nil))
+            transactionStream = self.stellarSdk.payments.stream(for: PaymentsChange.paymentsForTransaction(transaction: transactionHash, cursor: nil))
             transactionStream.onReceive { (response) -> (Void) in
                 switch response {
                 case .response(id: let id, data: _):
                     self.transactionResult.operationID = id
-                    transactionStream.closeStream()
-                    completion()
-                case .error(error: let error):
-                    self.transactionResult.status = TransactionStatus.error
-                    self.transactionResult.message = error?.localizedDescription
-                    transactionStream.closeStream()
-                    completion()
+                    self.closeStreamToGetOperationID()
+                case .error(error: _):
+                    break
                 case .open:
                     break
                 }
             }
-        } else {
-            self.transactionResult.status = TransactionStatus.error
-            completion()
         }
+    }
+    
+    private func closeStreamToGetOperationID() {
+        self.transactionStream?.closeStream()
+        self.transactionStream = nil
     }
     
     private func submitPaymentTransaction(destinationKeyPair: KeyPair, sourceKeyPair: KeyPair, accountResponse: AccountResponse, asset: Asset, amount: Decimal, memo: Memo,
@@ -310,29 +309,33 @@ class TransactionHelper {
             let transaction = try Transaction(sourceAccount: accountResponse, operations: [paymentOperation], memo: memo, timeBounds: nil)
             
             try signTransaction(transaction: transaction, sourceKeyPair: sourceKeyPair)
+            openStreamToGetOperationID(forTransaction: transaction)
             
             try self.stellarSdk.transactions.submitTransaction(transaction: transaction) { (response) -> (Void) in
                 switch response {
-                case .success(_):
-                    self.submitPaymentSucceeded(transaction: transaction, completion: { () -> (Void) in
-                        completion()
-                    })
+                case .success(details:_):
+                    print("Success")
+                    self.transactionResult.status = TransactionStatus.success
+                    self.transactionResult.transactionFee = self.transactionFee
+                    completion()
                     
                 case .failure(let error):
                     StellarSDKLog.printHorizonRequestErrorMessage(tag:"SRP Test", horizonRequestError:error)
                     self.transactionResult.status = TransactionStatus.error
                     self.transactionResult.message = error.localizedDescription
                     self.transactionResult.transactionFee = transaction.fee > 0 ? self.transactionFee : nil
+                    self.closeStreamToGetOperationID()
                     completion()
                 }
             }
         } catch {
+            self.closeStreamToGetOperationID()
             completion()
         }
     }
     
     private func signTransaction(transaction: Transaction, sourceKeyPair: KeyPair) throws{
-        if let signer = inputData.signer, let signerSeed = inputData.signerSeed {
+        if let signer = inputData?.signer ?? externalSigner, let signerSeed = inputData?.signerSeed ?? externalSignerSeed {
             let signerKeyPair = try KeyPair.init(secretSeed: signerSeed)
             
             if signerKeyPair.accountId != signer {
@@ -374,8 +377,7 @@ class TransactionHelper {
                                               operations: [changeTrustOp],
                                               memo: Memo.none,
                                               timeBounds: nil)
-            
-            try transaction.sign(keyPair: trustingAccountKeyPair, network: Network.testnet)
+            try signTransaction(transaction: transaction, sourceKeyPair: trustingAccountKeyPair)
             
             try self.stellarSdk.transactions.submitTransaction(transaction: transaction) { (response) -> (Void) in
                 switch response {
@@ -391,7 +393,7 @@ class TransactionHelper {
         }
     }
     
-    private func addTrustLine(trustingAccountKeyPair: KeyPair, asset: Asset, userMnemonic: String, completion: @escaping TrustLineClosure) {
+    private func addTrustLine(trustingAccountKeyPair: KeyPair, asset: Asset, completion: @escaping TrustLineClosure) {
         stellarSdk.accounts.getAccountDetails(accountId: trustingAccountKeyPair.accountId) { (response) -> (Void) in
             switch response {
             case .success(let accountResponse):
@@ -431,7 +433,7 @@ class TransactionHelper {
                                                   memo: Memo.none,
                                                   timeBounds:nil)
                 
-                try transaction.sign(keyPair: trustingAccountKeyPair, network: Network.testnet)
+                try signTransaction(transaction: transaction, sourceKeyPair: trustingAccountKeyPair)
                 
                 try self.stellarSdk.transactions.submitTransaction(transaction: transaction) { (response) -> (Void) in
                     switch response {

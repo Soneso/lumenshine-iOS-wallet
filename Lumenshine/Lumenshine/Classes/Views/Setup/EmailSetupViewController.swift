@@ -140,7 +140,7 @@ fileprivate extension EmailSetupViewController {
         
         contentView.addSubview(errorLabel)
         errorLabel.snp.makeConstraints { make in
-            make.top.equalTo(hintLabel.snp.bottom).offset(70)
+            make.top.equalTo(hintLabel.snp.bottom).offset(40)
             make.left.equalTo(horizontalSpacing)
             make.right.equalTo(-horizontalSpacing)
         }
@@ -151,7 +151,7 @@ fileprivate extension EmailSetupViewController {
         submitButton.title = R.string.localizable.continue().uppercased()
         submitButton.titleColor = Stylesheet.color(.white)
         submitButton.cornerRadiusPreset = .cornerRadius6
-        submitButton.backgroundColor = Stylesheet.color(.green)
+        submitButton.backgroundColor = Stylesheet.color(.cyan)
         submitButton.titleLabel?.font = R.font.encodeSansSemiBold(size: 15)
         submitButton.addTarget(self, action: #selector(submitAction(sender:)), for: .touchUpInside)
         
@@ -166,7 +166,7 @@ fileprivate extension EmailSetupViewController {
         resendButton.title = R.string.localizable.email_resend_confirmation().uppercased()
         resendButton.titleColor = Stylesheet.color(.white)
         resendButton.cornerRadiusPreset = .cornerRadius6
-        resendButton.backgroundColor = Stylesheet.color(.cyan)
+        resendButton.backgroundColor = Stylesheet.color(.orange)
         resendButton.titleLabel?.font = R.font.encodeSansSemiBold(size: 15)
         resendButton.titleLabel?.adjustsFontSizeToFitWidth = true
         resendButton.addTarget(self, action: #selector(resendAction(sender:)), for: .touchUpInside)

@@ -18,18 +18,24 @@ fileprivate enum SetOrRemoveButtonTitles: String {
 
 class KnownInflationDestinationsTableViewCell: UITableViewCell {
     @IBOutlet weak var expansionView: UIView!
+    @IBOutlet weak var passwordViewContainer: UIView!
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var issuerPublicKeyLabel: UILabel!
     @IBOutlet weak var shortDescriptionLabel: UILabel!
-    @IBOutlet weak var passwordValidationLabel: UILabel!
     
-    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var isCurrentlySetSwitch: UISwitch!
     
     @IBOutlet weak var setOrRemoveButton: UIButton!
     
-    var wallet: FundedWallet!
+    var canWalletSign: Bool!
+    var wallet: FundedWallet! {
+        didSet {
+            setupPasswordView()
+        }
+    }
+    
+    private var passwordView: PasswordView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,33 +43,7 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
     }
     
     @IBAction func setOrRemoveButtonAction(_ sender: UIButton) {
-        resetValidationError()
-        setButtonAsValidating()
-        
-        if isPasswordValid {
-            passwordManager.getMnemonic(password: !passwordTextField.isHidden ? passwordTextField.text : nil) { (response) -> (Void) in
-                switch response {
-                case .success(mnemonic: let mnemonic):
-                    if self.isCurrentlySetSwitch.isOn {
-                        self.removeInflationDestination(mnemonic: mnemonic)
-                    } else {
-                        self.setInflationDestination(sourceAccountID: self.wallet.publicKey)
-                    }
-                    
-                case .failure(error: let error):
-                    if error == BiometricStatus.enterPasswordPressed.rawValue {
-                        self.passwordTextField.isHidden = false
-                    } else {
-                        print("Error: \(error)")
-                        self.showPasswordValidationError(validationError: ValidationErrors.InvalidPassword)
-                    }
-                    
-                    self.setButtonAsNormal()
-                }
-            }
-        } else {
-            setButtonAsNormal()
-        }
+        addInflation()
     }
     
     @IBAction func detailsButtonAction(_ sender: UIButton) {
@@ -77,7 +57,6 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
     private let inflationManager = InflationManager()
     
     func expand() {
-        resetValidationError()
         expansionView.isHidden = false
         setButtonAsNormal()
     }
@@ -86,13 +65,63 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
         expansionView.isHidden = true
     }
     
-    private func removeInflationDestination(mnemonic: String) {
+    private func addInflation(biometricAuth: Bool = false) {
+        passwordView.resetValidationErrors()
+        setButtonAsValidating()
+        
+        if passwordView.validatePassword(biometricAuth: biometricAuth) {
+            guard hasEnoughFunding else {
+                showFundingAlert()
+                setButtonAsNormal()
+                return
+            }
+            
+            if passwordView.useExternalSigning {
+                if self.isCurrentlySetSwitch.isOn {
+                    self.removeInflationDestination()
+                } else {
+                    self.setInflationDestination(sourceAccountID: self.wallet.publicKey)
+                }
+
+            } else {
+                validatePasswordAndSetInflation(biometricAuth: biometricAuth)
+            }
+
+        } else {
+            setButtonAsNormal()
+        }
+    }
+    
+    private func validatePasswordAndSetInflation(biometricAuth: Bool) {
+        passwordManager.getMnemonic(password: !biometricAuth ? passwordView.passwordTextField.text : nil) { (response) -> (Void) in
+            switch response {
+            case .success(mnemonic: let mnemonic):
+                if self.isCurrentlySetSwitch.isOn {
+                    self.removeInflationDestination(mnemonic: mnemonic)
+                } else {
+                    self.setInflationDestination(sourceAccountID: self.wallet.publicKey)
+                }
+
+            case .failure(error: let error):
+                print("Error: \(error)")
+                self.passwordView.showInvalidPasswordError()
+                self.setButtonAsNormal()
+            }
+        }
+    }
+    
+    private func removeInflationDestination(mnemonic: String? = nil) {
         setButtonAsNormal()
     }
     
     private func setInflationDestination(sourceAccountID: String) {
         if let inflationDestinationAddress = issuerPublicKeyLabel.text {
-            inflationManager.setInflationDestination(inflationAddress: inflationDestinationAddress, sourceAccountID: sourceAccountID) { (response) -> (Void) in
+            let signer = passwordView.useExternalSigning ? passwordView.signersTextField.text : nil
+            let seed = passwordView.useExternalSigning ? passwordView.seedTextField.text : nil
+            inflationManager.setInflationDestination(inflationAddress: inflationDestinationAddress,
+                                                     sourceAccountID: sourceAccountID,
+                                                     externalSigner: signer,
+                                                     externalSignersSeed: seed) { (response) -> (Void) in
                 switch response {
                 case .success:
                     break
@@ -103,35 +132,6 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
                 self.dissmissView()
             }
         }
-    }
-    
-    private func showPasswordValidationError(validationError: ValidationErrors) {
-        passwordValidationLabel.isHidden = false
-        passwordValidationLabel.text = validationError.rawValue
-    }
-    
-    private var isPasswordValid: Bool {
-        get {
-            if passwordTextField.isHidden {
-                return true
-            }
-            
-            if let password = passwordTextField.text, password.isMandatoryValid() {
-                if password.isValidPassword() {
-                    return true
-                }
-                
-                showPasswordValidationError(validationError: ValidationErrors.InvalidPassword)
-            } else {
-                showPasswordValidationError(validationError: ValidationErrors.MandatoryPassword)
-            }
-            
-            return false
-        }
-    }
-    
-    private func resetValidationError() {
-        passwordValidationLabel.isHidden = true
     }
     
     private var hasEnoughFunding: Bool {
@@ -172,5 +172,38 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
         backgroundColor = Stylesheet.color(.clear)
         setOrRemoveButton.backgroundColor = Stylesheet.color(.green)
     }
+    
+    func setupPasswordView() {
+        passwordView = Bundle.main.loadNibNamed("PasswordView", owner: self, options: nil)![0] as? PasswordView
+        passwordView.neededSigningSecurity = .medium
+        passwordView.externalSetup = true
+        passwordView.hideTitleLabels = true
+        passwordView.alwaysShowValidationPlaceholders = true
+        passwordView.wallet = wallet
+        
+        passwordView.biometricAuthAction = {
+            self.addInflation(biometricAuth: true)
+        }
+        
+        if canWalletSign {
+            passwordView.showPassword()
+        } else {
+            passwordView.showSigners()
+        }
+        
+        passwordViewContainer.addSubview(passwordView)
+        
+        passwordView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        for subView in passwordViewContainer.subviews {
+            subView.removeFromSuperview()
+        }
+        
+        passwordView = nil
+    }
 }
-

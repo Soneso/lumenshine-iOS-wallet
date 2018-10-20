@@ -36,19 +36,23 @@ class SetInflationDestinationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationItem()
+        setupSegmentedContent()
         showKnownDestinations()
         view.backgroundColor = Stylesheet.color(.veryLightGray)
+    }
+    
+    private func setupSegmentedContent() {
+        knownInflationDestinationsViewController = KnownInflationDestinationsViewController(nibName: "KnownInflationDestinationsViewController", bundle: Bundle.main)
+        knownInflationDestinationsViewController.currentInflationDestination = currentInflationDestination
+        knownInflationDestinationsViewController.wallet = wallet
+        
+        provideInflationDestinationViewController = ProvideInflationDestinationViewController(nibName: "ProvideInflationDestinationViewController", bundle: Bundle.main)
+        provideInflationDestinationViewController.wallet = wallet
     }
     
     private func showKnownDestinations() {
         if destinationContainer.subviews.count > 0 {
             destinationContainer.subviews[0].removeFromSuperview()
-        }
-        
-        if knownInflationDestinationsViewController == nil {
-            knownInflationDestinationsViewController = KnownInflationDestinationsViewController(nibName: "KnownInflationDestinationsViewController", bundle: Bundle.main)
-            knownInflationDestinationsViewController.currentInflationDestination = currentInflationDestination
-            knownInflationDestinationsViewController.wallet = wallet
         }
         
         if let knownInflationDestinationsViewController = knownInflationDestinationsViewController {
@@ -66,11 +70,6 @@ class SetInflationDestinationViewController: UIViewController {
     private func showProvideDestinationData() {
         if destinationContainer.subviews.count > 0 {
             destinationContainer.subviews[0].removeFromSuperview()
-        }
-        
-        if provideInflationDestinationViewController == nil {
-            provideInflationDestinationViewController = ProvideInflationDestinationViewController(nibName: "ProvideInflationDestinationViewController", bundle: Bundle.main)
-            provideInflationDestinationViewController.wallet = wallet
         }
         
         if let provideInflationDestinationViewController = provideInflationDestinationViewController {

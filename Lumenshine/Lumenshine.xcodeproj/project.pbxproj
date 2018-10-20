@@ -351,6 +351,8 @@
 		C6C0E4DB212570EF00FF1BA8 /* ExchangeRateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C0E4DA212570EF00FF1BA8 /* ExchangeRateResponse.swift */; };
 		C6C1FC6E21673F0900F80F44 /* BiometricAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C1FC6D21673F0900F80F44 /* BiometricAuthButton.swift */; };
 		C6C1FC702167960400F80F44 /* HintLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C1FC6F2167960400F80F44 /* HintLabel.swift */; };
+		C6CB744021746B3100FB99C3 /* PasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6CB743F21746B3100FB99C3 /* PasswordView.xib */; };
+		C6CB744221746B3E00FB99C3 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CB744121746B3E00FB99C3 /* PasswordView.swift */; };
 		C6CEBCB2216CA66000710ED7 /* TabLikeSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CEBCB1216CA66000710ED7 /* TabLikeSegmentedControl.swift */; };
 		C6D87E742133ECE100154A3B /* KnownCurrenciesTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D87E732133ECE100154A3B /* KnownCurrenciesTableViewController.xib */; };
 		C6D87E762133ECED00154A3B /* KnownCurrenciesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D87E752133ECED00154A3B /* KnownCurrenciesTableViewController.swift */; };
@@ -749,6 +751,8 @@
 		C6C0E4DA212570EF00FF1BA8 /* ExchangeRateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateResponse.swift; sourceTree = "<group>"; };
 		C6C1FC6D21673F0900F80F44 /* BiometricAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricAuthButton.swift; sourceTree = "<group>"; };
 		C6C1FC6F2167960400F80F44 /* HintLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintLabel.swift; sourceTree = "<group>"; };
+		C6CB743F21746B3100FB99C3 /* PasswordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasswordView.xib; sourceTree = "<group>"; };
+		C6CB744121746B3E00FB99C3 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
 		C6CEBCB1216CA66000710ED7 /* TabLikeSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabLikeSegmentedControl.swift; sourceTree = "<group>"; };
 		C6D87E732133ECE100154A3B /* KnownCurrenciesTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KnownCurrenciesTableViewController.xib; sourceTree = "<group>"; };
 		C6D87E752133ECED00154A3B /* KnownCurrenciesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownCurrenciesTableViewController.swift; sourceTree = "<group>"; };
@@ -1464,6 +1468,8 @@
 			children = (
 				7491BE47211C322D0058877E /* CurrencyView.swift */,
 				7491BE49211C32700058877E /* CurrencyView.xib */,
+				C6CB743F21746B3100FB99C3 /* PasswordView.xib */,
+				C6CB744121746B3E00FB99C3 /* PasswordView.swift */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -1895,6 +1901,7 @@
 				7491BE45211C2E230058877E /* AccountCurrenciesViewController.xib in Resources */,
 				C6BEBE7021302CAD000F7435 /* ProvideCurrencyDataViewController.xib in Resources */,
 				7420BBE7211819AB002FC4C7 /* AccountDetailsViewController.xib in Resources */,
+				C6CB744021746B3100FB99C3 /* PasswordView.xib in Resources */,
 				43AE63282135A19300B7A904 /* EncodeSans-Thin.ttf in Resources */,
 				C61244C62113325A00DE1EA9 /* SendViewController.xib in Resources */,
 				C6BDA2C0216F66BF0076439E /* NativeCurrencyFeeInfoViewController.xib in Resources */,
@@ -2089,6 +2096,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4322BA26205BAA60007FEB5E /* HeaderMenuViewController.swift in Sources */,
+				C6CB744221746B3E00FB99C3 /* PasswordView.swift in Sources */,
 				C63B4F9E212AB3750003ECE5 /* TransactionTableViewCell.swift in Sources */,
 				439A182F2100CF8D00F7F5FD /* EmailSetupViewController.swift in Sources */,
 				4359984D20A492FF00007F27 /* AlertFactory.swift in Sources */,

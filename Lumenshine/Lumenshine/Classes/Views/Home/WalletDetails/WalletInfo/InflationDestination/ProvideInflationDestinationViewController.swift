@@ -21,43 +21,75 @@ fileprivate enum PublicKeyValidationErrors: String {
 
 class ProvideInflationDestinationViewController: UIViewController {
     @IBOutlet weak var publicKeyValidationView: UIView!
-    @IBOutlet weak var passwordValidationView: UIView!
+    @IBOutlet weak var passwordViewContainer: UIView!
     
     @IBOutlet weak var publicKeyTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
     
     @IBOutlet weak var publicKeyValidationLabel: UILabel!
-    @IBOutlet weak var passwordValidationLabel: UILabel!
     
     @IBOutlet weak var setButton: UIButton!
     
+    var wallet: FundedWallet!
+    
+    private let passwordManager = PasswordManager()
+    private let walletManager = WalletManager()
+    private let inflationManager = InflationManager()
+    private var inputDataValidator = InputDataValidator()
+    private var passwordView: PasswordView!
+    
+    private var hasEnoughFunding: Bool {
+        get {
+            return walletManager.hasWalletEnoughFunding(wallet: wallet)
+        }
+    }
+    
+    private var isAddressValid: Bool {
+        get {
+            if let address = publicKeyTextField.text, address.isMandatoryValid() {
+                if address.isBase64Valid() {
+                    return true
+                }
+                
+                showValidationError(for: publicKeyValidationView)
+                publicKeyValidationLabel.text = ValidationErrors.InvalidAddress.rawValue
+                return false
+                
+            } else {
+                showValidationError(for: publicKeyValidationView)
+                publicKeyValidationLabel.text = PublicKeyValidationErrors.mandatory.rawValue
+            }
+            
+            return false
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupPasswordView()
+        
+        setButton.backgroundColor = Stylesheet.color(.green)
+    }
+    
     @IBAction func setButtonAction(_ sender: UIButton) {
-        resetValidationErrors()
+        addInflation()
+    }
+    
+    private func addInflation(biometricAuth: Bool = false) {
+        passwordView.resetValidationErrors()
         setButton.setTitle(SetButtonTitles.validating.rawValue, for: UIControlState.normal)
         setButton.isEnabled = false
         
-        if self.isInputDataValid {
+        if isInputDataValid(biometricAuth: biometricAuth) {
             guard self.hasEnoughFunding else {
                 self.showFundingAlert()
                 return
             }
             
-            if let inflationDestination = publicKeyTextField.text{
-                passwordManager.getMnemonic(password: !passwordTextField.isHidden ? passwordTextField.text : nil) { (response) -> (Void) in
-                    switch response {
-                    case .success(_):
-                        self.setInflationDestination(inflationDestination: inflationDestination)
-                    case .failure(error: let error):
-                        if error == BiometricStatus.enterPasswordPressed.rawValue {
-                            self.passwordTextField.isHidden = false
-                        } else {
-                            print("Error: \(error)")
-                            self.showValidationError(for: self.passwordValidationView)
-                            self.passwordValidationLabel.text = ValidationErrors.InvalidPassword.rawValue
-                        }
-                        
-                        self.resetSetButtonToDefault()
-                    }
+            if let inflationDestination = publicKeyTextField.text {
+                if passwordView.useExternalSigning {
+                    self.setInflationDestination(inflationDestination: inflationDestination)
+                } else {
+                    validatePasswordAndAddInflation(inflationDestination: inflationDestination, biometricAuth: biometricAuth)
                 }
             }
         } else {
@@ -65,25 +97,17 @@ class ProvideInflationDestinationViewController: UIViewController {
         }
     }
     
-    var wallet: FundedWallet!
-    private let passwordManager = PasswordManager()
-    private var inputDataValidator = InputDataValidator()
-    private let walletManager = WalletManager()
-    private let inflationManager = InflationManager()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        if BiometricHelper.isBiometricAuthEnabled {
-            passwordTextField.isHidden = true
+    private func validatePasswordAndAddInflation(inflationDestination: String, biometricAuth: Bool) {
+        passwordManager.getMnemonic(password: !biometricAuth ? passwordView.passwordTextField.text : nil) { (response) -> (Void) in
+            switch response {
+            case .success(_):
+                self.setInflationDestination(inflationDestination: inflationDestination)
+            case .failure(error: let error):
+                print("Error: \(error)")
+                self.passwordView.showInvalidPasswordError()
+                self.resetSetButtonToDefault()
+            }
         }
-        
-        setButton.backgroundColor = Stylesheet.color(.green)
-    }
-    
-    private func resetValidationErrors() {
-        publicKeyValidationView.isHidden = true
-        passwordValidationView.isHidden = true
     }
     
     private func resetSetButtonToDefault() {
@@ -100,7 +124,13 @@ class ProvideInflationDestinationViewController: UIViewController {
     }
     
     private func setInflationDestination(inflationDestination: String) {
-        inflationManager.setInflationDestination(inflationAddress: inflationDestination, sourceAccountID: wallet.publicKey, completion: { (response) -> (Void) in
+        let signer = passwordView.useExternalSigning ? passwordView.signersTextField.text : nil
+        let seed = passwordView.useExternalSigning ? passwordView.seedTextField.text : nil
+        inflationManager.setInflationDestination(inflationAddress: inflationDestination,
+                                                 sourceAccountID: wallet.publicKey,
+                                                 externalSigner: signer,
+                                                 externalSignersSeed: seed,
+                                                 completion: { (response) -> (Void) in
             switch response {
             case .success:
                 break
@@ -119,64 +149,27 @@ class ProvideInflationDestinationViewController: UIViewController {
         })
     }
     
-    private var hasEnoughFunding: Bool {
-        get {
-            return walletManager.hasWalletEnoughFunding(wallet: wallet)
-        }
-    }
-    
-    private var isAddressValid: Bool {
-        get {
-            if let address = publicKeyTextField.text, address.isMandatoryValid() {
-                if address.isBase64Valid() {
-                    return true
-                }
-                
-                showValidationError(for: publicKeyValidationView)
-                publicKeyValidationLabel.text = ValidationErrors.InvalidAddress.rawValue
-                return false
+    private func isInputDataValid(biometricAuth: Bool) -> Bool {
+        let isAddressValid = self.isAddressValid
+        let isPasswordValid = passwordView.validatePassword(biometricAuth: biometricAuth)
 
-            } else {
-                showValidationError(for: publicKeyValidationView)
-                publicKeyValidationLabel.text = PublicKeyValidationErrors.mandatory.rawValue
-            }
-            
-            return false
-        }
+        return isAddressValid && isPasswordValid
     }
     
-    private var isPasswordValid: Bool {
-        get {
-            if let password = passwordTextField.text, password.isMandatoryValid() {
-                if password.isValidPassword() {
-                    return true
-                }
-                
-                showValidationError(for: passwordValidationView)
-                passwordValidationLabel.text = ValidationErrors.InvalidPassword.rawValue
-            } else {
-                showValidationError(for: passwordValidationView)
-                passwordValidationLabel.text = ValidationErrors.MandatoryPassword.rawValue
-            }
-            
-            return false
+    private func setupPasswordView() {
+        passwordView = Bundle.main.loadNibNamed("PasswordView", owner: self, options: nil)![0] as? PasswordView
+        passwordView.neededSigningSecurity = .medium
+        passwordView.hideTitleLabels = true
+        passwordView.wallet = wallet
+        
+        passwordView.biometricAuthAction = {
+            self.addInflation(biometricAuth: true)
         }
-    }
-    
-    private var isInputDataValid: Bool {
-        get {
-            let isAddressValid = self.isAddressValid
-            
-            if passwordTextField.isHidden {
-                if !isAddressValid {
-                    return false
-                }
-                
-                return true
-            }
-            
-            let isPasswordValid = self.isPasswordValid
-            return isAddressValid && isPasswordValid
+        
+        passwordViewContainer.addSubview(passwordView)
+        
+        passwordView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
         }
     }
 }

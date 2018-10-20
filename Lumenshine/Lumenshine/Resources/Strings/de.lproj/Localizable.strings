@@ -332,6 +332,9 @@
 "email_resent" = "Email erneut gesendet";
 
 /*  */
+"already_verified" = "Bereits bestätigt";
+
+/*  */
 "mnemonic_title" = "Notiere und bestätige dein Backup Secret (Mnemonic)";
 
 /*  */

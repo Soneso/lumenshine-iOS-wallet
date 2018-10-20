@@ -104,7 +104,7 @@ extension HomeViewController: UITableViewDataSource {
                     }, completion: nil)
                 }
                 
-                self?.viewModel.updateCurrencies()
+                //self?.viewModel.updateCurrencies()
             }
         }
         

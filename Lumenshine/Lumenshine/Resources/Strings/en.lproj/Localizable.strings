@@ -365,7 +365,7 @@
 "tfa_code" = "2FA Code";
 
 /*  */
-"tfa_code_configured" = "2FA CODE (if configured)";
+"tfa_code_configured" = "2FA CODE (if enabled)";
 
 /*  */
 "lbl_email_confirmation" = "Verify your email address";
@@ -377,7 +377,7 @@
 "email_confirmation_posthint" = "Click the link to verify your email address.";
 
 /*  */
-"email_confirmation_hint2" = "Your email address is not verified. We sent a verification message to your email account. Click the link to verify your email address. After doing so, please come back and press the \"Continue\" button to finish resetting your password.";
+"email_confirmation_hint2" = "Your email address is not verified. We sent a verification message to your email account. Click the link to verify your email address. After doing so, please come back and press the \"Already verified\" button to finish resetting your password.";
 
 /*  */
 "lbl_please_confirm" = "Please verify your email address first.";
@@ -387,6 +387,9 @@
 
 /*  */
 "resend_email" = "Resend email";
+
+/*  */
+"already_verified" = "Already verified";
 
 /*  */
 "lost_security_email_sent" = "%@ email sent";

@@ -9,6 +9,12 @@
 import UIKit
 import stellarsdk
 
+public enum SigningSecurityLevel {
+    case high
+    case medium
+    case low
+}
+
 public enum BoolEnum {
     case success(response: Bool)
     case failure(error: ServiceError)
@@ -29,7 +35,7 @@ public enum AddressStatusEnum {
     case failure
 }
 
-public enum CanAccountSignEnum {
+public enum CanMasterKeySignOperationEnum {
     case success(canSign: Bool)
     case failure(error: HorizonRequestError)
 }
@@ -48,7 +54,7 @@ public typealias BoolClosure = (_ response:BoolEnum) -> (Void)
 public typealias CoinClosure = (_ response:CoinEnum) -> (Void)
 public typealias WalletsClosure = (_ response:WalletsEnum) -> (Void)
 public typealias AddressStatusClosure = (_ response: AddressStatusEnum) -> (Void)
-public typealias CanAccountSignClosure = (_ response: CanAccountSignEnum) -> (Void)
+public typealias CanMasterKeySignOperationClosure = (_ response: CanMasterKeySignOperationEnum) -> (Void)
 public typealias GetSignersListClosure = (_ response: GetSignersListEnum) -> (Void)
 public typealias GetAccountBalanceResponseClosure = (_ response: GetAccountBalanceResponseEnum) -> (Void)
 public typealias CoinUnit = Double
@@ -162,15 +168,30 @@ public class UserManager: NSObject {
         }
     }
     
-    func canAccountSign(accountID: String, completion: @escaping CanAccountSignClosure) {
+    /**
+     neededSecurity:
+     Low Security - "low": AllowTrust
+     Medium Security - "medium": All else (e.g. payments)
+     High Security - "high": AccountMerge, SetOptions for Signer and threshold
+    **/
+    func canSignerSignOperation(accountID: String, signerPublicKey:String, neededSecurity: SigningSecurityLevel, completion: @escaping CanMasterKeySignOperationClosure) {
         stellarSDK.accounts.getAccountDetails(accountId: accountID) { (response) -> (Void) in
             DispatchQueue.main.async {
                 switch response {
                 case .success(details: let accountDetails):
-                    if let masterKeyWeight = accountDetails.signers.first(where: { (account) -> Bool in
-                        return account.publicKey == accountID
+                    if let signerWeight = accountDetails.signers.first(where: { (nextSigner) -> Bool in
+                        return nextSigner.publicKey == signerPublicKey
                     })?.weight {
-                        if masterKeyWeight >= accountDetails.thresholds.lowThreshold {
+                        
+                        var neededThreshold = accountDetails.thresholds.highThreshold
+                        
+                        if (neededSecurity == SigningSecurityLevel.medium) {
+                            neededThreshold = accountDetails.thresholds.medThreshold
+                        } else if (neededSecurity == SigningSecurityLevel.low) {
+                            neededThreshold = accountDetails.thresholds.lowThreshold
+                        }
+                        
+                        if signerWeight >= neededThreshold {
                             completion(.success(canSign: true))
                         } else {
                             completion(.success(canSign: false))
@@ -186,12 +207,26 @@ public class UserManager: NSObject {
         }
     }
     
-    func getSignersList(accountID: String, completion: @escaping GetSignersListClosure) {
+    func getSignersThatCanSignOperation(accountID: String, neededSecurity: SigningSecurityLevel, completion: @escaping GetSignersListClosure) {
         stellarSDK.accounts.getAccountDetails(accountId: accountID) { (response) -> (Void) in
             DispatchQueue.main.async {
                 switch response {
                 case .success(details: let accountDetails):
-                    completion(.success(signersList: accountDetails.signers))
+                    var signersThatCanSign: [AccountSignerResponse] = []
+                    for nextSigner in accountDetails.signers {
+                        var neededThreshold = accountDetails.thresholds.highThreshold
+                        
+                        if (neededSecurity == SigningSecurityLevel.medium) {
+                            neededThreshold = accountDetails.thresholds.medThreshold
+                        } else if (neededSecurity == SigningSecurityLevel.low) {
+                            neededThreshold = accountDetails.thresholds.lowThreshold
+                        }
+                        
+                        if nextSigner.weight >= neededThreshold {
+                            signersThatCanSign.append(nextSigner)
+                        }
+                    }
+                    completion(.success(signersList: signersThatCanSign))
                 case .failure(error: let error):
                     completion(.failure(error: error))
                 }

@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProvideInflationDestinationViewController" customModule="Lumenshine" customModuleProvider="target">
             <connections>
-                <outlet property="passwordTextField" destination="qAw-DC-d5j" id="uyI-hn-BgQ"/>
-                <outlet property="passwordValidationLabel" destination="dEE-6M-1qn" id="3yX-Jp-GyC"/>
-                <outlet property="passwordValidationView" destination="VYD-mR-D7w" id="5Qp-LP-W34"/>
+                <outlet property="passwordViewContainer" destination="exo-P4-UAv" id="6TZ-IY-kMM"/>
                 <outlet property="publicKeyTextField" destination="Z3N-v9-8E1" id="BE0-sX-Yqm"/>
                 <outlet property="publicKeyValidationLabel" destination="8Vp-qS-VOD" id="oCI-Ml-xuW"/>
                 <outlet property="publicKeyValidationView" destination="RRX-c9-bTe" id="HVF-PU-bKw"/>
@@ -27,11 +25,11 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="scO-g7-9ue">
-                    <rect key="frame" x="0.0" y="20" width="375" height="163"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="scO-g7-9ue">
+                    <rect key="frame" x="0.0" y="20" width="375" height="197"/>
                     <subviews>
                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RRX-c9-bTe">
-                            <rect key="frame" x="0.0" y="-4" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Public key not found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Vp-qS-VOD" customClass="ErrorLabel" customModule="Lumenshine" customModuleProvider="target">
                                     <rect key="frame" x="16" y="0.0" width="359" height="0.0"/>
@@ -59,37 +57,12 @@
                                 </textField>
                             </subviews>
                         </stackView>
-                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VYD-mR-D7w">
-                            <rect key="frame" x="0.0" y="34" width="375" height="0.0"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="passwordValidationLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEE-6M-1qn" customClass="ErrorLabel" customModule="Lumenshine" customModuleProvider="target">
-                                    <rect key="frame" x="16" y="0.0" width="359" height="0.0"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
+                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="exo-P4-UAv">
+                            <rect key="frame" x="0.0" y="46" width="375" height="40"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstItem="dEE-6M-1qn" firstAttribute="top" secondItem="VYD-mR-D7w" secondAttribute="top" id="O9E-xo-4GP"/>
-                                <constraint firstAttribute="trailing" secondItem="dEE-6M-1qn" secondAttribute="trailing" id="cvs-pE-pUn"/>
-                                <constraint firstAttribute="bottom" secondItem="dEE-6M-1qn" secondAttribute="bottom" id="qxt-D9-wqf"/>
-                                <constraint firstItem="dEE-6M-1qn" firstAttribute="leading" secondItem="VYD-mR-D7w" secondAttribute="leading" constant="16" id="zW9-7F-4bG"/>
-                            </constraints>
                         </view>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="h9R-Mk-JKd">
-                            <rect key="frame" x="0.0" y="38" width="375" height="30"/>
-                            <subviews>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="qAw-DC-d5j" customClass="InputTextField" customModule="Lumenshine" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
-                                    <nil key="textColor"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
-                                </textField>
-                            </subviews>
-                        </stackView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="icl-yb-BIF">
-                            <rect key="frame" x="0.0" y="76" width="375" height="17"/>
+                            <rect key="frame" x="0.0" y="102" width="375" height="17"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Password required to set inflation destination" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Msa-bM-uTE" customClass="HintLabel" customModule="Lumenshine" customModuleProvider="target">
                                     <rect key="frame" x="16" y="0.0" width="359" height="17"/>
@@ -107,7 +80,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aX4-df-Vwa">
-                            <rect key="frame" x="0.0" y="101" width="375" height="62"/>
+                            <rect key="frame" x="0.0" y="135" width="375" height="62"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gCT-rh-4mv" customClass="RoundedButton" customModule="Lumenshine" customModuleProvider="target">
                                     <rect key="frame" x="172.5" y="16" width="30" height="30"/>
@@ -128,7 +101,6 @@
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="qCu-33-LO2" secondAttribute="trailing" id="AJ6-iO-of9"/>
-                        <constraint firstAttribute="trailing" secondItem="h9R-Mk-JKd" secondAttribute="trailing" id="IoB-Vb-hcg"/>
                     </constraints>
                 </stackView>
             </subviews>

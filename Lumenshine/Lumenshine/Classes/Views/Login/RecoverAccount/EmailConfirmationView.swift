@@ -121,7 +121,7 @@ fileprivate extension EmailConfirmationView {
     }
     
     func prepareButtons() {
-        submitButton.title = R.string.localizable.continue().uppercased()
+        submitButton.title = R.string.localizable.already_verified().uppercased()
         submitButton.titleColor = Stylesheet.color(.white)
         submitButton.backgroundColor = Stylesheet.color(.cyan)
         submitButton.titleLabel?.font = R.font.encodeSansSemiBold(size: 15)
@@ -132,7 +132,7 @@ fileprivate extension EmailConfirmationView {
         submitButton.snp.makeConstraints { make in
             make.top.equalTo(hintLabel.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
-            make.width.equalTo(120)
+            make.width.equalTo(200)
             make.height.equalTo(38)
         }
         
