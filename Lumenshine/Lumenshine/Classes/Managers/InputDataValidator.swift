@@ -9,10 +9,6 @@
 import Foundation
 import stellarsdk
 
-enum PasswordAndDestinationAddressEnum {
-    case success(passwordResponse: PasswordEnum, addressResponse: AddressStatusEnum)
-    case failure(errorCode: PasswordAndAddressErrorCodes)
-}
 
 enum PasswordAndDestionationAddressValidityEnum {
     case success(userMnemonic: String)
@@ -25,14 +21,12 @@ enum PasswordAndAddressErrorCodes: Int {
     case enterPasswordPressed = 2
 }
 
-typealias PasswordAndDestinationAddressClosure = (_ response: PasswordAndDestinationAddressEnum) -> (Void)
 typealias PasswordAndDestinationAddressValidityClosure = (_ response: PasswordAndDestionationAddressValidityEnum) -> (Void)
-typealias DestinationAddressClosure = (_ response: AddressStatusEnum) -> (Void)
+
 
 class InputDataValidator {
     private let passwordManager = PasswordManager()
     private let userManager = UserManager()
-    private let federationManager = FederationManager()
     
     func isPasswordAndDestinationAddresValid(address: String, password: String? = nil, completion: @escaping PasswordAndDestinationAddressValidityClosure) {
         userManager.checkIfAccountExists(forAccountID: address) { (accountExists) -> (Void) in
@@ -54,40 +48,6 @@ class InputDataValidator {
             } else {
                 DispatchQueue.main.async {
                     completion(.failure(errorCode: .addressNotFound))
-                }
-            }
-        }
-    }
-    
-    func validatePasswordAndDestinationAddress(address: String, password: String?, currency: AccountBalanceResponse, completion: @escaping PasswordAndDestinationAddressClosure) {
-        passwordManager.getMnemonic(password: password) { (passwordResult) -> (Void) in
-            if address.isFederationAddress() {
-                self.federationManager.resolveAndCheckFederationAddressStatus(forDomain: address, currency: currency, completion: { (federationResult) -> (Void) in
-                    DispatchQueue.main.async {
-                        completion(.success(passwordResponse: passwordResult, addressResponse: federationResult))
-                    }
-                })
-            } else {
-                self.userManager.checkAddressStatus(forAccountID: address, asset: currency) { (addressResult) -> (Void) in
-                    DispatchQueue.main.async {
-                        completion(.success(passwordResponse: passwordResult, addressResponse: addressResult))
-                    }
-                }
-            }
-        }
-    }
-    
-    func isDestinationAddressValid(address: String, currency: AccountBalanceResponse, completion: @escaping DestinationAddressClosure) {
-        if address.isFederationAddress() {
-            federationManager.resolveAndCheckFederationAddressStatus(forDomain: address, currency: currency) { (response) -> (Void) in
-                DispatchQueue.main.async {
-                    completion(response)
-                }
-            }
-        } else {
-            userManager.checkAddressStatus(forAccountID: address, asset: currency) { (response) -> (Void) in
-                DispatchQueue.main.async {
-                    completion(response)
                 }
             }
         }

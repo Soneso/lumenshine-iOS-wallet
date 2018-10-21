@@ -301,7 +301,6 @@
 		C6725090213FECDB0064F6E3 /* KnownInflationDestinationsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C672508F213FECDB0064F6E3 /* KnownInflationDestinationsTableViewCell.xib */; };
 		C6725092213FFC580064F6E3 /* KnownInflationDestinationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6725091213FFC580064F6E3 /* KnownInflationDestinationDetailsViewController.swift */; };
 		C6725094213FFC7A0064F6E3 /* KnownInflationDestinationDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6725093213FFC7A0064F6E3 /* KnownInflationDestinationDetailsViewController.xib */; };
-		C6752A42213806030067F815 /* FederationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6752A41213806030067F815 /* FederationManager.swift */; };
 		C6752A44213808D50067F815 /* PasswordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6752A43213808D50067F815 /* PasswordManager.swift */; };
 		C6752A46213818CD0067F815 /* InputDataValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6752A45213818CD0067F815 /* InputDataValidator.swift */; };
 		C675BC22215CBF8000B663DB /* LeftRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C675BC21215CBF8000B663DB /* LeftRoundedButton.swift */; };
@@ -701,7 +700,6 @@
 		C672508F213FECDB0064F6E3 /* KnownInflationDestinationsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KnownInflationDestinationsTableViewCell.xib; sourceTree = "<group>"; };
 		C6725091213FFC580064F6E3 /* KnownInflationDestinationDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownInflationDestinationDetailsViewController.swift; sourceTree = "<group>"; };
 		C6725093213FFC7A0064F6E3 /* KnownInflationDestinationDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KnownInflationDestinationDetailsViewController.xib; sourceTree = "<group>"; };
-		C6752A41213806030067F815 /* FederationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FederationManager.swift; sourceTree = "<group>"; };
 		C6752A43213808D50067F815 /* PasswordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordManager.swift; sourceTree = "<group>"; };
 		C6752A45213818CD0067F815 /* InputDataValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputDataValidator.swift; sourceTree = "<group>"; };
 		C675BC21215CBF8000B663DB /* LeftRoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftRoundedButton.swift; sourceTree = "<group>"; };
@@ -1480,7 +1478,6 @@
 				74C08FF220EE1FE6000A809D /* UserManager.swift */,
 				74C0914B20FB4125000A809D /* CurrenciesMonitor.swift */,
 				7491BE4B211C450F0058877E /* WalletManager.swift */,
-				C6752A41213806030067F815 /* FederationManager.swift */,
 				C6752A43213808D50067F815 /* PasswordManager.swift */,
 				C6752A45213818CD0067F815 /* InputDataValidator.swift */,
 				C6805B5A2139530C003B2B25 /* TransactionHistoryManager.swift */,
@@ -2202,7 +2199,6 @@
 				43C7A8F2215BB28D007F4E5E /* HelpCenterViewModel.swift in Sources */,
 				C6752A44213808D50067F815 /* PasswordManager.swift in Sources */,
 				43C6377A20BEFF2B00498FC5 /* ReLoginViewController.swift in Sources */,
-				C6752A42213806030067F815 /* FederationManager.swift in Sources */,
 				43844F4020E401B500C352E5 /* ReLoginMenuViewModel.swift in Sources */,
 				43844F3E20E3FE2600C352E5 /* ReLoginViewModel.swift in Sources */,
 				43564BAB21637630006A7B9F /* ContactsCoordinator.swift in Sources */,

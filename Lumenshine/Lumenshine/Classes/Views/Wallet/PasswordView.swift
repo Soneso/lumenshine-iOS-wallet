@@ -74,6 +74,7 @@ class PasswordView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
             return validateSignersSeed()
         }
         
+        // TODO: this breaks if user returns from result view and wants to send new payment
         if let currentPassword = passwordTextField.text {
             if !currentPassword.isMandatoryValid() {
                 setValidationError(view: passwordValidationView, label: passwordValidationErrorLabel, errorMessage: .Mandatory)
