@@ -35,7 +35,6 @@ class ProvideCurrencyDataViewController: UIViewController {
     
     var wallet: FundedWallet!
     private var walletManager = WalletManager()
-    private var inputDataValidator = InputDataValidator()
     private var passwordView: PasswordView!
     private let IssuerDoesntExistValidationError = "Issuer does not exist"
     private let passwordManager = PasswordManager()
@@ -92,24 +91,26 @@ class ProvideCurrencyDataViewController: UIViewController {
     }
     
     private func validateDestinationAndPassword(issuer: String, assetCode: String, biometricAuth: Bool) {
-        inputDataValidator.isPasswordAndDestinationAddresValid(address: issuer, password: !biometricAuth ? passwordView.passwordTextField.text : nil) { (passwordAndAddressResponse) -> (Void) in
-            switch passwordAndAddressResponse {
-            case .success(_):
-                self.addTrustLine(issuer: issuer, assetCode: assetCode)
-                
-            case .failure(errorCode: let errorCode):
-                switch errorCode {
-                case .addressNotFound:
-                    self.showValidationError(for: self.issuerValidationStackView)
-                    self.issuerValidationLabel.text = self.IssuerDoesntExistValidationError
-                    
-                case .incorrectPassword:
-                    self.passwordView.showInvalidPasswordError()
-                    
-                case .enterPasswordPressed:
-                    break
+        
+        userManager.checkIfAccountExists(forAccountID: issuer) { (accountExists) -> (Void) in
+            if accountExists {
+                let password = !biometricAuth ? self.passwordView.passwordTextField.text : nil
+                self.passwordManager.getMnemonic(password: password) { (passwordResult) -> (Void) in
+                    DispatchQueue.main.async {
+                        switch passwordResult {
+                        case .success(_):
+                            self.addTrustLine(issuer: issuer, assetCode: assetCode)
+                        case .failure(error: let error):
+                            if error != BiometricStatus.enterPasswordPressed.rawValue {
+                                self.passwordView.showInvalidPasswordError()
+                            }
+                            self.resetAddButtonToDefault()
+                        }
+                    }
                 }
-                
+            } else {
+                self.showValidationError(for: self.issuerValidationStackView)
+                self.issuerValidationLabel.text = self.IssuerDoesntExistValidationError
                 self.resetAddButtonToDefault()
             }
         }
@@ -221,13 +222,14 @@ class ProvideCurrencyDataViewController: UIViewController {
             transactionHelper.addTrustLine(asset: asset, completion: { (status) -> (Void) in
                 switch status {
                 case .success:
+                    self.navigationController?.popViewController(animated: true)
                     break
                 case .failure(let error):
                     print("Error: \(error)")
+                    // TODO show more specific error
+                    self.displaySimpleAlertView(title: "Adding failed", message: "An error occured while trying to add currency.")
                     self.resetAddButtonToDefault()
                 }
-                
-                self.navigationController?.popViewController(animated: true)
             })
         }
     }

@@ -109,7 +109,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     private var otherCurrencyAsset: AccountBalanceResponse?
     
     private var scanViewController: ScanViewController!
-    private let inputDataValidator = InputDataValidator()
     private let userManager = UserManager()
     private let passwordManager = PasswordManager()
     

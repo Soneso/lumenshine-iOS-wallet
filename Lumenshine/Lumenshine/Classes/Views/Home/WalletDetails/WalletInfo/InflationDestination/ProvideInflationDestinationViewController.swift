@@ -34,7 +34,6 @@ class ProvideInflationDestinationViewController: UIViewController {
     private let passwordManager = PasswordManager()
     private let walletManager = WalletManager()
     private let inflationManager = InflationManager()
-    private var inputDataValidator = InputDataValidator()
     private var passwordView: PasswordView!
     
     private var hasEnoughFunding: Bool {

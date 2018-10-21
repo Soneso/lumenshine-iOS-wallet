@@ -302,7 +302,6 @@
 		C6725092213FFC580064F6E3 /* KnownInflationDestinationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6725091213FFC580064F6E3 /* KnownInflationDestinationDetailsViewController.swift */; };
 		C6725094213FFC7A0064F6E3 /* KnownInflationDestinationDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6725093213FFC7A0064F6E3 /* KnownInflationDestinationDetailsViewController.xib */; };
 		C6752A44213808D50067F815 /* PasswordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6752A43213808D50067F815 /* PasswordManager.swift */; };
-		C6752A46213818CD0067F815 /* InputDataValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6752A45213818CD0067F815 /* InputDataValidator.swift */; };
 		C675BC22215CBF8000B663DB /* LeftRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C675BC21215CBF8000B663DB /* LeftRoundedButton.swift */; };
 		C675BC26215CBFE700B663DB /* RightRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C675BC25215CBFE700B663DB /* RightRoundedButton.swift */; };
 		C675BC28215CF86200B663DB /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C675BC27215CF86200B663DB /* BaseButton.swift */; };
@@ -701,7 +700,6 @@
 		C6725091213FFC580064F6E3 /* KnownInflationDestinationDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownInflationDestinationDetailsViewController.swift; sourceTree = "<group>"; };
 		C6725093213FFC7A0064F6E3 /* KnownInflationDestinationDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KnownInflationDestinationDetailsViewController.xib; sourceTree = "<group>"; };
 		C6752A43213808D50067F815 /* PasswordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordManager.swift; sourceTree = "<group>"; };
-		C6752A45213818CD0067F815 /* InputDataValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputDataValidator.swift; sourceTree = "<group>"; };
 		C675BC21215CBF8000B663DB /* LeftRoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftRoundedButton.swift; sourceTree = "<group>"; };
 		C675BC25215CBFE700B663DB /* RightRoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightRoundedButton.swift; sourceTree = "<group>"; };
 		C675BC27215CF86200B663DB /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
@@ -1479,7 +1477,6 @@
 				74C0914B20FB4125000A809D /* CurrenciesMonitor.swift */,
 				7491BE4B211C450F0058877E /* WalletManager.swift */,
 				C6752A43213808D50067F815 /* PasswordManager.swift */,
-				C6752A45213818CD0067F815 /* InputDataValidator.swift */,
 				C6805B5A2139530C003B2B25 /* TransactionHistoryManager.swift */,
 				C6813DC8213AC725007074C2 /* KnownCurrenciesManager.swift */,
 				C691F68E211C571E00ECA2C4 /* TransactionHelper.swift */,
@@ -2195,7 +2192,6 @@
 				C66E353D215A082700D39906 /* ImageBackgroundNavigationController.swift in Sources */,
 				4359984B20A438EF00007F27 /* AuthenticationResponse.swift in Sources */,
 				C6257A70216211DA00E1B879 /* RegularSubtitleLabel.swift in Sources */,
-				C6752A46213818CD0067F815 /* InputDataValidator.swift in Sources */,
 				43C7A8F2215BB28D007F4E5E /* HelpCenterViewModel.swift in Sources */,
 				C6752A44213808D50067F815 /* PasswordManager.swift in Sources */,
 				43C6377A20BEFF2B00498FC5 /* ReLoginViewController.swift in Sources */,
