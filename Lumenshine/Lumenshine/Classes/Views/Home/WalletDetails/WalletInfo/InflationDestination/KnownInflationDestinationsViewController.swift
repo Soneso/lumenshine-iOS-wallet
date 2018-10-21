@@ -44,7 +44,7 @@ class KnownInflationDestinationsViewController: UIViewController, UITableViewDel
     private var headerViewController: LoadTransactionsHistoryViewController!
     private var itemsSource: [KnownInflationDestinationResponse] = []
     private var currentExpandedRowIndexPath: IndexPath?
-    private var canWalletSign = true
+    private var canMasterKeySign = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,11 +52,12 @@ class KnownInflationDestinationsViewController: UIViewController, UITableViewDel
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
+        getKnownInflationDestinations()
         setTableViewHeader()
         userManager.canSignerSignOperation(accountID: wallet.publicKey, signerPublicKey: wallet.publicKey, neededSecurity: .medium) { (response) -> (Void) in
             switch response {
             case .success(canSign: let canSign):
-                self.canWalletSign = canSign
+                self.canMasterKeySign = canSign
             case .failure(error: let error):
                 print(error.localizedDescription)
             }
@@ -82,6 +83,7 @@ class KnownInflationDestinationsViewController: UIViewController, UITableViewDel
                 self.tableView.reloadData()
             case .failure(error: let error):
                 print("Error: \(error)")
+                // TODO handle error
                 self.tableView.tableHeaderView = nil
             }
         }
@@ -108,9 +110,9 @@ class KnownInflationDestinationsViewController: UIViewController, UITableViewDel
         
         cell.nameLabel.text = knownInflationDestination.name
         cell.shortDescriptionLabel.text = knownInflationDestination.shortDescription
-        cell.issuerPublicKeyLabel.text = knownInflationDestination.issuerPublicKey
+        cell.destinationPublicKeyLabel.text = knownInflationDestination.destinationPublicKey
         
-        if knownInflationDestination.issuerPublicKey == currentInflationDestination {
+        if knownInflationDestination.destinationPublicKey == currentInflationDestination {
             cell.isCurrentlySetSwitch.isOn = true
         } else {
             cell.isCurrentlySetSwitch.isOn = false
@@ -126,7 +128,7 @@ class KnownInflationDestinationsViewController: UIViewController, UITableViewDel
             cell.collapse()
         }
         
-        cell.canWalletSign = canWalletSign
+        cell.canMasterKeySign = canMasterKeySign
         cell.wallet = wallet
         cell.selectionStyle = .none
         

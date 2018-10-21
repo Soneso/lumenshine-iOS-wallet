@@ -70,7 +70,7 @@ class InflationManager {
                     if let inflationAddress = accountDetails.inflationDestination {
                         completion(.success(inflationDestinationAddress: inflationAddress))
                     } else {
-                        completion(.failure(error: nil))
+                        completion(.success(inflationDestinationAddress: ""))
                     }
                 case .failure(error: let error):
                     completion(.failure(error: error))
@@ -84,7 +84,7 @@ class InflationManager {
             switch response {
             case .success(response: let knownInflationDestinations):
                 for inflationDestination in knownInflationDestinations {
-                    if inflationDestination.issuerPublicKey == inflationAddress {
+                    if inflationDestination.destinationPublicKey == inflationAddress {
                         DispatchQueue.main.async {
                             completion(.success(knownInflationDestination: inflationDestination))
                         }

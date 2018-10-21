@@ -21,14 +21,14 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
     @IBOutlet weak var passwordViewContainer: UIView!
     
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var issuerPublicKeyLabel: UILabel!
+    @IBOutlet weak var destinationPublicKeyLabel: UILabel!
     @IBOutlet weak var shortDescriptionLabel: UILabel!
     
     @IBOutlet weak var isCurrentlySetSwitch: UISwitch!
     
     @IBOutlet weak var setOrRemoveButton: UIButton!
     
-    var canWalletSign: Bool!
+    var canMasterKeySign: Bool!
     var wallet: FundedWallet! {
         didSet {
             setupPasswordView()
@@ -80,7 +80,12 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
                 if self.isCurrentlySetSwitch.isOn {
                     self.removeInflationDestination()
                 } else {
-                    self.setInflationDestination(sourceAccountID: self.wallet.publicKey)
+                    if let inflationDestinationAddress = self.destinationPublicKeyLabel.text {
+                        self.setInflationDestination(sourceAccountID: self.wallet.publicKey, destination: inflationDestinationAddress)
+                    }else {
+                        // TODO improve, make sure not to show any cells that have no destination address
+                        self.showUnknownErrorAlert()
+                    }
                 }
 
             } else {
@@ -99,7 +104,12 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
                 if self.isCurrentlySetSwitch.isOn {
                     self.removeInflationDestination(mnemonic: mnemonic)
                 } else {
-                    self.setInflationDestination(sourceAccountID: self.wallet.publicKey)
+                    if let inflationDestinationAddress = self.destinationPublicKeyLabel.text {
+                        self.setInflationDestination(sourceAccountID: self.wallet.publicKey, destination: inflationDestinationAddress)
+                    }else {
+                        // TODO improve, make sure not to show any cells that have no destination address
+                        self.showUnknownErrorAlert()
+                    }
                 }
 
             case .failure(error: let error):
@@ -111,26 +121,27 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
     }
     
     private func removeInflationDestination(mnemonic: String? = nil) {
-        setButtonAsNormal()
+        // TODO: set the inflation destination to the account itself.
+        self.setInflationDestination(sourceAccountID: self.wallet.publicKey, destination: self.wallet.publicKey)
     }
     
-    private func setInflationDestination(sourceAccountID: String) {
-        if let inflationDestinationAddress = issuerPublicKeyLabel.text {
-            let signer = passwordView.useExternalSigning ? passwordView.signersTextField.text : nil
-            let seed = passwordView.useExternalSigning ? passwordView.seedTextField.text : nil
-            inflationManager.setInflationDestination(inflationAddress: inflationDestinationAddress,
-                                                     sourceAccountID: sourceAccountID,
-                                                     externalSigner: signer,
-                                                     externalSignersSeed: seed) { (response) -> (Void) in
-                switch response {
-                case .success:
-                    break
-                case .failure(error: let error):
-                    print("Error: \(error)")
-                }
-                
-                self.dissmissView()
-            }
+    private func setInflationDestination(sourceAccountID: String, destination: String) {
+        let signer = passwordView.useExternalSigning ? passwordView.signersTextField.text : nil
+        let seed = passwordView.useExternalSigning ? passwordView.seedTextField.text : nil
+        inflationManager.setInflationDestination(inflationAddress: destination,
+                                                 sourceAccountID: sourceAccountID,
+                                                 externalSigner: signer,
+                                                 externalSignersSeed: seed) { (response) -> (Void) in
+                                                    switch response {
+                                                    case .success:
+                                                        self.dissmissView()
+                                                        break
+                                                    case .failure(error: let error):
+                                                        print("Error: \(error)")
+                                                        //TODO handle specific error, e.g. one of the accounts not found, transaction failed, etc
+                                                        self.showUnknownErrorAlert()
+                                                        self.setButtonAsNormal()
+                                                    }
         }
     }
     
@@ -146,6 +157,10 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
     
     private func showFundingAlert() {
         parentContainerViewController()?.displaySimpleAlertView(title: "Operation failed", message: "Insufficient funding. Please send lumens to your wallet first.")
+    }
+    
+    private func showUnknownErrorAlert() {
+        parentContainerViewController()?.displaySimpleAlertView(title: "Operation failed", message: "An error occured while trying to set the inflation destination. Please try again later.")
     }
     
     private func setButtonAsValidating() {
@@ -185,7 +200,7 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
             self.addInflation(biometricAuth: true)
         }
         
-        if canWalletSign {
+        if canMasterKeySign {
             passwordView.showPassword()
         } else {
             passwordView.showSigners()

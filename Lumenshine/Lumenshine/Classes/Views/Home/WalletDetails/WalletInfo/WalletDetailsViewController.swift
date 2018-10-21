@@ -112,6 +112,7 @@ class WalletDetailsViewController: UIViewController {
     private var inflationManager = InflationManager()
     private let PublicKeyLabelInitialValue = "****************************"
     private let InflationNoneSet = "none"
+    private let InflationUnknownSet = "unknown"
     private let InflationNoneSetHint = "Hint: Vote or earn free lumens by setting the inflation destination"
     private var currentInflationDestination: KnownInflationDestinationResponse!
     private var paymentOperationsVCManager: PaymentOperationsVCManager!
@@ -180,10 +181,17 @@ class WalletDetailsViewController: UIViewController {
         inflationShortDescriptionLabel.text = InflationNoneSetHint
     }
     
+    private func setUIForInflationUnknown() {
+        inflationCoinLabel.text = InflationUnknownSet
+        inflationCoinLabel.textColor = Stylesheet.color(.red)
+        inflationPublicKeyLabel.isHidden = true
+        inflationShortDescriptionLabel.text = InflationNoneSetHint
+    }
+    
     private func setUIForInflationSet(knownInflationDestination: KnownInflationDestinationResponse) {
         inflationCoinLabel.text = knownInflationDestination.name
         inflationCoinLabel.textColor = Stylesheet.color(.green)
-        inflationPublicKeyLabel.text = knownInflationDestination.issuerPublicKey
+        inflationPublicKeyLabel.text = knownInflationDestination.destinationPublicKey
         inflationShortDescriptionLabel.text = knownInflationDestination.shortDescription
         inflationButtonsStackView.isHidden = false
         noInflationSetStackView.isHidden = true
@@ -218,13 +226,16 @@ class WalletDetailsViewController: UIViewController {
         inflationManager.getInflationDestination(forAccount: wallet.publicKey) { (response) -> (Void) in
             switch response {
             case .success(inflationDestinationAddress: let inflationAddress):
-                self.checkForKnownInflationDestination(inflationAddress: inflationAddress)
+                if inflationAddress == "" || inflationAddress == self.wallet.publicKey {
+                    self.setUIForNoInflationSet()
+                } else {
+                    self.checkForKnownInflationDestination(inflationAddress: inflationAddress)
+                }
             case .failure(error: let error):
                 if let error = error {
                     print("Error: \(error.localizedDescription)")
                 }
-                
-                self.setUIForNoInflationSet()
+                self.setUIForInflationUnknown()
             }
         }
     }

@@ -11,7 +11,7 @@ import Foundation
 public class KnownInflationDestinationResponse: Decodable {
     let id: Int
     let name: String
-    let issuerPublicKey: String
+    let destinationPublicKey: String
     let shortDescription: String
     let longDescription: String
     let orderIndex: Int
@@ -19,7 +19,7 @@ public class KnownInflationDestinationResponse: Decodable {
     private enum CodingKeys: String, CodingKey {
         case id = "id"
         case name = "name"
-        case issuerPublicKey = "issuer_public_key"
+        case destinationPublicKey = "issuer_public_key"
         case shortDescription = "short_description"
         case longDescription = "long_description"
         case orderIndex = "order_index"
@@ -29,7 +29,7 @@ public class KnownInflationDestinationResponse: Decodable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         id = try values.decode(Int.self, forKey: .id)
         name = try values.decode(String.self, forKey: .name)
-        issuerPublicKey = try values.decode(String.self, forKey: .issuerPublicKey)
+        destinationPublicKey = try values.decode(String.self, forKey: .destinationPublicKey)
         shortDescription = try values.decode(String.self, forKey: .shortDescription)
         longDescription = try values.decode(String.self, forKey: .longDescription)
         orderIndex = try values.decode(Int.self, forKey: .orderIndex)

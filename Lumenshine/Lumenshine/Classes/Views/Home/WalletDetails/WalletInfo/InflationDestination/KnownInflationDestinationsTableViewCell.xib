@@ -65,14 +65,14 @@
                                         <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="RJh-j6-llF">
                                             <rect key="frame" x="0.0" y="41" width="289" height="20.5"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Issuer public key:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGD-Ce-oxx" customClass="RegularSubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="0.0" width="132.5" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Destination public key:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGD-Ce-oxx" customClass="RegularSubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="0.0" width="173" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="issuerPublicKeyLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ygj-7y-If2" customClass="RegularSubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
-                                                    <rect key="frame" x="152.5" y="0.0" width="136.5" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="destinationPublicKeyLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ygj-7y-If2" userLabel="Destination Public Key Label" customClass="RegularSubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
+                                                    <rect key="frame" x="193" y="0.0" width="96" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -220,9 +220,9 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="7Tp-yV-uV0"/>
             <connections>
+                <outlet property="destinationPublicKeyLabel" destination="Ygj-7y-If2" id="ITC-q9-Jw8"/>
                 <outlet property="expansionView" destination="ldi-Gn-c25" id="Fau-nd-7St"/>
                 <outlet property="isCurrentlySetSwitch" destination="JgS-ee-Zwi" id="79w-b8-lRu"/>
-                <outlet property="issuerPublicKeyLabel" destination="Ygj-7y-If2" id="Qbo-qx-y3n"/>
                 <outlet property="nameLabel" destination="PdU-If-aP8" id="J5h-aM-xS8"/>
                 <outlet property="passwordViewContainer" destination="gMy-5m-Ld8" id="ama-xb-FCk"/>
                 <outlet property="setOrRemoveButton" destination="4qB-mA-nqU" id="KGu-LL-F7Y"/>
