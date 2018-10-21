@@ -144,6 +144,11 @@ class InflationManager {
                                             externalSignersSeed: String? = nil,
                                             completion: @escaping SetInflationDestinationClosure) {
         do {
+            var network = Network.testnet
+            if (Services.shared.usePublicStellarNetwork) {
+                network = Network.public
+            }
+            
             let setInflationOperation = try SetOptionsOperation(inflationDestination: KeyPair(accountId: inflationAddress))
             let transaction = try Transaction(sourceAccount: accountResponse,
                                               operations: [setInflationOperation],
@@ -156,9 +161,9 @@ class InflationManager {
                     throw SignerErorr.signerMismatch
                 }
                 
-                try transaction.sign(keyPair: signerKeyPair, network: .testnet)
+                try transaction.sign(keyPair: signerKeyPair, network: network)
             } else {
-                try transaction.sign(keyPair: sourceAccountKeyPair, network: Network.testnet)
+                try transaction.sign(keyPair: sourceAccountKeyPair, network: network)
             }
             
             try self.stellarSDK.transactions.submitTransaction(transaction: transaction) { (response) -> (Void) in
