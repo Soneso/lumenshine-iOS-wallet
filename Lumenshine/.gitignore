@@ -50,3 +50,5 @@ playground.xcworkspace
 #
 Pods/
 Podfile.lock
+
+Lumenshine/Resources/R.generated.swift
