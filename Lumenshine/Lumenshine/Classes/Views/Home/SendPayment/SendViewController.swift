@@ -21,6 +21,7 @@ enum ValidationErrors: String {
     case CurrencyNoTrust = "Recipient can not receive selected currency"
     case AddressNotFound = "Address not found"
     case InvalidPassword = "Invalid password"
+    case SigningError = "An error occured while trying to sign transaction"
     case MandatoryPassword = "Password required"
     case InvalidSignerSeed = "Invalid seed"
     case InvalidAmount = "Invalid amount"
@@ -104,7 +105,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     private var isInputDataValid: Bool = true
     private var createRecepientAccount = false
-    private var userMnemonic: String!
+    private var masterKeyPair: KeyPair!
     private var availableAmount: CoinUnit?
     private var otherCurrencyAsset: AccountBalanceResponse?
     
@@ -185,15 +186,26 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             
             if otherCurrencyView.isHidden { // currency is native or selected from dropdown
                 if let currency = getSelectedCurrency() {
-                    validateDestination(accountId: accountId, currency: currency)
+                    self.userManager.checkAddressStatus(forAccountID: accountId, asset: currency, completion: { (addressResult) -> (Void) in
+                        switch addressResult {
+                        case .success(isFunded: let isFunded, isTrusted: let isTrusted):
+                            if !isFunded {
+                                self.createRecepientAccount = true
+                            } else if let isTrusted = isTrusted, !isTrusted {
+                                self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .CurrencyNoTrust)
+                            }
+                            if (self.isInputDataValid && forMasterKey) {
+                                self.validatePasswordAndSendPaymentIfValid(password: password)
+                            } else {
+                                self.sendPaymentIfValid()
+                            }
+                        case .failure: // TODO: handle: address found but horizon error
+                            self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .ResolveRecepientAddress)
+                        }
+                    })
+                    
                 } else {
                     self.setValidationError(view: self.sendErrorView, label: self.sendErrorLabel, errorMessage: .CurrencyNotFound)
-                }
-                
-                if (isInputDataValid && forMasterKey) {
-                    validatePasswordAndSendPaymentIfValid(password: password)
-                } else {
-                    sendPaymentIfValid()
                 }
                 
             } else { // currency asset code is provided by user, current account is issuer
@@ -221,27 +233,23 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
     }
     
-    private func validateDestination(accountId: String, currency:AccountBalanceResponse) {
-        self.userManager.checkAddressStatus(forAccountID: accountId, asset: currency, completion: { (addressResult) -> (Void) in
-            switch addressResult {
-            case .success(isFunded: let isFunded, isTrusted: let isTrusted):
-                if !isFunded {
-                    self.createRecepientAccount = true
-                } else if let isTrusted = isTrusted, !isTrusted {
-                    self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .CurrencyNoTrust)
-                }
-            case .failure: // TODO: handle: address found but horizon error
-                self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .ResolveRecepientAddress)
-            }
-        })
-    }
-    
     private func validatePasswordAndSendPaymentIfValid(password: String?) {
         passwordManager.getMnemonic(password: password) { (passwordResult) -> (Void) in
             switch passwordResult {
             case .success(mnemonic: let mnemonic):
-                self.userMnemonic = mnemonic
-                self.sendPaymentIfValid()
+                PrivateKeyManager.getKeyPair(forAccountID: self.wallet.publicKey, fromMnemonic: mnemonic) { (response) -> (Void) in
+                    switch response {
+                    case .success(keyPair: let keyPair):
+                        if let sourceKeyPair = keyPair {
+                            self.masterKeyPair = sourceKeyPair
+                            self.sendPaymentIfValid()
+                            return
+                        }
+                    case .failure(error: let error):
+                        print(error)
+                    }
+                    self.setValidationError(view: self.sendErrorView, label: self.sendErrorLabel, errorMessage: .SigningError)
+                }
             case .failure(error: let error):
                 print("Error: \(error)")
                 self.passwordView.showInvalidPasswordError()
@@ -504,7 +512,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                                                 
                                                 return memoType.rawValue == MemoTypeValues.MEMO_TEXT.rawValue
                                                }),
-                                               userMnemonic: self.userMnemonic,
+                                               masterKeyPair: self.masterKeyPair,
                                                transactionType: self.createRecepientAccount ? TransactionActionType.createAndFundAccount : TransactionActionType.sendPayment,
                                                signer: self.passwordView.useExternalSigning ? self.passwordView.signersTextField.text : nil,
                                                signerSeed: self.passwordView.useExternalSigning ? self.passwordView.seedTextField.text : nil,

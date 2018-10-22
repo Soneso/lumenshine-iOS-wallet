@@ -20,7 +20,7 @@ public struct TransactionInput {
     let amount: String
     let memo: String?
     let memoType: MemoTypeValues?
-    let userMnemonic: String?
+    let masterKeyPair: KeyPair?
     let transactionType: TransactionActionType
     let signer: String?
     let signerSeed: String?

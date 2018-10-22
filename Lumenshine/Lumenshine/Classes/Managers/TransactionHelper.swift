@@ -71,19 +71,17 @@ class TransactionHelper {
             transactionResult.recipentMail = inputData.address != accountID ? accountID : ""
         }
         
-        PrivateKeyManager.getKeyPair(forAccountID: wallet.publicKey) { (response) -> (Void) in
-            switch response {
-            case .success(keyPair: let keyPair):
-                if let sourceKeyPair = keyPair,
-                    let destinationKeyPair = destinationAccountKeyPair,
-                    let amount = CoinUnit(self.inputData.amount) {
-                    self.createAndFundAccount(sourceKeyPair: sourceKeyPair, destinationKeyPair: destinationKeyPair, amount: Decimal(amount), memo: memo) { () -> (Void) in
-                        completion(self.transactionResult)
-                    }
-                }
-
-            case .failure(error: let error):
-                print(error)
+        var sourceKeyPair = try! KeyPair(publicKey: PublicKey(accountId:wallet.publicKey), privateKey:nil)
+        
+        if let masterKeyPair = inputData.masterKeyPair {
+            sourceKeyPair = masterKeyPair
+        }
+        
+        if let destinationKeyPair = destinationAccountKeyPair,
+            let amount = CoinUnit(self.inputData.amount) {
+            
+            self.createAndFundAccount(sourceKeyPair: sourceKeyPair, destinationKeyPair: destinationKeyPair, amount: Decimal(amount), memo: memo) { () -> (Void) in
+                completion(self.transactionResult)
             }
         }
     }
@@ -118,20 +116,18 @@ class TransactionHelper {
             transactionResult.recipentMail = inputData.address != accountID ? accountID : ""
         }
         
-        PrivateKeyManager.getKeyPair(forAccountID: wallet.publicKey, fromMnemonic: inputData.userMnemonic) { (response) -> (Void) in
-            switch response {
-            case .success(keyPair: let keyPair):
-                if let sourceKeyPair = keyPair,
-                    let asset = selectedAsset,
-                    let destinationKeyPair = destinationAccountKeyPair,
-                    let amount = CoinUnit(self.inputData.amount) {
-                    self.sendPayment(sourceKeyPair: sourceKeyPair, destinationKeyPair: destinationKeyPair, asset: asset, amount: Decimal(amount), memo: memo) { () -> (Void) in
-                        completion(self.transactionResult)
-                    }
-                }
+        var sourceKeyPair = try! KeyPair(publicKey: PublicKey(accountId:wallet.publicKey), privateKey:nil)
 
-            case .failure(error: let error):
-                print(error)
+        if let masterKeyPair = inputData.masterKeyPair {
+            sourceKeyPair = masterKeyPair
+        }
+        
+        if let asset = selectedAsset,
+            let destinationKeyPair = destinationAccountKeyPair,
+            let amount = CoinUnit(self.inputData.amount) {
+                        
+            self.sendPayment(sourceKeyPair: sourceKeyPair, destinationKeyPair: destinationKeyPair, asset: asset, amount: Decimal(amount), memo: memo) { () -> (Void) in
+                completion(self.transactionResult)
             }
         }
     }
