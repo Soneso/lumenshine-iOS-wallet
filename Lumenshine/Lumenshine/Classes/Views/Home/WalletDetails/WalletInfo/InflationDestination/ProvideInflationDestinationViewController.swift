@@ -18,7 +18,7 @@ fileprivate enum PublicKeyValidationErrors: String {
     case mandatory = "Public key of destination account needed"
     case notFound = "Public key not found"
 }
-
+// TODO: validate that user does not set destination to already setted destination
 class ProvideInflationDestinationViewController: UIViewController {
     @IBOutlet weak var publicKeyValidationView: UIView!
     @IBOutlet weak var passwordViewContainer: UIView!
@@ -34,12 +34,11 @@ class ProvideInflationDestinationViewController: UIViewController {
     private let passwordManager = PasswordManager()
     private let walletManager = WalletManager()
     private let inflationManager = InflationManager()
-    private var inputDataValidator = InputDataValidator()
     private var passwordView: PasswordView!
     
     private var hasEnoughFunding: Bool {
         get {
-            return walletManager.hasWalletEnoughFunding(wallet: wallet)
+            return walletManager.hasWalletEnoughFunding(wallet: wallet) // TODO: is this the current balance? May be updated in menatime
         }
     }
     
@@ -120,7 +119,11 @@ class ProvideInflationDestinationViewController: UIViewController {
     }
     
     private func showFundingAlert() {
-        self.displaySimpleAlertView(title: "Setting failed", message: "Insufficient funding. Please send lumens to your wallet first.")
+        self.displaySimpleAlertView(title: "Operation failed", message: "Insufficient funding. Please send lumens to your wallet first.")
+    }
+    
+    private func showUnknownErrorAlert() {
+        self.displaySimpleAlertView(title: "Operation failed", message: "An error occured while trying to set the inflation destination. Please try again later.")
     }
     
     private func setInflationDestination(inflationDestination: String) {
@@ -133,19 +136,20 @@ class ProvideInflationDestinationViewController: UIViewController {
                                                  completion: { (response) -> (Void) in
             switch response {
             case .success:
+                self.navigationController?.popViewController(animated: true)
                 break
             case .failure(error: let error):
+                self.resetSetButtonToDefault()
+                
                 if error == InflationDestinationErrorCodes.accountNotFound {
                     self.showValidationError(for: self.publicKeyValidationView)
                     self.publicKeyValidationLabel.text = ValidationErrors.AddressNotFound.rawValue
-                    self.resetSetButtonToDefault()
                     return
                 }
-                
+                // TODO handle specific error
                 print("Error: \(error)")
+                self.showUnknownErrorAlert()
             }
-            
-            self.navigationController?.popViewController(animated: true)
         })
     }
     

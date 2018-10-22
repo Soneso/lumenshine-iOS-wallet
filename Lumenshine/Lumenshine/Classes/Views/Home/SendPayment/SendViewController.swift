@@ -17,7 +17,7 @@ enum ValidationErrors: String {
     case InvalidMemo = "Invalid memo"
     case MemoLength = "Memo is too long"
     case InsufficientLumens = "Insufficient XLM for transaction fee available"
-    case RecipientAccount = "Warning: Recipient account does not exist or is not funded"
+    case ResolveRecepientAddress = "An error occured while trying to validate recepient address"
     case CurrencyNoTrust = "Recipient can not receive selected currency"
     case AddressNotFound = "Address not found"
     case InvalidPassword = "Invalid password"
@@ -26,6 +26,7 @@ enum ValidationErrors: String {
     case InvalidAmount = "Invalid amount"
     case InvalidAssetCode = "Invalid asset code"
     case FederationNotFound = "Could not find stellar address"
+    case CurrencyNotFound = "Could not find selected currency"
 }
 
 enum MemoTypeValues: String {
@@ -47,7 +48,6 @@ enum NativeCurrencyNames: String {
 }
 
 enum SendButtonTitles: String {
-    case sendAnyway = "Send anyway"
     case validating = "Validating and sending"
 }
 
@@ -103,13 +103,12 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     private var memoTypePickerView: UIPickerView!
     
     private var isInputDataValid: Bool = true
-    private var isSendAnywayRequired = false
+    private var createRecepientAccount = false
     private var userMnemonic: String!
     private var availableAmount: CoinUnit?
     private var otherCurrencyAsset: AccountBalanceResponse?
     
     private var scanViewController: ScanViewController!
-    private let inputDataValidator = InputDataValidator()
     private let userManager = UserManager()
     private let passwordManager = PasswordManager()
     
@@ -143,9 +142,9 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         sendButton.isEnabled = false
         if validateInsertedData(biometricAuth: biometricAuth) {
             if passwordView.passwordStackView.isHidden {
-                validateInputForExternalSigning()
+                validateInput(forMasterKey: false, biometricAuth: false)
             } else {
-                validateInputForMasterKey(biometricAuth: biometricAuth)
+                validateInput(forMasterKey: true, biometricAuth: biometricAuth)
             }
         }
         else {
@@ -153,76 +152,100 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
     }
     
-    private func validateInputForMasterKey(biometricAuth: Bool) {
+    private func validateInput(forMasterKey: Bool, biometricAuth: Bool) {
         if let address = addressTextField.text {
-            let password = !biometricAuth ? passwordView.passwordTextField.text : nil
-            if otherCurrencyView.isHidden, let currency = getSelectedCurrency() {
-                validatePasswordAndDestinationAddress(address: address, password: password, currency: currency)
-            } else {
-                userManager.getAccountBalanceResponse(forAccount: address, forAssetCode: selectedCurrency, forAssetIssuer: wallet.publicKey) { (response) -> (Void) in
-                    switch (response) {
-                    case .success(currency: let currencyResponse):
-                        let currency = currencyResponse
-                        self.validatePasswordAndDestinationAddress(address: address, password: password, currency: currency)
-                        self.otherCurrencyAsset = currency
-                    case .failure(error: let error):
-                        print("Currency asset code error: \(error)")
-                        self.setValidationError(view: self.otherCurrencyErrorView, label: self.otherCurrencyErrorLabel, errorMessage: .InvalidAssetCode)
-                        self.setSendButtonDefaultTitle()
-                    }
-                }
-            }
-        }
-    }
-    
-    private func validateInputForExternalSigning() {
-        if let address = addressTextField.text {
-            if otherCurrencyView.isHidden, let currency = getSelectedCurrency() {
-                isDestinationAddressValid(address: address, currency: currency)
-            } else {
-                userManager.getAccountBalanceResponse(forAccount: address, forAssetCode: selectedCurrency, forAssetIssuer: wallet.publicKey) { (response) -> (Void) in
-                    switch (response) {
-                    case .success(currency: let currencyResponse):
-                        let currency = currencyResponse
-                        self.isDestinationAddressValid(address: address, currency: currency)
-                        self.otherCurrencyAsset = currency
-                    case .failure(error: let error):
-                        print("Currency asset code error: \(error)")
-                        self.setValidationError(view: self.otherCurrencyErrorView, label: self.otherCurrencyErrorLabel, errorMessage: .InvalidAssetCode)
-                        self.setSendButtonDefaultTitle()
-                    }
-                }
-            }
-        }
-    }
-    
-    private func validatePasswordAndDestinationAddress(address: String, password: String?, currency: AccountBalanceResponse) {
-        inputDataValidator.validatePasswordAndDestinationAddress(address: address, password: password, currency: currency) { (result) -> (Void) in
-            switch result {
-            case .success(passwordResponse: let passwordResponse, addressResponse: let addressResponse):
-                self.validatePasswordResponse(passwordResponse: passwordResponse)
-                self.validateAddressResponse(addressResponse: addressResponse)
-                self.sendPaymentIfValid()
+            var accountId = address
+            
+            // resolve federation if needed
+            if address.isFederationAddress() {
                 
-            case .failure(errorCode: let errorCode):
-                switch errorCode {
-                case .addressNotFound:
-                    self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .AddressNotFound)
-                    self.setSendButtonDefaultTitle()
-                case .incorrectPassword:
-                    self.passwordView.showInvalidPasswordError()
-                    self.setSendButtonDefaultTitle()
-                case .enterPasswordPressed:
-                    break
+                let parts = address.components(separatedBy: "*")
+                let federationServer = "https://" + parts[1]
+                let federation = Federation(federationAddress: federationServer)
+                
+                federation.resolve(address: address) { (response) -> (Void) in
+                    switch response {
+                    case .success(let federationResponse):
+                        if let pk = federationResponse.accountId {
+                            accountId = pk
+                        } else {
+                            self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .FederationNotFound)
+                        }
+                    case .failure(_):
+                        self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .FederationNotFound)
+                    }
+                }
+            }
+            
+            if (!isInputDataValid) { // could not resolve federation addres
+                return
+            }
+            
+            let password = !biometricAuth ? passwordView.passwordTextField.text : nil
+            
+            if otherCurrencyView.isHidden { // currency is native or selected from dropdown
+                if let currency = getSelectedCurrency() {
+                    validateDestination(accountId: accountId, currency: currency)
+                } else {
+                    self.setValidationError(view: self.sendErrorView, label: self.sendErrorLabel, errorMessage: .CurrencyNotFound)
+                }
+                
+                if (isInputDataValid && forMasterKey) {
+                    validatePasswordAndSendPaymentIfValid(password: password)
+                } else {
+                    sendPaymentIfValid()
+                }
+                
+            } else { // currency asset code is provided by user, current account is issuer
+                userManager.hasAccountTrustline(forAccount: accountId, forAssetCode: selectedCurrency, forAssetIssuer: wallet.publicKey) { (response) -> (Void) in
+                    switch (response) {
+                    case .success(hasTrustline: let hasTrustline, currency: let currencyResponse):
+                        let currency = currencyResponse
+                        if (hasTrustline) {
+                            self.otherCurrencyAsset = currency
+                            if (forMasterKey) {
+                                self.validatePasswordAndSendPaymentIfValid(password: password)
+                            } else {
+                                self.sendPaymentIfValid()
+                            }
+                        } else {
+                            self.setValidationError(view: self.otherCurrencyErrorView, label: self.otherCurrencyErrorLabel, errorMessage: .CurrencyNoTrust)
+                            self.setSendButtonDefaultTitle()
+                        }
+                    case .failure(error: let error):
+                        print("error looking up for trustline of recepient account: \(error)")
+                        self.setValidationError(view: self.sendErrorView, label: self.sendErrorLabel, errorMessage: .ResolveRecepientAddress)
+                    }
                 }
             }
         }
     }
-
-    private func isDestinationAddressValid(address: String, currency: AccountBalanceResponse) {
-        inputDataValidator.isDestinationAddressValid(address: address, currency: currency) { (response) -> (Void) in
-            self.validateAddressResponse(addressResponse: response)
-            self.sendPaymentIfValid()
+    
+    private func validateDestination(accountId: String, currency:AccountBalanceResponse) {
+        self.userManager.checkAddressStatus(forAccountID: accountId, asset: currency, completion: { (addressResult) -> (Void) in
+            switch addressResult {
+            case .success(isFunded: let isFunded, isTrusted: let isTrusted):
+                if !isFunded {
+                    self.createRecepientAccount = true
+                } else if let isTrusted = isTrusted, !isTrusted {
+                    self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .CurrencyNoTrust)
+                }
+            case .failure: // TODO: handle: address found but horizon error
+                self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .ResolveRecepientAddress)
+            }
+        })
+    }
+    
+    private func validatePasswordAndSendPaymentIfValid(password: String?) {
+        passwordManager.getMnemonic(password: password) { (passwordResult) -> (Void) in
+            switch passwordResult {
+            case .success(mnemonic: let mnemonic):
+                self.userMnemonic = mnemonic
+                self.sendPaymentIfValid()
+            case .failure(error: let error):
+                print("Error: \(error)")
+                self.passwordView.showInvalidPasswordError()
+            }
         }
     }
     
@@ -244,9 +267,9 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     @objc func addressChanged(_ textField: UITextField) {
-        if isSendAnywayRequired {
+        if createRecepientAccount {
             setSendButtonDefaultTitle()
-            isSendAnywayRequired = false
+            createRecepientAccount = false
         }
     }
     
@@ -481,7 +504,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                                                 return memoType.rawValue == MemoTypeValues.MEMO_TEXT.rawValue
                                                }),
                                                userMnemonic: self.userMnemonic,
-                                               transactionType: !self.isSendAnywayRequired ? TransactionActionType.sendPayment : TransactionActionType.createAndFundAccount,
+                                               transactionType: self.createRecepientAccount ? TransactionActionType.createAndFundAccount : TransactionActionType.sendPayment,
                                                signer: self.passwordView.useExternalSigning ? self.passwordView.signersTextField.text : nil,
                                                signerSeed: self.passwordView.useExternalSigning ? self.passwordView.seedTextField.text : nil,
                                                otherCurrencyAsset: self.otherCurrencyAsset ?? nil)
@@ -492,55 +515,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     private func clearSeedAndPasswordFields() {
         passwordView.seedTextField = nil
         passwordView.passwordTextField = nil
-    }
-    
-    private func validatePasswordResponse(passwordResponse: PasswordEnum) {
-        switch passwordResponse {
-        case .success(mnemonic: let mnemonic):
-            self.userMnemonic = mnemonic
-        case .failure(error: let error):
-            print("Error: \(error)")
-            self.passwordView.showInvalidPasswordError()
-        }
-    }
-    
-    private func validateAddressResponse(addressResponse: AddressStatusEnum) {
-        switch addressResponse {
-        case .success(isFunded: let isFunded, isTrusted: let isTrusted):
-            if !isFunded {
-                if self.isSendAnywayRequired && self.selectedCurrency == NativeCurrencyNames.xlm.rawValue{
-                    self.checkForRecipientAccount()
-                    return
-                }
-                
-                self.setValidationError(view: self.sendErrorView, label: self.sendErrorLabel, errorMessage: .RecipientAccount)
-                
-                if self.selectedCurrency == NativeCurrencyNames.xlm.rawValue {
-                    self.isSendAnywayRequired = true
-                }
-            } else if let isTrusted = isTrusted, !isTrusted {
-                self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .CurrencyNoTrust)
-            }
-            
-        case .failure:
-            print("Account not found")
-            if self.selectedCurrency == NativeCurrencyNames.xlm.rawValue {
-                if addressTextField.text?.isFederationAddress() == true {
-                    self.setValidationError(view: self.sendErrorView, label: self.sendErrorLabel, errorMessage: .FederationNotFound)
-                    return
-                }
-                
-                if self.isSendAnywayRequired {
-                    self.checkForRecipientAccount()
-                    return
-                }
-                
-                self.setValidationError(view: self.sendErrorView, label: self.sendErrorLabel, errorMessage: .RecipientAccount)
-                self.isSendAnywayRequired = true
-            } else {
-                self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .AddressNotFound)
-            }
-        }
     }
     
     private func getSendButtonDefaultTitle() -> String {
@@ -711,16 +685,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
     }
     
-    private func checkForRecipientAccount() {
-        if !isInputDataValid || isSendAnywayRequired {
-            if isSendAnywayRequired {
-                isInputDataValid = true
-            }
-
-            return
-        }
-    }
-    
     private func validateInsertedData(biometricAuth: Bool = false) -> Bool {
         validateAddress()
         validateAssetCodeIsFilled()
@@ -731,7 +695,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
         
         checkForTransactionFeeAvailability()
-        checkForRecipientAccount()
+        //checkForRecipientAccount()
         
         return isInputDataValid
     }
@@ -843,7 +807,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     private func resetSendButtonToNormal() {
-        sendButton.setTitle(isSendAnywayRequired ? SendButtonTitles.sendAnyway.rawValue : getSendButtonDefaultTitle(), for: UIControlState.normal)
+        sendButton.setTitle(getSendButtonDefaultTitle(), for: UIControlState.normal)
         sendButton.isEnabled = true
     }
     
@@ -853,7 +817,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         
         let scanQrButton = Material.IconButton()
-        scanQrButton.image = R.image.qr_placeholder()?.crop(toWidth: 15, toHeight: 15)?.tint(with: Stylesheet.color(.white))
+        scanQrButton.image = R.image.qr_placeholder()?.crop(toWidth: 25, toHeight: 25)?.tint(with: Stylesheet.color(.white))
         scanQrButton.addTarget(self, action: #selector(didTapScan(_:)), for: .touchUpInside)
         navigationItem.rightViews = [scanQrButton]
     }

@@ -180,7 +180,11 @@ class TransactionHelper {
         self.transactionResult.status = TransactionStatus.success
         self.transactionResult.transactionFee = transactionFee
 
-        if let transactionHash = try? transaction.getTransactionHash(network: Network.testnet) {
+        var network = Network.testnet
+        if (Services.shared.usePublicStellarNetwork) {
+            network = Network.public
+        }
+        if let transactionHash = try? transaction.getTransactionHash(network: network) {
             self.stellarSdk.payments.getPayments(forTransaction: transactionHash, response: { (response) -> (Void) in
                 switch response {
                 case .success(details: let details):
@@ -281,7 +285,12 @@ class TransactionHelper {
     }
     
     private func openStreamToGetOperationID(forTransaction transaction: Transaction) {
-        if let transactionHash = try? transaction.getTransactionHash(network: Network.testnet) {
+        var network = Network.testnet
+        if (Services.shared.usePublicStellarNetwork) {
+            network = Network.public
+        }
+        
+        if let transactionHash = try? transaction.getTransactionHash(network: network) {
             transactionStream = self.stellarSdk.payments.stream(for: PaymentsChange.paymentsForTransaction(transaction: transactionHash, cursor: nil))
             transactionStream.onReceive { (response) -> (Void) in
                 switch response {
@@ -335,6 +344,11 @@ class TransactionHelper {
     }
     
     private func signTransaction(transaction: Transaction, sourceKeyPair: KeyPair) throws{
+        var network = Network.testnet
+        if (Services.shared.usePublicStellarNetwork) {
+            network = Network.public
+        }
+        
         if let signer = inputData?.signer ?? externalSigner, let signerSeed = inputData?.signerSeed ?? externalSignerSeed {
             let signerKeyPair = try KeyPair.init(secretSeed: signerSeed)
             
@@ -342,9 +356,9 @@ class TransactionHelper {
                 throw SignerErorr.signerMismatch
             }
             
-            try transaction.sign(keyPair: signerKeyPair, network: .testnet)
+            try transaction.sign(keyPair: signerKeyPair, network: network)
         } else {
-            try transaction.sign(keyPair: sourceKeyPair, network: .testnet)
+            try transaction.sign(keyPair: sourceKeyPair, network: network)
         }
     }
     

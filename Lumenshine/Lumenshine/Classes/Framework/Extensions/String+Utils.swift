@@ -167,9 +167,7 @@ extension String  {
     }
     
     func isFederationAddress() -> Bool {
-        let sRegex = "[a-zA-Z\\_]+[*][a-zA-Z]+[.][a-zA-Z]+"
-        
-        return NSPredicate(format: "SELF MATCHES[c] %@", sRegex).evaluate(with: self)
+        return self.range(of: "*") != nil
     }
     
     func isAssetCodeValid() -> Bool {

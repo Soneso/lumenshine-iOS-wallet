@@ -35,7 +35,7 @@ public enum AddressStatusEnum {
     case failure
 }
 
-public enum CanMasterKeySignOperationEnum {
+public enum CanSignerSignOperationEnum {
     case success(canSign: Bool)
     case failure(error: HorizonRequestError)
 }
@@ -45,8 +45,8 @@ public enum GetSignersListEnum {
     case failure(error: HorizonRequestError)
 }
 
-public enum GetAccountBalanceResponseEnum {
-    case success(currency: AccountBalanceResponse)
+public enum HasAccountTrustlineResponseEnum {
+    case success(hasTrustline: Bool, currency: AccountBalanceResponse?)
     case failure(error: HorizonRequestError)
 }
 
@@ -54,9 +54,9 @@ public typealias BoolClosure = (_ response:BoolEnum) -> (Void)
 public typealias CoinClosure = (_ response:CoinEnum) -> (Void)
 public typealias WalletsClosure = (_ response:WalletsEnum) -> (Void)
 public typealias AddressStatusClosure = (_ response: AddressStatusEnum) -> (Void)
-public typealias CanMasterKeySignOperationClosure = (_ response: CanMasterKeySignOperationEnum) -> (Void)
+public typealias CanSignerSignOperationClosure = (_ response: CanSignerSignOperationEnum) -> (Void)
 public typealias GetSignersListClosure = (_ response: GetSignersListEnum) -> (Void)
-public typealias GetAccountBalanceResponseClosure = (_ response: GetAccountBalanceResponseEnum) -> (Void)
+public typealias HasAccountTrustlineResponseClosure = (_ response: HasAccountTrustlineResponseEnum) -> (Void)
 public typealias CoinUnit = Double
 
 public class UserManager: NSObject {
@@ -114,12 +114,8 @@ public class UserManager: NSObject {
         stellarSDK.accounts.getAccountDetails(accountId: accountID) { response in
             switch response {
             case .success(let accountDetails):
-                var isFunded = false
+                
                 var isTrusted = false
-        
-                if accountDetails.balances.count > 0 {
-                    isFunded = true
-                }
                 
                 if asset.assetIssuer == accountID {
                     isTrusted = true
@@ -132,11 +128,19 @@ public class UserManager: NSObject {
                     }
                 }
                 DispatchQueue.main.async {
-                    completion(.success(isFunded: isFunded, isTrusted: isTrusted))
+                    completion(.success(isFunded: true, isTrusted: isTrusted))
                 }
-            case .failure(_):
-                DispatchQueue.main.async {
-                    completion(.failure)
+            case .failure(let error):
+                switch error {
+                case .notFound( _, _):
+                    // does not exist => is not funded
+                    DispatchQueue.main.async {
+                        completion(.success(isFunded: false, isTrusted: false))
+                    }
+                default:
+                    DispatchQueue.main.async {
+                        completion(.failure)
+                    }
                 }
             }
         }
@@ -148,8 +152,15 @@ public class UserManager: NSObject {
                 switch accountResponse {
                 case .success(_):
                     completion(true)
-                case .failure(_):
-                    completion(false)
+                case .failure(let error):
+                    // TODO: improve this, may be some other error
+                    switch error {
+                    case .notFound( _, _):
+                        completion(false)
+                    default:
+                        // patch!
+                        completion(false) // TODO handle error
+                    }
                 }
             }
         }
@@ -174,7 +185,7 @@ public class UserManager: NSObject {
      Medium Security - "medium": All else (e.g. payments)
      High Security - "high": AccountMerge, SetOptions for Signer and threshold
     **/
-    func canSignerSignOperation(accountID: String, signerPublicKey:String, neededSecurity: SigningSecurityLevel, completion: @escaping CanMasterKeySignOperationClosure) {
+    func canSignerSignOperation(accountID: String, signerPublicKey:String, neededSecurity: SigningSecurityLevel, completion: @escaping CanSignerSignOperationClosure) {
         stellarSDK.accounts.getAccountDetails(accountId: accountID) { (response) -> (Void) in
             DispatchQueue.main.async {
                 switch response {
@@ -234,7 +245,7 @@ public class UserManager: NSObject {
         }
     }
     
-    func getAccountBalanceResponse(forAccount account: String, forAssetCode assetCode: String, forAssetIssuer issuer: String, completion: @escaping GetAccountBalanceResponseClosure) {
+    func hasAccountTrustline(forAccount account: String, forAssetCode assetCode: String, forAssetIssuer issuer: String, completion: @escaping HasAccountTrustlineResponseClosure) {
         stellarSDK.accounts.getAccountDetails(accountId: account) { (response) -> (Void) in
             switch response {
             case .success(details: let accountDetails):
@@ -242,16 +253,15 @@ public class UserManager: NSObject {
                     return accountResponse.assetCode == assetCode && accountResponse.assetIssuer == issuer
                 }) {
                     DispatchQueue.main.async {
-                        completion(.success(currency: currency))
+                        completion(.success(hasTrustline: true, currency: currency))
                     }
                     return
                 }
-                
                 DispatchQueue.main.async {
-                    completion(.failure(error: HorizonRequestError.emptyResponse))
+                    completion(.success(hasTrustline: false, currency: nil))
                 }
                 
-            case .failure(error: let error):
+            case .failure(error: let error): // TODO: check error, and handle
                 DispatchQueue.main.async {
                     completion(.failure(error: error))
                 }

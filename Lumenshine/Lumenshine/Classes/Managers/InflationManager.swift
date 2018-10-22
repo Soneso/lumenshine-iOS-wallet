@@ -70,7 +70,7 @@ class InflationManager {
                     if let inflationAddress = accountDetails.inflationDestination {
                         completion(.success(inflationDestinationAddress: inflationAddress))
                     } else {
-                        completion(.failure(error: nil))
+                        completion(.success(inflationDestinationAddress: ""))
                     }
                 case .failure(error: let error):
                     completion(.failure(error: error))
@@ -84,7 +84,7 @@ class InflationManager {
             switch response {
             case .success(response: let knownInflationDestinations):
                 for inflationDestination in knownInflationDestinations {
-                    if inflationDestination.issuerPublicKey == inflationAddress {
+                    if inflationDestination.destinationPublicKey == inflationAddress {
                         DispatchQueue.main.async {
                             completion(.success(knownInflationDestination: inflationDestination))
                         }
@@ -144,6 +144,11 @@ class InflationManager {
                                             externalSignersSeed: String? = nil,
                                             completion: @escaping SetInflationDestinationClosure) {
         do {
+            var network = Network.testnet
+            if (Services.shared.usePublicStellarNetwork) {
+                network = Network.public
+            }
+            
             let setInflationOperation = try SetOptionsOperation(inflationDestination: KeyPair(accountId: inflationAddress))
             let transaction = try Transaction(sourceAccount: accountResponse,
                                               operations: [setInflationOperation],
@@ -156,9 +161,9 @@ class InflationManager {
                     throw SignerErorr.signerMismatch
                 }
                 
-                try transaction.sign(keyPair: signerKeyPair, network: .testnet)
+                try transaction.sign(keyPair: signerKeyPair, network: network)
             } else {
-                try transaction.sign(keyPair: sourceAccountKeyPair, network: Network.testnet)
+                try transaction.sign(keyPair: sourceAccountKeyPair, network: network)
             }
             
             try self.stellarSDK.transactions.submitTransaction(transaction: transaction) { (response) -> (Void) in
