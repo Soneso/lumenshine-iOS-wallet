@@ -68,9 +68,9 @@ class RemoveCurrencyViewController: UIViewController {
     private func removeCurrencyWithPassword(biometricAuth: Bool) {
         passwordManager.getMnemonic(password: !biometricAuth ? passwordView.passwordTextField.text : nil) { (result) -> (Void) in
             switch result {
-            case .success(mnemonic: _):
+            case .success(mnemonic: let mnemonic):
                 let transactionHelper = TransactionHelper(wallet: self.wallet)
-                transactionHelper.removeTrustLine(currency: self.currency, completion: { (_) -> (Void) in
+                transactionHelper.removeTrustLine(currency: self.currency, mnemonic: mnemonic, completion: { (_) -> (Void) in
                     self.navigationController?.popViewController(animated: true)
                 })
 

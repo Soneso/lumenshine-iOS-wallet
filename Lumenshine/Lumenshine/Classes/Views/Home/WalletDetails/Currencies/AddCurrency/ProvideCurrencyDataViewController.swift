@@ -98,8 +98,8 @@ class ProvideCurrencyDataViewController: UIViewController {
                 self.passwordManager.getMnemonic(password: password) { (passwordResult) -> (Void) in
                     DispatchQueue.main.async {
                         switch passwordResult {
-                        case .success(_):
-                            self.addTrustLine(issuer: issuer, assetCode: assetCode)
+                        case .success(mnemonic: let mnemonic):
+                            self.addTrustLine(issuer: issuer, assetCode: assetCode, mnemonic: mnemonic)
                         case .failure(error: let error):
                             if error != BiometricStatus.enterPasswordPressed.rawValue {
                                 self.passwordView.showInvalidPasswordError()
@@ -200,7 +200,7 @@ class ProvideCurrencyDataViewController: UIViewController {
         self.displaySimpleAlertView(title: "Adding failed", message: "Insufficient funding. Please send lumens to your wallet first.")
     }
     
-    private func addTrustLine(issuer: String, assetCode: String) {
+    private func addTrustLine(issuer: String, assetCode: String, mnemonic: String? = nil) {
         let signer = passwordView.useExternalSigning ? passwordView.signersTextField.text : nil
         let seed = passwordView.useExternalSigning ? passwordView.seedTextField.text : nil
         let transactionHelper = TransactionHelper(wallet: wallet, signer: signer, signerSeed: seed)
@@ -219,7 +219,7 @@ class ProvideCurrencyDataViewController: UIViewController {
             let issuerKeyPair = issuerKeyPair,
             let asset = Asset(type: assetType, code: assetCode, issuer: issuerKeyPair) {
             
-            transactionHelper.addTrustLine(asset: asset, completion: { (status) -> (Void) in
+            transactionHelper.addTrustLine(asset: asset, mnemonic: mnemonic, completion: { (status) -> (Void) in
                 switch status {
                 case .success:
                     self.navigationController?.popViewController(animated: true)

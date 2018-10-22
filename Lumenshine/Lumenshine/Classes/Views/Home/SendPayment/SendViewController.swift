@@ -508,13 +508,8 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                                                signer: self.passwordView.useExternalSigning ? self.passwordView.signersTextField.text : nil,
                                                signerSeed: self.passwordView.useExternalSigning ? self.passwordView.seedTextField.text : nil,
                                                otherCurrencyAsset: self.otherCurrencyAsset ?? nil)
-        self.clearSeedAndPasswordFields()
+        self.passwordView.clearSeedAndPasswordFields()
         self.sendAction?(transactionData)
-    }
-    
-    private func clearSeedAndPasswordFields() {
-        passwordView.seedTextField = nil
-        passwordView.passwordTextField = nil
     }
     
     private func getSendButtonDefaultTitle() -> String {

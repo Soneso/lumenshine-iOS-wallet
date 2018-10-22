@@ -22,7 +22,6 @@ enum SignerErorr: Error {
 }
 
 class TransactionHelper {
-    private let TransactionDefaultLimit: Decimal = 10000
     private let transactionFee = String(format: "%.5f", CoinUnit.Constants.transactionFee)
     private var inputData: TransactionInput!
     private var wallet: FundedWallet!
@@ -72,12 +71,19 @@ class TransactionHelper {
             transactionResult.recipentMail = inputData.address != accountID ? accountID : ""
         }
         
-        if let sourceKeyPair = PrivateKeyManager.getKeyPair(forAccountID: wallet.publicKey),
-            let destinationKeyPair = destinationAccountKeyPair,
-            let amount = CoinUnit(self.inputData.amount) {
-            
-            createAndFundAccount(sourceKeyPair: sourceKeyPair, destinationKeyPair: destinationKeyPair, amount: Decimal(amount), memo: memo) { () -> (Void) in
-                completion(self.transactionResult)
+        PrivateKeyManager.getKeyPair(forAccountID: wallet.publicKey) { (response) -> (Void) in
+            switch response {
+            case .success(keyPair: let keyPair):
+                if let sourceKeyPair = keyPair,
+                    let destinationKeyPair = destinationAccountKeyPair,
+                    let amount = CoinUnit(self.inputData.amount) {
+                    self.createAndFundAccount(sourceKeyPair: sourceKeyPair, destinationKeyPair: destinationKeyPair, amount: Decimal(amount), memo: memo) { () -> (Void) in
+                        completion(self.transactionResult)
+                    }
+                }
+
+            case .failure(error: let error):
+                print(error)
             }
         }
     }
@@ -112,15 +118,25 @@ class TransactionHelper {
             transactionResult.recipentMail = inputData.address != accountID ? accountID : ""
         }
         
-        if let asset = selectedAsset, let destinationKeyPair = destinationAccountKeyPair,
-            let sourceKeyPair = PrivateKeyManager.getKeyPair(forAccountID: wallet.publicKey), let amount = CoinUnit(self.inputData.amount) {
-            sendPayment(sourceKeyPair: sourceKeyPair, destinationKeyPair: destinationKeyPair, asset: asset, amount: Decimal(amount), memo: memo) { () -> (Void) in
-                completion(self.transactionResult)
+        PrivateKeyManager.getKeyPair(forAccountID: wallet.publicKey, fromMnemonic: inputData.userMnemonic) { (response) -> (Void) in
+            switch response {
+            case .success(keyPair: let keyPair):
+                if let sourceKeyPair = keyPair,
+                    let asset = selectedAsset,
+                    let destinationKeyPair = destinationAccountKeyPair,
+                    let amount = CoinUnit(self.inputData.amount) {
+                    self.sendPayment(sourceKeyPair: sourceKeyPair, destinationKeyPair: destinationKeyPair, asset: asset, amount: Decimal(amount), memo: memo) { () -> (Void) in
+                        completion(self.transactionResult)
+                    }
+                }
+
+            case .failure(error: let error):
+                print(error)
             }
         }
     }
     
-    func removeTrustLine(currency: AccountBalanceResponse, discardingDestination: String? = nil, completion: @escaping TrustLineClosure) {
+    func removeTrustLine(currency: AccountBalanceResponse, discardingDestination: String? = nil, mnemonic: String? = nil, completion: @escaping TrustLineClosure) {
         if let assetIssuer = currency.assetIssuer {
             let issuingAccountKeyPair = try? KeyPair(accountId: assetIssuer)
             
@@ -140,23 +156,38 @@ class TransactionHelper {
                 break
             }
             
-            if let assetType = assetType, let asset = Asset(type: assetType, code: currency.assetCode, issuer: issuingAccountKeyPair),
-                let trustingAccountKeyPair = PrivateKeyManager.getKeyPair(forAccountID: wallet.publicKey) {
-                removeTrustLine(trustingAccountKeyPair: trustingAccountKeyPair, issuingAccountKeyPair: issuingAccountKeyPair, currency: currency, asset: asset) { (status) -> (Void) in
-                    DispatchQueue.main.async {
-                        completion(status)
+            PrivateKeyManager.getKeyPair(forAccountID: wallet.publicKey, fromMnemonic: mnemonic) { (response) -> (Void) in
+                switch response {
+                case .success(keyPair: let keyPair):
+                    if let trustingAccountKeyPair = keyPair,
+                        let assetType = assetType,
+                        let asset = Asset(type: assetType, code: currency.assetCode, issuer: issuingAccountKeyPair) {
+                        self.removeTrustLine(trustingAccountKeyPair: trustingAccountKeyPair, issuingAccountKeyPair: issuingAccountKeyPair, currency: currency, asset: asset) { (status) -> (Void) in
+                            DispatchQueue.main.async {
+                                completion(status)
+                            }
+                        }
                     }
+                case .failure(error: let error):
+                   print(error)
                 }
             }
         }
     }
     
-    func addTrustLine(asset: Asset, completion: @escaping TrustLineClosure) {
-        if let trustingAccountKeyPair = PrivateKeyManager.getKeyPair(forAccountID: wallet.publicKey) {
-            addTrustLine(trustingAccountKeyPair: trustingAccountKeyPair, asset: asset) { (result) -> (Void) in
-                DispatchQueue.main.async {
-                    completion(result)
+    func addTrustLine(asset: Asset, mnemonic: String?, completion: @escaping TrustLineClosure) {
+        PrivateKeyManager.getKeyPair(forAccountID: wallet.publicKey, fromMnemonic: mnemonic) { (response) -> (Void) in
+            switch response {
+            case .success(keyPair: let keyPair):
+                if let trustingAccountKeyPair = keyPair {
+                    self.addTrustLine(trustingAccountKeyPair: trustingAccountKeyPair, asset: asset) { (result) -> (Void) in
+                        DispatchQueue.main.async {
+                            completion(result)
+                        }
+                    }
                 }
+            case .failure(error: let error):
+                print(error)
             }
         }
     }
@@ -386,7 +417,7 @@ class TransactionHelper {
     
     private func submitAddTrustLine(trustingAccountKeyPair: KeyPair, accountResponse: AccountResponse, asset: Asset, completion: @escaping TrustLineClosure) {
         do {
-            let changeTrustOp = ChangeTrustOperation(asset: asset, limit: self.TransactionDefaultLimit)
+            let changeTrustOp = ChangeTrustOperation(asset: asset)
             let transaction = try Transaction(sourceAccount: accountResponse,
                                               operations: [changeTrustOp],
                                               memo: Memo.none,

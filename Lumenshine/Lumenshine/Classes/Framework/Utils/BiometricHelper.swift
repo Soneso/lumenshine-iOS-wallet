@@ -22,7 +22,6 @@ enum BiometricStatus: String {
 typealias BiometricAuthResponseClosure = (_ response:BiometricAuthResponseEnum) -> (Void)
 
 class BiometricHelper {
-    static var UserMnemonic: String?
     static let touchIDKey = "touchEnabled"
     static var isBiometricAuthEnabled: Bool {
         get {
@@ -35,6 +34,17 @@ class BiometricHelper {
                 }
             }
             return false
+        }
+    }
+    
+    static func getMnemonic(completion: @escaping PasswordClosure) {
+        let passwordManager = PasswordManager()
+        if let userName = UserDefaults.standard.value(forKey: "username") as? String {
+            if let password = password(for: userName) {
+                passwordManager.getMnemonic(password: password) { (response) -> (Void) in
+                    completion(response)
+                }
+            }
         }
     }
     

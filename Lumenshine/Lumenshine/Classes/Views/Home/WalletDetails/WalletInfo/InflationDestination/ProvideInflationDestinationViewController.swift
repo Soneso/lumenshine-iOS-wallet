@@ -99,8 +99,8 @@ class ProvideInflationDestinationViewController: UIViewController {
     private func validatePasswordAndAddInflation(inflationDestination: String, biometricAuth: Bool) {
         passwordManager.getMnemonic(password: !biometricAuth ? passwordView.passwordTextField.text : nil) { (response) -> (Void) in
             switch response {
-            case .success(_):
-                self.setInflationDestination(inflationDestination: inflationDestination)
+            case .success(mnemonic: let mnemonic):
+                self.setInflationDestination(inflationDestination: inflationDestination, mnemonic: mnemonic)
             case .failure(error: let error):
                 print("Error: \(error)")
                 self.passwordView.showInvalidPasswordError()
@@ -126,11 +126,12 @@ class ProvideInflationDestinationViewController: UIViewController {
         self.displaySimpleAlertView(title: "Operation failed", message: "An error occured while trying to set the inflation destination. Please try again later.")
     }
     
-    private func setInflationDestination(inflationDestination: String) {
+    private func setInflationDestination(inflationDestination: String, mnemonic: String? = nil) {
         let signer = passwordView.useExternalSigning ? passwordView.signersTextField.text : nil
         let seed = passwordView.useExternalSigning ? passwordView.seedTextField.text : nil
         inflationManager.setInflationDestination(inflationAddress: inflationDestination,
                                                  sourceAccountID: wallet.publicKey,
+                                                 mnemonic: mnemonic,
                                                  externalSigner: signer,
                                                  externalSignersSeed: seed,
                                                  completion: { (response) -> (Void) in

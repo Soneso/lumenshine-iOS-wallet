@@ -15,7 +15,7 @@ enum PasswordEnum {
 }
 
 enum PrivateKeyEnum {
-    case success(privateKey: String)
+    case success(privateKey: String?)
     case failure(error: String)
 }
 
@@ -36,9 +36,14 @@ class PasswordManager {
                 print("Fingerprind/touchid result: \(result ?? "Access granted!"))")
                 
                 if result == nil {
-                    if let userMnemonic = BiometricHelper.UserMnemonic {
-                        completion(.success(mnemonic: userMnemonic))
-                    }
+                    BiometricHelper.getMnemonic(completion: { (response) -> (Void) in
+                        switch response {
+                        case .success(mnemonic: let mnemonic):
+                            completion(.success(mnemonic: mnemonic))
+                        case .failure(error: let error):
+                            completion(.failure(error: error))
+                        }
+                    })
                 } else if let resultError = result {
                     completion(.failure(error: resultError))
                 }
@@ -99,16 +104,22 @@ class PasswordManager {
     func getPrivateKey(fromPassword password: String, forAccountID accountID: String, completion: @escaping PrivateKeyClosure) {
         getMnemonic(fromPassword: password) { (response) -> (Void) in
             switch response {
-            case .success(mnemonic: _):
-                if let keyPair = PrivateKeyManager.getKeyPair(forAccountID: accountID) {
-                    DispatchQueue.main.async {
-                        completion(.success(privateKey: keyPair.secretSeed))
+            case .success(mnemonic: let mnemonic):
+                PrivateKeyManager.getKeyPair(forAccountID: accountID, fromMnemonic: mnemonic, completion: { (response) -> (Void) in
+                    switch response {
+                    case .success(keyPair: let keyPair):
+                        DispatchQueue.main.async {
+                            completion(.success(privateKey: keyPair?.secretSeed))
+                        }
+                    
+                    case .failure(error: let error):
+                        print(error)
+                        DispatchQueue.main.async {
+                            completion(.failure(error: "KeyPair not found"))
+                        }
                     }
-                } else {
-                    DispatchQueue.main.async {
-                        completion(.failure(error: "KeyPair not found"))
-                    }
-                }
+                })
+                
             case .failure(error: let error):
                 DispatchQueue.main.async {
                     completion(.failure(error: error))

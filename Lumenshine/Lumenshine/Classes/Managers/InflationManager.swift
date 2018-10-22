@@ -47,7 +47,7 @@ class InflationManager {
         }
     }
     
-    private var userManager = UserManager()
+    private let userManager = UserManager()
     
     func getKnownInflationDestinations(completion: @escaping GetKnownInflationDestinationsClosure) {
         currenciesService.getKnownInflationDestinations { (response) -> (Void) in
@@ -104,34 +104,63 @@ class InflationManager {
         }
     }
     
-    func setInflationDestination(inflationAddress: String, sourceAccountID: String, externalSigner: String? = nil, externalSignersSeed: String? = nil, completion: @escaping SetInflationDestinationClosure) {
-        if let sourceAccountKeyPair = PrivateKeyManager.getKeyPair(forAccountID: sourceAccountID) {
-            userManager.checkIfAccountExists(forAccountID: inflationAddress) { (accountExists) -> (Void) in
-                if accountExists {
-                    self.stellarSDK.accounts.getAccountDetails(accountId: sourceAccountKeyPair.accountId) { (response) -> (Void) in
-                        switch response {
-                        case .success(let accountResponse):
-                            self.submitInflationDestination(accountResponse: accountResponse,
-                                                            sourceAccountKeyPair: sourceAccountKeyPair,
-                                                            inflationAddress: inflationAddress,
-                                                            externalSigner: externalSigner,
-                                                            externalSignersSeed: externalSignersSeed,
-                                                            completion: { (response) -> (Void) in
-                                DispatchQueue.main.async {
-                                    completion(response)
-                                }
-                            })
-                        case .failure(let error):
-                            StellarSDKLog.printHorizonRequestErrorMessage(tag:"Error:", horizonRequestError: error)
-                            DispatchQueue.main.async {
-                                completion(.failure(error: InflationDestinationErrorCodes.transactionFailed))
-                            }
+    private func checkAndSubmitInflationDestination(inflationAddress: String,
+                                                    sourceAccountKeyPair: KeyPair,
+                                                    externalSigner: String?,
+                                                    externalSignersSeed: String?,
+                                                    completion: @escaping SetInflationDestinationClosure) {
+        userManager.checkIfAccountExists(forAccountID: inflationAddress) { (accountExists) -> (Void) in
+            if accountExists {
+                self.stellarSDK.accounts.getAccountDetails(accountId: sourceAccountKeyPair.accountId) { (response) -> (Void) in
+                    switch response {
+                    case .success(let accountResponse):
+                        self.submitInflationDestination(accountResponse: accountResponse,
+                                                        sourceAccountKeyPair: sourceAccountKeyPair,
+                                                        inflationAddress: inflationAddress,
+                                                        externalSigner: externalSigner,
+                                                        externalSignersSeed: externalSignersSeed,
+                                                        completion: { (response) -> (Void) in
+                                                            completion(response)
+                        })
+                    case .failure(let error):
+                        StellarSDKLog.printHorizonRequestErrorMessage(tag:"Error:", horizonRequestError: error)
+                        DispatchQueue.main.async {
+                            completion(.failure(error: InflationDestinationErrorCodes.transactionFailed))
                         }
                     }
-                } else {
-                    DispatchQueue.main.async {
-                        completion(.failure(error: InflationDestinationErrorCodes.accountNotFound))
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(.failure(error: InflationDestinationErrorCodes.accountNotFound))
+                }
+            }
+        }
+    }
+    
+    func setInflationDestination(inflationAddress: String,
+                                 sourceAccountID: String,
+                                 mnemonic: String? = nil,
+                                 externalSigner: String? = nil,
+                                 externalSignersSeed: String? = nil,
+                                 completion: @escaping SetInflationDestinationClosure) {
+        PrivateKeyManager.getKeyPair(forAccountID: sourceAccountID, fromMnemonic: mnemonic) { (response) -> (Void) in
+            switch response {
+            case .success(keyPair: let keyPair):
+                    if let sourceAccountKeyPair = keyPair {
+                        self.checkAndSubmitInflationDestination(inflationAddress: inflationAddress,
+                                                           sourceAccountKeyPair: sourceAccountKeyPair,
+                                                           externalSigner: externalSigner,
+                                                           externalSignersSeed: externalSignersSeed,
+                                                           completion: { (response) -> (Void) in
+                            DispatchQueue.main.async {
+                                completion(response)
+                            }
+                        })
                     }
+            case .failure(error: let error):
+                print(error)
+                DispatchQueue.main.async {
+                    completion(.failure(error: InflationDestinationErrorCodes.transactionFailed))
                 }
             }
         }
