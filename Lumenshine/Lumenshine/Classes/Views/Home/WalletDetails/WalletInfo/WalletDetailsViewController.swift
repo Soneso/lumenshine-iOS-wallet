@@ -207,17 +207,18 @@ class WalletDetailsViewController: UIViewController {
         inflationDetailsButton.isHidden = true
     }
     
-    private func checkForKnownInflationDestination(inflationAddress: String) {
-        inflationManager.checkInflationDestination(inflationAddress: inflationAddress) { (response) -> (Void) in
+    private func checkForKnownInflationDestination(destinationPublicKey: String) {
+        inflationManager.getKnownInflationDestination(forPublicKey: destinationPublicKey) { (response) -> (Void) in
             switch response {
-            case .success(knownInflationDestination: let knownInflationDestination):
+            case .success(response: let knownInflationDestination):
+                // found in list or known inflation destinations
                 self.setUIForInflationSet(knownInflationDestination: knownInflationDestination)
             case .failure(error: let error):
                 if let error = error {
                     print("Error: \(error.localizedDescription)")
                 }
-                
-                self.setUIForUnkownInflationSet(inflationAddress: inflationAddress)
+                // not found in list of known inflation destinations
+                self.setUIForUnkownInflationSet(inflationAddress: destinationPublicKey)
             }
         }
     }
@@ -225,11 +226,13 @@ class WalletDetailsViewController: UIViewController {
     private func setupInflationDestination() {
         inflationManager.getInflationDestination(forAccount: wallet.publicKey) { (response) -> (Void) in
             switch response {
-            case .success(inflationDestinationAddress: let inflationAddress):
-                if inflationAddress == "" || inflationAddress == self.wallet.publicKey {
+            case .success(inflationDestinationAddress: let destinationPublicKey):
+                // has no inflation destination or is set to self
+                if destinationPublicKey == "" || destinationPublicKey == self.wallet.publicKey {
                     self.setUIForNoInflationSet()
                 } else {
-                    self.checkForKnownInflationDestination(inflationAddress: inflationAddress)
+                    // has inflation destination
+                    self.checkForKnownInflationDestination(destinationPublicKey: destinationPublicKey)
                 }
             case .failure(error: let error):
                 if let error = error {
