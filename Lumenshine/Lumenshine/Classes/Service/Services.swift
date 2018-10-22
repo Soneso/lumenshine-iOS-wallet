@@ -27,6 +27,11 @@ public final class Services {
     /** live net **/
     //let baseURL = "https://alphaapi.lumenshine.com"
     //let horizonURL = "https://alphahorizon.lumenshine.com"
+
+#else
+    let usePublicStellarNetwork = true
+    let baseURL = "https://alphaapi.lumenshine.com"
+    let horizonURL = "https://alphahorizon.lumenshine.com"
     
 #endif
     

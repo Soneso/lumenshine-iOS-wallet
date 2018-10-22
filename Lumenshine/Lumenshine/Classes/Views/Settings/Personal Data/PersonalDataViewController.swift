@@ -150,11 +150,31 @@ class PersonalDataViewController: UITableViewController {
     
 }
 
+extension PersonalDataViewController {
+    @objc
+    func saveAction(sender: UIButton) {
+        viewModel.submit { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    self?.snackbarController?.animate(snackbar: .visible, delay: 0)
+                    self?.snackbarController?.animate(snackbar: .hidden, delay: 3)
+                case .failure(let error):
+                    let alert = AlertFactory.createAlert(error: error)
+                    self?.navigationController?.present(alert, animated: true)
+                }
+            }
+        }
+    }
+}
+
 fileprivate extension PersonalDataViewController {
     func prepare() {
         prepareTableView()
         prepareCopyright()
         prepareNavigationItem()
+        
+        snackbarController?.snackbar.text = R.string.localizable.success()
     }
     
     func prepareTableView() {
@@ -169,11 +189,17 @@ fileprivate extension PersonalDataViewController {
     
     func prepareNavigationItem() {
         
-        navigationItem.titleLabel.text = R.string.localizable.personal_data()
-        navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
-        navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
+        let doneButton = RaisedButton()
+        doneButton.backgroundColor = Stylesheet.color(.whiteWith(alpha: 0.2))
+        doneButton.title = R.string.localizable.save().uppercased()
+        doneButton.titleColor = Stylesheet.color(.blue)
+        doneButton.titleLabel?.font = R.font.encodeSansBold(size: 14)
+        doneButton.addTarget(self, action: #selector(saveAction(sender:)), for: .touchUpInside)
+        snackbarController?.navigationItem.rightViews = [doneButton]
         
-        navigationController?.navigationBar.setBackgroundImage(R.image.nav_background(), for: .default)
+        snackbarController?.navigationItem.titleLabel.text = R.string.localizable.personal_data()
+        snackbarController?.navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
+        snackbarController?.navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
     }
     
     func prepareCopyright() {

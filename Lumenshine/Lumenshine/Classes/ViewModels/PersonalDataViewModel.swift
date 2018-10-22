@@ -73,7 +73,7 @@ class PersonalDataViewModel : PersonalDataViewModelType {
         self.service.getUserData { [weak self] result in
             switch result {
             case .success(let response):
-                self?.userData = response
+                self?.setUserData(response)
             case .failure(let error):
                 print("Get user data failure: \(error)")
             }
@@ -203,7 +203,7 @@ fileprivate extension PersonalDataViewModel {
         var validatedData = Dictionary<PersonalDataEntry,String>()
         validatedData.merge(selectedValues, uniquingKeysWith: {(_, last) in last})
         
-        guard let email = validatedData[.email], email.isEmail() else {
+        if let email = validatedData[.email], !email.isEmail() {
             let error = ErrorResponse()
             error.errorMessage = R.string.localizable.invalid_email()
             return (error, nil)
@@ -245,6 +245,37 @@ fileprivate extension PersonalDataViewModel {
                 print("Failure reading Occupation JSON: \(error)")
             }
         }
+    }
+    
+    func setUserData(_ userData: UserData) {
+        self.userData = userData
+        selectedValues[.additionalName] = userData.additionalName
+        selectedValues[.address] = userData.address
+        selectedValues[.bankAccountNumber] = userData.bankAccountNumber
+        selectedValues[.bankNumber] = userData.bankNumber
+        selectedValues[.bankPhoneNumber] = userData.bankPhoneNumber
+        selectedValues[.birthCountryCode] = userData.birthCountryCode
+        selectedValues[.birthday] = DateUtils.shortDateString(from: userData.birthday)
+        selectedValues[.birthPlace] = userData.birthPlace
+        selectedValues[.city] = userData.city
+        selectedValues[.company] = userData.company
+        selectedValues[.countryCode] = userData.countryCode
+        selectedValues[.email] = userData.email
+        selectedValues[.employerAddress] = userData.employerAddress
+        selectedValues[.employerName] = userData.employerName
+        selectedValues[.forename] = userData.forename
+        selectedValues[.languageCode] = userData.languageCode
+        selectedValues[.lastname] = userData.lastname
+        selectedValues[.mobileNR] = userData.mobileNR
+        selectedValues[.nationality] = userData.nationality
+        selectedValues[.occupation] = userData.occupation
+        selectedValues[.registrationDate] = DateUtils.shortDateString(from: userData.registrationDate)
+        selectedValues[.salutation] = userData.salutation
+        selectedValues[.state] = userData.state
+        selectedValues[.taxID] = userData.taxID
+        selectedValues[.taxIDName] = userData.taxIDName
+        selectedValues[.title] = userData.title
+        selectedValues[.zipCode] = userData.zipCode
     }
 }
 

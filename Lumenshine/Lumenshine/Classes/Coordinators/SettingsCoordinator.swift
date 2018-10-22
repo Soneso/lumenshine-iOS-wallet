@@ -144,7 +144,8 @@ fileprivate extension SettingsCoordinator {
     func showPersonalData() {
         let personalDataViewModel = PersonalDataViewModel(service: service.userData)
         let personalVC = PersonalDataViewController(viewModel: personalDataViewModel)
-        baseController.navigationController?.pushViewController(personalVC, animated: true)
+        let snackBarVC = SnackbarController(rootViewController: personalVC)
+        baseController.navigationController?.pushViewController(snackBarVC, animated: true)
         self.personalDataViewModel = personalDataViewModel
         self.personalDataViewModel?.navigationCoordinator = self
     }
