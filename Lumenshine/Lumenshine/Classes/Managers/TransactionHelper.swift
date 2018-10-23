@@ -384,6 +384,8 @@ class TransactionHelper {
             }
             
             try transaction.sign(keyPair: signerKeyPair, network: network)
+            inputData.signerSeed = nil
+            externalSignerSeed = nil
         } else {
             try transaction.sign(keyPair: sourceKeyPair, network: network)
         }

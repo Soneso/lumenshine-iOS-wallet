@@ -131,6 +131,7 @@ class KnownCurrenciesTableViewCell: UITableViewCell {
             let signer = passwordView.useExternalSigning ? passwordView.signersTextField.text : nil
             let seed = passwordView.useExternalSigning ? passwordView.seedTextField.text : nil
             let transactionHelper = TransactionHelper(wallet: wallet, signer: signer, signerSeed: seed)
+            passwordView.clearSeedAndPasswordFields()
             transactionHelper.addTrustLine(asset: asset, mnemonic: mnemonic) { (result) -> (Void) in
                 switch result {
                 case .success:

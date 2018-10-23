@@ -143,7 +143,8 @@ class ProvideInflationDestinationViewController: UIViewController {
     private func setInflationDestination(sourceAccountKeyPair: KeyPair, inflationDestination: String) {
         let signer = passwordView.useExternalSigning ? passwordView.signersTextField.text : nil
         let seed = passwordView.useExternalSigning ? passwordView.seedTextField.text : nil
-
+        
+        passwordView.clearSeedAndPasswordFields()
         inflationManager.checkAndSubmitInflationDestination(inflationAddress: inflationDestination,
                                                  sourceAccountKeyPair: sourceAccountKeyPair,
                                                  externalSigner: signer,

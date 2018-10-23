@@ -352,6 +352,7 @@
 		C6CB744021746B3100FB99C3 /* PasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6CB743F21746B3100FB99C3 /* PasswordView.xib */; };
 		C6CB744221746B3E00FB99C3 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CB744121746B3E00FB99C3 /* PasswordView.swift */; };
 		C6CEBCB2216CA66000710ED7 /* TabLikeSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CEBCB1216CA66000710ED7 /* TabLikeSegmentedControl.swift */; };
+		C6CFEF34217DB1E0006EEC08 /* JailbreakChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CFEF33217DB1E0006EEC08 /* JailbreakChecker.swift */; };
 		C6D87E742133ECE100154A3B /* KnownCurrenciesTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D87E732133ECE100154A3B /* KnownCurrenciesTableViewController.xib */; };
 		C6D87E762133ECED00154A3B /* KnownCurrenciesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D87E752133ECED00154A3B /* KnownCurrenciesTableViewController.swift */; };
 		C6D87E78213400A000154A3B /* KnownCurrenciesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6D87E77213400A000154A3B /* KnownCurrenciesTableViewCell.xib */; };
@@ -750,6 +751,7 @@
 		C6CB743F21746B3100FB99C3 /* PasswordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasswordView.xib; sourceTree = "<group>"; };
 		C6CB744121746B3E00FB99C3 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
 		C6CEBCB1216CA66000710ED7 /* TabLikeSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabLikeSegmentedControl.swift; sourceTree = "<group>"; };
+		C6CFEF33217DB1E0006EEC08 /* JailbreakChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JailbreakChecker.swift; sourceTree = "<group>"; };
 		C6D87E732133ECE100154A3B /* KnownCurrenciesTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KnownCurrenciesTableViewController.xib; sourceTree = "<group>"; };
 		C6D87E752133ECED00154A3B /* KnownCurrenciesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownCurrenciesTableViewController.swift; sourceTree = "<group>"; };
 		C6D87E77213400A000154A3B /* KnownCurrenciesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KnownCurrenciesTableViewCell.xib; sourceTree = "<group>"; };
@@ -973,6 +975,7 @@
 				43B78D4B21777523006B1EA9 /* PersonalDataEntry.swift */,
 				43AAC6E42178B9C100985DCA /* Occupation.swift */,
 				43BAAB96217B311800034657 /* UserData.swift */,
+				C6CFEF33217DB1E0006EEC08 /* JailbreakChecker.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -2188,6 +2191,7 @@
 				4301312A20C049CB00E47E83 /* ReLoginCoordinator.swift in Sources */,
 				4319B1842063F00C007CE18D /* MenuViewModel.swift in Sources */,
 				43AAC6E52178B9C100985DCA /* Occupation.swift in Sources */,
+				C6CFEF34217DB1E0006EEC08 /* JailbreakChecker.swift in Sources */,
 				43B144CC20FCA5D40099E3AE /* TitleHeader.swift in Sources */,
 				C66E353D215A082700D39906 /* ImageBackgroundNavigationController.swift in Sources */,
 				4359984B20A438EF00007F27 /* AuthenticationResponse.swift in Sources */,

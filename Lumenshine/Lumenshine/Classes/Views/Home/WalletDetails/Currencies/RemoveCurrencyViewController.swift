@@ -60,6 +60,7 @@ class RemoveCurrencyViewController: UIViewController {
         let signer = passwordView.signersTextField.text
         let seed = passwordView.seedTextField.text
         let transactionHelper = TransactionHelper(wallet: self.wallet, signer: signer, signerSeed: seed)
+        passwordView.clearSeedAndPasswordFields()
         transactionHelper.removeTrustLine(currency: self.currency, completion: { (_) -> (Void) in
             self.navigationController?.popViewController(animated: true)
         })

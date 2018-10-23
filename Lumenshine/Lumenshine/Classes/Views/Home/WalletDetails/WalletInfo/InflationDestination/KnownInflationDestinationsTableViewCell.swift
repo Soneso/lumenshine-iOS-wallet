@@ -140,6 +140,7 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
         let signer = passwordView.useExternalSigning ? passwordView.signersTextField.text : nil
         let seed = passwordView.useExternalSigning ? passwordView.seedTextField.text : nil
      
+        passwordView.clearSeedAndPasswordFields()
         inflationManager.checkAndSubmitInflationDestination(inflationAddress: destination,
                                                             sourceAccountKeyPair: sourceAccountKeyPair,
                                                             externalSigner: signer,

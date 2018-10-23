@@ -23,6 +23,6 @@ public struct TransactionInput {
     let masterKeyPair: KeyPair?
     let transactionType: TransactionActionType
     let signer: String?
-    let signerSeed: String?
+    var signerSeed: String?
     let otherCurrencyAsset: AccountBalanceResponse?
 }

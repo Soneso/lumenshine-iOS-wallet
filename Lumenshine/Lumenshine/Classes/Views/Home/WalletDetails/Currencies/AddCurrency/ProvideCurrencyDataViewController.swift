@@ -215,6 +215,7 @@ class ProvideCurrencyDataViewController: UIViewController {
         
         let issuerKeyPair = try? KeyPair(accountId: issuer)
         
+        passwordView.clearSeedAndPasswordFields()
         if let assetType = assetType,
             let issuerKeyPair = issuerKeyPair,
             let asset = Asset(type: assetType, code: assetCode, issuer: issuerKeyPair) {
