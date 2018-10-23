@@ -87,8 +87,8 @@ class KnownCurrenciesTableViewCell: UITableViewCell {
     private func validatePasswordAndRemoveCurrency(biometricAuth: Bool, assetCode: String, issuerKeyPair: KeyPair) {
         passwordManager.getMnemonic(password: !biometricAuth ? passwordView.passwordTextField.text : nil) { (result) -> (Void) in
             switch result {
-            case .success(_):
-                self.addTrustLine(assetCode: assetCode, issuerKeyPair: issuerKeyPair)
+            case .success(mnemonic: let mnemonic):
+                self.addTrustLine(assetCode: assetCode, issuerKeyPair: issuerKeyPair, mnemonic: mnemonic)
             case .failure(error: let error):
                 print("Get mnemonic error: \(error)")
                 self.passwordView.showInvalidPasswordError()
@@ -125,13 +125,14 @@ class KnownCurrenciesTableViewCell: UITableViewCell {
         addButton.isEnabled = true
     }
     
-    private func addTrustLine(assetCode: String, issuerKeyPair: KeyPair) {
+    private func addTrustLine(assetCode: String, issuerKeyPair: KeyPair, mnemonic: String? = nil) {
         let assetType: Int32 = assetCode.count < 5 ? AssetType.ASSET_TYPE_CREDIT_ALPHANUM4 : AssetType.ASSET_TYPE_CREDIT_ALPHANUM12
         if let asset = Asset(type: assetType, code: assetCode, issuer: issuerKeyPair) {
             let signer = passwordView.useExternalSigning ? passwordView.signersTextField.text : nil
             let seed = passwordView.useExternalSigning ? passwordView.seedTextField.text : nil
             let transactionHelper = TransactionHelper(wallet: wallet, signer: signer, signerSeed: seed)
-            transactionHelper.addTrustLine(asset: asset) { (result) -> (Void) in
+            passwordView.clearSeedAndPasswordFields()
+            transactionHelper.addTrustLine(asset: asset, mnemonic: mnemonic) { (result) -> (Void) in
                 switch result {
                 case .success:
                     break

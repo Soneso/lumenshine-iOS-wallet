@@ -81,6 +81,11 @@ class PasswordView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
                 return false
             }
             
+            if !currentPassword.isValidPassword() {
+                showInvalidPasswordError()
+                return false
+            }
+            
             return true
         }
         
@@ -133,6 +138,11 @@ class PasswordView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         passwordStackView.isHidden = false
     }
     
+    func clearSeedAndPasswordFields() {
+        seedTextField.text = nil
+        passwordTextField.text = nil
+    }
+
     private func setupHeightConstraints() {
         setStaticHeightConstraint(for: passwordTextField)
         setStaticHeightConstraint(for: signersTextField)

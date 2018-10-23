@@ -49,6 +49,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = loginCoordinator.baseController
         window?.makeKeyAndVisible()
         
+        let jailbreakChecker = JailbreakChecker()
+        jailbreakChecker.checkDeviceForJailbreak()
+        
         return true
     }
 

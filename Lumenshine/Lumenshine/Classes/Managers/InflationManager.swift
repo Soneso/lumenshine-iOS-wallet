@@ -14,8 +14,8 @@ public enum GetInflationDestinationEnum {
     case failure(error: HorizonRequestError?)
 }
 
-public enum CheckInflationDestinationEnum {
-    case success(knownInflationDestination: KnownInflationDestinationResponse)
+public enum GetKnownInflationDestinationEnum {
+    case success(response: KnownInflationDestinationResponse)
     case failure(error: ServiceError?)
 }
 
@@ -31,7 +31,7 @@ public enum SetInflationDestinationEnum {
 }
 
 public typealias GetInflationDestinationClosure = (_ completion: GetInflationDestinationEnum) -> (Void)
-public typealias CheckInflationDestinationClosure = (_ completion: CheckInflationDestinationEnum) -> (Void)
+public typealias GetKnownInflationDestinationClosure = (_ response: GetKnownInflationDestinationEnum) -> (Void)
 public typealias SetInflationDestinationClosure = (_ completion: SetInflationDestinationEnum) -> (Void)
 
 class InflationManager {
@@ -47,7 +47,7 @@ class InflationManager {
         }
     }
     
-    private var userManager = UserManager()
+    private let userManager = UserManager()
     
     func getKnownInflationDestinations(completion: @escaping GetKnownInflationDestinationsClosure) {
         currenciesService.getKnownInflationDestinations { (response) -> (Void) in
@@ -79,16 +79,15 @@ class InflationManager {
         }
     }
     
-    func checkInflationDestination(inflationAddress: String, completion: @escaping CheckInflationDestinationClosure) {
+    func getKnownInflationDestination(forPublicKey destinationPublicKey: String, completion: @escaping GetKnownInflationDestinationClosure) {
         currenciesService.getKnownInflationDestinations { (response) -> (Void) in
             switch response {
             case .success(response: let knownInflationDestinations):
                 for inflationDestination in knownInflationDestinations {
-                    if inflationDestination.destinationPublicKey == inflationAddress {
+                    if inflationDestination.destinationPublicKey == destinationPublicKey {
                         DispatchQueue.main.async {
-                            completion(.success(knownInflationDestination: inflationDestination))
+                            completion(.success(response: inflationDestination))
                         }
-                        
                         return
                     }
                 }
@@ -104,34 +103,37 @@ class InflationManager {
         }
     }
     
-    func setInflationDestination(inflationAddress: String, sourceAccountID: String, externalSigner: String? = nil, externalSignersSeed: String? = nil, completion: @escaping SetInflationDestinationClosure) {
-        if let sourceAccountKeyPair = PrivateKeyManager.getKeyPair(forAccountID: sourceAccountID) {
-            userManager.checkIfAccountExists(forAccountID: inflationAddress) { (accountExists) -> (Void) in
-                if accountExists {
-                    self.stellarSDK.accounts.getAccountDetails(accountId: sourceAccountKeyPair.accountId) { (response) -> (Void) in
-                        switch response {
-                        case .success(let accountResponse):
-                            self.submitInflationDestination(accountResponse: accountResponse,
-                                                            sourceAccountKeyPair: sourceAccountKeyPair,
-                                                            inflationAddress: inflationAddress,
-                                                            externalSigner: externalSigner,
-                                                            externalSignersSeed: externalSignersSeed,
-                                                            completion: { (response) -> (Void) in
-                                DispatchQueue.main.async {
-                                    completion(response)
-                                }
-                            })
-                        case .failure(let error):
-                            StellarSDKLog.printHorizonRequestErrorMessage(tag:"Error:", horizonRequestError: error)
-                            DispatchQueue.main.async {
-                                completion(.failure(error: InflationDestinationErrorCodes.transactionFailed))
-                            }
+    func checkAndSubmitInflationDestination(inflationAddress: String,
+                                                    sourceAccountKeyPair: KeyPair,
+                                                    externalSigner: String?,
+                                                    externalSignersSeed: String?,
+                                                    completion: @escaping SetInflationDestinationClosure) {
+        userManager.checkIfAccountExists(forAccountID: inflationAddress) { (accountExists) -> (Void) in
+            if accountExists {
+                self.stellarSDK.accounts.getAccountDetails(accountId: sourceAccountKeyPair.accountId) { (response) -> (Void) in
+                    switch response {
+                    case .success(let accountResponse):
+                        self.submitInflationDestination(accountResponse: accountResponse,
+                                                        sourceAccountKeyPair: sourceAccountKeyPair,
+                                                        inflationAddress: inflationAddress,
+                                                        externalSigner: externalSigner,
+                                                        externalSignersSeed: externalSignersSeed,
+                                                        completion: { (response) -> (Void) in
+                                                            DispatchQueue.main.async {
+                                                                completion(response)
+                                                            }
+
+                        })
+                    case .failure(let error):
+                        StellarSDKLog.printHorizonRequestErrorMessage(tag:"Error:", horizonRequestError: error)
+                        DispatchQueue.main.async {
+                            completion(.failure(error: InflationDestinationErrorCodes.transactionFailed))
                         }
                     }
-                } else {
-                    DispatchQueue.main.async {
-                        completion(.failure(error: InflationDestinationErrorCodes.accountNotFound))
-                    }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(.failure(error: InflationDestinationErrorCodes.accountNotFound))
                 }
             }
         }

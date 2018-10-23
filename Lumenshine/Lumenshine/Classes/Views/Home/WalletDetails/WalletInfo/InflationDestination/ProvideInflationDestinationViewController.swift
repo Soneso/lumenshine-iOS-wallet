@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import stellarsdk
 
 fileprivate enum SetButtonTitles: String {
     case set = "SET"
@@ -86,7 +87,8 @@ class ProvideInflationDestinationViewController: UIViewController {
             
             if let inflationDestination = publicKeyTextField.text {
                 if passwordView.useExternalSigning {
-                    self.setInflationDestination(inflationDestination: inflationDestination)
+                    let sourceKeyPair = try! KeyPair(publicKey: PublicKey(accountId:wallet.publicKey), privateKey:nil)
+                    self.setInflationDestination(sourceAccountKeyPair: sourceKeyPair, inflationDestination: inflationDestination)
                 } else {
                     validatePasswordAndAddInflation(inflationDestination: inflationDestination, biometricAuth: biometricAuth)
                 }
@@ -99,8 +101,20 @@ class ProvideInflationDestinationViewController: UIViewController {
     private func validatePasswordAndAddInflation(inflationDestination: String, biometricAuth: Bool) {
         passwordManager.getMnemonic(password: !biometricAuth ? passwordView.passwordTextField.text : nil) { (response) -> (Void) in
             switch response {
-            case .success(_):
-                self.setInflationDestination(inflationDestination: inflationDestination)
+            case .success(mnemonic: let mnemonic):
+                PrivateKeyManager.getKeyPair(forAccountID: self.wallet.publicKey, fromMnemonic: mnemonic, completion: { (response) -> (Void) in
+                    switch response {
+                    case .success(keyPair: let keyPair):
+                        if let walletKeyPair = keyPair {
+                            self.setInflationDestination(sourceAccountKeyPair: walletKeyPair, inflationDestination: inflationDestination)
+                            return
+                        }
+                    case .failure(error: let error):
+                        print(error)
+                    }
+                    self.showUnknownErrorAlert()
+                    self.resetSetButtonToDefault()
+                })
             case .failure(error: let error):
                 print("Error: \(error)")
                 self.passwordView.showInvalidPasswordError()
@@ -126,30 +140,32 @@ class ProvideInflationDestinationViewController: UIViewController {
         self.displaySimpleAlertView(title: "Operation failed", message: "An error occured while trying to set the inflation destination. Please try again later.")
     }
     
-    private func setInflationDestination(inflationDestination: String) {
+    private func setInflationDestination(sourceAccountKeyPair: KeyPair, inflationDestination: String) {
         let signer = passwordView.useExternalSigning ? passwordView.signersTextField.text : nil
         let seed = passwordView.useExternalSigning ? passwordView.seedTextField.text : nil
-        inflationManager.setInflationDestination(inflationAddress: inflationDestination,
-                                                 sourceAccountID: wallet.publicKey,
+        
+        passwordView.clearSeedAndPasswordFields()
+        inflationManager.checkAndSubmitInflationDestination(inflationAddress: inflationDestination,
+                                                 sourceAccountKeyPair: sourceAccountKeyPair,
                                                  externalSigner: signer,
                                                  externalSignersSeed: seed,
                                                  completion: { (response) -> (Void) in
-            switch response {
-            case .success:
-                self.navigationController?.popViewController(animated: true)
-                break
-            case .failure(error: let error):
-                self.resetSetButtonToDefault()
-                
-                if error == InflationDestinationErrorCodes.accountNotFound {
-                    self.showValidationError(for: self.publicKeyValidationView)
-                    self.publicKeyValidationLabel.text = ValidationErrors.AddressNotFound.rawValue
-                    return
-                }
-                // TODO handle specific error
-                print("Error: \(error)")
-                self.showUnknownErrorAlert()
-            }
+                                                    switch response {
+                                                    case .success:
+                                                        self.navigationController?.popViewController(animated: true)
+                                                        break
+                                                    case .failure(error: let error):
+                                                        self.resetSetButtonToDefault()
+                                                        if error == InflationDestinationErrorCodes.accountNotFound {
+                                                            self.showValidationError(for: self.publicKeyValidationView)
+                                                            self.publicKeyValidationLabel.text = ValidationErrors.AddressNotFound.rawValue
+                                                            return
+                                                            
+                                                        }
+                                                        print("Error: \(error)")
+                                                        self.showUnknownErrorAlert()
+                                                        self.resetSetButtonToDefault()
+                                                    }
         })
     }
     

@@ -9,8 +9,15 @@
 import Foundation
 import stellarsdk
 
+public enum GetKeyPairEnum {
+    case success(keyPair: KeyPair?)
+    case failure(error: String)
+}
+
+public typealias GetKeyPairClosure = (_ completion: GetKeyPairEnum) -> (Void)
+
 class PrivateKeyManager {
-    private static var walletsKeyPairs: [String: KeyPair] = [:]
+    private static var walletsKeyPairsIndexes: [String: Int] = [:]
 
     static func getWalletsKeyPairs(fromMnemonic mnemonic: String?) {
         if let mnemonic = mnemonic {
@@ -23,16 +30,37 @@ class PrivateKeyManager {
                 let account = coinType.derived(at: UInt32(index))
                 let stellarSeed = try! Seed(bytes: account.raw.bytes)
                 let keyPair = KeyPair.init(seed: stellarSeed)
-                walletsKeyPairs[keyPair.accountId] = keyPair
+                walletsKeyPairsIndexes[keyPair.accountId] = index
             }
         } else {
-            walletsKeyPairs = [:]
+            walletsKeyPairsIndexes = [:]
         }
     }
     
-    static func getKeyPair(forAccountID accountID: String) -> KeyPair? {
-        return walletsKeyPairs.first(where: { (walletKeyPair) -> Bool in
+    private static func getIndex(forAccountID accountID: String) -> Int? {
+        return walletsKeyPairsIndexes.first(where: { (walletKeyPair) -> Bool in
             return walletKeyPair.key == accountID
         })?.value
+    }
+    
+    static func getKeyPair(forAccountID accountID: String, fromMnemonic mnemonic: String? = nil, completion: @escaping GetKeyPairClosure) {
+        var keyPair: KeyPair? = nil
+        if let index = getIndex(forAccountID: accountID) {
+            if let mnemonic = mnemonic {
+                keyPair = try? stellarsdk.Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: index)
+                completion(.success(keyPair: keyPair))
+            } else {
+                BiometricHelper.getMnemonic { (response) -> (Void) in
+                    switch response {
+                    case .success(mnemonic: let mnemonic):
+                        keyPair = try? stellarsdk.Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: index)
+                        completion(.success(keyPair: keyPair))
+                    case .failure(error: let error):
+                        print(error)
+                        completion(.failure(error: error))
+                    }
+                }
+            }
+        }
     }
 }

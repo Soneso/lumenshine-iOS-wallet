@@ -40,11 +40,6 @@ public enum GetKnownCurrenciesEnum {
     case failure(error: ServiceError)
 }
 
-public enum GetKnownInflationDestinationEnum {
-    case success(response: KnownInflationDestinationResponse)
-    case failure(error: ServiceError)
-}
-
 public enum GetKnownInflationDestinationsEnum {
     case success(response: [KnownInflationDestinationResponse])
     case failure(error: ServiceError)
@@ -53,7 +48,6 @@ public enum GetKnownInflationDestinationsEnum {
 public typealias GetRateClosure = (_ response:GetRateEnum) -> (Void)
 public typealias GetKnownCurrencyClosure = (_ response: GetKnownCurrencyEnum) -> (Void)
 public typealias GetKnownCurrenciesClosure = (_ response: GetKnownCurrenciesEnum) -> (Void)
-public typealias GetKnownInflationDestinationClosure = (_ response: GetKnownInflationDestinationEnum) -> (Void)
 public typealias GetKnownInflationDestinationsClosure = (_ response: GetKnownInflationDestinationsEnum) -> (Void)
 
 public class CurrenciesService: BaseService {
