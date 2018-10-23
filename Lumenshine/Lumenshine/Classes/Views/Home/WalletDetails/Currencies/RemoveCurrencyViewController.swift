@@ -61,8 +61,17 @@ class RemoveCurrencyViewController: UIViewController {
         let seed = passwordView.seedTextField.text
         let transactionHelper = TransactionHelper(wallet: self.wallet, signer: signer, signerSeed: seed)
         passwordView.clearSeedAndPasswordFields()
-        transactionHelper.removeTrustLine(currency: self.currency, completion: { (_) -> (Void) in
-            self.navigationController?.popViewController(animated: true)
+        let trustorKeyPair = try! KeyPair(publicKey: PublicKey(accountId:self.wallet.publicKey), privateKey:nil)
+        transactionHelper.removeTrustLine(currency: self.currency, trustingAccountKeyPair: trustorKeyPair, completion: { (result) -> (Void) in
+            switch result {
+            case .success:
+                self.navigationController?.popViewController(animated: true)
+                break
+            case .failure(error: let error):
+                print("Error: \(String(describing: error))")
+                self.showTrnsactionFailedAlert()
+                self.resetRemoveButton()
+            }
         })
     }
     
@@ -70,11 +79,32 @@ class RemoveCurrencyViewController: UIViewController {
         passwordManager.getMnemonic(password: !biometricAuth ? passwordView.passwordTextField.text : nil) { (result) -> (Void) in
             switch result {
             case .success(mnemonic: let mnemonic):
-                let transactionHelper = TransactionHelper(wallet: self.wallet)
-                transactionHelper.removeTrustLine(currency: self.currency, mnemonic: mnemonic, completion: { (_) -> (Void) in
-                    self.navigationController?.popViewController(animated: true)
-                })
-
+                PrivateKeyManager.getKeyPair(forAccountID: self.wallet.publicKey, fromMnemonic: mnemonic) { (response) -> (Void) in
+                    switch response {
+                    case .success(keyPair: let keyPair):
+                        if let trustorKeyPair = keyPair {
+                            let transactionHelper = TransactionHelper(wallet: self.wallet)
+                            transactionHelper.removeTrustLine(currency: self.currency, trustingAccountKeyPair: trustorKeyPair, completion: { (result) -> (Void) in
+                                switch result {
+                                case .success:
+                                    self.navigationController?.popViewController(animated: true)
+                                    break
+                                case .failure(error: let error):
+                                    print("Error: \(String(describing: error))")
+                                    self.showTrnsactionFailedAlert()
+                                    self.resetRemoveButton()
+                                }
+                            })
+                            return
+                        }
+                    case .failure(error: let error):
+                        print(error)
+                    }
+                    DispatchQueue.main.async {
+                        self.showSigningAlert()
+                        self.resetRemoveButton()
+                    }
+                }
             case .failure(error: let error):
                 print("Error: \(error)")
                 self.passwordView.showInvalidPasswordError()
@@ -100,7 +130,7 @@ class RemoveCurrencyViewController: UIViewController {
         }
         
         if passwordView.useExternalSigning {
-         removeCurrencyWithExternalSigning()
+            removeCurrencyWithExternalSigning()
         } else {
             removeCurrencyWithPassword(biometricAuth: biometricAuth)
         }
@@ -112,6 +142,14 @@ class RemoveCurrencyViewController: UIViewController {
     
     private func showFundingAlert() {
         self.displaySimpleAlertView(title: "Removing failed", message: "Insufficient funding. Please send lumens to your wallet first.")
+    }
+    
+    private func showSigningAlert() {
+        self.displaySimpleAlertView(title: "Removing failed", message: "A signing error occured.")
+    }
+    
+    private func showTrnsactionFailedAlert() {
+        self.displaySimpleAlertView(title: "Removing failed", message: "A transaction error occured.")
     }
     
     private func resetRemoveButton() {

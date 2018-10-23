@@ -132,9 +132,9 @@ class TransactionHelper {
         }
     }
     
-    func removeTrustLine(currency: AccountBalanceResponse, discardingDestination: String? = nil, mnemonic: String? = nil, completion: @escaping TrustLineClosure) {
+    func removeTrustLine(currency: AccountBalanceResponse, discardingDestination: String? = nil, trustingAccountKeyPair: KeyPair, completion: @escaping TrustLineClosure) {
         if let assetIssuer = currency.assetIssuer {
-            let issuingAccountKeyPair = try? KeyPair(accountId: assetIssuer)
+            let issuingAccountKeyPair = try! KeyPair(accountId: assetIssuer)
             
             var assetType: Int32? = nil
             
@@ -152,41 +152,18 @@ class TransactionHelper {
                 break
             }
             
-            PrivateKeyManager.getKeyPair(forAccountID: wallet.publicKey, fromMnemonic: mnemonic) { (response) -> (Void) in
-                switch response {
-                case .success(keyPair: let keyPair):
-                    if let trustingAccountKeyPair = keyPair,
-                        let assetType = assetType,
-                        let asset = Asset(type: assetType, code: currency.assetCode, issuer: issuingAccountKeyPair) {
-                        self.removeTrustLine(trustingAccountKeyPair: trustingAccountKeyPair, issuingAccountKeyPair: issuingAccountKeyPair, currency: currency, asset: asset) { (status) -> (Void) in
-                            DispatchQueue.main.async {
-                                completion(status)
-                            }
-                        }
+            if let assetType = assetType,
+                let asset = Asset(type: assetType, code: currency.assetCode, issuer: issuingAccountKeyPair) {
+                self.removeTrustLine(trustingAccountKeyPair: trustingAccountKeyPair, issuingAccountKeyPair: issuingAccountKeyPair, currency: currency, asset: asset) { (status) -> (Void) in
+                    DispatchQueue.main.async {
+                        completion(status)
                     }
-                case .failure(error: let error):
-                   print(error)
                 }
             }
+        } else{
+            completion(.failure(error: nil))
         }
     }
-    
-    /*func addTrustLine(asset: Asset, trustingAccountKeyPair: KeyPair, completion: @escaping TrustLineClosure) {
-        PrivateKeyManager.getKeyPair(forAccountID: wallet.publicKey, fromMnemonic: mnemonic) { (response) -> (Void) in
-            switch response {
-            case .success(keyPair: let keyPair):
-                if let trustingAccountKeyPair = keyPair {
-                    self.addTrustLine(trustingAccountKeyPair: trustingAccountKeyPair, asset: asset) { (result) -> (Void) in
-                        DispatchQueue.main.async {
-                            completion(result)
-                        }
-                    }
-                }
-            case .failure(error: let error):
-                print(error)
-            }
-        }
-    }*/
     
     private func getSelectedCurrency() -> AccountBalanceResponse? {
         return inputData.otherCurrencyAsset ?? wallet.balances.first(where: { (asset) -> Bool in
@@ -454,14 +431,14 @@ class TransactionHelper {
         }
     }
     
-    private func submitRemoveTrustLine(issuingAccountKeyPair: KeyPair?, trustingAccountKeyPair: KeyPair, accountResponse: AccountResponse, currency: AccountBalanceResponse, asset: Asset, discardingDestination: String? = nil, completion: @escaping TrustLineClosure) {
+    private func submitRemoveTrustLine(issuingAccountKeyPair: KeyPair, trustingAccountKeyPair: KeyPair, accountResponse: AccountResponse, currency: AccountBalanceResponse, asset: Asset, discardingDestination: String? = nil, completion: @escaping TrustLineClosure) {
         do {
             var destination = issuingAccountKeyPair
             if let discardingDestination = discardingDestination {
-                destination = try? KeyPair(accountId: discardingDestination)
+                destination = try! KeyPair(accountId: discardingDestination)
             }
             
-            if let destination = destination, let balance = CoinUnit(currency.balance) {
+            if let balance = CoinUnit(currency.balance) {
                 var operationsArray: [stellarsdk.Operation] = []
                 
                 if balance > 0.0 {
@@ -494,10 +471,11 @@ class TransactionHelper {
                 }
             }
         } catch {
+            completion(.failure(error: nil))
         }
     }
     
-    private func removeTrustLine(trustingAccountKeyPair: KeyPair, issuingAccountKeyPair: KeyPair?, discardingDestination: String? = nil,
+    private func removeTrustLine(trustingAccountKeyPair: KeyPair, issuingAccountKeyPair: KeyPair, discardingDestination: String? = nil,
                                  currency: AccountBalanceResponse, asset: Asset, completion: @escaping TrustLineClosure) {
         stellarSdk.accounts.getAccountDetails(accountId: trustingAccountKeyPair.accountId) { (response) -> (Void) in
             switch response {
