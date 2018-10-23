@@ -170,7 +170,7 @@
 		43B81D5C21174B1F0039BC3D /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B81D5B21174B1F0039BC3D /* MainCoordinator.swift */; };
 		43B8919B2104764600062660 /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B8919A2104764600062660 /* InputField.swift */; };
 		43BAAB97217B311800034657 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BAAB96217B311800034657 /* UserData.swift */; };
-		43C08AE82178A9B80079A364 /* OccupationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C08AE72178A9B80079A364 /* OccupationsViewController.swift */; };
+		43C08AE82178A9B80079A364 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C08AE72178A9B80079A364 /* ListViewController.swift */; };
 		43C08AEA2178B3EF0079A364 /* occupations.json in Resources */ = {isa = PBXBuildFile; fileRef = 43C08AE92178B3EF0079A364 /* occupations.json */; };
 		43C54039215A66170064BA67 /* HelpCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C54038215A66170064BA67 /* HelpCardViewModel.swift */; };
 		43C6377A20BEFF2B00498FC5 /* ReLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C6377920BEFF2B00498FC5 /* ReLoginViewController.swift */; };
@@ -263,6 +263,10 @@
 		74E2057A20D1544000E94048 /* HomeFundedWalletHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74E2057920D1544000E94048 /* HomeFundedWalletHeaderView.xib */; };
 		74E2057F20D2A3B200E94048 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E2057E20D2A3B200E94048 /* IconButton.swift */; };
 		74E2058120D2A3C400E94048 /* IconView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74E2058020D2A3C400E94048 /* IconView.xib */; };
+		B18D3BA4217DF920003B9D9E /* iso_countries.json in Resources */ = {isa = PBXBuildFile; fileRef = B18D3BA2217DF920003B9D9E /* iso_countries.json */; };
+		B18D3BA5217DF920003B9D9E /* iso_languages.json in Resources */ = {isa = PBXBuildFile; fileRef = B18D3BA3217DF920003B9D9E /* iso_languages.json */; };
+		B18D3BA8217E0B9B003B9D9E /* LanguageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D3BA7217E0B9B003B9D9E /* LanguageResponse.swift */; };
+		B1D4409B217F2B95003A3ACF /* iso_salutations.json in Resources */ = {isa = PBXBuildFile; fileRef = B1D4409A217F2B94003A3ACF /* iso_salutations.json */; };
 		BC85BD500013E598CAFF9FAE /* Pods_LumenshineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F29A5324DA57F1AA741A5E82 /* Pods_LumenshineTests.framework */; };
 		C61244C62113325A00DE1EA9 /* SendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C61244C52113325A00DE1EA9 /* SendViewController.xib */; };
 		C61244C8211332E700DE1EA9 /* SendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61244C7211332E700DE1EA9 /* SendViewController.swift */; };
@@ -562,7 +566,7 @@
 		43B81D5B21174B1F0039BC3D /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		43B8919A2104764600062660 /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
 		43BAAB96217B311800034657 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
-		43C08AE72178A9B80079A364 /* OccupationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccupationsViewController.swift; sourceTree = "<group>"; };
+		43C08AE72178A9B80079A364 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		43C08AE92178B3EF0079A364 /* occupations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = occupations.json; sourceTree = "<group>"; };
 		43C54038215A66170064BA67 /* HelpCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCardViewModel.swift; sourceTree = "<group>"; };
 		43C6377920BEFF2B00498FC5 /* ReLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginViewController.swift; sourceTree = "<group>"; };
@@ -659,6 +663,10 @@
 		74E2057E20D2A3B200E94048 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 		74E2058020D2A3C400E94048 /* IconView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IconView.xib; sourceTree = "<group>"; };
 		7A07122EB8B38B1B6BC1B141 /* Pods-LumenshineUITests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineUITests.development.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineUITests/Pods-LumenshineUITests.development.xcconfig"; sourceTree = "<group>"; };
+		B18D3BA2217DF920003B9D9E /* iso_countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = iso_countries.json; sourceTree = "<group>"; };
+		B18D3BA3217DF920003B9D9E /* iso_languages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = iso_languages.json; sourceTree = "<group>"; };
+		B18D3BA7217E0B9B003B9D9E /* LanguageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageResponse.swift; sourceTree = "<group>"; };
+		B1D4409A217F2B94003A3ACF /* iso_salutations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = iso_salutations.json; sourceTree = "<group>"; };
 		BD5D7ECC1085F6D80224F694 /* Pods-LumenshineUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineUITests/Pods-LumenshineUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C5A51E60F2E3DA1ACC512340 /* Pods-LumenshineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineTests/Pods-LumenshineTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C61244C52113325A00DE1EA9 /* SendViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendViewController.xib; sourceTree = "<group>"; };
@@ -910,13 +918,13 @@
 		4314B9F02048068B006DBE63 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B18D3BA1217DF8AF003B9D9E /* JSONs */,
 				C68850DA214B979D00D7D077 /* Styles */,
 				43AE62612135A12100B7A904 /* Fonts */,
 				74C89956210761EE009B13EA /* Images */,
 				43D7A776205A892E00238E29 /* Strings */,
 				4314B9F1204806E5006DBE63 /* MaterialIcons.bundle */,
 				43D7A774205A84B300238E29 /* R.generated.swift */,
-				43C08AE92178B3EF0079A364 /* occupations.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1290,7 +1298,7 @@
 			isa = PBXGroup;
 			children = (
 				43B78D4721775679006B1EA9 /* PersonalDataViewController.swift */,
-				43C08AE72178A9B80079A364 /* OccupationsViewController.swift */,
+				43C08AE72178A9B80079A364 /* ListViewController.swift */,
 			);
 			path = "Personal Data";
 			sourceTree = "<group>";
@@ -1379,6 +1387,7 @@
 				C6813DC6213AB708007074C2 /* KnownInflationDestinationResponse.swift */,
 				43564BAE2163DF4A006A7B9F /* ContactResponse.swift */,
 				43CF47EC21652B7000B9E7E2 /* AddContactResponse.swift */,
+				B18D3BA7217E0B9B003B9D9E /* LanguageResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -1509,6 +1518,17 @@
 				BD5D7ECC1085F6D80224F694 /* Pods-LumenshineUITests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		B18D3BA1217DF8AF003B9D9E /* JSONs */ = {
+			isa = PBXGroup;
+			children = (
+				B1D4409A217F2B94003A3ACF /* iso_salutations.json */,
+				B18D3BA2217DF920003B9D9E /* iso_countries.json */,
+				B18D3BA3217DF920003B9D9E /* iso_languages.json */,
+				43C08AE92178B3EF0079A364 /* occupations.json */,
+			);
+			path = JSONs;
 			sourceTree = "<group>";
 		};
 		C6725082213FC1240064F6E3 /* InflationDestination */ = {
@@ -1864,6 +1884,7 @@
 				43AE633D2135A19300B7A904 /* EncodeSansCondensed-Bold.ttf in Resources */,
 				43AE633B2135A19300B7A904 /* EncodeSansCondensed-Thin.ttf in Resources */,
 				C6B75F3321182E7500B45BEB /* TransactionResultViewController.xib in Resources */,
+				B18D3BA4217DF920003B9D9E /* iso_countries.json in Resources */,
 				43AE63502135A19300B7A904 /* Lato-Black.ttf in Resources */,
 				43AE63302135A19300B7A904 /* EncodeSansSemiExpanded-Thin.ttf in Resources */,
 				43AE635C2135A19300B7A904 /* EncodeSansSemiCondensed-Regular.ttf in Resources */,
@@ -1904,6 +1925,7 @@
 				74C899582107621E009B13EA /* receive_payment.html in Resources */,
 				C6BDA2BA216F66760076439E /* CurrencyFeeInfoViewController.xib in Resources */,
 				43D7A77B205A892E00238E29 /* Localizable.strings in Resources */,
+				B1D4409B217F2B95003A3ACF /* iso_salutations.json in Resources */,
 				43AE635F2135A19300B7A904 /* EncodeSansSemiCondensed-ExtraLight.ttf in Resources */,
 				43AE63582135A19300B7A904 /* EncodeSansSemiCondensed-Bold.ttf in Resources */,
 				43AE63372135A19300B7A904 /* EncodeSansSemiExpanded-Regular.ttf in Resources */,
@@ -1941,6 +1963,7 @@
 				C63B4F9C212AB35D0003ECE5 /* TransactionTableViewCell.xib in Resources */,
 				4314B9F2204806E5006DBE63 /* MaterialIcons.bundle in Resources */,
 				43AE63312135A19300B7A904 /* EncodeSansSemiExpanded-ExtraLight.ttf in Resources */,
+				B18D3BA5217DF920003B9D9E /* iso_languages.json in Resources */,
 				43AE63522135A19300B7A904 /* Lato-Regular.ttf in Resources */,
 				43AE634A2135A19300B7A904 /* EncodeSansExpanded-Light.ttf in Resources */,
 				43D7A77C205A892E00238E29 /* Common.strings in Resources */,
@@ -2197,6 +2220,7 @@
 				43C6377A20BEFF2B00498FC5 /* ReLoginViewController.swift in Sources */,
 				43844F4020E401B500C352E5 /* ReLoginMenuViewModel.swift in Sources */,
 				43844F3E20E3FE2600C352E5 /* ReLoginViewModel.swift in Sources */,
+				B18D3BA8217E0B9B003B9D9E /* LanguageResponse.swift in Sources */,
 				43564BAB21637630006A7B9F /* ContactsCoordinator.swift in Sources */,
 				746DC58520D142EC00AD0856 /* HomeUnfundedWalletHeaderView.swift in Sources */,
 				7420BBF021185366002FC4C7 /* ChangeWalletRequest.swift in Sources */,
@@ -2204,7 +2228,7 @@
 				43D7A77E205A90CC00238E29 /* MenuCoordinator.swift in Sources */,
 				C672508A213FE8ED0064F6E3 /* KnownInflationDestinationsViewController.swift in Sources */,
 				C672508E213FECD00064F6E3 /* KnownInflationDestinationsTableViewCell.swift in Sources */,
-				43C08AE82178A9B80079A364 /* OccupationsViewController.swift in Sources */,
+				43C08AE82178A9B80079A364 /* ListViewController.swift in Sources */,
 				C67E5D64215271F2002BCAA1 /* InputTextField.swift in Sources */,
 				C6C0E4D921256F2700FF1BA8 /* ChartExchangeRatesResponse.swift in Sources */,
 				438F54E3217A3F9300F4B556 /* UserDataService.swift in Sources */,

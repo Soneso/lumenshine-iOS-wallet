@@ -56,6 +56,6 @@ public indirect enum Transition {
     case showMnemonic(String)
     case showChartCurrency
     case showPersonalData
-    case showOccupationList
+    case showPersonalDataSubList
 }
 

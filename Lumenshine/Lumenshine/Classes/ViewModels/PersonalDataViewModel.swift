@@ -11,13 +11,9 @@ import UIKit.UITextInputTraits
 
 protocol PersonalDataViewModelType: Transitionable {
     var itemDistribution: [Int] { get }
-    var occupationList: [String] { get }
+    var subItems: [String] { get }
     var isFiltering: Bool { get set }
     
-    func setupOccupations()
-    func occupationSelected(at indexPath: IndexPath)
-    func saveSelectedOccupation()
-    func filterItems(searchText: String)
     func sectionTitle(at section: Int) -> String?
     func placeholder(at indexPath: IndexPath) -> String?
     func textValue(at indexPath: IndexPath) -> String?
@@ -28,19 +24,28 @@ protocol PersonalDataViewModelType: Transitionable {
     func textChanged(_ text: String, itemForRowAt indexPath: IndexPath)
     func shouldBeginEditing(at indexPath: IndexPath) -> Bool
     func submit(response: @escaping EmptyResponseClosure)
+    
+    func subItemSelected(at indexPath: IndexPath)
+    func filterSubItems(searchText: String)
+    func subListTitle() -> String?
+    var isDataChanged: Bool { get }
 }
 
 class PersonalDataViewModel : PersonalDataViewModelType {
     
     fileprivate let service: UserDataService
     fileprivate let entries: [[PersonalDataEntry]]
-    fileprivate var selectedValues: [PersonalDataEntry:String] = [:]
-    fileprivate var countries: [CountryResponse]?
+    fileprivate var selectedValues: [PersonalDataEntry:PersonalDataProtocol] = [:]
     fileprivate var salutations: [String]?
-    fileprivate var occupations: [Occupation]?
-    fileprivate var filteredOccupations: [Occupation]?
-    fileprivate var selectedOccupation: Occupation?
     fileprivate var userData: UserData?
+    
+    fileprivate var countries: [CountryResponse]?
+    fileprivate var languages: [LanguageResponse]?
+    fileprivate var occupations: [Occupation]?
+    
+    fileprivate var activeEntry: PersonalDataEntry?
+    fileprivate var activeList: [PersonalDataProtocol]?
+    fileprivate var filteredActiveList: [PersonalDataProtocol]?
     
     weak var navigationCoordinator: CoordinatorType?
     
@@ -52,23 +57,7 @@ class PersonalDataViewModel : PersonalDataViewModelType {
                         [.bankAccountNumber, .bankNumber, .bankPhoneNumber],
                         [.taxID, .taxIDName]]
         
-        self.service.countryList { [weak self] result in
-            switch result {
-            case .success(let response):
-                self?.countries = response.countries
-            case .failure(let error):
-                print("Get country list failure: \(error.localizedDescription)")
-            }
-        }
-        
-        self.service.salutationList { [weak self] result in
-            switch result {
-            case .success(let response):
-                self?.salutations = response.salutations
-            case .failure(let error):
-                print("Get salutations failure: \(error.localizedDescription)")
-            }
-        }
+        getSalutationList()
         
         self.service.getUserData { [weak self] result in
             switch result {
@@ -84,31 +73,25 @@ class PersonalDataViewModel : PersonalDataViewModelType {
         return entries.map { $0.count }
     }
     
-    var occupationList: [String] {
-        let list = isFiltering ? filteredOccupations : occupations
+    var subItems: [String] {
+        let list = isFiltering ? filteredActiveList : activeList
         return list?.map { $0.name } ?? []
     }
     
     var isFiltering: Bool = false
     
-    func setupOccupations() {
-        if occupations?.isEmpty ?? true {
-            getOccupationList()
-        }
+    var isDataChanged: Bool = false
+    
+    func subItemSelected(at indexPath: IndexPath) {
+        guard let entry = activeEntry else { return }
+        let list = isFiltering ? filteredActiveList : activeList
+        selectedValues[entry] = list?[indexPath.row]
+        isDataChanged = true
     }
     
-    func occupationSelected(at indexPath: IndexPath) {
-        let list = isFiltering ? filteredOccupations : occupations
-        selectedOccupation = list?[indexPath.row]
-    }
-    
-    func saveSelectedOccupation() {
-        selectedValues[.occupation] = selectedOccupation?.name
-    }
-    
-    func filterItems(searchText: String) {
-        filteredOccupations = occupations?.filter({( occupation : Occupation) -> Bool in
-            return occupation.name.lowercased().contains(searchText.lowercased())
+    func filterSubItems(searchText: String) {
+        filteredActiveList = activeList?.filter({( entry : PersonalDataProtocol) -> Bool in
+            return entry.name.lowercased().contains(searchText.lowercased())
         })
     }
     
@@ -132,13 +115,11 @@ class PersonalDataViewModel : PersonalDataViewModelType {
     }
     
     func textValue(at indexPath: IndexPath) -> String? {
-        return selectedValues[entry(at: indexPath)]
+        return selectedValues[entry(at: indexPath)]?.name
     }
     
     func inputViewOptions(at indexPath: IndexPath) -> ([String]?, Int?) {
         switch entry(at: indexPath) {
-        case .countryCode:
-            return (countries?.map { $0.code }, nil)
         case .salutation:
             return (salutations, nil)
         default: break
@@ -169,17 +150,47 @@ class PersonalDataViewModel : PersonalDataViewModelType {
     }
     
     func textChanged(_ text: String, itemForRowAt indexPath: IndexPath) {
-        selectedValues[entry(at: indexPath)] = text
+        selectedValues[entry(at: indexPath)] = PersonalData(name: text)
+        isDataChanged = true
     }
     
     func shouldBeginEditing(at indexPath: IndexPath) -> Bool {
         switch entry(at: indexPath) {
         case .occupation:
-            navigationCoordinator?.performTransition(transition: .showOccupationList)
-            return false
-        default: break
+            if occupations?.isEmpty ?? true {
+                getOccupationList()
+            }
+            activeList = occupations
+        case .languageCode:
+            if languages?.isEmpty ?? true {
+                getLanguageList()
+            }
+            activeList = languages
+        case .countryCode, .birthCountryCode:
+            if countries?.isEmpty ?? true {
+                getCountryList()
+            }
+            activeList = countries
+        default: return true
         }
-        return true
+        activeEntry = entry(at: indexPath)
+        navigationCoordinator?.performTransition(transition: .showPersonalDataSubList)
+        return false
+    }
+    
+    func subListTitle() -> String? {
+        switch activeEntry! {
+        case .occupation:
+            return R.string.localizable.occupation()
+        case .languageCode:
+            return R.string.localizable.language()
+        case .countryCode:
+            return R.string.localizable.country()
+        case .birthCountryCode:
+            return R.string.localizable.birth_country()
+        default:
+            return nil
+        }
     }
     
     func submit(response: @escaping EmptyResponseClosure) {
@@ -200,16 +211,16 @@ fileprivate extension PersonalDataViewModel {
     }
     
     func validateUserData() -> (ErrorResponse?, Dictionary<String,String>?) {
-        var validatedData = Dictionary<PersonalDataEntry,String>()
+        var validatedData = Dictionary<PersonalDataEntry, PersonalDataProtocol>()
         validatedData.merge(selectedValues, uniquingKeysWith: {(_, last) in last})
         
-        if let email = validatedData[.email], !email.isEmail() {
+        if let email = validatedData[.email], !email.name.isEmail() {
             let error = ErrorResponse()
             error.errorMessage = R.string.localizable.invalid_email()
             return (error, nil)
         }
         
-        if let phone = validatedData[.mobileNR] {
+        if let phone = validatedData[.mobileNR]?.name {
             let charSet = CharacterSet(charactersIn: "()-").union(.whitespaces)
             let components = phone.components(separatedBy: charSet)
             let phoneNr = components.joined(separator: "")
@@ -218,18 +229,18 @@ fileprivate extension PersonalDataViewModel {
                 error.errorMessage = R.string.localizable.invalid_phone()
                 return (error, nil)
             }
-            validatedData[.mobileNR] = phoneNr
+            validatedData[.mobileNR] = PersonalData(name: phoneNr)
         }
         
-        if let nationalityName = validatedData[.nationality] {
-            let nationality = countries?.filter {
-                $0.name == nationalityName
-            }
-            validatedData[.nationality] = nationality?.first?.code
-        }
+        validatedData.removeValue(forKey: .occupation)
+        let tupleArray = validatedData.map { ($0.rawValue, $1.code ?? $1.name) }
+        var userData = Dictionary(uniqueKeysWithValues: tupleArray)
         
-        let tupleArray = validatedData.map { ($0.rawValue, $1) }
-        let userData = Dictionary(uniqueKeysWithValues: tupleArray)
+        if let occupation = selectedValues[.occupation] as? Occupation {
+            userData["occupation_name"] = occupation.name
+            userData["occupation_code08"] = occupation.code
+            userData["occupation_code88"] = occupation.code88
+        }
         
         return (nil, userData)
     }
@@ -240,42 +251,92 @@ fileprivate extension PersonalDataViewModel {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
                 let decoder = JSONDecoder()
                 self.occupations = try decoder.decode(Array<Occupation>.self, from: data)
-                
             } catch {
                 print("Failure reading Occupation JSON: \(error)")
             }
         }
     }
     
+    func getSalutationList() {
+        if let path = Bundle.main.path(forResource: "iso_salutations", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
+                let decoder = JSONDecoder()
+                self.salutations = try decoder.decode(Array<String>.self, from: data)
+            } catch {
+                print("Failure reading salutations JSON: \(error)")
+            }
+        }
+    }
+    
+    func getCountryList() {
+        if let path = Bundle.main.path(forResource: "iso_countries", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
+                let decoder = JSONDecoder()
+                self.countries = try decoder.decode(Array<CountryResponse>.self, from: data)
+            } catch {
+                print("Failure reading countries JSON: \(error)")
+            }
+        }
+    }
+    
+    func getLanguageList() {
+        if let path = Bundle.main.path(forResource: "iso_languages", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
+                let decoder = JSONDecoder()
+                self.languages = try decoder.decode(Array<LanguageResponse>.self, from: data)
+                
+            } catch {
+                print("Failure reading languages JSON: \(error)")
+            }
+        }
+    }
+    
     func setUserData(_ userData: UserData) {
         self.userData = userData
-        selectedValues[.additionalName] = userData.additionalName
-        selectedValues[.address] = userData.address
-        selectedValues[.bankAccountNumber] = userData.bankAccountNumber
-        selectedValues[.bankNumber] = userData.bankNumber
-        selectedValues[.bankPhoneNumber] = userData.bankPhoneNumber
-        selectedValues[.birthCountryCode] = userData.birthCountryCode
-        selectedValues[.birthday] = DateUtils.shortDateString(from: userData.birthday)
-        selectedValues[.birthPlace] = userData.birthPlace
-        selectedValues[.city] = userData.city
-        selectedValues[.company] = userData.company
-        selectedValues[.countryCode] = userData.countryCode
-        selectedValues[.email] = userData.email
-        selectedValues[.employerAddress] = userData.employerAddress
-        selectedValues[.employerName] = userData.employerName
-        selectedValues[.forename] = userData.forename
-        selectedValues[.languageCode] = userData.languageCode
-        selectedValues[.lastname] = userData.lastname
-        selectedValues[.mobileNR] = userData.mobileNR
-        selectedValues[.nationality] = userData.nationality
-        selectedValues[.occupation] = userData.occupation
-        selectedValues[.registrationDate] = DateUtils.shortDateString(from: userData.registrationDate)
-        selectedValues[.salutation] = userData.salutation
-        selectedValues[.state] = userData.state
-        selectedValues[.taxID] = userData.taxID
-        selectedValues[.taxIDName] = userData.taxIDName
-        selectedValues[.title] = userData.title
-        selectedValues[.zipCode] = userData.zipCode
+        if countries?.isEmpty ?? true {
+            getCountryList()
+        }
+        if let country = countries?.first(where: {$0.code == userData.countryCode}) {
+            selectedValues[.countryCode] = PersonalData(name: country.name, code: country.code)
+        }
+        if let birthCountry = countries?.first(where: {$0.code == userData.birthCountryCode}) {
+            selectedValues[.birthCountryCode] = PersonalData(name: birthCountry.name, code: birthCountry.code)
+        }
+        
+        if languages?.isEmpty ?? true {
+            getLanguageList()
+        }
+        if let lang = languages?.first(where: {$0.code == userData.languageCode}) {
+            selectedValues[.languageCode] = PersonalData(name: lang.name, code: lang.code)
+        }
+        
+        selectedValues[.additionalName] = PersonalData(name: userData.additionalName)
+        selectedValues[.address] = PersonalData(name: userData.address)
+        selectedValues[.bankAccountNumber] = PersonalData(name: userData.bankAccountNumber)
+        selectedValues[.bankNumber] = PersonalData(name: userData.bankNumber)
+        selectedValues[.bankPhoneNumber] = PersonalData(name: userData.bankPhoneNumber)
+        selectedValues[.birthday] = PersonalData(name: DateUtils.shortDateString(from: userData.birthday))
+        selectedValues[.birthPlace] = PersonalData(name: userData.birthPlace)
+        selectedValues[.city] = PersonalData(name: userData.city)
+        selectedValues[.company] = PersonalData(name: userData.company)
+        selectedValues[.email] = PersonalData(name: userData.email)
+        selectedValues[.employerAddress] = PersonalData(name: userData.employerAddress)
+        selectedValues[.employerName] = PersonalData(name: userData.employerName)
+        selectedValues[.forename] = PersonalData(name: userData.forename)
+        selectedValues[.lastname] = PersonalData(name: userData.lastname)
+        selectedValues[.mobileNR] = PersonalData(name: userData.mobileNR)
+        selectedValues[.nationality] = PersonalData(name: userData.nationality)
+        selectedValues[.occupation] = PersonalData(name: userData.occupation)
+        selectedValues[.registrationDate] = PersonalData(name: DateUtils.shortDateString(from: userData.registrationDate))
+        selectedValues[.salutation] = PersonalData(name: userData.salutation)
+        selectedValues[.state] = PersonalData(name: userData.state)
+        selectedValues[.taxID] = PersonalData(name: userData.taxID)
+        selectedValues[.taxIDName] = PersonalData(name: userData.taxIDName)
+        selectedValues[.title] = PersonalData(name: userData.title)
+        selectedValues[.zipCode] = PersonalData(name: userData.zipCode)
     }
 }
 

@@ -157,13 +157,34 @@ extension PersonalDataViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success:
-                    self?.snackbarController?.animate(snackbar: .visible, delay: 0)
-                    self?.snackbarController?.animate(snackbar: .hidden, delay: 3)
+                    self?.navigationController?.popViewController(animated: true)
                 case .failure(let error):
                     let alert = AlertFactory.createAlert(error: error)
                     self?.navigationController?.present(alert, animated: true)
                 }
             }
+        }
+    }
+    
+    @objc
+    func backAction(sender: UIButton) {
+        if viewModel.isDataChanged {
+            let alertView = UIAlertController(title: R.string.localizable.personal_data_changed(),
+                                              message: nil,
+                                              preferredStyle: .alert)
+            let okAction = UIAlertAction(title: R.string.localizable.save(), style: .default, handler: { action in
+                self.saveAction(sender: sender)
+            })
+            alertView.addAction(okAction)
+            
+            let cancelAction = UIAlertAction(title: R.string.localizable.cancel(), style: .cancel, handler: { action in
+                self.navigationController?.popViewController(animated: true)
+            })
+            alertView.addAction(cancelAction)
+            
+            navigationController?.present(alertView, animated: true)
+        } else {
+            navigationController?.popViewController(animated: true)
         }
     }
 }
@@ -173,8 +194,6 @@ fileprivate extension PersonalDataViewController {
         prepareTableView()
         prepareCopyright()
         prepareNavigationItem()
-        
-        snackbarController?.snackbar.text = R.string.localizable.success()
     }
     
     func prepareTableView() {
@@ -191,15 +210,22 @@ fileprivate extension PersonalDataViewController {
         
         let doneButton = RaisedButton()
         doneButton.backgroundColor = Stylesheet.color(.whiteWith(alpha: 0.2))
-        doneButton.title = R.string.localizable.save().uppercased()
+        doneButton.title = R.string.localizable.submit()
         doneButton.titleColor = Stylesheet.color(.blue)
         doneButton.titleLabel?.font = R.font.encodeSansBold(size: 14)
         doneButton.addTarget(self, action: #selector(saveAction(sender:)), for: .touchUpInside)
-        snackbarController?.navigationItem.rightViews = [doneButton]
+        navigationItem.rightViews = [doneButton]
         
-        snackbarController?.navigationItem.titleLabel.text = R.string.localizable.personal_data()
-        snackbarController?.navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
-        snackbarController?.navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
+        navigationItem.backButton.isHidden = true
+        
+        let backButton = Material.IconButton()
+        backButton.image = Icon.arrowBack?.tint(with: Stylesheet.color(.blue))
+        backButton.addTarget(self, action: #selector(backAction(sender:)), for: .touchUpInside)
+        navigationItem.leftViews = [backButton]
+        
+        navigationItem.titleLabel.text = R.string.localizable.personal_data()
+        navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
+        navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
     }
     
     func prepareCopyright() {

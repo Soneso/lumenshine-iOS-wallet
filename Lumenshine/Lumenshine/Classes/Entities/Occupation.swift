@@ -8,11 +8,15 @@
 
 import Foundation
 
-class Occupation: Decodable {
+class Occupation: Decodable, PersonalDataProtocol {
     
     let name: String
     let isco08: Int
     let isco88: Int
+    
+    let code: String?
+    let code88: String?
+    
     
     
     private enum CodingKeys: String, CodingKey {
@@ -26,5 +30,7 @@ class Occupation: Decodable {
         name = try values.decode(String.self, forKey: .name)
         isco08 = try values.decode(Int.self, forKey: .isco08)
         isco88 = try values.decode(Int.self, forKey: .isco88)
+        code = String(isco08)
+        code88 = String(isco88)
     }
 }

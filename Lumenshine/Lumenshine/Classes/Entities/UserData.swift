@@ -62,7 +62,7 @@ public struct UserData: Codable {
         case bankPhoneNumber = "bank_phone_number"
         case taxID = "tax_id"
         case taxIDName = "tax_id_name"
-        case occupation
+        case occupation = "occupation_name"
         case employerName = "employer_name"
         case employerAddress = "employer_address"
         case languageCode = "language_code"

@@ -56,8 +56,8 @@ class SettingsCoordinator: CoordinatorType {
             showChartCurrency()
         case .showPersonalData:
             showPersonalData()
-        case .showOccupationList:
-            showOccupationList()
+        case .showPersonalDataSubList:
+            showPersonalDataSubList()
         default: break
         }
     }
@@ -144,14 +144,13 @@ fileprivate extension SettingsCoordinator {
     func showPersonalData() {
         let personalDataViewModel = PersonalDataViewModel(service: service.userData)
         let personalVC = PersonalDataViewController(viewModel: personalDataViewModel)
-        let snackBarVC = SnackbarController(rootViewController: personalVC)
-        baseController.navigationController?.pushViewController(snackBarVC, animated: true)
+        baseController.navigationController?.pushViewController(personalVC, animated: true)
         self.personalDataViewModel = personalDataViewModel
         self.personalDataViewModel?.navigationCoordinator = self
     }
     
-    func showOccupationList() {
-        let occupationsVC = OccupationsViewController(viewModel: personalDataViewModel!)
+    func showPersonalDataSubList() {
+        let occupationsVC = ListViewController(viewModel: personalDataViewModel!)
         let composeVC = ComposeNavigationController(rootViewController: occupationsVC)
         baseController.navigationController?.present(composeVC, animated: true)
     }
