@@ -74,9 +74,10 @@ class KnownCurrenciesTableViewCell: UITableViewCell {
             }
             
             if passwordView.useExternalSigning {
-                self.addTrustLine(assetCode: assetCode, issuerKeyPair: issuerKeyPair)
+                let trustorKeyPair = try! KeyPair(publicKey: PublicKey(accountId:wallet.publicKey), privateKey:nil)
+                self.addTrustLine(assetCode: assetCode, trustingAccountKeyPair:trustorKeyPair, issuerKeyPair: issuerKeyPair)
             } else {
-                validatePasswordAndRemoveCurrency(biometricAuth: biometricAuth, assetCode: assetCode, issuerKeyPair: issuerKeyPair)
+                validatePasswordAndAddCurrency(biometricAuth: biometricAuth, assetCode: assetCode, issuerKeyPair: issuerKeyPair)
             }
             
         } else {
@@ -84,15 +85,32 @@ class KnownCurrenciesTableViewCell: UITableViewCell {
         }
     }
     
-    private func validatePasswordAndRemoveCurrency(biometricAuth: Bool, assetCode: String, issuerKeyPair: KeyPair) {
+    private func validatePasswordAndAddCurrency(biometricAuth: Bool, assetCode: String, issuerKeyPair: KeyPair) {
         passwordManager.getMnemonic(password: !biometricAuth ? passwordView.passwordTextField.text : nil) { (result) -> (Void) in
             switch result {
             case .success(mnemonic: let mnemonic):
-                self.addTrustLine(assetCode: assetCode, issuerKeyPair: issuerKeyPair, mnemonic: mnemonic)
+                PrivateKeyManager.getKeyPair(forAccountID: self.wallet.publicKey, fromMnemonic: mnemonic) { (response) -> (Void) in
+                    switch response {
+                    case .success(keyPair: let keyPair):
+                        if let trustorKeyPair = keyPair {
+                            self.addTrustLine(assetCode: assetCode, trustingAccountKeyPair:trustorKeyPair, issuerKeyPair: issuerKeyPair)
+                            return
+                        }
+                    case .failure(error: let error):
+                        print(error)
+                    }
+                    DispatchQueue.main.async {
+                        self.showSigningAlert()
+                        self.setButtonAsNormal()
+                    }
+                }
+                
             case .failure(error: let error):
                 print("Get mnemonic error: \(error)")
-                self.passwordView.showInvalidPasswordError()
-                self.setButtonAsNormal()
+                DispatchQueue.main.async {
+                    self.passwordView.showInvalidPasswordError()
+                    self.setButtonAsNormal()
+                }
             }
         }
     }
@@ -115,6 +133,14 @@ class KnownCurrenciesTableViewCell: UITableViewCell {
         parentContainerViewController()?.displaySimpleAlertView(title: "Adding failed", message: "Insufficient funding. Please send lumens to your wallet first.")
     }
     
+    private func showSigningAlert() {
+        parentContainerViewController()?.displaySimpleAlertView(title: "Adding failed", message: "A signing error occured.")
+    }
+    
+    private func showTrnsactionFailedAlert() {
+        parentContainerViewController()?.displaySimpleAlertView(title: "Adding failed", message: "A transaction error occured.")
+    }
+    
     private func setButtonAsValidating() {
         addButton.setTitle(AddButtonTitles.validatingAndAdding.rawValue, for: UIControlState.normal)
         addButton.isEnabled = false
@@ -125,23 +151,24 @@ class KnownCurrenciesTableViewCell: UITableViewCell {
         addButton.isEnabled = true
     }
     
-    private func addTrustLine(assetCode: String, issuerKeyPair: KeyPair, mnemonic: String? = nil) {
+    private func addTrustLine(assetCode: String, trustingAccountKeyPair:KeyPair, issuerKeyPair: KeyPair) {
         let assetType: Int32 = assetCode.count < 5 ? AssetType.ASSET_TYPE_CREDIT_ALPHANUM4 : AssetType.ASSET_TYPE_CREDIT_ALPHANUM12
         if let asset = Asset(type: assetType, code: assetCode, issuer: issuerKeyPair) {
             let signer = passwordView.useExternalSigning ? passwordView.signersTextField.text : nil
             let seed = passwordView.useExternalSigning ? passwordView.seedTextField.text : nil
+   
             let transactionHelper = TransactionHelper(wallet: wallet, signer: signer, signerSeed: seed)
             passwordView.clearSeedAndPasswordFields()
-            transactionHelper.addTrustLine(asset: asset, mnemonic: mnemonic) { (result) -> (Void) in
+            transactionHelper.addTrustLine(trustingAccountKeyPair:trustingAccountKeyPair, asset:asset) { (result) -> (Void) in
                 switch result {
                 case .success:
+                    self.dissmissView()
                     break
                 case .failure(error: let error):
-                    print("Error: \(error)")
+                    print("Error: \(String(describing: error))")
+                    self.showTrnsactionFailedAlert()
                     self.setButtonAsNormal()
                 }
-                
-                self.dissmissView()
             }
         }
     }

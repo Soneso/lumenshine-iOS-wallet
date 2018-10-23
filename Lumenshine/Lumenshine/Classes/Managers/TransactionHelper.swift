@@ -11,7 +11,7 @@ import stellarsdk
 
 enum TrustLineStatus {
     case success
-    case failure(error: HorizonRequestError)
+    case failure(error: HorizonRequestError?)
 }
 
 typealias TransactionResultClosure = () -> (Void)
@@ -171,7 +171,7 @@ class TransactionHelper {
         }
     }
     
-    func addTrustLine(asset: Asset, mnemonic: String?, completion: @escaping TrustLineClosure) {
+    /*func addTrustLine(asset: Asset, trustingAccountKeyPair: KeyPair, completion: @escaping TrustLineClosure) {
         PrivateKeyManager.getKeyPair(forAccountID: wallet.publicKey, fromMnemonic: mnemonic) { (response) -> (Void) in
             switch response {
             case .success(keyPair: let keyPair):
@@ -186,7 +186,7 @@ class TransactionHelper {
                 print(error)
             }
         }
-    }
+    }*/
     
     private func getSelectedCurrency() -> AccountBalanceResponse? {
         return inputData.otherCurrencyAsset ?? wallet.balances.first(where: { (asset) -> Bool in
@@ -384,7 +384,7 @@ class TransactionHelper {
             }
             
             try transaction.sign(keyPair: signerKeyPair, network: network)
-            inputData.signerSeed = nil
+            inputData?.signerSeed = nil
             externalSignerSeed = nil
         } else {
             try transaction.sign(keyPair: sourceKeyPair, network: network)
@@ -425,7 +425,6 @@ class TransactionHelper {
             try self.stellarSdk.transactions.submitTransaction(transaction: transaction) { (response) -> (Void) in
                 switch response {
                 case .success(_):
-                    print("Success")
                     completion(.success)
                 case .failure(let error):
                     StellarSDKLog.printHorizonRequestErrorMessage(tag:"Trust error", horizonRequestError:error)
@@ -433,10 +432,11 @@ class TransactionHelper {
                 }
             }
         } catch {
+            completion(.failure(error: nil))
         }
     }
     
-    private func addTrustLine(trustingAccountKeyPair: KeyPair, asset: Asset, completion: @escaping TrustLineClosure) {
+    func addTrustLine(trustingAccountKeyPair: KeyPair, asset: Asset, completion: @escaping TrustLineClosure) {
         stellarSdk.accounts.getAccountDetails(accountId: trustingAccountKeyPair.accountId) { (response) -> (Void) in
             switch response {
             case .success(let accountResponse):

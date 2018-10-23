@@ -81,7 +81,8 @@ class ProvideCurrencyDataViewController: UIViewController {
     private func validateDestinationForExternalSigning(issuer: String, assetCode: String) {
         userManager.checkIfAccountExists(forAccountID: issuer) { (result) -> (Void) in
             if result {
-                self.addTrustLine(issuer: issuer, assetCode: assetCode)
+                let trustorKeyPair = try! KeyPair(publicKey: PublicKey(accountId:self.wallet.publicKey), privateKey:nil)
+                self.addTrustLine(trustingAccountKeyPair: trustorKeyPair, issuer: issuer, assetCode: assetCode)
             } else {
                 self.showValidationError(for: self.issuerValidationStackView)
                 self.issuerValidationLabel.text = self.IssuerDoesntExistValidationError
@@ -91,7 +92,6 @@ class ProvideCurrencyDataViewController: UIViewController {
     }
     
     private func validateDestinationAndPassword(issuer: String, assetCode: String, biometricAuth: Bool) {
-        
         userManager.checkIfAccountExists(forAccountID: issuer) { (accountExists) -> (Void) in
             if accountExists {
                 let password = !biometricAuth ? self.passwordView.passwordTextField.text : nil
@@ -99,7 +99,21 @@ class ProvideCurrencyDataViewController: UIViewController {
                     DispatchQueue.main.async {
                         switch passwordResult {
                         case .success(mnemonic: let mnemonic):
-                            self.addTrustLine(issuer: issuer, assetCode: assetCode, mnemonic: mnemonic)
+                            PrivateKeyManager.getKeyPair(forAccountID: self.wallet.publicKey, fromMnemonic: mnemonic) { (response) -> (Void) in
+                                switch response {
+                                case .success(keyPair: let keyPair):
+                                    if let trustorKeyPair = keyPair {
+                                        self.addTrustLine(trustingAccountKeyPair: trustorKeyPair, issuer: issuer, assetCode: assetCode)
+                                        return
+                                    }
+                                case .failure(error: let error):
+                                    print(error)
+                                }
+                                DispatchQueue.main.async {
+                                    self.showSigningAlert()
+                                    self.resetAddButtonToDefault()
+                                }
+                            }
                         case .failure(error: let error):
                             if error != BiometricStatus.enterPasswordPressed.rawValue {
                                 self.passwordView.showInvalidPasswordError()
@@ -200,7 +214,15 @@ class ProvideCurrencyDataViewController: UIViewController {
         self.displaySimpleAlertView(title: "Adding failed", message: "Insufficient funding. Please send lumens to your wallet first.")
     }
     
-    private func addTrustLine(issuer: String, assetCode: String, mnemonic: String? = nil) {
+    private func showSigningAlert() {
+        self.displaySimpleAlertView(title: "Adding failed", message: "A signing error occured.")
+    }
+    
+    private func showTrnsactionFailedAlert() {
+        self.displaySimpleAlertView(title: "Adding failed", message: "A transaction error occured.")
+    }
+    
+    private func addTrustLine(trustingAccountKeyPair:KeyPair, issuer: String, assetCode: String) {
         let signer = passwordView.useExternalSigning ? passwordView.signersTextField.text : nil
         let seed = passwordView.useExternalSigning ? passwordView.seedTextField.text : nil
         let transactionHelper = TransactionHelper(wallet: wallet, signer: signer, signerSeed: seed)
@@ -220,18 +242,17 @@ class ProvideCurrencyDataViewController: UIViewController {
             let issuerKeyPair = issuerKeyPair,
             let asset = Asset(type: assetType, code: assetCode, issuer: issuerKeyPair) {
             
-            transactionHelper.addTrustLine(asset: asset, mnemonic: mnemonic, completion: { (status) -> (Void) in
-                switch status {
+            transactionHelper.addTrustLine(trustingAccountKeyPair:trustingAccountKeyPair, asset:asset) { (result) -> (Void) in
+                switch result {
                 case .success:
                     self.navigationController?.popViewController(animated: true)
                     break
-                case .failure(let error):
-                    print("Error: \(error)")
-                    // TODO show more specific error
-                    self.displaySimpleAlertView(title: "Adding failed", message: "An error occured while trying to add currency.")
+                case .failure(error: let error):
+                    print("Error: \(String(describing: error))")
+                    self.showTrnsactionFailedAlert()
                     self.resetAddButtonToDefault()
                 }
-            })
+            }
         }
     }
 }
