@@ -288,6 +288,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             case .failure(error: let error):
                 print("Error: \(error)")
                 self.passwordView.showInvalidPasswordError()
+                self.setSendButtonDefaultTitle()
             }
         }
     }
