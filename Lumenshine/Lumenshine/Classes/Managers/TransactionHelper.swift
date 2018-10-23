@@ -53,7 +53,7 @@ class TransactionHelper {
     }
     
     func createAndFundAccount(completion: @escaping (TransactionResult) -> ()) {
-        let destinationAccountKeyPair = try? KeyPair(accountId: inputData.address)
+        let destinationAccountKeyPair = try? KeyPair(accountId: inputData.destinationPublicKey)
         var memo = Memo.none
         
         if inputData.memo != nil {
@@ -68,7 +68,7 @@ class TransactionHelper {
         
         if let accountID = destinationAccountKeyPair?.publicKey.accountId {
             transactionResult.recipentPK = accountID
-            transactionResult.recipentMail = inputData.address != accountID ? accountID : ""
+            transactionResult.recipentMail = inputData.destinationPublicKey != accountID ? accountID : ""
         }
         
         var sourceKeyPair = try! KeyPair(publicKey: PublicKey(accountId:wallet.publicKey), privateKey:nil)
@@ -87,7 +87,7 @@ class TransactionHelper {
     }
     
     func sendPayment(completion: @escaping (TransactionResult) -> ()) {
-        let destinationAccountKeyPair = try? KeyPair(accountId: inputData.address)
+        let destinationAccountKeyPair = try? KeyPair(accountId: inputData.destinationPublicKey)
         
         var assetIssuerKeyPair: KeyPair? = nil
         var assetTypeIntValue: Int32 = -1
@@ -113,7 +113,7 @@ class TransactionHelper {
         
         if let accountID = destinationAccountKeyPair?.publicKey.accountId {
             transactionResult.recipentPK = accountID
-            transactionResult.recipentMail = inputData.address != accountID ? accountID : ""
+            transactionResult.recipentMail = inputData.destinationPublicKey != accountID ? accountID : ""
         }
         
         var sourceKeyPair = try! KeyPair(publicKey: PublicKey(accountId:wallet.publicKey), privateKey:nil)

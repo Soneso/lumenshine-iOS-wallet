@@ -246,6 +246,7 @@ public class UserManager: NSObject {
     }
     
     func hasAccountTrustline(forAccount account: String, forAssetCode assetCode: String, forAssetIssuer issuer: String, completion: @escaping HasAccountTrustlineResponseClosure) {
+        // TODO: check if trustline is authorized
         stellarSDK.accounts.getAccountDetails(accountId: account) { (response) -> (Void) in
             switch response {
             case .success(details: let accountDetails):

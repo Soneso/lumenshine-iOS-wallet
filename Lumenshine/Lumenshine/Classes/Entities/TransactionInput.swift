@@ -16,7 +16,8 @@ enum TransactionActionType {
 public struct TransactionInput {
     let currency: String
     let issuer: String?
-    let address: String
+    let destinationPublicKey: String
+    let destinationStellarAddress: String?
     let amount: String
     let memo: String?
     let memoType: MemoTypeValues?

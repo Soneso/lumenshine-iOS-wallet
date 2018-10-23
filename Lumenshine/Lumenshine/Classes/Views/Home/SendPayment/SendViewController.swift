@@ -26,7 +26,8 @@ enum ValidationErrors: String {
     case InvalidSignerSeed = "Invalid seed"
     case InvalidAmount = "Invalid amount"
     case InvalidAssetCode = "Invalid asset code"
-    case FederationNotFound = "Could not find stellar address"
+    case InvalidStellarAddress = "Invalid stellar address"
+    case StellarAddressNotFound = "Could not find stellar address"
     case CurrencyNotFound = "Could not find selected currency"
 }
 
@@ -108,6 +109,8 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     private var masterKeyPair: KeyPair!
     private var availableAmount: CoinUnit?
     private var otherCurrencyAsset: AccountBalanceResponse?
+    private var destinationPublicKey: String = ""
+    private var destinationStellarAddress: String?
     
     private var scanViewController: ScanViewController!
     private let userManager = UserManager()
@@ -141,11 +144,17 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         resetValidations()
         sendButton.setTitle(SendButtonTitles.validating.rawValue, for: UIControlState.normal)
         sendButton.isEnabled = false
+        
+        self.destinationPublicKey = ""
+        self.destinationStellarAddress = nil
+        self.createRecepientAccount = false
+        self.masterKeyPair = nil
+        
         if validateInsertedData(biometricAuth: biometricAuth) {
             if passwordView.passwordStackView.isHidden {
-                validateInput(forMasterKey: false, biometricAuth: false)
+                setDestinationPKAndContinuePaymentIfValid(forMasterKey: false, biometricAuth: false)
             } else {
-                validateInput(forMasterKey: true, biometricAuth: biometricAuth)
+                setDestinationPKAndContinuePaymentIfValid(forMasterKey: true, biometricAuth: biometricAuth)
             }
         }
         else {
@@ -153,86 +162,113 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
     }
     
-    private func validateInput(forMasterKey: Bool, biometricAuth: Bool) {
+    /**
+    // finds and sets the destination public key before continuing with the payment process
+    // if the inserted address is a stellar address it makes a federation call to find the destination public key
+    // after finding and setting the destination public key it continues with the payment process
+     **/
+    private func setDestinationPKAndContinuePaymentIfValid(forMasterKey: Bool, biometricAuth: Bool) {
         if let address = addressTextField.text {
-            var accountId = address
+            self.destinationPublicKey = address
             
             // resolve federation if needed
             if address.isFederationAddress() {
-                
-                let parts = address.components(separatedBy: "*")
-                let federationServer = "https://" + parts[1]
-                let federation = Federation(federationAddress: federationServer)
-                
-                federation.resolve(address: address) { (response) -> (Void) in
+                Federation.resolve(stellarAddress: address, completion: { (response) -> (Void) in
                     switch response {
                     case .success(let federationResponse):
                         if let pk = federationResponse.accountId {
-                            accountId = pk
+                            self.destinationPublicKey = pk
+                            self.destinationStellarAddress = address
+                            DispatchQueue.main.async {
+                                // continue payment process
+                                self.validateDestinationAndContinuePaymentIfValid(forMasterKey:forMasterKey, biometricAuth:biometricAuth)
+                            }
+                            return
                         } else {
-                            self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .FederationNotFound)
-                        }
-                    case .failure(_):
-                        self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .FederationNotFound)
-                    }
-                }
-            }
-            
-            if (!isInputDataValid) { // could not resolve federation addres
-                return
-            }
-            
-            let password = !biometricAuth ? passwordView.passwordTextField.text : nil
-            
-            if otherCurrencyView.isHidden { // currency is native or selected from dropdown
-                if let currency = getSelectedCurrency() {
-                    self.userManager.checkAddressStatus(forAccountID: accountId, asset: currency, completion: { (addressResult) -> (Void) in
-                        switch addressResult {
-                        case .success(isFunded: let isFunded, isTrusted: let isTrusted):
-                            if !isFunded {
-                                self.createRecepientAccount = true
-                            } else if let isTrusted = isTrusted, !isTrusted {
-                                self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .CurrencyNoTrust)
-                            }
-                            if (self.isInputDataValid && forMasterKey) {
-                                self.validatePasswordAndSendPaymentIfValid(password: password)
-                            } else {
-                                self.sendPaymentIfValid()
-                            }
-                        case .failure: // TODO: handle: address found but horizon error
-                            self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .ResolveRecepientAddress)
-                        }
-                    })
-                    
-                } else {
-                    self.setValidationError(view: self.sendErrorView, label: self.sendErrorLabel, errorMessage: .CurrencyNotFound)
-                }
-                
-            } else { // currency asset code is provided by user, current account is issuer
-                userManager.hasAccountTrustline(forAccount: accountId, forAssetCode: selectedCurrency, forAssetIssuer: wallet.publicKey) { (response) -> (Void) in
-                    switch (response) {
-                    case .success(hasTrustline: let hasTrustline, currency: let currencyResponse):
-                        let currency = currencyResponse
-                        if (hasTrustline) {
-                            self.otherCurrencyAsset = currency
-                            if (forMasterKey) {
-                                self.validatePasswordAndSendPaymentIfValid(password: password)
-                            } else {
-                                self.sendPaymentIfValid()
-                            }
-                        } else {
-                            self.setValidationError(view: self.otherCurrencyErrorView, label: self.otherCurrencyErrorLabel, errorMessage: .CurrencyNoTrust)
-                            self.setSendButtonDefaultTitle()
+                            self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .StellarAddressNotFound)
                         }
                     case .failure(error: let error):
-                        print("error looking up for trustline of recepient account: \(error)")
-                        self.setValidationError(view: self.sendErrorView, label: self.sendErrorLabel, errorMessage: .ResolveRecepientAddress)
+                        switch error {
+                        case FederationError.invalidAddress:
+                            self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .InvalidStellarAddress)
+                        default:
+                            self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .StellarAddressNotFound)
+                        }
                     }
+                })
+            } else {
+                // input is public key, no federation request needed
+                // continue payment process
+                self.validateDestinationAndContinuePaymentIfValid(forMasterKey:forMasterKey, biometricAuth:biometricAuth)
+            }
+        } else {
+            // could not read user input
+            self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .AddressNotFound)
+        }
+    }
+    
+    /**
+    // validates the destination account and continues with the payment process if valid.
+    // if the user wants to send an aritrary token, this function validates if if the receiving account has a trutsline to the token
+    // if the destination account does not exist, and native token is sent, this function prepares the payment for the create account operation
+    // after validating the destination account it continues with the payment process
+    **/
+    private func validateDestinationAndContinuePaymentIfValid(forMasterKey: Bool, biometricAuth: Bool) {
+        
+        let password = !biometricAuth ? passwordView.passwordTextField.text : nil
+        
+        if otherCurrencyView.isHidden { // currency is native or selected from dropdown
+            if let currency = getSelectedCurrency() {
+                self.userManager.checkAddressStatus(forAccountID: destinationPublicKey, asset: currency, completion: { (addressResult) -> (Void) in
+                    switch addressResult {
+                    case .success(isFunded: let isFunded, isTrusted: let isTrusted):
+                        if !isFunded {
+                            self.createRecepientAccount = true
+                        } else if let isTrusted = isTrusted, !isTrusted {
+                            self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .CurrencyNoTrust)
+                        }
+                        // continue payment process if valid
+                        if (self.isInputDataValid && forMasterKey) {
+                            self.validatePasswordAndSendPaymentIfValid(password: password)
+                        } else if (self.isInputDataValid) {
+                            self.sendPaymentIfValid()
+                        }
+                    case .failure: // TODO: handle: address found but horizon error
+                        self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .ResolveRecepientAddress)
+                    }
+                })
+            } else {
+                self.setValidationError(view: self.sendErrorView, label: self.sendErrorLabel, errorMessage: .CurrencyNotFound)
+            }
+        } else { // currency asset code is provided by user, current account is issuer
+            userManager.hasAccountTrustline(forAccount: destinationPublicKey, forAssetCode: selectedCurrency, forAssetIssuer: wallet.publicKey) { (response) -> (Void) in
+                switch (response) {
+                case .success(hasTrustline: let hasTrustline, currency: let currencyResponse):
+                    let currency = currencyResponse
+                    if (hasTrustline) {
+                        self.otherCurrencyAsset = currency
+                        
+                        // continue payment process
+                        if (forMasterKey) {
+                            self.validatePasswordAndSendPaymentIfValid(password: password)
+                        } else {
+                            self.sendPaymentIfValid()
+                        }
+                    } else {
+                        self.setValidationError(view: self.otherCurrencyErrorView, label: self.otherCurrencyErrorLabel, errorMessage: .CurrencyNoTrust)
+                    }
+                case .failure(error: let error):
+                    print("error looking up for trustline of recepient account: \(error)")
+                    self.setValidationError(view: self.sendErrorView, label: self.sendErrorLabel, errorMessage: .ResolveRecepientAddress)
                 }
             }
         }
     }
     
+    /**
+    // validates the password of the user and creates the master key pair containing the seed to be used for payment
+    // continues with the payment process if the password is valid
+     **/
     private func validatePasswordAndSendPaymentIfValid(password: String?) {
         passwordManager.getMnemonic(password: password) { (passwordResult) -> (Void) in
             switch passwordResult {
@@ -243,17 +279,15 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                         if let sourceKeyPair = keyPair {
                             self.masterKeyPair = sourceKeyPair
                             self.sendPaymentIfValid()
-                            return
                         }
                     case .failure(error: let error):
                         print(error)
+                        self.setValidationError(view: self.sendErrorView, label: self.sendErrorLabel, errorMessage: .SigningError)
                     }
-                    self.setValidationError(view: self.sendErrorView, label: self.sendErrorLabel, errorMessage: .SigningError)
                 }
             case .failure(error: let error):
                 print("Error: \(error)")
                 self.passwordView.showInvalidPasswordError()
-                self.setSendButtonDefaultTitle()
             }
         }
     }
@@ -267,6 +301,9 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             return currency.displayCode == selectedCurrency && currency.assetIssuer == issuerTextField.text})
     }
     
+    /**
+    // sends the payment if no input vas invalid
+    **/
     private func sendPaymentIfValid() {
         if isInputDataValid {
             sendPayment()
@@ -502,7 +539,8 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     private func sendPayment() {
         let transactionData = TransactionInput(currency: self.selectedCurrency,
                                                issuer: self.issuerTextField.text ?? nil,
-                                               address: self.addressTextField.text ?? "",
+                                               destinationPublicKey: self.destinationPublicKey,
+                                               destinationStellarAddress: self.destinationStellarAddress,
                                                amount: availableAmount != nil ? String(availableAmount!) : (self.amountTextField.text ?? ""),
                                                memo: self.memoInputTextField.text?.isEmpty == false ? self.memoInputTextField.text! : nil,
                                                memoType: self.memoTypes.first(where: { (memoType) -> Bool in
@@ -559,11 +597,14 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     private func setValidationError(view: UIView, label: UILabel, errorMessage: ValidationErrors) {
-        view.isHidden = false
-        label.text = errorMessage.rawValue
-        isInputDataValid = false
+        DispatchQueue.main.async {
+            view.isHidden = false
+            label.text = errorMessage.rawValue
+            self.isInputDataValid = false
         
-        contentView.setContentOffset(CGPoint(x: 0, y: view.frame.center.y), animated: false)
+            self.contentView.setContentOffset(CGPoint(x: 0, y: view.frame.center.y), animated: false)
+            self.setSendButtonDefaultTitle()
+        }
     }
     
     private func resetOtherCurrencyValidationError() {
