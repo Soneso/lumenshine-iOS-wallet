@@ -8,6 +8,21 @@
 
 import Foundation
 
+protocol PersonalDataProtocol {
+    var name: String { get }
+    var code: String? { get }
+}
+
+struct PersonalData: PersonalDataProtocol {
+    let name: String
+    let code: String?
+    
+    init(name: String, code: String? = nil) {
+        self.name = name
+        self.code = code
+    }
+}
+
 enum PersonalDataEntry: String {
     
     case email
@@ -73,7 +88,7 @@ enum PersonalDataEntry: String {
         case .additionalName:
             return R.string.localizable.additional_name()
         case .birthCountryCode:
-            return R.string.localizable.birth_country_code()
+            return R.string.localizable.birth_country()
         case .bankAccountNumber:
             return R.string.localizable.bank_account_number()
         case .bankNumber:
@@ -91,7 +106,7 @@ enum PersonalDataEntry: String {
         case .employerAddress:
             return R.string.localizable.employer_address()
         case .languageCode:
-            return R.string.localizable.language_code()
+            return R.string.localizable.language()
         case .registrationDate:
             return R.string.localizable.registration_date()
         }

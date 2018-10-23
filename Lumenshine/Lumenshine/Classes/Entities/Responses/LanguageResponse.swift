@@ -1,26 +1,26 @@
 //
-//  CountryResponse.swift
+//  LanguageResponse.swift
 //  Lumenshine
 //
-//  Created by Istvan Elekes on 6/13/18.
+//  Created by Elekes Istvan on 22/10/2018.
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
 import Foundation
 
-public class CountryResponse: Decodable, PersonalDataProtocol {
+public class LanguageResponse: Decodable, PersonalDataProtocol {
     
     let name: String
     let code: String?
     
     private enum CodingKeys: String, CodingKey {
-        case name = "name"
-        case code = "code"
+        case name = "lang_name"
+        case code = "lang_code"
     }
     
     public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         name = try values.decode(String.self, forKey: .name)
-        code = try values.decode(String.self, forKey: .code)
+        code = try values.decodeIfPresent(String.self, forKey: .code)
     }
 }

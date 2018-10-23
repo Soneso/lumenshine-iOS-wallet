@@ -9,11 +9,11 @@
 import UIKit
 import Material
 
-class OccupationsViewController: UITableViewController {
+class ListViewController: UITableViewController {
     
     // MARK: - Parameters & Constants
     
-    fileprivate static let CellIdentifier = "OccupationCell"
+    fileprivate static let CellIdentifier = "ListCell"
     
     // MARK: - Properties
     
@@ -27,7 +27,6 @@ class OccupationsViewController: UITableViewController {
         self.viewModel = viewModel
         super.init(style: .plain)
         
-        viewModel.setupOccupations()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -52,43 +51,40 @@ class OccupationsViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.occupationList.count
+        return viewModel.subItems.count
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: OccupationsViewController.CellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: ListViewController.CellIdentifier, for: indexPath)
         
-        cell.textLabel?.text = viewModel.occupationList[indexPath.row]
+        cell.textLabel?.text = viewModel.subItems[indexPath.row]
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.occupationSelected(at: indexPath)
+        viewModel.subItemSelected(at: indexPath)
+        closeAction(sender: nil)
     }
     
     @objc
-    func closeAction(sender: UIButton) {
-        dismiss(animated: true)
-    }
-    
-    @objc
-    func doneAction(sender: UIButton) {
-        
-        viewModel.saveSelectedOccupation()
+    func closeAction(sender: UIButton?) {
+        if searchController.isActive {
+            searchController.dismiss(animated: false)
+        }
         dismiss(animated: true)
     }
 }
 
 // MARK: - UISearchResultsUpdating Delegate
-extension OccupationsViewController: UISearchResultsUpdating {
+extension ListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
     }
 }
 
 // MARK: - UISearchControllerDelegate
-extension OccupationsViewController: UISearchControllerDelegate {
+extension ListViewController: UISearchControllerDelegate {
     func presentSearchController(_ searchController: UISearchController) {
         viewModel.isFiltering = isFiltering()
     }
@@ -99,14 +95,14 @@ extension OccupationsViewController: UISearchControllerDelegate {
 }
 
 // MARK: - Search methods
-fileprivate extension OccupationsViewController {
+fileprivate extension ListViewController {
     func searchBarIsEmpty() -> Bool {
         return searchController.searchBar.text?.isEmpty ?? true
     }
     
     func filterContentForSearchText(_ searchText: String) {
         viewModel.isFiltering = isFiltering()
-        viewModel.filterItems(searchText: searchText)
+        viewModel.filterSubItems(searchText: searchText)
         tableView.reloadData()
     }
     
@@ -116,7 +112,7 @@ fileprivate extension OccupationsViewController {
 }
 
 
-fileprivate extension OccupationsViewController {
+fileprivate extension ListViewController {
     func prepare() {
         prepareTableView()
         prepareNavigationItem()
@@ -124,7 +120,7 @@ fileprivate extension OccupationsViewController {
     }
     
     func prepareTableView() {
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: OccupationsViewController.CellIdentifier)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: ListViewController.CellIdentifier)
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = Stylesheet.color(.lightGray)
@@ -156,15 +152,7 @@ fileprivate extension OccupationsViewController {
         backButton.addTarget(self, action: #selector(closeAction(sender:)), for: .touchUpInside)
         navigationItem.leftViews = [backButton]
         
-        let doneButton = RaisedButton()
-        doneButton.backgroundColor = Stylesheet.color(.whiteWith(alpha: 0.2))
-        doneButton.title = R.string.localizable.done().uppercased()
-        doneButton.titleColor = Stylesheet.color(.blue)
-        doneButton.titleLabel?.font = R.font.encodeSansBold(size: 14)
-        doneButton.addTarget(self, action: #selector(doneAction(sender:)), for: .touchUpInside)
-        navigationItem.rightViews = [doneButton]
-        
-        navigationItem.titleLabel.text = R.string.localizable.occupation()
+        navigationItem.titleLabel.text = viewModel.subListTitle()
         navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         

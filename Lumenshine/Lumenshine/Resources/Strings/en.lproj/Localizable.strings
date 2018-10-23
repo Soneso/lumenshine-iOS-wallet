@@ -233,7 +233,7 @@
 "additional_name" = "Additional Name";
 
 /*  */
-"birth_country_code" = "Birth Country Code";
+"birth_country" = "Birth Country";
 
 /*  */
 "bank_account_number" = "Bank Account Number";
@@ -260,7 +260,7 @@
 "employer_address" = "Employer Address";
 
 /*  */
-"language_code" = "Language Code";
+"language" = "Primary language";
 
 /*  */
 "registration_date" = "Registration Date";
@@ -825,3 +825,6 @@
 
 /*  */
 "no_stellar_address" = "no stellar address";
+
+/*  */
+"personal_data_changed" = "Do you want to save the modified data?";
