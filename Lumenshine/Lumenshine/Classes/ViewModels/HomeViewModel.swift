@@ -13,6 +13,7 @@ protocol HomeViewModelType: Transitionable {
 
     var cardViewModels: [CardViewModelType] { get }
     var reloadClosure: (() -> ())? { get set }
+    var appendClosure: ((CardViewModelType) -> ())? { get set }
     var totalNativeFoundsClosure: ((CoinUnit) -> ())? { get set }
     var currencyRateUpdateClosure: ((Double) -> ())? { get set }
     
@@ -64,6 +65,7 @@ class HomeViewModel : HomeViewModelType {
 
     var cardViewModels: [CardViewModelType]
     var reloadClosure: (() -> ())?
+    var appendClosure: ((CardViewModelType) -> ())?
     var totalNativeFoundsClosure: ((CoinUnit) -> ())?
     var currencyRateUpdateClosure: ((Double) -> ())? {
         didSet {
@@ -97,7 +99,8 @@ class HomeViewModel : HomeViewModelType {
     }
     
     func reloadCards() {
-        cardViewModels = []
+        cardViewModels.removeAll()
+        balances.removeAll()
         
         service.walletService.getWallets { [weak self] (result) -> (Void) in
             switch result {
@@ -150,7 +153,7 @@ class HomeViewModel : HomeViewModelType {
                         chartViewModel.navigationCoordinator = self.navigationCoordinator
                         cardViewModels.insert(chartViewModel, at: cardViewModels.count-1)
                         
-                        self.reloadClosure?()
+                        self.appendClosure?(chartViewModel)
                     }
                 }
             }

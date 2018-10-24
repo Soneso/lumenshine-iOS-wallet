@@ -44,6 +44,14 @@ class HomeViewController: UIViewController {
             }
         }
         
+        viewModel.appendClosure = { chartViewModel in
+            DispatchQueue.main.async {
+                let cardView = CardView.create(viewModel: chartViewModel, viewController: self)
+                self.dataSourceItems.insert(cardView, at: self.dataSourceItems.count-1)
+                self.tableView.reloadData()
+            }
+        }
+        
         viewModel.totalNativeFoundsClosure = { (nativeFounds) in
            self.setHeaderType(nativeFounds: nativeFounds)
         }
@@ -104,10 +112,9 @@ extension HomeViewController: UITableViewDataSource {
                     }, completion: nil)
                 }
                 
-                //self?.viewModel.updateCurrencies()
+                self?.viewModel.updateCurrencies()
             }
         }
-        
         return cell
     }
     
@@ -167,7 +174,7 @@ fileprivate extension HomeViewController {
         tableView.backgroundColor = Stylesheet.color(.clear)
         tableView.register(CardTableViewCell.self, forCellReuseIdentifier: HomeViewController.CellIdentifier)
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 180
+        tableView.estimatedRowHeight = 250
         tableView.separatorStyle = .none
         
         prepareCopyright()
