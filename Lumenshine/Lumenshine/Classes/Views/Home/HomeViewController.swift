@@ -17,7 +17,7 @@ class HomeViewController: UIViewController {
     // MARK: - Properties
     
     fileprivate let viewModel: HomeViewModelType
-    fileprivate var headerBar: FlexibleHeightBar!
+    fileprivate var headerBar: CustomizableFlexibleHeightBar!
     fileprivate var header: HomeHeaderView!
     fileprivate var tableViewContainer: UIView!
     
@@ -207,6 +207,8 @@ fileprivate extension HomeViewController {
             make.bottom.equalTo(0)
         }
         
+        headerBar.header = header
+
         tableViewContainer = UIView()
         view.addSubview(tableViewContainer)
         tableViewContainer.snp.makeConstraints { (make) in
@@ -216,6 +218,7 @@ fileprivate extension HomeViewController {
         }
         
         tableViewContainer.topAnchor.constraint(equalTo: headerBar.bottomAnchor, constant: -1).isActive = true
+        tableView.contentInset = UIEdgeInsetsMake(0.0, 0.0, headerBar.maximumBarHeight + 20, 0.0)
         
         let initialLayoutAttributes = FlexibleHeightBarSubviewLayoutAttributes()
         initialLayoutAttributes.size = headerBar.frame.size
@@ -255,8 +258,8 @@ fileprivate extension HomeViewController {
             topSafeAreaInset = window.safeAreaInsets.top
         }
         
-        headerBar = FlexibleHeightBar(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: 230 + topSafeAreaInset))
-        headerBar.minimumBarHeight = 0.0
+        headerBar = CustomizableFlexibleHeightBar(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: 230 + topSafeAreaInset))
+        headerBar.minimumBarHeight = topSafeAreaInset
         headerBar.clipsToBounds = true
         let backgroundImage = UIImageView()
         backgroundImage.image = R.image.header_background()

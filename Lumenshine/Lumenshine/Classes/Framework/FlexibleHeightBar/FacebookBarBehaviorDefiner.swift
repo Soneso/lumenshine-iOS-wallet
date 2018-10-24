@@ -8,6 +8,39 @@
 
 import UIKit
 
+fileprivate let maxProgress: CGFloat = 0.8
+
+public class CustomizableFlexibleHeightBar: FlexibleHeightBar {
+    var header: UIView?
+    private var _progress: CGFloat = 0.0
+    override public var progress: CGFloat {
+        get {
+            return _progress
+        }
+        set (newProgress) {
+            _progress = fmin(newProgress, maxProgress)
+            
+            if let bhvrDefr = behaviorDefiner {
+                if !bhvrDefr.elasticMaximumHeightAtTop {
+                    _progress = fmax(_progress, 0.0)
+                }
+            } else {
+                _progress = fmax(_progress, 0.0)
+            }
+            
+            setNavigationBarVisibility()
+        }
+    }
+    
+    private func setNavigationBarVisibility() {
+        if progress == maxProgress {
+            header?.isHidden = true
+        } else {
+            header?.isHidden = false
+        }
+    }
+}
+
 public class FacebookBarBehaviorDefiner: FlexibleHeightBarBehaviorDefiner {
     // MARK: - Properties -
     
@@ -50,7 +83,7 @@ public class FacebookBarBehaviorDefiner: FlexibleHeightBarBehaviorDefiner {
         super.init()
         
         addSnappingPositionProgress(0.0, _forProgressRangeStart: 0.0, end: 40.0/(105.0 - 20.0))
-        addSnappingPositionProgress(1.0, _forProgressRangeStart: 40.0/(105.0 - 20.0), end: 1.0)
+        addSnappingPositionProgress(maxProgress, _forProgressRangeStart: 40.0/(105.0 - 20.0), end: maxProgress)
         thresholdNegativeDirection = 140.0
     }
     
@@ -61,7 +94,7 @@ public class FacebookBarBehaviorDefiner: FlexibleHeightBarBehaviorDefiner {
     }
     
     private func applyNegativeDirectionProgressTrackingThreshold() {
-        if flexibleHeightBar?.progress == 1.0 {
+        if flexibleHeightBar?.progress == maxProgress {
             previousYOffset -= thresholdNegativeDirection
         }
     }
@@ -111,8 +144,8 @@ public class FacebookBarBehaviorDefiner: FlexibleHeightBarBehaviorDefiner {
             } else if scrollView.contentOffset.y > (scrollView.contentSize.height - scrollViewViewportHeight) {
                 if scrollView.contentSize.height > scrollViewViewportHeight {
                     previousYOffset = scrollView.contentSize.height - scrollViewViewportHeight
-                    previousProgress = 1.0
-                    
+                    previousProgress = maxProgress
+
                     applyNegativeDirectionProgressTrackingThreshold()
                     applyPositiveDirectionProgressTrackingThreshold()
                 }

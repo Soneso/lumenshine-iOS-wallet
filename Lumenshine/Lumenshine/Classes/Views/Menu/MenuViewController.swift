@@ -132,6 +132,7 @@ extension MenuViewController: MenuViewProtocol {
 extension MenuViewController {
     @objc
     func onMenuButtonTap(_ sender: UIButton, event: UIEvent) {
+        drawerController?.view.endEditing(true)
         drawerController?.openSide(.left)
         menuButton.showsMenu = false
     }
