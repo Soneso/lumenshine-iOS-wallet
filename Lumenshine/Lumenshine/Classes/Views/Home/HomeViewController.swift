@@ -85,7 +85,9 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.shadowColor = Stylesheet.color(.clear)
         navigationController?.navigationBar.backgroundColor = Stylesheet.color(.clear)
         navigationController?.navigationBar.isTranslucent = true
-        
+        navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
+        navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
+        navigationItem.titleLabel.text = R.string.localizable.homeScreenTitle()
         viewModel.refreshWallets()
     }
 }

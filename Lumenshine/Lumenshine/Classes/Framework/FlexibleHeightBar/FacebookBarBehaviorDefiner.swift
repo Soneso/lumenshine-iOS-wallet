@@ -35,8 +35,10 @@ public class CustomizableFlexibleHeightBar: FlexibleHeightBar {
     private func setNavigationBarVisibility() {
         if progress == maxProgress {
             header?.isHidden = true
+            viewContainingController()?.navigationItem.titleLabel.isHidden = false
         } else {
             header?.isHidden = false
+            viewContainingController()?.navigationItem.titleLabel.isHidden = true
         }
     }
 }
