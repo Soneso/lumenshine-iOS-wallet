@@ -49,6 +49,11 @@ class LoginViewModel : LoginViewModelType {
     fileprivate let service: AuthService
     fileprivate var email: String?
     fileprivate var user: User?
+    fileprivate var mnemonic: String? {
+        didSet {
+            PrivateKeyManager.getWalletsKeyPairs(fromMnemonic: mnemonic)
+        }
+    }
     
     var entries: [MenuEntry]
     var lostPassword: Bool
@@ -179,7 +184,7 @@ class LoginViewModel : LoginViewModelType {
                                   publicKeyIndex0: userSecurity.publicKeyIndex0,
                                   publicKeyIndex188: userSecurity.publicKeyIndex188,
                                   publicKeys: nil)
-                PrivateKeyManager.getWalletsKeyPairs(fromMnemonic: userSecurity.mnemonic24Word)
+                self?.mnemonic = userSecurity.mnemonic24Word
                 self?.service.loginStep2(publicKeyIndex188: userSecurity.publicKeyIndex188) { [weak self] result in
                     switch result {
                     case .success(let login2Response):
@@ -344,7 +349,7 @@ fileprivate extension LoginViewModel {
                                      publicKeyIndex0: login1Response.publicKeyIndex0,
                                      publicKeyIndex188: decryptedUserData.publicKeyIndex188,
                                      publicKeys: decryptedUserData.publicKeys)
-                    PrivateKeyManager.getWalletsKeyPairs(fromMnemonic: decryptedUserData.mnemonic)
+                    self.mnemonic = decryptedUserData.mnemonic
                     self.service.loginStep2(publicKeyIndex188: decryptedUserData.publicKeyIndex188, response: response)
                 } else {
                     let error = ErrorResponse()
@@ -364,14 +369,8 @@ fileprivate extension LoginViewModel {
             if login2Response.tfaConfirmed && login2Response.mailConfirmed && login2Response.mnemonicConfirmed {
                 self.navigationCoordinator?.performTransition(transition: .showDashboard(user))
             } else {
-                BiometricHelper.getMnemonic(completion: { (response) -> (Void) in
-                    switch response {
-                    case .success(mnemonic: let mnemonic):
-                        self.navigationCoordinator?.performTransition(transition: .showSetup(user, mnemonic, login2Response))
-                    case .failure(error: let error):
-                        print(error)
-                    }
-                })
+                guard let mnemonic = self.mnemonic else { return }
+                self.navigationCoordinator?.performTransition(transition: .showSetup(user, mnemonic, login2Response))
             }
         }
     }
