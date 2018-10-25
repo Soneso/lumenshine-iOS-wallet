@@ -58,7 +58,7 @@ class HomeViewController: UIViewController {
         
         viewModel.currencyRateUpdateClosure = { (rate) in
             if let nativeFunds = Services.shared.userManager.totalNativeFunds {
-                self.header.funds = nativeFunds.stringConversionTo(currency: .usd, rate: rate)
+                self.header?.funds = nativeFunds.stringConversionTo(currency: .usd, rate: rate)
             }
         }
     }
@@ -85,7 +85,9 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.shadowColor = Stylesheet.color(.clear)
         navigationController?.navigationBar.backgroundColor = Stylesheet.color(.clear)
         navigationController?.navigationBar.isTranslucent = true
-        
+        navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
+        navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 18)
+        navigationItem.titleLabel.text = R.string.localizable.homeScreenTitle()
         viewModel.refreshWallets()
     }
 }
@@ -301,9 +303,9 @@ fileprivate extension HomeViewController {
     
     func setHeaderType(nativeFounds: CoinUnit) {
         if nativeFounds > 0 {
-            self.header.type = .funded
+            self.header?.type = .funded
         } else {
-            self.header.type = .unfunded
+            self.header?.type = .unfunded
         }
     }
     

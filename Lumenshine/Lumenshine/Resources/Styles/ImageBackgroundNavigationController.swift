@@ -11,19 +11,28 @@ import Material
 
 class ImageBackgroundNavigationController: NavigationController {
     private let rootIndex = 0
+    private var alwaysShowBackgroundImage = false
+    
+    convenience init(rootViewController: UIViewController, alwaysShowBackgroundImage: Bool) {
+        self.init(rootViewController: rootViewController)
+        self.alwaysShowBackgroundImage = alwaysShowBackgroundImage
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationBar.backIndicatorImage = R.image.arrowLeft()?.crop(toWidth: 15, toHeight: 15)?.tint(with: Stylesheet.color(.white))
         view.backgroundColor = .clear
+        
+        if alwaysShowBackgroundImage {
+            setupBackgroundImage()
+        } else {
+            setupRootViewControllerIfNeeded()
+        }
     }
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         super.pushViewController(viewController, animated: animated)
         setupBackgroundImage()
-        statusBarVisibility(isHidden: false)
-        
-        navigationBar.isTranslucent = false
     }
     
     override func popViewController(animated: Bool) -> UIViewController? {
@@ -46,10 +55,13 @@ class ImageBackgroundNavigationController: NavigationController {
             let backgroundImage = UIImage(cgImage: cgImage, scale: 1.0, orientation: .down).crop(toWidth: navigationBar.frame.width, toHeight: navigationBar.frame.width)
             navigationBar.setBackgroundImage(backgroundImage, for: .default)
         }
+        
+        statusBarVisibility(isHidden: false)
+        navigationBar.isTranslucent = false
     }
     
     private func setupRootViewControllerIfNeeded() {
-        if viewControllers.count == 1 {
+        if viewControllers.count == 1 && !alwaysShowBackgroundImage{
             removeBackgroundImage()
             statusBarVisibility(isHidden: true)
         }
