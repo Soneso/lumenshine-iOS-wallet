@@ -14,8 +14,14 @@ protocol PersonalDataViewModelType: Transitionable {
     var subItems: [String] { get }
     var isFiltering: Bool { get set }
     
+    var dataChangedClosure: (() -> ())? { get set }
+    var cellSizeRefreshCallback: (() -> ())? { get set }
+    
     func sectionTitle(at section: Int) -> String?
     func placeholder(at indexPath: IndexPath) -> String?
+    func cellHeight(at indexPath: IndexPath) -> CGFloat
+    func cellHeightChanged(_ height: CGFloat, at indexPath: IndexPath)
+    func cellIdentifier(at indexPath: IndexPath) -> String
     func textValue(at indexPath: IndexPath) -> String?
     func keyboardType(at indexPath: IndexPath) -> UIKeyboardType
     func inputViewOptions(at indexPath: IndexPath) -> ([String]?, Int?)
@@ -36,6 +42,8 @@ class PersonalDataViewModel : PersonalDataViewModelType {
     fileprivate let service: UserDataService
     fileprivate let entries: [[PersonalDataEntry]]
     fileprivate var selectedValues: [PersonalDataEntry:PersonalDataProtocol] = [:]
+    fileprivate var cellHeights: [PersonalDataEntry:CGFloat] = [:]
+    fileprivate let normalCellHeight: CGFloat = 25
     fileprivate var salutations: [String]?
     fileprivate var userData: UserData?
     
@@ -69,6 +77,9 @@ class PersonalDataViewModel : PersonalDataViewModelType {
         }
     }
     
+    var dataChangedClosure: (() -> ())?
+    var cellSizeRefreshCallback: (() -> ())?
+    
     var itemDistribution: [Int] {
         return entries.map { $0.count }
     }
@@ -85,8 +96,10 @@ class PersonalDataViewModel : PersonalDataViewModelType {
     func subItemSelected(at indexPath: IndexPath) {
         guard let entry = activeEntry else { return }
         let list = isFiltering ? filteredActiveList : activeList
+        
         selectedValues[entry] = list?[indexPath.row]
         isDataChanged = true
+        self.dataChangedClosure?()
     }
     
     func filterSubItems(searchText: String) {
@@ -112,6 +125,26 @@ class PersonalDataViewModel : PersonalDataViewModelType {
     
     func placeholder(at indexPath: IndexPath) -> String? {
         return entry(at: indexPath).placeholder
+    }
+    
+    func cellHeight(at indexPath: IndexPath) -> CGFloat {
+        return (cellHeights[entry(at: indexPath)] ?? normalCellHeight) + 30
+    }
+    
+    func cellHeightChanged(_ height: CGFloat, at indexPath: IndexPath) {
+        if height != cellHeights[entry(at: indexPath)] {
+            cellHeights[entry(at: indexPath)] = height
+            cellSizeRefreshCallback?()
+        }
+    }
+    
+    func cellIdentifier(at indexPath: IndexPath) -> String {
+        switch entry(at: indexPath) {
+        case .occupation, .employerAddress:
+            return MultilineInputTableViewCell.CellIdentifier
+        default:
+            return InputTableViewCell.CellIdentifier
+        }
     }
     
     func textValue(at indexPath: IndexPath) -> String? {
@@ -142,7 +175,7 @@ class PersonalDataViewModel : PersonalDataViewModelType {
             return .emailAddress
         case .zipCode:
             return .decimalPad
-        case .mobileNR:
+        case .mobileNR, .bankPhoneNumber:
             return .phonePad
         default:
             return .default
@@ -152,6 +185,7 @@ class PersonalDataViewModel : PersonalDataViewModelType {
     func textChanged(_ text: String, itemForRowAt indexPath: IndexPath) {
         selectedValues[entry(at: indexPath)] = PersonalData(name: text)
         isDataChanged = true
+        self.dataChangedClosure?()
     }
     
     func shouldBeginEditing(at indexPath: IndexPath) -> Bool {
@@ -329,7 +363,7 @@ fileprivate extension PersonalDataViewModel {
         selectedValues[.lastname] = PersonalData(name: userData.lastname)
         selectedValues[.mobileNR] = PersonalData(name: userData.mobileNR)
         selectedValues[.nationality] = PersonalData(name: userData.nationality)
-        selectedValues[.occupation] = PersonalData(name: userData.occupation)
+        selectedValues[.occupation] = Occupation(name: userData.occupation, code08: userData.occupationCode08, code88: userData.occupationCode88)
         selectedValues[.registrationDate] = PersonalData(name: DateUtils.shortDateString(from: userData.registrationDate))
         selectedValues[.salutation] = PersonalData(name: userData.salutation)
         selectedValues[.state] = PersonalData(name: userData.state)

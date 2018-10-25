@@ -13,8 +13,6 @@ class PersonalDataViewController: UITableViewController {
     
     // MARK: - Parameters & Constants
     
-    fileprivate static let CellIdentifier = "PersonalDataCell"
-    
     // MARK: - Properties
     
     fileprivate let verticalSpacing = 31.0
@@ -61,10 +59,10 @@ class PersonalDataViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let identifier = PersonalDataViewController.CellIdentifier
+        let identifier = viewModel.cellIdentifier(at: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         
-        if let tableCell = cell as? RegistrationTableViewCell {
+        if let tableCell = cell as? InputTableViewCell {
             tableCell.setText(viewModel.textValue(at: indexPath))
             tableCell.setPlaceholder(viewModel.placeholder(at: indexPath))
             
@@ -76,16 +74,22 @@ class PersonalDataViewController: UITableViewController {
                 self.viewModel.textChanged(changedText, itemForRowAt: indexPath)
             }
             tableCell.shouldBeginEditingCallback = {
-                 return self.viewModel.shouldBeginEditing(at: indexPath)
+                return self.viewModel.shouldBeginEditing(at: indexPath)
+            }
+        }
+        
+        if let inputCell = cell as? MultilineInputTableViewCell {
+            inputCell.cellSizeChangedCallback = { height in
+                self.viewModel.cellHeightChanged(height, at: indexPath)
             }
         }
         
         return cell
     }
     
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 60
-//    }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return viewModel.cellHeight(at: indexPath)
+    }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return viewModel.sectionTitle(at: section) == nil ? 25 : 50
@@ -177,7 +181,7 @@ extension PersonalDataViewController {
             })
             alertView.addAction(okAction)
             
-            let cancelAction = UIAlertAction(title: R.string.localizable.cancel(), style: .cancel, handler: { action in
+            let cancelAction = UIAlertAction(title: R.string.localizable.ignore(), style: .cancel, handler: { action in
                 self.navigationController?.popViewController(animated: true)
             })
             alertView.addAction(cancelAction)
@@ -197,24 +201,37 @@ fileprivate extension PersonalDataViewController {
     }
     
     func prepareTableView() {
-        tableView.register(RegistrationTableViewCell.self, forCellReuseIdentifier: PersonalDataViewController.CellIdentifier)
+        tableView.register(MultilineInputTableViewCell.self, forCellReuseIdentifier: MultilineInputTableViewCell.CellIdentifier)
+        tableView.register(InputTableViewCell.self, forCellReuseIdentifier: InputTableViewCell.CellIdentifier)
         tableView.rowHeight = UITableViewAutomaticDimension
-        //        tableView.separatorInset = UIEdgeInsets(top: 0, left: CGFloat(2*horizontalSpacing), bottom: 0, right: CGFloat(2*horizontalSpacing))
-        //        tableView.separatorColor = Stylesheet.color(.lightGray)
         tableView.separatorStyle = .none
         tableView.tableHeaderView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         tableView.tableFooterView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
+        
+        viewModel.cellSizeRefreshCallback = {
+            UIView.setAnimationsEnabled(false)
+            
+            self.tableView.beginUpdates()
+            self.tableView.endUpdates()
+            
+            UIView.setAnimationsEnabled(true)
+        }
     }
     
     func prepareNavigationItem() {
         
-        let doneButton = RaisedButton()
+        let doneButton = LSButton()
         doneButton.backgroundColor = Stylesheet.color(.whiteWith(alpha: 0.2))
         doneButton.title = R.string.localizable.submit()
         doneButton.titleColor = Stylesheet.color(.blue)
-        doneButton.titleLabel?.font = R.font.encodeSansBold(size: 14)
+        doneButton.cornerRadiusPreset = .cornerRadius5
         doneButton.addTarget(self, action: #selector(saveAction(sender:)), for: .touchUpInside)
         navigationItem.rightViews = [doneButton]
+        doneButton.isHidden = true
+        
+        viewModel.dataChangedClosure = {
+            doneButton.isHidden = false
+        }
         
         navigationItem.backButton.isHidden = true
         

@@ -62,7 +62,7 @@ class RegistrationFormTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: RegistrationFormTableViewController.CellIdentifier, for: indexPath) as! RegistrationTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: RegistrationFormTableViewController.CellIdentifier, for: indexPath) as! InputTableViewCell
         
         cell.setPlaceholder(viewModel.placeholder(at: indexPath))
         cell.setText(viewModel.textValue(at: indexPath))
@@ -112,7 +112,7 @@ extension RegistrationFormTableViewController {
 
 fileprivate extension RegistrationFormTableViewController {
     func prepare() {
-        tableView.register(RegistrationTableViewCell.self, forCellReuseIdentifier: RegistrationFormTableViewController.CellIdentifier)
+        tableView.register(InputTableViewCell.self, forCellReuseIdentifier: RegistrationFormTableViewController.CellIdentifier)
         tableView.rowHeight = 70.0
         tableView.estimatedRowHeight = 70.0
         tableView.separatorStyle = .none

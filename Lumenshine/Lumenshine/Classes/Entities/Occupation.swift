@@ -33,4 +33,12 @@ class Occupation: Decodable, PersonalDataProtocol {
         code = String(isco08)
         code88 = String(isco88)
     }
+    
+    init(name: String, code08: String, code88: String) {
+        self.name = name
+        self.code = code08
+        self.code88 = code88
+        self.isco08 = Int(code08) ?? 0
+        self.isco88 = Int(code88) ?? 0
+    }
 }

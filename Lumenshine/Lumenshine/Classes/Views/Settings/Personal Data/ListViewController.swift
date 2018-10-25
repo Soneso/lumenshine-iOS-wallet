@@ -59,6 +59,9 @@ class ListViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: ListViewController.CellIdentifier, for: indexPath)
         
         cell.textLabel?.text = viewModel.subItems[indexPath.row]
+        cell.textLabel?.font = R.font.encodeSansRegular(size: 15)
+        cell.textLabel?.numberOfLines = 0
+        
         return cell
     }
     

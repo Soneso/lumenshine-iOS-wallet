@@ -1,5 +1,5 @@
 //
-//  RegistrationTableViewCell.swift
+//  InputTableViewCell.swift
 //  Lumenshine
 //
 //  Created by Istvan Elekes on 4/21/18.
@@ -9,7 +9,7 @@
 import UIKit
 import Material
 
-protocol RegistrationTableCellProtocol {
+protocol InputTableCellProtocol {
     func setPlaceholder(_ placeholder: String?)
     func setText(_ text: String?)
     func setSecureText(_ isSecure: Bool)
@@ -18,14 +18,20 @@ protocol RegistrationTableCellProtocol {
     func setKeyboardType(_ type: UIKeyboardType)
 }
 
-typealias TextChangedClosure = (_ text:String) -> (Void)
-
-class RegistrationTableViewCell: UITableViewCell {
+class InputTableViewCell: UITableViewCell, InputTableCellProtocol {
+    
+    // MARK: - Parameters & Constants
+    
+    class var CellIdentifier: String {
+        return "InputDataCell"
+    }
+    
+    // MARK: - Properties
     
     fileprivate let horizontalSpacing: CGFloat = 15.0
     fileprivate let textField = LSTextField()
     
-    var textEditingCallback: TextChangedClosure?
+    var textEditingCallback: ((_ text:String) -> (Void))?
     var shouldBeginEditingCallback: (() -> (Bool))?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -72,21 +78,10 @@ class RegistrationTableViewCell: UITableViewCell {
         }
         callback(text)
     }
-
-}
-
-extension RegistrationTableViewCell: UITextFieldDelegate {
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        guard let callback = shouldBeginEditingCallback else {
-            return true
-        }        
-        return callback()
-    }
     
-}
-
-extension RegistrationTableViewCell: RegistrationTableCellProtocol {
+    // MARK: - InputTableCellProtocol methods
+    
     func setInputViewOptions(_ options: [String]?, selectedIndex: Int? = nil) {
         if let opt = options {
             let enumPicker = EnumPicker()
@@ -121,9 +116,21 @@ extension RegistrationTableViewCell: RegistrationTableCellProtocol {
     func setSecureText(_ isSecure: Bool) {
         textField.isSecureTextEntry = isSecure
     }
+
 }
 
-fileprivate extension RegistrationTableViewCell {
+extension InputTableViewCell: UITextFieldDelegate {
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        guard let callback = shouldBeginEditingCallback else {
+            return true
+        }        
+        return callback()
+    }
+    
+}
+
+fileprivate extension InputTableViewCell {
     func setDatePickerInputView() {
         var minYear = DateComponents()
         minYear.year = 1910

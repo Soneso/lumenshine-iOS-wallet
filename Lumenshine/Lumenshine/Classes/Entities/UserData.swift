@@ -33,6 +33,8 @@ public struct UserData: Codable {
     let taxID: String
     let taxIDName: String
     let occupation: String
+    let occupationCode08: String
+    let occupationCode88: String
     let employerName: String
     let employerAddress: String
     let languageCode: String
@@ -63,6 +65,8 @@ public struct UserData: Codable {
         case taxID = "tax_id"
         case taxIDName = "tax_id_name"
         case occupation = "occupation_name"
+        case occupationCode08 = "occupation_code08"
+        case occupationCode88 = "occupation_code88"
         case employerName = "employer_name"
         case employerAddress = "employer_address"
         case languageCode = "language_code"
