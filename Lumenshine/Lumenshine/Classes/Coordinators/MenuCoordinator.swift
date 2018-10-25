@@ -49,6 +49,8 @@ class MenuCoordinator: MenuCoordinatorType {
             showRelogin()
         case .logout:
             logout()
+        case .showWallets:
+            showWallets()
         default: break
         }
     }
@@ -58,6 +60,12 @@ fileprivate extension MenuCoordinator {
     func showHome() {
         let coordinator = HomeCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
         let navigationController = ImageBackgroundNavigationController(rootViewController: coordinator.baseController)
+        present(navigationController: navigationController)
+    }
+    
+    func showWallets() {
+        let coordinator = WalletsCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
+        let navigationController = ImageBackgroundNavigationController(rootViewController: coordinator.baseController, alwaysShowBackgroundImage: true)
         present(navigationController: navigationController)
     }
     

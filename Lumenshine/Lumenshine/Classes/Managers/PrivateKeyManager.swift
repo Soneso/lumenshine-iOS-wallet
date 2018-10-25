@@ -37,6 +37,12 @@ class PrivateKeyManager {
         }
     }
     
+    static func getPublicKey(forIndex index: Int) -> String {
+        return walletsKeyPairsIndexes.first(where: { (wallet) -> Bool in
+            return wallet.value == index
+        })?.key ?? ""
+    }
+    
     private static func getIndex(forAccountID accountID: String) -> Int? {
         return walletsKeyPairsIndexes.first(where: { (walletKeyPair) -> Bool in
             return walletKeyPair.key == accountID

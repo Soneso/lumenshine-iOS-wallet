@@ -106,6 +106,8 @@ class MenuViewModel : MenuViewModelType {
             logout()
         case .help:
             navigationCoordinator?.performTransition(transition: .showHelp)
+        case .wallets:
+            navigationCoordinator?.performTransition(transition: .showWallets)
         default: break
         }
         lastIndex = indexPath

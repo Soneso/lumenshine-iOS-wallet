@@ -18,8 +18,14 @@ public enum ChangeWalletDataEnum {
     case failure(error: ServiceError)
 }
 
-public typealias GetWalletsClosure = (_ response:GetWalletsEnum) -> (Void)
-public typealias ChangeWalletDataClosure = (_ response:ChangeWalletDataEnum) -> (Void)
+public enum AddWalletEnum {
+    case success
+    case failure(error: ServiceError)
+}
+
+public typealias GetWalletsClosure = (_ response: GetWalletsEnum) -> (Void)
+public typealias ChangeWalletDataClosure = (_ response: ChangeWalletDataEnum) -> (Void)
+public typealias AddWalletClosure = (_ response: AddWalletEnum) -> (Void)
 
 public class WalletsService: BaseService {
     
@@ -75,4 +81,24 @@ public class WalletsService: BaseService {
         }
     }
     
+    func addWallet(publicKey: String, name: String, federationAddress: String? = "", showOnHomescreen: Bool, completion: @escaping AddWalletClosure) {
+        var params = Dictionary<String, Any>()
+        params["public_key_0"] = publicKey
+        params["wallet_name"] = name
+        params["federation_address"] = federationAddress
+        params["show_on_homescreen"] = showOnHomescreen
+        
+        let bodyData = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+        
+        POSTRequestWithPath(path: "/portal/user/dashboard/add_wallet", body: bodyData) { (result) -> (Void) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    completion(.success)
+                case .failure(let error):
+                    completion(.failure(error: error))
+                }
+            }
+        }
+    }
 }

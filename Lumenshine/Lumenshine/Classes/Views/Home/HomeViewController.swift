@@ -58,7 +58,7 @@ class HomeViewController: UIViewController {
         
         viewModel.currencyRateUpdateClosure = { (rate) in
             if let nativeFunds = Services.shared.userManager.totalNativeFunds {
-                self.header.funds = nativeFunds.stringConversionTo(currency: .usd, rate: rate)
+                self.header?.funds = nativeFunds.stringConversionTo(currency: .usd, rate: rate)
             }
         }
     }
@@ -303,9 +303,9 @@ fileprivate extension HomeViewController {
     
     func setHeaderType(nativeFounds: CoinUnit) {
         if nativeFounds > 0 {
-            self.header.type = .funded
+            self.header?.type = .funded
         } else {
-            self.header.type = .unfunded
+            self.header?.type = .unfunded
         }
     }
     
