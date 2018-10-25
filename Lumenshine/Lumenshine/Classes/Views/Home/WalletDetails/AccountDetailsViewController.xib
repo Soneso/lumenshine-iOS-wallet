@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -194,7 +194,7 @@
                                     <rect key="frame" x="0.0" y="183.5" width="375" height="31"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show wallet on home screen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Nj-CA-bx0" customClass="RegularSubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="0.0" width="218.5" height="30.5"/>
+                                            <rect key="frame" x="16" y="0.0" width="218.5" height="31"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -231,13 +231,13 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q3G-kj-w8a" customClass="RegularSubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="39" width="302" height="33"/>
+                                            <rect key="frame" x="16" y="39" width="296" height="33"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dId-DL-9Xw" customClass="SimpleButton" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="334" y="34.5" width="33" height="33"/>
+                                            <rect key="frame" x="322" y="34.5" width="33" height="33"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="dId-DL-9Xw" secondAttribute="height" multiplier="1:1" id="243-CK-Frh"/>
                                             </constraints>
@@ -250,13 +250,13 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="dId-DL-9Xw" firstAttribute="height" secondItem="Q3G-kj-w8a" secondAttribute="height" id="7zx-6S-Nzi"/>
-                                        <constraint firstItem="dId-DL-9Xw" firstAttribute="leading" secondItem="Q3G-kj-w8a" secondAttribute="trailing" constant="16" id="Efv-sf-0ye"/>
+                                        <constraint firstItem="dId-DL-9Xw" firstAttribute="leading" secondItem="Q3G-kj-w8a" secondAttribute="trailing" constant="10" id="Efv-sf-0ye"/>
                                         <constraint firstItem="Q3G-kj-w8a" firstAttribute="leading" secondItem="mqw-09-RRm" secondAttribute="leading" constant="16" id="PcQ-3u-SDj"/>
                                         <constraint firstAttribute="bottom" secondItem="Q3G-kj-w8a" secondAttribute="bottom" constant="16" id="ZNi-tF-Qer"/>
                                         <constraint firstItem="Q3G-kj-w8a" firstAttribute="top" secondItem="MSF-J7-JYy" secondAttribute="bottom" id="bW6-Jr-Agn"/>
                                         <constraint firstItem="MSF-J7-JYy" firstAttribute="leading" secondItem="mqw-09-RRm" secondAttribute="leading" constant="16" id="cSn-GU-YlJ"/>
                                         <constraint firstItem="dId-DL-9Xw" firstAttribute="baseline" secondItem="Q3G-kj-w8a" secondAttribute="baseline" id="tdj-gc-yh7"/>
-                                        <constraint firstAttribute="trailing" secondItem="dId-DL-9Xw" secondAttribute="trailing" constant="8" id="yd4-X4-6Ix"/>
+                                        <constraint firstAttribute="trailing" secondItem="dId-DL-9Xw" secondAttribute="trailing" constant="20" id="yd4-X4-6Ix"/>
                                         <constraint firstItem="MSF-J7-JYy" firstAttribute="top" secondItem="mqw-09-RRm" secondAttribute="top" constant="16" id="ypR-pL-YuJ"/>
                                     </constraints>
                                 </view>
@@ -271,13 +271,13 @@
                                     <rect key="frame" x="0.0" y="304.5" width="375" height="774"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stellar address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGi-ZA-kCa" customClass="SubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="0.0" width="137" height="23"/>
+                                            <rect key="frame" x="16" y="0.0" width="137.5" height="23"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nuk-dl-9bZ" customClass="SimpleButton" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="157" y="-3.5" width="80" height="30"/>
+                                            <rect key="frame" x="157.5" y="-3.5" width="80" height="30"/>
                                             <state key="normal" title="set address"/>
                                             <connections>
                                                 <action selector="didTapSetAddress:" destination="-1" eventType="touchUpInside" id="sUQ-P4-Kon"/>

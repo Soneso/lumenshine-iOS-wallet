@@ -63,6 +63,9 @@ class AccountDetailsViewController: UIViewController {
         setupNavigationItem()
         setupWalletNameView()
         publicKeyLabel.text = wallet.publicKey
+        publicKeyLabel.font = R.font.encodeSansSemiBold(size: 15)
+        publicKeyLabel.numberOfLines = 1
+        publicKeyLabel.lineBreakMode = .byTruncatingMiddle
         setupStellarAddress()
         view.backgroundColor = Stylesheet.color(.veryLightGray)
         setupButtons()
@@ -120,6 +123,12 @@ class AccountDetailsViewController: UIViewController {
     @IBAction func didTapCopyPublicKey(_ sender: Any) {
         if let key = publicKeyLabel.text {
             UIPasteboard.general.string = key
+            let alert = UIAlertController(title: nil, message: "Copied to clipboard", preferredStyle: .actionSheet)
+            self.present(alert, animated: true)
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when){
+                alert.dismiss(animated: true)
+            }
         }
     }
     

@@ -61,6 +61,12 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
     @IBAction func didTapCopyButton(_ sender: UIButton) {
         if let key = publicKeyLabel.text {
             UIPasteboard.general.string = key
+            let alert = UIAlertController(title: nil, message: "Copied to clipboard", preferredStyle: .actionSheet)
+            self.present(alert, animated: true)
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when){
+                alert.dismiss(animated: true)
+            }
         }
     }
     
@@ -128,6 +134,15 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
                 issuerTextField.inputView = issuerPickerView
             }
         }
+        
+        publicKeyLabel.font = R.font.encodeSansSemiBold(size: 16)
+        publicKeyLabel.numberOfLines = 1
+        publicKeyLabel.lineBreakMode = .byTruncatingMiddle
+
+        emailLabel.font = R.font.encodeSansSemiBold(size: 16)
+        emailLabel.numberOfLines = 0
+        
+        nativeCurrencyValueLabel.font = R.font.encodeSansSemiBold(size: 15)
     }
     
     private func issuerVisibility(isHidden: Bool) {
@@ -232,9 +247,9 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
     }
     
     private func setupNavigationItem() {
-        navigationItem.titleLabel.text = "Receive"
+        navigationItem.titleLabel.text = "Receive".uppercased()
         navigationItem.titleLabel.textColor = Stylesheet.color(.white)
-        navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
+        navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 17)
     }
     
     private func setupView() {

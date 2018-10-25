@@ -38,6 +38,12 @@ class FundWalletViewController: UIViewController {
     @IBAction func didTapPublicKey(_ sender: Any) {
         if let key = publicKeyButton.titleLabel?.text {
             UIPasteboard.general.string = key
+            let alert = UIAlertController(title: nil, message: "Copied to clipboard", preferredStyle: .actionSheet)
+            self.present(alert, animated: true)
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when){
+                alert.dismiss(animated: true)
+            }
         }
     }
     

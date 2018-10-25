@@ -80,9 +80,14 @@ extension Confirm2faCodeViewController {
     @objc
     func copyAction(sender: UIButton) {
         UIPasteboard.general.string = viewModel.tfaSecret
-        
-        snackbarController?.animate(snackbar: .visible, delay: 0)
-        snackbarController?.animate(snackbar: .hidden, delay: 3)
+        let alert = UIAlertController(title: nil, message: "Copied to clipboard", preferredStyle: .actionSheet)
+        self.present(alert, animated: true)
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when){
+            alert.dismiss(animated: true)
+        }
+        //snackbarController?.animate(snackbar: .visible, delay: 0)
+        //snackbarController?.animate(snackbar: .hidden, delay: 3)
     }
     
     @objc
