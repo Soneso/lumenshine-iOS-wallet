@@ -22,7 +22,6 @@ class AccountDetailsViewController: UIViewController {
     @IBOutlet weak var walletNameStackView: UIStackView!
     @IBOutlet var walletNameView: UIView!
     @IBOutlet var walletNameEditView: UIView!
-    
     @IBOutlet weak var walletNameLabel: UILabel!
     @IBOutlet weak var walletNameTextField: UITextField!
     
@@ -62,10 +61,7 @@ class AccountDetailsViewController: UIViewController {
 
         setupNavigationItem()
         setupWalletNameView()
-        publicKeyLabel.text = wallet.publicKey
-        publicKeyLabel.font = R.font.encodeSansSemiBold(size: 15)
-        publicKeyLabel.numberOfLines = 1
-        publicKeyLabel.lineBreakMode = .byTruncatingMiddle
+        setupPublicKeyView()
         setupStellarAddress()
         view.backgroundColor = Stylesheet.color(.veryLightGray)
         setupButtons()
@@ -188,15 +184,24 @@ class AccountDetailsViewController: UIViewController {
         navigationItem.titleLabel.attributedText = walletName
         
         let helpButton = Material.IconButton()
-        helpButton.image = R.image.question()?.crop(toWidth: 15, toHeight: 15)?.tint(with: Stylesheet.color(.white))
+        helpButton.image = R.image.question()?.crop(toWidth: 25, toHeight: 25)?.tint(with: Stylesheet.color(.white))
         helpButton.addTarget(self, action: #selector(didTapHelp(_:)), for: .touchUpInside)
         navigationItem.rightViews = [helpButton]
     }
     
     private func setupWalletNameView() {
+        
         walletNameEditView.removeFromSuperview()
         walletNameLabel.text = wallet.name
         walletNameTextField.placeholder = wallet.name
+    
+    }
+    
+    private func setupPublicKeyView() {
+        publicKeyLabel.text = wallet.publicKey
+        publicKeyLabel.font = R.font.encodeSansSemiBold(size: 15)
+        publicKeyLabel.numberOfLines = 1
+        publicKeyLabel.lineBreakMode = .byTruncatingMiddle
     }
     
     private func setupStellarAddress() {

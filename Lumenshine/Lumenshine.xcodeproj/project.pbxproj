@@ -1616,11 +1616,11 @@
 		C68884FC213E68CD0010615D /* WalletDetails */ = {
 			isa = PBXGroup;
 			children = (
-				C6888500213E69FB0010615D /* TransactionHistory */,
-				C6888502213E6A7A0010615D /* Currencies */,
-				C6888503213E6AC30010615D /* WalletInfo */,
 				7420BBE4211819AB002FC4C7 /* AccountDetailsViewController.swift */,
 				7420BBE5211819AB002FC4C7 /* AccountDetailsViewController.xib */,
+				C6888503213E6AC30010615D /* WalletInfo */,
+				C6888502213E6A7A0010615D /* Currencies */,
+				C6888500213E69FB0010615D /* TransactionHistory */,
 			);
 			path = WalletDetails;
 			sourceTree = "<group>";
