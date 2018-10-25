@@ -192,7 +192,7 @@ class AccountDetailsViewController: UIViewController {
     
     private func setupStellarAddress() {
         
-        federationDomainLabel.text = "*lumenshine.com"
+        federationDomainLabel.text = "*demo.lumenshine.com"
         
         /** live net **/
         //federationDomainLabel.text = "*alpha.lumenshine.com"
