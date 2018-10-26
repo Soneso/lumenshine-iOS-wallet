@@ -114,6 +114,7 @@ class WalletCard: CardView {
             fundedView.nameLabel.text = viewModel.title?.uppercased()
             if !viewModel.wallet.federationAddress.isEmpty {
                 fundedView.stellarAddressLabel.text = viewModel.wallet.federationAddress
+                fundedView.stellarAddressLabel.backgroundColor = Stylesheet.color(.orange)
             }
             
             fundedView.balanceDescriptionLabel.text = (viewModel.wallet as! FundedWallet).balances.count > 1 ? R.string.localizable.balances().uppercased() : R.string.localizable.balance().uppercased()
@@ -191,8 +192,7 @@ fileprivate extension WalletCard {
         fundedView.walletLabel.font = R.font.encodeSansRegular(size: 16)
         fundedView.walletLabel.textColor = Stylesheet.color(.lightBlack)
         
-        fundedView.stellarAddressLabel.font = R.font.encodeSansRegular(size: 15)
-        fundedView.stellarAddressLabel.textColor = Stylesheet.color(.orange)
+        fundedView.stellarAddressLabel.backgroundColor = Stylesheet.color(.helpButtonGray)
         
         fundedView.balanceBackgroundView.backgroundColor = Stylesheet.color(.green)
         fundedView.balanceBackgroundView.layer.cornerRadius = 10
@@ -247,8 +247,7 @@ fileprivate extension WalletCard {
         unfundedView.walletLabel.font = R.font.encodeSansRegular(size: 16)
         unfundedView.walletLabel.textColor = Stylesheet.color(.lightBlack)
         
-        unfundedView.notFundedLabel.font = R.font.encodeSansRegular(size: 15)
-        unfundedView.notFundedLabel.textColor = Stylesheet.color(.red)
+        unfundedView.notFundedLabel.backgroundColor = Stylesheet.color(.helpButtonGray)
         
         unfundedView.balanceBackgroundView.backgroundColor = Stylesheet.color(.red)
         unfundedView.balanceBackgroundView.layer.cornerRadius = 10

@@ -52,7 +52,10 @@ class AddWalletViewController: UIViewController {
             UIPasteboard.general.string = value
             let alert = UIAlertController(title: nil, message: "Copied to clipboard", preferredStyle: .actionSheet)
             self.present(alert, animated: true)
-            alert.dismiss(animated: true)
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when){
+                alert.dismiss(animated: true)
+            }
         }
     }
     

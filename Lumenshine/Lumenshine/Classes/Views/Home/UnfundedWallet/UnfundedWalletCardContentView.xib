@@ -73,8 +73,8 @@
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="VWl-F4-CNx"/>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="not funded" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QmJ-VE-oES">
-                    <rect key="frame" x="16" y="41.5" width="343" height="18"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="not funded" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QmJ-VE-oES" customClass="RoundedBackgroundLabel" customModule="Lumenshine" customModuleProvider="target">
+                    <rect key="frame" x="16" y="41.5" width="75" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.98823529409999999" green="0.047058823530000002" blue="0.1058823529" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -95,7 +95,6 @@
                 <constraint firstItem="0Zl-V8-7a0" firstAttribute="bottom" secondItem="LXd-hR-sCL" secondAttribute="bottom" constant="10" id="Hpy-oc-PEm"/>
                 <constraint firstItem="0Zl-V8-7a0" firstAttribute="top" secondItem="UWs-ZR-OhZ" secondAttribute="top" constant="-10" id="JrS-Nt-7Ik"/>
                 <constraint firstItem="ye4-CW-sVN" firstAttribute="trailing" secondItem="LXd-hR-sCL" secondAttribute="trailing" constant="16" id="KYi-9N-1hr"/>
-                <constraint firstItem="ye4-CW-sVN" firstAttribute="trailing" secondItem="QmJ-VE-oES" secondAttribute="trailing" constant="16" id="QnV-G6-sgO"/>
                 <constraint firstItem="UWs-ZR-OhZ" firstAttribute="top" secondItem="QmJ-VE-oES" secondAttribute="bottom" constant="25" id="SVa-rd-BiS"/>
                 <constraint firstItem="0Zl-V8-7a0" firstAttribute="leading" secondItem="UWs-ZR-OhZ" secondAttribute="leading" constant="-10" id="SyM-nK-Ees"/>
                 <constraint firstItem="0Zl-V8-7a0" firstAttribute="width" secondItem="MEy-Lv-QCt" secondAttribute="width" multiplier="0.5" id="Uxc-Vm-sI1"/>

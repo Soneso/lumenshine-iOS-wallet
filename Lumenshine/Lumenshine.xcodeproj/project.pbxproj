@@ -338,6 +338,7 @@
 		C69ABBCD2181A9D70077B119 /* AddWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69ABBCC2181A9D70077B119 /* AddWalletViewController.swift */; };
 		C69F551D2158BC920021EE5C /* AmountSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69F551C2158BC920021EE5C /* AmountSegmentedControl.swift */; };
 		C6A11D592142721200424DBE /* PrivateKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A11D582142721200424DBE /* PrivateKeyManager.swift */; };
+		C6A6E3502182F1AE004A5634 /* RoundedBackgroundLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A6E34F2182F1AE004A5634 /* RoundedBackgroundLabel.swift */; };
 		C6A87D71216B24DE00658D55 /* SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A87D70216B24DE00658D55 /* SimpleButton.swift */; };
 		C6A87D73216B4D4B00658D55 /* CellRegularLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A87D72216B4D4B00658D55 /* CellRegularLabel.swift */; };
 		C6A87D75216B77EB00658D55 /* LeftCaptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A87D74216B77EB00658D55 /* LeftCaptionTextField.swift */; };
@@ -747,6 +748,7 @@
 		C69ABBCC2181A9D70077B119 /* AddWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWalletViewController.swift; sourceTree = "<group>"; };
 		C69F551C2158BC920021EE5C /* AmountSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountSegmentedControl.swift; sourceTree = "<group>"; };
 		C6A11D582142721200424DBE /* PrivateKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeyManager.swift; sourceTree = "<group>"; };
+		C6A6E34F2182F1AE004A5634 /* RoundedBackgroundLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedBackgroundLabel.swift; sourceTree = "<group>"; };
 		C6A87D70216B24DE00658D55 /* SimpleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleButton.swift; sourceTree = "<group>"; };
 		C6A87D72216B4D4B00658D55 /* CellRegularLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellRegularLabel.swift; sourceTree = "<group>"; };
 		C6A87D74216B77EB00658D55 /* LeftCaptionTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftCaptionTextField.swift; sourceTree = "<group>"; };
@@ -1598,6 +1600,7 @@
 				C6A87D74216B77EB00658D55 /* LeftCaptionTextField.swift */,
 				C6CEBCB1216CA66000710ED7 /* TabLikeSegmentedControl.swift */,
 				C6BDA2B1216F3ED80076439E /* CurrencyInfoButton.swift */,
+				C6A6E34F2182F1AE004A5634 /* RoundedBackgroundLabel.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
@@ -1616,11 +1619,11 @@
 		C68884FC213E68CD0010615D /* WalletDetails */ = {
 			isa = PBXGroup;
 			children = (
-				C6888500213E69FB0010615D /* TransactionHistory */,
-				C6888502213E6A7A0010615D /* Currencies */,
-				C6888503213E6AC30010615D /* WalletInfo */,
 				7420BBE4211819AB002FC4C7 /* AccountDetailsViewController.swift */,
 				7420BBE5211819AB002FC4C7 /* AccountDetailsViewController.xib */,
+				C6888503213E6AC30010615D /* WalletInfo */,
+				C6888502213E6A7A0010615D /* Currencies */,
+				C6888500213E69FB0010615D /* TransactionHistory */,
 			);
 			path = WalletDetails;
 			sourceTree = "<group>";
@@ -2384,6 +2387,7 @@
 				43D15E48212AE53A00415CE5 /* ChartCardViewModel.swift in Sources */,
 				C69F551D2158BC920021EE5C /* AmountSegmentedControl.swift in Sources */,
 				43C54039215A66170064BA67 /* HelpCardViewModel.swift in Sources */,
+				C6A6E3502182F1AE004A5634 /* RoundedBackgroundLabel.swift in Sources */,
 				C6B75F35211837AF00B45BEB /* TransactionResultViewController.swift in Sources */,
 				7445E9C52019CF7200470E0A /* AppDelegate.swift in Sources */,
 				436B367220512114009F7C21 /* SquareCashBarBehaviorDefiner.swift in Sources */,
