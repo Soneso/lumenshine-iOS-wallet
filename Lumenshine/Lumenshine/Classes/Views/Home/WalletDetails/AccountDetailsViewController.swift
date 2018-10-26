@@ -18,6 +18,12 @@ protocol AccountDetailsViewControllerFlow: BaseViewControllerFlowDelegate {
     
 }
 
+private enum ActionButtonTitles: String {
+    case setAddress = "set address"
+    case removeAddress = "remove address"
+    case cancel = "cancel"
+}
+
 class AccountDetailsViewController: UIViewController {
     @IBOutlet weak var walletNameStackView: UIStackView!
     @IBOutlet var walletNameView: UIView!
@@ -46,13 +52,35 @@ class AccountDetailsViewController: UIViewController {
     @IBOutlet weak var saveWalletNameButton: UIButton!
     @IBOutlet weak var cancelWalletNameButton: UIButton!
     
-    @IBOutlet weak var cancelInflationChangeButton: UIButton!
     @IBOutlet weak var submitInflationChangeButton: UIButton!
     weak var flowDelegate: AccountDetailsViewControllerFlow?
     
     private let walletService = Services.shared.walletService
     private var titleView: TitleView!
     private var accountCurrenciesViewController: AccountCurrenciesViewController!
+    
+    @IBOutlet weak var stellarAddressActionbutton: UIButton!
+    
+    @IBAction func didTapStellarAddressActionButton(_ sender: UIButton) {
+        if let buttonTitle = stellarAddressActionbutton.title(for: .normal) {
+            if  buttonTitle == ActionButtonTitles.cancel.rawValue {
+                setStellarAddressView()
+                return
+            }
+            
+            if buttonTitle == ActionButtonTitles.setAddress.rawValue {
+                stellarAddressNotSetupView.removeFromSuperview()
+                stellarAddressEditTextField.text = nil
+                stellarAddressEditErrorLabel.text = nil
+                stellarAddressStackView.addArrangedSubview(stellarAddressEditView)
+                setupStellarAddressActionButton(withTitle: .cancel)
+            } else {
+                removeStellarAddress()
+                setupStellarAddressActionButton(withTitle: .setAddress)
+            }
+        }
+      
+    }
     
     var wallet: Wallet!
     
@@ -128,15 +156,6 @@ class AccountDetailsViewController: UIViewController {
         }
     }
     
-    @IBAction func didTapSetAddress(_ sender: Any) {
-        stellarAddressNotSetupView.removeFromSuperview()
-        stellarAddressStackView.addArrangedSubview(stellarAddressEditView)
-    }
-    
-    @IBAction func didTapCancelEditStellarAddress(_ sender: Any) {
-        setStellarAddressView()
-    }
-    
     @IBAction func didTapSubmitEditStellarAddress(_ sender: Any) {
         var request = ChangeWalletRequest(id: wallet.id)
         let stellarAddress = (stellarAddressEditTextField.text ?? "") + federationDomainLabel.text!
@@ -151,13 +170,14 @@ class AccountDetailsViewController: UIViewController {
                 self.stellarAddressEditView.removeFromSuperview()
                 self.stellarAddressStackView.addArrangedSubview(self.stellarAddressRemoveView)
                 self.wallet.federationAddress = stellarAddress
+                self.setupStellarAddressActionButton(withTitle: .removeAddress)
             case .failure(let error):
                 self.stellarAddressEditErrorLabel.text = error.localizedDescription
             }
         }
     }
     
-    @IBAction func didTapRemoveStellarAddress(_ sender: Any) {
+    private func removeStellarAddress() {
         view.isUserInteractionEnabled = false
         walletService.removeFederationAddress(walletId: wallet.id) { (result) -> (Void) in
             self.view.isUserInteractionEnabled = true
@@ -205,7 +225,8 @@ class AccountDetailsViewController: UIViewController {
     }
     
     private func setupStellarAddress() {
-        
+        federationDomainLabel.backgroundColor = Stylesheet.color(.helpButtonGray)
+        removeViewAddressLabel.backgroundColor = Stylesheet.color(.orange)
         federationDomainLabel.text = "*demo.lumenshine.com"
         
         /** live net **/
@@ -214,21 +235,38 @@ class AccountDetailsViewController: UIViewController {
         if wallet.federationAddress.isEmpty {
             stellarAddressEditView.removeFromSuperview()
             stellarAddressRemoveView.removeFromSuperview()
+            setupStellarAddressActionButton(withTitle: .setAddress)
         } else {
             removeViewAddressLabel.text = wallet.federationAddress
             stellarAddressNotSetupView.removeFromSuperview()
             stellarAddressEditView.removeFromSuperview()
+            setupStellarAddressActionButton(withTitle: .removeAddress)
         }
         
-        stellarAddressNoneLabel.textColor = Stylesheet.color(.red)
+        stellarAddressNoneLabel.backgroundColor = Stylesheet.color(.helpButtonGray)
+    }
+    
+    private func setupStellarAddressActionButton(withTitle title: ActionButtonTitles) {
+        switch title {
+        case .setAddress:
+            stellarAddressActionbutton.tintColor = Stylesheet.color(.blue)
+        case .removeAddress:
+            stellarAddressActionbutton.tintColor = Stylesheet.color(.red)
+        case .cancel:
+            stellarAddressActionbutton.tintColor = Stylesheet.color(.orange)
+        }
+        
+        stellarAddressActionbutton.setTitle(title.rawValue, for: .normal)
     }
     
     private func setStellarAddressView() {
         stellarAddressEditView.removeFromSuperview()
         if wallet.federationAddress.isEmpty {
             stellarAddressStackView.addArrangedSubview(stellarAddressNotSetupView)
+            setupStellarAddressActionButton(withTitle: .setAddress)
         } else {
             stellarAddressStackView.addArrangedSubview(stellarAddressRemoveView)
+            setupStellarAddressActionButton(withTitle: .removeAddress)
         }
     }
     
@@ -291,6 +329,5 @@ class AccountDetailsViewController: UIViewController {
         submitInflationChangeButton.backgroundColor = Stylesheet.color(.blue)
         
         cancelWalletNameButton.backgroundColor = Stylesheet.color(.red)
-        cancelInflationChangeButton.backgroundColor = Stylesheet.color(.red)
     }
 }
