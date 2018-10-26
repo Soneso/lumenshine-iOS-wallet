@@ -25,11 +25,12 @@ protocol PersonalDataViewModelType: Transitionable {
     func textValue(at indexPath: IndexPath) -> String?
     func keyboardType(at indexPath: IndexPath) -> UIKeyboardType
     func inputViewOptions(at indexPath: IndexPath) -> ([String]?, Int?)
-    func isDateInputView(at indexPath: IndexPath) -> Bool
+    func isDateInputView(at indexPath: IndexPath) -> Date?
     
     func textChanged(_ text: String, itemForRowAt indexPath: IndexPath)
     func shouldBeginEditing(at indexPath: IndexPath) -> Bool
     func submit(response: @escaping EmptyResponseClosure)
+    func getUserData(response: @escaping EmptyResponseClosure)
     
     func subItemSelected(at indexPath: IndexPath)
     func filterSubItems(searchText: String)
@@ -66,15 +67,6 @@ class PersonalDataViewModel : PersonalDataViewModelType {
                         [.taxID, .taxIDName]]
         
         getSalutationList()
-        
-        self.service.getUserData { [weak self] result in
-            switch result {
-            case .success(let response):
-                self?.setUserData(response)
-            case .failure(let error):
-                print("Get user data failure: \(error)")
-            }
-        }
     }
     
     var dataChangedClosure: (() -> ())?
@@ -160,12 +152,12 @@ class PersonalDataViewModel : PersonalDataViewModelType {
         return (nil, nil)
     }
     
-    func isDateInputView(at indexPath: IndexPath) -> Bool {
+    func isDateInputView(at indexPath: IndexPath) -> Date? {
         switch entry(at: indexPath) {
         case .birthday:
-            return true
+            return userData?.birthday ?? Date()
         default:
-            return false
+            return nil
         }
     }
     
@@ -236,7 +228,18 @@ class PersonalDataViewModel : PersonalDataViewModelType {
         
         service.updateUserData(userData: validatedData!, response: response)
     }
-
+    
+    func getUserData(response: @escaping EmptyResponseClosure) {
+        self.service.getUserData { [weak self] result in
+            switch result {
+            case .success(let userData):
+                self?.setUserData(userData)
+                response(.success)
+            case .failure(let error):
+                response(.failure(error: error))
+            }
+        }
+    }
 }
 
 fileprivate extension PersonalDataViewModel {
@@ -254,7 +257,7 @@ fileprivate extension PersonalDataViewModel {
             return (error, nil)
         }
         
-        if let phone = validatedData[.mobileNR]?.name {
+        if let phone = validatedData[.mobileNR]?.name, !phone.isEmpty {
             let charSet = CharacterSet(charactersIn: "()-").union(.whitespaces)
             let components = phone.components(separatedBy: charSet)
             let phoneNr = components.joined(separator: "")
@@ -349,10 +352,18 @@ fileprivate extension PersonalDataViewModel {
         
         selectedValues[.additionalName] = PersonalData(name: userData.additionalName)
         selectedValues[.address] = PersonalData(name: userData.address)
-        selectedValues[.bankAccountNumber] = PersonalData(name: userData.bankAccountNumber)
-        selectedValues[.bankNumber] = PersonalData(name: userData.bankNumber)
-        selectedValues[.bankPhoneNumber] = PersonalData(name: userData.bankPhoneNumber)
-        selectedValues[.birthday] = PersonalData(name: DateUtils.shortDateString(from: userData.birthday))
+        if userData.bankAccountNumber.count == 4 {
+            selectedValues[.bankAccountNumber] = PersonalData(name: userData.bankAccountNumber.extend(prefix: "*", count: 12))
+        }
+        if userData.bankNumber.count == 4 {
+            selectedValues[.bankNumber] = PersonalData(name: userData.bankNumber.extend(prefix: "*", count: 12))
+        }
+        if userData.bankPhoneNumber.count == 4 {
+            selectedValues[.bankPhoneNumber] = PersonalData(name: userData.bankPhoneNumber.extend(prefix: "*", count: 12))
+        }
+        if let birthDay = userData.birthday {
+            selectedValues[.birthday] = PersonalData(name: DateUtils.shortDateString(from: birthDay))
+        }
         selectedValues[.birthPlace] = PersonalData(name: userData.birthPlace)
         selectedValues[.city] = PersonalData(name: userData.city)
         selectedValues[.company] = PersonalData(name: userData.company)
@@ -364,7 +375,6 @@ fileprivate extension PersonalDataViewModel {
         selectedValues[.mobileNR] = PersonalData(name: userData.mobileNR)
         selectedValues[.nationality] = PersonalData(name: userData.nationality)
         selectedValues[.occupation] = Occupation(name: userData.occupation, code08: userData.occupationCode08, code88: userData.occupationCode88)
-        selectedValues[.registrationDate] = PersonalData(name: DateUtils.shortDateString(from: userData.registrationDate))
         selectedValues[.salutation] = PersonalData(name: userData.salutation)
         selectedValues[.state] = PersonalData(name: userData.state)
         selectedValues[.taxID] = PersonalData(name: userData.taxID)

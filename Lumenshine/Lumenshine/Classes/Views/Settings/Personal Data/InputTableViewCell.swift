@@ -14,7 +14,7 @@ protocol InputTableCellProtocol {
     func setText(_ text: String?)
     func setSecureText(_ isSecure: Bool)
     func setInputViewOptions(_ options: [String]?, selectedIndex: Int?)
-    func setDateInputView(_ isDate: Bool)
+    func setDateInputView(_ date: Date?)
     func setKeyboardType(_ type: UIKeyboardType)
 }
 
@@ -42,6 +42,12 @@ class InputTableViewCell: UITableViewCell, InputTableCellProtocol {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        textEditingCallback = nil
+        shouldBeginEditingCallback = nil
     }
     
     override func layoutSubviews() {
@@ -95,9 +101,9 @@ class InputTableViewCell: UITableViewCell, InputTableCellProtocol {
         }
     }
     
-    func setDateInputView(_ isDate: Bool) {
-        if isDate == true {
-            setDatePickerInputView()
+    func setDateInputView(_ date: Date?) {
+        if let d = date {
+            setDatePickerInputView(d)
         }
     }
     
@@ -131,7 +137,7 @@ extension InputTableViewCell: UITextFieldDelegate {
 }
 
 fileprivate extension InputTableViewCell {
-    func setDatePickerInputView() {
+    func setDatePickerInputView(_ date: Date) {
         var minYear = DateComponents()
         minYear.year = 1910
         
@@ -142,6 +148,8 @@ fileprivate extension InputTableViewCell {
         datePicker.addTarget(self, action: #selector(birthdayDidChange(sender:)), for: .valueChanged)
         
         textField.inputView = datePicker
+        
+        datePicker.date = date
     }
     
     @objc

@@ -26,6 +26,11 @@ class MultilineInputTableViewCell: InputTableViewCell {
     
     var cellSizeChangedCallback: ((_ size:CGFloat) -> ())?
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        cellSizeChangedCallback = nil
+    }
+    
     override func commonInit() {
         selectionStyle = .none
         backgroundColor = .clear

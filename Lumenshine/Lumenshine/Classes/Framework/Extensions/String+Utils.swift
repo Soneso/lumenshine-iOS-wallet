@@ -213,6 +213,14 @@ extension String  {
         return nil
     }
     
+    func extend(prefix: String, count: Int = 1) -> String {
+        var extended = self
+        for _ in 0...count {
+            extended = prefix + extended
+        }
+        return extended
+    }
+    
     func getSize(usingFont font: UIFont) -> CGSize {
         let fontAttributes = [NSAttributedStringKey.font: font]
         return self.size(withAttributes: fontAttributes)

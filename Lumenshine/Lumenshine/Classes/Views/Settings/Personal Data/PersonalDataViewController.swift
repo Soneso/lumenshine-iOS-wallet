@@ -18,6 +18,7 @@ class PersonalDataViewController: UITableViewController {
     fileprivate let verticalSpacing = 31.0
     fileprivate let horizontalSpacing = 15.0
     fileprivate let viewModel: PersonalDataViewModelType
+    fileprivate let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
     
     init(viewModel: PersonalDataViewModelType) {
         self.viewModel = viewModel
@@ -31,6 +32,20 @@ class PersonalDataViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         prepare()
+        
+        activityIndicator.startAnimating()
+        viewModel.getUserData { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    self?.tableView.reloadData()
+                case .failure(let error):
+                    let alert = AlertFactory.createAlert(error: error)
+                    self?.present(alert, animated: true)
+                }
+                self?.activityIndicator.stopAnimating()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,6 +77,12 @@ class PersonalDataViewController: UITableViewController {
         let identifier = viewModel.cellIdentifier(at: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         
+        if let inputCell = cell as? MultilineInputTableViewCell {
+            inputCell.cellSizeChangedCallback = { height in
+                self.viewModel.cellHeightChanged(height, at: indexPath)
+            }
+        }
+        
         if let tableCell = cell as? InputTableViewCell {
             tableCell.setText(viewModel.textValue(at: indexPath))
             tableCell.setPlaceholder(viewModel.placeholder(at: indexPath))
@@ -75,12 +96,6 @@ class PersonalDataViewController: UITableViewController {
             }
             tableCell.shouldBeginEditingCallback = {
                 return self.viewModel.shouldBeginEditing(at: indexPath)
-            }
-        }
-        
-        if let inputCell = cell as? MultilineInputTableViewCell {
-            inputCell.cellSizeChangedCallback = { height in
-                self.viewModel.cellHeightChanged(height, at: indexPath)
             }
         }
         
@@ -210,29 +225,25 @@ fileprivate extension PersonalDataViewController {
         
         viewModel.cellSizeRefreshCallback = {
             UIView.setAnimationsEnabled(false)
-            
             self.tableView.beginUpdates()
             self.tableView.endUpdates()
-            
             UIView.setAnimationsEnabled(true)
         }
     }
     
     func prepareNavigationItem() {
-        
         let doneButton = LSButton()
         doneButton.backgroundColor = Stylesheet.color(.whiteWith(alpha: 0.2))
         doneButton.title = R.string.localizable.submit()
         doneButton.titleColor = Stylesheet.color(.blue)
         doneButton.cornerRadiusPreset = .cornerRadius5
         doneButton.addTarget(self, action: #selector(saveAction(sender:)), for: .touchUpInside)
-        navigationItem.rightViews = [doneButton]
-        doneButton.isHidden = true
         
         viewModel.dataChangedClosure = {
-            doneButton.isHidden = false
+            self.navigationItem.rightViews = [doneButton]
         }
         
+        navigationItem.rightViews = [activityIndicator]
         navigationItem.backButton.isHidden = true
         
         let backButton = Material.IconButton()

@@ -23,7 +23,7 @@ public struct UserData: Codable {
     let countryCode: String
     let nationality: String
     let mobileNR: String
-    let birthday: Date
+    let birthday: Date?
     let birthPlace: String
     let additionalName: String
     let birthCountryCode: String
@@ -38,7 +38,6 @@ public struct UserData: Codable {
     let employerName: String
     let employerAddress: String
     let languageCode: String
-    let registrationDate: Date
     
     private enum CodingKeys: String, CodingKey {
         
@@ -70,6 +69,5 @@ public struct UserData: Codable {
         case employerName = "employer_name"
         case employerAddress = "employer_address"
         case languageCode = "language_code"
-        case registrationDate = "registration_date"
     }
 }
