@@ -24,6 +24,7 @@ protocol LoginViewModelType: Transitionable, BiometricAuthenticationProtocol {
     func enableTfaCode(email: String) -> Bool
     func signUp(email: String, password: String, repassword: String, response: @escaping EmptyResponseClosure)
     func showPasswordHint()
+    func showTermsOfService()
     
     func headerMenuSelected(at index: Int)
     
@@ -255,6 +256,10 @@ class LoginViewModel : LoginViewModelType {
         hint.append(hint4)
         
         navigationCoordinator?.performTransition(transition: .showPasswordHint(hint.string, hint))
+    }
+    
+    func showTermsOfService() {
+        navigationCoordinator?.performTransition(transition: .showTermsOfService)
     }
     
 

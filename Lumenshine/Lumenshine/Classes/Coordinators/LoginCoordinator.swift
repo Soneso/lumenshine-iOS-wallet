@@ -48,6 +48,8 @@ class LoginCoordinator: CoordinatorType {
                 self.showPasswordHint(hint, attributedText: attributedText)
             case .showSetup(let user, let mnemonic, let loginResponse):
                 self.showSetup(user: user, mnemonic: mnemonic, loginResponse: loginResponse)
+            case .showTermsOfService:
+                self.showTermsOfService()
             default:
                 break
             }
@@ -94,6 +96,14 @@ fileprivate extension LoginCoordinator {
     func showPasswordHint(_ hint: String, attributedText: NSAttributedString?) {
         let title = R.string.localizable.password_hint_title()
         let textVC = InfoViewController(info: hint, attributedText: attributedText, title: title)
+        let composeVC = ComposeNavigationController(rootViewController: textVC)
+        baseController.present(composeVC, animated: true)
+    }
+    
+    func showTermsOfService() {
+        let title = R.string.localizable.terms_of_service()
+        let hint = R.string.localizable.terms_of_service_hint()
+        let textVC = InfoViewController(info: hint, title: title)
         let composeVC = ComposeNavigationController(rootViewController: textVC)
         baseController.present(composeVC, animated: true)
     }

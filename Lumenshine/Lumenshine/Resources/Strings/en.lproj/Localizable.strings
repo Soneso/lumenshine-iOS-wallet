@@ -831,3 +831,12 @@
 
 /*  */
 "personal_data_changed" = "Do you want to save the modified data?";
+
+/*  */
+"terms_of_service" = "Terms of service";
+
+/*  */
+"agree_to_abide" = "You agree to abide by Lumenshine's";
+
+/*  */
+"terms_of_service_hint" = "Terms of service text comes here";

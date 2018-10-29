@@ -28,6 +28,8 @@ class SignUpView: UIView {
     fileprivate let textField2 = LSTextField()
     fileprivate let textField3 = LSTextField()
     fileprivate let submitButton = RaisedButton()
+    fileprivate let checkButton = CheckButton()
+    fileprivate let termsButton = Button()
     
     weak var delegate: SignUpViewDelegate?
     
@@ -75,6 +77,8 @@ extension SignUpView {
     
     @objc
     func signUpAction(sender: UIButton) {
+        if !submitButton.isEnabled { return }
+        
         textField1.detail = nil
         textField2.detail = nil
         textField3.detail = nil
@@ -99,12 +103,31 @@ extension SignUpView {
         _ = resignFirstResponder()
         delegate?.didTapSubmitButton(email: email, password: password, repassword: repassword)
     }
+    
+    @objc
+    func agreeAction(sender: UIButton) {
+        updateSubmitButton()
+    }
+    
+    @objc
+    func termsAction(sender: UIButton) {
+        viewModel.showTermsOfService()
+    }
+    
+    @objc
+    func editingDidChange(_ textField: TextField) {
+        updateSubmitButton()
+    }
 }
 
 extension SignUpView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         signUpAction(sender: submitButton)
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        updateSubmitButton()
     }
 }
 
@@ -113,8 +136,10 @@ fileprivate extension SignUpView {
         prepareTitle()
         //prepareDetail()
         prepareTextFields()
-        prepareLoginButton()
         prepareHintButton()
+        prepareCheckButton()
+        prepareLoginButton()
+        updateSubmitButton()
     }
     
     func prepareTitle() {
@@ -156,15 +181,18 @@ fileprivate extension SignUpView {
         textField1.keyboardType = .emailAddress
         textField1.autocapitalizationType = .none
         textField1.placeholder = R.string.localizable.email().uppercased()
+        textField1.addTarget(self, action: #selector(editingDidChange(_:)), for: .editingChanged)
         
         textField2.isSecureTextEntry = true
         textField2.isVisibilityIconButtonEnabled = true
         textField2.placeholder = R.string.localizable.password().uppercased()
         textField2.dividerContentEdgeInsets = EdgeInsets(top: 0, left: 0, bottom: 0, right: -2.0*horizontalSpacing)
+        textField2.addTarget(self, action: #selector(editingDidChange(_:)), for: .editingChanged)
 
         textField3.isSecureTextEntry = true
         textField3.isVisibilityIconButtonEnabled = true
         textField3.placeholder = R.string.localizable.repeat_password().uppercased()
+        textField3.addTarget(self, action: #selector(editingDidChange(_:)), for: .editingChanged)
         
         addSubview(textField1)
         textField1.snp.makeConstraints { make in
@@ -202,6 +230,37 @@ fileprivate extension SignUpView {
         }
     }
     
+    func prepareCheckButton() {
+        
+        checkButton.title = R.string.localizable.agree_to_abide()
+//        checkButton.checkmarkColor = Stylesheet.color(.blue)
+        checkButton.titleColor = Stylesheet.color(.lightBlack)
+        checkButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        checkButton.titleLabel?.font = R.font.encodeSansRegular(size: 13)
+        checkButton.addTarget(self, action: #selector(agreeAction(sender:)), for: .touchUpInside)
+        
+        addSubview(checkButton)
+        checkButton.snp.makeConstraints { make in
+            make.top.equalTo(textField3.snp.bottom).offset(verticalSpacing)
+            make.left.equalTo(10)
+//            make.width.height.equalTo(40)
+        }
+        
+        termsButton.title = R.string.localizable.terms_of_service().lowercased()
+        termsButton.titleColor = Stylesheet.color(.blue)
+        termsButton.backgroundColor = Stylesheet.color(.white)
+        termsButton.titleLabel?.font = R.font.encodeSansRegular(size: 13)
+        termsButton.contentEdgeInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+        termsButton.addTarget(self, action: #selector(termsAction(sender:)), for: .touchUpInside)
+        
+        addSubview(termsButton)
+        termsButton.snp.makeConstraints { make in
+            make.left.equalTo(checkButton.snp.right)
+            make.centerY.equalTo(checkButton)
+//            make.right.equalToSuperview()
+        }
+    }
+    
     func prepareLoginButton() {
         submitButton.title = R.string.localizable.signup().uppercased()
         submitButton.backgroundColor = Stylesheet.color(.green)
@@ -213,11 +272,31 @@ fileprivate extension SignUpView {
         
         addSubview(submitButton)
         submitButton.snp.makeConstraints { make in
-            make.top.equalTo(textField3.snp.bottom).offset(verticalSpacing+10)
+            make.top.equalTo(checkButton.snp.bottom).offset(verticalSpacing)
             make.centerX.equalToSuperview()
             make.width.equalTo(160)
             make.height.equalTo(38)
             make.bottom.equalTo(-20)
+        }
+    }
+    
+    func validateForm() -> Bool {
+        if textField1.text?.isEmpty ?? true ||
+            textField2.text?.isEmpty ?? true ||
+            textField3.text?.isEmpty ?? true ||
+            !checkButton.isSelected {
+            return false
+        }
+        return true
+    }
+    
+    func updateSubmitButton() {
+        if validateForm() {
+            submitButton.isEnabled = true
+            submitButton.backgroundColor = Stylesheet.color(.green)
+        } else {
+            submitButton.isEnabled = false
+            submitButton.backgroundColor = Stylesheet.color(.gray)
         }
     }
 }
