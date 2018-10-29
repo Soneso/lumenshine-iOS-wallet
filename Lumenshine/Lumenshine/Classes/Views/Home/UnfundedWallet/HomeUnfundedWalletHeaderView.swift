@@ -14,6 +14,7 @@ class HomeUnfundedWalletHeaderView: UIView {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var xlmPriceLabel: UILabel!
 
+    @IBOutlet weak var logoTopConstraint: NSLayoutConstraint!
     var foundAction: ((_ sender: UIButton)->())?
     
     override func awakeFromNib() {
@@ -27,5 +28,10 @@ class HomeUnfundedWalletHeaderView: UIView {
     
     private func setup() {
         titleLabel.text = R.string.localizable.homeScreenTitle()
+        
+        guard #available(iOS 11, *) else {
+            logoTopConstraint.constant = 0
+            return
+        }
     }
 }

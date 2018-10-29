@@ -72,6 +72,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="foundAccountButton" destination="GMo-Qc-Wuw" id="Xw4-Ch-vl1"/>
+                <outlet property="logoTopConstraint" destination="UWB-4S-hNM" id="KR8-iO-A9W"/>
                 <outlet property="moreButton" destination="U3X-f6-ZbK" id="cES-aV-ww0"/>
                 <outlet property="receiveButton" destination="7DH-E9-F68" id="SuR-Dd-gtm"/>
                 <outlet property="sendButton" destination="OGg-q4-4bu" id="6Yu-nz-JCO"/>

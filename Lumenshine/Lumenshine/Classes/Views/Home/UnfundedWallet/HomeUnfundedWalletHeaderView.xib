@@ -60,6 +60,7 @@
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
+                <outlet property="logoTopConstraint" destination="9iw-mv-uWg" id="6N9-3H-KG2"/>
                 <outlet property="titleLabel" destination="zV4-Ib-O6t" id="TB0-5f-s1P"/>
                 <outlet property="xlmPriceLabel" destination="e4r-hr-Tbu" id="haU-2A-vrc"/>
             </connections>

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Material
 
 class RightRoundedButton: BaseButton {
     override func awakeFromNib() {
@@ -15,7 +16,6 @@ class RightRoundedButton: BaseButton {
     }
     
     private func setup() {
-        cornerRadiusPreset = .cornerRadius6
-        layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner ]
+        roundCorners([.layerMaxXMinYCorner, .layerMaxXMaxYCorner ], radius: CornerRadiusPresetToValue(preset: .cornerRadius6))
     }
 }

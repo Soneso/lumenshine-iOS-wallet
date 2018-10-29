@@ -18,6 +18,7 @@ class HomeFundedWalletHeaderView: UIView {
     @IBOutlet weak var moreButton: UITabBarItem!
     @IBOutlet weak var tabBar: UITabBar!
     
+    @IBOutlet weak var logoTopConstraint: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
@@ -27,6 +28,11 @@ class HomeFundedWalletHeaderView: UIView {
         setupTabBar()
         setupButtons()
         titleLabel.text = R.string.localizable.homeScreenTitle()
+        
+        guard #available(iOS 11, *) else {
+            logoTopConstraint.constant = 0
+            return
+        }
     }
     
     private func setupTabBar() {

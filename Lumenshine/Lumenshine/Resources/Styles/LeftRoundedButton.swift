@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Material
 
 class LeftRoundedButton: BaseButton {
     override func awakeFromNib() {
@@ -15,7 +16,6 @@ class LeftRoundedButton: BaseButton {
     }
     
     private func setup() {
-        cornerRadiusPreset = .cornerRadius6
-        layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner ]
+        roundCorners([.layerMinXMinYCorner, .layerMinXMaxYCorner ], radius: CornerRadiusPresetToValue(preset: .cornerRadius6))
     }
 }

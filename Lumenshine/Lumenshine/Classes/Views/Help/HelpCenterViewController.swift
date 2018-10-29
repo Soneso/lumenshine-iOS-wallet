@@ -80,8 +80,7 @@ class HelpCenterViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let separator = UIView()
-        separator.layer.cornerRadius = 12
-        separator.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        separator.roundCorners([.layerMinXMinYCorner, .layerMaxXMinYCorner], radius: 12)
         separator.backgroundColor = .white
         
         let label = UILabel()
@@ -115,8 +114,7 @@ class HelpCenterViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let separator = UIView()
-        separator.layer.cornerRadius = 12
-        separator.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        separator.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 12)
         separator.backgroundColor = .white
 //        separator.depthPreset = .depth3
         
