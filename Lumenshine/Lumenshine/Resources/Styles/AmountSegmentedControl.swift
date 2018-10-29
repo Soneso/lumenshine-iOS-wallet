@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Material
 
 class AmountSegmentedControl: UISegmentedControl {
     override func awakeFromNib() {
@@ -29,8 +30,10 @@ class AmountSegmentedControl: UISegmentedControl {
             ], for: .selected)
                 
         if subviews.count == 2 {
-            setBorder(forSegment: subviews[0], isFirst: true)
-            setBorder(forSegment: subviews[1])
+            if #available(iOS 11, *) {
+                setBorder(forSegment: subviews[0], isFirst: true)
+                setBorder(forSegment: subviews[1])
+            }
         }
         
         setDividerImage(UIImage(), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: UIBarMetrics.default)
@@ -40,7 +43,6 @@ class AmountSegmentedControl: UISegmentedControl {
         segment.layer.borderColor = Stylesheet.color(.borderGray).cgColor
         segment.layer.borderWidth = 0.33
         segment.clipsToBounds = true
-        segment.layer.cornerRadiusPreset = .cornerRadius4
-        segment.layer.maskedCorners = isFirst ? [.layerMinXMinYCorner, .layerMinXMaxYCorner] : [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
+        segment.roundCorners(isFirst ? [.layerMinXMinYCorner, .layerMinXMaxYCorner] : [.layerMaxXMaxYCorner, .layerMaxXMinYCorner], radius: CornerRadiusPresetToValue(preset: .cornerRadius4))
     }
 }

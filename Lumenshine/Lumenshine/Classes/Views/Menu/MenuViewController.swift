@@ -94,6 +94,7 @@ fileprivate extension MenuViewController {
         tableView.register(MenuTableViewCell.self, forCellReuseIdentifier: MenuViewController.MenuCellIdentifier)
         tableView.register(AvatarTableViewCell.self, forCellReuseIdentifier: MenuViewController.AvatarCellIdentifier)
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 80
         tableView.separatorStyle = .none
         tableView.backgroundColor = Stylesheet.color(.lightCyan)
         tableView.tableHeaderView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))

@@ -109,9 +109,15 @@ extension HomeViewController: UITableViewDataSource {
                 if reload {
                     self?.tableView.reloadData()
                 } else {
-                    self?.tableView.performBatchUpdates({
+                    if #available(iOS 11.0, *) {
+                        self?.tableView.performBatchUpdates({
+                            self?.tableView.reloadRows(at: [indexPath], with: .automatic)
+                        }, completion: nil)
+                    } else {
+                        self?.tableView.beginUpdates()
                         self?.tableView.reloadRows(at: [indexPath], with: .automatic)
-                    }, completion: nil)
+                        self?.tableView.endUpdates()
+                    }
                 }
                 
                 self?.viewModel.updateCurrencies()
@@ -257,7 +263,9 @@ fileprivate extension HomeViewController {
         var topSafeAreaInset = CGFloat(0)
         
         if let window = UIApplication.shared.keyWindow {
-            topSafeAreaInset = window.safeAreaInsets.top
+            if #available(iOS 11.0, *) {
+                topSafeAreaInset = window.safeAreaInsets.top
+            }
         }
         
         headerBar = CustomizableFlexibleHeightBar(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: 230 + topSafeAreaInset))

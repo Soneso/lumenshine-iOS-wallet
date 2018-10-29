@@ -17,5 +17,13 @@ class RoundedButton: BaseButton {
     
     private func setup() {
         cornerRadiusPreset = .cornerRadius6
+       
+        guard #available(iOS 11, *) else {
+            contentEdgeInsets.left = horizontalInset
+            contentEdgeInsets.right = horizontalInset
+            contentEdgeInsets.top = verticalInset
+            contentEdgeInsets.bottom = verticalInset
+            return
+        }
     }
 }

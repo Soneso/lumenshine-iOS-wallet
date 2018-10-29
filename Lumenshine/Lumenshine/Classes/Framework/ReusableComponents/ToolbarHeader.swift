@@ -56,7 +56,12 @@ class ToolbarHeader: UIView {
         
         addSubview(logoImage)
         logoImage.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(-29)
+            if #available(iOS 11.0, *) {
+                make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(-29)
+            } else {
+                make.top.equalTo(self.snp.top)
+            }
+            
             make.centerX.equalToSuperview()
             make.height.equalTo(logoImage.snp.width)
         }

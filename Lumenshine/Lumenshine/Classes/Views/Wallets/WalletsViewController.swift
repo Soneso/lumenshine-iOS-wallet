@@ -173,9 +173,15 @@ class WalletsViewController: UIViewController, UITableViewDataSource {
                 if reload {
                     self?.tableView.reloadData()
                 } else {
-                    self?.tableView.performBatchUpdates({
+                    if #available(iOS 11.0, *) {
+                        self?.tableView.performBatchUpdates({
+                            self?.tableView.reloadRows(at: [indexPath], with: .automatic)
+                        }, completion: nil)
+                    } else {
+                        self?.tableView.beginUpdates()
                         self?.tableView.reloadRows(at: [indexPath], with: .automatic)
-                    }, completion: nil)
+                        self?.tableView.endUpdates()
+                    }
                 }
                 
                 self?.viewModel.updateCurrencies()

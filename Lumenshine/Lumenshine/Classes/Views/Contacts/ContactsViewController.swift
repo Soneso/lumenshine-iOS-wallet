@@ -88,8 +88,7 @@ class ContactsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let separator = UIView()
-        separator.layer.cornerRadius = 12
-        separator.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        separator.roundCorners([.layerMinXMinYCorner, .layerMaxXMinYCorner], radius: 12)
         separator.backgroundColor = .white
         
         let label = UILabel()
@@ -123,8 +122,7 @@ class ContactsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let separator = UIView()
-        separator.layer.cornerRadius = 12
-        separator.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        separator.roundCorners([.layerMinXMaxYCorner, .layerMaxXMaxYCorner], radius: 12)
         separator.backgroundColor = .white
         //        separator.depthPreset = .depth3
         
@@ -209,7 +207,9 @@ fileprivate extension ContactsViewController {
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = Stylesheet.color(.lightGray)
         tableView.separatorInset = UIEdgeInsetsMake(0, 50, 0, 50)
-        tableView.separatorInsetReference = .fromAutomaticInsets
+        if #available(iOS 11.0, *) {
+            tableView.separatorInsetReference = .fromAutomaticInsets
+        }
         tableView.tableHeaderView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         tableView.tableFooterView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
     }
@@ -220,7 +220,11 @@ fileprivate extension ContactsViewController {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = true
         searchController.hidesNavigationBarDuringPresentation = false
-        navigationItem.searchController = searchController
+        if #available(iOS 11.0, *) {
+            navigationItem.searchController = searchController
+        } else {
+            tableView.tableHeaderView = searchController.searchBar
+        }
 //        navigationItem.hidesSearchBarWhenScrolling = false
         
         if let backgroundImage = R.image.nav_background() {

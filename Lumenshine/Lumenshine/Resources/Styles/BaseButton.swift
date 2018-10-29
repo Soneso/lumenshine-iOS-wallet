@@ -9,8 +9,8 @@
 import UIKit
 
 class BaseButton: UIButton {
-    private let horizontalInset = CGFloat(20)
-    private let verticalInset = CGFloat(10)
+    let horizontalInset = CGFloat(20)
+    let verticalInset = CGFloat(10)
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,9 +21,14 @@ class BaseButton: UIButton {
         setTitleColor(Stylesheet.color(.white), for: .normal)
         setTitleColor(Stylesheet.color(.helpButtonGray), for: .disabled)
         titleLabel?.font = R.font.encodeSansSemiBold(size: 13)
-        contentEdgeInsets.left = horizontalInset
-        contentEdgeInsets.right = horizontalInset
-        contentEdgeInsets.top = verticalInset
-        contentEdgeInsets.bottom = verticalInset
+        
+        if #available(iOS 11.0, *) {
+            contentEdgeInsets.left = horizontalInset
+            contentEdgeInsets.right = horizontalInset
+            contentEdgeInsets.top = verticalInset
+            contentEdgeInsets.bottom = verticalInset
+        } else {
+            contentEdgeInsets = UIEdgeInsetsMake(5,5,5,5)
+        }
     }
 }

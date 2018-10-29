@@ -14,8 +14,7 @@ class ComposeNavigationController: NavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.clipsToBounds = true
-        view.layer.cornerRadius = 16.0
-        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        view.roundCorners([.layerMinXMinYCorner, .layerMaxXMinYCorner], radius: 16)
     }
     
     override func prepare() {

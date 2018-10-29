@@ -285,6 +285,7 @@
 		C63B4F9E212AB3750003ECE5 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63B4F9D212AB3750003ECE5 /* TransactionTableViewCell.swift */; };
 		C6410CD7212C269C00F9C8B3 /* TransactionHistoryDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6410CD6212C269C00F9C8B3 /* TransactionHistoryDetailsViewController.xib */; };
 		C6410CD9212C26B300F9C8B3 /* TransactionHistoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6410CD8212C26B300F9C8B3 /* TransactionHistoryDetailsViewController.swift */; };
+		C646A7C62183210D0035DBD1 /* UIView+RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = C646A7C52183210D0035DBD1 /* UIView+RoundedCorners.swift */; };
 		C654AFB42122D3D500FB9686 /* FundTestNetWalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C654AFB32122D3D500FB9686 /* FundTestNetWalletViewController.xib */; };
 		C654AFB62122D4C900FB9686 /* FundTestNetWalletViewController.xib.swift in Sources */ = {isa = PBXBuildFile; fileRef = C654AFB52122D4C900FB9686 /* FundTestNetWalletViewController.xib.swift */; };
 		C66390F9215B58DC00573B54 /* PaymentOperationsVCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66390F8215B58DC00573B54 /* PaymentOperationsVCManager.swift */; };
@@ -694,6 +695,7 @@
 		C63B4F9D212AB3750003ECE5 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		C6410CD6212C269C00F9C8B3 /* TransactionHistoryDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionHistoryDetailsViewController.xib; sourceTree = "<group>"; };
 		C6410CD8212C26B300F9C8B3 /* TransactionHistoryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryDetailsViewController.swift; sourceTree = "<group>"; };
+		C646A7C52183210D0035DBD1 /* UIView+RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+RoundedCorners.swift"; sourceTree = "<group>"; };
 		C646F566BF9C95E0290B7A6D /* Pods-LumenshineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineTests/Pods-LumenshineTests.release.xcconfig"; sourceTree = "<group>"; };
 		C654AFB32122D3D500FB9686 /* FundTestNetWalletViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FundTestNetWalletViewController.xib; sourceTree = "<group>"; };
 		C654AFB52122D4C900FB9686 /* FundTestNetWalletViewController.xib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundTestNetWalletViewController.xib.swift; sourceTree = "<group>"; };
@@ -1382,6 +1384,7 @@
 				7459815E211AC73200488999 /* UIAlertController+Extension.swift */,
 				74BC395E211D988000EAF8A4 /* AccountBalanceResponse+Properties.swift */,
 				B16EE6D62181CD6300AF1D8B /* UITextView+Size.swift */,
+				C646A7C52183210D0035DBD1 /* UIView+RoundedCorners.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2280,6 +2283,7 @@
 				4319B1822063EF72007CE18D /* LoginCoordinator.swift in Sources */,
 				43CF47ED21652B7000B9E7E2 /* AddContactResponse.swift in Sources */,
 				434E049B20D3DC8A00D3235A /* DateUtils+Format.swift in Sources */,
+				C646A7C62183210D0035DBD1 /* UIView+RoundedCorners.swift in Sources */,
 				C66CC2D7212EA2BD00729C09 /* RemoveCurrencyViewController.swift in Sources */,
 				4391A53220D170420015A6DA /* CountryListResponse.swift in Sources */,
 				432F11792101C64600FC429B /* MnemonicSetupViewController.swift in Sources */,
@@ -2592,7 +2596,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QN6AY4TH84;
 				INFOPLIST_FILE = Lumenshine/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.soneso.lumenshine;
@@ -2764,7 +2768,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QN6AY4TH84;
 				INFOPLIST_FILE = Lumenshine/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.soneso.lumenshine;
@@ -2783,7 +2787,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QN6AY4TH84;
 				INFOPLIST_FILE = Lumenshine/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.soneso.lumenshine;
 				PRODUCT_NAME = "$(TARGET_NAME)";

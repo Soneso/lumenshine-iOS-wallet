@@ -31,13 +31,17 @@ class BiometricIDAuth {
     
     func biometricType() -> BiometricType {
         let _ = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
-        switch context.biometryType {
-        case .none:
+        if #available(iOS 11.0, *) {
+            switch context.biometryType {
+            case .none:
+                return .none
+            case .touchID:
+                return .touchID
+            case .faceID:
+                return .faceID
+            }
+        } else {
             return .none
-        case .touchID:
-            return .touchID
-        case .faceID:
-            return .faceID
         }
     }
     
@@ -51,29 +55,31 @@ class BiometricIDAuth {
             return
         }
         
-        context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: loginReason) { (success, evaluateError) in
-            if success {
-                completion(nil)
-            } else {
-                let message: String
-                
-                switch evaluateError {
-                case LAError.authenticationFailed?:
-                    message = "There was a problem verifying your identity."
-                case LAError.userCancel?:
-                    message = ""
-                case LAError.userFallback?:
-                    message = "You pressed password."
-                case LAError.biometryNotAvailable?:
-                    message = "Face ID/Touch ID is not available."
-                case LAError.biometryNotEnrolled?:
-                    message = "Face ID/Touch ID is not set up."
-                case LAError.biometryLockout?:
-                    message = "Face ID/Touch ID is locked."
-                default:
-                    message = "Face ID/Touch ID may not be configured"
+        if #available(iOS 11.0, *) {
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: loginReason) { (success, evaluateError) in
+                if success {
+                    completion(nil)
+                } else {
+                    let message: String
+                    
+                    switch evaluateError {
+                    case LAError.authenticationFailed?:
+                        message = "There was a problem verifying your identity."
+                    case LAError.userCancel?:
+                        message = ""
+                    case LAError.userFallback?:
+                        message = "You pressed password."
+                    case LAError.biometryNotAvailable?:
+                        message = "Face ID/Touch ID is not available."
+                    case LAError.biometryNotEnrolled?:
+                        message = "Face ID/Touch ID is not set up."
+                    case LAError.biometryLockout?:
+                        message = "Face ID/Touch ID is locked."
+                    default:
+                        message = "Face ID/Touch ID may not be configured"
+                    }
+                    completion(message)
                 }
-                completion(message)
             }
         }
     }

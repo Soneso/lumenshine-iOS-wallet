@@ -137,8 +137,13 @@ fileprivate extension ListViewController {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
+        
+        if #available(iOS 11.0, *) {
+            navigationItem.searchController = searchController
+            navigationItem.hidesSearchBarWhenScrolling = false
+        } else {
+            tableView.tableHeaderView = searchController.searchBar
+        }
         
         if let backgroundImage = R.image.nav_background() {
             searchController.searchBar.backgroundColor = UIColor(patternImage: backgroundImage)
