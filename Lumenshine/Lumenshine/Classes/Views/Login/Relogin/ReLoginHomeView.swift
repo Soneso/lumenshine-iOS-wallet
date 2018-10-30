@@ -8,6 +8,7 @@
 
 import UIKit
 import Material
+import LocalAuthentication
 
 protocol ReLoginViewDelegate: class {
     func didTapSubmitButton(password: String, tfaCode: String?)
@@ -21,6 +22,7 @@ class ReLoginHomeView: UIView {
     // MARK: - UI properties
     fileprivate let titleLabel = UILabel()
     fileprivate let forgotPasswordButton = LSButton()
+    fileprivate let lostTFAButton = LSButton()
     fileprivate let submitButton = LSButton()
     fileprivate let passwordTextField = LSTextField()
     fileprivate let tfaTextField = LSTextField()
@@ -29,6 +31,8 @@ class ReLoginHomeView: UIView {
     
     fileprivate let verticalSpacing = 25.0
     fileprivate let horizontalSpacing = 15.0
+    
+    fileprivate var storedPassword = false
     
     weak var delegate: ReLoginViewDelegate?
     
@@ -52,9 +56,16 @@ class ReLoginHomeView: UIView {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let password):
+                    self?.storedPassword = true
                     self?.delegate?.didTapSubmitButton(password: password, tfaCode: nil)
                 case .failure(let error):
-                    self?.passwordTextField.detail = error
+                    if let err = error as? LAError {
+                        self?.passwordTextField.detail = error.errorDescription
+                        if err.code == LAError.authenticationFailed {
+                            self?.touchIDButton.isHidden = true
+                            self?.viewModel.removeBiometricRecognition()
+                        }
+                    }
                 }
             }
         }
@@ -63,6 +74,12 @@ class ReLoginHomeView: UIView {
     @objc
     func forgotPasswordAction(sender: UIButton) {
         viewModel.forgotPasswordClick()
+    }
+    
+    
+    @objc
+    func lostTFAAction(sender: UIButton) {
+        viewModel.lost2FAClick()
     }
     
     @objc
@@ -76,8 +93,17 @@ class ReLoginHomeView: UIView {
                 return
         }
         
+        if !tfaTextField.isHidden {
+            guard let tfa = tfaTextField.text,
+                !tfa.isEmpty else {
+                    tfaTextField.detail = R.string.localizable.invalid_input()
+                    return
+            }
+        }
+        
         passwordTextField.resignFirstResponder()
         
+        self.storedPassword = false
         self.delegate?.didTapSubmitButton(password: password, tfaCode: tfaTextField.text)
     }
 }
@@ -87,11 +113,17 @@ extension ReLoginHomeView: ReLoginViewProtocol {
         if error.code == 1009 || error.parameterName == "tfa_code" {
             if tfaTextField.isHidden {
                 tfaTextField.isHidden = false
+                touchIDButton.isHidden = true
                 viewModel.remove2FASecret()
+                viewModel.removeBiometricRecognition()
             } else {
                 tfaTextField.detail = error.errorDescription
             }
         } else {
+            if storedPassword, error.parameterName == "password" {
+                touchIDButton.isHidden = true
+                viewModel.removeBiometricRecognition()
+            }
             passwordTextField.detail = error.errorDescription
         }
         return true
@@ -171,7 +203,7 @@ fileprivate extension ReLoginHomeView {
         
         addSubview(submitButton)
         submitButton.snp.makeConstraints { make in
-            make.top.equalTo(tfaTextField.snp.bottom).offset(15)
+            make.top.equalTo(tfaTextField.snp.bottom).offset(25)
             make.centerX.equalToSuperview()
             make.width.equalTo(160)
             make.height.equalTo(38)
@@ -193,11 +225,26 @@ fileprivate extension ReLoginHomeView {
             make.width.equalTo(160)
             make.height.equalTo(38)
         }
+        
+        lostTFAButton.title = R.string.localizable.lost_2fa()
+        lostTFAButton.titleColor = Stylesheet.color(.blue)
+        lostTFAButton.borderWidthPreset = .border1
+        lostTFAButton.borderColor = Stylesheet.color(.blue)
+        lostTFAButton.setGradientLayer(color: Stylesheet.color(.white))
+        lostTFAButton.addTarget(self, action: #selector(lostTFAAction(sender:)), for: .touchUpInside)
+        
+        addSubview(lostTFAButton)
+        lostTFAButton.snp.makeConstraints { make in
+            make.top.equalTo(forgotPasswordButton.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(160)
+            make.height.equalTo(38)
+        }
     }
     
     func updateBottomConstraints() {
-        forgotPasswordButton.snp.remakeConstraints { make in
-            make.top.equalTo(submitButton.snp.bottom).offset(20)
+        lostTFAButton.snp.remakeConstraints { make in
+            make.top.equalTo(forgotPasswordButton.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
             make.width.equalTo(160)
             make.height.equalTo(38)
@@ -212,7 +259,7 @@ fileprivate extension ReLoginHomeView {
         
         addSubview(touchIDButton)
         touchIDButton.snp.makeConstraints { make in
-            make.top.equalTo(forgotPasswordButton.snp.bottom).offset(20)
+            make.top.equalTo(lostTFAButton.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
             make.bottom.equalTo(-20)
             make.width.height.equalTo(90)

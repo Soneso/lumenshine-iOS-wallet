@@ -11,7 +11,7 @@ import Rswift
 
 enum BiometricAuthResponseEnum {
     case success(response: String)
-    case failure(error: String)
+    case failure(error: Error)
 }
 
 enum BiometricStatus: String {
@@ -40,9 +40,14 @@ class BiometricHelper {
     static func getMnemonic(completion: @escaping PasswordClosure) {
         let passwordManager = PasswordManager()
         if let userName = UserDefaults.standard.value(forKey: "username") as? String {
-            if let password = password(for: userName) {
-                passwordManager.getMnemonic(password: password) { (response) -> (Void) in
-                    completion(response)
+            password(for: userName) { result in
+                switch result {
+                case .success(let password):
+                    passwordManager.getMnemonic(password: password) { (response) -> (Void) in
+                        completion(response)
+                    }
+                case .failure(let error):
+                    completion(.failure(error: error.errorDescription))
                 }
             }
         }
@@ -75,16 +80,16 @@ class BiometricHelper {
         }
     }
     
-    static func password(for username: String) -> String? {
+    static func password(for username: String, response: @escaping BiometricAuthResponseClosure) {
         do {
             let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
                                                     account: username,
                                                     accessGroup: KeychainConfiguration.accessGroup)
             let keychainPassword = try passwordItem.readPassword()
-            return keychainPassword
-        } catch {
+            response(.success(response: keychainPassword))
+        } catch (let error) {
             print("Error reading password from keychain: \(error)")
-            return nil
+            response(.failure(error: error))
         }
     }
     
@@ -105,11 +110,7 @@ class BiometricHelper {
             if let err = error {
                 response(.failure(error: err))
             } else {
-                if let password = password(for: username) {
-                    response(.success(response: password))
-                } else {
-                    response(.failure(error: R.string.localizable.missing_password()))
-                }
+                password(for: username, response: response)
             }
         }
     }

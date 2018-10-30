@@ -78,7 +78,7 @@ extension Change2faSecretViewController {
                 case .success(let password):
                     self?.change2FASecret(password: password)
                 case .failure(let error):
-                    let alert = AlertFactory.createAlert(title: R.string.localizable.error(), message: error)
+                    let alert = AlertFactory.createAlert(title: R.string.localizable.error(), message: error.errorDescription)
                     self?.present(alert, animated: true)
                 }
             }

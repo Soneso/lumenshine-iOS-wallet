@@ -31,6 +31,12 @@ class ReLoginViewController: UIViewController {
         self.viewModel = viewModel
         self.contentView = ReLoginHomeView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
+        
+        viewModel.reloadClosure = {
+            DispatchQueue.main.async {
+                self.headerBar.setItems(viewModel.barItems, selectedAt: 1)
+            }
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -17,7 +17,7 @@ class ReLoginMenuViewModel : LoginMenuViewModel {
         super.init(service: service)
         
         self.entries = [[.avatar],
-                        [.signOut, .home, .lostPassword],
+                        [.signOut, .home, .lostPassword, .lost2FA],
                         [.about, .help]]
         
         switch BiometricIDAuth().biometricType() {
@@ -44,6 +44,9 @@ class ReLoginMenuViewModel : LoginMenuViewModel {
         case .lostPassword:
             logout()
             navigationCoordinator?.performTransition(transition: .logout(.showForgotPassword))
+        case .lost2FA:
+            logout()
+            navigationCoordinator?.performTransition(transition: .logout(.showLost2fa))
         case .fingerprint:
             break
         default: break

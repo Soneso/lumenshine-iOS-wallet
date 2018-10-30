@@ -32,10 +32,11 @@ class PasswordManager {
    private func getMnemonicFromBiometricAuth(completion: @escaping PasswordClosure) {
         let biometricIDAuth = BiometricIDAuth()
         if biometricIDAuth.canEvaluatePolicy() {
-            biometricIDAuth.authenticateUser(completion: { result in
-                print("Fingerprind/touchid result: \(result ?? "Access granted!"))")
+            biometricIDAuth.authenticateUser(completion: { error in
                 
-                if result == nil {
+                if let err = error {
+                    completion(.failure(error: err.errorDescription))
+                } else {
                     BiometricHelper.getMnemonic(completion: { (response) -> (Void) in
                         switch response {
                         case .success(mnemonic: let mnemonic):
@@ -44,8 +45,6 @@ class PasswordManager {
                             completion(.failure(error: error))
                         }
                     })
-                } else if let resultError = result {
-                    completion(.failure(error: resultError))
                 }
             })
         }

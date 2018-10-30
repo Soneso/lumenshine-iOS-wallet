@@ -7,9 +7,12 @@
 //
 
 import Foundation
+import LocalAuthentication
 
 class ReLoginViewModel : LoginViewModel {
     fileprivate var user: User
+    
+    var reloadClosure: (() -> ())?
     
     init(service: AuthService, user: User) {
         self.user = user
@@ -47,8 +50,11 @@ class ReLoginViewModel : LoginViewModel {
     }
     
     override var hintText: String? {
-        let text = entries[2].name
-        return R.string.localizable.hint_face_fingerprint(text, text)
+        if entries.count > 2 {
+            let text = entries[2].name
+            return R.string.localizable.hint_face_fingerprint(text, text)
+        }
+        return nil
     }
     
     override func loginCompleted() {
@@ -69,9 +75,21 @@ class ReLoginViewModel : LoginViewModel {
         navigationCoordinator?.performTransition(transition: .logout(.showForgotPassword))
     }
     
+    override func lost2FAClick() {
+        logout()
+        navigationCoordinator?.performTransition(transition: .logout(.showLost2fa))
+    }
+    
+    override func removeBiometricRecognition() {
+        entries.removeLast()
+        reloadClosure?()
+    }
+    
     // MARK: Biometric authentication
     override func authenticateUser(completion: @escaping BiometricAuthResponseClosure) {
-        BiometricHelper.authenticate(username: user.email, response: completion)
+        BiometricHelper.authenticate(username: user.email) { response in
+            completion(response)
+        }
     }
 }
 

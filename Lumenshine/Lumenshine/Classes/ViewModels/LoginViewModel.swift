@@ -29,7 +29,9 @@ protocol LoginViewModelType: Transitionable, BiometricAuthenticationProtocol {
     func headerMenuSelected(at index: Int)
     
     func forgotPasswordClick()
+    func lost2FAClick()
     func remove2FASecret()
+    func removeBiometricRecognition()
 }
 
 protocol LostSecurityViewModelType: Transitionable {
@@ -112,6 +114,10 @@ class LoginViewModel : LoginViewModelType {
     
     func forgotPasswordClick() {
         self.navigationCoordinator?.performTransition(transition: .showForgotPassword)
+    }
+    
+    func lost2FAClick() {
+        self.navigationCoordinator?.performTransition(transition: .showLost2fa)
     }
     
     func enableTfaCode(email: String) -> Bool {
@@ -268,6 +274,8 @@ class LoginViewModel : LoginViewModelType {
     func remove2FASecret() {
         TFAGeneration.removeToken(email: email!)
     }
+    
+    func removeBiometricRecognition() {}
     
     class func logout(username: String) {
         TFAGeneration.removeToken(email: username)
