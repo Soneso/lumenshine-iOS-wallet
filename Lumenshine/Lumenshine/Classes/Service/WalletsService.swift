@@ -83,7 +83,7 @@ public class WalletsService: BaseService {
     
     func addWallet(publicKey: String, name: String, federationAddress: String? = "", showOnHomescreen: Bool, completion: @escaping AddWalletClosure) {
         var params = Dictionary<String, Any>()
-        params["public_key_0"] = publicKey
+        params["public_key"] = publicKey
         params["wallet_name"] = name
         params["federation_address"] = federationAddress
         params["show_on_homescreen"] = showOnHomescreen

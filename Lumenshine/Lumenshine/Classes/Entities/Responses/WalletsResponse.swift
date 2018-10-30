@@ -17,7 +17,7 @@ public class WalletsResponse: Decodable {
     
     private enum CodingKeys: String, CodingKey {
         case id = "id"
-        case publicKey = "public_key_0"
+        case publicKey = "public_key"
         case walletName = "wallet_name"
         case federationAddress = "federation_address"
         case showOnHomeScreen = "show_on_homescreen"
