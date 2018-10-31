@@ -262,6 +262,7 @@
 		74E2057A20D1544000E94048 /* HomeFundedWalletHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74E2057920D1544000E94048 /* HomeFundedWalletHeaderView.xib */; };
 		74E2057F20D2A3B200E94048 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E2057E20D2A3B200E94048 /* IconButton.swift */; };
 		74E2058120D2A3C400E94048 /* IconView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74E2058020D2A3C400E94048 /* IconView.xib */; };
+		833F7D6F2189FB9600ED43D9 /* SEP10ChallengeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F7D6E2189FB9600ED43D9 /* SEP10ChallengeResponse.swift */; };
 		B16EE6D72181CD6300AF1D8B /* UITextView+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16EE6D62181CD6300AF1D8B /* UITextView+Size.swift */; };
 		B16EE6D921820C1700AF1D8B /* InputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16EE6D821820C1700AF1D8B /* InputTableViewCell.swift */; };
 		B18D3BA4217DF920003B9D9E /* iso_countries.json in Resources */ = {isa = PBXBuildFile; fileRef = B18D3BA2217DF920003B9D9E /* iso_countries.json */; };
@@ -672,6 +673,7 @@
 		74E2057E20D2A3B200E94048 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 		74E2058020D2A3C400E94048 /* IconView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IconView.xib; sourceTree = "<group>"; };
 		7A07122EB8B38B1B6BC1B141 /* Pods-LumenshineUITests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineUITests.development.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineUITests/Pods-LumenshineUITests.development.xcconfig"; sourceTree = "<group>"; };
+		833F7D6E2189FB9600ED43D9 /* SEP10ChallengeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEP10ChallengeResponse.swift; sourceTree = "<group>"; };
 		B16EE6D62181CD6300AF1D8B /* UITextView+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Size.swift"; sourceTree = "<group>"; };
 		B16EE6D821820C1700AF1D8B /* InputTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputTableViewCell.swift; sourceTree = "<group>"; };
 		B18D3BA2217DF920003B9D9E /* iso_countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = iso_countries.json; sourceTree = "<group>"; };
@@ -1414,6 +1416,7 @@
 				43564BAE2163DF4A006A7B9F /* ContactResponse.swift */,
 				43CF47EC21652B7000B9E7E2 /* AddContactResponse.swift */,
 				B18D3BA7217E0B9B003B9D9E /* LanguageResponse.swift */,
+				833F7D6E2189FB9600ED43D9 /* SEP10ChallengeResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -2171,6 +2174,7 @@
 				436201C0212DDC5300CF4495 /* R+Plurals.swift in Sources */,
 				C68850DE214BA47000D7D077 /* AppTitleLabel.swift in Sources */,
 				4391A53420D175D40015A6DA /* SalutationsResponse.swift in Sources */,
+				833F7D6F2189FB9600ED43D9 /* SEP10ChallengeResponse.swift in Sources */,
 				43D131E42056D439000483C4 /* CardTableViewCell.swift in Sources */,
 				43CD7B1220F7B8A70014BF69 /* SetupMenuViewModel.swift in Sources */,
 				43EFF204204939F700B1887C /* UIColor+Utils.swift in Sources */,

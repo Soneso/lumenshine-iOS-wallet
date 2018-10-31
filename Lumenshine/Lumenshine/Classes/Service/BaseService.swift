@@ -17,6 +17,10 @@ public enum ServiceError: Error {
     case parsingFailed(message: String)
     case encryptionFailed(message: String)
     case validationFailed(error: ErrorResponse)
+    case invalidToml
+    case noSigningKeySet
+    case parsingServerSigningKeyResponseFailed(message:String)
+    case invalidSEP10Challenge
 }
 
 extension ServiceError: LocalizedError {
@@ -67,6 +71,14 @@ extension ServiceError: LocalizedError {
             return message
         case .validationFailed(let error):
             return error.errorMessage ?? ""
+        case .invalidToml:
+            return R.string.localizable.invalid_toml()
+        case .noSigningKeySet:
+            return R.string.localizable.no_signing_key_in_toml()
+        case .parsingServerSigningKeyResponseFailed(let message):
+            return message
+        case .invalidSEP10Challenge:
+            return R.string.localizable.invaild_sep10_challenge()
         }
     }
 }

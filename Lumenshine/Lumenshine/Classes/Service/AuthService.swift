@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import stellarsdk
+
 
 public enum GenerateAccountResponseEnum {
     case success(response: RegistrationResponse?, userSecurity: UserSecurity)
@@ -53,6 +55,26 @@ public enum DecryptedUserDataResponseEnum {
     case failure(error: ServiceError)
 }
 
+public enum ServerSigningKeyResponseEnum {
+    case success(signingKey: String)
+    case failure(error: ServiceError)
+}
+
+public enum SEP10ChallengeResponseEnum {
+    case success(transactionEnvelopeXDR: String)
+    case failure(error: ServiceError)
+}
+
+public enum SignSEP10ChallengeResponseEnum {
+    case success(signedXDR: String)
+    case failure(error: ServiceError)
+}
+
+public enum SEP10ChallengeValidationResponseEnum {
+    case success(isValid: Bool)
+    case failure(error: ServiceError)
+}
+
 public typealias GenerateAccountResponseClosure = (_ response:GenerateAccountResponseEnum) -> (Void)
 public typealias TFAResponseClosure = (_ response:TFAResponseEnum) -> (Void)
 public typealias EmptyResponseClosure = (_ response:EmptyResponseEnum) -> (Void)
@@ -62,6 +84,10 @@ public typealias TfaSecretResponseClosure = (_ response:TfaSecretResponseEnum) -
 public typealias CountryListResponseClosure = (_ response:CountryListResponseEnum) -> (Void)
 public typealias SalutationsResponseClosure = (_ response:SalutationsResponseEnum) -> (Void)
 public typealias DecryptedUserDataResponseClosure = (_ response:DecryptedUserDataResponseEnum) -> (Void)
+public typealias ServerSigningKeyClosure = (_ response:ServerSigningKeyResponseEnum) -> (Void)
+public typealias SEP10ChallengeClosure = (_ response:SEP10ChallengeResponseEnum) -> (Void)
+public typealias SignSEP10ChallengeClosure = (_ response:SignSEP10ChallengeResponseEnum) -> (Void)
+public typealias SEP10ChallengeValidationClosure = (_ response:SEP10ChallengeValidationResponseEnum) -> (Void)
 
 public class AuthService: BaseService {
     
@@ -141,6 +167,206 @@ public class AuthService: BaseService {
             }
         } catch {
             response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+        }
+    }
+    
+    /// Requests the sep10 challange from the server
+    /// - Parameter: SEP10ChallengeClosure
+    open func getSep10Challenge(response: @escaping SEP10ChallengeClosure) {
+        
+        guard let tokenType = BaseService.jwtTokenType else { return }
+        var path: String = ""
+        switch tokenType {
+        case .full:
+            path = "/portal/user/dashboard/get_sep10_challange"
+        case .partial:
+            path = "/portal/user/auth/get_sep10_challange"
+        case .lost:
+            path = "/portal/user/auth/get_sep10_challange"
+        }
+        
+        GETRequestWithPath(path: path) { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                do {
+                    let challenge = try self.jsonDecoder.decode(SEP10ChallengeResponse.self, from: data)
+                    response(.success(transactionEnvelopeXDR: challenge.transactionEnvelopeXDR))
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+                }
+            case .failure(let error):
+                response(.failure(error: error))
+            }
+        }
+    }
+    
+    /// Loads the server signing key from the servers stellar.toml file
+    /// - Parameter: ServerSigningKeyClosure
+    open func loadServerSigningKey(completion:@escaping ServerSigningKeyClosure) {
+        let serverSigningKeyTomlKey = "SIGNING_KEY"
+        
+        guard let url = URL(string: Services.shared.tomlURL) else {
+            completion(.failure(error: .invalidRequest))
+            return
+        }
+        
+        DispatchQueue.global().async {
+            do {
+                let tomlString = try String(contentsOf: url, encoding: .utf8)
+                let toml = try Toml(withString: tomlString)
+                if let serverKey = toml.string(serverSigningKeyTomlKey) {
+                    completion(.success(signingKey: serverKey))
+                } else {
+                    completion(.failure(error: .noSigningKeySet))
+                }
+                
+            } catch {
+                completion(.failure(error: .invalidToml))
+            }
+        }
+    }
+    
+    /// Validates a transaction envelope of a SEP10 Challenge received from the server and signes it if valid
+    /// The transaction envelope must contain only one transaction having the seqence number 0
+    /// The transaction within the envelope must contain only one manage data operation having the user account as source account
+    /// The transaction within the envelope must be signed by the server key only
+    ///
+    /// - Parameters:
+    ///     - base64EnvelopeXDR: The SEP10 challenge to be validated
+    ///     - userKeyPair: the keypair of the user including its public key and private key
+    open func signSEP10ChallengeIfValid(base64EnvelopeXDR: String, userKeyPair: KeyPair, completion:@escaping SignSEP10ChallengeClosure) {
+        validateSEP10Envelope(base64EnvelopeXDR: base64EnvelopeXDR, userAccountId: userKeyPair.accountId) { validationResult in
+            switch validationResult {
+            case .success(let isValid):
+                if isValid {
+                    // TODO sign
+                    completion(.success(signedXDR: base64EnvelopeXDR))
+                } else {
+                    completion(.failure(error: .invalidSEP10Challenge))
+                }
+            case .failure(let error):
+                completion(.failure(error: error))
+            }
+        }
+    }
+    
+    open func validateSEP10Envelope(base64EnvelopeXDR: String, userAccountId: String, completion:@escaping SEP10ChallengeValidationClosure) {
+        
+        print("SEP 10:" + base64EnvelopeXDR)
+        
+        // xdr decoder to be used for decoding the transaction envelope
+        let xdrDecoder = XDRDecoder.init(data: [UInt8].init(base64: base64EnvelopeXDR))
+        do {
+            
+            // decode the envelope
+            let transactionEnvelopeXDR = try TransactionEnvelopeXDR(fromBinary: xdrDecoder)
+            let transactionXDR = transactionEnvelopeXDR.tx
+            
+            // sequence number of transaction must be 0
+            if (transactionXDR.seqNum != 0) {
+                completion(.success(isValid: false))
+                return
+            }
+            
+            // the transaction must contain one operation
+            if transactionXDR.operations.count == 1, let operationXDR = transactionXDR.operations.first {
+                
+                // the source account of the operation must match
+                if let operationSourceAccount = operationXDR.sourceAccount {
+                    if (operationSourceAccount.accountId != userAccountId) {
+                        // source account of transaction doese not match user account
+                        completion(.success(isValid: false))
+                        return
+                    }
+                } else {
+                    // source account of transaction not found
+                    completion(.success(isValid: false))
+                    return
+                }
+                
+                //operation must be manage data operation
+                let operationBodyXDR = operationXDR.body
+                if (operationBodyXDR.type() != OperationType.manageData.rawValue) {
+                    // not a manage data operation
+                    completion(.success(isValid: false))
+                    return
+                }
+                
+            } else {
+                // the transaction has no operation or contains more than one operation
+                completion(.success(isValid: false))
+                return
+            }
+            
+            // the envelope must have one signature and it must be valid: transaction signed by the server
+            if transactionEnvelopeXDR.signatures.count == 1, let signature = transactionEnvelopeXDR.signatures.first?.signature {
+                
+                // get currently used stellar network
+                var network = Network.testnet
+                if (Services.shared.usePublicStellarNetwork) {
+                    network = Network.public
+                }
+                
+                // transaction hash is the signed payload
+                let transactionHash = try [UInt8](transactionXDR.hash(network: network))
+                
+                // validate signature
+                var serverKeyPair = try KeyPair(accountId: Services.shared.serverSigningKey)
+                var signatureIsValid = try serverKeyPair.verify(signature: [UInt8](signature), message: transactionHash)
+                if signatureIsValid {
+                    // signature is valid
+                    completion(.success(isValid: true))
+                    return
+                } else { // signature is not valid
+                    //check if our server key is still the same. Load from server and if different, try validation again
+                    loadServerSigningKey() { keyResult in
+                        switch keyResult {
+                        case .success(let signingKey):
+                            // check if key loaded from the server is different to our locally stored key
+                            if (signingKey != Services.shared.serverSigningKey) {
+                                // store new signing key
+                                Services.shared.serverSigningKey = signingKey
+                                do {
+                                    // validate signature again
+                                    serverKeyPair = try KeyPair(accountId: signingKey)
+                                    signatureIsValid = try serverKeyPair.verify(signature: [UInt8](signature), message: transactionHash)
+                                    if signatureIsValid {
+                                        // signature is valid
+                                        completion(.success(isValid: true))
+                                        return
+                                    }
+                                    else {
+                                        // signature is not valid
+                                        completion(.success(isValid: false))
+                                        return
+                                    }
+                                } catch let error {
+                                    print(error.localizedDescription)
+                                    // validation failed
+                                    completion(.success(isValid: false))
+                                }
+                            } else {
+                                // server key is not different
+                                // signature is not valid
+                                completion(.success(isValid: false))
+                                return
+                            }
+                        case .failure(let error):
+                            // could not load signing key from server signature
+                            completion(.failure(error: error))
+                        }
+                    }
+                }
+            }
+            else {
+                // could not find signature
+                completion(.success(isValid: false))
+                return
+            }
+        } catch let error {
+            print(error.localizedDescription)
+            // validation failed
+            completion(.success(isValid: false))
         }
     }
     

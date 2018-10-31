@@ -17,26 +17,48 @@ public final class Services {
     let baseURL = "https://demoapi.lumenshine.com"
     //let horizonURL = "https://horizon-testnet.stellar.org"
     let horizonURL = "https://demohorizon.lumenshine.com"
+    let tomlURL = "https://demo.lumenshine.com/.well-known/stellar.toml"
+    let initialServerSigningKey = "GCP4BR7GWG664577XMLX2BRUPSHKHTAXQ4I4HZORLMQNILNNVMSFWVUV"
     
 #elseif DEVELOPMENT
     let usePublicStellarNetwork = false
     let baseURL = "https://demoapi.lumenshine.com"
     //let horizonURL = "https://horizon-testnet.stellar.org"
     let horizonURL = "https://demohorizon.lumenshine.com"
+    let tomlURL = "https://demo.lumenshine.com/.well-known/stellar.toml"
+    let initialServerSigningKey = "GCP4BR7GWG664577XMLX2BRUPSHKHTAXQ4I4HZORLMQNILNNVMSFWVUV"
     
     /** live net **/
     //let baseURL = "https://alphaapi.lumenshine.com"
     //let horizonURL = "https://alphahorizon.lumenshine.com"
+    //let tomlURL = "https://alpha.lumenshine.com/.well-known/stellar.toml"
+    //let initialServerSigningKey = "GBGXAY3HDXMUWAUDATBZ5SVGLFUC5GKJC4BNN5MEPVLWKCOMBXQUIUWM"
 
 #else
     let usePublicStellarNetwork = true
     let baseURL = "https://alphaapi.lumenshine.com"
     let horizonURL = "https://alphahorizon.lumenshine.com"
+    let tomlURL = "https://alpha.lumenshine.com/.well-known/stellar.toml"
+    let initialServerSigningKey = "GBGXAY3HDXMUWAUDATBZ5SVGLFUC5GKJC4BNN5MEPVLWKCOMBXQUIUWM"
     
 #endif
     
+    let userDefaultsServerKey = "serverKey"
+    
     public var isTestURL: Bool {
         return horizonURL == "https://demohorizon.lumenshine.com"
+    }
+    
+    public var serverSigningKey: String {
+        set {
+            UserDefaults.standard.set(newValue, forKey:userDefaultsServerKey)
+        }
+        get {
+            if let keyFromPrefs = UserDefaults.standard.string(forKey: userDefaultsServerKey) {
+                return keyFromPrefs
+            }
+            return initialServerSigningKey
+        }
     }
     
     static let shared = Services()

@@ -362,7 +362,27 @@ fileprivate extension LoginViewModel {
                                      publicKeyIndex0: login1Response.publicKeyIndex0,
                                      publicKeyIndex188: decryptedUserData.publicKeyIndex188,
                                      publicKeys: decryptedUserData.publicKeys)
+                    
+                    // TODO: why is this needed here?
                     self.mnemonic = decryptedUserData.mnemonic
+                    
+                    /*PrivateKeyManager.getKeyPair(forAccountID: self.user!.publicKeyIndex0, fromMnemonic: decryptedUserData.mnemonic, completion: { (keyResponse) -> (Void) in
+                        switch keyResponse {
+                        case .success(keyPair: let keyPair):
+                            self.service.signSEP10ChallengeIfValid(base64EnvelopeXDR: login1Response.sep10TransactionEnvelopeXDR, userKeyPair: keyPair!, completion: { (signResponse) -> (Void) in
+                                switch signResponse {
+                                case .success(signedXDR: let signedXDR):
+                                    print(signedXDR)
+                                case .failure(error: let error):
+                                    print(error)
+                                }
+                                self.service.loginStep2(publicKeyIndex188: decryptedUserData.publicKeyIndex188, response: response)
+                        })
+                        case .failure(error: let error):
+                            print(error)
+                        }
+                    })*/
+                    
                     self.service.loginStep2(publicKeyIndex188: decryptedUserData.publicKeyIndex188, response: response)
                 } else {
                     let error = ErrorResponse()

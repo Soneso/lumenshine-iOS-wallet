@@ -840,3 +840,12 @@
 
 /*  */
 "terms_of_service_hint" = "Terms of service text comes here";
+
+/*  */
+"invalid_toml" = "Invalid stellar toml file received from server";
+
+/*  */
+"no_signing_key_in_toml" = "No server signing key found in stellar toml file";
+
+/*  */
+"invaild_sep10_challenge" = "Invalid SEP10 challenge received";
