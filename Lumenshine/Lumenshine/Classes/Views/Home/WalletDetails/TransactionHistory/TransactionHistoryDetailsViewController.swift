@@ -39,6 +39,9 @@ class TransactionHistoryDetailsViewController: UIViewController {
     }
     
     private func setupResponseLabel() {
-        responseLabel.text = operationInfo.responseString
+        guard let data = operationInfo.responseData else {
+            return
+        }
+        responseLabel.text = String(data: data, encoding: .utf8)
     }
 }

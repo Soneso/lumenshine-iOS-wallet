@@ -60,10 +60,9 @@ class TransactionHistoryManager {
         walletService.GETRequestFromUrl(url: requestUrl) { (result) -> (Void) in
             switch result {
             case .success(let data):
-                operation.responseString = String(data: data, encoding: String.Encoding.utf8)
+                operation.responseData = data
                completion()
-            case .failure(let error):
-                operation.responseString = error.localizedDescription
+            case .failure:
                 completion()
             }
         }

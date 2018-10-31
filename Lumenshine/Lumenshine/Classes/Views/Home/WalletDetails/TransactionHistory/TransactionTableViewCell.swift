@@ -33,8 +33,7 @@ class TransactionTableViewCell: UITableViewCell {
     }
     
     @IBAction func detailsButtonAction(_ sender: UIButton) {
-        let transactionDetailsViewController = TransactionHistoryDetailsViewController(nibName: "TransactionHistoryDetailsViewController", bundle: Bundle.main)
-        transactionDetailsViewController.operationInfo = operationInfo
+        let transactionDetailsViewController = TransactionHistoryDetailsTableViewController(operationInfo: operationInfo)
         viewContainingController()?.navigationController?.pushViewController(transactionDetailsViewController, animated: true)
     }
     

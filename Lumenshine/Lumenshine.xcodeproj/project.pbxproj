@@ -269,6 +269,7 @@
 		B18D3BA8217E0B9B003B9D9E /* LanguageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18D3BA7217E0B9B003B9D9E /* LanguageResponse.swift */; };
 		B19A8A9E2180D9C200140F18 /* MultilineInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19A8A9D2180D9C200140F18 /* MultilineInputTableViewCell.swift */; };
 		B1D4409B217F2B95003A3ACF /* iso_salutations.json in Resources */ = {isa = PBXBuildFile; fileRef = B1D4409A217F2B94003A3ACF /* iso_salutations.json */; };
+		B1DA1E912189C586001BB4FA /* TransactionHistoryDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DA1E902189C586001BB4FA /* TransactionHistoryDetailsTableViewController.swift */; };
 		BC85BD500013E598CAFF9FAE /* Pods_LumenshineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F29A5324DA57F1AA741A5E82 /* Pods_LumenshineTests.framework */; };
 		C61244C62113325A00DE1EA9 /* SendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C61244C52113325A00DE1EA9 /* SendViewController.xib */; };
 		C61244C8211332E700DE1EA9 /* SendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61244C7211332E700DE1EA9 /* SendViewController.swift */; };
@@ -678,6 +679,7 @@
 		B18D3BA7217E0B9B003B9D9E /* LanguageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageResponse.swift; sourceTree = "<group>"; };
 		B19A8A9D2180D9C200140F18 /* MultilineInputTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineInputTableViewCell.swift; sourceTree = "<group>"; };
 		B1D4409A217F2B94003A3ACF /* iso_salutations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = iso_salutations.json; sourceTree = "<group>"; };
+		B1DA1E902189C586001BB4FA /* TransactionHistoryDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryDetailsTableViewController.swift; sourceTree = "<group>"; };
 		BD5D7ECC1085F6D80224F694 /* Pods-LumenshineUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineUITests/Pods-LumenshineUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C5A51E60F2E3DA1ACC512340 /* Pods-LumenshineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineTests/Pods-LumenshineTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C61244C52113325A00DE1EA9 /* SendViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendViewController.xib; sourceTree = "<group>"; };
@@ -1681,6 +1683,7 @@
 				C63B4F9D212AB3750003ECE5 /* TransactionTableViewCell.swift */,
 				C6410CD6212C269C00F9C8B3 /* TransactionHistoryDetailsViewController.xib */,
 				C6410CD8212C26B300F9C8B3 /* TransactionHistoryDetailsViewController.swift */,
+				B1DA1E902189C586001BB4FA /* TransactionHistoryDetailsTableViewController.swift */,
 			);
 			path = TransactionHistory;
 			sourceTree = "<group>";
@@ -2311,6 +2314,7 @@
 				74C0913520F64012000A809D /* WalletCardContentView.swift in Sources */,
 				4376F4A3204D9F9D00B179C3 /* HomeViewModel.swift in Sources */,
 				C6D87E762133ECED00154A3B /* KnownCurrenciesTableViewController.swift in Sources */,
+				B1DA1E912189C586001BB4FA /* TransactionHistoryDetailsTableViewController.swift in Sources */,
 				74C8994E210205C8009B13EA /* UIApplication+ViewControllerTree.swift in Sources */,
 				74C0914A20FB3F6F000A809D /* CurrenciesService.swift in Sources */,
 				43C7A8F0215B92CA007F4E5E /* HelpCenterViewController.swift in Sources */,
