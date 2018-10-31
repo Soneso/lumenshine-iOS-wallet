@@ -373,13 +373,15 @@ fileprivate extension LoginViewModel {
                                 switch signResponse {
                                 case .success(signedXDR: let signedXDR):
                                     print(signedXDR)
+                                    self.service.loginStep2(signedSEP10TransactionEnvelope:signedXDR, response: response)
                                 case .failure(error: let error):
                                     print(error)
+                                    response(.failure(error: error))
                                 }
-                                self.service.loginStep2(publicKeyIndex188: decryptedUserData.publicKeyIndex188, response: response)
                         })
                         case .failure(error: let error):
                             print(error)
+                            response(.failure(error: .encryptionFailed(message: error)))
                         }
                     })*/
                     

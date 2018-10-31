@@ -370,6 +370,7 @@ public class AuthService: BaseService {
         }
     }
     
+    // TODO: remove this after sep10 implementation
     open func loginStep2(publicKeyIndex188: String, response: @escaping Login2ResponseClosure) {
         
         do {
@@ -378,6 +379,33 @@ public class AuthService: BaseService {
             
             let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
         
+            POSTRequestWithPath(path: "/portal/user/auth/login_step2", body: bodyData) { (result) -> (Void) in
+                switch result {
+                case .success(let data):
+                    BaseService.jwtTokenType = .full
+                    do {
+                        let loginResponse = try self.jsonDecoder.decode(LoginStep2Response.self, from: data)
+                        response(.success(response: loginResponse))
+                    } catch {
+                        response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+                    }
+                case .failure(let error):
+                    response(.failure(error: error))
+                }
+            }
+        } catch {
+            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+        }
+    }
+    
+    open func loginStep2(signedSEP10TransactionEnvelope: String, response: @escaping Login2ResponseClosure) {
+        
+        do {
+            var params = Dictionary<String,String>()
+            params["sep10_transaction"] = signedSEP10TransactionEnvelope
+            
+            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+            
             POSTRequestWithPath(path: "/portal/user/auth/login_step2", body: bodyData) { (result) -> (Void) in
                 switch result {
                 case .success(let data):
