@@ -63,10 +63,23 @@ class TransactionHistoryDetailsTableViewController: UITableViewController {
         
         let keys = jsonDict.keys.sorted()
         let key = keys[indexPath.row]
-        let value = jsonDict[key] as? String
+        let anyValue = jsonDict[key]
+        var value = ""
+        
+        switch anyValue {
+        case let anInt as Int:
+            value = String(anInt)
+        case let aDouble as Double:
+            value = String(aDouble)
+        case let aString as String:
+            value = aString
+        case let anArray as Array<String>:
+            value = anArray.joined(separator: ", ")
+        default: break
+        }
         
         cell.textLabel?.font = R.font.encodeSansRegular(size: 14)
-        cell.textLabel?.text = key
+        cell.textLabel?.text = key.replacingOccurrences(of: "_", with: " ")
         cell.detailTextLabel?.font = R.font.encodeSansSemiBold(size: 14)
         cell.detailTextLabel?.text = value
         cell.detailTextLabel?.numberOfLines = 0
