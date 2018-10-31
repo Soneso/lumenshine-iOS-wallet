@@ -306,6 +306,7 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
+                                                        <constraint firstItem="BU0-9b-Da8" firstAttribute="width" relation="lessThanOrEqual" secondItem="842-Wl-ulV" secondAttribute="width" id="4KF-Em-RRa"/>
                                                         <constraint firstItem="eKg-Pr-I0D" firstAttribute="leading" secondItem="842-Wl-ulV" secondAttribute="leading" id="4mj-Vq-Me7"/>
                                                         <constraint firstAttribute="trailing" secondItem="eKg-Pr-I0D" secondAttribute="trailing" id="PL4-i9-SCd"/>
                                                         <constraint firstItem="BU0-9b-Da8" firstAttribute="top" secondItem="842-Wl-ulV" secondAttribute="top" id="XZZ-AO-Tg6"/>
@@ -428,6 +429,7 @@
                                                                         <constraint firstItem="INw-OD-Zfk" firstAttribute="leading" secondItem="ywB-GN-Pkd" secondAttribute="leading" id="EXp-65-JXC"/>
                                                                         <constraint firstItem="INw-OD-Zfk" firstAttribute="top" secondItem="ywB-GN-Pkd" secondAttribute="top" id="Ejp-sP-TME"/>
                                                                         <constraint firstAttribute="bottom" secondItem="INw-OD-Zfk" secondAttribute="bottom" id="R8k-kM-o67"/>
+                                                                        <constraint firstItem="INw-OD-Zfk" firstAttribute="width" relation="lessThanOrEqual" secondItem="ywB-GN-Pkd" secondAttribute="width" id="SqT-i5-jkF"/>
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>

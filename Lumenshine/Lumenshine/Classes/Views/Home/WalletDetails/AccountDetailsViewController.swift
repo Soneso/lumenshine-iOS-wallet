@@ -185,7 +185,7 @@ class AccountDetailsViewController: UIViewController {
             case .success:
                 self.stellarAddressRemoveView.removeFromSuperview()
                 self.stellarAddressStackView.addArrangedSubview(self.stellarAddressNotSetupView)
-            // TODO: remove stellar address from wallet
+                self.wallet.federationAddress = ""
             case .failure(let error):
                 self.stellarAddressEditErrorLabel.text = error.localizedDescription
             }

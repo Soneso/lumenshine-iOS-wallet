@@ -150,6 +150,7 @@
                 <constraint firstItem="R8E-4K-ttp" firstAttribute="firstBaseline" secondItem="dcr-TQ-c9b" secondAttribute="firstBaseline" id="dMR-r3-yO9"/>
                 <constraint firstItem="dcr-TQ-c9b" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="fV5-T4-SOz"/>
                 <constraint firstItem="DSU-9a-gmP" firstAttribute="top" secondItem="AMC-lx-fVN" secondAttribute="top" constant="-10" id="iSI-kw-rO8"/>
+                <constraint firstItem="M9j-et-ier" firstAttribute="width" relation="lessThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="width" constant="-32" id="imc-kR-fRB"/>
                 <constraint firstItem="dcr-TQ-c9b" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="opk-ke-0wT"/>
                 <constraint firstItem="R8E-4K-ttp" firstAttribute="leading" secondItem="dcr-TQ-c9b" secondAttribute="trailing" constant="5" id="p0J-DG-NK0"/>
                 <constraint firstItem="DSU-9a-gmP" firstAttribute="bottom" secondItem="A0f-Us-sOy" secondAttribute="bottom" constant="10" id="per-t7-mQK"/>
