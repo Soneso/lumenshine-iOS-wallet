@@ -8,7 +8,6 @@
 
 import UIKit
 import Material
-import LocalAuthentication
 
 protocol ReLoginViewDelegate: class {
     func didTapSubmitButton(password: String, tfaCode: String?)
@@ -59,13 +58,7 @@ class ReLoginHomeView: UIView {
                     self?.storedPassword = true
                     self?.delegate?.didTapSubmitButton(password: password, tfaCode: nil)
                 case .failure(let error):
-                    if let err = error as? LAError {
-                        self?.passwordTextField.detail = error.errorDescription
-                        if err.code == LAError.authenticationFailed {
-                            self?.touchIDButton.isHidden = true
-                            self?.viewModel.removeBiometricRecognition()
-                        }
-                    }
+                    self?.passwordTextField.detail = error.errorDescription
                 }
             }
         }

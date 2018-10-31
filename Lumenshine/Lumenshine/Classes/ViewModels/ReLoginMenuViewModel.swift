@@ -20,12 +20,9 @@ class ReLoginMenuViewModel : LoginMenuViewModel {
                         [.signOut, .home, .lostPassword, .lost2FA],
                         [.about, .help]]
         
-        switch BiometricIDAuth().biometricType() {
-        case .faceID:
-            entries[1].append(.faceRecognition)
-        case .touchID:
-            entries[1].append(.fingerprint)
-        default: break
+        
+        if !BiometricHelper.isTouchEnabled {
+            entries[1].append(BiometricIDAuth().biometricType() == .faceID ? .faceRecognition : .fingerprint)
         }
     }
     

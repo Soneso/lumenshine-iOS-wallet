@@ -74,6 +74,7 @@ class MultilineInputTableViewCell: InputTableViewCell {
     
     override func setText(_ text: String?) {
         textView.text = text
+        textView.sizeToFit()
         cellSizeChangedCallback?(textView.newHeight(withBaseHeight: 25))
     }
 }

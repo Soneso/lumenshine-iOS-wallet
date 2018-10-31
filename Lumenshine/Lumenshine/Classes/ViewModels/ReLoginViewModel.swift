@@ -18,8 +18,11 @@ class ReLoginViewModel : LoginViewModel {
         self.user = user
         super.init(service: service)
         self.entries = [.signOut,
-                        .home,
-                        BiometricIDAuth().biometricType() == .faceID ? .faceRecognition : .fingerprint]
+                        .home]
+        
+        if !BiometricHelper.isTouchEnabled {
+            entries.append(BiometricIDAuth().biometricType() == .faceID ? .faceRecognition : .fingerprint)
+        }
     }
     
     override var barItems: [(String, String)] {
