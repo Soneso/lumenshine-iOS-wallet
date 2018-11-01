@@ -13,7 +13,11 @@ enum SignEnum {
     case minus
 }
 
-class OperationInfo {
+class OperationInfo: Equatable {
+    static func == (lhs: OperationInfo, rhs: OperationInfo) -> Bool {
+        return lhs.operationID == rhs.operationID
+    }
+    
     var date: Date!
     var amount: String!
     var assetCode: String!

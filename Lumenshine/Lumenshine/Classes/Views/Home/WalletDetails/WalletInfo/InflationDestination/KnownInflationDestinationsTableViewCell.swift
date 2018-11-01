@@ -30,6 +30,8 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
     @IBOutlet weak var setOrRemoveButton: UIButton!
     
     var canMasterKeySign: Bool!
+    var reloadDelegate: ReloadDelegate?
+    
     var wallet: FundedWallet! {
         didSet {
             setupPasswordView()
@@ -84,6 +86,7 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
                 } else {
                     if let inflationDestinationAddress = self.destinationPublicKeyLabel.text {
                         self.setInflationDestination(sourceAccountKeyPair: sourceKeyPair, destination: inflationDestinationAddress)
+                        self.reloadDelegate?.setNeedsReload()
                     }else {
                         // TODO improve, make sure not to show any cells that have no destination address
                         self.showUnknownErrorAlert()
@@ -213,6 +216,8 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
         passwordView.hideTitleLabels = true
         passwordView.alwaysShowValidationPlaceholders = true
         passwordView.wallet = wallet
+        passwordView.passwordHintView.isHidden = false
+        passwordView.passwordHintLabel.text = "Password required to set inflation destination"
         
         passwordView.biometricAuthAction = {
             self.addInflation(biometricAuth: true)

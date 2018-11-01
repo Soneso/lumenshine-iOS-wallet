@@ -28,7 +28,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="dvD-X5-FCZ">
-                    <rect key="frame" x="16" y="36" width="343" height="301"/>
+                    <rect key="frame" x="16" y="36" width="343" height="272.5"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p9b-kP-V4f">
                             <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
@@ -97,26 +97,8 @@
                             <rect key="frame" x="0.0" y="85.5" width="343" height="60"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QxH-ad-ccS">
-                            <rect key="frame" x="0.0" y="153.5" width="343" height="20.5"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Password required to remove currency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L8D-k4-jP1" customClass="HintLabel" customModule="Lumenshine" customModuleProvider="target">
-                                    <rect key="frame" x="16" y="0.0" width="327" height="20.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstItem="L8D-k4-jP1" firstAttribute="leading" secondItem="QxH-ad-ccS" secondAttribute="leading" constant="16" id="hI9-vo-aSj"/>
-                                <constraint firstItem="L8D-k4-jP1" firstAttribute="top" secondItem="QxH-ad-ccS" secondAttribute="top" id="odB-z5-ayG"/>
-                                <constraint firstAttribute="bottom" secondItem="L8D-k4-jP1" secondAttribute="bottom" id="pF0-me-yh7"/>
-                                <constraint firstAttribute="trailing" secondItem="L8D-k4-jP1" secondAttribute="trailing" id="uY1-Ds-g2R"/>
-                            </constraints>
-                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0XP-yy-tUd">
-                            <rect key="frame" x="0.0" y="182" width="343" height="30"/>
+                            <rect key="frame" x="0.0" y="153.5" width="343" height="30"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U2z-2A-ANL" customClass="RoundedButton" customModule="Lumenshine" customModuleProvider="target">
                                     <rect key="frame" x="143.5" y="0.0" width="56" height="30"/>
@@ -135,7 +117,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5pC-gT-sBI">
-                            <rect key="frame" x="0.0" y="220" width="343" height="81"/>
+                            <rect key="frame" x="0.0" y="191.5" width="343" height="81"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance is not zero. If you remove this currency, your credits will also be removed." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cH-EN-Z0I" customClass="ErrorLabel" customModule="Lumenshine" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="343" height="81"/>

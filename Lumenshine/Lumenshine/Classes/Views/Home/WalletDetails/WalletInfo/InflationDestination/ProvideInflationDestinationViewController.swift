@@ -31,6 +31,7 @@ class ProvideInflationDestinationViewController: UIViewController {
     @IBOutlet weak var setButton: UIButton!
     
     var wallet: FundedWallet!
+    var reloadDelegate: ReloadDelegate?
     
     private let passwordManager = PasswordManager()
     private let walletManager = WalletManager()
@@ -107,6 +108,7 @@ class ProvideInflationDestinationViewController: UIViewController {
                     case .success(keyPair: let keyPair):
                         if let walletKeyPair = keyPair {
                             self.setInflationDestination(sourceAccountKeyPair: walletKeyPair, inflationDestination: inflationDestination)
+                            self.reloadDelegate?.setNeedsReload()
                             return
                         }
                     case .failure(error: let error):
@@ -181,6 +183,8 @@ class ProvideInflationDestinationViewController: UIViewController {
         passwordView.neededSigningSecurity = .medium
         passwordView.hideTitleLabels = true
         passwordView.wallet = wallet
+        passwordView.passwordHintView.isHidden = false
+        passwordView.passwordHintLabel.text = "Password required to set inflation destination"
         
         passwordView.biometricAuthAction = {
             self.addInflation(biometricAuth: true)

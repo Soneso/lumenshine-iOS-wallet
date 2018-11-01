@@ -18,13 +18,18 @@ protocol AccountDetailsViewControllerFlow: BaseViewControllerFlowDelegate {
     
 }
 
+protocol ReloadDelegate {
+    func setNeedsReload()
+}
+
 private enum ActionButtonTitles: String {
     case setAddress = "set address"
     case removeAddress = "remove address"
+    case changeAddress = "change"
     case cancel = "cancel"
 }
 
-class AccountDetailsViewController: UIViewController {
+class AccountDetailsViewController: UIViewController, ReloadDelegate {
     @IBOutlet weak var walletNameStackView: UIStackView!
     @IBOutlet var walletNameView: UIView!
     @IBOutlet var walletNameEditView: UIView!
@@ -58,39 +63,46 @@ class AccountDetailsViewController: UIViewController {
     private let walletService = Services.shared.walletService
     private var titleView: TitleView!
     private var accountCurrenciesViewController: AccountCurrenciesViewController!
+    private var needsReloadData = false
     
     @IBOutlet weak var stellarAddressActionbutton: UIButton!
     
     @IBAction func didTapStellarAddressActionButton(_ sender: UIButton) {
         if let buttonTitle = stellarAddressActionbutton.title(for: .normal) {
+            if buttonTitle == ActionButtonTitles.removeAddress.rawValue {
+                removeStellarAddress()
+                return
+            }
+
             if  buttonTitle == ActionButtonTitles.cancel.rawValue {
                 setStellarAddressView()
                 return
             }
             
-            if buttonTitle == ActionButtonTitles.setAddress.rawValue {
-                stellarAddressNotSetupView.removeFromSuperview()
-                stellarAddressEditTextField.text = nil
-                stellarAddressEditErrorLabel.text = nil
-                stellarAddressStackView.addArrangedSubview(stellarAddressEditView)
-                setupStellarAddressActionButton(withTitle: .cancel)
+            stellarAddressNotSetupView.removeFromSuperview()
+            stellarAddressEditTextField.text = nil
+            stellarAddressEditErrorLabel.text = nil
+            stellarAddressStackView.addArrangedSubview(stellarAddressEditView)
+            
+            if buttonTitle == ActionButtonTitles.changeAddress.rawValue {
+                setupStellarAddressActionButton(withTitle: .removeAddress)
             } else {
-                removeStellarAddress()
-                setupStellarAddressActionButton(withTitle: .setAddress)
+                setupStellarAddressActionButton(withTitle: .cancel)
             }
         }
-      
     }
     
     var wallet: Wallet!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupNavigationItem()
         setupWalletNameView()
         setupPublicKeyView()
         setupStellarAddress()
+        setupAccountCurrency()
+        setupWalletDetails()
+        setupTransactionsHistory()
         view.backgroundColor = Stylesheet.color(.veryLightGray)
         setupButtons()
     }
@@ -157,6 +169,12 @@ class AccountDetailsViewController: UIViewController {
     }
     
     @IBAction func didTapSubmitEditStellarAddress(_ sender: Any) {
+        stellarAddressEditErrorLabel.text = nil
+        if stellarAddressEditTextField.text?.isMandatoryValid() == false {
+            stellarAddressEditErrorLabel.text = "Stellar address can not be empty"
+            return
+        }
+        
         var request = ChangeWalletRequest(id: wallet.id)
         let stellarAddress = (stellarAddressEditTextField.text ?? "") + federationDomainLabel.text!
         request.federationAddress = stellarAddress
@@ -170,7 +188,7 @@ class AccountDetailsViewController: UIViewController {
                 self.stellarAddressEditView.removeFromSuperview()
                 self.stellarAddressStackView.addArrangedSubview(self.stellarAddressRemoveView)
                 self.wallet.federationAddress = stellarAddress
-                self.setupStellarAddressActionButton(withTitle: .removeAddress)
+                self.setupStellarAddressActionButton(withTitle: .changeAddress)
             case .failure(let error):
                 self.stellarAddressEditErrorLabel.text = error.localizedDescription
             }
@@ -186,6 +204,7 @@ class AccountDetailsViewController: UIViewController {
                 self.stellarAddressRemoveView.removeFromSuperview()
                 self.stellarAddressStackView.addArrangedSubview(self.stellarAddressNotSetupView)
                 self.wallet.federationAddress = ""
+                self.setStellarAddressView()
             case .failure(let error):
                 self.stellarAddressEditErrorLabel.text = error.localizedDescription
             }
@@ -240,7 +259,7 @@ class AccountDetailsViewController: UIViewController {
             removeViewAddressLabel.text = wallet.federationAddress
             stellarAddressNotSetupView.removeFromSuperview()
             stellarAddressEditView.removeFromSuperview()
-            setupStellarAddressActionButton(withTitle: .removeAddress)
+            setupStellarAddressActionButton(withTitle: .changeAddress)
         }
         
         stellarAddressNoneLabel.backgroundColor = Stylesheet.color(.helpButtonGray)
@@ -248,7 +267,7 @@ class AccountDetailsViewController: UIViewController {
     
     private func setupStellarAddressActionButton(withTitle title: ActionButtonTitles) {
         switch title {
-        case .setAddress:
+        case .setAddress, .changeAddress:
             stellarAddressActionbutton.tintColor = Stylesheet.color(.blue)
         case .removeAddress:
             stellarAddressActionbutton.tintColor = Stylesheet.color(.red)
@@ -266,7 +285,7 @@ class AccountDetailsViewController: UIViewController {
             setupStellarAddressActionButton(withTitle: .setAddress)
         } else {
             stellarAddressStackView.addArrangedSubview(stellarAddressRemoveView)
-            setupStellarAddressActionButton(withTitle: .removeAddress)
+            setupStellarAddressActionButton(withTitle: .changeAddress)
         }
     }
     
@@ -275,6 +294,8 @@ class AccountDetailsViewController: UIViewController {
         if let wallet = wallet as? FundedWallet {
             viewController.wallet = wallet
         }
+        
+        viewController.reloadDelegate = self
         
         addChildViewController(viewController)
         accountCurrencyContainer.addSubview(viewController.view)
@@ -305,6 +326,8 @@ class AccountDetailsViewController: UIViewController {
             viewController.wallet = wallet
         }
         
+        viewController.reloadDelegate = self
+        
         addChildViewController(viewController)
         walletDetailsContainer.addSubview(viewController.view)
         viewController.view.snp.makeConstraints({ (make) in
@@ -314,14 +337,22 @@ class AccountDetailsViewController: UIViewController {
         viewController.didMove(toParentViewController: self)
     }
     
+    func setNeedsReload() {
+        needsReloadData = true
+    }
+    
     private func reloadWalletDetails() {
-        accountCurrencyContainer.subviews.forEach({ $0.removeFromSuperview() })
-        walletDetailsContainer.subviews.forEach({ $0.removeFromSuperview() })
-        transactionsHistoryContainer.subviews.forEach({ $0.removeFromSuperview() })
-        
-        setupAccountCurrency()
-        setupWalletDetails()
-        setupTransactionsHistory()
+        if needsReloadData {
+            accountCurrencyContainer.subviews.forEach({ $0.removeFromSuperview() })
+            walletDetailsContainer.subviews.forEach({ $0.removeFromSuperview() })
+            transactionsHistoryContainer.subviews.forEach({ $0.removeFromSuperview() })
+            
+            setupAccountCurrency()
+            setupWalletDetails()
+            setupTransactionsHistory()
+            
+            needsReloadData = false
+        }
     }
     
     private func setupButtons() {

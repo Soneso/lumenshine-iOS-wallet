@@ -23,6 +23,7 @@ class AccountCurrenciesViewController: UIViewController {
     @IBOutlet weak var intrinsicView: IntrinsicView!
     
     var wallet: FundedWallet!
+    var reloadDelegate: ReloadDelegate?
     let walletManager = WalletManager()
     
     override func viewDidLoad() {
@@ -33,6 +34,7 @@ class AccountCurrenciesViewController: UIViewController {
 
     @IBAction func didTapAddCurrency(_ sender: Any) {
         let addCurrencyViewController = AddCurrencyViewController(nibName: "AddCurrencyViewController", bundle: Bundle.main)
+        addCurrencyViewController.reloadDelegate = reloadDelegate
         addCurrencyViewController.wallet = wallet
         navigationController?.pushViewController(addCurrencyViewController, animated: true)
     }
@@ -83,6 +85,7 @@ class AccountCurrenciesViewController: UIViewController {
     
     private func removeCurrency(forCurrency currency: AccountBalanceResponse) {
         let removeCurrencyViewController = RemoveCurrencyViewController(nibName: "RemoveCurrencyViewController", bundle: Bundle.main)
+        removeCurrencyViewController.reloadDelegate = reloadDelegate
         removeCurrencyViewController.currency = currency
         removeCurrencyViewController.wallet = wallet
         navigationController?.pushViewController(removeCurrencyViewController, animated: true)

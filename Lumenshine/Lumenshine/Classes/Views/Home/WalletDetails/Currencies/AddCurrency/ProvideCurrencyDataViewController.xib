@@ -28,7 +28,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="huj-FQ-jdS">
-                    <rect key="frame" x="0.0" y="20" width="375" height="214.5"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="178"/>
                     <subviews>
                         <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cCz-zb-Taa">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
@@ -102,31 +102,8 @@
                             <rect key="frame" x="0.0" y="92" width="375" height="40"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="lDP-Rk-6P5">
-                            <rect key="frame" x="0.0" y="148" width="375" height="20.5"/>
-                            <subviews>
-                                <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="7sB-Wt-7X1">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="20.5"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Password required to add currency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m1Z-U3-jRl" customClass="HintLabel" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="0.0" width="359" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstItem="m1Z-U3-jRl" firstAttribute="leading" secondItem="7sB-Wt-7X1" secondAttribute="leading" constant="16" id="72W-7M-55h"/>
-                                        <constraint firstItem="m1Z-U3-jRl" firstAttribute="top" secondItem="7sB-Wt-7X1" secondAttribute="top" id="LVI-IS-rFn"/>
-                                        <constraint firstAttribute="bottom" secondItem="m1Z-U3-jRl" secondAttribute="bottom" id="oFj-d3-vyH"/>
-                                        <constraint firstAttribute="trailing" secondItem="m1Z-U3-jRl" secondAttribute="trailing" id="wX3-zh-9h4"/>
-                                    </constraints>
-                                </view>
-                            </subviews>
-                        </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jBa-HS-3JG">
-                            <rect key="frame" x="0.0" y="184.5" width="375" height="30"/>
+                            <rect key="frame" x="0.0" y="148" width="375" height="30"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tiY-k1-PPq">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>

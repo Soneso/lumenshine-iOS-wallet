@@ -20,6 +20,7 @@ class AddCurrencyViewController: UIViewController {
     private var knownCurrenciesTableViewController: KnownCurrenciesTableViewController!
     
     var wallet: FundedWallet!
+    var reloadDelegate: ReloadDelegate?
 
     @IBOutlet weak var currencyContainer: UIView!
     
@@ -42,8 +43,10 @@ class AddCurrencyViewController: UIViewController {
     private func setupSegmentedContent() {
         knownCurrenciesTableViewController = KnownCurrenciesTableViewController(nibName: "KnownCurrenciesTableViewController", bundle: Bundle.main)
         knownCurrenciesTableViewController.wallet = wallet
+        knownCurrenciesTableViewController.reloadDelegate = reloadDelegate
         
         provideCurrencyDataViewController = ProvideCurrencyDataViewController(nibName: "ProvideCurrencyDataViewController", bundle: Bundle.main)
+        provideCurrencyDataViewController.reloadDelegate = reloadDelegate
     }
     
     private func showKnownCurrencies() {

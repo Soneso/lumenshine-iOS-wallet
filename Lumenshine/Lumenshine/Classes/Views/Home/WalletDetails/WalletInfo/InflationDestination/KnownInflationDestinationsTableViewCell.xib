@@ -24,7 +24,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="597" height="61.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="250" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="9QC-QE-Ee3">
-                                    <rect key="frame" x="0.0" y="0.0" width="481" height="61.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="466" height="61.5"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="lgC-3u-mkl">
                                             <rect key="frame" x="0.0" y="0.0" width="82.5" height="20.5"/>
@@ -92,7 +92,7 @@
                                     </subviews>
                                 </stackView>
                                 <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="hMt-5I-Dwt">
-                                    <rect key="frame" x="489" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="474" y="0.0" width="50" height="50"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OnX-eK-2O4" customClass="SimpleButton" customModule="Lumenshine" customModuleProvider="target">
                                             <rect key="frame" x="2" y="10" width="46" height="30"/>
@@ -112,20 +112,20 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Z81-ZD-faK">
-                                    <rect key="frame" x="547" y="0.0" width="50" height="51"/>
+                                    <rect key="frame" x="532" y="0.0" width="65" height="51"/>
                                     <subviews>
                                         <switch opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="JgS-ee-Zwi">
-                                            <rect key="frame" x="0.0" y="10" width="52" height="31"/>
+                                            <rect key="frame" x="2" y="10" width="63" height="31"/>
                                         </switch>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstItem="JgS-ee-Zwi" firstAttribute="leading" secondItem="Z81-ZD-faK" secondAttribute="leading" id="0Yu-bO-kQy"/>
+                                        <constraint firstItem="JgS-ee-Zwi" firstAttribute="leading" secondItem="Z81-ZD-faK" secondAttribute="leading" constant="2" id="0Yu-bO-kQy"/>
                                         <constraint firstItem="JgS-ee-Zwi" firstAttribute="top" secondItem="Z81-ZD-faK" secondAttribute="top" constant="10" id="3xG-CN-Y2y"/>
                                         <constraint firstAttribute="bottom" secondItem="JgS-ee-Zwi" secondAttribute="bottom" constant="10" id="9Dj-Ew-C74"/>
                                         <constraint firstItem="JgS-ee-Zwi" firstAttribute="centerY" secondItem="Z81-ZD-faK" secondAttribute="centerY" id="OFC-QW-h8S"/>
                                         <constraint firstItem="JgS-ee-Zwi" firstAttribute="centerX" secondItem="Z81-ZD-faK" secondAttribute="centerX" id="dh0-zv-c5g"/>
-                                        <constraint firstAttribute="trailing" secondItem="JgS-ee-Zwi" secondAttribute="trailing" id="lm6-QT-dnX"/>
+                                        <constraint firstAttribute="trailing" secondItem="JgS-ee-Zwi" secondAttribute="trailing" constant="2" id="lm6-QT-dnX"/>
                                     </constraints>
                                 </view>
                             </subviews>
@@ -137,26 +137,8 @@
                                     <rect key="frame" x="0.0" y="16" width="597" height="124"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="597" placeholderIntrinsicHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="gMy-5m-Ld8">
-                                            <rect key="frame" x="0.0" y="0.0" width="597" height="61"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="597" height="78"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </view>
-                                        <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Cnv-lH-r6e">
-                                            <rect key="frame" x="0.0" y="61" width="597" height="17"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Password required to set inflation destination" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFB-10-zId" customClass="HintLabel" customModule="Lumenshine" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="0.0" width="581" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="fFB-10-zId" secondAttribute="trailing" id="KTE-kd-mt7"/>
-                                                <constraint firstItem="fFB-10-zId" firstAttribute="top" secondItem="Cnv-lH-r6e" secondAttribute="top" id="bqo-N2-eBh"/>
-                                                <constraint firstAttribute="bottom" secondItem="fFB-10-zId" secondAttribute="bottom" id="iBm-gt-OdP"/>
-                                                <constraint firstItem="fFB-10-zId" firstAttribute="leading" secondItem="Cnv-lH-r6e" secondAttribute="leading" constant="16" id="kQc-Z6-URG"/>
-                                            </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" verticalHuggingPriority="1000" placeholderIntrinsicWidth="597" placeholderIntrinsicHeight="46" translatesAutoresizingMaskIntoConstraints="NO" id="deD-Dg-f5q">
                                             <rect key="frame" x="0.0" y="78" width="597" height="46"/>

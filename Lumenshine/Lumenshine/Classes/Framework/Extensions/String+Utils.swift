@@ -69,7 +69,9 @@ extension String  {
     }
     
     func isMandatoryValid() -> Bool {
-        return !self.isEmpty
+        let sRegex = "^\\s*$"
+        
+        return !NSPredicate(format: "SELF MATCHES[c] %@", sRegex).evaluate(with: self)
     }
     
     func isBase64Valid() -> Bool {

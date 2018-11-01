@@ -290,6 +290,7 @@
 		C646A7C62183210D0035DBD1 /* UIView+RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = C646A7C52183210D0035DBD1 /* UIView+RoundedCorners.swift */; };
 		C654AFB42122D3D500FB9686 /* FundTestNetWalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C654AFB32122D3D500FB9686 /* FundTestNetWalletViewController.xib */; };
 		C654AFB62122D4C900FB9686 /* FundTestNetWalletViewController.xib.swift in Sources */ = {isa = PBXBuildFile; fileRef = C654AFB52122D4C900FB9686 /* FundTestNetWalletViewController.xib.swift */; };
+		C65C85F62189D83300591D61 /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65C85F52189D83300591D61 /* ImageButton.swift */; };
 		C66390F9215B58DC00573B54 /* PaymentOperationsVCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66390F8215B58DC00573B54 /* PaymentOperationsVCManager.swift */; };
 		C665871021254A78006499A7 /* ChartsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C665870F21254A78006499A7 /* ChartsService.swift */; };
 		C665871221254C9D006499A7 /* ChartsCurrencyPairsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C665871121254C9D006499A7 /* ChartsCurrencyPairsResponse.swift */; };
@@ -703,6 +704,7 @@
 		C646F566BF9C95E0290B7A6D /* Pods-LumenshineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineTests/Pods-LumenshineTests.release.xcconfig"; sourceTree = "<group>"; };
 		C654AFB32122D3D500FB9686 /* FundTestNetWalletViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FundTestNetWalletViewController.xib; sourceTree = "<group>"; };
 		C654AFB52122D4C900FB9686 /* FundTestNetWalletViewController.xib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundTestNetWalletViewController.xib.swift; sourceTree = "<group>"; };
+		C65C85F52189D83300591D61 /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
 		C66390F8215B58DC00573B54 /* PaymentOperationsVCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentOperationsVCManager.swift; sourceTree = "<group>"; };
 		C665870F21254A78006499A7 /* ChartsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsService.swift; sourceTree = "<group>"; };
 		C665871121254C9D006499A7 /* ChartsCurrencyPairsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsCurrencyPairsResponse.swift; sourceTree = "<group>"; };
@@ -1609,6 +1611,7 @@
 				C6CEBCB1216CA66000710ED7 /* TabLikeSegmentedControl.swift */,
 				C6BDA2B1216F3ED80076439E /* CurrencyInfoButton.swift */,
 				C6A6E34F2182F1AE004A5634 /* RoundedBackgroundLabel.swift */,
+				C65C85F52189D83300591D61 /* ImageButton.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
@@ -2038,7 +2041,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Lumenshine/Pods-Lumenshine-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Base32/Base32.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/DGElasticPullToRefresh/DGElasticPullToRefresh.framework",
@@ -2073,7 +2076,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lumenshine/Pods-Lumenshine-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5EB5DFCDC887288385313455 /* [CP] Check Pods Manifest.lock */ = {
@@ -2297,6 +2300,7 @@
 				7477F3FB20EE19EE00408934 /* WalletsResponse.swift in Sources */,
 				C617195A21552E1F00F9907A /* InfoLabel.swift in Sources */,
 				C665871221254C9D006499A7 /* ChartsCurrencyPairsResponse.swift in Sources */,
+				C65C85F62189D83300591D61 /* ImageButton.swift in Sources */,
 				43088DB02087C4B8008AE1AB /* Dictionary+HTTPParams.swift in Sources */,
 				431A71D7214C0E5000D44C7E /* LSTextField.swift in Sources */,
 				C6813DC9213AC725007074C2 /* KnownCurrenciesManager.swift in Sources */,

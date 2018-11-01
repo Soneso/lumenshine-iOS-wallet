@@ -20,10 +20,12 @@ class PasswordView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBOutlet weak var biometricAuthView: UIView!
     @IBOutlet weak var signersTitleView: UIView!
     @IBOutlet weak var passwordTitleView: UIView!
+    @IBOutlet weak var passwordHintView: UIView!
     
     @IBOutlet weak var passwordValidationErrorLabel: UILabel!
     @IBOutlet weak var seedValidationErrorLabel: UILabel!
     @IBOutlet weak var signersTitleLabel: UILabel!
+    @IBOutlet weak var passwordHintLabel: UILabel!
     
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signersTextField: UITextField!

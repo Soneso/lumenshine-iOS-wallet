@@ -37,6 +37,7 @@ class KnownInflationDestinationsViewController: UIViewController, UITableViewDel
     
     var currentInflationDestination: String?
     var wallet: FundedWallet!
+    var reloadDelegate: ReloadDelegate?
     
     private let userManager = UserManager()
     private let CellIdentifier = "KnownInflationDestinationsTableViewCell"
@@ -105,6 +106,7 @@ class KnownInflationDestinationsViewController: UIViewController, UITableViewDel
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: KnownInflationDestinationsTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: CellIdentifier) as! KnownInflationDestinationsTableViewCell
+        cell.reloadDelegate = reloadDelegate
         
         let knownInflationDestination = itemsSource[indexPath.section]
         

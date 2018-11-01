@@ -13,6 +13,7 @@ fileprivate enum CancelRevealButtonTitles: String {
     case cancel = "cancel"
     case reveal = "reveal"
     case revealing = "revealing"
+    case hide = "hide"
 }
 
 class WalletDetailsViewController: UIViewController {
@@ -25,6 +26,7 @@ class WalletDetailsViewController: UIViewController {
     @IBOutlet weak var inflationPublicKeyLabel: UILabel!
     @IBOutlet weak var passwordValidationLabel: UILabel!
     
+    @IBOutlet weak var copyInflationButton: UIButton!
     @IBOutlet weak var secretRevealButton: UIButton!
     @IBOutlet weak var cancelRevealButton: UIButton!
     @IBOutlet weak var inflationDetailsButton: UIButton!
@@ -33,8 +35,11 @@ class WalletDetailsViewController: UIViewController {
     @IBOutlet weak var noInflationSetStackView: UIStackView!
     @IBOutlet weak var inflationButtonsStackView: UIStackView!
     
+    @IBOutlet weak var inflationPublicKeyView: UIView!
     @IBOutlet weak var passwordTextField: UITextField!
 
+    var reloadDelegate: ReloadDelegate?
+    
     @IBAction func sendButtonAction(_ sender: UIButton) {
         paymentOperationsVCManager.addViewController(forAction: WalletAction.send, wallet: wallet)
     }
@@ -64,12 +69,14 @@ class WalletDetailsViewController: UIViewController {
                 
                 self.secretRevealButton.setTitle(CancelRevealButtonTitles.reveal.rawValue.uppercased(), for: UIControlState.normal)
                 self.secretRevealButton.isEnabled = true
+                
+                self.setUIForRevealedSecret()
             }
         }
     }
     
     @IBAction func cancelRevealButtonAction(_ sender: UIButton) {
-        if passwordStackView.isHidden {
+        if passwordStackView.isHidden  && cancelRevealButton.title(for: .normal) != CancelRevealButtonTitles.hide.rawValue {
             passwordStackView.isHidden = false
             cancelRevealButton.setTitle(CancelRevealButtonTitles.cancel.rawValue, for: UIControlState.normal)
         } else {
@@ -180,14 +187,14 @@ class WalletDetailsViewController: UIViewController {
     private func setUIForNoInflationSet() {
         inflationCoinLabel.text = InflationNoneSet
         inflationCoinLabel.textColor = Stylesheet.color(.red)
-        inflationPublicKeyLabel.isHidden = true
+        inflationPublicKeyView.isHidden = true
         inflationShortDescriptionLabel.text = InflationNoneSetHint
     }
     
     private func setUIForInflationUnknown() {
         inflationCoinLabel.text = InflationUnknownSet
         inflationCoinLabel.textColor = Stylesheet.color(.red)
-        inflationPublicKeyLabel.isHidden = true
+        inflationPublicKeyView.isHidden = true
         inflationShortDescriptionLabel.text = InflationNoneSetHint
     }
     
@@ -195,6 +202,7 @@ class WalletDetailsViewController: UIViewController {
         inflationCoinLabel.text = knownInflationDestination.name
         inflationCoinLabel.textColor = Stylesheet.color(.green)
         inflationPublicKeyLabel.text = knownInflationDestination.destinationPublicKey
+        copyInflationButton.isHidden = false
         inflationShortDescriptionLabel.text = knownInflationDestination.shortDescription
         inflationButtonsStackView.isHidden = false
         noInflationSetStackView.isHidden = true
@@ -204,6 +212,7 @@ class WalletDetailsViewController: UIViewController {
     private func setUIForUnkownInflationSet(inflationAddress: String) {
         inflationCoinLabel.isHidden = true
         inflationPublicKeyLabel.text = inflationAddress
+        copyInflationButton.isHidden = false
         inflationShortDescriptionLabel.isHidden = true
         inflationButtonsStackView.isHidden = false
         noInflationSetStackView.isHidden = true
@@ -250,6 +259,13 @@ class WalletDetailsViewController: UIViewController {
         let setInflationDestinationViewController = SetInflationDestinationViewController(nibName: "SetInflationDestinationViewController", bundle: Bundle.main)
         setInflationDestinationViewController.wallet = wallet
         setInflationDestinationViewController.currentInflationDestination = currentInflationDestination
+        setInflationDestinationViewController.reloadDelegate = reloadDelegate
         navigationController?.pushViewController(setInflationDestinationViewController, animated: true)
+    }
+    
+    private func setUIForRevealedSecret() {
+        passwordTextField.text = nil
+        passwordStackView.isHidden = true
+        cancelRevealButton.setTitle(CancelRevealButtonTitles.hide.rawValue, for: .normal)
     }
 }

@@ -56,7 +56,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="6fN-lk-tkP">
-                            <rect key="frame" x="0.0" y="28.5" width="375" height="20.5"/>
+                            <rect key="frame" x="0.0" y="35" width="375" height="20.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" text="Issuer public key:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tZO-Go-M3m" customClass="RegularSubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
                                     <rect key="frame" x="16" y="0.0" width="132.5" height="20.5"/>
@@ -82,33 +82,15 @@
                                 <constraint firstItem="9Da-8M-8ry" firstAttribute="leading" secondItem="tZO-Go-M3m" secondAttribute="trailing" constant="4" id="yfa-ou-w2y"/>
                             </constraints>
                         </view>
-                        <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AOL-BV-zn8">
-                            <rect key="frame" x="0.0" y="57" width="375" height="159"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="AOL-BV-zn8">
+                            <rect key="frame" x="0.0" y="69.5" width="375" height="146.5"/>
                             <subviews>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="108.5" translatesAutoresizingMaskIntoConstraints="NO" id="JbX-et-RH4">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="108.5"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
-                                <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="On7-XB-Wbf">
-                                    <rect key="frame" x="0.0" y="108.5" width="375" height="20.5"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Password required to add currency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FbL-jj-mNn" customClass="HintLabel" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="0.0" width="359" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="FbL-jj-mNn" secondAttribute="trailing" id="0sR-qI-8eX"/>
-                                        <constraint firstItem="FbL-jj-mNn" firstAttribute="leading" secondItem="On7-XB-Wbf" secondAttribute="leading" constant="16" id="9LD-Iz-bVh"/>
-                                        <constraint firstItem="FbL-jj-mNn" firstAttribute="top" secondItem="On7-XB-Wbf" secondAttribute="top" id="GL9-xU-Nph"/>
-                                        <constraint firstAttribute="bottom" secondItem="FbL-jj-mNn" secondAttribute="bottom" id="doj-g4-GWc"/>
-                                    </constraints>
-                                </view>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="l6Y-3U-mKv">
-                                    <rect key="frame" x="0.0" y="129" width="375" height="30"/>
+                                    <rect key="frame" x="0.0" y="116.5" width="375" height="30"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SvU-bi-nVG">
                                             <rect key="frame" x="0.0" y="0.0" width="303" height="30"/>

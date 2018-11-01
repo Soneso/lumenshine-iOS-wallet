@@ -43,6 +43,7 @@ class KnownCurrenciesTableViewController: UIViewController, UITableViewDelegate,
     private var currentExpandedRowIndexPath: IndexPath?
     private var canWalletSign = true
 
+    var reloadDelegate: ReloadDelegate?
     var wallet: FundedWallet!
     
     override func viewDidLoad() {
@@ -100,6 +101,7 @@ class KnownCurrenciesTableViewController: UIViewController, UITableViewDelegate,
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: KnownCurrenciesTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: CellIdentifier) as! KnownCurrenciesTableViewCell
+        cell.reloadDelegate = reloadDelegate
         
         let knownCurrency = itemsSource[indexPath.section]
         

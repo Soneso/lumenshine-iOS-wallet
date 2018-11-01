@@ -34,6 +34,7 @@ class ProvideCurrencyDataViewController: UIViewController {
     @IBOutlet weak var passwordViewContainer: UIView!
     
     var wallet: FundedWallet!
+    var reloadDelegate: ReloadDelegate?
     private var walletManager = WalletManager()
     private var passwordView: PasswordView!
     private let IssuerDoesntExistValidationError = "Issuer does not exist"
@@ -135,6 +136,8 @@ class ProvideCurrencyDataViewController: UIViewController {
         passwordView.neededSigningSecurity = .medium
         passwordView.hideTitleLabels = true
         passwordView.wallet = wallet
+        passwordView.passwordHintView.isHidden = false
+        passwordView.passwordHintLabel.text = "Password required to add currency"
         
         passwordView.biometricAuthAction = {
             self.addCurrency(forBiometricAuth: true)
@@ -245,8 +248,8 @@ class ProvideCurrencyDataViewController: UIViewController {
             transactionHelper.addTrustLine(trustingAccountKeyPair:trustingAccountKeyPair, asset:asset) { (result) -> (Void) in
                 switch result {
                 case .success:
+                    self.reloadDelegate?.setNeedsReload()
                     self.navigationController?.popViewController(animated: true)
-                    break
                 case .failure(error: let error):
                     print("Error: \(String(describing: error))")
                     self.showTrnsactionFailedAlert()

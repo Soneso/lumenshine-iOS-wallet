@@ -43,18 +43,40 @@ class TransactionHistoryTableViewController: UIViewController, UITableViewDelega
     }
     
     private func setTableViewFooter() {
-        guard self.footerViewController == nil else {
-            self.footerViewController.hideLoadingSign()
-            self.footerViewController.showButton()
-            return
+        if footerViewController == nil {
+            footerViewController = LoadTransactionsHistoryViewController(nibName: "LoadTransactionsHistoryViewController", bundle: Bundle.main, initialState: .showButton)
+            footerViewController.loadTransactionsAction = { [weak self] in
+                self?.getTransactionsHistory()
+            }
+        } else {
+            footerViewController?.hideLoadingSign()
+            footerViewController?.showButton()
         }
         
-        footerViewController = LoadTransactionsHistoryViewController(nibName: "LoadTransactionsHistoryViewController", bundle: Bundle.main, initialState: .showButton)
-        footerViewController.loadTransactionsAction = { [weak self] in
-            self?.getTransactionsHistory()
+        checkIfMoreDataExists { (result) in
+            if result {
+                self.tableView.tableFooterView = self.footerViewController.view
+            } else {
+                self.tableView.tableFooterView = nil
+            }
         }
-        
-        tableView.tableFooterView = footerViewController.view
+    }
+    
+    private func checkIfMoreDataExists(completion: @escaping (Bool) -> ()) {
+        transactionHistoryManager.getTransactionsHistory(forAccount: wallet.publicKey, fromCursor: cursor) { (result) -> (Void) in
+            switch result {
+            case .success(operations: let operations, cursor: _):
+                if operations.count > 0 {
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+               
+            case .failure(error: let error):
+                print("Error: \(error)")
+                completion(false)
+            }
+        }
     }
     
     private func setTableViewHeader() {

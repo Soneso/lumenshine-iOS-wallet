@@ -30,6 +30,7 @@ class RemoveCurrencyViewController: UIViewController {
     
     var currency: AccountBalanceResponse!
     var wallet: FundedWallet!
+    var reloadDelegate: ReloadDelegate?
     private var walletManager = WalletManager()
     private var passwordView: PasswordView!
     
@@ -65,6 +66,7 @@ class RemoveCurrencyViewController: UIViewController {
         transactionHelper.removeTrustLine(currency: self.currency, trustingAccountKeyPair: trustorKeyPair, completion: { (result) -> (Void) in
             switch result {
             case .success:
+                self.reloadDelegate?.setNeedsReload()
                 self.navigationController?.popViewController(animated: true)
                 break
             case .failure(error: let error):
@@ -87,8 +89,8 @@ class RemoveCurrencyViewController: UIViewController {
                             transactionHelper.removeTrustLine(currency: self.currency, trustingAccountKeyPair: trustorKeyPair, completion: { (result) -> (Void) in
                                 switch result {
                                 case .success:
+                                    self.reloadDelegate?.setNeedsReload()
                                     self.navigationController?.popViewController(animated: true)
-                                    break
                                 case .failure(error: let error):
                                     print("Error: \(String(describing: error))")
                                     self.showTrnsactionFailedAlert()
@@ -192,6 +194,8 @@ class RemoveCurrencyViewController: UIViewController {
         passwordView.neededSigningSecurity = .medium
         passwordView.hideTitleLabels = true
         passwordView.wallet = wallet
+        passwordView.passwordHintView.isHidden = false
+        passwordView.passwordHintLabel.text = "Password required to remove currency"
         
         passwordView.biometricAuthAction = {
             self.removeCurrency(biometricAuth: true)
