@@ -366,13 +366,15 @@ fileprivate extension LoginViewModel {
                     // TODO: why is this needed here?
                     self.mnemonic = decryptedUserData.mnemonic
                     
-                    /*PrivateKeyManager.getKeyPair(forAccountID: self.user!.publicKeyIndex0, fromMnemonic: decryptedUserData.mnemonic, completion: { (keyResponse) -> (Void) in
+                    // sign sep10 challenge and login user
+                    PrivateKeyManager.getKeyPair(forAccountID: self.user!.publicKeyIndex0, fromMnemonic: decryptedUserData.mnemonic, completion: { (keyResponse) -> (Void) in
                         switch keyResponse {
                         case .success(keyPair: let keyPair):
+                            // sign challenge
                             self.service.signSEP10ChallengeIfValid(base64EnvelopeXDR: login1Response.sep10TransactionEnvelopeXDR, userKeyPair: keyPair!, completion: { (signResponse) -> (Void) in
                                 switch signResponse {
                                 case .success(signedXDR: let signedXDR):
-                                    print(signedXDR)
+                                    // login user
                                     self.service.loginStep2(signedSEP10TransactionEnvelope:signedXDR, response: response)
                                 case .failure(error: let error):
                                     print(error)
@@ -383,9 +385,7 @@ fileprivate extension LoginViewModel {
                             print(error)
                             response(.failure(error: .encryptionFailed(message: error)))
                         }
-                    })*/
-                    
-                    self.service.loginStep2(publicKeyIndex188: decryptedUserData.publicKeyIndex188, response: response)
+                    })
                 } else {
                     let error = ErrorResponse()
                     error.parameterName = "password"

@@ -71,7 +71,7 @@ public enum SignSEP10ChallengeResponseEnum {
 }
 
 public enum SEP10ChallengeValidationResponseEnum {
-    case success(isValid: Bool)
+    case success(isValid: Bool, envelopeXDR: TransactionEnvelopeXDR?)
     case failure(error: ServiceError)
 }
 
@@ -237,10 +237,39 @@ public class AuthService: BaseService {
     open func signSEP10ChallengeIfValid(base64EnvelopeXDR: String, userKeyPair: KeyPair, completion:@escaping SignSEP10ChallengeClosure) {
         validateSEP10Envelope(base64EnvelopeXDR: base64EnvelopeXDR, userAccountId: userKeyPair.accountId) { validationResult in
             switch validationResult {
-            case .success(let isValid):
-                if isValid {
-                    // TODO sign
-                    completion(.success(signedXDR: base64EnvelopeXDR))
+            case .success(let isValid, let transactionEnvelopeXDR):
+                if isValid, let envelopeXDR = transactionEnvelopeXDR, envelopeXDR.tx.seqNum == 0 {
+                    // sign
+                    // get currently used stellar network
+                    var network = Network.testnet
+                    if (Services.shared.usePublicStellarNetwork) {
+                        network = Network.public
+                    }
+                    do {
+                        // TODO: improve this in the SDK: add signature + get base 64
+                        let tx = envelopeXDR.tx
+                        // server signature
+                        let serverSignature = envelopeXDR.signatures.first
+                        
+                        // user signature
+                        let transactionHash = try [UInt8](tx.hash(network: network))
+                        let userSignature = userKeyPair.signDecorated(transactionHash)
+                        
+                        // server + user signature
+                        let signatures = [serverSignature, userSignature]
+                        
+                        // new envelope containung both signatures
+                        let signedEnvelopeXDR = TransactionEnvelopeXDR(tx: tx, signatures:signatures as! [DecoratedSignatureXDR])
+                        
+                        // base 64
+                        var encodedEnvelope = try XDREncoder.encode(signedEnvelopeXDR)
+                        let result = Data(bytes: &encodedEnvelope, count: encodedEnvelope.count).base64EncodedString()
+                    
+                        completion(.success(signedXDR: result))
+                    } catch let error {
+                        print(error)
+                        completion(.failure(error: .badCredentials))
+                    }
                 } else {
                     completion(.failure(error: .invalidSEP10Challenge))
                 }
@@ -252,11 +281,10 @@ public class AuthService: BaseService {
     
     open func validateSEP10Envelope(base64EnvelopeXDR: String, userAccountId: String, completion:@escaping SEP10ChallengeValidationClosure) {
         
-        print("SEP 10:" + base64EnvelopeXDR)
-        
-        // xdr decoder to be used for decoding the transaction envelope
-        let xdrDecoder = XDRDecoder.init(data: [UInt8].init(base64: base64EnvelopeXDR))
         do {
+            // xdr decoder to be used for decoding the transaction envelope
+            let xdrDecoder = XDRDecoder.init(data: [UInt8].init(base64: base64EnvelopeXDR))
+        
             
             // decode the envelope
             let transactionEnvelopeXDR = try TransactionEnvelopeXDR(fromBinary: xdrDecoder)
@@ -264,7 +292,7 @@ public class AuthService: BaseService {
             
             // sequence number of transaction must be 0
             if (transactionXDR.seqNum != 0) {
-                completion(.success(isValid: false))
+                completion(.success(isValid: false, envelopeXDR: transactionEnvelopeXDR))
                 return
             }
             
@@ -275,12 +303,12 @@ public class AuthService: BaseService {
                 if let operationSourceAccount = operationXDR.sourceAccount {
                     if (operationSourceAccount.accountId != userAccountId) {
                         // source account of transaction doese not match user account
-                        completion(.success(isValid: false))
+                        completion(.success(isValid: false, envelopeXDR: transactionEnvelopeXDR))
                         return
                     }
                 } else {
                     // source account of transaction not found
-                    completion(.success(isValid: false))
+                    completion(.success(isValid: false, envelopeXDR: transactionEnvelopeXDR))
                     return
                 }
                 
@@ -288,13 +316,13 @@ public class AuthService: BaseService {
                 let operationBodyXDR = operationXDR.body
                 if (operationBodyXDR.type() != OperationType.manageData.rawValue) {
                     // not a manage data operation
-                    completion(.success(isValid: false))
+                    completion(.success(isValid: false, envelopeXDR: transactionEnvelopeXDR))
                     return
                 }
                 
             } else {
                 // the transaction has no operation or contains more than one operation
-                completion(.success(isValid: false))
+                completion(.success(isValid: false, envelopeXDR: transactionEnvelopeXDR))
                 return
             }
             
@@ -315,7 +343,7 @@ public class AuthService: BaseService {
                 var signatureIsValid = try serverKeyPair.verify(signature: [UInt8](signature), message: transactionHash)
                 if signatureIsValid {
                     // signature is valid
-                    completion(.success(isValid: true))
+                    completion(.success(isValid: true, envelopeXDR: transactionEnvelopeXDR))
                     return
                 } else { // signature is not valid
                     //check if our server key is still the same. Load from server and if different, try validation again
@@ -332,23 +360,23 @@ public class AuthService: BaseService {
                                     signatureIsValid = try serverKeyPair.verify(signature: [UInt8](signature), message: transactionHash)
                                     if signatureIsValid {
                                         // signature is valid
-                                        completion(.success(isValid: true))
+                                        completion(.success(isValid: true, envelopeXDR: transactionEnvelopeXDR))
                                         return
                                     }
                                     else {
                                         // signature is not valid
-                                        completion(.success(isValid: false))
+                                        completion(.success(isValid: false, envelopeXDR: transactionEnvelopeXDR))
                                         return
                                     }
                                 } catch let error {
                                     print(error.localizedDescription)
                                     // validation failed
-                                    completion(.success(isValid: false))
+                                    completion(.success(isValid: false, envelopeXDR: transactionEnvelopeXDR))
                                 }
                             } else {
                                 // server key is not different
                                 // signature is not valid
-                                completion(.success(isValid: false))
+                                completion(.success(isValid: false, envelopeXDR: transactionEnvelopeXDR))
                                 return
                             }
                         case .failure(let error):
@@ -360,13 +388,13 @@ public class AuthService: BaseService {
             }
             else {
                 // could not find signature
-                completion(.success(isValid: false))
+                completion(.success(isValid: false, envelopeXDR: transactionEnvelopeXDR))
                 return
             }
         } catch let error {
             print(error.localizedDescription)
             // validation failed
-            completion(.success(isValid: false))
+            completion(.success(isValid: false, envelopeXDR: nil))
         }
     }
     
