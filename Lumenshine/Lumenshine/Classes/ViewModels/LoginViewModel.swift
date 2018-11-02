@@ -192,6 +192,48 @@ class LoginViewModel : LoginViewModelType {
                                   publicKeyIndex188: userSecurity.publicKeyIndex188,
                                   publicKeys: nil)
                 self?.mnemonic = userSecurity.mnemonic24Word
+                
+                // load sep10 challenge from server and continue signup.
+                // TODO: handle errors correctly - the user is already registered here!
+                self?.service.getSep10Challenge(response: { (challengeResponse) -> (Void) in
+                    switch challengeResponse {
+                    case .success(transactionEnvelopeXDR: let envelopeXDR):
+                        // sign sep10 challenge and login user
+                        PrivateKeyManager.getKeyPair(forAccountID: userSecurity.publicKeyIndex0, fromMnemonic: userSecurity.mnemonic24Word, completion: { (keyResponse) -> (Void) in
+                            switch keyResponse {
+                            case .success(keyPair: let keyPair):
+                                // sign challenge
+                                self?.service.signSEP10ChallengeIfValid(base64EnvelopeXDR: envelopeXDR, userKeyPair: keyPair!, completion: { (signResponse) -> (Void) in
+                                    switch signResponse {
+                                    case .success(signedXDR: let signedXDR):
+                                        // login user
+                                        self?.service.loginStep2(signedSEP10TransactionEnvelope:signedXDR) { [weak self] result in
+                                            switch result {
+                                            case .success(let login2Response):
+                                                self?.checkSetup(login2Response: login2Response)
+                                                response(.success)
+                                            case .failure(let error):
+                                                response(.failure(error: error))
+                                            }
+                                        }
+                                    case .failure(error: let error):
+                                        print(error)
+                                        response(.failure(error: error))
+                                    }
+                                })
+                            case .failure(error: let error):
+                                print(error)
+                                response(.failure(error: .encryptionFailed(message: error)))
+                            }
+                        })
+                    case .failure(error: let error):
+                        print(error)
+                        response(.failure(error: error))
+                    }
+                    
+                })
+               
+                /*
                 self?.service.loginStep2(publicKeyIndex188: userSecurity.publicKeyIndex188) { [weak self] result in
                     switch result {
                     case .success(let login2Response):
@@ -201,6 +243,7 @@ class LoginViewModel : LoginViewModelType {
                         response(.failure(error: error))
                     }
                 }
+                */
             case .failure(let error):
                 response(.failure(error: error))
             }
@@ -363,7 +406,7 @@ fileprivate extension LoginViewModel {
                                      publicKeyIndex188: decryptedUserData.publicKeyIndex188,
                                      publicKeys: decryptedUserData.publicKeys)
                     
-                    // TODO: why is this needed here?
+                    // this is needed because the user mitght not have completed the setup and it may be used later.
                     self.mnemonic = decryptedUserData.mnemonic
                     
                     // sign sep10 challenge and login user
@@ -399,6 +442,7 @@ fileprivate extension LoginViewModel {
     }
     
     func checkSetup(login2Response: LoginStep2Response) {
+        // TODO: improve this. Otherwise on error the app will hang in the login screen.
         guard let user = self.user else { return }
         DispatchQueue.main.async {
             if login2Response.tfaConfirmed && login2Response.mailConfirmed && login2Response.mnemonicConfirmed {

@@ -398,7 +398,7 @@ public class AuthService: BaseService {
         }
     }
     
-    // TODO: remove this after sep10 implementation
+    /*
     open func loginStep2(publicKeyIndex188: String, response: @escaping Login2ResponseClosure) {
         
         do {
@@ -424,7 +424,7 @@ public class AuthService: BaseService {
         } catch {
             response(.failure(error: .parsingFailed(message: error.localizedDescription)))
         }
-    }
+    }*/
     
     open func loginStep2(signedSEP10TransactionEnvelope: String, response: @escaping Login2ResponseClosure) {
         
