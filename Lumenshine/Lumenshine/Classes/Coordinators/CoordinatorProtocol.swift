@@ -59,5 +59,6 @@ public indirect enum Transition {
     case showPersonalDataSubList
     case showWallets
     case showTermsOfService
+    case showTransactions
 }
 

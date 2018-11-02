@@ -108,6 +108,8 @@ class MenuViewModel : MenuViewModelType {
             navigationCoordinator?.performTransition(transition: .showHelp)
         case .wallets:
             navigationCoordinator?.performTransition(transition: .showWallets)
+        case .transactions:
+            navigationCoordinator?.performTransition(transition: .showTransactions)
         default: break
         }
         lastIndex = indexPath
