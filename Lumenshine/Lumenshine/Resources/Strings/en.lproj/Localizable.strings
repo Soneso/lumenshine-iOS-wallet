@@ -849,3 +849,6 @@
 
 /*  */
 "invaild_sep10_challenge" = "Invalid SEP10 challenge received";
+
+/*  */
+"operation_details" = "Operation details";

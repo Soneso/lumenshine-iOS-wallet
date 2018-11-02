@@ -285,8 +285,6 @@
 		C62B0EA22153DBDB00CF920B /* SeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B0EA12153DBDB00CF920B /* SeparatorView.swift */; };
 		C63B4F9C212AB35D0003ECE5 /* TransactionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C63B4F9B212AB35D0003ECE5 /* TransactionTableViewCell.xib */; };
 		C63B4F9E212AB3750003ECE5 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63B4F9D212AB3750003ECE5 /* TransactionTableViewCell.swift */; };
-		C6410CD7212C269C00F9C8B3 /* TransactionHistoryDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6410CD6212C269C00F9C8B3 /* TransactionHistoryDetailsViewController.xib */; };
-		C6410CD9212C26B300F9C8B3 /* TransactionHistoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6410CD8212C26B300F9C8B3 /* TransactionHistoryDetailsViewController.swift */; };
 		C646A7C62183210D0035DBD1 /* UIView+RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = C646A7C52183210D0035DBD1 /* UIView+RoundedCorners.swift */; };
 		C654AFB42122D3D500FB9686 /* FundTestNetWalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C654AFB32122D3D500FB9686 /* FundTestNetWalletViewController.xib */; };
 		C654AFB62122D4C900FB9686 /* FundTestNetWalletViewController.xib.swift in Sources */ = {isa = PBXBuildFile; fileRef = C654AFB52122D4C900FB9686 /* FundTestNetWalletViewController.xib.swift */; };
@@ -698,8 +696,6 @@
 		C62B0EA12153DBDB00CF920B /* SeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
 		C63B4F9B212AB35D0003ECE5 /* TransactionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionTableViewCell.xib; sourceTree = "<group>"; };
 		C63B4F9D212AB3750003ECE5 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
-		C6410CD6212C269C00F9C8B3 /* TransactionHistoryDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionHistoryDetailsViewController.xib; sourceTree = "<group>"; };
-		C6410CD8212C26B300F9C8B3 /* TransactionHistoryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryDetailsViewController.swift; sourceTree = "<group>"; };
 		C646A7C52183210D0035DBD1 /* UIView+RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+RoundedCorners.swift"; sourceTree = "<group>"; };
 		C646F566BF9C95E0290B7A6D /* Pods-LumenshineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineTests/Pods-LumenshineTests.release.xcconfig"; sourceTree = "<group>"; };
 		C654AFB32122D3D500FB9686 /* FundTestNetWalletViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FundTestNetWalletViewController.xib; sourceTree = "<group>"; };
@@ -1687,8 +1683,6 @@
 				C69556522126F6F400B0E110 /* TransactionHistoryTableViewController.swift */,
 				C63B4F9B212AB35D0003ECE5 /* TransactionTableViewCell.xib */,
 				C63B4F9D212AB3750003ECE5 /* TransactionTableViewCell.swift */,
-				C6410CD6212C269C00F9C8B3 /* TransactionHistoryDetailsViewController.xib */,
-				C6410CD8212C26B300F9C8B3 /* TransactionHistoryDetailsViewController.swift */,
 				B1DA1E902189C586001BB4FA /* TransactionHistoryDetailsTableViewController.swift */,
 			);
 			path = TransactionHistory;
@@ -1955,7 +1949,6 @@
 				74C0913B20F64AF0000A809D /* UnfundedWalletCardContentView.xib in Resources */,
 				43AE633F2135A19300B7A904 /* EncodeSansCondensed-Light.ttf in Resources */,
 				74C8994C2101DD7C009B13EA /* ReceivePaymentCardViewController.xib in Resources */,
-				C6410CD7212C269C00F9C8B3 /* TransactionHistoryDetailsViewController.xib in Resources */,
 				C69556512126F6AC00B0E110 /* TransactionHistoryTableViewController.xib in Resources */,
 				43AE632E2135A19300B7A904 /* EncodeSans-ExtraBold.ttf in Resources */,
 				7491BE45211C2E230058877E /* AccountCurrenciesViewController.xib in Resources */,
@@ -2282,7 +2275,6 @@
 				438F54E3217A3F9300F4B556 /* UserDataService.swift in Sources */,
 				436FE5082052634300CFE788 /* WebCard.swift in Sources */,
 				C6813DC7213AB708007074C2 /* KnownInflationDestinationResponse.swift in Sources */,
-				C6410CD9212C26B300F9C8B3 /* TransactionHistoryDetailsViewController.swift in Sources */,
 				C6813DC3213AB6CB007074C2 /* KnownCurrencyResponse.swift in Sources */,
 				436B366F20512114009F7C21 /* FlexibleHeightBar.swift in Sources */,
 				C62B0E9C215375A400CF920B /* PickerTextField.swift in Sources */,
