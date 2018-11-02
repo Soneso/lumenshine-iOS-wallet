@@ -66,6 +66,21 @@ class AccountDetailsViewController: UIViewController, ReloadDelegate {
     private var needsReloadData = false
     
     @IBOutlet weak var stellarAddressActionbutton: UIButton!
+    @IBOutlet weak var showOnHomescreenSwitch: UISwitch!
+    
+    @IBAction func showOnHomescreenSwitchValueChanged(_ sender: UISwitch) {
+        if let walletID = wallet?.id {
+            walletService.setWalletHomescreen(walletID: walletID, isVisible: sender.isOn) { (response) -> (Void) in
+                switch response {
+                case .success:
+                    print("Successfully changed show on homepage!")
+                    (self.wallet as? FundedWallet)?.showOnHomescreen = sender.isOn
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+    }
     
     @IBAction func didTapStellarAddressActionButton(_ sender: UIButton) {
         if let buttonTitle = stellarAddressActionbutton.title(for: .normal) {
@@ -105,6 +120,7 @@ class AccountDetailsViewController: UIViewController, ReloadDelegate {
         setupTransactionsHistory()
         view.backgroundColor = Stylesheet.color(.veryLightGray)
         setupButtons()
+        setupShowOnHomescreen()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -213,6 +229,12 @@ class AccountDetailsViewController: UIViewController, ReloadDelegate {
     
     
     // MARK: Private methods
+    
+    private func setupShowOnHomescreen() {
+        if let fundedWallet = wallet as? FundedWallet {
+            showOnHomescreenSwitch.isOn = fundedWallet.showOnHomescreen
+        }
+    }
     
     private func setupNavigationItem() {
         navigationItem.titleLabel.textColor = Stylesheet.color(.white)

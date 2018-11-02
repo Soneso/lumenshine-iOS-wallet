@@ -107,9 +107,15 @@ class HomeViewModel : HomeViewModelType {
             case .success(let wallets):
                 let sortedWallets = wallets.sorted(by: { $0.id < $1.id })
                 for wallet in sortedWallets {
-                    let viewModel = WalletCardViewModel(userManager: (self?.service.userManager)!, walletResponse: wallet)
-                    viewModel.navigationCoordinator = self?.navigationCoordinator
-                    self?.cardViewModels.append(viewModel)
+                    if wallet.showOnHomeScreen {
+                        let viewModel = WalletCardViewModel(userManager: (self?.service.userManager)!, walletResponse: wallet)
+                        viewModel.navigationCoordinator = self?.navigationCoordinator
+                        viewModel.reloadCardsClosure = {
+                            self?.reloadCards()
+                        }
+                        
+                        self?.cardViewModels.append(viewModel)
+                    }
                 }
             case .failure(_):
                 print("Failed to get wallets")

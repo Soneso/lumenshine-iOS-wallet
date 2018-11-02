@@ -18,6 +18,7 @@
                 <outlet property="publicKeyLabel" destination="Q3G-kj-w8a" id="Ujc-ng-Ke8"/>
                 <outlet property="removeViewAddressLabel" destination="INw-OD-Zfk" id="N0H-jq-P23"/>
                 <outlet property="saveWalletNameButton" destination="Ads-Ku-8Gm" id="7OQ-pv-GWb"/>
+                <outlet property="showOnHomescreenSwitch" destination="uMy-4V-5Zd" id="Vo1-tM-VLp"/>
                 <outlet property="stellarAddressActionbutton" destination="Nuk-dl-9bZ" id="l2c-n7-Tjx"/>
                 <outlet property="stellarAddressEditErrorLabel" destination="9AE-2t-a9z" id="h9b-ya-rXI"/>
                 <outlet property="stellarAddressEditTextField" destination="iPa-C1-NNl" id="Mod-ik-khr"/>
@@ -201,6 +202,9 @@
                                         </label>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uMy-4V-5Zd">
                                             <rect key="frame" x="250.5" y="0.0" width="51" height="31"/>
+                                            <connections>
+                                                <action selector="showOnHomescreenSwitchValueChanged:" destination="-1" eventType="valueChanged" id="5Vv-y4-llp"/>
+                                            </connections>
                                         </switch>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

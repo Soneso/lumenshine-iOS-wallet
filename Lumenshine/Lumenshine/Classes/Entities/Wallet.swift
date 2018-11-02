@@ -21,12 +21,14 @@ public class Wallet {
     var name: String
     var federationAddress: String
     var publicKey: String
+    var showOnHomescreen: Bool!
     
     init(wallet: Wallet) {
         self.walletResponse = wallet.walletResponse
         self.name = wallet.name
         self.federationAddress = wallet.federationAddress
         self.publicKey = wallet.publicKey
+        self.showOnHomescreen = wallet.showOnHomescreen
     }
     
     init(walletResponse: WalletsResponse) {
@@ -35,6 +37,7 @@ public class Wallet {
         name = walletResponse.walletName
         federationAddress = walletResponse.federationAddress
         publicKey = walletResponse.publicKey
+        showOnHomescreen = walletResponse.showOnHomeScreen
     }
     
     public var id: Int {

@@ -21,6 +21,7 @@ class WalletCardViewModel : CardViewModelType {
     
     var receivePaymentAction: (() -> ())?
     var sendAction: (() -> ())?
+    var reloadCardsClosure: (() -> ())?
     var reloadClosure: ((Bool) -> ())?
     
     init(userManager: UserManager, walletResponse: WalletsResponse) {
@@ -55,7 +56,13 @@ class WalletCardViewModel : CardViewModelType {
             case .success(let wallets):
                 guard let wallet = wallets.first else { return }
                 self?.wallet = wallet
+                
+                if (wallet as? FundedWallet)?.showOnHomescreen == false {
+                    self?.reloadCardsClosure?()
+                }
+                
                 self?.reloadClosure?(false)
+                
                 self?.needsRefresh = false
             case .failure(let error):
                 print("Account details failure: \(error)")

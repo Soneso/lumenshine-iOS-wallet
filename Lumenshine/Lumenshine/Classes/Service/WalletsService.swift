@@ -23,9 +23,15 @@ public enum AddWalletEnum {
     case failure(error: ServiceError)
 }
 
+public enum SetWalletHomescreenEnum {
+    case success
+    case failure(error: ServiceError)
+}
+
 public typealias GetWalletsClosure = (_ response: GetWalletsEnum) -> (Void)
 public typealias ChangeWalletDataClosure = (_ response: ChangeWalletDataEnum) -> (Void)
 public typealias AddWalletClosure = (_ response: AddWalletEnum) -> (Void)
+public typealias SetWalletHomescreenClosure = (_ response: SetWalletHomescreenEnum) -> (Void)
 
 public class WalletsService: BaseService {
     
@@ -91,6 +97,25 @@ public class WalletsService: BaseService {
         let bodyData = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
         
         POSTRequestWithPath(path: "/portal/user/dashboard/add_wallet", body: bodyData) { (result) -> (Void) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    completion(.success)
+                case .failure(let error):
+                    completion(.failure(error: error))
+                }
+            }
+        }
+    }
+    
+    func setWalletHomescreen(walletID: Int, isVisible: Bool, completion: @escaping SetWalletHomescreenClosure) {
+        var params = Dictionary<String, Any>()
+        params["id"] = walletID
+        params["visible"] = isVisible
+        
+        let bodyData = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+        
+        POSTRequestWithPath(path: "/portal/user/dashboard/wallet_set_homescreen", body: bodyData) { (result) -> (Void) in
             DispatchQueue.main.async {
                 switch result {
                 case .success(_):
