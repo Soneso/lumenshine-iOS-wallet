@@ -852,3 +852,6 @@
 
 /*  */
 "operation_details" = "Operation details";
+
+/*  */
+"operation_details_load_error" = "Could not load operation details";

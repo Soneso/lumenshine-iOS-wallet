@@ -33,8 +33,30 @@ class TransactionTableViewCell: UITableViewCell {
     }
     
     @IBAction func detailsButtonAction(_ sender: UIButton) {
+        if operationInfo.responseData == nil {
+            let requestUrl = Services.shared.horizonURL + "/operations/" + operationInfo.operationID
+            Services.shared.walletService.GETRequestFromUrl(url: requestUrl) { (result) -> (Void) in
+                switch result {
+                case .success(let data):
+                    self.operationInfo.responseData = data
+                    DispatchQueue.main.async {
+                       self.showDetails()
+                    }
+                case .failure:
+                    let alertController = UIAlertController(title: R.string.localizable.error(), message: R.string.localizable.operation_details_load_error(), preferredStyle: .alert)
+                    let action = UIAlertAction(title: R.string.localizable.ok(), style: .cancel, handler: nil)
+                    alertController.addAction(action)
+                    alertController.showOnANewWindow()
+                }
+            }
+        } else {
+            showDetails()
+        }
+    }
+    
+    private func showDetails() {
         let transactionDetailsViewController = TransactionHistoryDetailsTableViewController(operationInfo: operationInfo)
-        viewContainingController()?.navigationController?.pushViewController(transactionDetailsViewController, animated: true)
+        self.viewContainingController()?.navigationController?.pushViewController(transactionDetailsViewController, animated: true)
     }
     
     override func awakeFromNib() {
