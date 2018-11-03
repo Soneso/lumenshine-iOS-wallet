@@ -30,6 +30,11 @@ public enum AuthResponseEnum {
     case failure(error: ServiceError)
 }
 
+public enum Login1ResponseEnum {
+    case success(response: LoginStep1Response)
+    case failure(error: ServiceError)
+}
+
 public enum Login2ResponseEnum {
     case success(response: LoginStep2Response)
     case failure(error: ServiceError)
@@ -79,6 +84,7 @@ public typealias GenerateAccountResponseClosure = (_ response:GenerateAccountRes
 public typealias TFAResponseClosure = (_ response:TFAResponseEnum) -> (Void)
 public typealias EmptyResponseClosure = (_ response:EmptyResponseEnum) -> (Void)
 public typealias AuthResponseClosure = (_ response:AuthResponseEnum) -> (Void)
+public typealias Login1ResponseClosure = (_ response:Login1ResponseEnum) -> (Void)
 public typealias Login2ResponseClosure = (_ response:Login2ResponseEnum) -> (Void)
 public typealias TfaSecretResponseClosure = (_ response:TfaSecretResponseEnum) -> (Void)
 public typealias CountryListResponseClosure = (_ response:CountryListResponseEnum) -> (Void)
@@ -453,7 +459,7 @@ public class AuthService: BaseService {
         }
     }
     
-    open func loginStep1(email: String, tfaCode:String?, response: @escaping AuthResponseClosure) {
+    open func loginStep1(email: String, tfaCode:String?, response: @escaping Login1ResponseClosure) {
         
         do {
             var params = Dictionary<String,String>()
@@ -469,7 +475,7 @@ public class AuthService: BaseService {
                 case .success(let data):
                     BaseService.jwtTokenType = .partial
                     do {
-                        let loginResponse = try self.jsonDecoder.decode(AuthenticationResponse.self, from: data)
+                        let loginResponse = try self.jsonDecoder.decode(LoginStep1Response.self, from: data)
                         response(.success(response: loginResponse))
                     } catch {
                         response(.failure(error: .parsingFailed(message: error.localizedDescription)))
