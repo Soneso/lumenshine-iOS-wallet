@@ -576,7 +576,7 @@ public class AuthService: BaseService {
             params["wordlist"] = userSecurity.encryptedWordList.toBase64()
             params["wordlist_iv"] = userSecurity.wordListEncryptionIV.toBase64()
             params["public_key_0"] = userSecurity.publicKeyIndex0
-            params["public_key_188"] = userSecurity.publicKeyIndex188
+            params["public_key_188"] = "blubber" //TODO remove this as soon as the server is ready
             
             if let userDict = userData {
                 params.merge(userDict, uniquingKeysWith: {(first, _) in first})
@@ -696,7 +696,7 @@ public class AuthService: BaseService {
     open func new2faSecret(signedSEP10TransactionEnvelope: String, response: @escaping TfaSecretResponseClosure) {
         var params = Dictionary<String,String>()
         params["sep10_transaction"] = signedSEP10TransactionEnvelope
-        params["public_key_188"] = "blubber"
+        params["public_key_188"] = "blubber" // TODO remove this when server is ready
         
         do {
             let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)

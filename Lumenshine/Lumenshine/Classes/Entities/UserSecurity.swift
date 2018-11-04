@@ -11,7 +11,6 @@ import Foundation
 public struct UserSecurity {
     let username: String
     let publicKeyIndex0: String
-    let publicKeyIndex188: String
     let passwordKdfSalt: Array<UInt8>
     let encryptedMnemonicMasterKey: Array<UInt8>
     let mnemonicMasterKeyEncryptionIV: Array<UInt8>
@@ -28,7 +27,6 @@ extension UserSecurity {
     
     init?(from loginResponse: AuthenticationResponse) {
         username = ""
-        publicKeyIndex188 = ""
         mnemonic24Word = ""
         
         publicKeyIndex0 = loginResponse.publicKeyIndex0
@@ -61,7 +59,7 @@ extension UserSecurity {
         wordListEncryptionIV = wordListEncryptionIVData.bytes
     }
     
-    func updatePassword(_ password: String, mnemonic: String, publicKeyIndex188: String, wordlistMasterKey: Array<UInt8>, mnemonicMasterKey: Array<UInt8>) throws -> UserSecurity {
+    func updatePassword(_ password: String, mnemonic: String, wordlistMasterKey: Array<UInt8>, mnemonicMasterKey: Array<UInt8>) throws -> UserSecurity {
         do {
             // generate 256 bit password and salt
             let passwordSalt = CryptoUtil.generateSalt()
@@ -75,7 +73,6 @@ extension UserSecurity {
             
             return UserSecurity(username: username,
                                 publicKeyIndex0: publicKeyIndex0,
-                                publicKeyIndex188: publicKeyIndex188,
                                 passwordKdfSalt: passwordSalt,
                                 encryptedMnemonicMasterKey: encryptedMnemonicMasterKey,
                                 mnemonicMasterKeyEncryptionIV: mnemonicMasterKeyEncryptionIV,

@@ -41,7 +41,6 @@ struct UserSecurityHelper {
             
             // generate public keys
             let publicKeyIndex0 = try stellarsdk.Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: 0).accountId
-            let publicKeyIndex188 = try stellarsdk.Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: 188).accountId
             
             let words = wordList.joined(separator: ",")
             
@@ -51,7 +50,6 @@ struct UserSecurityHelper {
             
             return UserSecurity(username: email,
                                 publicKeyIndex0: publicKeyIndex0,
-                                publicKeyIndex188: publicKeyIndex188,
                                 passwordKdfSalt: passwordSalt,
                                 encryptedMnemonicMasterKey: encryptedMnemonicMasterKey,
                                 mnemonicMasterKeyEncryptionIV: mnemonicMasterKeyEncryptionIV,
@@ -96,19 +94,7 @@ struct UserSecurityHelper {
             let publicKeyIndex0 = try stellarsdk.Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: 0).accountId
             if publicKeyIndex0 != userSecurity.publicKeyIndex0 { return nil }
             
-            let publicKeyIndex188 = try stellarsdk.Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: 188).accountId
-            
-//            print("Start public: \(Date())")
-//            var publicKeys = Array<String>()
-//            for index in 1...50 {
-//                let publicKeyIndex = try stellarsdk.Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: index).accountId
-//                publicKeys.append(publicKeyIndex)
-//            }
-//
-//            print("Finish public: \(Date())")
-            
             return DecryptedUserData(mnemonic: mnemonic,
-                                     publicKeyIndex188: publicKeyIndex188,
                                      wordListMasterKey: wordListMasterKey,
                                      mnemonicMasterKey: mnemonicMasterKey,
                                      publicKeys: nil)

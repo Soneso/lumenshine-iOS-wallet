@@ -188,7 +188,6 @@ class LoginViewModel : LoginViewModelType {
                 self?.user = User(id: "1",
                                   email: email,
                                   publicKeyIndex0: userSecurity.publicKeyIndex0,
-                                  publicKeyIndex188: userSecurity.publicKeyIndex188,
                                   publicKeys: nil)
                 self?.mnemonic = userSecurity.mnemonic24Word
                 
@@ -382,7 +381,6 @@ fileprivate extension LoginViewModel {
                     self.user = User(id: "1",
                                      email: self.email!,
                                      publicKeyIndex0: login1Response.publicKeyIndex0,
-                                     publicKeyIndex188: decryptedUserData.publicKeyIndex188,
                                      publicKeys: decryptedUserData.publicKeys)
                     
                     // this is needed because the user mitght not have completed the setup and it may be used later.

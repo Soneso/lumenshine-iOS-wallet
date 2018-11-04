@@ -340,7 +340,6 @@ fileprivate extension SettingsViewModel {
                     
                     let userSec = try userSecurity.updatePassword(newPass,
                                                                   mnemonic: decryptedUserData.mnemonic,
-                                                                  publicKeyIndex188: decryptedUserData.publicKeyIndex188,
                                                                   wordlistMasterKey: decryptedUserData.wordListMasterKey,
                                                                   mnemonicMasterKey: decryptedUserData.mnemonicMasterKey)
                    
@@ -388,8 +387,6 @@ fileprivate extension SettingsViewModel {
                             response(.failure(error: .encryptionFailed(message: error)))
                         }
                     })
-                    
-                    //self.services.auth.new2faSecret(publicKeyIndex188: decryptedUserData.publicKeyIndex188, response: response)
                 } else {
                     let error = ErrorResponse()
                     error.parameterName = "current_password"
