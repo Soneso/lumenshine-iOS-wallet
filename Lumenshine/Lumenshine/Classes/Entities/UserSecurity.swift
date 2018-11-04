@@ -61,7 +61,7 @@ extension UserSecurity {
         wordListEncryptionIV = wordListEncryptionIVData.bytes
     }
     
-    func updatePassword(_ password: String, publicKeyIndex188: String, wordlistMasterKey: Array<UInt8>, mnemonicMasterKey: Array<UInt8>) throws -> UserSecurity {
+    func updatePassword(_ password: String, mnemonic: String, publicKeyIndex188: String, wordlistMasterKey: Array<UInt8>, mnemonicMasterKey: Array<UInt8>) throws -> UserSecurity {
         do {
             // generate 256 bit password and salt
             let passwordSalt = CryptoUtil.generateSalt()
@@ -85,7 +85,7 @@ extension UserSecurity {
                                 wordListMasterKeyEncryptionIV: wordListMasterKeyEncryptionIV,
                                 encryptedWordList: encryptedWordList,
                                 wordListEncryptionIV: wordListEncryptionIV,
-                                mnemonic24Word: mnemonic24Word)
+                                mnemonic24Word: mnemonic)
         } catch {
             throw error
         }

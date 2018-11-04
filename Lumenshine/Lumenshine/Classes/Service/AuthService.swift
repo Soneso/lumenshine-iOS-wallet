@@ -681,16 +681,16 @@ public class AuthService: BaseService {
         }
     }
     
-    open func changePassword(userSecurity: UserSecurity, response: @escaping EmptyResponseClosure) {
+    open func changePassword(signedSEP10TransactionEnvelope: String, userSecurity: UserSecurity, response: @escaping EmptyResponseClosure) {
         
         var params = Dictionary<String,String>()
         params["kdf_salt"] = userSecurity.passwordKdfSalt.toBase64()
         params["mnemonic_master_key"] = userSecurity.encryptedMnemonicMasterKey.toBase64()
         params["mnemonic_master_iv"] = userSecurity.mnemonicMasterKeyEncryptionIV.toBase64()
         params["wordlist_master_key"] = userSecurity.encryptedWordListMasterKey.toBase64()
-        // key: wordlist_encryption_iv ??
         params["wordlist_master_iv"] = userSecurity.wordListMasterKeyEncryptionIV.toBase64()
-        params["public_key_188"] = userSecurity.publicKeyIndex188
+        params["sep10_transaction"] = signedSEP10TransactionEnvelope
+        
         
         do {
             let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
@@ -708,10 +708,10 @@ public class AuthService: BaseService {
         }
     }
     
-    open func new2faSecret(signedSEP10TransactionEnvelope: String, publicKeyIndex188: String, response: @escaping TfaSecretResponseClosure) {
+    open func new2faSecret(signedSEP10TransactionEnvelope: String, response: @escaping TfaSecretResponseClosure) {
         var params = Dictionary<String,String>()
         params["sep10_transaction"] = signedSEP10TransactionEnvelope
-        params["public_key_188"] = publicKeyIndex188
+        params["public_key_188"] = "blubber"
         
         do {
             let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)

@@ -214,7 +214,36 @@ class SettingsViewModel: SettingsViewModelType {
                 self.changePassword(authResponse: authResponse, oldPass: currentPass, newPass: newPass) { result2 in
                     switch result2 {
                     case .success(_, let userSecurity):
-                        self.services.auth.changePassword(userSecurity: userSecurity, response: response)
+                        // get secret seed nneded to sign sep 10 challenge
+                        PrivateKeyManager.getKeyPair(forAccountID: userSecurity.publicKeyIndex0, fromMnemonic: userSecurity.mnemonic24Word, completion: { (keyResponse) -> (Void) in
+                            switch keyResponse {
+                            case .success(keyPair: let keyPair):
+                                // get sep 10 challenge
+                                self.services.auth.getSep10Challenge(response: { (sep10Response) -> (Void) in
+                                    switch sep10Response {
+                                    case .success(transactionEnvelopeXDR: let envelopeXDR):
+                                        // sign sep 10 challenge if valid
+                                        self.services.auth.signSEP10ChallengeIfValid(base64EnvelopeXDR: envelopeXDR, userKeyPair: keyPair!, completion: { (signResponse) -> (Void) in
+                                            switch signResponse {
+                                            case .success(signedXDR: let signedXDR):
+                                                // change password
+                                                self.services.auth.changePassword(signedSEP10TransactionEnvelope: signedXDR, userSecurity: userSecurity, response: response)
+                                            case .failure(error: let error):
+                                                print(error)
+                                                response(.failure(error: error))
+                                            }
+                                        })
+                                    case .failure(error: let error):
+                                        print(error)
+                                        response(.failure(error: error))
+                                    }
+                                })
+                            case .failure(error: let error):
+                                print(error)
+                                response(.failure(error: .encryptionFailed(message: error)))
+                            }
+                        })
+                        //self.services.auth.changePassword(userSecurity: userSecurity, response: response)
                     case .failure(let error):
                         response(.failure(error: error))
                     }
@@ -310,9 +339,11 @@ fileprivate extension SettingsViewModel {
                     let decryptedUserData = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: oldPass) {
                     
                     let userSec = try userSecurity.updatePassword(newPass,
+                                                                  mnemonic: decryptedUserData.mnemonic,
                                                                   publicKeyIndex188: decryptedUserData.publicKeyIndex188,
                                                                   wordlistMasterKey: decryptedUserData.wordListMasterKey,
                                                                   mnemonicMasterKey: decryptedUserData.mnemonicMasterKey)
+                   
                     response(.success(response: nil, userSecurity: userSec))
                 } else {
                     let error = ErrorResponse()
@@ -341,7 +372,7 @@ fileprivate extension SettingsViewModel {
                                             switch signResponse {
                                             case .success(signedXDR: let signedXDR):
                                                 // get new 2fa secret
-                                                self.services.auth.new2faSecret(signedSEP10TransactionEnvelope:signedXDR, publicKeyIndex188:"blubber", response: response)
+                                                self.services.auth.new2faSecret(signedSEP10TransactionEnvelope:signedXDR, response: response)
                                             case .failure(error: let error):
                                                 print(error)
                                                 response(.failure(error: error))
