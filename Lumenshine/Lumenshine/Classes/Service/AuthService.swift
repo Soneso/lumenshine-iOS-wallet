@@ -151,31 +151,6 @@ public class AuthService: BaseService {
         }
     }
     
-    open func tfaSecret(publicKeyIndex188: String, response: @escaping TfaSecretResponseClosure) {
-        do {
-            var params = Dictionary<String,String>()
-            params["public_key_188"] = publicKeyIndex188
-            
-            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-            
-            POSTRequestWithPath(path: "/portal/user/dashboard/tfa_secret", body: bodyData) { (result) -> (Void) in
-                switch result {
-                case .success(let data):
-                    do {
-                        let tfaResponse = try self.jsonDecoder.decode(TFASecretResponse.self, from: data)
-                        response(.success(response: tfaResponse))
-                    } catch {
-                        response(.failure(error: .parsingFailed(message: error.localizedDescription)))
-                    }
-                case .failure(let error):
-                    response(.failure(error: error))
-                }
-            }
-        } catch {
-            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
-        }
-    }
-    
     /// Requests the sep10 challange from the server
     /// - Parameter: SEP10ChallengeClosure
     open func getSep10Challenge(response: @escaping SEP10ChallengeClosure) {
@@ -404,22 +379,19 @@ public class AuthService: BaseService {
         }
     }
     
-    /*
-    open func loginStep2(publicKeyIndex188: String, response: @escaping Login2ResponseClosure) {
-        
+    open func tfaSecret(signedSEP10TransactionEnvelope: String, response: @escaping TfaSecretResponseClosure) {
         do {
             var params = Dictionary<String,String>()
-            params["key"] = publicKeyIndex188
+            params["sep10_transaction"] = signedSEP10TransactionEnvelope
             
             let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-        
-            POSTRequestWithPath(path: "/portal/user/auth/login_step2", body: bodyData) { (result) -> (Void) in
+            
+            POSTRequestWithPath(path: "/portal/user/dashboard/tfa_secret", body: bodyData) { (result) -> (Void) in
                 switch result {
                 case .success(let data):
-                    BaseService.jwtTokenType = .full
                     do {
-                        let loginResponse = try self.jsonDecoder.decode(LoginStep2Response.self, from: data)
-                        response(.success(response: loginResponse))
+                        let tfaResponse = try self.jsonDecoder.decode(TFASecretResponse.self, from: data)
+                        response(.success(response: tfaResponse))
                     } catch {
                         response(.failure(error: .parsingFailed(message: error.localizedDescription)))
                     }
@@ -430,9 +402,9 @@ public class AuthService: BaseService {
         } catch {
             response(.failure(error: .parsingFailed(message: error.localizedDescription)))
         }
-    }*/
+    }
     
-    open func loginStep2(signedSEP10TransactionEnvelope: String, response: @escaping Login2ResponseClosure) {
+    open func loginStep2(signedSEP10TransactionEnvelope: String, userEmail: String, response: @escaping Login2ResponseClosure) {
         
         do {
             var params = Dictionary<String,String>()
@@ -446,7 +418,20 @@ public class AuthService: BaseService {
                     BaseService.jwtTokenType = .full
                     do {
                         let loginResponse = try self.jsonDecoder.decode(LoginStep2Response.self, from: data)
-                        response(.success(response: loginResponse))
+                        if let tokenExists = TFAGeneration.isTokenExists(email: userEmail),
+                            tokenExists == false, loginResponse.tfaConfirmed {
+                            self.tfaSecret(signedSEP10TransactionEnvelope: signedSEP10TransactionEnvelope) { result in
+                                switch result {
+                                case .success(let tfaResponse):
+                                    TFAGeneration.createToken(tfaSecret: tfaResponse.tfaSecret, email: userEmail)
+                                case .failure(let error):
+                                    print("Tfa secret request error: \(error)")
+                                }
+                                response(.success(response: loginResponse))
+                            }
+                        } else {
+                            response(.success(response: loginResponse))
+                        }
                     } catch {
                         response(.failure(error: .parsingFailed(message: error.localizedDescription)))
                     }

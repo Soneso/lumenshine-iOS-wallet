@@ -41,23 +41,6 @@ class MenuViewModel : MenuViewModelType {
          [.home, .wallets, .transactions, .contacts, .settings],
          [.help, .signOut]]
         
-        if let tokenExists = TFAGeneration.isTokenExists(email: user.email),
-            tokenExists == false {
-            service.tfaSecret(publicKeyIndex188: user.publicKeyIndex188) { result in
-                switch result {
-                case .success(let response):
-                    TFAGeneration.createToken(tfaSecret: response.tfaSecret, email: user.email)
-                    /*if let secret = response.tfaSecret {
-                        TFAGeneration.createToken(tfaSecret: secret, email: user.email)
-                    } else {
-                        TFAGeneration.removeToken(email: user.email)
-                    }*/
-                case .failure(let error):
-                    print("Tfa secret request error: \(error)")
-                }
-            }
-        }
-        
         NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: .UIApplicationWillEnterForeground, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground(notification:)), name: .UIApplicationDidEnterBackground, object: nil)

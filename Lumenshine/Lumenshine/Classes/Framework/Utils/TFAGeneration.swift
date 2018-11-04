@@ -40,7 +40,8 @@ struct TFAGeneration {
                 return
         }
         
-        removeToken(email: email)
+        remove2FASecretTokens()
+        
         do {
             let token = Token(name: email, issuer: "Lumenshine", generator: generator)
             _ = try Keychain.sharedInstance.add(token)
@@ -64,14 +65,12 @@ struct TFAGeneration {
         }
     }
     
-    static func removeToken(email: String) {
+    static func remove2FASecretTokens() {
         do {
             let keychain = Keychain.sharedInstance
             let persistentTokens = try keychain.allPersistentTokens()
             for token in persistentTokens {
-                if token.token.name == email {
-                    try keychain.delete(token)
-                }
+                try keychain.delete(token)
             }
         } catch {
             print("Keychain error: \(error)")

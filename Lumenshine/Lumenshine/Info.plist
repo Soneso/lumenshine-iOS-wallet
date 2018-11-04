@@ -62,7 +62,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Scan QR code</string>
 	<key>NSFaceIDUsageDescription</key>
-	<string>We use Face ID to unlock the notes</string>
+	<string>We use Face ID to unlock the app</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>EncodeSans-Black.ttf</string>

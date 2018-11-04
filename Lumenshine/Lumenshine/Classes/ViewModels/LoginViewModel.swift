@@ -30,7 +30,6 @@ protocol LoginViewModelType: Transitionable, BiometricAuthenticationProtocol {
     
     func forgotPasswordClick()
     func lost2FAClick()
-    func remove2FASecret()
     func removeBiometricRecognition()
 }
 
@@ -206,7 +205,7 @@ class LoginViewModel : LoginViewModelType {
                                 switch signResponse {
                                 case .success(signedXDR: let signedXDR):
                                     // login user
-                                    self?.service.loginStep2(signedSEP10TransactionEnvelope:signedXDR) { [weak self] result in
+                                    self?.service.loginStep2(signedSEP10TransactionEnvelope:signedXDR, userEmail: email) { [weak self] result in
                                         switch result {
                                         case .success(let login2Response):
                                             self?.checkSetup(login2Response: login2Response)
@@ -228,18 +227,6 @@ class LoginViewModel : LoginViewModelType {
                         response(.failure(error: .encryptionFailed(message: error)))
                     }
                 })
-               
-                /*
-                self?.service.loginStep2(publicKeyIndex188: userSecurity.publicKeyIndex188) { [weak self] result in
-                    switch result {
-                    case .success(let login2Response):
-                        self?.checkSetup(login2Response: login2Response)
-                        response(.success)
-                    case .failure(let error):
-                        response(.failure(error: error))
-                    }
-                }
-                */
             case .failure(let error):
                 response(.failure(error: error))
             }
@@ -310,14 +297,10 @@ class LoginViewModel : LoginViewModelType {
 
     func authenticateUser(completion: @escaping BiometricAuthResponseClosure) {}
     
-    func remove2FASecret() {
-        TFAGeneration.removeToken(email: email!)
-    }
-    
     func removeBiometricRecognition() {}
     
     class func logout(username: String) {
-        TFAGeneration.removeToken(email: username)
+        TFAGeneration.remove2FASecretTokens()
         BaseService.removeToken()
         BiometricHelper.enableTouch(false)
         BiometricHelper.removePassword(username: username)
@@ -414,7 +397,7 @@ fileprivate extension LoginViewModel {
                                 switch signResponse {
                                 case .success(signedXDR: let signedXDR):
                                     // login user
-                                    self.service.loginStep2(signedSEP10TransactionEnvelope:signedXDR, response: response)
+                                    self.service.loginStep2(signedSEP10TransactionEnvelope:signedXDR, userEmail: self.email!, response: response)
                                 case .failure(error: let error):
                                     print(error)
                                     response(.failure(error: error))
