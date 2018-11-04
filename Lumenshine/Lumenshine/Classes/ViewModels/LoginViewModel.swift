@@ -185,7 +185,7 @@ class LoginViewModel : LoginViewModelType {
         
         service.generateAccount(email: email, password: password, userData: nil) { [weak self] result in
             switch result {
-            case .success( _, let userSecurity):
+            case .success( let registrationResponse, let userSecurity):
                 self?.user = User(id: "1",
                                   email: email,
                                   publicKeyIndex0: userSecurity.publicKeyIndex0,
@@ -195,42 +195,38 @@ class LoginViewModel : LoginViewModelType {
                 
                 // load sep10 challenge from server and continue signup.
                 // TODO: handle errors correctly - the user is already registered here!
-                self?.service.getSep10Challenge(response: { (challengeResponse) -> (Void) in
-                    switch challengeResponse {
-                    case .success(transactionEnvelopeXDR: let envelopeXDR):
-                        // sign sep10 challenge and login user
-                        PrivateKeyManager.getKeyPair(forAccountID: userSecurity.publicKeyIndex0, fromMnemonic: userSecurity.mnemonic24Word, completion: { (keyResponse) -> (Void) in
-                            switch keyResponse {
-                            case .success(keyPair: let keyPair):
-                                // sign challenge
-                                self?.service.signSEP10ChallengeIfValid(base64EnvelopeXDR: envelopeXDR, userKeyPair: keyPair!, completion: { (signResponse) -> (Void) in
-                                    switch signResponse {
-                                    case .success(signedXDR: let signedXDR):
-                                        // login user
-                                        self?.service.loginStep2(signedSEP10TransactionEnvelope:signedXDR) { [weak self] result in
-                                            switch result {
-                                            case .success(let login2Response):
-                                                self?.checkSetup(login2Response: login2Response)
-                                                response(.success)
-                                            case .failure(let error):
-                                                response(.failure(error: error))
-                                            }
+                
+                // sign sep10 challenge and login user
+                PrivateKeyManager.getKeyPair(forAccountID: userSecurity.publicKeyIndex0, fromMnemonic: userSecurity.mnemonic24Word, completion: { (keyResponse) -> (Void) in
+                    switch keyResponse {
+                    case .success(keyPair: let keyPair):
+                        // sign challenge
+                        if let envelopeXDR = registrationResponse?.sep10ChallengeXDR {
+                            self?.service.signSEP10ChallengeIfValid(base64EnvelopeXDR: envelopeXDR, userKeyPair: keyPair!, completion: { (signResponse) -> (Void) in
+                                switch signResponse {
+                                case .success(signedXDR: let signedXDR):
+                                    // login user
+                                    self?.service.loginStep2(signedSEP10TransactionEnvelope:signedXDR) { [weak self] result in
+                                        switch result {
+                                        case .success(let login2Response):
+                                            self?.checkSetup(login2Response: login2Response)
+                                            response(.success)
+                                        case .failure(let error):
+                                            response(.failure(error: error))
                                         }
-                                    case .failure(error: let error):
-                                        print(error)
-                                        response(.failure(error: error))
                                     }
-                                })
-                            case .failure(error: let error):
-                                print(error)
-                                response(.failure(error: .encryptionFailed(message: error)))
-                            }
-                        })
+                                case .failure(error: let error):
+                                    print(error)
+                                    response(.failure(error: error))
+                                }
+                            })
+                        } else {
+                            response(.failure(error: .invalidSEP10Challenge))
+                        }
                     case .failure(error: let error):
                         print(error)
-                        response(.failure(error: error))
+                        response(.failure(error: .encryptionFailed(message: error)))
                     }
-                    
                 })
                
                 /*
