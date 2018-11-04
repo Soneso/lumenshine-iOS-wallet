@@ -175,7 +175,7 @@ fileprivate extension Change2faSecretViewController {
         }
     }
     
-    func show2faSecret(_ tfaSecretResponse: RegistrationResponse) {
+    func show2faSecret(_ tfaSecretResponse: TFASecretResponse) {
         viewModel.showConfirm2faSecret(tfaResponse: tfaSecretResponse)
     }
     

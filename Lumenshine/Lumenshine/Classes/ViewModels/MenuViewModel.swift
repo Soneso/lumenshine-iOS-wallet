@@ -46,11 +46,12 @@ class MenuViewModel : MenuViewModelType {
             service.tfaSecret(publicKeyIndex188: user.publicKeyIndex188) { result in
                 switch result {
                 case .success(let response):
-                    if let secret = response.tfaSecret {
+                    TFAGeneration.createToken(tfaSecret: response.tfaSecret, email: user.email)
+                    /*if let secret = response.tfaSecret {
                         TFAGeneration.createToken(tfaSecret: secret, email: user.email)
                     } else {
                         TFAGeneration.removeToken(email: user.email)
-                    }
+                    }*/
                 case .failure(let error):
                     print("Tfa secret request error: \(error)")
                 }

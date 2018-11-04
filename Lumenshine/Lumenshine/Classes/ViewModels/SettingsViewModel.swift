@@ -33,7 +33,7 @@ protocol SettingsViewModelType: Transitionable, BiometricAuthenticationProtocol 
     func confirm2faSecret(tfaCode: String, response: @escaping TFAResponseClosure)
     func showHome()
     func showSettings()
-    func showConfirm2faSecret(tfaResponse: RegistrationResponse)
+    func showConfirm2faSecret(tfaResponse: TFASecretResponse)
     func showBackupMnemonic(password: String, response: @escaping DecryptedUserDataResponseClosure)
     func showMnemonic(_ mnemonic: String)
     func destinationCurrencies(response: @escaping DestinationCurrenciesResponseClosure)
@@ -52,7 +52,7 @@ class SettingsViewModel: SettingsViewModelType {
     fileprivate let services: Services
     fileprivate let user: User
     fileprivate let entries: [[SettingsEntry]]
-    fileprivate var tfaResponse: RegistrationResponse?
+    fileprivate var tfaResponse: TFASecretResponse?
     fileprivate var changePassword: Bool = true
     
     init(services: Services, user: User) {
@@ -250,7 +250,7 @@ class SettingsViewModel: SettingsViewModelType {
         }
     }
     
-    func showConfirm2faSecret(tfaResponse: RegistrationResponse) {
+    func showConfirm2faSecret(tfaResponse: TFASecretResponse) {
         self.tfaResponse = tfaResponse
         navigationCoordinator?.performTransition(transition: .showNew2faSecret)
     }
@@ -331,7 +331,34 @@ fileprivate extension SettingsViewModel {
             do {
                 if let userSecurity = UserSecurity(from: authResponse),
                     let decryptedUserData = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: password) {
-                    self.services.auth.new2faSecret(publicKeyIndex188: decryptedUserData.publicKeyIndex188, response: response)
+                    PrivateKeyManager.getKeyPair(forAccountID: userSecurity.publicKeyIndex0, fromMnemonic: decryptedUserData.mnemonic, completion: { (keyResponse) -> (Void) in
+                        switch keyResponse {
+                        case .success(keyPair: let keyPair):
+                            self.services.auth.getSep10Challenge(response: { (sep10Response) -> (Void) in
+                                switch sep10Response {
+                                    case .success(transactionEnvelopeXDR: let envelopeXDR):
+                                        self.services.auth.signSEP10ChallengeIfValid(base64EnvelopeXDR: envelopeXDR, userKeyPair: keyPair!, completion: { (signResponse) -> (Void) in
+                                            switch signResponse {
+                                            case .success(signedXDR: let signedXDR):
+                                                // get new 2fa secret
+                                                self.services.auth.new2faSecret(signedSEP10TransactionEnvelope:signedXDR, publicKeyIndex188:"blubber", response: response)
+                                            case .failure(error: let error):
+                                                print(error)
+                                                response(.failure(error: error))
+                                            }
+                                        })
+                                    case .failure(error: let error):
+                                        print(error)
+                                        response(.failure(error: error))
+                                }
+                            })
+                        case .failure(error: let error):
+                            print(error)
+                            response(.failure(error: .encryptionFailed(message: error)))
+                        }
+                    })
+                    
+                    //self.services.auth.new2faSecret(publicKeyIndex188: decryptedUserData.publicKeyIndex188, response: response)
                 } else {
                     let error = ErrorResponse()
                     error.parameterName = "current_password"

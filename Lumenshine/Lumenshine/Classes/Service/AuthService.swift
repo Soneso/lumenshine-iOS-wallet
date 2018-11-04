@@ -41,7 +41,7 @@ public enum Login2ResponseEnum {
 }
 
 public enum TfaSecretResponseEnum {
-    case success(response: RegistrationResponse)
+    case success(response: TFASecretResponse)
     case failure(error: ServiceError)
 }
 
@@ -162,7 +162,7 @@ public class AuthService: BaseService {
                 switch result {
                 case .success(let data):
                     do {
-                        let tfaResponse = try self.jsonDecoder.decode(RegistrationResponse.self, from: data)
+                        let tfaResponse = try self.jsonDecoder.decode(TFASecretResponse.self, from: data)
                         response(.success(response: tfaResponse))
                     } catch {
                         response(.failure(error: .parsingFailed(message: error.localizedDescription)))
@@ -708,8 +708,9 @@ public class AuthService: BaseService {
         }
     }
     
-    open func new2faSecret(publicKeyIndex188: String, response: @escaping TfaSecretResponseClosure) {
+    open func new2faSecret(signedSEP10TransactionEnvelope: String, publicKeyIndex188: String, response: @escaping TfaSecretResponseClosure) {
         var params = Dictionary<String,String>()
+        params["sep10_transaction"] = signedSEP10TransactionEnvelope
         params["public_key_188"] = publicKeyIndex188
         
         do {
@@ -719,7 +720,7 @@ public class AuthService: BaseService {
                 switch result {
                 case .success(let data):
                     do {
-                        let tfaResponse = try self.jsonDecoder.decode(RegistrationResponse.self, from: data)
+                        let tfaResponse = try self.jsonDecoder.decode(TFASecretResponse.self, from: data)
                         response(.success(response: tfaResponse))
                     } catch {
                         response(.failure(error: .parsingFailed(message: error.localizedDescription)))
