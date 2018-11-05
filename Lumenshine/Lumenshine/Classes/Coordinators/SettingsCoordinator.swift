@@ -130,7 +130,7 @@ fileprivate extension SettingsCoordinator {
     }
     
     func showActivateFingerprint() {
-        let viewModel = ReLoginViewModel(service: service.auth, user: user)
+        let viewModel = ReLoginViewModel(services: service, user: user)
         let activateVC = ActivateFingerprintViewController(viewModel: viewModel)
         let composeVC = ComposeNavigationController(rootViewController: activateVC)
         baseController.navigationController?.present(composeVC, animated: true)

@@ -22,7 +22,7 @@ class MenuCoordinator: MenuCoordinatorType {
         self.service = Services()
         self.mainCoordinator = mainCoordinator
         
-        let viewModel = MenuViewModel(service: service.auth, user: user)
+        let viewModel = MenuViewModel(services: service, user: user)
         menuView = MenuViewController(viewModel: viewModel)
         
         let drawer = AppNavigationDrawerController()
@@ -88,7 +88,7 @@ fileprivate extension MenuCoordinator {
     }
     
     func showRelogin() {
-        let coordinator = ReLoginMenuCoordinator(mainCoordinator: mainCoordinator, service: service.auth, user: user)
+        let coordinator = ReLoginMenuCoordinator(mainCoordinator: mainCoordinator, user: user)
         present(coordinator: coordinator)
     }
     

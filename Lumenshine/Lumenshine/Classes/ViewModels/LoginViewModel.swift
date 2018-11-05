@@ -282,7 +282,7 @@ class LoginViewModel : LoginViewModelType {
         BaseService.removeToken()
         BiometricHelper.enableTouch(false)
         BiometricHelper.removePassword(username: username)
-        UserDefaults.standard.setValue(nil, forKey:ChartCardViewModel.selectedPeriodKey)
+        UserDefaults.standard.setValue(nil, forKey:Keys.selectedPeriod)
     }
 }
 
@@ -364,6 +364,7 @@ fileprivate extension LoginViewModel {
                                      publicKeys: decryptedUserData.publicKeys)
                     
                     // TODO: why is this needed here?
+                    // for setup step, will be removed after setup
                     self.mnemonic = decryptedUserData.mnemonic
                     
                     // sign sep10 challenge and login user

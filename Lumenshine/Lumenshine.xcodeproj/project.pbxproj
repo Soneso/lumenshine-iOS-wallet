@@ -263,6 +263,8 @@
 		74E2057F20D2A3B200E94048 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E2057E20D2A3B200E94048 /* IconButton.swift */; };
 		74E2058120D2A3C400E94048 /* IconView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74E2058020D2A3C400E94048 /* IconView.xib */; };
 		833F7D6F2189FB9600ED43D9 /* SEP10ChallengeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F7D6E2189FB9600ED43D9 /* SEP10ChallengeResponse.swift */; };
+		B16BC4C62190398000CF7280 /* PushService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16BC4C52190398000CF7280 /* PushService.swift */; };
+		B16BC4C82190548E00CF7280 /* KeyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16BC4C72190548E00CF7280 /* KeyConstants.swift */; };
 		B16EE6D72181CD6300AF1D8B /* UITextView+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16EE6D62181CD6300AF1D8B /* UITextView+Size.swift */; };
 		B16EE6D921820C1700AF1D8B /* InputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16EE6D821820C1700AF1D8B /* InputTableViewCell.swift */; };
 		B18D3BA4217DF920003B9D9E /* iso_countries.json in Resources */ = {isa = PBXBuildFile; fileRef = B18D3BA2217DF920003B9D9E /* iso_countries.json */; };
@@ -675,6 +677,8 @@
 		74E2058020D2A3C400E94048 /* IconView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IconView.xib; sourceTree = "<group>"; };
 		7A07122EB8B38B1B6BC1B141 /* Pods-LumenshineUITests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineUITests.development.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineUITests/Pods-LumenshineUITests.development.xcconfig"; sourceTree = "<group>"; };
 		833F7D6E2189FB9600ED43D9 /* SEP10ChallengeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEP10ChallengeResponse.swift; sourceTree = "<group>"; };
+		B16BC4C52190398000CF7280 /* PushService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushService.swift; sourceTree = "<group>"; };
+		B16BC4C72190548E00CF7280 /* KeyConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyConstants.swift; sourceTree = "<group>"; };
 		B16EE6D62181CD6300AF1D8B /* UITextView+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Size.swift"; sourceTree = "<group>"; };
 		B16EE6D821820C1700AF1D8B /* InputTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputTableViewCell.swift; sourceTree = "<group>"; };
 		B18D3BA2217DF920003B9D9E /* iso_countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = iso_countries.json; sourceTree = "<group>"; };
@@ -844,6 +848,7 @@
 				434E049A20D3DC8A00D3235A /* DateUtils+Format.swift */,
 				C682C001213691A3007705DF /* BiometricHelper.swift */,
 				43E23993214F8EF00017AABF /* GradientView.swift */,
+				B16BC4C72190548E00CF7280 /* KeyConstants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1183,6 +1188,7 @@
 				C665870F21254A78006499A7 /* ChartsService.swift */,
 				43564BAC2163DCB9006A7B9F /* ContactsService.swift */,
 				438F54E2217A3F9300F4B556 /* UserDataService.swift */,
+				B16BC4C52190398000CF7280 /* PushService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -2240,6 +2246,7 @@
 				4390D57E205FA5FC00383BB2 /* BaseService.swift in Sources */,
 				744DE2D720BD7A8A003BC216 /* UIDevice+Additions.swift in Sources */,
 				431628CE2097352B00F23A20 /* TFAResponse.swift in Sources */,
+				B16BC4C82190548E00CF7280 /* KeyConstants.swift in Sources */,
 				74C0914820FB3612000A809D /* CoinUnit+Additions.swift in Sources */,
 				74C0914520F7B3CD000A809D /* WalletCardInfoViewController.swift in Sources */,
 				43E23996214FA1CB0017AABF /* LSButton.swift in Sources */,
@@ -2350,6 +2357,7 @@
 				4322BA35205BDD58007FEB5E /* Card.swift in Sources */,
 				4391A52B20D139D60015A6DA /* CountryResponse.swift in Sources */,
 				7459815F211AC73200488999 /* UIAlertController+Extension.swift in Sources */,
+				B16BC4C62190398000CF7280 /* PushService.swift in Sources */,
 				4319B1802063EEA9007CE18D /* LoginViewModel.swift in Sources */,
 				43920D9A2057EECA0040003C /* CardView.swift in Sources */,
 				43B78D4C21777523006B1EA9 /* PersonalDataEntry.swift in Sources */,

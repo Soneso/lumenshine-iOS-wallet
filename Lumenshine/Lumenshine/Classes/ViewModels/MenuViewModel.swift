@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit.UIApplication
 
 protocol MenuViewModelType: Transitionable {
     var itemDistribution: [Int] { get }
@@ -21,7 +22,7 @@ class MenuViewModel : MenuViewModelType {
     
     static var backgroudTimePeriod: TimeInterval = 10
     
-    fileprivate let service: AuthService
+    fileprivate let services: Services
     fileprivate let user: User
     fileprivate let entries: [[MenuEntry]]
     fileprivate var lastIndex = IndexPath(row: 0, section: 1)
@@ -29,8 +30,8 @@ class MenuViewModel : MenuViewModelType {
     
     weak var navigationCoordinator: CoordinatorType?
     
-    init(service: AuthService, user: User) {
-        self.service = service
+    init(services: Services, user: User) {
+        self.services = services
         self.user = user
         
         /*self.entries = [[.avatar],
@@ -41,21 +42,7 @@ class MenuViewModel : MenuViewModelType {
          [.home, .wallets, .transactions, .contacts, .settings],
          [.help, .signOut]]
         
-        if let tokenExists = TFAGeneration.isTokenExists(email: user.email),
-            tokenExists == false {
-            service.tfaSecret(publicKeyIndex188: user.publicKeyIndex188) { result in
-                switch result {
-                case .success(let response):
-                    if let secret = response.tfaSecret {
-                        TFAGeneration.createToken(tfaSecret: secret, email: user.email)
-                    } else {
-                        TFAGeneration.removeToken(email: user.email)
-                    }
-                case .failure(let error):
-                    print("Tfa secret request error: \(error)")
-                }
-            }
-        }
+        loginCompleted()
         
         NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: .UIApplicationWillEnterForeground, object: nil)
         
@@ -123,6 +110,16 @@ fileprivate extension MenuViewModel {
         NotificationCenter.default.removeObserver(self, name: .UIApplicationWillEnterForeground, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UIApplicationDidEnterBackground, object: nil)
         
+        if let deviceToken = UserDefaults.standard.value(forKey: Keys.deviceToken) as? String {
+            services.push.unsubscribe(pushToken: deviceToken) { result in
+                switch result {
+                case .success:
+                    print("Push unsubscribe success")
+                case .failure(let error):
+                    print("Push unsubscribe error: \(error)")
+                }
+            }
+        }
         LoginViewModel.logout(username: user.email)
         navigationCoordinator?.performTransition(transition: .logout(nil))
     }
@@ -135,5 +132,63 @@ fileprivate extension MenuViewModel {
     
     func countBackgroundTime() {
         backgroundTime = Date()
+    }
+    
+    func loginCompleted() {
+        update2FASecret()
+        updatePushToken()
+    }
+    
+    func update2FASecret() {
+        if let tokenExists = TFAGeneration.isTokenExists(email: user.email),
+            tokenExists == false {
+            services.auth.tfaSecret(publicKeyIndex188: user.publicKeyIndex188) { result in
+                switch result {
+                case .success(let response):
+                    if let secret = response.tfaSecret {
+                        TFAGeneration.createToken(tfaSecret: secret, email: self.user.email)
+                    } else {
+                        TFAGeneration.removeToken(email: self.user.email)
+                    }
+                case .failure(let error):
+                    print("Tfa secret request error: \(error)")
+                }
+            }
+        }
+    }
+    
+    func updatePushToken() {
+        
+        if let notifications = UserDefaults.standard.value(forKey: Keys.notifications) as? Bool {
+            if notifications == false { return }
+        } else {
+            UserDefaults.standard.setValue(true, forKey: Keys.notifications)
+        }
+        
+        if let newToken = (UIApplication.shared.delegate as? AppDelegate)?.deviceToken {
+            if let deviceToken = UserDefaults.standard.value(forKey: Keys.deviceToken) as? String,
+                newToken != deviceToken {
+                services.push.update(newPushToken: newToken, oldPushToken: deviceToken) { result in
+                    switch result {
+                    case .success:
+                        print("Push update success")
+                    case .failure(let error):
+                        print("Push update error: \(error)")
+                    }
+                }
+            } else {
+                services.push.subscribe(pushToken: newToken) { result in
+                    switch result {
+                    case .success:
+                        print("Push subscribe success")
+                    case .failure(let error):
+                        print("Push subscribe error: \(error)")
+                    }
+                }
+            }
+            UserDefaults.standard.setValue(newToken, forKey: Keys.deviceToken)
+        } else {
+            UserDefaults.standard.setValue(false, forKey: Keys.notifications)
+        }
     }
 }

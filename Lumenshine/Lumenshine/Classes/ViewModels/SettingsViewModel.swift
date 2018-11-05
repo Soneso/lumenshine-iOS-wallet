@@ -45,8 +45,6 @@ class SettingsViewModel: SettingsViewModelType {
     
     // MARK: - Parameters & Constants
     
-    static let DestinationCurrencyKey = "DestinationCurrencyKey"
-    
     weak var navigationCoordinator: CoordinatorType?
     
     fileprivate let services: Services
@@ -88,6 +86,8 @@ class SettingsViewModel: SettingsViewModelType {
         switch entry(at: indexPath) {
         case .faceRecognition, .fingerprint:
             return BiometricHelper.isTouchEnabled
+        case .notifications:
+            return isNotificationsEnabled()
         default:
             return nil
         }
@@ -103,6 +103,8 @@ class SettingsViewModel: SettingsViewModelType {
                 BiometricHelper.enableTouch(false)
                 BiometricHelper.removePassword(username: user.email)
             }
+        case .notifications:
+            enableNotifications(value)
         default: break
         }
     }
@@ -294,7 +296,7 @@ class SettingsViewModel: SettingsViewModelType {
     }
     
     func destinationCurrencySelected(_ currency: String) {
-        UserDefaults.standard.setValue(currency, forKey: SettingsViewModel.DestinationCurrencyKey)
+        UserDefaults.standard.setValue(currency, forKey: Keys.destinationCurrency)
     }
 }
 
@@ -360,6 +362,17 @@ fileprivate extension SettingsViewModel {
                 response(.failure(error: .encryptionFailed(message: error.localizedDescription)))
             }
         }
+    }
+    
+    func enableNotifications(_ enable: Bool) {
+        UserDefaults.standard.setValue(enable, forKey: Keys.notifications)
+    }
+    
+    func isNotificationsEnabled() -> Bool {
+        if let value = UserDefaults.standard.value(forKey: Keys.notifications) as? Bool {
+            return value
+        }
+        return true
     }
     
 }

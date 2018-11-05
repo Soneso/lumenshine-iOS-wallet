@@ -59,6 +59,9 @@ extension SetupMenuViewModel {
     }
     
     func logout() {
+        if (UserDefaults.standard.value(forKey: Keys.deviceToken) as? String) != nil {
+            fatalError("deviceToken is only activated after setup process")
+        }
         LoginViewModel.logout(username: user.email)
     }
 }

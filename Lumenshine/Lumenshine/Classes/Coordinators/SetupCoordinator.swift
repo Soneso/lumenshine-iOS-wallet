@@ -68,7 +68,7 @@ fileprivate extension SetupCoordinator {
     }
     
     func showRelogin() {
-        let coordinator = ReLoginMenuCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
+        let coordinator = ReLoginMenuCoordinator(mainCoordinator: mainCoordinator, user: user)
         present(coordinator: coordinator)
     }
     
