@@ -142,18 +142,19 @@ fileprivate extension MenuViewModel {
     func update2FASecret() {
         if let tokenExists = TFAGeneration.isTokenExists(email: user.email),
             tokenExists == false {
-            services.auth.tfaSecret(publicKeyIndex188: user.publicKeyIndex188) { result in
-                switch result {
-                case .success(let response):
-                    if let secret = response.tfaSecret {
-                        TFAGeneration.createToken(tfaSecret: secret, email: self.user.email)
-                    } else {
-                        TFAGeneration.removeToken(email: self.user.email)
-                    }
-                case .failure(let error):
-                    print("Tfa secret request error: \(error)")
-                }
-            }
+            // TODO: update to sep10
+//            services.auth.tfaSecret(publicKeyIndex188: user.publicKeyIndex188) { result in
+//                switch result {
+//                case .success(let response):
+//                    if let secret = response.tfaSecret {
+//                        TFAGeneration.createToken(tfaSecret: secret, email: self.user.email)
+//                    } else {
+//                        TFAGeneration.removeToken(email: self.user.email)
+//                    }
+//                case .failure(let error):
+//                    print("Tfa secret request error: \(error)")
+//                }
+//            }
         }
     }
     

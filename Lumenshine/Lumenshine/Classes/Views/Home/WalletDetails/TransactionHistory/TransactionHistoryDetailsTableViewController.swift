@@ -26,6 +26,8 @@ class TransactionHistoryDetailsTableViewController: UITableViewController {
         super.init(nibName: nil, bundle: nil)
         
         guard let response = operationInfo.responseData else { return }
+        print("Details: " + String(data: response, encoding: .utf8)!)
+        
         if let jsonDict = try! JSONSerialization.jsonObject(with: response, options: []) as? [String:Any] {
             self.jsonDict = jsonDict
         }
@@ -45,11 +47,6 @@ class TransactionHistoryDetailsTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - Table view data source
@@ -109,12 +106,12 @@ fileprivate extension TransactionHistoryDetailsTableViewController {
     }
     
     func prepareNavigationItem() {
-        navigationItem.titleLabel.text = R.string.localizable.details()
+        navigationItem.titleLabel.text = R.string.localizable.operation_details()
         navigationItem.titleLabel.textColor = Stylesheet.color(.white)
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         
         let helpButton = Material.IconButton()
-        helpButton.image = R.image.question()?.crop(toWidth: 15, toHeight: 15)?.tint(with: Stylesheet.color(.white))
+        helpButton.image = R.image.question()?.crop(toWidth: 25, toHeight: 25)?.tint(with: Stylesheet.color(.white))
         helpButton.addTarget(self, action: #selector(didTapHelp(_:)), for: .touchUpInside)
         navigationItem.rightViews = [helpButton]
     }

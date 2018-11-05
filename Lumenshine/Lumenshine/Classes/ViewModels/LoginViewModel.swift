@@ -30,7 +30,6 @@ protocol LoginViewModelType: Transitionable, BiometricAuthenticationProtocol {
     
     func forgotPasswordClick()
     func lost2FAClick()
-    func remove2FASecret()
     func removeBiometricRecognition()
 }
 
@@ -185,22 +184,48 @@ class LoginViewModel : LoginViewModelType {
         
         service.generateAccount(email: email, password: password, userData: nil) { [weak self] result in
             switch result {
-            case .success( _, let userSecurity):
+            case .success( let registrationResponse, let userSecurity):
                 self?.user = User(id: "1",
                                   email: email,
                                   publicKeyIndex0: userSecurity.publicKeyIndex0,
-                                  publicKeyIndex188: userSecurity.publicKeyIndex188,
                                   publicKeys: nil)
                 self?.mnemonic = userSecurity.mnemonic24Word
-                self?.service.loginStep2(publicKeyIndex188: userSecurity.publicKeyIndex188) { [weak self] result in
-                    switch result {
-                    case .success(let login2Response):
-                        self?.checkSetup(login2Response: login2Response)
-                        response(.success)
-                    case .failure(let error):
-                        response(.failure(error: error))
+                
+                // load sep10 challenge from server and continue signup.
+                // TODO: handle errors correctly - the user is already registered here!
+                
+                // sign sep10 challenge and login user
+                PrivateKeyManager.getKeyPair(forAccountID: userSecurity.publicKeyIndex0, fromMnemonic: userSecurity.mnemonic24Word, completion: { (keyResponse) -> (Void) in
+                    switch keyResponse {
+                    case .success(keyPair: let keyPair):
+                        // sign challenge
+                        if let envelopeXDR = registrationResponse?.sep10ChallengeXDR {
+                            self?.service.signSEP10ChallengeIfValid(base64EnvelopeXDR: envelopeXDR, userKeyPair: keyPair!, completion: { (signResponse) -> (Void) in
+                                switch signResponse {
+                                case .success(signedXDR: let signedXDR):
+                                    // login user
+                                    self?.service.loginStep2(signedSEP10TransactionEnvelope:signedXDR, userEmail: email) { [weak self] result in
+                                        switch result {
+                                        case .success(let login2Response):
+                                            self?.checkSetup(login2Response: login2Response)
+                                            response(.success)
+                                        case .failure(let error):
+                                            response(.failure(error: error))
+                                        }
+                                    }
+                                case .failure(error: let error):
+                                    print(error)
+                                    response(.failure(error: error))
+                                }
+                            })
+                        } else {
+                            response(.failure(error: .invalidSEP10Challenge))
+                        }
+                    case .failure(error: let error):
+                        print(error)
+                        response(.failure(error: .encryptionFailed(message: error)))
                     }
-                }
+                })
             case .failure(let error):
                 response(.failure(error: error))
             }
@@ -271,14 +296,10 @@ class LoginViewModel : LoginViewModelType {
 
     func authenticateUser(completion: @escaping BiometricAuthResponseClosure) {}
     
-    func remove2FASecret() {
-        TFAGeneration.removeToken(email: email!)
-    }
-    
     func removeBiometricRecognition() {}
     
     class func logout(username: String) {
-        TFAGeneration.removeToken(email: username)
+        TFAGeneration.remove2FASecretTokens()
         BaseService.removeToken()
         BiometricHelper.enableTouch(false)
         BiometricHelper.removePassword(username: username)
@@ -351,7 +372,7 @@ fileprivate extension LoginViewModel {
         navigationCoordinator?.performTransition(transition: .showHeaderMenu(items))
     }
     
-    func verifyLogin1Response(_ login1Response: AuthenticationResponse, password: String, response: @escaping Login2ResponseClosure) {
+    func verifyLogin1Response(_ login1Response: LoginStep1Response, password: String, response: @escaping Login2ResponseClosure) {
         DispatchQueue.global(qos: .userInitiated).async {
             do {
                 if let userSecurity = UserSecurity(from: login1Response),
@@ -360,11 +381,9 @@ fileprivate extension LoginViewModel {
                     self.user = User(id: "1",
                                      email: self.email!,
                                      publicKeyIndex0: login1Response.publicKeyIndex0,
-                                     publicKeyIndex188: decryptedUserData.publicKeyIndex188,
                                      publicKeys: decryptedUserData.publicKeys)
                     
-                    // TODO: why is this needed here?
-                    // for setup step, will be removed after setup
+                    // this is needed because the user mitght not have completed the setup and it may be used later.
                     self.mnemonic = decryptedUserData.mnemonic
                     
                     // sign sep10 challenge and login user
@@ -376,7 +395,7 @@ fileprivate extension LoginViewModel {
                                 switch signResponse {
                                 case .success(signedXDR: let signedXDR):
                                     // login user
-                                    self.service.loginStep2(signedSEP10TransactionEnvelope:signedXDR, response: response)
+                                    self.service.loginStep2(signedSEP10TransactionEnvelope:signedXDR, userEmail: self.email!, response: response)
                                 case .failure(error: let error):
                                     print(error)
                                     response(.failure(error: error))
@@ -400,6 +419,7 @@ fileprivate extension LoginViewModel {
     }
     
     func checkSetup(login2Response: LoginStep2Response) {
+        // TODO: improve this. Otherwise on error the app will hang in the login screen.
         guard let user = self.user else { return }
         DispatchQueue.main.async {
             if login2Response.tfaConfirmed && login2Response.mailConfirmed && login2Response.mnemonicConfirmed {

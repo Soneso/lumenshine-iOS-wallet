@@ -265,6 +265,8 @@
 		833F7D6F2189FB9600ED43D9 /* SEP10ChallengeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F7D6E2189FB9600ED43D9 /* SEP10ChallengeResponse.swift */; };
 		B16BC4C62190398000CF7280 /* PushService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16BC4C52190398000CF7280 /* PushService.swift */; };
 		B16BC4C82190548E00CF7280 /* KeyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16BC4C72190548E00CF7280 /* KeyConstants.swift */; };
+		833F7D71218D95B800ED43D9 /* LoginStep1Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F7D70218D95B800ED43D9 /* LoginStep1Response.swift */; };
+		833F7D73218F6E3F00ED43D9 /* TFASecretResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F7D72218F6E3F00ED43D9 /* TFASecretResponse.swift */; };
 		B16EE6D72181CD6300AF1D8B /* UITextView+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16EE6D62181CD6300AF1D8B /* UITextView+Size.swift */; };
 		B16EE6D921820C1700AF1D8B /* InputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16EE6D821820C1700AF1D8B /* InputTableViewCell.swift */; };
 		B18D3BA4217DF920003B9D9E /* iso_countries.json in Resources */ = {isa = PBXBuildFile; fileRef = B18D3BA2217DF920003B9D9E /* iso_countries.json */; };
@@ -287,8 +289,6 @@
 		C62B0EA22153DBDB00CF920B /* SeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62B0EA12153DBDB00CF920B /* SeparatorView.swift */; };
 		C63B4F9C212AB35D0003ECE5 /* TransactionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C63B4F9B212AB35D0003ECE5 /* TransactionTableViewCell.xib */; };
 		C63B4F9E212AB3750003ECE5 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63B4F9D212AB3750003ECE5 /* TransactionTableViewCell.swift */; };
-		C6410CD7212C269C00F9C8B3 /* TransactionHistoryDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6410CD6212C269C00F9C8B3 /* TransactionHistoryDetailsViewController.xib */; };
-		C6410CD9212C26B300F9C8B3 /* TransactionHistoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6410CD8212C26B300F9C8B3 /* TransactionHistoryDetailsViewController.swift */; };
 		C646A7C62183210D0035DBD1 /* UIView+RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = C646A7C52183210D0035DBD1 /* UIView+RoundedCorners.swift */; };
 		C654AFB42122D3D500FB9686 /* FundTestNetWalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C654AFB32122D3D500FB9686 /* FundTestNetWalletViewController.xib */; };
 		C654AFB62122D4C900FB9686 /* FundTestNetWalletViewController.xib.swift in Sources */ = {isa = PBXBuildFile; fileRef = C654AFB52122D4C900FB9686 /* FundTestNetWalletViewController.xib.swift */; };
@@ -679,6 +679,8 @@
 		833F7D6E2189FB9600ED43D9 /* SEP10ChallengeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEP10ChallengeResponse.swift; sourceTree = "<group>"; };
 		B16BC4C52190398000CF7280 /* PushService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushService.swift; sourceTree = "<group>"; };
 		B16BC4C72190548E00CF7280 /* KeyConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyConstants.swift; sourceTree = "<group>"; };
+		833F7D70218D95B800ED43D9 /* LoginStep1Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStep1Response.swift; sourceTree = "<group>"; };
+		833F7D72218F6E3F00ED43D9 /* TFASecretResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFASecretResponse.swift; sourceTree = "<group>"; };
 		B16EE6D62181CD6300AF1D8B /* UITextView+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Size.swift"; sourceTree = "<group>"; };
 		B16EE6D821820C1700AF1D8B /* InputTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputTableViewCell.swift; sourceTree = "<group>"; };
 		B18D3BA2217DF920003B9D9E /* iso_countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = iso_countries.json; sourceTree = "<group>"; };
@@ -702,8 +704,6 @@
 		C62B0EA12153DBDB00CF920B /* SeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
 		C63B4F9B212AB35D0003ECE5 /* TransactionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionTableViewCell.xib; sourceTree = "<group>"; };
 		C63B4F9D212AB3750003ECE5 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
-		C6410CD6212C269C00F9C8B3 /* TransactionHistoryDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionHistoryDetailsViewController.xib; sourceTree = "<group>"; };
-		C6410CD8212C26B300F9C8B3 /* TransactionHistoryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryDetailsViewController.swift; sourceTree = "<group>"; };
 		C646A7C52183210D0035DBD1 /* UIView+RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+RoundedCorners.swift"; sourceTree = "<group>"; };
 		C646F566BF9C95E0290B7A6D /* Pods-LumenshineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineTests/Pods-LumenshineTests.release.xcconfig"; sourceTree = "<group>"; };
 		C654AFB32122D3D500FB9686 /* FundTestNetWalletViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FundTestNetWalletViewController.xib; sourceTree = "<group>"; };
@@ -1408,6 +1408,7 @@
 				431628CD2097352B00F23A20 /* TFAResponse.swift */,
 				431628CF2097476500F23A20 /* ErrorResponse.swift */,
 				4359984A20A438EF00007F27 /* AuthenticationResponse.swift */,
+				833F7D70218D95B800ED43D9 /* LoginStep1Response.swift */,
 				43A8633720A9F0E6007C46E2 /* LoginStep2Response.swift */,
 				4391A52A20D139D60015A6DA /* CountryResponse.swift */,
 				4391A53120D170420015A6DA /* CountryListResponse.swift */,
@@ -1425,6 +1426,7 @@
 				43CF47EC21652B7000B9E7E2 /* AddContactResponse.swift */,
 				B18D3BA7217E0B9B003B9D9E /* LanguageResponse.swift */,
 				833F7D6E2189FB9600ED43D9 /* SEP10ChallengeResponse.swift */,
+				833F7D72218F6E3F00ED43D9 /* TFASecretResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -1693,8 +1695,6 @@
 				C69556522126F6F400B0E110 /* TransactionHistoryTableViewController.swift */,
 				C63B4F9B212AB35D0003ECE5 /* TransactionTableViewCell.xib */,
 				C63B4F9D212AB3750003ECE5 /* TransactionTableViewCell.swift */,
-				C6410CD6212C269C00F9C8B3 /* TransactionHistoryDetailsViewController.xib */,
-				C6410CD8212C26B300F9C8B3 /* TransactionHistoryDetailsViewController.swift */,
 				B1DA1E902189C586001BB4FA /* TransactionHistoryDetailsTableViewController.swift */,
 			);
 			path = TransactionHistory;
@@ -1961,7 +1961,6 @@
 				74C0913B20F64AF0000A809D /* UnfundedWalletCardContentView.xib in Resources */,
 				43AE633F2135A19300B7A904 /* EncodeSansCondensed-Light.ttf in Resources */,
 				74C8994C2101DD7C009B13EA /* ReceivePaymentCardViewController.xib in Resources */,
-				C6410CD7212C269C00F9C8B3 /* TransactionHistoryDetailsViewController.xib in Resources */,
 				C69556512126F6AC00B0E110 /* TransactionHistoryTableViewController.xib in Resources */,
 				43AE632E2135A19300B7A904 /* EncodeSans-ExtraBold.ttf in Resources */,
 				7491BE45211C2E230058877E /* AccountCurrenciesViewController.xib in Resources */,
@@ -2289,9 +2288,9 @@
 				438F54E3217A3F9300F4B556 /* UserDataService.swift in Sources */,
 				436FE5082052634300CFE788 /* WebCard.swift in Sources */,
 				C6813DC7213AB708007074C2 /* KnownInflationDestinationResponse.swift in Sources */,
-				C6410CD9212C26B300F9C8B3 /* TransactionHistoryDetailsViewController.swift in Sources */,
 				C6813DC3213AB6CB007074C2 /* KnownCurrencyResponse.swift in Sources */,
 				436B366F20512114009F7C21 /* FlexibleHeightBar.swift in Sources */,
+				833F7D73218F6E3F00ED43D9 /* TFASecretResponse.swift in Sources */,
 				C62B0E9C215375A400CF920B /* PickerTextField.swift in Sources */,
 				C6658714212555B4006499A7 /* SourceCurrencyResponse.swift in Sources */,
 				4365F69A211057B900D4B12C /* Change2faSecretViewController.swift in Sources */,
@@ -2335,6 +2334,7 @@
 				43C7A8F0215B92CA007F4E5E /* HelpCenterViewController.swift in Sources */,
 				43D7A775205A84B300238E29 /* R.generated.swift in Sources */,
 				4322BA2F205BD69F007FEB5E /* ResponseMock.swift in Sources */,
+				833F7D71218D95B800ED43D9 /* LoginStep1Response.swift in Sources */,
 				4384C70C20E27C72000C7201 /* LoginMenuCoordinator.swift in Sources */,
 				43D131E220569950000483C4 /* HomeViewController.swift in Sources */,
 				4319B17E2063EE0E007CE18D /* LoginViewController.swift in Sources */,

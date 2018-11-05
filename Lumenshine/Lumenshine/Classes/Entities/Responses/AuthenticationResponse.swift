@@ -21,7 +21,6 @@ public class AuthenticationResponse: Decodable {
     let encryptedWordlist: String
     let wordlistEncryptionIV: String
     let publicKeyIndex0: String
-    let sep10TransactionEnvelopeXDR: String
     
     private enum CodingKeys: String, CodingKey {
         
@@ -36,7 +35,6 @@ public class AuthenticationResponse: Decodable {
         case encryptedWordlist = "encrypted_wordlist"
         case wordlistEncryptionIV = "wordlist_encryption_iv"
         case publicKeyIndex0 = "public_key_index0"
-        case sep10TransactionEnvelopeXDR = "sep10_transaction_challenge"
     }
     
     public required init(from decoder: Decoder) throws {
@@ -52,6 +50,5 @@ public class AuthenticationResponse: Decodable {
         encryptedWordlist = try values.decode(String.self, forKey: .encryptedWordlist)
         wordlistEncryptionIV = try values.decode(String.self, forKey: .wordlistEncryptionIV)
         publicKeyIndex0 = try values.decode(String.self, forKey: .publicKeyIndex0)
-        sep10TransactionEnvelopeXDR = try values.decode(String.self, forKey: .sep10TransactionEnvelopeXDR)
     }
 }
