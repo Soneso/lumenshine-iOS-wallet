@@ -11,7 +11,7 @@ import stellarsdk
 
 
 public enum GenerateAccountResponseEnum {
-    case success(response: RegistrationResponse?, userSecurity: UserSecurity)
+    case success(response: TFASecretResponse?, userSecurity: UserSecurity)
     case failure(error: ServiceError)
 }
 
@@ -591,8 +591,7 @@ public class AuthService: BaseService {
                     case .success(let data):
                         BaseService.jwtTokenType = .partial
                         do {
-                            print(data)
-                            let registrationResponse = try self.jsonDecoder.decode(RegistrationResponse.self, from: data)
+                            let registrationResponse = try self.jsonDecoder.decode(TFASecretResponse.self, from: data)
                             response(.success(response: registrationResponse, userSecurity: userSecurity))
                         } catch {
                             response(.failure(error: .parsingFailed(message: error.localizedDescription)))

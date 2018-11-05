@@ -17,7 +17,7 @@ class SetupMenuCoordinator: MenuCoordinatorType {
     fileprivate let user: User
     fileprivate let menuView: MenuViewController
     
-    init(mainCoordinator: MainCoordinator, service: AuthService, user: User, mnemonic: String, loginResponse: LoginStep2Response) {
+    init(mainCoordinator: MainCoordinator, service: AuthService, user: User, mnemonic: String, tfaConfirmed: Bool, mailConfirmed: Bool, mnemonicConfirmed: Bool, tfaSecret: String?) {
         self.service = service
         self.user = user
         self.mainCoordinator = mainCoordinator
@@ -30,7 +30,7 @@ class SetupMenuCoordinator: MenuCoordinatorType {
         
         self.baseController = drawer
         menuViewModel.navigationCoordinator = self
-        showSetup(mnemonic: mnemonic, loginResponse: loginResponse)
+        showSetup(user: user, mnemonic: mnemonic, tfaConfirmed: tfaConfirmed, mailConfirmed: mailConfirmed, mnemonicConfirmed: mnemonicConfirmed, tfaSecret: tfaSecret)
         mainCoordinator.currentMenuCoordinator = self
     }
     
@@ -54,8 +54,8 @@ fileprivate extension SetupMenuCoordinator {
         }
     }
     
-    func showSetup(mnemonic: String, loginResponse: LoginStep2Response) {
-        let coordinator = SetupCoordinator(mainCoordinator: mainCoordinator, service: service, user: user, mnemonic: mnemonic, loginResponse: loginResponse)
+    func showSetup(user: User, mnemonic: String, tfaConfirmed: Bool, mailConfirmed: Bool, mnemonicConfirmed: Bool, tfaSecret: String?) {
+        let coordinator = SetupCoordinator(mainCoordinator: mainCoordinator, service: service, user: user, mnemonic: mnemonic, tfaConfirmed: tfaConfirmed, mailConfirmed: mailConfirmed, mnemonicConfirmed: mnemonicConfirmed, tfaSecret:tfaSecret)
         
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
         navigationController.navigationBar.isTranslucent = true

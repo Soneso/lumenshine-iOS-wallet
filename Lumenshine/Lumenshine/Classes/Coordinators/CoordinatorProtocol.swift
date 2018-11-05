@@ -46,7 +46,7 @@ public indirect enum Transition {
     case showWalletCardInfo
     case logout(Transition?)
     case showPasswordHint(String, NSAttributedString?)
-    case showSetup(User, String, LoginStep2Response)
+    case showSetup(User, String, Bool, Bool, Bool, String?)
     case nextSetupStep
     case showMnemonicVerification
     case showChangePassword

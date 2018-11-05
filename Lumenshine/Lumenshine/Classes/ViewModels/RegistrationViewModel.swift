@@ -20,7 +20,7 @@ protocol RegistrationViewModelType: Transitionable {
     
     func textChanged(_ text: String, itemForRowAt indexPath: IndexPath)
     func submit(response: @escaping GenerateAccountResponseClosure)
-    func show2FA(response: RegistrationResponse, userSecurity: UserSecurity)
+    func show2FA(response: TFASecretResponse, userSecurity: UserSecurity)
     func checkUserSecurity(_ userSecurity: UserSecurity, response: @escaping EmptyResponseClosure)
 }
 
@@ -106,7 +106,7 @@ class RegistrationViewModel : RegistrationViewModelType {
         }
     }
     
-    func show2FA(response: RegistrationResponse, userSecurity: UserSecurity) {
+    func show2FA(response: TFASecretResponse, userSecurity: UserSecurity) {
     }
     
     func checkUserSecurity(_ userSecurity: UserSecurity, response: @escaping EmptyResponseClosure) {

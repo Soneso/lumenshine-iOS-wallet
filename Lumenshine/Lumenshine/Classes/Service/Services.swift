@@ -23,8 +23,8 @@ public final class Services {
 #elseif DEVELOPMENT
     let usePublicStellarNetwork = false
     let baseURL = "https://demoapi.lumenshine.com"
-    //let horizonURL = "https://horizon-testnet.stellar.org"
-    let horizonURL = "https://demohorizon.lumenshine.com"
+    let horizonURL = "https://horizon-testnet.stellar.org"
+    //let horizonURL = "https://demohorizon.lumenshine.com"
     let tomlURL = "https://demo.lumenshine.com/.well-known/stellar.toml"
     let initialServerSigningKey = "GCP4BR7GWG664577XMLX2BRUPSHKHTAXQ4I4HZORLMQNILNNVMSFWVUV"
     

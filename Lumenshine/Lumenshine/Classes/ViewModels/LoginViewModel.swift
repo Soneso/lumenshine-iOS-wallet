@@ -138,7 +138,7 @@ class LoginViewModel : LoginViewModelType {
                             BiometricHelper.save(user: email, password: password)
                         }
                         if checkSetup == true {
-                            self?.checkSetup(login2Response: login2Response)
+                            self?.checkSetup(tfaConfirmed: login2Response.tfaConfirmed, mailConfirmed: login2Response.mailConfirmed, mnemonicConfirmed: login2Response.mnemonicConfirmed, tfaSecret: login2Response.tfaSecret)
                         } else {
                             BiometricHelper.enableTouch(true)
                             BiometricHelper.save(user: email, password: password)
@@ -191,11 +191,13 @@ class LoginViewModel : LoginViewModelType {
                                   publicKeys: nil)
                 self?.mnemonic = userSecurity.mnemonic24Word
                 
+                self?.checkSetup(tfaConfirmed: false, mailConfirmed: false, mnemonicConfirmed: false, tfaSecret: registrationResponse?.tfaSecret)
+                
                 // load sep10 challenge from server and continue signup.
                 // TODO: handle errors correctly - the user is already registered here!
                 
                 // sign sep10 challenge and login user
-                PrivateKeyManager.getKeyPair(forAccountID: userSecurity.publicKeyIndex0, fromMnemonic: userSecurity.mnemonic24Word, completion: { (keyResponse) -> (Void) in
+                /*PrivateKeyManager.getKeyPair(forAccountID: userSecurity.publicKeyIndex0, fromMnemonic: userSecurity.mnemonic24Word, completion: { (keyResponse) -> (Void) in
                     switch keyResponse {
                     case .success(keyPair: let keyPair):
                         // sign challenge
@@ -207,7 +209,7 @@ class LoginViewModel : LoginViewModelType {
                                     self?.service.loginStep2(signedSEP10TransactionEnvelope:signedXDR, userEmail: email) { [weak self] result in
                                         switch result {
                                         case .success(let login2Response):
-                                            self?.checkSetup(login2Response: login2Response)
+                                            self?.checkSetup(tfaConfirmed: login2Response.tfaConfirmed, mailConfirmed: login2Response.mailConfirmed, mnemonicConfirmed: login2Response.mnemonicConfirmed, tfaSecret: login2Response.tfaSecret)
                                             response(.success)
                                         case .failure(let error):
                                             response(.failure(error: error))
@@ -225,7 +227,7 @@ class LoginViewModel : LoginViewModelType {
                         print(error)
                         response(.failure(error: .encryptionFailed(message: error)))
                     }
-                })
+                })*/
             case .failure(let error):
                 response(.failure(error: error))
             }
@@ -418,15 +420,15 @@ fileprivate extension LoginViewModel {
         }
     }
     
-    func checkSetup(login2Response: LoginStep2Response) {
+    func checkSetup(tfaConfirmed: Bool, mailConfirmed: Bool, mnemonicConfirmed: Bool, tfaSecret: String?) {
         // TODO: improve this. Otherwise on error the app will hang in the login screen.
         guard let user = self.user else { return }
         DispatchQueue.main.async {
-            if login2Response.tfaConfirmed && login2Response.mailConfirmed && login2Response.mnemonicConfirmed {
+            if tfaConfirmed && mailConfirmed && mnemonicConfirmed {
                 self.navigationCoordinator?.performTransition(transition: .showDashboard(user))
             } else {
                 guard let mnemonic = self.mnemonic else { return }
-                self.navigationCoordinator?.performTransition(transition: .showSetup(user, mnemonic, login2Response))
+                self.navigationCoordinator?.performTransition(transition: .showSetup(user, mnemonic, tfaConfirmed, mailConfirmed, mnemonicConfirmed, tfaSecret))
             }
         }
     }
