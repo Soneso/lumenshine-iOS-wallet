@@ -576,7 +576,7 @@ public class AuthService: BaseService {
             params["wordlist"] = userSecurity.encryptedWordList.toBase64()
             params["wordlist_iv"] = userSecurity.wordListEncryptionIV.toBase64()
             params["public_key_0"] = userSecurity.publicKeyIndex0
-            params["public_key_188"] = "blubber" //TODO remove this as soon as the server is ready
+            params["public_key_188"] = "GDTIYCZV3QNVBSONKMT2SEDYE6TBLVQ7JX6U2FTJ37CDDS2XBUEGGJ42" //TODO remove this as soon as the server is ready
             
             if let userDict = userData {
                 params.merge(userDict, uniquingKeysWith: {(first, _) in first})
@@ -590,6 +590,7 @@ public class AuthService: BaseService {
                     case .success(let data):
                         BaseService.jwtTokenType = .partial
                         do {
+                            print(data)
                             let registrationResponse = try self.jsonDecoder.decode(RegistrationResponse.self, from: data)
                             response(.success(response: registrationResponse, userSecurity: userSecurity))
                         } catch {
