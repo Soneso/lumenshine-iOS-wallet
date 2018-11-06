@@ -62,6 +62,7 @@ class WalletDetailsViewController: UIViewController {
                 switch response {
                 case .success(privateKey: let privateKey):
                     self.privateKeyValueLabel.text = privateKey
+                    self.setUIForRevealedSecret()
                 case .failure(error: let error):
                     print("Error: \(error)")
                     self.setPasswordValidationError(validationError: ValidationErrors.InvalidPassword)
@@ -69,8 +70,6 @@ class WalletDetailsViewController: UIViewController {
                 
                 self.secretRevealButton.setTitle(CancelRevealButtonTitles.reveal.rawValue.uppercased(), for: UIControlState.normal)
                 self.secretRevealButton.isEnabled = true
-                
-                self.setUIForRevealedSecret()
             }
         }
     }
