@@ -20,4 +20,7 @@ public struct Keys {
     
     static let deviceToken = "DeviceTokenKey"
     
+    static let deviceTokenNotification = "DeviceTokenNotificationKey"
+    
+    static let username = "UsernameKey"
 }

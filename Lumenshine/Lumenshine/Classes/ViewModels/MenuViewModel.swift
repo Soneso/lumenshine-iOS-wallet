@@ -42,16 +42,15 @@ class MenuViewModel : MenuViewModelType {
          [.home, .wallets, .transactions, .contacts, .settings],
          [.help, .signOut]]
         
-        loginCompleted()
-        
         NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: .UIApplicationWillEnterForeground, object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground(notification:)), name: .UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updatePushToken(notification:)), name: Notification.Name(Keys.deviceTokenNotification), object: nil)
+        
+        loginCompleted()
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillEnterForeground, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIApplicationDidEnterBackground, object: nil)
+        removeObservers()
     }
     
     @objc
@@ -107,14 +106,12 @@ fileprivate extension MenuViewModel {
     }
     
     func logout() {
-        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillEnterForeground, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIApplicationDidEnterBackground, object: nil)
-        
+        removeObservers()
         if let deviceToken = UserDefaults.standard.value(forKey: Keys.deviceToken) as? String {
             services.push.unsubscribe(pushToken: deviceToken) { result in
                 switch result {
                 case .success:
-                    print("Push unsubscribe success")
+                    UserDefaults.standard.setValue(nil, forKey:Keys.deviceToken)
                 case .failure(let error):
                     print("Push unsubscribe error: \(error)")
                 }
@@ -122,6 +119,12 @@ fileprivate extension MenuViewModel {
         }
         LoginViewModel.logout(username: user.email)
         navigationCoordinator?.performTransition(transition: .logout(nil))
+    }
+    
+    func removeObservers() {
+        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name(Keys.deviceTokenNotification), object: nil)
     }
     
     func showRelogin() {
@@ -136,7 +139,7 @@ fileprivate extension MenuViewModel {
     
     func loginCompleted() {
         update2FASecret()
-        updatePushToken()
+        UIApplication.shared.registerForRemoteNotifications()
     }
     
     func update2FASecret() {
@@ -158,7 +161,8 @@ fileprivate extension MenuViewModel {
         }
     }
     
-    func updatePushToken() {
+    @objc
+    func updatePushToken(notification: Notification) {
         
         if let notifications = UserDefaults.standard.value(forKey: Keys.notifications) as? Bool {
             if notifications == false { return }
@@ -166,7 +170,7 @@ fileprivate extension MenuViewModel {
             UserDefaults.standard.setValue(true, forKey: Keys.notifications)
         }
         
-        if let newToken = (UIApplication.shared.delegate as? AppDelegate)?.deviceToken {
+        if let newToken = notification.userInfo?[Keys.deviceToken] as? String {
             if let deviceToken = UserDefaults.standard.value(forKey: Keys.deviceToken) as? String,
                 newToken != deviceToken {
                 services.push.update(newPushToken: newToken, oldPushToken: deviceToken) { result in
@@ -181,9 +185,9 @@ fileprivate extension MenuViewModel {
                 services.push.subscribe(pushToken: newToken) { result in
                     switch result {
                     case .success:
-                        print("Push subscribe success")
+                        print("Push Subscribe success")
                     case .failure(let error):
-                        print("Push subscribe error: \(error)")
+                        print("Push Subscribe error: \(error)")
                     }
                 }
             }

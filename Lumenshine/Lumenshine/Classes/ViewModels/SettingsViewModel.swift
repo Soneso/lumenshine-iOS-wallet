@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit.UIApplication
 
 enum DestinationCurrenciesResponseEnum {
     case success(response: Array<String>)
@@ -421,6 +422,22 @@ fileprivate extension SettingsViewModel {
     
     func enableNotifications(_ enable: Bool) {
         UserDefaults.standard.setValue(enable, forKey: Keys.notifications)
+    
+        if enable {
+            UIApplication.shared.registerForRemoteNotifications()
+        } else {
+            UIApplication.shared.unregisterForRemoteNotifications()
+            if let deviceToken = UserDefaults.standard.value(forKey: Keys.deviceToken) as? String {
+                services.push.unsubscribe(pushToken: deviceToken) { result in
+                    switch result {
+                    case .success:
+                        UserDefaults.standard.setValue(nil, forKey:Keys.deviceToken)
+                    case .failure(let error):
+                        print("Push unsubscribe error: \(error)")
+                    }
+                }
+            }
+        }
     }
     
     func isNotificationsEnabled() -> Bool {

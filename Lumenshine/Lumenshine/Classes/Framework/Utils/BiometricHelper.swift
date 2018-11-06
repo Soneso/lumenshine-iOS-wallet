@@ -38,7 +38,7 @@ class BiometricHelper {
     
     static func getMnemonic(completion: @escaping PasswordClosure) {
         let passwordManager = PasswordManager()
-        if let userName = UserDefaults.standard.value(forKey: "username") as? String {
+        if let userName = UserDefaults.standard.value(forKey: Keys.username) as? String {
             password(for: userName) { result in
                 switch result {
                 case .success(let password):

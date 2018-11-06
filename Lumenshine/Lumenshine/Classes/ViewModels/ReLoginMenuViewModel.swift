@@ -61,7 +61,7 @@ fileprivate extension ReLoginMenuViewModel {
             services.push.unsubscribe(pushToken: deviceToken) { result in
                 switch result {
                 case .success:
-                    print("Push unsubscribe success")
+                    UserDefaults.standard.setValue(nil, forKey:Keys.deviceToken)
                 case .failure(let error):
                     print("Push unsubscribe error: \(error)")
                 }

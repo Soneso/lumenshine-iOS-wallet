@@ -15,7 +15,6 @@ import stellarsdk
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var deviceToken: String?
 
     fileprivate let mainCoordinator = MainCoordinator()
     fileprivate var snapshotView: UIView?
@@ -36,8 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UNUserNotificationCenter.current().requestAuthorization(
             options: authOptions,
             completionHandler: {_, _ in })
-        
-        application.registerForRemoteNotifications()
         
         let loginCoordinator = LoginMenuCoordinator(mainCoordinator: mainCoordinator)
         
@@ -98,13 +95,12 @@ extension AppDelegate {
         let token = tokenParts.joined()
         print("Device Token: \(token)")
         
-        self.deviceToken = token
+        NotificationCenter.default.post(name: Notification.Name(Keys.deviceTokenNotification), object: nil, userInfo: [Keys.deviceToken:token])
     }
     
     func application(_ application: UIApplication,
                      didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("Failed to register: \(error)")
-        self.deviceToken = nil
     }
 }
 
@@ -117,4 +113,3 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
     }
 }
-
