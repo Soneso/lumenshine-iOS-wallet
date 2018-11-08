@@ -56,10 +56,10 @@ fileprivate extension HomeCoordinator {
     func showScan(forWallet wallet: Wallet) {
         var fundWalletViewController: UIViewController
         
-        if Services.shared.isTestURL {
-            fundWalletViewController = FundTestNetWalletViewController(nibName: "FundTestNetWalletViewController", bundle: Bundle.main, forWallet: wallet)
-        } else {
+        if Services.shared.usePublicStellarNetwork {
             fundWalletViewController = FundWalletViewController(nibName: "FundWalletViewController", bundle: Bundle.main, forWallet: wallet)
+        } else {
+            fundWalletViewController = FundTestNetWalletViewController(nibName: "FundTestNetWalletViewController", bundle: Bundle.main, forWallet: wallet)
         }
     
         let composeVC = ComposeNavigationController(rootViewController: fundWalletViewController)

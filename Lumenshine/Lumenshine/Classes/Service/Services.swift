@@ -45,10 +45,6 @@ public final class Services {
     
     let userDefaultsServerKey = "serverKey"
     
-    public var isTestURL: Bool {
-        return horizonURL == "https://demohorizon.lumenshine.com"
-    }
-    
     public var serverSigningKey: String {
         set {
             UserDefaults.standard.set(newValue, forKey:userDefaultsServerKey)
