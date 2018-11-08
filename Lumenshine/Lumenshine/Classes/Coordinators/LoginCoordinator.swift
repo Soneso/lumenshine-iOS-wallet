@@ -46,8 +46,8 @@ class LoginCoordinator: CoordinatorType {
                 self.showHeaderMenu(items: items)
             case .showPasswordHint(let hint, let attributedText):
                 self.showPasswordHint(hint, attributedText: attributedText)
-            case .showSetup(let user, let mnemonic, let loginResponse):
-                self.showSetup(user: user, mnemonic: mnemonic, loginResponse: loginResponse)
+            case .showSetup(let user, let mnemonic, let tfaConfirmed, let mailConfirmed, let mnemonicConfirmed, let tfaSecret):
+                self.showSetup(user: user, mnemonic: mnemonic, tfaConfirmed: tfaConfirmed, mailConfirmed: mailConfirmed, mnemonicConfirmed: mnemonicConfirmed, tfaSecret: tfaSecret)
             case .showTermsOfService:
                 self.showTermsOfService()
             default:
@@ -108,8 +108,8 @@ fileprivate extension LoginCoordinator {
         baseController.present(composeVC, animated: true)
     }
     
-    func showSetup(user: User, mnemonic: String, loginResponse: LoginStep2Response) {
-        let coordinator = SetupMenuCoordinator(mainCoordinator: mainCoordinator, service: service, user: user, mnemonic: mnemonic, loginResponse: loginResponse)
+    func showSetup(user: User, mnemonic: String, tfaConfirmed: Bool, mailConfirmed: Bool, mnemonicConfirmed: Bool, tfaSecret: String?) {
+        let coordinator = SetupMenuCoordinator(mainCoordinator: mainCoordinator, service: service, user: user, mnemonic: mnemonic, tfaConfirmed: tfaConfirmed, mailConfirmed: mailConfirmed, mnemonicConfirmed: mnemonicConfirmed, tfaSecret:tfaSecret)
         present(coordinator: coordinator)
     }
     

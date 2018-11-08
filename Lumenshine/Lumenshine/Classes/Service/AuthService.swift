@@ -11,7 +11,7 @@ import stellarsdk
 
 
 public enum GenerateAccountResponseEnum {
-    case success(response: RegistrationResponse?, userSecurity: UserSecurity)
+    case success(response: TFASecretResponse?, userSecurity: UserSecurity)
     case failure(error: ServiceError)
 }
 
@@ -30,13 +30,18 @@ public enum AuthResponseEnum {
     case failure(error: ServiceError)
 }
 
+public enum Login1ResponseEnum {
+    case success(response: LoginStep1Response)
+    case failure(error: ServiceError)
+}
+
 public enum Login2ResponseEnum {
     case success(response: LoginStep2Response)
     case failure(error: ServiceError)
 }
 
 public enum TfaSecretResponseEnum {
-    case success(response: RegistrationResponse)
+    case success(response: TFASecretResponse)
     case failure(error: ServiceError)
 }
 
@@ -79,6 +84,7 @@ public typealias GenerateAccountResponseClosure = (_ response:GenerateAccountRes
 public typealias TFAResponseClosure = (_ response:TFAResponseEnum) -> (Void)
 public typealias EmptyResponseClosure = (_ response:EmptyResponseEnum) -> (Void)
 public typealias AuthResponseClosure = (_ response:AuthResponseEnum) -> (Void)
+public typealias Login1ResponseClosure = (_ response:Login1ResponseEnum) -> (Void)
 public typealias Login2ResponseClosure = (_ response:Login2ResponseEnum) -> (Void)
 public typealias TfaSecretResponseClosure = (_ response:TfaSecretResponseEnum) -> (Void)
 public typealias CountryListResponseClosure = (_ response:CountryListResponseEnum) -> (Void)
@@ -142,31 +148,6 @@ public class AuthService: BaseService {
             case .failure(let error):
                 response(.failure(error: error))
             }
-        }
-    }
-    
-    open func tfaSecret(publicKeyIndex188: String, response: @escaping TfaSecretResponseClosure) {
-        do {
-            var params = Dictionary<String,String>()
-            params["public_key_188"] = publicKeyIndex188
-            
-            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-            
-            POSTRequestWithPath(path: "/portal/user/dashboard/tfa_secret", body: bodyData) { (result) -> (Void) in
-                switch result {
-                case .success(let data):
-                    do {
-                        let tfaResponse = try self.jsonDecoder.decode(RegistrationResponse.self, from: data)
-                        response(.success(response: tfaResponse))
-                    } catch {
-                        response(.failure(error: .parsingFailed(message: error.localizedDescription)))
-                    }
-                case .failure(let error):
-                    response(.failure(error: error))
-                }
-            }
-        } catch {
-            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
         }
     }
     
@@ -398,22 +379,19 @@ public class AuthService: BaseService {
         }
     }
     
-    // TODO: remove this after sep10 implementation
-    open func loginStep2(publicKeyIndex188: String, response: @escaping Login2ResponseClosure) {
-        
+    open func tfaSecret(signedSEP10TransactionEnvelope: String, response: @escaping TfaSecretResponseClosure) {
         do {
             var params = Dictionary<String,String>()
-            params["key"] = publicKeyIndex188
+            params["sep10_transaction"] = signedSEP10TransactionEnvelope
             
             let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-        
-            POSTRequestWithPath(path: "/portal/user/auth/login_step2", body: bodyData) { (result) -> (Void) in
+            
+            POSTRequestWithPath(path: "/portal/user/dashboard/tfa_secret", body: bodyData) { (result) -> (Void) in
                 switch result {
                 case .success(let data):
-                    BaseService.jwtTokenType = .full
                     do {
-                        let loginResponse = try self.jsonDecoder.decode(LoginStep2Response.self, from: data)
-                        response(.success(response: loginResponse))
+                        let tfaResponse = try self.jsonDecoder.decode(TFASecretResponse.self, from: data)
+                        response(.success(response: tfaResponse))
                     } catch {
                         response(.failure(error: .parsingFailed(message: error.localizedDescription)))
                     }
@@ -426,7 +404,7 @@ public class AuthService: BaseService {
         }
     }
     
-    open func loginStep2(signedSEP10TransactionEnvelope: String, response: @escaping Login2ResponseClosure) {
+    open func loginStep2(signedSEP10TransactionEnvelope: String, userEmail: String, response: @escaping Login2ResponseClosure) {
         
         do {
             var params = Dictionary<String,String>()
@@ -440,7 +418,20 @@ public class AuthService: BaseService {
                     BaseService.jwtTokenType = .full
                     do {
                         let loginResponse = try self.jsonDecoder.decode(LoginStep2Response.self, from: data)
-                        response(.success(response: loginResponse))
+                        if let tokenExists = TFAGeneration.isTokenExists(email: userEmail),
+                            tokenExists == false, loginResponse.tfaConfirmed {
+                            self.tfaSecret(signedSEP10TransactionEnvelope: signedSEP10TransactionEnvelope) { result in
+                                switch result {
+                                case .success(let tfaResponse):
+                                    TFAGeneration.createToken(tfaSecret: tfaResponse.tfaSecret, email: userEmail)
+                                case .failure(let error):
+                                    print("Tfa secret request error: \(error)")
+                                }
+                                response(.success(response: loginResponse))
+                            }
+                        } else {
+                            response(.success(response: loginResponse))
+                        }
                     } catch {
                         response(.failure(error: .parsingFailed(message: error.localizedDescription)))
                     }
@@ -453,7 +444,7 @@ public class AuthService: BaseService {
         }
     }
     
-    open func loginStep1(email: String, tfaCode:String?, response: @escaping AuthResponseClosure) {
+    open func loginStep1(email: String, tfaCode:String?, response: @escaping Login1ResponseClosure) {
         
         do {
             var params = Dictionary<String,String>()
@@ -469,7 +460,7 @@ public class AuthService: BaseService {
                 case .success(let data):
                     BaseService.jwtTokenType = .partial
                     do {
-                        let loginResponse = try self.jsonDecoder.decode(AuthenticationResponse.self, from: data)
+                        let loginResponse = try self.jsonDecoder.decode(LoginStep1Response.self, from: data)
                         response(.success(response: loginResponse))
                     } catch {
                         response(.failure(error: .parsingFailed(message: error.localizedDescription)))
@@ -585,7 +576,8 @@ public class AuthService: BaseService {
             params["wordlist"] = userSecurity.encryptedWordList.toBase64()
             params["wordlist_iv"] = userSecurity.wordListEncryptionIV.toBase64()
             params["public_key_0"] = userSecurity.publicKeyIndex0
-            params["public_key_188"] = userSecurity.publicKeyIndex188
+            let keyPair = try! KeyPair.generateRandomKeyPair()
+            params["public_key_188"] = keyPair.accountId //TODO remove this as soon as the server is ready
             
             if let userDict = userData {
                 params.merge(userDict, uniquingKeysWith: {(first, _) in first})
@@ -599,7 +591,7 @@ public class AuthService: BaseService {
                     case .success(let data):
                         BaseService.jwtTokenType = .partial
                         do {
-                            let registrationResponse = try self.jsonDecoder.decode(RegistrationResponse.self, from: data)
+                            let registrationResponse = try self.jsonDecoder.decode(TFASecretResponse.self, from: data)
                             response(.success(response: registrationResponse, userSecurity: userSecurity))
                         } catch {
                             response(.failure(error: .parsingFailed(message: error.localizedDescription)))
@@ -675,16 +667,16 @@ public class AuthService: BaseService {
         }
     }
     
-    open func changePassword(userSecurity: UserSecurity, response: @escaping EmptyResponseClosure) {
+    open func changePassword(signedSEP10TransactionEnvelope: String, userSecurity: UserSecurity, response: @escaping EmptyResponseClosure) {
         
         var params = Dictionary<String,String>()
         params["kdf_salt"] = userSecurity.passwordKdfSalt.toBase64()
         params["mnemonic_master_key"] = userSecurity.encryptedMnemonicMasterKey.toBase64()
         params["mnemonic_master_iv"] = userSecurity.mnemonicMasterKeyEncryptionIV.toBase64()
         params["wordlist_master_key"] = userSecurity.encryptedWordListMasterKey.toBase64()
-        // key: wordlist_encryption_iv ??
         params["wordlist_master_iv"] = userSecurity.wordListMasterKeyEncryptionIV.toBase64()
-        params["public_key_188"] = userSecurity.publicKeyIndex188
+        params["sep10_transaction"] = signedSEP10TransactionEnvelope
+        
         
         do {
             let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
@@ -702,9 +694,10 @@ public class AuthService: BaseService {
         }
     }
     
-    open func new2faSecret(publicKeyIndex188: String, response: @escaping TfaSecretResponseClosure) {
+    open func new2faSecret(signedSEP10TransactionEnvelope: String, response: @escaping TfaSecretResponseClosure) {
         var params = Dictionary<String,String>()
-        params["public_key_188"] = publicKeyIndex188
+        params["sep10_transaction"] = signedSEP10TransactionEnvelope
+        params["public_key_188"] = "blubber" // TODO remove this when server is ready
         
         do {
             let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
@@ -713,7 +706,7 @@ public class AuthService: BaseService {
                 switch result {
                 case .success(let data):
                     do {
-                        let tfaResponse = try self.jsonDecoder.decode(RegistrationResponse.self, from: data)
+                        let tfaResponse = try self.jsonDecoder.decode(TFASecretResponse.self, from: data)
                         response(.success(response: tfaResponse))
                     } catch {
                         response(.failure(error: .parsingFailed(message: error.localizedDescription)))

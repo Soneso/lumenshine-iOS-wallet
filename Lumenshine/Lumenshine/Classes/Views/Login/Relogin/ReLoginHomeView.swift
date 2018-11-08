@@ -107,7 +107,7 @@ extension ReLoginHomeView: ReLoginViewProtocol {
             if tfaTextField.isHidden {
                 tfaTextField.isHidden = false
                 touchIDButton.isHidden = true
-                viewModel.remove2FASecret()
+                TFAGeneration.remove2FASecretTokens()
                 viewModel.removeBiometricRecognition()
             } else {
                 tfaTextField.detail = error.errorDescription

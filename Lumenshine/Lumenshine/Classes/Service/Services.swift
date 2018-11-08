@@ -23,8 +23,8 @@ public final class Services {
 #elseif DEVELOPMENT
     let usePublicStellarNetwork = false
     let baseURL = "https://demoapi.lumenshine.com"
-    //let horizonURL = "https://horizon-testnet.stellar.org"
-    let horizonURL = "https://demohorizon.lumenshine.com"
+    let horizonURL = "https://horizon-testnet.stellar.org"
+    //let horizonURL = "https://demohorizon.lumenshine.com"
     let tomlURL = "https://demo.lumenshine.com/.well-known/stellar.toml"
     let initialServerSigningKey = "GCP4BR7GWG664577XMLX2BRUPSHKHTAXQ4I4HZORLMQNILNNVMSFWVUV"
     
@@ -44,10 +44,6 @@ public final class Services {
 #endif
     
     let userDefaultsServerKey = "serverKey"
-    
-    public var isTestURL: Bool {
-        return horizonURL == "https://demohorizon.lumenshine.com"
-    }
     
     public var serverSigningKey: String {
         set {
@@ -70,6 +66,7 @@ public final class Services {
     public let contacts: ContactsService
     public let userManager: UserManager
     public let userData: UserDataService
+    public let push: PushService
     
     public let stellarSdk: StellarSDK
     
@@ -81,6 +78,7 @@ public final class Services {
         contacts = ContactsService(baseURL: baseURL)
         userManager = UserManager()
         userData = UserDataService(baseURL: baseURL)
+        push = PushService(baseURL: baseURL)
         
         stellarSdk = StellarSDK(withHorizonUrl: horizonURL)
     }

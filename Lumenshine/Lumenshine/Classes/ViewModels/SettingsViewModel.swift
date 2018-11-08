@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit.UIApplication
 
 enum DestinationCurrenciesResponseEnum {
     case success(response: Array<String>)
@@ -33,7 +34,7 @@ protocol SettingsViewModelType: Transitionable, BiometricAuthenticationProtocol 
     func confirm2faSecret(tfaCode: String, response: @escaping TFAResponseClosure)
     func showHome()
     func showSettings()
-    func showConfirm2faSecret(tfaResponse: RegistrationResponse)
+    func showConfirm2faSecret(tfaResponse: TFASecretResponse)
     func showBackupMnemonic(password: String, response: @escaping DecryptedUserDataResponseClosure)
     func showMnemonic(_ mnemonic: String)
     func destinationCurrencies(response: @escaping DestinationCurrenciesResponseClosure)
@@ -45,14 +46,12 @@ class SettingsViewModel: SettingsViewModelType {
     
     // MARK: - Parameters & Constants
     
-    static let DestinationCurrencyKey = "DestinationCurrencyKey"
-    
     weak var navigationCoordinator: CoordinatorType?
     
     fileprivate let services: Services
     fileprivate let user: User
     fileprivate let entries: [[SettingsEntry]]
-    fileprivate var tfaResponse: RegistrationResponse?
+    fileprivate var tfaResponse: TFASecretResponse?
     fileprivate var changePassword: Bool = true
     
     init(services: Services, user: User) {
@@ -88,6 +87,8 @@ class SettingsViewModel: SettingsViewModelType {
         switch entry(at: indexPath) {
         case .faceRecognition, .fingerprint:
             return BiometricHelper.isTouchEnabled
+        case .notifications:
+            return isNotificationsEnabled()
         default:
             return nil
         }
@@ -103,6 +104,8 @@ class SettingsViewModel: SettingsViewModelType {
                 BiometricHelper.enableTouch(false)
                 BiometricHelper.removePassword(username: user.email)
             }
+        case .notifications:
+            enableNotifications(value)
         default: break
         }
     }
@@ -214,7 +217,36 @@ class SettingsViewModel: SettingsViewModelType {
                 self.changePassword(authResponse: authResponse, oldPass: currentPass, newPass: newPass) { result2 in
                     switch result2 {
                     case .success(_, let userSecurity):
-                        self.services.auth.changePassword(userSecurity: userSecurity, response: response)
+                        // get secret seed nneded to sign sep 10 challenge
+                        PrivateKeyManager.getKeyPair(forAccountID: userSecurity.publicKeyIndex0, fromMnemonic: userSecurity.mnemonic24Word, completion: { (keyResponse) -> (Void) in
+                            switch keyResponse {
+                            case .success(keyPair: let keyPair):
+                                // get sep 10 challenge
+                                self.services.auth.getSep10Challenge(response: { (sep10Response) -> (Void) in
+                                    switch sep10Response {
+                                    case .success(transactionEnvelopeXDR: let envelopeXDR):
+                                        // sign sep 10 challenge if valid
+                                        self.services.auth.signSEP10ChallengeIfValid(base64EnvelopeXDR: envelopeXDR, userKeyPair: keyPair!, completion: { (signResponse) -> (Void) in
+                                            switch signResponse {
+                                            case .success(signedXDR: let signedXDR):
+                                                // change password
+                                                self.services.auth.changePassword(signedSEP10TransactionEnvelope: signedXDR, userSecurity: userSecurity, response: response)
+                                            case .failure(error: let error):
+                                                print(error)
+                                                response(.failure(error: error))
+                                            }
+                                        })
+                                    case .failure(error: let error):
+                                        print(error)
+                                        response(.failure(error: error))
+                                    }
+                                })
+                            case .failure(error: let error):
+                                print(error)
+                                response(.failure(error: .encryptionFailed(message: error)))
+                            }
+                        })
+                        //self.services.auth.changePassword(userSecurity: userSecurity, response: response)
                     case .failure(let error):
                         response(.failure(error: error))
                     }
@@ -250,7 +282,7 @@ class SettingsViewModel: SettingsViewModelType {
         }
     }
     
-    func showConfirm2faSecret(tfaResponse: RegistrationResponse) {
+    func showConfirm2faSecret(tfaResponse: TFASecretResponse) {
         self.tfaResponse = tfaResponse
         navigationCoordinator?.performTransition(transition: .showNew2faSecret)
     }
@@ -294,7 +326,7 @@ class SettingsViewModel: SettingsViewModelType {
     }
     
     func destinationCurrencySelected(_ currency: String) {
-        UserDefaults.standard.setValue(currency, forKey: SettingsViewModel.DestinationCurrencyKey)
+        UserDefaults.standard.setValue(currency, forKey: Keys.destinationCurrency)
     }
 }
 
@@ -310,9 +342,10 @@ fileprivate extension SettingsViewModel {
                     let decryptedUserData = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: oldPass) {
                     
                     let userSec = try userSecurity.updatePassword(newPass,
-                                                                  publicKeyIndex188: decryptedUserData.publicKeyIndex188,
+                                                                  mnemonic: decryptedUserData.mnemonic,
                                                                   wordlistMasterKey: decryptedUserData.wordListMasterKey,
                                                                   mnemonicMasterKey: decryptedUserData.mnemonicMasterKey)
+                   
                     response(.success(response: nil, userSecurity: userSec))
                 } else {
                     let error = ErrorResponse()
@@ -331,7 +364,32 @@ fileprivate extension SettingsViewModel {
             do {
                 if let userSecurity = UserSecurity(from: authResponse),
                     let decryptedUserData = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: password) {
-                    self.services.auth.new2faSecret(publicKeyIndex188: decryptedUserData.publicKeyIndex188, response: response)
+                    PrivateKeyManager.getKeyPair(forAccountID: userSecurity.publicKeyIndex0, fromMnemonic: decryptedUserData.mnemonic, completion: { (keyResponse) -> (Void) in
+                        switch keyResponse {
+                        case .success(keyPair: let keyPair):
+                            self.services.auth.getSep10Challenge(response: { (sep10Response) -> (Void) in
+                                switch sep10Response {
+                                    case .success(transactionEnvelopeXDR: let envelopeXDR):
+                                        self.services.auth.signSEP10ChallengeIfValid(base64EnvelopeXDR: envelopeXDR, userKeyPair: keyPair!, completion: { (signResponse) -> (Void) in
+                                            switch signResponse {
+                                            case .success(signedXDR: let signedXDR):
+                                                // get new 2fa secret
+                                                self.services.auth.new2faSecret(signedSEP10TransactionEnvelope:signedXDR, response: response)
+                                            case .failure(error: let error):
+                                                print(error)
+                                                response(.failure(error: error))
+                                            }
+                                        })
+                                    case .failure(error: let error):
+                                        print(error)
+                                        response(.failure(error: error))
+                                }
+                            })
+                        case .failure(error: let error):
+                            print(error)
+                            response(.failure(error: .encryptionFailed(message: error)))
+                        }
+                    })
                 } else {
                     let error = ErrorResponse()
                     error.parameterName = "current_password"
@@ -360,6 +418,33 @@ fileprivate extension SettingsViewModel {
                 response(.failure(error: .encryptionFailed(message: error.localizedDescription)))
             }
         }
+    }
+    
+    func enableNotifications(_ enable: Bool) {
+        UserDefaults.standard.setValue(enable, forKey: Keys.notifications)
+    
+        if enable {
+            UIApplication.shared.registerForRemoteNotifications()
+        } else {
+            UIApplication.shared.unregisterForRemoteNotifications()
+            if let deviceToken = UserDefaults.standard.value(forKey: Keys.deviceToken) as? String {
+                services.push.unsubscribe(pushToken: deviceToken) { result in
+                    switch result {
+                    case .success:
+                        UserDefaults.standard.setValue(nil, forKey:Keys.deviceToken)
+                    case .failure(let error):
+                        print("Push unsubscribe error: \(error)")
+                    }
+                }
+            }
+        }
+    }
+    
+    func isNotificationsEnabled() -> Bool {
+        if let value = UserDefaults.standard.value(forKey: Keys.notifications) as? Bool {
+            return value
+        }
+        return true
     }
     
 }

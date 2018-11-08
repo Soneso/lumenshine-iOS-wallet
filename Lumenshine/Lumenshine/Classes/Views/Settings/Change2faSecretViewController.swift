@@ -163,7 +163,7 @@ fileprivate extension Change2faSecretViewController {
     
     func present(error: ServiceError) {
         if let parameter = error.parameterName {
-            if parameter == "current_password" || parameter == "public_key_188" {
+            if parameter == "current_password" || parameter == "sep10_transaction" {
                 textField1.detail = error.errorDescription
             } else {
                 let alert = AlertFactory.createAlert(error: error)
@@ -175,7 +175,7 @@ fileprivate extension Change2faSecretViewController {
         }
     }
     
-    func show2faSecret(_ tfaSecretResponse: RegistrationResponse) {
+    func show2faSecret(_ tfaSecretResponse: TFASecretResponse) {
         viewModel.showConfirm2faSecret(tfaResponse: tfaSecretResponse)
     }
     

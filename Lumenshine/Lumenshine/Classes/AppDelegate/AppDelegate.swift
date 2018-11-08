@@ -21,27 +21,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-//        
+        
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
         // Register for remote notifications. This shows a permission dialog on first run, to
         // show the dialog at a more appropriate time move this registration accordingly.
         
-        // For iOS 10 display notification (sent via APNS)
-        UNUserNotificationCenter.current().delegate = self
-        
-        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(
-            options: authOptions,
-            completionHandler: {_, _ in })
-        
-        application.registerForRemoteNotifications()
-        
-        // for testing purpose
-//        let loginCoordinator = MenuCoordinator(mainCoordinator: mainCoordinator, user: User(id: "1", email: "isti@isti.com", publicKeyIndex0: "publicKeyIndex0", publicKeyIndex188: "publicKeyIndex188", publicKeys: nil))
-//        let loginCoordinator = ReLoginMenuCoordinator(mainCoordinator: mainCoordinator, service: Services.shared.auth, user: User(id: "1", email: "isti@isti.com", publicKeyIndex0: "publicKeyIndex0", publicKeyIndex188: "publicKeyIndex188"))
-//        let loginCoordinator = SetupMenuCoordinator(mainCoordinator: mainCoordinator, service: Services().auth, user: User(id: "1", email: "isti@isti.com", publicKeyIndex0: "publicKeyIndex0", publicKeyIndex188: "publicKeyIndex188"), mnemonic: "mnemonic apple word car bike watch", loginResponse: nil)
+        registerForPushNotifications()
         
         let loginCoordinator = LoginMenuCoordinator(mainCoordinator: mainCoordinator)
         
@@ -90,13 +77,68 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 }
+
+// MARK: APNs
+extension AppDelegate {
+    func application(_ application: UIApplication,
+                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let tokenParts = deviceToken.map { data -> String in
+            return String(format: "%02.2hhx", data)
+        }
+        
+        let token = tokenParts.joined()
+        print("Device Token: \(token)")
+        
+        NotificationCenter.default.post(name: Notification.Name(Keys.deviceTokenNotification), object: nil, userInfo: [Keys.deviceToken:token])
+    }
+    
+    func application(_ application: UIApplication,
+                     didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Failed to register: \(error)")
+    }
+    
+    func registerForPushNotifications() {
+        // For iOS 10 display notification (sent via APNS)
+        UNUserNotificationCenter.current().delegate = self
+        
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: authOptions,
+            completionHandler: {_, _ in })
+        
+        let viewAction = UNNotificationAction(identifier: "ViewActionIdentifier",
+                                              title: R.string.localizable.push_view(),
+                                              options: [.foreground])
+        
+        let cancelAction = UNNotificationAction(identifier: "CancelActionIdentifier",
+                                                title: R.string.localizable.cancel(),
+                                                options: [.destructive])
+        
+        let newsCategory = UNNotificationCategory(identifier: "GENERAL",
+                                                  actions: [viewAction, cancelAction],
+                                                  intentIdentifiers: [],
+                                                  options: [])
+        
+        UNUserNotificationCenter.current().setNotificationCategories([newsCategory])
+    }
+}
+
 extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .badge, .sound])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        let userInfo = response.notification.request.content.userInfo
+        
+        // TODO: do something with public key
+        if let walletKey = userInfo["wallet_key"] as? String {
+            
+        }
+        
+        completionHandler()
     }
 }
-

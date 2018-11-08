@@ -54,20 +54,6 @@ class TransactionHistoryManager {
         }
     }
     
-    private func getTransactionDetailsRsponseAsString(transactionHash: String, forOperation operation: OperationInfo, completion: @escaping (() -> (Void))) {
-        let requestUrl = Services.shared.horizonURL + "/transactions/" + transactionHash
-
-        walletService.GETRequestFromUrl(url: requestUrl) { (result) -> (Void) in
-            switch result {
-            case .success(let data):
-                operation.responseData = data
-               completion()
-            case .failure:
-                completion()
-            }
-        }
-    }
-    
     private func getMemoForTransaction(fromHash transactionHash:String, forOperation operation: OperationInfo, completion: @escaping (() -> (Void))) {
         stellarSdk.transactions.getTransactionDetails(transactionHash: transactionHash, response: { (response) -> (Void) in
             switch response {
@@ -104,7 +90,6 @@ class TransactionHistoryManager {
     private func getOperations(forOperations operations: [OperationResponse], forAccount account: String, completion: @escaping (([OperationInfo]) -> (Void))) {
         var operationsToReturn = [OperationInfo]()
         var memosReturned = 0
-        var stringResponsesReturned = 0
         
         if memosReturned == operations.count {
             completion(operationsToReturn)
@@ -131,7 +116,6 @@ class TransactionHistoryManager {
                 // AccountMergeOperationResponse
                 if let _ = record as? AccountMergeOperationResponse {
                     operation.amount = "0"
-                    operation.assetCode = NativeCurrencyNames.xlm.rawValue
                     operation.sign = SignEnum.plus
                 }
                 
@@ -141,7 +125,7 @@ class TransactionHistoryManager {
                 // AllowTrustOperationResponse
                 if let allowTrustOperationResponse = record as? AllowTrustOperationResponse {
                     operation.amount = "0"
-                    operation.assetCode = allowTrustOperationResponse.assetCode ?? NativeCurrencyNames.xlm.rawValue
+                    operation.assetCode = allowTrustOperationResponse.assetCode
                     operation.sign = SignEnum.plus
                 }
                 
@@ -151,7 +135,7 @@ class TransactionHistoryManager {
                 // ChangeTrustOperationResponse
                 if let changeTrustOperationResponse = record as? ChangeTrustOperationResponse {
                     operation.amount = "0"
-                    operation.assetCode = changeTrustOperationResponse.assetCode ?? NativeCurrencyNames.xlm.rawValue
+                    operation.assetCode = changeTrustOperationResponse.assetCode
                     operation.sign = SignEnum.plus
                 }
                 
@@ -171,7 +155,6 @@ class TransactionHistoryManager {
                 // InflationOperationResponse
                 if let _ = record as? InflationOperationResponse {
                     operation.amount = "0"
-                    operation.assetCode = NativeCurrencyNames.xlm.rawValue
                     operation.sign = SignEnum.plus
                 }
                 
@@ -181,7 +164,6 @@ class TransactionHistoryManager {
                 // ManageDataOperationResponse
                 if let manageDataOperationResponse = record as? ManageDataOperationResponse {
                     operation.amount = manageDataOperationResponse.value
-                    operation.assetCode = NativeCurrencyNames.xlm.rawValue
                     operation.sign = SignEnum.plus
                 }
                 
@@ -219,8 +201,7 @@ class TransactionHistoryManager {
             case .setOptions:
                 // SetOptionsOperationResponse
                 if let setOptionsOperation = record as? SetOptionsOperationResponse {
-                    operation.amount = "\(setOptionsOperation.lowThreshold ?? 0)"
-                    operation.assetCode = NativeCurrencyNames.xlm.rawValue
+                    operation.amount = "0"
                     operation.sign = SignEnum.minus
                 }
                 
@@ -236,18 +217,10 @@ class TransactionHistoryManager {
             
             operationsToReturn.append(operation)
             
-            self.getTransactionDetailsRsponseAsString(transactionHash: record.transactionHash, forOperation: operation) {
-                stringResponsesReturned += 1
-                
-                if memosReturned == operations.count && stringResponsesReturned == operations.count{
-                    completion(operationsToReturn)
-                }
-            }
-            
             self.getMemoForTransaction(fromHash: record.transactionHash, forOperation: operation) {
                 memosReturned += 1
 
-                if memosReturned == operations.count && stringResponsesReturned == operations.count{
+                if memosReturned == operations.count {
                     completion(operationsToReturn)
                 }
             }

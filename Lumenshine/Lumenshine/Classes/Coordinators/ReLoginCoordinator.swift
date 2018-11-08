@@ -12,11 +12,11 @@ class ReLoginCoordinator: CoordinatorType {
     var baseController: UIViewController
     unowned var mainCoordinator: MainCoordinator
     
-    fileprivate let service: AuthService
+    fileprivate let services: Services
     
-    init(mainCoordinator: MainCoordinator, service: AuthService, user: User) {
-        let viewModel = ReLoginViewModel(service: service, user: user)
-        self.service = service
+    init(mainCoordinator: MainCoordinator, services: Services, user: User) {
+        let viewModel = ReLoginViewModel(services: services, user: user)
+        self.services = services
         self.mainCoordinator = mainCoordinator
         self.baseController = ReLoginViewController(viewModel: viewModel)
         viewModel.navigationCoordinator = self
@@ -33,8 +33,8 @@ class ReLoginCoordinator: CoordinatorType {
             showRelogin()
         case .showFingerprint:
             showFingerprint()
-        case .showSetup(let user, let mnemonic, let loginResponse):
-            self.showSetup(user: user, mnemonic: mnemonic, loginResponse: loginResponse)
+        case .showSetup(let user, let mnemonic, let tfaConfirmed, let mailConfirmed, let mnemonicConfirmed, let tfaSecret):
+            self.showSetup(user: user, mnemonic: mnemonic, tfaConfirmed: tfaConfirmed, mailConfirmed: mailConfirmed, mnemonicConfirmed: mnemonicConfirmed, tfaSecret: tfaSecret)
         default:
             break
         }
@@ -52,8 +52,8 @@ fileprivate extension ReLoginCoordinator {
         present(coordinator: loginCoordinator)
     }
     
-    func showSetup(user: User, mnemonic: String, loginResponse: LoginStep2Response) {
-        let coordinator = SetupMenuCoordinator(mainCoordinator: mainCoordinator, service: service, user: user, mnemonic: mnemonic, loginResponse: loginResponse)
+    func showSetup(user: User, mnemonic: String, tfaConfirmed: Bool, mailConfirmed: Bool, mnemonicConfirmed: Bool, tfaSecret: String?) {
+        let coordinator = SetupMenuCoordinator(mainCoordinator: mainCoordinator, service: services.auth, user: user, mnemonic: mnemonic, tfaConfirmed: tfaConfirmed, mailConfirmed: mailConfirmed, mnemonicConfirmed: mnemonicConfirmed, tfaSecret:tfaSecret)
         present(coordinator: coordinator)
     }
     

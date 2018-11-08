@@ -82,6 +82,9 @@ extension TFASetupViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let tfaResponse):
+                    if let tfaSecret = self.viewModel.tfaSecret {
+                        TFAGeneration.createToken(tfaSecret: tfaSecret, email: self.viewModel.userEmail)
+                    }
                     self.viewModel.nextStep(tfaResponse: tfaResponse)
                 case .failure(let error):
                     self.tfaCodeTextField.detail = error.errorDescription

@@ -20,7 +20,7 @@ protocol RegistrationViewModelType: Transitionable {
     
     func textChanged(_ text: String, itemForRowAt indexPath: IndexPath)
     func submit(response: @escaping GenerateAccountResponseClosure)
-    func show2FA(response: RegistrationResponse, userSecurity: UserSecurity)
+    func show2FA(response: TFASecretResponse, userSecurity: UserSecurity)
     func checkUserSecurity(_ userSecurity: UserSecurity, response: @escaping EmptyResponseClosure)
 }
 
@@ -106,27 +106,10 @@ class RegistrationViewModel : RegistrationViewModelType {
         }
     }
     
-    func show2FA(response: RegistrationResponse, userSecurity: UserSecurity) {
-//        guard let email = selectedValues[.email] else { return }
-//        let user = User(id: "1", email: email, publicKeyIndex0: userSecurity.publicKeyIndex0, publicKeyIndex188: userSecurity.publicKeyIndex188, mnemonic: userSecurity.mnemonic24Word)
-//        self.navigationCoordinator?.performTransition(transition: .show2FA(user, response))
+    func show2FA(response: TFASecretResponse, userSecurity: UserSecurity) {
     }
     
     func checkUserSecurity(_ userSecurity: UserSecurity, response: @escaping EmptyResponseClosure) {
-//        guard let email = selectedValues[.email] else { return }
-//        self.service.loginStep2(publicKeyIndex188: userSecurity.publicKeyIndex188) { result in
-//            DispatchQueue.main.async {
-//                switch result {
-//                case .success(let login2Response):
-//                    let user = User(id: "1", email: email, publicKeyIndex0: userSecurity.publicKeyIndex0, publicKeyIndex188: userSecurity.publicKeyIndex188, mnemonic: userSecurity.mnemonic24Word)
-//                    let loginViewModel = LoginViewModel(service: self.service, user: user)
-//                    loginViewModel.navigationCoordinator = self.navigationCoordinator
-//                    loginViewModel.verifyLogin2Response(login2Response)
-//                case .failure(let error):
-//                    response(EmptyResponseEnum.failure(error: error))
-//                }
-//            }
-//        }
     }
 }
 

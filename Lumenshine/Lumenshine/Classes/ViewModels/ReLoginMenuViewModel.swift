@@ -11,10 +11,12 @@ import Foundation
 class ReLoginMenuViewModel : LoginMenuViewModel {
     
     fileprivate let user: User
+    fileprivate let services: Services
     
-    init(service: AuthService, user: User) {
+    init(services: Services, user: User) {
         self.user = user
-        super.init(service: service)
+        self.services = services
+        super.init(service: services.auth)
         
         self.entries = [[.avatar],
                         [.signOut, .home, .lostPassword, .lost2FA],
@@ -53,7 +55,18 @@ class ReLoginMenuViewModel : LoginMenuViewModel {
 }
 
 fileprivate extension ReLoginMenuViewModel {
+    
     func logout() {
+        if let deviceToken = UserDefaults.standard.value(forKey: Keys.deviceToken) as? String {
+            services.push.unsubscribe(pushToken: deviceToken) { result in
+                switch result {
+                case .success:
+                    UserDefaults.standard.setValue(nil, forKey:Keys.deviceToken)
+                case .failure(let error):
+                    print("Push unsubscribe error: \(error)")
+                }
+            }
+        }
         LoginViewModel.logout(username: user.email)
     }
 }

@@ -10,7 +10,6 @@ import Foundation
 
 public struct DecryptedUserData {
     let mnemonic: String
-    let publicKeyIndex188: String
     let wordListMasterKey: Array<UInt8>
     let mnemonicMasterKey: Array<UInt8>
     let publicKeys: Array<String>?

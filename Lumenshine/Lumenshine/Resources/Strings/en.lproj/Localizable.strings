@@ -849,3 +849,16 @@
 
 /*  */
 "invaild_sep10_challenge" = "Invalid SEP10 challenge received";
+
+/*  */
+"operation_details" = "Operation details";
+
+/*  */
+"operation_details_load_error" = "Could not load operation details";
+
+/*  */
+"payment_received" = "Payment received";
+
+/*  */
+"push_view" = "View";
+

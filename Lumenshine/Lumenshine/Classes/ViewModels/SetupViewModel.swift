@@ -43,21 +43,28 @@ class SetupViewModel: SetupViewModelType {
     fileprivate let service: AuthService
     fileprivate let user: User
     fileprivate let mnemonic: String
-    fileprivate let loginResponse: LoginStep2Response
+    //fileprivate let loginResponse: LoginStep2Response
+    fileprivate let tfaConfirmed: Bool
+    fileprivate let mailConfirmed: Bool
+    fileprivate let mnemonicConfirmed: Bool
+    fileprivate let internalTfaSecret: String?
     fileprivate var currentSetupStep: SetupStep
     fileprivate var randomIndices = [Int]()
     fileprivate var backgroundTime: Date?
     
     weak var navigationCoordinator: CoordinatorType?
     
-    init(service: AuthService, user: User, mnemonic: String, loginResponse: LoginStep2Response) {
+    init(service: AuthService, user: User, mnemonic: String, tfaConfirmed: Bool, mailConfirmed: Bool, mnemonicConfirmed: Bool, tfaSecret:String?) {
         self.service = service
         self.user = user
         self.mnemonic = mnemonic
-        self.loginResponse = loginResponse
+        self.tfaConfirmed = tfaConfirmed
+        self.mailConfirmed = mailConfirmed
+        self.mnemonicConfirmed = mnemonicConfirmed
+        self.internalTfaSecret = tfaSecret
         self.currentSetupStep = .none
         self.randomIndices = generateRandomIndices()
-        updateSetupStep(loginResponse: loginResponse)
+        updateSetupStep(tfaConfirmed: tfaConfirmed, mailConfirmed: mailConfirmed, mnemonicConfirmed: mnemonicConfirmed)
         
         NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: .UIApplicationWillEnterForeground, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground(notification:)), name: .UIApplicationDidEnterBackground, object: nil)
@@ -91,12 +98,7 @@ class SetupViewModel: SetupViewModelType {
     }
     
     var tfaSecret: String? {
-        return loginResponse.tfaSecret
-    }
-    
-    var qrCode: Data? {
-        guard  let qr = loginResponse.qrCode else { return nil }
-        return Data(base64Encoded: qr)
+        return internalTfaSecret
     }
     
     var mnemonic24Word: String {
@@ -154,7 +156,9 @@ class SetupViewModel: SetupViewModelType {
     }
     
     func nextStep(tfaResponse: TFAResponse?) {
-        updateSetupStep(loginResponse: tfaResponse)
+        if let response = tfaResponse {
+            updateSetupStep(tfaConfirmed: response.tfaConfirmed, mailConfirmed: response.mailConfirmed, mnemonicConfirmed: response.mnemonicConfirmed)
+        }
         navigationCoordinator?.performTransition(transition: .nextSetupStep)
     }
     
@@ -176,13 +180,13 @@ class SetupViewModel: SetupViewModelType {
 }
 
 fileprivate extension SetupViewModel {
-    func updateSetupStep(loginResponse: TFAResponse?) {
-        guard let loginRes = loginResponse else { return }
-        if loginRes.tfaConfirmed == false {
+    func updateSetupStep(tfaConfirmed: Bool, mailConfirmed: Bool, mnemonicConfirmed: Bool) {
+
+        if tfaConfirmed == false {
             currentSetupStep = .TFA
-        } else if loginRes.mailConfirmed == false {
+        } else if mailConfirmed == false {
             currentSetupStep = .email
-        } else if loginRes.mnemonicConfirmed == false {
+        } else if mnemonicConfirmed == false {
             currentSetupStep = .mnemonic
         } else {
             currentSetupStep = .none

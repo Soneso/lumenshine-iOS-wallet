@@ -15,16 +15,16 @@ class ReLoginMenuCoordinator: MenuCoordinatorType {
 //    var baseController: UIViewController
     unowned var mainCoordinator: MainCoordinator
     
-    fileprivate let service: AuthService
+    fileprivate let services: Services
     fileprivate let user: User
     fileprivate let menuView: MenuViewController
     
-    init(mainCoordinator: MainCoordinator, service: AuthService, user: User) {
-        self.service = service
+    init(mainCoordinator: MainCoordinator, user: User) {
+        self.services = Services()
         self.user = user
         self.mainCoordinator = mainCoordinator
         
-        let menuViewModel = ReLoginMenuViewModel(service: service, user: user)
+        let menuViewModel = ReLoginMenuViewModel(services: services, user: user)
         menuView = MenuViewController(viewModel: menuViewModel)
         
         let drawer = AppNavigationDrawerController()
@@ -60,7 +60,7 @@ fileprivate extension ReLoginMenuCoordinator {
     }
     
     func showRelogin() {
-        let loginCoordinator = ReLoginCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
+        let loginCoordinator = ReLoginCoordinator(mainCoordinator: mainCoordinator, services: services, user: user)
         let navigationController = AppNavigationController(rootViewController: loginCoordinator.baseController)
         navigationController.navigationBar.isTranslucent = true
         if let drawer = baseController as? AppNavigationDrawerController {

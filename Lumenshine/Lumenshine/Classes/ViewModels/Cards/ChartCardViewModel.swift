@@ -12,8 +12,6 @@ import stellarsdk
 
 class ChartCardViewModel: CardViewModelType {
     
-    static let selectedPeriodKey = "selectedPeriodIndex"
-    
     weak var navigationCoordinator: CoordinatorType?
     
     fileprivate var card: Card?
@@ -41,7 +39,7 @@ class ChartCardViewModel: CardViewModelType {
             "6 \(R.string.localizable.months())",
             "1 \(R.string.localizable.year())"
         ]
-        if let selectedIndex = UserDefaults.standard.value(forKey: ChartCardViewModel.selectedPeriodKey) as? Int {
+        if let selectedIndex = UserDefaults.standard.value(forKey: Keys.selectedPeriod) as? Int {
             self.selectedPeriodIndex = selectedIndex
         } else {
             self.selectedPeriodIndex = 4
@@ -128,10 +126,10 @@ class ChartCardViewModel: CardViewModelType {
     
     func periodSelected(at index: Int) {
         selectedPeriodIndex = index
-        UserDefaults.standard.setValue(index, forKey:ChartCardViewModel.selectedPeriodKey)
+        UserDefaults.standard.setValue(index, forKey:Keys.selectedPeriod)
         
         let assetCode = balance?.assetCode ?? "XLM"
-        let currency = UserDefaults.standard.value(forKey: SettingsViewModel.DestinationCurrencyKey) as? String ?? "USD"
+        let currency = UserDefaults.standard.value(forKey: Keys.destinationCurrency) as? String ?? "USD"
         
         service.getChartExchangeRates(assetCode: assetCode, issuerPublicKey: balance?.assetIssuer, destinationCurrency: currency, timeRange: Int32(periodValues[selectedPeriodIndex])) { [weak self] result in
             switch result {

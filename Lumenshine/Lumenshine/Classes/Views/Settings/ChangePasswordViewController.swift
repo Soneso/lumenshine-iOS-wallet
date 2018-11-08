@@ -215,7 +215,7 @@ fileprivate extension ChangePasswordViewController {
     
     func present(error: ServiceError) {
         if let parameter = error.parameterName {
-            if parameter == "current_password" || parameter == "public_key_188" {
+            if parameter == "current_password" || parameter == "sep10_transaction" {
                 textField1.detail = error.errorDescription
             } else if parameter == "new_password" {
                 textField2.detail = error.errorDescription
