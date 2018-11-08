@@ -42,24 +42,18 @@ public class ContactsService: BaseService {
         params["stellar_address"] = address
         params["public_key"] = publicKey
 
-        do {
-            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-            
-            POSTRequestWithPath(path: "/portal/user/dashboard/add_contact", body: bodyData) { (result) -> (Void) in
-                switch result {
-                case .success(let data):
-                    do {
-                        let addContactResponse = try self.jsonDecoder.decode(AddContactResponse.self, from: data)
-                        response(.success(response: addContactResponse.contacts))
-                    } catch {
-                        response(.failure(error: .parsingFailed(message: error.localizedDescription)))
-                    }
-                case .failure(let error):
-                    response(.failure(error: error))
+        POSTRequestWithPath(path: "/portal/user/dashboard/add_contact", parameters: params) { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                do {
+                    let addContactResponse = try self.jsonDecoder.decode(AddContactResponse.self, from: data)
+                    response(.success(response: addContactResponse.contacts))
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
                 }
+            case .failure(let error):
+                response(.failure(error: error))
             }
-        } catch {
-            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
         }
     }
     
@@ -70,48 +64,36 @@ public class ContactsService: BaseService {
         params["stellar_address"] = address
         params["public_key"] = publicKey
         
-        do {
-            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-            
-            POSTRequestWithPath(path: "/portal/user/dashboard/edit_contact", body: bodyData) { (result) -> (Void) in
-                switch result {
-                case .success(let data):
-                    do {
-                        let contacts = try self.jsonDecoder.decode(Array<ContactResponse>.self, from: data)
-                        response(.success(response: contacts))
-                    } catch {
-                        response(.failure(error: .parsingFailed(message: error.localizedDescription)))
-                    }
-                case .failure(let error):
-                    response(.failure(error: error))
+        POSTRequestWithPath(path: "/portal/user/dashboard/edit_contact", parameters: params) { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                do {
+                    let contacts = try self.jsonDecoder.decode(Array<ContactResponse>.self, from: data)
+                    response(.success(response: contacts))
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
                 }
+            case .failure(let error):
+                response(.failure(error: error))
             }
-        } catch {
-            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
         }
     }
     
     func removeContact(id: Int, response: @escaping ContactsResponseClosure) {
         let params = ["id": id]
         
-        do {
-            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-            
-            POSTRequestWithPath(path: "/portal/user/dashboard/remove_contact", body: bodyData) { (result) -> (Void) in
-                switch result {
-                case .success(let data):
-                    do {
-                        let contacts = try self.jsonDecoder.decode(Array<ContactResponse>.self, from: data)
-                        response(.success(response: contacts))
-                    } catch {
-                        response(.failure(error: .parsingFailed(message: error.localizedDescription)))
-                    }
-                case .failure(let error):
-                    response(.failure(error: error))
+        POSTRequestWithPath(path: "/portal/user/dashboard/remove_contact", parameters: params) { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                do {
+                    let contacts = try self.jsonDecoder.decode(Array<ContactResponse>.self, from: data)
+                    response(.success(response: contacts))
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
                 }
+            case .failure(let error):
+                response(.failure(error: error))
             }
-        } catch {
-            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
         }
     }
 }

@@ -61,22 +61,18 @@ public class ChartsService: BaseService {
         
         params["source_currencies"] = currenciesArray
         
-        if let bodyData = try? JSONSerialization.data(withJSONObject: params, options: .prettyPrinted) {
-            POSTRequestWithPath(path: "/portal/chart/chart_current_rates", body: bodyData) { (result) -> (Void) in
-                switch result {
-                case .success(data: let data):
-                    do {
-                        let chartCurrentRates = try self.jsonDecoder.decode(ChartCurrentRatesResponse.self, from: data)
-                        response(.success(response: chartCurrentRates))
-                    } catch {
-                        response(.failure(error: .parsingFailed(message: error.localizedDescription)))
-                    }
-                case .failure(error: let error):
-                    response(.failure(error: error))
+        POSTRequestWithPath(path: "/portal/chart/chart_current_rates", parameters: params) { (result) -> (Void) in
+            switch result {
+            case .success(data: let data):
+                do {
+                    let chartCurrentRates = try self.jsonDecoder.decode(ChartCurrentRatesResponse.self, from: data)
+                    response(.success(response: chartCurrentRates))
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
                 }
+            case .failure(error: let error):
+                response(.failure(error: error))
             }
-        } else {
-            print("Invalid parameters")
         }
     }
     
@@ -90,22 +86,18 @@ public class ChartsService: BaseService {
         params["destination_currency"] = destinationCurrency
         params["range_hours"] = timeRange
         
-        if let bodyData = try? JSONSerialization.data(withJSONObject: params, options: .prettyPrinted) {
-            POSTRequestWithPath(path: "/portal/chart/chart_exchange_rates", body: bodyData) { (result) -> (Void) in
-                switch result {
-                case .success(data: let data):
-                    do {
-                        let chartExchangeRates = try self.jsonDecoder.decode(ChartExchangeRatesResponse.self, from: data)
-                        response(.success(response: chartExchangeRates))
-                    } catch {
-                        response(.failure(error: .parsingFailed(message: error.localizedDescription)))
-                    }
-                case .failure(error: let error):
-                    response(.failure(error: error))
+        POSTRequestWithPath(path: "/portal/chart/chart_exchange_rates", parameters: params) { (result) -> (Void) in
+            switch result {
+            case .success(data: let data):
+                do {
+                    let chartExchangeRates = try self.jsonDecoder.decode(ChartExchangeRatesResponse.self, from: data)
+                    response(.success(response: chartExchangeRates))
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
                 }
+            case .failure(error: let error):
+                response(.failure(error: error))
             }
-        } else {
-            print("Invalid parameters")
         }
     }
 }
