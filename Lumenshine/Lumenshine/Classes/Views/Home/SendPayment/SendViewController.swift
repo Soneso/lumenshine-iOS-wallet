@@ -770,12 +770,12 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                     if let paymentDictionary = stellarDictionary["payment"] as? [String: Any] {
                         
                         if let networkID = paymentDictionary["network"] as? String {
-                            var network = Network.testnet
-                            if (Services.shared.usePublicStellarNetwork) {
-                                network = Network.public
+                            var network = Network.public
+                            if (!Services.shared.usePublicStellarNetwork) {
+                                network = Network.testnet
                             }
-                            if (!network.rawValue.hasPrefix(networkID)) {
-                                // show error
+                            if (!network.rawValue.sha256().hasPrefix(networkID)) {
+                                // not for current network
                                 // TODO: add copy button
                                 self.displaySimpleAlertView(title: "QR code not supported", message: "The OR-Code refers to an unknown Network and can not be used. Value: " + value)
                                 finishQRScanner()
@@ -807,7 +807,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                             destinationSet = true
                         }
                         if let amount = paymentDictionary["amount"] as? Double {
-                            amountTextField.text = amount.stringWithUnit
+                            amountTextField.text = String(format:"%f", amount)
                         }
                         
                         if let memoDictionary = paymentDictionary["memo"] as? [String: Any] {
@@ -835,12 +835,13 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                     else if let accountDictionary  = stellarDictionary["account"] as? [String: Any] {
                         // this is a contact qr-code
                         if let networkID = accountDictionary["network"] as? String {
-                            var network = Network.testnet
-                            if (Services.shared.usePublicStellarNetwork) {
-                                network = Network.public
+                            var network = Network.public
+                            if (!Services.shared.usePublicStellarNetwork) {
+                                network = Network.testnet
                             }
-                            if (!network.rawValue.hasPrefix(networkID)) {
-                                // show error
+                            if (!network.rawValue.sha256().hasPrefix(networkID)) {
+                                // not for current network
+                                // TODO: add copy button
                                 self.displaySimpleAlertView(title: "QR code not supported", message: "The OR-Code refers to an unknown Network and can not be used. Value: " + value)
                                 finishQRScanner()
                                 return
