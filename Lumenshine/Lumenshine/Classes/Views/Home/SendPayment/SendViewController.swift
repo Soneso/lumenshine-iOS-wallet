@@ -59,8 +59,6 @@ enum AmountSegmentedControlIndexes: Int {
 }
 
 public let MaximumLengthInBytesForMemoText = 28
-public let QRCodeSeparationString = " "
-public let QRCodeNativeCurrencyIssuer = "native"
 public let OtherCurrencyText = "Other"
 
 class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, WalletActionsProtocol, ScanViewControllerDelegate, UITextFieldDelegate {
@@ -642,7 +640,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 return
             }
             
-            if !address.isBase64Valid() || !address.isPublicKey(){
+            if !address.isValidEd25519PublicKey() {
                 setValidationError(view: addressErrorView, label: addressErrorLabel, errorMessage: .InvalidAddress)
             }
         }
@@ -746,51 +744,132 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         return isInputDataValid
     }
     
-    func setQR(value: String) {
-        // QR Valid Structure:
-        // Currency: XML
-        // Issuer: KAJSHDJAS.../native
-        // Address: KJSAHDJKASH...
-        // Amount: 500
-        // MemoType: none/text/id/hash/return
-        // Memo: none/value
-        // Password: asdfdasjkd
-        
-        // Example: XML native me@me.me 500 none none 1234
-        
-        let qrResultArray = value.components(separatedBy: QRCodeSeparationString)
-        
-        if qrResultArray.count != 7 {
-            scanViewController.view.removeFromSuperview()
-            scanViewController = nil
-            return
-        }
-        
-        currentCurrencyTextField.text = nil
-        currentCurrencyTextField.insertText(qrResultArray[0])
-        issuerTextField.text = qrResultArray[1] != QRCodeNativeCurrencyIssuer ? qrResultArray[1] : nil
-        addressTextField.text = qrResultArray[2]
-        amountTextField.text = qrResultArray[3]
-        
-        switch qrResultArray[4] {
-        case MemoTypeAsString.TEXT:
-            memoTypeTextField.text = MemoTypeValues.MEMO_TEXT.rawValue
-        case MemoTypeAsString.ID:
-            memoTypeTextField.text = MemoTypeValues.MEMO_ID.rawValue
-        case MemoTypeAsString.HASH:
-            memoTypeTextField.text = MemoTypeValues.MEMO_HASH.rawValue
-        case MemoTypeAsString.RETURN:
-            memoTypeTextField.text = MemoTypeValues.MEMO_RETURN.rawValue
-        default:
-            break
-        }
-        
-        if qrResultArray[5] != MemoTypeAsString.NONE {
-            memoInputTextField.text = qrResultArray[5]
-        }
-        
-        scanViewController.view.removeFromSuperview()
+    func noQRCameraFound() {
+        finishQRScanner()
+        self.displaySimpleAlertView(title: "No Camera access", message: "Lumenshine can not access your cammera. Please check your system settings.")
+    }
+    
+    private func finishQRScanner() {
+        navigationController?.popViewController(animated: true)
         scanViewController = nil
+    }
+    
+    func setQR(value: String) {
+        
+        print("QR:" + value)
+        var destinationSet = false
+        
+        // Supported qr-code format, see:
+        // https://github.com/future-tense/stargazer/blob/master/docs/qr-codes.md
+        if let data = value.data(using: String.Encoding.utf8)  {
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                let dictionary = json as? [String: Any]
+                if let stellarDictionary = dictionary?["stellar"] as? [String: Any] {
+                    
+                    if let paymentDictionary = stellarDictionary["payment"] as? [String: Any] {
+                        
+                        if let networkID = paymentDictionary["network"] as? String {
+                            var network = Network.testnet
+                            if (Services.shared.usePublicStellarNetwork) {
+                                network = Network.public
+                            }
+                            if (!network.rawValue.hasPrefix(networkID)) {
+                                // show error
+                                // TODO: add copy button
+                                self.displaySimpleAlertView(title: "QR code not supported", message: "The OR-Code refers to an unknown Network and can not be used. Value: " + value)
+                                finishQRScanner()
+                                return
+                            }
+                        }
+                        
+                        if let assetDictionary = paymentDictionary["asset"] as? [String: Any] {
+                            if let code = assetDictionary["code"] as? String {
+                                if code != "XLM" {
+                                    if let issuer = assetDictionary["issuer"] as? String {
+                                        // TODO check if wallet supports code && issuer
+                                        let message = "The QR-Code request a payment with a currency that you do not have in this wallet. Requested currency code is: " + code + " having the issuer public key: " + issuer
+                                        self.displaySimpleAlertView(title: "Currency unavailable", message: message)
+                                        finishQRScanner()
+                                        return
+                                    } else
+                                    {
+                                        // invalid
+                                        self.displaySimpleAlertView(title: "Invalid QR-Code", message: "The QR-Code request a payment with an not native asset but fails to provide the issuer.") //TODO
+                                        finishQRScanner()
+                                        return
+                                    }
+                                }
+                            }
+                        }
+                        if let destination = paymentDictionary["destination"] as? String {
+                            addressTextField.text = destination
+                            destinationSet = true
+                        }
+                        if let amount = paymentDictionary["amount"] as? Double {
+                            amountTextField.text = amount.stringWithUnit
+                        }
+                        
+                        if let memoDictionary = paymentDictionary["memo"] as? [String: Any] {
+                            if let type = memoDictionary["type"] as? String {
+                                switch type.trimmed.lowercased() {
+                                case "text":
+                                    memoTypeTextField.text = MemoTypeValues.MEMO_TEXT.rawValue
+                                case "id":
+                                    memoTypeTextField.text = MemoTypeValues.MEMO_ID.rawValue
+                                case "hash":
+                                    memoTypeTextField.text = MemoTypeValues.MEMO_HASH.rawValue
+                                case "return":
+                                    memoTypeTextField.text = MemoTypeValues.MEMO_RETURN.rawValue
+                                default:
+                                    break
+                                }
+                            }
+                            if let memo = memoDictionary["value"] as? String {
+                                if memo.trimmed != "" {
+                                    memoInputTextField.text = memo
+                                }
+                            }
+                        }
+                    }
+                    else if let accountDictionary  = stellarDictionary["account"] as? [String: Any] {
+                        // this is a contact qr-code
+                        if let networkID = accountDictionary["network"] as? String {
+                            var network = Network.testnet
+                            if (Services.shared.usePublicStellarNetwork) {
+                                network = Network.public
+                            }
+                            if (!network.rawValue.hasPrefix(networkID)) {
+                                // show error
+                                self.displaySimpleAlertView(title: "QR code not supported", message: "The OR-Code refers to an unknown Network and can not be used. Value: " + value)
+                                finishQRScanner()
+                                return
+                            }
+                        }
+                        
+                        if let accounID = accountDictionary["id"] as? String {
+                            addressTextField.text = accounID
+                            destinationSet = true
+                        }
+                    }
+                }
+            } catch {
+                print(error)
+            }
+        }
+        
+        if !destinationSet {
+            if value.isValidEd25519PublicKey() {
+                //TODO, check if this is a valid stellar address, use the sdk
+                addressTextField.text = value
+                destinationSet = true
+            } else {
+                // TODO: add copy button
+                self.displaySimpleAlertView(title: "QR-Code not supported", message: "The scanned OR-Code is not supported by Lumenshine. Value: " + value)
+            }
+        }
+        
+        finishQRScanner()
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

@@ -149,7 +149,7 @@ class ContactsViewModel : ContactsViewModelType {
             return
         }
 
-        if let address = address, !address.isEmpty, !address.isStellarAddress() {
+        if let address = address, !address.isEmpty, !address.isFederationAddress() {
             let error = ErrorResponse()
             error.errorMessage = R.string.localizable.invalid_address()
             error.parameterName = "address"
@@ -157,7 +157,7 @@ class ContactsViewModel : ContactsViewModelType {
             return
         }
 
-        if let publicKey = publicKey, !publicKey.isEmpty, !publicKey.isPublicKey() {
+        if let publicKey = publicKey, !publicKey.isEmpty, !publicKey.isValidEd25519PublicKey() {
             let error = ErrorResponse()
             error.errorMessage = R.string.localizable.invalid_public_key()
             error.parameterName = "public_key"

@@ -142,13 +142,6 @@ extension HomeViewController: HeaderMenuDelegate {
     }
 }
 
-extension HomeViewController: ScanViewControllerDelegate {
-    func setQR(value: String) {
-
-    }
-}
-
-
 extension HomeViewController {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
