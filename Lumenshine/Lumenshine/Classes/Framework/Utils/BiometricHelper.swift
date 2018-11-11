@@ -43,10 +43,14 @@ class BiometricHelper {
                 switch result {
                 case .success(let password):
                     passwordManager.getMnemonic(password: password) { (response) -> (Void) in
-                        completion(response)
+                        DispatchQueue.main.async {
+                            completion(response)
+                        }
                     }
                 case .failure(let error):
-                    completion(.failure(error: error.errorDescription))
+                    DispatchQueue.main.async {
+                        completion(.failure(error: error.errorDescription))
+                    }
                 }
             }
         }
@@ -94,6 +98,7 @@ class BiometricHelper {
     
     static func removePassword(username: String) {
         do {
+            // TODO remove all passwords!
             let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
                                                     account: username,
                                                     accessGroup: KeychainConfiguration.accessGroup)

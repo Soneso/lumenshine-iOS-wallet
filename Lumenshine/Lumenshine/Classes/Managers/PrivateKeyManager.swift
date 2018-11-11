@@ -54,16 +54,23 @@ class PrivateKeyManager {
         if let index = getIndex(forAccountID: accountID) {
             if let mnemonic = mnemonic {
                 keyPair = try? stellarsdk.Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: index)
-                completion(.success(keyPair: keyPair))
+                DispatchQueue.main.async {
+                    completion(.success(keyPair: keyPair))
+                }
             } else {
                 BiometricHelper.getMnemonic { (response) -> (Void) in
+                    
                     switch response {
                     case .success(mnemonic: let mnemonic):
                         keyPair = try? stellarsdk.Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: index)
-                        completion(.success(keyPair: keyPair))
+                        DispatchQueue.main.async {
+                            completion(.success(keyPair: keyPair))
+                        }
                     case .failure(error: let error):
                         print(error)
-                        completion(.failure(error: error))
+                        DispatchQueue.main.async {
+                            completion(.failure(error: error))
+                        }
                     }
                 }
             }

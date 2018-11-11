@@ -187,13 +187,11 @@ extension FundedWallet {
     func getAvailableCurrencies() -> [String] {
         var availableCurrencies = [String]()
         for currency in self.uniqueAssetCodeBalances {
-            if let balance = CoinUnit(currency.balance), let displayCode = currency.displayCode {
-                if (balance != 0) {
-                    if currency.displayCode == NativeCurrencyNames.xlm.rawValue {
-                        availableCurrencies.insert(displayCode, at: 0)
-                    } else {
-                        availableCurrencies.append(displayCode)
-                    }
+            if let displayCode = currency.displayCode {
+                if currency.displayCode == NativeCurrencyNames.xlm.rawValue {
+                    availableCurrencies.insert(displayCode, at: 0)
+                } else {
+                    availableCurrencies.append(displayCode)
                 }
             }
         }
@@ -215,23 +213,6 @@ extension FundedWallet {
         }
         
         return false
-    }
-    
-    func isCurrencyDuplicateAndValid(withAssetCode assetCode: String) -> Bool {
-        var alreadyFoundOnce: Bool = false
-        
-        for currency in balances {
-            if currency.assetCode == assetCode && CoinUnit(currency.balance) != 0 {
-                if !alreadyFoundOnce {
-                    alreadyFoundOnce = true
-                } else {
-                    return true
-                }
-            }
-        }
-        
-        return false
-
     }
 }
     

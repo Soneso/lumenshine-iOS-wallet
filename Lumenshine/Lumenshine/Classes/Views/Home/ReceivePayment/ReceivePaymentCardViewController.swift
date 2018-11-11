@@ -137,6 +137,7 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
                 issuerPickerView.dataSource = self
                 issuerTextField.text = wallet.uniqueAssetCodeBalances.first?.assetIssuer
                 issuerTextField.inputView = issuerPickerView
+                issuerTextField.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(issuerDoneButtonTap))
             }
         }
         
@@ -166,13 +167,10 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
         if let wallet = wallet as? FundedWallet {
             if wallet.hasOnlyNative {
                 currencyView.removeFromSuperview()
-                issuerVisibility(isHidden: true)
             } else {
                 hideNativeCurrency()
-                if !wallet.hasDuplicateNameCurrencies {
-                    issuerVisibility(isHidden: true)
-                }
             }
+            issuerVisibility(isHidden: true)
         }
     }
     
@@ -294,6 +292,10 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
     
     @objc func currencyDoneButtonTap(_ sender: Any) {
         selectAsset(pickerView: currencyPickerView, row: currencyPickerView.selectedRow(inComponent: 0))
+        updateQRCode()
+    }
+    
+    @objc func issuerDoneButtonTap(_ sender: Any) {
         updateQRCode()
     }
     

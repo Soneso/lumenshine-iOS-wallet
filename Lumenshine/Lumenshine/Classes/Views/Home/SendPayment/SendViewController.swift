@@ -183,14 +183,20 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                             }
                             return
                         } else {
-                            self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .StellarAddressNotFound)
+                            DispatchQueue.main.async {
+                                self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .StellarAddressNotFound)
+                            }
                         }
                     case .failure(error: let error):
                         switch error {
                         case FederationError.invalidAddress:
-                            self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .InvalidStellarAddress)
+                            DispatchQueue.main.async {
+                                self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .InvalidStellarAddress)
+                            }
                         default:
-                            self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .StellarAddressNotFound)
+                            DispatchQueue.main.async {
+                                self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .StellarAddressNotFound)
+                            }
                         }
                     }
                 })
@@ -219,11 +225,21 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             if let currency = getSelectedCurrency() {
                 self.userManager.checkAddressStatus(forAccountID: destinationPublicKey, asset: currency, completion: { (addressResult) -> (Void) in
                     switch addressResult {
-                    case .success(isFunded: let isFunded, isTrusted: let isTrusted):
+                    case .success(isFunded: let isFunded, isTrusted: let isTrusted, limit: let limit):
                         if !isFunded {
                             self.createRecepientAccount = true
-                        } else if let isTrusted = isTrusted, !isTrusted {
-                            self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .CurrencyNoTrust)
+                        } else if let isTrusted = isTrusted {
+                            if !isTrusted {
+                                self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .CurrencyNoTrust)
+                            } else if let limit = limit {
+                                if let amount = self.amountTextField.text {
+                                    let correctedAmount = amount.replacingOccurrences(of: ",", with: ".")
+                                    if let amountToSend = CoinUnit(correctedAmount), !amountToSend.isLessThanOrEqualTo(limit) {
+                                        let individualMessage = "Recepient can not receive more than \(limit)"
+                                        self.setValidationError(view: self.amountErrorView, label: self.amountErrorLabel, errorMessage: .InvalidAmount, individualMessage: individualMessage)
+                                    }
+                                }
+                            }
                         }
                         // continue payment process if valid
                         if (self.isInputDataValid && forMasterKey) {
@@ -245,6 +261,20 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                     let currency = currencyResponse
                     if (hasTrustline) {
                         self.otherCurrencyAsset = currency
+                        
+                        // check limit
+                        if let ownCurrency = currency, let cbalance = CoinUnit(ownCurrency.balance), let climit = CoinUnit(ownCurrency.limit), let minus = CoinUnit("-1.0") {
+                            let limit = climit.addingProduct(minus, cbalance)
+                            print("Limit: " + limit.stringWithUnit)
+                            if let amount = self.amountTextField.text {
+                                let correctedAmount = amount.replacingOccurrences(of: ",", with: ".")
+                                if let amountToSend = CoinUnit(correctedAmount), !amountToSend.isLessThanOrEqualTo(limit) {
+                                    let individualMessage = "Recepient can not receive more than \(limit)"
+                                    self.setValidationError(view: self.amountErrorView, label: self.amountErrorLabel, errorMessage: .InvalidAmount, individualMessage: individualMessage)
+                                    return
+                                }
+                            }
+                        }
                         
                         // continue payment process
                         if (forMasterKey) {
@@ -322,7 +352,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         selectedCurrency = otherCurrencyTextField.text ?? ""
         currentCurrencyLabel.text = selectedCurrency
         setSendButtonDefaultTitle()
-        validateAssetCode()
+        validateOtherAssetCode()
     }
     
     private var selectedMemoType: MemoTypeValues! = MemoTypeValues.MEMO_TEXT {
@@ -374,7 +404,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             
             setSendButtonDefaultTitle()
             
-            if (wallet as! FundedWallet).isCurrencyDuplicateAndValid(withAssetCode: selectedCurrency) {
+            if (wallet as! FundedWallet).isCurrencyDuplicate(withAssetCode: selectedCurrency) {
                 if issuerPickerView == nil {
                     issuerPickerView = UIPickerView()
                     issuerPickerView.delegate = self
@@ -596,15 +626,19 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         setSendButtonDefaultTitle()
     }
     
-    private func setValidationError(view: UIView, label: UILabel, errorMessage: ValidationErrors) {
-        DispatchQueue.main.async {
-            view.isHidden = false
-            label.text = errorMessage.rawValue
-            self.isInputDataValid = false
-        
-            self.contentView.setContentOffset(CGPoint(x: 0, y: view.frame.center.y), animated: false)
-            self.setSendButtonDefaultTitle()
+    private func setValidationError(view: UIView, label: UILabel, errorMessage: ValidationErrors, individualMessage: String? = nil) {
+        view.isHidden = false
+        if let individualMessage = individualMessage {
+            label.text = individualMessage
         }
+        else {
+            label.text = errorMessage.rawValue
+        }
+        self.isInputDataValid = false
+        
+        self.contentView.setContentOffset(CGPoint(x: 0, y: view.frame.center.y), animated: false)
+        self.setSendButtonDefaultTitle()
+        
     }
     
     private func resetOtherCurrencyValidationError() {
@@ -614,13 +648,13 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         isInputDataValid = true
     }
     
-    private func validateAssetCodeIsFilled() {
+    private func validateOtherAssetCodeIsFilled() {
         if !otherCurrencyView.isHidden, let assetCode = otherCurrencyTextField.text, !assetCode.isMandatoryValid() {
             setValidationError(view: otherCurrencyErrorView, label: otherCurrencyErrorLabel, errorMessage: .Mandatory)
         }
     }
     
-    private func validateAssetCode() {
+    private func validateOtherAssetCode() {
         if let assetCode = otherCurrencyTextField.text {
             if !assetCode.isAssetCodeValid() {
                 setValidationError(view: otherCurrencyErrorView, label: otherCurrencyErrorLabel, errorMessage: .InvalidAssetCode)
@@ -661,6 +695,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     private func validate(amount: String) {
+        
         let correctedAmount = amount.replacingOccurrences(of: ",", with: ".")
         if !correctedAmount.isNumeric() {
             setValidationError(view: amountErrorView, label: amountErrorLabel, errorMessage: .InvalidAmount)
@@ -682,10 +717,10 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 }
             }
             
-            if !correctedAmount.isAmountValid(forBalance: balanceToValidate) {
-                amountErrorView.isHidden = false
-                amountErrorLabel.text = "Insufficient \(selectedCurrency) available"
-                isInputDataValid = false
+            if !correctedAmount.isAmountSufficient(forBalance: balanceToValidate) {
+                let individualMessage = "Insufficient \(selectedCurrency) available"
+                setValidationError(view: amountErrorView, label: amountErrorLabel, errorMessage: .InvalidAmount, individualMessage: individualMessage)
+                return
             }
         }
     }
@@ -713,16 +748,19 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             case MemoTypeValues.MEMO_ID.rawValue:
                 if !memoText.isMemoIDValid() {
                     setValidationError(view: memoInputErrorView, label: memoInputErrorLabel, errorMessage: .InvalidMemo)
+                    return
                 }
                 
             case MemoTypeValues.MEMO_HASH.rawValue:
                 if !memoText.isMemoHashValid() {
                     setValidationError(view: memoInputErrorView, label: memoInputErrorLabel, errorMessage: .InvalidMemo)
+                    return
                 }
                 
             case MemoTypeValues.MEMO_RETURN.rawValue:
                 if !memoText.isMemoReturnValid() {
                     setValidationError(view: memoInputErrorView, label: memoInputErrorLabel, errorMessage: .InvalidMemo)
+                    return
                 }
                 
             default:
@@ -733,7 +771,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     private func validateInsertedData(biometricAuth: Bool = false) -> Bool {
         validateAddress()
-        validateAssetCodeIsFilled()
+        validateOtherAssetCodeIsFilled()
         validateAmount()
         validateMemo()
         if isInputDataValid {
@@ -741,7 +779,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
         
         checkForTransactionFeeAvailability()
-        //checkForRecipientAccount()
         
         return isInputDataValid
     }
@@ -797,10 +834,16 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                                             return (currency.assetCode == code && currency.assetIssuer == issuer)
                                         }) {
                                             print("requested currency: " + requestedCurrency.assetCode! + " " + requestedCurrency.assetIssuer!)
-                                            // select it
+                                            
+                                            // select asset code
                                             selectedCurrency = code
-                                            // TODO issuer
-                                            issuerTextField.text = issuer
+                                            
+                                            // set issuer if wallet has multiple currencies with this asset code
+                                            if (wallet as! FundedWallet).isCurrencyDuplicate(withAssetCode: selectedCurrency) {
+                                                    issuerTextField.text = nil
+                                                    issuerTextField.insertText(issuer)
+                                                    setAvailableAmount()
+                                            }
                                         } else { // not available currency
                                             let message = "The QR-Code request a payment with a currency that you do not have in this wallet. Requested currency code is: " + code + " having the issuer public key: " + issuer
                                             self.displaySimpleAlertView(title: "Currency unavailable", message: message)
@@ -811,7 +854,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                                     } else
                                     {
                                         // invalid
-                                        self.displaySimpleAlertView(title: "Invalid QR-Code", message: "The QR-Code request a payment with an not native asset but fails to provide the issuer.") //TODO
+                                        self.displaySimpleAlertView(title: "Invalid QR-Code", message: "The QR-Code request a payment with non native asset but fails to provide the issuer.")
                                         finishQRScanner()
                                         return
                                     }
@@ -877,7 +920,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         
         if !destinationSet {
             if value.isValidEd25519PublicKey() {
-                //TODO, check if this is a valid stellar address, use the sdk
                 addressTextField.text = value
                 destinationSet = true
             } else {
