@@ -101,7 +101,6 @@ public class FundedWallet: Wallet {
             for balance in balances {
                 switch balance.assetType {
                 case AssetTypeAsString.NATIVE:
-                    print("balance: \(balance.balance) XLM")
                     if let units = CoinUnit(balance.balance) {
                         amount += units
                     }

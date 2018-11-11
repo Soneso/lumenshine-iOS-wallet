@@ -296,7 +296,6 @@ public class UserManager: NSObject {
                     for balance in accountDetails.balances {
                         switch balance.assetType {
                         case AssetTypeAsString.NATIVE:
-                            print("balance: \(balance.balance) XLM")
                             if let units = CoinUnit(balance.balance) {
                                 xlm += units
                             }

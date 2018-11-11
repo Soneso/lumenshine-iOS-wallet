@@ -485,7 +485,8 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     private func setAvailableLabels(currency: AccountBalanceResponse) {
         if let balance = CoinUnit(currency.balance) {
-            let availableAmount = currency.assetCode != nil ? balance : balance.availableAmount(forWallet: wallet, forCurrency: currency)
+            let availableAmount = balance.availableAmount(forWallet: wallet, forCurrency: currency)
+            // TODO: the amount shown here is not correctly rounded
             availableAmountLabel.text = "You have \(availableAmount) \(selectedCurrency) available"
             
             if amountSegmentedControl.selectedSegmentIndex == AmountSegmentedControlIndexes.sendAll.rawValue {
@@ -496,7 +497,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     private func setAvailableAmount() {
         for currency in (wallet as! FundedWallet).uniqueAssetCodeBalances {
-            if selectedCurrency == NativeCurrencyNames.xlm.rawValue {
+            if selectedCurrency == NativeCurrencyNames.xlm.rawValue && (currency.assetCode == nil || currency.assetCode == selectedCurrency) {
                 setAvailableLabels(currency: currency)
             } else if let currencyIssuer = issuerTextField.text,
                 currency.assetIssuer == currencyIssuer,
