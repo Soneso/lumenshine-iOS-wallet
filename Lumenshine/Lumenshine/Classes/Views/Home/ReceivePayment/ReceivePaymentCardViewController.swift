@@ -192,7 +192,7 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
         paymentObject.setValue(wallet.publicKey, forKey: "destination")
         if let amount = amountTextField.text, !amount.isEmpty {
             if let dob = Double(amount.replacingOccurrences(of: ",", with: ".")) {
-                paymentObject.setValue("\(dob)", forKey: "amount")
+                paymentObject.setValue(dob, forKey: "amount")
             }
         }
         if !Services.shared.usePublicStellarNetwork {

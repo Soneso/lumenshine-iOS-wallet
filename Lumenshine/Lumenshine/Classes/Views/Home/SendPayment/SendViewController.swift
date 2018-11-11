@@ -759,6 +759,9 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     func setQR(value: String) {
         
         print("QR:" + value)
+        
+        setupForSelectedCurrency()
+        
         var destinationSet = false
         
         // Supported qr-code format, see:
@@ -789,11 +792,22 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                             if let code = assetDictionary["code"] as? String {
                                 if code != "XLM" {
                                     if let issuer = assetDictionary["issuer"] as? String {
-                                        // TODO check if wallet supports code && issuer
-                                        let message = "The QR-Code request a payment with a currency that you do not have in this wallet. Requested currency code is: " + code + " having the issuer public key: " + issuer
-                                        self.displaySimpleAlertView(title: "Currency unavailable", message: message)
-                                        finishQRScanner()
-                                        return
+                                        // check if wallet has code && issuer
+                                        if let requestedCurrency = (wallet as! FundedWallet).balances.first(where: { (currency) -> Bool in
+                                            return (currency.assetCode == code && currency.assetIssuer == issuer)
+                                        }) {
+                                            print("requested currency: " + requestedCurrency.assetCode! + " " + requestedCurrency.assetIssuer!)
+                                            // select it
+                                            selectedCurrency = code
+                                            // TODO issuer
+                                            issuerTextField.text = issuer
+                                        } else { // not available currency
+                                            let message = "The QR-Code request a payment with a currency that you do not have in this wallet. Requested currency code is: " + code + " having the issuer public key: " + issuer
+                                            self.displaySimpleAlertView(title: "Currency unavailable", message: message)
+                                            
+                                            finishQRScanner()
+                                            return
+                                        }
                                     } else
                                     {
                                         // invalid
@@ -922,9 +936,9 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 return
             }
         
-        setupForSelectedCurrency()
-        selectedCurrency = availableCurrencies[row]
-        return
+            setupForSelectedCurrency()
+            selectedCurrency = availableCurrencies[row]
+            return
         } else if pickerView == memoTypePickerView {
             selectedMemoType = memoTypes[row]
             return
