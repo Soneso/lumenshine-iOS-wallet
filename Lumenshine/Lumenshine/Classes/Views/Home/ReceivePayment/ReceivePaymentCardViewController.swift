@@ -48,6 +48,7 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
         setupTextFields()
         setupNavigationItem()
         view.backgroundColor = Stylesheet.color(.veryLightGray)
+        updateQRCode()
     }
     
     override func resignFirstResponder() -> Bool {
@@ -58,6 +59,10 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
         closeAction?()
     }
 
+    @IBAction func amountEditingChanged(_ sender: Any) {
+        updateQRCode()
+    }
+    
     @IBAction func didTapCopyButton(_ sender: UIButton) {
         if let key = publicKeyLabel.text {
             UIPasteboard.general.string = key
@@ -122,15 +127,15 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
             currencyPickerView = UIPickerView()
             currencyPickerView.delegate = self
             currencyPickerView.dataSource = self
-            currencyTextField.text = wallet.balances.first?.displayCode
-            assetCodeLabel.text = wallet.balances.first?.displayCode
+            currencyTextField.text = wallet.uniqueAssetCodeBalances.first?.displayCode
+            assetCodeLabel.text = wallet.uniqueAssetCodeBalances.first?.displayCode
             currencyTextField.inputView = currencyPickerView
             currencyTextField.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(currencyDoneButtonTap))
             if wallet.hasDuplicateNameCurrencies {
                 issuerPickerView = UIPickerView()
                 issuerPickerView.delegate = self
                 issuerPickerView.dataSource = self
-                issuerTextField.text = wallet.balances.first?.assetIssuer
+                issuerTextField.text = wallet.uniqueAssetCodeBalances.first?.assetIssuer
                 issuerTextField.inputView = issuerPickerView
             }
         }
@@ -139,6 +144,8 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
         publicKeyLabel.numberOfLines = 1
         publicKeyLabel.lineBreakMode = .byTruncatingMiddle
 
+        amountTextField.keyboardType = UIKeyboardType.decimalPad
+        
         emailLabel.font = R.font.encodeSansSemiBold(size: 16)
         emailLabel.numberOfLines = 0
         
@@ -169,6 +176,56 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
         }
     }
     
+    private func updateQRCode() {
+        let value = qrValueString()
+        print("QR:" + value)
+        if let image = QRCoder.qrCodeImage(qrValueString:value, size:10) {
+            qrImageView.image = image
+        }
+    }
+    
+    private func qrValueString() -> String {
+        let resultObject: NSMutableDictionary = NSMutableDictionary()
+        let stellarObject: NSMutableDictionary = NSMutableDictionary()
+        let paymentObject: NSMutableDictionary = NSMutableDictionary()
+        
+        paymentObject.setValue(wallet.publicKey, forKey: "destination")
+        if let amount = amountTextField.text, !amount.isEmpty {
+            if let dob = Double(amount.replacingOccurrences(of: ",", with: ".")) {
+                paymentObject.setValue("\(dob)", forKey: "amount")
+            }
+        }
+        if !Services.shared.usePublicStellarNetwork {
+            paymentObject.setValue(Network.testnet.rawValue.sha256().prefix(8), forKey: "network")
+        }
+        
+        if let wallet = wallet as? FundedWallet
+        {
+            if !wallet.hasOnlyNative, let currency = currencyTextField.text, currency != "XLM" {
+                let assetObject: NSMutableDictionary = NSMutableDictionary()
+                assetObject.setValue(currency, forKey:"code")
+                let issuer = issuerTextField.text ?? ""
+                assetObject.setValue(issuer, forKey:"issuer")
+                paymentObject.setValue(assetObject, forKey: "asset")
+            }
+        }
+        stellarObject.setValue(paymentObject, forKey: "payment")
+        resultObject.setValue(stellarObject, forKey: "stellar")
+        
+        
+        let jsonData: NSData
+        
+        do {
+            jsonData = try JSONSerialization.data(withJSONObject: resultObject, options: JSONSerialization.WritingOptions()) as NSData
+            let jsonString = NSString(data: jsonData as Data, encoding: String.Encoding.utf8.rawValue)! as String
+            return jsonString
+            
+        } catch _ {
+            print ("JSON Failure")
+        }
+        
+        return wallet.publicKey
+    }
     private func emailText() -> String {
         if let wallet = wallet as? FundedWallet {
             var text = "Receive public key: \(publicKeyLabel.text ?? "")\n"
@@ -179,8 +236,9 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
             
             if wallet.hasOnlyNative {
                 text += "\(nativeCurrencyLabel.text ?? ""): \(nativeCurrencyValueLabel.text ?? "")\nXLM: \(amountTextField.text ?? "0")"
-            } else if !wallet.hasDuplicateNameCurrencies {
+            } else if let currency = currencyTextField.text, currency == "XLM" {
                 text += "Currency: \(currencyTextField.text ?? "")\n \(currencyTextField.text ?? ""): \(amountTextField.text ?? "0")"
+                
             } else {
                 text += "Currency: \(currencyTextField.text ?? "")\nIssuer: \(issuerTextField.text ?? "-")\n\(currencyTextField.text ?? ""): \(amountTextField.text ?? "0")"
             }
@@ -236,6 +294,7 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
     
     @objc func currencyDoneButtonTap(_ sender: Any) {
         selectAsset(pickerView: currencyPickerView, row: currencyPickerView.selectedRow(inComponent: 0))
+        updateQRCode()
     }
     
     @IBAction func didTapBack(_ sender: Any) {

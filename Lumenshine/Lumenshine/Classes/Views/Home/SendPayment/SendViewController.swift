@@ -540,7 +540,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                                                issuer: self.issuerTextField.text ?? nil,
                                                destinationPublicKey: self.destinationPublicKey,
                                                destinationStellarAddress: self.destinationStellarAddress,
-                                               amount: availableAmount != nil ? String(availableAmount!) : (self.amountTextField.text ?? ""),
+                                               amount: availableAmount != nil ? String(availableAmount!) : (self.amountTextField.text?.replacingOccurrences(of: ",", with: ".") ?? ""),
                                                memo: self.memoInputTextField.text?.isEmpty == false ? self.memoInputTextField.text! : nil,
                                                memoType: self.memoTypes.first(where: { (memoType) -> Bool in
                                                 if let memoTypeTextFieldValue = self.memoTypeTextField.text {
@@ -660,7 +660,8 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     private func validate(amount: String) {
-        if !amount.isNumeric() {
+        let correctedAmount = amount.replacingOccurrences(of: ",", with: ".")
+        if !correctedAmount.isNumeric() {
             setValidationError(view: amountErrorView, label: amountErrorLabel, errorMessage: .InvalidAmount)
             return
         }
@@ -680,7 +681,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 }
             }
             
-            if !amount.isAmountValid(forBalance: balanceToValidate) {
+            if !correctedAmount.isAmountValid(forBalance: balanceToValidate) {
                 amountErrorView.isHidden = false
                 amountErrorLabel.text = "Insufficient \(selectedCurrency) available"
                 isInputDataValid = false

@@ -177,7 +177,7 @@ extension FundedWallet {
                     codes.append(balance)
                 }
                 if balance.assetType == "native" {
-                    codes.append(balance)
+                    codes.insert(balance, at: 0)
                 }
             }
             
