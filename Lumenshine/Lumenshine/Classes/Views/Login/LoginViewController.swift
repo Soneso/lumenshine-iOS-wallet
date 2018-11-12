@@ -136,7 +136,6 @@ extension LoginViewController {
 extension LoginViewController: LoginViewDelegate {
     func didTapSubmitButton(email: String, password: String, tfaCode: String?) {
         showActivity()
-        BiometricHelper.enableTouch(false)
         viewModel.loginStep1(email: email, password: password, tfaCode: tfaCode) { [weak self] result in
             DispatchQueue.main.async {
                 self?.hideActivity(completion: {

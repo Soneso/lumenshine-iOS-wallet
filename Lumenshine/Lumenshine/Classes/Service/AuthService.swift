@@ -184,8 +184,7 @@ public class AuthService: BaseService {
     /// Loads the server signing key from the servers stellar.toml file
     /// - Parameter: ServerSigningKeyClosure
     open func loadServerSigningKey(completion:@escaping ServerSigningKeyClosure) {
-        let serverSigningKeyTomlKey = "SIGNING_KEY"
-        
+         
         guard let url = URL(string: Services.shared.tomlURL) else {
             completion(.failure(error: .invalidRequest))
             return
@@ -194,8 +193,8 @@ public class AuthService: BaseService {
         DispatchQueue.global().async {
             do {
                 let tomlString = try String(contentsOf: url, encoding: .utf8)
-                let toml = try Toml(withString: tomlString)
-                if let serverKey = toml.string(serverSigningKeyTomlKey) {
+                let toml = try StellarToml(fromString: tomlString)
+                if let serverKey = toml.accountInformation.signingKey {
                     completion(.success(signingKey: serverKey))
                 } else {
                     completion(.failure(error: .noSigningKeySet))
@@ -217,45 +216,41 @@ public class AuthService: BaseService {
     ///     - userKeyPair: the keypair of the user including its public key and private key
     open func signSEP10ChallengeIfValid(base64EnvelopeXDR: String, userKeyPair: KeyPair, completion:@escaping SignSEP10ChallengeClosure) {
         validateSEP10Envelope(base64EnvelopeXDR: base64EnvelopeXDR, userAccountId: userKeyPair.accountId) { validationResult in
-            switch validationResult {
-            case .success(let isValid, let transactionEnvelopeXDR):
-                if isValid, let envelopeXDR = transactionEnvelopeXDR, envelopeXDR.tx.seqNum == 0 {
-                    // sign
-                    // get currently used stellar network
-                    var network = Network.testnet
-                    if (Services.shared.usePublicStellarNetwork) {
-                        network = Network.public
+            DispatchQueue.global().async {
+                switch validationResult {
+                case .success(let isValid, let transactionEnvelopeXDR):
+                    if isValid, let envelopeXDR = transactionEnvelopeXDR, envelopeXDR.tx.seqNum == 0 {
+                        // sign
+                        // get currently used stellar network
+                        var network = Network.testnet
+                        if (Services.shared.usePublicStellarNetwork) {
+                            network = Network.public
+                        }
+                        do {
+                            // TODO: improve this in the SDK: add signature + get base 64
+                            let tx = envelopeXDR.tx
+                            
+                            // user signature
+                            let transactionHash = try [UInt8](tx.hash(network: network))
+                            let userSignature = userKeyPair.signDecorated(transactionHash)
+                            
+                            envelopeXDR.signatures.append(userSignature)
+                            
+                            if let xdrEncodedEnvelope = envelopeXDR.xdrEncoded {
+                                completion(.success(signedXDR: xdrEncodedEnvelope))
+                                return
+                            } else {
+                                completion(.failure(error: .xdrError))
+                            }
+                        } catch _ {
+                            completion(.failure(error: .xdrError))
+                        }
+                    } else {
+                        completion(.failure(error: .invalidSEP10Challenge))
                     }
-                    do {
-                        // TODO: improve this in the SDK: add signature + get base 64
-                        let tx = envelopeXDR.tx
-                        // server signature
-                        let serverSignature = envelopeXDR.signatures.first
-                        
-                        // user signature
-                        let transactionHash = try [UInt8](tx.hash(network: network))
-                        let userSignature = userKeyPair.signDecorated(transactionHash)
-                        
-                        // server + user signature
-                        let signatures = [serverSignature, userSignature]
-                        
-                        // new envelope containung both signatures
-                        let signedEnvelopeXDR = TransactionEnvelopeXDR(tx: tx, signatures:signatures as! [DecoratedSignatureXDR])
-                        
-                        // base 64
-                        var encodedEnvelope = try XDREncoder.encode(signedEnvelopeXDR)
-                        let result = Data(bytes: &encodedEnvelope, count: encodedEnvelope.count).base64EncodedString()
-                    
-                        completion(.success(signedXDR: result))
-                    } catch let error {
-                        print(error)
-                        completion(.failure(error: .badCredentials))
-                    }
-                } else {
-                    completion(.failure(error: .invalidSEP10Challenge))
+                case .failure(let error):
+                    completion(.failure(error: error))
                 }
-            case .failure(let error):
-                completion(.failure(error: error))
             }
         }
     }
@@ -263,12 +258,9 @@ public class AuthService: BaseService {
     open func validateSEP10Envelope(base64EnvelopeXDR: String, userAccountId: String, completion:@escaping SEP10ChallengeValidationClosure) {
         
         do {
-            // xdr decoder to be used for decoding the transaction envelope
-            let xdrDecoder = XDRDecoder.init(data: [UInt8].init(base64: base64EnvelopeXDR))
-        
             
             // decode the envelope
-            let transactionEnvelopeXDR = try TransactionEnvelopeXDR(fromBinary: xdrDecoder)
+            let transactionEnvelopeXDR = try TransactionEnvelopeXDR(xdr:base64EnvelopeXDR)
             let transactionXDR = transactionEnvelopeXDR.tx
             
             // sequence number of transaction must be 0

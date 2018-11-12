@@ -14,6 +14,7 @@ public enum ServiceError: Error {
     case unexpectedDataType
     case invalidRequest
     case badCredentials
+    case xdrError
     case parsingFailed(message: String)
     case encryptionFailed(message: String)
     case validationFailed(error: ErrorResponse)
@@ -65,6 +66,8 @@ extension ServiceError: LocalizedError {
             return R.string.localizable.invalid_request()
         case .badCredentials:
             return R.string.localizable.bad_credentials()
+        case .xdrError:
+            return R.string.localizable.xdr_error()
         case .parsingFailed(let message):
             return message
         case .encryptionFailed(let message):
