@@ -31,7 +31,7 @@ public enum WalletsEnum {
 }
 
 public enum AddressStatusEnum {
-    case success(isFunded: Bool, isTrusted: Bool?)
+    case success(isFunded: Bool, isTrusted: Bool?, limit: CoinUnit?)
     case failure
 }
 
@@ -111,6 +111,9 @@ public class UserManager: NSObject {
     }
     
     func checkAddressStatus(forAccountID accountID: String, asset: AccountBalanceResponse, completion: @escaping AddressStatusClosure) {
+        
+        var limit: CoinUnit? = nil
+        
         stellarSDK.accounts.getAccountDetails(accountId: accountID) { response in
             switch response {
             case .success(let accountDetails):
@@ -124,18 +127,23 @@ public class UserManager: NSObject {
                         if balance.assetCode == asset.assetCode &&
                             balance.assetIssuer == asset.assetIssuer {
                             isTrusted = true
+                            if let blimit = balance.limit, let cbalance = CoinUnit(balance.balance), let climit = CoinUnit(blimit), let minus = CoinUnit("-1.0") {
+                                limit = climit.addingProduct(minus, cbalance)
+                                
+                            }
+                            break
                         }
                     }
                 }
                 DispatchQueue.main.async {
-                    completion(.success(isFunded: true, isTrusted: isTrusted))
+                    completion(.success(isFunded: true, isTrusted: isTrusted, limit:limit))
                 }
             case .failure(let error):
                 switch error {
                 case .notFound( _, _):
                     // does not exist => is not funded
                     DispatchQueue.main.async {
-                        completion(.success(isFunded: false, isTrusted: false))
+                        completion(.success(isFunded: false, isTrusted: false, limit:limit))
                     }
                 default:
                     DispatchQueue.main.async {
@@ -296,7 +304,6 @@ public class UserManager: NSObject {
                     for balance in accountDetails.balances {
                         switch balance.assetType {
                         case AssetTypeAsString.NATIVE:
-                            print("balance: \(balance.balance) XLM")
                             if let units = CoinUnit(balance.balance) {
                                 xlm += units
                             }

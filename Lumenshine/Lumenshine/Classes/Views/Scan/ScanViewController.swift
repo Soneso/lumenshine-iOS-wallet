@@ -11,6 +11,7 @@ import AVFoundation
 
 protocol ScanViewControllerDelegate: class {
     func setQR(value: String)
+    func noQRCameraFound()
 }
 
 class ScanViewController: UIViewController {
@@ -56,8 +57,9 @@ class ScanViewController: UIViewController {
     
     func setupView() {
         navigationItem.backButton.tintColor = Stylesheet.color(.white)
-        navigationItem.titleLabel.text = "Scanning..."
+        navigationItem.titleLabel.text = "QR Code Scanner"
         navigationItem.titleLabel.textColor = Stylesheet.color(.white)
+        navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         
         view.backgroundColor = Stylesheet.color(.black)
     }
@@ -77,7 +79,7 @@ class ScanViewController: UIViewController {
         
         let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: deviceTypes, mediaType: AVMediaType.video, position: .back)
         guard let captureDevice = deviceDiscoverySession.devices.first else {
-            print("No Camera Found.")
+            self.delegate?.noQRCameraFound()
             return
         }
         
@@ -110,16 +112,6 @@ class ScanViewController: UIViewController {
             view.bringSubview(toFront: qrCodeFrameView)
         }
     }
-    
-    func showAlert(qrCode: String) {
-        let alert = UIAlertController(title: "Valid QR Code Found", message: qrCode, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: R.string.localizable.ok(),
-                                      style: .cancel,
-                                      handler: { action in
-            self.dismissView()
-        }))
-        present(alert, animated: true)
-    }
 }
 
 extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
@@ -136,11 +128,8 @@ extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
             qrCodeFrameView?.frame = barCodeObject!.bounds
             
             if let qrValue =  metadataObj.stringValue {
-                delegate?.setQR(value: qrValue)
                 captureSession.stopRunning()
-                
-                navigationItem.titleLabel.text = "Valid QR Code Found"
-                showAlert(qrCode:qrValue)
+                delegate?.setQR(value: qrValue)
             }
         }
     }
