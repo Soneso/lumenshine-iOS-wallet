@@ -102,7 +102,7 @@ class SettingsViewModel: SettingsViewModelType {
                 navigationCoordinator?.performTransition(transition: .showFingerprint)
             } else {
                 BiometricHelper.enableTouch(false)
-                BiometricHelper.removePassword(username: user.email)
+                BiometricHelper.removePasswords()
             }
         case .notifications:
             enableNotifications(value)

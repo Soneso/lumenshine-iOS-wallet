@@ -96,15 +96,15 @@ class BiometricHelper {
         }
     }
     
-    static func removePassword(username: String) {
+    static func removePasswords() {
         do {
-            // TODO remove all passwords!
-            let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
-                                                    account: username,
-                                                    accessGroup: KeychainConfiguration.accessGroup)
-            try passwordItem.deleteItem()
+            let passwords = try KeychainPasswordItem.passwordItems(forService: KeychainConfiguration.serviceName,
+                                                               accessGroup: KeychainConfiguration.accessGroup)
+            for password in passwords {
+                try password.deleteItem()
+            }
         } catch {
-            print("Error deleting password from keychain: \(error)")
+            print("Error deleting passwords from keychain: \(error)")
         }
     }
     
