@@ -57,11 +57,11 @@ class ReLoginMenuViewModel : LoginMenuViewModel {
 fileprivate extension ReLoginMenuViewModel {
     
     func logout() {
-        if let deviceToken = UserDefaults.standard.value(forKey: Keys.deviceToken) as? String {
+        if let deviceToken = UserDefaults.standard.value(forKey: Keys.UserDefs.DeviceToken) as? String {
             services.push.unsubscribe(pushToken: deviceToken) { result in
                 switch result {
                 case .success:
-                    UserDefaults.standard.setValue(nil, forKey:Keys.deviceToken)
+                    UserDefaults.standard.setValue(nil, forKey:Keys.UserDefs.DeviceToken)
                 case .failure(let error):
                     print("Push unsubscribe error: \(error)")
                 }

@@ -42,6 +42,12 @@ class WalletsViewController: UIViewController, UITableViewDataSource {
                 self.tableView.reloadData()
             }
         }
+        
+        viewModel.scrollToItemClosure = { (index) in
+            DispatchQueue.main.async {
+                self.tableView.scrollToRow(at: IndexPath(row: index, section: 0), at: .top, animated: true)
+            }
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -154,6 +160,8 @@ class WalletsViewController: UIViewController, UITableViewDataSource {
                 }
                 
                 viewmodel.reloadClosure?()
+                
+                viewmodel.showWalletIfNeeded()
             }
         }
     }

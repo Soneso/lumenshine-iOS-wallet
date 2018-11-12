@@ -326,7 +326,7 @@ class SettingsViewModel: SettingsViewModelType {
     }
     
     func destinationCurrencySelected(_ currency: String) {
-        UserDefaults.standard.setValue(currency, forKey: Keys.destinationCurrency)
+        UserDefaults.standard.setValue(currency, forKey: Keys.UserDefs.DestinationCurrency)
     }
 }
 
@@ -421,17 +421,17 @@ fileprivate extension SettingsViewModel {
     }
     
     func enableNotifications(_ enable: Bool) {
-        UserDefaults.standard.setValue(enable, forKey: Keys.notifications)
+        UserDefaults.standard.setValue(enable, forKey: Keys.UserDefs.Notifications)
     
         if enable {
             UIApplication.shared.registerForRemoteNotifications()
         } else {
             UIApplication.shared.unregisterForRemoteNotifications()
-            if let deviceToken = UserDefaults.standard.value(forKey: Keys.deviceToken) as? String {
+            if let deviceToken = UserDefaults.standard.value(forKey: Keys.UserDefs.DeviceToken) as? String {
                 services.push.unsubscribe(pushToken: deviceToken) { result in
                     switch result {
                     case .success:
-                        UserDefaults.standard.setValue(nil, forKey:Keys.deviceToken)
+                        UserDefaults.standard.setValue(nil, forKey:Keys.UserDefs.DeviceToken)
                     case .failure(let error):
                         print("Push unsubscribe error: \(error)")
                     }
@@ -441,7 +441,7 @@ fileprivate extension SettingsViewModel {
     }
     
     func isNotificationsEnabled() -> Bool {
-        if let value = UserDefaults.standard.value(forKey: Keys.notifications) as? Bool {
+        if let value = UserDefaults.standard.value(forKey: Keys.UserDefs.Notifications) as? Bool {
             return value
         }
         return true

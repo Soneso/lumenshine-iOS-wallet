@@ -16,11 +16,14 @@ protocol HomeViewModelType: Transitionable {
     var appendClosure: ((CardViewModelType) -> ())? { get set }
     var totalNativeFoundsClosure: ((CoinUnit) -> ())? { get set }
     var currencyRateUpdateClosure: ((Double) -> ())? { get set }
+    var scrollToItemClosure: ((Int) -> ())? { get set }
+    
     
     func foundAccount()
     func reloadCards()
     func refreshWallets()
     func updateCurrencies()
+    func showWalletIfNeeded()
 }
 
 class HomeViewModel : HomeViewModelType {
@@ -72,6 +75,7 @@ class HomeViewModel : HomeViewModelType {
             currenciesMonitor.updateClosure = currencyRateUpdateClosure
         }
     }
+    var scrollToItemClosure: ((Int) -> ())?
     
     var barTitles: [String] {
         return [
@@ -132,6 +136,8 @@ class HomeViewModel : HomeViewModelType {
             self?.cardViewModels.append(helpViewModel)
             
             self?.reloadClosure?()
+            
+            self?.showWalletIfNeeded()
         }
     }
     
@@ -162,6 +168,21 @@ class HomeViewModel : HomeViewModelType {
                         self.appendClosure?(chartViewModel)
                     }
                 }
+            }
+        }
+    }
+    
+    func showWalletIfNeeded() {
+        if let walletPublicKey = UserDefaults.standard.value(forKey: Keys.UserDefs.ShowWallet) as? String {
+            let index = cardViewModels.firstIndex(where: {
+                if let wallet = $0 as? WalletCardViewModel {
+                    return wallet.wallet.publicKey == walletPublicKey
+                }
+                return false
+            })
+            UserDefaults.standard.setValue(nil, forKey: Keys.UserDefs.ShowWallet)
+            if let index = index {
+                self.scrollToItemClosure?(index)
             }
         }
     }

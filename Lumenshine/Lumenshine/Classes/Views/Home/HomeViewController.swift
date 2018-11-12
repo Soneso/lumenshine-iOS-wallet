@@ -61,6 +61,12 @@ class HomeViewController: UIViewController {
                 self.header?.funds = nativeFunds.stringConversionTo(currency: .usd, rate: rate)
             }
         }
+        
+        viewModel.scrollToItemClosure = { (index) in
+            DispatchQueue.main.async {
+                self.tableView.scrollToRow(at: IndexPath(row: index, section: 0), at: .top, animated: true)
+            }
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

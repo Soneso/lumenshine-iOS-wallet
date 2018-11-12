@@ -24,7 +24,7 @@ typealias BiometricAuthResponseClosure = (_ response:BiometricAuthResponseEnum) 
 class BiometricHelper {
     static var isBiometricAuthEnabled: Bool {
         get {
-            if let touchEnabled = UserDefaults.standard.value(forKey: Keys.touchID) as? Bool {
+            if let touchEnabled = UserDefaults.standard.value(forKey: Keys.UserDefs.TouchID) as? Bool {
                 if touchEnabled {
                     let biometricIDAuth = BiometricIDAuth()
                     if biometricIDAuth.canEvaluatePolicy() {
@@ -38,7 +38,7 @@ class BiometricHelper {
     
     static func getMnemonic(completion: @escaping PasswordClosure) {
         let passwordManager = PasswordManager()
-        if let userName = UserDefaults.standard.value(forKey: Keys.username) as? String {
+        if let userName = UserDefaults.standard.value(forKey: Keys.UserDefs.Username) as? String {
             password(for: userName) { result in
                 switch result {
                 case .success(let password):
@@ -57,11 +57,11 @@ class BiometricHelper {
     }
     
     static func enableTouch(_ touch: Bool) {
-        UserDefaults.standard.setValue(touch, forKey: Keys.touchID)
+        UserDefaults.standard.setValue(touch, forKey: Keys.UserDefs.TouchID)
     }
     
     static var isTouchEnabled: Bool {
-        if let touchEnabled = UserDefaults.standard.value(forKey: Keys.touchID) as? Bool {
+        if let touchEnabled = UserDefaults.standard.value(forKey: Keys.UserDefs.TouchID) as? Bool {
             return touchEnabled
         } else {
             return false

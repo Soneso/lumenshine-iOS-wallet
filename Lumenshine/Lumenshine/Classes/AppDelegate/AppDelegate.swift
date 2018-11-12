@@ -89,7 +89,7 @@ extension AppDelegate {
         let token = tokenParts.joined()
         print("Device Token: \(token)")
         
-        NotificationCenter.default.post(name: Notification.Name(Keys.deviceTokenNotification), object: nil, userInfo: [Keys.deviceToken:token])
+        NotificationCenter.default.post(name: Notification.Name(Keys.Notifications.DeviceToken), object: nil, userInfo: [Keys.UserDefs.DeviceToken:token])
     }
     
     func application(_ application: UIApplication,
@@ -106,20 +106,20 @@ extension AppDelegate {
             options: authOptions,
             completionHandler: {_, _ in })
         
-        let viewAction = UNNotificationAction(identifier: "ViewActionIdentifier",
+        let viewAction = UNNotificationAction(identifier: Keys.NotificationActions.View,
                                               title: R.string.localizable.push_view(),
                                               options: [.foreground])
         
-        let cancelAction = UNNotificationAction(identifier: "CancelActionIdentifier",
+        let cancelAction = UNNotificationAction(identifier: Keys.NotificationActions.Cancel,
                                                 title: R.string.localizable.cancel(),
                                                 options: [.destructive])
         
-        let newsCategory = UNNotificationCategory(identifier: "GENERAL",
+        let category = UNNotificationCategory(identifier: Keys.NotificationCategories.General,
                                                   actions: [viewAction, cancelAction],
                                                   intentIdentifiers: [],
                                                   options: [])
         
-        UNUserNotificationCenter.current().setNotificationCategories([newsCategory])
+        UNUserNotificationCenter.current().setNotificationCategories([category])
     }
 }
 
@@ -133,10 +133,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
         let userInfo = response.notification.request.content.userInfo
-        
-        // TODO: do something with public key
-        if let walletKey = userInfo["wallet_key"] as? String {
+        if let walletKey = userInfo["wallet_key"] as? String,
+            response.actionIdentifier == Keys.NotificationActions.View {
+            UserDefaults.standard.setValue(walletKey, forKey: Keys.UserDefs.ShowWallet)
             
+            NotificationCenter.default.post(name: Notification.Name(Keys.Notifications.ScrollToWallet), object: nil, userInfo:nil)
         }
         
         completionHandler()

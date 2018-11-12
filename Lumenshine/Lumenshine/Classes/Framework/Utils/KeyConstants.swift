@@ -10,17 +10,36 @@ import Foundation
 
 public struct Keys {
 
-    static let destinationCurrency = "DestinationCurrencyKey"
+    public struct UserDefs {
+        static let DestinationCurrency = "DestinationCurrencyKey"
+        
+        static let Notifications = "NotificationsKey"
+        
+        static let SelectedPeriod = "SelectedPeriodIndexKey"
+        
+        static let TouchID = "TouchIDKey"
+        
+        static let DeviceToken = "DeviceTokenKey"
+        
+        static let Username = "UsernameKey"
+        
+        static let ShowWallet = "ShowWalletKey"
+    }
+
     
-    static let notifications = "NotificationsKey"
+    public struct Notifications {
+        static let DeviceToken = "DeviceTokenNotificationKey"
+        
+        static let ScrollToWallet = "ScrollToWalletNotificationKey"
+    }
     
-    static let selectedPeriod = "SelectedPeriodIndexKey"
+    public struct NotificationActions {
+        static let View = "ViewActionIdentifier"
+        
+        static let Cancel = "CancelActionIdentifier"
+    }
     
-    static let touchID = "TouchIDKey"
-    
-    static let deviceToken = "DeviceTokenKey"
-    
-    static let deviceTokenNotification = "DeviceTokenNotificationKey"
-    
-    static let username = "UsernameKey"
+    public struct NotificationCategories {
+        static let General = "GENERAL"
+    }
 }
