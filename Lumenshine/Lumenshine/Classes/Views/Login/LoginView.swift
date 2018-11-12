@@ -88,7 +88,7 @@ extension LoginView {
                 return
         }
         _ = resignFirstResponder()
-        UserDefaults.standard.setValue(accountName, forKey: Keys.username)
+        UserDefaults.standard.setValue(accountName, forKey: Keys.UserDefs.Username)
         delegate?.didTapSubmitButton(email: accountName, password: password, tfaCode: textField3.text)
     }
 }
@@ -107,7 +107,7 @@ fileprivate extension LoginView {
         prepareTextFields()
         prepareLoginButton()
         
-        if let storedUsername = UserDefaults.standard.value(forKey: Keys.username) as? String {
+        if let storedUsername = UserDefaults.standard.value(forKey: Keys.UserDefs.Username) as? String {
             textField1.text = storedUsername
         }
     }

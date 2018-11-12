@@ -78,7 +78,7 @@ extension String  {
         return NSData(base64Encoded: self) != nil
     }
     
-    func isAmountValid(forBalance balance: String) -> Bool {
+    func isAmountSufficient(forBalance balance: String) -> Bool {
         if let availableFunds = CoinUnit(balance), let requestedFunds = CoinUnit(self) {
             if (availableFunds.isLess(than: requestedFunds) || requestedFunds == 0) {
                 return false
@@ -89,7 +89,7 @@ extension String  {
         
         return false
     }
-        
+
     func isMemoTextValid(limitNrOfBytes: Int) -> MemoTextValidationResult {
         var isASCIIEncoded: Bool = false
         var isUTF8Encoded: Bool = false
@@ -177,22 +177,6 @@ extension String  {
         
         return NSPredicate(format: "SELF MATCHES[c] %@", sRegex).evaluate(with: self)
     }
-    
-    func isStellarAddress() -> Bool {
-        let sRegex = "[a-zA-Z0-9!#$%\\&'+/=?\\^_`{|}~-]+[*][a-zA-Z]+[.][a-zA-Z]+"
-        
-        return NSPredicate(format: "SELF MATCHES[c] %@", sRegex).evaluate(with: self)
-    }
-    
-    func isPublicKey() -> Bool {
-        return self.hasPrefix("G")
-    }
-    
-//    func isPublicKey() -> Bool {
-//        let sRegex = "[G]+[a-zA-Z0-9]{31}$"
-//
-//        return NSPredicate(format: "SELF MATCHES[c] %@", sRegex).evaluate(with: self)
-//    }
     
     func isNumeric() -> Bool {
         let sRegex = "^(([0-9]\\.)|([1-9][0-9]*\\.*))[0-9]*$"

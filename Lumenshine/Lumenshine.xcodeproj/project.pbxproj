@@ -264,6 +264,7 @@
 		833F7D6F2189FB9600ED43D9 /* SEP10ChallengeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F7D6E2189FB9600ED43D9 /* SEP10ChallengeResponse.swift */; };
 		833F7D71218D95B800ED43D9 /* LoginStep1Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F7D70218D95B800ED43D9 /* LoginStep1Response.swift */; };
 		833F7D73218F6E3F00ED43D9 /* TFASecretResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F7D72218F6E3F00ED43D9 /* TFASecretResponse.swift */; };
+		834D13AA21982F7400428D7A /* QRCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834D13A921982F7400428D7A /* QRCoder.swift */; };
 		B16BC4C62190398000CF7280 /* PushService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16BC4C52190398000CF7280 /* PushService.swift */; };
 		B16BC4C82190548E00CF7280 /* KeyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16BC4C72190548E00CF7280 /* KeyConstants.swift */; };
 		B16EE6D72181CD6300AF1D8B /* UITextView+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16EE6D62181CD6300AF1D8B /* UITextView+Size.swift */; };
@@ -681,6 +682,7 @@
 		833F7D6E2189FB9600ED43D9 /* SEP10ChallengeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEP10ChallengeResponse.swift; sourceTree = "<group>"; };
 		833F7D70218D95B800ED43D9 /* LoginStep1Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStep1Response.swift; sourceTree = "<group>"; };
 		833F7D72218F6E3F00ED43D9 /* TFASecretResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFASecretResponse.swift; sourceTree = "<group>"; };
+		834D13A921982F7400428D7A /* QRCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCoder.swift; sourceTree = "<group>"; };
 		B16BC4C52190398000CF7280 /* PushService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushService.swift; sourceTree = "<group>"; };
 		B16BC4C72190548E00CF7280 /* KeyConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyConstants.swift; sourceTree = "<group>"; };
 		B16EE6D62181CD6300AF1D8B /* UITextView+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Size.swift"; sourceTree = "<group>"; };
@@ -855,6 +857,7 @@
 				C682C001213691A3007705DF /* BiometricHelper.swift */,
 				43E23993214F8EF00017AABF /* GradientView.swift */,
 				B16BC4C72190548E00CF7280 /* KeyConstants.swift */,
+				834D13A921982F7400428D7A /* QRCoder.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2427,6 +2430,7 @@
 				C6DBDB7121199FF100FCEC78 /* TransactionResult.swift in Sources */,
 				4304491C206BF47400349B51 /* UIView+Shake.swift in Sources */,
 				C691F68F211C571E00ECA2C4 /* TransactionHelper.swift in Sources */,
+				834D13AA21982F7400428D7A /* QRCoder.swift in Sources */,
 				C675BC28215CF86200B663DB /* BaseButton.swift in Sources */,
 				B1ECB668218C82DE002FBB6A /* TransactionsService.swift in Sources */,
 				4390D582205FBD6E00383BB2 /* Services.swift in Sources */,

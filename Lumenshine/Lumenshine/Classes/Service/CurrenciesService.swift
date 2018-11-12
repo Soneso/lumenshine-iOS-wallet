@@ -103,8 +103,8 @@ public class CurrenciesService: BaseService {
     open func getKnownInflationDestination(forID ID: Int, response: @escaping GetKnownInflationDestinationClosure) {
         var params = Dictionary<String,Any>()
         params["id"] = ID
-        let bodyData = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-        POSTRequestWithPath(path: "/portal/user/dashboard/get_known_inflation_destination", body: bodyData) { (result) -> (Void) in
+        
+        POSTRequestWithPath(path: "/portal/user/dashboard/get_known_inflation_destination", parameters: params) { (result) -> (Void) in
             switch result {
             case .success(let data):
                 do {
@@ -138,8 +138,8 @@ public class CurrenciesService: BaseService {
     open func getKnownCurrency(forID ID: Int, response: @escaping GetKnownCurrencyClosure) {
         var params = Dictionary<String,Any>()
         params["id"] = ID
-        let bodyData = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-        POSTRequestWithPath(path: "/portal/user/dashboard/get_known_currency", body: bodyData) { (result) -> (Void) in
+        
+        POSTRequestWithPath(path: "/portal/user/dashboard/get_known_currency", parameters: params) { (result) -> (Void) in
             switch result {
             case .success(let data):
                 do {

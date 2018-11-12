@@ -14,6 +14,7 @@ public enum ServiceError: Error {
     case unexpectedDataType
     case invalidRequest
     case badCredentials
+    case xdrError
     case parsingFailed(message: String)
     case encryptionFailed(message: String)
     case validationFailed(error: ErrorResponse)
@@ -65,6 +66,8 @@ extension ServiceError: LocalizedError {
             return R.string.localizable.invalid_request()
         case .badCredentials:
             return R.string.localizable.bad_credentials()
+        case .xdrError:
+            return R.string.localizable.xdr_error()
         case .parsingFailed(let message):
             return message
         case .encryptionFailed(let message):
@@ -145,16 +148,16 @@ public class BaseService: NSObject, URLSessionDelegate {
     ///
     /// - parameter path:  A path relative to the baseURL. If URL parameters have to be sent they can be encoded in this parameter as you would do it with regular URLs.
     /// - parameter response:   The closure to be called upon response.
-    open func GETRequestWithPath(path: String, completion: @escaping ResponseClosure) {
-        requestFromUrl(url: baseURL + path, method:.get, completion:completion)
+    open func GETRequestWithPath(path: String, parameters: [String: String]? = nil, completion: @escaping ResponseClosure) {
+        requestFromUrl(url: baseURL + path, method:.get, parameters: parameters, completion:completion)
     }
     
     /// Performs a get request to the spcified path.
     ///
     /// - parameter path:  A URL for the request. If URL parameters have to be sent they can be encoded in this parameter as you would do it with regular URLs.
     /// - parameter response:   The closure to be called upon response.
-    open func GETRequestFromUrl(url: String, completion: @escaping ResponseClosure) {
-        requestFromUrl(url: url, method:.get, completion:completion)
+    open func GETRequestFromUrl(url: String, parameters: [String: String]? = nil, completion: @escaping ResponseClosure) {
+        requestFromUrl(url: url, method:.get, parameters: parameters, completion:completion)
     }
     
     /// Performs a post request to the spcified path.
@@ -162,22 +165,36 @@ public class BaseService: NSObject, URLSessionDelegate {
     /// - parameter path:  A path relative to the baseURL. If URL parameters have to be sent they can be encoded in this parameter as you would do it with regular URLs.
     /// - parameter body:  An optional parameter with the data that should be contained in the request body
     /// - parameter response:   The closure to be called upon response.
-    open func POSTRequestWithPath(path: String, body:Data? = nil, completion: @escaping ResponseClosure) {
-        requestFromUrl(url: baseURL + path, method:.post, body:body, completion:completion)
+    open func POSTRequestWithPath(path: String, parameters: [String:Any]? = nil, completion: @escaping ResponseClosure) {
+        requestFromUrl(url: baseURL + path, method:.post, parameters: parameters, completion:completion)
     }
     
-    open func requestFromUrl(url: String, method: HTTPMethod, body:Data? = nil, completion: @escaping ResponseClosure) {
-        let url = URL(string: url)!
-        var urlRequest = URLRequest(url: url)
+    open func requestFromUrl(url: String, method: HTTPMethod, parameters: [String:Any]? = nil, completion: @escaping ResponseClosure) {
+        
+        guard let urlComp = URLComponents(string: url) else { return }
+        var urlRequest: URLRequest
+        var urlComponents = urlComp
         
         switch method {
         case .get:
-            break
+            urlComponents.queryItems = parameters?.map {
+                URLQueryItem(name: $0.key, value: $0.value as? String)
+            }
+            urlRequest = URLRequest(url: urlComponents.url!)
         case .post:
+            urlRequest = URLRequest(url: urlComponents.url!)
             urlRequest.httpMethod = "POST"
-            urlRequest.httpBody = body
             urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
             urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+            if let params = parameters {
+                do {
+                    let body = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+                    urlRequest.httpBody = body
+                } catch {
+                    completion(.failure(error: .parsingFailed(message: error.localizedDescription)))
+                }
+            }
         }
         
         urlRequest.setValue(BaseService.jwtToken, forHTTPHeaderField: "Authorization")

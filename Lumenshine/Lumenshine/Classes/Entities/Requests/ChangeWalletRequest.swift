@@ -17,11 +17,17 @@ struct ChangeWalletRequest: Codable {
         case id
         case walletName = "wallet_name"
         case federationAddress = "federation_address"
-        
     }
     
     init(id: Int) {
         self.id = id
     }
     
+    func toDictionary() -> [String:Any] {
+        var dict = [String:Any]()
+        dict[CodingKeys.id.rawValue] = id
+        dict[CodingKeys.walletName.rawValue] = walletName
+        dict[CodingKeys.federationAddress.rawValue] = federationAddress
+        return dict
+    }
 }

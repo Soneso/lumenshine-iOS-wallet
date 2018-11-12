@@ -59,8 +59,6 @@ enum AmountSegmentedControlIndexes: Int {
 }
 
 public let MaximumLengthInBytesForMemoText = 28
-public let QRCodeSeparationString = " "
-public let QRCodeNativeCurrencyIssuer = "native"
 public let OtherCurrencyText = "Other"
 
 class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, WalletActionsProtocol, ScanViewControllerDelegate, UITextFieldDelegate {
@@ -185,14 +183,20 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                             }
                             return
                         } else {
-                            self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .StellarAddressNotFound)
+                            DispatchQueue.main.async {
+                                self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .StellarAddressNotFound)
+                            }
                         }
                     case .failure(error: let error):
                         switch error {
                         case FederationError.invalidAddress:
-                            self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .InvalidStellarAddress)
+                            DispatchQueue.main.async {
+                                self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .InvalidStellarAddress)
+                            }
                         default:
-                            self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .StellarAddressNotFound)
+                            DispatchQueue.main.async {
+                                self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .StellarAddressNotFound)
+                            }
                         }
                     }
                 })
@@ -221,11 +225,21 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             if let currency = getSelectedCurrency() {
                 self.userManager.checkAddressStatus(forAccountID: destinationPublicKey, asset: currency, completion: { (addressResult) -> (Void) in
                     switch addressResult {
-                    case .success(isFunded: let isFunded, isTrusted: let isTrusted):
+                    case .success(isFunded: let isFunded, isTrusted: let isTrusted, limit: let limit):
                         if !isFunded {
                             self.createRecepientAccount = true
-                        } else if let isTrusted = isTrusted, !isTrusted {
-                            self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .CurrencyNoTrust)
+                        } else if let isTrusted = isTrusted {
+                            if !isTrusted {
+                                self.setValidationError(view: self.addressErrorView, label: self.addressErrorLabel, errorMessage: .CurrencyNoTrust)
+                            } else if let limit = limit {
+                                if let amount = self.amountTextField.text {
+                                    let correctedAmount = amount.replacingOccurrences(of: ",", with: ".")
+                                    if let amountToSend = CoinUnit(correctedAmount), !amountToSend.isLessThanOrEqualTo(limit) {
+                                        let individualMessage = "Recepient can not receive more than \(limit)"
+                                        self.setValidationError(view: self.amountErrorView, label: self.amountErrorLabel, errorMessage: .InvalidAmount, individualMessage: individualMessage)
+                                    }
+                                }
+                            }
                         }
                         // continue payment process if valid
                         if (self.isInputDataValid && forMasterKey) {
@@ -247,6 +261,20 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                     let currency = currencyResponse
                     if (hasTrustline) {
                         self.otherCurrencyAsset = currency
+                        
+                        // check limit
+                        if let ownCurrency = currency, let cbalance = CoinUnit(ownCurrency.balance), let climit = CoinUnit(ownCurrency.limit), let minus = CoinUnit("-1.0") {
+                            let limit = climit.addingProduct(minus, cbalance)
+                            print("Limit: " + limit.stringWithUnit)
+                            if let amount = self.amountTextField.text {
+                                let correctedAmount = amount.replacingOccurrences(of: ",", with: ".")
+                                if let amountToSend = CoinUnit(correctedAmount), !amountToSend.isLessThanOrEqualTo(limit) {
+                                    let individualMessage = "Recepient can not receive more than \(limit)"
+                                    self.setValidationError(view: self.amountErrorView, label: self.amountErrorLabel, errorMessage: .InvalidAmount, individualMessage: individualMessage)
+                                    return
+                                }
+                            }
+                        }
                         
                         // continue payment process
                         if (forMasterKey) {
@@ -324,7 +352,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         selectedCurrency = otherCurrencyTextField.text ?? ""
         currentCurrencyLabel.text = selectedCurrency
         setSendButtonDefaultTitle()
-        validateAssetCode()
+        validateOtherAssetCode()
     }
     
     private var selectedMemoType: MemoTypeValues! = MemoTypeValues.MEMO_TEXT {
@@ -376,7 +404,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             
             setSendButtonDefaultTitle()
             
-            if (wallet as! FundedWallet).isCurrencyDuplicateAndValid(withAssetCode: selectedCurrency) {
+            if (wallet as! FundedWallet).isCurrencyDuplicate(withAssetCode: selectedCurrency) {
                 if issuerPickerView == nil {
                     issuerPickerView = UIPickerView()
                     issuerPickerView.delegate = self
@@ -487,7 +515,8 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     private func setAvailableLabels(currency: AccountBalanceResponse) {
         if let balance = CoinUnit(currency.balance) {
-            let availableAmount = currency.assetCode != nil ? balance : balance.availableAmount(forWallet: wallet, forCurrency: currency)
+            let availableAmount = balance.availableAmount(forWallet: wallet, forCurrency: currency)
+            // TODO: the amount shown here is not correctly rounded
             availableAmountLabel.text = "You have \(availableAmount) \(selectedCurrency) available"
             
             if amountSegmentedControl.selectedSegmentIndex == AmountSegmentedControlIndexes.sendAll.rawValue {
@@ -498,7 +527,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     private func setAvailableAmount() {
         for currency in (wallet as! FundedWallet).uniqueAssetCodeBalances {
-            if selectedCurrency == NativeCurrencyNames.xlm.rawValue {
+            if selectedCurrency == NativeCurrencyNames.xlm.rawValue && (currency.assetCode == nil || currency.assetCode == selectedCurrency) {
                 setAvailableLabels(currency: currency)
             } else if let currencyIssuer = issuerTextField.text,
                 currency.assetIssuer == currencyIssuer,
@@ -542,7 +571,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                                                issuer: self.issuerTextField.text ?? nil,
                                                destinationPublicKey: self.destinationPublicKey,
                                                destinationStellarAddress: self.destinationStellarAddress,
-                                               amount: availableAmount != nil ? String(availableAmount!) : (self.amountTextField.text ?? ""),
+                                               amount: availableAmount != nil ? String(availableAmount!) : (self.amountTextField.text?.replacingOccurrences(of: ",", with: ".") ?? ""),
                                                memo: self.memoInputTextField.text?.isEmpty == false ? self.memoInputTextField.text! : nil,
                                                memoType: self.memoTypes.first(where: { (memoType) -> Bool in
                                                 if let memoTypeTextFieldValue = self.memoTypeTextField.text {
@@ -597,15 +626,19 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         setSendButtonDefaultTitle()
     }
     
-    private func setValidationError(view: UIView, label: UILabel, errorMessage: ValidationErrors) {
-        DispatchQueue.main.async {
-            view.isHidden = false
-            label.text = errorMessage.rawValue
-            self.isInputDataValid = false
-        
-            self.contentView.setContentOffset(CGPoint(x: 0, y: view.frame.center.y), animated: false)
-            self.setSendButtonDefaultTitle()
+    private func setValidationError(view: UIView, label: UILabel, errorMessage: ValidationErrors, individualMessage: String? = nil) {
+        view.isHidden = false
+        if let individualMessage = individualMessage {
+            label.text = individualMessage
         }
+        else {
+            label.text = errorMessage.rawValue
+        }
+        self.isInputDataValid = false
+        
+        self.contentView.setContentOffset(CGPoint(x: 0, y: view.frame.center.y), animated: false)
+        self.setSendButtonDefaultTitle()
+        
     }
     
     private func resetOtherCurrencyValidationError() {
@@ -615,13 +648,13 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         isInputDataValid = true
     }
     
-    private func validateAssetCodeIsFilled() {
+    private func validateOtherAssetCodeIsFilled() {
         if !otherCurrencyView.isHidden, let assetCode = otherCurrencyTextField.text, !assetCode.isMandatoryValid() {
             setValidationError(view: otherCurrencyErrorView, label: otherCurrencyErrorLabel, errorMessage: .Mandatory)
         }
     }
     
-    private func validateAssetCode() {
+    private func validateOtherAssetCode() {
         if let assetCode = otherCurrencyTextField.text {
             if !assetCode.isAssetCodeValid() {
                 setValidationError(view: otherCurrencyErrorView, label: otherCurrencyErrorLabel, errorMessage: .InvalidAssetCode)
@@ -642,7 +675,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 return
             }
             
-            if !address.isBase64Valid() || !address.isPublicKey(){
+            if !address.isValidEd25519PublicKey() {
                 setValidationError(view: addressErrorView, label: addressErrorLabel, errorMessage: .InvalidAddress)
             }
         }
@@ -662,7 +695,9 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     private func validate(amount: String) {
-        if !amount.isNumeric() {
+        
+        let correctedAmount = amount.replacingOccurrences(of: ",", with: ".")
+        if !correctedAmount.isNumeric() {
             setValidationError(view: amountErrorView, label: amountErrorLabel, errorMessage: .InvalidAmount)
             return
         }
@@ -682,10 +717,10 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 }
             }
             
-            if !amount.isAmountValid(forBalance: balanceToValidate) {
-                amountErrorView.isHidden = false
-                amountErrorLabel.text = "Insufficient \(selectedCurrency) available"
-                isInputDataValid = false
+            if !correctedAmount.isAmountSufficient(forBalance: balanceToValidate) {
+                let individualMessage = "Insufficient \(selectedCurrency) available"
+                setValidationError(view: amountErrorView, label: amountErrorLabel, errorMessage: .InvalidAmount, individualMessage: individualMessage)
+                return
             }
         }
     }
@@ -713,16 +748,19 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             case MemoTypeValues.MEMO_ID.rawValue:
                 if !memoText.isMemoIDValid() {
                     setValidationError(view: memoInputErrorView, label: memoInputErrorLabel, errorMessage: .InvalidMemo)
+                    return
                 }
                 
             case MemoTypeValues.MEMO_HASH.rawValue:
                 if !memoText.isMemoHashValid() {
                     setValidationError(view: memoInputErrorView, label: memoInputErrorLabel, errorMessage: .InvalidMemo)
+                    return
                 }
                 
             case MemoTypeValues.MEMO_RETURN.rawValue:
                 if !memoText.isMemoReturnValid() {
                     setValidationError(view: memoInputErrorView, label: memoInputErrorLabel, errorMessage: .InvalidMemo)
+                    return
                 }
                 
             default:
@@ -733,7 +771,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     private func validateInsertedData(biometricAuth: Bool = false) -> Bool {
         validateAddress()
-        validateAssetCodeIsFilled()
+        validateOtherAssetCodeIsFilled()
         validateAmount()
         validateMemo()
         if isInputDataValid {
@@ -741,56 +779,156 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
         
         checkForTransactionFeeAvailability()
-        //checkForRecipientAccount()
         
         return isInputDataValid
     }
     
-    func setQR(value: String) {
-        // QR Valid Structure:
-        // Currency: XML
-        // Issuer: KAJSHDJAS.../native
-        // Address: KJSAHDJKASH...
-        // Amount: 500
-        // MemoType: none/text/id/hash/return
-        // Memo: none/value
-        // Password: asdfdasjkd
-        
-        // Example: XML native me@me.me 500 none none 1234
-        
-        let qrResultArray = value.components(separatedBy: QRCodeSeparationString)
-        
-        if qrResultArray.count != 7 {
-            scanViewController.view.removeFromSuperview()
-            scanViewController = nil
-            return
-        }
-        
-        currentCurrencyTextField.text = nil
-        currentCurrencyTextField.insertText(qrResultArray[0])
-        issuerTextField.text = qrResultArray[1] != QRCodeNativeCurrencyIssuer ? qrResultArray[1] : nil
-        addressTextField.text = qrResultArray[2]
-        amountTextField.text = qrResultArray[3]
-        
-        switch qrResultArray[4] {
-        case MemoTypeAsString.TEXT:
-            memoTypeTextField.text = MemoTypeValues.MEMO_TEXT.rawValue
-        case MemoTypeAsString.ID:
-            memoTypeTextField.text = MemoTypeValues.MEMO_ID.rawValue
-        case MemoTypeAsString.HASH:
-            memoTypeTextField.text = MemoTypeValues.MEMO_HASH.rawValue
-        case MemoTypeAsString.RETURN:
-            memoTypeTextField.text = MemoTypeValues.MEMO_RETURN.rawValue
-        default:
-            break
-        }
-        
-        if qrResultArray[5] != MemoTypeAsString.NONE {
-            memoInputTextField.text = qrResultArray[5]
-        }
-        
-        scanViewController.view.removeFromSuperview()
+    func noQRCameraFound() {
+        finishQRScanner()
+        self.displaySimpleAlertView(title: "No Camera access", message: "Lumenshine can not access your cammera. Please check your system settings.")
+    }
+    
+    private func finishQRScanner() {
+        navigationController?.popViewController(animated: true)
         scanViewController = nil
+    }
+    
+    func setQR(value: String) {
+        
+        print("QR:" + value)
+        
+        setupForSelectedCurrency()
+        
+        var destinationSet = false
+        
+        // Supported qr-code format, see:
+        // https://github.com/future-tense/stargazer/blob/master/docs/qr-codes.md
+        if let data = value.data(using: String.Encoding.utf8)  {
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                let dictionary = json as? [String: Any]
+                if let stellarDictionary = dictionary?["stellar"] as? [String: Any] {
+                    
+                    if let paymentDictionary = stellarDictionary["payment"] as? [String: Any] {
+                        
+                        if let networkID = paymentDictionary["network"] as? String {
+                            var network = Network.public
+                            if (!Services.shared.usePublicStellarNetwork) {
+                                network = Network.testnet
+                            }
+                            if (!network.rawValue.sha256().hasPrefix(networkID)) {
+                                // not for current network
+                                // TODO: add copy button
+                                self.displaySimpleAlertView(title: "QR code not supported", message: "The OR-Code refers to an unknown Network and can not be used. Value: " + value)
+                                finishQRScanner()
+                                return
+                            }
+                        }
+                        
+                        if let assetDictionary = paymentDictionary["asset"] as? [String: Any] {
+                            if let code = assetDictionary["code"] as? String {
+                                if code != "XLM" {
+                                    if let issuer = assetDictionary["issuer"] as? String {
+                                        // check if wallet has code && issuer
+                                        if let requestedCurrency = (wallet as! FundedWallet).balances.first(where: { (currency) -> Bool in
+                                            return (currency.assetCode == code && currency.assetIssuer == issuer)
+                                        }) {
+                                            print("requested currency: " + requestedCurrency.assetCode! + " " + requestedCurrency.assetIssuer!)
+                                            
+                                            // select asset code
+                                            selectedCurrency = code
+                                            
+                                            // set issuer if wallet has multiple currencies with this asset code
+                                            if (wallet as! FundedWallet).isCurrencyDuplicate(withAssetCode: selectedCurrency) {
+                                                    issuerTextField.text = nil
+                                                    issuerTextField.insertText(issuer)
+                                                    setAvailableAmount()
+                                            }
+                                        } else { // not available currency
+                                            let message = "The QR-Code request a payment with a currency that you do not have in this wallet. Requested currency code is: " + code + " having the issuer public key: " + issuer
+                                            self.displaySimpleAlertView(title: "Currency unavailable", message: message)
+                                            
+                                            finishQRScanner()
+                                            return
+                                        }
+                                    } else
+                                    {
+                                        // invalid
+                                        self.displaySimpleAlertView(title: "Invalid QR-Code", message: "The QR-Code request a payment with non native asset but fails to provide the issuer.")
+                                        finishQRScanner()
+                                        return
+                                    }
+                                }
+                            }
+                        }
+                        if let destination = paymentDictionary["destination"] as? String {
+                            addressTextField.text = destination
+                            destinationSet = true
+                        }
+                        if let amount = paymentDictionary["amount"] as? Double {
+                            amountTextField.text = String(format:"%f", amount)
+                        }
+                        
+                        if let memoDictionary = paymentDictionary["memo"] as? [String: Any] {
+                            if let type = memoDictionary["type"] as? String {
+                                switch type.trimmed.lowercased() {
+                                case "text":
+                                    memoTypeTextField.text = MemoTypeValues.MEMO_TEXT.rawValue
+                                case "id":
+                                    memoTypeTextField.text = MemoTypeValues.MEMO_ID.rawValue
+                                case "hash":
+                                    memoTypeTextField.text = MemoTypeValues.MEMO_HASH.rawValue
+                                case "return":
+                                    memoTypeTextField.text = MemoTypeValues.MEMO_RETURN.rawValue
+                                default:
+                                    break
+                                }
+                            }
+                            if let memo = memoDictionary["value"] as? String {
+                                if memo.trimmed != "" {
+                                    memoInputTextField.text = memo
+                                }
+                            }
+                        }
+                    }
+                    else if let accountDictionary  = stellarDictionary["account"] as? [String: Any] {
+                        // this is a contact qr-code
+                        if let networkID = accountDictionary["network"] as? String {
+                            var network = Network.public
+                            if (!Services.shared.usePublicStellarNetwork) {
+                                network = Network.testnet
+                            }
+                            if (!network.rawValue.sha256().hasPrefix(networkID)) {
+                                // not for current network
+                                // TODO: add copy button
+                                self.displaySimpleAlertView(title: "QR code not supported", message: "The OR-Code refers to an unknown Network and can not be used. Value: " + value)
+                                finishQRScanner()
+                                return
+                            }
+                        }
+                        
+                        if let accounID = accountDictionary["id"] as? String {
+                            addressTextField.text = accounID
+                            destinationSet = true
+                        }
+                    }
+                }
+            } catch {
+                print(error)
+            }
+        }
+        
+        if !destinationSet {
+            if value.isValidEd25519PublicKey() {
+                addressTextField.text = value
+                destinationSet = true
+            } else {
+                // TODO: add copy button
+                self.displaySimpleAlertView(title: "QR-Code not supported", message: "The scanned OR-Code is not supported by Lumenshine. Value: " + value)
+            }
+        }
+        
+        finishQRScanner()
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -840,9 +978,9 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 return
             }
         
-        setupForSelectedCurrency()
-        selectedCurrency = availableCurrencies[row]
-        return
+            setupForSelectedCurrency()
+            selectedCurrency = availableCurrencies[row]
+            return
         } else if pickerView == memoTypePickerView {
             selectedMemoType = memoTypes[row]
             return

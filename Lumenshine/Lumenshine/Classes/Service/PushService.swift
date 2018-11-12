@@ -18,19 +18,13 @@ public class PushService: BaseService {
         params["push_token"] = pushToken
         params["device_type"] = deviceType
         
-        do {
-            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-            
-            POSTRequestWithPath(path: "/portal/user/dashboard/subscribe_push_token", body: bodyData) { (result) -> (Void) in
-                switch result {
-                case .success:
-                    response(.success)
-                case .failure(let error):
-                    response(.failure(error: error))
-                }
+        POSTRequestWithPath(path: "/portal/user/dashboard/subscribe_push_token", parameters: params) { (result) -> (Void) in
+            switch result {
+            case .success:
+                response(.success)
+            case .failure(let error):
+                response(.failure(error: error))
             }
-        } catch {
-            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
         }
     }
     
@@ -38,19 +32,13 @@ public class PushService: BaseService {
         var params = Dictionary<String, Any>()
         params["push_token"] = pushToken
         
-        do {
-            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-            
-            POSTRequestWithPath(path: "/portal/user/dashboard/unsubscribe_push_token", body: bodyData) { (result) -> (Void) in
-                switch result {
-                case .success:
-                    response(.success)
-                case .failure(let error):
-                    response(.failure(error: error))
-                }
+        POSTRequestWithPath(path: "/portal/user/dashboard/unsubscribe_push_token", parameters: params) { (result) -> (Void) in
+            switch result {
+            case .success:
+                response(.success)
+            case .failure(let error):
+                response(.failure(error: error))
             }
-        } catch {
-            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
         }
     }
     
@@ -59,19 +47,13 @@ public class PushService: BaseService {
         params["push_token"] = pushToken
         params["email"] = email
         
-        do {
-            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-            
-            POSTRequestWithPath(path: "/portal/user/dashboard/unsubscribe_previous_user_push_token", body: bodyData) { (result) -> (Void) in
-                switch result {
-                case .success:
-                    response(.success)
-                case .failure(let error):
-                    response(.failure(error: error))
-                }
+        POSTRequestWithPath(path: "/portal/user/dashboard/unsubscribe_previous_user_push_token", parameters: params) { (result) -> (Void) in
+            switch result {
+            case .success:
+                response(.success)
+            case .failure(let error):
+                response(.failure(error: error))
             }
-        } catch {
-            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
         }
     }
     
@@ -80,20 +62,14 @@ public class PushService: BaseService {
         params["new_push_token"] = newPushToken
         params["old_push_token"] = oldPushToken
         params["device_type"] = deviceType
-        
-        do {
-            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
             
-            POSTRequestWithPath(path: "/portal/user/dashboard/subscribe_push_token", body: bodyData) { (result) -> (Void) in
-                switch result {
-                case .success:
-                    response(.success)
-                case .failure(let error):
-                    response(.failure(error: error))
-                }
+        POSTRequestWithPath(path: "/portal/user/dashboard/subscribe_push_token", parameters: params) { (result) -> (Void) in
+            switch result {
+            case .success:
+                response(.success)
+            case .failure(let error):
+                response(.failure(error: error))
             }
-        } catch {
-            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
         }
     }
 }

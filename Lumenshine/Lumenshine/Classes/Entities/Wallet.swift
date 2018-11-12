@@ -101,7 +101,6 @@ public class FundedWallet: Wallet {
             for balance in balances {
                 switch balance.assetType {
                 case AssetTypeAsString.NATIVE:
-                    print("balance: \(balance.balance) XLM")
                     if let units = CoinUnit(balance.balance) {
                         amount += units
                     }
@@ -177,7 +176,7 @@ extension FundedWallet {
                     codes.append(balance)
                 }
                 if balance.assetType == "native" {
-                    codes.append(balance)
+                    codes.insert(balance, at: 0)
                 }
             }
             
@@ -188,13 +187,11 @@ extension FundedWallet {
     func getAvailableCurrencies() -> [String] {
         var availableCurrencies = [String]()
         for currency in self.uniqueAssetCodeBalances {
-            if let balance = CoinUnit(currency.balance), let displayCode = currency.displayCode {
-                if (balance != 0) {
-                    if currency.displayCode == NativeCurrencyNames.xlm.rawValue {
-                        availableCurrencies.insert(displayCode, at: 0)
-                    } else {
-                        availableCurrencies.append(displayCode)
-                    }
+            if let displayCode = currency.displayCode {
+                if currency.displayCode == NativeCurrencyNames.xlm.rawValue {
+                    availableCurrencies.insert(displayCode, at: 0)
+                } else {
+                    availableCurrencies.append(displayCode)
                 }
             }
         }
@@ -216,23 +213,6 @@ extension FundedWallet {
         }
         
         return false
-    }
-    
-    func isCurrencyDuplicateAndValid(withAssetCode assetCode: String) -> Bool {
-        var alreadyFoundOnce: Bool = false
-        
-        for currency in balances {
-            if currency.assetCode == assetCode && CoinUnit(currency.balance) != 0 {
-                if !alreadyFoundOnce {
-                    alreadyFoundOnce = true
-                } else {
-                    return true
-                }
-            }
-        }
-        
-        return false
-
     }
 }
     

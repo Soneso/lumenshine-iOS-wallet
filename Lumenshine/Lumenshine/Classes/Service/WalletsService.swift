@@ -56,10 +56,7 @@ public class WalletsService: BaseService {
     }
     
     func changeWalletData(request: ChangeWalletRequest, response: @escaping ChangeWalletDataClosure) {
-        let encoder = JSONEncoder()
-        let params = try! encoder.encode(request)
-        
-        POSTRequestWithPath(path: "/portal/user/dashboard/change_wallet_data", body: params) { (result) -> (Void) in
+        POSTRequestWithPath(path: "/portal/user/dashboard/change_wallet_data", parameters: request.toDictionary()) { (result) -> (Void) in
             DispatchQueue.main.async {
                 switch result {
                 case .success(_):
@@ -73,9 +70,8 @@ public class WalletsService: BaseService {
     
     func removeFederationAddress(walletId: Int, response: @escaping ChangeWalletDataClosure) {
         let params = ["id": walletId]
-        let bodyData = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
         
-        POSTRequestWithPath(path: "/portal/user/dashboard/remove_wallet_federation_address", body: bodyData) { (result) -> (Void) in
+        POSTRequestWithPath(path: "/portal/user/dashboard/remove_wallet_federation_address", parameters: params) { (result) -> (Void) in
             DispatchQueue.main.async {
                 switch result {
                 case .success(_):
@@ -94,9 +90,7 @@ public class WalletsService: BaseService {
         params["federation_address"] = federationAddress
         params["show_on_homescreen"] = showOnHomescreen
         
-        let bodyData = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-        
-        POSTRequestWithPath(path: "/portal/user/dashboard/add_wallet", body: bodyData) { (result) -> (Void) in
+        POSTRequestWithPath(path: "/portal/user/dashboard/add_wallet", parameters: params) { (result) -> (Void) in
             DispatchQueue.main.async {
                 switch result {
                 case .success(_):
@@ -113,9 +107,7 @@ public class WalletsService: BaseService {
         params["id"] = walletID
         params["visible"] = isVisible
         
-        let bodyData = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-        
-        POSTRequestWithPath(path: "/portal/user/dashboard/wallet_set_homescreen", body: bodyData) { (result) -> (Void) in
+        POSTRequestWithPath(path: "/portal/user/dashboard/wallet_set_homescreen", parameters: params) { (result) -> (Void) in
             DispatchQueue.main.async {
                 switch result {
                 case .success(_):

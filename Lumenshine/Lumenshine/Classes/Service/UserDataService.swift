@@ -71,20 +71,13 @@ public class UserDataService: BaseService {
     }
     
     func updateUserData(userData: Dictionary<String, String>, response: @escaping EmptyResponseClosure) {
-        
-        do {
-            let bodyData = try JSONSerialization.data(withJSONObject: userData, options: .prettyPrinted)
-            
-            POSTRequestWithPath(path: "/portal/user/dashboard/update_user_data", body: bodyData) { (result) -> (Void) in
-                switch result {
-                case .success:
-                    response(.success)
-                case .failure(let error):
-                    response(.failure(error: error))
-                }
+        POSTRequestWithPath(path: "/portal/user/dashboard/update_user_data", parameters: userData) { (result) -> (Void) in
+            switch result {
+            case .success:
+                response(.success)
+            case .failure(let error):
+                response(.failure(error: error))
             }
-        } catch {
-            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
         }
     }
 }

@@ -31,6 +31,7 @@ protocol LoginViewModelType: Transitionable, BiometricAuthenticationProtocol {
     func forgotPasswordClick()
     func lost2FAClick()
     func removeBiometricRecognition()
+    func removeBiometricAuthData()
 }
 
 protocol LostSecurityViewModelType: Transitionable {
@@ -300,12 +301,17 @@ class LoginViewModel : LoginViewModelType {
     
     func removeBiometricRecognition() {}
     
+    func removeBiometricAuthData() {
+        BiometricHelper.enableTouch(false)
+        BiometricHelper.removePasswords()
+    }
+    
     class func logout(username: String) {
         TFAGeneration.remove2FASecretTokens()
         BaseService.removeToken()
         BiometricHelper.enableTouch(false)
-        BiometricHelper.removePassword(username: username)
-        UserDefaults.standard.setValue(nil, forKey:Keys.selectedPeriod)
+        BiometricHelper.removePasswords()
+        UserDefaults.standard.setValue(nil, forKey:Keys.UserDefs.SelectedPeriod)
         UIApplication.shared.unregisterForRemoteNotifications()
     }
 }

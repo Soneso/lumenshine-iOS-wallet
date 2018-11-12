@@ -184,8 +184,7 @@ public class AuthService: BaseService {
     /// Loads the server signing key from the servers stellar.toml file
     /// - Parameter: ServerSigningKeyClosure
     open func loadServerSigningKey(completion:@escaping ServerSigningKeyClosure) {
-        let serverSigningKeyTomlKey = "SIGNING_KEY"
-        
+         
         guard let url = URL(string: Services.shared.tomlURL) else {
             completion(.failure(error: .invalidRequest))
             return
@@ -194,8 +193,8 @@ public class AuthService: BaseService {
         DispatchQueue.global().async {
             do {
                 let tomlString = try String(contentsOf: url, encoding: .utf8)
-                let toml = try Toml(withString: tomlString)
-                if let serverKey = toml.string(serverSigningKeyTomlKey) {
+                let toml = try StellarToml(fromString: tomlString)
+                if let serverKey = toml.accountInformation.signingKey {
                     completion(.success(signingKey: serverKey))
                 } else {
                     completion(.failure(error: .noSigningKeySet))
@@ -217,45 +216,41 @@ public class AuthService: BaseService {
     ///     - userKeyPair: the keypair of the user including its public key and private key
     open func signSEP10ChallengeIfValid(base64EnvelopeXDR: String, userKeyPair: KeyPair, completion:@escaping SignSEP10ChallengeClosure) {
         validateSEP10Envelope(base64EnvelopeXDR: base64EnvelopeXDR, userAccountId: userKeyPair.accountId) { validationResult in
-            switch validationResult {
-            case .success(let isValid, let transactionEnvelopeXDR):
-                if isValid, let envelopeXDR = transactionEnvelopeXDR, envelopeXDR.tx.seqNum == 0 {
-                    // sign
-                    // get currently used stellar network
-                    var network = Network.testnet
-                    if (Services.shared.usePublicStellarNetwork) {
-                        network = Network.public
+            DispatchQueue.global().async {
+                switch validationResult {
+                case .success(let isValid, let transactionEnvelopeXDR):
+                    if isValid, let envelopeXDR = transactionEnvelopeXDR, envelopeXDR.tx.seqNum == 0 {
+                        // sign
+                        // get currently used stellar network
+                        var network = Network.testnet
+                        if (Services.shared.usePublicStellarNetwork) {
+                            network = Network.public
+                        }
+                        do {
+                            // TODO: improve this in the SDK: add signature + get base 64
+                            let tx = envelopeXDR.tx
+                            
+                            // user signature
+                            let transactionHash = try [UInt8](tx.hash(network: network))
+                            let userSignature = userKeyPair.signDecorated(transactionHash)
+                            
+                            envelopeXDR.signatures.append(userSignature)
+                            
+                            if let xdrEncodedEnvelope = envelopeXDR.xdrEncoded {
+                                completion(.success(signedXDR: xdrEncodedEnvelope))
+                                return
+                            } else {
+                                completion(.failure(error: .xdrError))
+                            }
+                        } catch _ {
+                            completion(.failure(error: .xdrError))
+                        }
+                    } else {
+                        completion(.failure(error: .invalidSEP10Challenge))
                     }
-                    do {
-                        // TODO: improve this in the SDK: add signature + get base 64
-                        let tx = envelopeXDR.tx
-                        // server signature
-                        let serverSignature = envelopeXDR.signatures.first
-                        
-                        // user signature
-                        let transactionHash = try [UInt8](tx.hash(network: network))
-                        let userSignature = userKeyPair.signDecorated(transactionHash)
-                        
-                        // server + user signature
-                        let signatures = [serverSignature, userSignature]
-                        
-                        // new envelope containung both signatures
-                        let signedEnvelopeXDR = TransactionEnvelopeXDR(tx: tx, signatures:signatures as! [DecoratedSignatureXDR])
-                        
-                        // base 64
-                        var encodedEnvelope = try XDREncoder.encode(signedEnvelopeXDR)
-                        let result = Data(bytes: &encodedEnvelope, count: encodedEnvelope.count).base64EncodedString()
-                    
-                        completion(.success(signedXDR: result))
-                    } catch let error {
-                        print(error)
-                        completion(.failure(error: .badCredentials))
-                    }
-                } else {
-                    completion(.failure(error: .invalidSEP10Challenge))
+                case .failure(let error):
+                    completion(.failure(error: error))
                 }
-            case .failure(let error):
-                completion(.failure(error: error))
             }
         }
     }
@@ -263,12 +258,9 @@ public class AuthService: BaseService {
     open func validateSEP10Envelope(base64EnvelopeXDR: String, userAccountId: String, completion:@escaping SEP10ChallengeValidationClosure) {
         
         do {
-            // xdr decoder to be used for decoding the transaction envelope
-            let xdrDecoder = XDRDecoder.init(data: [UInt8].init(base64: base64EnvelopeXDR))
-        
             
             // decode the envelope
-            let transactionEnvelopeXDR = try TransactionEnvelopeXDR(fromBinary: xdrDecoder)
+            let transactionEnvelopeXDR = try TransactionEnvelopeXDR(xdr:base64EnvelopeXDR)
             let transactionXDR = transactionEnvelopeXDR.tx
             
             // sequence number of transaction must be 0
@@ -380,97 +372,78 @@ public class AuthService: BaseService {
     }
     
     open func tfaSecret(signedSEP10TransactionEnvelope: String, response: @escaping TfaSecretResponseClosure) {
-        do {
-            var params = Dictionary<String,String>()
-            params["sep10_transaction"] = signedSEP10TransactionEnvelope
-            
-            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-            
-            POSTRequestWithPath(path: "/portal/user/dashboard/tfa_secret", body: bodyData) { (result) -> (Void) in
-                switch result {
-                case .success(let data):
-                    do {
-                        let tfaResponse = try self.jsonDecoder.decode(TFASecretResponse.self, from: data)
-                        response(.success(response: tfaResponse))
-                    } catch {
-                        response(.failure(error: .parsingFailed(message: error.localizedDescription)))
-                    }
-                case .failure(let error):
-                    response(.failure(error: error))
+        var params = Dictionary<String,String>()
+        params["sep10_transaction"] = signedSEP10TransactionEnvelope
+        
+        POSTRequestWithPath(path: "/portal/user/dashboard/tfa_secret", parameters: params) { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                do {
+                    let tfaResponse = try self.jsonDecoder.decode(TFASecretResponse.self, from: data)
+                    response(.success(response: tfaResponse))
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
                 }
+            case .failure(let error):
+                response(.failure(error: error))
             }
-        } catch {
-            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
         }
     }
     
     open func loginStep2(signedSEP10TransactionEnvelope: String, userEmail: String, response: @escaping Login2ResponseClosure) {
         
-        do {
-            var params = Dictionary<String,String>()
-            params["sep10_transaction"] = signedSEP10TransactionEnvelope
-            
-            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-            
-            POSTRequestWithPath(path: "/portal/user/auth/login_step2", body: bodyData) { (result) -> (Void) in
-                switch result {
-                case .success(let data):
-                    BaseService.jwtTokenType = .full
-                    do {
-                        let loginResponse = try self.jsonDecoder.decode(LoginStep2Response.self, from: data)
-                        if let tokenExists = TFAGeneration.isTokenExists(email: userEmail),
-                            tokenExists == false, loginResponse.tfaConfirmed {
-                            self.tfaSecret(signedSEP10TransactionEnvelope: signedSEP10TransactionEnvelope) { result in
-                                switch result {
-                                case .success(let tfaResponse):
-                                    TFAGeneration.createToken(tfaSecret: tfaResponse.tfaSecret, email: userEmail)
-                                case .failure(let error):
-                                    print("Tfa secret request error: \(error)")
-                                }
-                                response(.success(response: loginResponse))
+        var params = Dictionary<String,String>()
+        params["sep10_transaction"] = signedSEP10TransactionEnvelope
+        
+        POSTRequestWithPath(path: "/portal/user/auth/login_step2", parameters: params) { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                BaseService.jwtTokenType = .full
+                do {
+                    let loginResponse = try self.jsonDecoder.decode(LoginStep2Response.self, from: data)
+                    if let tokenExists = TFAGeneration.isTokenExists(email: userEmail),
+                        tokenExists == false, loginResponse.tfaConfirmed {
+                        self.tfaSecret(signedSEP10TransactionEnvelope: signedSEP10TransactionEnvelope) { result in
+                            switch result {
+                            case .success(let tfaResponse):
+                                TFAGeneration.createToken(tfaSecret: tfaResponse.tfaSecret, email: userEmail)
+                            case .failure(let error):
+                                print("Tfa secret request error: \(error)")
                             }
-                        } else {
                             response(.success(response: loginResponse))
                         }
-                    } catch {
-                        response(.failure(error: .parsingFailed(message: error.localizedDescription)))
+                    } else {
+                        response(.success(response: loginResponse))
                     }
-                case .failure(let error):
-                    response(.failure(error: error))
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
                 }
+            case .failure(let error):
+                response(.failure(error: error))
             }
-        } catch {
-            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
         }
     }
     
     open func loginStep1(email: String, tfaCode:String?, response: @escaping Login1ResponseClosure) {
-        
-        do {
-            var params = Dictionary<String,String>()
-            params["email"] = email
-            if let tfa = tfaCode {
-                params["tfa_code"] = tfa
-            }
-            
-            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-        
-            POSTRequestWithPath(path: "/portal/user/login_step1", body: bodyData) { (result) -> (Void) in
-                switch result {
-                case .success(let data):
-                    BaseService.jwtTokenType = .partial
-                    do {
-                        let loginResponse = try self.jsonDecoder.decode(LoginStep1Response.self, from: data)
-                        response(.success(response: loginResponse))
-                    } catch {
-                        response(.failure(error: .parsingFailed(message: error.localizedDescription)))
-                    }
-                case .failure(let error):
-                    response(.failure(error: error))
+        var params = Dictionary<String,String>()
+        params["email"] = email
+        if let tfa = tfaCode {
+            params["tfa_code"] = tfa
+        }
+    
+        POSTRequestWithPath(path: "/portal/user/login_step1", parameters: params) { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                BaseService.jwtTokenType = .partial
+                do {
+                    let loginResponse = try self.jsonDecoder.decode(LoginStep1Response.self, from: data)
+                    response(.success(response: loginResponse))
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
                 }
+            case .failure(let error):
+                response(.failure(error: error))
             }
-        } catch {
-            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
         }
     }
     
@@ -491,23 +464,16 @@ public class AuthService: BaseService {
     }
     
     open func resendMailConfirmation(email: String, response: @escaping EmptyResponseClosure) {
-        
-        do {
-            var params = Dictionary<String,String>()
-            params["email"] = email
-            
-            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-        
-            POSTRequestWithPath(path: "/portal/user/resend_confirmation_mail", body: bodyData) { (result) -> (Void) in
-                switch result {
-                case .success:
-                    response(.success)
-                case .failure(let error):
-                    response(.failure(error: error))
-                }
+        var params = Dictionary<String,String>()
+        params["email"] = email
+    
+        POSTRequestWithPath(path: "/portal/user/resend_confirmation_mail", parameters: params) { (result) -> (Void) in
+            switch result {
+            case .success:
+                response(.success)
+            case .failure(let error):
+                response(.failure(error: error))
             }
-        } catch {
-            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
         }
     }
     
@@ -529,29 +495,22 @@ public class AuthService: BaseService {
     }
     
     open func sendTFA(code: String, response: @escaping TFAResponseClosure) {
-        
-        do {
-            var params = Dictionary<String,String>()
-            params["tfa_code"] = code
-            
-            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-        
-            POSTRequestWithPath(path: "/portal/user/auth/confirm_tfa_registration", body: bodyData) { (result) -> (Void) in
-                switch result {
-                case .success(let data):
-                    BaseService.jwtTokenType = .full
-                    do {
-                        let tfaResponse = try self.jsonDecoder.decode(TFAResponse.self, from: data)
-                        response(.success(response: tfaResponse))
-                    } catch {
-                        response(.failure(error: .parsingFailed(message: error.localizedDescription)))
-                    }
-                case .failure(let error):
-                    response(.failure(error: error))
+        var params = Dictionary<String,String>()
+        params["tfa_code"] = code
+    
+        POSTRequestWithPath(path: "/portal/user/auth/confirm_tfa_registration", parameters: params) { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                BaseService.jwtTokenType = .full
+                do {
+                    let tfaResponse = try self.jsonDecoder.decode(TFAResponse.self, from: data)
+                    response(.success(response: tfaResponse))
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
                 }
+            case .failure(let error):
+                response(.failure(error: error))
             }
-        } catch {
-            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
         }
     }
     
@@ -582,71 +541,53 @@ public class AuthService: BaseService {
             if let userDict = userData {
                 params.merge(userDict, uniquingKeysWith: {(first, _) in first})
             }
-            
-            do {
-                let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
                 
-                self.POSTRequestWithPath(path: "/portal/user/register_user", body: bodyData) { (result) -> (Void) in
-                    switch result {
-                    case .success(let data):
-                        BaseService.jwtTokenType = .partial
-                        do {
-                            let registrationResponse = try self.jsonDecoder.decode(TFASecretResponse.self, from: data)
-                            response(.success(response: registrationResponse, userSecurity: userSecurity))
-                        } catch {
-                            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
-                        }
-                    case .failure(let error):
-                        response(.failure(error: error))
+            self.POSTRequestWithPath(path: "/portal/user/register_user", parameters: params) { (result) -> (Void) in
+                switch result {
+                case .success(let data):
+                    BaseService.jwtTokenType = .partial
+                    do {
+                        let registrationResponse = try self.jsonDecoder.decode(TFASecretResponse.self, from: data)
+                        response(.success(response: registrationResponse, userSecurity: userSecurity))
+                    } catch {
+                        response(.failure(error: .parsingFailed(message: error.localizedDescription)))
                     }
+                case .failure(let error):
+                    response(.failure(error: error))
                 }
-            } catch {
-                response(.failure(error: .parsingFailed(message: error.localizedDescription)))
             }
         }
     }
     
     func lostPassword(email: String, response: @escaping EmptyResponseClosure) {
-        do {
-            var params = Dictionary<String,String>()
-            params["email"] = email
-            
-            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-            
-            POSTRequestWithPath(path: "/portal/user/lost_password", body: bodyData) { (result) -> (Void) in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(_):
-                        response(.success)
-                    case .failure(let error):
-                        response(.failure(error: error))
-                    }
+        var params = Dictionary<String,String>()
+        params["email"] = email
+        
+        POSTRequestWithPath(path: "/portal/user/lost_password", parameters: params) { (result) -> (Void) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    response(.success)
+                case .failure(let error):
+                    response(.failure(error: error))
                 }
             }
-        } catch {
-            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
         }
     }
     
     func reset2fa(email: String, response: @escaping EmptyResponseClosure) {
-        do {
-            var params = Dictionary<String,String>()
-            params["email"] = email
-            
-            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-            
-            POSTRequestWithPath(path: "/portal/user/lost_tfa", body: bodyData) { (result) -> (Void) in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(_):
-                        response(.success)
-                    case .failure(let error):
-                        response(.failure(error: error))
-                    }
+        var params = Dictionary<String,String>()
+        params["email"] = email
+        
+        POSTRequestWithPath(path: "/portal/user/lost_tfa", parameters: params) { (result) -> (Void) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    response(.success)
+                case .failure(let error):
+                    response(.failure(error: error))
                 }
             }
-        } catch {
-            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
         }
     }
     
@@ -676,21 +617,14 @@ public class AuthService: BaseService {
         params["wordlist_master_key"] = userSecurity.encryptedWordListMasterKey.toBase64()
         params["wordlist_master_iv"] = userSecurity.wordListMasterKeyEncryptionIV.toBase64()
         params["sep10_transaction"] = signedSEP10TransactionEnvelope
-        
-        
-        do {
-            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
             
-            self.POSTRequestWithPath(path: "/portal/user/dashboard/change_password", body: bodyData) { (result) -> (Void) in
-                switch result {
-                case .success:
-                    response(.success)
-                case .failure(let error):
-                    response(.failure(error: error))
-                }
+        POSTRequestWithPath(path: "/portal/user/dashboard/change_password", parameters: params) { (result) -> (Void) in
+            switch result {
+            case .success:
+                response(.success)
+            case .failure(let error):
+                response(.failure(error: error))
             }
-        } catch {
-            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
         }
     }
     
@@ -698,50 +632,38 @@ public class AuthService: BaseService {
         var params = Dictionary<String,String>()
         params["sep10_transaction"] = signedSEP10TransactionEnvelope
         params["public_key_188"] = "blubber" // TODO remove this when server is ready
-        
-        do {
-            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
             
-            POSTRequestWithPath(path: "/portal/user/dashboard/new_2fa_secret", body: bodyData) { (result) -> (Void) in
-                switch result {
-                case .success(let data):
-                    do {
-                        let tfaResponse = try self.jsonDecoder.decode(TFASecretResponse.self, from: data)
-                        response(.success(response: tfaResponse))
-                    } catch {
-                        response(.failure(error: .parsingFailed(message: error.localizedDescription)))
-                    }
-                case .failure(let error):
-                    response(.failure(error: error))
+        POSTRequestWithPath(path: "/portal/user/dashboard/new_2fa_secret", parameters: params) { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                do {
+                    let tfaResponse = try self.jsonDecoder.decode(TFASecretResponse.self, from: data)
+                    response(.success(response: tfaResponse))
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
                 }
+            case .failure(let error):
+                response(.failure(error: error))
             }
-        } catch {
-            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
         }
     }
     
     open func confirm2faSecret(tfaCode: String, response: @escaping TFAResponseClosure) {
-        do {
-            var params = Dictionary<String,String>()
-            params["tfa_code"] = tfaCode
-            
-            let bodyData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-            
-            POSTRequestWithPath(path: "/portal/user/dashboard/confirm_new_2fa_secret", body: bodyData) { (result) -> (Void) in
-                switch result {
-                case .success(let data):
-                    do {
-                        let tfaResponse = try self.jsonDecoder.decode(TFAResponse.self, from: data)
-                        response(.success(response: tfaResponse))
-                    } catch {
-                        response(.failure(error: .parsingFailed(message: error.localizedDescription)))
-                    }
-                case .failure(let error):
-                    response(.failure(error: error))
+        var params = Dictionary<String,String>()
+        params["tfa_code"] = tfaCode
+        
+        POSTRequestWithPath(path: "/portal/user/dashboard/confirm_new_2fa_secret", parameters: params) { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                do {
+                    let tfaResponse = try self.jsonDecoder.decode(TFAResponse.self, from: data)
+                    response(.success(response: tfaResponse))
+                } catch {
+                    response(.failure(error: .parsingFailed(message: error.localizedDescription)))
                 }
+            case .failure(let error):
+                response(.failure(error: error))
             }
-        } catch {
-            response(.failure(error: .parsingFailed(message: error.localizedDescription)))
         }
     }
     

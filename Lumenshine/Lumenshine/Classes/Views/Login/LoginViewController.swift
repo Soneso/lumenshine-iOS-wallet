@@ -42,6 +42,7 @@ class LoginViewController: UIViewController {
         
         prepareView()
         showLogin(animated: false)
+        viewModel.removeBiometricAuthData()
         
         NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: .UIApplicationWillEnterForeground, object: nil)
     }
