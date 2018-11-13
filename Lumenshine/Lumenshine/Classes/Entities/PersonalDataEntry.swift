@@ -25,12 +25,9 @@ struct PersonalData: PersonalDataProtocol {
 
 enum PersonalDataEntry: String {
     
-    case email
     case forename
     case lastname
-    case company
     case salutation
-    case title
     case address
     case zipCode = "zip_code"
     case city
@@ -55,18 +52,12 @@ enum PersonalDataEntry: String {
     
     var placeholder: String? {
         switch self {
-        case .email:
-            return R.string.localizable.email()
         case .forename:
             return R.string.localizable.forename()
         case .lastname:
             return R.string.localizable.lastname()
-        case .company:
-            return R.string.localizable.company_name()
         case .salutation:
             return R.string.localizable.salutation()
-        case .title:
-            return R.string.localizable.title()
         case .address:
             return R.string.localizable.street_address()
         case .zipCode:
