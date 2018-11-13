@@ -22,7 +22,7 @@ protocol LoginViewModelType: Transitionable, BiometricAuthenticationProtocol {
     
     func loginStep1(email: String, password: String, tfaCode: String?, checkSetup: Bool?, response: @escaping EmptyResponseClosure)
     func enableTfaCode(email: String) -> Bool
-    func signUp(email: String, password: String, repassword: String, response: @escaping EmptyResponseClosure)
+    func signUp(email: String, password: String, repassword: String, forename: String, lastname: String, response: @escaping EmptyResponseClosure)
     func showPasswordHint()
     func showTermsOfService()
     
@@ -155,7 +155,23 @@ class LoginViewModel : LoginViewModelType {
         }
     }
     
-    func signUp(email: String, password: String, repassword: String, response: @escaping EmptyResponseClosure) {
+    func signUp(email: String, password: String, repassword: String, forename: String, lastname: String, response: @escaping EmptyResponseClosure) {
+        
+        if !forename.isValidName() {
+            let error = ErrorResponse()
+            error.parameterName = "forename"
+            error.errorMessage = R.string.localizable.invalid_forename()
+            response(.failure(error: .validationFailed(error: error)))
+            return
+        }
+        
+        if !lastname.isValidName() {
+            let error = ErrorResponse()
+            error.parameterName = "lastname"
+            error.errorMessage = R.string.localizable.invalid_lastname()
+            response(.failure(error: .validationFailed(error: error)))
+            return
+        }
         
         if !email.isEmail() {
             let error = ErrorResponse()
@@ -183,7 +199,7 @@ class LoginViewModel : LoginViewModelType {
         
         self.email = email
         
-        service.generateAccount(email: email, password: password, userData: nil) { [weak self] result in
+        service.generateAccount(email: email, password: password, forename: forename, lastname: lastname) { [weak self] result in
             switch result {
             case .success( let registrationResponse, let userSecurity):
                 self?.user = User(id: "1",
@@ -194,41 +210,6 @@ class LoginViewModel : LoginViewModelType {
                 
                 self?.checkSetup(tfaConfirmed: false, mailConfirmed: false, mnemonicConfirmed: false, tfaSecret: registrationResponse?.tfaSecret)
                 
-                // load sep10 challenge from server and continue signup.
-                // TODO: handle errors correctly - the user is already registered here!
-                
-                // sign sep10 challenge and login user
-                /*PrivateKeyManager.getKeyPair(forAccountID: userSecurity.publicKeyIndex0, fromMnemonic: userSecurity.mnemonic24Word, completion: { (keyResponse) -> (Void) in
-                    switch keyResponse {
-                    case .success(keyPair: let keyPair):
-                        // sign challenge
-                        if let envelopeXDR = registrationResponse?.sep10ChallengeXDR {
-                            self?.service.signSEP10ChallengeIfValid(base64EnvelopeXDR: envelopeXDR, userKeyPair: keyPair!, completion: { (signResponse) -> (Void) in
-                                switch signResponse {
-                                case .success(signedXDR: let signedXDR):
-                                    // login user
-                                    self?.service.loginStep2(signedSEP10TransactionEnvelope:signedXDR, userEmail: email) { [weak self] result in
-                                        switch result {
-                                        case .success(let login2Response):
-                                            self?.checkSetup(tfaConfirmed: login2Response.tfaConfirmed, mailConfirmed: login2Response.mailConfirmed, mnemonicConfirmed: login2Response.mnemonicConfirmed, tfaSecret: login2Response.tfaSecret)
-                                            response(.success)
-                                        case .failure(let error):
-                                            response(.failure(error: error))
-                                        }
-                                    }
-                                case .failure(error: let error):
-                                    print(error)
-                                    response(.failure(error: error))
-                                }
-                            })
-                        } else {
-                            response(.failure(error: .invalidSEP10Challenge))
-                        }
-                    case .failure(error: let error):
-                        print(error)
-                        response(.failure(error: .encryptionFailed(message: error)))
-                    }
-                })*/
             case .failure(let error):
                 response(.failure(error: error))
             }

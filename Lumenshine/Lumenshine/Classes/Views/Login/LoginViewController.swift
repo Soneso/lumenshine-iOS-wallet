@@ -155,9 +155,9 @@ extension LoginViewController: LoginViewDelegate {
 }
 
 extension LoginViewController: SignUpViewDelegate {
-    func didTapSubmitButton(email: String, password: String, repassword: String) {
+    func didTapSubmitButton(email: String, password: String, repassword: String, forename: String, lastname: String) {
         showActivity()
-        viewModel.signUp(email: email, password: password, repassword: repassword) { [weak self] result in
+        viewModel.signUp(email: email, password: password, repassword: repassword, forename: forename, lastname: lastname) { [weak self] result in
             DispatchQueue.main.async {
                 self?.hideActivity(completion: {
                     switch result {

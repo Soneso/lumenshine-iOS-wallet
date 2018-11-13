@@ -836,7 +836,7 @@
 "terms_of_service" = "Terms of service";
 
 /*  */
-"agree_to_abide" = "You agree to abide by Lumenshine's";
+"agree_to_abide" = "You agree to abide by our";
 
 /*  */
 "terms_of_service_hint" = "Terms of service text comes here";
@@ -864,3 +864,18 @@
 
 /*  */
 "xdr_error" = "An error occured while processing the data. Please try again later";
+
+/*  */
+"email_mandatory" = "Email is mandatory";
+
+/*  */
+"forename_mandatory" = "Forename is mandatory";
+
+/*  */
+"lastname_mandatory" = "Lastname is mandatory";
+
+/*  */
+"invalid_forename" = "Invalid forename";
+
+/*  */
+"invalid_lastname" = "Invalid lastname";

@@ -45,7 +45,6 @@
 		432E298B211CA098005C7F9E /* EmailConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432E298A211CA098005C7F9E /* EmailConfirmationView.swift */; };
 		432F11792101C64600FC429B /* MnemonicSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432F11782101C64600FC429B /* MnemonicSetupViewController.swift */; };
 		432F117B2101EEF500FC429B /* VerificationSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432F117A2101EEF500FC429B /* VerificationSetupViewController.swift */; };
-		4337C4E72081BAA400F4585A /* RegistrationFormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4337C4E62081BAA400F4585A /* RegistrationFormTableViewController.swift */; };
 		4341251120EBC2C700267260 /* ReLoginHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4341251020EBC2C700267260 /* ReLoginHomeView.swift */; };
 		4341251320EBC2E900267260 /* ReLoginFingerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4341251220EBC2E900267260 /* ReLoginFingerView.swift */; };
 		434E049B20D3DC8A00D3235A /* DateUtils+Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434E049A20D3DC8A00D3235A /* DateUtils+Format.swift */; };
@@ -202,7 +201,6 @@
 		43E13E8820D97DA000409129 /* WalletCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E13E8720D97DA000409129 /* WalletCard.swift */; };
 		43E23994214F8EF00017AABF /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E23993214F8EF00017AABF /* GradientView.swift */; };
 		43E23996214FA1CB0017AABF /* LSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E23995214FA1CB0017AABF /* LSButton.swift */; };
-		43ECA9CA208B3C4400CB571E /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ECA9C9208B3C4400CB571E /* RegistrationViewModel.swift */; };
 		43EFF204204939F700B1887C /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EFF203204939F700B1887C /* UIColor+Utils.swift */; };
 		43EFF20620493B4900B1887C /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EFF20520493B4900B1887C /* Stylesheet.swift */; };
 		43F3E35F20F3B8780032D017 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F3E35E20F3B8780032D017 /* LoginView.swift */; };
@@ -448,7 +446,6 @@
 		432E298A211CA098005C7F9E /* EmailConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailConfirmationView.swift; sourceTree = "<group>"; };
 		432F11782101C64600FC429B /* MnemonicSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicSetupViewController.swift; sourceTree = "<group>"; };
 		432F117A2101EEF500FC429B /* VerificationSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationSetupViewController.swift; sourceTree = "<group>"; };
-		4337C4E62081BAA400F4585A /* RegistrationFormTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationFormTableViewController.swift; sourceTree = "<group>"; };
 		4339B907213D810D00D1BE0E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4339B908213D810D00D1BE0E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Common.strings; sourceTree = "<group>"; };
 		4341251020EBC2C700267260 /* ReLoginHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginHomeView.swift; sourceTree = "<group>"; };
@@ -612,7 +609,6 @@
 		43E13E8720D97DA000409129 /* WalletCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCard.swift; sourceTree = "<group>"; };
 		43E23993214F8EF00017AABF /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		43E23995214FA1CB0017AABF /* LSButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSButton.swift; sourceTree = "<group>"; };
-		43ECA9C9208B3C4400CB571E /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		43EFF203204939F700B1887C /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
 		43EFF20520493B4900B1887C /* Stylesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stylesheet.swift; sourceTree = "<group>"; };
 		43F3E35E20F3B8780032D017 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -878,9 +874,9 @@
 				43C7A8EE215B9282007F4E5E /* Help */,
 				7491BE46211C32040058877E /* Wallet */,
 				43CD7B1520F7C4680014BF69 /* Setup */,
-				4337C4E52081BA6A00F4585A /* Registration */,
 				4370E23B20655F6F004C62C3 /* Settings */,
 				4319B17C2063EDFA007CE18D /* Login */,
+				834D13AB219AB33700428D7A /* SignUp */,
 				43FBEE4320628521004E2BB1 /* Scan */,
 				4376F4A4204DA07A00B179C3 /* Home */,
 				431437F02047FF7E00189C83 /* Drawer */,
@@ -967,7 +963,6 @@
 				4368468A2139246200B3A179 /* Relogin */,
 				4319B17D2063EE0E007CE18D /* LoginViewController.swift */,
 				43F3E35E20F3B8780032D017 /* LoginView.swift */,
-				43F3E36020F3B88E0032D017 /* SignUpView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1015,14 +1010,6 @@
 				C6CFEF33217DB1E0006EEC08 /* JailbreakChecker.swift */,
 			);
 			path = Entities;
-			sourceTree = "<group>";
-		};
-		4337C4E52081BA6A00F4585A /* Registration */ = {
-			isa = PBXGroup;
-			children = (
-				4337C4E62081BAA400F4585A /* RegistrationFormTableViewController.swift */,
-			);
-			path = Registration;
 			sourceTree = "<group>";
 		};
 		43564BA321635E44006A7B9F /* Contacts */ = {
@@ -1134,7 +1121,6 @@
 				4319B17F2063EEA9007CE18D /* LoginViewModel.swift */,
 				43844F3D20E3FE2600C352E5 /* ReLoginViewModel.swift */,
 				4319B1832063F00C007CE18D /* MenuViewModel.swift */,
-				43ECA9C9208B3C4400CB571E /* RegistrationViewModel.swift */,
 				4394911B20BEB845008D4FA2 /* SettingsViewModel.swift */,
 				43CD7B1120F7B8A70014BF69 /* SetupMenuViewModel.swift */,
 				43CD7B1320F7BEBF0014BF69 /* SetupViewModel.swift */,
@@ -1541,6 +1527,14 @@
 				74C899572107621E009B13EA /* receive_payment.html */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		834D13AB219AB33700428D7A /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				43F3E36020F3B88E0032D017 /* SignUpView.swift */,
+			);
+			path = SignUp;
 			sourceTree = "<group>";
 		};
 		A21B98E0A3EC476C69581BDB /* Pods */ = {
@@ -2242,7 +2236,6 @@
 				434FB3F920F78AFD004A4CDB /* InfoViewController.swift in Sources */,
 				4394911C20BEB845008D4FA2 /* SettingsViewModel.swift in Sources */,
 				432E298B211CA098005C7F9E /* EmailConfirmationView.swift in Sources */,
-				4337C4E72081BAA400F4585A /* RegistrationFormTableViewController.swift in Sources */,
 				C665871621255BF2006499A7 /* ChartCurrentRatesResponse.swift in Sources */,
 				C62B0EA02153A81000CF920B /* NormalLabel.swift in Sources */,
 				4390D57E205FA5FC00383BB2 /* BaseService.swift in Sources */,
@@ -2262,7 +2255,6 @@
 				431628D02097476500F23A20 /* ErrorResponse.swift in Sources */,
 				C67E5D6221526B9A002BCAA1 /* HelpButton.swift in Sources */,
 				43088DAC2087AB23008AE1AB /* AuthService.swift in Sources */,
-				43ECA9CA208B3C4400CB571E /* RegistrationViewModel.swift in Sources */,
 				C654AFB62122D4C900FB9686 /* FundTestNetWalletViewController.xib.swift in Sources */,
 				4301312A20C049CB00E47E83 /* ReLoginCoordinator.swift in Sources */,
 				4319B1842063F00C007CE18D /* MenuViewModel.swift in Sources */,

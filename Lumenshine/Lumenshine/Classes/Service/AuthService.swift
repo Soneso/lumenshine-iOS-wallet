@@ -227,7 +227,6 @@ public class AuthService: BaseService {
                             network = Network.public
                         }
                         do {
-                            // TODO: improve this in the SDK: add signature + get base 64
                             let tx = envelopeXDR.tx
                             
                             // user signature
@@ -514,7 +513,7 @@ public class AuthService: BaseService {
         }
     }
     
-    open func generateAccount(email: String, password: String, userData: Dictionary<String,String>?, response: @escaping GenerateAccountResponseClosure) {
+    open func generateAccount(email: String, password: String, forename: String, lastname: String, response: @escaping GenerateAccountResponseClosure) {
         DispatchQueue.global(qos: .userInitiated).async {
             var userSecurity: UserSecurity!
             do {
@@ -525,6 +524,8 @@ public class AuthService: BaseService {
         
             var params = Dictionary<String,String>()
             params["email"] = email
+            params["forename"] = forename
+            params["lastname"] = lastname
             params["kdf_salt"] = userSecurity.passwordKdfSalt.toBase64()
             params["mnemonic_master_key"] = userSecurity.encryptedMnemonicMasterKey.toBase64()
             params["mnemonic_master_iv"] = userSecurity.mnemonicMasterKeyEncryptionIV.toBase64()
@@ -538,9 +539,6 @@ public class AuthService: BaseService {
             let keyPair = try! KeyPair.generateRandomKeyPair()
             params["public_key_188"] = keyPair.accountId //TODO remove this as soon as the server is ready
             
-            if let userDict = userData {
-                params.merge(userDict, uniquingKeysWith: {(first, _) in first})
-            }
                 
             self.POSTRequestWithPath(path: "/portal/user/register_user", parameters: params) { (result) -> (Void) in
                 switch result {
