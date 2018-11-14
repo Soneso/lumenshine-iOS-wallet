@@ -19,7 +19,7 @@ class CurrencyView: UIView {
         didSet {
             currencyLabel.text = currency.assetCode
             if let issuer = currency.assetIssuer {
-                issuerLabel.text = "\(R.string.localizable.issuer_pk()) \(issuer)"
+                issuerLabel.text = issuer
             }
             
             if let isAuthorized = currency.authorized, isAuthorized {
@@ -32,5 +32,17 @@ class CurrencyView: UIView {
     
     @IBAction func removeButtonAction(_ sender: UIButton) {
         removeAction?(currency)
+    }
+    
+    @IBAction func copyIssuerLabelAction(_ sender: UIButton) {
+        if let value = issuerLabel.text {
+            UIPasteboard.general.string = value
+            let alert = UIAlertController(title: nil, message: "Copied to clipboard", preferredStyle: .actionSheet)
+            parentContainerViewController()?.present(alert, animated: true)
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when){
+                alert.dismiss(animated: true)
+            }
+        }
     }
 }

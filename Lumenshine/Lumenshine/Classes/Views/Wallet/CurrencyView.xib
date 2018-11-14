@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,20 +18,20 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LgR-8G-cLc">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1DP-S1-V2s">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="61.5"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="1DP-S1-V2s">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
                             <subviews>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="20.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxg-0w-gbq" customClass="RegularSubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="308" height="20.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="308" height="30"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXW-Jh-7tb" customClass="SimpleButton" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="324" y="0.0" width="51" height="20.5"/>
+                                            <rect key="frame" x="324" y="0.0" width="51" height="30"/>
                                             <state key="normal" title="remove">
                                                 <color key="titleColor" red="0.98823529409999999" green="0.047058823530000002" blue="0.1058823529" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
@@ -52,14 +53,40 @@
                                     </constraints>
                                     <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="23C-iM-5QB" customClass="RegularSubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="20.5" width="375" height="20.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mgd-ua-ygi">
+                                    <rect key="frame" x="0.0" y="34" width="375" height="25"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="23C-iM-5QB" customClass="RegularSubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="25"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q0A-G8-BCS" customClass="ImageButton" customModule="Lumenshine" customModuleProvider="target">
+                                            <rect key="frame" x="346" y="0.0" width="25" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="Dpu-b9-nde"/>
+                                                <constraint firstAttribute="width" constant="25" id="kWD-xb-1hE"/>
+                                            </constraints>
+                                            <state key="normal" image="copy"/>
+                                            <connections>
+                                                <action selector="copyIssuerLabelAction:" destination="6zL-hD-HSN" eventType="touchUpInside" id="j9B-xL-XuY"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="Q0A-G8-BCS" firstAttribute="top" secondItem="mgd-ua-ygi" secondAttribute="top" id="IX1-zN-hJw"/>
+                                        <constraint firstAttribute="bottom" secondItem="23C-iM-5QB" secondAttribute="bottom" id="QSZ-6k-PzS"/>
+                                        <constraint firstAttribute="bottom" secondItem="Q0A-G8-BCS" secondAttribute="bottom" id="eNz-WN-3xE"/>
+                                        <constraint firstItem="23C-iM-5QB" firstAttribute="top" secondItem="mgd-ua-ygi" secondAttribute="top" id="fWD-fZ-YeE"/>
+                                        <constraint firstAttribute="trailing" secondItem="Q0A-G8-BCS" secondAttribute="trailing" constant="4" id="h7m-8w-v8G"/>
+                                        <constraint firstItem="23C-iM-5QB" firstAttribute="leading" secondItem="mgd-ua-ygi" secondAttribute="leading" id="rDq-fV-92D"/>
+                                        <constraint firstItem="Q0A-G8-BCS" firstAttribute="leading" secondItem="23C-iM-5QB" secondAttribute="trailing" constant="4" id="vuu-vP-zbM"/>
+                                    </constraints>
+                                </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="waiting for issuer authorization" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="myo-Sn-9Wh" customClass="ErrorLabel" customModule="Lumenshine" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="41" width="375" height="20.5"/>
+                                    <rect key="frame" x="0.0" y="63" width="375" height="27"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.98823529409999999" green="0.047058823530000002" blue="0.1058823529" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -71,7 +98,7 @@
                     <constraints>
                         <constraint firstItem="1DP-S1-V2s" firstAttribute="leading" secondItem="LgR-8G-cLc" secondAttribute="leading" id="3HE-hN-9DL"/>
                         <constraint firstItem="1DP-S1-V2s" firstAttribute="top" secondItem="LgR-8G-cLc" secondAttribute="top" id="5hq-WN-VuQ"/>
-                        <constraint firstAttribute="height" constant="90" id="S5Y-qh-tvq"/>
+                        <constraint firstAttribute="bottom" secondItem="1DP-S1-V2s" secondAttribute="bottom" id="ShV-05-M84"/>
                         <constraint firstAttribute="trailing" secondItem="1DP-S1-V2s" secondAttribute="trailing" id="ulr-Mg-0ix"/>
                     </constraints>
                 </view>
@@ -95,4 +122,7 @@
         </view>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
     </objects>
+    <resources>
+        <image name="copy" width="33" height="33"/>
+    </resources>
 </document>

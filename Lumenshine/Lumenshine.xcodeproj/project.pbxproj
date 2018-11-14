@@ -278,6 +278,8 @@
 		C61244C8211332E700DE1EA9 /* SendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61244C7211332E700DE1EA9 /* SendViewController.swift */; };
 		C6171958215520C200F9907A /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6171957215520C200F9907A /* RoundedButton.swift */; };
 		C617195A21552E1F00F9907A /* InfoLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C617195921552E1F00F9907A /* InfoLabel.swift */; };
+		C62342D4219B07DC00A2FFBD /* MemoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C62342D3219B07DC00A2FFBD /* MemoView.xib */; };
+		C62342D6219B07EB00A2FFBD /* MemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62342D5219B07EB00A2FFBD /* MemoView.swift */; };
 		C6257A6C21620C0000E1B879 /* NoMultiSigSupportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6257A6B21620C0000E1B879 /* NoMultiSigSupportViewController.xib */; };
 		C6257A6E21620C1300E1B879 /* NoMultiSigSupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6257A6D21620C1300E1B879 /* NoMultiSigSupportViewController.swift */; };
 		C6257A70216211DA00E1B879 /* RegularSubtitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6257A6F216211DA00E1B879 /* RegularSubtitleLabel.swift */; };
@@ -691,6 +693,8 @@
 		C61244C7211332E700DE1EA9 /* SendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendViewController.swift; sourceTree = "<group>"; };
 		C6171957215520C200F9907A /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		C617195921552E1F00F9907A /* InfoLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoLabel.swift; sourceTree = "<group>"; };
+		C62342D3219B07DC00A2FFBD /* MemoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemoView.xib; sourceTree = "<group>"; };
+		C62342D5219B07EB00A2FFBD /* MemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoView.swift; sourceTree = "<group>"; };
 		C6257A6B21620C0000E1B879 /* NoMultiSigSupportViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoMultiSigSupportViewController.xib; sourceTree = "<group>"; };
 		C6257A6D21620C1300E1B879 /* NoMultiSigSupportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMultiSigSupportViewController.swift; sourceTree = "<group>"; };
 		C6257A6F216211DA00E1B879 /* RegularSubtitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularSubtitleLabel.swift; sourceTree = "<group>"; };
@@ -1500,6 +1504,8 @@
 				7491BE49211C32700058877E /* CurrencyView.xib */,
 				C6CB743F21746B3100FB99C3 /* PasswordView.xib */,
 				C6CB744121746B3E00FB99C3 /* PasswordView.swift */,
+				C62342D3219B07DC00A2FFBD /* MemoView.xib */,
+				C62342D5219B07EB00A2FFBD /* MemoView.swift */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -1944,6 +1950,7 @@
 				C6725084213FC1380064F6E3 /* SetInflationDestinationViewController.xib in Resources */,
 				43AE63532135A19300B7A904 /* Lato-Hairline.ttf in Resources */,
 				43AE634E2135A19300B7A904 /* Lato-LightItalic.ttf in Resources */,
+				C62342D4219B07DC00A2FFBD /* MemoView.xib in Resources */,
 				43AE63272135A19300B7A904 /* EncodeSans-Bold.ttf in Resources */,
 				C672508C213FE8FA0064F6E3 /* KnownInflationDestinationsViewController.xib in Resources */,
 				C6725094213FFC7A0064F6E3 /* KnownInflationDestinationDetailsViewController.xib in Resources */,
@@ -2174,6 +2181,7 @@
 				74E2057820D1543400E94048 /* HomeFundedWalletHeaderView.swift in Sources */,
 				4359985120A5920200007F27 /* Array+Shuffle.swift in Sources */,
 				43C7A8F4215BEE19007F4E5E /* HelpTableViewCell.swift in Sources */,
+				C62342D6219B07EB00A2FFBD /* MemoView.swift in Sources */,
 				C68850E4214BC72900D7D077 /* UnfundedHeaderLabel.swift in Sources */,
 				43564BA921637334006A7B9F /* ContactsViewModel.swift in Sources */,
 				436201C0212DDC5300CF4495 /* R+Plurals.swift in Sources */,

@@ -29,6 +29,7 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
     @IBOutlet weak var issuerSeparatorView: UIView!
     @IBOutlet weak var issuerSubtitleView: UIView!
     @IBOutlet weak var issuerValueView: UIView!
+    @IBOutlet weak var memoViewContainer: UIView!
     
     @IBOutlet weak var sendByEmailButton: UIButton!
     @IBOutlet weak var printButton: UIButton!
@@ -36,6 +37,7 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
     
     private var currencyPickerView: UIPickerView!
     private var issuerPickerView: UIPickerView!
+    private var memoView: MemoView!
     
     var wallet: Wallet!
     var closeAction: (() -> ())?
@@ -49,6 +51,7 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
         setupNavigationItem()
         view.backgroundColor = Stylesheet.color(.veryLightGray)
         updateQRCode()
+        setupMemoView()
     }
     
     override func resignFirstResponder() -> Bool {
@@ -81,9 +84,16 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
             mail.mailComposeDelegate = self;
             mail.setSubject("Payment data")
             mail.setMessageBody(emailText(), isHTML: false)
-            if let image = qrImageView.image, let imageData = UIImagePNGRepresentation(image) {
-                mail.addAttachmentData(imageData, mimeType: "image/png", fileName: "qr_code.png")
-                self.present(mail, animated: true, completion: nil)
+    
+            if let image = qrImageView.image {
+                UIGraphicsBeginImageContext(image.size)
+                image.draw(in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
+                let newImage = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                if let newImage = newImage, let imageData = UIImagePNGRepresentation(newImage) {
+                    mail.addAttachmentData(imageData, mimeType: "image/png", fileName: "qr_code.png")
+                    self.present(mail, animated: true, completion: nil)
+                }
             }
         } else {
             let alert = UIAlertController(title: "Alert", message: "Email not set up!", preferredStyle: .alert)
@@ -207,6 +217,14 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
                 paymentObject.setValue(assetObject, forKey: "asset")
             }
         }
+        
+        if memoView?.hasMemo == true {
+            let memoObject: NSMutableDictionary = NSMutableDictionary()
+            memoObject.setValue(memoView.memoType, forKey: "type")
+            memoObject.setValue(memoView.memo, forKey: "value")
+            paymentObject.setValue(memoObject, forKey: "memo")
+        }
+        
         stellarObject.setValue(paymentObject, forKey: "payment")
         resultObject.setValue(stellarObject, forKey: "stellar")
         
@@ -224,6 +242,7 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
         
         return wallet.publicKey
     }
+    
     private func emailText() -> String {
         if let wallet = wallet as? FundedWallet {
             var text = "Receive public key: \(publicKeyLabel.text ?? "")\n"
@@ -239,6 +258,10 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
                 
             } else {
                 text += "Currency: \(currencyTextField.text ?? "")\nIssuer: \(issuerTextField.text ?? "-")\n\(currencyTextField.text ?? ""): \(amountTextField.text ?? "0")"
+            }
+            
+            if memoView.hasMemo, let memo = memoView.memo {
+                text += "\nMemo: \(memo)"
             }
             
             return text
@@ -307,6 +330,15 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
         
     }
     
+    @objc func memoValueChanged() {
+        memoView.resetValidationErrors()
+        memoView.validateMemo()
+        
+        if memoView.hasMemo {
+            updateQRCode()
+        }
+    }
+
     private func setupNavigationItem() {
         navigationItem.titleLabel.text = "Receive".uppercased()
         navigationItem.titleLabel.textColor = Stylesheet.color(.white)
@@ -318,6 +350,18 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
         sendByEmailButton.backgroundColor = Stylesheet.color(.green)
         printButton.backgroundColor = Stylesheet.color(.orange)
         doneButton.backgroundColor = Stylesheet.color(.blue)
+    }
+    
+    private func setupMemoView() {
+        memoView = Bundle.main.loadNibNamed("MemoView", owner: self, options: nil)![0] as? MemoView
+        memoViewContainer.addSubview(memoView)
+        
+        memoView.memoTypeTextField.addTarget(self, action: #selector(memoValueChanged), for: .editingDidEnd)
+        memoView.memoInputTextField.addTarget(self, action: #selector(memoValueChanged), for: .editingDidEnd)
+        
+        memoView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
     }
 }
 
