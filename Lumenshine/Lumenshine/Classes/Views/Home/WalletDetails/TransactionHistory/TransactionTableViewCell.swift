@@ -34,7 +34,7 @@ class TransactionTableViewCell: UITableViewCell {
     
     @IBAction func detailsButtonAction(_ sender: UIButton) {
         if operationInfo.responseData == nil {
-            self.viewContainingController()?.showActivity()
+            self.viewContainingController()?.showActivity(message: R.string.localizable.loading())
             let requestUrl = Services.shared.horizonURL + "/operations/" + operationInfo.operationID
             Services.shared.walletService.GETRequestFromUrl(url: requestUrl) { (result) -> (Void) in
                 DispatchQueue.main.async {

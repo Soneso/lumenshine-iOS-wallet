@@ -20,7 +20,7 @@ target 'Lumenshine' do
   ui_components_and_helper_pods
   
   pod 'R.swift', '~> 5.0.0.alpha.2'
-  pod 'stellar-ios-mac-sdk', :git => 'https://github.com/Soneso/stellar-ios-mac-sdk.git', :commit => 'c2d6ba60b6cd11b4fed6fba4517b225e4b801d0e'
+  pod 'stellar-ios-mac-sdk'
   pod 'OneTimePassword'
   pod 'SwiftRichString'
   

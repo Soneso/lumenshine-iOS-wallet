@@ -14,8 +14,13 @@ typealias okActionClosure = () -> Void
 
 extension UIViewController {
     
-    func showActivity(animated: Bool = true) {
-        let alert = UIAlertController(title: nil, message: R.string.localizable.loading(), preferredStyle: .alert)
+    func showActivity(message: String, animated: Bool = true) {
+        
+        if self.presentedViewController != nil {
+            hideActivity(animated: false)
+        }
+        
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         
         let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         loadingIndicator.hidesWhenStopped = true
@@ -28,6 +33,12 @@ extension UIViewController {
         }
         
         present(alert, animated: animated)
+    }
+    
+    func updateActivityMessage(message: String) {
+        if let presented = self.presentedViewController as? UIAlertController {
+            presented.message = message
+        }
     }
     
     func hideActivity(animated: Bool = true, completion: (() -> Void)? = nil) {

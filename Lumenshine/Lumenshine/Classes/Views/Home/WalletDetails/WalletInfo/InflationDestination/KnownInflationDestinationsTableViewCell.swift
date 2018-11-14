@@ -86,7 +86,6 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
                 } else {
                     if let inflationDestinationAddress = self.destinationPublicKeyLabel.text {
                         self.setInflationDestination(sourceAccountKeyPair: sourceKeyPair, destination: inflationDestinationAddress)
-                        self.reloadDelegate?.setNeedsReload()
                     }else {
                         // TODO improve, make sure not to show any cells that have no destination address
                         self.showUnknownErrorAlert()
@@ -140,6 +139,7 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
     }
     
     private func setInflationDestination(sourceAccountKeyPair: KeyPair, destination: String) {
+        viewContainingController()?.updateActivityMessage(message: R.string.localizable.sending())
         let signer = passwordView.useExternalSigning ? passwordView.signersTextField.text : nil
         let seed = passwordView.useExternalSigning ? passwordView.seedTextField.text : nil
      
@@ -150,6 +150,7 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
                                                             externalSignersSeed: seed) { (response) -> (Void) in
                                                                 switch response {
                                                                 case .success:
+                                                                    self.reloadDelegate?.setNeedsReload()
                                                                     self.dissmissView()
                                                                     break
                                                                 case .failure(error: let error):
@@ -171,6 +172,7 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
     }
     
     private func dissmissView() {
+        viewContainingController()?.hideActivity()
         viewContainingController()?.navigationController?.popViewController(animated: true)
     }
     
@@ -185,6 +187,7 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
     }
     
     private func setButtonAsValidating() {
+        viewContainingController()?.showActivity(message: R.string.localizable.validateing())
         if isCurrentlySetSwitch.isOn {
             setOrRemoveButton.setTitle(SetOrRemoveButtonTitles.validatingRemove.rawValue, for: UIControlState.normal)
             setOrRemoveButton.isEnabled = false
@@ -195,6 +198,7 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
     }
     
     private func setButtonAsNormal() {
+        viewContainingController()?.hideActivity()
         if isCurrentlySetSwitch.isOn {
             setOrRemoveButton.setTitle(SetOrRemoveButtonTitles.remove.rawValue, for: UIControlState.normal)
             setOrRemoveButton.isEnabled = true

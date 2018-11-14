@@ -135,7 +135,7 @@ extension LoginViewController {
 
 extension LoginViewController: LoginViewDelegate {
     func didTapSubmitButton(email: String, password: String, tfaCode: String?) {
-        showActivity()
+        showActivity(message: R.string.localizable.loading())
         viewModel.loginStep1(email: email, password: password, tfaCode: tfaCode) { [weak self] result in
             DispatchQueue.main.async {
                 self?.hideActivity(completion: {
@@ -156,7 +156,7 @@ extension LoginViewController: LoginViewDelegate {
 
 extension LoginViewController: SignUpViewDelegate {
     func didTapSubmitButton(email: String, password: String, repassword: String, forename: String, lastname: String) {
-        showActivity()
+        showActivity(message: R.string.localizable.loading())
         viewModel.signUp(email: email, password: password, repassword: repassword, forename: forename, lastname: lastname) { [weak self] result in
             DispatchQueue.main.async {
                 self?.hideActivity(completion: {
@@ -203,7 +203,7 @@ extension LoginViewController: EmailConfirmationViewDelegate {
 
 extension LoginViewController: LostSecuritySuccessViewDelegate {
     func didTapResendButton(email: String?) {
-        showActivity()
+        showActivity(message: R.string.localizable.loading())
         viewModel.lostSecurity(email: email) { [weak self] result in
             self?.hideActivity(completion: {
                 switch result {
@@ -221,7 +221,7 @@ extension LoginViewController: LostSecuritySuccessViewDelegate {
 
 fileprivate extension LoginViewController {
     func lostSecurity(email: String?) {
-        showActivity()
+        showActivity(message: R.string.localizable.loading())
         viewModel.lostSecurity(email: email) { [weak self] result in
             self?.hideActivity(completion: {
                 switch result {

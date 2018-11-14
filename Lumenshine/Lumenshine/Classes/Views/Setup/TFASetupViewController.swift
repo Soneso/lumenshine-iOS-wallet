@@ -67,7 +67,7 @@ extension TFASetupViewController {
         UIPasteboard.general.string = viewModel.tfaSecret
         let alert = UIAlertController(title: nil, message: "Copied to clipboard", preferredStyle: .actionSheet)
         self.present(alert, animated: true)
-        let when = DispatchTime.now() + 1
+        let when = DispatchTime.now() + 0.75
         DispatchQueue.main.asyncAfter(deadline: when){
             alert.dismiss(animated: true)
         }

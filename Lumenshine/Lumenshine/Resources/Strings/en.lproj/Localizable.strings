@@ -870,3 +870,9 @@
 
 /*  */
 "invalid_lastname" = "Invalid lastname";
+
+/*  */
+"validateing" = "validating";
+
+/*  */
+"sending" = "sending";

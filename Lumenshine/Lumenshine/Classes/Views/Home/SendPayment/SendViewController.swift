@@ -136,6 +136,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
 
     private func sendActionPreparation(biometricAuth: Bool = false) {
         resetValidations()
+        showActivity(message: R.string.localizable.validateing())
         sendButton.setTitle(SendButtonTitles.validating.rawValue, for: UIControlState.normal)
         sendButton.isEnabled = false
         
@@ -533,13 +534,16 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     private func sendPayment() {
+        
+        updateActivityMessage(message: R.string.localizable.sending())
+        
         let transactionData = TransactionInput(currency: self.selectedCurrency,
                                                issuer: self.issuerTextField.text ?? nil,
                                                destinationPublicKey: self.destinationPublicKey,
                                                destinationStellarAddress: self.destinationStellarAddress,
-                                               amount: availableAmount != nil ? String(availableAmount!) : (self.amountTextField.text?.replacingOccurrences(of: ",", with: ".") ?? ""),
-                                               memo: memoView.hasMemo ? memoView.memo : nil,
-                                               memoType: memoView.getMemoType,
+                                               amount: self.availableAmount != nil ? String(self.availableAmount!) : (self.amountTextField.text?.replacingOccurrences(of: ",", with: ".") ?? ""),
+                                               memo: self.memoView.hasMemo ? self.memoView.memo : nil,
+                                               memoType: self.memoView.getMemoType,
                                                masterKeyPair: self.masterKeyPair,
                                                transactionType: self.createRecepientAccount ? TransactionActionType.createAndFundAccount : TransactionActionType.sendPayment,
                                                signer: self.passwordView.useExternalSigning ? self.passwordView.signersTextField.text : nil,
@@ -554,6 +558,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     private func setSendButtonDefaultTitle() {
+        hideActivity()
         let sendButtonTitle: String = getSendButtonDefaultTitle()
         sendButton.setTitle(sendButtonTitle, for: .normal)
         
@@ -899,8 +904,10 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     private func resetSendButtonToNormal() {
+        hideActivity()
         sendButton.setTitle(getSendButtonDefaultTitle(), for: UIControlState.normal)
         sendButton.isEnabled = true
+        
     }
     
     private func setupNavigationItem() {

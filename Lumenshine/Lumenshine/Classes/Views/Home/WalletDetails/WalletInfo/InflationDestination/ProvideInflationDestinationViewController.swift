@@ -79,9 +79,11 @@ class ProvideInflationDestinationViewController: UIViewController {
         passwordView.resetValidationErrors()
         setButton.setTitle(SetButtonTitles.validating.rawValue, for: UIControlState.normal)
         setButton.isEnabled = false
+        showActivity(message: R.string.localizable.validateing())
         
         if isInputDataValid(biometricAuth: biometricAuth) {
             guard self.hasEnoughFunding else {
+                hideActivity()
                 self.showFundingAlert()
                 return
             }
@@ -114,18 +116,19 @@ class ProvideInflationDestinationViewController: UIViewController {
                     case .failure(error: let error):
                         print(error)
                     }
-                    self.showUnknownErrorAlert()
                     self.resetSetButtonToDefault()
+                    self.showUnknownErrorAlert()
                 })
             case .failure(error: let error):
                 print("Error: \(error)")
-                self.passwordView.showInvalidPasswordError()
                 self.resetSetButtonToDefault()
+                self.passwordView.showInvalidPasswordError()
             }
         }
     }
     
     private func resetSetButtonToDefault() {
+        hideActivity()
         setButton.setTitle(SetButtonTitles.set.rawValue, for: UIControlState.normal)
         setButton.isEnabled = true
     }
@@ -143,6 +146,7 @@ class ProvideInflationDestinationViewController: UIViewController {
     }
     
     private func setInflationDestination(sourceAccountKeyPair: KeyPair, inflationDestination: String) {
+        updateActivityMessage(message: R.string.localizable.sending())
         let signer = passwordView.useExternalSigning ? passwordView.signersTextField.text : nil
         let seed = passwordView.useExternalSigning ? passwordView.seedTextField.text : nil
         
@@ -154,6 +158,7 @@ class ProvideInflationDestinationViewController: UIViewController {
                                                  completion: { (response) -> (Void) in
                                                     switch response {
                                                     case .success:
+                                                        self.hideActivity()
                                                         self.navigationController?.popViewController(animated: true)
                                                         break
                                                     case .failure(error: let error):
@@ -165,8 +170,8 @@ class ProvideInflationDestinationViewController: UIViewController {
                                                             
                                                         }
                                                         print("Error: \(error)")
-                                                        self.showUnknownErrorAlert()
                                                         self.resetSetButtonToDefault()
+                                                        self.showUnknownErrorAlert()
                                                     }
         })
     }

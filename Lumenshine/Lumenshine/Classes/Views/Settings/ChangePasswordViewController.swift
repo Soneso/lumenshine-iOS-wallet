@@ -84,7 +84,7 @@ extension ChangePasswordViewController {
         
         _ = resignFirstResponder()
         
-        showActivity()
+        showActivity(message: R.string.localizable.loading())
         viewModel.changePassword(currentPass: currentPassword, newPass: newPassword, repeatPass: repassword) { [weak self] result in
             DispatchQueue.main.async {
                 self?.hideActivity(completion: {

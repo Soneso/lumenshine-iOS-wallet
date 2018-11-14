@@ -194,7 +194,7 @@ fileprivate extension Change2faSecretViewController {
     }
     
     func change2FASecret(password: String) {
-        showActivity()
+        showActivity(message: R.string.localizable.loading())
         viewModel.change2faSecret(password: password) { result in
             DispatchQueue.main.async {
                 self.hideActivity(completion: {

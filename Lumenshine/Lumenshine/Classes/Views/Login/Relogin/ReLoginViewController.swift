@@ -122,7 +122,7 @@ extension ReLoginViewController: ToolbarHeaderDelegate {
 
 extension ReLoginViewController: ReLoginViewDelegate {
     func didTapSubmitButton(password: String, tfaCode: String?) {
-        showActivity()
+        showActivity(message: R.string.localizable.loading())
         viewModel.loginStep1(email: "", password: password, tfaCode: tfaCode) { [weak self] result in
             DispatchQueue.main.async {
                 self?.hideActivity(completion: {
@@ -139,7 +139,7 @@ extension ReLoginViewController: ReLoginViewDelegate {
 
 extension ReLoginViewController: ReLoginFingerViewDelegate {
     func didTapActivateButton(password: String, tfaCode: String?) {
-        showActivity()
+        showActivity(message: R.string.localizable.loading())
         viewModel.loginStep1(email: "", password: password, tfaCode: tfaCode, checkSetup: false) { [weak self] result in
             DispatchQueue.main.async {
                 self?.hideActivity(completion: {

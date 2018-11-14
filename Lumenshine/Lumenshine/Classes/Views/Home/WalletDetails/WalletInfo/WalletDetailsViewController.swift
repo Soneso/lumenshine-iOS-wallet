@@ -108,7 +108,7 @@ class WalletDetailsViewController: UIViewController {
             UIPasteboard.general.string = value
             let alert = UIAlertController(title: nil, message: "Copied to clipboard", preferredStyle: .actionSheet)
             self.present(alert, animated: true)
-            let when = DispatchTime.now() + 1
+            let when = DispatchTime.now() + 0.75
             DispatchQueue.main.asyncAfter(deadline: when){
                 alert.dismiss(animated: true)
             }
@@ -132,6 +132,11 @@ class WalletDetailsViewController: UIViewController {
         setupInflationDestination()
         paymentOperationsVCManager = PaymentOperationsVCManager(parentViewController: self)
         secretRevealButton.backgroundColor = Stylesheet.color(.blue)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        hideActivity()
     }
     
     private func setupBalances() {
