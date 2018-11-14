@@ -32,7 +32,7 @@ protocol ContactsViewModelType: Transitionable {
     var removeIsHidden: Bool { get }
     
     func showAddContact()
-    func addUpdateContact(name: String, address: String?, publicKey: String?, response: @escaping ContactsResponseClosure)
+    func addUpdateContact(name: String, address: String, response: @escaping ContactsResponseClosure)
     func removeContact(response: @escaping ContactsResponseClosure)
 }
 
@@ -140,33 +140,33 @@ class ContactsViewModel : ContactsViewModelType {
         return selectedContact == nil
     }
     
-    func addUpdateContact(name: String, address: String?, publicKey: String?, response: @escaping ContactsResponseClosure) {
+    func addUpdateContact(name: String, address: String, response: @escaping ContactsResponseClosure) {
         
-        if address?.isEmpty ?? true, publicKey?.isEmpty ?? true {
+        if address.isEmpty || (!address.isFederationAddress() && !address.isValidEd25519PublicKey()){
             let error = ErrorResponse()
             error.errorMessage = R.string.localizable.stellar_address_error()
             response(.failure(error: .validationFailed(error: error)))
             return
         }
-
-        if let address = address, !address.isEmpty, !address.isFederationAddress() {
+        
+        if !address.isFederationAddress() && !address.isValidEd25519PublicKey(){
             let error = ErrorResponse()
-            error.errorMessage = R.string.localizable.invalid_address()
-            error.parameterName = "address"
-            response(.failure(error: .validationFailed(error: error)))
-            return
-        }
-
-        if let publicKey = publicKey, !publicKey.isEmpty, !publicKey.isValidEd25519PublicKey() {
-            let error = ErrorResponse()
-            error.errorMessage = R.string.localizable.invalid_public_key()
-            error.parameterName = "public_key"
+            error.errorMessage = R.string.localizable.invalid_address_or_pk()
             response(.failure(error: .validationFailed(error: error)))
             return
         }
         
+        var public_key: String? = nil
+        var federation_address: String? = nil
+        
+        if (address.isValidEd25519PublicKey()) {
+            public_key = address
+        } else if (address.isFederationAddress()) {
+            federation_address = address
+        }
+        
         if let contactId = selectedContact?.id {
-            service.editContact(id: contactId, name: name, address: address, publicKey: publicKey) { [weak self] result in
+            service.editContact(id: contactId, name: name, address: federation_address, publicKey: public_key) { [weak self] result in
                 switch result {
                 case .success(let contacts):
                     self?.entries = contacts
@@ -177,7 +177,7 @@ class ContactsViewModel : ContactsViewModelType {
                 }
             }
         } else {
-            service.addContact(name: name, address: address, publicKey: publicKey) { [weak self] result in
+            service.addContact(name: name, address: federation_address, publicKey: public_key) { [weak self] result in
                 switch result {
                 case .success(let contacts):
                     self?.entries = contacts

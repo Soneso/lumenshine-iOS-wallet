@@ -809,22 +809,13 @@
 "stellar_address" = "Stellar address";
 
 /*  */
-"invalid_address" = "Invalid Stellar address";
+"invalid_address_or_pk" = "Invalid address or public key";
 
 /*  */
-"stellar_address_hint" = "     example: max*lumenshine.com";
+"stellar_address_hint" = "     example: max*lumenshine.com or GBABXVQ64GP...";
 
 /*  */
-"stellar_public_key" = "Stellar public key";
-
-/*  */
-"invalid_public_key" = "Invalid Stellar public key";
-
-/*  */
-"stellar_public_key_hint" = "     example: GBABXVQ64GP5JZ3AQFX5FUYLCVY6HIHMTX4HZQ6...";
-
-/*  */
-"stellar_address_error" = "You must enter address OR public key";
+"stellar_address_error" = "You must enter a stellar account federation (short) address or a stellar account public key";
 
 /*  */
 "no_stellar_address" = "no stellar address";
