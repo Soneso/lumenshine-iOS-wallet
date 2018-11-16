@@ -113,6 +113,7 @@ class KnownInflationDestinationsViewController: UIViewController, UITableViewDel
         cell.nameLabel.text = knownInflationDestination.name
         cell.shortDescriptionLabel.text = knownInflationDestination.shortDescription
         cell.destinationPublicKeyLabel.text = knownInflationDestination.destinationPublicKey
+        cell.destinationPublicKeyLabel.lineBreakMode = .byTruncatingMiddle
         
         if knownInflationDestination.destinationPublicKey == currentInflationDestination {
             cell.isCurrentlySetSwitch.isOn = true

@@ -10,7 +10,7 @@ import UIKit
 import Material
 
 protocol SignUpViewDelegate: class {
-    func didTapSubmitButton(email: String, password: String, repassword: String)
+    func didTapSubmitButton(email: String, password: String, repassword: String, forename: String, lastname: String)
 }
 
 class SignUpView: UIView {
@@ -21,12 +21,13 @@ class SignUpView: UIView {
     fileprivate let horizontalSpacing: CGFloat = 15.0
     fileprivate let passwordHintButton = Material.IconButton()
     fileprivate let titleLabel = UILabel()
-    //fileprivate let detailLabel = UILabel()
     
     // MARK: - UI properties
-    fileprivate let textField1 = LSTextField()
-    fileprivate let textField2 = LSTextField()
-    fileprivate let textField3 = LSTextField()
+    fileprivate let emailTextField = LSTextField()
+    fileprivate let forenameTextField = LSTextField()
+    fileprivate let lastnameTextField = LSTextField()
+    fileprivate let passwordTextField = LSTextField()
+    fileprivate let repeatPasswordTextField = LSTextField()
     fileprivate let submitButton = RaisedButton()
     fileprivate let checkButton = CheckButton()
     fileprivate let termsButton = Button()
@@ -44,10 +45,18 @@ class SignUpView: UIView {
     }
     
     override func resignFirstResponder() -> Bool {
-        textField1.resignFirstResponder()
-        textField2.resignFirstResponder()
-        textField3.resignFirstResponder()
+        emailTextField.resignFirstResponder()
+        forenameTextField.resignFirstResponder()
+        lastnameTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+        repeatPasswordTextField.resignFirstResponder()
         return super.resignFirstResponder()
+    }
+    
+    private func scrollTextFieldToVisible(textField: LSTextField) {
+        if let parent = self.superview, let scrollview = parent.superview as? UIScrollView {
+            scrollview.setContentOffset(CGPoint(x: 0, y: textField.frame.center.y - 35), animated: true)
+        }
     }
 }
 
@@ -55,11 +64,20 @@ extension SignUpView: LoginViewContentProtocol {
     func present(error: ServiceError) -> Bool {
         if let parameter = error.parameterName {
             if parameter == "email" {
-                textField1.detail = error.errorDescription
+                emailTextField.detail = error.errorDescription
+                scrollTextFieldToVisible(textField: emailTextField)
+            } else if parameter == "forename" {
+                forenameTextField.detail = error.errorDescription
+                scrollTextFieldToVisible(textField:forenameTextField)
+            } else if parameter == "lastname" {
+                lastnameTextField.detail = error.errorDescription
+                scrollTextFieldToVisible(textField:lastnameTextField)
             } else if parameter == "password" {
-                textField2.detail = error.errorDescription
+                passwordTextField.detail = error.errorDescription
+                scrollTextFieldToVisible(textField:passwordTextField)
             } else if parameter == "repassword" {
-                textField3.detail = error.errorDescription
+                repeatPasswordTextField.detail = error.errorDescription
+                scrollTextFieldToVisible(textField:passwordTextField)
             }
             return true
         }
@@ -79,29 +97,48 @@ extension SignUpView {
     func signUpAction(sender: UIButton) {
         if !submitButton.isEnabled { return }
         
-        textField1.detail = nil
-        textField2.detail = nil
-        textField3.detail = nil
+        emailTextField.detail = nil
+        forenameTextField.detail = nil
+        lastnameTextField.detail = nil
+        passwordTextField.detail = nil
+        repeatPasswordTextField.detail = nil
         
-        guard let email = textField1.text,
+        guard let email = emailTextField.text,
             !email.isEmpty else {
-                textField1.detail = R.string.localizable.invalid_email()
+                emailTextField.detail = R.string.localizable.email_mandatory()
+                scrollTextFieldToVisible(textField: emailTextField)
                 return
         }
         
-        guard let password = textField2.text,
+        guard let forename = forenameTextField.text,
+            !forename.isEmpty else {
+                forenameTextField.detail = R.string.localizable.forename_mandatory()
+                scrollTextFieldToVisible(textField: forenameTextField)
+                return
+        }
+        
+        guard let lastname = lastnameTextField.text,
+            !lastname.isEmpty else {
+                lastnameTextField.detail = R.string.localizable.lastname_mandatory()
+                scrollTextFieldToVisible(textField: lastnameTextField)
+                return
+        }
+        
+        guard let password = passwordTextField.text,
             !password.isEmpty else {
-                textField2.detail = R.string.localizable.invalid_password()
+                passwordTextField.detail = R.string.localizable.invalid_password()
+                scrollTextFieldToVisible(textField: passwordTextField)
                 return
         }
         
-        guard let repassword = textField3.text,
+        guard let repassword = repeatPasswordTextField.text,
             !repassword.isEmpty else {
-                textField3.detail = R.string.localizable.invalid_password()
+                repeatPasswordTextField.detail = R.string.localizable.invalid_password()
+                scrollTextFieldToVisible(textField: passwordTextField)
                 return
         }
         _ = resignFirstResponder()
-        delegate?.didTapSubmitButton(email: email, password: password, repassword: repassword)
+        delegate?.didTapSubmitButton(email: email, password: password, repassword: repassword, forename: forename, lastname: lastname)
     }
     
     @objc
@@ -134,7 +171,6 @@ extension SignUpView: UITextFieldDelegate {
 fileprivate extension SignUpView {
     func prepare() {
         prepareTitle()
-        //prepareDetail()
         prepareTextFields()
         prepareHintButton()
         prepareCheckButton()
@@ -157,75 +193,80 @@ fileprivate extension SignUpView {
         }
     }
     
-    /*func prepareDetail() {
-        detailLabel.text = R.string.localizable.login_fill()
-        detailLabel.textColor = Stylesheet.color(.lightBlack)
-        detailLabel.font = R.font.encodeSansRegular(size: 13)
-        detailLabel.textAlignment = .left
-        detailLabel.adjustsFontSizeToFitWidth = true
-        detailLabel.numberOfLines = 0
-        
-        addSubview(detailLabel)
-        detailLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLabel.snp.bottom)
-            make.left.equalTo(horizontalSpacing)
-            make.right.equalTo(-horizontalSpacing)
-        }
-    }*/
-    
     func prepareTextFields() {
-        textField1.delegate = self
-        textField2.delegate = self
-        textField3.delegate = self
+        emailTextField.delegate = self
+        forenameTextField.delegate = self
+        lastnameTextField.delegate = self
+        passwordTextField.delegate = self
+        repeatPasswordTextField.delegate = self
         
-        textField1.keyboardType = .emailAddress
-        textField1.autocapitalizationType = .none
-        textField1.placeholder = R.string.localizable.email().uppercased()
-        textField1.addTarget(self, action: #selector(editingDidChange(_:)), for: .editingChanged)
+        emailTextField.keyboardType = .emailAddress
+        emailTextField.autocapitalizationType = .none
+        emailTextField.placeholder = R.string.localizable.email().uppercased()
+        emailTextField.addTarget(self, action: #selector(editingDidChange(_:)), for: .editingChanged)
         
-        textField2.isSecureTextEntry = true
-        textField2.isVisibilityIconButtonEnabled = true
-        textField2.placeholder = R.string.localizable.password().uppercased()
-        textField2.dividerContentEdgeInsets = EdgeInsets(top: 0, left: 0, bottom: 0, right: -2.0*horizontalSpacing)
-        textField2.addTarget(self, action: #selector(editingDidChange(_:)), for: .editingChanged)
+        forenameTextField.placeholder = R.string.localizable.forename().uppercased()
+        forenameTextField.addTarget(self, action: #selector(editingDidChange(_:)), for: .editingChanged)
+        
+        lastnameTextField.placeholder = R.string.localizable.lastname().uppercased()
+        lastnameTextField.addTarget(self, action: #selector(editingDidChange(_:)), for: .editingChanged)
+        
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.isVisibilityIconButtonEnabled = true
+        passwordTextField.placeholder = R.string.localizable.password().uppercased()
+        passwordTextField.dividerContentEdgeInsets = EdgeInsets(top: 0, left: 0, bottom: 0, right: -2.0*horizontalSpacing)
+        passwordTextField.addTarget(self, action: #selector(editingDidChange(_:)), for: .editingChanged)
 
-        textField3.isSecureTextEntry = true
-        textField3.isVisibilityIconButtonEnabled = true
-        textField3.placeholder = R.string.localizable.repeat_password().uppercased()
-        textField3.addTarget(self, action: #selector(editingDidChange(_:)), for: .editingChanged)
+        repeatPasswordTextField.isSecureTextEntry = true
+        repeatPasswordTextField.isVisibilityIconButtonEnabled = true
+        repeatPasswordTextField.placeholder = R.string.localizable.repeat_password().uppercased()
+        repeatPasswordTextField.addTarget(self, action: #selector(editingDidChange(_:)), for: .editingChanged)
         
-        addSubview(textField1)
-        textField1.snp.makeConstraints { make in
+        addSubview(forenameTextField)
+        forenameTextField.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(25)
             make.left.equalTo(horizontalSpacing)
             make.right.equalTo(-horizontalSpacing)
         }
         
-        addSubview(textField2)
-        textField2.snp.makeConstraints { make in
-            make.top.equalTo(textField1.snp.bottom).offset(verticalSpacing)
-            make.left.equalTo(textField1)
+        addSubview(lastnameTextField)
+        lastnameTextField.snp.makeConstraints { make in
+            make.top.equalTo(forenameTextField.snp.bottom).offset(verticalSpacing)
+            make.left.equalTo(forenameTextField)
+            make.right.equalTo(-horizontalSpacing)
+        }
+        
+        addSubview(emailTextField)
+        emailTextField.snp.makeConstraints { make in
+            make.top.equalTo(lastnameTextField.snp.bottom).offset(verticalSpacing)
+            make.left.equalTo(lastnameTextField)
+            make.right.equalTo(-horizontalSpacing)
+        }
+        
+        addSubview(passwordTextField)
+        passwordTextField.snp.makeConstraints { make in
+            make.top.equalTo(emailTextField.snp.bottom).offset(verticalSpacing)
+            make.left.equalTo(emailTextField)
             make.right.equalTo(-3*horizontalSpacing)
         }
         
-        addSubview(textField3)
-        textField3.snp.makeConstraints { make in
-            make.top.equalTo(textField2.snp.bottom).offset(verticalSpacing)
-            make.left.equalTo(textField1)
-            make.right.equalTo(textField1)
+        addSubview(repeatPasswordTextField)
+        repeatPasswordTextField.snp.makeConstraints { make in
+            make.top.equalTo(passwordTextField.snp.bottom).offset(verticalSpacing)
+            make.left.equalTo(emailTextField)
+            make.right.equalTo(emailTextField)
         }
     }
     
     func prepareHintButton() {
         let image = R.image.question()?.resize(toWidth: 20)
         passwordHintButton.image = image?.tint(with: Stylesheet.color(.gray))
-//        passwordHintButton.shapePreset = .circle
         passwordHintButton.addTarget(self, action: #selector(hintAction(sender:)), for: .touchUpInside)
         
         addSubview(passwordHintButton)
         passwordHintButton.snp.makeConstraints { make in
             make.right.equalTo(-8)
-            make.centerY.equalTo(textField2)
+            make.centerY.equalTo(passwordTextField)
             make.width.height.equalTo(44)
         }
     }
@@ -233,7 +274,6 @@ fileprivate extension SignUpView {
     func prepareCheckButton() {
         
         checkButton.title = R.string.localizable.agree_to_abide()
-//        checkButton.checkmarkColor = Stylesheet.color(.blue)
         checkButton.titleColor = Stylesheet.color(.lightBlack)
         checkButton.titleLabel?.adjustsFontSizeToFitWidth = true
         checkButton.titleLabel?.font = R.font.encodeSansRegular(size: 13)
@@ -241,9 +281,8 @@ fileprivate extension SignUpView {
         
         addSubview(checkButton)
         checkButton.snp.makeConstraints { make in
-            make.top.equalTo(textField3.snp.bottom).offset(verticalSpacing)
+            make.top.equalTo(repeatPasswordTextField.snp.bottom).offset(verticalSpacing)
             make.left.equalTo(10)
-//            make.width.height.equalTo(40)
         }
         
         termsButton.title = R.string.localizable.terms_of_service().lowercased()
@@ -257,7 +296,6 @@ fileprivate extension SignUpView {
         termsButton.snp.makeConstraints { make in
             make.left.equalTo(checkButton.snp.right)
             make.centerY.equalTo(checkButton)
-//            make.right.equalToSuperview()
         }
     }
     
@@ -281,9 +319,11 @@ fileprivate extension SignUpView {
     }
     
     func validateForm() -> Bool {
-        if textField1.text?.isEmpty ?? true ||
-            textField2.text?.isEmpty ?? true ||
-            textField3.text?.isEmpty ?? true ||
+        if emailTextField.text?.isEmpty ?? true ||
+            forenameTextField.text?.isEmpty ?? true ||
+            lastnameTextField.text?.isEmpty ?? true ||
+            passwordTextField.text?.isEmpty ?? true ||
+            repeatPasswordTextField.text?.isEmpty ?? true ||
             !checkButton.isSelected {
             return false
         }

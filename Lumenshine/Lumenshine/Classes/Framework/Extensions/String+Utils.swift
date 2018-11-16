@@ -61,11 +61,20 @@ extension String  {
         }
         
         return true
-        //let sRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{9,}"
-        // with special character
-        //let regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&]{8,}"
+    }
+    
+    func isValidName () -> Bool {
         
-        //return NSPredicate(format: "SELF MATCHES %@", sRegex).evaluate(with: self)
+        if self.trimmed.count < 2 {
+            return false
+        }
+        
+        let decimalDigits = CharacterSet.decimalDigits
+        
+        if self.rangeOfCharacter(from: decimalDigits) != nil {
+            return false
+        }
+        return true
     }
     
     func isMandatoryValid() -> Bool {

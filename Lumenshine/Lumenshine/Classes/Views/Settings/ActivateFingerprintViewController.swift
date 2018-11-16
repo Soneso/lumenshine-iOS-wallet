@@ -29,7 +29,7 @@ class ActivateFingerprintViewController: UIViewController {
     }
     
     // MARK: - View Life Cycle
-    override func viewDidLoad() {
+    override func viewDidLoad() {R.string.localizable.loading()
         super.viewDidLoad()
         
         prepareView()
@@ -52,7 +52,7 @@ class ActivateFingerprintViewController: UIViewController {
 
 extension ActivateFingerprintViewController: ReLoginFingerViewDelegate {
     func didTapActivateButton(password: String, tfaCode: String?) {
-        showActivity()
+        showActivity(message: R.string.localizable.loading())
         viewModel.loginStep1(email: "", password: password, tfaCode: tfaCode, checkSetup: false) { [weak self] result in
             DispatchQueue.main.async {
                 self?.hideActivity(completion: {

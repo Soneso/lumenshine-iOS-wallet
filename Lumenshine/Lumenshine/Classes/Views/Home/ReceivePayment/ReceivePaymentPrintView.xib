@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,25 +16,41 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="303"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KqJ-fX-svj">
-                    <rect key="frame" x="16" y="20" width="343" height="206"/>
-                </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gr0-wM-iaw">
-                    <rect key="frame" x="16" y="258" width="343" height="29"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="a9K-0P-sRH">
+                    <rect key="frame" x="16" y="16" width="343" height="271"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O5D-Lk-xRb">
+                            <rect key="frame" x="0.0" y="0.0" width="343" height="210"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KqJ-fX-svj">
+                                    <rect key="frame" x="66.5" y="0.0" width="210" height="210"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="KqJ-fX-svj" secondAttribute="height" multiplier="1:1" id="Fhz-KC-mCO"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="KqJ-fX-svj" firstAttribute="centerX" secondItem="O5D-Lk-xRb" secondAttribute="centerX" id="2zs-Ty-oHq"/>
+                                <constraint firstItem="KqJ-fX-svj" firstAttribute="top" secondItem="O5D-Lk-xRb" secondAttribute="top" id="VRO-Ue-Y05"/>
+                                <constraint firstItem="KqJ-fX-svj" firstAttribute="centerY" secondItem="O5D-Lk-xRb" secondAttribute="centerY" id="wwn-S3-JDk"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gr0-wM-iaw">
+                            <rect key="frame" x="0.0" y="242" width="343" height="29"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="gr0-wM-iaw" secondAttribute="bottom" constant="16" id="PMp-KA-WfI"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="KqJ-fX-svj" secondAttribute="trailing" constant="16" id="Vik-LG-BB3"/>
-                <constraint firstItem="KqJ-fX-svj" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="X49-C0-zb6"/>
-                <constraint firstItem="gr0-wM-iaw" firstAttribute="top" secondItem="KqJ-fX-svj" secondAttribute="bottom" constant="32" id="cjj-MA-iFS"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="gr0-wM-iaw" secondAttribute="trailing" constant="16" id="frJ-lr-5Vv"/>
-                <constraint firstItem="gr0-wM-iaw" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="iTY-nS-B2P"/>
-                <constraint firstItem="KqJ-fX-svj" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="sci-ws-iD1"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="a9K-0P-sRH" secondAttribute="bottom" constant="16" id="9vp-qw-C8X"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="a9K-0P-sRH" secondAttribute="trailing" constant="16" id="g7e-jR-lB2"/>
+                <constraint firstItem="a9K-0P-sRH" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="sQY-7d-16D"/>
+                <constraint firstItem="a9K-0P-sRH" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="w85-k1-f5a"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

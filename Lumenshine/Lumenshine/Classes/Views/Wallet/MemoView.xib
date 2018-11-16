@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MemoView" customModule="Lumenshine" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="71v-SZ-vWr">
+                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="EJ2-5K-Ekf">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="20.5"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="1000" text="Memo (optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iDO-yH-Con" customClass="SubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="16" y="0.0" width="126" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="iDO-yH-Con" firstAttribute="leading" secondItem="EJ2-5K-Ekf" secondAttribute="leading" constant="16" id="DEX-ir-Gfa"/>
+                                <constraint firstAttribute="bottom" secondItem="iDO-yH-Con" secondAttribute="bottom" id="gIS-Oi-Eya"/>
+                                <constraint firstItem="iDO-yH-Con" firstAttribute="top" secondItem="EJ2-5K-Ekf" secondAttribute="top" id="pYe-kv-vbr"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="94e-kw-Spv">
+                            <rect key="frame" x="0.0" y="30.5" width="375" height="30"/>
+                            <subviews>
+                                <textField opaque="NO" contentMode="left" verticalHuggingPriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Memo Type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hk2-Dn-U1j" customClass="PickerTextField" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="hk2-Dn-U1j" firstAttribute="leading" secondItem="94e-kw-Spv" secondAttribute="leading" id="IrN-hJ-Zfa"/>
+                                <constraint firstItem="hk2-Dn-U1j" firstAttribute="top" secondItem="94e-kw-Spv" secondAttribute="top" id="bFt-sL-aQr"/>
+                                <constraint firstAttribute="trailing" secondItem="hk2-Dn-U1j" secondAttribute="trailing" id="hY3-5H-VAz"/>
+                                <constraint firstAttribute="bottom" secondItem="hk2-Dn-U1j" secondAttribute="bottom" id="zby-2e-3ra"/>
+                            </constraints>
+                        </view>
+                        <view hidden="YES" contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="bdh-mG-Niu">
+                            <rect key="frame" x="0.0" y="65.5" width="375" height="0.0"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="751" text="Memo Input Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfG-Z2-2gu" userLabel="MemoInputErrorLabel" customClass="ErrorLabel" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="16" y="0.0" width="359" height="0.0"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="bfG-Z2-2gu" secondAttribute="trailing" id="8IW-6g-N3w"/>
+                                <constraint firstItem="bfG-Z2-2gu" firstAttribute="leading" secondItem="bdh-mG-Niu" secondAttribute="leading" constant="16" id="GUf-1m-G0A"/>
+                                <constraint firstAttribute="bottom" secondItem="bfG-Z2-2gu" secondAttribute="bottom" id="QGM-OK-9Iy"/>
+                                <constraint firstItem="bfG-Z2-2gu" firstAttribute="top" secondItem="bdh-mG-Niu" secondAttribute="top" id="eo4-Ab-Ngi"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="GAM-3G-AUJ">
+                            <rect key="frame" x="0.0" y="70.5" width="375" height="30"/>
+                            <subviews>
+                                <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Up to 28 characters" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="L0X-Ud-LYL" customClass="InputTextField" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="L0X-Ud-LYL" firstAttribute="top" secondItem="GAM-3G-AUJ" secondAttribute="top" id="1Kq-oc-ELc"/>
+                                <constraint firstItem="L0X-Ud-LYL" firstAttribute="leading" secondItem="GAM-3G-AUJ" secondAttribute="leading" id="MWg-3A-mbN"/>
+                                <constraint firstAttribute="bottom" secondItem="L0X-Ud-LYL" secondAttribute="bottom" id="ODA-Jx-BTn"/>
+                                <constraint firstAttribute="trailing" secondItem="L0X-Ud-LYL" secondAttribute="trailing" id="qK0-zZ-Wzs"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Exg-j3-2E2">
+                            <rect key="frame" x="0.0" y="110.5" width="375" height="536.5"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="71v-SZ-vWr" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="5Tb-SF-wgz"/>
+                <constraint firstItem="71v-SZ-vWr" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="SXg-aQ-QP9"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="71v-SZ-vWr" secondAttribute="trailing" id="Ztb-Dq-M33"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="71v-SZ-vWr" secondAttribute="bottom" id="iun-Fl-cMN"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="memoInputErrorLabel" destination="bfG-Z2-2gu" id="3to-PX-UiR"/>
+                <outlet property="memoInputErrorView" destination="bdh-mG-Niu" id="ETI-gc-jV3"/>
+                <outlet property="memoInputTextField" destination="L0X-Ud-LYL" id="iwD-Mk-GKr"/>
+                <outlet property="memoTypeTextField" destination="hk2-Dn-U1j" id="slQ-XR-P2Z"/>
+            </connections>
+        </view>
+    </objects>
+</document>

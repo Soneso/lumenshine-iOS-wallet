@@ -60,7 +60,7 @@ class PersonalDataViewModel : PersonalDataViewModelType {
     
     init(service: UserDataService) {
         self.service = service
-        self.entries = [[.salutation, .lastname, .forename, .additionalName, .countryCode, .state, .city, .zipCode, .address, .mobileNR,
+        self.entries = [[.salutation, .forename, .lastname, .additionalName, .countryCode, .state, .city, .zipCode, .address, .mobileNR,
                          .birthday, .birthPlace, .birthCountryCode, .languageCode],
                         [.occupation, .employerName, .employerAddress],
                         [.bankAccountNumber, .bankNumber, .bankPhoneNumber],
@@ -163,8 +163,6 @@ class PersonalDataViewModel : PersonalDataViewModelType {
     
     func keyboardType(at indexPath: IndexPath) -> UIKeyboardType {
         switch entry(at: indexPath) {
-        case .email:
-            return .emailAddress
         case .zipCode:
             return .decimalPad
         case .mobileNR, .bankPhoneNumber:
@@ -251,9 +249,27 @@ fileprivate extension PersonalDataViewModel {
         var validatedData = Dictionary<PersonalDataEntry, PersonalDataProtocol>()
         validatedData.merge(selectedValues, uniquingKeysWith: {(_, last) in last})
         
-        if let email = validatedData[.email], !email.name.isEmail() {
+        if let forename = validatedData[.forename]?.name, forename.isEmpty {
             let error = ErrorResponse()
-            error.errorMessage = R.string.localizable.invalid_email()
+            error.errorMessage = R.string.localizable.forename_mandatory()
+            return (error, nil)
+        }
+        
+        if let forename = validatedData[.forename]?.name, !forename.isValidName() {
+            let error = ErrorResponse()
+            error.errorMessage = R.string.localizable.invalid_forename()
+            return (error, nil)
+        }
+        
+        if let lastname = validatedData[.lastname]?.name, lastname.isEmpty {
+            let error = ErrorResponse()
+            error.errorMessage = R.string.localizable.lastname_mandatory()
+            return (error, nil)
+        }
+        
+        if let lastname = validatedData[.lastname]?.name, !lastname.isValidName() {
+            let error = ErrorResponse()
+            error.errorMessage = R.string.localizable.invalid_lastname()
             return (error, nil)
         }
         
@@ -366,8 +382,6 @@ fileprivate extension PersonalDataViewModel {
         }
         selectedValues[.birthPlace] = PersonalData(name: userData.birthPlace)
         selectedValues[.city] = PersonalData(name: userData.city)
-        selectedValues[.company] = PersonalData(name: userData.company)
-        selectedValues[.email] = PersonalData(name: userData.email)
         selectedValues[.employerAddress] = PersonalData(name: userData.employerAddress)
         selectedValues[.employerName] = PersonalData(name: userData.employerName)
         selectedValues[.forename] = PersonalData(name: userData.forename)
@@ -379,7 +393,6 @@ fileprivate extension PersonalDataViewModel {
         selectedValues[.state] = PersonalData(name: userData.state)
         selectedValues[.taxID] = PersonalData(name: userData.taxID)
         selectedValues[.taxIDName] = PersonalData(name: userData.taxIDName)
-        selectedValues[.title] = PersonalData(name: userData.title)
         selectedValues[.zipCode] = PersonalData(name: userData.zipCode)
     }
 }

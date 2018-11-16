@@ -86,7 +86,7 @@ class TransactionResultViewController: UIViewController, WalletActionsProtocol, 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        hideActivity()
         switch result.status {
         case .error:
             operationIDStackView.isHidden = true

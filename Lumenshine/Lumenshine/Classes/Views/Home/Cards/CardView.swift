@@ -72,19 +72,21 @@ class CardView: UIView {
         viewModel?.barButtonSelected(at: sender.tag)
     }
     
-    class private func setupConstraints(forLabel label: UILabel, forButton button: CurrencyInfoButton) {
+    class private func setupConstraints(forLabel label: UILabel, forButton button: CurrencyInfoButton? = nil) {
         label.snp.makeConstraints { (make) in
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.top.equalTo(1)
+            make.bottom.equalTo(1)
             make.left.equalToSuperview()
         }
         
-        button.snp.makeConstraints { (make) in
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview()
+        if let button = button {
+            button.snp.makeConstraints { (make) in
+                make.top.equalTo(1)
+                make.bottom.equalTo(1)
+            }
+            
+            label.rightAnchor.constraint(equalTo: button.leftAnchor, constant: -4).isActive = true
         }
-        
-        label.rightAnchor.constraint(equalTo: button.leftAnchor, constant: -4).isActive = true
     }
     
     class private func setupCurrencyInfoButton(forCurrency currency: AccountBalanceResponse, wallet: FundedWallet) -> CurrencyInfoButton {
@@ -102,6 +104,16 @@ class CardView: UIView {
         label.text = text
         
         return label
+    }
+    
+    class private func setupLabelView(font: UIFont, color: UIColor, text: String) -> UIView {
+        let view = UIView()
+        let label = setupLabel(font: font, color: color, text: text)
+
+        view.addSubview(label)
+        setupConstraints(forLabel: label)
+        
+        return view
     }
     
     class private func getLabelAndInfoButtonView(font: UIFont, color: UIColor, text: String, currency: AccountBalanceResponse, wallet: FundedWallet) -> UIView {
@@ -146,7 +158,7 @@ class CardView: UIView {
                         if forAvailable == true && balance != availableBalance {
                             views.append(getLabelAndInfoButtonView(font: font, color: color, text: labelText, currency: currency, wallet: wallet))
                         } else {
-                            views.append(setupLabel(font: font, color: color, text: labelText))
+                            views.append(setupLabelView(font: font, color: color, text: labelText))
                         }
                     }
                 }

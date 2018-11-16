@@ -45,7 +45,6 @@
 		432E298B211CA098005C7F9E /* EmailConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432E298A211CA098005C7F9E /* EmailConfirmationView.swift */; };
 		432F11792101C64600FC429B /* MnemonicSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432F11782101C64600FC429B /* MnemonicSetupViewController.swift */; };
 		432F117B2101EEF500FC429B /* VerificationSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432F117A2101EEF500FC429B /* VerificationSetupViewController.swift */; };
-		4337C4E72081BAA400F4585A /* RegistrationFormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4337C4E62081BAA400F4585A /* RegistrationFormTableViewController.swift */; };
 		4341251120EBC2C700267260 /* ReLoginHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4341251020EBC2C700267260 /* ReLoginHomeView.swift */; };
 		4341251320EBC2E900267260 /* ReLoginFingerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4341251220EBC2E900267260 /* ReLoginFingerView.swift */; };
 		434E049B20D3DC8A00D3235A /* DateUtils+Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434E049A20D3DC8A00D3235A /* DateUtils+Format.swift */; };
@@ -202,7 +201,6 @@
 		43E13E8820D97DA000409129 /* WalletCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E13E8720D97DA000409129 /* WalletCard.swift */; };
 		43E23994214F8EF00017AABF /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E23993214F8EF00017AABF /* GradientView.swift */; };
 		43E23996214FA1CB0017AABF /* LSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E23995214FA1CB0017AABF /* LSButton.swift */; };
-		43ECA9CA208B3C4400CB571E /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ECA9C9208B3C4400CB571E /* RegistrationViewModel.swift */; };
 		43EFF204204939F700B1887C /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EFF203204939F700B1887C /* UIColor+Utils.swift */; };
 		43EFF20620493B4900B1887C /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EFF20520493B4900B1887C /* Stylesheet.swift */; };
 		43F3E35F20F3B8780032D017 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F3E35E20F3B8780032D017 /* LoginView.swift */; };
@@ -300,6 +298,8 @@
 		C61244C8211332E700DE1EA9 /* SendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61244C7211332E700DE1EA9 /* SendViewController.swift */; };
 		C6171958215520C200F9907A /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6171957215520C200F9907A /* RoundedButton.swift */; };
 		C617195A21552E1F00F9907A /* InfoLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C617195921552E1F00F9907A /* InfoLabel.swift */; };
+		C62342D4219B07DC00A2FFBD /* MemoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C62342D3219B07DC00A2FFBD /* MemoView.xib */; };
+		C62342D6219B07EB00A2FFBD /* MemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62342D5219B07EB00A2FFBD /* MemoView.swift */; };
 		C6257A6C21620C0000E1B879 /* NoMultiSigSupportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6257A6B21620C0000E1B879 /* NoMultiSigSupportViewController.xib */; };
 		C6257A6E21620C1300E1B879 /* NoMultiSigSupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6257A6D21620C1300E1B879 /* NoMultiSigSupportViewController.swift */; };
 		C6257A70216211DA00E1B879 /* RegularSubtitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6257A6F216211DA00E1B879 /* RegularSubtitleLabel.swift */; };
@@ -468,7 +468,6 @@
 		432E298A211CA098005C7F9E /* EmailConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailConfirmationView.swift; sourceTree = "<group>"; };
 		432F11782101C64600FC429B /* MnemonicSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicSetupViewController.swift; sourceTree = "<group>"; };
 		432F117A2101EEF500FC429B /* VerificationSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationSetupViewController.swift; sourceTree = "<group>"; };
-		4337C4E62081BAA400F4585A /* RegistrationFormTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationFormTableViewController.swift; sourceTree = "<group>"; };
 		4339B907213D810D00D1BE0E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4339B908213D810D00D1BE0E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Common.strings; sourceTree = "<group>"; };
 		4341251020EBC2C700267260 /* ReLoginHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginHomeView.swift; sourceTree = "<group>"; };
@@ -632,7 +631,6 @@
 		43E13E8720D97DA000409129 /* WalletCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCard.swift; sourceTree = "<group>"; };
 		43E23993214F8EF00017AABF /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		43E23995214FA1CB0017AABF /* LSButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSButton.swift; sourceTree = "<group>"; };
-		43ECA9C9208B3C4400CB571E /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		43EFF203204939F700B1887C /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
 		43EFF20520493B4900B1887C /* Stylesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stylesheet.swift; sourceTree = "<group>"; };
 		43F3E35E20F3B8780032D017 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -735,6 +733,8 @@
 		C61244C7211332E700DE1EA9 /* SendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendViewController.swift; sourceTree = "<group>"; };
 		C6171957215520C200F9907A /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		C617195921552E1F00F9907A /* InfoLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoLabel.swift; sourceTree = "<group>"; };
+		C62342D3219B07DC00A2FFBD /* MemoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemoView.xib; sourceTree = "<group>"; };
+		C62342D5219B07EB00A2FFBD /* MemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoView.swift; sourceTree = "<group>"; };
 		C6257A6B21620C0000E1B879 /* NoMultiSigSupportViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoMultiSigSupportViewController.xib; sourceTree = "<group>"; };
 		C6257A6D21620C1300E1B879 /* NoMultiSigSupportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMultiSigSupportViewController.swift; sourceTree = "<group>"; };
 		C6257A6F216211DA00E1B879 /* RegularSubtitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularSubtitleLabel.swift; sourceTree = "<group>"; };
@@ -919,9 +919,9 @@
 				43C7A8EE215B9282007F4E5E /* Help */,
 				7491BE46211C32040058877E /* Wallet */,
 				43CD7B1520F7C4680014BF69 /* Setup */,
-				4337C4E52081BA6A00F4585A /* Registration */,
 				4370E23B20655F6F004C62C3 /* Settings */,
 				4319B17C2063EDFA007CE18D /* Login */,
+				834D13AB219AB33700428D7A /* SignUp */,
 				43FBEE4320628521004E2BB1 /* Scan */,
 				4376F4A4204DA07A00B179C3 /* Home */,
 				431437F02047FF7E00189C83 /* Drawer */,
@@ -1008,7 +1008,6 @@
 				4368468A2139246200B3A179 /* Relogin */,
 				4319B17D2063EE0E007CE18D /* LoginViewController.swift */,
 				43F3E35E20F3B8780032D017 /* LoginView.swift */,
-				43F3E36020F3B88E0032D017 /* SignUpView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1056,14 +1055,6 @@
 				C6CFEF33217DB1E0006EEC08 /* JailbreakChecker.swift */,
 			);
 			path = Entities;
-			sourceTree = "<group>";
-		};
-		4337C4E52081BA6A00F4585A /* Registration */ = {
-			isa = PBXGroup;
-			children = (
-				4337C4E62081BAA400F4585A /* RegistrationFormTableViewController.swift */,
-			);
-			path = Registration;
 			sourceTree = "<group>";
 		};
 		43564BA321635E44006A7B9F /* Contacts */ = {
@@ -1176,7 +1167,6 @@
 				4319B17F2063EEA9007CE18D /* LoginViewModel.swift */,
 				43844F3D20E3FE2600C352E5 /* ReLoginViewModel.swift */,
 				4319B1832063F00C007CE18D /* MenuViewModel.swift */,
-				43ECA9C9208B3C4400CB571E /* RegistrationViewModel.swift */,
 				4394911B20BEB845008D4FA2 /* SettingsViewModel.swift */,
 				43CD7B1120F7B8A70014BF69 /* SetupMenuViewModel.swift */,
 				43CD7B1320F7BEBF0014BF69 /* SetupViewModel.swift */,
@@ -1560,6 +1550,8 @@
 				7491BE49211C32700058877E /* CurrencyView.xib */,
 				C6CB743F21746B3100FB99C3 /* PasswordView.xib */,
 				C6CB744121746B3E00FB99C3 /* PasswordView.swift */,
+				C62342D3219B07DC00A2FFBD /* MemoView.xib */,
+				C62342D5219B07EB00A2FFBD /* MemoView.swift */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -1587,6 +1579,14 @@
 				74C899572107621E009B13EA /* receive_payment.html */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		834D13AB219AB33700428D7A /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				43F3E36020F3B88E0032D017 /* SignUpView.swift */,
+			);
+			path = SignUp;
 			sourceTree = "<group>";
 		};
 		A21B98E0A3EC476C69581BDB /* Pods */ = {
@@ -2026,6 +2026,7 @@
 				C6725084213FC1380064F6E3 /* SetInflationDestinationViewController.xib in Resources */,
 				43AE63532135A19300B7A904 /* Lato-Hairline.ttf in Resources */,
 				43AE634E2135A19300B7A904 /* Lato-LightItalic.ttf in Resources */,
+				C62342D4219B07DC00A2FFBD /* MemoView.xib in Resources */,
 				43AE63272135A19300B7A904 /* EncodeSans-Bold.ttf in Resources */,
 				C672508C213FE8FA0064F6E3 /* KnownInflationDestinationsViewController.xib in Resources */,
 				C6725094213FFC7A0064F6E3 /* KnownInflationDestinationDetailsViewController.xib in Resources */,
@@ -2125,7 +2126,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Lumenshine/Pods-Lumenshine-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Base32/Base32.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/DGElasticPullToRefresh/DGElasticPullToRefresh.framework",
@@ -2160,7 +2161,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lumenshine/Pods-Lumenshine-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5EB5DFCDC887288385313455 /* [CP] Check Pods Manifest.lock */ = {
@@ -2257,6 +2258,7 @@
 				4359985120A5920200007F27 /* Array+Shuffle.swift in Sources */,
 				43C7A8F4215BEE19007F4E5E /* HelpTableViewCell.swift in Sources */,
 				B1F3AA24219C2B1B00A1F3B4 /* TxBumpSequenceOperationResponse.swift in Sources */,
+				C62342D6219B07EB00A2FFBD /* MemoView.swift in Sources */,
 				C68850E4214BC72900D7D077 /* UnfundedHeaderLabel.swift in Sources */,
 				43564BA921637334006A7B9F /* ContactsViewModel.swift in Sources */,
 				436201C0212DDC5300CF4495 /* R+Plurals.swift in Sources */,
@@ -2323,7 +2325,6 @@
 				B1F3AA18219C28F400A1F3B4 /* TxSetOptionsOperationResponse.swift in Sources */,
 				4394911C20BEB845008D4FA2 /* SettingsViewModel.swift in Sources */,
 				432E298B211CA098005C7F9E /* EmailConfirmationView.swift in Sources */,
-				4337C4E72081BAA400F4585A /* RegistrationFormTableViewController.swift in Sources */,
 				C665871621255BF2006499A7 /* ChartCurrentRatesResponse.swift in Sources */,
 				C62B0EA02153A81000CF920B /* NormalLabel.swift in Sources */,
 				4390D57E205FA5FC00383BB2 /* BaseService.swift in Sources */,

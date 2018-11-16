@@ -166,6 +166,9 @@ fileprivate extension WalletCard {
         emptyView.balanceLabel.textColor = Stylesheet.color(.white)
         emptyView.balanceLabel.text = ""
         
+        emptyView.fundButton.isHidden = true
+        emptyView.helpButton.isHidden = true
+        
         let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         loadingIndicator.startAnimating()
         

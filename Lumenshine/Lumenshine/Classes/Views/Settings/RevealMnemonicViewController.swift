@@ -176,7 +176,7 @@ fileprivate extension RevealMnemonicViewController {
     }
     
     func showBackupMnemonic(password: String) {
-        showActivity()
+        showActivity(message: R.string.localizable.loading())
         viewModel.showBackupMnemonic(password: password) { [weak self] result in
             DispatchQueue.main.async {
                 self?.hideActivity(completion: {

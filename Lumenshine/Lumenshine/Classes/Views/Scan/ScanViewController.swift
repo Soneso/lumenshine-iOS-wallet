@@ -18,6 +18,7 @@ class ScanViewController: UIViewController {
     var captureSession = AVCaptureSession()
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var qrCodeFrameView: UIView?
+    private var activityIndicator: UIActivityIndicatorView!
     
     weak var delegate: ScanViewControllerDelegate?
     
@@ -52,6 +53,11 @@ class ScanViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
+        showLoading()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         setupCamera()
     }
     
@@ -111,6 +117,23 @@ class ScanViewController: UIViewController {
             view.addSubview(qrCodeFrameView)
             view.bringSubview(toFront: qrCodeFrameView)
         }
+        
+        hideLoading()
+    }
+    
+    private func showLoading() {
+        activityIndicator = UIActivityIndicatorView()
+        view.addSubview(activityIndicator)
+        
+        activityIndicator.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        
+        activityIndicator.startAnimating()
+    }
+    
+    private func hideLoading() {
+        activityIndicator.removeFromSuperview()
     }
 }
 

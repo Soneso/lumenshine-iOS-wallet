@@ -851,22 +851,13 @@
 "stellar_address" = "Stellar address";
 
 /*  */
-"invalid_address" = "Invalid Stellar address";
+"invalid_address_or_pk" = "Invalid address or public key";
 
 /*  */
-"stellar_address_hint" = "     example: max*lumenshine.com";
+"stellar_address_hint" = "     example: max*lumenshine.com or GBABXVQ64GP...";
 
 /*  */
-"stellar_public_key" = "Stellar public key";
-
-/*  */
-"invalid_public_key" = "Invalid Stellar public key";
-
-/*  */
-"stellar_public_key_hint" = "     example: GBABXVQ64GP5JZ3AQFX5FUYLCVY6HIHMTX4HZQ6...";
-
-/*  */
-"stellar_address_error" = "You must enter address OR public key";
+"stellar_address_error" = "You must enter a stellar account federation (short) address or a stellar account public key";
 
 /*  */
 "no_stellar_address" = "no stellar address";
@@ -878,7 +869,7 @@
 "terms_of_service" = "Terms of service";
 
 /*  */
-"agree_to_abide" = "You agree to abide by Lumenshine's";
+"agree_to_abide" = "You agree to abide by our";
 
 /*  */
 "terms_of_service_hint" = "Terms of service text comes here";
@@ -961,3 +952,24 @@
 /*  */
 "entry_value" = "Entry value";
 
+
+/*  */
+"email_mandatory" = "Email is mandatory";
+
+/*  */
+"forename_mandatory" = "Forename is mandatory";
+
+/*  */
+"lastname_mandatory" = "Lastname is mandatory";
+
+/*  */
+"invalid_forename" = "Invalid forename";
+
+/*  */
+"invalid_lastname" = "Invalid lastname";
+
+/*  */
+"validateing" = "validating";
+
+/*  */
+"sending" = "sending";

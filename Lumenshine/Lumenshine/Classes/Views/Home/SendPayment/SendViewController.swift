@@ -65,7 +65,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var currentCurrencyLabel: UILabel!
     @IBOutlet weak var addressErrorLabel: UILabel!
     @IBOutlet weak var amountErrorLabel: UILabel!
-    @IBOutlet weak var memoInputErrorLabel: UILabel!
     @IBOutlet weak var sendErrorLabel: UILabel!
     @IBOutlet weak var availableAmountLabel: UILabel!
     @IBOutlet weak var sendAllCurrency: UILabel!
@@ -73,10 +72,8 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var otherCurrencyErrorLabel: UILabel!
     @IBOutlet weak var transactionFeeLabel: UILabel!
     
-    @IBOutlet weak var memoTypeTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var amountTextField: UITextField!
-    @IBOutlet weak var memoInputTextField: UITextField!
     @IBOutlet weak var issuerTextField: UITextField!
     @IBOutlet weak var currentCurrencyTextField: UITextField!
     @IBOutlet weak var otherCurrencyTextField: UITextField!
@@ -84,7 +81,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var addressErrorView: UIView!
     @IBOutlet weak var amountErrorView: UIView!
     @IBOutlet weak var sendErrorView: UIView!
-    @IBOutlet weak var memoInputErrorView: UIView!
     @IBOutlet weak var issuerView: UIView!
     @IBOutlet weak var contentView: UIScrollView!
     @IBOutlet weak var sendAllView: UIView!
@@ -93,6 +89,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var otherCurrencyView: UIView!
     @IBOutlet weak var otherCurrencyErrorView: UIView!
     @IBOutlet weak var passwordViewContainer: UIView!
+    @IBOutlet weak var memoViewContainer: UIView!
     
     @IBOutlet weak var sendButton: UIButton!
     
@@ -100,7 +97,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     private var currencyPickerView: UIPickerView!
     private var issuerPickerView: UIPickerView!
-    private var memoTypePickerView: UIPickerView!
     
     private var isInputDataValid: Bool = true
     private var createRecepientAccount = false
@@ -118,8 +114,8 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     var closeAction: (() -> ())?
     var sendAction: ((TransactionInput) -> ())?
     
-    private var memoTypes: [MemoTypeValues] = [MemoTypeValues.MEMO_TEXT, MemoTypeValues.MEMO_ID, MemoTypeValues.MEMO_HASH, MemoTypeValues.MEMO_RETURN]
     private var passwordView: PasswordView!
+    private var memoView: MemoView!
     
     @IBAction func amountSegmentedControlValueChanged(_ sender: UISegmentedControl) {
         if amountSegmentedControl.selectedSegmentIndex == AmountSegmentedControlIndexes.sendAmount.rawValue {
@@ -140,6 +136,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
 
     private func sendActionPreparation(biometricAuth: Bool = false) {
         resetValidations()
+        showActivity(message: R.string.localizable.validateing())
         sendButton.setTitle(SendButtonTitles.validating.rawValue, for: UIControlState.normal)
         sendButton.isEnabled = false
         
@@ -355,33 +352,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         validateOtherAssetCode()
     }
     
-    private var selectedMemoType: MemoTypeValues! = MemoTypeValues.MEMO_TEXT {
-        didSet {
-            memoTypeTextField.text = selectedMemoType.rawValue
-            
-            switch selectedMemoType.rawValue {
-            case MemoTypeValues.MEMO_TEXT.rawValue:
-                memoInputTextField.placeholder = MemoTextFieldPlaceholders.MemoText.rawValue
-                memoInputTextField.keyboardType = .default
-    
-            case MemoTypeValues.MEMO_ID.rawValue:
-                memoInputTextField.placeholder = MemoTextFieldPlaceholders.MemoID.rawValue
-                memoInputTextField.keyboardType = .numberPad
-
-            case MemoTypeValues.MEMO_HASH.rawValue:
-                memoInputTextField.placeholder = MemoTextFieldPlaceholders.MemoReturn.rawValue
-                memoInputTextField.keyboardType = .default
-                
-            case MemoTypeValues.MEMO_RETURN.rawValue:
-                memoInputTextField.placeholder = MemoTextFieldPlaceholders.MemoReturn.rawValue
-                memoInputTextField.keyboardType = .default
-                
-            default:
-                break
-            }
-        }
-    }
-    
     private var selectedCurrency: String = "" {
         didSet {
             if !otherCurrencyView.isHidden {
@@ -436,12 +406,12 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationItem()
-        setupMemoTypePicker()
         addressTextField.addTarget(self, action: #selector(addressChanged), for: .editingChanged)
         view.backgroundColor = Stylesheet.color(.veryLightGray)
         sendButton.backgroundColor = Stylesheet.color(.blue)
         transactionFeeLabel.text = "Stellar transaction fee: \(String(format: "%.5f", CoinUnit.Constants.transactionFee)) XLM"
         setupPasswordView()
+        setupMemoView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -471,6 +441,17 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             passwordView.snp.makeConstraints { (make) in
                 make.edges.equalToSuperview()
             }
+        }
+    }
+    
+    private func setupMemoView() {
+        memoView = Bundle.main.loadNibNamed("MemoView", owner: self, options: nil)![0] as? MemoView
+        memoView.contentView = contentView
+        
+        memoViewContainer.addSubview(memoView)
+        
+        memoView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
         }
     }
     
@@ -504,20 +485,10 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
     }
     
-    private func setupMemoTypePicker() {
-        memoTypePickerView = UIPickerView()
-        memoTypePickerView.delegate = self
-        memoTypePickerView.dataSource = self
-        memoTypeTextField.text = selectedMemoType.rawValue
-        memoTypeTextField.inputView = memoTypePickerView
-        memoTypeTextField.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(memoTypeDoneButtonTap))
-    }
-    
     private func setAvailableLabels(currency: AccountBalanceResponse) {
         if let balance = CoinUnit(currency.balance) {
             let availableAmount = balance.availableAmount(forWallet: wallet, forCurrency: currency)
-            // TODO: the amount shown here is not correctly rounded
-            availableAmountLabel.text = "You have \(availableAmount) \(selectedCurrency) available"
+            availableAmountLabel.text = "You have \(String(format: "%.2f", availableAmount)) \(selectedCurrency) available"
             
             if amountSegmentedControl.selectedSegmentIndex == AmountSegmentedControlIndexes.sendAll.rawValue {
                 setSendAllLabel(amount: availableAmount)
@@ -558,28 +529,21 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         selectAsset(pickerView: currencyPickerView, row: currencyPickerView.selectedRow(inComponent: 0))
     }
     
-    @objc func memoTypeDoneButtonTap(_ sender: Any) {
-        selectAsset(pickerView: memoTypePickerView, row: memoTypePickerView.selectedRow(inComponent: 0))
-    }
-    
     @objc func issuerDoneButtonTap(_ sender: Any) {
         selectAsset(pickerView: issuerPickerView, row: issuerPickerView.selectedRow(inComponent: 0))
     }
     
     private func sendPayment() {
+        
+        updateActivityMessage(message: R.string.localizable.sending())
+        
         let transactionData = TransactionInput(currency: self.selectedCurrency,
                                                issuer: self.issuerTextField.text ?? nil,
                                                destinationPublicKey: self.destinationPublicKey,
                                                destinationStellarAddress: self.destinationStellarAddress,
-                                               amount: availableAmount != nil ? String(availableAmount!) : (self.amountTextField.text?.replacingOccurrences(of: ",", with: ".") ?? ""),
-                                               memo: self.memoInputTextField.text?.isEmpty == false ? self.memoInputTextField.text! : nil,
-                                               memoType: self.memoTypes.first(where: { (memoType) -> Bool in
-                                                if let memoTypeTextFieldValue = self.memoTypeTextField.text {
-                                                    return memoType.rawValue == memoTypeTextFieldValue
-                                                }
-                                                
-                                                return memoType.rawValue == MemoTypeValues.MEMO_TEXT.rawValue
-                                               }),
+                                               amount: self.availableAmount != nil ? String(self.availableAmount!) : (self.amountTextField.text?.replacingOccurrences(of: ",", with: ".") ?? ""),
+                                               memo: self.memoView.hasMemo ? self.memoView.memo : nil,
+                                               memoType: self.memoView.getMemoType,
                                                masterKeyPair: self.masterKeyPair,
                                                transactionType: self.createRecepientAccount ? TransactionActionType.createAndFundAccount : TransactionActionType.sendPayment,
                                                signer: self.passwordView.useExternalSigning ? self.passwordView.signersTextField.text : nil,
@@ -594,6 +558,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     private func setSendButtonDefaultTitle() {
+        hideActivity()
         let sendButtonTitle: String = getSendButtonDefaultTitle()
         sendButton.setTitle(sendButtonTitle, for: .normal)
         
@@ -615,8 +580,7 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         addressErrorLabel.text = nil
         amountErrorView.isHidden = true
         amountErrorLabel.text = nil
-        memoInputErrorView.isHidden = true
-        memoInputErrorLabel.text = nil
+        memoView.resetValidationErrors()
         sendErrorView.isHidden = true
         sendErrorLabel.text = nil
         otherCurrencyErrorView.isHidden = true
@@ -725,55 +689,11 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
     }
     
-    private func validateMemo() {
-        if let memoText = self.memoInputTextField.text {
-            if memoText.isEmpty == true {
-                return
-            }
-            
-            switch selectedMemoType.rawValue {
-            case MemoTypeValues.MEMO_TEXT.rawValue:
-                let memoTextValidationResult: MemoTextValidationResult = memoText.isMemoTextValid(limitNrOfBytes: MaximumLengthInBytesForMemoText)
-                
-                if memoTextValidationResult == MemoTextValidationResult.InvalidEncoding {
-                    setValidationError(view: memoInputErrorView, label: memoInputErrorLabel, errorMessage: .InvalidMemo)
-                    return
-                }
-                
-                if memoTextValidationResult == MemoTextValidationResult.InvalidLength {
-                    setValidationError(view: memoInputErrorView, label: memoInputErrorLabel, errorMessage: .MemoLength)
-                    return
-                }
-                
-            case MemoTypeValues.MEMO_ID.rawValue:
-                if !memoText.isMemoIDValid() {
-                    setValidationError(view: memoInputErrorView, label: memoInputErrorLabel, errorMessage: .InvalidMemo)
-                    return
-                }
-                
-            case MemoTypeValues.MEMO_HASH.rawValue:
-                if !memoText.isMemoHashValid() {
-                    setValidationError(view: memoInputErrorView, label: memoInputErrorLabel, errorMessage: .InvalidMemo)
-                    return
-                }
-                
-            case MemoTypeValues.MEMO_RETURN.rawValue:
-                if !memoText.isMemoReturnValid() {
-                    setValidationError(view: memoInputErrorView, label: memoInputErrorLabel, errorMessage: .InvalidMemo)
-                    return
-                }
-                
-            default:
-                break
-            }
-        }
-    }
-    
     private func validateInsertedData(biometricAuth: Bool = false) -> Bool {
         validateAddress()
         validateOtherAssetCodeIsFilled()
         validateAmount()
-        validateMemo()
+        memoView.validateMemo()
         if isInputDataValid {
             isInputDataValid = passwordView.validatePassword(biometricAuth: biometricAuth)
         }
@@ -873,20 +793,20 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                             if let type = memoDictionary["type"] as? String {
                                 switch type.trimmed.lowercased() {
                                 case "text":
-                                    memoTypeTextField.text = MemoTypeValues.MEMO_TEXT.rawValue
+                                    memoView.memoType = MemoTypeValues.MEMO_TEXT.rawValue
                                 case "id":
-                                    memoTypeTextField.text = MemoTypeValues.MEMO_ID.rawValue
+                                    memoView.memoType = MemoTypeValues.MEMO_ID.rawValue
                                 case "hash":
-                                    memoTypeTextField.text = MemoTypeValues.MEMO_HASH.rawValue
+                                    memoView.memoType = MemoTypeValues.MEMO_HASH.rawValue
                                 case "return":
-                                    memoTypeTextField.text = MemoTypeValues.MEMO_RETURN.rawValue
+                                    memoView.memoType = MemoTypeValues.MEMO_RETURN.rawValue
                                 default:
                                     break
                                 }
                             }
                             if let memo = memoDictionary["value"] as? String {
                                 if memo.trimmed != "" {
-                                    memoInputTextField.text = memo
+                                    memoView.memo = memo
                                 }
                             }
                         }
@@ -938,8 +858,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView == currencyPickerView {
             return availableCurrencies.count
-        } else if pickerView == memoTypePickerView {
-            return memoTypes.count
         } else if pickerView == issuerPickerView {
             return (wallet as! FundedWallet).issuersFor(assetCode: selectedCurrency).count
         }
@@ -954,8 +872,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             }
             
             return availableCurrencies[row]
-        } else if pickerView == memoTypePickerView {
-            return memoTypes[row].rawValue
         } else if pickerView == issuerPickerView {
             return (wallet as! FundedWallet).issuersFor(assetCode: selectedCurrency)[row]
         }
@@ -981,9 +897,6 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             setupForSelectedCurrency()
             selectedCurrency = availableCurrencies[row]
             return
-        } else if pickerView == memoTypePickerView {
-            selectedMemoType = memoTypes[row]
-            return
         } else if pickerView == issuerPickerView {
             issuerTextField.text = (wallet as! FundedWallet).issuersFor(assetCode: selectedCurrency)[row]
             return
@@ -991,8 +904,10 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     private func resetSendButtonToNormal() {
+        hideActivity()
         sendButton.setTitle(getSendButtonDefaultTitle(), for: UIControlState.normal)
         sendButton.isEnabled = true
+        
     }
     
     private func setupNavigationItem() {
