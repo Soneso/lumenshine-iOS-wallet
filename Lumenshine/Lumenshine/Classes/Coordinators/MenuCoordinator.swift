@@ -51,6 +51,8 @@ class MenuCoordinator: MenuCoordinatorType {
             logout()
         case .showWallets:
             showWallets()
+        case .showTransactions:
+            showTransactions()
         default: break
         }
     }
@@ -83,6 +85,12 @@ fileprivate extension MenuCoordinator {
     
     func showContacts() {
         let coordinator = ContactsCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
+        let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
+        present(navigationController: navigationController)
+    }
+    
+    func showTransactions() {
+        let coordinator = TransactionsCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
         present(navigationController: navigationController)
     }

@@ -7,10 +7,9 @@
 //
 
 import Foundation
-import stellarsdk
 
 public enum TransactionsResponseEnum {
-    case success(response: [TransactionResponse])
+    case success(response: [TxTransactionResponse])
     case failure(error: ServiceError)
 }
 
@@ -21,12 +20,17 @@ public class TransactionsService: BaseService {
         super.init(baseURL: baseURL)
     }
     
-    func getTransactions(response: @escaping TransactionsResponseClosure) {
-        GETRequestWithPath(path: "/portal/user/dashboard/get_stellar_transactions") { (result) -> (Void) in
+    func getTransactions(stellarAccount: String, startTime: String, endTime: String, response: @escaping TransactionsResponseClosure) {
+        var params = Dictionary<String, String>()
+        params["stellar_account_pk"] = stellarAccount
+        params["start_timestamp"] = startTime
+        params["end_timestamp"] = endTime
+        
+        GETRequestWithPath(path: "/portal/user/dashboard/get_stellar_transactions", parameters: params) { (result) -> (Void) in
             switch result {
             case .success(let data):
                 do {
-                    let contacts = try self.jsonDecoder.decode(Array<TransactionResponse>.self, from: data)
+                    let contacts = try self.jsonDecoder.decode(Array<TxTransactionResponse>.self, from: data)
                     response(.success(response: contacts))
                 } catch {
                     response(.failure(error: .parsingFailed(message: error.localizedDescription)))

@@ -17,6 +17,9 @@
 "done" = "Done";
 
 /*  */
+"none" = "None";
+
+/*  */
 "info" = "Info";
 
 /*  */
@@ -50,6 +53,9 @@
 "delete" = "Delete";
 
 /*  */
+"deleted" = "Deleted";
+
+/*  */
 "remove" = "Remove";
 
 /*  */
@@ -60,6 +66,9 @@
 
 /*  */
 "login" = "Log in";
+
+/*  */
+"authorize" = "Authorize";
 
 /*  */
 "login_continue" = "Log in to your account";
@@ -132,6 +141,21 @@
 
 /*  */
 "sell" = "Sell";
+
+/*  */
+"selling" = "Selling";
+
+/*  */
+"buy" = "Buy";
+
+/*  */
+"buying" = "Buying";
+
+/*  */
+"price_for_asset" = "Price for 1 unit of asset for sale";
+
+/*  */
+"asset" = "Asset";
 
 /*  */
 "scan" = "Scan";
@@ -297,6 +321,9 @@
 
 /*  */
 "transactions" = "Transactions";
+
+/*  */
+"transactions_history" = "Transactions History";
 
 /*  */
 "currencies" = "Currencies";
@@ -689,6 +716,9 @@
 "learn_more" = "Learn more";
 
 /*  */
+"issuer" = "Issuer";
+
+/*  */
 "issuer_pk" = "Issuer public key:";
 
 /*  */
@@ -710,13 +740,25 @@
 "message" = "Message";
 
 /*  */
+"date" = "Date";
+
+/*  */
+"type" = "Type";
+
+/*  */
 "currency" = "Currency";
 
 /*  */
 "amount" = "Amount";
 
 /*  */
+"fee" = "Fee";
+
+/*  */
 "recipient" = "Recipient";
+
+/*  */
+"sender" = "Sender";
 
 /*  */
 "memo" = "Memo";
@@ -860,7 +902,62 @@
 "payment_received" = "Payment received";
 
 /*  */
+"payment_sent" = "Payment sent";
+
+/*  */
 "push_view" = "View";
 
 /*  */
 "xdr_error" = "An error occured while processing the data. Please try again later";
+
+/*  */
+"offer_id" = "Offer ID";
+
+/*  */
+"offer_created" = "Offer created";
+
+/*  */
+"offer_removed" = "Offer removed";
+
+/*  */
+"passive_offer_created" = "Passive offer created";
+
+/*  */
+"passive_offer_removed" = "Passive offer removed";
+
+/*  */
+"set_options" = "Set options";
+
+/*  */
+"change_trust" = "Change trust";
+
+/*  */
+"allow_trust" = "Allow trust";
+
+/*  */
+"trust_limit" = "Trust limit";
+
+/*  */
+"trustor" = "Trustor";
+
+/*  */
+"merge_account" = "Merge account";
+
+/*  */
+"merged_account" = "Merged account";
+
+/*  */
+"manage_data" = "Manage Data";
+
+/*  */
+"bump_sequence" = "Bump Sequence";
+
+/*  */
+"bumped_from" = "Bumped from";
+
+/*  */
+"entry_name" = "Entry name";
+
+/*  */
+"entry_value" = "Entry value";
+

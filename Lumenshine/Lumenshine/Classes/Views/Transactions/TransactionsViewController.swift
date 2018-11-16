@@ -25,11 +25,11 @@ class TransactionsViewController: UITableViewController {
         self.viewModel = viewModel
         super.init(style: .grouped)
         
-//        viewModel.reloadClosure = {
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//        }
+        viewModel.reloadClosure = {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -54,11 +54,11 @@ class TransactionsViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.itemDistribution.count
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.itemDistribution[section]
+        return viewModel.itemCount
     }
     
     
@@ -67,14 +67,19 @@ class TransactionsViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         
         if let tableCell = cell as? TransactionsCellProtocol {
-            tableCell.setName(viewModel.name(at: indexPath))
+            tableCell.setDate(viewModel.date(at: indexPath))
+            tableCell.setType(viewModel.type(at: indexPath))
+            tableCell.setAmount(viewModel.amount(at: indexPath))
+            tableCell.setCurrency(viewModel.currency(at: indexPath))
+            tableCell.setFee(viewModel.feePaid(at: indexPath))
+            tableCell.setDetails(viewModel.details(at: indexPath))
         }
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return viewModel.headerTitle(at: section) == nil ? 25 : 50
+        return 50
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -83,7 +88,7 @@ class TransactionsViewController: UITableViewController {
         separator.backgroundColor = .white
         
         let label = UILabel()
-        label.text = viewModel.headerTitle(at: section)
+        label.text = R.string.localizable.transactions_history()
         label.textColor = Stylesheet.color(.blue)
         label.font = R.font.encodeSansSemiBold(size: 15)
         
@@ -156,7 +161,7 @@ fileprivate extension TransactionsViewController {
     
     func prepareNavigationItem() {
         
-        navigationItem.titleLabel.text = R.string.localizable.contacts()
+        navigationItem.titleLabel.text = R.string.localizable.transactions_history()
         navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         
