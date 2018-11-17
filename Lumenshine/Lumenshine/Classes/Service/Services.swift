@@ -57,6 +57,10 @@ public final class Services {
         }
     }
     
+    let termsUrl = "https://lumenshine.com/terms"
+    let privacyUrl = "https://lumenshine.com/privacy"
+    let guidesUrl = "https://lumenshine.com/trading"
+    
     static let shared = Services()
     
     public let auth: AuthService

@@ -827,10 +827,22 @@
 "terms_of_service" = "Terms of service";
 
 /*  */
-"agree_to_abide" = "You agree to abide by our";
+"privacy_policy" = "Privacy Policy";
 
 /*  */
-"terms_of_service_hint" = "Terms of service text comes here";
+"wallet_guidelines" = "Wallet Guidelines";
+
+/*  */
+"terms" = "Terms";
+
+/*  */
+"privacy" = "Privacy";
+
+/*  */
+"guidelines" = "Guidelines";
+
+/*  */
+"agree_to_abide" = "You agree to abide by our";
 
 /*  */
 "invalid_toml" = "Invalid stellar toml file received from server";

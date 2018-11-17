@@ -142,7 +142,7 @@ class WalletCardViewModel : CardViewModelType {
     }
     
     @objc func didTapFundButton() {
-        navigationCoordinator?.performTransition(transition: .showScan(wallet))
+        navigationCoordinator?.performTransition(transition: .showFundWallet(wallet))
         needsRefresh = true
     }
 }

@@ -20,13 +20,13 @@ class HeaderMenuViewController: UIViewController {
     
     // MARK: - Properties
     
-    fileprivate let items: [(String, String)]
+    fileprivate let items: [(String, String?)]
     fileprivate let tableView: UITableView
     fileprivate let tapView = UIView()
     
     weak var delegate: HeaderMenuDelegate?
     
-    init(items: [(String, String)]) {
+    init(items: [(String, String?)]) {
         self.items = items
         tableView = UITableView(frame: .zero, style: .plain)
         super.init(nibName: nil, bundle: nil)
@@ -67,8 +67,10 @@ extension HeaderMenuViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: HeaderMenuViewController.CellIdentifier, for: indexPath)
         
         cell.textLabel?.text = items[indexPath.row].0
-        let image = UIImage(named: items[indexPath.row].1)
-        cell.imageView?.image =  image?.tint(with: Stylesheet.color(.black))
+        if let imageName = items[indexPath.row].1 {
+            let image = UIImage(named: imageName)
+            cell.imageView?.image =  image?.tint(with: Stylesheet.color(.black))
+        }
         cell.selectionStyle = .none
         
         return cell

@@ -203,7 +203,7 @@ fileprivate extension HomeViewController {
         header = HomeHeaderView()
         //header.type = .unfunded
         header.unfundedView.foundAction = {(button) in
-            self.viewModel.foundAccount()
+            self.viewModel.fundAccount()
         }
         
         headerBar.addSubview(header)

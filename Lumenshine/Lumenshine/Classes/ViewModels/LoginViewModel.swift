@@ -356,10 +356,11 @@ extension LoginViewModel: LostSecurityViewModelType {
 
 fileprivate extension LoginViewModel {
     func showHeaderMenu() {
-        let items = entries[2...].map {
-            ($0.name, $0.icon.name)
+        var items:[(String, String?)]? = nil
+        items = entries[2...].map {
+            ($0.name, nil) //($0.name, $0.icon.name)
         }
-        navigationCoordinator?.performTransition(transition: .showHeaderMenu(items))
+        navigationCoordinator?.performTransition(transition: .showHeaderMenu(items!))
     }
     
     func verifyLogin1Response(_ login1Response: LoginStep1Response, password: String, response: @escaping Login2ResponseClosure) {

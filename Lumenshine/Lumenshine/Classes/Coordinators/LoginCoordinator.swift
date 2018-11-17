@@ -58,7 +58,7 @@ class LoginCoordinator: CoordinatorType {
 }
 
 fileprivate extension LoginCoordinator {
-    func showHeaderMenu(items: [(String, String)]) {
+    func showHeaderMenu(items: [(String, String?)]) {
         let headerVC = HeaderMenuViewController(items: items)
         headerVC.delegate = self.baseController as? LoginViewController
         self.baseController.present(headerVC, animated: true)
@@ -101,9 +101,7 @@ fileprivate extension LoginCoordinator {
     }
     
     func showTermsOfService() {
-        let title = R.string.localizable.terms_of_service()
-        let hint = R.string.localizable.terms_of_service_hint()
-        let textVC = InfoViewController(info: hint, title: title)
+        let textVC = TermsViewController()
         let composeVC = ComposeNavigationController(rootViewController: textVC)
         baseController.present(composeVC, animated: true)
     }
