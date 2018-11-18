@@ -19,6 +19,9 @@ public final class Services {
     let horizonURL = "https://demohorizon.lumenshine.com"
     let tomlURL = "https://demo.lumenshine.com/.well-known/stellar.toml"
     let initialServerSigningKey = "GCP4BR7GWG664577XMLX2BRUPSHKHTAXQ4I4HZORLMQNILNNVMSFWVUV"
+    let termsUrl = "https://demo.lumenshine.com/terms"
+    let privacyUrl = "https://demo.lumenshine.com/privacy"
+    let guidesUrl = "https://demo.lumenshine.com/guidelines"
     
 #elseif DEVELOPMENT
     let usePublicStellarNetwork = false
@@ -33,6 +36,10 @@ public final class Services {
     //let horizonURL = "https://alphahorizon.lumenshine.com"
     //let tomlURL = "https://alpha.lumenshine.com/.well-known/stellar.toml"
     //let initialServerSigningKey = "GBGXAY3HDXMUWAUDATBZ5SVGLFUC5GKJC4BNN5MEPVLWKCOMBXQUIUWM"
+    
+    let termsUrl = "https://demo.lumenshine.com/terms"
+    let privacyUrl = "https://demo.lumenshine.com/privacy"
+    let guidesUrl = "https://demo.lumenshine.com/guidelines"
 
 #else
     let usePublicStellarNetwork = true
@@ -40,8 +47,13 @@ public final class Services {
     let horizonURL = "https://alphahorizon.lumenshine.com"
     let tomlURL = "https://alpha.lumenshine.com/.well-known/stellar.toml"
     let initialServerSigningKey = "GBGXAY3HDXMUWAUDATBZ5SVGLFUC5GKJC4BNN5MEPVLWKCOMBXQUIUWM"
+    let termsUrl = "https://lumenshine.com/terms"
+    let privacyUrl = "https://lumenshine.com/privacy"
+    let guidesUrl = "https://lumenshine.com/guidelines"
     
 #endif
+    
+    let supportEmailAddress = "support@lumenshine.com"
     
     let userDefaultsServerKey = "serverKey"
     
@@ -56,10 +68,6 @@ public final class Services {
             return initialServerSigningKey
         }
     }
-    
-    let termsUrl = "https://lumenshine.com/terms"
-    let privacyUrl = "https://lumenshine.com/privacy"
-    let guidesUrl = "https://lumenshine.com/trading"
     
     static let shared = Services()
     
