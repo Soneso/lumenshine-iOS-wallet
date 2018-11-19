@@ -28,8 +28,8 @@ class HomeHeaderView: UIView {
     var funds: String! {
         didSet {
             if let fundedView = fundedView {
-                fundedView.foundAccountButton.text = funds
-                applyTransitionFlip(to: fundedView.foundAccountButton)
+                fundedView.fundAccountButton.text = funds
+                applyTransitionFlip(to: fundedView.fundAccountButton)
             }
             
             if let unfundedView = unfundedView {

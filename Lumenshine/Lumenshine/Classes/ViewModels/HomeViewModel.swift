@@ -19,7 +19,7 @@ protocol HomeViewModelType: Transitionable {
     var scrollToItemClosure: ((Int) -> ())? { get set }
     
     
-    func foundAccount()
+    func fundAccount()
     func reloadCards()
     func refreshWallets()
     func updateCurrencies()
@@ -98,8 +98,10 @@ class HomeViewModel : HomeViewModelType {
         ]
     }
     
-    func foundAccount() {
-        showScan()
+    func fundAccount() {
+        if let wallet = (self.cardViewModels.first as? WalletCardViewModel)?.wallet {
+            navigationCoordinator?.performTransition(transition: .showFundWallet(wallet))
+        }
     }
     
     func reloadCards() {
@@ -190,20 +192,11 @@ class HomeViewModel : HomeViewModelType {
 
 fileprivate extension HomeViewModel {
     func showHeaderMenu() {
-        let items = [
-            (R.string.localizable.sell(), R.image.wallets.name),
-            (R.string.localizable.send(), R.image.pencil.name),
-            (R.string.localizable.receive(), R.image.link.name),
-            (R.string.localizable.scan(), R.image.question.name),
-            (R.string.localizable.deposit(), R.image.lost_2fa.name),
-            (R.string.localizable.withdraw(), R.image.currencies.name)
+        var items:[(String, String?)]? = nil
+        items = [
+            (R.string.localizable.deposit(), nil),
+            (R.string.localizable.withdraw(), nil)
         ]
-        navigationCoordinator?.performTransition(transition: .showHeaderMenu(items))
-    }
-    
-    func showScan() {
-        if let wallet = (self.cardViewModels.first as? WalletCardViewModel)?.wallet {
-            navigationCoordinator?.performTransition(transition: .showScan(wallet))
-        }
+        navigationCoordinator?.performTransition(transition: .showHeaderMenu(items!))
     }
 }

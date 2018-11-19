@@ -39,10 +39,10 @@ public indirect enum Transition {
     case showHelp
     case showContacts
     case showAddUpdateContact(ContactResponse?)
-    case showHeaderMenu([(String, String)])
+    case showHeaderMenu([(String, String?)])
     case showOnWeb(URL)
     case showCardDetails(Wallet)
-    case showScan(Wallet)
+    case showFundWallet(Wallet)
     case showWalletCardInfo
     case logout(Transition?)
     case showPasswordHint(String, NSAttributedString?)

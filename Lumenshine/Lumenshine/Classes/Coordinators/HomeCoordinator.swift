@@ -29,8 +29,8 @@ class HomeCoordinator: CoordinatorType {
             showHeaderMenu(items: items)
         case .showOnWeb(let url):
             showOnWeb(url: url)
-        case .showScan(let wallet):
-            showScan(forWallet: wallet)
+        case .showFundWallet(let wallet):
+            showFundWallet(forWallet: wallet)
         case .showCardDetails(let wallet):
             showCardDetails(wallet: wallet)
         case .showWalletCardInfo:
@@ -43,7 +43,7 @@ class HomeCoordinator: CoordinatorType {
 }
 
 fileprivate extension HomeCoordinator {
-    func showHeaderMenu(items: [(String, String)]) {
+    func showHeaderMenu(items: [(String, String?)]) {
         let headerVC = HeaderMenuViewController(items: items)
         headerVC.delegate = self.baseController as! HomeViewController
         self.baseController.present(headerVC, animated: true)
@@ -53,7 +53,7 @@ fileprivate extension HomeCoordinator {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
-    func showScan(forWallet wallet: Wallet) {
+    func showFundWallet(forWallet wallet: Wallet) {
         var fundWalletViewController: UIViewController
         
         if Services.shared.usePublicStellarNetwork {

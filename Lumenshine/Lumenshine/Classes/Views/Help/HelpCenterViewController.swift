@@ -8,6 +8,7 @@
 
 import UIKit
 import Material
+import MessageUI
 
 class HelpCenterViewController: UITableViewController {
     
@@ -130,9 +131,35 @@ class HelpCenterViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.itemSelected(at: indexPath)
+        if indexPath.section == 0 {
+            showSupportInbox()
+        } else {
+            viewModel.itemSelected(at: indexPath)
+        }
     }
     
+    func showSupportInbox () {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self;
+            mail.setSubject("Lumenshine Support")
+            mail.setToRecipients([Services.shared.supportEmailAddress])
+            //mail.setMessageBody("test", isHTML: false)
+            self.present(mail, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "Alert", message: "Email not set up!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+     }
+    
+}
+
+extension HelpCenterViewController: MFMailComposeViewControllerDelegate {
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 fileprivate extension HelpCenterViewController {

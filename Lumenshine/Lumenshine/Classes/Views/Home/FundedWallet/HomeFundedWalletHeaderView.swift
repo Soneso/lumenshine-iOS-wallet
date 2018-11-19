@@ -12,7 +12,7 @@ import Material
 class HomeFundedWalletHeaderView: UIView {
 
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var foundAccountButton: UILabel!
+    @IBOutlet weak var fundAccountButton: UILabel!
     @IBOutlet weak var sendButton: UITabBarItem!
     @IBOutlet weak var receiveButton: UITabBarItem!
     @IBOutlet weak var moreButton: UITabBarItem!
