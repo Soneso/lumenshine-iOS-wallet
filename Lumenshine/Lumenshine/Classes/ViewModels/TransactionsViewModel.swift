@@ -25,7 +25,7 @@ protocol TransactionsViewModelType: Transitionable {
 
 class TransactionsViewModel : TransactionsViewModelType {
     
-    fileprivate let service: TransactionsService
+    fileprivate let services: Services
     fileprivate let user: User?
     fileprivate let mainFont: UIFont
     fileprivate var entries: [TxTransactionResponse] = []
@@ -34,8 +34,8 @@ class TransactionsViewModel : TransactionsViewModelType {
     weak var navigationCoordinator: CoordinatorType?    
     var reloadClosure: (() -> ())?
     
-    init(service: TransactionsService, user: User?) {
-        self.service = service
+    init(service: Services, user: User?) {
+        self.services = service
         self.user = user
         self.mainFont = R.font.encodeSansRegular(size: 13) ?? Stylesheet.font(.body)
         
@@ -44,7 +44,7 @@ class TransactionsViewModel : TransactionsViewModelType {
         let startDate = DateUtils.format(weekBefore, in: .dateAndTime) ?? Date().description
         let endDate = DateUtils.format(Date(), in: .dateAndTime) ?? Date().description
         
-        service.getTransactions(stellarAccount: currentWalletPK, startTime: startDate, endTime: endDate) { [weak self] result in
+        service.transactions.getTransactions(stellarAccount: currentWalletPK, startTime: startDate, endTime: endDate) { [weak self] result in
             switch result {
             case .success(let transactions):
                 self?.entries = transactions
@@ -220,8 +220,8 @@ class TransactionsViewModel : TransactionsViewModelType {
                 subDetails = self.details(manageOffer: item)
             }
         case .createPassiveOffer:
-            if let item = item.operationResponse as? TxCreatePassiveOfferOperationResponse {
-                subDetails = self.details(passiveOffer: item)
+            if let subItem = item.operationResponse as? TxCreatePassiveOfferOperationResponse {
+                subDetails = self.details(passiveOffer: subItem, transactionHash: item.transactionHash)
             }
         case .setOptions:
             if let item = item.operationResponse as? TxSetOptionsOperationResponse {
@@ -328,11 +328,20 @@ fileprivate extension TransactionsViewModel {
         return details
     }
     
-    func details(passiveOffer: TxCreatePassiveOfferOperationResponse) -> NSAttributedString {
-        let offerId = self.offerID(for: passiveOffer) ?? "TEST Id"
-        let offerID = NSAttributedString(string: "\(R.string.localizable.offer_id()): \(offerId)\n",
-            attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
-                         .font : mainFont])
+    func details(passiveOffer: TxCreatePassiveOfferOperationResponse, transactionHash: String) -> NSAttributedString {
+        
+        let details = NSMutableAttributedString()
+        
+        offerIDForTransaction(fromHash: transactionHash) { offerID in
+            if let offerID = offerID {
+                let offerIDStr = NSAttributedString(string: "\(R.string.localizable.offer_id()): \(offerID)\n",
+                    attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
+                                 .font : self.mainFont])
+                details.insert(offerIDStr, at: 0)
+                
+                // TODO: update UI label main thread
+            }
+        }
         
         let buyingCode = passiveOffer.buyingAssetCode ?? NativeCurrencyNames.xlm.rawValue
         let buying = NSAttributedString(string: "\(R.string.localizable.buying()): \(buyingCode)\n",
@@ -349,7 +358,6 @@ fileprivate extension TransactionsViewModel {
             attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
                          .font : mainFont])
         
-        let details = NSMutableAttributedString(attributedString: offerID)
         details.append(buying)
         details.append(selling)
         details.append(price)
@@ -359,8 +367,117 @@ fileprivate extension TransactionsViewModel {
     }
     
     func details(setOptions: TxSetOptionsOperationResponse) -> NSAttributedString {
-        // TODO: implement set options
-        return NSAttributedString()
+        let details = NSMutableAttributedString()
+        if let inflationPK = setOptions.inflationDestination {
+            let pkStr = copyString(prefix: R.string.localizable.inflation_destination(), value: inflationPK)
+            details.append(pkStr)
+        }
+        
+        if let setFlags = setOptions.setFlags {
+            var flags: [String] = []
+            if setFlags.authRequired { flags.append(R.string.localizable.authorization_required()) }
+            if setFlags.authImmutable { flags.append(R.string.localizable.authorization_immutable()) }
+            if setFlags.authRevocable { flags.append(R.string.localizable.authorization_revocable()) }
+            
+            if flags.count > 0 {
+                let flagStr = flags.joined(separator: ",")
+                let setFlagStr = NSAttributedString(string: "\(R.string.localizable.set_flags()): \(flagStr)\n",
+                    attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
+                                 .font : mainFont])
+                
+                details.append(setFlagStr)
+            }
+        }
+        
+        if let clearFlags = setOptions.clearFlags {
+            var flags: [String] = []
+            if clearFlags.authRequired { flags.append(R.string.localizable.authorization_required()) }
+            if clearFlags.authImmutable { flags.append(R.string.localizable.authorization_immutable()) }
+            if clearFlags.authRevocable { flags.append(R.string.localizable.authorization_revocable()) }
+            
+            if flags.count > 0 {
+                let flagStr = flags.joined(separator: ",")
+                let setFlagStr = NSAttributedString(string: "\(R.string.localizable.clear_flags()): \(flagStr)\n",
+                    attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
+                                 .font : mainFont])
+                
+                details.append(setFlagStr)
+            }
+        }
+        
+        if let masterWeight = setOptions.masterKeyWeight {
+            let weight = NSAttributedString(string: "\(R.string.localizable.master_weight()): \(masterWeight)\n",
+                attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
+                             .font : mainFont])
+            
+            details.append(weight)
+        }
+        
+        if let lowThreshold = setOptions.lowThreshold {
+            let threshold = NSAttributedString(string: "\(R.string.localizable.low_threshold()): \(lowThreshold)\n",
+                attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
+                             .font : mainFont])
+            
+            details.append(threshold)
+        }
+        
+        if let medThreshold = setOptions.medThreshold {
+            let threshold = NSAttributedString(string: "\(R.string.localizable.med_threshold()): \(medThreshold)\n",
+                attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
+                             .font : mainFont])
+            
+            details.append(threshold)
+        }
+        
+        if let highThreshold = setOptions.highThreshold {
+            let threshold = NSAttributedString(string: "\(R.string.localizable.high_threshold()): \(highThreshold)\n",
+                attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
+                             .font : mainFont])
+            
+            details.append(threshold)
+        }
+        
+        if let signerWeight = setOptions.signerWeight,
+            let signerKey = setOptions.signerKey {
+            let label = signerWeight == 0 ? R.string.localizable.signer_removed() : R.string.localizable.signer_added()
+            let signer = copyString(prefix: label, value: signerKey)
+            
+            var type = ""
+            switch signerKey.first {
+            case "G":
+                type = R.string.localizable.ed_public_key()
+            case "X":
+                type = R.string.localizable.sha256_hash()
+            case "T":
+                type = R.string.localizable.pre_auth_hash()
+            default:
+                break
+            }
+            
+            let signerType = NSAttributedString(string: "\(R.string.localizable.signer_type()): \(type)\n",
+                attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
+                             .font : mainFont])
+            
+            let signerWeightStr = NSAttributedString(string: "\(R.string.localizable.signer_weight()): \(signerWeight)\n",
+                attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
+                             .font : mainFont])
+            
+            details.append(signer)
+            details.append(signerType)
+            details.append(signerWeightStr)
+        }
+        
+        if let homeDomain = setOptions.homeDomain {
+            let domain = NSMutableAttributedString(string: R.string.localizable.home_domain())
+            let domainLink = NSAttributedString(string: "\(homeDomain)\n",
+                attributes: [.link : homeDomain,
+                             .font : mainFont])
+            
+            domain.append(domainLink)
+            details.append(domain)
+        }
+        
+        return details
     }
     
     func details(changeTrust: TxChangeTrustOperationResponse) -> NSAttributedString {
@@ -467,8 +584,35 @@ fileprivate extension TransactionsViewModel {
         return details
     }
     
-    func offerID(for passiveOffer: TxCreatePassiveOfferOperationResponse) -> String? {
-        // TODO: get offer id from horizon
-        return nil
+    func offerIDForTransaction(fromHash transactionHash:String, completion: @escaping ((String?) -> (Void))) {
+        services.stellarSdk.transactions.getTransactionDetails(transactionHash: transactionHash, response: { (response) -> (Void) in
+            switch response {
+            case .success(details: let transaction):
+                switch transaction.transactionResult.resultBody {
+                case .success(let operations)?:
+                    for operation in operations {
+                        switch operation {
+                        case .manageOffer( _, let result): fallthrough
+                        case .createPassiveOffer( _, let result):
+                            switch result {
+                            case .success( _, let subResult):
+                                switch subResult.offer {
+                                case .created(let offer)?:
+                                    completion(String(offer.offerID))
+                                default: continue
+                                }
+                            default: continue
+                            }
+                        default: continue
+                        }
+                    }
+                default:
+                    completion(nil)
+                }
+            case .failure(error: let error):
+                print("Error: \(error)")
+                completion(nil)
+            }
+        })
     }
 }

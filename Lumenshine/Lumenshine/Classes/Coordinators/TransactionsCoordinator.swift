@@ -13,7 +13,7 @@ class TransactionsCoordinator: CoordinatorType {
     unowned var mainCoordinator: MainCoordinator
     
     init(mainCoordinator: MainCoordinator, service: Services, user: User) {
-        let viewModel = TransactionsViewModel(service: service.transactions, user: user)
+        let viewModel = TransactionsViewModel(service: service, user: user)
         let viewController = TransactionsViewController(viewModel: viewModel)
         
         self.mainCoordinator = mainCoordinator

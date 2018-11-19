@@ -964,6 +964,59 @@
 /*  */
 "entry_value" = "Entry value";
 
+/*  */
+"inflation_destination" = "Inflation destination";
+
+/*  */
+"set_flags" = "Set flags";
+
+/*  */
+"clear_flags" = "Clear flags";
+
+/*  */
+"authorization_required" = "Authorization required";
+
+/*  */
+"authorization_revocable" = "Authorization revocable";
+
+/*  */
+"authorization_immutable" = "Authorization immutable";
+
+/*  */
+"master_weight" = "Master weight";
+
+/*  */
+"low_threshold" = "Low threshold";
+
+/*  */
+"med_threshold" = "Medium threshold";
+
+/*  */
+"high_threshold" = "High threshold";
+
+/*  */
+"signer_removed" = "Signer removed";
+
+/*  */
+"signer_added" = "Signer added";
+
+/*  */
+"signer_type" = "Signer type";
+
+/*  */
+"signer_weight" = "Signer weight";
+
+/*  */
+"ed_public_key" = "Ed25519 Public key";
+
+/*  */
+"sha256_hash" = "sha256 Hash";
+
+/*  */
+"pre_auth_hash" = "Pre-authorized Transaction Hash";
+
+/*  */
+"home_domain" = "Home domain";
 
 /*  */
 "email_mandatory" = "Email is mandatory";
