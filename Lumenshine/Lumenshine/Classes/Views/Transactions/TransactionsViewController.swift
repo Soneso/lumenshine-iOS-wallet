@@ -17,6 +17,12 @@ class TransactionsViewController: UITableViewController {
     
     // MARK: - Properties
     
+    fileprivate let walletLabel = UILabel()
+    fileprivate let dateFromLabel = UILabel()
+    fileprivate let dateToLabel = UILabel()
+    fileprivate let filterButton = LSButton()
+    fileprivate let sortButton = LSButton()
+    
     fileprivate let verticalSpacing = 31.0
     fileprivate let horizontalSpacing = 15.0
     fileprivate let viewModel: TransactionsViewModelType
@@ -138,6 +144,18 @@ class TransactionsViewController: UITableViewController {
     }
 }
 
+extension TransactionsViewController {
+    @objc
+    func filterAction(sender: UIButton) {
+        print("filterButton")
+    }
+    
+    @objc
+    func sortAction(sender: UIButton) {
+        print("sortbutton")
+    }
+}
+
 
 fileprivate extension TransactionsViewController {
     func prepare() {
@@ -155,7 +173,9 @@ fileprivate extension TransactionsViewController {
         if #available(iOS 11.0, *) {
             tableView.separatorInsetReference = .fromAutomaticInsets
         }
-        tableView.tableHeaderView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
+        let headerView = prepareTableHeader()
+        headerView.frame = CGRect(origin: .zero, size: CGSize(width: 30, height: 80))
+        tableView.tableHeaderView = headerView
         tableView.tableFooterView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
     }
     
@@ -166,6 +186,77 @@ fileprivate extension TransactionsViewController {
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         
         navigationController?.navigationBar.setBackgroundImage(R.image.nav_background(), for: .default)
+    }
+    
+    func prepareTableHeader() -> UIView {
+        let headerView = UIView()
+        
+        walletLabel.text = R.string.localizable.unlock_app()
+        walletLabel.textColor = Stylesheet.color(.darkGray)
+        walletLabel.font = R.font.encodeSansRegular(size: 13)
+        walletLabel.adjustsFontSizeToFitWidth = true
+        
+        headerView.addSubview(walletLabel)
+        walletLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(horizontalSpacing)
+            make.left.equalTo(2*horizontalSpacing)
+        }
+        
+        dateFromLabel.text = R.string.localizable.unlock_app()
+        dateFromLabel.textColor = Stylesheet.color(.darkGray)
+        dateFromLabel.font = R.font.encodeSansRegular(size: 13)
+        dateFromLabel.adjustsFontSizeToFitWidth = true
+        
+        headerView.addSubview(dateFromLabel)
+        dateFromLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(walletLabel.snp.bottom)
+            make.left.equalTo(walletLabel)
+        }
+        
+        dateToLabel.text = R.string.localizable.unlock_app()
+        dateToLabel.textColor = Stylesheet.color(.darkGray)
+        dateToLabel.font = R.font.encodeSansRegular(size: 13)
+        dateToLabel.adjustsFontSizeToFitWidth = true
+        
+        headerView.addSubview(dateToLabel)
+        dateToLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(dateFromLabel.snp.bottom)
+            make.left.equalTo(walletLabel)
+        }
+        
+        sortButton.title = R.string.localizable.sort().uppercased()
+        sortButton.titleColor = Stylesheet.color(.blue)
+        sortButton.borderWidthPreset = .border1
+        sortButton.borderColor = Stylesheet.color(.blue)
+        sortButton.cornerRadiusPreset = .cornerRadius5
+        sortButton.setGradientLayer(color: Stylesheet.color(.white))
+        sortButton.addTarget(self, action: #selector(sortAction(sender:)), for: .touchUpInside)
+        
+        headerView.addSubview(sortButton)
+        sortButton.snp.makeConstraints { make in
+            make.right.equalTo(-horizontalSpacing)
+            make.centerY.equalTo(dateFromLabel)
+            make.width.equalTo(80)
+            make.height.equalTo(36)
+        }
+        
+        filterButton.title = R.string.localizable.filter().uppercased()
+        filterButton.titleColor = Stylesheet.color(.blue)
+        filterButton.borderWidthPreset = .border1
+        filterButton.borderColor = Stylesheet.color(.blue)
+        filterButton.cornerRadiusPreset = .cornerRadius5
+        filterButton.setGradientLayer(color: Stylesheet.color(.white))
+        filterButton.addTarget(self, action: #selector(filterAction(sender:)), for: .touchUpInside)
+        
+        headerView.addSubview(filterButton)
+        filterButton.snp.makeConstraints { make in
+            make.right.equalTo(sortButton.snp.left).offset(-10)
+            make.centerY.equalTo(dateFromLabel)
+            make.width.equalTo(80)
+            make.height.equalTo(36)
+        }
+        
+        return headerView
     }
     
     func prepareCopyright() {
@@ -193,6 +284,7 @@ fileprivate extension TransactionsViewController {
         }
         
         tableView.backgroundView = backgroundView
+        tableView.backgroundView?.isUserInteractionEnabled = true
     }
 }
 

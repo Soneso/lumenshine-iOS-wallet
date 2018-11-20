@@ -106,7 +106,11 @@ extension TransactionsTableViewCell: UITextViewDelegate {
     }
     
     func textView(_ textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        return true
+        
+        if let attachment = textAttachment as? LSTextAttachment {
+            print("Info: \(attachment.additionalInfo)")
+        }
+        return false
     }
     
 }
@@ -245,6 +249,7 @@ fileprivate extension TransactionsTableViewCell {
         detailsValueLabel.isEditable = false
         detailsValueLabel.isScrollEnabled = false
         detailsValueLabel.delegate = self
+        detailsValueLabel.textContainerInset = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 0)
         
         contentView.addSubview(detailsValueLabel)
         detailsValueLabel.snp.makeConstraints { make in

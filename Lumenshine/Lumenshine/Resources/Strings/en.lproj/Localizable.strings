@@ -944,6 +944,9 @@
 "trustor" = "Trustor";
 
 /*  */
+"source_account" = "Source account";
+
+/*  */
 "merge_account" = "Merge account";
 
 /*  */
@@ -1038,3 +1041,9 @@
 
 /*  */
 "sending" = "sending";
+
+/*  */
+"sort" = "Sort";
+
+/*  */
+"filter" = "Filter";

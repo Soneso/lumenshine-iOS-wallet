@@ -267,6 +267,10 @@ class TransactionsViewModel : TransactionsViewModelType {
         }
         details.append(subDetails)
         
+        if item.sourceAccount != currentWalletPK {
+            details.append(copyString(prefix: R.string.localizable.source_account(), value: item.sourceAccount))
+        }
+        
         return details
     }
     
@@ -574,7 +578,7 @@ fileprivate extension TransactionsViewModel {
                          .font : mainFont])
         
         let attachment = LSTextAttachment(info: value)
-        attachment.image = R.image.copy()
+        attachment.image = R.image.copy()?.resize(toHeight: 30)
         let copyStr = NSAttributedString(attachment: attachment)
         
         let details = NSMutableAttributedString(attributedString: pkStr)
