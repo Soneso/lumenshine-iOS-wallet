@@ -186,32 +186,12 @@ fileprivate extension MenuViewModel {
     }
     
     func loginCompleted() {
-        update2FASecret()
         UIApplication.shared.registerForRemoteNotifications()
         
         if let walletPublicKey = UserDefaults.standard.value(forKey: Keys.UserDefs.ShowWallet) as? String {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.showWallet(publicKey: walletPublicKey)
             }
-        }
-    }
-    
-    func update2FASecret() {
-        if let tokenExists = TFAGeneration.isTokenExists(email: user.email),
-            tokenExists == false {
-            // TODO: update to sep10
-//            services.auth.tfaSecret(publicKeyIndex188: user.publicKeyIndex188) { result in
-//                switch result {
-//                case .success(let response):
-//                    if let secret = response.tfaSecret {
-//                        TFAGeneration.createToken(tfaSecret: secret, email: self.user.email)
-//                    } else {
-//                        TFAGeneration.removeToken(email: self.user.email)
-//                    }
-//                case .failure(let error):
-//                    print("Tfa secret request error: \(error)")
-//                }
-//            }
         }
     }
     

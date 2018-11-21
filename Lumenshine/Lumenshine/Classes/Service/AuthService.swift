@@ -536,9 +536,6 @@ public class AuthService: BaseService {
             params["wordlist"] = userSecurity.encryptedWordList.toBase64()
             params["wordlist_iv"] = userSecurity.wordListEncryptionIV.toBase64()
             params["public_key_0"] = userSecurity.publicKeyIndex0
-            let keyPair = try! KeyPair.generateRandomKeyPair()
-            params["public_key_188"] = keyPair.accountId //TODO remove this as soon as the server is ready
-            
                 
             self.POSTRequestWithPath(path: "/portal/user/register_user", parameters: params) { (result) -> (Void) in
                 switch result {
@@ -629,7 +626,6 @@ public class AuthService: BaseService {
     open func new2faSecret(signedSEP10TransactionEnvelope: String, response: @escaping TfaSecretResponseClosure) {
         var params = Dictionary<String,String>()
         params["sep10_transaction"] = signedSEP10TransactionEnvelope
-        params["public_key_188"] = "blubber" // TODO remove this when server is ready
             
         POSTRequestWithPath(path: "/portal/user/dashboard/new_2fa_secret", parameters: params) { (result) -> (Void) in
             switch result {
