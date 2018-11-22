@@ -14,38 +14,38 @@ public final class Services {
     let usePublicStellarNetwork = false
     //let baseURL = "http://192.168.0.17:9000"
     //let baseURL = "http://127.0.0.1:8000"
-    let baseURL = "https://demoapi.lumenshine.com"
+    let baseURL = "https://lsdevapi.ponytest.de"
     //let horizonURL = "https://horizon-testnet.stellar.org"
-    let horizonURL = "https://demohorizon.lumenshine.com"
-    let tomlURL = "https://demo.lumenshine.com/.well-known/stellar.toml"
+    let horizonURL = "https://lsdevhorizon.ponytest.de"
+    let tomlURL = "https://lsdev.ponytest.de/.well-known/stellar.toml"
     let initialServerSigningKey = "GCP4BR7GWG664577XMLX2BRUPSHKHTAXQ4I4HZORLMQNILNNVMSFWVUV"
-    let termsUrl = "https://demo.lumenshine.com/terms"
-    let privacyUrl = "https://demo.lumenshine.com/privacy"
-    let guidesUrl = "https://demo.lumenshine.com/guidelines"
+    let termsUrl = "https://lsdev.ponytest.de/terms"
+    let privacyUrl = "https://lsdev.ponytest.de/privacy"
+    let guidesUrl = "https://lsdev.ponytest.de/guidelines"
     
 #elseif DEVELOPMENT
     let usePublicStellarNetwork = false
-    let baseURL = "https://demoapi.lumenshine.com"
-    let horizonURL = "https://horizon-testnet.stellar.org"
-    //let horizonURL = "https://demohorizon.lumenshine.com"
-    let tomlURL = "https://demo.lumenshine.com/.well-known/stellar.toml"
+    let baseURL = "https://lsdevapi.ponytest.de"
+    //let horizonURL = "https://horizon-testnet.stellar.org"
+    let horizonURL = "https://lsdevhorizon.ponytest.de"
+    let tomlURL = "https://lsdev.ponytest.de/.well-known/stellar.toml"
     let initialServerSigningKey = "GCP4BR7GWG664577XMLX2BRUPSHKHTAXQ4I4HZORLMQNILNNVMSFWVUV"
     
     /** live net **/
-    //let baseURL = "https://alphaapi.lumenshine.com"
-    //let horizonURL = "https://alphahorizon.lumenshine.com"
-    //let tomlURL = "https://alpha.lumenshine.com/.well-known/stellar.toml"
+    //let baseURL = "https://lsstageapi.ponytest.de"
+    //let horizonURL = "https://lsdstagehorizon.ponytest.de"
+    //let tomlURL = "https://lsstage.ponytest.de/.well-known/stellar.toml"
     //let initialServerSigningKey = "GBGXAY3HDXMUWAUDATBZ5SVGLFUC5GKJC4BNN5MEPVLWKCOMBXQUIUWM"
     
-    let termsUrl = "https://demo.lumenshine.com/terms"
-    let privacyUrl = "https://demo.lumenshine.com/privacy"
-    let guidesUrl = "https://demo.lumenshine.com/guidelines"
+    let termsUrl = "https://lsdev.ponytest.de/terms"
+    let privacyUrl = "https://lsdev.ponytest.de/privacy"
+    let guidesUrl = "https://lsdev.ponytest.de/guidelines"
 
 #else
     let usePublicStellarNetwork = true
-    let baseURL = "https://alphaapi.lumenshine.com"
-    let horizonURL = "https://alphahorizon.lumenshine.com"
-    let tomlURL = "https://alpha.lumenshine.com/.well-known/stellar.toml"
+    let baseURL = "https://api.lumenshine.com"
+    let horizonURL = "https://horizon.lumenshine.com"
+    let tomlURL = "https://lumenshine.com/.well-known/stellar.toml"
     let initialServerSigningKey = "GBGXAY3HDXMUWAUDATBZ5SVGLFUC5GKJC4BNN5MEPVLWKCOMBXQUIUWM"
     let termsUrl = "https://lumenshine.com/terms"
     let privacyUrl = "https://lumenshine.com/privacy"
