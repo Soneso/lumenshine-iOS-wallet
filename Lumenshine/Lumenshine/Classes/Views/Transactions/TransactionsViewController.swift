@@ -147,12 +147,12 @@ class TransactionsViewController: UITableViewController {
 extension TransactionsViewController {
     @objc
     func filterAction(sender: UIButton) {
-        print("filterButton")
+        viewModel.filterClick()
     }
     
     @objc
     func sortAction(sender: UIButton) {
-        print("sortbutton")
+        viewModel.sortClick()
     }
 }
 

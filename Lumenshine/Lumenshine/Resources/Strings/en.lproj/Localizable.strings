@@ -59,10 +59,22 @@
 "remove" = "Remove";
 
 /*  */
+"clear" = "Clear";
+
+/*  */
+"clear_all" = "Clear all";
+
+/*  */
 "refresh" = "Refresh";
 
 /*  */
+"apply" = "Apply";
+
+/*  */
 "send" = "Send";
+
+/*  */
+"sent" = "Sent";
 
 /*  */
 "login" = "Log in";
@@ -164,7 +176,16 @@
 "receive" = "Receive";
 
 /*  */
+"received" = "Received";
+
+/*  */
 "details" = "Details";
+
+/*  */
+"primary" = "Primary";
+
+/*  */
+"wallet_name" = "Wallet name";
 
 /*  */
 "fund_wallet" = "Fund Wallet";
@@ -324,6 +345,9 @@
 
 /*  */
 "transactions_history" = "Transactions History";
+
+/*  */
+"transactions_filters" = "Transactions Filters";
 
 /*  */
 "currencies" = "Currencies";
@@ -743,6 +767,12 @@
 "date" = "Date";
 
 /*  */
+"date_from" = "Date from";
+
+/*  */
+"date_to" = "Date to";
+
+/*  */
 "type" = "Type";
 
 /*  */
@@ -750,6 +780,12 @@
 
 /*  */
 "amount" = "Amount";
+
+/*  */
+"amount_from" = "Amount from";
+
+/*  */
+"amount_to" = "Amount to";
 
 /*  */
 "fee" = "Fee";
@@ -932,6 +968,9 @@
 "set_options" = "Set options";
 
 /*  */
+"trust" = "Trust";
+
+/*  */
 "change_trust" = "Change trust";
 
 /*  */
@@ -966,6 +1005,9 @@
 
 /*  */
 "entry_value" = "Entry value";
+
+/*  */
+"inflation" = "Inflation";
 
 /*  */
 "inflation_destination" = "Inflation destination";

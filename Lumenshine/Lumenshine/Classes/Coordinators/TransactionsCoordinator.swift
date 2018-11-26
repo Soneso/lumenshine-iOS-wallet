@@ -12,8 +12,10 @@ class TransactionsCoordinator: CoordinatorType {
     var baseController: UIViewController
     unowned var mainCoordinator: MainCoordinator
     
+    fileprivate let viewModel: TransactionsViewModel
+    
     init(mainCoordinator: MainCoordinator, service: Services, user: User) {
-        let viewModel = TransactionsViewModel(service: service, user: user)
+        self.viewModel = TransactionsViewModel(service: service, user: user)
         let viewController = TransactionsViewController(viewModel: viewModel)
         
         self.mainCoordinator = mainCoordinator
@@ -23,10 +25,39 @@ class TransactionsCoordinator: CoordinatorType {
     }
     
     func performTransition(transition: Transition) {
-
+        switch transition {
+        case .showTransactionFilter:
+            showTransactionFilter()
+        case .showPaymentsFilter:
+            showPaymentsFilter()
+        case .showOffersFilter:
+            showOffersFilter()
+        case .showOtherFilter:
+            showOtherFilter()
+        default:
+            break
+        }
     }
 }
 
 fileprivate extension TransactionsCoordinator {
+    func showTransactionFilter() {
+        let filterVC = TransactionsFilterViewController(viewModel: viewModel)
+        baseController.navigationController?.pushViewController(filterVC, animated: true)
+    }
     
+    func showPaymentsFilter() {
+        let filterVC = PaymentFilterViewController(viewModel: viewModel)
+        baseController.navigationController?.pushViewController(filterVC, animated: true)
+    }
+    
+    func showOffersFilter() {
+        let filterVC = OfferFilterViewController(viewModel: viewModel)
+        baseController.navigationController?.pushViewController(filterVC, animated: true)
+    }
+    
+    func showOtherFilter() {
+        let filterVC = OtherFilterViewController(viewModel: viewModel)
+        baseController.navigationController?.pushViewController(filterVC, animated: true)
+    }
 }

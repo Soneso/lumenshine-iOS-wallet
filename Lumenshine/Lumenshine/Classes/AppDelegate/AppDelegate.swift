@@ -30,7 +30,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         registerForPushNotifications()
         
-        let loginCoordinator = LoginMenuCoordinator(mainCoordinator: mainCoordinator)
+        // for testing purpose
+        let loginCoordinator = MenuCoordinator(mainCoordinator: mainCoordinator, user: User(id: "1", email: "isti@isti.com", publicKeyIndex0: "publicKeyIndex0", publicKeys: nil))
+        
+//        let loginCoordinator = LoginMenuCoordinator(mainCoordinator: mainCoordinator)
+        
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = loginCoordinator.baseController

@@ -60,5 +60,10 @@ public indirect enum Transition {
     case showWallets
     case showTermsOfService
     case showTransactions
+    case showTransactionFilter
+    case showTransactionSorter
+    case showPaymentsFilter
+    case showOffersFilter
+    case showOtherFilter
 }
 

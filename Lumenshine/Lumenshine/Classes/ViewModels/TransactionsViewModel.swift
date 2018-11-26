@@ -11,7 +11,9 @@ import UIKit.NSTextAttachment
 
 protocol TransactionsViewModelType: Transitionable {
     var itemCount: Int { get }
+    var wallets: [String] { get }
     var reloadClosure: (() -> ())? { get set }
+    var filter: TransactionFilter { get set }
     
     func date(at indexPath: IndexPath) -> String?
     func type(at indexPath: IndexPath) -> String?
@@ -21,6 +23,17 @@ protocol TransactionsViewModelType: Transitionable {
     func details(at indexPath: IndexPath) -> NSAttributedString
     
     func itemSelected(at indexPath: IndexPath)
+    func filterClick()
+    func sortClick()
+    
+    var walletIndex: Int { get set }
+    var dateFrom: Date { get set }
+    var dateTo: Date { get set }
+    func memoChanged(_ memo: String)
+    
+    func showPaymentsFilter()
+    func showOffersFilter()
+    func showOtherFilter()
 }
 
 class TransactionsViewModel : TransactionsViewModelType {
@@ -28,8 +41,15 @@ class TransactionsViewModel : TransactionsViewModelType {
     fileprivate let services: Services
     fileprivate let user: User?
     fileprivate let mainFont: UIFont
+    
     fileprivate var entries: [TxTransactionResponse] = []
     fileprivate var currentWalletPK: String
+    fileprivate var startDate: String
+    fileprivate var endDate: String
+    fileprivate var sortedWallets: [WalletsResponse] = []
+    fileprivate var memo: String?
+    
+    var filter: TransactionFilter
     
     weak var navigationCoordinator: CoordinatorType?    
     var reloadClosure: (() -> ())?
@@ -40,11 +60,59 @@ class TransactionsViewModel : TransactionsViewModelType {
         self.mainFont = R.font.encodeSansRegular(size: 13) ?? Stylesheet.font(.body)
         
         self.currentWalletPK = PrivateKeyManager.getPublicKey(forIndex: 0)
-        let weekBefore = Calendar.current.date(byAdding: .day, value: -7, to: Date())
-        let startDate = DateUtils.format(weekBefore, in: .dateAndTime) ?? Date().description
-        let endDate = DateUtils.format(Date(), in: .dateAndTime) ?? Date().description
+        self.dateFrom = Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date()
+        self.dateTo = Date()
+        self.startDate = DateUtils.format(dateFrom, in: .dateAndTime) ?? Date().description
+        self.endDate = DateUtils.format(dateTo, in: .dateAndTime) ?? Date().description
+        self.walletIndex = 0        
+        self.filter = TransactionFilter()
         
-        service.transactions.getTransactions(stellarAccount: currentWalletPK, startTime: startDate, endTime: endDate) { [weak self] result in
+        updateTransactions()
+        
+        services.walletService.getWallets { [weak self] (result) -> (Void) in
+            switch result {
+            case .success(let wallets):
+                self?.sortedWallets = wallets.sorted(by: { $0.id < $1.id })
+            case .failure(_):
+                print("Failed to get wallets")
+            }
+        }
+    }
+    
+    var itemCount: Int {
+        return entries.count
+    }
+    
+    var wallets: [String] {
+        return sortedWallets.map {
+            $0.walletName
+        }
+    }
+    
+    var walletIndex: Int {
+        didSet {
+            self.currentWalletPK = sortedWallets[walletIndex].publicKey
+        }
+    }
+    
+    var dateFrom: Date {
+        didSet {
+            startDate = DateUtils.format(dateFrom, in: .dateAndTime) ?? startDate
+        }
+    }
+    
+    var dateTo: Date {
+        didSet {
+            endDate = DateUtils.format(dateTo, in: .dateAndTime) ?? endDate
+        }
+    }
+    
+    func memoChanged(_ memo: String) {
+        self.memo = memo
+    }
+    
+    func updateTransactions() {
+        services.transactions.getTransactions(stellarAccount: currentWalletPK, startTime: startDate, endTime: endDate) { [weak self] result in
             switch result {
             case .success(let transactions):
                 self?.entries = transactions
@@ -53,10 +121,6 @@ class TransactionsViewModel : TransactionsViewModelType {
                 print("Transactions list failure: \(error)")
             }
         }
-    }
-    
-    var itemCount: Int {
-        return entries.count
     }
     
     func date(at indexPath: IndexPath) -> String? {
@@ -277,6 +341,26 @@ class TransactionsViewModel : TransactionsViewModelType {
     func itemSelected(at indexPath:IndexPath) {
         
     }
+    
+    func filterClick() {
+        navigationCoordinator?.performTransition(transition: .showTransactionFilter)
+    }
+    
+    func sortClick() {
+        
+    }
+    
+    func showPaymentsFilter() {
+        navigationCoordinator?.performTransition(transition: .showPaymentsFilter)
+    }
+    
+    func showOffersFilter() {
+        navigationCoordinator?.performTransition(transition: .showOffersFilter)
+    }
+    
+    func showOtherFilter() {
+        navigationCoordinator?.performTransition(transition: .showOtherFilter)
+    }
 }
 
 fileprivate extension TransactionsViewModel {
@@ -284,6 +368,11 @@ fileprivate extension TransactionsViewModel {
         return entries[indexPath.row]
     }
     
+    
+}
+
+// MARK: Operation details
+fileprivate extension TransactionsViewModel {
     func details(accountCreated: TxAccountCreatedOperationResponse) -> NSAttributedString {
         // TODO: check logic
         let publicKey = accountCreated.funder == currentWalletPK ? accountCreated.funder : accountCreated.account
