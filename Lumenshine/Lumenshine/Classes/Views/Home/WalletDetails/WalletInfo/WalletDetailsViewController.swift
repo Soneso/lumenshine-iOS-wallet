@@ -37,8 +37,6 @@ class WalletDetailsViewController: UIViewController {
     
     @IBOutlet weak var inflationPublicKeyView: UIView!
     @IBOutlet weak var passwordTextField: UITextField!
-
-    var reloadDelegate: ReloadDelegate?
     
     @IBAction func sendButtonAction(_ sender: UIButton) {
         paymentOperationsVCManager.addViewController(forAction: WalletAction.send, wallet: wallet)
@@ -263,7 +261,6 @@ class WalletDetailsViewController: UIViewController {
         let setInflationDestinationViewController = SetInflationDestinationViewController(nibName: "SetInflationDestinationViewController", bundle: Bundle.main)
         setInflationDestinationViewController.wallet = wallet
         setInflationDestinationViewController.currentInflationDestination = currentInflationDestination
-        setInflationDestinationViewController.reloadDelegate = reloadDelegate
         navigationController?.pushViewController(setInflationDestinationViewController, animated: true)
     }
     

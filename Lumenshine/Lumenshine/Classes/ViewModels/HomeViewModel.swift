@@ -123,6 +123,8 @@ class HomeViewModel : HomeViewModelType {
                         self?.cardViewModels.append(viewModel)
                     }
                 }
+                
+                WebSocketService.wallets = wallets
             case .failure(_):
                 print("Failed to get wallets")
             }

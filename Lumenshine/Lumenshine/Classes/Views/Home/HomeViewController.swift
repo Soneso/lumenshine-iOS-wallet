@@ -10,7 +10,7 @@ import UIKit
 import Material
 import DGElasticPullToRefresh
 
-class HomeViewController: UIViewController {
+class HomeViewController: UpdatableViewController {
     
     fileprivate static let CellIdentifier = "CardTableViewCell"
     
@@ -34,6 +34,7 @@ class HomeViewController: UIViewController {
         self.viewModel = viewModel
         tableView = UITableView(frame: .zero, style: .grouped)
         super.init(nibName: nil, bundle: nil)
+        hasWallets = true
         viewModel.reloadClosure = {
             DispatchQueue.main.async {
                 self.dataSourceItems = self.viewModel.cardViewModels.map {
@@ -95,6 +96,10 @@ class HomeViewController: UIViewController {
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 18)
         navigationItem.titleLabel.text = R.string.localizable.homeScreenTitle()
         viewModel.refreshWallets()
+    }
+    
+    override func reloadWallets() {
+        viewModel.reloadCards()
     }
 }
 

@@ -28,7 +28,6 @@ class SetInflationDestinationViewController: UIViewController {
     
     var wallet: FundedWallet!
     var currentInflationDestination: String?
-    var reloadDelegate: ReloadDelegate?
     
     private var titleView: TitleView!
     private var provideInflationDestinationViewController: ProvideInflationDestinationViewController!
@@ -46,11 +45,9 @@ class SetInflationDestinationViewController: UIViewController {
         knownInflationDestinationsViewController = KnownInflationDestinationsViewController(nibName: "KnownInflationDestinationsViewController", bundle: Bundle.main)
         knownInflationDestinationsViewController.currentInflationDestination = currentInflationDestination
         knownInflationDestinationsViewController.wallet = wallet
-        knownInflationDestinationsViewController.reloadDelegate = reloadDelegate
         
         provideInflationDestinationViewController = ProvideInflationDestinationViewController(nibName: "ProvideInflationDestinationViewController", bundle: Bundle.main)
         provideInflationDestinationViewController.wallet = wallet
-        provideInflationDestinationViewController.reloadDelegate = reloadDelegate
     }
     
     private func showKnownDestinations() {

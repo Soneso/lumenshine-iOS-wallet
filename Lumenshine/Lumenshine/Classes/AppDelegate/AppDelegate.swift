@@ -15,7 +15,12 @@ import stellarsdk
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    private var webSocketService: WebSocketService {
+        get {
+            return Services.shared.webSocketService
+        }
+    }
+    
     fileprivate let mainCoordinator = MainCoordinator()
     fileprivate var snapshotView: UIView?
 
@@ -54,6 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.snapshotView = snapshotView
         }
         
+        webSocketService.disconnectWebSocket()
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -65,6 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         snapshotView?.removeFromSuperview()
         snapshotView = nil
+        webSocketService.connectWebSocket()
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {

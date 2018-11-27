@@ -18,10 +18,6 @@ protocol AccountDetailsViewControllerFlow: BaseViewControllerFlowDelegate {
     
 }
 
-protocol ReloadDelegate {
-    func setNeedsReload()
-}
-
 private enum ActionButtonTitles: String {
     case setAddress = "set address"
     case removeAddress = "remove address"
@@ -29,7 +25,7 @@ private enum ActionButtonTitles: String {
     case cancel = "cancel"
 }
 
-class AccountDetailsViewController: UIViewController, ReloadDelegate {
+class AccountDetailsViewController: UpdatableViewController {
     @IBOutlet weak var walletNameStackView: UIStackView!
     @IBOutlet var walletNameView: UIView!
     @IBOutlet var walletNameEditView: UIView!
@@ -63,7 +59,12 @@ class AccountDetailsViewController: UIViewController, ReloadDelegate {
     private let walletService = Services.shared.walletService
     private var titleView: TitleView!
     private var accountCurrenciesViewController: AccountCurrenciesViewController!
-    private var needsReloadData = false
+    
+    private var userManager: UserManager {
+        get {
+            return Services.shared.userManager
+        }
+    }
     
     @IBOutlet weak var stellarAddressActionbutton: UIButton!
     @IBOutlet weak var showOnHomescreenSwitch: UISwitch!
@@ -125,7 +126,6 @@ class AccountDetailsViewController: UIViewController, ReloadDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        reloadWalletDetails()
     }
     
     // MARK: Actions
@@ -317,8 +317,6 @@ class AccountDetailsViewController: UIViewController, ReloadDelegate {
             viewController.wallet = wallet
         }
         
-        viewController.reloadDelegate = self
-        
         addChildViewController(viewController)
         accountCurrencyContainer.addSubview(viewController.view)
         viewController.view.snp.makeConstraints {make in
@@ -348,8 +346,6 @@ class AccountDetailsViewController: UIViewController, ReloadDelegate {
             viewController.wallet = wallet
         }
         
-        viewController.reloadDelegate = self
-        
         addChildViewController(viewController)
         walletDetailsContainer.addSubview(viewController.view)
         viewController.view.snp.makeConstraints({ (make) in
@@ -359,22 +355,16 @@ class AccountDetailsViewController: UIViewController, ReloadDelegate {
         viewController.didMove(toParentViewController: self)
     }
     
-    func setNeedsReload() {
-        needsReloadData = true
-    }
-    
     private func reloadWalletDetails() {
-        if needsReloadData {
-            accountCurrencyContainer.subviews.forEach({ $0.removeFromSuperview() })
-            walletDetailsContainer.subviews.forEach({ $0.removeFromSuperview() })
-            transactionsHistoryContainer.subviews.forEach({ $0.removeFromSuperview() })
-            
-            setupAccountCurrency()
-            setupWalletDetails()
-            setupTransactionsHistory()
-            
-            needsReloadData = false
-        }
+        accountCurrencyContainer.subviews.forEach({ $0.removeFromSuperview() })
+        walletDetailsContainer.subviews.forEach({ $0.removeFromSuperview() })
+        transactionsHistoryContainer.subviews.forEach({ $0.removeFromSuperview() })
+        walletDetailsContainer.subviews.forEach({ $0.removeFromSuperview() })
+        
+        setupWalletDetails()
+        setupAccountCurrency()
+        setupWalletDetails()
+        setupTransactionsHistory()
     }
     
     private func setupButtons() {
@@ -382,5 +372,23 @@ class AccountDetailsViewController: UIViewController, ReloadDelegate {
         submitInflationChangeButton.backgroundColor = Stylesheet.color(.blue)
         
         cancelWalletNameButton.backgroundColor = Stylesheet.color(.red)
+    }
+    
+    override func updateUIAfterWalletsReload(notification: NSNotification) {
+        if let wallets = notification.object as? [WalletsResponse] {
+            if let newWallet = wallets.first(where: { (newWallet) -> Bool in
+                return wallet.publicKey == newWallet.publicKey
+            }) {
+                userManager.updatedWalletDetails(forWallet: newWallet) { (response) -> (Void) in
+                    switch response {
+                    case .success(response: let updatedWallet):
+                        self.wallet = updatedWallet
+                        self.reloadWalletDetails()
+                    case .failure(error: let error):
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+        }
     }
 }

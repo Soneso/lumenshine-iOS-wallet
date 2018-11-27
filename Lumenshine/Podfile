@@ -23,6 +23,8 @@ target 'Lumenshine' do
   pod 'stellar-ios-mac-sdk'
   pod 'OneTimePassword'
   pod 'SwiftRichString'
+  pod 'Starscream'
+  pod 'ReachabilitySwift'
   
   pod 'IQKeyboardManagerSwift'
 

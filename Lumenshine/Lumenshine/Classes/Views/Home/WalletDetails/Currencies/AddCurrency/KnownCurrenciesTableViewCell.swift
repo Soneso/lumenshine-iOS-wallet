@@ -36,7 +36,6 @@ class KnownCurrenciesTableViewCell: UITableViewCell {
     var canWalletSign: Bool!
     var cellIndexPath: IndexPath!
     var passwordView: PasswordView!
-    var reloadDelegate: ReloadDelegate?
     private let walletManager = WalletManager()
     private let passwordManager = PasswordManager()
     
@@ -163,7 +162,6 @@ class KnownCurrenciesTableViewCell: UITableViewCell {
             transactionHelper.addTrustLine(trustingAccountKeyPair:trustingAccountKeyPair, asset:asset) { (result) -> (Void) in
                 switch result {
                 case .success:
-                    self.reloadDelegate?.setNeedsReload()
                     self.dissmissView()
                     break
                 case .failure(error: let error):

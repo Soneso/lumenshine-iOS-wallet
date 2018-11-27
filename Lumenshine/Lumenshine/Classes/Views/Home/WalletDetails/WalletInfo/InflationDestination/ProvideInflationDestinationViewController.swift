@@ -31,7 +31,6 @@ class ProvideInflationDestinationViewController: UIViewController {
     @IBOutlet weak var setButton: UIButton!
     
     var wallet: FundedWallet!
-    var reloadDelegate: ReloadDelegate?
     
     private let passwordManager = PasswordManager()
     private let walletManager = WalletManager()
@@ -110,7 +109,6 @@ class ProvideInflationDestinationViewController: UIViewController {
                     case .success(keyPair: let keyPair):
                         if let walletKeyPair = keyPair {
                             self.setInflationDestination(sourceAccountKeyPair: walletKeyPair, inflationDestination: inflationDestination)
-                            self.reloadDelegate?.setNeedsReload()
                             return
                         }
                     case .failure(error: let error):

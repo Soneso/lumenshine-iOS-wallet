@@ -9,7 +9,7 @@
 import UIKit
 
 class PaymentOperationsVCManager {
-    private var parentViewController: UIViewController
+    private weak var parentViewController: UIViewController?
     
     init(parentViewController: UIViewController) {
         self.parentViewController = parentViewController
@@ -32,26 +32,26 @@ class PaymentOperationsVCManager {
         }
         
         (viewController as! WalletActionsProtocol).wallet = wallet
-        (viewController as! WalletActionsProtocol).closeAction = {
-            self.parentViewController.navigationController?.popViewController(animated: true)
+        (viewController as! WalletActionsProtocol).closeAction = { [weak self] in
+            self?.parentViewController?.navigationController?.popViewController(animated: true)
         }
         
-        parentViewController.navigationController?.pushViewController(viewController, animated: true)
+        parentViewController?.navigationController?.pushViewController(viewController, animated: true)
     }
     
     private func setupSendViewController(viewController: SendViewController) {
-        viewController.sendAction = { [weak self] (transactionData) in
-            if let wallet = viewController.wallet as? FundedWallet {
+        viewController.sendAction = { [weak self, weak viewController] (transactionData) in
+            if let viewController = viewController, let wallet = viewController.wallet as? FundedWallet {
                 let transactionHelper = TransactionHelper(transactionInputData: transactionData, wallet: wallet)
-                
+
                 switch transactionData.transactionType {
                 case .sendPayment:
-                    transactionHelper.sendPayment(completion: { (result) in
+                    transactionHelper.sendPayment(completion: { [weak self] (result) in
                         self?.addViewController(forAction: WalletAction.transactionResult, wallet: viewController.wallet, transactionResult: result)
                     })
-                    
+
                 case .createAndFundAccount:
-                    transactionHelper.createAndFundAccount(completion: { (result) in
+                    transactionHelper.createAndFundAccount(completion: { [weak self] (result) in
                         self?.addViewController(forAction: WalletAction.transactionResult, wallet: viewController.wallet, transactionResult: result)
                     })
                 }
@@ -60,7 +60,7 @@ class PaymentOperationsVCManager {
     }
     
     private func closeAll() {
-        self.parentViewController.navigationController?.popToRootViewController(animated: true)
+        self.parentViewController?.navigationController?.popToRootViewController(animated: true)
     }
     
     private func setupTransactionResult(viewController: TransactionResultViewController, transactionResult: TransactionResult?) {

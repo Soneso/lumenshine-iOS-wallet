@@ -10,7 +10,7 @@ import UIKit
 import DGElasticPullToRefresh
 import Material
 
-class WalletsViewController: UIViewController, UITableViewDataSource {
+class WalletsViewController: UpdatableViewController, UITableViewDataSource {
     private let cellIdentifier = "CardTableViewCell"
     private let viewModel: HomeViewModelType!
     private let tableView: UITableView!
@@ -32,6 +32,7 @@ class WalletsViewController: UIViewController, UITableViewDataSource {
         self.viewModel = viewModel
         tableView = UITableView(frame: .zero, style: .grouped)
         super.init(nibName: nil, bundle: nil)
+        hasWallets = true
         
         viewModel.reloadClosure = {
             DispatchQueue.main.async {
@@ -155,6 +156,8 @@ class WalletsViewController: UIViewController, UITableViewDataSource {
                         walletCardViewModel.navigationCoordinator = viewmodel.navigationCoordinator
                         viewmodel.cardViewModels.append(walletCardViewModel)
                     }
+                    
+                WebSocketService.wallets = wallets
                 case .failure(_):
                     print("Failed to get wallets")
                 }
@@ -197,5 +200,9 @@ class WalletsViewController: UIViewController, UITableViewDataSource {
         }
         
         return cell
+    }
+    
+    override func reloadWallets() {
+        reloadCards()
     }
 }

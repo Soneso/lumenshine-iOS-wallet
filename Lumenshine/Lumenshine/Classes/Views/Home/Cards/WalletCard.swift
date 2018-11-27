@@ -40,14 +40,18 @@ class WalletCard: CardView {
     override var viewModel: CardViewModelType? {
         didSet {
             if let viewModel = viewModel as? WalletCardViewModel {
-                viewModel.receivePaymentAction = {
-                    self.setupPaymentOperationsVCManager()
-                    self.paymentOperationsVCManager.addViewController(forAction: WalletAction.receive, wallet: self.wallet)
+                viewModel.receivePaymentAction = { [weak self] in
+                    if let wallet = self?.wallet {
+                        self?.setupPaymentOperationsVCManager()
+                        self?.paymentOperationsVCManager.addViewController(forAction: WalletAction.receive, wallet: wallet)
+                    }
                 }
                 
-                viewModel.sendAction = {
-                    self.setupPaymentOperationsVCManager()
-                    self.paymentOperationsVCManager.addViewController(forAction: WalletAction.send, wallet: self.wallet)
+                viewModel.sendAction = { [weak self] in
+                    if let wallet = self?.wallet {
+                        self?.setupPaymentOperationsVCManager()
+                        self?.paymentOperationsVCManager.addViewController(forAction: WalletAction.send, wallet: wallet)
+                    }
                 }
                 
                 viewModel.reloadClosure = { reload in

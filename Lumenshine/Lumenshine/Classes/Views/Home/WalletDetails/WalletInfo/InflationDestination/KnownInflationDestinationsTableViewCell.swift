@@ -30,7 +30,6 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
     @IBOutlet weak var setOrRemoveButton: UIButton!
     
     var canMasterKeySign: Bool!
-    var reloadDelegate: ReloadDelegate?
     
     var wallet: FundedWallet! {
         didSet {
@@ -150,7 +149,6 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
                                                             externalSignersSeed: seed) { (response) -> (Void) in
                                                                 switch response {
                                                                 case .success:
-                                                                    self.reloadDelegate?.setNeedsReload()
                                                                     self.dissmissView()
                                                                     break
                                                                 case .failure(error: let error):

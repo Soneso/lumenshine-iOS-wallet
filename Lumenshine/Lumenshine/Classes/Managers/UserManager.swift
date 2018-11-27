@@ -30,6 +30,11 @@ public enum WalletsEnum {
     case failure(error: ServiceError)
 }
 
+public enum UpdateWalletDetailsEnum {
+    case success(response: Wallet)
+    case failure(error: ServiceError)
+}
+
 public enum AddressStatusEnum {
     case success(isFunded: Bool, isTrusted: Bool?, limit: CoinUnit?)
     case failure
@@ -53,6 +58,7 @@ public enum HasAccountTrustlineResponseEnum {
 public typealias BoolClosure = (_ response:BoolEnum) -> (Void)
 public typealias CoinClosure = (_ response:CoinEnum) -> (Void)
 public typealias WalletsClosure = (_ response:WalletsEnum) -> (Void)
+public typealias UpdateWalletDetailsClosure = (_ response:UpdateWalletDetailsEnum) -> (Void)
 public typealias AddressStatusClosure = (_ response: AddressStatusEnum) -> (Void)
 public typealias CanSignerSignOperationClosure = (_ response: CanSignerSignOperationEnum) -> (Void)
 public typealias GetSignersListClosure = (_ response: GetSignersListEnum) -> (Void)
@@ -370,6 +376,23 @@ public class UserManager: NSObject {
                 if completed == wallets.count {
                     completion(.success(response: walletDetails))
                 }
+            }
+        }
+    }
+    
+    func updatedWalletDetails(forWallet walletResponse: WalletsResponse, completion: @escaping UpdateWalletDetailsClosure) {
+        walletDetailsFor(wallets: [walletResponse]) { (response) -> (Void) in
+            switch response {
+            case .success(response: let wallets):
+                if let wallet = wallets.first {
+                    DispatchQueue.main.async {
+                        completion(.success(response: wallet))
+                    }
+                } else {
+                    completion(.failure(error: .genericError(message: "Wallet not found!")))
+                }
+            case .failure(error: let error):
+                completion(.failure(error: error))
             }
         }
     }

@@ -23,7 +23,6 @@ class AccountCurrenciesViewController: UIViewController {
     @IBOutlet weak var intrinsicView: IntrinsicView!
     
     var wallet: FundedWallet!
-    var reloadDelegate: ReloadDelegate?
     let walletManager = WalletManager()
     
     override func viewDidLoad() {
@@ -34,7 +33,6 @@ class AccountCurrenciesViewController: UIViewController {
 
     @IBAction func didTapAddCurrency(_ sender: Any) {
         let addCurrencyViewController = AddCurrencyViewController(nibName: "AddCurrencyViewController", bundle: Bundle.main)
-        addCurrencyViewController.reloadDelegate = reloadDelegate
         addCurrencyViewController.wallet = wallet
         navigationController?.pushViewController(addCurrencyViewController, animated: true)
     }
@@ -46,23 +44,23 @@ class AccountCurrenciesViewController: UIViewController {
             case .success(let balances):
                 var currencyViewHeight: CGFloat = 0
                 for balance in balances {
-                        if let _ = balance.assetCode, let _ = balance.assetIssuer {
-                            let currencyView = Bundle.main.loadNibNamed("CurrencyView", owner:self, options:nil)![0] as! CurrencyView
-                            currencyView.currency = balance
-                            
-                            currencyView.removeAction = { [weak balance] (tappedCurrency) in
-                                if tappedCurrency == balance {
-                                    self.removeCurrency(forCurrency: tappedCurrency)
-                                }
+                    if let _ = balance.assetCode, let _ = balance.assetIssuer {
+                        let currencyView = Bundle.main.loadNibNamed("CurrencyView", owner:self, options:nil)![0] as! CurrencyView
+                        currencyView.currency = balance
+                        
+                        currencyView.removeAction = { [weak balance, weak self] (tappedCurrency) in
+                            if tappedCurrency == balance {
+                                self?.removeCurrency(forCurrency: tappedCurrency)
                             }
-                            
-                            if currencyViewHeight == 0 {
-                                currencyViewHeight = currencyView.frame.height
-                            }
-                            
-                            self.currenciesStackView.addArrangedSubview(currencyView)
                         }
+                        
+                        if currencyViewHeight == 0 {
+                            currencyViewHeight = currencyView.frame.height
+                        }
+                        
+                        self.currenciesStackView.addArrangedSubview(currencyView)
                     }
+                }
                 
                 self.calculateAndSetContentSize(nrOfCurrencies: balances.count, viewHeight: currencyViewHeight)
                 self.activityIndicator(showLoading: false)
@@ -85,7 +83,6 @@ class AccountCurrenciesViewController: UIViewController {
     
     private func removeCurrency(forCurrency currency: AccountBalanceResponse) {
         let removeCurrencyViewController = RemoveCurrencyViewController(nibName: "RemoveCurrencyViewController", bundle: Bundle.main)
-        removeCurrencyViewController.reloadDelegate = reloadDelegate
         removeCurrencyViewController.currency = currency
         removeCurrencyViewController.wallet = wallet
         navigationController?.pushViewController(removeCurrencyViewController, animated: true)

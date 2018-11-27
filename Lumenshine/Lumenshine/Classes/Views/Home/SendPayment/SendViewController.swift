@@ -61,7 +61,7 @@ enum AmountSegmentedControlIndexes: Int {
 public let MaximumLengthInBytesForMemoText = 28
 public let OtherCurrencyText = "Other"
 
-class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, WalletActionsProtocol, ScanViewControllerDelegate, UITextFieldDelegate {
+class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPickerViewDataSource, WalletActionsProtocol, ScanViewControllerDelegate, UITextFieldDelegate {
     @IBOutlet weak var currentCurrencyLabel: UILabel!
     @IBOutlet weak var addressErrorLabel: UILabel!
     @IBOutlet weak var amountErrorLabel: UILabel!
@@ -432,8 +432,8 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             passwordView.wallet = wallet
             passwordView.contentView = contentView
             
-            passwordView.biometricAuthAction = {
-                self.sendActionPreparation(biometricAuth: true)
+            passwordView.biometricAuthAction = { [weak self] in
+                self?.sendActionPreparation(biometricAuth: true)
             }
             
             passwordViewContainer.addSubview(passwordView)
@@ -919,5 +919,24 @@ class SendViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         scanQrButton.image = R.image.qr_placeholder()?.crop(toWidth: 25, toHeight: 25)?.tint(with: Stylesheet.color(.white))
         scanQrButton.addTarget(self, action: #selector(didTapScan(_:)), for: .touchUpInside)
         navigationItem.rightViews = [scanQrButton]
+    }
+    
+    override func updateUIAfterWalletsReload(notification: NSNotification) {
+        if let wallets = notification.object as? [WalletsResponse] {
+            if let newWallet = wallets.first(where: { (newWallet) -> Bool in
+                return wallet.publicKey == newWallet.publicKey
+            }) {
+                userManager.updatedWalletDetails(forWallet: newWallet) { (response) -> (Void) in
+                    switch response {
+                    case .success(response: let updatedWallet):
+                        self.wallet = updatedWallet
+                        self.checkForTransactionFeeAvailability()
+                        self.setAvailableAmount()
+                    case .failure(error: let error):
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+        }
     }
 }

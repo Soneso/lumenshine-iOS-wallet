@@ -34,7 +34,6 @@ class ProvideCurrencyDataViewController: UIViewController {
     @IBOutlet weak var passwordViewContainer: UIView!
     
     var wallet: FundedWallet!
-    var reloadDelegate: ReloadDelegate?
     private var walletManager = WalletManager()
     private var passwordView: PasswordView!
     private let IssuerDoesntExistValidationError = "Issuer does not exist"
@@ -248,7 +247,6 @@ class ProvideCurrencyDataViewController: UIViewController {
             transactionHelper.addTrustLine(trustingAccountKeyPair:trustingAccountKeyPair, asset:asset) { (result) -> (Void) in
                 switch result {
                 case .success:
-                    self.reloadDelegate?.setNeedsReload()
                     self.navigationController?.popViewController(animated: true)
                 case .failure(error: let error):
                     print("Error: \(String(describing: error))")
