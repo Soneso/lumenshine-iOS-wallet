@@ -23,7 +23,7 @@ target 'Lumenshine' do
   pod 'stellar-ios-mac-sdk'
   pod 'OneTimePassword'
   pod 'SwiftRichString'
-  pod 'Starscream'
+  pod 'Starscream', :git => 'https://github.com/Soneso/Starscream.git'
   pod 'ReachabilitySwift'
   
   pod 'IQKeyboardManagerSwift'
