@@ -154,7 +154,14 @@ class HomeViewModel : HomeViewModelType {
     }
     
     func updateCurrencies() {
+        
+        var hasChartCard = false
+        
         for cardViewModel in cardViewModels {
+            if let _ = cardViewModel as? ChartCardViewModel {
+                hasChartCard = true
+            }
+            
             if let viewModel = cardViewModel as? WalletCardViewModel,
                 let wallet = viewModel.wallet as? FundedWallet {
                 
@@ -165,14 +172,22 @@ class HomeViewModel : HomeViewModelType {
                     if !balances.contains(where: { $0.assetCode == balance.assetCode }) {
                         balances.append(balance)
                         
-                        let chartViewModel = ChartCardViewModel(service: service.chartsService, balance: balance)
+                        /*let chartViewModel = ChartCardViewModel(service: service.chartsService, balance: balance)
                         chartViewModel.navigationCoordinator = self.navigationCoordinator
                         cardViewModels.insert(chartViewModel, at: cardViewModels.count-1)
                         
-                        self.appendClosure?(chartViewModel)
+                        self.appendClosure?(chartViewModel)*/
                     }
                 }
             }
+        }
+        
+        // TODO: move this to its correct place
+        if !hasChartCard {
+            let chartViewModel = ChartCardViewModel(service: service.chartsService)
+            chartViewModel.navigationCoordinator = self.navigationCoordinator
+            cardViewModels.insert(chartViewModel, at: cardViewModels.count-1)
+            self.appendClosure?(chartViewModel)
         }
     }
     
