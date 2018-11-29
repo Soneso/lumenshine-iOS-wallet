@@ -22,6 +22,7 @@ class AddCurrencyViewController: UIViewController {
     var wallet: FundedWallet!
 
     @IBOutlet weak var currencyContainer: UIView!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == SegmentendControlIndexes.knownCurrencies.rawValue {
@@ -35,7 +36,14 @@ class AddCurrencyViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationItem()
         setupSegmentedContent()
-        showKnownCurrencies()
+
+        segmentedControl.removeFromSuperview()
+        currencyContainer.snp.makeConstraints { (make) in
+            make.top.equalTo(16)
+        }
+        
+        //showKnownCurrencies()
+        showProvideCurrencyData()
         view.backgroundColor = Stylesheet.color(.veryLightGray)
     }
     

@@ -11,8 +11,8 @@ import UIKit
 import Material
 
 fileprivate enum SegmentedControlIndexes: Int {
-    case knownDestinations = 0
-    case provideDestinationData = 1
+    case provideDestinationData = 0
+    case knownDestinations = 1
 }
 
 class SetInflationDestinationViewController: UIViewController {
@@ -37,7 +37,7 @@ class SetInflationDestinationViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationItem()
         setupSegmentedContent()
-        showKnownDestinations()
+        showProvideDestinationData()
         view.backgroundColor = Stylesheet.color(.veryLightGray)
     }
     
