@@ -17,6 +17,9 @@
 "done" = "Done";
 
 /*  */
+"none" = "None";
+
+/*  */
 "info" = "Info";
 
 /*  */
@@ -50,16 +53,34 @@
 "delete" = "Delete";
 
 /*  */
+"deleted" = "Deleted";
+
+/*  */
 "remove" = "Remove";
+
+/*  */
+"clear" = "Clear";
+
+/*  */
+"clear_all" = "Clear all";
 
 /*  */
 "refresh" = "Refresh";
 
 /*  */
+"apply" = "Apply";
+
+/*  */
 "send" = "Send";
 
 /*  */
+"sent" = "Sent";
+
+/*  */
 "login" = "Log in";
+
+/*  */
+"authorize" = "Authorize";
 
 /*  */
 "login_continue" = "Log in to your account";
@@ -134,13 +155,37 @@
 "sell" = "Sell";
 
 /*  */
+"selling" = "Selling";
+
+/*  */
+"buy" = "Buy";
+
+/*  */
+"buying" = "Buying";
+
+/*  */
+"price_for_asset" = "Price for 1 unit of asset for sale";
+
+/*  */
+"asset" = "Asset";
+
+/*  */
 "scan" = "Scan";
 
 /*  */
 "receive" = "Receive";
 
 /*  */
+"received" = "Received";
+
+/*  */
 "details" = "Details";
+
+/*  */
+"primary" = "Primary";
+
+/*  */
+"wallet_name" = "Wallet name";
 
 /*  */
 "fund_wallet" = "Fund Wallet";
@@ -297,6 +342,12 @@
 
 /*  */
 "transactions" = "Transactions";
+
+/*  */
+"transactions_history" = "Transactions History";
+
+/*  */
+"transactions_filters" = "Transactions Filters";
 
 /*  */
 "currencies" = "Currencies";
@@ -689,6 +740,9 @@
 "learn_more" = "Learn more";
 
 /*  */
+"issuer" = "Issuer";
+
+/*  */
 "issuer_pk" = "Issuer public key:";
 
 /*  */
@@ -710,13 +764,37 @@
 "message" = "Message";
 
 /*  */
+"date" = "Date";
+
+/*  */
+"date_from" = "Date from";
+
+/*  */
+"date_to" = "Date to";
+
+/*  */
+"type" = "Type";
+
+/*  */
 "currency" = "Currency";
 
 /*  */
 "amount" = "Amount";
 
 /*  */
+"amount_from" = "Amount from";
+
+/*  */
+"amount_to" = "Amount to";
+
+/*  */
+"fee" = "Fee";
+
+/*  */
 "recipient" = "Recipient";
+
+/*  */
+"sender" = "Sender";
 
 /*  */
 "memo" = "Memo";
@@ -863,10 +941,127 @@
 "payment_received" = "Payment received";
 
 /*  */
+"payment_sent" = "Payment sent";
+
+/*  */
 "push_view" = "View";
 
 /*  */
 "xdr_error" = "An error occured while processing the data. Please try again later";
+
+/*  */
+"offer_id" = "Offer ID";
+
+/*  */
+"offer_created" = "Offer created";
+
+/*  */
+"offer_removed" = "Offer removed";
+
+/*  */
+"passive_offer_created" = "Passive offer created";
+
+/*  */
+"passive_offer_removed" = "Passive offer removed";
+
+/*  */
+"set_options" = "Set options";
+
+/*  */
+"trust" = "Trust";
+
+/*  */
+"change_trust" = "Change trust";
+
+/*  */
+"allow_trust" = "Allow trust";
+
+/*  */
+"trust_limit" = "Trust limit";
+
+/*  */
+"trustor" = "Trustor";
+
+/*  */
+"source_account" = "Source account";
+
+/*  */
+"merge_account" = "Merge account";
+
+/*  */
+"merged_account" = "Merged account";
+
+/*  */
+"manage_data" = "Manage Data";
+
+/*  */
+"bump_sequence" = "Bump Sequence";
+
+/*  */
+"bumped_from" = "Bumped from";
+
+/*  */
+"entry_name" = "Entry name";
+
+/*  */
+"entry_value" = "Entry value";
+
+/*  */
+"inflation" = "Inflation";
+
+/*  */
+"inflation_destination" = "Inflation destination";
+
+/*  */
+"set_flags" = "Set flags";
+
+/*  */
+"clear_flags" = "Clear flags";
+
+/*  */
+"authorization_required" = "Authorization required";
+
+/*  */
+"authorization_revocable" = "Authorization revocable";
+
+/*  */
+"authorization_immutable" = "Authorization immutable";
+
+/*  */
+"master_weight" = "Master weight";
+
+/*  */
+"low_threshold" = "Low threshold";
+
+/*  */
+"med_threshold" = "Medium threshold";
+
+/*  */
+"high_threshold" = "High threshold";
+
+/*  */
+"signer_removed" = "Signer removed";
+
+/*  */
+"signer_added" = "Signer added";
+
+/*  */
+"signer_type" = "Signer type";
+
+/*  */
+"signer_weight" = "Signer weight";
+
+/*  */
+"ed_public_key" = "Ed25519 Public key";
+
+/*  */
+"sha256_hash" = "sha256 Hash";
+
+/*  */
+"pre_auth_hash" = "Pre-authorized Transaction Hash";
+
+/*  */
+"home_domain" = "Home domain";
 
 /*  */
 "email_mandatory" = "Email is mandatory";
@@ -888,3 +1083,18 @@
 
 /*  */
 "sending" = "sending";
+
+/*  */
+"sort" = "Sort";
+
+/*  */
+"filter" = "Filter";
+
+/*  */
+"payments" = "Payments";
+
+/*  */
+"offers" = "Offers";
+
+/*  */
+"other" = "Other";

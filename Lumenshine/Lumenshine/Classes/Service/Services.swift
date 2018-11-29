@@ -80,6 +80,7 @@ public final class Services {
     public let userData: UserDataService
     public let push: PushService
     public let webSocketService: WebSocketService
+    public let transactions: TransactionsService
     
     public let stellarSdk: StellarSDK
     
@@ -94,6 +95,7 @@ public final class Services {
         push = PushService(baseURL: baseURL)
         webSocketService = WebSocketService(baseURL: baseURL)
         let _ = ReachabilityService.instance
+        transactions = TransactionsService(baseURL: baseURL)
         
         stellarSdk = StellarSDK(withHorizonUrl: horizonURL)
     }
