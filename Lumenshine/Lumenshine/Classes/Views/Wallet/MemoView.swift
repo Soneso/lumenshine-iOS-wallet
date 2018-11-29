@@ -61,6 +61,11 @@ class MemoView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         memoInputErrorLabel.text = nil
     }
     
+    func resetToDefault() {
+        memo = nil
+        memoType = MemoTypeValues.MEMO_TEXT.rawValue
+    }
+    
     func validateMemo() {
         if let memoText = self.memoInputTextField.text {
             if memoText.isEmpty == true {

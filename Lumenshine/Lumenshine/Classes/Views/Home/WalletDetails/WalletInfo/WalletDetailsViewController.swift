@@ -39,11 +39,11 @@ class WalletDetailsViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     
     @IBAction func sendButtonAction(_ sender: UIButton) {
-        paymentOperationsVCManager.addViewController(forAction: WalletAction.send, wallet: wallet)
+        paymentOperationsVCManager.addViewController(forAction: WalletAction.send, wallets: [wallet])
     }
     
     @IBAction func receiveButtonAction(_ sender: UIButton) {
-        paymentOperationsVCManager.addViewController(forAction: WalletAction.receive, wallet: wallet)
+        paymentOperationsVCManager.addViewController(forAction: WalletAction.receive, wallets: [wallet])
     }
     
     @IBAction func secretRevealButtonAction(_ sender: UIButton) {

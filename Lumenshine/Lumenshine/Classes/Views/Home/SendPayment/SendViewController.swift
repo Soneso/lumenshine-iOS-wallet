@@ -77,6 +77,7 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var issuerTextField: UITextField!
     @IBOutlet weak var currentCurrencyTextField: UITextField!
     @IBOutlet weak var otherCurrencyTextField: UITextField!
+    @IBOutlet weak var walletTextField: UITextField!
     
     @IBOutlet weak var addressErrorView: UIView!
     @IBOutlet weak var amountErrorView: UIView!
@@ -90,6 +91,7 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var otherCurrencyErrorView: UIView!
     @IBOutlet weak var passwordViewContainer: UIView!
     @IBOutlet weak var memoViewContainer: UIView!
+    @IBOutlet weak var walletsView: UIView!
     
     @IBOutlet weak var sendButton: UIButton!
     
@@ -97,6 +99,7 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
     
     private var currencyPickerView: UIPickerView!
     private var issuerPickerView: UIPickerView!
+    private var walletPickerView: UIPickerView!
     
     private var isInputDataValid: Bool = true
     private var createRecepientAccount = false
@@ -109,7 +112,10 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
     private var scanViewController: ScanViewController!
     private let userManager = UserManager()
     private let passwordManager = PasswordManager()
+    private let walletManager = WalletManager()
     
+    var walletsList: [Wallet]!
+    var contactDestination: String?
     var wallet: Wallet!
     var closeAction: (() -> ())?
     var sendAction: ((TransactionInput) -> ())?
@@ -133,7 +139,7 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
     @IBAction func sendButtonAction(_ sender: UIButton) {
         sendActionPreparation()
     }
-
+    
     private func sendActionPreparation(biometricAuth: Bool = false) {
         resetValidations()
         showActivity(message: R.string.localizable.validateing())
@@ -405,6 +411,8 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        wallet = walletsList.first
+        setupWalletPicker()
         setupNavigationItem()
         addressTextField.addTarget(self, action: #selector(addressChanged), for: .editingChanged)
         view.backgroundColor = Stylesheet.color(.veryLightGray)
@@ -421,8 +429,24 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
             selectedCurrency = availableCurrencies.first!
         }
         
+        if let contactDestination = contactDestination {
+            addressTextField.text = contactDestination
+        }
+        
         checkForTransactionFeeAvailability()
         resetSendButtonToNormal()
+    }
+    
+    private func refreshAvailableCurrencies() {
+        setupForSelectedCurrency()
+        availableCurrencies = (wallet as! FundedWallet).getAvailableCurrencies()
+        selectedCurrency = availableCurrencies.first!
+    }
+    
+    private func refreshAfterWalletChanged() {
+        refreshAvailableCurrencies()
+        setAvailableAmount()
+        checkForTransactionFeeAvailability()
     }
     
     private func setupPasswordView() {
@@ -525,6 +549,10 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
         availableAmount = amount
     }
     
+    @objc func walletsDoneButtonTap() {
+        selectAsset(pickerView: walletPickerView, row: walletPickerView.selectedRow(inComponent: 0))
+    }
+    
     @objc func currencyDoneButtonTap(_ sender: Any) {
         selectAsset(pickerView: currencyPickerView, row: currencyPickerView.selectedRow(inComponent: 0))
     }
@@ -572,6 +600,10 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
             sendErrorView.isHidden = false
             sendErrorLabel.text = ValidationErrors.InsufficientLumens.rawValue
             sendButton.isEnabled = false
+        } else if !sendErrorView.isHidden {
+            sendErrorView.isHidden = true
+            sendErrorLabel.text = nil
+            sendButton.isEnabled = true
         }
     }
     
@@ -851,6 +883,22 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
         finishQRScanner()
     }
     
+    func clearValuesForNewPayment() {
+        wallet = walletsList.first
+        if !walletsView.isHidden {
+            selectAsset(pickerView: walletPickerView, row: 0)
+        }
+
+        refreshAvailableCurrencies()
+        addressTextField.text = nil
+        amountTextField.text = nil
+        amountSegmentedControl.selectedSegmentIndex = AmountSegmentedControlIndexes.sendAmount.rawValue
+        sendAmountView.isHidden = false
+        sendAllView.isHidden = true
+        availableAmount = nil
+        memoView.resetToDefault()
+    }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -860,6 +908,8 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
             return availableCurrencies.count
         } else if pickerView == issuerPickerView {
             return (wallet as! FundedWallet).issuersFor(assetCode: selectedCurrency).count
+        } else if pickerView == walletPickerView {
+            return walletsList.count
         }
         
         return 0
@@ -874,6 +924,8 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
             return availableCurrencies[row]
         } else if pickerView == issuerPickerView {
             return (wallet as! FundedWallet).issuersFor(assetCode: selectedCurrency)[row]
+        } else if pickerView == walletPickerView {
+            return walletsList[row].name
         }
         
         return nil
@@ -900,6 +952,10 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
         } else if pickerView == issuerPickerView {
             issuerTextField.text = (wallet as! FundedWallet).issuersFor(assetCode: selectedCurrency)[row]
             return
+        } else if pickerView == walletPickerView {
+            wallet = walletsList[row]
+            refreshAfterWalletChanged()
+            walletTextField.text = wallet.name
         }
     }
     
@@ -907,7 +963,6 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
         hideActivity()
         sendButton.setTitle(getSendButtonDefaultTitle(), for: UIControlState.normal)
         sendButton.isEnabled = true
-        
     }
     
     private func setupNavigationItem() {
@@ -921,22 +976,26 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
         navigationItem.rightViews = [scanQrButton]
     }
     
-    override func updateUIAfterWalletsReload(notification: NSNotification) {
-        if let wallets = notification.object as? [WalletsResponse] {
-            if let newWallet = wallets.first(where: { (newWallet) -> Bool in
-                return wallet.publicKey == newWallet.publicKey
-            }) {
-                userManager.updatedWalletDetails(forWallet: newWallet) { (response) -> (Void) in
-                    switch response {
-                    case .success(response: let updatedWallet):
-                        self.wallet = updatedWallet
-                        self.checkForTransactionFeeAvailability()
-                        self.setAvailableAmount()
-                    case .failure(error: let error):
-                        print(error.localizedDescription)
-                    }
-                }
-            }
+    private func setupWalletPicker() {
+        if walletsList.count == 1 {
+            walletsView.isHidden = true
+            return
         }
+        
+        walletPickerView = UIPickerView()
+        walletPickerView.delegate = self
+        walletPickerView.dataSource = self
+        walletTextField.inputView = walletPickerView
+        walletTextField.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(walletsDoneButtonTap))
+        walletTextField.text = wallet.name
+    }
+    
+    override func updateUIAfterWalletsReload(notification: NSNotification) {
+        if let updatedWallets = notification.object as? [Wallet] {
+            walletManager.updateWallets(currentWallet: &wallet, updatedWallets: updatedWallets, walletsList: &walletsList)
+        }
+
+        self.checkForTransactionFeeAvailability()
+        self.setAvailableAmount()
     }
 }

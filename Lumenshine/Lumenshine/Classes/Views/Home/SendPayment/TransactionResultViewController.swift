@@ -60,6 +60,12 @@ class TransactionResultViewController: UIViewController, WalletActionsProtocol, 
     @IBOutlet weak var printButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
 
+    var walletsList: [Wallet]! {
+        didSet {
+            wallet = walletsList.first
+        }
+    }
+    
     var wallet: Wallet!
     var result: TransactionResult!
     var closeAction: (() -> ())?

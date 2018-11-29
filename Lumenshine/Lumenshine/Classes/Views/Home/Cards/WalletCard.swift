@@ -21,7 +21,7 @@ protocol WalletCardProtocol {
 }
 
 protocol WalletActionsProtocol: class {
-    var wallet: Wallet! { get set }
+    var walletsList: [Wallet]! { get set }
     var closeAction: (() -> ())? { get set }
 }
 
@@ -43,14 +43,14 @@ class WalletCard: CardView {
                 viewModel.receivePaymentAction = { [weak self] in
                     if let wallet = self?.wallet {
                         self?.setupPaymentOperationsVCManager()
-                        self?.paymentOperationsVCManager.addViewController(forAction: WalletAction.receive, wallet: wallet)
+                        self?.paymentOperationsVCManager.addViewController(forAction: WalletAction.receive, wallets: [wallet])
                     }
                 }
                 
                 viewModel.sendAction = { [weak self] in
                     if let wallet = self?.wallet {
                         self?.setupPaymentOperationsVCManager()
-                        self?.paymentOperationsVCManager.addViewController(forAction: WalletAction.send, wallet: wallet)
+                        self?.paymentOperationsVCManager.addViewController(forAction: WalletAction.send, wallets: [wallet])
                     }
                 }
                 

@@ -9,7 +9,7 @@
 import UIKit
 import Material
 
-class HomeFundedWalletHeaderView: UIView {
+class HomeFundedWalletHeaderView: UIView, UITabBarDelegate {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var fundAccountButton: UILabel!
@@ -19,6 +19,9 @@ class HomeFundedWalletHeaderView: UIView {
     @IBOutlet weak var tabBar: UITabBar!
     
     @IBOutlet weak var logoTopConstraint: NSLayoutConstraint!
+    
+    private var paymentOperationsVCManager: PaymentOperationsVCManager!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
@@ -42,6 +45,7 @@ class HomeFundedWalletHeaderView: UIView {
         tabBar.shadowImage = UIImage.image(with: Stylesheet.color(.clear), size: CGSize(width: 10, height: 10))
         tabBar.itemWidth = 90
         tabBar.itemSpacing = 50
+        tabBar.delegate = self
     }
     
     private func setupButtons() {
@@ -61,5 +65,21 @@ class HomeFundedWalletHeaderView: UIView {
         moreButton.setTitleTextAttributes(attributes, for: .normal)
         moreButton.setTitleTextAttributes(attributes, for: .selected)
         moreButton.selectedImage = R.image.moreActive()?.tint(with: Stylesheet.color(.white))
+    }
+    
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        if item == sendButton {
+            if let parentViewController = viewContainingController() {
+                if paymentOperationsVCManager == nil {
+                    paymentOperationsVCManager = PaymentOperationsVCManager(parentViewController: parentViewController)
+                }
+                
+                paymentOperationsVCManager.setupSendViewControllerWithMultipleWallets()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    tabBar.selectedItem = nil
+                }
+            }
+        }
     }
 }

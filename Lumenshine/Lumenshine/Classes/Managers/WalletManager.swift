@@ -19,13 +19,21 @@ public enum BalancesEnum {
     case failure(error: HorizonRequestError)
 }
 
+public enum WalletsForSendingPaymentEnum {
+    case success(fundedWallets: [FundedWallet], paymentDestination: String?)
+    case failure(error: String)
+    case noFunding
+}
+
 public typealias EffectsClosure = (_ response:EffectsEnum) -> (Void)
 public typealias BalancesClosure = (_ response:BalancesEnum) -> (Void)
+public typealias WalletsForSendingPaymentClosure = (_ response: WalletsForSendingPaymentEnum) -> (Void)
 
 class WalletManager: NSObject {
     let limit = 200
     
     var stellarSDK = Services.shared.stellarSdk
+    private let userManager = UserManager()
     
     func effectsForWallet(wallet: String, completion: @escaping EffectsClosure) {
         var effects = [EffectResponse]()
@@ -83,6 +91,88 @@ class WalletManager: NSObject {
     
     func hasWalletEnoughFunding(wallet: Wallet) -> Bool {
         return !wallet.nativeBalance.availableAmount(forWallet: wallet, forCurrency: (wallet as? FundedWallet)?.nativeAsset).isLess(than: CoinUnit.minimumAccountBalance(forWallet: wallet))
+    }
+    
+    private func getFundedWallets(wallets: [Wallet]) -> [FundedWallet] {
+        var fundedWallets = [FundedWallet]()
+        
+        for wallet in wallets {
+            if let fundedWallet = wallet as? FundedWallet {
+                fundedWallets.append(fundedWallet)
+            }
+        }
+        
+        return fundedWallets
+    }
+    
+    func walletsForSendingPayment(stellarAddress: String? = nil, publicKey: String? = nil, completion: @escaping WalletsForSendingPaymentClosure) {
+        userManager.walletsForCurrentUser { (response) -> (Void) in
+            switch response {
+            case .success(response: let wallets):
+                let fundedWallets = self.getFundedWallets(wallets: wallets)
+                
+                if fundedWallets.count == 0 {
+                    DispatchQueue.main.async {
+                        completion(.noFunding)
+                    }
+                    
+                    return
+                }
+                
+                if let address = stellarAddress, address.isFederationAddress() {
+                    Federation.resolve(stellarAddress: address, completion: { (response) -> (Void) in
+                        switch response {
+                        case .success(response: _):
+                            DispatchQueue.main.async {
+                                completion(.success(fundedWallets: fundedWallets, paymentDestination: address))
+                            }
+                        case .failure(error: _):
+                            if let publicKey = publicKey, publicKey.isValidEd25519PublicKey() {
+                                DispatchQueue.main.async {
+                                    completion(.success(fundedWallets: fundedWallets, paymentDestination: publicKey))
+                                }
+                            } else {
+                                DispatchQueue.main.async {
+                                    completion(.success(fundedWallets: fundedWallets, paymentDestination: nil))
+                                }
+                            }
+                        }
+                    })
+                } else if let publicKey = publicKey, publicKey.isValidEd25519PublicKey() {
+                    DispatchQueue.main.async {
+                        completion(.success(fundedWallets: fundedWallets, paymentDestination: publicKey))
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        completion(.success(fundedWallets: fundedWallets, paymentDestination: nil))
+                    }
+                }
+                
+            case .failure(error: let error):
+                completion(.failure(error: error.localizedDescription))
+            }
+        }
+    }
+    
+    public func updateWallets(currentWallet: inout Wallet, updatedWallets: [Wallet], walletsList: inout [Wallet]) {
+        for wallet in walletsList {
+            if let updatedWallet = updatedWallets.first(where: { (item) -> Bool in
+                return item.publicKey == wallet.publicKey
+            }) {
+                if let indexOfWalletToUpdate = walletsList.firstIndex(where: { (item) -> Bool in
+                    return item.publicKey == wallet.publicKey
+                }) {
+                    walletsList.remove(at: indexOfWalletToUpdate)
+                    walletsList.insert(updatedWallet, at: indexOfWalletToUpdate)
+                }
+            }
+        }
+
+        if let updatedCurrentWallet = updatedWallets.first(where: { (updatedWallet) -> Bool in
+            return updatedWallet.publicKey == currentWallet.publicKey
+        }) {
+            currentWallet = updatedCurrentWallet
+        }
     }
     
     private func balanceAuthorized(issuer: String, completion: @escaping ((Bool, HorizonRequestError?)->())) {

@@ -20,6 +20,7 @@ public class WebSocketService: BaseService, WebSocketDelegate {
     private static var socket: WebSocket!
     private static var randomKey: String?
     private static var cachedWallets: [WalletsResponse]!
+    private static var walletsToUpdate: [String]?
     
     public static var subscribers = NSMapTable<UIViewController, InitializationState>(keyOptions: NSPointerFunctions.Options.weakMemory, valueOptions: NSPointerFunctions.Options.strongMemory)
     
@@ -28,6 +29,12 @@ public class WebSocketService: BaseService, WebSocketDelegate {
         didSet {
             WebSocketService.instance.listenToAllAccounts()
             WebSocketService.instance.sendNeedsUpdateUIAfterWalletReload()
+        }
+    }
+    
+    private var userManager: UserManager {
+        get {
+            return Services.shared.userManager
         }
     }
     
@@ -49,6 +56,7 @@ public class WebSocketService: BaseService, WebSocketDelegate {
     
     public func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
         print("WebSocketDidReceiveMessage: \(text)")
+        setWalletsToUpdate(text: text)
         NotificationCenter.default.post(name: .reloadWalletsNotification, object: self)
     }
     
@@ -107,6 +115,23 @@ public class WebSocketService: BaseService, WebSocketDelegate {
         disconnectWebSocket()
     }
     
+    private func getAccountsID(fromMessage text: String) -> [String] {
+        let removedPrefixes = text.replacingOccurrences(of: "{\"account\":\"", with: "")
+        let formattedText = removedPrefixes.replacingOccurrences(of: "\"}", with: "")
+        let splittedValues = formattedText.split(separator: "\n", maxSplits: 2, omittingEmptySubsequences: true)
+        
+        var accountsArray = [String]()
+        for account in splittedValues {
+            accountsArray.append(String(account))
+        }
+
+        return accountsArray
+    }
+    
+    private func setWalletsToUpdate(text: String) {
+        WebSocketService.walletsToUpdate = getAccountsID(fromMessage: text)
+    }
+    
     private func registerNotifications() {
         registerSubsciptionNotifications()
         registerNetworkChangesNotifications()
@@ -163,7 +188,24 @@ public class WebSocketService: BaseService, WebSocketDelegate {
     }
     
     private func sendNeedsUpdateUIAfterWalletReload() {
-        NotificationCenter.default.post(name: .updateUIAfterWalletsReload, object: WebSocketService.wallets)
+        userManager.updatedWalletDetails(forWallets: WebSocketService.wallets) { (response) -> (Void) in
+            switch response {
+            case .success(response: let wallets):
+                var updateWallets = [Wallet]()
+                
+                if let walletsToUpdate = WebSocketService.walletsToUpdate {
+                    for wallet in wallets {
+                        if walletsToUpdate.contains(wallet.publicKey) {
+                            updateWallets.append(wallet)
+                        }
+                    }
+                }
+                
+                NotificationCenter.default.post(name: .updateUIAfterWalletsReload, object: updateWallets)
+            case .failure(error: let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
     private func setupWebSocket() {

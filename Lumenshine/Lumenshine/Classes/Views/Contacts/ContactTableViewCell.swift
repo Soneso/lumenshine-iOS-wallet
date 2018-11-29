@@ -8,6 +8,7 @@
 
 import UIKit
 import Material
+import stellarsdk
 
 protocol ContactCellDelegate: class {
     func contactCellDidTapEdit(cell: ContactTableViewCell)
@@ -33,6 +34,8 @@ class ContactTableViewCell: UITableViewCell {
     fileprivate let horizontalSpacing: CGFloat = 15.0
     
     weak var delegate: ContactCellDelegate?
+    
+    private var paymentOperationsVCManager: PaymentOperationsVCManager!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
@@ -133,7 +136,13 @@ class ContactTableViewCell: UITableViewCell {
     
     @objc
     func sendAction(sender: UIButton) {
-        
+        if let parentViewController = viewContainingController() {
+            if paymentOperationsVCManager == nil {
+                paymentOperationsVCManager = PaymentOperationsVCManager(parentViewController: parentViewController)
+            }
+            
+            paymentOperationsVCManager.setupSendViewControllerWithMultipleWallets(stellarAddress: addressLabel.text, publicKey: publicKeyLabel.text)
+        }
     }
 }
 

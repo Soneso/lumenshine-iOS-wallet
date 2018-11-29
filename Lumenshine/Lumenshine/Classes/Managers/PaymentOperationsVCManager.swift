@@ -10,12 +10,14 @@ import UIKit
 
 class PaymentOperationsVCManager {
     private weak var parentViewController: UIViewController?
+    private weak var sendViewController: SendViewController?
+    private let walletManager = WalletManager()
     
     init(parentViewController: UIViewController) {
         self.parentViewController = parentViewController
     }
     
-    func addViewController(forAction: WalletAction, wallet: Wallet, transactionResult: TransactionResult? = nil) {
+    func addViewController(forAction: WalletAction, wallets: [Wallet], transactionResult: TransactionResult? = nil, paymentDestination: String? = nil) {
         var viewController: UIViewController
         switch (forAction) {
         case .receive:
@@ -24,6 +26,8 @@ class PaymentOperationsVCManager {
             
         case .send:
             viewController = SendViewController()
+            sendViewController = (viewController as! SendViewController)
+            (viewController as! SendViewController).contactDestination = paymentDestination
             setupSendViewController(viewController: viewController as! SendViewController)
             
         case .transactionResult:
@@ -31,12 +35,27 @@ class PaymentOperationsVCManager {
             setupTransactionResult(viewController: viewController as! TransactionResultViewController, transactionResult: transactionResult)
         }
         
-        (viewController as! WalletActionsProtocol).wallet = wallet
+        (viewController as! WalletActionsProtocol).walletsList = wallets
         (viewController as! WalletActionsProtocol).closeAction = { [weak self] in
             self?.parentViewController?.navigationController?.popViewController(animated: true)
         }
         
         parentViewController?.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func setupSendViewControllerWithMultipleWallets(stellarAddress: String? = nil, publicKey: String? = nil) {
+        walletManager.walletsForSendingPayment(stellarAddress: stellarAddress, publicKey: publicKey) { (response) -> (Void) in
+            switch response {
+            case .success(fundedWallets: let wallets, paymentDestination: let paymentDestination):
+                self.addViewController(forAction: .send, wallets: wallets, paymentDestination: paymentDestination)
+            case .noFunding:
+                let alert = UIAlertController(title: "No funding", message: "Please fund your wallet first to be able to send a payment.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.parentViewController?.present(alert, animated: true, completion: nil)
+            case .failure(error: let error):
+                print(error)
+            }
+        }
     }
     
     private func setupSendViewController(viewController: SendViewController) {
@@ -47,12 +66,12 @@ class PaymentOperationsVCManager {
                 switch transactionData.transactionType {
                 case .sendPayment:
                     transactionHelper.sendPayment(completion: { [weak self] (result) in
-                        self?.addViewController(forAction: WalletAction.transactionResult, wallet: viewController.wallet, transactionResult: result)
+                        self?.addViewController(forAction: WalletAction.transactionResult, wallets: [viewController.wallet], transactionResult: result)
                     })
 
                 case .createAndFundAccount:
                     transactionHelper.createAndFundAccount(completion: { [weak self] (result) in
-                        self?.addViewController(forAction: WalletAction.transactionResult, wallet: viewController.wallet, transactionResult: result)
+                        self?.addViewController(forAction: WalletAction.transactionResult, wallets: [viewController.wallet], transactionResult: result)
                     })
                 }
             }
@@ -73,8 +92,8 @@ class PaymentOperationsVCManager {
         }
         
         viewController.sendOtherAction = { [weak self] in
-            self?.closeAll()
-            self?.addViewController(forAction: WalletAction.send, wallet: viewController.wallet)
+            self?.parentViewController?.navigationController?.popViewController(animated: true)
+            self?.sendViewController?.clearValuesForNewPayment()
         }
     }
 }

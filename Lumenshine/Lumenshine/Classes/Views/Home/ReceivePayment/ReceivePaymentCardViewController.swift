@@ -39,6 +39,12 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
     private var issuerPickerView: UIPickerView!
     private var memoView: MemoView!
     
+    var walletsList: [Wallet]! {
+        didSet {
+            wallet = walletsList.first
+        }
+    }
+    
     var wallet: Wallet!
     var closeAction: (() -> ())?
     

@@ -59,6 +59,7 @@ class AccountDetailsViewController: UpdatableViewController {
     private let walletService = Services.shared.walletService
     private var titleView: TitleView!
     private var accountCurrenciesViewController: AccountCurrenciesViewController!
+    private let walletManager = WalletManager()
     
     private var userManager: UserManager {
         get {
@@ -375,20 +376,11 @@ class AccountDetailsViewController: UpdatableViewController {
     }
     
     override func updateUIAfterWalletsReload(notification: NSNotification) {
-        if let wallets = notification.object as? [WalletsResponse] {
-            if let newWallet = wallets.first(where: { (newWallet) -> Bool in
-                return wallet.publicKey == newWallet.publicKey
-            }) {
-                userManager.updatedWalletDetails(forWallet: newWallet) { (response) -> (Void) in
-                    switch response {
-                    case .success(response: let updatedWallet):
-                        self.wallet = updatedWallet
-                        self.reloadWalletDetails()
-                    case .failure(error: let error):
-                        print(error.localizedDescription)
-                    }
-                }
-            }
+        if let updatedWallets = notification.object as? [Wallet] {
+            var dummyWalletsList = [Wallet]()
+            walletManager.updateWallets(currentWallet: &wallet, updatedWallets: updatedWallets, walletsList: &dummyWalletsList)
         }
+        
+        self.reloadWalletDetails()
     }
 }

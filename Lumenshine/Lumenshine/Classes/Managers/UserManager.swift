@@ -31,7 +31,7 @@ public enum WalletsEnum {
 }
 
 public enum UpdateWalletDetailsEnum {
-    case success(response: Wallet)
+    case success(response: [Wallet])
     case failure(error: ServiceError)
 }
 
@@ -97,12 +97,12 @@ public class UserManager: NSObject {
         walletService.getWallets { (result) -> (Void) in
             switch result {
             case .success(let data):
-                let sortedWallets = data.sorted(by: { $0.id < $1.id })
-                self.walletDetailsFor(wallets: sortedWallets) { (result) -> (Void) in
+                self.walletDetailsFor(wallets: data) { (result) -> (Void) in
                     DispatchQueue.main.async {
                         switch result {
                         case .success(let wallets):
-                            completion(.success(response: wallets))
+                            let sortedWallets = wallets.sorted(by: { $0.id < $1.id })
+                            completion(.success(response: sortedWallets))
                         case .failure(let error):
                             completion(.failure(error: error))
                         }
@@ -380,16 +380,16 @@ public class UserManager: NSObject {
         }
     }
     
-    func updatedWalletDetails(forWallet walletResponse: WalletsResponse, completion: @escaping UpdateWalletDetailsClosure) {
-        walletDetailsFor(wallets: [walletResponse]) { (response) -> (Void) in
+    func updatedWalletDetails(forWallets walletResponses: [WalletsResponse], completion: @escaping UpdateWalletDetailsClosure) {
+        walletDetailsFor(wallets: walletResponses) { (response) -> (Void) in
             switch response {
             case .success(response: let wallets):
-                if let wallet = wallets.first {
+                if wallets.count > 0 {
                     DispatchQueue.main.async {
-                        completion(.success(response: wallet))
+                        completion(.success(response: wallets))
                     }
                 } else {
-                    completion(.failure(error: .genericError(message: "Wallet not found!")))
+                    completion(.failure(error: .genericError(message: "Wallet details not found!")))
                 }
             case .failure(error: let error):
                 completion(.failure(error: error))
