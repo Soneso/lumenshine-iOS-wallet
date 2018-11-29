@@ -1089,3 +1089,12 @@
 
 /*  */
 "filter" = "Filter";
+
+/*  */
+"payments" = "Payments";
+
+/*  */
+"offers" = "Offers";
+
+/*  */
+"other" = "Other";

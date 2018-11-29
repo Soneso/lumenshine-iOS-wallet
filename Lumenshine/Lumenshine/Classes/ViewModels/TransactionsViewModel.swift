@@ -34,6 +34,55 @@ protocol TransactionsViewModelType: Transitionable {
     func showPaymentsFilter()
     func showOffersFilter()
     func showOtherFilter()
+    func applyFilters()
+    
+    func paymentFilterTags() -> [String]
+    func offerFilterTags() -> [String]
+    func otherFilterTags() -> [String]
+}
+
+enum TransactionType: String {
+    case paymentReceived
+    case paymentSent
+    case offerCreated
+    case offerRemoved
+    case passiveOfferCreated
+    case passiveOfferRemoved
+    case setOptions
+    case changeTrust
+    case allowTrust
+    case accountMerge
+    case manageData
+    case bumpSequence
+    
+    var description: String {
+        switch self {
+        case .paymentReceived:
+            return R.string.localizable.payment_sent()
+        case .paymentSent:
+            return R.string.localizable.payment_received()
+        case .offerCreated:
+            return R.string.localizable.offer_created()
+        case .offerRemoved:
+            return R.string.localizable.offer_removed()
+        case .passiveOfferCreated:
+            return R.string.localizable.passive_offer_created()
+        case .passiveOfferRemoved:
+            return R.string.localizable.passive_offer_removed()
+        case .setOptions:
+            return R.string.localizable.set_options()
+        case .changeTrust:
+            return R.string.localizable.change_trust()
+        case .allowTrust:
+            return R.string.localizable.allow_trust()
+        case .accountMerge:
+            return R.string.localizable.merge_account()
+        case .manageData:
+            return R.string.localizable.manage_data()
+        case .bumpSequence:
+            return R.string.localizable.bump_sequence()
+        }
+    }
 }
 
 class TransactionsViewModel : TransactionsViewModelType {
@@ -43,6 +92,7 @@ class TransactionsViewModel : TransactionsViewModelType {
     fileprivate let mainFont: UIFont
     
     fileprivate var entries: [TxTransactionResponse] = []
+    fileprivate var filteredEntries: [TxTransactionResponse] = []
     fileprivate var currentWalletPK: String
     fileprivate var startDate: String
     fileprivate var endDate: String
@@ -130,68 +180,23 @@ class TransactionsViewModel : TransactionsViewModelType {
     
     func type(at indexPath: IndexPath) -> String? {
         let item = entry(at: indexPath)
-        switch item.operationType {
-        case .accountCreated:
-            return item.sourceAccount == currentWalletPK ? R.string.localizable.payment_sent() : R.string.localizable.payment_received()
-        case .payment:
-            if let item = item.operationResponse as? TxPaymentOperationResponse {
-                return item.to == currentWalletPK ? R.string.localizable.payment_received() : R.string.localizable.payment_sent()
-            }
-        case .pathPayment:
-            if let item = item.operationResponse as? TxPathPaymentOperationResponse {
-                return item.to == currentWalletPK ? R.string.localizable.payment_received() : R.string.localizable.payment_sent()
-            }
-        case .manageOffer:
-            return item.sourceAccount == currentWalletPK ? R.string.localizable.offer_removed() : R.string.localizable.offer_created()
-        case .createPassiveOffer:
-            return item.sourceAccount == currentWalletPK ? R.string.localizable.passive_offer_removed() : R.string.localizable.passive_offer_created()
-        case .setOptions:
-            return R.string.localizable.set_options()
-        case .changeTrust:
-            return R.string.localizable.change_trust()
-        case .allowTrust:
-            return R.string.localizable.allow_trust()
-        case .accountMerge:
-            return R.string.localizable.merge_account()
-        case .manageData:
-            return R.string.localizable.manage_data()
-        case .bumpSequence:
-            return R.string.localizable.bump_sequence()
-        default:
-            break
-        }
-        return nil
+        return transactionType(for: item)?.description
     }
     
     func amount(at indexPath: IndexPath) -> NSAttributedString? {
         let item = entry(at: indexPath)
         switch item.operationType {
-        case .accountCreated:
-            let color: ColorStyle = type(at: indexPath) == R.string.localizable.payment_sent() ? .red : .green
-            if let amount = (item.operationResponse as? TxAccountCreatedOperationResponse)?.startingBalance {
+        case .accountCreated,
+             .payment,
+             .pathPayment:
+            if let amount = amount(for: item) {
+                let color: ColorStyle = transactionType(for: item) == .paymentSent ? .red : .green
                 return NSAttributedString(string: amount,
                                           attributes: [.foregroundColor : Stylesheet.color(color)])
             }
-        case .payment:
-            let color: ColorStyle = type(at: indexPath) == R.string.localizable.payment_sent() ? .red : .green
-            if let amount = (item.operationResponse as? TxPaymentOperationResponse)?.amount {
-                return NSAttributedString(string: amount,
-                                          attributes: [.foregroundColor : Stylesheet.color(color)])
-            }
-        case .pathPayment:
-            if let subItem = item.operationResponse as? TxPathPaymentOperationResponse {
-                let color: ColorStyle = type(at: indexPath) == R.string.localizable.payment_sent() ? .red : .green
-                let amount = type(at: indexPath) == R.string.localizable.payment_sent() ? subItem.sourceAmount : subItem.amount
-                return NSAttributedString(string: amount,
-                                          attributes: [.foregroundColor : Stylesheet.color(color)])
-            }
-        case .manageOffer:
-            if let amount = (item.operationResponse as? TxManageOfferOperationResponse)?.amount {
-                return NSAttributedString(string: amount,
-                                          attributes: [.foregroundColor : Stylesheet.color(.lightBlack)])
-            }
-        case .createPassiveOffer:
-            if let amount = (item.operationResponse as? TxCreatePassiveOfferOperationResponse)?.amount {
+        case .manageOffer,
+             .createPassiveOffer:
+            if let amount = amount(for: item) {
                 return NSAttributedString(string: amount,
                                           attributes: [.foregroundColor : Stylesheet.color(.lightBlack)])
             }
@@ -208,47 +213,12 @@ class TransactionsViewModel : TransactionsViewModelType {
     
     func currency(at indexPath: IndexPath) -> String? {
         let item = entry(at: indexPath)
-        switch item.operationType {
-        case .accountCreated:
-            return NativeCurrencyNames.xlm.rawValue
-        case .payment:
-            if let item = item.operationResponse as? TxPaymentOperationResponse {
-                return item.assetCode ?? NativeCurrencyNames.xlm.rawValue
+        if let currency = self.currency(for: item) {
+            if let buying = currency.1 {
+                return "\(currency.0) - \(buying)"
+            } else {
+                return currency.0
             }
-        case .pathPayment:
-            if let item = item.operationResponse as? TxPathPaymentOperationResponse {
-                let currency = type(at: indexPath) == R.string.localizable.payment_sent() ? item.sendAssetCode : item.assetCode
-                return currency ?? NativeCurrencyNames.xlm.rawValue
-            }
-        case .manageOffer:
-            if let item = item.operationResponse as? TxManageOfferOperationResponse {
-                let selling = item.sellingAssetCode ?? NativeCurrencyNames.xlm.rawValue
-                let buying = item.buyingAssetCode ?? NativeCurrencyNames.xlm.rawValue
-                return "\(selling) - \(buying)"
-            }
-        case .createPassiveOffer:
-            if let item = item.operationResponse as? TxCreatePassiveOfferOperationResponse {
-                let selling = item.sellingAssetCode ?? NativeCurrencyNames.xlm.rawValue
-                let buying = item.buyingAssetCode ?? NativeCurrencyNames.xlm.rawValue
-                return "\(selling) - \(buying)"
-            }
-        case .changeTrust:
-            if let item = item.operationResponse as? TxChangeTrustOperationResponse {
-                return item.assetCode ?? NativeCurrencyNames.xlm.rawValue
-            }
-        case .allowTrust:
-            if let item = item.operationResponse as? TxAllowTrustOperationResponse {
-                // TODO: check if authorize is necessary
-                if item.authorize {
-                    return item.assetCode ?? NativeCurrencyNames.xlm.rawValue
-                }
-            }
-        case .accountMerge:
-            // TODO: fix logic, calculate currency
-            if let subItem = item.operationResponse as? TxAccountMergeOperationResponse {
-                return subItem.account
-            }
-        default: break
         }
         return nil
     }
@@ -361,6 +331,57 @@ class TransactionsViewModel : TransactionsViewModelType {
     func showOtherFilter() {
         navigationCoordinator?.performTransition(transition: .showOtherFilter)
     }
+    
+    func applyFilters() {
+        filteredEntries = entries.filter {
+            return filter(item: $0)
+        }
+    }
+    
+    func paymentFilterTags() -> [String] {
+        var tags = [String]()
+        if let range = filter.payment.receivedRange {
+            tags.append("Received:\(range.lowerBound)-\(range.upperBound)")
+        }
+        if let range = filter.payment.sentRange {
+            tags.append("Sent:\(range.lowerBound)-\(range.upperBound)")
+        }
+        if let currency = filter.payment.currency {
+            tags.append(currency)
+        }
+        return tags
+    }
+    
+    func offerFilterTags() -> [String] {
+        var tags = [String]()
+        if let currency = filter.offer.sellingCurrency {
+            tags.append("Selling:\(currency)")
+        }
+        if let currency = filter.offer.buyingCurrency {
+            tags.append("Buying:\(currency)")
+        }
+        return tags
+    }
+    
+    func otherFilterTags() -> [String] {
+        var tags = [String]()
+        if filter.other.setOptions ?? false {
+            tags.append(R.string.localizable.set_options())
+        }
+        if filter.other.manageData ?? false {
+            tags.append(R.string.localizable.manage_data())
+        }
+        if filter.other.trust ?? false {
+            tags.append(R.string.localizable.trust())
+        }
+        if filter.other.accountMerge ?? false {
+            tags.append(R.string.localizable.merge_account())
+        }
+        if filter.other.bumpSequence ?? false {
+            tags.append(R.string.localizable.bump_sequence())
+        }
+        return tags
+    }
 }
 
 fileprivate extension TransactionsViewModel {
@@ -368,7 +389,214 @@ fileprivate extension TransactionsViewModel {
         return entries[indexPath.row]
     }
     
+    func amount(for item: TxTransactionResponse) -> String? {
+        switch item.operationType {
+        case .accountCreated:
+            return (item.operationResponse as? TxAccountCreatedOperationResponse)?.startingBalance
+        case .payment:
+            return (item.operationResponse as? TxPaymentOperationResponse)?.amount
+        case .pathPayment:
+            if let subItem = item.operationResponse as? TxPathPaymentOperationResponse {
+                return transactionType(for: item) == .paymentSent ? subItem.sourceAmount : subItem.amount
+            }
+        case .manageOffer:
+            return (item.operationResponse as? TxManageOfferOperationResponse)?.amount
+        case .createPassiveOffer:
+            return (item.operationResponse as? TxCreatePassiveOfferOperationResponse)?.amount
+        default:
+            break
+        }
+        return nil
+    }
     
+    func currency(for item: TxTransactionResponse) -> (String, String?)? {
+        switch item.operationType {
+        case .accountCreated:
+            return (NativeCurrencyNames.xlm.rawValue, nil)
+        case .payment:
+            if let item = item.operationResponse as? TxPaymentOperationResponse {
+                return (item.assetCode ?? NativeCurrencyNames.xlm.rawValue, nil)
+            }
+        case .pathPayment:
+            if let subitem = item.operationResponse as? TxPathPaymentOperationResponse {
+                let currency = transactionType(for: item) == .paymentSent ? subitem.sendAssetCode : subitem.assetCode
+                return (currency ?? NativeCurrencyNames.xlm.rawValue, nil)
+            }
+        case .manageOffer:
+            if let item = item.operationResponse as? TxManageOfferOperationResponse {
+                let selling = item.sellingAssetCode ?? NativeCurrencyNames.xlm.rawValue
+                let buying = item.buyingAssetCode ?? NativeCurrencyNames.xlm.rawValue
+                return (selling, buying)
+            }
+        case .createPassiveOffer:
+            if let item = item.operationResponse as? TxCreatePassiveOfferOperationResponse {
+                let selling = item.sellingAssetCode ?? NativeCurrencyNames.xlm.rawValue
+                let buying = item.buyingAssetCode ?? NativeCurrencyNames.xlm.rawValue
+                return (selling, buying)
+            }
+        case .changeTrust:
+            if let item = item.operationResponse as? TxChangeTrustOperationResponse {
+                return (item.assetCode ?? NativeCurrencyNames.xlm.rawValue, nil)
+            }
+        case .allowTrust:
+            if let item = item.operationResponse as? TxAllowTrustOperationResponse {
+                // TODO: check if authorize is necessary
+                if item.authorize {
+                    return (item.assetCode ?? NativeCurrencyNames.xlm.rawValue, nil)
+                }
+            }
+        case .accountMerge:
+            // TODO: fix logic, calculate currency
+            break
+        default:
+            break
+        }
+        return nil
+    }
+    
+    func transactionType(for item: TxTransactionResponse) -> TransactionType? {
+        switch item.operationType {
+        case .accountCreated:
+            return item.sourceAccount == currentWalletPK ? .paymentSent : .paymentReceived
+        case .payment:
+            if let item = item.operationResponse as? TxPaymentOperationResponse {
+                return item.to == currentWalletPK ? .paymentReceived : .paymentSent
+            }
+        case .pathPayment:
+            if let item = item.operationResponse as? TxPathPaymentOperationResponse {
+                return item.to == currentWalletPK ? .paymentReceived : .paymentSent
+            }
+        case .manageOffer:
+            return item.sourceAccount == currentWalletPK ? .offerRemoved : .offerCreated
+        case .createPassiveOffer:
+            return item.sourceAccount == currentWalletPK ? .passiveOfferRemoved : .passiveOfferCreated
+        case .setOptions:
+            return .setOptions
+        case .changeTrust:
+            return .changeTrust
+        case .allowTrust:
+            return .allowTrust
+        case .accountMerge:
+            return .accountMerge
+        case .manageData:
+            return .manageData
+        case .bumpSequence:
+            return .bumpSequence
+        default:
+            break
+        }
+        return nil
+    }
+    
+    func filter(item: TxTransactionResponse) -> Bool {
+        let type = transactionType(for: item)
+        
+        if let memo = memo, !memo.isEmpty {
+            return item.memo.contains(memo)
+        }
+        
+        var paymentReceivedFlag = false
+        if type == .paymentReceived {
+            if let range = filter.payment.receivedRange {
+                if let amount = self.amount(for: item),
+                    let dAmount = Double(amount) {
+                    paymentReceivedFlag = range.contains(dAmount)
+                } else {
+                    paymentReceivedFlag = false
+                }
+            } else {
+               paymentReceivedFlag = true
+            }
+        }
+        
+        var paymentSentFlag = false
+        if type == .paymentSent {
+            if let range = filter.payment.sentRange {
+                if let amount = self.amount(for: item),
+                    let dAmount = Double(amount) {
+                    paymentSentFlag = range.contains(dAmount)
+                } else {
+                    paymentSentFlag = false
+                }
+            } else {
+                paymentSentFlag = true
+            }
+        }
+        
+        var currencyFlag = false
+        if type == .paymentSent || type == .paymentReceived {
+            if let currency = filter.payment.currency {
+                if let curr = self.currency(for: item) {
+                    currencyFlag = currency.lowercased() == curr.0.lowercased()
+                } else {
+                    currencyFlag = false
+                }
+            } else {
+                currencyFlag = true
+            }
+        }
+        
+        var sellingFlag = false
+        if item.operationType == .manageOffer || item.operationType == .createPassiveOffer {
+            if let selling = filter.offer.sellingCurrency {
+                if let curr = self.currency(for: item) {
+                    sellingFlag = selling.lowercased() == curr.0.lowercased()
+                } else {
+                    sellingFlag = false
+                }
+            } else {
+                sellingFlag = true
+            }
+        }
+        
+        var buyingFlag = false
+        if (item.operationType == .manageOffer || item.operationType == .createPassiveOffer) {
+            if let buying = filter.offer.buyingCurrency {
+                if let curr = self.currency(for: item) {
+                    buyingFlag = buying.lowercased() == curr.1!.lowercased()
+                } else {
+                    buyingFlag = false
+                }
+            } else {
+                buyingFlag = true
+            }
+        }
+        
+        var setOptionsFlag = false
+        if item.operationType == .setOptions {
+            setOptionsFlag = filter.other.setOptions ?? true
+        }
+        
+        var manageDataFlag = false
+        if item.operationType == .manageData {
+            manageDataFlag = filter.other.manageData ?? true
+        }
+        
+        var trustFlag = false
+        if item.operationType == .allowTrust || item.operationType == .changeTrust {
+            trustFlag = filter.other.trust ?? true
+        }
+        
+        var accountMergeFlag = false
+        if item.operationType == .accountMerge {
+            accountMergeFlag = filter.other.accountMerge ?? true
+        }
+        
+        var bumpSequenceFlag = false
+        if item.operationType == .bumpSequence {
+            bumpSequenceFlag = filter.other.bumpSequence ?? true
+        }
+        
+        return (paymentReceivedFlag && currencyFlag) ||
+            (paymentSentFlag && currencyFlag) ||
+            sellingFlag ||
+            buyingFlag ||
+            setOptionsFlag ||
+            manageDataFlag ||
+            trustFlag ||
+            accountMergeFlag ||
+            bumpSequenceFlag
+    }
 }
 
 // MARK: Operation details

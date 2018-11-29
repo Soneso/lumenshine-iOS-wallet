@@ -58,6 +58,9 @@ extension PaymentFilterViewController {
     @objc
     func clearAction(sender: UIButton) {
         viewModel.filter.payment.clear()
+        receivedField.update(range: viewModel.filter.payment.receivedRange, animated: true)
+        sentField.update(range: viewModel.filter.payment.sentRange, animated: true)
+        currencyField.update(value: viewModel.filter.payment.currency, animated: true)
     }
     
     func saveFilter() {
@@ -151,6 +154,7 @@ fileprivate extension PaymentFilterViewController {
         receivedField.textField.textInset = horizontalSpacing
         receivedField.rangeTextField.placeholder = R.string.localizable.amount_to()
         receivedField.rangeTextField.textInset = horizontalSpacing
+        receivedField.update(range: viewModel.filter.payment.receivedRange)
         
         contentView.addSubview(receivedField)
         receivedField.snp.makeConstraints { make in
@@ -162,12 +166,11 @@ fileprivate extension PaymentFilterViewController {
     
     func prepareSent() {
         sentField.label.text = R.string.localizable.sent()
-        
         sentField.textField.placeholder = R.string.localizable.amount_from()
         sentField.textField.textInset = horizontalSpacing
-        
         sentField.rangeTextField.placeholder = R.string.localizable.amount_to()
         sentField.rangeTextField.textInset = horizontalSpacing
+        sentField.update(range: viewModel.filter.payment.sentRange)
         
         contentView.addSubview(sentField)
         sentField.snp.makeConstraints { make in
@@ -179,9 +182,9 @@ fileprivate extension PaymentFilterViewController {
     
     func prepareCurrency() {
         currencyField.label.text = R.string.localizable.currency()
-        
         currencyField.textField.placeholder = R.string.localizable.currency()
         currencyField.textField.textInset = horizontalSpacing
+        currencyField.update(value: viewModel.filter.payment.currency)
         
         contentView.addSubview(currencyField)
         currencyField.snp.makeConstraints { make in

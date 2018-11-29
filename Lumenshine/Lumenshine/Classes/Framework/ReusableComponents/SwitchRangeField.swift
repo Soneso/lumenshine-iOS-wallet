@@ -49,6 +49,17 @@ class SwitchRangeField: SwitchInputField {
             rangeTextField.textColor = Stylesheet.color(.white)
         }
     }
+    
+    func update(range: Range<Double>?, animated: Bool = false) {
+        if let range = range {
+            self.switch.setOn(true, animated: animated)
+            rangeTextField.text = String(range.upperBound)
+            textField.text = String(range.lowerBound)
+        } else {
+            self.switch.setOn(false, animated: animated)
+        }
+        switchChangedValue(sender: self.switch)
+    }
 }
 
 

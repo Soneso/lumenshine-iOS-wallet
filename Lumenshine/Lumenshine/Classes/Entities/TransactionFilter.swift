@@ -45,28 +45,25 @@ struct TransactionFilter {
     
     struct Other {
         var setOptions: Bool?
-        var inflation: Bool?
         var manageData: Bool?
         var trust: Bool?
         var accountMerge: Bool?
         var bumpSequence: Bool?
         
         init() {
-            setOptions = true
-            inflation = false
-            manageData = false
-            trust = true
-            accountMerge = false
-            bumpSequence = false
+            setOptions = nil
+            manageData = nil
+            trust = nil
+            accountMerge = nil
+            bumpSequence = nil
         }
         
         mutating func clear() {
-            setOptions = true
-            inflation = false
-            manageData = false
-            trust = true
-            accountMerge = false
-            bumpSequence = false
+            setOptions = nil
+            manageData = nil
+            trust = nil
+            accountMerge = nil
+            bumpSequence = nil
         }
     }
     
@@ -78,5 +75,11 @@ struct TransactionFilter {
         self.payment = Payment()
         self.offer = Offer()
         self.other = Other()
+    }
+    
+    mutating func clear() {
+        payment.clear()
+        offer.clear()
+        other.clear()
     }
 }

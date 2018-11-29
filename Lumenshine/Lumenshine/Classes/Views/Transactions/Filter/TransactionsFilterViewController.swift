@@ -51,6 +51,11 @@ class TransactionsFilterViewController: UIViewController {
         prepareView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateTags()
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
@@ -66,12 +71,12 @@ extension TransactionsFilterViewController: UITextFieldDelegate {
 extension TransactionsFilterViewController {
     @objc
     func clearAction(sender: UIButton) {
-        
+        viewModel.filter.clear()
     }
     
     @objc
     func applyAction(sender: UIButton) {
-        
+        viewModel.applyFilters()
     }
     
     @objc
@@ -112,6 +117,15 @@ extension TransactionsFilterViewController {
     @objc
     func didTapOthers(sender: UITapGestureRecognizer) {
         viewModel.showOtherFilter()
+    }
+}
+
+extension TransactionsFilterViewController {
+    
+    func updateTags() {
+        paymentsFilter.show(tags: viewModel.paymentFilterTags(), color: Stylesheet.color(.orange))
+        offersFilter.show(tags: viewModel.offerFilterTags(), color: Stylesheet.color(.green))
+        otherFilter.show(tags: viewModel.otherFilterTags(), color: Stylesheet.color(.blue))
     }
 }
 
@@ -311,38 +325,39 @@ fileprivate extension TransactionsFilterViewController {
     func prepareSwitches() {
         var tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapPayments(sender:)))
         paymentsFilter.addGestureRecognizer(tapGesture)
+        paymentsFilter.setTitle(R.string.localizable.payments())
         
         contentView.addSubview(paymentsFilter)
         paymentsFilter.snp.makeConstraints { make in
             make.top.equalTo(memoField.snp.bottom).offset(verticalSpacing)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.height.greaterThanOrEqualTo(60)
+            make.height.greaterThanOrEqualTo(70)
         }
         
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOffers(sender:)))
         offersFilter.addGestureRecognizer(tapGesture)
+        offersFilter.setTitle(R.string.localizable.offers())
         
         contentView.addSubview(offersFilter)
         offersFilter.snp.makeConstraints { make in
             make.top.equalTo(paymentsFilter.snp.bottom)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.height.greaterThanOrEqualTo(60)
+            make.height.greaterThanOrEqualTo(70)
         }
         
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOthers(sender:)))
         otherFilter.addGestureRecognizer(tapGesture)
+        otherFilter.setTitle(R.string.localizable.other())
         
         contentView.addSubview(otherFilter)
         otherFilter.snp.makeConstraints { make in
             make.top.equalTo(offersFilter.snp.bottom)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.height.greaterThanOrEqualTo(60)
+            make.height.greaterThanOrEqualTo(70)
         }
-        
-        paymentsFilter.show(tags: ["Set", "Manage Offer", "Set options", "Manage Offer", "Set options", "Manage"])
     }
     
     func prepareButtons() {

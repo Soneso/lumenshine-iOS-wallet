@@ -71,5 +71,15 @@ class SwitchInputField: UIView {
             textField.textColor = Stylesheet.color(.white)
         }
     }
+    
+    func update(value: String?, animated: Bool = false) {
+        if let value = value {
+            self.switch.setOn(true, animated: animated)
+            textField.text = value
+        } else {
+            self.switch.setOn(false, animated: animated)
+        }
+        switchChangedValue(sender: self.switch)
+    }
 }
 

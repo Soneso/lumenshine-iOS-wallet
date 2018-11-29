@@ -31,9 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         registerForPushNotifications()
         
         // for testing purpose
-        let loginCoordinator = MenuCoordinator(mainCoordinator: mainCoordinator, user: User(id: "1", email: "isti@isti.com", publicKeyIndex0: "publicKeyIndex0", publicKeys: nil))
+//        let loginCoordinator = MenuCoordinator(mainCoordinator: mainCoordinator, user: User(id: "1", email: "isti@isti.com", publicKeyIndex0: "publicKeyIndex0", publicKeys: nil))
         
-//        let loginCoordinator = LoginMenuCoordinator(mainCoordinator: mainCoordinator)
+        let loginCoordinator = LoginMenuCoordinator(mainCoordinator: mainCoordinator)
         
         
         window = UIWindow(frame: UIScreen.main.bounds)

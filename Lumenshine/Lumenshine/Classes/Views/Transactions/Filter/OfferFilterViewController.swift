@@ -57,6 +57,8 @@ extension OfferFilterViewController {
     @objc
     func clearAction(sender: UIButton) {
         viewModel.filter.offer.clear()
+        sellingField.update(value: viewModel.filter.offer.sellingCurrency, animated: true)
+        buyingField.update(value: viewModel.filter.offer.buyingCurrency, animated: true)
     }
     
     func saveFilter() {
@@ -137,6 +139,7 @@ fileprivate extension OfferFilterViewController {
         sellingField.label.text = "\(R.string.localizable.selling()) \(R.string.localizable.currency())"
         sellingField.textField.placeholder = R.string.localizable.currency()
         sellingField.textField.textInset = horizontalSpacing
+        sellingField.update(value: viewModel.filter.offer.sellingCurrency)
         
         contentView.addSubview(sellingField)
         sellingField.snp.makeConstraints { make in
@@ -150,6 +153,7 @@ fileprivate extension OfferFilterViewController {
         buyingField.label.text = "\(R.string.localizable.buying()) \(R.string.localizable.currency())"
         buyingField.textField.placeholder = R.string.localizable.currency()
         buyingField.textField.textInset = horizontalSpacing
+        buyingField.update(value: viewModel.filter.offer.buyingCurrency)
         
         contentView.addSubview(buyingField)
         buyingField.snp.makeConstraints { make in

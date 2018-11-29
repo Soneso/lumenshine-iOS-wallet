@@ -10,7 +10,8 @@ import UIKit
 import Material
 
 protocol FilterSwitchProtocol  {
-    func show(tags: [String])
+    func show(tags: [String], color: UIColor)
+    func setTitle(_ text: String)
 }
 
 class FilterSwitch: View {
@@ -42,14 +43,13 @@ class FilterSwitch: View {
             make.left.equalTo(horizontalSpacing)
         }
         
-        titleLabel.text = R.string.localizable.memo()
         titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textColor = Stylesheet.color(.blue)
         
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.top.equalTo(10)
             make.left.equalTo(self.switch.snp.right).offset(2*horizontalSpacing)
             make.right.equalTo(-horizontalSpacing)
         }
@@ -72,8 +72,13 @@ class FilterSwitch: View {
     }
 }
 extension FilterSwitch: FilterSwitchProtocol {
-    func show(tags: [String]) {
+    func show(tags: [String], color: UIColor) {
         tagsView.items = tags
+        tagsView.color = color
 //        tagsView.layoutIfNeeded()
+    }
+    
+    func setTitle(_ text: String) {
+        titleLabel.text = text
     }
 }

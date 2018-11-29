@@ -20,6 +20,8 @@ class TagsCollectionView: UICollectionView {
         }
     }
     
+    var color: UIColor = Stylesheet.color(.blue)
+    
     init() {
         super.init(frame: .zero, collectionViewLayout: collectionLayout)
         
@@ -57,6 +59,7 @@ extension TagsCollectionView: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagsCollectionView.CellIdentifier, for: indexPath) as! TagCollectionViewItem
         
         cell.setTitle(items[indexPath.row])
+        cell.setColor(color)
         return cell
     }
 }
@@ -80,6 +83,7 @@ class CustomFlowLayout : UICollectionViewFlowLayout {
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         var atts = super.layoutAttributesForItem(at:indexPath)!
         if indexPath.item == 0 {
+            atts.frame.origin.x = self.sectionInset.left
             return atts
             
         }

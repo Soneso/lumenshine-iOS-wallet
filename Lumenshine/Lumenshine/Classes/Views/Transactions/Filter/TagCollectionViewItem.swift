@@ -10,6 +10,7 @@ import UIKit
 
 protocol TagCollectionViewItemProtocol {
     func setTitle(_ text: String?)
+    func setColor(_ color: UIColor)
 }
 
 class TagCollectionViewItem: UICollectionViewCell {
@@ -36,6 +37,10 @@ class TagCollectionViewItem: UICollectionViewCell {
 extension TagCollectionViewItem: TagCollectionViewItemProtocol {
     func setTitle(_ text: String?) {
         titleLabel.text = text
+    }
+    
+    func setColor(_ color: UIColor) {
+        contentView.backgroundColor = color
     }
 }
 

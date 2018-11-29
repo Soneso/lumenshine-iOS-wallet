@@ -33,7 +33,6 @@ class OtherFilterViewController: UIViewController {
                          SwitchLabel(),
                          SwitchLabel(),
                          SwitchLabel(),
-                         SwitchLabel(),
                          SwitchLabel()]
         self.stackView = UIStackView(arrangedSubviews: subviews)
         super.init(nibName: nil, bundle: nil)
@@ -64,15 +63,23 @@ extension OtherFilterViewController {
     @objc
     func clearAction(sender: UIButton) {
         viewModel.filter.offer.clear()
+        updateValues(animated: true)
     }
     
     func saveFilter() {
         viewModel.filter.other.setOptions = subviews[0].switch.isOn
-        viewModel.filter.other.inflation = subviews[1].switch.isOn
-        viewModel.filter.other.manageData = subviews[2].switch.isOn
-        viewModel.filter.other.trust = subviews[3].switch.isOn
-        viewModel.filter.other.accountMerge = subviews[4].switch.isOn
-        viewModel.filter.other.bumpSequence = subviews[5].switch.isOn
+        viewModel.filter.other.manageData = subviews[1].switch.isOn
+        viewModel.filter.other.trust = subviews[2].switch.isOn
+        viewModel.filter.other.accountMerge = subviews[3].switch.isOn
+        viewModel.filter.other.bumpSequence = subviews[4].switch.isOn
+    }
+    
+    func updateValues(animated: Bool = false) {
+        subviews[0].switch.setOn(viewModel.filter.other.setOptions ?? false, animated: animated)
+        subviews[1].switch.setOn(viewModel.filter.other.manageData ?? false, animated: animated)
+        subviews[2].switch.setOn(viewModel.filter.other.trust ?? false, animated: animated)
+        subviews[3].switch.setOn(viewModel.filter.other.accountMerge ?? false, animated: animated)
+        subviews[4].switch.setOn(viewModel.filter.other.bumpSequence ?? false, animated: animated)
     }
 }
 
@@ -139,11 +146,12 @@ fileprivate extension OtherFilterViewController {
         stackView.spacing = 15
         
         subviews[0].label.text = R.string.localizable.set_options()
-        subviews[1].label.text = R.string.localizable.inflation()
-        subviews[2].label.text = R.string.localizable.manage_data()
-        subviews[3].label.text = R.string.localizable.trust()
-        subviews[4].label.text = R.string.localizable.merge_account()
-        subviews[5].label.text = R.string.localizable.bump_sequence()
+        subviews[1].label.text = R.string.localizable.manage_data()
+        subviews[2].label.text = R.string.localizable.trust()
+        subviews[3].label.text = R.string.localizable.merge_account()
+        subviews[4].label.text = R.string.localizable.bump_sequence()
+        
+        updateValues()
         
         var i = stackView.arrangedSubviews.count
         while i > 1 {
@@ -163,7 +171,7 @@ fileprivate extension OtherFilterViewController {
     
     func verticalCreateSeparator(color : UIColor) -> UIView {
         let separator = UIView()
-        separator.widthAnchor.constraint(equalToConstant: 1).isActive = true
+        separator.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         separator.backgroundColor = color
         return separator
     }
