@@ -16,6 +16,11 @@ protocol TransactionsCellProtocol {
     func setAmount(_ text: NSAttributedString?)
     func setCurrency(_ text: String?)
     func setDetails(_ text: NSAttributedString?)
+    var delegate: TransactionsCellDelegate? { get set }
+}
+
+protocol TransactionsCellDelegate: class {
+    func cellCopiedToPasteboard(_ cell: TransactionsCellProtocol)
 }
 
 class TransactionsTableViewCell: UITableViewCell {
@@ -38,6 +43,8 @@ class TransactionsTableViewCell: UITableViewCell {
     fileprivate let horizontalSpacing: CGFloat = 15.0
     fileprivate let labelWidth: CGFloat = 80.0
     fileprivate let fontSize: CGFloat = 13.0
+    
+    weak var delegate: TransactionsCellDelegate?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
@@ -108,7 +115,8 @@ extension TransactionsTableViewCell: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         
         if let attachment = textAttachment as? LSTextAttachment {
-            print("Info: \(attachment.additionalInfo)")
+            UIPasteboard.general.string = attachment.additionalInfo            
+            delegate?.cellCopiedToPasteboard(self)
         }
         return false
     }
@@ -176,7 +184,7 @@ fileprivate extension TransactionsTableViewCell {
         }
         
         amountValueLabel.textColor = Stylesheet.color(.green)
-        amountValueLabel.font = R.font.encodeSansRegular(size: fontSize)
+        amountValueLabel.font = R.font.encodeSansSemiBold(size: fontSize)
         
         contentView.addSubview(amountValueLabel)
         amountValueLabel.snp.makeConstraints { make in
@@ -199,7 +207,7 @@ fileprivate extension TransactionsTableViewCell {
         }
         
         currencyValueLabel.textColor = Stylesheet.color(.lightBlack)
-        currencyValueLabel.font = R.font.encodeSansRegular(size: fontSize)
+        currencyValueLabel.font = R.font.encodeSansSemiBold(size: fontSize)
         
         contentView.addSubview(currencyValueLabel)
         currencyValueLabel.snp.makeConstraints { make in

@@ -31,7 +31,7 @@ protocol TransactionsViewModelType: Transitionable {
     var currencyIndex: Int { get set }
     var dateFrom: Date { get set }
     var dateTo: Date { get set }
-    func memoChanged(_ memo: String)
+    var memo: String { get set }
     
     func showPaymentsFilter()
     func showOffersFilter()
@@ -101,7 +101,6 @@ class TransactionsViewModel : TransactionsViewModelType {
     fileprivate var endDate: String
     fileprivate var sortedWallets: [WalletsResponse] = []
     fileprivate var sortedWalletsDetails: [Wallet] = []
-    fileprivate var memo: String?
     fileprivate var isFiltering: Bool = false
     fileprivate var forceUpdate: Bool = true
     
@@ -122,6 +121,7 @@ class TransactionsViewModel : TransactionsViewModelType {
         self.endDate = DateUtils.format(dateTo, in: .dateAndTime) ?? Date().description
         self.walletIndex = 0
         self.currencyIndex = 0
+        self.memo = ""
         self.filter = TransactionFilter()
         
         updateTransactions()
@@ -172,9 +172,7 @@ class TransactionsViewModel : TransactionsViewModelType {
         }
     }
     
-    func memoChanged(_ memo: String) {
-        self.memo = memo
-    }
+    var memo: String
     
     func date(at indexPath: IndexPath) -> String? {
         let date = entry(at: indexPath).createdAt
@@ -336,7 +334,7 @@ class TransactionsViewModel : TransactionsViewModelType {
     }
     
     func applyFilters() {
-        isFiltering = filter.payment.include || filter.offer.include || filter.other.include || !(memo?.isEmpty ?? true) ||
+        isFiltering = filter.payment.include || filter.offer.include || filter.other.include || !memo.isEmpty ||
             paymentFilterTags().count > 0 || offerFilterTags().count > 0 || otherFilterTags().count > 0
         if forceUpdate {
             updateTransactions()
@@ -555,7 +553,7 @@ fileprivate extension TransactionsViewModel {
     func filter(item: TxTransactionResponse) -> Bool {
         let type = transactionType(for: item)
         
-        if let memo = memo, !memo.isEmpty {
+        if !memo.isEmpty {
             return item.memo.contains(memo)
         }
         
@@ -604,7 +602,7 @@ fileprivate extension TransactionsViewModel {
         if item.operationType == .manageOffer || item.operationType == .createPassiveOffer {
             if let selling = filter.offer.sellingCurrency {
                 if let curr = self.currency(for: item) {
-                    sellingFlag = curr.0.contains(selling)
+                    sellingFlag = selling.isEmpty ? true : curr.0.contains(selling)
                 } else {
                     sellingFlag = false
                 }
@@ -617,7 +615,7 @@ fileprivate extension TransactionsViewModel {
         if (item.operationType == .manageOffer || item.operationType == .createPassiveOffer) {
             if let buying = filter.offer.buyingCurrency {
                 if let curr = self.currency(for: item) {
-                    buyingFlag = curr.1?.contains(buying) ?? false
+                    buyingFlag = buying.isEmpty ? true : curr.1?.contains(buying) ?? false
                 } else {
                     buyingFlag = false
                 }
@@ -945,7 +943,11 @@ fileprivate extension TransactionsViewModel {
     }
     
     func copyString(prefix: String, value: String) -> NSAttributedString {
-        let pkStr = NSAttributedString(string: "\(prefix): \(value)",
+        let start = value.index(value.startIndex, offsetBy: 6)
+        let end = value.index(value.endIndex, offsetBy: -7)
+        let truncatedValue = value.replacingCharacters(in: start...end, with: "...")
+        
+        let pkStr = NSAttributedString(string: "\(prefix): \(truncatedValue)",
             attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
                          .font : mainFont])
         

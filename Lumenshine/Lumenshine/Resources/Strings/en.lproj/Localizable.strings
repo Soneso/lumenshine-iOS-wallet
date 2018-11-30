@@ -59,6 +59,9 @@
 "remove" = "Remove";
 
 /*  */
+"all" = "All";
+
+/*  */
 "clear" = "Clear";
 
 /*  */
@@ -201,6 +204,9 @@
 
 /*  */
 "2FA_secret_copy" = "2FA secret copied to clipboard";
+
+/*  */
+"copied_clipboard" = "Copied to clipboard";
 
 /*  */
 "more" = "More";

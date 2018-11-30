@@ -137,7 +137,7 @@ fileprivate extension OfferFilterViewController {
     
     func prepareSelling() {
         sellingField.label.text = "\(R.string.localizable.selling()) \(R.string.localizable.currency())"
-        sellingField.textField.placeholder = R.string.localizable.currency()
+        sellingField.textField.placeholder = R.string.localizable.all()
         sellingField.textField.textInset = horizontalSpacing
         sellingField.update(value: viewModel.filter.offer.sellingCurrency)
         
@@ -151,7 +151,7 @@ fileprivate extension OfferFilterViewController {
     
     func prepareBuying() {
         buyingField.label.text = "\(R.string.localizable.buying()) \(R.string.localizable.currency())"
-        buyingField.textField.placeholder = R.string.localizable.currency()
+        buyingField.textField.placeholder = R.string.localizable.all()
         buyingField.textField.textInset = horizontalSpacing
         buyingField.update(value: viewModel.filter.offer.buyingCurrency)
         

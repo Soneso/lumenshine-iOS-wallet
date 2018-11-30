@@ -77,13 +77,14 @@ class TransactionsViewController: UITableViewController {
         let identifier = TransactionsViewController.CellIdentifier
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         
-        if let tableCell = cell as? TransactionsCellProtocol {
+        if var tableCell = cell as? TransactionsCellProtocol {
             tableCell.setDate(viewModel.date(at: indexPath))
             tableCell.setType(viewModel.type(at: indexPath))
             tableCell.setAmount(viewModel.amount(at: indexPath))
             tableCell.setCurrency(viewModel.currency(at: indexPath))
             tableCell.setFee(viewModel.feePaid(at: indexPath))
             tableCell.setDetails(viewModel.details(at: indexPath))
+            tableCell.delegate = self
         }
         
         return cell
@@ -149,6 +150,13 @@ class TransactionsViewController: UITableViewController {
     }
 }
 
+extension TransactionsViewController: TransactionsCellDelegate {
+    func cellCopiedToPasteboard(_ cell: TransactionsCellProtocol) {
+        snackbarController?.animate(snackbar: .visible, delay: 0)
+        snackbarController?.animate(snackbar: .hidden, delay: 3)
+    }
+}
+
 extension TransactionsViewController {
     @objc
     func filterAction(sender: UIButton) {
@@ -176,6 +184,8 @@ fileprivate extension TransactionsViewController {
         prepareTableView()
         prepareCopyright()
         prepareNavigationItem()
+        
+        snackbarController?.snackbar.text = R.string.localizable.copied_clipboard()
     }
     
     func prepareTableView() {

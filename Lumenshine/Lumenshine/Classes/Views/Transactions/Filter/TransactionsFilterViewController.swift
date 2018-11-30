@@ -83,7 +83,7 @@ extension TransactionsFilterViewController {
         guard let text = textField.text else {
             return
         }
-        viewModel.memoChanged(text)
+        viewModel.memo = text
     }
     
     @objc
@@ -117,18 +117,21 @@ extension TransactionsFilterViewController {
     func paymentsFilterSwitched(sender: UISwitch) {
         viewModel.filter.payment.include = sender.isOn
         sender.onTintColor = nil
+        paymentsFilter.show(tags: viewModel.paymentFilterTags(), color: Stylesheet.color(.orange))
     }
     
     @objc
     func offersFilterSwitched(sender: UISwitch) {
         viewModel.filter.offer.include = sender.isOn
         sender.onTintColor = nil
+        offersFilter.show(tags: viewModel.offerFilterTags(), color: Stylesheet.color(.green))
     }
     
     @objc
     func otherFilterSwitched(sender: UISwitch) {
         viewModel.filter.other.include = sender.isOn
         sender.onTintColor = nil
+        otherFilter.show(tags: viewModel.otherFilterTags(), color: Stylesheet.color(.blue))
     }
 }
 
@@ -320,6 +323,7 @@ fileprivate extension TransactionsFilterViewController {
             make.right.equalTo(-horizontalSpacing)
         }
         
+        memoField.text = viewModel.memo
         memoField.placeholder = R.string.localizable.memo()
         memoField.borderWidthPreset = .border2
         memoField.borderColor = Stylesheet.color(.gray)

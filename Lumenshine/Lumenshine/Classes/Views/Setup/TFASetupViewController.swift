@@ -65,7 +65,7 @@ extension TFASetupViewController {
     @objc
     func copyAction(sender: UIButton) {
         UIPasteboard.general.string = viewModel.tfaSecret
-        let alert = UIAlertController(title: nil, message: "Copied to clipboard", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: nil, message: R.string.localizable.copied_clipboard(), preferredStyle: .actionSheet)
         self.present(alert, animated: true)
         let when = DispatchTime.now() + 0.75
         DispatchQueue.main.asyncAfter(deadline: when){

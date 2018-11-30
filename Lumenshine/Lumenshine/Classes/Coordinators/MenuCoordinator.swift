@@ -91,7 +91,8 @@ fileprivate extension MenuCoordinator {
     
     func showTransactions() {
         let coordinator = TransactionsCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
-        let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
+        let snackBar = SnackbarController(rootViewController: coordinator.baseController)
+        let navigationController = AppNavigationController(rootViewController: snackBar)
         present(navigationController: navigationController)
     }
     
