@@ -36,4 +36,16 @@ class LSTextField: TextField {
         detail = nil
     }
     
+    func setInputViewOptions(options: [String], selectedIndex: Int? = nil, handler: @escaping (_ newIndex: Int) -> (Void)) {
+        let enumPicker = EnumPicker()
+        enumPicker.setValues(options, currentSelection: selectedIndex) { (newIndex) in
+            if newIndex < options.count {
+                self.text = options[newIndex]
+                handler(newIndex)
+            }
+        }
+        self.text = options[selectedIndex ?? 0]
+        self.inputView = enumPicker
+    }
+    
 }

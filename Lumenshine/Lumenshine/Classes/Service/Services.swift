@@ -12,8 +12,6 @@ import stellarsdk
 public final class Services {
 #if DEBUG
     let usePublicStellarNetwork = false
-    //let baseURL = "http://192.168.0.17:9000"
-    //let baseURL = "http://127.0.0.1:8000"
     let baseURL = "https://lsdevapi.ponytest.de"
     //let horizonURL = "https://horizon-testnet.stellar.org"
     let horizonURL = "https://lsdevhorizon.ponytest.de"

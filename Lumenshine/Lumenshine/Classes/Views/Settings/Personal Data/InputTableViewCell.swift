@@ -90,12 +90,9 @@ class InputTableViewCell: UITableViewCell, InputTableCellProtocol {
     
     func setInputViewOptions(_ options: [String]?, selectedIndex: Int? = nil) {
         if let opt = options {
-            let enumPicker = EnumPicker()
-            enumPicker.setValues(opt, currentSelection: selectedIndex) { (newIndex) in
-                self.textField.text = opt[newIndex]
+            textField.setInputViewOptions(options: opt, selectedIndex: selectedIndex) { newIndex in
                 self.editingDidChange(self.textField)
             }
-            textField.inputView = enumPicker
         } else {
             textField.inputView = nil
         }

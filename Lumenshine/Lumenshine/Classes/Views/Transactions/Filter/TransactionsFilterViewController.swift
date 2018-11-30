@@ -33,7 +33,6 @@ class TransactionsFilterViewController: UIViewController {
     
     fileprivate let verticalSpacing: CGFloat = 25.0
     fileprivate let horizontalSpacing: CGFloat = 15.0
-    fileprivate var walletIndex: Int = 0
     
     init(viewModel: TransactionsViewModelType) {
         self.viewModel = viewModel
@@ -54,6 +53,7 @@ class TransactionsFilterViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateTags()
+        updateSwitchState()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -71,7 +71,7 @@ extension TransactionsFilterViewController: UITextFieldDelegate {
 extension TransactionsFilterViewController {
     @objc
     func clearAction(sender: UIButton) {
-        viewModel.filter.clear()
+        viewModel.clearFilters()
     }
     
     @objc
@@ -85,11 +85,6 @@ extension TransactionsFilterViewController {
             return
         }
         viewModel.memoChanged(text)
-    }
-    
-    @objc
-    func walletEditingDidChange(_ textField: TextField) {
-        viewModel.walletIndex = walletIndex
     }
     
     @objc
@@ -118,6 +113,24 @@ extension TransactionsFilterViewController {
     func didTapOthers(sender: UITapGestureRecognizer) {
         viewModel.showOtherFilter()
     }
+    
+    @objc
+    func paymentsFilterSwitched(sender: UISwitch) {
+        viewModel.filter.payment.include = sender.isOn
+        sender.onTintColor = nil
+    }
+    
+    @objc
+    func offersFilterSwitched(sender: UISwitch) {
+        viewModel.filter.offer.include = sender.isOn
+        sender.onTintColor = nil
+    }
+    
+    @objc
+    func otherFilterSwitched(sender: UISwitch) {
+        viewModel.filter.other.include = sender.isOn
+        sender.onTintColor = nil
+    }
 }
 
 extension TransactionsFilterViewController {
@@ -126,6 +139,12 @@ extension TransactionsFilterViewController {
         paymentsFilter.show(tags: viewModel.paymentFilterTags(), color: Stylesheet.color(.orange))
         offersFilter.show(tags: viewModel.offerFilterTags(), color: Stylesheet.color(.green))
         otherFilter.show(tags: viewModel.otherFilterTags(), color: Stylesheet.color(.blue))
+    }
+    
+    func updateSwitchState() {
+        paymentsFilter.switch.isOn = viewModel.filter.payment.include
+        offersFilter.switch.isOn = viewModel.filter.offer.include
+        otherFilter.switch.isOn = viewModel.filter.other.include
     }
 }
 
@@ -204,7 +223,6 @@ fileprivate extension TransactionsFilterViewController {
             make.right.equalTo(-horizontalSpacing)
         }
         
-        walletField.text = viewModel.wallets.first ?? R.string.localizable.primary()
         walletField.borderWidthPreset = .border2
         walletField.borderColor = Stylesheet.color(.gray)
         walletField.dividerNormalHeight = 1
@@ -212,7 +230,9 @@ fileprivate extension TransactionsFilterViewController {
         walletField.dividerNormalColor = Stylesheet.color(.gray)
         walletField.backgroundColor = .white
         walletField.textInset = horizontalSpacing
-        setInputViewOptions(textField: walletField, options: viewModel.wallets)
+        walletField.setInputViewOptions(options: viewModel.wallets, selectedIndex: viewModel.walletIndex) { newIndex in
+            self.viewModel.walletIndex = newIndex
+        }
         
         contentView.addSubview(walletField)
         walletField.snp.makeConstraints { make in
@@ -246,7 +266,7 @@ fileprivate extension TransactionsFilterViewController {
         dateFromField.dividerNormalColor = Stylesheet.color(.gray)
         dateFromField.backgroundColor = Stylesheet.color(.gray)
         dateFromField.textInset = horizontalSpacing
-        setDatePickerInputView(textField: dateFromField)
+        setDatePickerInputView(textField: dateFromField, date: viewModel.dateFrom)
         
         contentView.addSubview(dateFromField)
         dateFromField.snp.makeConstraints { make in
@@ -278,7 +298,7 @@ fileprivate extension TransactionsFilterViewController {
         dateToField.dividerNormalColor = Stylesheet.color(.gray)
         dateToField.backgroundColor = Stylesheet.color(.gray)
         dateToField.textInset = horizontalSpacing
-        setDatePickerInputView(textField: dateToField)
+        setDatePickerInputView(textField: dateToField, date: viewModel.dateTo)
         
         contentView.addSubview(dateToField)
         dateToField.snp.makeConstraints { make in
@@ -326,6 +346,7 @@ fileprivate extension TransactionsFilterViewController {
         var tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapPayments(sender:)))
         paymentsFilter.addGestureRecognizer(tapGesture)
         paymentsFilter.setTitle(R.string.localizable.payments())
+        paymentsFilter.switch.addTarget(self, action: #selector(paymentsFilterSwitched(sender:)), for: .valueChanged)
         
         contentView.addSubview(paymentsFilter)
         paymentsFilter.snp.makeConstraints { make in
@@ -338,6 +359,7 @@ fileprivate extension TransactionsFilterViewController {
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOffers(sender:)))
         offersFilter.addGestureRecognizer(tapGesture)
         offersFilter.setTitle(R.string.localizable.offers())
+        offersFilter.switch.addTarget(self, action: #selector(offersFilterSwitched(sender:)), for: .valueChanged)
         
         contentView.addSubview(offersFilter)
         offersFilter.snp.makeConstraints { make in
@@ -350,6 +372,7 @@ fileprivate extension TransactionsFilterViewController {
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOthers(sender:)))
         otherFilter.addGestureRecognizer(tapGesture)
         otherFilter.setTitle(R.string.localizable.other())
+        otherFilter.switch.addTarget(self, action: #selector(otherFilterSwitched(sender:)), for: .valueChanged)
         
         contentView.addSubview(otherFilter)
         otherFilter.snp.makeConstraints { make in
@@ -393,20 +416,7 @@ fileprivate extension TransactionsFilterViewController {
         }
     }
     
-    func setInputViewOptions(textField: TextField, options: [String], selectedIndex: Int? = nil) {
-        let enumPicker = EnumPicker()
-        enumPicker.setValues(options, currentSelection: selectedIndex) { (newIndex) in
-            if newIndex > options.count {
-                textField.text = options[newIndex]
-                self.walletEditingDidChange(textField)
-                self.walletIndex = newIndex
-            }
-        }
-        textField.text = options.first
-        textField.inputView = enumPicker
-    }
-    
-    func setDatePickerInputView(textField: TextField, date: Date = Date()) {
+    func setDatePickerInputView(textField: TextField, date: Date) {
         var minYear = DateComponents()
         minYear.year = 1910
         

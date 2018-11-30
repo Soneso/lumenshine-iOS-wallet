@@ -65,16 +65,28 @@ extension PaymentFilterViewController {
     
     func saveFilter() {
         if receivedField.switch.isOn {
-            let from = Double(receivedField.textField.text ?? "0") ?? 0
-            let to = Double(receivedField.rangeTextField.text ?? "0") ?? 0
+            var from = 0.0
+            if let fromV = receivedField.textField.text, !fromV.isEmpty {
+                from = Double(fromV) ?? 0.0
+            }
+            var to = Double.infinity
+            if let toV = receivedField.rangeTextField.text, !toV.isEmpty {
+                to = Double(toV) ?? Double.infinity
+            }
             viewModel.filter.payment.receivedRange = Range<Double>(uncheckedBounds: (from, to))
         } else {
             viewModel.filter.payment.receivedRange = nil
         }
         
         if sentField.switch.isOn {
-            let from = Double(sentField.textField.text ?? "0") ?? 0
-            let to = Double(sentField.rangeTextField.text ?? "0") ?? 0
+            var from = 0.0
+            if let fromV = sentField.textField.text, !fromV.isEmpty {
+                from = Double(fromV) ?? 0.0
+            }
+            var to = Double.infinity
+            if let toV = sentField.rangeTextField.text, !toV.isEmpty {
+                to = Double(toV) ?? Double.infinity
+            }
             viewModel.filter.payment.sentRange = Range<Double>(uncheckedBounds: (from, to))
         } else {
             viewModel.filter.payment.sentRange = nil
@@ -185,6 +197,9 @@ fileprivate extension PaymentFilterViewController {
         currencyField.textField.placeholder = R.string.localizable.currency()
         currencyField.textField.textInset = horizontalSpacing
         currencyField.update(value: viewModel.filter.payment.currency)
+        currencyField.textField.setInputViewOptions(options: viewModel.currencies, selectedIndex: viewModel.currencyIndex) { newIndex in
+            self.viewModel.currencyIndex = newIndex
+        }
         
         contentView.addSubview(currencyField)
         currencyField.snp.makeConstraints { make in

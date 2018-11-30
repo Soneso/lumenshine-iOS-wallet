@@ -14,6 +14,11 @@ struct TransactionFilter {
         var receivedRange: Range<Double>?
         var sentRange: Range<Double>?
         var currency: String?
+        var include: Bool = false {
+            didSet {
+                self.clear()
+            }
+        }
         
         init() {
             receivedRange = nil
@@ -31,6 +36,11 @@ struct TransactionFilter {
     struct Offer {
         var sellingCurrency: String?
         var buyingCurrency: String?
+        var include: Bool = false {
+            didSet {
+                self.clear()
+            }
+        }
         
         init() {
             sellingCurrency = nil
@@ -49,6 +59,11 @@ struct TransactionFilter {
         var trust: Bool?
         var accountMerge: Bool?
         var bumpSequence: Bool?
+        var include: Bool = false {
+            didSet {
+                self.clear()
+            }
+        }
         
         init() {
             setOptions = nil

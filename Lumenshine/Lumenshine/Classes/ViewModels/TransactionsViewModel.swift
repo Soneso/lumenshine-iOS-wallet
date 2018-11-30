@@ -12,6 +12,7 @@ import UIKit.NSTextAttachment
 protocol TransactionsViewModelType: Transitionable {
     var itemCount: Int { get }
     var wallets: [String] { get }
+    var currencies: [String] { get }
     var reloadClosure: (() -> ())? { get set }
     var filter: TransactionFilter { get set }
     
@@ -27,6 +28,7 @@ protocol TransactionsViewModelType: Transitionable {
     func sortClick()
     
     var walletIndex: Int { get set }
+    var currencyIndex: Int { get set }
     var dateFrom: Date { get set }
     var dateTo: Date { get set }
     func memoChanged(_ memo: String)
@@ -35,6 +37,7 @@ protocol TransactionsViewModelType: Transitionable {
     func showOffersFilter()
     func showOtherFilter()
     func applyFilters()
+    func clearFilters()
     
     func paymentFilterTags() -> [String]
     func offerFilterTags() -> [String]
@@ -58,9 +61,9 @@ enum TransactionType: String {
     var description: String {
         switch self {
         case .paymentReceived:
-            return R.string.localizable.payment_sent()
-        case .paymentSent:
             return R.string.localizable.payment_received()
+        case .paymentSent:
+            return R.string.localizable.payment_sent()
         case .offerCreated:
             return R.string.localizable.offer_created()
         case .offerRemoved:
@@ -97,7 +100,10 @@ class TransactionsViewModel : TransactionsViewModelType {
     fileprivate var startDate: String
     fileprivate var endDate: String
     fileprivate var sortedWallets: [WalletsResponse] = []
+    fileprivate var sortedWalletsDetails: [Wallet] = []
     fileprivate var memo: String?
+    fileprivate var isFiltering: Bool = false
+    fileprivate var forceUpdate: Bool = true
     
     var filter: TransactionFilter
     
@@ -114,22 +120,18 @@ class TransactionsViewModel : TransactionsViewModelType {
         self.dateTo = Date()
         self.startDate = DateUtils.format(dateFrom, in: .dateAndTime) ?? Date().description
         self.endDate = DateUtils.format(dateTo, in: .dateAndTime) ?? Date().description
-        self.walletIndex = 0        
+        self.walletIndex = 0
+        self.currencyIndex = 0
         self.filter = TransactionFilter()
         
         updateTransactions()
-        
-        services.walletService.getWallets { [weak self] (result) -> (Void) in
-            switch result {
-            case .success(let wallets):
-                self?.sortedWallets = wallets.sorted(by: { $0.id < $1.id })
-            case .failure(_):
-                print("Failed to get wallets")
-            }
-        }
+        getWallets()
     }
     
     var itemCount: Int {
+        if isFiltering {
+            return filteredEntries.count
+        }
         return entries.count
     }
     
@@ -142,35 +144,36 @@ class TransactionsViewModel : TransactionsViewModelType {
     var walletIndex: Int {
         didSet {
             self.currentWalletPK = sortedWallets[walletIndex].publicKey
+            forceUpdate = true
         }
     }
+    
+    var currencies: [String] {
+        let wallet = sortedWalletsDetails[walletIndex]
+        if wallet.isFunded, let funded = wallet as? FundedWallet {
+            return funded.getAvailableCurrencies()
+        }
+        return []
+    }
+    
+    var currencyIndex: Int
     
     var dateFrom: Date {
         didSet {
             startDate = DateUtils.format(dateFrom, in: .dateAndTime) ?? startDate
+            forceUpdate = true
         }
     }
     
     var dateTo: Date {
         didSet {
             endDate = DateUtils.format(dateTo, in: .dateAndTime) ?? endDate
+            forceUpdate = true
         }
     }
     
     func memoChanged(_ memo: String) {
         self.memo = memo
-    }
-    
-    func updateTransactions() {
-        services.transactions.getTransactions(stellarAccount: currentWalletPK, startTime: startDate, endTime: endDate) { [weak self] result in
-            switch result {
-            case .success(let transactions):
-                self?.entries = transactions
-                self?.reloadClosure?()
-            case .failure(let error):
-                print("Transactions list failure: \(error)")
-            }
-        }
     }
     
     func date(at indexPath: IndexPath) -> String? {
@@ -333,9 +336,22 @@ class TransactionsViewModel : TransactionsViewModelType {
     }
     
     func applyFilters() {
-        filteredEntries = entries.filter {
-            return filter(item: $0)
+        isFiltering = filter.payment.include || filter.offer.include || filter.other.include || !(memo?.isEmpty ?? true) ||
+            paymentFilterTags().count > 0 || offerFilterTags().count > 0 || otherFilterTags().count > 0
+        if forceUpdate {
+            updateTransactions()
+        } else {
+            filteredEntries = entries.filter {
+                return filter(item: $0)
+            }
+            self.reloadClosure?()
         }
+    }
+    
+    func clearFilters() {
+        filter.clear()
+        isFiltering = false
+        self.reloadClosure?()
     }
     
     func paymentFilterTags() -> [String] {
@@ -384,8 +400,56 @@ class TransactionsViewModel : TransactionsViewModelType {
     }
 }
 
+// MARK: remote methods
+fileprivate extension TransactionsViewModel {
+    
+    func updateTransactions() {
+        services.transactions.getTransactions(stellarAccount: currentWalletPK, startTime: startDate, endTime: endDate) { [weak self] result in
+            switch result {
+            case .success(let transactions):
+                self?.entries = transactions
+                if self?.isFiltering ?? false {
+                    self?.filteredEntries = transactions.filter {
+                        return self?.filter(item: $0) ?? false
+                    }
+                }
+                self?.reloadClosure?()
+                self?.forceUpdate = false
+            case .failure(let error):
+                print("Transactions list failure: \(error)")
+            }
+        }
+    }
+    
+    func getWallets() {
+        services.walletService.getWallets { [weak self] (result) -> (Void) in
+            switch result {
+            case .success(let wallets):
+                self?.sortedWallets = wallets.sorted(by: { $0.id < $1.id })
+                self?.getWalletDetails(wallets: wallets)
+            case .failure(_):
+                print("Failed to get wallets")
+            }
+        }
+    }
+    
+    func getWalletDetails(wallets: [WalletsResponse]) {
+        services.userManager.walletDetailsFor(wallets: wallets) { result in
+            switch result {
+            case .success(let wallets):
+                self.sortedWalletsDetails = wallets.sorted(by: { $0.id < $1.id })
+            case .failure(let error):
+                print("Account details failure: \(error)")
+            }
+        }
+    }
+}
+
 fileprivate extension TransactionsViewModel {
     func entry(at indexPath: IndexPath) -> TxTransactionResponse {
+        if isFiltering {
+            return filteredEntries[indexPath.row]
+        }
         return entries[indexPath.row]
     }
     
@@ -467,9 +531,9 @@ fileprivate extension TransactionsViewModel {
                 return item.to == currentWalletPK ? .paymentReceived : .paymentSent
             }
         case .manageOffer:
-            return item.sourceAccount == currentWalletPK ? .offerRemoved : .offerCreated
+            return item.sourceAccount == currentWalletPK ? .offerCreated : .offerRemoved
         case .createPassiveOffer:
-            return item.sourceAccount == currentWalletPK ? .passiveOfferRemoved : .passiveOfferCreated
+            return item.sourceAccount == currentWalletPK ? .passiveOfferCreated : .passiveOfferRemoved
         case .setOptions:
             return .setOptions
         case .changeTrust:
@@ -505,7 +569,7 @@ fileprivate extension TransactionsViewModel {
                     paymentReceivedFlag = false
                 }
             } else {
-               paymentReceivedFlag = true
+               paymentReceivedFlag = filter.payment.include
             }
         }
         
@@ -519,7 +583,7 @@ fileprivate extension TransactionsViewModel {
                     paymentSentFlag = false
                 }
             } else {
-                paymentSentFlag = true
+                paymentSentFlag = filter.payment.include
             }
         }
         
@@ -532,7 +596,7 @@ fileprivate extension TransactionsViewModel {
                     currencyFlag = false
                 }
             } else {
-                currencyFlag = true
+                currencyFlag = paymentReceivedFlag || paymentSentFlag
             }
         }
         
@@ -545,7 +609,7 @@ fileprivate extension TransactionsViewModel {
                     sellingFlag = false
                 }
             } else {
-                sellingFlag = true
+                sellingFlag = filter.offer.include
             }
         }
         
@@ -558,37 +622,38 @@ fileprivate extension TransactionsViewModel {
                     buyingFlag = false
                 }
             } else {
-                buyingFlag = true
+                buyingFlag = filter.offer.include
             }
         }
         
         var setOptionsFlag = false
         if item.operationType == .setOptions {
-            setOptionsFlag = filter.other.setOptions ?? true
+            setOptionsFlag = filter.other.setOptions ?? filter.other.include
         }
         
         var manageDataFlag = false
         if item.operationType == .manageData {
-            manageDataFlag = filter.other.manageData ?? true
+            manageDataFlag = filter.other.manageData ?? filter.other.include
         }
         
         var trustFlag = false
         if item.operationType == .allowTrust || item.operationType == .changeTrust {
-            trustFlag = filter.other.trust ?? true
+            trustFlag = filter.other.trust ?? filter.other.include
         }
         
         var accountMergeFlag = false
         if item.operationType == .accountMerge {
-            accountMergeFlag = filter.other.accountMerge ?? true
+            accountMergeFlag = filter.other.accountMerge ?? filter.other.include
         }
         
         var bumpSequenceFlag = false
         if item.operationType == .bumpSequence {
-            bumpSequenceFlag = filter.other.bumpSequence ?? true
+            bumpSequenceFlag = filter.other.bumpSequence ?? filter.other.include
         }
         
         return (paymentReceivedFlag && currencyFlag) ||
             (paymentSentFlag && currencyFlag) ||
+            ((paymentReceivedFlag && paymentSentFlag) || currencyFlag) ||
             sellingFlag ||
             buyingFlag ||
             setOptionsFlag ||
@@ -694,14 +759,9 @@ fileprivate extension TransactionsViewModel {
             details.append(pkStr)
         }
         
-        if let setFlags = setOptions.setFlags {
-            var flags: [String] = []
-            if setFlags.authRequired { flags.append(R.string.localizable.authorization_required()) }
-            if setFlags.authImmutable { flags.append(R.string.localizable.authorization_immutable()) }
-            if setFlags.authRevocable { flags.append(R.string.localizable.authorization_revocable()) }
-            
-            if flags.count > 0 {
-                let flagStr = flags.joined(separator: ",")
+        if let setFlags = setOptions.setFlagsString{
+            if setFlags.count > 0 {
+                let flagStr = setFlags.joined(separator: ",")
                 let setFlagStr = NSAttributedString(string: "\(R.string.localizable.set_flags()): \(flagStr)\n",
                     attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
                                  .font : mainFont])
@@ -710,14 +770,9 @@ fileprivate extension TransactionsViewModel {
             }
         }
         
-        if let clearFlags = setOptions.clearFlags {
-            var flags: [String] = []
-            if clearFlags.authRequired { flags.append(R.string.localizable.authorization_required()) }
-            if clearFlags.authImmutable { flags.append(R.string.localizable.authorization_immutable()) }
-            if clearFlags.authRevocable { flags.append(R.string.localizable.authorization_revocable()) }
-            
-            if flags.count > 0 {
-                let flagStr = flags.joined(separator: ",")
+        if let clearFlags = setOptions.clearFlagsString {
+            if clearFlags.count > 0 {
+                let flagStr = clearFlags.joined(separator: ",")
                 let setFlagStr = NSAttributedString(string: "\(R.string.localizable.clear_flags()): \(flagStr)\n",
                     attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
                                  .font : mainFont])

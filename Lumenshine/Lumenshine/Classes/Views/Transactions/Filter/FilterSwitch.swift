@@ -76,6 +76,11 @@ extension FilterSwitch: FilterSwitchProtocol {
         tagsView.items = tags
         tagsView.color = color
 //        tagsView.layoutIfNeeded()
+        
+        if tags.count > 0 {
+            self.switch.isOn = true
+            self.switch.onTintColor = Stylesheet.color(.darkGray)
+        }
     }
     
     func setTitle(_ text: String) {

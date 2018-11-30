@@ -48,6 +48,11 @@ class TransactionsViewController: UITableViewController {
         prepare()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateHeader()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -154,6 +159,15 @@ extension TransactionsViewController {
     func sortAction(sender: UIButton) {
         viewModel.sortClick()
     }
+    
+    func updateHeader() {
+        let name = viewModel.wallets.count > 0 ? viewModel.wallets[viewModel.walletIndex] : R.string.localizable.primary()
+        walletLabel.text = "\(R.string.localizable.wallet()): \(name)"
+        let dateFrom = DateUtils.format(viewModel.dateFrom, in: .date) ?? viewModel.dateFrom.description
+        dateFromLabel.text = "\(R.string.localizable.date_from()): \(dateFrom)"
+        let dateTo = DateUtils.format(viewModel.dateTo, in: .date) ?? viewModel.dateTo.description
+        dateToLabel.text = "\(R.string.localizable.date_to()): \(dateTo)"
+    }
 }
 
 
@@ -191,7 +205,6 @@ fileprivate extension TransactionsViewController {
     func prepareTableHeader() -> UIView {
         let headerView = UIView()
         
-        walletLabel.text = R.string.localizable.unlock_app()
         walletLabel.textColor = Stylesheet.color(.darkGray)
         walletLabel.font = R.font.encodeSansRegular(size: 13)
         walletLabel.adjustsFontSizeToFitWidth = true
@@ -202,7 +215,6 @@ fileprivate extension TransactionsViewController {
             make.left.equalTo(2*horizontalSpacing)
         }
         
-        dateFromLabel.text = R.string.localizable.unlock_app()
         dateFromLabel.textColor = Stylesheet.color(.darkGray)
         dateFromLabel.font = R.font.encodeSansRegular(size: 13)
         dateFromLabel.adjustsFontSizeToFitWidth = true

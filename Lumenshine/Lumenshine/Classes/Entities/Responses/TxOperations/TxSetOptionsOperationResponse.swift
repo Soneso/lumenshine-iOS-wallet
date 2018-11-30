@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import stellarsdk
 
 class TxSetOptionsOperationResponse: TxOperationResponse {
     
@@ -36,10 +35,12 @@ class TxSetOptionsOperationResponse: TxOperationResponse {
     public let masterKeyWeight:Int?
     
     /// The array of numeric values of flags that has been cleared in this operation
-    public let clearFlags:AccountFlagsResponse?
+    public let clearFlagsString:[String]?
+    public let clearFlags:[Int]?
     
     /// The array of numeric values of flags that has been set in this operation
-    public let setFlags:AccountFlagsResponse?
+    public let setFlagsString:[String]?
+    public let setFlags:[Int]?
     
     
     // Properties to encode and decode
@@ -52,8 +53,10 @@ class TxSetOptionsOperationResponse: TxOperationResponse {
         case signerKey = "signer_key"
         case signerWeight = "signer_weight"
         case masterKeyWeight = "master_key_weight"
-        case clearFlags = "clear_flags_s"
-        case setFlags = "set_flags_s"
+        case clearFlagsString = "clear_flags_s"
+        case clearFlags = "clear_flags"
+        case setFlagsString = "set_flags_s"
+        case setFlags = "set_flags"
         
     }
     
@@ -72,8 +75,10 @@ class TxSetOptionsOperationResponse: TxOperationResponse {
         signerKey = try values.decodeIfPresent(String.self, forKey: .signerKey)
         signerWeight = try values.decodeIfPresent(Int.self, forKey: .signerWeight)
         masterKeyWeight = try values.decodeIfPresent(Int.self, forKey: .masterKeyWeight)
-        clearFlags = try values.decodeIfPresent(AccountFlagsResponse.self, forKey: .clearFlags)
-        setFlags = try values.decodeIfPresent(AccountFlagsResponse.self, forKey: .setFlags)
+        clearFlagsString = try values.decodeIfPresent(Array<String>.self, forKey: .clearFlagsString)
+        clearFlags = try values.decodeIfPresent(Array<Int>.self, forKey: .clearFlags)
+        setFlagsString = try values.decodeIfPresent(Array<String>.self, forKey: .setFlagsString)
+        setFlags = try values.decodeIfPresent(Array<Int>.self, forKey: .setFlags)
         
         try super.init(from: decoder)
     }
