@@ -604,7 +604,7 @@ fileprivate extension TransactionsViewModel {
         if item.operationType == .manageOffer || item.operationType == .createPassiveOffer {
             if let selling = filter.offer.sellingCurrency {
                 if let curr = self.currency(for: item) {
-                    sellingFlag = selling.lowercased() == curr.0.lowercased()
+                    sellingFlag = curr.0.contains(selling)
                 } else {
                     sellingFlag = false
                 }
@@ -617,12 +617,12 @@ fileprivate extension TransactionsViewModel {
         if (item.operationType == .manageOffer || item.operationType == .createPassiveOffer) {
             if let buying = filter.offer.buyingCurrency {
                 if let curr = self.currency(for: item) {
-                    buyingFlag = buying.lowercased() == curr.1!.lowercased()
+                    buyingFlag = curr.1?.contains(buying) ?? false
                 } else {
                     buyingFlag = false
                 }
             } else {
-                buyingFlag = filter.offer.include
+                buyingFlag = sellingFlag
             }
         }
         
@@ -654,8 +654,7 @@ fileprivate extension TransactionsViewModel {
         return (paymentReceivedFlag && currencyFlag) ||
             (paymentSentFlag && currencyFlag) ||
             ((paymentReceivedFlag && paymentSentFlag) || currencyFlag) ||
-            sellingFlag ||
-            buyingFlag ||
+            (sellingFlag && buyingFlag) ||
             setOptionsFlag ||
             manageDataFlag ||
             trustFlag ||
@@ -665,6 +664,7 @@ fileprivate extension TransactionsViewModel {
 }
 
 // MARK: Operation details
+
 fileprivate extension TransactionsViewModel {
     func details(accountCreated: TxAccountCreatedOperationResponse) -> NSAttributedString {
         // TODO: check logic

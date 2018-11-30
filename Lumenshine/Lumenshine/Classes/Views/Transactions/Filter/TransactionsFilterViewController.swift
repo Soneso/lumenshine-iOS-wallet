@@ -53,7 +53,6 @@ class TransactionsFilterViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateTags()
-        updateSwitchState()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -136,15 +135,13 @@ extension TransactionsFilterViewController {
 extension TransactionsFilterViewController {
     
     func updateTags() {
-        paymentsFilter.show(tags: viewModel.paymentFilterTags(), color: Stylesheet.color(.orange))
-        offersFilter.show(tags: viewModel.offerFilterTags(), color: Stylesheet.color(.green))
-        otherFilter.show(tags: viewModel.otherFilterTags(), color: Stylesheet.color(.blue))
-    }
-    
-    func updateSwitchState() {
         paymentsFilter.switch.isOn = viewModel.filter.payment.include
         offersFilter.switch.isOn = viewModel.filter.offer.include
         otherFilter.switch.isOn = viewModel.filter.other.include
+        
+        paymentsFilter.show(tags: viewModel.paymentFilterTags(), color: Stylesheet.color(.orange))
+        offersFilter.show(tags: viewModel.offerFilterTags(), color: Stylesheet.color(.green))
+        otherFilter.show(tags: viewModel.otherFilterTags(), color: Stylesheet.color(.blue))
     }
 }
 
