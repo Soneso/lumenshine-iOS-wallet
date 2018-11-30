@@ -992,7 +992,7 @@
 "trustor" = "Trustor";
 
 /*  */
-"source_account" = "Source account";
+"source_account" = "Source";
 
 /*  */
 "merge_account" = "Merge account";
