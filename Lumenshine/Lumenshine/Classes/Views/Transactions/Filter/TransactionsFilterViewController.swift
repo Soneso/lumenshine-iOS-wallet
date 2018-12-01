@@ -37,6 +37,14 @@ class TransactionsFilterViewController: UIViewController {
     init(viewModel: TransactionsViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        
+        viewModel.applyFiltersClosure = {
+            DispatchQueue.main.async {
+                self.hideActivity(completion: {
+                    self.navigationController?.popViewController(animated: true)
+                })
+            }
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -45,8 +53,7 @@ class TransactionsFilterViewController: UIViewController {
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
+        super.viewDidLoad()        
         prepareView()
     }
     
@@ -58,7 +65,9 @@ class TransactionsFilterViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
-    
+}
+
+extension TransactionsFilterViewController: UINavigationControllerDelegate {
 }
 
 extension TransactionsFilterViewController: UITextFieldDelegate {
@@ -75,6 +84,7 @@ extension TransactionsFilterViewController {
     
     @objc
     func applyAction(sender: UIButton) {
+        showActivity(message: R.string.localizable.loading())
         viewModel.applyFilters()
     }
     
@@ -83,7 +93,7 @@ extension TransactionsFilterViewController {
         guard let text = textField.text else {
             return
         }
-        viewModel.memo = text
+        viewModel.filter.memo = text
     }
     
     @objc
@@ -323,7 +333,7 @@ fileprivate extension TransactionsFilterViewController {
             make.right.equalTo(-horizontalSpacing)
         }
         
-        memoField.text = viewModel.memo
+        memoField.text = viewModel.filter.memo
         memoField.placeholder = R.string.localizable.memo()
         memoField.borderWidthPreset = .border2
         memoField.borderColor = Stylesheet.color(.gray)

@@ -14,6 +14,7 @@ protocol TransactionsViewModelType: Transitionable {
     var wallets: [String] { get }
     var currencies: [String] { get }
     var reloadClosure: (() -> ())? { get set }
+    var applyFiltersClosure: (() -> ())? { get set }
     var filter: TransactionFilter { get set }
     
     func date(at indexPath: IndexPath) -> String?
@@ -31,13 +32,13 @@ protocol TransactionsViewModelType: Transitionable {
     var currencyIndex: Int { get set }
     var dateFrom: Date { get set }
     var dateTo: Date { get set }
-    var memo: String { get set }
     
     func showPaymentsFilter()
     func showOffersFilter()
     func showOtherFilter()
     func applyFilters()
     func clearFilters()
+    func restoreFilters()
     
     func paymentFilterTags() -> [String]
     func offerFilterTags() -> [String]
@@ -97,17 +98,16 @@ class TransactionsViewModel : TransactionsViewModelType {
     fileprivate var entries: [TxTransactionResponse] = []
     fileprivate var filteredEntries: [TxTransactionResponse] = []
     fileprivate var currentWalletPK: String
-    fileprivate var startDate: String
-    fileprivate var endDate: String
     fileprivate var sortedWallets: [WalletsResponse] = []
     fileprivate var sortedWalletsDetails: [Wallet] = []
     fileprivate var isFiltering: Bool = false
-    fileprivate var forceUpdate: Bool = true
     
+    fileprivate var filterBackup: TransactionFilter
     var filter: TransactionFilter
     
     weak var navigationCoordinator: CoordinatorType?    
     var reloadClosure: (() -> ())?
+    var applyFiltersClosure: (() -> ())?
     
     init(service: Services, user: User?) {
         self.services = service
@@ -115,14 +115,10 @@ class TransactionsViewModel : TransactionsViewModelType {
         self.mainFont = R.font.encodeSansRegular(size: 13) ?? Stylesheet.font(.body)
         
         self.currentWalletPK = PrivateKeyManager.getPublicKey(forIndex: 0)
-        self.dateFrom = Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date()
-        self.dateTo = Date()
-        self.startDate = DateUtils.format(dateFrom, in: .dateAndTime) ?? Date().description
-        self.endDate = DateUtils.format(dateTo, in: .dateAndTime) ?? Date().description
-        self.walletIndex = 0
-        self.currencyIndex = 0
-        self.memo = ""
-        self.filter = TransactionFilter()
+        
+        let startDate = Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date()
+        self.filter = TransactionFilter(startDate: startDate, endDate: Date())
+        self.filterBackup = filter
         
         updateTransactions()
         getWallets()
@@ -142,9 +138,11 @@ class TransactionsViewModel : TransactionsViewModelType {
     }
     
     var walletIndex: Int {
-        didSet {
-            self.currentWalletPK = sortedWallets[walletIndex].publicKey
-            forceUpdate = true
+        get {
+            return filter.walletIndex
+        }
+        set(value) {
+            filter.walletIndex = value
         }
     }
     
@@ -157,23 +155,33 @@ class TransactionsViewModel : TransactionsViewModelType {
         return allCurrencies
     }
     
-    var currencyIndex: Int
+    var currencyIndex: Int {
+        get {
+            return filter.currencyIndex
+        }
+        set(value) {
+            filter.currencyIndex = value
+        }
+    }
+    
     
     var dateFrom: Date {
-        didSet {
-            startDate = DateUtils.format(dateFrom, in: .dateAndTime) ?? startDate
-            forceUpdate = true
+        get {
+            return filter.startDate
+        }
+        set(value) {
+            filter.startDate = value
         }
     }
     
     var dateTo: Date {
-        didSet {
-            endDate = DateUtils.format(dateTo, in: .dateAndTime) ?? endDate
-            forceUpdate = true
+        get {
+            return filter.endDate
+        }
+        set(value) {
+            filter.endDate = value
         }
     }
-    
-    var memo: String
     
     func date(at indexPath: IndexPath) -> String? {
         let date = entry(at: indexPath).createdAt
@@ -335,22 +343,32 @@ class TransactionsViewModel : TransactionsViewModelType {
     }
     
     func applyFilters() {
-        isFiltering = filter.payment.include || filter.offer.include || filter.other.include || !memo.isEmpty ||
+        isFiltering = filter.payment.include || filter.offer.include || filter.other.include || !filter.memo.isEmpty ||
             paymentFilterTags().count > 0 || offerFilterTags().count > 0 || otherFilterTags().count > 0
-        if forceUpdate {
+        
+        if filter.walletIndex != filterBackup.walletIndex ||
+            filter.startDate != filterBackup.startDate ||
+            filter.endDate != filterBackup.endDate {
             updateTransactions()
         } else {
             filteredEntries = entries.filter {
                 return filter(item: $0)
             }
             self.reloadClosure?()
+            self.applyFiltersClosure?()
         }
+        filterBackup = filter
     }
     
     func clearFilters() {
         filter.clear()
+        filterBackup.clear()
         isFiltering = false
         self.reloadClosure?()
+    }
+    
+    func restoreFilters() {
+        filter = filterBackup
     }
     
     func paymentFilterTags() -> [String] {
@@ -411,6 +429,11 @@ class TransactionsViewModel : TransactionsViewModelType {
 fileprivate extension TransactionsViewModel {
     
     func updateTransactions() {
+        if sortedWallets.count > walletIndex {
+            currentWalletPK = sortedWallets[walletIndex].publicKey
+        }
+        let startDate = DateUtils.format(dateFrom, in: .dateAndTime) ?? Date().description
+        let endDate = DateUtils.format(dateTo, in: .dateAndTime) ?? Date().description
         services.transactions.getTransactions(stellarAccount: currentWalletPK, startTime: startDate, endTime: endDate) { [weak self] result in
             switch result {
             case .success(let transactions):
@@ -421,7 +444,7 @@ fileprivate extension TransactionsViewModel {
                     }
                 }
                 self?.reloadClosure?()
-                self?.forceUpdate = false
+                self?.applyFiltersClosure?()
             case .failure(let error):
                 print("Transactions list failure: \(error)")
             }
@@ -562,8 +585,8 @@ fileprivate extension TransactionsViewModel {
     func filter(item: TxTransactionResponse) -> Bool {
         let type = transactionType(for: item)
         
-        if !memo.isEmpty {
-            return item.memo.contains(memo)
+        if !filter.memo.isEmpty {
+            return item.memo.contains(filter.memo)
         }
         
         var paymentReceivedFlag = false

@@ -82,11 +82,22 @@ struct TransactionFilter {
         }
     }
     
+    var walletIndex: Int
+    var currencyIndex: Int
+    var startDate: Date
+    var endDate: Date
+    var memo: String
+    
     var payment: Payment
     var offer: Offer
     var other: Other
     
-    init() {
+    init(startDate: Date, endDate: Date) {
+        self.walletIndex = 0
+        self.currencyIndex = 0
+        self.startDate = startDate
+        self.endDate = endDate
+        self.memo = ""
         self.payment = Payment()
         self.offer = Offer()
         self.other = Other()

@@ -169,6 +169,8 @@ extension TransactionsViewController {
     }
     
     func updateHeader() {
+        viewModel.restoreFilters()
+        
         let name = viewModel.wallets.count > 0 ? viewModel.wallets[viewModel.walletIndex] : R.string.localizable.primary()
         walletLabel.text = "\(R.string.localizable.wallet()): \(name)"
         let dateFrom = DateUtils.format(viewModel.dateFrom, in: .date) ?? viewModel.dateFrom.description
@@ -205,9 +207,9 @@ fileprivate extension TransactionsViewController {
     
     func prepareNavigationItem() {
         
-        navigationItem.titleLabel.text = R.string.localizable.transactions_history()
-        navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
-        navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
+        snackbarController?.navigationItem.titleLabel.text = R.string.localizable.transactions_history()
+        snackbarController?.navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
+        snackbarController?.navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         
         navigationController?.navigationBar.setBackgroundImage(R.image.nav_background(), for: .default)
     }
