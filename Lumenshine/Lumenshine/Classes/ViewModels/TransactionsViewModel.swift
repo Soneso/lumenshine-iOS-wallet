@@ -443,8 +443,12 @@ fileprivate extension TransactionsViewModel {
                         return self?.filter(item: $0) ?? false
                     }
                 }
-                self?.reloadClosure?()
-                self?.applyFiltersClosure?()
+                if let closure = self?.reloadClosure {
+                    closure()
+                }
+                if let closure = self?.applyFiltersClosure {
+                    closure()
+                }
             case .failure(let error):
                 print("Transactions list failure: \(error)")
             }
