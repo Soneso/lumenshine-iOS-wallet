@@ -227,11 +227,11 @@ class TransactionsViewModel : TransactionsViewModelType {
     
     func feePaid(at indexPath: IndexPath) -> String {
         let transaction = entry(at: indexPath)
-        var operationFee = 0.0
         if currentWalletPK == transaction.sourceAccount {
-            operationFee = Double(transaction.feePaid)/Double(transaction.operationCount)
+            let operationFee = (Double(transaction.feePaid)/Double(transaction.operationCount)) * 0.0000001
+            return String(format: "%.5f", operationFee)
         }
-        return String(operationFee)
+        return "0.0"
     }
     
     func details(at indexPath: IndexPath) -> NSAttributedString {
@@ -684,14 +684,14 @@ fileprivate extension TransactionsViewModel {
     }
     
     func details(payment: TxPaymentOperationResponse) -> NSAttributedString {
-        let publicKey = payment.to == currentWalletPK ? payment.to : payment.from
-        let prefix = payment.to == currentWalletPK ? R.string.localizable.recipient() : R.string.localizable.sender()
+        let publicKey = payment.to == currentWalletPK ? payment.from : payment.to
+        let prefix = payment.to == currentWalletPK ? R.string.localizable.sender() : R.string.localizable.recipient()
         return copyString(prefix: prefix, value: publicKey)
     }
     
     func details(pathPayment: TxPathPaymentOperationResponse) -> NSAttributedString {
-        let publicKey = pathPayment.to == currentWalletPK ? pathPayment.to : pathPayment.from
-        let prefix = pathPayment.to == currentWalletPK ? R.string.localizable.recipient() : R.string.localizable.sender()
+        let publicKey = pathPayment.to == currentWalletPK ? pathPayment.from : pathPayment.to
+        let prefix = pathPayment.to == currentWalletPK ? R.string.localizable.sender() : R.string.localizable.recipient()
         return copyString(prefix: prefix, value: publicKey)
     }
     

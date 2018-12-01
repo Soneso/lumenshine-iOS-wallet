@@ -161,7 +161,7 @@ fileprivate extension TransactionsTableViewCell {
         }
         
         typeValueLabel.textColor = Stylesheet.color(.lightBlack)
-        typeValueLabel.font = R.font.encodeSansRegular(size: fontSize)
+        typeValueLabel.font = R.font.encodeSansSemiBold(size: fontSize)
         
         contentView.addSubview(typeValueLabel)
         typeValueLabel.snp.makeConstraints { make in
