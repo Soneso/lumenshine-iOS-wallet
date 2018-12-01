@@ -87,7 +87,7 @@ extension PaymentFilterViewController {
             if let toV = sentField.rangeTextField.text, !toV.isEmpty {
                 to = Double(toV) ?? Double.infinity
             }
-            viewModel.filter.payment.sentRange = Range<Double>(uncheckedBounds: (from, to))
+            viewModel.filter.payment.sentRange = from..<to// Range<Double>(uncheckedBounds: (from, to))
         } else {
             viewModel.filter.payment.sentRange = nil
         }

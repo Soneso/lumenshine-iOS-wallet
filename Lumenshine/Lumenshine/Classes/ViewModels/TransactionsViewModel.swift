@@ -149,11 +149,12 @@ class TransactionsViewModel : TransactionsViewModelType {
     }
     
     var currencies: [String] {
+        var allCurrencies = [R.string.localizable.all()]
         let wallet = sortedWalletsDetails[walletIndex]
         if wallet.isFunded, let funded = wallet as? FundedWallet {
-            return funded.getAvailableCurrencies()
+            allCurrencies += funded.getAvailableCurrencies()
         }
-        return []
+        return allCurrencies
     }
     
     var currencyIndex: Int
@@ -355,10 +356,18 @@ class TransactionsViewModel : TransactionsViewModelType {
     func paymentFilterTags() -> [String] {
         var tags = [String]()
         if let range = filter.payment.receivedRange {
-            tags.append("Received:\(range.lowerBound)-\(range.upperBound)")
+            if range.upperBound == Double.infinity {
+                tags.append("Received")
+            } else {
+                tags.append("Received:\(range.lowerBound)-\(range.upperBound)")
+            }
         }
         if let range = filter.payment.sentRange {
-            tags.append("Sent:\(range.lowerBound)-\(range.upperBound)")
+            if range.upperBound == Double.infinity {
+                tags.append("Sent")
+            } else {
+                tags.append("Sent:\(range.lowerBound)-\(range.upperBound)")
+            }
         }
         if let currency = filter.payment.currency {
             tags.append(currency)
@@ -590,12 +599,16 @@ fileprivate extension TransactionsViewModel {
             if let currency = filter.payment.currency {
                 if let curr = self.currency(for: item) {
                     currencyFlag = currency.lowercased() == curr.0.lowercased()
-                } else {
-                    currencyFlag = false
                 }
+                currencyFlag = currencyIndex == 0 || currencyFlag
             } else {
                 currencyFlag = paymentReceivedFlag || paymentSentFlag
             }
+        }
+        
+        // only currency flag is On
+        if currencyFlag == true, filter.payment.receivedRange == nil, filter.payment.sentRange == nil {
+            paymentReceivedFlag = true
         }
         
         var sellingFlag = false
@@ -649,9 +662,8 @@ fileprivate extension TransactionsViewModel {
             bumpSequenceFlag = filter.other.bumpSequence ?? filter.other.include
         }
         
-        return (paymentReceivedFlag && currencyFlag) ||
-            (paymentSentFlag && currencyFlag) ||
-            ((paymentReceivedFlag && paymentSentFlag) || currencyFlag) ||
+        return
+            ((paymentReceivedFlag || paymentSentFlag) && currencyFlag) ||
             (sellingFlag && buyingFlag) ||
             setOptionsFlag ||
             manageDataFlag ||

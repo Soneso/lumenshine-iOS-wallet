@@ -53,8 +53,10 @@ class SwitchRangeField: SwitchInputField {
     func update(range: Range<Double>?, animated: Bool = false) {
         if let range = range {
             self.switch.setOn(true, animated: animated)
-            rangeTextField.text = String(range.upperBound)
-            textField.text = String(range.lowerBound)
+            if range.upperBound != Double.infinity {
+                rangeTextField.text = String(range.upperBound)
+                textField.text = String(range.lowerBound)
+            }
         } else {
             self.switch.setOn(false, animated: animated)
         }
