@@ -80,6 +80,7 @@ extension TransactionsFilterViewController {
     @objc
     func clearAction(sender: UIButton) {
         viewModel.clearFilters()
+        updateTags(animated: true)
     }
     
     @objc
@@ -147,10 +148,10 @@ extension TransactionsFilterViewController {
 
 extension TransactionsFilterViewController {
     
-    func updateTags() {
-        paymentsFilter.switch.isOn = viewModel.filter.payment.include
-        offersFilter.switch.isOn = viewModel.filter.offer.include
-        otherFilter.switch.isOn = viewModel.filter.other.include
+    func updateTags(animated: Bool = false) {
+        paymentsFilter.switch.setOn(viewModel.filter.payment.include, animated: animated)
+        offersFilter.switch.setOn(viewModel.filter.offer.include, animated: animated)
+        otherFilter.switch.setOn(viewModel.filter.other.include, animated: animated)
         
         paymentsFilter.show(tags: viewModel.paymentFilterTags(), color: Stylesheet.color(.orange))
         offersFilter.show(tags: viewModel.offerFilterTags(), color: Stylesheet.color(.green))

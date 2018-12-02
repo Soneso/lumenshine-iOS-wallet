@@ -28,6 +28,8 @@ class TransactionsCoordinator: CoordinatorType {
         switch transition {
         case .showTransactionFilter:
             showTransactionFilter()
+        case .showTransactionSorter:
+            showTransactionSorter()
         case .showPaymentsFilter:
             showPaymentsFilter()
         case .showOffersFilter:
@@ -59,5 +61,10 @@ fileprivate extension TransactionsCoordinator {
     func showOtherFilter() {
         let filterVC = OtherFilterViewController(viewModel: viewModel)
         baseController.navigationController?.pushViewController(filterVC, animated: true)
+    }
+    
+    func showTransactionSorter() {
+        let sorterVC = TransactionsSortViewController(viewModel: viewModel)
+        baseController.navigationController?.pushViewController(sorterVC, animated: true)
     }
 }

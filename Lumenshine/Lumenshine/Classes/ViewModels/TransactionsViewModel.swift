@@ -16,6 +16,7 @@ protocol TransactionsViewModelType: Transitionable {
     var reloadClosure: (() -> ())? { get set }
     var applyFiltersClosure: (() -> ())? { get set }
     var filter: TransactionFilter { get set }
+    var sorter: TransactionSorter { get set }
     
     func date(at indexPath: IndexPath) -> String?
     func type(at indexPath: IndexPath) -> String?
@@ -40,12 +41,15 @@ protocol TransactionsViewModelType: Transitionable {
     func clearFilters()
     func restoreFilters()
     
+    func applySorter()
+    func clearSorter()
+    
     func paymentFilterTags() -> [String]
     func offerFilterTags() -> [String]
     func otherFilterTags() -> [String]
 }
 
-enum TransactionType: String {
+enum TransactionType: String, Comparable {
     case paymentReceived
     case paymentSent
     case offerCreated
@@ -87,6 +91,10 @@ enum TransactionType: String {
             return R.string.localizable.bump_sequence()
         }
     }
+    
+    static func < (lhs: TransactionType, rhs: TransactionType) -> Bool {
+        return lhs.rawValue < rhs.rawValue
+    }
 }
 
 class TransactionsViewModel : TransactionsViewModelType {
@@ -104,6 +112,7 @@ class TransactionsViewModel : TransactionsViewModelType {
     
     fileprivate var filterBackup: TransactionFilter
     var filter: TransactionFilter
+    var sorter: TransactionSorter
     
     weak var navigationCoordinator: CoordinatorType?    
     var reloadClosure: (() -> ())?
@@ -119,6 +128,7 @@ class TransactionsViewModel : TransactionsViewModelType {
         let startDate = Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date()
         self.filter = TransactionFilter(startDate: startDate, endDate: Date())
         self.filterBackup = filter
+        self.sorter = TransactionSorter()
         
         updateTransactions()
         getWallets()
@@ -327,7 +337,7 @@ class TransactionsViewModel : TransactionsViewModelType {
     }
     
     func sortClick() {
-        
+        navigationCoordinator?.performTransition(transition: .showTransactionSorter)
     }
     
     func showPaymentsFilter() {
@@ -423,6 +433,17 @@ class TransactionsViewModel : TransactionsViewModelType {
         }
         return tags
     }
+    
+    func applySorter() {
+        setupEntries(transactions: entries)
+        self.reloadClosure?()
+    }
+    
+    func clearSorter() {
+        sorter.clear()
+        setupEntries(transactions: entries)
+        self.reloadClosure?()
+    }
 }
 
 // MARK: remote methods
@@ -437,12 +458,7 @@ fileprivate extension TransactionsViewModel {
         services.transactions.getTransactions(stellarAccount: currentWalletPK, startTime: startDate, endTime: endDate) { [weak self] result in
             switch result {
             case .success(let transactions):
-                self?.entries = transactions
-                if self?.isFiltering ?? false {
-                    self?.filteredEntries = transactions.filter {
-                        return self?.filter(item: $0) ?? false
-                    }
-                }
+                self?.setupEntries(transactions: transactions)
                 if let closure = self?.reloadClosure {
                     closure()
                 }
@@ -481,10 +497,20 @@ fileprivate extension TransactionsViewModel {
 
 fileprivate extension TransactionsViewModel {
     func entry(at indexPath: IndexPath) -> TxTransactionResponse {
-        if isFiltering {
-            return filteredEntries[indexPath.row]
+        let items = isFiltering ? filteredEntries : entries
+        return items[indexPath.row]
+    }
+    
+    func setupEntries(transactions: [TxTransactionResponse]) {
+        entries = transactions
+        entries.sort(by:) {
+            return sorter(lhs: $0, rhs: $1)
         }
-        return entries[indexPath.row]
+        if isFiltering {
+            filteredEntries = entries.filter {
+                return filter(item: $0)
+            }
+        }
     }
     
     func amount(for item: TxTransactionResponse) -> String? {
@@ -697,6 +723,52 @@ fileprivate extension TransactionsViewModel {
             trustFlag ||
             accountMergeFlag ||
             bumpSequenceFlag
+    }
+    
+    func sorter(lhs: TxTransactionResponse, rhs: TxTransactionResponse) -> Bool {
+        if let typeSorter = sorter.type {
+            guard let lhsType = transactionType(for: lhs) else { return typeSorter }
+            guard let rhsType = transactionType(for: rhs) else { return !typeSorter }
+            if lhsType < rhsType {
+                return typeSorter
+            }
+            if lhsType > rhsType {
+                return !typeSorter
+            }
+        }
+        
+        if let amountSorter = sorter.amount {
+            guard let lhsAmount = amount(for: lhs) else { return amountSorter }
+            guard let rhsAmount = amount(for: rhs) else { return !amountSorter }
+            if Double(lhsAmount)! < Double(rhsAmount)! {
+                return amountSorter
+            }
+            if Double(lhsAmount)! > Double(rhsAmount)! {
+                return !amountSorter
+            }
+        }
+        
+        if let currencySorter = sorter.currency {
+            guard let lhsCurrency = self.currency(for: lhs) else { return !currencySorter }
+            guard let rhsCurrency = self.currency(for: rhs) else { return currencySorter }
+            if lhsCurrency.0 < rhsCurrency.0 {
+                return currencySorter
+            }
+            if lhsCurrency.0 > rhsCurrency.0 {
+                return !currencySorter
+            }
+        }
+        
+        if let dateSorter = sorter.date {
+            if lhs.createdAt < rhs.createdAt {
+                return dateSorter
+            }
+            if lhs.createdAt > rhs.createdAt {
+                return !dateSorter
+            }
+        }
+        
+        return true
     }
 }
 

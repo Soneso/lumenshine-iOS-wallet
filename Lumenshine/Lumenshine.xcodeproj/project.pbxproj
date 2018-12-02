@@ -266,6 +266,9 @@
 		839C4DDE21A0561500A1B715 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839C4DDD21A0561500A1B715 /* TermsViewController.swift */; };
 		97E8BBC0289EC0F063E34625 /* Pods_LumenshineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A860572CA3939F9BCA5F5986 /* Pods_LumenshineTests.framework */; };
 		A28F5687F8B3BF38588AC413 /* Pods_Lumenshine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52C8B6B260F28BAB38AF99E2 /* Pods_Lumenshine.framework */; };
+		B102359421B2EC5D009D5E0D /* TransactionsSortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B102359321B2EC5D009D5E0D /* TransactionsSortViewController.swift */; };
+		B102359621B2F054009D5E0D /* TransactionSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B102359521B2F054009D5E0D /* TransactionSorter.swift */; };
+		B102359821B2F64A009D5E0D /* SortSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B102359721B2F64A009D5E0D /* SortSwitch.swift */; };
 		B12FD05B21A6EF9B00480D0B /* TagsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12FD05A21A6EF9B00480D0B /* TagsCollectionView.swift */; };
 		B12FD05D21A6F0CE00480D0B /* TagCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12FD05C21A6F0CE00480D0B /* TagCollectionViewItem.swift */; };
 		B13D5D7021AC0326000BD6E2 /* SwitchInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13D5D6F21AC0326000BD6E2 /* SwitchInputField.swift */; };
@@ -307,7 +310,6 @@
 		B1F3AA20219C2AAD00A1F3B4 /* TxInflationOperationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F3AA1F219C2AAD00A1F3B4 /* TxInflationOperationResponse.swift */; };
 		B1F3AA22219C2ADD00A1F3B4 /* TxManageDataOperationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F3AA21219C2ADD00A1F3B4 /* TxManageDataOperationResponse.swift */; };
 		B1F3AA24219C2B1B00A1F3B4 /* TxBumpSequenceOperationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F3AA23219C2B1B00A1F3B4 /* TxBumpSequenceOperationResponse.swift */; };
-		BC85BD500013E598CAFF9FAE /* Pods_LumenshineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F29A5324DA57F1AA741A5E82 /* Pods_LumenshineTests.framework */; };
 		C61244C62113325A00DE1EA9 /* SendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C61244C52113325A00DE1EA9 /* SendViewController.xib */; };
 		C61244C8211332E700DE1EA9 /* SendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61244C7211332E700DE1EA9 /* SendViewController.swift */; };
 		C6171958215520C200F9907A /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6171957215520C200F9907A /* RoundedButton.swift */; };
@@ -720,6 +722,9 @@
 		8E00CFAD5C99654352F5BF2A /* Pods-LumenshineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineTests/Pods-LumenshineTests.release.xcconfig"; sourceTree = "<group>"; };
 		8EEC14D2AF35010B3F86265E /* Pods-Lumenshine.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lumenshine.development.xcconfig"; path = "Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine.development.xcconfig"; sourceTree = "<group>"; };
 		A860572CA3939F9BCA5F5986 /* Pods_LumenshineTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LumenshineTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B102359321B2EC5D009D5E0D /* TransactionsSortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsSortViewController.swift; sourceTree = "<group>"; };
+		B102359521B2F054009D5E0D /* TransactionSorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSorter.swift; sourceTree = "<group>"; };
+		B102359721B2F64A009D5E0D /* SortSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortSwitch.swift; sourceTree = "<group>"; };
 		B12FD05A21A6EF9B00480D0B /* TagsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsCollectionView.swift; sourceTree = "<group>"; };
 		B12FD05C21A6F0CE00480D0B /* TagCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewItem.swift; sourceTree = "<group>"; };
 		B13D5D6F21AC0326000BD6E2 /* SwitchInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchInputField.swift; sourceTree = "<group>"; };
@@ -761,8 +766,6 @@
 		B1F3AA1F219C2AAD00A1F3B4 /* TxInflationOperationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxInflationOperationResponse.swift; sourceTree = "<group>"; };
 		B1F3AA21219C2ADD00A1F3B4 /* TxManageDataOperationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxManageDataOperationResponse.swift; sourceTree = "<group>"; };
 		B1F3AA23219C2B1B00A1F3B4 /* TxBumpSequenceOperationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxBumpSequenceOperationResponse.swift; sourceTree = "<group>"; };
-		BD5D7ECC1085F6D80224F694 /* Pods-LumenshineUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineUITests/Pods-LumenshineUITests.release.xcconfig"; sourceTree = "<group>"; };
-		C5A51E60F2E3DA1ACC512340 /* Pods-LumenshineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineTests/Pods-LumenshineTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C61244C52113325A00DE1EA9 /* SendViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendViewController.xib; sourceTree = "<group>"; };
 		C61244C7211332E700DE1EA9 /* SendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendViewController.swift; sourceTree = "<group>"; };
 		C6171957215520C200F9907A /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
@@ -1103,6 +1106,7 @@
 				43BAAB96217B311800034657 /* UserData.swift */,
 				C6CFEF33217DB1E0006EEC08 /* JailbreakChecker.swift */,
 				B13D5D7321AC2B9B000BD6E2 /* TransactionFilter.swift */,
+				B102359521B2F054009D5E0D /* TransactionSorter.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1646,20 +1650,13 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
-		A21B98E0A3EC476C69581BDB /* Pods */ = {
+		B102359221B2EB7E009D5E0D /* Sort */ = {
 			isa = PBXGroup;
 			children = (
-				3A4149AFC8604617D96DE7F7 /* Pods-Lumenshine.debug.xcconfig */,
-				4534D0B19B1A29100BC77299 /* Pods-Lumenshine.development.xcconfig */,
-				52E54FC84E28F320A188104A /* Pods-Lumenshine.release.xcconfig */,
-				C5A51E60F2E3DA1ACC512340 /* Pods-LumenshineTests.debug.xcconfig */,
-				E2E442CC2A146D8996AF6B8A /* Pods-LumenshineTests.development.xcconfig */,
-				C646F566BF9C95E0290B7A6D /* Pods-LumenshineTests.release.xcconfig */,
-				C8C7E7BF44C74BBA464F81FF /* Pods-LumenshineUITests.debug.xcconfig */,
-				7A07122EB8B38B1B6BC1B141 /* Pods-LumenshineUITests.development.xcconfig */,
-				BD5D7ECC1085F6D80224F694 /* Pods-LumenshineUITests.release.xcconfig */,
+				B102359321B2EC5D009D5E0D /* TransactionsSortViewController.swift */,
+				B102359721B2F64A009D5E0D /* SortSwitch.swift */,
 			);
-			name = Pods;
+			path = Sort;
 			sourceTree = "<group>";
 		};
 		B168F06921A876EF000EE02C /* Filter */ = {
@@ -1690,6 +1687,7 @@
 		B1ECB660218C6654002FBB6A /* Transactions */ = {
 			isa = PBXGroup;
 			children = (
+				B102359221B2EB7E009D5E0D /* Sort */,
 				B168F06921A876EF000EE02C /* Filter */,
 				B1ECB661218C67D9002FBB6A /* TransactionsViewController.swift */,
 				B1ECB663218C70FF002FBB6A /* TransactionsTableViewCell.swift */,
@@ -2415,6 +2413,7 @@
 				74C0914520F7B3CD000A809D /* WalletCardInfoViewController.swift in Sources */,
 				C6B5DF9721A80A1C006413BB /* ReachabilityService.swift in Sources */,
 				43E23996214FA1CB0017AABF /* LSButton.swift in Sources */,
+				B102359421B2EC5D009D5E0D /* TransactionsSortViewController.swift in Sources */,
 				43E13E8820D97DA000409129 /* WalletCard.swift in Sources */,
 				43B8919B2104764600062660 /* InputField.swift in Sources */,
 				43CD7B1720F7C47A0014BF69 /* SetupViewController.swift in Sources */,
@@ -2578,6 +2577,7 @@
 				C62B0E9E215376C800CF920B /* CurrencyPickerTextField.swift in Sources */,
 				B16EE6D72181CD6300AF1D8B /* UITextView+Size.swift in Sources */,
 				C672507F213FB5DE0064F6E3 /* InflationManager.swift in Sources */,
+				B102359621B2F054009D5E0D /* TransactionSorter.swift in Sources */,
 				43F3E36120F3B88E0032D017 /* SignUpView.swift in Sources */,
 				B147312C21A466860048DD55 /* TransactionsFilterViewController.swift in Sources */,
 				43F3E35F20F3B8780032D017 /* LoginView.swift in Sources */,
@@ -2593,6 +2593,7 @@
 				C670F8A021A3F97F00D3A6B4 /* WebSocketService.swift in Sources */,
 				C675BC28215CF86200B663DB /* BaseButton.swift in Sources */,
 				B1F3AA1A219C296D00A1F3B4 /* TxChangeTrustOperationResponse.swift in Sources */,
+				B102359821B2F64A009D5E0D /* SortSwitch.swift in Sources */,
 				B1ECB668218C82DE002FBB6A /* TransactionsService.swift in Sources */,
 				4390D582205FBD6E00383BB2 /* Services.swift in Sources */,
 				C6BDA2BE216F66AD0076439E /* NativeCurrencyFeeInfoViewController.swift in Sources */,

@@ -16,7 +16,9 @@ struct TransactionFilter {
         var currency: String?
         var include: Bool = false {
             didSet {
-                self.clear()
+                receivedRange = nil
+                sentRange = nil
+                currency = nil
             }
         }
         
@@ -30,6 +32,7 @@ struct TransactionFilter {
             receivedRange = nil
             sentRange = nil
             currency = nil
+            include = false
         }
     }
     
@@ -38,7 +41,8 @@ struct TransactionFilter {
         var buyingCurrency: String?
         var include: Bool = false {
             didSet {
-                self.clear()
+                sellingCurrency = nil
+                buyingCurrency = nil
             }
         }
         
@@ -50,6 +54,7 @@ struct TransactionFilter {
         mutating func clear() {
             sellingCurrency = nil
             buyingCurrency = nil
+            include = false
         }
     }
     
@@ -61,7 +66,11 @@ struct TransactionFilter {
         var bumpSequence: Bool?
         var include: Bool = false {
             didSet {
-                self.clear()
+                setOptions = nil
+                manageData = nil
+                trust = nil
+                accountMerge = nil
+                bumpSequence = nil
             }
         }
         
@@ -79,6 +88,7 @@ struct TransactionFilter {
             trust = nil
             accountMerge = nil
             bumpSequence = nil
+            include = false
         }
     }
     
