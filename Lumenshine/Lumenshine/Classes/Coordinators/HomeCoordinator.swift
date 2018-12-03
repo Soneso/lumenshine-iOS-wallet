@@ -79,7 +79,8 @@ fileprivate extension HomeCoordinator {
     }
     
     func showHelpCenter() {
-        mainCoordinator.currentMenuCoordinator?.performTransition(transition: .showHelp)
+        let coordinator = HelpCenterCoordinator(mainCoordinator: mainCoordinator, service: Services())
+        self.baseController.navigationController?.pushViewController(coordinator.baseController, animated: true)
     }
 }
 
