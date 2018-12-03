@@ -155,6 +155,10 @@ extension TransactionsViewController: TransactionsCellDelegate {
         snackbarController?.animate(snackbar: .visible, delay: 0)
         snackbarController?.animate(snackbar: .hidden, delay: 3)
     }
+    
+    func cell(_ cell: TransactionsCellProtocol, didInteractWith url: URL) {
+        viewModel.showOperationDetails(operationId: url.lastPathComponent)
+    }
 }
 
 extension TransactionsViewController {

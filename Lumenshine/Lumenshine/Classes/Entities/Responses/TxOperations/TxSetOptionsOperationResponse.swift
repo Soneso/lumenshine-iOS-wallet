@@ -82,4 +82,20 @@ class TxSetOptionsOperationResponse: TxOperationResponse {
         
         try super.init(from: decoder)
     }
+    
+    public override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(lowThreshold, forKey: .lowThreshold)
+        try container.encode(medThreshold, forKey: .medThreshold)
+        try container.encode(highThreshold, forKey: .highThreshold)
+        try container.encode(inflationDestination, forKey: .inflationDestination)
+        try container.encode(homeDomain, forKey: .homeDomain)
+        try container.encode(signerKey, forKey: .signerKey)
+        try container.encode(signerWeight, forKey: .signerWeight)
+        try container.encode(masterKeyWeight, forKey: .masterKeyWeight)
+        try container.encode(clearFlagsString, forKey: .clearFlagsString)
+        try container.encode(clearFlags, forKey: .clearFlags)
+        try container.encode(setFlagsString, forKey: .setFlagsString)
+        try container.encode(setFlags, forKey: .setFlags)
+    }
 }

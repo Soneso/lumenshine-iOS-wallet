@@ -9,7 +9,7 @@
 import Foundation
 import stellarsdk
 
-class TxOperationResponse: Decodable {
+class TxOperationResponse: Codable {
     public static func create(type: Int, data: Data) throws -> (OperationType, TxOperationResponse)  {
         let jsonDecoder = JSONDecoder()
         jsonDecoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601)

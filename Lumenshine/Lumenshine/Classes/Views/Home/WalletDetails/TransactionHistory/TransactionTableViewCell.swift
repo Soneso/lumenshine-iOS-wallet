@@ -55,7 +55,9 @@ class TransactionTableViewCell: UITableViewCell {
     }
     
     private func showDetails() {
-        let transactionDetailsViewController = TransactionHistoryDetailsTableViewController(operationInfo: operationInfo)
+        guard let response = operationInfo.responseData else { return }
+        
+        let transactionDetailsViewController = TransactionHistoryDetailsTableViewController(details: response)
         self.viewContainingController()?.navigationController?.pushViewController(transactionDetailsViewController, animated: true)
     }
     

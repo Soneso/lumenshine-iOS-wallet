@@ -36,6 +36,8 @@ class TransactionsCoordinator: CoordinatorType {
             showOffersFilter()
         case .showOtherFilter:
             showOtherFilter()
+        case .showTransactionDetails(let details):
+            showTransactionDetails(details)
         default:
             break
         }
@@ -66,5 +68,10 @@ fileprivate extension TransactionsCoordinator {
     func showTransactionSorter() {
         let sorterVC = TransactionsSortViewController(viewModel: viewModel)
         baseController.navigationController?.pushViewController(sorterVC, animated: true)
+    }
+    
+    func showTransactionDetails(_ details: Data) {
+        let transactionDetailsViewController = TransactionHistoryDetailsTableViewController(details: details)
+        baseController.navigationController?.pushViewController(transactionDetailsViewController, animated: true)
     }
 }

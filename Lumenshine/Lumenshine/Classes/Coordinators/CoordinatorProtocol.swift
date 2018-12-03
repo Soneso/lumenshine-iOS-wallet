@@ -65,5 +65,6 @@ public indirect enum Transition {
     case showPaymentsFilter
     case showOffersFilter
     case showOtherFilter
+    case showTransactionDetails(Data)
 }
 

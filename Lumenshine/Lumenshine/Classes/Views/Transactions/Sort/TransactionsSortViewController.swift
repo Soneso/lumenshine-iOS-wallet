@@ -172,7 +172,6 @@ fileprivate extension TransactionsSortViewController {
         subviews[2].label.text = R.string.localizable.amount()
         subviews[3].label.text = R.string.localizable.currency()
         
-        let selectedColor = Stylesheet.color(.red)
         let normalColor = Stylesheet.color(.cyan)
         let disabledColor = Stylesheet.color(.gray)
         
@@ -181,7 +180,7 @@ fileprivate extension TransactionsSortViewController {
         subviews[0].button.setImage(R.image.sorter_91()?.tint(with: disabledColor), for: .disabled)
         
         subviews[1].button.setImage(R.image.sorter_AZ()?.tint(with: normalColor), for: .normal)
-        subviews[1].button.setImage(R.image.sorter_AZ()?.tint(with: selectedColor), for: .selected)
+        subviews[1].button.setImage(R.image.sorter_ZA()?.tint(with: normalColor), for: .selected)
         subviews[1].button.setImage(R.image.sorter_AZ()?.tint(with: disabledColor), for: .disabled)
         
         subviews[2].button.setImage(R.image.sorter_91()?.tint(with: normalColor), for: .normal)
@@ -189,7 +188,7 @@ fileprivate extension TransactionsSortViewController {
         subviews[2].button.setImage(R.image.sorter_91()?.tint(with: disabledColor), for: .disabled)
         
         subviews[3].button.setImage(R.image.sorter_AZ()?.tint(with: normalColor), for: .normal)
-        subviews[3].button.setImage(R.image.sorter_AZ()?.tint(with: selectedColor), for: .selected)
+        subviews[3].button.setImage(R.image.sorter_ZA()?.tint(with: normalColor), for: .selected)
         subviews[3].button.setImage(R.image.sorter_AZ()?.tint(with: disabledColor), for: .disabled)
         
         updateValues()

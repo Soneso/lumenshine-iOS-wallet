@@ -34,4 +34,10 @@ class TxAccountMergeOperationResponse: TxOperationResponse {
         
         try super.init(from: decoder)
     }
+    
+    public override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(account, forKey: .account)
+        try container.encode(into, forKey: .into)
+    }
 }

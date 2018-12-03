@@ -39,4 +39,11 @@ class TxAccountCreatedOperationResponse: TxOperationResponse {
         
         try super.init(from: decoder)
     }
+    
+    public override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(startingBalance, forKey: .startingBalance)
+        try container.encode(funder, forKey: .funder)
+        try container.encode(account, forKey: .account)
+    }
 }

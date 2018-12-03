@@ -47,6 +47,8 @@ protocol TransactionsViewModelType: Transitionable {
     func paymentFilterTags() -> [String]
     func offerFilterTags() -> [String]
     func otherFilterTags() -> [String]
+    
+    func showOperationDetails(operationId: String)
 }
 
 enum TransactionType: String, Comparable {
@@ -309,10 +311,14 @@ class TransactionsViewModel : TransactionsViewModelType {
                                                 attributes: [.font : mainFont,
                                                              .foregroundColor : Stylesheet.color(.lightBlack)])
         
+        let link = services.baseURL.appending("/\(item.opId)")
         let operationIdValue = NSAttributedString(string: String(item.opId)+"\n",
                                                   attributes: [.font : mainFont,
-                                                               .foregroundColor : Stylesheet.color(.blue)])
+                                                                .foregroundColor : Stylesheet.color(.blue),
+                                                                .link :  link])
         details.append(operationIdValue)
+        
+        
         
         if !item.memo.isEmpty {
             details.append(NSAttributedString(string: "\(R.string.localizable.memo()): \(item.memo)\n",
@@ -443,6 +449,16 @@ class TransactionsViewModel : TransactionsViewModelType {
         sorter.clear()
         setupEntries(transactions: entries)
         self.reloadClosure?()
+    }
+    
+    func showOperationDetails(operationId: String) {
+        let transaction = entries.first(where: {
+            $0.opId == Int(operationId)
+        })
+        
+        if let jsonData = transaction?.opDetails.data(using: .utf8) {
+            navigationCoordinator?.performTransition(transition: .showTransactionDetails(jsonData))
+        }
     }
 }
 

@@ -54,4 +54,14 @@ class TxPaymentOperationResponse: TxOperationResponse {
         
         try super.init(from: decoder)
     }
+    
+    public override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(amount, forKey: .amount)
+        try container.encode(assetType, forKey: .assetType)
+        try container.encode(assetCode, forKey: .assetCode)
+        try container.encode(assetIssuer, forKey: .assetIssuer)
+        try container.encode(from, forKey: .from)
+        try container.encode(to, forKey: .to)
+    }
 }

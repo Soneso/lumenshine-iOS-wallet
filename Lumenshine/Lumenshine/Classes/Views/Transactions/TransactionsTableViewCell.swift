@@ -21,6 +21,7 @@ protocol TransactionsCellProtocol {
 
 protocol TransactionsCellDelegate: class {
     func cellCopiedToPasteboard(_ cell: TransactionsCellProtocol)
+    func cell(_ cell: TransactionsCellProtocol, didInteractWith url: URL)
 }
 
 class TransactionsTableViewCell: UITableViewCell {
@@ -109,7 +110,8 @@ extension TransactionsTableViewCell: TransactionsCellProtocol {
 
 extension TransactionsTableViewCell: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        return true
+        delegate?.cell(self, didInteractWith: URL)
+        return false
     }
     
     func textView(_ textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {

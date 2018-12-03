@@ -18,21 +18,15 @@ class TransactionHistoryDetailsTableViewController: UITableViewController {
     
     // MARK: - Properties
     
-    fileprivate let operationInfo: OperationInfo
     fileprivate var jsonDict = [String:Any]()
     
-    init(operationInfo: OperationInfo) {
-        self.operationInfo = operationInfo
-        super.init(nibName: nil, bundle: nil)
-        
-        guard let response = operationInfo.responseData else { return }
-        print("Details: " + String(data: response, encoding: .utf8)!)
-        
-        if let jsonDict = try! JSONSerialization.jsonObject(with: response, options: []) as? [String:Any] {
+    init(details: Data) {
+        if let jsonDict = try! JSONSerialization.jsonObject(with: details, options: []) as? [String:Any] {
             self.jsonDict = jsonDict
+            self.jsonDict.removeValue(forKey: "_links")
         }
-        
-        jsonDict.removeValue(forKey: "_links")
+        super.init(nibName: nil, bundle: nil)
+        print("Details: " + String(data: details, encoding: .utf8)!)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -70,8 +64,10 @@ class TransactionHistoryDetailsTableViewController: UITableViewController {
             value = String(aDouble)
         case let aString as String:
             value = aString
-        case let anArray as Array<String>:
-            value = anArray.joined(separator: ", ")
+        case let anArray as Array<Any>:
+            value = anArray.description
+        case let aDict as [String: Any]:
+            value = aDict.description
         default: break
         }
         

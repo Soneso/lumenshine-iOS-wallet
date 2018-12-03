@@ -54,4 +54,14 @@ class TxAllowTrustOperationResponse: TxOperationResponse {
         
         try super.init(from: decoder)
     }
+    
+    public override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(trustor, forKey: .trustor)
+        try container.encode(trustee, forKey: .trustee)
+        try container.encode(assetType, forKey: .assetType)
+        try container.encode(assetCode, forKey: .assetCode)
+        try container.encode(assetIssuer, forKey: .assetIssuer)
+        try container.encode(authorize, forKey: .authorize)
+    }
 }

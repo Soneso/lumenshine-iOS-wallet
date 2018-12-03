@@ -65,4 +65,16 @@ class TxCreatePassiveOfferOperationResponse: TxOperationResponse {
         
         try super.init(from: decoder)
     }
+    
+    public override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(amount, forKey: .amount)
+        try container.encode(price, forKey: .price)
+        try container.encode(buyingAssetType, forKey: .buyingAssetType)
+        try container.encode(buyingAssetCode, forKey: .buyingAssetCode)
+        try container.encode(buyingAssetIssuer, forKey: .buyingAssetIssuer)
+        try container.encode(sellingAssetType, forKey: .sellingAssetType)
+        try container.encode(sellingAssetCode, forKey: .sellingAssetCode)
+        try container.encode(sellingAssetIssuer, forKey: .sellingAssetIssuer)
+    }
 }
