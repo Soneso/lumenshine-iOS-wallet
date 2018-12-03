@@ -39,6 +39,8 @@ class LoginMenuCoordinator: MenuCoordinatorType {
             performLoginTransition(transition)
         case .showHelp:
             showHelpCenter()
+        case .showAbout:
+            showAbout()
         default:
             break
         }
@@ -76,6 +78,11 @@ fileprivate extension LoginMenuCoordinator {
             drawer.closeSide()
             menuView.present(coordinator.baseController)
         }
+    }
+    func showAbout() {
+        let aboutVC = WebViewController(title: R.string.localizable.about(), url: Services.shared.aboutUrl)
+        let composeVC = ComposeNavigationController(rootViewController: aboutVC)
+        baseController.present(composeVC, animated: true)
     }
 }
 

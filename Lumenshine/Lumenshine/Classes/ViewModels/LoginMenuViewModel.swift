@@ -19,7 +19,7 @@ class LoginMenuViewModel : MenuViewModelType {
         self.service = service
         
         self.entries = [[.avatar],
-                        [.login, .signUp, .lostPassword, .lost2FA, .importMnemonic, .about, .help]]
+                        [.login, .signUp, .lostPassword, .lost2FA, .about, .help]] //.importMnemonic
     }
     
     var itemDistribution: [Int] {
@@ -51,6 +51,8 @@ class LoginMenuViewModel : MenuViewModelType {
             navigationCoordinator?.performTransition(transition: .showLost2fa)
         case .help:
             navigationCoordinator?.performTransition(transition: .showHelp)
+        case .about:
+            navigationCoordinator?.performTransition(transition: .showAbout)
         default: break
         }
         lastIndex = indexPath
