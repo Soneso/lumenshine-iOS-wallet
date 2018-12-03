@@ -2,7 +2,7 @@
 
 A Xcode project representing the Lumenshine Wallet by Soneso. It is a wallet for the Stellar network. It operates on the Stellar test net and uses our Lumenshine test server.
 
-The project connects to our test environment endpoint: https://demoapi.lumenshine.com.
+The project connects to our test environment endpoint: https://lsdevapi.ponytest.de.
 
 Currently the project is in development.
 
