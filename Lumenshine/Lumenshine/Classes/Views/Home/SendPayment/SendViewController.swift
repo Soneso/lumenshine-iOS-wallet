@@ -512,7 +512,7 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
     private func setAvailableLabels(currency: AccountBalanceResponse) {
         if let balance = CoinUnit(currency.balance) {
             let availableAmount = balance.availableAmount(forWallet: wallet, forCurrency: currency)
-            availableAmountLabel.text = "You have \(String(format: "%.2f", availableAmount)) \(selectedCurrency) available"
+            availableAmountLabel.text = "You have \(availableAmount.stringWithUnit) \(selectedCurrency) available"
             
             if amountSegmentedControl.selectedSegmentIndex == AmountSegmentedControlIndexes.sendAll.rawValue {
                 setSendAllLabel(amount: availableAmount)
@@ -544,9 +544,12 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
     }
     
     private func setSendAllLabel(amount: CoinUnit) {
-        sendAllValue.text = "\(amount)"
-        sendAllCurrency.text = selectedCurrency
-        availableAmount = amount
+        let maximumSendableValue = selectedCurrency == NativeCurrencyNames.xlm.rawValue ? amount - CoinUnit.Constants.transactionFee : amount
+        availableAmount = maximumSendableValue > CoinUnit(0) ? maximumSendableValue : 0.00
+        if let availableAmount = availableAmount {
+            sendAllValue.text = "\(availableAmount)"
+            sendAllCurrency.text = selectedCurrency
+        }
     }
     
     @objc func walletsDoneButtonTap() {

@@ -25,7 +25,16 @@ extension CoinUnit {
     
     var stringWithUnit: String {
         get {
-            return String(format: "%.2f XLM", self)
+            let currencyFormatter = NumberFormatter()
+            currencyFormatter.usesGroupingSeparator = true
+            currencyFormatter.minimumFractionDigits = 2
+            currencyFormatter.maximumFractionDigits = 5
+            currencyFormatter.numberStyle = .decimal
+            currencyFormatter.locale = Locale.current
+            
+            let value = currencyFormatter.string(from: NSNumber(value: self))
+            
+            return value ?? "0.00"
         }
     }
     
@@ -37,7 +46,7 @@ extension CoinUnit {
                 return self - (sellingLiabilities ?? 0)
             } else {
                 //native
-                return self - CoinUnit.minimumAccountBalance(forWallet: wallet) - (sellingLiabilities ?? 0) - Constants.transactionFee
+                return self - CoinUnit.minimumAccountBalance(forWallet: wallet) - (sellingLiabilities ?? 0)
             }
         } else {
             return 0

@@ -136,9 +136,9 @@ class CardView: UIView {
                                     availableBalance: CoinUnit,
                                     assetCode: String) -> String {
         if wallet.isCurrencyDuplicate(withAssetCode: assetCode), let issuer = currency.assetIssuer {
-            return String(format: "%.2f \(assetCode) (\(issuer.prefix(4))...)", forAvailable == true ? availableBalance : balance)
+            return "\(forAvailable == true ? availableBalance.stringWithUnit : balance.stringWithUnit) \(assetCode) (\(issuer.prefix(4))...)"
         } else {
-            return String(format: "%.2f \(assetCode)", forAvailable == true ? availableBalance : balance)
+            return "\(forAvailable == true ? availableBalance.stringWithUnit : balance.stringWithUnit) \(assetCode)"
         }
     }
     
