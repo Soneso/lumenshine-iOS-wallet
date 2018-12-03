@@ -122,8 +122,8 @@ class WalletCard: CardView {
             }
             
             fundedView.balanceDescriptionLabel.text = (viewModel.wallet as! FundedWallet).balances.count > 1 ? R.string.localizable.balances().uppercased() : R.string.localizable.balance().uppercased()
-            fundedView.balanceLabel.text = viewModel.nativeBalance?.stringWithUnit
-            fundedView.availableLabel.text = viewModel.nativeBalance?.availableAmount(forWallet: viewModel.wallet, forCurrency: (viewModel.wallet as? FundedWallet)?.nativeAsset).stringWithUnit
+            fundedView.balanceLabel.text = "\(viewModel.nativeBalance?.stringWithUnit ?? "0.00") XLM"
+            fundedView.availableLabel.text = "\(viewModel.nativeBalance?.availableAmount(forWallet: viewModel.wallet, forCurrency: (viewModel.wallet as? FundedWallet)?.nativeAsset).stringWithUnit ?? "0.00") XLM"
             fundedView.currencyInfoButton.currency = (viewModel.wallet as? FundedWallet)?.nativeAsset
             fundedView.currencyInfoButton.wallet = (viewModel.wallet as? FundedWallet)
             fundedView.currencyInfoButton.isHidden = viewModel.nativeBalance == viewModel.nativeBalance?.availableAmount(forWallet: viewModel.wallet, forCurrency: (viewModel.wallet as? FundedWallet)?.nativeAsset)

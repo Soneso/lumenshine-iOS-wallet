@@ -96,6 +96,7 @@ class HomeViewController: UpdatableViewController {
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 18)
         navigationItem.titleLabel.text = R.string.localizable.homeScreenTitle()
         viewModel.refreshWallets()
+        NotificationCenter.default.post(name: Notification.Name(Keys.Notifications.MenuItemChanged), object: MenuEntry.home)
     }
     
     override func reloadWallets() {

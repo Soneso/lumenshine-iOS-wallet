@@ -11,7 +11,7 @@ import UIKit.UIImage
 
 class HelpCardViewModel: CardViewModelType {
     
-    weak var navigationCoordinator: CoordinatorType?
+    var navigationCoordinator: CoordinatorType?
     
     fileprivate var card: Card?
     

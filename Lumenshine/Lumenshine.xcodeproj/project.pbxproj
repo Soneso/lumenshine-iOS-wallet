@@ -264,6 +264,7 @@
 		833F7D73218F6E3F00ED43D9 /* TFASecretResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F7D72218F6E3F00ED43D9 /* TFASecretResponse.swift */; };
 		834D13AA21982F7400428D7A /* QRCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834D13A921982F7400428D7A /* QRCoder.swift */; };
 		839C4DDE21A0561500A1B715 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839C4DDD21A0561500A1B715 /* TermsViewController.swift */; };
+		83A4331B21B59ACE005C1C86 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A4331A21B59ACE005C1C86 /* WebViewController.swift */; };
 		97E8BBC0289EC0F063E34625 /* Pods_LumenshineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A860572CA3939F9BCA5F5986 /* Pods_LumenshineTests.framework */; };
 		A28F5687F8B3BF38588AC413 /* Pods_Lumenshine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52C8B6B260F28BAB38AF99E2 /* Pods_Lumenshine.framework */; };
 		B102359421B2EC5D009D5E0D /* TransactionsSortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B102359321B2EC5D009D5E0D /* TransactionsSortViewController.swift */; };
@@ -718,6 +719,7 @@
 		833F7D72218F6E3F00ED43D9 /* TFASecretResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFASecretResponse.swift; sourceTree = "<group>"; };
 		834D13A921982F7400428D7A /* QRCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCoder.swift; sourceTree = "<group>"; };
 		839C4DDD21A0561500A1B715 /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
+		83A4331A21B59ACE005C1C86 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		8D434202D88BEB188FB96C1D /* Pods_LumenshineUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LumenshineUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E00CFAD5C99654352F5BF2A /* Pods-LumenshineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineTests/Pods-LumenshineTests.release.xcconfig"; sourceTree = "<group>"; };
 		8EEC14D2AF35010B3F86265E /* Pods-Lumenshine.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lumenshine.development.xcconfig"; path = "Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine.development.xcconfig"; sourceTree = "<group>"; };
@@ -1300,6 +1302,7 @@
 				B13D5D6F21AC0326000BD6E2 /* SwitchInputField.swift */,
 				B13D5D7121AC088C000BD6E2 /* SwitchRangeField.swift */,
 				B13D5D7721AC4C2A000BD6E2 /* SwitchLabel.swift */,
+				83A4331A21B59ACE005C1C86 /* WebViewController.swift */,
 			);
 			path = ReusableComponents;
 			sourceTree = "<group>";
@@ -2334,6 +2337,7 @@
 				43C7A8F4215BEE19007F4E5E /* HelpTableViewCell.swift in Sources */,
 				B1F3AA24219C2B1B00A1F3B4 /* TxBumpSequenceOperationResponse.swift in Sources */,
 				C62342D6219B07EB00A2FFBD /* MemoView.swift in Sources */,
+				83A4331B21B59ACE005C1C86 /* WebViewController.swift in Sources */,
 				C68850E4214BC72900D7D077 /* UnfundedHeaderLabel.swift in Sources */,
 				43564BA921637334006A7B9F /* ContactsViewModel.swift in Sources */,
 				436201C0212DDC5300CF4495 /* R+Plurals.swift in Sources */,
@@ -2804,6 +2808,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Lumenshine/Lumenshine.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QN6AY4TH84;
 				INFOPLIST_FILE = Lumenshine/Info.plist;
@@ -2812,6 +2817,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.soneso.lumenshine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEVELOPMENT;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2976,6 +2982,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Lumenshine/Lumenshine.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QN6AY4TH84;
 				INFOPLIST_FILE = Lumenshine/Info.plist;
@@ -2984,6 +2991,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.soneso.lumenshine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2995,6 +3003,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Lumenshine/Lumenshine.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QN6AY4TH84;
 				INFOPLIST_FILE = Lumenshine/Info.plist;
@@ -3002,6 +3011,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.soneso.lumenshine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

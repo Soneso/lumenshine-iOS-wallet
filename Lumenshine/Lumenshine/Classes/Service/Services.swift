@@ -20,6 +20,8 @@ public final class Services {
     let termsUrl = "https://lsdev.ponytest.de/terms"
     let privacyUrl = "https://lsdev.ponytest.de/privacy"
     let guidesUrl = "https://lsdev.ponytest.de/guidelines"
+    let aboutUrl = "https://lsdev.ponytest.de/about"
+    let helpUrl = "https://lsdev.ponytest.de/help"
     
 #elseif DEVELOPMENT
     let usePublicStellarNetwork = false
@@ -38,6 +40,8 @@ public final class Services {
     let termsUrl = "https://lsdev.ponytest.de/terms"
     let privacyUrl = "https://lsdev.ponytest.de/privacy"
     let guidesUrl = "https://lsdev.ponytest.de/guidelines"
+    let aboutUrl = "https://lsdev.ponytest.de/about"
+    let helpUrl = "https://lumenshine.com/help"
 
 #else
     let usePublicStellarNetwork = true
@@ -48,6 +52,8 @@ public final class Services {
     let termsUrl = "https://lumenshine.com/terms"
     let privacyUrl = "https://lumenshine.com/privacy"
     let guidesUrl = "https://lumenshine.com/guidelines"
+    let aboutUrl = "https://lumenshine.com/about"
+    let helpUrl = "https://lumenshine.com/help"
     
 #endif
     
