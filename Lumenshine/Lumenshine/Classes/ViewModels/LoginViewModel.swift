@@ -68,7 +68,7 @@ class LoginViewModel : LoginViewModelType {
         self.user = user
         self.lostPassword = true
         
-        self.entries = [.login, .signUp, .lostPassword, .lost2FA, .importMnemonic, .about, .help]
+        self.entries = [.login, .signUp, .lostPassword, .lost2FA, .about, .help] // .importMnemonic
     }
     
     var barItems: [(String, String)] {
@@ -357,7 +357,7 @@ extension LoginViewModel: LostSecurityViewModelType {
 fileprivate extension LoginViewModel {
     func showHeaderMenu() {
         var items:[(String, String?)]? = nil
-        items = entries[2...].map {
+        items = entries[2...3].map {
             ($0.name, nil) //($0.name, $0.icon.name)
         }
         navigationCoordinator?.performTransition(transition: .showHeaderMenu(items!))

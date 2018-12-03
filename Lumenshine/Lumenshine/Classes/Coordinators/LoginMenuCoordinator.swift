@@ -81,6 +81,11 @@ fileprivate extension LoginMenuCoordinator {
     }
     func showAbout() {
         let aboutVC = WebViewController(title: R.string.localizable.about(), url: Services.shared.aboutUrl)
+        
+        if let drawer = baseController as? AppNavigationDrawerController {
+            drawer.closeSide()
+        }
+        
         let composeVC = ComposeNavigationController(rootViewController: aboutVC)
         baseController.present(composeVC, animated: true)
     }
