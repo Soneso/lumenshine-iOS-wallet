@@ -269,10 +269,7 @@ class AccountDetailsViewController: UpdatableViewController {
     private func setupStellarAddress() {
         federationDomainLabel.backgroundColor = Stylesheet.color(.helpButtonGray)
         removeViewAddressLabel.backgroundColor = Stylesheet.color(.orange)
-        federationDomainLabel.text = "*demo.lumenshine.com"
-        
-        /** live net **/
-        //federationDomainLabel.text = "*alpha.lumenshine.com"
+        federationDomainLabel.text = "*" + Services.shared.federationDomain
         
         if wallet.federationAddress.isEmpty {
             stellarAddressEditView.removeFromSuperview()

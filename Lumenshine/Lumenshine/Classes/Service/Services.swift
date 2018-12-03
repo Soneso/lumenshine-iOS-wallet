@@ -17,6 +17,7 @@ public final class Services {
     let horizonURL = "https://lsdevhorizon.ponytest.de"
     let tomlURL = "https://lsdev.ponytest.de/.well-known/stellar.toml"
     let initialServerSigningKey = "GCP4BR7GWG664577XMLX2BRUPSHKHTAXQ4I4HZORLMQNILNNVMSFWVUV"
+    let federationDomain = "lsdev.ponytest.de"
     let termsUrl = "https://lsdev.ponytest.de/terms"
     let privacyUrl = "https://lsdev.ponytest.de/privacy"
     let guidesUrl = "https://lsdev.ponytest.de/guidelines"
@@ -29,6 +30,7 @@ public final class Services {
     //let horizonURL = "https://horizon-testnet.stellar.org"
     let horizonURL = "https://lsdevhorizon.ponytest.de"
     let tomlURL = "https://lsdev.ponytest.de/.well-known/stellar.toml"
+    let federationDomain = "lsdev.ponytest.de"
     let initialServerSigningKey = "GCP4BR7GWG664577XMLX2BRUPSHKHTAXQ4I4HZORLMQNILNNVMSFWVUV"
     
     /** live net **/
@@ -48,6 +50,7 @@ public final class Services {
     let baseURL = "https://api.lumenshine.com"
     let horizonURL = "https://horizon.lumenshine.com"
     let tomlURL = "https://lumenshine.com/.well-known/stellar.toml"
+    let federationDomain = "lumenshine.com"
     let initialServerSigningKey = "GBGXAY3HDXMUWAUDATBZ5SVGLFUC5GKJC4BNN5MEPVLWKCOMBXQUIUWM"
     let termsUrl = "https://lumenshine.com/terms"
     let privacyUrl = "https://lumenshine.com/privacy"
