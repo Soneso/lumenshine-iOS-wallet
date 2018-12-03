@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,7 +20,6 @@
                 <outlet property="copyInflationButton" destination="cA1-f1-FZW" id="f3g-me-qMh"/>
                 <outlet property="inflationButtonsStackView" destination="4m6-D2-uIq" id="jba-iK-IT8"/>
                 <outlet property="inflationCoinLabel" destination="a96-h5-Bbr" id="urO-7U-0Mn"/>
-                <outlet property="inflationDetailsButton" destination="6zM-5W-De8" id="ZLC-tg-44R"/>
                 <outlet property="inflationPublicKeyLabel" destination="PCR-Y5-HP5" id="Yja-fn-UhN"/>
                 <outlet property="inflationPublicKeyView" destination="hoy-X0-a72" id="TWh-Vq-74c"/>
                 <outlet property="inflationShortDescriptionLabel" destination="TSy-dC-aWJ" id="h9A-sp-TFC"/>
@@ -100,15 +99,17 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGi-x0-z5x" customClass="SimpleButton" customModule="Lumenshine" customModuleProvider="target">
-                                                    <rect key="frame" x="78" y="0.0" width="34" height="20.5"/>
-                                                    <state key="normal" title="send"/>
+                                                    <rect key="frame" x="82" y="0.0" width="40" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <state key="normal" title="SEND"/>
                                                     <connections>
                                                         <action selector="sendButtonAction:" destination="-1" eventType="touchUpInside" id="oRo-8l-JIJ"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FBt-pg-zS5" customClass="SimpleButton" customModule="Lumenshine" customModuleProvider="target">
-                                                    <rect key="frame" x="116" y="0.0" width="50" height="20.5"/>
-                                                    <state key="normal" title="receive"/>
+                                                    <rect key="frame" x="130" y="0.0" width="60" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <state key="normal" title="RECEIVE"/>
                                                     <connections>
                                                         <action selector="receiveButtonAction:" destination="-1" eventType="touchUpInside" id="Ya7-jq-1Pw"/>
                                                     </connections>
@@ -118,14 +119,14 @@
                                             <constraints>
                                                 <constraint firstItem="FBt-pg-zS5" firstAttribute="centerY" secondItem="hGi-x0-z5x" secondAttribute="centerY" id="69o-l5-obf"/>
                                                 <constraint firstItem="hGi-x0-z5x" firstAttribute="centerY" secondItem="A3B-4A-IZx" secondAttribute="centerY" id="9vJ-8h-kX1"/>
-                                                <constraint firstItem="hGi-x0-z5x" firstAttribute="leading" secondItem="A3B-4A-IZx" secondAttribute="trailing" constant="4" id="Eee-Of-1hj"/>
+                                                <constraint firstItem="hGi-x0-z5x" firstAttribute="leading" secondItem="A3B-4A-IZx" secondAttribute="trailing" constant="8" id="Eee-Of-1hj"/>
                                                 <constraint firstItem="hGi-x0-z5x" firstAttribute="top" secondItem="YcQ-Ma-79E" secondAttribute="top" id="Eu7-g5-tUK"/>
                                                 <constraint firstItem="A3B-4A-IZx" firstAttribute="leading" secondItem="YcQ-Ma-79E" secondAttribute="leading" id="GBK-et-0IU"/>
                                                 <constraint firstAttribute="bottom" secondItem="FBt-pg-zS5" secondAttribute="bottom" id="TTF-1E-w6B"/>
                                                 <constraint firstItem="A3B-4A-IZx" firstAttribute="top" secondItem="YcQ-Ma-79E" secondAttribute="top" id="Zhj-L1-8NC"/>
                                                 <constraint firstItem="FBt-pg-zS5" firstAttribute="top" secondItem="YcQ-Ma-79E" secondAttribute="top" id="faX-3Y-FtK"/>
                                                 <constraint firstAttribute="bottom" secondItem="hGi-x0-z5x" secondAttribute="bottom" id="hbu-0D-M6g"/>
-                                                <constraint firstItem="FBt-pg-zS5" firstAttribute="leading" secondItem="hGi-x0-z5x" secondAttribute="trailing" constant="4" id="xbo-DV-scM"/>
+                                                <constraint firstItem="FBt-pg-zS5" firstAttribute="leading" secondItem="hGi-x0-z5x" secondAttribute="trailing" constant="8" id="xbo-DV-scM"/>
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bv9-Tk-jip" customClass="RegularSubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
@@ -178,7 +179,7 @@
                                                                     <subviews>
                                                                         <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qEl-e0-sZA" customClass="SimpleButton" customModule="Lumenshine" customModuleProvider="target">
                                                                             <rect key="frame" x="0.0" y="0.0" width="175" height="30"/>
-                                                                            <state key="normal" title="set inflation destination"/>
+                                                                            <state key="normal" title="SET"/>
                                                                             <connections>
                                                                                 <action selector="setInflationDestinationButtonAction:" destination="-1" eventType="touchUpInside" id="eBq-WK-3Ev"/>
                                                                             </connections>
@@ -188,22 +189,15 @@
                                                                 <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="4m6-D2-uIq">
                                                                     <rect key="frame" x="0.0" y="0.0" width="175" height="0.0"/>
                                                                     <subviews>
-                                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6zM-5W-De8" customClass="SimpleButton" customModule="Lumenshine" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="34" height="0.0"/>
-                                                                            <state key="normal" title="details"/>
-                                                                            <connections>
-                                                                                <action selector="inflationDetailsButtonAction:" destination="-1" eventType="touchUpInside" id="AfM-QZ-2zC"/>
-                                                                            </connections>
-                                                                        </button>
                                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rqh-sX-Tay" customClass="SimpleButton" customModule="Lumenshine" customModuleProvider="target">
-                                                                            <rect key="frame" x="38" y="0.0" width="51" height="0.0"/>
-                                                                            <state key="normal" title="change"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="51" height="0.0"/>
+                                                                            <state key="normal" title="CHANGE"/>
                                                                             <connections>
                                                                                 <action selector="inflationChangeButtonAction:" destination="-1" eventType="touchUpInside" id="sjR-7P-OLW"/>
                                                                             </connections>
                                                                         </button>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2cw-wZ-PvX">
-                                                                            <rect key="frame" x="93" y="0.0" width="82" height="0.0"/>
+                                                                            <rect key="frame" x="55" y="0.0" width="120" height="0.0"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </view>
                                                                     </subviews>
@@ -311,8 +305,8 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C96-Ri-3k8" customClass="SimpleButton" customModule="Lumenshine" customModuleProvider="target">
-                                                    <rect key="frame" x="206" y="-4.5" width="41" height="30"/>
-                                                    <state key="normal" title="reveal"/>
+                                                    <rect key="frame" x="210" y="-4.5" width="55" height="30"/>
+                                                    <state key="normal" title="REVEAL"/>
                                                     <connections>
                                                         <action selector="cancelRevealButtonAction:" destination="-1" eventType="touchUpInside" id="Q1S-Xi-af8"/>
                                                     </connections>
@@ -323,7 +317,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="E8Y-Gp-GKr" secondAttribute="bottom" id="437-Pi-uCb"/>
                                                 <constraint firstItem="C96-Ri-3k8" firstAttribute="centerY" secondItem="E8Y-Gp-GKr" secondAttribute="centerY" id="DQy-qh-ZLk"/>
                                                 <constraint firstItem="E8Y-Gp-GKr" firstAttribute="leading" secondItem="9zS-Le-hDD" secondAttribute="leading" id="Lso-4g-BCz"/>
-                                                <constraint firstItem="C96-Ri-3k8" firstAttribute="leading" secondItem="E8Y-Gp-GKr" secondAttribute="trailing" constant="4" id="aHk-xS-pbz"/>
+                                                <constraint firstItem="C96-Ri-3k8" firstAttribute="leading" secondItem="E8Y-Gp-GKr" secondAttribute="trailing" constant="8" id="aHk-xS-pbz"/>
                                                 <constraint firstItem="E8Y-Gp-GKr" firstAttribute="top" secondItem="9zS-Le-hDD" secondAttribute="top" id="lph-TJ-GL3"/>
                                             </constraints>
                                         </view>

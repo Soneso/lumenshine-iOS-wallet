@@ -24,7 +24,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="597" height="61.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="250" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="9QC-QE-Ee3">
-                                    <rect key="frame" x="0.0" y="0.0" width="466" height="61.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="524" height="61.5"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="lgC-3u-mkl">
                                             <rect key="frame" x="0.0" y="0.0" width="82.5" height="20.5"/>
@@ -47,7 +47,7 @@
                                         <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="gYc-j6-Pwz">
                                             <rect key="frame" x="0.0" y="20.5" width="168" height="20.5"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="shortDescription" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BAt-wa-F9K" customClass="RegularSubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="shortDescription" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BAt-wa-F9K" customClass="RegularSubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="0.0" width="152" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -91,26 +91,6 @@
                                         </view>
                                     </subviews>
                                 </stackView>
-                                <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="hMt-5I-Dwt">
-                                    <rect key="frame" x="474" y="0.0" width="50" height="50"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OnX-eK-2O4" customClass="SimpleButton" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="2" y="10" width="46" height="30"/>
-                                            <state key="normal" title="details"/>
-                                            <connections>
-                                                <action selector="detailsButtonAction:" destination="PoO-jz-K2O" eventType="touchUpInside" id="6UL-rB-H9E"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstItem="OnX-eK-2O4" firstAttribute="centerY" secondItem="hMt-5I-Dwt" secondAttribute="centerY" id="Bq2-kb-qeI"/>
-                                        <constraint firstItem="OnX-eK-2O4" firstAttribute="top" secondItem="hMt-5I-Dwt" secondAttribute="top" constant="10" id="H01-dX-tKe"/>
-                                        <constraint firstAttribute="trailing" secondItem="OnX-eK-2O4" secondAttribute="trailing" constant="2" id="adY-qT-NeJ"/>
-                                        <constraint firstItem="OnX-eK-2O4" firstAttribute="centerX" secondItem="hMt-5I-Dwt" secondAttribute="centerX" id="eDQ-Qr-Y52"/>
-                                        <constraint firstItem="OnX-eK-2O4" firstAttribute="leading" secondItem="hMt-5I-Dwt" secondAttribute="leading" constant="2" id="tOB-r5-Ucb"/>
-                                    </constraints>
-                                </view>
                                 <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Z81-ZD-faK">
                                     <rect key="frame" x="532" y="0.0" width="65" height="51"/>
                                     <subviews>

@@ -19,10 +19,10 @@ protocol AccountDetailsViewControllerFlow: BaseViewControllerFlowDelegate {
 }
 
 private enum ActionButtonTitles: String {
-    case setAddress = "set address"
-    case removeAddress = "remove address"
-    case changeAddress = "change"
-    case cancel = "cancel"
+    case setAddress = "SET"
+    case removeAddress = "REMOVE"
+    case changeAddress = "CHANGE"
+    case cancel = "CANCEL"
 }
 
 class AccountDetailsViewController: UpdatableViewController {
@@ -245,10 +245,10 @@ class AccountDetailsViewController: UpdatableViewController {
         navigationItem.titleLabel.numberOfLines = 2
         navigationItem.titleLabel.attributedText = walletName
         
-        let helpButton = Material.IconButton()
+        /*let helpButton = Material.IconButton()
         helpButton.image = R.image.question()?.crop(toWidth: 25, toHeight: 25)?.tint(with: Stylesheet.color(.white))
         helpButton.addTarget(self, action: #selector(didTapHelp(_:)), for: .touchUpInside)
-        navigationItem.rightViews = [helpButton]
+        navigationItem.rightViews = [helpButton]*/
     }
     
     private func setupWalletNameView() {

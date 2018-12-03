@@ -10,10 +10,10 @@ import Foundation
 import UIKit
 
 fileprivate enum CancelRevealButtonTitles: String {
-    case cancel = "cancel"
-    case reveal = "reveal"
-    case revealing = "revealing"
-    case hide = "hide"
+    case cancel = "CANCEL"
+    case reveal = "REVEAL"
+    case revealing = "REVEALING"
+    case hide = "HIDE"
 }
 
 class WalletDetailsViewController: UIViewController {
@@ -29,7 +29,6 @@ class WalletDetailsViewController: UIViewController {
     @IBOutlet weak var copyInflationButton: UIButton!
     @IBOutlet weak var secretRevealButton: UIButton!
     @IBOutlet weak var cancelRevealButton: UIButton!
-    @IBOutlet weak var inflationDetailsButton: UIButton!
     
     @IBOutlet weak var passwordStackView: UIStackView!
     @IBOutlet weak var noInflationSetStackView: UIStackView!
@@ -89,11 +88,11 @@ class WalletDetailsViewController: UIViewController {
         addSetInflationDestinationViewController()
     }
     
-    @IBAction func inflationDetailsButtonAction(_ sender: UIButton) {
+    /*@IBAction func inflationDetailsButtonAction(_ sender: UIButton) {
         let knownInflationDestinationDetailsViewController = KnownInflationDestinationDetailsViewController(nibName: "KnownInflationDestinationDetailsViewController", bundle: Bundle.main)
         knownInflationDestinationDetailsViewController.knownInflationDestination = currentInflationDestination
         navigationController?.pushViewController(knownInflationDestinationDetailsViewController, animated: true)
-    }
+    }*/
     
     @IBAction func inflationChangeButtonAction(_ sender: UIButton) {
         if let inflationDestination = inflationPublicKeyLabel.text {
@@ -218,7 +217,6 @@ class WalletDetailsViewController: UIViewController {
         inflationShortDescriptionLabel.isHidden = true
         inflationButtonsStackView.isHidden = false
         noInflationSetStackView.isHidden = true
-        inflationDetailsButton.isHidden = true
     }
     
     private func checkForKnownInflationDestination(destinationPublicKey: String) {

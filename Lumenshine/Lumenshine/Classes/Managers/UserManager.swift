@@ -304,6 +304,7 @@ public class UserManager: NSObject {
         for wallet in wallets {
             guard !callFailed else { return }
             
+            // TODO: is this needed? to load the data again?
             stellarSDK.accounts.getAccountDetails(accountId: wallet.publicKey) { (result) -> (Void) in
                 switch result {
                 case .success(let accountDetails):

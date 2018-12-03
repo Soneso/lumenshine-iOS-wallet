@@ -57,8 +57,9 @@
                                             </subviews>
                                         </stackView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dyZ-e0-HEM" customClass="SimpleButton" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="120" y="0.0" width="91" height="30"/>
-                                            <state key="normal" title="add currency"/>
+                                            <rect key="frame" x="124" y="0.0" width="32" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <state key="normal" title="ADD"/>
                                             <connections>
                                                 <action selector="didTapAddCurrency:" destination="-1" eventType="touchUpInside" id="GXJ-rV-rIT"/>
                                             </connections>
@@ -69,7 +70,7 @@
                                         <constraint firstItem="dyZ-e0-HEM" firstAttribute="centerY" secondItem="plW-Oa-lIr" secondAttribute="centerY" id="GTf-o8-P01"/>
                                         <constraint firstItem="xMc-IC-UJ0" firstAttribute="leading" secondItem="4ja-vC-kBg" secondAttribute="leading" constant="16" id="NfN-IO-DMN"/>
                                         <constraint firstItem="plW-Oa-lIr" firstAttribute="top" secondItem="4ja-vC-kBg" secondAttribute="top" id="eoG-kn-HYb"/>
-                                        <constraint firstItem="dyZ-e0-HEM" firstAttribute="leading" secondItem="plW-Oa-lIr" secondAttribute="trailing" constant="4" id="f2g-C7-Wh1"/>
+                                        <constraint firstItem="dyZ-e0-HEM" firstAttribute="leading" secondItem="plW-Oa-lIr" secondAttribute="trailing" constant="8" id="f2g-C7-Wh1"/>
                                         <constraint firstAttribute="bottom" secondItem="xMc-IC-UJ0" secondAttribute="bottom" id="hhH-Zs-BQa"/>
                                         <constraint firstAttribute="trailing" secondItem="xMc-IC-UJ0" secondAttribute="trailing" constant="8" id="rgt-kV-cjA"/>
                                         <constraint firstItem="dyZ-e0-HEM" firstAttribute="top" secondItem="4ja-vC-kBg" secondAttribute="top" id="rmN-hu-pdp"/>
