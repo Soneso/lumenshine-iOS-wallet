@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import stellarsdk
 import Material
+import M13Checkbox
 
 enum ValidationErrors: String {
     case Mandatory = "Mandatory"
@@ -71,6 +72,7 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var sendAllValue: UILabel!
     @IBOutlet weak var otherCurrencyErrorLabel: UILabel!
     @IBOutlet weak var transactionFeeLabel: UILabel!
+    @IBOutlet weak var otherCurrencyAgreementLabel: UILabel!
     
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var amountTextField: UITextField!
@@ -92,6 +94,8 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var passwordViewContainer: UIView!
     @IBOutlet weak var memoViewContainer: UIView!
     @IBOutlet weak var walletsView: UIView!
+    @IBOutlet weak var checkBoxView: UIView!
+    @IBOutlet weak var otherCurrencyAgreementView: UIView!
     
     @IBOutlet weak var sendButton: UIButton!
     
@@ -122,6 +126,7 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
     
     private var passwordView: PasswordView!
     private var memoView: MemoView!
+    private var agreementCheckBox: M13Checkbox!
     
     @IBAction func amountSegmentedControlValueChanged(_ sender: UISegmentedControl) {
         if amountSegmentedControl.selectedSegmentIndex == AmountSegmentedControlIndexes.sendAmount.rawValue {
@@ -354,7 +359,7 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
     @objc func otherCurrencyChanged(_ textField: UITextField) {
         selectedCurrency = otherCurrencyTextField.text ?? ""
         currentCurrencyLabel.text = selectedCurrency
-        setSendButtonDefaultTitle()
+        sendButton.setTitle(getSendButtonDefaultTitle(), for: .normal)
         validateOtherAssetCode()
     }
     
@@ -479,11 +484,42 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
         }
     }
     
+    private func setupOtherCurrencyAgreement() {
+        otherCurrencyAgreementView.isHidden = false
+        
+        if agreementCheckBox != nil {
+            agreementCheckBox.checkState = .unchecked
+            sendButton.isEnabled = false
+            return
+        }
+        
+        agreementCheckBox = M13Checkbox(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        checkBoxView.addSubview(agreementCheckBox)
+        agreementCheckBox.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        
+        agreementCheckBox.boxType = .square
+        agreementCheckBox.tintColor = Stylesheet.color(.lightBlack)
+        agreementCheckBox.addTarget(self, action: #selector(agreementCheckBoxChecked), for: .valueChanged)
+        
+        otherCurrencyAgreementLabel.text = "I understand what own assets are and I take full responsibility for my own assets. Lumenshine is not responsible for any asset on the Stellar Network"
+    }
+    
+    @objc func agreementCheckBoxChecked() {
+        if agreementCheckBox.checkState == .checked {
+            sendButton.isEnabled = true
+        } else {
+            sendButton.isEnabled = false
+        }
+    }
+    
     private func setupForOtherCurrency() {
         currentCurrencyTextField.text = nil
         currentCurrencyTextField.insertText(OtherCurrencyText)
         availableAmountView.isHidden = true
         otherCurrencyView.isHidden = false
+        issuerView.isHidden = true
         amountSegmentedControl.selectedSegmentIndex = AmountSegmentedControlIndexes.sendAmount.rawValue
         sendAmountView.isHidden = false
         sendAllView.isHidden = true
@@ -493,6 +529,7 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
         selectedCurrency = ""
         currentCurrencyLabel.text = selectedCurrency
         setSendButtonDefaultTitle()
+        setupOtherCurrencyAgreement()
         
         otherCurrencyTextField.addTarget(self, action: #selector(otherCurrencyChanged), for: .editingChanged)
     }
@@ -503,8 +540,11 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
             availableAmountView.isHidden = false
             otherCurrencyView.isHidden = true
             amountSegmentedControl.isEnabled = true
+            otherCurrencyAgreementView.isHidden = true
             resetOtherCurrencyValidationError()
             otherCurrencyTextField.text = nil
+            sendButton.isEnabled = true
+            checkForTransactionFeeAvailability()
             otherCurrencyTextField.removeTarget(self, action: #selector(otherCurrencyChanged), for: .editingChanged)
         }
     }

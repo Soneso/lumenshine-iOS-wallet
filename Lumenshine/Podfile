@@ -12,6 +12,7 @@ def ui_components_and_helper_pods
     pod 'Charts', :git => 'https://github.com/danielgindi/Charts.git', :commit => '4fca1f7a027c69782522416ef73d9bb92119d1d3'
     pod 'LTMorphingLabel'
     pod 'TTTAttributedLabel'
+    pod 'M13Checkbox'
 end
 
 target 'Lumenshine' do
