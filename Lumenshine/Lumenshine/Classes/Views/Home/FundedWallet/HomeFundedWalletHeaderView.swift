@@ -68,17 +68,19 @@ class HomeFundedWalletHeaderView: UIView, UITabBarDelegate {
     }
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        if item == sendButton {
-            if let parentViewController = viewContainingController() {
-                if paymentOperationsVCManager == nil {
-                    paymentOperationsVCManager = PaymentOperationsVCManager(parentViewController: parentViewController)
-                }
-                
+        if let parentViewController = viewContainingController() {
+            if paymentOperationsVCManager == nil {
+                paymentOperationsVCManager = PaymentOperationsVCManager(parentViewController: parentViewController)
+            }
+            
+            if item == sendButton {
                 paymentOperationsVCManager.setupSendViewControllerWithMultipleWallets()
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    tabBar.selectedItem = nil
-                }
+            } else if item == receiveButton {
+                paymentOperationsVCManager.setupReceiveViewControllerWithMultipleWallets()
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                tabBar.selectedItem = nil
             }
         }
     }

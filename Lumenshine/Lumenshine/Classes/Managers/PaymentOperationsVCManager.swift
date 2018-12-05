@@ -12,6 +12,7 @@ class PaymentOperationsVCManager {
     private weak var parentViewController: UIViewController?
     private weak var sendViewController: SendViewController?
     private let walletManager = WalletManager()
+    private let userManager = UserManager()
     
     init(parentViewController: UIViewController) {
         self.parentViewController = parentViewController
@@ -22,7 +23,6 @@ class PaymentOperationsVCManager {
         switch (forAction) {
         case .receive:
             viewController = ReceivePaymentCardViewController()
-            break
             
         case .send:
             viewController = SendViewController()
@@ -52,6 +52,17 @@ class PaymentOperationsVCManager {
                 let alert = UIAlertController(title: "No funding", message: "Please fund your wallet first to be able to send a payment.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self.parentViewController?.present(alert, animated: true, completion: nil)
+            case .failure(error: let error):
+                print(error)
+            }
+        }
+    }
+    
+    func setupReceiveViewControllerWithMultipleWallets() {
+        userManager.walletsForCurrentUser { (response) -> (Void) in
+            switch response {
+            case .success(response: let wallets):
+                self.addViewController(forAction: .receive, wallets: wallets)
             case .failure(error: let error):
                 print(error)
             }

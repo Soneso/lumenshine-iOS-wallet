@@ -30,6 +30,7 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
     @IBOutlet weak var issuerSubtitleView: UIView!
     @IBOutlet weak var issuerValueView: UIView!
     @IBOutlet weak var memoViewContainer: UIView!
+    @IBOutlet weak var walletsViewContainer: UIView!
     
     @IBOutlet weak var sendByEmailButton: UIButton!
     @IBOutlet weak var printButton: UIButton!
@@ -38,18 +39,15 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
     private var currencyPickerView: UIPickerView!
     private var issuerPickerView: UIPickerView!
     private var memoView: MemoView!
+    private var walletsView: WalletsView!
     
-    var walletsList: [Wallet]! {
-        didSet {
-            wallet = walletsList.first
-        }
-    }
-    
+    var walletsList: [Wallet]!
     var wallet: Wallet!
     var closeAction: (() -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        wallet = walletsList.first
         setupView()
         populateViews()
         setCurrencies()
@@ -58,6 +56,7 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
         view.backgroundColor = Stylesheet.color(.veryLightGray)
         updateQRCode()
         setupMemoView()
+        setupWalletsView()
     }
     
     override func resignFirstResponder() -> Bool {
@@ -179,13 +178,26 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
         nativeCurrencyView.isHidden = true
     }
     
+    private func resetCurrencyView() {
+        currencyView.isHidden = false
+        
+        if let wallet = wallet as? FundedWallet {
+            currencyTextField.text = wallet.uniqueAssetCodeBalances.first?.displayCode
+            assetCodeLabel.text = wallet.uniqueAssetCodeBalances.first?.displayCode
+        }
+    }
+    
     private func setCurrencies() {
         if let wallet = wallet as? FundedWallet {
             if wallet.hasOnlyNative {
-                currencyView.removeFromSuperview()
+                currencyView.isHidden = true
+                nativeCurrencyView.isHidden = false
+                assetCodeLabel.text = NativeCurrencyNames.xlm.rawValue
             } else {
                 hideNativeCurrency()
+                resetCurrencyView()
             }
+            
             issuerVisibility(isHidden: true)
         }
     }
@@ -250,30 +262,26 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
     }
     
     private func emailText() -> String {
-        if let wallet = wallet as? FundedWallet {
-            var text = "Receive public key: \(publicKeyLabel.text ?? "")\n"
-            
-            if !wallet.federationAddress.isEmpty {
-                text += "Stellar address: \(emailLabel.text ?? "")\n"
-            }
-            
-            if wallet.hasOnlyNative {
-                text += "\(nativeCurrencyLabel.text ?? ""): \(nativeCurrencyValueLabel.text ?? "")\nXLM: \(amountTextField.text ?? "0")"
-            } else if let currency = currencyTextField.text, currency == "XLM" {
-                text += "Currency: \(currencyTextField.text ?? "")\n \(currencyTextField.text ?? ""): \(amountTextField.text ?? "0")"
-                
-            } else {
-                text += "Currency: \(currencyTextField.text ?? "")\nIssuer: \(issuerTextField.text ?? "-")\n\(currencyTextField.text ?? ""): \(amountTextField.text ?? "0")"
-            }
-            
-            if memoView.hasMemo, let memo = memoView.memo {
-                text += "\nMemo: \(memo)"
-            }
-            
-            return text
+        var text = "Receive public key: \(publicKeyLabel.text ?? "")\n"
+        
+        if !wallet.federationAddress.isEmpty {
+            text += "Stellar address: \(emailLabel.text ?? "")\n"
         }
         
-        return ""
+        if let wallet = wallet as? FundedWallet, wallet.hasOnlyNative {
+            text += "\(nativeCurrencyLabel.text ?? ""): \(nativeCurrencyValueLabel.text ?? "")\nXLM: \(amountTextField.text ?? "0")"
+        } else if let currency = currencyTextField.text, currency == "XLM" {
+            text += "Currency: \(currencyTextField.text ?? "")\n \(currencyTextField.text ?? ""): \(amountTextField.text ?? "0")"
+            
+        } else {
+            text += "Currency: \(currencyTextField.text ?? "")\nIssuer: \(issuerTextField.text ?? "-")\n\(currencyTextField.text ?? ""): \(amountTextField.text ?? "0")"
+        }
+        
+        if memoView.hasMemo, let memo = memoView.memo {
+            text += "\nMemo: \(memo)"
+        }
+        
+        return text
     }
     
     private func printImage() -> UIImage? {
@@ -367,6 +375,31 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
         
         memoView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
+        }
+    }
+    
+    private func refreshAfterWalletChanged() {
+        populateViews()
+        setCurrencies()
+    }
+    
+    private func setupWalletsView() {
+        if walletsList.count == 1 {
+            return
+        }
+        
+        walletsView = Bundle.main.loadNibNamed("WalletsView", owner: self, options: nil)![0] as? WalletsView
+        walletsView.walletsList = walletsList
+        walletsViewContainer.addSubview(walletsView)
+        
+        walletsView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        
+        walletsView.walletChanged = { (wallet) in
+            self.wallet = wallet
+            self.refreshAfterWalletChanged()
+            self.updateQRCode()
         }
     }
 }
