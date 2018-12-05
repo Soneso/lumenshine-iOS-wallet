@@ -64,6 +64,10 @@ extension PaymentFilterViewController {
     }
     
     func saveFilter() {
+        if receivedField.switch.isOn || sentField.switch.isOn || currencyField.switch.isOn {
+            viewModel.filter.payment.include = false
+        }
+        
         if receivedField.switch.isOn {
             var from = 0.0
             if let fromV = receivedField.textField.text, !fromV.isEmpty {

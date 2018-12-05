@@ -36,6 +36,18 @@ class TransactionsViewController: UITableViewController {
                 self.tableView.reloadData()
             }
         }
+        
+        viewModel.showActivityClosure = {
+            DispatchQueue.main.async {
+                self.showActivity(message: R.string.localizable.loading(), animated: false)
+            }
+        }
+        
+        viewModel.hideActivityClosure = {
+            DispatchQueue.main.async {
+                self.hideActivity(animated: false)
+            }
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -52,6 +64,11 @@ class TransactionsViewController: UITableViewController {
         super.viewWillAppear(animated)
         updateHeader()
         NotificationCenter.default.post(name: Notification.Name(Keys.Notifications.MenuItemChanged), object: MenuEntry.transactions)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.applyFilters()
     }
     
     override func didReceiveMemoryWarning() {
@@ -153,8 +170,12 @@ class TransactionsViewController: UITableViewController {
 
 extension TransactionsViewController: TransactionsCellDelegate {
     func cellCopiedToPasteboard(_ cell: TransactionsCellProtocol) {
-        snackbarController?.animate(snackbar: .visible, delay: 0)
-        snackbarController?.animate(snackbar: .hidden, delay: 3)
+        let alert = UIAlertController(title: nil, message: R.string.localizable.copied_clipboard(), preferredStyle: .actionSheet)
+        self.present(alert, animated: true)
+        let when = DispatchTime.now() + 0.75
+        DispatchQueue.main.asyncAfter(deadline: when){
+            alert.dismiss(animated: true)
+        }
     }
     
     func cell(_ cell: TransactionsCellProtocol, didInteractWith url: URL) {
@@ -174,8 +195,6 @@ extension TransactionsViewController {
     }
     
     func updateHeader() {
-        viewModel.restoreFilters()
-        
         let name = viewModel.wallets.count > 0 ? viewModel.wallets[viewModel.walletIndex] : R.string.localizable.primary()
         walletLabel.text = "\(R.string.localizable.wallet()): \(name)"
         let dateFrom = DateUtils.format(viewModel.dateFrom, in: .date) ?? viewModel.dateFrom.description
@@ -191,8 +210,6 @@ fileprivate extension TransactionsViewController {
         prepareTableView()
         prepareCopyright()
         prepareNavigationItem()
-        
-        snackbarController?.snackbar.text = R.string.localizable.copied_clipboard()
     }
     
     func prepareTableView() {
@@ -212,7 +229,7 @@ fileprivate extension TransactionsViewController {
     
     func prepareNavigationItem() {
         
-        snackbarController?.navigationItem.titleLabel.text = R.string.localizable.transactions_history()
+        snackbarController?.navigationItem.titleLabel.text = R.string.localizable.transactions()
         snackbarController?.navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
         snackbarController?.navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         

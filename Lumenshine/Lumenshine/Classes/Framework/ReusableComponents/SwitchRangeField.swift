@@ -55,8 +55,8 @@ class SwitchRangeField: SwitchInputField {
             self.switch.setOn(true, animated: animated)
             if range.upperBound != Double.infinity {
                 rangeTextField.text = String(range.upperBound)
-                textField.text = String(range.lowerBound)
             }
+            textField.text = String(range.lowerBound)
         } else {
             self.switch.setOn(false, animated: animated)
         }

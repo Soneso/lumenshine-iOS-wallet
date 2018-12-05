@@ -62,6 +62,10 @@ extension OfferFilterViewController {
     }
     
     func saveFilter() {
+        if sellingField.switch.isOn || buyingField.switch.isOn {
+            viewModel.filter.offer.include = false
+        }
+        
         if sellingField.switch.isOn {
             viewModel.filter.offer.sellingCurrency = sellingField.textField.text
         } else {

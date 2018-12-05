@@ -29,6 +29,10 @@ public class TransactionsService: BaseService {
         GETRequestWithPath(path: "/portal/user/dashboard/get_stellar_transactions", parameters: params) { (result) -> (Void) in
             switch result {
             case .success(let data):
+                if data.isEmpty {
+                    response(.success(response: []))
+                    return
+                }
                 do {
                     let contacts = try self.jsonDecoder.decode(Array<TxTransactionResponse>.self, from: data)
                     response(.success(response: contacts))

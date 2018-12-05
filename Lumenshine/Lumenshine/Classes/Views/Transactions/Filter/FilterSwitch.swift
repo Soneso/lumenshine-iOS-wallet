@@ -67,7 +67,7 @@ class FilterSwitch: View {
         addSubview(arrow)
         arrow.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.right.equalTo(-5)
+            make.right.equalTo(-horizontalSpacing)
         }
     }
 }

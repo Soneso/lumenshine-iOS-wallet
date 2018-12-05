@@ -67,6 +67,9 @@ extension OtherFilterViewController {
     }
     
     func saveFilter() {
+        if subviews.first(where: {$0.switch.isOn}) != nil {
+            viewModel.filter.other.include = false
+        }
         viewModel.filter.other.setOptions = subviews[0].switch.isOn
         viewModel.filter.other.manageData = subviews[1].switch.isOn
         viewModel.filter.other.trust = subviews[2].switch.isOn

@@ -28,7 +28,6 @@ class TransactionsFilterViewController: UIViewController {
     fileprivate let offersFilter = FilterSwitch()
     fileprivate let otherFilter = FilterSwitch()
     
-    fileprivate let applyButton = LSButton()
     fileprivate let clearButton = LSButton()
     
     fileprivate let verticalSpacing: CGFloat = 25.0
@@ -37,14 +36,6 @@ class TransactionsFilterViewController: UIViewController {
     init(viewModel: TransactionsViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        
-        viewModel.applyFiltersClosure = {
-            DispatchQueue.main.async {
-                self.hideActivity(completion: {
-                    self.navigationController?.popViewController(animated: true)
-                })
-            }
-        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -60,6 +51,8 @@ class TransactionsFilterViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateTags()
+        updateDateToField()
+        updateDateFromField()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -84,12 +77,6 @@ extension TransactionsFilterViewController {
     }
     
     @objc
-    func applyAction(sender: UIButton) {
-        showActivity(message: R.string.localizable.loading())
-        viewModel.applyFilters()
-    }
-    
-    @objc
     func memoEditingDidChange(_ textField: TextField) {
         guard let text = textField.text else {
             return
@@ -101,12 +88,14 @@ extension TransactionsFilterViewController {
     func dateFromDidChange(sender: UIDatePicker) {
         dateFromField.text = DateUtils.format(sender.date, in: .date)
         viewModel.dateFrom = sender.date
+        updateDateToField()
     }
     
     @objc
     func dateToDidChange(sender: UIDatePicker) {
         dateToField.text = DateUtils.format(sender.date, in: .date)
         viewModel.dateTo = sender.date
+        updateDateFromField()
     }
     
     @objc
@@ -156,6 +145,23 @@ extension TransactionsFilterViewController {
         paymentsFilter.show(tags: viewModel.paymentFilterTags(), color: Stylesheet.color(.orange))
         offersFilter.show(tags: viewModel.offerFilterTags(), color: Stylesheet.color(.green))
         otherFilter.show(tags: viewModel.otherFilterTags(), color: Stylesheet.color(.blue))
+    }
+    
+    func updateDateFromField() {
+        if let datePicker = dateFromField.inputView as? UIDatePicker {
+            var minYear = DateComponents()
+            minYear.year = 1990
+            
+            datePicker.maximumDate = viewModel.dateTo
+            datePicker.minimumDate = Calendar.current.date(from: minYear)
+        }
+    }
+    
+    func updateDateToField() {
+        if let datePicker = dateToField.inputView as? UIDatePicker {
+            datePicker.maximumDate = Date()
+            datePicker.minimumDate = viewModel.dateFrom
+        }
     }
 }
 
@@ -406,31 +412,16 @@ fileprivate extension TransactionsFilterViewController {
         contentView.addSubview(clearButton)
         clearButton.snp.makeConstraints { make in
             make.top.equalTo(otherFilter.snp.bottom).offset(2*verticalSpacing)
-            make.left.equalTo(2*horizontalSpacing)
+            make.centerX.equalToSuperview()
             make.width.equalTo(140)
             make.height.equalTo(40)
             make.bottom.equalTo(-verticalSpacing)
-        }
-        
-        applyButton.title = R.string.localizable.apply().uppercased()
-        applyButton.titleColor = Stylesheet.color(.blue)
-        applyButton.borderWidthPreset = .border1
-        applyButton.borderColor = Stylesheet.color(.blue)
-        applyButton.setGradientLayer(color: Stylesheet.color(.white))
-        applyButton.addTarget(self, action: #selector(applyAction(sender:)), for: .touchUpInside)
-        
-        contentView.addSubview(applyButton)
-        applyButton.snp.makeConstraints { make in
-            make.left.equalTo(clearButton.snp.right).offset(horizontalSpacing)
-            make.centerY.equalTo(clearButton)
-            make.width.equalTo(120)
-            make.height.equalTo(40)
         }
     }
     
     func setDatePickerInputView(textField: TextField, date: Date) {
         var minYear = DateComponents()
-        minYear.year = 1910
+        minYear.year = 1990
         
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .date

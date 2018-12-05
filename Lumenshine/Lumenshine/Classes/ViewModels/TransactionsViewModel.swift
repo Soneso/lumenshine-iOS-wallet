@@ -14,7 +14,8 @@ protocol TransactionsViewModelType: Transitionable {
     var wallets: [String] { get }
     var currencies: [String] { get }
     var reloadClosure: (() -> ())? { get set }
-    var applyFiltersClosure: (() -> ())? { get set }
+    var showActivityClosure: (() -> ())? { get set }
+    var hideActivityClosure: (() -> ())? { get set }
     var filter: TransactionFilter { get set }
     var sorter: TransactionSorter { get set }
     
@@ -39,7 +40,6 @@ protocol TransactionsViewModelType: Transitionable {
     func showOtherFilter()
     func applyFilters()
     func clearFilters()
-    func restoreFilters()
     
     func applySorter()
     func clearSorter()
@@ -118,7 +118,8 @@ class TransactionsViewModel : TransactionsViewModelType {
     
     weak var navigationCoordinator: CoordinatorType?    
     var reloadClosure: (() -> ())?
-    var applyFiltersClosure: (() -> ())?
+    var showActivityClosure: (() -> ())?
+    var hideActivityClosure: (() -> ())?
     
     init(service: Services, user: User?) {
         self.services = service
@@ -127,12 +128,11 @@ class TransactionsViewModel : TransactionsViewModelType {
         
         self.currentWalletPK = PrivateKeyManager.getPublicKey(forIndex: 0)
         
-        let startDate = Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date()
+        let startDate = Calendar.current.date(byAdding: .day, value: -14, to: Date()) ?? Date()
         self.filter = TransactionFilter(startDate: startDate, endDate: Date())
-        self.filterBackup = filter
+        self.filterBackup = TransactionFilter(startDate: Date(), endDate: Date())
         self.sorter = TransactionSorter()
         
-        updateTransactions()
         getWallets()
     }
     
@@ -365,13 +365,17 @@ class TransactionsViewModel : TransactionsViewModelType {
         if filter.walletIndex != filterBackup.walletIndex ||
             filter.startDate != filterBackup.startDate ||
             filter.endDate != filterBackup.endDate {
+            if let closure = self.showActivityClosure {
+                closure()
+            }
             updateTransactions()
         } else {
             filteredEntries = entries.filter {
                 return filter(item: $0)
             }
-            self.reloadClosure?()
-            self.applyFiltersClosure?()
+            if let closure = self.reloadClosure {
+                closure()
+            }
         }
         filterBackup = filter
     }
@@ -381,10 +385,6 @@ class TransactionsViewModel : TransactionsViewModelType {
         filterBackup.clear()
         isFiltering = false
         self.reloadClosure?()
-    }
-    
-    func restoreFilters() {
-        filter = filterBackup
     }
     
     func paymentFilterTags() -> [String] {
@@ -412,10 +412,18 @@ class TransactionsViewModel : TransactionsViewModelType {
     func offerFilterTags() -> [String] {
         var tags = [String]()
         if let currency = filter.offer.sellingCurrency {
-            tags.append("Selling:\(currency)")
+            if currency.isEmpty {
+                tags.append("Selling")
+            } else {
+                tags.append("Selling:\(currency)")
+            }
         }
         if let currency = filter.offer.buyingCurrency {
-            tags.append("Buying:\(currency)")
+            if currency.isEmpty {
+                tags.append("Buying")
+            } else {
+                tags.append("Buying:\(currency)")
+            }
         }
         return tags
     }
@@ -478,11 +486,11 @@ fileprivate extension TransactionsViewModel {
                 if let closure = self?.reloadClosure {
                     closure()
                 }
-                if let closure = self?.applyFiltersClosure {
-                    closure()
-                }
             case .failure(let error):
                 print("Transactions list failure: \(error)")
+            }
+            if let closure = self?.hideActivityClosure {
+                closure()
             }
         }
     }
@@ -1079,7 +1087,7 @@ fileprivate extension TransactionsViewModel {
                          .font : mainFont])
         
         let attachment = LSTextAttachment(info: value)
-        attachment.image = R.image.copy()?.resize(toHeight: 30)
+        attachment.image = R.image.copy()?.resize(toHeight: 26)
         let copyStr = NSAttributedString(attachment: attachment)
         
         let details = NSMutableAttributedString(attributedString: pkStr)
