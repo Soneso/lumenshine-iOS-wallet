@@ -492,8 +492,6 @@
 		432E298A211CA098005C7F9E /* EmailConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailConfirmationView.swift; sourceTree = "<group>"; };
 		432F11782101C64600FC429B /* MnemonicSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicSetupViewController.swift; sourceTree = "<group>"; };
 		432F117A2101EEF500FC429B /* VerificationSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationSetupViewController.swift; sourceTree = "<group>"; };
-		4339B907213D810D00D1BE0E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		4339B908213D810D00D1BE0E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Common.strings; sourceTree = "<group>"; };
 		4341251020EBC2C700267260 /* ReLoginHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginHomeView.swift; sourceTree = "<group>"; };
 		4341251220EBC2E900267260 /* ReLoginFingerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLoginFingerView.swift; sourceTree = "<group>"; };
 		434E049A20D3DC8A00D3235A /* DateUtils+Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateUtils+Format.swift"; sourceTree = "<group>"; };
@@ -2652,7 +2650,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				43D7A778205A892E00238E29 /* en */,
-				4339B907213D810D00D1BE0E /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2661,7 +2658,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				43D7A77A205A892E00238E29 /* en */,
-				4339B908213D810D00D1BE0E /* de */,
 			);
 			name = Common.strings;
 			sourceTree = "<group>";
