@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,11 +29,11 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Zl-V8-7a0" userLabel="BalanceBackgroundView">
-                    <rect key="frame" x="6" y="74.5" width="187.5" height="105.5"/>
+                    <rect key="frame" x="16" y="74.5" width="187.5" height="105.5"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UWs-ZR-OhZ">
-                    <rect key="frame" x="16" y="84.5" width="343" height="18"/>
+                    <rect key="frame" x="26" y="84.5" width="333" height="18"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -80,7 +80,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="0 XLM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXd-hR-sCL">
-                    <rect key="frame" x="16" y="106.5" width="343" height="63.5"/>
+                    <rect key="frame" x="26" y="106.5" width="333" height="63.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -100,13 +100,13 @@
                 <constraint firstItem="0Zl-V8-7a0" firstAttribute="width" secondItem="MEy-Lv-QCt" secondAttribute="width" multiplier="0.5" id="Uxc-Vm-sI1"/>
                 <constraint firstItem="wgI-xg-A9r" firstAttribute="leading" secondItem="ye4-CW-sVN" secondAttribute="leading" id="V6V-G0-1f0"/>
                 <constraint firstItem="ye4-CW-sVN" firstAttribute="trailing" secondItem="UWs-ZR-OhZ" secondAttribute="trailing" constant="16" id="a1X-rr-aUx"/>
-                <constraint firstItem="LXd-hR-sCL" firstAttribute="leading" secondItem="ye4-CW-sVN" secondAttribute="leading" constant="16" id="bTj-J2-x14"/>
+                <constraint firstItem="LXd-hR-sCL" firstAttribute="leading" secondItem="ye4-CW-sVN" secondAttribute="leading" constant="26" id="bTj-J2-x14"/>
                 <constraint firstItem="02c-sm-4KK" firstAttribute="leading" secondItem="ye4-CW-sVN" secondAttribute="leading" constant="16" id="chE-s9-S7I"/>
                 <constraint firstItem="02c-sm-4KK" firstAttribute="top" secondItem="ye4-CW-sVN" secondAttribute="top" constant="16" id="cyH-6k-1AN"/>
                 <constraint firstItem="QmJ-VE-oES" firstAttribute="top" secondItem="02c-sm-4KK" secondAttribute="bottom" constant="4" id="e1z-Fc-obi"/>
                 <constraint firstItem="QmJ-VE-oES" firstAttribute="leading" secondItem="ye4-CW-sVN" secondAttribute="leading" constant="16" id="evS-Nh-wr9"/>
                 <constraint firstItem="wgI-xg-A9r" firstAttribute="bottom" secondItem="ye4-CW-sVN" secondAttribute="bottom" id="gvl-3F-9Zi"/>
-                <constraint firstItem="UWs-ZR-OhZ" firstAttribute="leading" secondItem="ye4-CW-sVN" secondAttribute="leading" constant="16" id="l5Q-dP-pKG"/>
+                <constraint firstItem="UWs-ZR-OhZ" firstAttribute="leading" secondItem="ye4-CW-sVN" secondAttribute="leading" constant="26" id="l5Q-dP-pKG"/>
                 <constraint firstItem="ye4-CW-sVN" firstAttribute="trailing" secondItem="Ahx-bA-zsU" secondAttribute="trailing" constant="16" id="uYp-f5-Tyn"/>
                 <constraint firstItem="Ahx-bA-zsU" firstAttribute="leading" secondItem="02c-sm-4KK" secondAttribute="trailing" constant="5" id="v1T-8U-QA9"/>
             </constraints>
