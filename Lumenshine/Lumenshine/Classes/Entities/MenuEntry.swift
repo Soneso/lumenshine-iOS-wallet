@@ -73,9 +73,9 @@ enum MenuEntry {
         case .about:
             return R.string.localizable.about()
         case .fingerprint:
-            return R.string.localizable.fingerprint()
+            return R.string.localizable.fingerprint_cap()
         case .faceRecognition:
-            return R.string.localizable.face_recognition()
+            return R.string.localizable.face_recognition_cap()
         }
     }
     

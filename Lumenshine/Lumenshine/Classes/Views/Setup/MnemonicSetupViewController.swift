@@ -19,8 +19,6 @@ class MnemonicSetupViewController: SetupViewController {
     
     fileprivate let hintLabel = UILabel()
     fileprivate let descriptionLabel = UILabel()
-    fileprivate let moreLabel = UILabel()
-    fileprivate let moreButton = Button()
     
     fileprivate let wordsTitleLabel = UILabel()
     fileprivate let wordsLabel = UILabel()
@@ -131,35 +129,11 @@ fileprivate extension MnemonicSetupViewController {
             make.right.equalTo(-horizontalSpacing)
         }
         
-        moreLabel.text = R.string.localizable.mnemonic_more_lbl()
-        moreLabel.font = R.font.encodeSansRegular(size: 14)
-        moreLabel.textColor = Stylesheet.color(.lightBlack)
-        moreLabel.numberOfLines = 0
-        
-        contentView.addSubview(moreLabel)
-        moreLabel.snp.makeConstraints { make in
-            make.top.equalTo(descriptionLabel.snp.bottom).offset(15)
-            make.centerX.equalToSuperview().offset(-20)
-        }
-        
-        moreButton.title = R.string.localizable.here()
-        moreButton.titleColor = Stylesheet.color(.blue)
-        moreButton.backgroundColor = Stylesheet.color(.white)
-        moreButton.titleLabel?.font = R.font.encodeSansRegular(size: 14)
-        moreButton.contentEdgeInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
-        moreButton.addTarget(self, action: #selector(moreAction(sender:)), for: .touchUpInside)
-        
-        contentView.addSubview(moreButton)
-        moreButton.snp.makeConstraints { make in
-            make.left.equalTo(moreLabel.snp.right)
-            make.centerY.equalTo(moreLabel)
-        }
-        
         let separator = UIView()
         separator.backgroundColor = Stylesheet.color(.lightGray)
         contentView.addSubview(separator)
         separator.snp.makeConstraints { (make) in
-            make.top.equalTo(moreLabel.snp.bottom).offset(10)
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(10)
             make.left.right.equalToSuperview()
             make.height.equalTo(0.5)
         }
@@ -174,7 +148,7 @@ fileprivate extension MnemonicSetupViewController {
         
         contentView.addSubview(wordsTitleLabel)
         wordsTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(moreLabel.snp.bottom).offset(verticalSpacing)
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(verticalSpacing)
             make.left.equalTo(horizontalSpacing)
             make.right.equalTo(-horizontalSpacing)
         }

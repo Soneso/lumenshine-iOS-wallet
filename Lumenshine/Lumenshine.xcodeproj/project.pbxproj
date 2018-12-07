@@ -240,8 +240,6 @@
 		74C0913B20F64AF0000A809D /* UnfundedWalletCardContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74C0913A20F64AF0000A809D /* UnfundedWalletCardContentView.xib */; };
 		74C0913D20F64B03000A809D /* UnfundedWalletCardContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C0913C20F64B03000A809D /* UnfundedWalletCardContentView.swift */; };
 		74C0913F20F65A7A000A809D /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C0913E20F65A7A000A809D /* Wallet.swift */; };
-		74C0914520F7B3CD000A809D /* WalletCardInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C0914320F7B3CD000A809D /* WalletCardInfoViewController.swift */; };
-		74C0914620F7B3CD000A809D /* WalletCardInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74C0914420F7B3CD000A809D /* WalletCardInfoViewController.xib */; };
 		74C0914820FB3612000A809D /* CoinUnit+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C0914720FB3612000A809D /* CoinUnit+Additions.swift */; };
 		74C0914A20FB3F6F000A809D /* CurrenciesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C0914920FB3F6F000A809D /* CurrenciesService.swift */; };
 		74C0914C20FB4125000A809D /* CurrenciesMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C0914B20FB4125000A809D /* CurrenciesMonitor.swift */; };
@@ -699,8 +697,6 @@
 		74C0913A20F64AF0000A809D /* UnfundedWalletCardContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UnfundedWalletCardContentView.xib; sourceTree = "<group>"; };
 		74C0913C20F64B03000A809D /* UnfundedWalletCardContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnfundedWalletCardContentView.swift; sourceTree = "<group>"; };
 		74C0913E20F65A7A000A809D /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
-		74C0914320F7B3CD000A809D /* WalletCardInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCardInfoViewController.swift; sourceTree = "<group>"; };
-		74C0914420F7B3CD000A809D /* WalletCardInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletCardInfoViewController.xib; sourceTree = "<group>"; };
 		74C0914720FB3612000A809D /* CoinUnit+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoinUnit+Additions.swift"; sourceTree = "<group>"; };
 		74C0914920FB3F6F000A809D /* CurrenciesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesService.swift; sourceTree = "<group>"; };
 		74C0914B20FB4125000A809D /* CurrenciesMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesMonitor.swift; sourceTree = "<group>"; };
@@ -1262,8 +1258,6 @@
 				74E2058020D2A3C400E94048 /* IconView.xib */,
 				74C0913220F64002000A809D /* WalletCardContentView.xib */,
 				74C0913420F64012000A809D /* WalletCardContentView.swift */,
-				74C0914320F7B3CD000A809D /* WalletCardInfoViewController.swift */,
-				74C0914420F7B3CD000A809D /* WalletCardInfoViewController.xib */,
 				7420BBE821182D4C002FC4C7 /* TitleView.swift */,
 				7420BBEA21182D57002FC4C7 /* TitleView.xib */,
 			);
@@ -2162,7 +2156,6 @@
 				C6D87E742133ECE100154A3B /* KnownCurrenciesTableViewController.xib in Resources */,
 				7445E9CF2019CF7200470E0A /* LaunchScreen.storyboard in Resources */,
 				43AE632F2135A19300B7A904 /* EncodeSansSemiExpanded-ExtraBold.ttf in Resources */,
-				74C0914620F7B3CD000A809D /* WalletCardInfoViewController.xib in Resources */,
 				43AE632B2135A19300B7A904 /* EncodeSans-Black.ttf in Resources */,
 				43AE635A2135A19300B7A904 /* EncodeSansSemiCondensed-Black.ttf in Resources */,
 				C6725088213FC4E50064F6E3 /* ProvideInflationDestinationViewController.xib in Resources */,
@@ -2444,7 +2437,6 @@
 				431628CE2097352B00F23A20 /* TFAResponse.swift in Sources */,
 				B16BC4C82190548E00CF7280 /* KeyConstants.swift in Sources */,
 				74C0914820FB3612000A809D /* CoinUnit+Additions.swift in Sources */,
-				74C0914520F7B3CD000A809D /* WalletCardInfoViewController.swift in Sources */,
 				C6B5DF9721A80A1C006413BB /* ReachabilityService.swift in Sources */,
 				43E23996214FA1CB0017AABF /* LSButton.swift in Sources */,
 				B102359421B2EC5D009D5E0D /* TransactionsSortViewController.swift in Sources */,

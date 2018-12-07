@@ -392,13 +392,19 @@
 "activate" = "Activate";
 
 /*  */
-"fingerprint" = "Fingerprint";
+"fingerprint_cap" = "Fingerprint";
 
 /*  */
-"face_recognition" = "Face Recognition";
+"face_recognition_cap" = "Face Recognition";
 
 /*  */
-"hint_face_fingerprint" = "If you activate, the app will request your %@ instead of password when opened. Entering the password will not be required each time you open the app. To activate %@ please first insert your password below.";
+"fingerprint_recognition" = "fingerprint recognition";
+
+/*  */
+"face_recognition" = "face recognition";
+
+/*  */
+"hint_face_fingerprint" = "If you activate, the app will request %@ instead of password when opened. Entering the password will not be required each time you open the app. To activate %@ please first insert your password below.";
 
 /*  */
 "enabled" = "Enabled";
@@ -425,7 +431,7 @@
 "lbl_tfa_hint" = "For security reasons, your wallet will be protected by 2FA";
 
 /*  */
-"lbl_tfa_setup" = "To setup 2FA, please:\n\n1. Download a two-factor authenticator app (like Google Authenticator)\n\n2. Copy and enter the above displayed 2FA secret code into the authenticator app\n\n3. Enter the generated 2FA code from the authenticator app and press \"Next\"";
+"lbl_tfa_setup" = "To setup 2FA, please:\n\n1. Download a two-factor authenticator app (like Google Authenticator)\n\n2. Copy and enter the above displayed 2FA secret key into the authenticator app\n\n3. Enter the generated 2FA code from the authenticator app and press \"Next\"";
 
 /*  */
 "tfa_code" = "2FA Code";
@@ -476,7 +482,7 @@
 "mnemonic_hint_title" = "This step is very important";
 
 /*  */
-"mnemonic_hint_lbl" = "Please write down your backup secret (mnemonic). You can use it if you lose your password to recover your wallet. It can be also used in other apps / wallets that support import from mnemonic. If you lose your password and the mnemonic you will not be able to access your funds any more. We can not recover your account if you lose both (password and mnemonic). We do not store password and mnemonic.";
+"mnemonic_hint_lbl" = "Please write down your backup secret (mnemonic). You can use it if you lose your password to recover your wallet. It can be also used in other apps / wallets that support import from mnemonic. If you lose your password and the mnemonic you will not be able to access your funds via Lumenshine any more. We can not recover your account if you lose both (password and mnemonic). We do not store password and mnemonic.";
 
 /*  */
 "mnemonic_more_lbl" = "Read more about mnemonics";
@@ -494,7 +500,7 @@
 "verify_mnemonic_hint" = "To prove the noting of your mnemonic, please complete following quiz.";
 
 /*  */
-"verify_mnemonic_words_title" = "Here are 4 random words from the mnemonic. Please indicate their position within the mnemonic.";
+"verify_mnemonic_words_title" = "Here are 4 random words from the mnemonic. Indicate their position within the mnemonic.";
 
 /*  */
 "position" = "Position";
@@ -707,7 +713,7 @@
 "lbl_cancel_2fa_secret" = "If you cancel, the 2FA secret will not be changed";
 
 /*  */
-"lbl_2fa_hint" = "1. Copy and enter the below displayed 2FA secret code into the authenticator app\n\n2. Enter the generated 2FA code from the authenticator app and press \"Next\"";
+"lbl_2fa_hint" = "1. Copy and enter the below displayed 2FA secret key into the authenticator app\n\n2. Enter the generated 2FA code from the authenticator app and press \"Next\"";
 
 /*  */
 "change_2fa" = "Change 2FA Secret";
@@ -717,9 +723,6 @@
 
 /*  */
 "tfa_secret_changed" = "2FA Secret successfully changed";
-
-/*  */
-"fingerprint_recognition" = "Fingerprint/Face recognition";
 
 /*  */
 "avatar" = "Avatar";

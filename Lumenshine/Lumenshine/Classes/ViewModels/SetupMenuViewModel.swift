@@ -21,8 +21,8 @@ class SetupMenuViewModel : MenuViewModelType {
         self.user = user
         
         self.entries = [[.avatar],
-                        [.signOut],
-                        [.about, .help]]
+                        [.signOut]]
+                        //[.about, .help]]
     }
     
     var itemDistribution: [Int] {

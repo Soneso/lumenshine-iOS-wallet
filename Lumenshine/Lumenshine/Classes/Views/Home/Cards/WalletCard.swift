@@ -179,7 +179,6 @@ fileprivate extension WalletCard {
         emptyView.balanceLabel.text = ""
         
         emptyView.fundButton.isHidden = true
-        emptyView.helpButton.isHidden = true
         
         let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         loadingIndicator.startAnimating()
@@ -280,9 +279,6 @@ fileprivate extension WalletCard {
         
         unfundedView.balanceLabel.font = R.font.encodeSansSemiBold(size: 15)
         unfundedView.balanceLabel.textColor = Stylesheet.color(.white)
-        
-        unfundedView.helpButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapHelpButton), for: .touchUpInside)
-        unfundedView.helpButton.tintColor = buttonColor
         
         unfundedView.fundButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapFundButton), for: .touchUpInside)
         unfundedView.fundButton.titleLabel?.font = buttonFont

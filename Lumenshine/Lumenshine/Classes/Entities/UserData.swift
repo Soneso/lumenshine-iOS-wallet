@@ -13,9 +13,7 @@ public struct UserData: Codable {
     let email: String
     let forename: String
     let lastname: String
-    let company: String
     let salutation: String
-    let title: String
     let address: String
     let zipCode: String
     let city: String
@@ -44,9 +42,7 @@ public struct UserData: Codable {
         case email
         case forename
         case lastname
-        case company
         case salutation
-        case title
         case address
         case zipCode = "zip_code"
         case city

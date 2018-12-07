@@ -17,7 +17,7 @@ enum SettingsEntry {
     case notifications
     case personalData
     case avatar
-    case chartCurrency
+    //case chartCurrency
     
     var name: String {
         switch self {
@@ -26,9 +26,9 @@ enum SettingsEntry {
         case .change2FA:
             return R.string.localizable.change_2fa()
         case .fingerprint:
-            return R.string.localizable.fingerprint()
+            return R.string.localizable.fingerprint_cap()
         case .faceRecognition:
-            return R.string.localizable.face_recognition()
+            return R.string.localizable.face_recognition_cap()
         case .avatar:
             return R.string.localizable.avatar()
         case .backupMnemonic:
@@ -37,8 +37,8 @@ enum SettingsEntry {
             return R.string.localizable.notifications()
         case .personalData:
             return R.string.localizable.personal_data()
-        case .chartCurrency:
-            return R.string.localizable.chart_currency()
+        //case .chartCurrency:
+            //return R.string.localizable.chart_currency()
         }
     }
 }

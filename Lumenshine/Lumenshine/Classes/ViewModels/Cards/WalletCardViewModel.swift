@@ -142,10 +142,6 @@ class WalletCardViewModel : CardViewModelType {
         needsRefresh = true
     }
     
-    @objc func didTapHelpButton() {
-        navigationCoordinator?.performTransition(transition: .showWalletCardInfo)
-    }
-    
     @objc func didTapFundButton() {
         navigationCoordinator?.performTransition(transition: .showFundWallet(wallet))
         needsRefresh = true

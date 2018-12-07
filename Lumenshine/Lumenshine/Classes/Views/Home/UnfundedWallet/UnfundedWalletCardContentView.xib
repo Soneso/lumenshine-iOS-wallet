@@ -52,24 +52,16 @@
                             <rect key="frame" x="278" y="0.0" width="81" height="45"/>
                             <state key="normal" title="Fund Wallet"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p9g-xS-zVJ">
-                            <rect key="frame" x="16" y="0.0" width="28" height="45"/>
-                            <state key="normal" image="question"/>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="p9g-xS-zVJ" firstAttribute="leading" secondItem="VWl-F4-CNx" secondAttribute="leading" constant="16" id="Ev4-4b-jyY"/>
                         <constraint firstItem="f69-AE-dcV" firstAttribute="top" secondItem="VWl-F4-CNx" secondAttribute="top" id="J7e-ld-zxZ"/>
                         <constraint firstItem="VWl-F4-CNx" firstAttribute="trailing" secondItem="f69-AE-dcV" secondAttribute="trailing" constant="16" id="JqJ-cW-erC"/>
                         <constraint firstAttribute="height" constant="45" id="KJq-7H-bHl"/>
-                        <constraint firstItem="f69-AE-dcV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="p9g-xS-zVJ" secondAttribute="trailing" constant="16" id="NEd-k8-c5P"/>
                         <constraint firstItem="U2Y-cq-O7Y" firstAttribute="top" secondItem="wgI-xg-A9r" secondAttribute="top" id="Reh-Cq-Mgz"/>
                         <constraint firstItem="U2Y-cq-O7Y" firstAttribute="leading" secondItem="wgI-xg-A9r" secondAttribute="leading" id="cx5-qG-jai"/>
-                        <constraint firstItem="p9g-xS-zVJ" firstAttribute="top" secondItem="VWl-F4-CNx" secondAttribute="top" id="f8J-L4-h2Q"/>
                         <constraint firstAttribute="trailing" secondItem="U2Y-cq-O7Y" secondAttribute="trailing" id="rNB-Dj-bHI"/>
                         <constraint firstItem="VWl-F4-CNx" firstAttribute="bottom" secondItem="f69-AE-dcV" secondAttribute="bottom" id="rgI-eA-2qO"/>
-                        <constraint firstItem="VWl-F4-CNx" firstAttribute="bottom" secondItem="p9g-xS-zVJ" secondAttribute="bottom" id="v9S-Vk-gJu"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="VWl-F4-CNx"/>
                 </view>
@@ -117,7 +109,6 @@
                 <outlet property="balanceDescriptionLabel" destination="UWs-ZR-OhZ" id="ccj-Kl-TQx"/>
                 <outlet property="balanceLabel" destination="LXd-hR-sCL" id="Ybg-Bh-Qte"/>
                 <outlet property="fundButton" destination="f69-AE-dcV" id="ddL-Kr-4VF"/>
-                <outlet property="helpButton" destination="p9g-xS-zVJ" id="nfW-JV-hdp"/>
                 <outlet property="nameLabel" destination="02c-sm-4KK" id="mBw-HM-GPS"/>
                 <outlet property="notFundedLabel" destination="QmJ-VE-oES" id="h6B-5M-5b6"/>
                 <outlet property="walletLabel" destination="Ahx-bA-zsU" id="LIs-Kb-ou8"/>
@@ -125,7 +116,4 @@
             <point key="canvasLocation" x="32.799999999999997" y="-120.08995502248877"/>
         </view>
     </objects>
-    <resources>
-        <image name="question" width="28" height="28"/>
-    </resources>
 </document>

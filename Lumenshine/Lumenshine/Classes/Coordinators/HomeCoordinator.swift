@@ -33,8 +33,6 @@ class HomeCoordinator: CoordinatorType {
             showFundWallet(forWallet: wallet)
         case .showCardDetails(let wallet):
             showCardDetails(wallet: wallet)
-        case .showWalletCardInfo:
-            showWalletCardInfo()
         case .showHelp:
             showHelpCenter()
         default: break
@@ -69,11 +67,6 @@ fileprivate extension HomeCoordinator {
         accountDetailsViewController.flowDelegate = self
         accountDetailsViewController.wallet = wallet
         self.baseController.navigationController?.pushViewController(accountDetailsViewController, animated: true)
-    }
-    
-    func showWalletCardInfo() {
-        let infoViewController = WalletCardInfoViewController(nibName: "WalletCardInfoViewController", bundle: Bundle.main)
-        self.baseController.present(infoViewController, animated: true)
     }
     
     func showHelpCenter() {

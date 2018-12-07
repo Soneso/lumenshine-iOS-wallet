@@ -44,7 +44,6 @@ public indirect enum Transition {
     case showOnWeb(URL)
     case showCardDetails(Wallet)
     case showFundWallet(Wallet)
-    case showWalletCardInfo
     case logout(Transition?)
     case showPasswordHint(String, NSAttributedString?)
     case showSetup(User, String, Bool, Bool, Bool, String?)
