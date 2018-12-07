@@ -118,7 +118,7 @@ class TransactionsViewController: UITableViewController {
         separator.backgroundColor = .white
         
         let label = UILabel()
-        label.text = R.string.localizable.transactions_history()
+        label.text = R.string.localizable.transactions()
         label.textColor = Stylesheet.color(.blue)
         label.font = R.font.encodeSansSemiBold(size: 15)
         
@@ -196,7 +196,7 @@ extension TransactionsViewController {
     
     func updateHeader() {
         let name = viewModel.wallets.count > 0 ? viewModel.wallets[viewModel.walletIndex] : R.string.localizable.primary()
-        walletLabel.text = "\(R.string.localizable.wallet()): \(name)"
+        walletLabel.text = "\(name) \(R.string.localizable.wallet())"
         let dateFrom = DateUtils.format(viewModel.dateFrom, in: .date) ?? viewModel.dateFrom.description
         dateFromLabel.text = "\(R.string.localizable.date_from()): \(dateFrom)"
         let dateTo = DateUtils.format(viewModel.dateTo, in: .date) ?? viewModel.dateTo.description
@@ -239,8 +239,8 @@ fileprivate extension TransactionsViewController {
     func prepareTableHeader() -> UIView {
         let headerView = UIView()
         
-        walletLabel.textColor = Stylesheet.color(.darkGray)
-        walletLabel.font = R.font.encodeSansRegular(size: 13)
+        walletLabel.textColor = Stylesheet.color(.black)
+        walletLabel.font = R.font.encodeSansSemiBold(size: 13)
         walletLabel.adjustsFontSizeToFitWidth = true
         
         headerView.addSubview(walletLabel)

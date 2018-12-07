@@ -1025,6 +1025,9 @@
 "inflation_destination" = "Inflation destination";
 
 /*  */
+"inflation_dest" = "Inflation dest.";
+
+/*  */
 "set_flags" = "Set flags";
 
 /*  */

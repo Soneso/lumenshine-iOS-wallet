@@ -327,9 +327,10 @@ class TransactionsViewModel : TransactionsViewModelType {
         }
         details.append(subDetails)
         
-        if item.sourceAccount != currentWalletPK {
-            details.append(copyString(prefix: R.string.localizable.source_account(), value: item.sourceAccount))
-        }
+        /* TODO - change logic depending on operation type */
+        /*if item.sourceAccount != currentWalletPK {
+            details.append(prepareKeyString(prefix: R.string.localizable.source_account(), value: item.sourceAccount))
+        }*/
         
         return details
     }
@@ -803,19 +804,19 @@ fileprivate extension TransactionsViewModel {
         // TODO: check logic
         let publicKey = accountCreated.funder == currentWalletPK ? accountCreated.funder : accountCreated.account
         let prefix = accountCreated.funder == currentWalletPK ? R.string.localizable.sender() : R.string.localizable.recipient()
-        return copyString(prefix: prefix, value: publicKey)
+        return prepareKeyString(prefix: prefix, value: publicKey)
     }
     
     func details(payment: TxPaymentOperationResponse) -> NSAttributedString {
         let publicKey = payment.to == currentWalletPK ? payment.from : payment.to
         let prefix = payment.to == currentWalletPK ? R.string.localizable.sender() : R.string.localizable.recipient()
-        return copyString(prefix: prefix, value: publicKey)
+        return prepareKeyString(prefix: prefix, value: publicKey)
     }
     
     func details(pathPayment: TxPathPaymentOperationResponse) -> NSAttributedString {
         let publicKey = pathPayment.to == currentWalletPK ? pathPayment.from : pathPayment.to
         let prefix = pathPayment.to == currentWalletPK ? R.string.localizable.sender() : R.string.localizable.recipient()
-        return copyString(prefix: prefix, value: publicKey)
+        return prepareKeyString(prefix: prefix, value: publicKey)
     }
     
     func details(manageOffer: TxManageOfferOperationResponse) -> NSAttributedString {
@@ -888,7 +889,7 @@ fileprivate extension TransactionsViewModel {
     func details(setOptions: TxSetOptionsOperationResponse) -> NSAttributedString {
         let details = NSMutableAttributedString()
         if let inflationPK = setOptions.inflationDestination {
-            let pkStr = copyString(prefix: R.string.localizable.inflation_destination(), value: inflationPK)
+            let pkStr = prepareKeyString(prefix: R.string.localizable.inflation_dest(), value: inflationPK)
             details.append(pkStr)
         }
         
@@ -949,7 +950,7 @@ fileprivate extension TransactionsViewModel {
         if let signerWeight = setOptions.signerWeight,
             let signerKey = setOptions.signerKey {
             let label = signerWeight == 0 ? R.string.localizable.signer_removed() : R.string.localizable.signer_added()
-            let signer = copyString(prefix: label, value: signerKey)
+            let signer = prepareKeyString(prefix: label, value: signerKey)
             
             var type = ""
             switch signerKey.first {
@@ -1003,7 +1004,7 @@ fileprivate extension TransactionsViewModel {
         
         var issuer = NSAttributedString()
         if let issuerr = changeTrust.assetIssuer {
-            issuer = copyString(prefix: R.string.localizable.issuer(), value: issuerr)
+            issuer = prepareKeyString(prefix: R.string.localizable.issuer(), value: issuerr)
         }
         
         let limit = changeTrust.limit ?? R.string.localizable.none()
@@ -1021,7 +1022,7 @@ fileprivate extension TransactionsViewModel {
     }
     
     func details(allowTrust: TxAllowTrustOperationResponse) -> NSAttributedString {
-        let trustor = copyString(prefix: R.string.localizable.trustor(), value: allowTrust.trustor)
+        let trustor = prepareKeyString(prefix: R.string.localizable.trustor(), value: allowTrust.trustor)
         
         let code = allowTrust.assetCode ?? NativeCurrencyNames.xlm.rawValue
         let asset = NSAttributedString(string: "\(R.string.localizable.asset()): \(code)\n",
@@ -1041,7 +1042,7 @@ fileprivate extension TransactionsViewModel {
     }
     
     func details(accountMerge: TxAccountMergeOperationResponse) -> NSAttributedString {
-        return copyString(prefix: R.string.localizable.merged_account(), value: accountMerge.account)
+        return prepareKeyString(prefix: R.string.localizable.merged_account(), value: accountMerge.account)
     }
     
     func details(manageData: TxManageDataOperationResponse) -> NSAttributedString {
@@ -1077,9 +1078,9 @@ fileprivate extension TransactionsViewModel {
         return bump
     }
     
-    func copyString(prefix: String, value: String) -> NSAttributedString {
-        let start = value.index(value.startIndex, offsetBy: 6)
-        let end = value.index(value.endIndex, offsetBy: -7)
+    func prepareKeyString(prefix: String, value: String) -> NSAttributedString {
+        let start = value.index(value.startIndex, offsetBy: 10)
+        let end = value.index(value.endIndex, offsetBy: -11)
         let truncatedValue = value.replacingCharacters(in: start...end, with: "...")
         
         let pkStr = NSAttributedString(string: "\(prefix): \(truncatedValue)",
@@ -1087,7 +1088,7 @@ fileprivate extension TransactionsViewModel {
                          .font : mainFont])
         
         let attachment = LSTextAttachment(info: value)
-        attachment.image = R.image.copy()?.resize(toHeight: 26)
+        attachment.image = R.image.copy()?.resize(toHeight: 25)
         let copyStr = NSAttributedString(attachment: attachment)
         
         let details = NSMutableAttributedString(attributedString: pkStr)

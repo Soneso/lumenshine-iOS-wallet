@@ -243,7 +243,7 @@ fileprivate extension TransactionsTableViewCell {
     }
     
     func prepareDetailsLabel() {
-        detailsLabel.text = R.string.localizable.details() + ":"
+        detailsLabel.text = R.string.localizable.details()
         detailsLabel.textColor = Stylesheet.color(.lightBlack)
         detailsLabel.font = R.font.encodeSansSemiBold(size: fontSize)
         
@@ -263,8 +263,8 @@ fileprivate extension TransactionsTableViewCell {
         
         contentView.addSubview(detailsValueLabel)
         detailsValueLabel.snp.makeConstraints { make in
-            make.top.equalTo(detailsLabel)
-            make.left.equalTo(detailsLabel.snp.right)
+            make.top.equalTo(detailsLabel).offset(25.0)
+            make.left.equalTo(detailsLabel.snp.left).offset(10.0)
             make.right.equalTo(-horizontalSpacing)
             make.bottom.equalTo(-horizontalSpacing)
         }
