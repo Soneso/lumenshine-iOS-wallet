@@ -33,12 +33,12 @@ class WalletsView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return walletsList[row].name
+        return "\(walletsList[row].name) \(R.string.localizable.wallet())"
     }
     
     private func selectAsset(pickerView: UIPickerView, row: Int) {
         let wallet = walletsList[row]
-        walletTextField.text = wallet.name
+        walletTextField.text = "\(wallet.name) \(R.string.localizable.wallet())"
         walletChanged?(wallet)
     }
     
@@ -54,7 +54,10 @@ class WalletsView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
             walletTextField.inputView = walletPickerView
             walletTextField.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(walletsDoneButtonTap))
         }
-        
-        walletTextField.text = walletsList.first?.name
+        var firstWalletName = "No"
+        if let firstWallet = walletsList.first {
+            firstWalletName = firstWallet.name
+        }
+        walletTextField.text = "\(firstWalletName) \(R.string.localizable.wallet())" 
     }
 }
