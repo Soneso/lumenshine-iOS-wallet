@@ -388,7 +388,7 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
             return
         }
         
-        walletsView = Bundle.main.loadNibNamed("WalletsView", owner: self, options: nil)![0] as? WalletsView
+        walletsView = Bundle.main.loadNibNamed("WalletsPickerView", owner: self, options: nil)![0] as? WalletsView
         walletsView.walletsList = walletsList
         walletsViewContainer.addSubview(walletsView)
         

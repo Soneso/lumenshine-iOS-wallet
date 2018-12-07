@@ -416,7 +416,7 @@
 		C6D87E7A213400B500154A3B /* KnownCurrenciesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D87E79213400B500154A3B /* KnownCurrenciesTableViewCell.swift */; };
 		C6DBDB7121199FF100FCEC78 /* TransactionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DBDB7021199FF100FCEC78 /* TransactionResult.swift */; };
 		C6DBDB732119CD5000FCEC78 /* TransactionInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DBDB722119CD5000FCEC78 /* TransactionInput.swift */; };
-		C6F000EB21B6B3DB00A95228 /* WalletsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6F000E921B6B3DB00A95228 /* WalletsView.xib */; };
+		C6F000EB21B6B3DB00A95228 /* WalletsPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6F000E921B6B3DB00A95228 /* WalletsPickerView.xib */; };
 		C6F000EC21B6B3DB00A95228 /* WalletsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F000EA21B6B3DB00A95228 /* WalletsView.swift */; };
 /* End PBXBuildFile section */
 
@@ -875,7 +875,7 @@
 		C6D87E79213400B500154A3B /* KnownCurrenciesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownCurrenciesTableViewCell.swift; sourceTree = "<group>"; };
 		C6DBDB7021199FF100FCEC78 /* TransactionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionResult.swift; sourceTree = "<group>"; };
 		C6DBDB722119CD5000FCEC78 /* TransactionInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionInput.swift; sourceTree = "<group>"; };
-		C6F000E921B6B3DB00A95228 /* WalletsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletsView.xib; sourceTree = "<group>"; };
+		C6F000E921B6B3DB00A95228 /* WalletsPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletsPickerView.xib; sourceTree = "<group>"; };
 		C6F000EA21B6B3DB00A95228 /* WalletsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletsView.swift; sourceTree = "<group>"; };
 		E05E8F1585ADC115F3F208D2 /* Pods-Lumenshine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lumenshine.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine.release.xcconfig"; sourceTree = "<group>"; };
 		FF5D5F3CF2E79061B75C8EA0 /* Pods-LumenshineUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineUITests/Pods-LumenshineUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1615,7 +1615,7 @@
 			isa = PBXGroup;
 			children = (
 				C6F000EA21B6B3DB00A95228 /* WalletsView.swift */,
-				C6F000E921B6B3DB00A95228 /* WalletsView.xib */,
+				C6F000E921B6B3DB00A95228 /* WalletsPickerView.xib */,
 				7491BE47211C322D0058877E /* CurrencyView.swift */,
 				7491BE49211C32700058877E /* CurrencyView.xib */,
 				C6CB743F21746B3100FB99C3 /* PasswordView.xib */,
@@ -2099,7 +2099,7 @@
 				43AE635C2135A19300B7A904 /* EncodeSansSemiCondensed-Regular.ttf in Resources */,
 				74C08FF920EF6F2F000A809D /* FundWalletViewController.xib in Resources */,
 				43AE63322135A19300B7A904 /* EncodeSansSemiExpanded-Bold.ttf in Resources */,
-				C6F000EB21B6B3DB00A95228 /* WalletsView.xib in Resources */,
+				C6F000EB21B6B3DB00A95228 /* WalletsPickerView.xib in Resources */,
 				43AE63462135A19300B7A904 /* EncodeSansExpanded-Regular.ttf in Resources */,
 				43AE63432135A19300B7A904 /* EncodeSansExpanded-ExtraLight.ttf in Resources */,
 				43AE634D2135A19300B7A904 /* Lato-Italic.ttf in Resources */,
