@@ -14,6 +14,7 @@ enum WalletAction {
     case receive
     case send
     case transactionResult
+    case deposit
 }
 
 protocol WalletCardProtocol {
@@ -51,6 +52,13 @@ class WalletCard: CardView {
                     if let wallet = self?.wallet {
                         self?.setupPaymentOperationsVCManager()
                         self?.paymentOperationsVCManager.addViewController(forAction: WalletAction.send, wallets: [wallet])
+                    }
+                }
+                
+                viewModel.depositAction = { [weak self] in
+                    if let wallet = self?.wallet {
+                        self?.setupPaymentOperationsVCManager()
+                        self?.paymentOperationsVCManager.addViewController(forAction: WalletAction.deposit, wallets: [wallet])
                     }
                 }
                 
@@ -224,6 +232,10 @@ fileprivate extension WalletCard {
         
         fundedView.availableLabel.font = availableLabelFont
         fundedView.availableLabel.textColor = availableLabelColor
+        
+        fundedView.depositButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapDepositButton), for: .touchUpInside)
+        fundedView.depositButton.titleLabel?.font = buttonFont
+        fundedView.depositButton.setTitleColor(buttonColor, for: UIControlState.normal)
         
         fundedView.sendButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapSendButton), for: .touchUpInside)
         fundedView.sendButton.titleLabel?.font = buttonFont

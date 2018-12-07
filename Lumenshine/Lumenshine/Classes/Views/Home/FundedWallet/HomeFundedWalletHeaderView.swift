@@ -64,7 +64,7 @@ class HomeFundedWalletHeaderView: UIView, UITabBarDelegate {
         
         moreButton.setTitleTextAttributes(attributes, for: .normal)
         moreButton.setTitleTextAttributes(attributes, for: .selected)
-        moreButton.selectedImage = R.image.moreActive()?.tint(with: Stylesheet.color(.white))
+        moreButton.selectedImage = R.image.receiveActive()?.tint(with: Stylesheet.color(.white))
     }
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
@@ -76,7 +76,9 @@ class HomeFundedWalletHeaderView: UIView, UITabBarDelegate {
             if item == sendButton {
                 paymentOperationsVCManager.setupSendViewControllerWithMultipleWallets()
             } else if item == receiveButton {
-                paymentOperationsVCManager.setupReceiveViewControllerWithMultipleWallets()
+                paymentOperationsVCManager.setupViewControllerWithMultipleWallets(forAction: .receive)
+            } else if item == moreButton {
+                paymentOperationsVCManager.setupViewControllerWithMultipleWallets(forAction: .deposit)
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {

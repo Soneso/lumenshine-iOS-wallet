@@ -33,6 +33,15 @@ class PaymentOperationsVCManager {
         case .transactionResult:
             viewController = TransactionResultViewController()
             setupTransactionResult(viewController: viewController as! TransactionResultViewController, transactionResult: transactionResult)
+        
+        case .deposit:
+            viewController = DepositInfoViewController()
+            (viewController as! DepositInfoViewController).walletsList = wallets
+            (viewController as! DepositInfoViewController).baseViewController = self.parentViewController!.navigationController
+            let composeVC = ComposeNavigationController(rootViewController: viewController)
+            self.parentViewController?.present(composeVC, animated: true)
+            
+            return
         }
         
         (viewController as! WalletActionsProtocol).walletsList = wallets
@@ -58,11 +67,11 @@ class PaymentOperationsVCManager {
         }
     }
     
-    func setupReceiveViewControllerWithMultipleWallets() {
+    func setupViewControllerWithMultipleWallets(forAction action: WalletAction) {
         userManager.walletsForCurrentUser { (response) -> (Void) in
             switch response {
             case .success(response: let wallets):
-                self.addViewController(forAction: .receive, wallets: wallets)
+                self.addViewController(forAction: action, wallets: wallets)
             case .failure(error: let error):
                 print(error)
             }

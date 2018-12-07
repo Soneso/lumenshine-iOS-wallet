@@ -21,6 +21,7 @@ class WalletCardViewModel : CardViewModelType {
     
     var receivePaymentAction: (() -> ())?
     var sendAction: (() -> ())?
+    var depositAction: (() -> ())?
     var reloadCardsClosure: (() -> ())?
     var reloadClosure: ((Bool) -> ())?
     
@@ -120,6 +121,10 @@ class WalletCardViewModel : CardViewModelType {
         default:
             break
         }
+    }
+    
+    @objc func didTapDepositButton() {
+        depositAction?()
     }
     
     @objc func didTapSendButton() {

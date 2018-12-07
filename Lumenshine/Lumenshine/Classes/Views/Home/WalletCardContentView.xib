@@ -111,12 +111,17 @@
                             <rect key="frame" x="190" y="0.0" width="36" height="45"/>
                             <state key="normal" title="Send"/>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0k4-88-HJt">
+                            <rect key="frame" x="16" y="1" width="53" height="44"/>
+                            <state key="normal" title="Deposit"/>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="v69-4U-2Nv" firstAttribute="leading" secondItem="FaK-Fg-J3B" secondAttribute="trailing" constant="16" id="3Eb-lP-2kh"/>
                         <constraint firstItem="c71-49-efD" firstAttribute="top" secondItem="2ac-Fj-252" secondAttribute="top" id="3Zd-jr-DbI"/>
                         <constraint firstItem="c71-49-efD" firstAttribute="leading" secondItem="2ac-Fj-252" secondAttribute="leading" id="9qB-kn-9D0"/>
+                        <constraint firstItem="KLh-rI-TgG" firstAttribute="bottom" secondItem="0k4-88-HJt" secondAttribute="bottom" id="FwD-WS-usX"/>
                         <constraint firstItem="FaK-Fg-J3B" firstAttribute="top" secondItem="KLh-rI-TgG" secondAttribute="top" id="UGI-jW-YV4"/>
                         <constraint firstItem="KLh-rI-TgG" firstAttribute="trailing" secondItem="QpW-7W-h0z" secondAttribute="trailing" constant="16" id="Uak-iA-raC"/>
                         <constraint firstItem="QpW-7W-h0z" firstAttribute="top" secondItem="KLh-rI-TgG" secondAttribute="top" id="VUP-3d-nwf"/>
@@ -124,7 +129,9 @@
                         <constraint firstAttribute="height" constant="45" id="Zys-cz-b0f"/>
                         <constraint firstItem="KLh-rI-TgG" firstAttribute="bottom" secondItem="QpW-7W-h0z" secondAttribute="bottom" id="aGA-Ty-Jbs"/>
                         <constraint firstAttribute="trailing" secondItem="c71-49-efD" secondAttribute="trailing" id="eKJ-PW-HmK"/>
+                        <constraint firstItem="0k4-88-HJt" firstAttribute="leading" secondItem="KLh-rI-TgG" secondAttribute="leading" constant="16" id="iUT-6V-Fqn"/>
                         <constraint firstItem="QpW-7W-h0z" firstAttribute="leading" secondItem="v69-4U-2Nv" secondAttribute="trailing" constant="16" id="k01-dG-VuV"/>
+                        <constraint firstItem="0k4-88-HJt" firstAttribute="top" secondItem="c71-49-efD" secondAttribute="bottom" id="oku-Xq-I8o"/>
                         <constraint firstAttribute="bottom" secondItem="FaK-Fg-J3B" secondAttribute="bottom" id="qZJ-vm-aPA"/>
                         <constraint firstItem="v69-4U-2Nv" firstAttribute="top" secondItem="KLh-rI-TgG" secondAttribute="top" id="rGF-D6-bio"/>
                     </constraints>
@@ -173,6 +180,7 @@
                 <outlet property="balanceLabel" destination="yva-VC-2hl" id="bSb-ay-9c8"/>
                 <outlet property="balanceStackView" destination="A0f-Us-sOy" id="bje-lQ-HrV"/>
                 <outlet property="currencyInfoButton" destination="d4C-YN-0Dj" id="ISf-Qi-1nB"/>
+                <outlet property="depositButton" destination="0k4-88-HJt" id="FQS-zi-28y"/>
                 <outlet property="detailsButton" destination="QpW-7W-h0z" id="oQ4-6K-uOA"/>
                 <outlet property="nameLabel" destination="dcr-TQ-c9b" id="cft-fm-FwF"/>
                 <outlet property="receiveButton" destination="v69-4U-2Nv" id="71o-S7-Z6c"/>

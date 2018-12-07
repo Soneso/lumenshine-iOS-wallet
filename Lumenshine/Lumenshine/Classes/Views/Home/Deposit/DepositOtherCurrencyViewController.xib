@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DepositOtherCurrencyViewController" customModule="Lumenshine" customModuleProvider="target">
+            <connections>
+                <outlet property="backButton" destination="dnv-Zg-WcG" id="87V-Jo-Ts7"/>
+                <outlet property="payWithChangellyButton" destination="2Ma-bI-C6k" id="sgl-EX-O0o"/>
+                <outlet property="view" destination="iN0-l3-epB" id="qaQ-WU-Cjn"/>
+                <outlet property="walletsViewContainer" destination="T0E-go-dGU" id="0Uf-qM-m1u"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Other Currency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rha-oc-oVE" customClass="SubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
+                    <rect key="frame" x="16" y="52" width="343" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcq-eL-1Qt" customClass="RegularSubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
+                    <rect key="frame" x="16" y="88.5" width="343" height="101.5"/>
+                    <string key="text">Lumenshine uses Changelly as our cross-chain exchange provider. They convert your funds to XLM at the best rates by bidding out your order worldwide. They charge 0.5% for the conversion.</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Nmx-zP-s0m">
+                    <rect key="frame" x="16" y="206" width="343" height="104"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="T0E-go-dGU">
+                            <rect key="frame" x="0.0" y="0.0" width="343" height="40"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wNj-fs-C6Q">
+                            <rect key="frame" x="0.0" y="44" width="343" height="60"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dnv-Zg-WcG" customClass="RoundedButton" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="15" width="34" height="30"/>
+                                    <state key="normal" title="Back"/>
+                                    <connections>
+                                        <action selector="backButtonAction:" destination="-1" eventType="touchUpInside" id="Qca-dA-L8H"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Ma-bI-C6k" customClass="RoundedButton" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="34" y="0.0" width="250" height="60"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="60" id="A8T-GK-tUE"/>
+                                        <constraint firstAttribute="width" constant="250" id="u46-oW-YfN"/>
+                                    </constraints>
+                                    <state key="normal" image="payWithChangelly"/>
+                                    <connections>
+                                        <action selector="payWithChangellyButtonAction:" destination="-1" eventType="touchUpInside" id="m0K-kg-jZ0"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="2Ma-bI-C6k" firstAttribute="leading" secondItem="dnv-Zg-WcG" secondAttribute="trailing" id="GGS-Xi-iOm"/>
+                                <constraint firstItem="dnv-Zg-WcG" firstAttribute="leading" secondItem="wNj-fs-C6Q" secondAttribute="leading" id="dgQ-6u-PlU"/>
+                                <constraint firstItem="2Ma-bI-C6k" firstAttribute="top" secondItem="wNj-fs-C6Q" secondAttribute="top" id="fQY-aD-TgT"/>
+                                <constraint firstItem="dnv-Zg-WcG" firstAttribute="centerY" secondItem="wNj-fs-C6Q" secondAttribute="centerY" id="gzh-lg-bd0"/>
+                                <constraint firstAttribute="bottom" secondItem="2Ma-bI-C6k" secondAttribute="bottom" id="hiw-Q1-gS5"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Rha-oc-oVE" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="32" id="OrJ-X3-20S"/>
+                <constraint firstItem="dcq-eL-1Qt" firstAttribute="top" secondItem="Rha-oc-oVE" secondAttribute="bottom" constant="16" id="Uvi-Cc-3Ww"/>
+                <constraint firstItem="Nmx-zP-s0m" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="a7W-xz-Tz8"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="dcq-eL-1Qt" secondAttribute="trailing" constant="16" id="fM4-6D-mgI"/>
+                <constraint firstItem="Nmx-zP-s0m" firstAttribute="top" secondItem="dcq-eL-1Qt" secondAttribute="bottom" constant="16" id="iHA-bF-szB"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Nmx-zP-s0m" secondAttribute="trailing" constant="16" id="jcP-xH-ebY"/>
+                <constraint firstItem="Rha-oc-oVE" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="toR-XS-dyT"/>
+                <constraint firstItem="dcq-eL-1Qt" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="vWT-h6-lHP"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Rha-oc-oVE" secondAttribute="trailing" constant="16" id="yUb-hH-s9X"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="53.600000000000001" y="48.125937031484263"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="payWithChangelly" width="1072" height="174"/>
+    </resources>
+</document>

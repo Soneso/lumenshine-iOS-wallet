@@ -235,8 +235,6 @@
 		74A2A2F0210EF405007AEE91 /* ReceivePaymentPrintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A2A2EF210EF405007AEE91 /* ReceivePaymentPrintView.swift */; };
 		74BC395F211D988000EAF8A4 /* AccountBalanceResponse+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BC395E211D988000EAF8A4 /* AccountBalanceResponse+Properties.swift */; };
 		74C08FF320EE1FE6000A809D /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C08FF220EE1FE6000A809D /* UserManager.swift */; };
-		74C08FF820EF6F2F000A809D /* FundWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C08FF620EF6F2F000A809D /* FundWalletViewController.swift */; };
-		74C08FF920EF6F2F000A809D /* FundWalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74C08FF720EF6F2F000A809D /* FundWalletViewController.xib */; };
 		74C0913320F64002000A809D /* WalletCardContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74C0913220F64002000A809D /* WalletCardContentView.xib */; };
 		74C0913520F64012000A809D /* WalletCardContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C0913420F64012000A809D /* WalletCardContentView.swift */; };
 		74C0913B20F64AF0000A809D /* UnfundedWalletCardContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74C0913A20F64AF0000A809D /* UnfundedWalletCardContentView.xib */; };
@@ -336,6 +334,12 @@
 		C6658714212555B4006499A7 /* SourceCurrencyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6658713212555B4006499A7 /* SourceCurrencyResponse.swift */; };
 		C665871621255BF2006499A7 /* ChartCurrentRatesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C665871521255BF2006499A7 /* ChartCurrentRatesResponse.swift */; };
 		C665871821255EAB006499A7 /* RatesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C665871721255EAB006499A7 /* RatesResponse.swift */; };
+		C669269F21B7EF4100D57D51 /* DepositInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C669269E21B7EF4100D57D51 /* DepositInfoViewController.swift */; };
+		C66926A121B7EF6800D57D51 /* DepositXLMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66926A021B7EF6800D57D51 /* DepositXLMViewController.swift */; };
+		C66926A321B7EF9C00D57D51 /* DepositOtherCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66926A221B7EF9C00D57D51 /* DepositOtherCurrencyViewController.swift */; };
+		C66926A521B7EFBB00D57D51 /* DepositInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C66926A421B7EFBB00D57D51 /* DepositInfoViewController.xib */; };
+		C66926A721B7EFC700D57D51 /* DepositXLMViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C66926A621B7EFC700D57D51 /* DepositXLMViewController.xib */; };
+		C66926A921B7EFD300D57D51 /* DepositOtherCurrencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C66926A821B7EFD300D57D51 /* DepositOtherCurrencyViewController.xib */; };
 		C66CC2D5212EA2AD00729C09 /* RemoveCurrencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C66CC2D4212EA2AD00729C09 /* RemoveCurrencyViewController.xib */; };
 		C66CC2D7212EA2BD00729C09 /* RemoveCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66CC2D6212EA2BD00729C09 /* RemoveCurrencyViewController.swift */; };
 		C66E353D215A082700D39906 /* ImageBackgroundNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66E353C215A082700D39906 /* ImageBackgroundNavigationController.swift */; };
@@ -690,8 +694,6 @@
 		74A2A2EF210EF405007AEE91 /* ReceivePaymentPrintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivePaymentPrintView.swift; sourceTree = "<group>"; };
 		74BC395E211D988000EAF8A4 /* AccountBalanceResponse+Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountBalanceResponse+Properties.swift"; sourceTree = "<group>"; };
 		74C08FF220EE1FE6000A809D /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
-		74C08FF620EF6F2F000A809D /* FundWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundWalletViewController.swift; sourceTree = "<group>"; };
-		74C08FF720EF6F2F000A809D /* FundWalletViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FundWalletViewController.xib; sourceTree = "<group>"; };
 		74C0913220F64002000A809D /* WalletCardContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletCardContentView.xib; sourceTree = "<group>"; };
 		74C0913420F64012000A809D /* WalletCardContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCardContentView.swift; sourceTree = "<group>"; };
 		74C0913A20F64AF0000A809D /* UnfundedWalletCardContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UnfundedWalletCardContentView.xib; sourceTree = "<group>"; };
@@ -793,6 +795,12 @@
 		C6658713212555B4006499A7 /* SourceCurrencyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceCurrencyResponse.swift; sourceTree = "<group>"; };
 		C665871521255BF2006499A7 /* ChartCurrentRatesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCurrentRatesResponse.swift; sourceTree = "<group>"; };
 		C665871721255EAB006499A7 /* RatesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesResponse.swift; sourceTree = "<group>"; };
+		C669269E21B7EF4100D57D51 /* DepositInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositInfoViewController.swift; sourceTree = "<group>"; };
+		C66926A021B7EF6800D57D51 /* DepositXLMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositXLMViewController.swift; sourceTree = "<group>"; };
+		C66926A221B7EF9C00D57D51 /* DepositOtherCurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositOtherCurrencyViewController.swift; sourceTree = "<group>"; };
+		C66926A421B7EFBB00D57D51 /* DepositInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DepositInfoViewController.xib; sourceTree = "<group>"; };
+		C66926A621B7EFC700D57D51 /* DepositXLMViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DepositXLMViewController.xib; sourceTree = "<group>"; };
+		C66926A821B7EFD300D57D51 /* DepositOtherCurrencyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DepositOtherCurrencyViewController.xib; sourceTree = "<group>"; };
 		C66CC2D4212EA2AD00729C09 /* RemoveCurrencyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RemoveCurrencyViewController.xib; sourceTree = "<group>"; };
 		C66CC2D6212EA2BD00729C09 /* RemoveCurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveCurrencyViewController.swift; sourceTree = "<group>"; };
 		C66E353C215A082700D39906 /* ImageBackgroundNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBackgroundNavigationController.swift; sourceTree = "<group>"; };
@@ -1239,6 +1247,7 @@
 		4376F4A4204DA07A00B179C3 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				C669269D21B7EF1600D57D51 /* Deposit */,
 				C6BDA2B3216F66100076439E /* Info */,
 				C68884FD213E68FC0010615D /* SendPayment */,
 				C68884FB213E68B20010615D /* ReceivePayment */,
@@ -1723,6 +1732,19 @@
 			path = TxOperations;
 			sourceTree = "<group>";
 		};
+		C669269D21B7EF1600D57D51 /* Deposit */ = {
+			isa = PBXGroup;
+			children = (
+				C669269E21B7EF4100D57D51 /* DepositInfoViewController.swift */,
+				C66926A021B7EF6800D57D51 /* DepositXLMViewController.swift */,
+				C66926A221B7EF9C00D57D51 /* DepositOtherCurrencyViewController.swift */,
+				C66926A421B7EFBB00D57D51 /* DepositInfoViewController.xib */,
+				C66926A621B7EFC700D57D51 /* DepositXLMViewController.xib */,
+				C66926A821B7EFD300D57D51 /* DepositOtherCurrencyViewController.xib */,
+			);
+			path = Deposit;
+			sourceTree = "<group>";
+		};
 		C6725082213FC1240064F6E3 /* InflationDestination */ = {
 			isa = PBXGroup;
 			children = (
@@ -1833,8 +1855,6 @@
 			children = (
 				74E2057720D1543400E94048 /* HomeFundedWalletHeaderView.swift */,
 				74E2057920D1544000E94048 /* HomeFundedWalletHeaderView.xib */,
-				74C08FF620EF6F2F000A809D /* FundWalletViewController.swift */,
-				74C08FF720EF6F2F000A809D /* FundWalletViewController.xib */,
 			);
 			path = FundedWallet;
 			sourceTree = "<group>";
@@ -2087,6 +2107,7 @@
 				C69A5141211C16330066A4A0 /* TransactionResultPrintView.xib in Resources */,
 				74E2058120D2A3C400E94048 /* IconView.xib in Resources */,
 				74A2A2EE210EF3EB007AEE91 /* ReceivePaymentPrintView.xib in Resources */,
+				C66926A921B7EFD300D57D51 /* DepositOtherCurrencyViewController.xib in Resources */,
 				43AE63332135A19300B7A904 /* EncodeSansSemiExpanded-Black.ttf in Resources */,
 				43AE633D2135A19300B7A904 /* EncodeSansCondensed-Bold.ttf in Resources */,
 				43AE633B2135A19300B7A904 /* EncodeSansCondensed-Thin.ttf in Resources */,
@@ -2095,12 +2116,12 @@
 				43AE63502135A19300B7A904 /* Lato-Black.ttf in Resources */,
 				43AE63302135A19300B7A904 /* EncodeSansSemiExpanded-Thin.ttf in Resources */,
 				43AE635C2135A19300B7A904 /* EncodeSansSemiCondensed-Regular.ttf in Resources */,
-				74C08FF920EF6F2F000A809D /* FundWalletViewController.xib in Resources */,
 				43AE63322135A19300B7A904 /* EncodeSansSemiExpanded-Bold.ttf in Resources */,
 				C6F000EB21B6B3DB00A95228 /* WalletsPickerView.xib in Resources */,
 				43AE63462135A19300B7A904 /* EncodeSansExpanded-Regular.ttf in Resources */,
 				43AE63432135A19300B7A904 /* EncodeSansExpanded-ExtraLight.ttf in Resources */,
 				43AE634D2135A19300B7A904 /* Lato-Italic.ttf in Resources */,
+				C66926A721B7EFC700D57D51 /* DepositXLMViewController.xib in Resources */,
 				C6725084213FC1380064F6E3 /* SetInflationDestinationViewController.xib in Resources */,
 				43AE63532135A19300B7A904 /* Lato-Hairline.ttf in Resources */,
 				43AE634E2135A19300B7A904 /* Lato-LightItalic.ttf in Resources */,
@@ -2136,6 +2157,7 @@
 				B1D4409B217F2B95003A3ACF /* iso_salutations.json in Resources */,
 				43AE635F2135A19300B7A904 /* EncodeSansSemiCondensed-ExtraLight.ttf in Resources */,
 				43AE63582135A19300B7A904 /* EncodeSansSemiCondensed-Bold.ttf in Resources */,
+				C66926A521B7EFBB00D57D51 /* DepositInfoViewController.xib in Resources */,
 				43AE63372135A19300B7A904 /* EncodeSansSemiExpanded-Regular.ttf in Resources */,
 				C6D87E742133ECE100154A3B /* KnownCurrenciesTableViewController.xib in Resources */,
 				7445E9CF2019CF7200470E0A /* LaunchScreen.storyboard in Resources */,
@@ -2397,6 +2419,7 @@
 				43088DAA20879AC7008AE1AB /* RandomBytesSequence.swift in Sources */,
 				74C0914C20FB4125000A809D /* CurrenciesMonitor.swift in Sources */,
 				43DAC65620E4EB2C00E491D8 /* ReLoginMenuCoordinator.swift in Sources */,
+				C66926A321B7EF9C00D57D51 /* DepositOtherCurrencyViewController.swift in Sources */,
 				74DD4CEB210CE83E00F4D69A /* UIView+Snapshot.swift in Sources */,
 				43D131E82056EAC6000483C4 /* ChartCard.swift in Sources */,
 				C68F6A32213D297A0018EBFA /* WalletDetailsViewController.swift in Sources */,
@@ -2517,6 +2540,7 @@
 				4376F4A3204D9F9D00B179C3 /* HomeViewModel.swift in Sources */,
 				C6D87E762133ECED00154A3B /* KnownCurrenciesTableViewController.swift in Sources */,
 				B1DA1E912189C586001BB4FA /* TransactionHistoryDetailsTableViewController.swift in Sources */,
+				C66926A121B7EF6800D57D51 /* DepositXLMViewController.swift in Sources */,
 				74C8994E210205C8009B13EA /* UIApplication+ViewControllerTree.swift in Sources */,
 				74C0914A20FB3F6F000A809D /* CurrenciesService.swift in Sources */,
 				43C7A8F0215B92CA007F4E5E /* HelpCenterViewController.swift in Sources */,
@@ -2569,6 +2593,7 @@
 				B1F3AA0E219C246500A1F3B4 /* TxOperationResponse.swift in Sources */,
 				43DCF85F215CEF93004F827E /* HelpEntry.swift in Sources */,
 				C6BDA2BC216F66870076439E /* CurrencyFeeInfoViewController.swift in Sources */,
+				C669269F21B7EF4100D57D51 /* DepositInfoViewController.swift in Sources */,
 				C69A5143211C16500066A4A0 /* TransactionResultPrintView.swift in Sources */,
 				43CF47EB2164CE1400B9E7E2 /* AddUpdateContactViewController.swift in Sources */,
 				C682C002213691A3007705DF /* BiometricHelper.swift in Sources */,
@@ -2625,7 +2650,6 @@
 				43564BAD2163DCB9006A7B9F /* ContactsService.swift in Sources */,
 				7420BBED211839BB002FC4C7 /* BaseNavigationViewController.swift in Sources */,
 				4317663B2175F83500FDB422 /* ChartCurrencyViewController.swift in Sources */,
-				74C08FF820EF6F2F000A809D /* FundWalletViewController.swift in Sources */,
 				4319B1862063F1B0007CE18D /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

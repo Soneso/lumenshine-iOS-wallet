@@ -12,15 +12,24 @@ import WebKit
 import Material
 
 class WebViewController: UIViewController {
-    
-    fileprivate let webView = WKWebView()
     fileprivate let stitle: String
-    fileprivate let url: String
+    fileprivate let url: String?
+    fileprivate let iFrame: String?
+    
+    private var webView: WKWebView!
     
     init(title: String, url: String) {
         self.stitle = title
         self.url = url
+        self.iFrame = nil
         super.init(nibName: nil, bundle: nil)
+    }
+    
+    init(title: String, iFrame: String) {
+        self.stitle = title
+        self.url = nil
+        self.iFrame = iFrame
+        super.init(nibName: nil, bundle:nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -30,11 +39,27 @@ class WebViewController: UIViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view = webView
         prepareNavigationItems()
         
         navigationItem.titleLabel.text = stitle
-        if let url = URL(string: url) {
+        
+        if let iFrame = iFrame {
+            let jscript = "var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width, height=device-height'); document.getElementsByTagName('head')[0].appendChild(meta);"
+            let userScript = WKUserScript(source: jscript, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+            let wkUController = WKUserContentController()
+            wkUController.addUserScript(userScript)
+            let wkWebConfig = WKWebViewConfiguration()
+            wkWebConfig.userContentController = wkUController
+            webView = WKWebView(frame: view.bounds, configuration: wkWebConfig)
+            view = webView
+            
+            webView.loadHTMLString(iFrame, baseURL: nil)
+            return
+        }
+
+        if let inputUrl = url, let url = URL(string: inputUrl) {
+            webView = WKWebView()
+            view = webView
             webView.load(URLRequest(url: url))
         }
     }

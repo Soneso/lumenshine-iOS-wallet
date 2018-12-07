@@ -14,6 +14,7 @@ class WalletCardContentView: UIView {
     @IBOutlet weak var stellarAddressLabel: UILabel!
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var availableLabel: UILabel!
+    @IBOutlet weak var depositButton: UIButton!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var receiveButton: UIButton!
     @IBOutlet weak var detailsButton: UIButton!

@@ -54,16 +54,14 @@ fileprivate extension HomeCoordinator {
     }
     
     func showFundWallet(forWallet wallet: Wallet) {
-        var fundWalletViewController: UIViewController
-        
         if Services.shared.usePublicStellarNetwork {
-            fundWalletViewController = FundWalletViewController(nibName: "FundWalletViewController", bundle: Bundle.main, forWallet: wallet)
+            let paymentOperationsVCManager = PaymentOperationsVCManager(parentViewController: self.baseController)
+                paymentOperationsVCManager.addViewController(forAction: .deposit, wallets: [wallet])
         } else {
-            fundWalletViewController = FundTestNetWalletViewController(nibName: "FundTestNetWalletViewController", bundle: Bundle.main, forWallet: wallet)
+            let fundWalletViewController = FundTestNetWalletViewController(nibName: "FundTestNetWalletViewController", bundle: Bundle.main, forWallet: wallet)
+            let composeVC = ComposeNavigationController(rootViewController: fundWalletViewController)
+            self.baseController.present(composeVC, animated: true)
         }
-    
-        let composeVC = ComposeNavigationController(rootViewController: fundWalletViewController)
-        self.baseController.present(composeVC, animated: true)
     }
     
     func showCardDetails(wallet: Wallet) {
