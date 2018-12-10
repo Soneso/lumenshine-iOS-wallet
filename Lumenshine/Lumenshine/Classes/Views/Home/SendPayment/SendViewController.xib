@@ -28,7 +28,7 @@
                 <outlet property="issuerTextField" destination="tkU-ev-GZq" id="KsY-gL-moO"/>
                 <outlet property="issuerView" destination="E0k-0q-vLs" id="EPg-is-kYy"/>
                 <outlet property="memoViewContainer" destination="U5f-c9-RPO" id="O5R-ZA-B1N"/>
-                <outlet property="otherCurrencyAgreementLabel" destination="fEi-2U-YgY" id="uuB-SG-VtC"/>
+                <outlet property="otherCurrencyAgreementLabel" destination="fEi-2U-YgY" id="W4L-iI-IhK"/>
                 <outlet property="otherCurrencyAgreementView" destination="hcG-UO-hEx" id="UbE-EW-PXs"/>
                 <outlet property="otherCurrencyErrorLabel" destination="zcG-4S-Le0" id="ZCt-oH-SFL"/>
                 <outlet property="otherCurrencyErrorView" destination="Yz2-vw-CHY" id="Emb-l2-sKQ"/>
@@ -171,7 +171,7 @@
                                                         <constraint firstItem="P1H-Gl-eRy" firstAttribute="leading" secondItem="tld-Dc-WnQ" secondAttribute="leading" id="enM-Q0-spB"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fEi-2U-YgY" customClass="RegularSubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fEi-2U-YgY" customClass="TTTAttributedLabel">
                                                     <rect key="frame" x="28" y="0.0" width="315" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>

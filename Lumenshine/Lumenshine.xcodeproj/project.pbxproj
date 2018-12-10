@@ -382,6 +382,8 @@
 		C69A5143211C16500066A4A0 /* TransactionResultPrintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69A5142211C16500066A4A0 /* TransactionResultPrintView.swift */; };
 		C69ABBCB2181A9C30077B119 /* AddWalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C69ABBCA2181A9C30077B119 /* AddWalletViewController.xib */; };
 		C69ABBCD2181A9D70077B119 /* AddWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69ABBCC2181A9D70077B119 /* AddWalletViewController.swift */; };
+		C69B8E7521BAB7A900717DE0 /* OwnAssetsInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69B8E7421BAB7A900717DE0 /* OwnAssetsInfoViewController.swift */; };
+		C69B8E7721BAB7CB00717DE0 /* OwnAssetsInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C69B8E7621BAB7CB00717DE0 /* OwnAssetsInfoViewController.xib */; };
 		C69F551D2158BC920021EE5C /* AmountSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69F551C2158BC920021EE5C /* AmountSegmentedControl.swift */; };
 		C6A11D592142721200424DBE /* PrivateKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A11D582142721200424DBE /* PrivateKeyManager.swift */; };
 		C6A6E3502182F1AE004A5634 /* RoundedBackgroundLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A6E34F2182F1AE004A5634 /* RoundedBackgroundLabel.swift */; };
@@ -841,6 +843,8 @@
 		C69A5142211C16500066A4A0 /* TransactionResultPrintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionResultPrintView.swift; sourceTree = "<group>"; };
 		C69ABBCA2181A9C30077B119 /* AddWalletViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddWalletViewController.xib; sourceTree = "<group>"; };
 		C69ABBCC2181A9D70077B119 /* AddWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWalletViewController.swift; sourceTree = "<group>"; };
+		C69B8E7421BAB7A900717DE0 /* OwnAssetsInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnAssetsInfoViewController.swift; sourceTree = "<group>"; };
+		C69B8E7621BAB7CB00717DE0 /* OwnAssetsInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OwnAssetsInfoViewController.xib; sourceTree = "<group>"; };
 		C69F551C2158BC920021EE5C /* AmountSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountSegmentedControl.swift; sourceTree = "<group>"; };
 		C6A11D582142721200424DBE /* PrivateKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeyManager.swift; sourceTree = "<group>"; };
 		C6A6E34F2182F1AE004A5634 /* RoundedBackgroundLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedBackgroundLabel.swift; sourceTree = "<group>"; };
@@ -1917,9 +1921,19 @@
 			path = Cards;
 			sourceTree = "<group>";
 		};
+		C69B8E7321BAB79000717DE0 /* OwnAssets */ = {
+			isa = PBXGroup;
+			children = (
+				C69B8E7421BAB7A900717DE0 /* OwnAssetsInfoViewController.swift */,
+				C69B8E7621BAB7CB00717DE0 /* OwnAssetsInfoViewController.xib */,
+			);
+			path = OwnAssets;
+			sourceTree = "<group>";
+		};
 		C6BDA2B3216F66100076439E /* Info */ = {
 			isa = PBXGroup;
 			children = (
+				C69B8E7321BAB79000717DE0 /* OwnAssets */,
 				C6BDA2B4216F661B0076439E /* Fees */,
 			);
 			path = Info;
@@ -2094,6 +2108,7 @@
 				C6BEBE6C2130138B000F7435 /* AddCurrencyViewController.xib in Resources */,
 				C654AFB42122D3D500FB9686 /* FundTestNetWalletViewController.xib in Resources */,
 				43AE632C2135A19300B7A904 /* EncodeSans-SemiBold.ttf in Resources */,
+				C69B8E7721BAB7CB00717DE0 /* OwnAssetsInfoViewController.xib in Resources */,
 				43AE635D2135A19300B7A904 /* EncodeSansSemiCondensed-SemiBold.ttf in Resources */,
 				43F6AB9621511560000BDAFB /* LockedView.xib in Resources */,
 				43AE633E2135A19300B7A904 /* EncodeSansCondensed-Medium.ttf in Resources */,
@@ -2451,6 +2466,7 @@
 				C67E5D6221526B9A002BCAA1 /* HelpButton.swift in Sources */,
 				43088DAC2087AB23008AE1AB /* AuthService.swift in Sources */,
 				B16E12BB219EC5AE000B9CBA /* LSTextAttachment.swift in Sources */,
+				C69B8E7521BAB7A900717DE0 /* OwnAssetsInfoViewController.swift in Sources */,
 				C654AFB62122D4C900FB9686 /* FundTestNetWalletViewController.xib.swift in Sources */,
 				4301312A20C049CB00E47E83 /* ReLoginCoordinator.swift in Sources */,
 				4319B1842063F00C007CE18D /* MenuViewModel.swift in Sources */,

@@ -11,6 +11,7 @@ import UIKit
 import stellarsdk
 import Material
 import M13Checkbox
+import TTTAttributedLabel
 
 enum ValidationErrors: String {
     case Mandatory = "Mandatory"
@@ -62,7 +63,7 @@ enum AmountSegmentedControlIndexes: Int {
 public let MaximumLengthInBytesForMemoText = 28
 public let OtherCurrencyText = "Other"
 
-class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPickerViewDataSource, WalletActionsProtocol, ScanViewControllerDelegate, UITextFieldDelegate {
+class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPickerViewDataSource, WalletActionsProtocol, ScanViewControllerDelegate, UITextFieldDelegate, TTTAttributedLabelDelegate {
     @IBOutlet weak var currentCurrencyLabel: UILabel!
     @IBOutlet weak var addressErrorLabel: UILabel!
     @IBOutlet weak var amountErrorLabel: UILabel!
@@ -72,7 +73,7 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var sendAllValue: UILabel!
     @IBOutlet weak var otherCurrencyErrorLabel: UILabel!
     @IBOutlet weak var transactionFeeLabel: UILabel!
-    @IBOutlet weak var otherCurrencyAgreementLabel: UILabel!
+    @IBOutlet weak var otherCurrencyAgreementLabel: TTTAttributedLabel!
     
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var amountTextField: UITextField!
@@ -521,7 +522,25 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
         agreementCheckBox.tintColor = Stylesheet.color(.lightBlack)
         agreementCheckBox.addTarget(self, action: #selector(agreementCheckBoxChecked), for: .valueChanged)
         
-        otherCurrencyAgreementLabel.text = "I understand what own assets are and I take full responsibility for my own assets. Lumenshine is not responsible for any asset on the Stellar Network"
+        let text = "I understand what own assets are and I take full responsibility for my own assets. Lumenshine is not responsible for any asset on the Stellar Network"
+        
+        setupOtherCurrencyAgreementLabel(forText: text)
+    }
+    
+    private func setupOtherCurrencyAgreementLabel(forText text: String) {
+        otherCurrencyAgreementLabel.delegate = self
+        otherCurrencyAgreementLabel.font = R.font.encodeSansRegular(size: 16)
+        otherCurrencyAgreementLabel.textColor = Stylesheet.color(.lightBlack)
+        let linkAttributes = [ NSAttributedStringKey.foregroundColor: Stylesheet.color(.blue) ] as [NSAttributedStringKey : Any]
+        otherCurrencyAgreementLabel.activeLinkAttributes = linkAttributes
+        otherCurrencyAgreementLabel.linkAttributes = linkAttributes
+
+        otherCurrencyAgreementLabel.setText(text)
+        
+        if let range = text.range(of: "own assets") {
+            let objcRange = NSMakeRange(range.lowerBound.encodedOffset, range.upperBound.encodedOffset - range.lowerBound.encodedOffset)
+            otherCurrencyAgreementLabel.addLink(to: URL(string: "goto://ownAssets"), with: objcRange)
+        }
     }
     
     @objc func agreementCheckBoxChecked() {
@@ -1011,7 +1030,7 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
     private func resetSendButtonToNormal() {
         hideActivity()
         sendButton.setTitle(getSendButtonDefaultTitle(), for: UIControlState.normal)
-        sendButton.isEnabled = true
+        sendButton.isEnabled = agreementCheckBox?.isHidden == false ? sendButton.isEnabled : true
     }
     
     private func setupNavigationItem() {
@@ -1032,5 +1051,13 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
 
         self.checkForTransactionFeeAvailability()
         self.setAvailableAmount()
+    }
+    
+    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
+        if url.absoluteString == "goto://ownAssets" {
+            let ownAssetsInfoViewController = OwnAssetsInfoViewController()
+            let composeVC = ComposeNavigationController(rootViewController: ownAssetsInfoViewController)
+            present(composeVC, animated: true)
+        }
     }
 }
