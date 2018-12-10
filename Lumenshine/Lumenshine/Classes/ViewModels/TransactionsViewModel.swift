@@ -538,20 +538,54 @@ fileprivate extension TransactionsViewModel {
         }
     }
     
+    func formatAmount(amount: String) -> String {
+        
+        let currencyFormatter = NumberFormatter()
+        currencyFormatter.usesGroupingSeparator = true
+        currencyFormatter.minimumFractionDigits = 2
+        currencyFormatter.maximumFractionDigits = 5
+        currencyFormatter.numberStyle = .decimal
+        currencyFormatter.locale = Locale.current
+        
+        var value = "0.00"
+        if let coinUnit = CoinUnit(amount) {
+            let numberAmount = NSNumber(value:coinUnit)
+            if let formattedValue = currencyFormatter.string(from: numberAmount) {
+                value = formattedValue
+            }
+        }
+        
+        return value
+    }
+    
     func amount(for item: TxTransactionResponse) -> String? {
         switch item.operationType {
         case .accountCreated:
-            return (item.operationResponse as? TxAccountCreatedOperationResponse)?.startingBalance
+            if let amountVal = (item.operationResponse as? TxAccountCreatedOperationResponse)?.startingBalance {
+                return formatAmount(amount: amountVal)
+            }
+            break
         case .payment:
-            return (item.operationResponse as? TxPaymentOperationResponse)?.amount
+            if let amountVal = (item.operationResponse as? TxPaymentOperationResponse)?.amount {
+                return formatAmount(amount: amountVal)
+            }
+            break
         case .pathPayment:
             if let subItem = item.operationResponse as? TxPathPaymentOperationResponse {
-                return transactionType(for: item) == .paymentSent ? subItem.sourceAmount : subItem.amount
+                let amountVal = transactionType(for: item) == .paymentSent ? subItem.sourceAmount : subItem.amount
+                return formatAmount(amount: amountVal)
             }
+            break
         case .manageOffer:
-            return (item.operationResponse as? TxManageOfferOperationResponse)?.amount
+            if let amountVal = (item.operationResponse as? TxManageOfferOperationResponse)?.amount {
+                return formatAmount(amount: amountVal)
+            }
+            break
         case .createPassiveOffer:
-            return (item.operationResponse as? TxCreatePassiveOfferOperationResponse)?.amount
+            if let amountVal = (item.operationResponse as? TxCreatePassiveOfferOperationResponse)?.amount {
+                return formatAmount(amount: amountVal)
+            }
+            break
         default:
             break
         }

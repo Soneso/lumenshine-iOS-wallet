@@ -88,8 +88,13 @@ extension TransactionsTableViewCell: TransactionsCellProtocol {
     }
     
     func setFee(_ text: String?) {
-        feeValueLabel.text = text
-        feeLabel.isHidden = text?.isEmpty ?? true
+        if let feeText = text {
+            feeValueLabel.text = feeText + " XLM"
+            feeLabel.isHidden = false
+        }
+        else {
+            feeLabel.isHidden = true
+        }
     }
     
     func setAmount(_ text: NSAttributedString?) {
