@@ -121,6 +121,11 @@ class TransactionsViewController: UITableViewController {
         label.textColor = Stylesheet.color(.blue)
         label.font = R.font.encodeSansSemiBold(size: 15)
         
+        if viewModel.itemCount == 0 {
+            label.text = R.string.localizable.no_transactions_found()
+            label.textColor = Stylesheet.color(.darkGray)
+        }
+
         separator.addSubview(label)
         label.snp.makeConstraints { make in
             make.top.equalTo(10)

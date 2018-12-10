@@ -33,9 +33,13 @@ public class TransactionsService: BaseService {
                     response(.success(response: []))
                     return
                 }
+                if let dataString = String(data: data, encoding: String.Encoding.utf8), dataString == "null" {
+                    response(.success(response: []))
+                    return
+                }
                 do {
-                    let contacts = try self.jsonDecoder.decode(Array<TxTransactionResponse>.self, from: data)
-                    response(.success(response: contacts))
+                    let operations = try self.jsonDecoder.decode(Array<TxTransactionResponse>.self, from: data)
+                    response(.success(response: operations))
                 } catch {
                     response(.failure(error: .parsingFailed(message: error.localizedDescription)))
                 }

@@ -43,7 +43,7 @@
                             <items>
                                 <tabBarItem title="SEND" image="send" id="OGg-q4-4bu"/>
                                 <tabBarItem title="RECEIVE" image="receive" id="7DH-E9-F68"/>
-                                <tabBarItem title="DEPOSIT" image="receive" id="U3X-f6-ZbK"/>
+                                <tabBarItem title="DEPOSIT" image="depositActive" id="U3X-f6-ZbK"/>
                             </items>
                         </tabBar>
                     </subviews>
@@ -83,6 +83,7 @@
         </view>
     </objects>
     <resources>
+        <image name="depositActive" width="33" height="33"/>
         <image name="logo" width="75" height="75"/>
         <image name="receive" width="33" height="33"/>
         <image name="send" width="33" height="33"/>

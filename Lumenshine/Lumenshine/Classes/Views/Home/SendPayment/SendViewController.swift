@@ -61,7 +61,7 @@ enum AmountSegmentedControlIndexes: Int {
 }
 
 public let MaximumLengthInBytesForMemoText = 28
-public let OtherCurrencyText = "Other"
+public let OtherCurrencyText = "Own asset"
 
 class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPickerViewDataSource, WalletActionsProtocol, ScanViewControllerDelegate, UITextFieldDelegate, TTTAttributedLabelDelegate {
     @IBOutlet weak var currentCurrencyLabel: UILabel!

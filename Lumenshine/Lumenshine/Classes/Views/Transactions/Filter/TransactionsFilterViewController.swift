@@ -228,7 +228,7 @@ fileprivate extension TransactionsFilterViewController {
     
     func prepareWalletLabel() {
         let walletLabel = UILabel()
-        walletLabel.text = R.string.localizable.wallet_name()
+        walletLabel.text = R.string.localizable.wallet()
         walletLabel.font = R.font.encodeSansRegular(size: 13)
         walletLabel.adjustsFontSizeToFitWidth = true
         walletLabel.textColor = Stylesheet.color(.gray)

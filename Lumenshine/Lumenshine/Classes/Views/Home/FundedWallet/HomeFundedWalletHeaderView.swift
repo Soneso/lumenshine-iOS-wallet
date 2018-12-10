@@ -64,7 +64,7 @@ class HomeFundedWalletHeaderView: UIView, UITabBarDelegate {
         
         moreButton.setTitleTextAttributes(attributes, for: .normal)
         moreButton.setTitleTextAttributes(attributes, for: .selected)
-        moreButton.selectedImage = R.image.receiveActive()?.tint(with: Stylesheet.color(.white))
+        moreButton.selectedImage = R.image.depositActive()?.tint(with: Stylesheet.color(.white))
     }
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {

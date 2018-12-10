@@ -353,7 +353,7 @@
 "transactions" = "Transactions";
 
 /*  */
-"transactions_history" = "Transactions History";
+"no_transactions_found" = "No transactions found";
 
 /*  */
 "transactions_filters" = "Transactions Filters";
@@ -395,7 +395,7 @@
 "fingerprint_cap" = "Fingerprint";
 
 /*  */
-"face_recognition_cap" = "Face Recognition";
+"face_recognition_cap" = "Face ID";
 
 /*  */
 "fingerprint_recognition" = "fingerprint recognition";
@@ -908,7 +908,7 @@
 "stellar_address_hint" = "     example: max*lumenshine.com or GBABXVQ64GP...";
 
 /*  */
-"stellar_address_error" = "You must enter a stellar account federation (short) address or a stellar account public key";
+"stellar_address_error" = "You must enter a stellar address or a stellar account Id (public key)";
 
 /*  */
 "no_stellar_address" = "no stellar address";
