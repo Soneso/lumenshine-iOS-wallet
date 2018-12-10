@@ -40,7 +40,7 @@ class HelpCenterViewModel : HelpCenterViewModelType {
         }*/
         self.entries = [[.inbox],
                         [.FAQ1, .FAQ2, .FAQ3, .FAQ4],
-                        [.basics, .security, .wallets, .stellar]]
+                        [.basics, .wallets, .security, .stellar]]
     }
     
     var itemDistribution: [Int] {
@@ -71,12 +71,8 @@ class HelpCenterViewModel : HelpCenterViewModelType {
     }
     
     func itemSelected(at indexPath:IndexPath) {
-        switch entry(at: indexPath) {
-        case .inbox:
-            break
-        case .FAQ1:
-            break
-        default: break
+        if indexPath.section != 0 {
+            navigationCoordinator?.performTransition(transition: .showHelpForEntry(name(at: indexPath)))
         }
     }
 }

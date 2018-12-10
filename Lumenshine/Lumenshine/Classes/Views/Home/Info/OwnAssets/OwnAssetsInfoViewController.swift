@@ -76,8 +76,9 @@ class OwnAssetsInfoViewController: UIViewController, UITextViewDelegate {
     }
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        let webViewController = WebViewController(title: modalTitle, url: URL.absoluteString)
-        navigationController?.pushViewController(webViewController, animated: true)
+        /*let webViewController = WebViewController(title: modalTitle, url: URL.absoluteString)
+        navigationController?.pushViewController(webViewController, animated: true)*/
+        UIApplication.shared.open(URL)
         return false
     }
 }

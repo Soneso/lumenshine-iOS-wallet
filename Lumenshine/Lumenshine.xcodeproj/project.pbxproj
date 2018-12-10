@@ -259,6 +259,8 @@
 		833F7D71218D95B800ED43D9 /* LoginStep1Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F7D70218D95B800ED43D9 /* LoginStep1Response.swift */; };
 		833F7D73218F6E3F00ED43D9 /* TFASecretResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F7D72218F6E3F00ED43D9 /* TFASecretResponse.swift */; };
 		834D13AA21982F7400428D7A /* QRCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834D13A921982F7400428D7A /* QRCoder.swift */; };
+		8389A0C521BEA06700B9F16A /* HelpDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8389A0C421BEA06700B9F16A /* HelpDetailsViewController.swift */; };
+		8389A0C721BEA95E00B9F16A /* HelpDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8389A0C621BEA95D00B9F16A /* HelpDetailsViewController.xib */; };
 		839C4DDE21A0561500A1B715 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839C4DDD21A0561500A1B715 /* TermsViewController.swift */; };
 		83A4331B21B59ACE005C1C86 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A4331A21B59ACE005C1C86 /* WebViewController.swift */; };
 		97E8BBC0289EC0F063E34625 /* Pods_LumenshineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A860572CA3939F9BCA5F5986 /* Pods_LumenshineTests.framework */; };
@@ -718,6 +720,8 @@
 		833F7D70218D95B800ED43D9 /* LoginStep1Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStep1Response.swift; sourceTree = "<group>"; };
 		833F7D72218F6E3F00ED43D9 /* TFASecretResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFASecretResponse.swift; sourceTree = "<group>"; };
 		834D13A921982F7400428D7A /* QRCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCoder.swift; sourceTree = "<group>"; };
+		8389A0C421BEA06700B9F16A /* HelpDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDetailsViewController.swift; sourceTree = "<group>"; };
+		8389A0C621BEA95D00B9F16A /* HelpDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpDetailsViewController.xib; sourceTree = "<group>"; };
 		839C4DDD21A0561500A1B715 /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		83A4331A21B59ACE005C1C86 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		8D434202D88BEB188FB96C1D /* Pods_LumenshineUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LumenshineUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1462,6 +1466,8 @@
 			children = (
 				43C7A8EF215B92CA007F4E5E /* HelpCenterViewController.swift */,
 				43C7A8F3215BEE19007F4E5E /* HelpTableViewCell.swift */,
+				8389A0C421BEA06700B9F16A /* HelpDetailsViewController.swift */,
+				8389A0C621BEA95D00B9F16A /* HelpDetailsViewController.xib */,
 			);
 			path = Help;
 			sourceTree = "<group>";
@@ -2112,6 +2118,7 @@
 				43AE635D2135A19300B7A904 /* EncodeSansSemiCondensed-SemiBold.ttf in Resources */,
 				43F6AB9621511560000BDAFB /* LockedView.xib in Resources */,
 				43AE633E2135A19300B7A904 /* EncodeSansCondensed-Medium.ttf in Resources */,
+				8389A0C721BEA95E00B9F16A /* HelpDetailsViewController.xib in Resources */,
 				43AE63292135A19300B7A904 /* EncodeSans-ExtraLight.ttf in Resources */,
 				C69A5141211C16330066A4A0 /* TransactionResultPrintView.xib in Resources */,
 				74E2058120D2A3C400E94048 /* IconView.xib in Resources */,
@@ -2572,6 +2579,7 @@
 				439C476E20D6770900C5DC97 /* AvatarTableViewCell.swift in Sources */,
 				43973A8C20BD4B87000145DD /* TFAGeneration.swift in Sources */,
 				43564BA521635FCC006A7B9F /* ContactsViewController.swift in Sources */,
+				8389A0C521BEA06700B9F16A /* HelpDetailsViewController.swift in Sources */,
 				C69556552126FAEF00B0E110 /* OperationInfo.swift in Sources */,
 				4314B9F420480813006DBE63 /* MenuViewProtocol.swift in Sources */,
 				C675BC26215CBFE700B663DB /* RightRoundedButton.swift in Sources */,

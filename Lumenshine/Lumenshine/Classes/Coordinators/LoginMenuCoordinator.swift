@@ -80,13 +80,17 @@ fileprivate extension LoginMenuCoordinator {
         }
     }
     func showAbout() {
-        let aboutVC = WebViewController(title: R.string.localizable.about(), url: Services.shared.aboutUrl)
+        
+        let helpDetailsVC = HelpDetailsViewController()
+        helpDetailsVC.modalTitle = R.string.localizable.about()
+        helpDetailsVC.infoText = R.string.localizable.about_info()
+        helpDetailsVC.linksDict = [R.string.localizable.about_info_soneso_link_key() : R.string.localizable.about_info_soneso_link().components(separatedBy: ",")]
         
         if let drawer = baseController as? AppNavigationDrawerController {
             drawer.closeSide()
         }
         
-        let composeVC = ComposeNavigationController(rootViewController: aboutVC)
+        let composeVC = ComposeNavigationController(rootViewController: helpDetailsVC)
         baseController.present(composeVC, animated: true)
     }
 }
