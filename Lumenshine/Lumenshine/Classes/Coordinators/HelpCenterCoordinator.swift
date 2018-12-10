@@ -42,6 +42,7 @@ fileprivate extension HelpCenterCoordinator {
             switch modalTitle {
             case R.string.localizable.faq_1():
                 helpDetailsVC.infoText = R.string.localizable.faq_1_info()
+                helpDetailsVC.linksDict = [R.string.localizable.faq_1_market_link_key() : R.string.localizable.faq_1_market_link().components(separatedBy: ","), R.string.localizable.faq_1_changelly_link_key() : R.string.localizable.faq_1_changelly_link().components(separatedBy: ",")]
                 break
             case R.string.localizable.faq_2():
                 helpDetailsVC.infoText = R.string.localizable.faq_2_info()
