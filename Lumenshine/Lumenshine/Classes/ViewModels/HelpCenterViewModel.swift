@@ -30,14 +30,17 @@ class HelpCenterViewModel : HelpCenterViewModelType {
         self.service = service
         self.user = user
         
-        if user != nil {
+        /*if user != nil {
             self.entries = [[.inbox],
                             [.FAQ1, .FAQ2, .FAQ3, .FAQ4],
                             [.basics, .security, .wallets, .stellar]]//, .ICO]]
         } else {
             self.entries = [[.inbox],
                             [.FAQ1, .FAQ2, .FAQ3, .FAQ4]]
-        }
+        }*/
+        self.entries = [[.inbox],
+                        [.FAQ1, .FAQ2, .FAQ3, .FAQ4],
+                        [.basics, .security, .wallets, .stellar]]
     }
     
     var itemDistribution: [Int] {

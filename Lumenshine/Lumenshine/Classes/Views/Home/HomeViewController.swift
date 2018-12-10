@@ -9,6 +9,7 @@
 import UIKit
 import Material
 import DGElasticPullToRefresh
+import MessageUI
 
 class HomeViewController: UpdatableViewController {
     
@@ -332,3 +333,11 @@ fileprivate extension HomeViewController {
         }
     }
 }
+
+extension HomeViewController: MFMailComposeViewControllerDelegate {
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        dismiss(animated: true, completion: nil)
+    }
+}
+

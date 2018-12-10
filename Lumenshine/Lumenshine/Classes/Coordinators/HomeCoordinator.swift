@@ -8,6 +8,7 @@
 
 import UIKit
 import stellarsdk
+import MessageUI
 
 class HomeCoordinator: CoordinatorType {
     var baseController: UIViewController
@@ -35,6 +36,8 @@ class HomeCoordinator: CoordinatorType {
             showCardDetails(wallet: wallet)
         case .showHelp:
             showHelpCenter()
+        case .showFeedback:
+            showFeedback()
         default: break
         }
     }
@@ -72,6 +75,20 @@ fileprivate extension HomeCoordinator {
     func showHelpCenter() {
         let coordinator = HelpCenterCoordinator(mainCoordinator: mainCoordinator, service: Services())
         self.baseController.navigationController?.pushViewController(coordinator.baseController, animated: true)
+    }
+    
+    func showFeedback() {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self.baseController as! HomeViewController;
+            mail.setSubject("Lumenshine Feedback")
+            mail.setToRecipients([Services.shared.supportEmailAddress])
+            baseController.present(mail, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "Alert", message: "Email not set up!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            baseController.present(alert, animated: true, completion: nil)
+        }
     }
 }
 

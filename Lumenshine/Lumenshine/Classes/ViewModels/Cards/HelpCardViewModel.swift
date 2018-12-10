@@ -54,6 +54,8 @@ class HelpCardViewModel: CardViewModelType {
     
     func barButtonSelected(at index: Int) {
         switch index {
+        case 0:
+            navigationCoordinator?.performTransition(transition: .showFeedback)
         case 1:
             navigationCoordinator?.performTransition(transition: .showHelp)
         default:
