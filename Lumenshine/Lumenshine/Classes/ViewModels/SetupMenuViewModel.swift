@@ -13,7 +13,6 @@ class SetupMenuViewModel : MenuViewModelType {
     fileprivate var user: User
     
     var entries: [[MenuEntry]]
-    var lastIndex: IndexPath?
     weak var navigationCoordinator: CoordinatorType?
     
     init(service: AuthService, user: User) {
@@ -42,14 +41,12 @@ class SetupMenuViewModel : MenuViewModelType {
     }
     
     func menuItemSelected(at indexPath:IndexPath) {
-        if indexPath == lastIndex { return }
         switch entry(at: indexPath) {
         case .signOut:
             logout()
             navigationCoordinator?.performTransition(transition: .logout(nil))
         default: break
         }
-        lastIndex = indexPath
     }
 }
 

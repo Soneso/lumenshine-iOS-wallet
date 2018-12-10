@@ -69,7 +69,6 @@ class WalletsViewController: UpdatableViewController, UITableViewDataSource {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadCards()
-        NotificationCenter.default.post(name: Notification.Name(Keys.Notifications.MenuItemChanged), object: MenuEntry.wallets)
     }
     
     private func prepareView() {

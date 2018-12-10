@@ -31,8 +31,6 @@ public struct Keys {
         static let DeviceToken = "DeviceTokenNotificationKey"
         
         static let ScrollToWallet = "ScrollToWalletNotificationKey"
-        
-        static let MenuItemChanged = "MenuItemChangedNotificationKey"
     }
     
     public struct NotificationActions {

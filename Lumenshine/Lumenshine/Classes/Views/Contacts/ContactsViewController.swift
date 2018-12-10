@@ -46,7 +46,6 @@ class ContactsViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.post(name: Notification.Name(Keys.Notifications.MenuItemChanged), object: MenuEntry.contacts)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

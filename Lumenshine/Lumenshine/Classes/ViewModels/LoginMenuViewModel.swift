@@ -11,7 +11,6 @@ import Foundation
 class LoginMenuViewModel : MenuViewModelType {
     fileprivate let service: AuthService
     var entries: [[MenuEntry]]
-    var lastIndex: IndexPath?
     
     weak var navigationCoordinator: CoordinatorType?
     
@@ -39,7 +38,6 @@ class LoginMenuViewModel : MenuViewModelType {
     }
     
     func menuItemSelected(at indexPath:IndexPath) {
-        if indexPath == lastIndex { return }
         switch entry(at: indexPath) {
         case .login:
             navigationCoordinator?.performTransition(transition: .showLogin)
@@ -55,7 +53,6 @@ class LoginMenuViewModel : MenuViewModelType {
             navigationCoordinator?.performTransition(transition: .showAbout)
         default: break
         }
-        lastIndex = indexPath
     }
 }
 

@@ -25,7 +25,6 @@ class MenuViewModel : MenuViewModelType {
     fileprivate let services: Services
     fileprivate let user: User
     fileprivate let entries: [[MenuEntry]]
-    fileprivate var lastIndex = IndexPath(row: 0, section: 1)
     fileprivate var backgroundTime: Date?
     
     weak var navigationCoordinator: CoordinatorType?
@@ -46,7 +45,6 @@ class MenuViewModel : MenuViewModelType {
         NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground(notification:)), name: .UIApplicationDidEnterBackground, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updatePushToken(notification:)), name: Notification.Name(Keys.Notifications.DeviceToken), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(scrollToWallet(notification:)), name: Notification.Name(Keys.Notifications.ScrollToWallet), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(menuItemChanged(notification:)), name: Notification.Name(Keys.Notifications.MenuItemChanged), object: nil)
 
         loginCompleted()
     }
@@ -72,7 +70,6 @@ class MenuViewModel : MenuViewModelType {
     }
     
     func menuItemSelected(at indexPath:IndexPath) {
-        if indexPath == lastIndex { return }
         switch entry(at: indexPath) {
         case .avatar, .settings:
             navigationCoordinator?.performTransition(transition: .showSettings)
@@ -90,7 +87,6 @@ class MenuViewModel : MenuViewModelType {
             navigationCoordinator?.performTransition(transition: .showTransactions)
         default: break
         }
-        lastIndex = indexPath
     }
 }
 
@@ -147,23 +143,7 @@ fileprivate extension MenuViewModel {
         if let walletPublicKey = UserDefaults.standard.value(forKey: Keys.UserDefs.ShowWallet) as? String {
             self.showWallet(publicKey: walletPublicKey)
         }
-    }
-    
-    @objc
-    func menuItemChanged(notification: Notification) {
-        if let selectedItemEntry = notification.object as? MenuEntry {
-            for i in 0..<entries.count {
-                for j in 0..<entries[i].count {
-                    if entries[i][j] == selectedItemEntry {
-                        let currentIndexPath = IndexPath(row: j, section: i)
-                        if lastIndex != currentIndexPath {
-                            lastIndex = currentIndexPath
-                        }
-                    }
-                }
-            }
-        }
-    }
+    }    
 }
 
 fileprivate extension MenuViewModel {
@@ -192,7 +172,6 @@ fileprivate extension MenuViewModel {
         NotificationCenter.default.removeObserver(self, name: .UIApplicationDidEnterBackground, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name(Keys.Notifications.DeviceToken), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name(Keys.Notifications.ScrollToWallet), object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(Keys.Notifications.MenuItemChanged), object: nil)
     }
     
     func showRelogin() {

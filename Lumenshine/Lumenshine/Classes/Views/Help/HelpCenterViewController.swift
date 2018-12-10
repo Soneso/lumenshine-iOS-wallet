@@ -38,7 +38,6 @@ class HelpCenterViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.post(name: Notification.Name(Keys.Notifications.MenuItemChanged), object: MenuEntry.help)
     }
     
     override func didReceiveMemoryWarning() {

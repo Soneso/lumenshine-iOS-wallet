@@ -63,7 +63,6 @@ class TransactionsViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateHeader()
-        NotificationCenter.default.post(name: Notification.Name(Keys.Notifications.MenuItemChanged), object: MenuEntry.transactions)
     }
     
     override func viewDidAppear(_ animated: Bool) {

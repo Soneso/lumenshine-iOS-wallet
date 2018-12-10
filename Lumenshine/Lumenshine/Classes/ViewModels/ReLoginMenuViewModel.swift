@@ -33,7 +33,6 @@ class ReLoginMenuViewModel : LoginMenuViewModel {
     }
     
     override func menuItemSelected(at indexPath:IndexPath) {
-        if indexPath == lastIndex { return }
         switch entry(at: indexPath) {
         case .signOut:
             logout()
@@ -50,7 +49,6 @@ class ReLoginMenuViewModel : LoginMenuViewModel {
             break
         default: break
         }
-        lastIndex = indexPath
     }
 }
 
