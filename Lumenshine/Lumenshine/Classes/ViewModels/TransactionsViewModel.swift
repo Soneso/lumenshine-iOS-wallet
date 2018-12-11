@@ -24,6 +24,8 @@ protocol TransactionsViewModelType: Transitionable {
     func amount(at indexPath: IndexPath) -> NSAttributedString?
     func currency(at indexPath: IndexPath) -> String?
     func feePaid(at indexPath: IndexPath) -> String
+    func offer(at indexPath: IndexPath) -> TxOperationResponse?
+    func transactionHash(at indexPath: IndexPath) -> String?
     func details(at indexPath: IndexPath) -> NSAttributedString
     
     func itemSelected(at indexPath: IndexPath)
@@ -56,8 +58,8 @@ enum TransactionType: String, Comparable {
     case paymentSent
     case offerCreated
     case offerRemoved
+    case offerChanged
     case passiveOfferCreated
-    case passiveOfferRemoved
     case setOptions
     case changeTrust
     case allowTrust
@@ -75,10 +77,10 @@ enum TransactionType: String, Comparable {
             return R.string.localizable.offer_created()
         case .offerRemoved:
             return R.string.localizable.offer_removed()
+        case .offerChanged:
+            return R.string.localizable.offer_changed()
         case .passiveOfferCreated:
             return R.string.localizable.passive_offer_created()
-        case .passiveOfferRemoved:
-            return R.string.localizable.passive_offer_removed()
         case .setOptions:
             return R.string.localizable.set_options()
         case .changeTrust:
@@ -222,12 +224,6 @@ class TransactionsViewModel : TransactionsViewModelType {
                 return NSAttributedString(string: amount,
                                           attributes: [.foregroundColor : Stylesheet.color(.lightBlack)])
             }
-        case .accountMerge:
-            // TODO: fix logic, calculate amount
-            if let subItem = item.operationResponse as? TxAccountMergeOperationResponse {
-                return NSAttributedString(string: subItem.account,
-                                          attributes: [.foregroundColor : Stylesheet.color(.green)])
-            }
         default: break
         }
         return nil
@@ -245,6 +241,22 @@ class TransactionsViewModel : TransactionsViewModelType {
         return nil
     }
     
+    func offer(at indexPath: IndexPath) -> TxOperationResponse? {
+        let item = entry(at: indexPath)
+        if let manageOfferItem = item.operationResponse as? TxManageOfferOperationResponse {
+            return manageOfferItem
+        }
+        if let passiveOfferItem = item.operationResponse as? TxCreatePassiveOfferOperationResponse {
+            return passiveOfferItem
+        }
+        return nil
+    }
+    
+    func transactionHash(at indexPath: IndexPath) -> String? {
+        let item = entry(at: indexPath)
+        return item.transactionHash
+    }
+    
     func feePaid(at indexPath: IndexPath) -> String {
         let transaction = entry(at: indexPath)
         if currentWalletPK == transaction.sourceAccount {
@@ -260,78 +272,75 @@ class TransactionsViewModel : TransactionsViewModelType {
         
         switch item.operationType {
         case .accountCreated:
-            if let item = item.operationResponse as? TxAccountCreatedOperationResponse {
-                subDetails = self.details(accountCreated: item)
+            if let operationItem = item.operationResponse as? TxAccountCreatedOperationResponse {
+                subDetails = self.details(accountCreated: operationItem, sourceAccount:item.sourceAccount)
             }
         case .payment:
-            if let item = item.operationResponse as? TxPaymentOperationResponse {
-                subDetails = self.details(payment: item)
+            if let operationItem = item.operationResponse as? TxPaymentOperationResponse {
+                subDetails = self.details(payment: operationItem, sourceAccount:item.sourceAccount)
             }
         case .pathPayment:
-            if let item = item.operationResponse as? TxPathPaymentOperationResponse {
-                subDetails = self.details(pathPayment: item)
+            if let operationItem = item.operationResponse as? TxPathPaymentOperationResponse {
+                subDetails = self.details(pathPayment: operationItem, sourceAccount:item.sourceAccount)
             }
         case .manageOffer:
-            if let item = item.operationResponse as? TxManageOfferOperationResponse {
-                subDetails = self.details(manageOffer: item)
+            if let operationItem = item.operationResponse as? TxManageOfferOperationResponse {
+                subDetails = self.details(manageOffer: operationItem, sourceAccount:item.sourceAccount)
             }
         case .createPassiveOffer:
-            if let subItem = item.operationResponse as? TxCreatePassiveOfferOperationResponse {
-                subDetails = self.details(passiveOffer: subItem, transactionHash: item.transactionHash)
+            if let operationItem = item.operationResponse as? TxCreatePassiveOfferOperationResponse {
+                subDetails = self.details(passiveOffer: operationItem, sourceAccount: item.sourceAccount)
             }
         case .setOptions:
-            if let item = item.operationResponse as? TxSetOptionsOperationResponse {
-                subDetails = self.details(setOptions: item)
+            if let operationItem = item.operationResponse as? TxSetOptionsOperationResponse {
+                subDetails = self.details(setOptions: operationItem, sourceAccount:item.sourceAccount)
             }
         case .changeTrust:
-            if let item = item.operationResponse as? TxChangeTrustOperationResponse {
-                subDetails = self.details(changeTrust: item)
+            if let operationItem = item.operationResponse as? TxChangeTrustOperationResponse {
+                subDetails = self.details(changeTrust: operationItem, sourceAccount:item.sourceAccount)
             }
         case .allowTrust:
-            if let item = item.operationResponse as? TxAllowTrustOperationResponse {
-                subDetails = self.details(allowTrust: item)
+            if let operationItem = item.operationResponse as? TxAllowTrustOperationResponse {
+                subDetails = self.details(allowTrust: operationItem, sourceAccount: item.sourceAccount)
             }
         case .accountMerge:
-            if let item = item.operationResponse as? TxAccountMergeOperationResponse {
-                subDetails = self.details(accountMerge: item)
+            if let operationItem = item.operationResponse as? TxAccountMergeOperationResponse {
+                subDetails = self.details(accountMerge: operationItem, sourceAccount: item.sourceAccount)
             }
         case .inflation:
             break
         case .manageData:
-            if let item = item.operationResponse as? TxManageDataOperationResponse {
-                subDetails = self.details(manageData: item)
+            if let operationItem = item.operationResponse as? TxManageDataOperationResponse {
+                subDetails = self.details(manageData: operationItem, sourceAccount: item.sourceAccount)
             }
         case .bumpSequence:
-            if let item = item.operationResponse as? TxBumpSequenceOperationResponse {
-                subDetails = self.details(bumpSequence: item)
+            if let operationItem = item.operationResponse as? TxBumpSequenceOperationResponse {
+                subDetails = self.details(bumpSequence: operationItem, sourceAccount: item.sourceAccount)
             }
         }
         
-        let details = NSMutableAttributedString(string: R.string.localizable.operation_id()+": ",
-                                                attributes: [.font : mainFont,
-                                                             .foregroundColor : Stylesheet.color(.lightBlack)])
-        
-        let link = services.baseURL.appending("/\(item.opId)")
-        let operationIdValue = NSAttributedString(string: String(item.opId)+"\n",
-                                                  attributes: [.font : mainFont,
-                                                                .foregroundColor : Stylesheet.color(.blue),
-                                                                .link :  link])
-        details.append(operationIdValue)
-        
-        
+        let details = NSMutableAttributedString()
+        details.append(subDetails)
         
         if !item.memo.isEmpty {
             details.append(NSAttributedString(string: "\(R.string.localizable.memo()): \(item.memo)\n",
-                                              attributes: [.font : mainFont,
-                                                           .foregroundColor : Stylesheet.color(.lightBlack)]))
+                attributes: [.font : mainFont,
+                             .foregroundColor : Stylesheet.color(.lightBlack)]))
         }
-        details.append(subDetails)
+        let opIdLabel = NSAttributedString(string: R.string.localizable.operation_id() + ": ",
+                                           attributes: [.font : mainFont,
+                                                        .foregroundColor : Stylesheet.color(.lightBlack)])
         
-        /* TODO - change logic depending on operation type */
-        /*if item.sourceAccount != currentWalletPK {
-            details.append(prepareKeyString(prefix: R.string.localizable.source_account(), value: item.sourceAccount))
-        }*/
+        let link = services.baseURL.appending("/\(item.opId)")
+        let operationIdValue = NSAttributedString(string: String(item.opId),
+                                                  attributes: [.font : mainFont,
+                                                               .foregroundColor : Stylesheet.color(.blue),
+                                                               .link :  link])
         
+        
+        details.append(opIdLabel)
+        details.append(operationIdValue)
+    
         return details
     }
     
@@ -461,12 +470,26 @@ class TransactionsViewModel : TransactionsViewModelType {
     }
     
     func showOperationDetails(operationId: String) {
-        let transaction = entries.first(where: {
-            $0.opId == Int(operationId)
-        })
         
-        if let jsonData = transaction?.opDetails.data(using: .utf8) {
-            navigationCoordinator?.performTransition(transition: .showTransactionDetails(jsonData))
+        if let closure = self.showActivityClosure {
+            closure()
+        }
+        
+        let requestUrl = Services.shared.horizonURL + "/operations/" + operationId
+        Services.shared.walletService.GETRequestFromUrl(url: requestUrl) { (result) -> (Void) in
+            DispatchQueue.main.async {
+                if let closure = self.hideActivityClosure {
+                    closure() // TODO wait until closed and remove hack from below
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                    switch result {
+                    case .success (let data):
+                        self.navigationCoordinator?.performTransition(transition: .showTransactionDetails(data))
+                    case .failure(_):
+                        self.navigationCoordinator?.baseController.displaySimpleAlertView(title: R.string.localizable.error(), message: R.string.localizable.operation_details_load_error())
+                    }
+                })
+            }
         }
     }
 }
@@ -509,6 +532,7 @@ fileprivate extension TransactionsViewModel {
                 self?.sortedWallets = wallets.sorted(by: { $0.id < $1.id })
                 self?.getWalletDetails(wallets: wallets)
             case .failure(_):
+                // TODO show error to user
                 print("Failed to get wallets")
             }
         }
@@ -520,6 +544,7 @@ fileprivate extension TransactionsViewModel {
             case .success(let wallets):
                 self.sortedWalletsDetails = wallets.sorted(by: { $0.id < $1.id })
             case .failure(let error):
+                // TODO show error to user
                 print("Account details failure: \(error)")
             }
         }
@@ -629,14 +654,8 @@ fileprivate extension TransactionsViewModel {
             }
         case .allowTrust:
             if let item = item.operationResponse as? TxAllowTrustOperationResponse {
-                // TODO: check if authorize is necessary
-                if item.authorize {
-                    return (item.assetCode ?? NativeCurrencyNames.xlm.rawValue, nil)
-                }
+                return (item.assetCode ?? NativeCurrencyNames.xlm.rawValue, nil)
             }
-        case .accountMerge:
-            // TODO: fix logic, calculate currency
-            break
         default:
             break
         }
@@ -656,9 +675,22 @@ fileprivate extension TransactionsViewModel {
                 return item.to == currentWalletPK ? .paymentReceived : .paymentSent
             }
         case .manageOffer:
-            return item.sourceAccount == currentWalletPK ? .offerCreated : .offerRemoved
+            if let item = item.operationResponse as? TxManageOfferOperationResponse {
+    
+                if item.offerId == 0 {
+                    return .offerCreated
+                }
+                
+                let amount = item.amount.replacingOccurrences(of: ".", with: "").replacingOccurrences(of: "0", with: "")
+                
+                if amount.isEmpty {
+                    return .offerRemoved
+                }
+                
+                return .offerChanged
+            }
         case .createPassiveOffer:
-            return item.sourceAccount == currentWalletPK ? .passiveOfferCreated : .passiveOfferRemoved
+            return .passiveOfferCreated
         case .setOptions:
             return .setOptions
         case .changeTrust:
@@ -840,68 +872,101 @@ fileprivate extension TransactionsViewModel {
 // MARK: Operation details
 
 fileprivate extension TransactionsViewModel {
-    func details(accountCreated: TxAccountCreatedOperationResponse) -> NSAttributedString {
-        // TODO: check logic
-        let publicKey = accountCreated.funder == currentWalletPK ? accountCreated.funder : accountCreated.account
-        let prefix = accountCreated.funder == currentWalletPK ? R.string.localizable.sender() : R.string.localizable.recipient()
-        return prepareKeyString(prefix: prefix, value: publicKey)
+    
+    func details(accountCreated: TxAccountCreatedOperationResponse, sourceAccount: String) -> NSAttributedString {
+    
+        let result = NSMutableAttributedString()
+        
+        if accountCreated.funder == currentWalletPK {
+            let recepient = prepareKeyString(prefix: R.string.localizable.recipient(), value: accountCreated.account)
+            result.append(recepient)
+            if sourceAccount != currentWalletPK {
+                let source = prepareKeyString(prefix: R.string.localizable.source_account(), value: sourceAccount)
+                result.append(source)
+            }
+        } else if accountCreated.account == currentWalletPK {
+            let sender = prepareKeyString(prefix: R.string.localizable.sender(), value: accountCreated.funder)
+            result.append(sender)
+            if sourceAccount != accountCreated.funder {
+                let source = prepareKeyString(prefix: R.string.localizable.source_account(), value: sourceAccount)
+                result.append(source)
+            }
+        }
+
+        return result
     }
     
-    func details(payment: TxPaymentOperationResponse) -> NSAttributedString {
-        let publicKey = payment.to == currentWalletPK ? payment.from : payment.to
-        let prefix = payment.to == currentWalletPK ? R.string.localizable.sender() : R.string.localizable.recipient()
-        return prepareKeyString(prefix: prefix, value: publicKey)
+    func details(payment: TxPaymentOperationResponse, sourceAccount: String) -> NSAttributedString {
+        
+        let result = NSMutableAttributedString()
+        if (payment.to == currentWalletPK) {
+            result.append(prepareKeyString(prefix: R.string.localizable.sender(), value: payment.from))
+            if sourceAccount != payment.from {
+                let source = prepareKeyString(prefix: R.string.localizable.source_account(), value: sourceAccount)
+                result.append(source)
+            }
+        } else if (payment.from == currentWalletPK) {
+            result.append(prepareKeyString(prefix: R.string.localizable.recipient(), value: payment.to))
+            if sourceAccount != currentWalletPK {
+                let source = prepareKeyString(prefix: R.string.localizable.source_account(), value: sourceAccount)
+                result.append(source)
+            }
+        }
+        
+        return result
     }
     
-    func details(pathPayment: TxPathPaymentOperationResponse) -> NSAttributedString {
-        let publicKey = pathPayment.to == currentWalletPK ? pathPayment.from : pathPayment.to
-        let prefix = pathPayment.to == currentWalletPK ? R.string.localizable.sender() : R.string.localizable.recipient()
-        return prepareKeyString(prefix: prefix, value: publicKey)
+    func details(pathPayment: TxPathPaymentOperationResponse, sourceAccount: String) -> NSAttributedString {
+        let result = NSMutableAttributedString()
+        if (pathPayment.to == currentWalletPK) {
+            result.append(prepareKeyString(prefix: R.string.localizable.sender(), value: pathPayment.from))
+            if sourceAccount != pathPayment.from {
+                let source = prepareKeyString(prefix: R.string.localizable.source_account(), value: sourceAccount)
+                result.append(source)
+            }
+        } else if (pathPayment.from == currentWalletPK) {
+            result.append(prepareKeyString(prefix: R.string.localizable.recipient(), value: pathPayment.to))
+            if sourceAccount != currentWalletPK {
+                let source = prepareKeyString(prefix: R.string.localizable.source_account(), value: sourceAccount)
+                result.append(source)
+            }
+        }
+        
+        return result
     }
     
-    func details(manageOffer: TxManageOfferOperationResponse) -> NSAttributedString {
-        let offerID = NSAttributedString(string: "\(R.string.localizable.offer_id()): \(manageOffer.offerId)\n",
-            attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
-                         .font : mainFont])
+    func details(manageOffer: TxManageOfferOperationResponse, sourceAccount: String) -> NSAttributedString {
         
         let buyingCode = manageOffer.buyingAssetCode ?? NativeCurrencyNames.xlm.rawValue
         let buying = NSAttributedString(string: "\(R.string.localizable.buying()): \(buyingCode)\n",
             attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
                          .font : mainFont])
         
-        let sellingAmount = manageOffer.amount
+        let sellingAmount = formatAmount(amount: manageOffer.amount)
         let sellingCode = manageOffer.sellingAssetCode ?? NativeCurrencyNames.xlm.rawValue
         let selling = NSAttributedString(string: "\(R.string.localizable.selling()): \(sellingAmount) \(sellingCode)\n",
             attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
                          .font : mainFont])
         
-        let price = NSAttributedString(string: "\(R.string.localizable.price_for_asset()): \(manageOffer.price)\n",
+        let price = NSAttributedString(string: "\(R.string.localizable.price_for_asset()): \(formatAmount(amount: manageOffer.price))\n",
             attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
                          .font : mainFont])
         
-        let details = NSMutableAttributedString(attributedString: offerID)
-        details.append(buying)
+        let details = NSMutableAttributedString(attributedString: buying)
         details.append(selling)
         details.append(price)
-        details.append(NSAttributedString(string: "\n"))
+        
+        if sourceAccount != currentWalletPK {
+            let source = prepareKeyString(prefix: R.string.localizable.source_account(), value: sourceAccount)
+            details.append(source)
+        }
         
         return details
     }
     
-    func details(passiveOffer: TxCreatePassiveOfferOperationResponse, transactionHash: String) -> NSAttributedString {
+    func details(passiveOffer: TxCreatePassiveOfferOperationResponse, sourceAccount:String) -> NSAttributedString {
         
         let details = NSMutableAttributedString()
-        
-        offerIDForTransaction(fromHash: transactionHash) { offerID in
-            if let offerID = offerID {
-                let offerIDStr = NSAttributedString(string: "\(R.string.localizable.offer_id()): \(offerID)\n",
-                    attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
-                                 .font : self.mainFont])
-                details.insert(offerIDStr, at: 0)
-                
-                // TODO: update UI label main thread
-            }
-        }
         
         let buyingCode = passiveOffer.buyingAssetCode ?? NativeCurrencyNames.xlm.rawValue
         let buying = NSAttributedString(string: "\(R.string.localizable.buying()): \(buyingCode)\n",
@@ -910,23 +975,27 @@ fileprivate extension TransactionsViewModel {
         
         let sellingAmount = passiveOffer.amount
         let sellingCode = passiveOffer.sellingAssetCode ?? NativeCurrencyNames.xlm.rawValue
-        let selling = NSAttributedString(string: "\(R.string.localizable.selling()): \(sellingAmount) \(sellingCode)\n",
+        let selling = NSAttributedString(string: "\(R.string.localizable.selling()): \(formatAmount(amount: sellingAmount)) \(sellingCode)\n",
             attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
                          .font : mainFont])
         
-        let price = NSAttributedString(string: "\(R.string.localizable.price_for_asset()): \(passiveOffer.price)\n",
+        let price = NSAttributedString(string: "\(R.string.localizable.price_for_asset()): \(formatAmount(amount:passiveOffer.price))\n",
             attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
                          .font : mainFont])
         
         details.append(buying)
         details.append(selling)
         details.append(price)
-        details.append(NSAttributedString(string: "\n"))
+        
+        if sourceAccount != currentWalletPK {
+            let source = prepareKeyString(prefix: R.string.localizable.source_account(), value: sourceAccount)
+            details.append(source)
+        }
         
         return details
     }
     
-    func details(setOptions: TxSetOptionsOperationResponse) -> NSAttributedString {
+    func details(setOptions: TxSetOptionsOperationResponse, sourceAccount: String) -> NSAttributedString {
         let details = NSMutableAttributedString()
         if let inflationPK = setOptions.inflationDestination {
             let pkStr = prepareKeyString(prefix: R.string.localizable.inflation_dest(), value: inflationPK)
@@ -935,7 +1004,7 @@ fileprivate extension TransactionsViewModel {
         
         if let setFlags = setOptions.setFlagsString{
             if setFlags.count > 0 {
-                let flagStr = setFlags.joined(separator: ",")
+                let flagStr = setFlags.joined(separator: ", ")
                 let setFlagStr = NSAttributedString(string: "\(R.string.localizable.set_flags()): \(flagStr)\n",
                     attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
                                  .font : mainFont])
@@ -946,7 +1015,7 @@ fileprivate extension TransactionsViewModel {
         
         if let clearFlags = setOptions.clearFlagsString {
             if clearFlags.count > 0 {
-                let flagStr = clearFlags.joined(separator: ",")
+                let flagStr = clearFlags.joined(separator: ", ")
                 let setFlagStr = NSAttributedString(string: "\(R.string.localizable.clear_flags()): \(flagStr)\n",
                     attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
                                  .font : mainFont])
@@ -989,8 +1058,7 @@ fileprivate extension TransactionsViewModel {
         
         if let signerWeight = setOptions.signerWeight,
             let signerKey = setOptions.signerKey {
-            let label = signerWeight == 0 ? R.string.localizable.signer_removed() : R.string.localizable.signer_added()
-            let signer = prepareKeyString(prefix: label, value: signerKey)
+            let signer = prepareKeyString(prefix: R.string.localizable.signer_key(), value: signerKey)
             
             var type = ""
             switch signerKey.first {
@@ -1008,7 +1076,12 @@ fileprivate extension TransactionsViewModel {
                 attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
                              .font : mainFont])
             
-            let signerWeightStr = NSAttributedString(string: "\(R.string.localizable.signer_weight()): \(signerWeight)\n",
+            var weight = String(signerWeight)
+            if signerWeight == 0 {
+                weight = "0 \(R.string.localizable.signer_remove())"
+            }
+            
+            let signerWeightStr = NSAttributedString(string: "\(R.string.localizable.signer_weight()): \(weight)\n",
                 attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
                              .font : mainFont])
             
@@ -1018,9 +1091,9 @@ fileprivate extension TransactionsViewModel {
         }
         
         if let homeDomain = setOptions.homeDomain {
-            let domain = NSMutableAttributedString(string: R.string.localizable.home_domain())
+            let domain = NSMutableAttributedString(string: R.string.localizable.home_domain() + ": " ,attributes: [.foregroundColor : Stylesheet.color(.lightBlack),.font : mainFont])
             let domainLink = NSAttributedString(string: "\(homeDomain)\n",
-                attributes: [.link : homeDomain,
+                attributes: [.foregroundColor : Stylesheet.color(.lightBlack), // TODO make link
                              .font : mainFont])
             
             domain.append(domainLink)
@@ -1030,42 +1103,62 @@ fileprivate extension TransactionsViewModel {
         return details
     }
     
-    func details(changeTrust: TxChangeTrustOperationResponse) -> NSAttributedString {
-        // TODO: check type calculation logic
-        let typee = (changeTrust.limit ?? "0") == "0" ? R.string.localizable.remove() : R.string.localizable.add()
-        let type = NSAttributedString(string: "\(R.string.localizable.type()): \(typee)\n",
-                                      attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
-                                                   .font : mainFont])
+    func details(changeTrust: TxChangeTrustOperationResponse, sourceAccount: String) -> NSAttributedString {
         
-        let code = changeTrust.assetCode ?? NativeCurrencyNames.xlm.rawValue
-        let asset = NSAttributedString(string: "\(R.string.localizable.asset()): \(code)\n",
-                                       attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
-                                                    .font : mainFont])
+        let result = NSMutableAttributedString()
         
         var issuer = NSAttributedString()
         if let issuerr = changeTrust.assetIssuer {
             issuer = prepareKeyString(prefix: R.string.localizable.issuer(), value: issuerr)
         }
+        result.append(issuer)
         
-        let limit = changeTrust.limit ?? R.string.localizable.none()
+        let code = changeTrust.assetCode ?? NativeCurrencyNames.xlm.rawValue
+        let asset = NSAttributedString(string: "\(R.string.localizable.asset_code()): \(code)\n",
+            attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
+                         .font : mainFont])
+        
+        result.append(asset)
+        
+        var limit = changeTrust.limit ?? R.string.localizable.none()
+        
+        if limit != R.string.localizable.none() {
+            limit = formatAmount(amount: limit)
+        }
+        
         let trustLimit = NSAttributedString(string: "\(R.string.localizable.trust_limit()): \(limit)\n",
-                                            attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
-                                                         .font : mainFont])
+            attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
+                         .font : mainFont])
         
-        let details = NSMutableAttributedString(attributedString: type)
-        details.append(asset)
-        details.append(issuer)
-        details.append(trustLimit)
-        details.append(NSAttributedString(string: "\n"))
+        result.append(trustLimit)
         
-        return details
+        let limitString = (changeTrust.limit ?? "0.00").replacingOccurrences(of: ".", with: "").replacingOccurrences(of: "0", with: "")
+        
+        var type = R.string.localizable.add_trustline()
+        if limitString.isEmpty {
+            type = R.string.localizable.remove_trustline()
+        }
+        
+        let typeValue = NSAttributedString(string: "\(R.string.localizable.type()): \(type)\n",
+                                      attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
+                                                   .font : mainFont])
+        
+        result.append(typeValue)
+        
+        if sourceAccount != currentWalletPK {
+            let source = prepareKeyString(prefix: R.string.localizable.source_account(), value: sourceAccount)
+            result.append(source)
+        }
+        
+        return result
+        
     }
     
-    func details(allowTrust: TxAllowTrustOperationResponse) -> NSAttributedString {
+    func details(allowTrust: TxAllowTrustOperationResponse, sourceAccount: String) -> NSAttributedString {
         let trustor = prepareKeyString(prefix: R.string.localizable.trustor(), value: allowTrust.trustor)
         
         let code = allowTrust.assetCode ?? NativeCurrencyNames.xlm.rawValue
-        let asset = NSAttributedString(string: "\(R.string.localizable.asset()): \(code)\n",
+        let asset = NSAttributedString(string: "\(R.string.localizable.asset_code()): \(code)\n",
                                        attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
                                                     .font : mainFont])
         
@@ -1076,51 +1169,95 @@ fileprivate extension TransactionsViewModel {
         let details = NSMutableAttributedString(attributedString: trustor)
         details.append(asset)
         details.append(authorize)
-        details.append(NSAttributedString(string: "\n"))
+        
+        if sourceAccount != currentWalletPK {
+            let source = prepareKeyString(prefix: R.string.localizable.source_account(), value: sourceAccount)
+            details.append(source)
+        }
         
         return details
     }
     
-    func details(accountMerge: TxAccountMergeOperationResponse) -> NSAttributedString {
-        return prepareKeyString(prefix: R.string.localizable.merged_account(), value: accountMerge.account)
+    func details(accountMerge: TxAccountMergeOperationResponse, sourceAccount: String) -> NSAttributedString {
+        
+        let details = NSMutableAttributedString()
+        
+        if accountMerge.into == currentWalletPK {
+            details.append(NSMutableAttributedString(attributedString: prepareKeyString(prefix: R.string.localizable.merged_account(), value: accountMerge.account)))
+        } else if accountMerge.account == currentWalletPK {
+            details.append(NSMutableAttributedString(attributedString: prepareKeyString(prefix: R.string.localizable.into_account(), value: accountMerge.into)))
+        }
+        
+        if sourceAccount != accountMerge.account {
+            let source = prepareKeyString(prefix: R.string.localizable.source_account(), value: sourceAccount)
+            details.append(source)
+        }
+        
+        
+        return details
     }
     
-    func details(manageData: TxManageDataOperationResponse) -> NSAttributedString {
+    func details(manageData: TxManageDataOperationResponse, sourceAccount:String) -> NSAttributedString {
         let name = NSAttributedString(string: "\(R.string.localizable.entry_name()): \(manageData.name)\n",
             attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
                          .font : mainFont])
         
-        var valuee = R.string.localizable.deleted()
-        if !manageData.value.isEmpty {
-            if let base64 = Data(base64Encoded: manageData.value),
-                let text = String(data: base64, encoding: .utf8) {
-                valuee = text
-            } else {
-                valuee = manageData.value
+        let details = NSMutableAttributedString(attributedString: name)
+        
+        var displayValue = ""
+        if let newValue = manageData.value {
+            if !newValue.isEmpty {
+                if let base64 = Data(base64Encoded: newValue),
+                    let text = String(data: base64, encoding: .utf8) {
+                    displayValue = text
+                } else {
+                    displayValue = newValue
+                }
             }
         }
         
-        let value = NSAttributedString(string: "\(R.string.localizable.entry_value()): \(valuee)\n",
-            attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
-                         .font : mainFont])
+        if displayValue != "" {
+            let value = NSAttributedString(string: "\(R.string.localizable.entry_value()): \(displayValue)\n",
+                attributes: [.foregroundColor : Stylesheet.color(.lightBlack), .font : mainFont])
         
-        let details = NSMutableAttributedString(attributedString: name)
-        details.append(value)
-        details.append(NSAttributedString(string: "\n"))
+            details.append(value)
+        }
+        else {
+            details.append(NSAttributedString(string:"\(R.string.localizable.entry_deleted())\n", attributes: [.foregroundColor : Stylesheet.color(.red),.font : mainFont]))
+        }
+        
+        if sourceAccount != currentWalletPK {
+            let source = prepareKeyString(prefix: R.string.localizable.source_account(), value: sourceAccount)
+            details.append(source)
+        }
         
         return details
     }
     
-    func details(bumpSequence: TxBumpSequenceOperationResponse) -> NSAttributedString {
-        let bump = NSAttributedString(string: "\(R.string.localizable.bumped_from()): \(bumpSequence.bumpTo)\n",
+    func details(bumpSequence: TxBumpSequenceOperationResponse, sourceAccount: String) -> NSAttributedString {
+        let bump = NSAttributedString(string: "\(R.string.localizable.bumped_to()): \(bumpSequence.bumpTo)\n",
                                       attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
                                                    .font : mainFont])
-        return bump
+        
+        let details = NSMutableAttributedString(attributedString: bump)
+        
+        if sourceAccount != currentWalletPK {
+            let source = prepareKeyString(prefix: R.string.localizable.source_account(), value: sourceAccount)
+            details.append(source)
+        }
+        
+        return details
     }
     
     func prepareKeyString(prefix: String, value: String) -> NSAttributedString {
-        let start = value.index(value.startIndex, offsetBy: 10)
-        let end = value.index(value.endIndex, offsetBy: -11)
+        var startIndex = 9
+        var endIndex = -10
+        if (prefix == R.string.localizable.inflation_dest()) {
+            startIndex = 6
+            endIndex = -7
+        }
+        let start = value.index(value.startIndex, offsetBy: startIndex)
+        let end = value.index(value.endIndex, offsetBy: endIndex)
         let truncatedValue = value.replacingCharacters(in: start...end, with: "...")
         
         let pkStr = NSAttributedString(string: "\(prefix): \(truncatedValue)",
@@ -1128,7 +1265,7 @@ fileprivate extension TransactionsViewModel {
                          .font : mainFont])
         
         let attachment = LSTextAttachment(info: value)
-        attachment.image = R.image.copy()?.resize(toHeight: 25)
+        attachment.image = R.image.copy()?.resize(toHeight: 25)?.tint(with: Stylesheet.color(.darkBlue))
         let copyStr = NSAttributedString(attachment: attachment)
         
         let details = NSMutableAttributedString(attributedString: pkStr)
@@ -1136,37 +1273,5 @@ fileprivate extension TransactionsViewModel {
         details.append(NSAttributedString(string: "\n"))
         
         return details
-    }
-    
-    func offerIDForTransaction(fromHash transactionHash:String, completion: @escaping ((String?) -> (Void))) {
-        services.stellarSdk.transactions.getTransactionDetails(transactionHash: transactionHash, response: { (response) -> (Void) in
-            switch response {
-            case .success(details: let transaction):
-                switch transaction.transactionResult.resultBody {
-                case .success(let operations)?:
-                    for operation in operations {
-                        switch operation {
-                        case .manageOffer( _, let result): fallthrough
-                        case .createPassiveOffer( _, let result):
-                            switch result {
-                            case .success( _, let subResult):
-                                switch subResult.offer {
-                                case .created(let offer)?:
-                                    completion(String(offer.offerID))
-                                default: continue
-                                }
-                            default: continue
-                            }
-                        default: continue
-                        }
-                    }
-                default:
-                    completion(nil)
-                }
-            case .failure(error: let error):
-                print("Error: \(error)")
-                completion(nil)
-            }
-        })
     }
 }

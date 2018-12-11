@@ -98,7 +98,7 @@ fileprivate extension OtherFilterViewController {
     }
     
     func prepareNavigationItem() {
-        navigationItem.titleLabel.text = R.string.localizable.transactions_filters()
+        navigationItem.titleLabel.text = R.string.localizable.other_filters()
         navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
     }

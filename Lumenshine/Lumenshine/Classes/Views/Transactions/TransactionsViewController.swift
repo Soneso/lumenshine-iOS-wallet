@@ -100,6 +100,7 @@ class TransactionsViewController: UITableViewController {
             tableCell.setAmount(viewModel.amount(at: indexPath))
             tableCell.setCurrency(viewModel.currency(at: indexPath))
             tableCell.setFee(viewModel.feePaid(at: indexPath))
+            tableCell.setOfferId(viewModel.offer(at: indexPath), transactionHash:viewModel.transactionHash(at: indexPath))
             tableCell.setDetails(viewModel.details(at: indexPath))
             tableCell.delegate = self
         }
@@ -250,7 +251,7 @@ fileprivate extension TransactionsViewController {
         headerView.addSubview(walletLabel)
         walletLabel.snp.makeConstraints { (make) in
             make.top.equalTo(horizontalSpacing)
-            make.left.equalTo(2*horizontalSpacing)
+            make.left.equalTo(horizontalSpacing + 15)
         }
         
         dateFromLabel.textColor = Stylesheet.color(.darkGray)

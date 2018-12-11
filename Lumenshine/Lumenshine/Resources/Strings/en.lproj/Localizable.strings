@@ -56,6 +56,9 @@
 "deleted" = "Deleted";
 
 /*  */
+"entry_deleted" = "Entry deleted";
+
+/*  */
 "remove" = "Remove";
 
 /*  */
@@ -171,6 +174,9 @@
 
 /*  */
 "asset" = "Asset";
+
+/*  */
+"asset_code" = "Asset code";
 
 /*  */
 "scan" = "Scan";
@@ -356,7 +362,16 @@
 "no_transactions_found" = "No transactions found";
 
 /*  */
-"transactions_filters" = "Transactions Filters";
+"transactions_filters" = "Transactions filter";
+
+/*  */
+"payment_filters" = "Payment filter";
+
+/*  */
+"offers_filters" = "Offers filter";
+
+/*  */
+"other_filters" = "Other filter";
 
 /*  */
 "transactions_sorting" = "Transactions Sorting";
@@ -788,10 +803,10 @@
 "date" = "Date";
 
 /*  */
-"date_from" = "Date from";
+"date_from" = "From";
 
 /*  */
-"date_to" = "Date to";
+"date_to" = "To";
 
 /*  */
 "type" = "Type";
@@ -1049,6 +1064,9 @@
 "offer_created" = "Offer created";
 
 /*  */
+"offer_changed" = "Offer changed";
+
+/*  */
 "offer_removed" = "Offer removed";
 
 /*  */
@@ -1070,6 +1088,12 @@
 "allow_trust" = "Allow trust";
 
 /*  */
+"remove_trustline" = "remove trustline";
+
+/*  */
+"add_trustline" = "add trustline";
+
+/*  */
 "trust_limit" = "Trust limit";
 
 /*  */
@@ -1079,10 +1103,13 @@
 "source_account" = "Source";
 
 /*  */
-"merge_account" = "Merge account";
+"merge_account" = "Account merge";
 
 /*  */
-"merged_account" = "Merged account";
+"merged_account" = "Account";
+
+/*  */
+"into_account" = "Into";
 
 /*  */
 "manage_data" = "Manage Data";
@@ -1091,7 +1118,7 @@
 "bump_sequence" = "Bump Sequence";
 
 /*  */
-"bumped_from" = "Bumped from";
+"bumped_to" = "Bumped to";
 
 /*  */
 "entry_name" = "Entry name";
@@ -1124,7 +1151,7 @@
 "authorization_immutable" = "Authorization immutable";
 
 /*  */
-"master_weight" = "Master weight";
+"master_weight" = "Master key weight";
 
 /*  */
 "low_threshold" = "Low threshold";
@@ -1136,16 +1163,16 @@
 "high_threshold" = "High threshold";
 
 /*  */
-"signer_removed" = "Signer removed";
-
-/*  */
-"signer_added" = "Signer added";
+"signer_key" = "Signer key";
 
 /*  */
 "signer_type" = "Signer type";
 
 /*  */
-"signer_weight" = "Signer weight";
+"signer_remove" = "(remove)";
+
+/*  */
+"signer_weight" = "Set weight";
 
 /*  */
 "ed_public_key" = "Ed25519 Public key";

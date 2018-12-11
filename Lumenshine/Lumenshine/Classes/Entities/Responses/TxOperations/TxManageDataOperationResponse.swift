@@ -14,7 +14,7 @@ class TxManageDataOperationResponse: TxOperationResponse {
     public let name:String
     
     /// Value from the (name/value pair) for an account.
-    public let value:String
+    public let value:String?
     
     // Properties to encode and decode
     private enum CodingKeys: String, CodingKey {
@@ -30,7 +30,7 @@ class TxManageDataOperationResponse: TxOperationResponse {
     public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         name = try values.decode(String.self, forKey: .name)
-        value = try values.decode(String.self, forKey: .value)
+        value = try values.decodeIfPresent(String.self, forKey: .value)
         
         try super.init(from: decoder)
     }

@@ -8,6 +8,7 @@
 
 import UIKit
 import Material
+import stellarsdk
 
 protocol TransactionsCellProtocol {
     func setDate(_ text: String?)
@@ -15,6 +16,7 @@ protocol TransactionsCellProtocol {
     func setFee(_ text: String?)
     func setAmount(_ text: NSAttributedString?)
     func setCurrency(_ text: String?)
+    func setOfferId(_ item:TxOperationResponse?, transactionHash: String?)
     func setDetails(_ text: NSAttributedString?)
     var delegate: TransactionsCellDelegate? { get set }
 }
@@ -30,6 +32,7 @@ class TransactionsTableViewCell: UITableViewCell {
     fileprivate let typeLabel = UILabel()
     fileprivate let amountLabel = UILabel()
     fileprivate let currencyLabel = UILabel()
+    fileprivate let offerIdLabel = UILabel()
     fileprivate let feeLabel = UILabel()
     fileprivate let detailsLabel = UILabel()
     
@@ -37,6 +40,7 @@ class TransactionsTableViewCell: UITableViewCell {
     fileprivate let typeValueLabel = UILabel()
     fileprivate let amountValueLabel = UILabel()
     fileprivate let currencyValueLabel = UILabel()
+    fileprivate let offerIdValueLabel = UILabel()
     fileprivate let feeValueLabel = UILabel()
     fileprivate let detailsValueLabel = UITextView()
     
@@ -46,6 +50,12 @@ class TransactionsTableViewCell: UITableViewCell {
     fileprivate let fontSize: CGFloat = 13.0
     
     weak var delegate: TransactionsCellDelegate?
+    
+    var stellarSDK: StellarSDK {
+        get {
+            return Services.shared.stellarSdk
+        }
+    }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
@@ -72,6 +82,7 @@ class TransactionsTableViewCell: UITableViewCell {
         prepareAmountLabel()
         prepareCurrencyLabel()
         prepareFeeLabel()
+        prepareOfferIdLabel()
         prepareDetailsLabel()
     }
 }
@@ -105,6 +116,67 @@ extension TransactionsTableViewCell: TransactionsCellProtocol {
     func setCurrency(_ text: String?) {
         currencyValueLabel.text = text
         currencyLabel.isHidden = text?.isEmpty ?? true
+    }
+    
+    func setOfferId(_ item:TxOperationResponse?, transactionHash: String?) {
+        if let manageOfferItem = item as? TxManageOfferOperationResponse, manageOfferItem.offerId != 0 {
+            offerIdValueLabel.text = String(manageOfferItem.offerId)
+            offerIdLabel.isHidden = false
+        } else {
+
+            var isOffer = false
+            var amount = "0"
+            var price = "0"
+            var sellingAssetType = "native"
+            var sellingAssetCode: String? = nil
+            var sellingIssuer: String? = nil
+            var buyingAssetType = "native"
+            var buyingAssetCode: String? = nil
+            var buyingIssuer: String? = nil
+            
+            if let manageOfferItem = item as? TxManageOfferOperationResponse {
+                isOffer = true
+                amount = manageOfferItem.amount
+                sellingAssetType = manageOfferItem.sellingAssetType
+                sellingAssetCode = manageOfferItem.sellingAssetCode
+                sellingIssuer = manageOfferItem.sellingAssetIssuer
+                buyingAssetType = manageOfferItem.sellingAssetType
+                buyingAssetCode = manageOfferItem.sellingAssetCode
+                buyingIssuer = manageOfferItem.sellingAssetIssuer
+                price = manageOfferItem.price
+                
+            } else if let passiveOfferItem = item as? TxCreatePassiveOfferOperationResponse {
+                isOffer = true
+                amount = passiveOfferItem.amount
+                sellingAssetType = passiveOfferItem.sellingAssetType
+                sellingAssetCode = passiveOfferItem.sellingAssetCode
+                sellingIssuer = passiveOfferItem.sellingAssetIssuer
+                buyingAssetType = passiveOfferItem.sellingAssetType
+                buyingAssetCode = passiveOfferItem.sellingAssetCode
+                buyingIssuer = passiveOfferItem.sellingAssetIssuer
+                price = passiveOfferItem.price
+            }
+            
+            if let tHash = transactionHash, isOffer {
+                offerIdLabel.isHidden = false
+                offerIdValueLabel.text = "loading ..."
+                stellarSDK.transactions.getTransactionDetails(transactionHash: tHash) { (response) -> (Void) in
+                    DispatchQueue.main.async {
+                        switch response {
+                        case .success(details: let transaction):
+                            // TODO find offer
+                            self.offerIdValueLabel.text = transaction.id
+                            print("TODO find offer")
+                        case .failure(_):
+                            print("offer could not be fetched")
+                            self.offerIdValueLabel.text = "not found"
+                        }
+                    }
+                }
+            } else {
+                offerIdLabel.isHidden = true
+            }
+        }
     }
     
     func setDetails(_ text: NSAttributedString?) {
@@ -247,6 +319,29 @@ fileprivate extension TransactionsTableViewCell {
         }
     }
     
+    func prepareOfferIdLabel() {
+        offerIdLabel.text = R.string.localizable.offer_id() + ":"
+        offerIdLabel.textColor = Stylesheet.color(.lightBlack)
+        offerIdLabel.font = R.font.encodeSansSemiBold(size: fontSize)
+        
+        contentView.addSubview(offerIdLabel)
+        offerIdLabel.snp.makeConstraints { make in
+            make.top.equalTo(feeValueLabel.snp.bottom)
+            make.left.equalTo(horizontalSpacing)
+            make.width.equalTo(dateLabel)
+        }
+        
+        offerIdValueLabel.textColor = Stylesheet.color(.lightBlack)
+        offerIdValueLabel.font = R.font.encodeSansRegular(size: fontSize)
+        
+        contentView.addSubview(offerIdValueLabel)
+        offerIdValueLabel.snp.makeConstraints { make in
+            make.top.equalTo(offerIdLabel)
+            make.left.equalTo(offerIdLabel.snp.right)
+            make.right.equalTo(-horizontalSpacing)
+        }
+    }
+    
     func prepareDetailsLabel() {
         detailsLabel.text = R.string.localizable.details()
         detailsLabel.textColor = Stylesheet.color(.lightBlack)
@@ -254,7 +349,7 @@ fileprivate extension TransactionsTableViewCell {
         
         contentView.addSubview(detailsLabel)
         detailsLabel.snp.makeConstraints { make in
-            make.top.equalTo(feeValueLabel.snp.bottom)
+            make.top.equalTo(offerIdValueLabel.snp.bottom).offset(10.0)
             make.left.equalTo(horizontalSpacing)
             make.width.equalTo(dateLabel)
         }
@@ -268,8 +363,8 @@ fileprivate extension TransactionsTableViewCell {
         
         contentView.addSubview(detailsValueLabel)
         detailsValueLabel.snp.makeConstraints { make in
-            make.top.equalTo(detailsLabel).offset(25.0)
-            make.left.equalTo(detailsLabel.snp.left).offset(10.0)
+            make.top.equalTo(detailsLabel.snp.bottom)
+            make.left.equalTo(detailsLabel.snp.left)
             make.right.equalTo(-horizontalSpacing)
             make.bottom.equalTo(-horizontalSpacing)
         }
