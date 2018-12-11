@@ -487,8 +487,14 @@ fileprivate extension TransactionsViewModel {
                 if let closure = self?.reloadClosure {
                     closure()
                 }
+                break
             case .failure(let error):
+                // TODO show error to user
                 print("Transactions list failure: \(error)")
+                self?.setupEntries(transactions: [])
+                if let closure = self?.reloadClosure {
+                    closure()
+                }
             }
             if let closure = self?.hideActivityClosure {
                 closure()
