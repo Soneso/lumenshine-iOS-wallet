@@ -11,7 +11,7 @@ import Foundation
 class TxBumpSequenceOperationResponse: TxOperationResponse {
     
     /// Value to bump the sequence to.
-    public let bumpTo:UInt64
+    public let bumpTo:String
     
     // Properties to encode and decode
     private enum CodingKeys: String, CodingKey {
@@ -25,7 +25,7 @@ class TxBumpSequenceOperationResponse: TxOperationResponse {
      */
     public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        bumpTo = try values.decode(UInt64.self, forKey: .bumpTo)
+        bumpTo = try values.decode(String.self, forKey: .bumpTo)
         
         try super.init(from: decoder)
     }
