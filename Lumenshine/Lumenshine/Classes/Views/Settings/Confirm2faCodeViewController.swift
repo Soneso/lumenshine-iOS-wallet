@@ -188,7 +188,7 @@ fileprivate extension Confirm2faCodeViewController {
         view.addSubview(tfaSecretLabel)
         tfaSecretLabel.snp.makeConstraints { make in
             make.top.equalTo(hintLabel.snp.bottom).offset(verticalSpacing)
-            make.left.equalTo(40)
+            make.left.equalTo(30)
         }
         
         tfaCopyButton.image = R.image.copy()
@@ -198,8 +198,7 @@ fileprivate extension Confirm2faCodeViewController {
         tfaCopyButton.snp.makeConstraints { make in
             make.centerY.equalTo(tfaSecretLabel)
             make.left.equalTo(tfaSecretLabel.snp.right).offset(10)
-            make.right.equalTo(-40)
-            make.width.equalTo(40)
+            make.width.equalTo(30)
         }
         
         let separator = UIView()

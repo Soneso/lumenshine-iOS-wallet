@@ -695,7 +695,7 @@
 "change_password" = "Change Password";
 
 /*  */
-"change_password_hint" = "To change your password please provide current and new password.";
+"change_password_hint" = "To change your password please provide your current and new password.";
 
 /*  */
 "current_password" = "Current password";

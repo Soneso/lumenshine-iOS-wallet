@@ -69,14 +69,14 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f8x-X1-gbQ">
                                     <rect key="frame" x="0.0" y="162" width="343" height="38"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Label" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obq-eW-3u3" customClass="InfoLabel" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="299" height="38"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Label" textAlignment="center" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obq-eW-3u3" customClass="InfoLabel" customModule="Lumenshine" customModuleProvider="target">
+                                            <rect key="frame" x="6" y="0.0" width="296" height="38"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WEC-ag-bJI">
-                                            <rect key="frame" x="302" y="6.5" width="25" height="25"/>
+                                            <rect key="frame" x="312" y="6.5" width="25" height="25"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="25" id="Wqo-JT-SMI"/>
                                                 <constraint firstAttribute="width" constant="25" id="gjk-Lz-dEt"/>
@@ -89,12 +89,12 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="WEC-ag-bJI" secondAttribute="trailing" constant="16" id="76I-qn-wq5"/>
+                                        <constraint firstAttribute="trailing" secondItem="WEC-ag-bJI" secondAttribute="trailing" constant="6" id="76I-qn-wq5"/>
                                         <constraint firstItem="WEC-ag-bJI" firstAttribute="centerY" secondItem="obq-eW-3u3" secondAttribute="centerY" id="BnV-0S-Guq"/>
                                         <constraint firstAttribute="bottom" secondItem="obq-eW-3u3" secondAttribute="bottom" id="NMH-ad-pB2"/>
-                                        <constraint firstItem="WEC-ag-bJI" firstAttribute="leading" secondItem="obq-eW-3u3" secondAttribute="trailing" constant="3" id="jdb-Vv-IRk"/>
+                                        <constraint firstItem="WEC-ag-bJI" firstAttribute="leading" secondItem="obq-eW-3u3" secondAttribute="trailing" constant="10" id="jdb-Vv-IRk"/>
                                         <constraint firstItem="obq-eW-3u3" firstAttribute="top" secondItem="f8x-X1-gbQ" secondAttribute="top" id="ngJ-KN-hZl"/>
-                                        <constraint firstItem="obq-eW-3u3" firstAttribute="leading" secondItem="f8x-X1-gbQ" secondAttribute="leading" id="zsQ-5V-Xcv"/>
+                                        <constraint firstItem="obq-eW-3u3" firstAttribute="leading" secondItem="f8x-X1-gbQ" secondAttribute="leading" constant="6" id="zsQ-5V-Xcv"/>
                                     </constraints>
                                 </view>
                             </subviews>
@@ -112,14 +112,14 @@
                     </subviews>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vFF-YP-TNX" customClass="RoundedButton" customModule="Lumenshine" customModuleProvider="target">
-                    <rect key="frame" x="66" y="421.5" width="64" height="30"/>
+                    <rect key="frame" x="66" y="429.5" width="64" height="30"/>
                     <state key="normal" title="OK, done"/>
                     <connections>
                         <action selector="doneButtonAction:" destination="-1" eventType="touchUpInside" id="F7g-Cm-xES"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AYp-PE-maQ" customClass="RoundedButton" customModule="Lumenshine" customModuleProvider="target">
-                    <rect key="frame" x="16" y="421.5" width="34" height="30"/>
+                    <rect key="frame" x="16" y="429.5" width="34" height="30"/>
                     <state key="normal" title="Back"/>
                     <connections>
                         <action selector="backButtonAction:" destination="-1" eventType="touchUpInside" id="a29-hs-Ysf"/>
@@ -135,11 +135,11 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="McC-7W-MIH" secondAttribute="trailing" constant="16" id="Eq2-sq-QT6"/>
                 <constraint firstItem="vFF-YP-TNX" firstAttribute="leading" secondItem="AYp-PE-maQ" secondAttribute="trailing" constant="16" id="GbQ-29-NjU"/>
                 <constraint firstItem="oGh-VX-XpP" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="a1i-N8-I1s"/>
-                <constraint firstItem="AYp-PE-maQ" firstAttribute="top" secondItem="Lgp-UI-zzS" secondAttribute="bottom" constant="16" id="gnL-CD-lcM"/>
+                <constraint firstItem="AYp-PE-maQ" firstAttribute="top" secondItem="Lgp-UI-zzS" secondAttribute="bottom" constant="24" id="gnL-CD-lcM"/>
                 <constraint firstItem="McC-7W-MIH" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="32" id="lFd-Ju-8AY"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Lgp-UI-zzS" secondAttribute="trailing" constant="16" id="rJ9-E5-zeo"/>
                 <constraint firstItem="Lgp-UI-zzS" firstAttribute="top" secondItem="oGh-VX-XpP" secondAttribute="bottom" constant="16" id="sKo-9m-k52"/>
-                <constraint firstItem="vFF-YP-TNX" firstAttribute="top" secondItem="Lgp-UI-zzS" secondAttribute="bottom" constant="16" id="suk-C2-b1C"/>
+                <constraint firstItem="vFF-YP-TNX" firstAttribute="top" secondItem="Lgp-UI-zzS" secondAttribute="bottom" constant="24" id="suk-C2-b1C"/>
                 <constraint firstItem="AYp-PE-maQ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="zUK-q2-M6G"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

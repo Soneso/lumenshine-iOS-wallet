@@ -75,6 +75,7 @@ class DepositXLMViewController: UIViewController {
         
         walletsView.walletChanged = { (wallet) in
             self.wallet = wallet
+            self.setupPublicKey()
             self.setupQRCode()
         }
     }
