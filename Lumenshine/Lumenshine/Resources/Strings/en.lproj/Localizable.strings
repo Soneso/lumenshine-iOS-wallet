@@ -401,16 +401,13 @@
 "activate" = "Activate";
 
 /*  */
-"fingerprint_cap" = "Fingerprint";
+"fingerprint_cap" = "Touch ID";
 
 /*  */
 "face_recognition_cap" = "Face ID";
 
 /*  */
 "fingerprint_recognition" = "fingerprint recognition";
-
-/*  */
-"face_recognition" = "face recognition";
 
 /*  */
 "hint_face_fingerprint" = "If you activate, the app will request %@ instead of password when opened. Entering the password will not be required each time you open the app. To activate %@ please first insert your password below.";

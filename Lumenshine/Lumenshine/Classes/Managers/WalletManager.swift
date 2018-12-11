@@ -115,30 +115,14 @@ class WalletManager: NSObject {
                     DispatchQueue.main.async {
                         completion(.noFunding)
                     }
-                    
                     return
                 }
                 
-                if let address = stellarAddress, address.isFederationAddress() {
-                    Federation.resolve(stellarAddress: address, completion: { (response) -> (Void) in
-                        switch response {
-                        case .success(response: _):
-                            DispatchQueue.main.async {
-                                completion(.success(fundedWallets: fundedWallets, paymentDestination: address))
-                            }
-                        case .failure(error: _):
-                            if let publicKey = publicKey, publicKey.isValidEd25519PublicKey() {
-                                DispatchQueue.main.async {
-                                    completion(.success(fundedWallets: fundedWallets, paymentDestination: publicKey))
-                                }
-                            } else {
-                                DispatchQueue.main.async {
-                                    completion(.success(fundedWallets: fundedWallets, paymentDestination: nil))
-                                }
-                            }
-                        }
-                    })
-                } else if let publicKey = publicKey, publicKey.isValidEd25519PublicKey() {
+                if let address = stellarAddress {
+                    DispatchQueue.main.async {
+                        completion(.success(fundedWallets: fundedWallets, paymentDestination: address))
+                    }
+                } else if let publicKey = publicKey {
                     DispatchQueue.main.async {
                         completion(.success(fundedWallets: fundedWallets, paymentDestination: publicKey))
                     }
@@ -147,7 +131,6 @@ class WalletManager: NSObject {
                         completion(.success(fundedWallets: fundedWallets, paymentDestination: nil))
                     }
                 }
-                
             case .failure(error: let error):
                 completion(.failure(error: error.localizedDescription))
             }

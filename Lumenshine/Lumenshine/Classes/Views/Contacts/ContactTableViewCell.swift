@@ -140,8 +140,15 @@ class ContactTableViewCell: UITableViewCell {
             if paymentOperationsVCManager == nil {
                 paymentOperationsVCManager = PaymentOperationsVCManager(parentViewController: parentViewController)
             }
-            
-            paymentOperationsVCManager.setupSendViewControllerWithMultipleWallets(stellarAddress: addressLabel.text, publicKey: publicKeyLabel.text)
+            var stellarAddress = addressLabel.text
+            var publicKey = publicKeyLabel.text
+            if publicKey != nil, publicKey?.trimmed == "" {
+                publicKey = nil
+            }
+            if stellarAddress != nil, stellarAddress?.trimmed == "" {
+                stellarAddress = nil
+            }
+            paymentOperationsVCManager.setupSendViewControllerWithMultipleWallets(stellarAddress: stellarAddress, publicKey: publicKey)
         }
     }
 }

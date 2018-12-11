@@ -57,10 +57,7 @@ class ReLoginViewModel : LoginViewModel {
     override var hintText: String? {
         if entries.count > 2 {
             let buttonLabel = entries[2].name
-            var text = R.string.localizable.fingerprint_recognition()
-            if buttonLabel == R.string.localizable.face_recognition_cap() {
-                text = R.string.localizable.face_recognition()
-            }
+            var text = buttonLabel
             return R.string.localizable.hint_face_fingerprint(text, text)
         }
         return nil
