@@ -2,7 +2,10 @@
 //  AccountDetailsViewController.swift
 //  Lumenshine
 //
-//  Created by Razvan Chelemen on 06/08/2018.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -75,7 +78,6 @@ class AccountDetailsViewController: UpdatableViewController {
             walletService.setWalletHomescreen(walletID: walletID, isVisible: sender.isOn) { (response) -> (Void) in
                 switch response {
                 case .success:
-                    print("Successfully changed show on homepage!")
                     (self.wallet as? FundedWallet)?.showOnHomescreen = sender.isOn
                 case .failure(let error):
                     print(error)

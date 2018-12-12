@@ -2,7 +2,10 @@
 //  HelpCenterViewModel.swift
 //  Lumenshine
 //
-//  Created by Istvan Elekes on 9/26/18.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -30,14 +33,6 @@ class HelpCenterViewModel : HelpCenterViewModelType {
         self.service = service
         self.user = user
         
-        /*if user != nil {
-            self.entries = [[.inbox],
-                            [.FAQ1, .FAQ2, .FAQ3, .FAQ4],
-                            [.basics, .security, .wallets, .stellar]]//, .ICO]]
-        } else {
-            self.entries = [[.inbox],
-                            [.FAQ1, .FAQ2, .FAQ3, .FAQ4]]
-        }*/
         self.entries = [[.inbox],
                         [.FAQ1, .FAQ2, .FAQ3, .FAQ4],
                         [.basics, .wallets, .security, .stellar]]

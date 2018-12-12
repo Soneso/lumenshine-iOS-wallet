@@ -2,7 +2,10 @@
 //  SettingsTableViewController.swift
 //  Lumenshine
 //
-//  Created by Istvan Elekes on 3/23/18.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -89,8 +92,5 @@ fileprivate extension SettingsTableViewController {
         
         tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewController.CellIdentifier)
         tableView.rowHeight = UITableViewAutomaticDimension
-//        tableView.separatorStyle = .none
-        
-//        tableView.tableHeaderView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 130)))
     }
 }

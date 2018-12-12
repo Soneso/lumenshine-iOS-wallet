@@ -2,7 +2,10 @@
 //  ChartCardViewModel.swift
 //  Lumenshine
 //
-//  Created by Istvan Elekes on 8/20/18.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -54,7 +57,6 @@ class ChartCardViewModel: CardViewModelType {
     var currentRate: String? {
         guard let exchange = exchangeRates else { return nil }
         let formatter = NumberFormatter()
-//        formatter.decimalSeparator = ","
         formatter.minimumFractionDigits = 5
         formatter.maximumFractionDigits = 6
         formatter.minimumIntegerDigits = 1
@@ -152,4 +154,3 @@ fileprivate extension ChartCardViewModel {
         return (decreaseValue / oldNumber) * 100
     }
 }
-

@@ -2,7 +2,10 @@
 //  TxCreatePassiveOfferOperationResponse.swift
 //  Lumenshine
 //
-//  Created by Elekes Istvan on 14/11/2018.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -25,7 +28,7 @@ class TxCreatePassiveOfferOperationResponse: TxOperationResponse {
     /// The issuer of asset to buy.
     public let buyingAssetIssuer:String?
     
-    /// Type of asset to sell (native / alphanum4 / alphanum12)
+    /// Type of asset to sell (native / credit_alphanum4 / credit_alphanum12)
     public let sellingAssetType:String
     
     /// The code of asset to sell.

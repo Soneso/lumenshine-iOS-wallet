@@ -2,7 +2,10 @@
 //  FundButtonTitles.swift
 //  Lumenshine
 //
-//  Created by Soneso on 14/08/2018.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -74,7 +77,6 @@ public class FundTestNetWalletViewController: UIViewController {
         userManager.createTestAccount(withAccountID: wallet.publicKey) { (response) -> (Void) in
             switch response {
             case .success(_):
-                print("Success!")
                 self.setFundButtonTitle(titleEnum: .success)
             case .failure(error: let error):
                 print("Failure, error: \(error.localizedDescription)")

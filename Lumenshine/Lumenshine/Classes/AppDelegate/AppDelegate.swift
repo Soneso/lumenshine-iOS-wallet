@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  Lumenshine
 //
-//  Created by Soneso GmbH on 25/01/2018.
+//  Created by Soneso GmbH on 12/12/2018.
 //  Munich, Germany
 //  web: https://soneso.com
 //  email: hi@soneso.com
@@ -120,7 +120,7 @@ extension AppDelegate {
         }
         
         let token = tokenParts.joined()
-        print("Device Token: \(token)")
+        //print("Device Token: \(token)")
         
         NotificationCenter.default.post(name: Notification.Name(Keys.Notifications.DeviceToken), object: nil, userInfo: [Keys.UserDefs.DeviceToken:token])
     }

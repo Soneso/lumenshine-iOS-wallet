@@ -2,7 +2,10 @@
 //  SendTransaction.swift
 //  Lumenshine
 //
-//  Created by Soneso on 09/08/2018.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -180,7 +183,7 @@ class TransactionHelper {
     }
     
     private func submitTransactionSucceeded(transaction: Transaction, completion: @escaping (() -> (Void))) {
-        print("Account successfully created.")
+        
         self.transactionResult.status = TransactionStatus.success
         self.transactionResult.transactionFee = transactionFee
 
@@ -327,7 +330,6 @@ class TransactionHelper {
             try self.stellarSdk.transactions.submitTransaction(transaction: transaction) { (response) -> (Void) in
                 switch response {
                 case .success(details:_):
-                    print("Success")
                     self.transactionResult.status = TransactionStatus.success
                     self.transactionResult.transactionFee = self.transactionFee
                     completion()
@@ -458,7 +460,6 @@ class TransactionHelper {
                 try self.stellarSdk.transactions.submitTransaction(transaction: transaction) { (response) -> (Void) in
                     switch response {
                     case .success(_):
-                        print("Success")
                         DispatchQueue.main.async {
                             completion(.success)
                         }

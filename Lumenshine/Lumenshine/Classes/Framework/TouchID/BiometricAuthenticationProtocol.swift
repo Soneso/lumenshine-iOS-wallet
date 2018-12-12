@@ -2,7 +2,10 @@
 //  BiometricAuthenticationProtocol.swift
 //  Lumenshine
 //
-//  Created by Istvan Elekes on 6/28/18.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 

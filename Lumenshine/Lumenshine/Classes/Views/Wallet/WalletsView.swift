@@ -2,7 +2,10 @@
 //  WalletsView.swift
 //  Lumenshine
 //
-//  Created by Soneso on 04/12/2018.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -54,7 +57,7 @@ class WalletsView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
             walletTextField.inputView = walletPickerView
             walletTextField.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(walletsDoneButtonTap))
         }
-        var firstWalletName = "No"
+        var firstWalletName = "Not available"
         if let firstWallet = walletsList.first {
             firstWalletName = firstWallet.name
         }

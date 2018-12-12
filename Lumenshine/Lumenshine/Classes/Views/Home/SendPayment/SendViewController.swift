@@ -2,7 +2,10 @@
 //  SendViewController.swift
 //  Lumenshine
 //
-//  Created by Soneso on 02/08/2018.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -273,7 +276,7 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
                         // check limit
                         if let ownCurrency = currency, let cbalance = CoinUnit(ownCurrency.balance), let climit = CoinUnit(ownCurrency.limit), let minus = CoinUnit("-1.0") {
                             let limit = climit.addingProduct(minus, cbalance)
-                            print("Limit: " + limit.stringWithUnit)
+                            //print("Limit: " + limit.stringWithUnit)
                             if let amount = self.amountTextField.text {
                                 let correctedAmount = amount.replacingOccurrences(of: ",", with: ".")
                                 if let amountToSend = CoinUnit(correctedAmount), !amountToSend.isLessThanOrEqualTo(limit) {

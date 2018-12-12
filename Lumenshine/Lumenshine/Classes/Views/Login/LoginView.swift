@@ -2,7 +2,10 @@
 //  LoginView.swift
 //  Lumenshine
 //
-//  Created by Istvan Elekes on 7/9/18.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -20,7 +23,6 @@ class LoginView: UIView {
     fileprivate let verticalSpacing = 31.0
     fileprivate let horizontalSpacing = 15.0
     fileprivate let titleLabel = UILabel()
-    //fileprivate let detailLabel = UILabel()
     
     // MARK: - UI properties
     fileprivate let textField1 = LSTextField()
@@ -103,7 +105,6 @@ extension LoginView: UITextFieldDelegate {
 fileprivate extension LoginView {
     func prepare() {
         prepareTitle()
-        //prepareDetail()
         prepareTextFields()
         prepareLoginButton()
         
@@ -126,22 +127,6 @@ fileprivate extension LoginView {
             make.right.equalTo(-horizontalSpacing)
         }
     }
-    
-    /*func prepareDetail() {
-        detailLabel.text = R.string.localizable.login_fill()
-        detailLabel.textColor = Stylesheet.color(.lightBlack)
-        detailLabel.font = R.font.encodeSansRegular(size: 13)
-        detailLabel.textAlignment = .left
-        detailLabel.adjustsFontSizeToFitWidth = true
-        detailLabel.numberOfLines = 0
-        
-        self.addSubview(detailLabel)
-        detailLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLabel.snp.bottom)
-            make.left.equalTo(horizontalSpacing)
-            make.right.equalTo(-horizontalSpacing)
-        }
-    }*/
     
     func prepareTextFields() {
         textField1.delegate = self
@@ -196,4 +181,3 @@ fileprivate extension LoginView {
         }
     }
 }
-

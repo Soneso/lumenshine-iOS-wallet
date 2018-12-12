@@ -2,7 +2,10 @@
 //  SetupViewModel.swift
 //  Lumenshine
 //
-//  Created by Istvan Elekes on 7/12/18.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -43,7 +46,6 @@ class SetupViewModel: SetupViewModelType {
     fileprivate let service: AuthService
     fileprivate let user: User
     fileprivate let mnemonic: String
-    //fileprivate let loginResponse: LoginStep2Response
     fileprivate let tfaConfirmed: Bool
     fileprivate let mailConfirmed: Bool
     fileprivate let mnemonicConfirmed: Bool
@@ -129,13 +131,6 @@ class SetupViewModel: SetupViewModelType {
         }
     }
     
-//    func openAuthenticator() {
-//        let tfaSecret = loginResponse?.tfaSecret?.base32EncodedString
-//        let urlString = "otpauth://totp/lumenshine:\(user.email)?secret=\(tfaSecret)&issuer=lumenshine"
-//        guard let url = URL(string: urlString) else { return }
-//        navigationCoordinator?.performTransition(transition: .showGoogle2FA(url))
-//    }
-    
     // Email confirmation methods
     func checkMailConfirmation(response: @escaping TFAResponseClosure) {
         service.registrationStatus { result in
@@ -216,4 +211,3 @@ fileprivate extension SetupViewModel {
         backgroundTime = Date()
     }
 }
-

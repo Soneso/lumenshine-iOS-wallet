@@ -2,7 +2,10 @@
 //  AuthService.swift
 //  Lumenshine
 //
-//  Created by Istvan Elekes on 4/18/18.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -108,10 +111,10 @@ public class AuthService: BaseService {
                 DispatchQueue.global(qos: .userInitiated).async {
                     self?.refreshToken() { response in
                         switch response {
-                        case .success:
-                            print("Token refreshed")
                         case .failure(let error):
                             print("Token refresh failed: \(error.localizedDescription)")
+                        default:
+                            break
                         }
                     }
                 }

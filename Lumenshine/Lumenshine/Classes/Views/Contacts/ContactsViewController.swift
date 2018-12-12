@@ -2,7 +2,10 @@
 //  ContactsViewController.swift
 //  Lumenshine
 //
-//  Created by Istvan Elekes on 10/2/18.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -76,10 +79,6 @@ class ContactsViewController: UITableViewController {
         
         return cell
     }
-    
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 60
-//    }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return viewModel.headerTitle(at: section) == nil ? 25 : 50
@@ -276,4 +275,3 @@ fileprivate extension ContactsViewController {
         tableView.backgroundView = backgroundView
     }
 }
-

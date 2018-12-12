@@ -2,7 +2,10 @@
 //  WalletsResponse.swift
 //  Lumenshine
 //
-//  Created by Razvan Chelemen on 05/07/2018.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -31,5 +34,4 @@ public class WalletsResponse: Decodable {
         federationAddress = try values.decode(String.self, forKey: .federationAddress)
         showOnHomeScreen = try values.decode(Bool.self, forKey: .showOnHomeScreen)
     }
-    
 }

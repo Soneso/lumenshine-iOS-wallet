@@ -2,7 +2,10 @@
 //  WalletsViewController.swift
 //  Lumenshine
 //
-//  Created by Soneso on 24/10/2018.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -159,6 +162,7 @@ class WalletsViewController: UpdatableViewController, UITableViewDataSource {
                     
                 WebSocketService.wallets = wallets
                 case .failure(_):
+                    // TODO: handle this
                     print("Failed to get wallets")
                 }
                 

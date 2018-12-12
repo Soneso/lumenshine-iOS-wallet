@@ -2,7 +2,10 @@
 //  SettingsTableViewCell.swift
 //  Lumenshine
 //
-//  Created by Istvan Elekes on 6/6/18.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -33,7 +36,6 @@ class SettingsTableViewCell: UITableViewCell {
     }
     
     func commonInit() {
-//        textLabel?.textColor = Stylesheet.color(.white)
         textLabel?.font = R.font.encodeSansRegular(size: 15)
         backgroundColor = Stylesheet.color(.clear)
         stateSwitch.isHidden = true

@@ -2,7 +2,10 @@
 //  OwnAssetsInfoViewController.swift
 //  Lumenshine
 //
-//  Created by Soneso on 07/12/2018.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -76,8 +79,6 @@ class OwnAssetsInfoViewController: UIViewController, UITextViewDelegate {
     }
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        /*let webViewController = WebViewController(title: modalTitle, url: URL.absoluteString)
-        navigationController?.pushViewController(webViewController, animated: true)*/
         UIApplication.shared.open(URL)
         return false
     }

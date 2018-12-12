@@ -1,8 +1,11 @@
 //
 //  MaterialIcon.swift
-//  jupiter
+//  Lumenshine
 //
-//  Created by Istvan Elekes on 3/1/18.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -184,4 +187,3 @@ public struct MaterialIcon {
         public static let size36pt = MaterialIcon.icon("ic_account_balance36pt")
     }
 }
-

@@ -2,7 +2,10 @@
 //  MenuViewModel.swift
 //  Lumenshine
 //
-//  Created by Istvan Elekes on 3/22/18.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -32,10 +35,6 @@ class MenuViewModel : MenuViewModelType {
     init(services: Services, user: User) {
         self.services = services
         self.user = user
-        
-        /*self.entries = [[.avatar],
-                        [.home, .wallets, .transactions, .ICOs, .myOrders, .contacts, .extras, .settings],
-                        [.help, .signOut]]*/
         
         self.entries = [[.avatar],
          [.home, .wallets, .transactions, .contacts, .settings],
@@ -116,19 +115,19 @@ fileprivate extension MenuViewModel {
                 newToken != deviceToken {
                 services.push.update(newPushToken: newToken, oldPushToken: deviceToken) { result in
                     switch result {
-                    case .success:
-                        print("Push update success")
                     case .failure(let error):
                         print("Push update error: \(error)")
+                    default:
+                        break
                     }
                 }
             } else {
                 services.push.subscribe(pushToken: newToken) { result in
                     switch result {
-                    case .success:
-                        print("Push Subscribe success")
                     case .failure(let error):
                         print("Push Subscribe error: \(error)")
+                    default:
+                        break
                     }
                 }
             }
@@ -204,6 +203,7 @@ fileprivate extension MenuViewModel {
                     transition = .showWallets
                 }
             case .failure(let error):
+                // TODO: handle this
                 print("Failed to get wallets: \(error)")
             }
             DispatchQueue.main.async {

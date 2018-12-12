@@ -2,7 +2,10 @@
 //  LoginCoordinator.swift
 //  Lumenshine
 //
-//  Created by Istvan Elekes on 3/22/18.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -22,7 +25,6 @@ class LoginCoordinator: CoordinatorType {
         self.baseController = LoginViewController(viewModel: viewModel)
         viewModel.navigationCoordinator = self
         mainCoordinator.currentCoordinator = self
-//        performTransition(transition: transition ?? .showLogin)
     }
     
     func performTransition(transition: Transition) {

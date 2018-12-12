@@ -1,8 +1,11 @@
 //
 //  HomeViewModel.swift
-//  jupiter
+//  Lumenshine
 //
-//  Created by Istvan Elekes on 3/5/18.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -52,6 +55,7 @@ class HomeViewModel : HomeViewModelType {
                 self.totalNativeFoundsClosure?(data)
                 self.currencyRateUpdateClosure?(self.currenciesMonitor.currentRate)
             case .failure(_):
+                // TODO: handle this
                 print("Failed to get wallets")
             }
         }
@@ -126,14 +130,9 @@ class HomeViewModel : HomeViewModelType {
                 
                 WebSocketService.wallets = wallets
             case .failure(_):
+                // TODO: handle this
                 print("Failed to get wallets")
             }
-            
-//            if let chartService = self?.service.chartsService {
-//                let chartViewModel = ChartCardViewModel(service: chartService)
-//                chartViewModel.navigationCoordinator = self?.navigationCoordinator
-//                self?.cardViewModels.append(chartViewModel)
-//            }
             
             let helpViewModel = HelpCardViewModel()
             helpViewModel.navigationCoordinator = self?.navigationCoordinator
@@ -171,12 +170,6 @@ class HomeViewModel : HomeViewModelType {
                     }
                     if !balances.contains(where: { $0.assetCode == balance.assetCode }) {
                         balances.append(balance)
-                        
-                        /*let chartViewModel = ChartCardViewModel(service: service.chartsService, balance: balance)
-                        chartViewModel.navigationCoordinator = self.navigationCoordinator
-                        cardViewModels.insert(chartViewModel, at: cardViewModels.count-1)
-                        
-                        self.appendClosure?(chartViewModel)*/
                     }
                 }
             }

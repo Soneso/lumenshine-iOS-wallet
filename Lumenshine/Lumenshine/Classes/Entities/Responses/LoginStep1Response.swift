@@ -2,7 +2,10 @@
 //  LoginStep1Response.swift
 //  Lumenshine
 //
-//  Created by Christian Rogobete on 03.11.18.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 

@@ -2,7 +2,10 @@
 //  HelpCenterViewController.swift
 //  Lumenshine
 //
-//  Created by Istvan Elekes on 9/26/18.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -148,7 +151,6 @@ class HelpCenterViewController: UITableViewController {
             mail.mailComposeDelegate = self;
             mail.setSubject("Lumenshine Support")
             mail.setToRecipients([Services.shared.supportEmailAddress])
-            //mail.setMessageBody("test", isHTML: false)
             self.present(mail, animated: true, completion: nil)
         } else {
             let alert = UIAlertController(title: "Alert", message: "Email not set up!", preferredStyle: .alert)
@@ -176,8 +178,6 @@ fileprivate extension HelpCenterViewController {
     func prepareTableView() {
         tableView.register(HelpTableViewCell.self, forCellReuseIdentifier: HelpCenterViewController.CellIdentifier)
         tableView.rowHeight = UITableViewAutomaticDimension
-//        tableView.separatorInset = UIEdgeInsets(top: 0, left: CGFloat(2*horizontalSpacing), bottom: 0, right: CGFloat(2*horizontalSpacing))
-//        tableView.separatorColor = Stylesheet.color(.lightGray)
         tableView.separatorStyle = .none
         tableView.tableHeaderView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         tableView.tableFooterView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))

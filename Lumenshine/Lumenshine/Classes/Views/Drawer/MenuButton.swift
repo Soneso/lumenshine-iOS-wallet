@@ -2,7 +2,10 @@
 //  MenuButton.swift
 //  Lumenshine
 //
-//  Created by Razvan Chelemen on 04/10/2018.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -12,7 +15,6 @@ class MenuButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         tintColor = Stylesheet.color(.blue)
         imageView?.contentMode = .scaleAspectFit
         setImage(R.image.iconMenu(), for: .normal)
@@ -36,5 +38,4 @@ class MenuButton: UIButton {
             setImage(R.image.arrowLeft(), for: .normal)
         }
     }
-
 }

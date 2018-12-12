@@ -2,7 +2,10 @@
 //  AddWalletViewController.swift
 //  Lumenshine
 //
-//  Created by Soneso on 25/10/2018.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -88,10 +91,11 @@ class AddWalletViewController: UIViewController {
             let walletName = walletNameTextField.text {
             walletService.addWallet(publicKey: publicKey, name: walletName, showOnHomescreen: showOnHomescreenSwitch.isOn) { (response) -> (Void) in
                 switch response {
-                case .success:
-                    print("Successfully added the wallet!")
                 case .failure(error: let error):
+                    // TODO: handle this
                     print("Failed adding wallet! Error: \(error.localizedDescription)")
+                default:
+                    break
                 }
                 
                 self.navigationController?.popViewController(animated: true)
@@ -100,7 +104,7 @@ class AddWalletViewController: UIViewController {
     }
     
     private func setupNavigationItem() {
-        navigationItem.titleLabel.text = "Add new Wallet"
+        navigationItem.titleLabel.text = "Add new wallet"
         navigationItem.titleLabel.textColor = Stylesheet.color(.white)
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         

@@ -2,7 +2,10 @@
 //  TxChangeTrustOperationResponse.swift
 //  Lumenshine
 //
-//  Created by Elekes Istvan on 14/11/2018.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -16,7 +19,7 @@ class TxChangeTrustOperationResponse: TxOperationResponse {
     /// Trustee account.
     public let trustee:String
     
-    /// Asset type (native / alphanum4 / alphanum12)
+    /// Asset type (native / credit_alphanum4 / credit_alphanum12)
     public let assetType:String
     
     /// Asset code.

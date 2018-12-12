@@ -2,7 +2,10 @@
 //  InflationManager.swift
 //  Lumenshine
 //
-//  Created by Soneso on 05/09/2018.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -171,7 +174,6 @@ class InflationManager {
             try self.stellarSDK.transactions.submitTransaction(transaction: transaction) { (response) -> (Void) in
                 switch response {
                 case .success(_):
-                    print("Success")
                     completion(.success)
                 case .failure(let error):
                     StellarSDKLog.printHorizonRequestErrorMessage(tag:"Change inflation destination", horizonRequestError:error)

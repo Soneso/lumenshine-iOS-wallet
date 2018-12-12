@@ -2,7 +2,10 @@
 //  LSButton.swift
 //  Lumenshine
 //
-//  Created by Istvan Elekes on 9/17/18.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -22,7 +25,7 @@ class LSButton: RaisedButton {
     
     func setGradientLayer(color: UIColor) {
         let comp = color.cgColor.components?.map { x -> CGFloat in
-            let y = x - 15/255
+            let y = x - 15 / 255
             return y > 0 ? y : 0
         }
         let color2 = CGColor(colorSpace: color.cgColor.colorSpace!, components: comp!) ?? color.cgColor
@@ -42,5 +45,4 @@ class LSButton: RaisedButton {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

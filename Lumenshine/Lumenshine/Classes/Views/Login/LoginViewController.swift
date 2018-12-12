@@ -2,7 +2,10 @@
 //  LoginViewController.swift
 //  Lumenshine
 //
-//  Created by Istvan Elekes on 3/22/18.
+//  Created by Soneso GmbH on 12/12/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -262,7 +265,6 @@ fileprivate extension LoginViewController {
     func prepareHeader() {
         headerBar.delegate = self
         headerBar.setTitle(viewModel.headerTitle)
-//        headerBar.setDetail(viewModel.headerDetail)
         headerBar.setItems(viewModel.barItems)
         
         view.addSubview(headerBar)
@@ -313,4 +315,3 @@ fileprivate extension LoginViewController {
         }
     }
 }
-
