@@ -91,6 +91,8 @@ extension TransactionsTableViewCell: TransactionsCellProtocol {
     func setDate(_ text: String?) {
         dateValueLabel.text = text
         dateLabel.isHidden = text?.isEmpty ?? true
+        offerIdLabel.isHidden = true
+        offerIdValueLabel.text = ""
     }
     
     func setType(_ text: String?) {
