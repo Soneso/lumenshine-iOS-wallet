@@ -82,8 +82,9 @@ class ProvideInflationDestinationViewController: UIViewController {
         
         if isInputDataValid(biometricAuth: biometricAuth) {
             guard self.hasEnoughFunding else {
-                hideActivity()
-                self.showFundingAlert()
+                hideActivity(completion: {
+                    self.showFundingAlert()
+                })
                 return
             }
             
@@ -96,7 +97,9 @@ class ProvideInflationDestinationViewController: UIViewController {
                 }
             }
         } else {
-            resetSetButtonToDefault()
+            hideActivity(completion: {
+                self.resetSetButtonToDefault()
+            })
         }
     }
     
@@ -114,21 +117,24 @@ class ProvideInflationDestinationViewController: UIViewController {
                     case .failure(error: let error):
                         print(error)
                     }
-                    self.resetSetButtonToDefault()
-                    self.showUnknownErrorAlert()
+                    self.hideActivity(completion: {
+                        self.resetSetButtonToDefault()
+                        self.showUnknownErrorAlert()
+                    })
                 })
             case .failure(error: let error):
                 print("Error: \(error)")
-                self.resetSetButtonToDefault()
-                self.passwordView.showInvalidPasswordError()
+                self.hideActivity(completion: {
+                    self.resetSetButtonToDefault()
+                    self.passwordView.showInvalidPasswordError()
+                })
             }
         }
     }
     
     private func resetSetButtonToDefault() {
-        hideActivity()
-        setButton.setTitle(SetButtonTitles.set.rawValue, for: UIControlState.normal)
-        setButton.isEnabled = true
+        self.setButton.setTitle(SetButtonTitles.set.rawValue, for: UIControlState.normal)
+        self.setButton.isEnabled = true
     }
     
     private func showValidationError(for view: UIView) {
@@ -154,23 +160,23 @@ class ProvideInflationDestinationViewController: UIViewController {
                                                  externalSigner: signer,
                                                  externalSignersSeed: seed,
                                                  completion: { (response) -> (Void) in
-                                                    switch response {
-                                                    case .success:
-                                                        self.hideActivity()
-                                                        self.navigationController?.popViewController(animated: true)
-                                                        break
-                                                    case .failure(error: let error):
-                                                        self.resetSetButtonToDefault()
-                                                        if error == InflationDestinationErrorCodes.accountNotFound {
-                                                            self.showValidationError(for: self.publicKeyValidationView)
-                                                            self.publicKeyValidationLabel.text = ValidationErrors.AddressNotFound.rawValue
-                                                            return
-                                                            
+                                                    self.hideActivity(completion: {
+                                                        switch response {
+                                                        case .success:
+                                                            self.navigationController?.popViewController(animated: true)
+                                                            break
+                                                        case .failure(error: let error):
+                                                            self.resetSetButtonToDefault()
+                                                            if error == InflationDestinationErrorCodes.accountNotFound {
+                                                                self.showValidationError(for: self.publicKeyValidationView)
+                                                                self.publicKeyValidationLabel.text = ValidationErrors.AddressNotFound.rawValue
+                                                                return
+                                                            }
+                                                            print("Error: \(error)")
+                                                            self.resetSetButtonToDefault()
+                                                            self.showUnknownErrorAlert()
                                                         }
-                                                        print("Error: \(error)")
-                                                        self.resetSetButtonToDefault()
-                                                        self.showUnknownErrorAlert()
-                                                    }
+                                                    })
         })
     }
     

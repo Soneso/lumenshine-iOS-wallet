@@ -170,8 +170,9 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
     }
     
     private func dissmissView() {
-        viewContainingController()?.hideActivity()
-        viewContainingController()?.navigationController?.popViewController(animated: true)
+        viewContainingController()?.hideActivity(completion: {
+            self.viewContainingController()?.navigationController?.popViewController(animated: true)
+        })
     }
     
     private func showFundingAlert() {
@@ -185,7 +186,6 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
     }
     
     private func setButtonAsValidating() {
-        viewContainingController()?.showActivity(message: R.string.localizable.validateing())
         if isCurrentlySetSwitch.isOn {
             setOrRemoveButton.setTitle(SetOrRemoveButtonTitles.validatingRemove.rawValue, for: UIControlState.normal)
             setOrRemoveButton.isEnabled = false
@@ -193,10 +193,10 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
             setOrRemoveButton.setTitle(SetOrRemoveButtonTitles.validatingSet.rawValue, for: UIControlState.normal)
             setOrRemoveButton.isEnabled = false
         }
+        viewContainingController()?.showActivity(message: R.string.localizable.validateing())
     }
     
     private func setButtonAsNormal() {
-        viewContainingController()?.hideActivity()
         if isCurrentlySetSwitch.isOn {
             setOrRemoveButton.setTitle(SetOrRemoveButtonTitles.remove.rawValue, for: UIControlState.normal)
             setOrRemoveButton.isEnabled = true
@@ -204,6 +204,7 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
             setOrRemoveButton.setTitle(SetOrRemoveButtonTitles.set.rawValue, for: UIControlState.normal)
             setOrRemoveButton.isEnabled = true
         }
+        viewContainingController()?.hideActivity()
     }
     
     private func setupView() {

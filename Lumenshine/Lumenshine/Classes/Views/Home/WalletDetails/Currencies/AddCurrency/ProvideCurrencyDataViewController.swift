@@ -55,16 +55,21 @@ class ProvideCurrencyDataViewController: UIViewController {
         
         addButton.setTitle(AddButtonTitles.validating.rawValue, for: UIControlState.normal)
         addButton.isEnabled = false
+        showActivity(message: R.string.localizable.validateing())
         
         if isInputDataValid(forBiometricAuth: biometricAuth) {
             guard hasEnoughFunding else {
-                self.showFundingAlert()
+                hideActivity(completion: {
+                    self.showFundingAlert()
+                })
                 return
             }
             
             validatePasswordAndDestination(forBiometricAuth: biometricAuth)
         } else {
-            resetAddButtonToDefault()
+            hideActivity(completion: {
+                self.resetAddButtonToDefault()
+            })
         }
     }
     
@@ -100,18 +105,20 @@ class ProvideCurrencyDataViewController: UIViewController {
                         switch passwordResult {
                         case .success(mnemonic: let mnemonic):
                             PrivateKeyManager.getKeyPair(forAccountID: self.wallet.publicKey, fromMnemonic: mnemonic) { (response) -> (Void) in
-                                switch response {
-                                case .success(keyPair: let keyPair):
-                                    if let trustorKeyPair = keyPair {
-                                        self.addTrustLine(trustingAccountKeyPair: trustorKeyPair, issuer: issuer, assetCode: assetCode)
-                                        return
-                                    }
-                                case .failure(error: let error):
-                                    print(error)
-                                }
                                 DispatchQueue.main.async {
-                                    self.showSigningAlert()
-                                    self.resetAddButtonToDefault()
+                                    switch response {
+                                    case .success(keyPair: let keyPair):
+                                        if let trustorKeyPair = keyPair {
+                                            self.addTrustLine(trustingAccountKeyPair: trustorKeyPair, issuer: issuer, assetCode: assetCode)
+                                            return
+                                        }
+                                    case .failure(error: let error):
+                                        print(error)
+                                    }
+                                    self.hideActivity(completion: {
+                                        self.showSigningAlert()
+                                        self.resetAddButtonToDefault()
+                                    })
                                 }
                             }
                         case .failure(error: let error):
@@ -119,6 +126,7 @@ class ProvideCurrencyDataViewController: UIViewController {
                                 self.passwordView.showInvalidPasswordError()
                             }
                             self.resetAddButtonToDefault()
+                            self.hideActivity()
                         }
                     }
                 }
@@ -126,6 +134,7 @@ class ProvideCurrencyDataViewController: UIViewController {
                 self.showValidationError(for: self.issuerValidationStackView)
                 self.issuerValidationLabel.text = self.IssuerDoesntExistValidationError
                 self.resetAddButtonToDefault()
+                self.hideActivity()
             }
         }
     }
@@ -160,8 +169,8 @@ class ProvideCurrencyDataViewController: UIViewController {
     }
     
     private func resetAddButtonToDefault() {
-        addButton.setTitle(AddButtonTitles.add.rawValue, for: UIControlState.normal)
-        addButton.isEnabled = true
+        self.addButton.setTitle(AddButtonTitles.add.rawValue, for: UIControlState.normal)
+        self.addButton.isEnabled = true
     }
     
     private var isAddressValid: Bool {
@@ -225,6 +234,7 @@ class ProvideCurrencyDataViewController: UIViewController {
     }
     
     private func addTrustLine(trustingAccountKeyPair:KeyPair, issuer: String, assetCode: String) {
+        updateActivityMessage(message: R.string.localizable.sending())
         let signer = passwordView.useExternalSigning ? passwordView.signersTextField.text : nil
         let seed = passwordView.useExternalSigning ? passwordView.seedTextField.text : nil
         let transactionHelper = TransactionHelper(wallet: wallet, signer: signer, signerSeed: seed)
@@ -243,17 +253,20 @@ class ProvideCurrencyDataViewController: UIViewController {
         if let assetType = assetType,
             let issuerKeyPair = issuerKeyPair,
             let asset = Asset(type: assetType, code: assetCode, issuer: issuerKeyPair) {
-            
             transactionHelper.addTrustLine(trustingAccountKeyPair:trustingAccountKeyPair, asset:asset) { (result) -> (Void) in
-                switch result {
-                case .success:
-                    self.navigationController?.popViewController(animated: true)
-                case .failure(error: let error):
-                    print("Error: \(String(describing: error))")
-                    self.showTrnsactionFailedAlert()
-                    self.resetAddButtonToDefault()
-                }
+                self.hideActivity(completion: {
+                    switch result {
+                    case .success:
+                        self.navigationController?.popViewController(animated: true)
+                    case .failure(error: let error):
+                        print("Error: \(String(describing: error))")
+                        self.showTrnsactionFailedAlert()
+                        self.resetAddButtonToDefault()
+                    }
+                })
             }
+        } else {
+            hideActivity()
         }
     }
 }

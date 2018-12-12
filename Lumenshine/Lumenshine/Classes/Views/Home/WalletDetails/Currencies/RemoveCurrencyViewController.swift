@@ -62,20 +62,24 @@ class RemoveCurrencyViewController: UIViewController {
         let transactionHelper = TransactionHelper(wallet: self.wallet, signer: signer, signerSeed: seed)
         passwordView.clearSeedAndPasswordFields()
         let trustorKeyPair = try! KeyPair(publicKey: PublicKey(accountId:self.wallet.publicKey), privateKey:nil)
+        updateActivityMessage(message: R.string.localizable.sending())
         transactionHelper.removeTrustLine(currency: self.currency, trustingAccountKeyPair: trustorKeyPair, completion: { (result) -> (Void) in
-            switch result {
-            case .success:
-                self.navigationController?.popViewController(animated: true)
-                break
-            case .failure(error: let error):
-                print("Error: \(String(describing: error))")
-                self.showTrnsactionFailedAlert()
-                self.resetRemoveButton()
-            }
+            self.hideActivity(completion: {
+                switch result {
+                case .success:
+                    self.navigationController?.popViewController(animated: true)
+                    break
+                case .failure(error: let error):
+                    print("Error: \(String(describing: error))")
+                    self.showTrnsactionFailedAlert()
+                    self.resetRemoveButton()
+                }
+            })
         })
     }
     
     private func removeCurrencyWithPassword(biometricAuth: Bool) {
+        
         passwordManager.getMnemonic(password: !biometricAuth ? passwordView.passwordTextField.text : nil) { (result) -> (Void) in
             switch result {
             case .success(mnemonic: let mnemonic):
@@ -84,15 +88,19 @@ class RemoveCurrencyViewController: UIViewController {
                     case .success(keyPair: let keyPair):
                         if let trustorKeyPair = keyPair {
                             let transactionHelper = TransactionHelper(wallet: self.wallet)
+                            self.passwordView.clearSeedAndPasswordFields()
+                            self.updateActivityMessage(message: R.string.localizable.sending())
                             transactionHelper.removeTrustLine(currency: self.currency, trustingAccountKeyPair: trustorKeyPair, completion: { (result) -> (Void) in
-                                switch result {
-                                case .success:
-                                    self.navigationController?.popViewController(animated: true)
-                                case .failure(error: let error):
-                                    print("Error: \(String(describing: error))")
-                                    self.showTrnsactionFailedAlert()
-                                    self.resetRemoveButton()
-                                }
+                                self.hideActivity(completion: {
+                                    switch result {
+                                    case .success:
+                                        self.navigationController?.popViewController(animated: true)
+                                    case .failure(error: let error):
+                                        print("Error: \(String(describing: error))")
+                                        self.showTrnsactionFailedAlert()
+                                        self.resetRemoveButton()
+                                    }
+                                })
                             })
                             return
                         }
@@ -100,14 +108,17 @@ class RemoveCurrencyViewController: UIViewController {
                         print(error)
                     }
                     DispatchQueue.main.async {
-                        self.showSigningAlert()
-                        self.resetRemoveButton()
+                        self.hideActivity(completion: {
+                            self.showSigningAlert()
+                            self.resetRemoveButton()
+                        })
                     }
                 }
             case .failure(error: let error):
                 print("Error: \(error)")
                 self.passwordView.showInvalidPasswordError()
                 self.resetRemoveButton()
+                self.hideActivity()
             }
         }
     }
@@ -127,6 +138,8 @@ class RemoveCurrencyViewController: UIViewController {
             self.resetRemoveButton()
             return
         }
+        
+        showActivity(message: R.string.localizable.validateing())
         
         if passwordView.useExternalSigning {
             removeCurrencyWithExternalSigning()
@@ -165,11 +178,7 @@ class RemoveCurrencyViewController: UIViewController {
         navigationItem.titleLabel.text = "Remove currency"
         navigationItem.titleLabel.textColor = Stylesheet.color(.white)
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
-        
-        /*let helpButton = Material.IconButton()
-        helpButton.image = R.image.question()?.crop(toWidth: 15, toHeight: 15)?.tint(with: Stylesheet.color(.white))
-        helpButton.addTarget(self, action: #selector(didTapHelp(_:)), for: .touchUpInside)
-        navigationItem.rightViews = [helpButton]*/
+    
     }
     
     private func setupLabelDescriptions() {

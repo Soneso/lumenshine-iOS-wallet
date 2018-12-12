@@ -182,8 +182,8 @@ extension TransactionsTableViewCell: TransactionsCellProtocol {
             
             if let tHash = transactionHash, isOffer {
                 offerIdLabel.isHidden = false
-                offerIdValueLabel.text = "loading ..."
-                stellarSDK.transactions.getTransactionDetails(transactionHash: tHash) { (response) -> (Void) in
+                offerIdValueLabel.text = R.string.localizable.loading_pp()
+                stellarSDK.transactions.getTransactionDetails(transactionHash: tHash) { [weak self] (response) -> (Void) in
                     DispatchQueue.main.async {
                         switch response {
                         case .success(details: let transaction):
@@ -248,7 +248,7 @@ extension TransactionsTableViewCell: TransactionsCellProtocol {
                                             if offerPrice == price, offerSellingAssetType == sellingAssetType, offerBuyingAssetType == buyingAssetType,
                                                 offerSellingAssetCode == sellingAssetCode, offerBuyingAssetCode == buyingAssetCode, offerSellingIssuer == sellingIssuer, offerBuyingIssuer == buyingIssuer, amount == offer.amount {
                                     
-                                                self.offerIdValueLabel.text = String(offer.offerID)
+                                                self?.offerIdValueLabel.text = String(offer.offerID)
                                                 return
                                             }
                                         }
@@ -257,11 +257,9 @@ extension TransactionsTableViewCell: TransactionsCellProtocol {
                                     break
                                 }
                             }
-                            
-                            self.offerIdValueLabel.text = "not found"
+                            self?.offerIdValueLabel.text = R.string.localizable.not_found()
                         case .failure(_):
-                            print("offer could not be fetched")
-                            self.offerIdValueLabel.text = "not found"
+                            self?.offerIdValueLabel.text = R.string.localizable.not_found()
                         }
                     }
                 }
