@@ -56,7 +56,6 @@ class WalletManager: NSObject {
         stellarSDK.accounts.getAccountDetails(accountId: wallet.publicKey) { (response) -> (Void) in
             switch response {
             case .success(let accountDetails):
-                print("asd")
                 for balance in accountDetails.balances {
                     if let issuer = balance.assetIssuer {
                         assetsWithIssuers += 1
@@ -162,7 +161,6 @@ class WalletManager: NSObject {
         stellarSDK.accounts.getAccountDetails(accountId: issuer) { (response) -> (Void) in
             switch response {
             case .success(let accountDetails):
-                print("asd")
                 if accountDetails.flags.authRequired {
                     self.checkEffectsForAuthorziation(issuer: issuer, completion: completion)
                 } else {

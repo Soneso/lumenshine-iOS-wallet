@@ -83,7 +83,7 @@ class BiometricHelper {
         }
     }
     
-    static func password(for username: String, response: @escaping BiometricAuthResponseClosure) {
+    static private func password(for username: String, response: @escaping BiometricAuthResponseClosure) {
         do {
             let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
                                                     account: username,

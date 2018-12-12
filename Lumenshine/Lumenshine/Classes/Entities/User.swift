@@ -9,8 +9,6 @@
 import Foundation
 
 public struct User {
-    let id: String
     let email: String
     let publicKeyIndex0: String
-    let publicKeys: Array<String>?
 }

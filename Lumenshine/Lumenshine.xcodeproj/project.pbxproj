@@ -965,7 +965,6 @@
 		431437EB2047FEEC00189C83 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				7459815D2119D53400488999 /* Persistance */,
 				74C08FF120EE1FD3000A809D /* Managers */,
 				4390D572205EC5CF00383BB2 /* Service */,
 				4314B9EC204805F6006DBE63 /* AppDelegate */,
@@ -1613,13 +1612,6 @@
 				43A51718211D8FBD0034AA46 /* LostSecuritySuccessView.swift */,
 			);
 			path = RecoverAccount;
-			sourceTree = "<group>";
-		};
-		7459815D2119D53400488999 /* Persistance */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Persistance;
 			sourceTree = "<group>";
 		};
 		7491BE46211C32040058877E /* Wallet */ = {

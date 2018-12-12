@@ -202,10 +202,7 @@ class LoginViewModel : LoginViewModelType {
         service.generateAccount(email: email, password: password, forename: forename, lastname: lastname) { [weak self] result in
             switch result {
             case .success( let registrationResponse, let userSecurity):
-                self?.user = User(id: "1",
-                                  email: email,
-                                  publicKeyIndex0: userSecurity.publicKeyIndex0,
-                                  publicKeys: nil)
+                self?.user = User(email: email, publicKeyIndex0: userSecurity.publicKeyIndex0)
                 self?.mnemonic = userSecurity.mnemonic24Word
                 
                 self?.checkSetup(tfaConfirmed: false, mailConfirmed: false, mnemonicConfirmed: false, tfaSecret: registrationResponse?.tfaSecret)
@@ -369,10 +366,7 @@ fileprivate extension LoginViewModel {
                 if let userSecurity = UserSecurity(from: login1Response),
                     let decryptedUserData = try UserSecurityHelper.decryptUserSecurity(userSecurity, password: password) {
                     
-                    self.user = User(id: "1",
-                                     email: self.email!,
-                                     publicKeyIndex0: login1Response.publicKeyIndex0,
-                                     publicKeys: decryptedUserData.publicKeys)
+                    self.user = User(email: self.email!, publicKeyIndex0: login1Response.publicKeyIndex0)
                     
                     // this is needed because the user mitght not have completed the setup and it may be used later.
                     self.mnemonic = decryptedUserData.mnemonic

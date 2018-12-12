@@ -1,8 +1,11 @@
 //
 //  AppDelegate.swift
-//  jupiter
+//  Lumenshine
 //
-//  Created by Razvan Chelemen on 25/01/2018.
+//  Created by Soneso GmbH on 25/01/2018.
+//  Munich, Germany
+//  web: https://soneso.com
+//  email: hi@soneso.com
 //  Copyright © 2018 Soneso. All rights reserved.
 //
 
@@ -10,6 +13,7 @@ import UIKit
 import UserNotifications
 import IQKeyboardManagerSwift
 import stellarsdk
+import OneTimePassword
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -38,11 +42,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // for testing purpose
 //        let loginCoordinator = MenuCoordinator(mainCoordinator: mainCoordinator, user: User(id: "1", email: "isti@isti.com", publicKeyIndex0: "publicKeyIndex0", publicKeys: nil))
         
-        let loginCoordinator = LoginMenuCoordinator(mainCoordinator: mainCoordinator)
+        var loginCoordinator: MenuCoordinatorType? = nil
         
+        var persistedUserEmail:String? = nil
+        
+        do {
+            let persistentTokens = try Keychain.sharedInstance.allPersistentTokens()
+            for token in persistentTokens {
+                persistedUserEmail = token.token.name
+                break
+            }
+        } catch {
+            print("Keychain error: \(error)")
+        }
+    
+        if let userEmail = persistedUserEmail {
+            let user = User(email: userEmail, publicKeyIndex0:"")
+            loginCoordinator = ReLoginMenuCoordinator(mainCoordinator: mainCoordinator, user: user)
+        } else {
+            loginCoordinator = LoginMenuCoordinator(mainCoordinator: mainCoordinator)
+        }
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = loginCoordinator.baseController
+        window?.rootViewController = loginCoordinator!.baseController
         window?.makeKeyAndVisible()
         
         let jailbreakChecker = JailbreakChecker()
