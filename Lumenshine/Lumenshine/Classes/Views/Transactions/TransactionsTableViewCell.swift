@@ -125,7 +125,7 @@ extension TransactionsTableViewCell: TransactionsCellProtocol {
         } else {
 
             var isOffer = false
-            var amount = Decimal(0.0)
+            var amount = UInt64(0)
             var price = Double(0.0)
             var sellingAssetType = "native"
             var sellingAssetCode = "native"
@@ -137,7 +137,8 @@ extension TransactionsTableViewCell: TransactionsCellProtocol {
             if let manageOfferItem = item as? TxManageOfferOperationResponse {
                 isOffer = true
                 if let amountDecimal = Decimal(string:manageOfferItem.amount) {
-                    amount = amountDecimal
+                    let stoops = NSDecimalNumber(decimal:(amountDecimal * 10000000))
+                    amount = stoops.uint64Value
                 }
                 sellingAssetType = manageOfferItem.sellingAssetType
                 if let sac = manageOfferItem.sellingAssetCode {
@@ -157,7 +158,8 @@ extension TransactionsTableViewCell: TransactionsCellProtocol {
                 isOffer = true
                 
                 if let amountDecimal = Decimal(string:passiveOfferItem.amount) {
-                    amount = amountDecimal
+                    let stoops = NSDecimalNumber(decimal:(amountDecimal * 10000000))
+                    amount = stoops.uint64Value
                 }
                 sellingAssetType = passiveOfferItem.sellingAssetType
                 sellingAssetType = passiveOfferItem.sellingAssetType
@@ -183,9 +185,6 @@ extension TransactionsTableViewCell: TransactionsCellProtocol {
                     DispatchQueue.main.async {
                         switch response {
                         case .success(details: let transaction):
-                            // TODO find offer
-                            self.offerIdValueLabel.text = transaction.id
-                            
                             if let resultBody = transaction.transactionResult.resultBody{
                                 switch resultBody {
                                 case .success(let operationResult):
@@ -220,7 +219,6 @@ extension TransactionsTableViewCell: TransactionsCellProtocol {
                                         }
                                         if let offer = aOfferEntry {
                                             let offerPrice = Double(offer.price.n) / Double(offer.price.d)
-                                            //let offerAmount = offer.amount
                                             var offerSellingAssetType = "native"
                                             let offerSellingAssetCode = offer.selling.assetCode
                                             let offerSellingIssuer = offer.selling.issuer?.accountId
@@ -246,10 +244,9 @@ extension TransactionsTableViewCell: TransactionsCellProtocol {
                                                 break
                                             }
                                             if offerPrice == price, offerSellingAssetType == sellingAssetType, offerBuyingAssetType == buyingAssetType,
-                                                offerSellingAssetCode == sellingAssetCode, offerBuyingAssetCode == buyingAssetCode, offerSellingIssuer == sellingIssuer, offerBuyingIssuer == buyingIssuer { //, amount == offer.amount
+                                                offerSellingAssetCode == sellingAssetCode, offerBuyingAssetCode == buyingAssetCode, offerSellingIssuer == sellingIssuer, offerBuyingIssuer == buyingIssuer, amount == offer.amount {
                                     
                                                 self.offerIdValueLabel.text = String(offer.offerID)
-                                                print("amount \(amount) - offeramount: \(offer.amount)")
                                                 return
                                             }
                                         }
