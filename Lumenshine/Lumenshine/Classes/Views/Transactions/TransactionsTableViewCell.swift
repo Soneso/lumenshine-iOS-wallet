@@ -125,36 +125,55 @@ extension TransactionsTableViewCell: TransactionsCellProtocol {
         } else {
 
             var isOffer = false
-            var amount = "0"
-            var price = "0"
+            var amount = Decimal(0.0)
+            var price = Double(0.0)
             var sellingAssetType = "native"
-            var sellingAssetCode: String? = nil
+            var sellingAssetCode = "native"
             var sellingIssuer: String? = nil
             var buyingAssetType = "native"
-            var buyingAssetCode: String? = nil
+            var buyingAssetCode = "native"
             var buyingIssuer: String? = nil
             
             if let manageOfferItem = item as? TxManageOfferOperationResponse {
                 isOffer = true
-                amount = manageOfferItem.amount
+                if let amountDecimal = Decimal(string:manageOfferItem.amount) {
+                    amount = amountDecimal
+                }
                 sellingAssetType = manageOfferItem.sellingAssetType
-                sellingAssetCode = manageOfferItem.sellingAssetCode
+                if let sac = manageOfferItem.sellingAssetCode {
+                    sellingAssetCode = sac
+                }
                 sellingIssuer = manageOfferItem.sellingAssetIssuer
-                buyingAssetType = manageOfferItem.sellingAssetType
-                buyingAssetCode = manageOfferItem.sellingAssetCode
-                buyingIssuer = manageOfferItem.sellingAssetIssuer
-                price = manageOfferItem.price
+                buyingAssetType = manageOfferItem.buyingAssetType
+                if let bac = manageOfferItem.buyingAssetCode {
+                    buyingAssetCode = bac
+                }
+                buyingIssuer = manageOfferItem.buyingAssetIssuer
+                if let priceDouble = Double(manageOfferItem.price) {
+                    price = priceDouble
+                }
                 
             } else if let passiveOfferItem = item as? TxCreatePassiveOfferOperationResponse {
                 isOffer = true
-                amount = passiveOfferItem.amount
+                
+                if let amountDecimal = Decimal(string:passiveOfferItem.amount) {
+                    amount = amountDecimal
+                }
                 sellingAssetType = passiveOfferItem.sellingAssetType
-                sellingAssetCode = passiveOfferItem.sellingAssetCode
+                sellingAssetType = passiveOfferItem.sellingAssetType
+                if let sac = passiveOfferItem.sellingAssetCode {
+                    sellingAssetCode = sac
+                }
                 sellingIssuer = passiveOfferItem.sellingAssetIssuer
-                buyingAssetType = passiveOfferItem.sellingAssetType
-                buyingAssetCode = passiveOfferItem.sellingAssetCode
-                buyingIssuer = passiveOfferItem.sellingAssetIssuer
-                price = passiveOfferItem.price
+                buyingAssetType = passiveOfferItem.buyingAssetType
+                buyingAssetType = passiveOfferItem.buyingAssetType
+                if let bac = passiveOfferItem.buyingAssetCode {
+                    buyingAssetCode = bac
+                }
+                buyingIssuer = passiveOfferItem.buyingAssetIssuer
+                if let priceDouble = Double(passiveOfferItem.price) {
+                    price = priceDouble
+                }
             }
             
             if let tHash = transactionHash, isOffer {
@@ -166,7 +185,81 @@ extension TransactionsTableViewCell: TransactionsCellProtocol {
                         case .success(details: let transaction):
                             // TODO find offer
                             self.offerIdValueLabel.text = transaction.id
-                            print("TODO find offer")
+                            
+                            if let resultBody = transaction.transactionResult.resultBody{
+                                switch resultBody {
+                                case .success(let operationResult):
+                                    for opRes in operationResult {
+                                        var nextManageOfferResult:ManageOfferResultXDR? = nil
+                                        
+                                        switch opRes {
+                                        case .manageOffer(_, let manageOfferResult):
+                                            nextManageOfferResult = manageOfferResult
+                                        case .createPassiveOffer(_, let manageOfferResult):
+                                            nextManageOfferResult = manageOfferResult
+                                        default:
+                                            break
+                                        }
+                                        
+                                        var aOfferEntry:OfferEntryXDR? = nil
+                                        
+                                        if nextManageOfferResult != nil {
+                                            switch nextManageOfferResult {
+                                            case .success(_, let manageOfferSuccessResult)?:
+                                                if let offer = manageOfferSuccessResult.offer {
+                                                    switch offer {
+                                                    case .created(let offerEntry):
+                                                        aOfferEntry = offerEntry
+                                                    default:
+                                                        break
+                                                    }
+                                                }
+                                            default:
+                                                break
+                                            }
+                                        }
+                                        if let offer = aOfferEntry {
+                                            let offerPrice = Double(offer.price.n) / Double(offer.price.d)
+                                            //let offerAmount = offer.amount
+                                            var offerSellingAssetType = "native"
+                                            let offerSellingAssetCode = offer.selling.assetCode
+                                            let offerSellingIssuer = offer.selling.issuer?.accountId
+                                            
+                                            var offerBuyingAssetType = "native"
+                                            let offerBuyingAssetCode = offer.buying.assetCode
+                                            let offerBuyingIssuer:String? = offer.buying.issuer?.accountId
+                                            
+                                            switch offer.selling {
+                                            case .alphanum4(_):
+                                                offerSellingAssetType = "credit_alphanum4"
+                                            case .alphanum12(_):
+                                                offerSellingAssetType = "credit_alphanum12"
+                                            default:
+                                                break
+                                            }
+                                            switch offer.buying {
+                                            case .alphanum4(_):
+                                                offerBuyingAssetType = "credit_alphanum4"
+                                            case .alphanum12(_):
+                                                offerBuyingAssetType = "credit_alphanum12"
+                                            default:
+                                                break
+                                            }
+                                            if offerPrice == price, offerSellingAssetType == sellingAssetType, offerBuyingAssetType == buyingAssetType,
+                                                offerSellingAssetCode == sellingAssetCode, offerBuyingAssetCode == buyingAssetCode, offerSellingIssuer == sellingIssuer, offerBuyingIssuer == buyingIssuer { //, amount == offer.amount
+                                    
+                                                self.offerIdValueLabel.text = String(offer.offerID)
+                                                print("amount \(amount) - offeramount: \(offer.amount)")
+                                                return
+                                            }
+                                        }
+                                    }
+                                default:
+                                    break
+                                }
+                            }
+                            
+                            self.offerIdValueLabel.text = "not found"
                         case .failure(_):
                             print("offer could not be fetched")
                             self.offerIdValueLabel.text = "not found"
