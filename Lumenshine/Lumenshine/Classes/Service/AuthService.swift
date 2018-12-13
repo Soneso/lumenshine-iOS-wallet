@@ -100,6 +100,8 @@ public typealias SEP10ChallengeValidationClosure = (_ response:SEP10ChallengeVal
 
 public class AuthService: BaseService {
     
+    
+    private var needsOverlayOnBackground = true
     private static var timer: Timer?
     
     override init(baseURL: String) {
@@ -152,6 +154,14 @@ public class AuthService: BaseService {
                 response(.failure(error: error))
             }
         }
+    }
+    
+    open func overlayOnClose(required:Bool) {
+        self.needsOverlayOnBackground = required
+    }
+    
+    open func showOverlayOnClose() -> Bool {
+        return self.needsOverlayOnBackground
     }
     
     /// Requests the sep10 challange from the server

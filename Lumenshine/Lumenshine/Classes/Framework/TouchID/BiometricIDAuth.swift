@@ -57,11 +57,13 @@ class BiometricIDAuth {
             completion(LAError(.touchIDNotAvailable))
             return
         }
-        
+        Services.shared.auth.overlayOnClose(required: false)
         context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: loginReason) { (success, evaluateError) in
             if success {
+                 Services.shared.auth.overlayOnClose(required: true)
                 completion(nil)
             } else {
+                 Services.shared.auth.overlayOnClose(required: true)
                 completion(evaluateError)
             }
         }

@@ -32,7 +32,7 @@ class ReLoginViewController: UIViewController {
     
     init(viewModel: ReLoginViewModel) {
         self.viewModel = viewModel
-        self.contentView = ReLoginHomeView(viewModel: viewModel)
+        //self.contentView = ReLoginHomeView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
         
         viewModel.reloadClosure = {
