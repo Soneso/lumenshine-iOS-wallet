@@ -18,7 +18,7 @@ class ChartCardViewModel: CardViewModelType {
     weak var navigationCoordinator: CoordinatorType?
     
     fileprivate var card: Card?
-    fileprivate let service: ChartsService
+    fileprivate let service = Services.shared.chartsService
     private(set) var exchangeRates: ChartExchangeRatesResponse?
     fileprivate let balance: AccountBalanceResponse?
     fileprivate let periodValues: [Int]
@@ -27,8 +27,7 @@ class ChartCardViewModel: CardViewModelType {
     
     var reloadClosure: ((ChartExchangeRatesResponse) -> ())?
     
-    init(service: ChartsService, balance: AccountBalanceResponse? = nil) {
-        self.service = service
+    init(balance: AccountBalanceResponse? = nil) {
         self.balance = balance
         self.periodValues = [1, 12, 24, 3*24, 7*24, 2*365, 6*365, 12*365, 24*365]
         self.periodLabels = [
@@ -93,12 +92,12 @@ class ChartCardViewModel: CardViewModelType {
     }
     
     var detail: String? {
-        var updateStr = exchangeRates?.lastUpdateDate ?? ""
+        /*var updateStr = exchangeRates?.lastUpdateDate ?? ""
         if let date = exchangeRates?.lastUpdateDate,
             let updated = DateUtils.format(date, in: .dateAndTime) {
             updateStr = R.string.localizable.updated(DateUtils.longString(from: updated))
-        }
-        return "\(periodOptions[selectedPeriodIndex]) - \(updateStr)"
+        }*/
+        return "\(periodOptions[selectedPeriodIndex]) - \(R.string.localizable.updated_just_now())"
     }
     
     var percentageChange: String? {

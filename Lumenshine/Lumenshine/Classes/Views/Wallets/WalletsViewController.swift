@@ -198,15 +198,13 @@ class WalletsViewController: UpdatableViewController, UITableViewDataSource {
                         self?.tableView.endUpdates()
                     }
                 }
-                
-                self?.viewModel.updateCurrencies()
             }
         }
         
         return cell
     }
     
-    override func reloadWallets() {
-        reloadCards()
+    override func refreshWallets(notification: NSNotification) {
+        viewModel.refreshWallets()
     }
 }

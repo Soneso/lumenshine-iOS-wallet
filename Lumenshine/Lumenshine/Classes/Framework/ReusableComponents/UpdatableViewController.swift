@@ -27,9 +27,9 @@ public class UpdatableViewController: UIViewController {
             WebSocketService.subscribers.setObject(InitializationState(), forKey: self)
             NotificationCenter.default.post(name: .subscribeForUpdates, object: self)
             if hasWallets {
-                NotificationCenter.default.addObserver(self, selector: #selector(reloadWallets), name: NSNotification.Name.reloadWalletsNotification, object: nil)
+                NotificationCenter.default.addObserver(self, selector: #selector(refreshWallets), name: NSNotification.Name.refreshWalletsNotification, object: nil)
             } else {
-                NotificationCenter.default.addObserver(self, selector: #selector(updateUIAfterWalletsReload), name: NSNotification.Name.updateUIAfterWalletsReload, object: nil)
+                NotificationCenter.default.addObserver(self, selector: #selector(updateUIAfterWalletRefresh), name: NSNotification.Name.updateUIAfterWalletRefresh, object: nil)
             }
         }
     }
@@ -38,14 +38,14 @@ public class UpdatableViewController: UIViewController {
         WebSocketService.subscribers.removeObject(forKey: self)
         NotificationCenter.default.post(name: .unsubscribeForUpdates, object: self)
         if hasWallets {
-            NotificationCenter.default.removeObserver(self, name: NSNotification.Name.reloadWalletsNotification, object: nil)
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name.refreshWalletsNotification, object: nil)
         } else {
-            NotificationCenter.default.removeObserver(self, name: NSNotification.Name.updateUIAfterWalletsReload, object: nil)
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name.updateUIAfterWalletRefresh, object: nil)
         }
         
         print("UpdatableViewController deinit")
     }
     
-    @objc func reloadWallets() { }
-    @objc func updateUIAfterWalletsReload(notification: NSNotification) { }
+    @objc func refreshWallets(notification: NSNotification) { }
+    @objc func updateUIAfterWalletRefresh(notification: NSNotification) { }
 }

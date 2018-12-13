@@ -15,15 +15,15 @@ import Starscream
 extension NSNotification.Name {
     static let subscribeForUpdates = Notification.Name("subscribeForUpdatesNotification")
     static let unsubscribeForUpdates = Notification.Name("unsubscribeForUpdatesNotification")
-    static let reloadWalletsNotification = Notification.Name("reloadWalletsNotification")
-    static let updateUIAfterWalletsReload = Notification.Name("updateUIAfterWalletsReloadNotification")
+    static let refreshWalletsNotification = Notification.Name("refreshWalletsNotification")
+    static let updateUIAfterWalletRefresh = Notification.Name("updateUIAfterWalletRefreshNotification")
 }
 
 public class WebSocketService: BaseService, WebSocketDelegate {
     private static var socket: WebSocket!
     private static var randomKey: String?
     private static var cachedWallets: [WalletsResponse]!
-    private static var walletsToUpdate: [String]?
+    //private static var walletsToUpdate: [String]?
     
     public static var subscribers = NSMapTable<UIViewController, InitializationState>(keyOptions: NSPointerFunctions.Options.weakMemory, valueOptions: NSPointerFunctions.Options.strongMemory)
     
@@ -31,7 +31,6 @@ public class WebSocketService: BaseService, WebSocketDelegate {
     static var wallets: [WalletsResponse]! {
         didSet {
             WebSocketService.instance.listenToAllAccounts()
-            WebSocketService.instance.sendNeedsUpdateUIAfterWalletReload()
         }
     }
     
@@ -59,13 +58,16 @@ public class WebSocketService: BaseService, WebSocketDelegate {
     
     public func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
         print("WebSocketDidReceiveMessage: \(text)")
-        setWalletsToUpdate(text: text)
-        NotificationCenter.default.post(name: .reloadWalletsNotification, object: self)
+        let accountsToUpdate = getAccountsID(fromMessage: text)
+        for account in accountsToUpdate {
+            Services.shared.walletService.addWalletToRefresh(accountId: account)
+        }
+        NotificationCenter.default.post(name: .refreshWalletsNotification, object: true)
     }
     
     public func websocketDidReceiveData(socket: WebSocketClient, data: Data) {
         print("WebSocketDidReceiveData: \(data)")
-        NotificationCenter.default.post(name: .reloadWalletsNotification, object: self)
+        NotificationCenter.default.post(name: .refreshWalletsNotification, object: true)
     }
     
     func connectWebSocket() {
@@ -131,10 +133,6 @@ public class WebSocketService: BaseService, WebSocketDelegate {
         return accountsArray
     }
     
-    private func setWalletsToUpdate(text: String) {
-        WebSocketService.walletsToUpdate = getAccountsID(fromMessage: text)
-    }
-    
     private func registerNotifications() {
         registerSubsciptionNotifications()
         registerNetworkChangesNotifications()
@@ -190,7 +188,7 @@ public class WebSocketService: BaseService, WebSocketDelegate {
         }
     }
     
-    private func sendNeedsUpdateUIAfterWalletReload() {
+    /*private func sendNeedsUpdateUIAfterWalletReload() {
         userManager.updatedWalletDetails(forWallets: WebSocketService.wallets) { (response) -> (Void) in
             switch response {
             case .success(response: let wallets):
@@ -209,7 +207,7 @@ public class WebSocketService: BaseService, WebSocketDelegate {
                 print(error.localizedDescription)
             }
         }
-    }
+    }*/
     
     private func setupWebSocket() {
         if WebSocketService.socket?.isConnected == true {

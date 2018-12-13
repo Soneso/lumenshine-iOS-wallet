@@ -40,6 +40,13 @@ class PrivateKeyManager {
         }
     }
     
+    static func hasPublicKey(accountId: String) -> Bool {
+        if let _ = getIndex(forAccountID: accountId) {
+            return true
+        }
+        return false
+    }
+    
     static func getPublicKey(forIndex index: Int) -> String {
         return walletsKeyPairsIndexes.first(where: { (wallet) -> Bool in
             return wallet.value == index

@@ -12,9 +12,9 @@
 import UIKit
 
 class CurrenciesMonitor: NSObject {
-    static var updateInterval: Double = 5
+    static var updateInterval: Double = 3*60
     
-    private let currenciesService = Services.shared.currenciesService
+    private let chartService = Services.shared.chartsService
     
     var isMonitoring = false
     var currentRate: Double = 0
@@ -30,19 +30,23 @@ class CurrenciesMonitor: NSObject {
     }
     
     private func update() {
-        currenciesService.getRate(from: .xlm, to: .usd) { (result) -> (Void) in
+    
+        chartService.getChartExchangeRates(assetCode: "XLM", issuerPublicKey: nil, destinationCurrency: "USD", timeRange: 1) { (result) -> (Void) in
             switch result {
-            case .success(let rate):
-                self.currentRate = rate
-                self.updateClosure?(rate)
-            case .failure(_):
-                print("Failed to update rate")
-            }
-            
-            if self.isMonitoring {
-                DispatchQueue.main.asyncAfter(deadline: .now() + CurrenciesMonitor.updateInterval) {
-                    self.update()
+            case .success(let exchangeRates):
+                if let currentRateResponse = exchangeRates.rates.first?.rate {
+                    self.currentRate = Double(truncating: currentRateResponse as NSNumber)
+                    print ("current rate: \(self.currentRate)")
+                    self.updateClosure?(self.currentRate)
                 }
+            case .failure(let error):
+                print("Failed to get exchange rates: \(error)")
+            }
+        }
+        
+        if self.isMonitoring {
+            DispatchQueue.main.asyncAfter(deadline: .now() + CurrenciesMonitor.updateInterval) {
+                self.update()
             }
         }
     }

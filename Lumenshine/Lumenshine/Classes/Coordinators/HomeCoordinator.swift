@@ -18,11 +18,19 @@ class HomeCoordinator: CoordinatorType {
     unowned var mainCoordinator: MainCoordinator
     
     init(mainCoordinator: MainCoordinator, service: Services, user: User) {
-        let viewModel = HomeViewModel(service: service, user: user)
+        let viewModel = HomeViewModel(service: service, user: user, needsHeaderUpdate: true)
         let homeView = HomeViewController(viewModel: viewModel)
         
         self.mainCoordinator = mainCoordinator
         self.baseController = homeView
+        viewModel.navigationCoordinator = self
+        mainCoordinator.currentCoordinator = self
+    }
+    
+    init(mainCoordinator: MainCoordinator, viewModel:HomeViewModel, viewController:UIViewController) {
+        
+        self.mainCoordinator = mainCoordinator
+        self.baseController = viewController
         viewModel.navigationCoordinator = self
         mainCoordinator.currentCoordinator = self
     }

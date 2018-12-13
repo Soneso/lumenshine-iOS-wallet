@@ -1047,13 +1047,15 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
         navigationItem.rightViews = [scanQrButton]
     }
     
-    override func updateUIAfterWalletsReload(notification: NSNotification) {
-        if let updatedWallets = notification.object as? [Wallet] {
-            walletManager.updateWallets(currentWallet: &wallet, updatedWallets: updatedWallets, walletsList: &walletsList)
+    override func updateUIAfterWalletRefresh(notification: NSNotification) {
+        
+        if let updatedWallet = notification.object as? Wallet, updatedWallet.publicKey == wallet.publicKey {
+            wallet = updatedWallet
         }
-
-        self.checkForTransactionFeeAvailability()
-        self.setAvailableAmount()
+        DispatchQueue.main.async {
+            self.checkForTransactionFeeAvailability()
+            self.setAvailableAmount()
+        }
     }
     
     func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {

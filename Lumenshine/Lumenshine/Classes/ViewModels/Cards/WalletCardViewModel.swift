@@ -18,7 +18,7 @@ class WalletCardViewModel : CardViewModelType {
     fileprivate var card: Card?
     fileprivate let stellarSdk: StellarSDK
     fileprivate var funded: Bool = false
-    fileprivate var needsRefresh: Bool = false
+    //fileprivate var needsRefresh: Bool = false
     
     var wallet: Wallet
     
@@ -53,7 +53,14 @@ class WalletCardViewModel : CardViewModelType {
     }
     
     func refreshContent(userManager: UserManager) {
-        if needsRefresh == false { return }
+        
+        if (wallet as? FundedWallet)?.showOnHomescreen == false {
+            self.reloadCardsClosure?()
+        }
+        
+        if !Services.shared.walletService.isWalletNeedsRefresh(accountId: wallet.publicKey) {
+            return
+        }
         
         userManager.walletDetails(wallet: wallet) { [weak self] result in
             switch result {
@@ -61,13 +68,11 @@ class WalletCardViewModel : CardViewModelType {
                 guard let wallet = wallets.first else { return }
                 self?.wallet = wallet
                 
-                if (wallet as? FundedWallet)?.showOnHomescreen == false {
-                    self?.reloadCardsClosure?()
-                }
-                
                 self?.reloadClosure?(false)
                 
-                self?.needsRefresh = false
+                Services.shared.walletService.removeFromWalletsToRefresh(accountId: wallet.publicKey)
+                NotificationCenter.default.post(name: .updateUIAfterWalletRefresh, object: wallet)
+                
             case .failure(let error):
                 print("Account details failure: \(error)")
             }
@@ -132,22 +137,18 @@ class WalletCardViewModel : CardViewModelType {
     
     @objc func didTapSendButton() {
         sendAction?()
-        needsRefresh = true
     }
     
     @objc func didTapReceiveButton() {
         receivePaymentAction?()
-        needsRefresh = true
     }
     
     @objc func didTapDetailsButton() {
         navigationCoordinator?.performTransition(transition: .showCardDetails(wallet))
-        needsRefresh = true
     }
     
     @objc func didTapFundButton() {
         navigationCoordinator?.performTransition(transition: .showFundWallet(wallet))
-        needsRefresh = true
     }
 }
 

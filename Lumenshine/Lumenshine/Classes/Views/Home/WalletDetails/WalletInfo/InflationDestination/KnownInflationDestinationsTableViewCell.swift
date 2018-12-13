@@ -152,6 +152,8 @@ class KnownInflationDestinationsTableViewCell: UITableViewCell {
                                                             externalSignersSeed: seed) { (response) -> (Void) in
                                                                 switch response {
                                                                 case .success:
+                                                                    Services.shared.walletService.addWalletToRefresh(accountId: self.wallet.publicKey)
+                                                                    NotificationCenter.default.post(name: .refreshWalletsNotification, object: false)
                                                                     self.dissmissView()
                                                                     break
                                                                 case .failure(error: let error):

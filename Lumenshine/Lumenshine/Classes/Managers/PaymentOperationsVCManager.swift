@@ -90,11 +90,25 @@ class PaymentOperationsVCManager {
                 case .sendPayment:
                     transactionHelper.sendPayment(completion: { [weak self] (result) in
                         self?.addViewController(forAction: WalletAction.transactionResult, wallets: [viewController.wallet], transactionResult: result)
+                        if result.status == TransactionStatus.success {
+                            Services.shared.walletService.addWalletToRefresh(accountId: wallet.publicKey)
+                            if PrivateKeyManager.hasPublicKey(accountId: result.recipentPK) {
+                                Services.shared.walletService.addWalletToRefresh(accountId: result.recipentPK)
+                            }
+                            NotificationCenter.default.post(name: .refreshWalletsNotification, object: true)
+                        }
                     })
 
                 case .createAndFundAccount:
                     transactionHelper.createAndFundAccount(completion: { [weak self] (result) in
                         self?.addViewController(forAction: WalletAction.transactionResult, wallets: [viewController.wallet], transactionResult: result)
+                        if result.status == TransactionStatus.success {
+                            Services.shared.walletService.addWalletToRefresh(accountId: wallet.publicKey)
+                            if PrivateKeyManager.hasPublicKey(accountId: result.recipentPK) {
+                                Services.shared.walletService.addWalletToRefresh(accountId: result.recipentPK)
+                            }
+                            NotificationCenter.default.post(name: .refreshWalletsNotification, object: true)
+                        }
                     })
                 }
             }

@@ -57,6 +57,7 @@ class WalletManager: NSObject {
         var assetsWithIssuers = 0
         
         stellarSDK.accounts.getAccountDetails(accountId: wallet.publicKey) { (response) -> (Void) in
+            print("WM-balances with auth: account details loaded for \(wallet.publicKey)")
             switch response {
             case .success(let accountDetails):
                 for balance in accountDetails.balances {
@@ -162,6 +163,7 @@ class WalletManager: NSObject {
     
     private func balanceAuthorized(issuer: String, completion: @escaping ((Bool, HorizonRequestError?)->())) {
         stellarSDK.accounts.getAccountDetails(accountId: issuer) { (response) -> (Void) in
+            print("WM-balance authorized: account details loaded for \(issuer)")
             switch response {
             case .success(let accountDetails):
                 if accountDetails.flags.authRequired {

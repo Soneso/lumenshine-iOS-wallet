@@ -63,7 +63,11 @@ class HomeViewController: UpdatableViewController {
         
         viewModel.currencyRateUpdateClosure = { (rate) in
             if let nativeFunds = Services.shared.userManager.totalNativeFunds {
-                self.header?.funds = nativeFunds.stringConversionTo(currency: .usd, rate: rate)
+                if (nativeFunds == 0 || rate == 0) {
+                    self.header?.funds = ""
+                } else {
+                    self.header?.funds = nativeFunds.tickerConversionTo(currency: .usd, rate: rate)
+                }
             }
         }
         
@@ -87,7 +91,7 @@ class HomeViewController: UpdatableViewController {
         prepareHeader()
         prepareView()
         prepareRefresh()
-        
+        print("reload cards")
         viewModel.reloadCards()
     }
     
@@ -99,11 +103,15 @@ class HomeViewController: UpdatableViewController {
         navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 18)
         navigationItem.titleLabel.text = R.string.localizable.homeScreenTitle()
+        print("refresh wallets")
         viewModel.refreshWallets()
     }
     
-    override func reloadWallets() {
-        viewModel.reloadCards()
+    override func refreshWallets(notification: NSNotification) {
+        viewModel.refreshWallets()
+        if let updateHeader = notification.object as? Bool, updateHeader {
+            viewModel.updateHeaderData()
+        }
     }
 }
 
@@ -134,8 +142,6 @@ extension HomeViewController: UITableViewDataSource {
                         self?.tableView.endUpdates()
                     }
                 }
-                
-                self?.viewModel.updateCurrencies()
             }
         }
         return cell

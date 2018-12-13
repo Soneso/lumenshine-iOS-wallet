@@ -25,7 +25,7 @@ protocol HomeViewModelType: Transitionable {
     func fundAccount()
     func reloadCards()
     func refreshWallets()
-    func updateCurrencies()
+    func updateHeaderData()
     func showWalletIfNeeded()
 }
 
@@ -35,50 +35,29 @@ class HomeViewModel : HomeViewModelType {
     fileprivate var responsesMock: CardsResponsesMock?
     fileprivate let user: User
     fileprivate let userManager = Services.shared.userManager
-    fileprivate let currenciesMonitor = CurrenciesMonitor()
-    
-    fileprivate var currencyPairs = Array<ChartsCurrencyPairsResponse>()
-    fileprivate var balances = Array<AccountBalanceResponse>()
+    //fileprivate let currenciesMonitor = CurrenciesMonitor()
+    fileprivate let needsHeaderUpdate: Bool
     
     weak var navigationCoordinator: CoordinatorType?
     
-    init(service: Services, user: User) {
+    init(service: Services, user: User, needsHeaderUpdate: Bool) {
         self.service = service
         self.user = user
+        self.needsHeaderUpdate = needsHeaderUpdate
         cardViewModels = []
-        
-        currenciesMonitor.startMonitoring()
-        
-        userManager.totalNativeFounds { (result) -> (Void) in
-            switch result {
-            case .success(let data):
-                self.totalNativeFoundsClosure?(data)
-                self.currencyRateUpdateClosure?(self.currenciesMonitor.currentRate)
-            case .failure(_):
-                // TODO: handle this
-                print("Failed to get wallets")
-            }
-        }
-        
-        service.chartsService.getChartsCurrencyPairs { result in
-            switch result {
-            case .success(let response):
-                self.currencyPairs.append(contentsOf: response)
-            case .failure(let error):
-                print("Failed to get chart currency pairs: \(error)")
-            }
-        }
+        //currenciesMonitor.startMonitoring()
+        updateHeaderData()
     }
 
     var cardViewModels: [CardViewModelType]
     var reloadClosure: (() -> ())?
     var appendClosure: ((CardViewModelType) -> ())?
     var totalNativeFoundsClosure: ((CoinUnit) -> ())?
-    var currencyRateUpdateClosure: ((Double) -> ())? {
+    var currencyRateUpdateClosure: ((Double) -> ())? /*{
         didSet {
             currenciesMonitor.updateClosure = currencyRateUpdateClosure
         }
-    }
+    }*/
     var scrollToItemClosure: ((Int) -> ())?
     
     var barTitles: [String] {
@@ -108,13 +87,41 @@ class HomeViewModel : HomeViewModelType {
         }
     }
     
+    func updateHeaderData() {
+        
+        if !needsHeaderUpdate {
+            return
+        }
+        
+        userManager.totalNativeFounds { [weak self] (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                self?.totalNativeFoundsClosure?(data)
+                self?.service.chartsService.getChartExchangeRates(assetCode: "XLM", issuerPublicKey: nil, destinationCurrency: "USD", timeRange: 1) { (result) -> (Void) in
+                    switch result {
+                    case .success(let exchangeRates):
+                        if let currentRateResponse = exchangeRates.rates.first?.rate {
+                            let currentRate = Double(truncating: currentRateResponse as NSNumber)
+                            DispatchQueue.main.async {
+                                self?.currencyRateUpdateClosure?(currentRate)
+                            }
+                        }
+                    case .failure(let error):
+                        print("Failed to get exchange rates: \(error)")
+                    }
+                }
+            default:
+                break
+            }
+        }
+    }
     func reloadCards() {
         cardViewModels.removeAll()
-        balances.removeAll()
         
         service.walletService.getWallets { [weak self] (result) -> (Void) in
             switch result {
             case .success(let wallets):
+                var chartAppended = false
                 let sortedWallets = wallets.sorted(by: { $0.id < $1.id })
                 for wallet in sortedWallets {
                     if wallet.showOnHomeScreen {
@@ -125,6 +132,12 @@ class HomeViewModel : HomeViewModelType {
                         }
                         
                         self?.cardViewModels.append(viewModel)
+                        if !chartAppended {
+                            let chartViewModel = ChartCardViewModel()
+                            chartViewModel.navigationCoordinator = self?.navigationCoordinator
+                            self?.cardViewModels.append(chartViewModel)
+                            chartAppended = true
+                        }
                     }
                 }
                 
@@ -134,6 +147,7 @@ class HomeViewModel : HomeViewModelType {
                 print("Failed to get wallets")
             }
             
+            
             let helpViewModel = HelpCardViewModel()
             helpViewModel.navigationCoordinator = self?.navigationCoordinator
             self?.cardViewModels.append(helpViewModel)
@@ -141,6 +155,7 @@ class HomeViewModel : HomeViewModelType {
             self?.reloadClosure?()
             
             self?.showWalletIfNeeded()
+            
         }
     }
     
@@ -149,38 +164,6 @@ class HomeViewModel : HomeViewModelType {
             if let wallet = cardViewModel as? WalletCardViewModel {
                 wallet.refreshContent(userManager: service.userManager)
             }
-        }
-    }
-    
-    func updateCurrencies() {
-        
-        var hasChartCard = false
-        
-        for cardViewModel in cardViewModels {
-            if let _ = cardViewModel as? ChartCardViewModel {
-                hasChartCard = true
-            }
-            
-            if let viewModel = cardViewModel as? WalletCardViewModel,
-                let wallet = viewModel.wallet as? FundedWallet {
-                
-                for balance in wallet.balances {
-                    if balance.assetType != AssetTypeAsString.NATIVE, !currencyPairs.contains(where: { $0.sourceCurrency.assetCode == balance.assetCode && $0.sourceCurrency.issuerPublicKey == balance.assetIssuer }) {
-                        continue
-                    }
-                    if !balances.contains(where: { $0.assetCode == balance.assetCode }) {
-                        balances.append(balance)
-                    }
-                }
-            }
-        }
-        
-        // TODO: move this to its correct place
-        if !hasChartCard {
-            let chartViewModel = ChartCardViewModel(service: service.chartsService)
-            chartViewModel.navigationCoordinator = self.navigationCoordinator
-            cardViewModels.insert(chartViewModel, at: cardViewModels.count-1)
-            self.appendClosure?(chartViewModel)
         }
     }
     

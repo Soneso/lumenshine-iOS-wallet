@@ -67,6 +67,7 @@ class InflationManager {
     
     func getInflationDestination(forAccount accountID: String, completion: @escaping GetInflationDestinationClosure) {
         stellarSDK.accounts.getAccountDetails(accountId: accountID) { (response) -> (Void) in
+            print("Inflation_manager - getInflation: account details loaded for \(accountID)")
             DispatchQueue.main.async {
                 switch response {
                 case .success(details: let accountDetails):
@@ -114,6 +115,7 @@ class InflationManager {
         userManager.checkIfAccountExists(forAccountID: inflationAddress) { (accountExists) -> (Void) in
             if accountExists {
                 self.stellarSDK.accounts.getAccountDetails(accountId: sourceAccountKeyPair.accountId) { (response) -> (Void) in
+                    print("Inflation_manager - checkAndSubmitInflationDestination: account details loaded for \(sourceAccountKeyPair.accountId)")
                     switch response {
                     case .success(let accountResponse):
                         self.submitInflationDestination(accountResponse: accountResponse,

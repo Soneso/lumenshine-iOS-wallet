@@ -162,6 +162,7 @@ class AccountDetailsViewController: UpdatableViewController {
                 self.walletNameTextField.placeholder = self.walletNameTextField.text
                 if let name = self.walletNameTextField.text {
                     self.wallet.name = name
+                    Services.shared.walletService.addWalletToRefresh(accountId: self.wallet.publicKey)
                 }
             case .failure(let error):
                 self.view.isUserInteractionEnabled = true
@@ -208,6 +209,7 @@ class AccountDetailsViewController: UpdatableViewController {
                 self.stellarAddressStackView.addArrangedSubview(self.stellarAddressRemoveView)
                 self.wallet.federationAddress = stellarAddress
                 self.setupStellarAddressActionButton(withTitle: .changeAddress)
+                Services.shared.walletService.addWalletToRefresh(accountId: self.wallet.publicKey)
             case .failure(let error):
                 self.stellarAddressEditErrorLabel.text = error.localizedDescription
             }
@@ -224,6 +226,7 @@ class AccountDetailsViewController: UpdatableViewController {
                 self.stellarAddressStackView.addArrangedSubview(self.stellarAddressNotSetupView)
                 self.wallet.federationAddress = ""
                 self.setStellarAddressView()
+                Services.shared.walletService.addWalletToRefresh(accountId: self.wallet.publicKey)
             case .failure(let error):
                 self.stellarAddressEditErrorLabel.text = error.localizedDescription
             }
@@ -374,12 +377,12 @@ class AccountDetailsViewController: UpdatableViewController {
         cancelWalletNameButton.backgroundColor = Stylesheet.color(.red)
     }
     
-    override func updateUIAfterWalletsReload(notification: NSNotification) {
-        if let updatedWallets = notification.object as? [Wallet] {
-            var dummyWalletsList = [Wallet]()
-            walletManager.updateWallets(currentWallet: &wallet, updatedWallets: updatedWallets, walletsList: &dummyWalletsList)
+    override func updateUIAfterWalletRefresh(notification: NSNotification) {
+        if let updatedWallet = notification.object as? Wallet, updatedWallet.publicKey == wallet.publicKey {
+            wallet = updatedWallet
         }
-        
-        self.reloadWalletDetails()
+        DispatchQueue.main.async {
+            self.reloadWalletDetails()
+        }
     }
 }

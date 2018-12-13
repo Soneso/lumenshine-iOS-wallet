@@ -41,6 +41,21 @@ extension CoinUnit {
         }
     }
     
+    var shortStringWithUnit: String {
+        get {
+            let currencyFormatter = NumberFormatter()
+            currencyFormatter.usesGroupingSeparator = true
+            currencyFormatter.minimumFractionDigits = 2
+            currencyFormatter.maximumFractionDigits = 2
+            currencyFormatter.numberStyle = .decimal
+            currencyFormatter.locale = Locale.current
+            
+            let value = currencyFormatter.string(from: NSNumber(value: self))
+            
+            return value ?? "0.00"
+        }
+    }
+    
     func availableAmount(forWallet wallet: Wallet?, forCurrency asset: AccountBalanceResponse?) -> CoinUnit {
         if let asset = asset {
             let sellingLiabilities = CoinUnit(asset.sellingLiabilities)
@@ -56,7 +71,8 @@ extension CoinUnit {
         }
     }
     
-    func stringConversionTo(currency: Currency, rate: Double) -> String {
-        return "\(stringWithUnit) ≈ \(String(format: "%.2f %@", rate * self, currency.assetCode))"
+    func tickerConversionTo(currency: Currency, rate: Double) -> String {
+        let result:CoinUnit = rate * self
+        return "\(shortStringWithUnit) XLM ≈ \(String(format: "%@ %@", result.shortStringWithUnit, currency.assetCode))"
     }
 }

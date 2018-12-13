@@ -38,8 +38,24 @@ public typealias SetWalletHomescreenClosure = (_ response: SetWalletHomescreenEn
 
 public class WalletsService: BaseService {
     
+    private var walletsToRefresh = [String]()
+    
     override init(baseURL: String) {
         super.init(baseURL: baseURL)
+    }
+    
+    open func addWalletToRefresh(accountId: String) {
+        if !walletsToRefresh.contains(accountId) {
+            self.walletsToRefresh.append(accountId)
+        }
+    }
+    
+    open func isWalletNeedsRefresh(accountId: String) -> Bool {
+        return self.walletsToRefresh.contains(accountId)
+    }
+    
+    open func removeFromWalletsToRefresh(accountId: String) {
+        self.walletsToRefresh.removeAll { $0 == accountId }
     }
     
     open func getWallets(response: @escaping GetWalletsClosure) {

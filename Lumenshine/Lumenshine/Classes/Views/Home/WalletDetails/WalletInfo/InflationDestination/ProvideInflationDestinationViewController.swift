@@ -166,6 +166,8 @@ class ProvideInflationDestinationViewController: UIViewController {
                                                     self.hideActivity(completion: {
                                                         switch response {
                                                         case .success:
+                                                            Services.shared.walletService.addWalletToRefresh(accountId: self.wallet.publicKey)
+                                                            NotificationCenter.default.post(name: .refreshWalletsNotification, object: false)
                                                             self.navigationController?.popViewController(animated: true)
                                                             break
                                                         case .failure(error: let error):

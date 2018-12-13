@@ -97,6 +97,8 @@ class RemoveCurrencyViewController: UIViewController {
                                 self.hideActivity(completion: {
                                     switch result {
                                     case .success:
+                                        Services.shared.walletService.addWalletToRefresh(accountId: self.wallet.publicKey)
+                                        NotificationCenter.default.post(name: .refreshWalletsNotification, object: false)
                                         self.navigationController?.popViewController(animated: true)
                                     case .failure(error: let error):
                                         print("Error: \(String(describing: error))")

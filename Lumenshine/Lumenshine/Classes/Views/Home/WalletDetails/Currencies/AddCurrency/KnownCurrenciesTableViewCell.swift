@@ -165,6 +165,8 @@ class KnownCurrenciesTableViewCell: UITableViewCell {
             transactionHelper.addTrustLine(trustingAccountKeyPair:trustingAccountKeyPair, asset:asset) { (result) -> (Void) in
                 switch result {
                 case .success:
+                    Services.shared.walletService.addWalletToRefresh(accountId: self.wallet.publicKey)
+                    NotificationCenter.default.post(name: .refreshWalletsNotification, object: false)
                     self.dissmissView()
                     break
                 case .failure(error: let error):
