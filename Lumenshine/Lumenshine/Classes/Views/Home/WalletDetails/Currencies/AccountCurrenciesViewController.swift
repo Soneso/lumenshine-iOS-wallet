@@ -41,7 +41,7 @@ class AccountCurrenciesViewController: UIViewController {
     }
     
     private func setupCurrencies() {
-        activityIndicator(showLoading: true)
+        //activityIndicator(showLoading: true)
         self.walletManager.balancesWithAuthorizationForWallet(wallet: self.wallet) { (response) -> (Void) in
             switch response {
             case .success(let balances):
@@ -66,11 +66,11 @@ class AccountCurrenciesViewController: UIViewController {
                 }
                 
                 self.calculateAndSetContentSize(nrOfCurrencies: balances.count, viewHeight: currencyViewHeight)
-                self.activityIndicator(showLoading: false)
+                //self.activityIndicator(showLoading: false)
                 
             case .failure(let error):
                 self.displayErrorAlertView(message: error.localizedDescription)
-                self.activityIndicator(showLoading: false)
+                //self.activityIndicator(showLoading: false)
             }
         }
     }

@@ -250,10 +250,6 @@ class AccountDetailsViewController: UpdatableViewController {
         navigationItem.titleLabel.numberOfLines = 2
         navigationItem.titleLabel.attributedText = walletName
         
-        /*let helpButton = Material.IconButton()
-        helpButton.image = R.image.question()?.crop(toWidth: 25, toHeight: 25)?.tint(with: Stylesheet.color(.white))
-        helpButton.addTarget(self, action: #selector(didTapHelp(_:)), for: .touchUpInside)
-        navigationItem.rightViews = [helpButton]*/
     }
     
     private func setupWalletNameView() {

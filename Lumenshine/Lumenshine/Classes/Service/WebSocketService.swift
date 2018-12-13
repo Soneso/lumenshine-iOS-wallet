@@ -23,7 +23,6 @@ public class WebSocketService: BaseService, WebSocketDelegate {
     private static var socket: WebSocket!
     private static var randomKey: String?
     private static var cachedWallets: [WalletsResponse]!
-    //private static var walletsToUpdate: [String]?
     
     public static var subscribers = NSMapTable<UIViewController, InitializationState>(keyOptions: NSPointerFunctions.Options.weakMemory, valueOptions: NSPointerFunctions.Options.strongMemory)
     
