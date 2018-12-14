@@ -127,10 +127,5 @@ class PaymentOperationsVCManager {
         viewController.closeAllAction = { [weak self] in
             self?.closeAll()
         }
-        
-        viewController.sendOtherAction = { [weak self] in
-            self?.parentViewController?.navigationController?.popViewController(animated: true)
-            self?.sendViewController?.clearValuesForNewPayment()
-        }
     }
 }

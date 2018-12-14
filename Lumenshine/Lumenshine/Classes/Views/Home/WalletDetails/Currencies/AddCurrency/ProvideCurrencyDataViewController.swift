@@ -55,7 +55,8 @@ class ProvideCurrencyDataViewController: UIViewController {
     
     private func addCurrency(forBiometricAuth biometricAuth: Bool = false) {
         resetValidationErrors()
-        
+        publicKeyTextField.resignFirstResponder()
+        assetCodeTextField.resignFirstResponder()
         addButton.setTitle(AddButtonTitles.validating.rawValue, for: UIControlState.normal)
         addButton.isEnabled = false
         showActivity(message: R.string.localizable.validateing())

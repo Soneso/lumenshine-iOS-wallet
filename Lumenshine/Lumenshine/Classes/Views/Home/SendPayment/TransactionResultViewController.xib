@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,7 +18,6 @@
                 <outlet property="currencyLabel" destination="Lyf-wG-9dp" id="jya-py-51i"/>
                 <outlet property="currencyValueLabel" destination="pas-ak-tIh" id="B6H-Yy-5pi"/>
                 <outlet property="doneButton" destination="49t-KT-MrH" id="cjf-Gn-eeO"/>
-                <outlet property="editButton" destination="PnW-Yn-a8K" id="v0W-k3-yjk"/>
                 <outlet property="errorMessageStackView" destination="hoc-td-35f" id="gXC-Se-Cq7"/>
                 <outlet property="issuerLabel" destination="eZn-qD-cFJ" id="no5-eh-g6p"/>
                 <outlet property="issuerLabelStackView" destination="avr-Df-0r5" id="bwf-vI-3cC"/>
@@ -35,13 +34,8 @@
                 <outlet property="operationIDValueLabel" destination="9yv-DF-9PG" id="vkb-OI-nkL"/>
                 <outlet property="printButton" destination="4RG-nc-OvM" id="m5G-Q4-Uc1"/>
                 <outlet property="recepientLabel" destination="dsO-6t-paW" id="3cu-tn-oJo"/>
-                <outlet property="recipientMailValueLabel" destination="DIR-Lb-c3e" id="aH1-LU-ocq"/>
-                <outlet property="recipientPKLabel" destination="Dhw-nb-oNr" id="6lL-Ur-qda"/>
-                <outlet property="sendOtherErrorButton" destination="HxR-BI-Tjw" id="gn1-yO-ETJ"/>
-                <outlet property="sendOtherSuccessButton" destination="fEx-hE-LeM" id="DRh-KB-hLr"/>
-                <outlet property="statusLabel" destination="8G7-5z-rJL" id="A3d-BJ-JXK"/>
+                <outlet property="recepientPK" destination="DIR-Lb-c3e" id="5Z7-wy-kIh"/>
                 <outlet property="statusValueLabel" destination="fyr-BF-iIu" id="Uji-vx-A1g"/>
-                <outlet property="subtitleLabel" destination="BVx-j4-tHm" id="Hh1-y3-AbN"/>
                 <outlet property="transactionFeeLabel" destination="Duz-en-UpM" id="fHx-cz-O1F"/>
                 <outlet property="transactionFeeStackView" destination="S1Z-FQ-tPy" id="ni4-Rd-8QF"/>
                 <outlet property="transactionFeeValueLabel" destination="lJC-3r-CYf" id="JYJ-K2-xyD"/>
@@ -53,51 +47,32 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="RYe-rQ-2OO">
-                    <rect key="frame" x="0.0" y="20" width="375" height="52.5"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Transaction result" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVx-j4-tHm" customClass="SubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
-                            <rect key="frame" x="16" y="16" width="137" height="20.5"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstItem="BVx-j4-tHm" firstAttribute="top" secondItem="RYe-rQ-2OO" secondAttribute="top" constant="16" id="4w3-kC-4fG"/>
-                        <constraint firstItem="BVx-j4-tHm" firstAttribute="leading" secondItem="RYe-rQ-2OO" secondAttribute="leading" constant="16" id="huX-37-3Jq"/>
-                        <constraint firstAttribute="bottom" secondItem="BVx-j4-tHm" secondAttribute="bottom" constant="16" id="wwM-CL-aXI"/>
-                    </constraints>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SPe-Ba-PBn">
-                    <rect key="frame" x="16" y="72.5" width="343" height="574.5"/>
+                    <rect key="frame" x="16" y="50" width="343" height="597"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="crY-Yr-Vt0">
-                            <rect key="frame" x="0.0" y="0.0" width="343" height="574.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="343" height="597"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="PNj-mf-kIe">
-                                    <rect key="frame" x="0.0" y="0.0" width="343" height="45"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="343" height="60.5"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Per-cd-xLw">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="36"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" text="Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8G7-5z-rJL" customClass="SubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="59.5" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="statusValue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyr-BF-iIu" customClass="InfoLabel" customModule="Lumenshine" customModuleProvider="target">
-                                                    <rect key="frame" x="67.5" y="0.0" width="275.5" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="statusValue" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyr-BF-iIu" customClass="InfoLabel" customModule="Lumenshine" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="36"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="fyr-BF-iIu" firstAttribute="centerY" secondItem="Per-cd-xLw" secondAttribute="centerY" id="8Of-nS-DoG"/>
+                                                <constraint firstItem="fyr-BF-iIu" firstAttribute="centerX" secondItem="Per-cd-xLw" secondAttribute="centerX" id="hYd-qV-p3n"/>
+                                            </constraints>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hoc-td-35f">
-                                            <rect key="frame" x="0.0" y="24.5" width="343" height="20.5"/>
+                                            <rect key="frame" x="0.0" y="40" width="343" height="20.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Message:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PRN-Nv-o0v" customClass="SubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="79" height="20.5"/>
@@ -114,9 +89,12 @@
                                             </subviews>
                                         </stackView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="hoc-td-35f" firstAttribute="top" secondItem="Per-cd-xLw" secondAttribute="top" constant="40" id="vA7-5Z-6bV"/>
+                                    </constraints>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="9Tm-Yd-TMr">
-                                    <rect key="frame" x="0.0" y="61" width="343" height="69.5"/>
+                                    <rect key="frame" x="0.0" y="76.5" width="343" height="69.5"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="4f0-Vd-d3x">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
@@ -161,7 +139,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="issuerValue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLA-01-VxM" customClass="InfoLabel" customModule="Lumenshine" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="issuerValue" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLA-01-VxM" customClass="InfoLabel" customModule="Lumenshine" customModuleProvider="target">
                                                     <rect key="frame" x="64.5" y="0.0" width="278.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -172,7 +150,7 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="YRr-Vx-kSw">
-                                    <rect key="frame" x="0.0" y="146.5" width="343" height="45"/>
+                                    <rect key="frame" x="0.0" y="162" width="343" height="20.5"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Fvv-lW-ckP">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
@@ -183,19 +161,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="recepientMailValue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="DIR-Lb-c3e" customClass="InfoLabel" customModule="Lumenshine" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="recepient" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DIR-Lb-c3e" customClass="InfoLabel" customModule="Lumenshine" customModuleProvider="target">
                                                     <rect key="frame" x="96" y="0.0" width="247" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </stackView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LCV-Bh-F0D">
-                                            <rect key="frame" x="0.0" y="24.5" width="343" height="20.5"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="recepientPK" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Dhw-nb-oNr" customClass="InfoLabel" customModule="Lumenshine" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -205,7 +172,7 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="P8c-3D-kBK">
-                                    <rect key="frame" x="0.0" y="207.5" width="343" height="45"/>
+                                    <rect key="frame" x="0.0" y="198.5" width="343" height="45"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Lyc-D5-Gdq">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
@@ -244,7 +211,7 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="T9u-ZQ-b9B">
-                                    <rect key="frame" x="0.0" y="268.5" width="343" height="45"/>
+                                    <rect key="frame" x="0.0" y="259.5" width="343" height="45"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="57H-m5-hgR">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
@@ -266,14 +233,14 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="S1Z-FQ-tPy">
                                             <rect key="frame" x="0.0" y="24.5" width="343" height="20.5"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Transaction fee:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Duz-en-UpM" customClass="SubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="132.5" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Network fee:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Duz-en-UpM" customClass="SubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="105.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="transactionFeeValue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lJC-3r-CYf" customClass="InfoLabel" customModule="Lumenshine" customModuleProvider="target">
-                                                    <rect key="frame" x="140.5" y="0.0" width="202.5" height="20.5"/>
+                                                    <rect key="frame" x="113.5" y="0.0" width="229.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -283,41 +250,20 @@
                                     </subviews>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="enE-V9-LHq">
-                                    <rect key="frame" x="0.0" y="329.5" width="343" height="90"/>
+                                    <rect key="frame" x="0.0" y="320.5" width="343" height="90"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="gfa-UE-ixx" userLabel="ButtonsStackView">
-                                            <rect key="frame" x="44" y="30" width="255" height="30"/>
+                                            <rect key="frame" x="136.5" y="30" width="70" height="30"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PnW-Yn-a8K" customClass="LeftRoundedButton" customModule="Lumenshine" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
-                                                    <state key="normal" title="Edit"/>
-                                                    <connections>
-                                                        <action selector="editButtonAction:" destination="-1" eventType="touchUpInside" id="KfY-Yg-psc"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEx-hE-LeM" userLabel="Send other success" customClass="LeftRoundedButton" customModule="Lumenshine" customModuleProvider="target">
-                                                    <rect key="frame" x="31" y="0.0" width="76" height="30"/>
-                                                    <state key="normal" title="Send other"/>
-                                                    <connections>
-                                                        <action selector="sendOtherButtonAction:" destination="-1" eventType="touchUpInside" id="j9e-Xz-HCX"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HxR-BI-Tjw" userLabel="Send other Error" customClass="BaseButton" customModule="Lumenshine" customModuleProvider="target">
-                                                    <rect key="frame" x="108" y="0.0" width="76" height="30"/>
-                                                    <state key="normal" title="Send other"/>
-                                                    <connections>
-                                                        <action selector="sendOtherButtonAction:" destination="-1" eventType="touchUpInside" id="FYr-65-MPn"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4RG-nc-OvM" customClass="BaseButton" customModule="Lumenshine" customModuleProvider="target">
-                                                    <rect key="frame" x="185" y="0.0" width="32" height="30"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4RG-nc-OvM" customClass="LeftRoundedButton" customModule="Lumenshine" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="32" height="30"/>
                                                     <state key="normal" title="Print"/>
                                                     <connections>
                                                         <action selector="printButtonAction:" destination="-1" eventType="touchUpInside" id="b8m-1w-ate"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="49t-KT-MrH" customClass="RightRoundedButton" customModule="Lumenshine" customModuleProvider="target">
-                                                    <rect key="frame" x="218" y="0.0" width="37" height="30"/>
+                                                    <rect key="frame" x="33" y="0.0" width="37" height="30"/>
                                                     <state key="normal" title="Done"/>
                                                     <connections>
                                                         <action selector="doneButtonAction:" destination="-1" eventType="touchUpInside" id="2dJ-6h-eba"/>
@@ -335,7 +281,7 @@
                                     </constraints>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ftL-IE-FOy" userLabel="SpaceFiller">
-                                    <rect key="frame" x="0.0" y="435.5" width="343" height="139"/>
+                                    <rect key="frame" x="0.0" y="426.5" width="343" height="170.5"/>
                                 </stackView>
                             </subviews>
                             <viewLayoutGuide key="safeArea" id="abl-jm-QkD"/>
@@ -353,11 +299,8 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="SPe-Ba-PBn" secondAttribute="bottom" constant="20" id="7eL-ep-3eU"/>
-                <constraint firstItem="SPe-Ba-PBn" firstAttribute="top" secondItem="RYe-rQ-2OO" secondAttribute="bottom" id="Cyf-Mj-eJY"/>
-                <constraint firstItem="RYe-rQ-2OO" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="Tzx-mt-HUS"/>
-                <constraint firstItem="RYe-rQ-2OO" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Xtd-8T-RRK"/>
+                <constraint firstItem="SPe-Ba-PBn" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="30" id="FKv-qg-Z8C"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="SPe-Ba-PBn" secondAttribute="trailing" constant="16" id="Yyj-n4-hJP"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="RYe-rQ-2OO" secondAttribute="trailing" id="cgA-9c-sCC"/>
                 <constraint firstItem="SPe-Ba-PBn" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="iaz-fe-Ytn"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
