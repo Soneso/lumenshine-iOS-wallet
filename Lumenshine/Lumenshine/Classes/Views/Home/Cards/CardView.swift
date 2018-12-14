@@ -59,12 +59,10 @@ class CardView: UIView {
             card = HelpCard()
         case .wallet(let status):
             let walletCard = WalletCard()
-            walletCard.status = status
+            walletCard.setWalletCardStatus(status: status, viewModel: viewModel as! WalletCardViewModel)
             walletCard.viewController = viewController
             walletCard.setup(viewModel: viewModel as! WalletCardViewModel)
-            
             card = walletCard
-            
         }
         card.viewModel = viewModel
         return card

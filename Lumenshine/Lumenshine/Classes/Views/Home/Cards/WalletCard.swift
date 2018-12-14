@@ -73,23 +73,11 @@ class WalletCard: CardView {
             }
         }
     }
-    
-    var status: WalletStatus {
-        didSet {
-            switch status {
-            case .none:
-                addEmptyWallet()
-            case .funded:
-                addFundedView()
-            case .unfunded:
-                addUnfundedView()
-            }
-        }
-    }
-    
+
     override init(frame: CGRect) {
-        status = .none
+        
         super.init(frame: frame)
+        addEmptyWallet()
         prepare()
     }
     
@@ -105,12 +93,22 @@ class WalletCard: CardView {
         }
     }
     
+    func setWalletCardStatus(status: WalletStatus, viewModel: WalletCardViewModel) {
+        switch status {
+        case .none:
+            addEmptyWallet()
+        case .funded:
+            addFundedView(viewModel:viewModel)
+        case .unfunded:
+            addUnfundedView(viewModel:viewModel)
+        }
+    }
     func reloadData(_ reload: Bool) {
         if let viewModel = self.viewModel as? WalletCardViewModel {           
             unfundedView?.removeFromSuperview()
             fundedView?.removeFromSuperview()
-            
-            self.status = (viewModel.wallet.isFunded) ? .funded : .unfunded
+            let nstatus = (viewModel.wallet.isFunded) ? WalletStatus.funded : WalletStatus.unfunded
+            setWalletCardStatus(status: nstatus, viewModel: viewModel)
             self.setup(viewModel: viewModel)
             self.reloadCellAction?(reload)
         }
@@ -195,7 +193,7 @@ fileprivate extension WalletCard {
         self.unfundedView = emptyView
     }
     
-    func addFundedView() {
+    func addFundedView(viewModel: WalletCardViewModel) {
         guard let fundedView = Bundle.main.loadNibNamed("WalletCardContentView", owner: nil, options: nil)![0] as? WalletCardContentView else { return }
         
         fundedView.frame = contentView.bounds
@@ -254,7 +252,7 @@ fileprivate extension WalletCard {
         self.fundedView = fundedView
     }
     
-    func addUnfundedView() {
+    func addUnfundedView(viewModel: WalletCardViewModel) {
         guard let unfundedView = Bundle.main.loadNibNamed("UnfundedWalletCardContentView", owner: nil, options: nil)![0] as? UnfundedWalletCardContentView else { return }
         
         unfundedView.frame = contentView.bounds
