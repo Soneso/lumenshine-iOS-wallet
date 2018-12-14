@@ -71,8 +71,7 @@ class KnownCurrenciesManager {
     }
     
     private func isAuthorizationRequired(forCurrency currency: KnownCurrency, completion: @escaping () -> (Void)) {
-        stellarSDK.accounts.getAccountDetails(accountId: currency.issuerPublicKey) { (response) -> (Void) in
-            print("Known curr: account details loaded for \(currency.issuerPublicKey)")
+        Services.shared.walletService.getAccountDetails(accountId: currency.issuerPublicKey) { (response) -> (Void) in
             switch response {
             case .success(let accountDetails):
                 currency.isAuthorized = accountDetails.flags.authRequired

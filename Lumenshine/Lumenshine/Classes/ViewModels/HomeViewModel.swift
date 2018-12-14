@@ -133,9 +133,9 @@ class HomeViewModel : HomeViewModelType {
                         
                         self?.cardViewModels.append(viewModel)
                         if !chartAppended {
-                            let chartViewModel = ChartCardViewModel()
+                            /*let chartViewModel = ChartCardViewModel()
                             chartViewModel.navigationCoordinator = self?.navigationCoordinator
-                            self?.cardViewModels.append(chartViewModel)
+                            self?.cardViewModels.append(chartViewModel)*/
                             chartAppended = true
                         }
                     }
@@ -146,7 +146,10 @@ class HomeViewModel : HomeViewModelType {
                 // TODO: handle this
                 print("Failed to get wallets")
             }
-            
+        
+            let chartViewModel = ChartCardViewModel()
+            chartViewModel.navigationCoordinator = self?.navigationCoordinator
+            self?.cardViewModels.append(chartViewModel)
             
             let helpViewModel = HelpCardViewModel()
             helpViewModel.navigationCoordinator = self?.navigationCoordinator
@@ -155,7 +158,7 @@ class HomeViewModel : HomeViewModelType {
             self?.reloadClosure?()
             
             self?.showWalletIfNeeded()
-            
+        
         }
     }
     

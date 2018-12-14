@@ -29,7 +29,6 @@ class TransactionHistoryDetailsTableViewController: UITableViewController {
             self.jsonDict.removeValue(forKey: "_links")
         }
         super.init(nibName: nil, bundle: nil)
-        //print("Details: " + String(data: details, encoding: .utf8)!)
     }
     
     required init?(coder aDecoder: NSCoder) {

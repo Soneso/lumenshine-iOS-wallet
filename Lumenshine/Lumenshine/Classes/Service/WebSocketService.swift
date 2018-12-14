@@ -59,6 +59,7 @@ public class WebSocketService: BaseService, WebSocketDelegate {
         print("WebSocketDidReceiveMessage: \(text)")
         let accountsToUpdate = getAccountsID(fromMessage: text)
         for account in accountsToUpdate {
+            Services.shared.walletService.removeCachedAccountDetails(accountId: account)
             Services.shared.walletService.addWalletToRefresh(accountId: account)
         }
         NotificationCenter.default.post(name: .refreshWalletsNotification, object: true)

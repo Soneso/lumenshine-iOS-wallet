@@ -47,7 +47,17 @@ class AccountCurrenciesViewController: UIViewController {
             case .success(let balances):
                 var currencyViewHeight: CGFloat = 0
                 for balance in balances {
-                    if let _ = balance.assetCode, let _ = balance.assetIssuer {
+                    if let newAssetCode = balance.assetCode, let newIssuer = balance.assetIssuer, let newAuthorized = balance.authorized {
+                        var alreadyExists = false
+                        for arrangedSubView in self.currenciesStackView.arrangedSubviews {
+                            if let existingCurrencyView = arrangedSubView as? CurrencyView, newAssetCode == existingCurrencyView.assetCode, newIssuer == existingCurrencyView.issuerPK, newAuthorized ==  existingCurrencyView.authorized {
+                                    alreadyExists = true
+                                    break
+                            }
+                        }
+                        if alreadyExists {
+                            continue
+                        }
                         let currencyView = Bundle.main.loadNibNamed("CurrencyView", owner:self, options:nil)![0] as! CurrencyView
                         currencyView.currency = balance
                         

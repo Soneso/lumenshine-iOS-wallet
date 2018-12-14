@@ -237,8 +237,7 @@ class TransactionHelper {
     }
     
     private func createAndFundAccount(sourceKeyPair: KeyPair, destinationKeyPair: KeyPair, amount: Decimal, memo: Memo, completion: @escaping TransactionResultClosure ) {
-        stellarSdk.accounts.getAccountDetails(accountId: sourceKeyPair.accountId) { (response) -> (Void) in
-            print("TR-Helper - create and fund: account details loaded for \(sourceKeyPair.accountId)")
+        Services.shared.walletService.getAccountDetails(accountId: sourceKeyPair.accountId) { (response) -> (Void) in
             switch response {
             case .success(let accountResponse):
               self.submitCreateAndFundAccount(destinationKeyPair: destinationKeyPair,
@@ -372,8 +371,7 @@ class TransactionHelper {
     }
     
     private func sendPayment(sourceKeyPair: KeyPair, destinationKeyPair: KeyPair, asset: Asset, amount: Decimal, memo: Memo, completion: @escaping TransactionResultClosure) {
-        stellarSdk.accounts.getAccountDetails(accountId: sourceKeyPair.accountId) { (response) -> (Void) in
-            print("TR-Helper - send pay: account details loaded for \(sourceKeyPair.accountId)")
+        Services.shared.walletService.getAccountDetails(accountId: sourceKeyPair.accountId) { (response) -> (Void) in
             switch response {
             case .success(let accountResponse):
                 self.submitPaymentTransaction(destinationKeyPair: destinationKeyPair, sourceKeyPair: sourceKeyPair, accountResponse: accountResponse,
@@ -418,8 +416,7 @@ class TransactionHelper {
     }
     
     func addTrustLine(trustingAccountKeyPair: KeyPair, asset: Asset, completion: @escaping TrustLineClosure) {
-        stellarSdk.accounts.getAccountDetails(accountId: trustingAccountKeyPair.accountId) { (response) -> (Void) in
-            print("TR-Helper - add trustline: account details loaded for \(trustingAccountKeyPair.accountId)")
+        Services.shared.walletService.getAccountDetails(accountId: trustingAccountKeyPair.accountId) { (response) -> (Void) in
             switch response {
             case .success(let accountResponse):
                 self.submitAddTrustLine(trustingAccountKeyPair: trustingAccountKeyPair, accountResponse: accountResponse, asset: asset, completion: { (response) -> (Void) in
@@ -481,8 +478,7 @@ class TransactionHelper {
     
     private func removeTrustLine(trustingAccountKeyPair: KeyPair, issuingAccountKeyPair: KeyPair, discardingDestination: String? = nil,
                                  currency: AccountBalanceResponse, asset: Asset, completion: @escaping TrustLineClosure) {
-        stellarSdk.accounts.getAccountDetails(accountId: trustingAccountKeyPair.accountId) { (response) -> (Void) in
-            print("TR-Helper - remove trustline: account details loaded for \(trustingAccountKeyPair.accountId)")
+        Services.shared.walletService.getAccountDetails(accountId: trustingAccountKeyPair.accountId) { (response) -> (Void) in
             switch response {
             case .success(let accountResponse):
                 self.submitRemoveTrustLine(issuingAccountKeyPair: issuingAccountKeyPair, trustingAccountKeyPair: trustingAccountKeyPair, accountResponse: accountResponse,

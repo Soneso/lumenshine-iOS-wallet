@@ -48,4 +48,16 @@ class CurrencyView: UIView {
             }
         }
     }
+    var issuerPK: String? {
+        return self.issuerLabel?.text
+    }
+    var assetCode: String? {
+        return self.currencyLabel?.text
+    }
+    var authorized: Bool {
+        if let _ = authorizationLabel.superview {
+            return false
+        }
+        return true
+    }
 }

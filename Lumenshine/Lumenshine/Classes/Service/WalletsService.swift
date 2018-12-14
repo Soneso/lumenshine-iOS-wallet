@@ -10,6 +10,7 @@
 //
 
 import UIKit
+import stellarsdk
 
 public enum GetWalletsEnum {
     case success(response: [WalletsResponse])
@@ -39,6 +40,25 @@ public typealias SetWalletHomescreenClosure = (_ response: SetWalletHomescreenEn
 public class WalletsService: BaseService {
     
     private var walletsToRefresh = [String]()
+    private var accountDetailsCache = NSCache<NSString, AnyObject>()
+    private var accountDetailsCachingDuration = 5.0 //sec.
+    typealias cacheEntry = (Date, AccountResponse)
+    
+    private class AcDetailsCacheEntry {
+        let date:Date
+        let accountResponse:AccountResponse
+        
+        init(date:Date, accountResponse:AccountResponse) {
+            self.date = date
+            self.accountResponse = accountResponse
+        }
+    }
+    
+    var stellarSDK: StellarSDK {
+        get {
+            return Services.shared.stellarSdk
+        }
+    }
     
     override init(baseURL: String) {
         super.init(baseURL: baseURL)
@@ -134,6 +154,39 @@ public class WalletsService: BaseService {
                 case .failure(let error):
                     completion(.failure(error: error))
                 }
+            }
+        }
+    }
+    
+    open func removeCachedAccountDetails(accountId:String){
+        accountDetailsCache.removeObject(forKey: accountId as NSString)
+    }
+    
+    open func getAccountDetails(accountId: String, response: @escaping AccountResponseClosure) {
+        
+        if let cachedObject = accountDetailsCache.object(forKey: accountId as NSString) {
+            if let entry = cachedObject as? AcDetailsCacheEntry {
+                let validEntryDate = Date().addingTimeInterval(-1.0 * accountDetailsCachingDuration)
+                if validEntryDate <= entry.date {
+                    print("CACHE: account details FOUND for \(accountId)")
+                    response(.success(details:entry.accountResponse))
+                    return
+                } else {
+                    print("CACHE: account details TO OLD for \(accountId)")
+                    accountDetailsCache.removeObject(forKey: accountId as NSString)
+                }
+            }
+        }
+        
+        stellarSDK.accounts.getAccountDetails(accountId: accountId) { (accountResponse) -> (Void) in
+            print("CACHE: account details loaded for \(accountId)")
+            switch accountResponse {
+            case .success(details: let accountDetails):
+                let newEntry = AcDetailsCacheEntry(date:Date(), accountResponse:accountDetails)
+                self.accountDetailsCache.setObject(newEntry, forKey: accountId as NSString)
+                response(.success(details:accountDetails))
+            case .failure(let error):
+                response(.failure(error:error))
             }
         }
     }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,13 +27,13 @@
                     <rect key="frame" x="6" y="20" width="369" height="50"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ykl-M6-KOP">
-                            <rect key="frame" x="0.0" y="5" width="369" height="40.5"/>
+                            <rect key="frame" x="0.0" y="7" width="369" height="36.5"/>
                             <subviews>
                                 <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Z0X-ga-pNu">
-                                    <rect key="frame" x="184.5" y="0.0" width="0.0" height="40.5"/>
+                                    <rect key="frame" x="184.5" y="0.0" width="0.0" height="36.5"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kLC-hE-OF1" customClass="SimpleButton" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="40.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="36.5"/>
                                             <state key="normal" title="Load more"/>
                                             <connections>
                                                 <action selector="loadTransactionsButtonAction:" destination="-1" eventType="touchUpInside" id="uZ9-xh-qdG"/>
@@ -42,10 +42,10 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="left" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZZK-wm-Sed">
-                                    <rect key="frame" x="0.0" y="0.0" width="369" height="40.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="369" height="36.5"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction History" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQo-Zl-kh1" customClass="SubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="10" y="8" width="351" height="24.5"/>
+                                            <rect key="frame" x="10" y="8" width="351" height="20.5"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -54,17 +54,11 @@
                                     <edgeInsets key="layoutMargins" top="8" left="10" bottom="8" right="8"/>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3wp-yZ-ngt">
-                                    <rect key="frame" x="369" y="0.0" width="0.0" height="40.5"/>
+                                    <rect key="frame" x="369" y="0.0" width="0.0" height="20"/>
                                     <subviews>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="rGJ-w8-ce0">
                                             <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
                                         </activityIndicatorView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="loading ..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWg-dh-23b">
-                                            <rect key="frame" x="0.0" y="20" width="0.0" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                     </subviews>
                                 </stackView>
                             </subviews>

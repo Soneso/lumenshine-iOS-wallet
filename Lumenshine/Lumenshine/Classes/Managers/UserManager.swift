@@ -123,8 +123,7 @@ public class UserManager: NSObject {
         
         var limit: CoinUnit? = nil
         
-        stellarSDK.accounts.getAccountDetails(accountId: accountID) { response in
-            print("UM-check address status: account details loaded for \(accountID)")
+        Services.shared.walletService.getAccountDetails(accountId: accountID) { response in
             switch response {
             case .success(let accountDetails):
                 
@@ -165,8 +164,7 @@ public class UserManager: NSObject {
     }
     
     func checkIfAccountExists(forAccountID accountID: String, completion: @escaping ((Bool) -> (Void))) {
-        stellarSDK.accounts.getAccountDetails(accountId: accountID) { (accountResponse) -> (Void) in
-            print("UM-check if account exists: account details loaded for \(accountID)")
+        Services.shared.walletService.getAccountDetails(accountId: accountID) { (accountResponse) -> (Void) in
             DispatchQueue.main.async {
                 switch accountResponse {
                 case .success(_):
@@ -205,8 +203,7 @@ public class UserManager: NSObject {
      High Security - "high": AccountMerge, SetOptions for Signer and threshold
     **/
     func canSignerSignOperation(accountID: String, signerPublicKey:String, neededSecurity: SigningSecurityLevel, completion: @escaping CanSignerSignOperationClosure) {
-        stellarSDK.accounts.getAccountDetails(accountId: accountID) { (response) -> (Void) in
-            print("UM-can signer sign: account details loaded for \(accountID)")
+        Services.shared.walletService.getAccountDetails(accountId: accountID) { (response) -> (Void) in
             DispatchQueue.main.async {
                 switch response {
                 case .success(details: let accountDetails):
@@ -239,8 +236,7 @@ public class UserManager: NSObject {
     }
     
     func getSignersThatCanSignOperation(accountID: String, neededSecurity: SigningSecurityLevel, completion: @escaping GetSignersListClosure) {
-        stellarSDK.accounts.getAccountDetails(accountId: accountID) { (response) -> (Void) in
-            print("UM-getsigners: account details loaded for \(accountID)")
+        Services.shared.walletService.getAccountDetails(accountId: accountID) { (response) -> (Void) in
             DispatchQueue.main.async {
                 switch response {
                 case .success(details: let accountDetails):
@@ -268,8 +264,7 @@ public class UserManager: NSObject {
     
     func hasAccountTrustline(forAccount account: String, forAssetCode assetCode: String, forAssetIssuer issuer: String, completion: @escaping HasAccountTrustlineResponseClosure) {
         // TODO: check if trustline is authorized
-        stellarSDK.accounts.getAccountDetails(accountId: account) { (response) -> (Void) in
-            print("UM-has account trustline: account details loaded for \(account)")
+        Services.shared.walletService.getAccountDetails(accountId: account) { (response) -> (Void) in
             switch response {
             case .success(details: let accountDetails):
                 if let currency = accountDetails.balances.first(where: { (accountResponse) -> Bool in
@@ -293,8 +288,7 @@ public class UserManager: NSObject {
     }
     
     func getAccountDetails(forAccountID account: String, completion: @escaping AccountResponseClosure) {
-        stellarSDK.accounts.getAccountDetails(accountId: account) { (response) -> (Void) in
-            print("UM-get account details: account details loaded for \(account)")
+        Services.shared.walletService.getAccountDetails(accountId: account) { (response) -> (Void) in
             DispatchQueue.main.async {
                 completion(response)
             }
@@ -314,8 +308,7 @@ public class UserManager: NSObject {
             guard !callFailed else { return }
             
             // TODO: is this needed? to load the data again?
-            stellarSDK.accounts.getAccountDetails(accountId: wallet.publicKey) { (result) -> (Void) in
-                print("UM-total balace: account details loaded for \(wallet.publicKey)")
+            Services.shared.walletService.getAccountDetails(accountId: wallet.publicKey) { (result) -> (Void) in
                 switch result {
                 case .success(let accountDetails):
                     for balance in accountDetails.balances {
@@ -365,8 +358,7 @@ public class UserManager: NSObject {
         for wallet in wallets {
             guard !callFailed else { return }
             
-            stellarSDK.accounts.getAccountDetails(accountId: wallet.publicKey) { (result) -> (Void) in
-                print("UM-wallet details for- loaded account details for: \(wallet.publicKey)")
+            Services.shared.walletService.getAccountDetails(accountId: wallet.publicKey) { (result) -> (Void) in
                 switch result {
                 case .success(let accountDetails):
                     let walletDetail = FundedWallet(walletResponse: wallet, accountResponse: accountDetails)
@@ -411,7 +403,7 @@ public class UserManager: NSObject {
     
     func walletDetails(wallet: Wallet, completion: @escaping WalletsClosure) {
         print ("UM- wallet details (single) - load account details for wallet: \(wallet.name)")
-        stellarSDK.accounts.getAccountDetails(accountId: wallet.publicKey) { (result) -> (Void) in
+        Services.shared.walletService.getAccountDetails(accountId: wallet.publicKey) { (result) -> (Void) in
             switch result {
             case .success(let accountDetails):
                 let walletDetail = FundedWallet(wallet: wallet, accountResponse: accountDetails)

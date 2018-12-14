@@ -18,7 +18,6 @@ class WalletCardViewModel : CardViewModelType {
     fileprivate var card: Card?
     fileprivate let stellarSdk: StellarSDK
     fileprivate var funded: Bool = false
-    //fileprivate var needsRefresh: Bool = false
     
     var wallet: Wallet
     

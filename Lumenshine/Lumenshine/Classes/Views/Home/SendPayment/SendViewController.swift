@@ -825,9 +825,7 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
     }
     
     func setQR(value: String) {
-        
-        print("QR:" + value)
-        
+    
         setupForSelectedCurrency()
         
         var destinationSet = false
@@ -864,8 +862,6 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
                                         if let requestedCurrency = (wallet as! FundedWallet).balances.first(where: { (currency) -> Bool in
                                             return (currency.assetCode == code && currency.assetIssuer == issuer)
                                         }) {
-                                            print("requested currency: " + requestedCurrency.assetCode! + " " + requestedCurrency.assetIssuer!)
-                                            
                                             // select asset code
                                             selectedCurrency = code
                                             

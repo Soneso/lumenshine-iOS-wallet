@@ -362,7 +362,6 @@ class AccountDetailsViewController: UpdatableViewController {
         
         setupWalletDetails()
         setupAccountCurrency()
-        setupWalletDetails()
         setupTransactionsHistory()
     }
     
