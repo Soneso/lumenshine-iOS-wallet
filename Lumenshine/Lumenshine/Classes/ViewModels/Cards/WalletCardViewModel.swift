@@ -27,12 +27,12 @@ class WalletCardViewModel : CardViewModelType {
     var reloadCardsClosure: (() -> ())?
     var reloadClosure: ((Bool) -> ())?
     
-    init(userManager: UserManager, walletResponse: WalletsResponse) {
+    init(walletResponse: WalletsResponse) {
         self.stellarSdk = StellarSDK()
         
         self.wallet = Wallet(walletResponse: walletResponse)
         
-        userManager.walletDetailsFor(wallets: [walletResponse]) { result in
+        Services.shared.userManager.walletDetailsFor(wallets: [walletResponse]) { result in
             switch result {
             case .success(let wallets):
                 guard let wallet = wallets.first else { return }
@@ -43,7 +43,9 @@ class WalletCardViewModel : CardViewModelType {
             }
         }
     }
-    
+    deinit {
+        print("wallet cardviewmodel deinit")
+    }
     init(wallet: Wallet) {
         self.stellarSdk = StellarSDK()
         

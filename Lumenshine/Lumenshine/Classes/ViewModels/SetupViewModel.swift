@@ -42,8 +42,7 @@ protocol SetupViewModelType: Transitionable {
 }
 
 class SetupViewModel: SetupViewModelType {
-    
-    fileprivate let service: AuthService
+
     fileprivate let user: User
     fileprivate let mnemonic: String
     fileprivate let tfaConfirmed: Bool
@@ -56,8 +55,7 @@ class SetupViewModel: SetupViewModelType {
     
     weak var navigationCoordinator: CoordinatorType?
     
-    init(service: AuthService, user: User, mnemonic: String, tfaConfirmed: Bool, mailConfirmed: Bool, mnemonicConfirmed: Bool, tfaSecret:String?) {
-        self.service = service
+    init(user: User, mnemonic: String, tfaConfirmed: Bool, mailConfirmed: Bool, mnemonicConfirmed: Bool, tfaSecret:String?) {
         self.user = user
         self.mnemonic = mnemonic
         self.tfaConfirmed = tfaConfirmed
@@ -126,26 +124,26 @@ class SetupViewModel: SetupViewModelType {
     
     // 2FA methods
     func submit(tfaCode: String, response: @escaping TFAResponseClosure) {
-        service.sendTFA(code: tfaCode) { result in
+        Services.shared.auth.sendTFA(code: tfaCode) { result in
             response(result)
         }
     }
     
     // Email confirmation methods
     func checkMailConfirmation(response: @escaping TFAResponseClosure) {
-        service.registrationStatus { result in
+        Services.shared.auth.registrationStatus { result in
             response(result)
         }
     }
     
     func resendMailConfirmation(response: @escaping EmptyResponseClosure) {
-        service.resendMailConfirmation(email: user.email) { result in
+        Services.shared.auth.resendMailConfirmation(email: user.email) { result in
             response(result)
         }
     }
     
     func confirmMnemonic(response: @escaping TFAResponseClosure) {
-        service.confirmMnemonic { result in
+        Services.shared.auth.confirmMnemonic { result in
             response(result)
         }
     }

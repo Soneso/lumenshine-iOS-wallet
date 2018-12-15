@@ -24,16 +24,13 @@ protocol MenuViewModelType: Transitionable {
 class MenuViewModel : MenuViewModelType {
     
     static var backgroudTimePeriod: TimeInterval = 10
-    
-    fileprivate let services: Services
     fileprivate let user: User
     fileprivate let entries: [[MenuEntry]]
     fileprivate var backgroundTime: Date?
     
     weak var navigationCoordinator: CoordinatorType?
     
-    init(services: Services, user: User) {
-        self.services = services
+    init(user: User) {
         self.user = user
         
         self.entries = [[.avatar],
@@ -113,7 +110,7 @@ fileprivate extension MenuViewModel {
         if let newToken = notification.userInfo?[Keys.UserDefs.DeviceToken] as? String {
             if let deviceToken = UserDefaults.standard.value(forKey: Keys.UserDefs.DeviceToken) as? String,
                 newToken != deviceToken {
-                services.push.update(newPushToken: newToken, oldPushToken: deviceToken) { result in
+                Services.shared.push.update(newPushToken: newToken, oldPushToken: deviceToken) { result in
                     switch result {
                     case .failure(let error):
                         print("Push update error: \(error)")
@@ -122,7 +119,7 @@ fileprivate extension MenuViewModel {
                     }
                 }
             } else {
-                services.push.subscribe(pushToken: newToken) { result in
+                Services.shared.push.subscribe(pushToken: newToken) { result in
                     switch result {
                     case .failure(let error):
                         print("Push Subscribe error: \(error)")
@@ -153,7 +150,7 @@ fileprivate extension MenuViewModel {
     func logout() {
         removeObservers()
         if let deviceToken = UserDefaults.standard.value(forKey: Keys.UserDefs.DeviceToken) as? String {
-            services.push.unsubscribe(pushToken: deviceToken) { result in
+            Services.shared.push.unsubscribe(pushToken: deviceToken) { result in
                 switch result {
                 case .success:
                     UserDefaults.standard.setValue(nil, forKey:Keys.UserDefs.DeviceToken)
@@ -194,7 +191,7 @@ fileprivate extension MenuViewModel {
     }
     
     func showWallet(publicKey: String) {
-        services.walletService.getWallets { (result) -> (Void) in
+        Services.shared.walletService.getWallets { (result) -> (Void) in
             var transition: Transition = .showHome
             switch result {
             case .success(let wallets):

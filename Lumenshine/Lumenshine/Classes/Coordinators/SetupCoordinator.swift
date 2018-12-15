@@ -16,16 +16,13 @@ import KWDrawerController
 class SetupCoordinator: CoordinatorType {
     var baseController: UIViewController
     unowned var mainCoordinator: MainCoordinator
-    
-    fileprivate let service: AuthService
     fileprivate let viewModel: SetupViewModel
     fileprivate let user: User
     
-    init(mainCoordinator: MainCoordinator, service: AuthService, user: User, mnemonic: String, tfaConfirmed: Bool, mailConfirmed: Bool, mnemonicConfirmed: Bool, tfaSecret:String?) {
-        self.service = service
+    init(mainCoordinator: MainCoordinator, user: User, mnemonic: String, tfaConfirmed: Bool, mailConfirmed: Bool, mnemonicConfirmed: Bool, tfaSecret:String?) {
         self.user = user
         self.mainCoordinator = mainCoordinator
-        self.viewModel = SetupViewModel(service: service, user: user, mnemonic: mnemonic, tfaConfirmed: tfaConfirmed, mailConfirmed: mailConfirmed, mnemonicConfirmed: mnemonicConfirmed, tfaSecret:tfaSecret)
+        self.viewModel = SetupViewModel(user: user, mnemonic: mnemonic, tfaConfirmed: tfaConfirmed, mailConfirmed: mailConfirmed, mnemonicConfirmed: mnemonicConfirmed, tfaSecret:tfaSecret)
         if let setup = SetupViewController.initialize(viewModel: viewModel) {
             self.baseController = SnackbarController(rootViewController: setup)
             viewModel.navigationCoordinator = self

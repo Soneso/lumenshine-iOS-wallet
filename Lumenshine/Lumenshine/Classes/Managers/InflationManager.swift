@@ -64,24 +64,7 @@ class InflationManager {
             }
         }
     }
-    
-    func getInflationDestination(forAccount accountID: String, completion: @escaping GetInflationDestinationClosure) {
-        Services.shared.walletService.getAccountDetails(accountId: accountID) { (response) -> (Void) in
-            DispatchQueue.main.async {
-                switch response {
-                case .success(details: let accountDetails):
-                    if let inflationAddress = accountDetails.inflationDestination {
-                        completion(.success(inflationDestinationAddress: inflationAddress))
-                    } else {
-                        completion(.success(inflationDestinationAddress: ""))
-                    }
-                case .failure(error: let error):
-                    completion(.failure(error: error))
-                }
-            }
-        }
-    }
-    
+
     func getKnownInflationDestination(forPublicKey destinationPublicKey: String, completion: @escaping GetKnownInflationDestinationClosure) {
         currenciesService.getKnownInflationDestinations { (response) -> (Void) in
             switch response {

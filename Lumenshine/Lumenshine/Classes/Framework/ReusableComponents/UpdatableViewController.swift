@@ -35,6 +35,12 @@ public class UpdatableViewController: UIViewController {
     }
     
     deinit {
+        cleanup()
+        print("UpdatableViewController deinit")
+    }
+    
+    public func cleanup() {
+        
         WebSocketService.subscribers.removeObject(forKey: self)
         NotificationCenter.default.post(name: .unsubscribeForUpdates, object: self)
         if hasWallets {
@@ -42,8 +48,6 @@ public class UpdatableViewController: UIViewController {
         } else {
             NotificationCenter.default.removeObserver(self, name: NSNotification.Name.updateUIAfterWalletRefresh, object: nil)
         }
-        
-        print("UpdatableViewController deinit")
     }
     
     @objc func refreshWallets(notification: NSNotification) { }

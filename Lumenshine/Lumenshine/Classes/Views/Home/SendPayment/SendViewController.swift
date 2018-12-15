@@ -1044,7 +1044,7 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
     }
     
     override func updateUIAfterWalletRefresh(notification: NSNotification) {
-        
+        print ("SendViewController - updateUIAfterWalletRefresh received")
         if let updatedWallet = notification.object as? Wallet, updatedWallet.publicKey == wallet.publicKey {
             wallet = updatedWallet
         }

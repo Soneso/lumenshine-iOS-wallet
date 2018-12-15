@@ -18,14 +18,12 @@ class SettingsCoordinator: CoordinatorType {
     
     fileprivate let viewModel: SettingsViewModel
     fileprivate var personalDataViewModel: PersonalDataViewModel?
-    fileprivate let service: Services
     fileprivate let user: User
     
-    init(mainCoordinator: MainCoordinator, service: Services, user: User) {
-        self.service = service
+    init(mainCoordinator: MainCoordinator, user: User) {
         self.user = user
         self.mainCoordinator = mainCoordinator
-        self.viewModel = SettingsViewModel(services: service, user: user)
+        self.viewModel = SettingsViewModel(user: user)
         self.baseController = SettingsTableViewController(viewModel: viewModel)
         viewModel.navigationCoordinator = self
         mainCoordinator.currentCoordinator = self
@@ -39,8 +37,6 @@ class SettingsCoordinator: CoordinatorType {
             showChangePassword()
         case .showPasswordHint(let hint, let attributedText):
             showPasswordHint(hint, attributedText: attributedText)
-        case .showHome:
-            showHome()
         case .showSuccess:
             showSuccess()
         case .showSettings:
@@ -99,18 +95,6 @@ fileprivate extension SettingsCoordinator {
         baseController.navigationController?.present(composeVC, animated: true)
     }
     
-    func showHome() {
-        let coordinator = HomeCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
-        let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
-        if let drawer = baseController.drawerController {
-            drawer.setViewController(navigationController, for: .none)
-            drawer.closeSide()
-            if let menu = drawer.getViewController(for: .left) as? MenuViewController {
-                menu.present(coordinator.baseController)
-            }
-        }
-    }
-    
     func showSuccess() {
         let changeVC = ChangePasswordSuccessViewController(viewModel: viewModel)
         baseController.navigationController?.popToRootViewController(animated: false)
@@ -133,7 +117,7 @@ fileprivate extension SettingsCoordinator {
     }
     
     func showActivateFingerprint() {
-        let viewModel = ReLoginViewModel(services: service, user: user)
+        let viewModel = ReLoginViewModel(user: user)
         let activateVC = ActivateFingerprintViewController(viewModel: viewModel)
         let composeVC = ComposeNavigationController(rootViewController: activateVC)
         baseController.navigationController?.present(composeVC, animated: true)
@@ -145,7 +129,7 @@ fileprivate extension SettingsCoordinator {
     }
     
     func showPersonalData() {
-        let personalDataViewModel = PersonalDataViewModel(service: service.userData)
+        let personalDataViewModel = PersonalDataViewModel()
         let personalVC = PersonalDataViewController(viewModel: personalDataViewModel)
         baseController.navigationController?.pushViewController(personalVC, animated: true)
         self.personalDataViewModel = personalDataViewModel

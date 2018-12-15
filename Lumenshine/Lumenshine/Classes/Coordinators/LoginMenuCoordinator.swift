@@ -61,7 +61,7 @@ fileprivate extension LoginMenuCoordinator {
     }
     
     func createLoginCoordinator() -> LoginCoordinator {
-        let loginCoordinator = LoginCoordinator(mainCoordinator: mainCoordinator, service: service.auth)
+        let loginCoordinator = LoginCoordinator(mainCoordinator: mainCoordinator)
         let snackBar = SnackbarController(rootViewController: loginCoordinator.baseController)
         let navigationController = AppNavigationController(rootViewController: snackBar)
         navigationController.navigationBar.isTranslucent = true
@@ -74,7 +74,7 @@ fileprivate extension LoginMenuCoordinator {
     }
     
     func showHelpCenter() {
-        let coordinator = HelpCenterCoordinator(mainCoordinator: mainCoordinator, service: service)
+        let coordinator = HelpCenterCoordinator(mainCoordinator: mainCoordinator)
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
         if let drawer = baseController as? AppNavigationDrawerController {
             drawer.setViewController(navigationController, for: .none)

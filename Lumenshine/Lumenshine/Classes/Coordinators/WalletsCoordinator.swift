@@ -12,11 +12,23 @@
 import UIKit
 
 class WalletsCoordinator: HomeCoordinator {
-    override init(mainCoordinator: MainCoordinator, service: Services, user: User) {
+    
+    
+    override init(mainCoordinator: MainCoordinator) {
         
-        let viewModel = HomeViewModel(service: service, user: user, needsHeaderUpdate: false)
+        let viewModel = HomeViewModel(needsHeaderUpdate: false)
         let walletsView = WalletsViewController(viewModel: viewModel)
         
         super.init(mainCoordinator: mainCoordinator, viewModel:viewModel, viewController:walletsView)
+    }
+    
+    deinit {
+        print("Deinit WalletsCoordinator")
+        // HELP NEEDED
+        // this is a hack - pls see deinit of superclass HomeCoordinator
+        // after fixing, pls. remove this.
+        if let walletsViewController = self.baseController as? WalletsViewController {
+            walletsViewController.cleanup()
+        }
     }
 }

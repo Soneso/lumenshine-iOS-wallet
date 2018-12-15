@@ -12,6 +12,10 @@
 import UIKit
 import Material
 
+public protocol AddWalletDelegate: class {
+    func newWalletAdded(accountId: String)
+}
+
 class AddWalletViewController: UIViewController {
     @IBOutlet weak var walletNameTextField: UITextField!
     
@@ -23,6 +27,8 @@ class AddWalletViewController: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
     
     @IBOutlet weak var walletNameValidationView: UIView!
+    
+    weak var delegate:AddWalletDelegate?
     
     var walletCount: Int!
     
@@ -68,7 +74,7 @@ class AddWalletViewController: UIViewController {
             addWallet()
         }
     }
-    
+
     @IBAction func cancelButtonAction(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }
@@ -94,11 +100,14 @@ class AddWalletViewController: UIViewController {
                 case .failure(error: let error):
                     // TODO: handle this
                     print("Failed adding wallet! Error: \(error.localizedDescription)")
+                    self.displaySimpleAlertView(title: "Error adding new wallet", message: error.localizedDescription)
                 default:
+                    if let del = self.delegate {
+                        del.newWalletAdded(accountId: publicKey)
+                        self.navigationController?.popViewController(animated: true)
+                    }
                     break
                 }
-                
-                self.navigationController?.popViewController(animated: true)
             }
         }
     }

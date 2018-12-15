@@ -29,6 +29,7 @@ class TransactionsViewController: UITableViewController {
     fileprivate let verticalSpacing = 31.0
     fileprivate let horizontalSpacing = 15.0
     fileprivate let viewModel: TransactionsViewModelType
+    fileprivate var showsOperationDetails = false
     
     init(viewModel: TransactionsViewModelType) {
         self.viewModel = viewModel
@@ -59,18 +60,22 @@ class TransactionsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         prepare()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateHeader()
+        if !showsOperationDetails {
+            updateHeader()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        viewModel.applyFilters()
+        if !showsOperationDetails {
+            viewModel.applyFilters()
+        }
+        showsOperationDetails = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -187,6 +192,7 @@ extension TransactionsViewController: TransactionsCellDelegate {
     }
     
     func cell(_ cell: TransactionsCellProtocol, didInteractWith url: URL) {
+        showsOperationDetails = true
         viewModel.showOperationDetails(operationId: url.lastPathComponent)
     }
 }

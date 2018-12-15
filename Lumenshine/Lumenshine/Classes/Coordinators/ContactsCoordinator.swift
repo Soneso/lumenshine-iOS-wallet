@@ -17,8 +17,8 @@ class ContactsCoordinator: CoordinatorType {
     
     fileprivate let viewModel: ContactsViewModel
     
-    init(mainCoordinator: MainCoordinator, service: Services, user: User) {
-        self.viewModel = ContactsViewModel(service: service.contacts, user: user)
+    init(mainCoordinator: MainCoordinator, user: User) {
+        self.viewModel = ContactsViewModel(user: user)
         let viewController = ContactsViewController(viewModel: viewModel)
         
         self.mainCoordinator = mainCoordinator

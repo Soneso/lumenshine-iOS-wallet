@@ -25,6 +25,7 @@ class CurrencyView: UIView {
                 issuerLabel.text = issuer
             }
             
+            authorizationLabel.removeFromSuperview()
             if let isAuthorized = currency.authorized, isAuthorized {
                 authorizationLabel.removeFromSuperview()
             }

@@ -91,12 +91,6 @@ class WalletDetailsViewController: UIViewController {
         addSetInflationDestinationViewController()
     }
     
-    /*@IBAction func inflationDetailsButtonAction(_ sender: UIButton) {
-        let knownInflationDestinationDetailsViewController = KnownInflationDestinationDetailsViewController(nibName: "KnownInflationDestinationDetailsViewController", bundle: Bundle.main)
-        knownInflationDestinationDetailsViewController.knownInflationDestination = currentInflationDestination
-        navigationController?.pushViewController(knownInflationDestinationDetailsViewController, animated: true)
-    }*/
-    
     @IBAction func inflationChangeButtonAction(_ sender: UIButton) {
         if let inflationDestination = inflationPublicKeyLabel.text {
             addSetInflationDestinationViewController(currentInflationDestination: inflationDestination)
@@ -239,22 +233,14 @@ class WalletDetailsViewController: UIViewController {
     }
     
     private func setupInflationDestination() {
-        inflationManager.getInflationDestination(forAccount: wallet.publicKey) { (response) -> (Void) in
-            switch response {
-            case .success(inflationDestinationAddress: let destinationPublicKey):
-                // has no inflation destination or is set to self
-                if destinationPublicKey == "" || destinationPublicKey == self.wallet.publicKey {
-                    self.setUIForNoInflationSet()
-                } else {
-                    // has inflation destination
-                    self.checkForKnownInflationDestination(destinationPublicKey: destinationPublicKey)
-                }
-            case .failure(error: let error):
-                if let error = error {
-                    print("Error: \(error.localizedDescription)")
-                }
-                self.setUIForInflationUnknown()
-            }
+        
+        let destinationPublicKey = wallet.accountDetails.inflationDestination
+        
+        if destinationPublicKey == nil || destinationPublicKey == self.wallet.publicKey {
+            self.setUIForNoInflationSet()
+        } else {
+            // has inflation destination
+            self.checkForKnownInflationDestination(destinationPublicKey: destinationPublicKey!)
         }
     }
     

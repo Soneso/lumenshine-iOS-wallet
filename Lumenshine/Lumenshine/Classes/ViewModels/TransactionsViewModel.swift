@@ -106,8 +106,6 @@ enum TransactionType: String, Comparable {
 
 class TransactionsViewModel : TransactionsViewModelType {
     
-    fileprivate let services: Services
-    fileprivate let user: User?
     fileprivate let mainFont: UIFont
     
     fileprivate var entries: [TxTransactionResponse] = []
@@ -126,9 +124,8 @@ class TransactionsViewModel : TransactionsViewModelType {
     var showActivityClosure: (() -> ())?
     var hideActivityClosure: (() -> ())?
     
-    init(service: Services, user: User?) {
-        self.services = service
-        self.user = user
+    init() {
+
         self.mainFont = R.font.encodeSansRegular(size: 13) ?? Stylesheet.font(.body)
         
         self.currentWalletPK = PrivateKeyManager.getPublicKey(forIndex: 0)
@@ -216,7 +213,7 @@ class TransactionsViewModel : TransactionsViewModelType {
         case .accountCreated,
              .payment,
              .pathPayment:
-            if let amount = amount(for: item) {
+            if let amount = formattedAmount(for: item) {
                 let color: ColorStyle = transactionType(for: item) == .paymentSent ? .red : .green
                 return NSAttributedString(string: amount,
                                           attributes: [.foregroundColor : Stylesheet.color(color)])
@@ -334,7 +331,7 @@ class TransactionsViewModel : TransactionsViewModelType {
                                            attributes: [.font : mainFont,
                                                         .foregroundColor : Stylesheet.color(.lightBlack)])
         
-        let link = services.baseURL.appending("/\(item.opId)")
+        let link = Services.shared.transactions.baseURL.appending("/\(item.opId)")
         let operationIdValue = NSAttributedString(string: String(item.opId),
                                                   attributes: [.font : mainFont,
                                                                .foregroundColor : Stylesheet.color(.blue),
@@ -474,24 +471,15 @@ class TransactionsViewModel : TransactionsViewModelType {
     
     func showOperationDetails(operationId: String) {
         
-        if let closure = self.showActivityClosure {
-            closure()
-        }
-        
         let requestUrl = Services.shared.horizonURL + "/operations/" + operationId
         Services.shared.walletService.GETRequestFromUrl(url: requestUrl) { (result) -> (Void) in
             DispatchQueue.main.async {
-                if let closure = self.hideActivityClosure {
-                    closure() // TODO wait until closed and remove hack from below
+                switch result {
+                case .success (let data):
+                    self.navigationCoordinator?.performTransition(transition: .showTransactionDetails(data))
+                case .failure(_):
+                    self.navigationCoordinator?.baseController.displaySimpleAlertView(title: R.string.localizable.error(), message: R.string.localizable.operation_details_load_error())
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
-                    switch result {
-                    case .success (let data):
-                        self.navigationCoordinator?.performTransition(transition: .showTransactionDetails(data))
-                    case .failure(_):
-                        self.navigationCoordinator?.baseController.displaySimpleAlertView(title: R.string.localizable.error(), message: R.string.localizable.operation_details_load_error())
-                    }
-                })
             }
         }
     }
@@ -506,7 +494,7 @@ fileprivate extension TransactionsViewModel {
         }
         let startDate = DateUtils.format(dateFrom, in: .dateAndTime) ?? Date().description
         let endDate = DateUtils.format(dateTo, in: .dateAndTime) ?? Date().description
-        services.transactions.getTransactions(stellarAccount: currentWalletPK, startTime: startDate, endTime: endDate) { [weak self] result in
+        Services.shared.transactions.getTransactions(stellarAccount: currentWalletPK, startTime: startDate, endTime: endDate) { [weak self] result in
             switch result {
             case .success(let transactions):
                 self?.setupEntries(transactions: transactions)
@@ -529,7 +517,7 @@ fileprivate extension TransactionsViewModel {
     }
     
     func getWallets() {
-        services.walletService.getWallets { [weak self] (result) -> (Void) in
+        Services.shared.walletService.getWallets { [weak self] (result) -> (Void) in
             switch result {
             case .success(let wallets):
                 self?.sortedWallets = wallets.sorted(by: { $0.id < $1.id })
@@ -542,7 +530,7 @@ fileprivate extension TransactionsViewModel {
     }
     
     func getWalletDetails(wallets: [WalletsResponse]) {
-        services.userManager.walletDetailsFor(wallets: wallets) { result in
+        Services.shared.userManager.walletDetailsFor(wallets: wallets) { result in
             switch result {
             case .success(let wallets):
                 self.sortedWalletsDetails = wallets.sorted(by: { $0.id < $1.id })
@@ -592,32 +580,39 @@ fileprivate extension TransactionsViewModel {
         return value
     }
     
+    func formattedAmount(for item: TxTransactionResponse) -> String? {
+        if let amountForItem = amount(for: item) {
+            return formatAmount(amount: amountForItem)
+        }
+        return nil
+    }
+    
     func amount(for item: TxTransactionResponse) -> String? {
         switch item.operationType {
         case .accountCreated:
             if let amountVal = (item.operationResponse as? TxAccountCreatedOperationResponse)?.startingBalance {
-                return formatAmount(amount: amountVal)
+                return amountVal
             }
             break
         case .payment:
             if let amountVal = (item.operationResponse as? TxPaymentOperationResponse)?.amount {
-                return formatAmount(amount: amountVal)
+                return amountVal
             }
             break
         case .pathPayment:
             if let subItem = item.operationResponse as? TxPathPaymentOperationResponse {
                 let amountVal = transactionType(for: item) == .paymentSent ? subItem.sourceAmount : subItem.amount
-                return formatAmount(amount: amountVal)
+                return amountVal
             }
             break
         case .manageOffer:
             if let amountVal = (item.operationResponse as? TxManageOfferOperationResponse)?.amount {
-                return formatAmount(amount: amountVal)
+                return amountVal
             }
             break
         case .createPassiveOffer:
             if let amountVal = (item.operationResponse as? TxCreatePassiveOfferOperationResponse)?.amount {
-                return formatAmount(amount: amountVal)
+                return amountVal
             }
             break
         default:
@@ -840,10 +835,14 @@ fileprivate extension TransactionsViewModel {
         if let amountSorter = sorter.amount {
             guard let lhsAmount = amount(for: lhs) else { return amountSorter }
             guard let rhsAmount = amount(for: rhs) else { return !amountSorter }
-            if Double(lhsAmount)! < Double(rhsAmount)! {
-                return amountSorter
-            }
-            if Double(lhsAmount)! > Double(rhsAmount)! {
+            if let dlhsAmount = Double(lhsAmount), let drhsAmount = Double(rhsAmount) {
+                if dlhsAmount < drhsAmount {
+                    return amountSorter
+                }
+                if dlhsAmount > drhsAmount {
+                    return !amountSorter
+                }
+            } else {
                 return !amountSorter
             }
         }

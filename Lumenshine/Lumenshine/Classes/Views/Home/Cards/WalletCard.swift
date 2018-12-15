@@ -33,7 +33,7 @@ class WalletCard: CardView {
     
     var fundedView: WalletCardContentView?
     var unfundedView: UnfundedWalletCardContentView?
-    var viewController: UIViewController?
+    weak var viewController: UIViewController?
     
     var reloadCellAction: ((Bool) -> ())?
     var expanded = false

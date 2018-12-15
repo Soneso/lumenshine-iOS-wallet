@@ -73,6 +73,7 @@ public class FundedWallet: Wallet {
     var balances: [AccountBalanceResponse]
     var subentryCount: UInt!
     var masterKeyWeight: Int!
+    var accountDetails : AccountResponse
     
     init(walletResponse: WalletsResponse, accountResponse: AccountResponse) {
         self.balances = accountResponse.balances
@@ -80,6 +81,7 @@ public class FundedWallet: Wallet {
         self.masterKeyWeight = accountResponse.signers.first(where: { (signer) -> Bool in
             return signer.publicKey == accountResponse.accountId
         })?.weight
+        self.accountDetails = accountResponse
         super.init(walletResponse: walletResponse)
     }
     
@@ -89,6 +91,7 @@ public class FundedWallet: Wallet {
         self.masterKeyWeight = accountResponse.signers.first(where: { (signer) -> Bool in
             return signer.publicKey == accountResponse.accountId
         })?.weight
+        self.accountDetails = accountResponse
         super.init(wallet: wallet)
     }
     

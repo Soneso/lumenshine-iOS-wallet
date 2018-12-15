@@ -17,8 +17,8 @@ class TransactionsCoordinator: CoordinatorType {
     
     fileprivate let viewModel: TransactionsViewModel
     
-    init(mainCoordinator: MainCoordinator, service: Services, user: User) {
-        self.viewModel = TransactionsViewModel(service: service, user: user)
+    init(mainCoordinator: MainCoordinator) {
+        self.viewModel = TransactionsViewModel()
         let viewController = TransactionsViewController(viewModel: viewModel)
         
         self.mainCoordinator = mainCoordinator

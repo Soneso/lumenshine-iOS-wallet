@@ -24,13 +24,7 @@ class HomeViewController: UpdatableViewController {
     fileprivate var headerBar: CustomizableFlexibleHeightBar!
     fileprivate var header: HomeHeaderView!
     fileprivate var tableViewContainer: UIView!
-    
-    fileprivate var userManager: UserManager {
-        get {
-            return Services.shared.userManager
-        }
-    }
-    
+
     fileprivate let tableView: UITableView
     public var dataSourceItems = [CardView]()
     
@@ -83,31 +77,37 @@ class HomeViewController: UpdatableViewController {
     }
     
     deinit {
+        print("HomeViewController deinit")
         tableView.dg_removePullToRefresh()
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         prepareHeader()
         prepareView()
         prepareRefresh()
-        print("reload cards")
-        viewModel.reloadCards()
+        viewModel.reloadData()
+        super.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         navigationController?.navigationBar.shadowColor = Stylesheet.color(.clear)
         navigationController?.navigationBar.backgroundColor = Stylesheet.color(.clear)
         navigationController?.navigationBar.isTranslucent = true
         navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 18)
         navigationItem.titleLabel.text = R.string.localizable.homeScreenTitle()
-        print("refresh wallets")
         viewModel.refreshWallets()
+        super.viewWillAppear(animated)
+    }
+    
+    override func cleanup() {
+        viewModel.cleanup()
+        dataSourceItems.removeAll()
+        super.cleanup()
     }
     
     override func refreshWallets(notification: NSNotification) {
+        print("HomeViewController - refresh wallets \(ObjectIdentifier(self))")
         viewModel.refreshWallets()
         if let updateHeader = notification.object as? Bool, updateHeader {
             viewModel.updateHeaderData()
@@ -262,10 +262,8 @@ fileprivate extension HomeViewController {
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
         loadingView.tintColor = Stylesheet.color(.blue)
         tableView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
-            // Add your logic here
-           self?.viewModel.reloadCards()
-            
-            // Do not forget to call dg_stopLoading() at the end
+            Services.shared.walletService.removeAllCachedAccountDetails()
+            self?.viewModel.reloadData()
             self?.tableView.dg_stopLoading()
             }, loadingView: loadingView)
         tableView.dg_setPullToRefreshFillColor(Stylesheet.color(.purple))
@@ -331,7 +329,7 @@ fileprivate extension HomeViewController {
     }
     
     func refreshHeaderType() {
-        userManager.totalNativeFounds { (result) -> (Void) in
+        Services.shared.userManager.totalNativeFounds { (result) -> (Void) in
             switch result {
             case .success(let data):
                 self.setHeaderType(nativeFounds: data)

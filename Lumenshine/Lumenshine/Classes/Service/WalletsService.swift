@@ -162,6 +162,10 @@ public class WalletsService: BaseService {
         accountDetailsCache.removeObject(forKey: accountId as NSString)
     }
     
+    open func removeAllCachedAccountDetails(){
+        accountDetailsCache.removeAllObjects()
+    }
+    
     open func getAccountDetails(accountId: String, response: @escaping AccountResponseClosure) {
         
         if let cachedObject = accountDetailsCache.object(forKey: accountId as NSString) {

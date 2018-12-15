@@ -41,7 +41,6 @@ protocol ContactsViewModelType: Transitionable {
 
 class ContactsViewModel : ContactsViewModelType {
     
-    fileprivate let service: ContactsService
     fileprivate let user: User
     fileprivate var entries: [ContactResponse] = []
     fileprivate var filteredEntries: [ContactResponse] = []
@@ -51,11 +50,10 @@ class ContactsViewModel : ContactsViewModelType {
     var selectedContact: ContactResponse?
     var reloadClosure: (() -> ())?
     
-    init(service: ContactsService, user: User) {
-        self.service = service
+    init(user: User) {
         self.user = user
         
-        service.getContactList { [weak self] result in
+        Services.shared.contacts.getContactList { [weak self] result in
             switch result {
             case .success(let contacts):
                 self?.entries = contacts
@@ -170,7 +168,7 @@ class ContactsViewModel : ContactsViewModelType {
         }
         
         if let contactId = selectedContact?.id {
-            service.editContact(id: contactId, name: name, address: federation_address, publicKey: public_key) { [weak self] result in
+            Services.shared.contacts.editContact(id: contactId, name: name, address: federation_address, publicKey: public_key) { [weak self] result in
                 switch result {
                 case .success(let contacts):
                     self?.entries = contacts
@@ -181,7 +179,7 @@ class ContactsViewModel : ContactsViewModelType {
                 }
             }
         } else {
-            service.addContact(name: name, address: federation_address, publicKey: public_key) { [weak self] result in
+            Services.shared.contacts.addContact(name: name, address: federation_address, publicKey: public_key) { [weak self] result in
                 switch result {
                 case .success(let contacts):
                     self?.entries = contacts
@@ -196,7 +194,7 @@ class ContactsViewModel : ContactsViewModelType {
     
     func removeContact(response: @escaping ContactsResponseClosure) {
         if let contactId = selectedContact?.id {
-            service.removeContact(id: contactId) { [weak self] result in
+            Services.shared.contacts.removeContact(id: contactId) { [weak self] result in
                 switch result {
                 case .success(let contacts):
                     self?.entries = contacts

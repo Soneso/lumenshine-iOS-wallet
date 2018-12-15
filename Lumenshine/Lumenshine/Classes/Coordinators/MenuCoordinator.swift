@@ -17,15 +17,13 @@ class MenuCoordinator: MenuCoordinatorType {
     unowned var mainCoordinator: MainCoordinator
     
     fileprivate let menuView: MenuViewController
-    fileprivate let service: Services
     fileprivate let user: User
     
     init(mainCoordinator: MainCoordinator, user: User) {
         self.user = user
-        self.service = Services()
         self.mainCoordinator = mainCoordinator
         
-        let viewModel = MenuViewModel(services: service, user: user)
+        let viewModel = MenuViewModel(user: user)
         menuView = MenuViewController(viewModel: viewModel)
         
         let drawer = AppNavigationDrawerController()
@@ -59,41 +57,47 @@ class MenuCoordinator: MenuCoordinatorType {
         default: break
         }
     }
+    deinit {
+        print("Deinit MenuCoordinator")
+        if let drawer = baseController as? AppNavigationDrawerController {
+            drawer.setViewController(nil, for: .none)
+        }
+    }
 }
 
 fileprivate extension MenuCoordinator {
     func showHome() {
-        let coordinator = HomeCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
+        let coordinator = HomeCoordinator(mainCoordinator: mainCoordinator)
         let navigationController = ImageBackgroundNavigationController(rootViewController: coordinator.baseController)
         present(navigationController: navigationController)
     }
     
     func showWallets() {
-        let coordinator = WalletsCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
+        let coordinator = WalletsCoordinator(mainCoordinator: mainCoordinator)
         let navigationController = ImageBackgroundNavigationController(rootViewController: coordinator.baseController, alwaysShowBackgroundImage: true)
         present(navigationController: navigationController)
     }
     
     func showSettings() {
-        let coordinator = SettingsCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
+        let coordinator = SettingsCoordinator(mainCoordinator: mainCoordinator, user: user)
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
         present(navigationController: navigationController)
     }
     
     func showHelpCenter() {
-        let coordinator = HelpCenterCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
+        let coordinator = HelpCenterCoordinator(mainCoordinator: mainCoordinator)
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
         present(navigationController: navigationController)
     }
     
     func showContacts() {
-        let coordinator = ContactsCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
+        let coordinator = ContactsCoordinator(mainCoordinator: mainCoordinator, user: user)
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
         present(navigationController: navigationController)
     }
     
     func showTransactions() {
-        let coordinator = TransactionsCoordinator(mainCoordinator: mainCoordinator, service: service, user: user)
+        let coordinator = TransactionsCoordinator(mainCoordinator: mainCoordinator)
         let snackBar = SnackbarController(rootViewController: coordinator.baseController)
         let navigationController = AppNavigationController(rootViewController: snackBar)
         present(navigationController: navigationController)
@@ -110,9 +114,14 @@ fileprivate extension MenuCoordinator {
     }
     
     func present(coordinator: CoordinatorType) {
-        if let window = UIApplication.shared.delegate?.window ?? baseController.view.window {
-            UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromBottom, animations: {
-                window.rootViewController = coordinator.baseController
+        if let window = UIApplication.shared.delegate?.window {
+            UIView.transition(with: window!, duration: 0.3, options: .transitionFlipFromBottom, animations: {
+                window!.rootViewController = coordinator.baseController
+            }, completion: nil)
+        } else {
+            let window = baseController.view.window
+            UIView.transition(with: window!, duration: 0.3, options: .transitionFlipFromBottom, animations: {
+                window!.rootViewController = coordinator.baseController
             }, completion: nil)
         }
     }

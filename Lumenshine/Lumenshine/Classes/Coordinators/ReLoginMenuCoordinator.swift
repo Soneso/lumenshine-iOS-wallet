@@ -63,7 +63,7 @@ fileprivate extension ReLoginMenuCoordinator {
     }
     
     func showRelogin() {
-        let loginCoordinator = ReLoginCoordinator(mainCoordinator: mainCoordinator, services: services, user: user)
+        let loginCoordinator = ReLoginCoordinator(mainCoordinator: mainCoordinator, user: user)
         let navigationController = AppNavigationController(rootViewController: loginCoordinator.baseController)
         navigationController.navigationBar.isTranslucent = true
         if let drawer = baseController as? AppNavigationDrawerController {

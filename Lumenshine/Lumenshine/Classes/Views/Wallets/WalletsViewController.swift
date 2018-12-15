@@ -13,23 +13,13 @@ import UIKit
 import DGElasticPullToRefresh
 import Material
 
-class WalletsViewController: UpdatableViewController, UITableViewDataSource {
+class WalletsViewController: UpdatableViewController, UITableViewDataSource, AddWalletDelegate {
+    
     private let cellIdentifier = "CardTableViewCell"
-    private let viewModel: HomeViewModelType!
+    private var viewModel: HomeViewModelType!
     private let tableView: UITableView!
-    private var walletService: WalletsService {
-        get {
-            return Services.shared.walletService
-        }
-    }
-    
-    private var userManager: UserManager {
-        get {
-            return Services.shared.userManager
-        }
-    }
-    
     public var dataSourceItems = [CardView]()
+    private var newWalletAdded = false
     
     init(viewModel: HomeViewModelType) {
         self.viewModel = viewModel
@@ -58,20 +48,48 @@ class WalletsViewController: UpdatableViewController, UITableViewDataSource {
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-        tableView.dg_removePullToRefresh()
-    }
-
     override func viewDidLoad() {
-        super.viewDidLoad()
         prepareView()
         prepareRefresh()
         setupNavigationItem()
+        super.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if let viewmodel = viewModel as? HomeViewModel, viewmodel.cardViewModels.count == 0 {
+            reloadCards()
+        } else if newWalletAdded {
+            newWalletAdded = false
+            reloadCards()
+        } else {
+            refreshWallets()
+        }
         super.viewWillAppear(animated)
-        reloadCards()
+    }
+    
+    deinit {
+        tableView.dg_removePullToRefresh()
+    }
+    
+    override func cleanup() {
+        viewModel.cleanup()
+        dataSourceItems.removeAll()
+        super.cleanup()
+    }
+    
+    func newWalletAdded(accountId: String) {
+        UserDefaults.standard.setValue(accountId, forKey: Keys.UserDefs.ShowWallet)
+        newWalletAdded = true
+    }
+    
+    func refreshWallets() {
+        if let viewmodel = viewModel as? HomeViewModel {
+            for cardViewModel in viewmodel.cardViewModels {
+                if let wallet = cardViewModel as? WalletCardViewModel {
+                    wallet.refreshContent(userManager: Services.shared.userManager)
+                }
+            }
+        }
     }
     
     private func prepareView() {
@@ -97,6 +115,7 @@ class WalletsViewController: UpdatableViewController, UITableViewDataSource {
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
         loadingView.tintColor = Stylesheet.color(.blue)
         tableView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
+            Services.shared.walletService.removeAllCachedAccountDetails()
             self?.reloadCards()
             self?.tableView.dg_stopLoading()
             }, loadingView: loadingView)
@@ -143,21 +162,22 @@ class WalletsViewController: UpdatableViewController, UITableViewDataSource {
     
     @IBAction func didTapAddWallet(_ sender: Any) {
         let addWalletVC = AddWalletViewController()
+        addWalletVC.delegate = self
         addWalletVC.walletCount = dataSourceItems.count
         navigationController?.pushViewController(addWalletVC, animated: true)
     }
     
     func reloadCards() {
-        if let viewmodel = viewModel as? HomeViewModel {
-            viewmodel.cardViewModels.removeAll()
-            walletService.getWallets { (result) -> (Void) in
+        if let _ = self.viewModel as? HomeViewModel {
+            self.viewModel.cardViewModels.removeAll()
+            Services.shared.walletService.getWallets { (result) -> (Void) in
                 switch result {
                 case .success(let wallets):
                     let sortedWallets = wallets.sorted(by: { $0.id < $1.id })
                     for wallet in sortedWallets {
-                        let walletCardViewModel = WalletCardViewModel(userManager: self.userManager, walletResponse: wallet)
-                        walletCardViewModel.navigationCoordinator = viewmodel.navigationCoordinator
-                        viewmodel.cardViewModels.append(walletCardViewModel)
+                        let walletCardViewModel = WalletCardViewModel(walletResponse: wallet)
+                        walletCardViewModel.navigationCoordinator = self.viewModel.navigationCoordinator
+                        self.viewModel.cardViewModels.append(walletCardViewModel)
                     }
                     
                 WebSocketService.wallets = wallets
@@ -166,9 +186,10 @@ class WalletsViewController: UpdatableViewController, UITableViewDataSource {
                     print("Failed to get wallets")
                 }
                 
-                viewmodel.reloadClosure?()
+                self.viewModel.reloadClosure?()
                 
-                viewmodel.showWalletIfNeeded()
+                self.viewModel.showWalletIfNeeded()
+                
             }
         }
     }
@@ -205,6 +226,7 @@ class WalletsViewController: UpdatableViewController, UITableViewDataSource {
     }
     
     override func refreshWallets(notification: NSNotification) {
+        print ("WalletsViewController - refresh wallets")
         viewModel.refreshWallets()
     }
 }

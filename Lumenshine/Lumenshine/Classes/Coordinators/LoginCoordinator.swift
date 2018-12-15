@@ -16,12 +16,9 @@ class LoginCoordinator: CoordinatorType {
     var baseController: UIViewController
     unowned var mainCoordinator: MainCoordinator
     
-    fileprivate let service: AuthService
-    
-    init(mainCoordinator: MainCoordinator, service: AuthService, transition: Transition? = .showLogin) {
-        self.service = service
+    init(mainCoordinator: MainCoordinator, transition: Transition? = .showLogin) {
         self.mainCoordinator = mainCoordinator
-        let viewModel = LoginViewModel(service: service)
+        let viewModel = LoginViewModel()
         self.baseController = LoginViewController(viewModel: viewModel)
         viewModel.navigationCoordinator = self
         mainCoordinator.currentCoordinator = self
@@ -109,7 +106,7 @@ fileprivate extension LoginCoordinator {
     }
     
     func showSetup(user: User, mnemonic: String, tfaConfirmed: Bool, mailConfirmed: Bool, mnemonicConfirmed: Bool, tfaSecret: String?) {
-        let coordinator = SetupMenuCoordinator(mainCoordinator: mainCoordinator, service: service, user: user, mnemonic: mnemonic, tfaConfirmed: tfaConfirmed, mailConfirmed: mailConfirmed, mnemonicConfirmed: mnemonicConfirmed, tfaSecret:tfaSecret)
+        let coordinator = SetupMenuCoordinator(mainCoordinator: mainCoordinator, user: user, mnemonic: mnemonic, tfaConfirmed: tfaConfirmed, mailConfirmed: mailConfirmed, mnemonicConfirmed: mnemonicConfirmed, tfaSecret:tfaSecret)
         present(coordinator: coordinator)
     }
     

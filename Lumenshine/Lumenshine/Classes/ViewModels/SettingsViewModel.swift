@@ -35,7 +35,6 @@ protocol SettingsViewModelType: Transitionable, BiometricAuthenticationProtocol 
     func changePassword(currentPass: String, newPass: String, repeatPass: String, response: @escaping EmptyResponseClosure)
     func change2faSecret(password: String, response: @escaping TfaSecretResponseClosure)
     func confirm2faSecret(tfaCode: String, response: @escaping TFAResponseClosure)
-    func showHome()
     func showSettings()
     func showConfirm2faSecret(tfaResponse: TFASecretResponse)
     func showBackupMnemonic(password: String, response: @escaping DecryptedUserDataResponseClosure)
@@ -47,18 +46,14 @@ protocol SettingsViewModelType: Transitionable, BiometricAuthenticationProtocol 
 
 class SettingsViewModel: SettingsViewModelType {
     
-    // MARK: - Parameters & Constants
-    
     weak var navigationCoordinator: CoordinatorType?
-    
-    fileprivate let services: Services
+
     fileprivate let user: User
     fileprivate let entries: [[SettingsEntry]]
     fileprivate var tfaResponse: TFASecretResponse?
     fileprivate var changePassword: Bool = true
     
-    init(services: Services, user: User) {
-        self.services = services
+    init(user: User) {
         self.user = user
         self.entries = [[.changePassword,
                          .change2FA,
@@ -189,10 +184,6 @@ class SettingsViewModel: SettingsViewModelType {
         navigationCoordinator?.performTransition(transition: .showSuccess)
     }
     
-    func showHome() {
-        navigationCoordinator?.performTransition(transition: .showHome)
-    }
-    
     func showSettings() {
         navigationCoordinator?.performTransition(transition: .showSettings)
     }
@@ -214,7 +205,7 @@ class SettingsViewModel: SettingsViewModelType {
             return
         }
         
-        services.auth.authenticationData { result in
+        Services.shared.auth.authenticationData { result in
             switch result {
             case .success(let authResponse):
                 self.changePassword(authResponse: authResponse, oldPass: currentPass, newPass: newPass) { result2 in
@@ -225,15 +216,15 @@ class SettingsViewModel: SettingsViewModelType {
                             switch keyResponse {
                             case .success(keyPair: let keyPair):
                                 // get sep 10 challenge
-                                self.services.auth.getSep10Challenge(response: { (sep10Response) -> (Void) in
+                                Services.shared.auth.getSep10Challenge(response: { (sep10Response) -> (Void) in
                                     switch sep10Response {
                                     case .success(transactionEnvelopeXDR: let envelopeXDR):
                                         // sign sep 10 challenge if valid
-                                        self.services.auth.signSEP10ChallengeIfValid(base64EnvelopeXDR: envelopeXDR, userKeyPair: keyPair!, completion: { (signResponse) -> (Void) in
+                                        Services.shared.auth.signSEP10ChallengeIfValid(base64EnvelopeXDR: envelopeXDR, userKeyPair: keyPair!, completion: { (signResponse) -> (Void) in
                                             switch signResponse {
                                             case .success(signedXDR: let signedXDR):
                                                 // change password
-                                                self.services.auth.changePassword(signedSEP10TransactionEnvelope: signedXDR, userSecurity: userSecurity, response: response)
+                                                Services.shared.auth.changePassword(signedSEP10TransactionEnvelope: signedXDR, userSecurity: userSecurity, response: response)
                                             case .failure(error: let error):
                                                 print(error)
                                                 response(.failure(error: error))
@@ -261,7 +252,7 @@ class SettingsViewModel: SettingsViewModelType {
     }
     
     func change2faSecret(password: String, response: @escaping TfaSecretResponseClosure) {
-        services.auth.authenticationData { result in
+        Services.shared.auth.authenticationData { result in
             switch result {
             case .success(let authResponse):
                 self.change2faSecret(authResponse: authResponse, password: password, response: response)
@@ -272,7 +263,7 @@ class SettingsViewModel: SettingsViewModelType {
     }
     
     func confirm2faSecret(tfaCode: String, response: @escaping TFAResponseClosure) {
-        services.auth.confirm2faSecret(tfaCode: tfaCode) { [weak self] result in
+        Services.shared.auth.confirm2faSecret(tfaCode: tfaCode) { [weak self] result in
             switch result {
             case .success:
                 if let secret = self?.tfaResponse?.tfaSecret,
@@ -291,7 +282,7 @@ class SettingsViewModel: SettingsViewModelType {
     }
     
     func showBackupMnemonic(password: String, response: @escaping DecryptedUserDataResponseClosure) {
-        services.auth.authenticationData { result in
+        Services.shared.auth.authenticationData { result in
             switch result {
             case .success(let authResponse):
                 self.backupMnemonic(authResponse: authResponse, password: password, response: response)
@@ -312,7 +303,7 @@ class SettingsViewModel: SettingsViewModelType {
     
     func destinationCurrencies(response: @escaping DestinationCurrenciesResponseClosure) {
         
-        services.chartsService.getChartsCurrencyPairs { result in
+        Services.shared.chartsService.getChartsCurrencyPairs { result in
             switch result {
             case .success(let currencyPairs):
                 if let currencies = currencyPairs.first?.destinationCurrencies {
@@ -370,14 +361,14 @@ fileprivate extension SettingsViewModel {
                     PrivateKeyManager.getKeyPair(forAccountID: userSecurity.publicKeyIndex0, fromMnemonic: decryptedUserData.mnemonic, completion: { (keyResponse) -> (Void) in
                         switch keyResponse {
                         case .success(keyPair: let keyPair):
-                            self.services.auth.getSep10Challenge(response: { (sep10Response) -> (Void) in
+                            Services.shared.auth.getSep10Challenge(response: { (sep10Response) -> (Void) in
                                 switch sep10Response {
                                     case .success(transactionEnvelopeXDR: let envelopeXDR):
-                                        self.services.auth.signSEP10ChallengeIfValid(base64EnvelopeXDR: envelopeXDR, userKeyPair: keyPair!, completion: { (signResponse) -> (Void) in
+                                        Services.shared.auth.signSEP10ChallengeIfValid(base64EnvelopeXDR: envelopeXDR, userKeyPair: keyPair!, completion: { (signResponse) -> (Void) in
                                             switch signResponse {
                                             case .success(signedXDR: let signedXDR):
                                                 // get new 2fa secret
-                                                self.services.auth.new2faSecret(signedSEP10TransactionEnvelope:signedXDR, response: response)
+                                                Services.shared.auth.new2faSecret(signedSEP10TransactionEnvelope:signedXDR, response: response)
                                             case .failure(error: let error):
                                                 print(error)
                                                 response(.failure(error: error))
@@ -431,7 +422,7 @@ fileprivate extension SettingsViewModel {
         } else {
             UIApplication.shared.unregisterForRemoteNotifications()
             if let deviceToken = UserDefaults.standard.value(forKey: Keys.UserDefs.DeviceToken) as? String {
-                services.push.unsubscribe(pushToken: deviceToken) { result in
+                Services.shared.push.unsubscribe(pushToken: deviceToken) { result in
                     switch result {
                     case .success:
                         UserDefaults.standard.setValue(nil, forKey:Keys.UserDefs.DeviceToken)

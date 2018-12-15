@@ -12,14 +12,12 @@
 import Foundation
 
 class SetupMenuViewModel : MenuViewModelType {
-    fileprivate let service: AuthService
     fileprivate var user: User
     
     var entries: [[MenuEntry]]
     weak var navigationCoordinator: CoordinatorType?
     
-    init(service: AuthService, user: User) {
-        self.service = service
+    init(user: User) {
         self.user = user
         
         self.entries = [[.avatar],

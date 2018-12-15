@@ -15,8 +15,8 @@ class HelpCenterCoordinator: CoordinatorType {
     var baseController: UIViewController
     unowned var mainCoordinator: MainCoordinator
     
-    init(mainCoordinator: MainCoordinator, service: Services, user: User? = nil) {
-        let viewModel = HelpCenterViewModel(service: service.auth, user: user)
+    init(mainCoordinator: MainCoordinator) {
+        let viewModel = HelpCenterViewModel()
         let helpView = HelpCenterViewController(viewModel: viewModel)
         
         self.mainCoordinator = mainCoordinator

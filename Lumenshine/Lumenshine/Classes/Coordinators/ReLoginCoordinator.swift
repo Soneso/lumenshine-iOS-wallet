@@ -15,11 +15,8 @@ class ReLoginCoordinator: CoordinatorType {
     var baseController: UIViewController
     unowned var mainCoordinator: MainCoordinator
     
-    fileprivate let services: Services
-    
-    init(mainCoordinator: MainCoordinator, services: Services, user: User) {
-        let viewModel = ReLoginViewModel(services: services, user: user)
-        self.services = services
+    init(mainCoordinator: MainCoordinator, user: User) {
+        let viewModel = ReLoginViewModel(user: user)
         self.mainCoordinator = mainCoordinator
         self.baseController = ReLoginViewController(viewModel: viewModel)
         viewModel.navigationCoordinator = self
@@ -56,7 +53,7 @@ fileprivate extension ReLoginCoordinator {
     }
     
     func showSetup(user: User, mnemonic: String, tfaConfirmed: Bool, mailConfirmed: Bool, mnemonicConfirmed: Bool, tfaSecret: String?) {
-        let coordinator = SetupMenuCoordinator(mainCoordinator: mainCoordinator, service: services.auth, user: user, mnemonic: mnemonic, tfaConfirmed: tfaConfirmed, mailConfirmed: mailConfirmed, mnemonicConfirmed: mnemonicConfirmed, tfaSecret:tfaSecret)
+        let coordinator = SetupMenuCoordinator(mainCoordinator: mainCoordinator, user: user, mnemonic: mnemonic, tfaConfirmed: tfaConfirmed, mailConfirmed: mailConfirmed, mnemonicConfirmed: mnemonicConfirmed, tfaSecret:tfaSecret)
         present(coordinator: coordinator)
     }
     

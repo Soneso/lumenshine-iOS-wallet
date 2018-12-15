@@ -22,17 +22,12 @@ protocol HelpCenterViewModelType: Transitionable {
 }
 
 class HelpCenterViewModel : HelpCenterViewModelType {
-    
-    fileprivate let service: AuthService
-    fileprivate let user: User?
+
     fileprivate let entries: [[HelpEntry]]
     
     weak var navigationCoordinator: CoordinatorType?
     
-    init(service: AuthService, user: User?) {
-        self.service = service
-        self.user = user
-        
+    init() {
         self.entries = [[.inbox],
                         [.FAQ1, .FAQ2, .FAQ3, .FAQ4],
                         [.basics, .wallets, .security, .stellar]]

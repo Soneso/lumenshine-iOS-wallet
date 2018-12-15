@@ -64,12 +64,6 @@ class AccountDetailsViewController: UpdatableViewController {
     private var accountCurrenciesViewController: AccountCurrenciesViewController!
     private let walletManager = WalletManager()
     
-    private var userManager: UserManager {
-        get {
-            return Services.shared.userManager
-        }
-    }
-    
     @IBOutlet weak var stellarAddressActionbutton: UIButton!
     @IBOutlet weak var showOnHomescreenSwitch: UISwitch!
     
@@ -373,6 +367,7 @@ class AccountDetailsViewController: UpdatableViewController {
     }
     
     override func updateUIAfterWalletRefresh(notification: NSNotification) {
+        print ("AccountDetailsViewController  - updateUIAfterWalletRefresh received")
         if let updatedWallet = notification.object as? Wallet, updatedWallet.publicKey == wallet.publicKey {
             wallet = updatedWallet
         }

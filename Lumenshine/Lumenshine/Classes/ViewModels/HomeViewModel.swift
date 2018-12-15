@@ -14,7 +14,7 @@ import stellarsdk
 
 protocol HomeViewModelType: Transitionable {
 
-    var cardViewModels: [CardViewModelType] { get }
+    var cardViewModels: [CardViewModelType] { get set }
     var reloadClosure: (() -> ())? { get set }
     var appendClosure: ((CardViewModelType) -> ())? { get set }
     var totalNativeFoundsClosure: ((CoinUnit) -> ())? { get set }
@@ -23,41 +23,34 @@ protocol HomeViewModelType: Transitionable {
     
     
     func fundAccount()
-    func reloadCards()
-    func refreshWallets()
+    func reloadData()
     func updateHeaderData()
+    func refreshWallets()
     func showWalletIfNeeded()
+    func cleanup()
 }
 
 class HomeViewModel : HomeViewModelType {
     
-    fileprivate let service: Services
     fileprivate var responsesMock: CardsResponsesMock?
-    fileprivate let user: User
-    fileprivate let userManager = Services.shared.userManager
-    //fileprivate let currenciesMonitor = CurrenciesMonitor()
     fileprivate let needsHeaderUpdate: Bool
     
     weak var navigationCoordinator: CoordinatorType?
     
-    init(service: Services, user: User, needsHeaderUpdate: Bool) {
-        self.service = service
-        self.user = user
+    init(needsHeaderUpdate: Bool) {
         self.needsHeaderUpdate = needsHeaderUpdate
         cardViewModels = []
-        //currenciesMonitor.startMonitoring()
-        updateHeaderData()
     }
-
+    
+    deinit {
+        print("HomeViewModel deinit")
+    }
+    
     var cardViewModels: [CardViewModelType]
     var reloadClosure: (() -> ())?
     var appendClosure: ((CardViewModelType) -> ())?
     var totalNativeFoundsClosure: ((CoinUnit) -> ())?
-    var currencyRateUpdateClosure: ((Double) -> ())? /*{
-        didSet {
-            currenciesMonitor.updateClosure = currencyRateUpdateClosure
-        }
-    }*/
+    var currencyRateUpdateClosure: ((Double) -> ())?
     var scrollToItemClosure: ((Int) -> ())?
     
     var barTitles: [String] {
@@ -93,11 +86,11 @@ class HomeViewModel : HomeViewModelType {
             return
         }
         
-        userManager.totalNativeFounds { [weak self] (result) -> (Void) in
+        Services.shared.userManager.totalNativeFounds { [weak self] (result) -> (Void) in
             switch result {
             case .success(let data):
                 self?.totalNativeFoundsClosure?(data)
-                self?.service.chartsService.getChartExchangeRates(assetCode: "XLM", issuerPublicKey: nil, destinationCurrency: "USD", timeRange: 1) { (result) -> (Void) in
+                Services.shared.chartsService.getChartExchangeRates(assetCode: "XLM", issuerPublicKey: nil, destinationCurrency: "USD", timeRange: 1) { (result) -> (Void) in
                     switch result {
                     case .success(let exchangeRates):
                         if let currentRateResponse = exchangeRates.rates.first?.rate {
@@ -115,27 +108,55 @@ class HomeViewModel : HomeViewModelType {
             }
         }
     }
+    
+    func reloadData() {
+
+        Services.shared.userManager.totalNativeFounds { [weak self] (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                self?.totalNativeFoundsClosure?(data)
+                Services.shared.chartsService.getChartExchangeRates(assetCode: "XLM", issuerPublicKey: nil, destinationCurrency: "USD", timeRange: 1) { (result) -> (Void) in
+                    switch result {
+                    case .success(let exchangeRates):
+                        if let currentRateResponse = exchangeRates.rates.first?.rate {
+                            let currentRate = Double(truncating: currentRateResponse as NSNumber)
+                            DispatchQueue.main.async {
+                                self?.currencyRateUpdateClosure?(currentRate)
+                            }
+                        }
+                    case .failure(let error):
+                        print("Failed to get exchange rates: \(error)")
+                    }
+                    self?.reloadCards()
+                }
+            default:
+                self?.reloadCards()
+                break
+            }
+        }
+    }
+    
     func reloadCards() {
         cardViewModels.removeAll()
         
-        service.walletService.getWallets { [weak self] (result) -> (Void) in
+        Services.shared.walletService.getWallets { [weak self] (result) -> (Void) in
             switch result {
             case .success(let wallets):
                 var chartAppended = false
                 let sortedWallets = wallets.sorted(by: { $0.id < $1.id })
                 for wallet in sortedWallets {
                     if wallet.showOnHomeScreen {
-                        let viewModel = WalletCardViewModel(userManager: (self?.service.userManager)!, walletResponse: wallet)
+                        let viewModel = WalletCardViewModel(walletResponse: wallet)
                         viewModel.navigationCoordinator = self?.navigationCoordinator
                         viewModel.reloadCardsClosure = {
-                            self?.reloadCards()
+                            self?.reloadData()
                         }
                         
                         self?.cardViewModels.append(viewModel)
                         if !chartAppended {
-                            /*let chartViewModel = ChartCardViewModel()
+                            let chartViewModel = ChartCardViewModel()
                             chartViewModel.navigationCoordinator = self?.navigationCoordinator
-                            self?.cardViewModels.append(chartViewModel)*/
+                            self?.cardViewModels.append(chartViewModel)
                             chartAppended = true
                         }
                     }
@@ -147,13 +168,9 @@ class HomeViewModel : HomeViewModelType {
                 print("Failed to get wallets")
             }
         
-            let chartViewModel = ChartCardViewModel()
-            chartViewModel.navigationCoordinator = self?.navigationCoordinator
-            self?.cardViewModels.append(chartViewModel)
-            
-            let helpViewModel = HelpCardViewModel()
+            /*let helpViewModel = HelpCardViewModel()
             helpViewModel.navigationCoordinator = self?.navigationCoordinator
-            self?.cardViewModels.append(helpViewModel)
+            self?.cardViewModels.append(helpViewModel)*/
             
             self?.reloadClosure?()
             
@@ -165,7 +182,7 @@ class HomeViewModel : HomeViewModelType {
     func refreshWallets() {
         for cardViewModel in cardViewModels {
             if let wallet = cardViewModel as? WalletCardViewModel {
-                wallet.refreshContent(userManager: service.userManager)
+                wallet.refreshContent(userManager: Services.shared.userManager)
             }
         }
     }
@@ -183,6 +200,10 @@ class HomeViewModel : HomeViewModelType {
                 self.scrollToItemClosure?(index)
             }
         }
+    }
+    
+    func cleanup() {
+        cardViewModels.removeAll()
     }
 }
 

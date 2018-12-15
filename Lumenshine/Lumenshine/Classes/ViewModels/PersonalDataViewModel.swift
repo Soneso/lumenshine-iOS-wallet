@@ -42,8 +42,7 @@ protocol PersonalDataViewModelType: Transitionable {
 }
 
 class PersonalDataViewModel : PersonalDataViewModelType {
-    
-    fileprivate let service: UserDataService
+
     fileprivate let entries: [[PersonalDataEntry]]
     fileprivate var selectedValues: [PersonalDataEntry:PersonalDataProtocol] = [:]
     fileprivate var cellHeights: [PersonalDataEntry:CGFloat] = [:]
@@ -61,8 +60,7 @@ class PersonalDataViewModel : PersonalDataViewModelType {
     
     weak var navigationCoordinator: CoordinatorType?
     
-    init(service: UserDataService) {
-        self.service = service
+    init() {
         self.entries = [[.salutation, .forename, .lastname, .additionalName, .countryCode, .state, .city, .zipCode, .address, .mobileNR,
                          .birthday, .birthPlace, .birthCountryCode, .languageCode],
                         [.occupation, .employerName, .employerAddress],
@@ -227,11 +225,11 @@ class PersonalDataViewModel : PersonalDataViewModelType {
             return
         }
         
-        service.updateUserData(userData: validatedData!, response: response)
+        Services.shared.userData.updateUserData(userData: validatedData!, response: response)
     }
     
     func getUserData(response: @escaping EmptyResponseClosure) {
-        self.service.getUserData { [weak self] result in
+        Services.shared.userData.getUserData { [weak self] result in
             switch result {
             case .success(let userData):
                 self?.setUserData(userData)

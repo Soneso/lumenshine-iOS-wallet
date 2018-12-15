@@ -52,7 +52,6 @@ protocol LostSecurityViewModelType: Transitionable {
 }
 
 class LoginViewModel : LoginViewModelType {
-    fileprivate let service: AuthService
     fileprivate var email: String?
     fileprivate var user: User?
     fileprivate var mnemonic: String? {
@@ -66,8 +65,7 @@ class LoginViewModel : LoginViewModelType {
     
     weak var navigationCoordinator: CoordinatorType?
     
-    init(service: AuthService, user: User? = nil) {
-        self.service = service
+    init(user: User? = nil) {
         self.user = user
         self.lostPassword = true
         
@@ -132,7 +130,7 @@ class LoginViewModel : LoginViewModelType {
     
     func loginStep1(email: String, password: String, tfaCode: String?, checkSetup: Bool? = true, response: @escaping EmptyResponseClosure) {
         self.email = email
-        service.loginStep1(email: email, tfaCode: tfaCode) { [weak self] result in
+        Services.shared.auth.loginStep1(email: email, tfaCode: tfaCode) { [weak self] result in
             switch result {
             case .success(let login1Response):
                 self?.verifyLogin1Response(login1Response, password: password) { result2 in
@@ -202,7 +200,7 @@ class LoginViewModel : LoginViewModelType {
         
         self.email = email
         
-        service.generateAccount(email: email, password: password, forename: forename, lastname: lastname) { [weak self] result in
+        Services.shared.auth.generateAccount(email: email, password: password, forename: forename, lastname: lastname) { [weak self] result in
             switch result {
             case .success( let registrationResponse, let userSecurity):
                 self?.user = User(email: email, publicKeyIndex0: userSecurity.publicKeyIndex0)
@@ -323,9 +321,9 @@ extension LoginViewModel: LostSecurityViewModelType {
         if let email = email, email.isEmail() {
             self.email = email
             if lostPassword {
-                service.lostPassword(email: email, response: response)
+                Services.shared.auth.lostPassword(email: email, response: response)
             } else {
-                service.reset2fa(email: email, response: response)
+                Services.shared.auth.reset2fa(email: email, response: response)
             }
         } else {
             let error = ErrorResponse()
@@ -336,7 +334,7 @@ extension LoginViewModel: LostSecurityViewModelType {
     
     func resendMailConfirmation(response: @escaping EmptyResponseClosure) {
         guard let email = self.email else { return }
-        service.resendMailConfirmation(email: email) { result in
+        Services.shared.auth.resendMailConfirmation(email: email) { result in
             response(result)
         }
     }
@@ -379,11 +377,11 @@ fileprivate extension LoginViewModel {
                         switch keyResponse {
                         case .success(keyPair: let keyPair):
                             // sign challenge
-                            self.service.signSEP10ChallengeIfValid(base64EnvelopeXDR: login1Response.sep10TransactionEnvelopeXDR, userKeyPair: keyPair!, completion: { (signResponse) -> (Void) in
+                            Services.shared.auth.signSEP10ChallengeIfValid(base64EnvelopeXDR: login1Response.sep10TransactionEnvelopeXDR, userKeyPair: keyPair!, completion: { (signResponse) -> (Void) in
                                 switch signResponse {
                                 case .success(signedXDR: let signedXDR):
                                     // login user
-                                    self.service.loginStep2(signedSEP10TransactionEnvelope:signedXDR, userEmail: self.email!, response: response)
+                                    Services.shared.auth.loginStep2(signedSEP10TransactionEnvelope:signedXDR, userEmail: self.email!, response: response)
                                 case .failure(error: let error):
                                     print(error)
                                     response(.failure(error: error))

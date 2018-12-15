@@ -26,11 +26,9 @@ class AccountCurrenciesViewController: UIViewController {
     @IBOutlet weak var intrinsicView: IntrinsicView!
     
     var wallet: FundedWallet!
-    let walletManager = WalletManager()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupCurrencies()
     }
 
@@ -41,48 +39,41 @@ class AccountCurrenciesViewController: UIViewController {
     }
     
     private func setupCurrencies() {
-        //activityIndicator(showLoading: true)
-        self.walletManager.balancesWithAuthorizationForWallet(wallet: self.wallet) { (response) -> (Void) in
-            switch response {
-            case .success(let balances):
-                var currencyViewHeight: CGFloat = 0
-                for balance in balances {
-                    if let newAssetCode = balance.assetCode, let newIssuer = balance.assetIssuer, let newAuthorized = balance.authorized {
-                        var alreadyExists = false
-                        for arrangedSubView in self.currenciesStackView.arrangedSubviews {
-                            if let existingCurrencyView = arrangedSubView as? CurrencyView, newAssetCode == existingCurrencyView.assetCode, newIssuer == existingCurrencyView.issuerPK, newAuthorized ==  existingCurrencyView.authorized {
-                                    alreadyExists = true
-                                    break
-                            }
-                        }
-                        if alreadyExists {
-                            continue
-                        }
-                        let currencyView = Bundle.main.loadNibNamed("CurrencyView", owner:self, options:nil)![0] as! CurrencyView
-                        currencyView.currency = balance
-                        
-                        currencyView.removeAction = { [weak balance, weak self] (tappedCurrency) in
-                            if tappedCurrency == balance {
-                                self?.removeCurrency(forCurrency: tappedCurrency)
-                            }
-                        }
-                        
-                        if currencyViewHeight == 0 {
-                            currencyViewHeight = currencyView.frame.height
-                        }
-                        
-                        self.currenciesStackView.addArrangedSubview(currencyView)
+
+        var currencyViewHeight: CGFloat = 0
+        for balance in self.wallet.balances {
+            if let newAssetCode = balance.assetCode, let newIssuer = balance.assetIssuer{
+                var alreadyExists = false
+                for arrangedSubView in self.currenciesStackView.arrangedSubviews {
+                    if let existingCurrencyView = arrangedSubView as? CurrencyView, newAssetCode == existingCurrencyView.assetCode, newIssuer == existingCurrencyView.issuerPK {
+                            alreadyExists = true
+                            break
+                    }
+                }
+                if alreadyExists {
+                    continue
+                }
+                let currencyView = Bundle.main.loadNibNamed("CurrencyView", owner:self, options:nil)![0] as! CurrencyView
+                
+                // TODO : add server method to check this.
+                balance.authorized = true
+                currencyView.currency = balance
+                
+                currencyView.removeAction = { [weak balance, weak self] (tappedCurrency) in
+                    if tappedCurrency == balance {
+                        self?.removeCurrency(forCurrency: tappedCurrency)
                     }
                 }
                 
-                self.calculateAndSetContentSize(nrOfCurrencies: balances.count, viewHeight: currencyViewHeight)
-                //self.activityIndicator(showLoading: false)
+                if currencyViewHeight == 0 {
+                    currencyViewHeight = currencyView.frame.height
+                }
                 
-            case .failure(let error):
-                self.displayErrorAlertView(message: error.localizedDescription)
-                //self.activityIndicator(showLoading: false)
+                self.currenciesStackView.addArrangedSubview(currencyView)
             }
         }
+        
+        self.calculateAndSetContentSize(nrOfCurrencies: self.wallet.balances.count, viewHeight: currencyViewHeight)
     }
     
     private func activityIndicator(showLoading: Bool) {

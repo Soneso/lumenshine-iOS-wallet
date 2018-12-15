@@ -14,14 +14,12 @@ import LocalAuthentication
 
 class ReLoginViewModel : LoginViewModel {
     fileprivate var user: User
-    fileprivate let services: Services
     
     var reloadClosure: (() -> ())?
     
-    init(services: Services, user: User) {
+    init(user: User) {
         self.user = user
-        self.services = services
-        super.init(service: services.auth)
+        super.init()
         self.entries = [.signOut,
                         .home]
         
@@ -104,7 +102,7 @@ class ReLoginViewModel : LoginViewModel {
 fileprivate extension ReLoginViewModel {
     func logout() {
         if let deviceToken = UserDefaults.standard.value(forKey: Keys.UserDefs.DeviceToken) as? String {
-            services.push.unsubscribe(pushToken: deviceToken) { result in
+            Services.shared.push.unsubscribe(pushToken: deviceToken) { result in
                 switch result {
                 case .success:
                     UserDefaults.standard.setValue(nil, forKey:Keys.UserDefs.DeviceToken)
