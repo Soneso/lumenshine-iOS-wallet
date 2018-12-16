@@ -201,7 +201,12 @@ class TransactionResultViewController: UIViewController, WalletActionsProtocol, 
     private func populateValues() {
         messageValueLabel.text = result.message
         currencyValueLabel.text = result.currency
-        issuerValueLabel.text = result.issuer
+        if let issuer = result.issuer, !issuer.isEmpty, issuer.trimmed != "" {
+            issuerValueLabel.text = result.issuer
+        } else if result.currency != NativeCurrencyNames.xlm.rawValue {
+            issuerValueLabel.text = wallet.publicKey // own asset sent
+        }
+        
         amountValueLabel.text = "\(result.amount) \(result.currency)"
         recepientPK.text = result.recipentPK
         memoValueLabel.text = result.memo
@@ -224,8 +229,12 @@ class TransactionResultViewController: UIViewController, WalletActionsProtocol, 
         if let currency = currencyValueLabel.text {
             resultString.append("Currency \(currency)\n")
             
-            if let issuer = issuerValueLabel.text {
-                resultString.append(currency != NativeCurrencyNames.xlm.rawValue && !issuer.isEmpty ? "Issuer: \(issuer)\n" : "")
+            if currency != NativeCurrencyNames.xlm.rawValue {
+                if let issuer = issuerValueLabel.text, !issuer.isEmpty {
+                    resultString.append("Issuer: \(issuer)\n")
+                } else {
+                    resultString.append("Issuer: \(wallet.publicKey)\n") // own asset send
+                }
             }
         }
         

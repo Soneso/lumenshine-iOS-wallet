@@ -804,7 +804,11 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
         validateAddress()
         validateOtherAssetCodeIsFilled()
         validateAmount()
-        memoView.validateMemo()
+        
+        if !memoView.validateMemo() {
+            isInputDataValid = false
+        }
+        
         if isInputDataValid {
             isInputDataValid = passwordView.validatePassword(biometricAuth: biometricAuth)
         }

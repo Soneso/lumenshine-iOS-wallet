@@ -69,10 +69,10 @@ class MemoView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         memoType = MemoTypeValues.MEMO_TEXT.rawValue
     }
     
-    func validateMemo() {
+    func validateMemo() -> Bool{
         if let memoText = self.memoInputTextField.text {
             if memoText.isEmpty == true {
-                return
+                return true
             }
             
             switch selectedMemoType.rawValue {
@@ -81,36 +81,37 @@ class MemoView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
                 
                 if memoTextValidationResult == MemoTextValidationResult.InvalidEncoding {
                     setValidationError(view: memoInputErrorView, label: memoInputErrorLabel, errorMessage: .InvalidMemo)
-                    return
+                    return false
                 }
                 
                 if memoTextValidationResult == MemoTextValidationResult.InvalidLength {
                     setValidationError(view: memoInputErrorView, label: memoInputErrorLabel, errorMessage: .MemoLength)
-                    return
+                    return false
                 }
                 
             case MemoTypeValues.MEMO_ID.rawValue:
                 if !memoText.isMemoIDValid() {
                     setValidationError(view: memoInputErrorView, label: memoInputErrorLabel, errorMessage: .InvalidMemo)
-                    return
+                    return false
                 }
                 
             case MemoTypeValues.MEMO_HASH.rawValue:
                 if !memoText.isMemoHashValid() {
                     setValidationError(view: memoInputErrorView, label: memoInputErrorLabel, errorMessage: .InvalidMemo)
-                    return
+                    return false
                 }
                 
             case MemoTypeValues.MEMO_RETURN.rawValue:
                 if !memoText.isMemoReturnValid() {
                     setValidationError(view: memoInputErrorView, label: memoInputErrorLabel, errorMessage: .InvalidMemo)
-                    return
+                    return false
                 }
                 
             default:
-                break
+                return true
             }
         }
+        return true
     }
     
     private var selectedMemoType: MemoTypeValues! = MemoTypeValues.MEMO_TEXT {
