@@ -86,6 +86,15 @@ class AccountCurrenciesViewController: UIViewController {
     }
     
     private func removeCurrency(forCurrency currency: AccountBalanceResponse) {
+        if let balance = CoinUnit(currency.balance) {
+            if balance != 0.0 {
+                self.displaySimpleAlertView(title: R.string.localizable.balance_not_zero_title(), message: R.string.localizable.balance_not_zero_msg())
+                return
+            }
+        } else {
+            return
+        }
+        
         let removeCurrencyViewController = RemoveCurrencyViewController(nibName: "RemoveCurrencyViewController", bundle: Bundle.main)
         removeCurrencyViewController.currency = currency
         removeCurrencyViewController.wallet = wallet

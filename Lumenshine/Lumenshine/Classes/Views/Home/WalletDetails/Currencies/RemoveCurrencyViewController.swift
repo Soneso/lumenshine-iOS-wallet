@@ -43,8 +43,8 @@ class RemoveCurrencyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationItem()
-        setupLabelDescriptions()
         setupPasswordView()
+        setupLabelDescriptions()
         
         view.backgroundColor = Stylesheet.color(.veryLightGray)
         removeButton.backgroundColor = Stylesheet.color(.blue)
@@ -193,7 +193,9 @@ class RemoveCurrencyViewController: UIViewController {
         if let balance = CoinUnit(currency.balance), let assetCode = currency.assetCode {
             balanceLabel.text = "Balance: \(balance) \(assetCode)"
             if balance > 0.0 {
-                removeButton.setTitle(RemoveButtonDescriptions.RemoveAndAbandon.rawValue, for: UIControlState.normal)
+                //removeButton.setTitle(RemoveButtonDescriptions.RemoveAndAbandon.rawValue, for: UIControlState.normal)
+                removeButton.isHidden = true
+                passwordView.isHidden = true
             } else if balance == 0.0 {
                 balanceWarningLabel.removeFromSuperview()
             }
