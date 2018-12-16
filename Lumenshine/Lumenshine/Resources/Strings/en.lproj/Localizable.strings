@@ -461,6 +461,12 @@
 "tfa_code_configured" = "2FA CODE (if enabled)";
 
 /*  */
+"tfa_code_numeric_msg" = "Code must be numeric";
+
+/*  */
+"tfa_code_6_digits_messgae" = "Code must have 6 digits";
+
+/*  */
 "lbl_email_confirmation" = "Verify your email address";
 
 /*  */

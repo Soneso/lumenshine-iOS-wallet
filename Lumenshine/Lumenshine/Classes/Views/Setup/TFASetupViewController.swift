@@ -81,7 +81,17 @@ extension TFASetupViewController {
     @objc
     func submitAction(sender: UIButton) {
         guard let code = tfaCodeTextField.text else { return }
-        viewModel.submit(tfaCode: code) { result in
+        
+        if !CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: code)) {
+            self.tfaCodeTextField.detail = R.string.localizable.tfa_code_numeric_msg()
+            return
+        }
+        if code.trimmed.count != 6 {
+            self.tfaCodeTextField.detail = R.string.localizable.tfa_code_6_digits_messgae()
+            return
+        }
+            
+        viewModel.submit(tfaCode: code.trimmed) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let tfaResponse):

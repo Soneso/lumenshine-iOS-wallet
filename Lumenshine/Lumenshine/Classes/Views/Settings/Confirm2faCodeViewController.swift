@@ -99,7 +99,17 @@ extension Confirm2faCodeViewController {
             tfaCodeTextField.detail = R.string.localizable.invalid_input()
             return
         }
-        viewModel.confirm2faSecret(tfaCode: code) { [weak self] result in
+        
+        if !CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: code)) {
+            self.tfaCodeTextField.detail = R.string.localizable.tfa_code_numeric_msg()
+            return
+        }
+        if code.trimmed.count != 6 {
+            self.tfaCodeTextField.detail = R.string.localizable.tfa_code_6_digits_messgae()
+            return
+        }
+        
+        viewModel.confirm2faSecret(tfaCode: code.trimmed) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(_):
