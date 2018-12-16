@@ -36,5 +36,24 @@ class HomeUnfundedWalletHeaderView: UIView {
             logoTopConstraint.constant = 0
             return
         }
+        
+        Services.shared.chartsService.getChartExchangeRates(assetCode: "XLM", issuerPublicKey: nil, destinationCurrency: "USD", timeRange: 1) { (result) -> (Void) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let exchangeRates):
+                    if let currentRateResponse = exchangeRates.rates.first?.rate {
+                        let rate = Decimal(1.0) / currentRateResponse
+                        self.xlmPriceLabel.text = "1 USD ≈ \(Services.shared.walletService.formatAmount(amount: rate.description)) XLM"
+                        self.applyTransitionFlip(to:self.xlmPriceLabel)
+                    }
+                case .failure(let error):
+                    print("Failed to get exchange rate: \(error)")
+                }
+            }
+        }
+    }
+    
+    private func applyTransitionFlip(to viewElement: UIView) {
+        UIView.transition(with: viewElement, duration: 1, options: .transitionFlipFromBottom, animations: nil, completion: nil)
     }
 }

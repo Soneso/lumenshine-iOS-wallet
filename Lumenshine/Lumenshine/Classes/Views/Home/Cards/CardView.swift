@@ -22,7 +22,7 @@ class CardView: UIView {
     internal let contentView = UIView()
     internal let bottomBar = Bar()
     
-    internal weak var viewModel: CardViewModelType? {
+    internal var viewModel: CardViewModelType? {
         didSet {
             let buttons = viewModel?.bottomTitles?.enumerated().map { (index, title) -> FlatButton in
                 let button = FlatButton(title: title)

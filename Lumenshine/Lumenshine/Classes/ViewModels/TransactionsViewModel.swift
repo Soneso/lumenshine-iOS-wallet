@@ -560,29 +560,9 @@ fileprivate extension TransactionsViewModel {
         }
     }
     
-    func formatAmount(amount: String) -> String {
-        
-        let currencyFormatter = NumberFormatter()
-        currencyFormatter.usesGroupingSeparator = true
-        currencyFormatter.minimumFractionDigits = 2
-        currencyFormatter.maximumFractionDigits = 5
-        currencyFormatter.numberStyle = .decimal
-        currencyFormatter.locale = Locale.current
-        
-        var value = "0.00"
-        if let coinUnit = CoinUnit(amount) {
-            let numberAmount = NSNumber(value:coinUnit)
-            if let formattedValue = currencyFormatter.string(from: numberAmount) {
-                value = formattedValue
-            }
-        }
-        
-        return value
-    }
-    
     func formattedAmount(for item: TxTransactionResponse) -> String? {
         if let amountForItem = amount(for: item) {
-            return formatAmount(amount: amountForItem)
+            return Services.shared.walletService.formatAmount(amount: amountForItem)
         }
         return nil
     }
@@ -944,13 +924,13 @@ fileprivate extension TransactionsViewModel {
             attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
                          .font : mainFont])
         
-        let sellingAmount = formatAmount(amount: manageOffer.amount)
+        let sellingAmount = Services.shared.walletService.formatAmount(amount: manageOffer.amount)
         let sellingCode = manageOffer.sellingAssetCode ?? NativeCurrencyNames.xlm.rawValue
         let selling = NSAttributedString(string: "\(R.string.localizable.selling()): \(sellingAmount) \(sellingCode)\n",
             attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
                          .font : mainFont])
         
-        let price = NSAttributedString(string: "\(R.string.localizable.price_for_asset()): \(formatAmount(amount: manageOffer.price))\n",
+        let price = NSAttributedString(string: "\(R.string.localizable.price_for_asset()): \(Services.shared.walletService.formatAmount(amount: manageOffer.price))\n",
             attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
                          .font : mainFont])
         
@@ -977,11 +957,11 @@ fileprivate extension TransactionsViewModel {
         
         let sellingAmount = passiveOffer.amount
         let sellingCode = passiveOffer.sellingAssetCode ?? NativeCurrencyNames.xlm.rawValue
-        let selling = NSAttributedString(string: "\(R.string.localizable.selling()): \(formatAmount(amount: sellingAmount)) \(sellingCode)\n",
+        let selling = NSAttributedString(string: "\(R.string.localizable.selling()): \(Services.shared.walletService.formatAmount(amount: sellingAmount)) \(sellingCode)\n",
             attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
                          .font : mainFont])
         
-        let price = NSAttributedString(string: "\(R.string.localizable.price_for_asset()): \(formatAmount(amount:passiveOffer.price))\n",
+        let price = NSAttributedString(string: "\(R.string.localizable.price_for_asset()): \(Services.shared.walletService.formatAmount(amount:passiveOffer.price))\n",
             attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
                          .font : mainFont])
         
@@ -1125,7 +1105,7 @@ fileprivate extension TransactionsViewModel {
         var limit = changeTrust.limit ?? R.string.localizable.none()
         
         if limit != R.string.localizable.none() {
-            limit = formatAmount(amount: limit)
+            limit = Services.shared.walletService.formatAmount(amount: limit)
         }
         
         let trustLimit = NSAttributedString(string: "\(R.string.localizable.trust_limit()): \(limit)\n",

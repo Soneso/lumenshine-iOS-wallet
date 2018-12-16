@@ -15,7 +15,9 @@ class UnfundedHeaderLabel: UILabel {
     }
     
     private func setup() {
-        font = R.font.encodeSansRegular(size: 19)
-        textColor = Stylesheet.color(.orange)
+        /*font = R.font.encodeSansRegular(size: 19)
+        textColor = Stylesheet.color(.orange)*/
+        font = R.font.encodeSansSemiBold(size: 16)
+        textColor = Stylesheet.color(.green)
     }
 }

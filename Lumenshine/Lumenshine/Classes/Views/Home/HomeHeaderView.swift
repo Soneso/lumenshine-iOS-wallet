@@ -31,14 +31,14 @@ class HomeHeaderView: UIView {
     var funds: String! {
         didSet {
             if let fundedView = fundedView {
-                fundedView.fundAccountButton.text = funds
-                applyTransitionFlip(to: fundedView.fundAccountButton)
+                fundedView.tickerLabel.text = funds
+                applyTransitionFlip(to: fundedView.tickerLabel)
             }
             
-            if let unfundedView = unfundedView {
+            /*if let unfundedView = unfundedView {
                 unfundedView.xlmPriceLabel.text = funds
                 applyTransitionFlip(to: unfundedView.xlmPriceLabel)
-            }
+            }*/
         }
     }
     

@@ -166,6 +166,26 @@ public class WalletsService: BaseService {
         accountDetailsCache.removeAllObjects()
     }
     
+    open func formatAmount(amount: String) -> String {
+        
+        let currencyFormatter = NumberFormatter()
+        currencyFormatter.usesGroupingSeparator = true
+        currencyFormatter.minimumFractionDigits = 2
+        currencyFormatter.maximumFractionDigits = 5
+        currencyFormatter.numberStyle = .decimal
+        currencyFormatter.locale = Locale.current
+        
+        var value = "0.00"
+        if let coinUnit = CoinUnit(amount) {
+            let numberAmount = NSNumber(value:coinUnit)
+            if let formattedValue = currencyFormatter.string(from: numberAmount) {
+                value = formattedValue
+            }
+        }
+        
+        return value
+    }
+    
     open func getAccountDetails(accountId: String, response: @escaping AccountResponseClosure) {
         
         if let cachedObject = accountDetailsCache.object(forKey: accountId as NSString) {

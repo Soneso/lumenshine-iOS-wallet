@@ -15,7 +15,7 @@ class SloganLabel: UILabel {
     }
     
     private func setup() {
-        font = R.font.encodeSansRegular(size: 12)
+        font = R.font.encodeSansRegular(size: 13)
         textColor = Stylesheet.color(.white)
     }
 }

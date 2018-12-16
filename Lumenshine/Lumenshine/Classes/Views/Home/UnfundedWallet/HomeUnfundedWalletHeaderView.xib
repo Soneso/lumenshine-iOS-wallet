@@ -23,13 +23,13 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A wallet for the Stellar Network by Soneso" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="loC-Nh-15F" userLabel="Slogan" customClass="SloganLabel" customModule="Lumenshine" customModuleProvider="target">
-                    <rect key="frame" x="34.5" y="75.5" width="321" height="21"/>
+                    <rect key="frame" x="34.5" y="91.5" width="321" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="    " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e4r-hr-Tbu" customClass="UnfundedHeaderLabel" customModule="Lumenshine" customModuleProvider="target">
-                    <rect key="frame" x="16" y="112.5" width="358" height="122.5"/>
+                    <rect key="frame" x="16" y="128.5" width="358" height="106.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -45,7 +45,7 @@
                 <constraint firstItem="fXs-oF-OHn" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="-28" id="9iw-mv-uWg"/>
                 <constraint firstItem="loC-Nh-15F" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="IjC-0E-xfV"/>
                 <constraint firstItem="zV4-Ib-O6t" firstAttribute="top" secondItem="fXs-oF-OHn" secondAttribute="bottom" constant="8" id="Jk3-2J-Wv9"/>
-                <constraint firstItem="loC-Nh-15F" firstAttribute="top" secondItem="zV4-Ib-O6t" secondAttribute="bottom" id="UHS-df-yJz"/>
+                <constraint firstItem="loC-Nh-15F" firstAttribute="top" secondItem="zV4-Ib-O6t" secondAttribute="bottom" constant="16" id="UHS-df-yJz"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="e4r-hr-Tbu" secondAttribute="bottom" constant="20" id="cv8-uP-beG"/>
                 <constraint firstItem="e4r-hr-Tbu" firstAttribute="top" secondItem="loC-Nh-15F" secondAttribute="bottom" constant="16" id="faD-6E-E0E"/>
                 <constraint firstItem="zV4-Ib-O6t" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="h8w-Vx-Tae"/>
