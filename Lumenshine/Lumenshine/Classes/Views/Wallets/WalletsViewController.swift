@@ -27,19 +27,21 @@ class WalletsViewController: UpdatableViewController, UITableViewDataSource, Add
         super.init(nibName: nil, bundle: nil)
         hasWallets = true
         
-        viewModel.reloadClosure = {
+        viewModel.reloadClosure = { [weak self] in
             DispatchQueue.main.async {
-                self.dataSourceItems = self.viewModel.cardViewModels.map {
-                    CardView.create(viewModel: $0, viewController: self)
+                if let wself = self {
+                    wself.dataSourceItems = wself.viewModel.cardViewModels.map {
+                        CardView.create(viewModel: $0, viewController: wself)
+                    }
+                    
+                    wself.tableView.reloadData()
                 }
-                
-                self.tableView.reloadData()
             }
         }
         
-        viewModel.scrollToItemClosure = { (index) in
+        viewModel.scrollToItemClosure = { [weak self] (index) in
             DispatchQueue.main.async {
-                self.tableView.scrollToRow(at: IndexPath(row: index, section: 0), at: .top, animated: true)
+                self?.tableView.scrollToRow(at: IndexPath(row: index, section: 0), at: .top, animated: true)
             }
         }
     }

@@ -33,41 +33,45 @@ class HomeViewController: UpdatableViewController {
         tableView = UITableView(frame: .zero, style: .grouped)
         super.init(nibName: nil, bundle: nil)
         hasWallets = true
-        viewModel.reloadClosure = {
+        viewModel.reloadClosure = { [weak self] in
             DispatchQueue.main.async {
-                self.dataSourceItems = self.viewModel.cardViewModels.map {
-                    CardView.create(viewModel: $0, viewController: self)
+                if let wself = self {
+                    wself.dataSourceItems = wself.viewModel.cardViewModels.map {
+                        CardView.create(viewModel: $0, viewController: wself)
+                    }
+                    wself.tableView.reloadData()
+                    wself.refreshHeaderType()
                 }
-                self.tableView.reloadData()
-                self.refreshHeaderType()
             }
         }
         
-        viewModel.appendClosure = { chartViewModel in
+        viewModel.appendClosure = { [weak self] chartViewModel in
             DispatchQueue.main.async {
-                let cardView = CardView.create(viewModel: chartViewModel, viewController: self)
-                self.dataSourceItems.insert(cardView, at: self.dataSourceItems.count-1)
-                self.tableView.reloadData()
+                if let wself = self {
+                    let cardView = CardView.create(viewModel: chartViewModel, viewController: wself)
+                    wself.dataSourceItems.insert(cardView, at: wself.dataSourceItems.count-1)
+                    wself.tableView.reloadData()
+                }
             }
         }
         
-        viewModel.totalNativeFoundsClosure = { (nativeFounds) in
-           self.setHeaderType(nativeFounds: nativeFounds)
+        viewModel.totalNativeFoundsClosure = { [weak self] (nativeFounds) in
+           self?.setHeaderType(nativeFounds: nativeFounds)
         }
         
-        viewModel.currencyRateUpdateClosure = { (rate) in
+        viewModel.currencyRateUpdateClosure = { [weak self] (rate) in
             if let nativeFunds = Services.shared.userManager.totalNativeFunds {
                 if (nativeFunds == 0 || rate == 0) {
-                    self.header?.funds = ""
+                    self?.header?.funds = ""
                 } else {
-                    self.header?.funds = nativeFunds.tickerConversionTo(currency: .usd, rate: rate)
+                    self?.header?.funds = nativeFunds.tickerConversionTo(currency: .usd, rate: rate)
                 }
             }
         }
         
-        viewModel.scrollToItemClosure = { (index) in
+        viewModel.scrollToItemClosure = { [weak self] (index) in
             DispatchQueue.main.async {
-                self.tableView.scrollToRow(at: IndexPath(row: index, section: 0), at: .top, animated: true)
+                self?.tableView.scrollToRow(at: IndexPath(row: index, section: 0), at: .top, animated: true)
             }
         }
     }
@@ -216,8 +220,8 @@ fileprivate extension HomeViewController {
         label.sizeToFit()
         
         header = HomeHeaderView()
-        header.unfundedView.foundAction = {(button) in
-            self.viewModel.fundAccount()
+        header.unfundedView.foundAction = { [weak self] (button) in
+            self?.viewModel.fundAccount()
         }
         
         headerBar.addSubview(header)

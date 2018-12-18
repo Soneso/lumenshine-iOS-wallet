@@ -128,6 +128,11 @@ fileprivate extension MenuCoordinator {
     
     func present(navigationController: NavigationController) {
         if let drawer = baseController as? AppNavigationDrawerController {
+            for vc in drawer.childViewControllers {
+                if type(of: vc) == type(of: navigationController) {
+                    vc.removeFromParentViewController()
+                }
+            }
             drawer.setViewController(navigationController, for: .none)
             drawer.closeSide()
             menuView.present(navigationController.viewControllers[0])
