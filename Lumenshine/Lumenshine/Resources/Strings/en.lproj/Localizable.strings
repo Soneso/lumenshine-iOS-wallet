@@ -1109,7 +1109,7 @@
 "balance_not_zero_title" = "Balance not zero";
 
 /*  */
-"balance_not_zero_msg" = "The currency can only be removed if its balance is zero. Hint: you can abandon your credits by sending them to the issuer account (displayed below the curreny name).";
+"balance_not_zero_msg" = "The currency can only be removed if its balance is zero. Hint: you can abandon your credits by sending them to the issuer account (displayed below the currency name).";
 
 /*  */
 "add_trustline" = "add trustline";

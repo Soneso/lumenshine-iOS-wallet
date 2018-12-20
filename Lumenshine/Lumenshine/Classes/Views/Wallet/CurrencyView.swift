@@ -15,6 +15,7 @@ import stellarsdk
 class CurrencyView: UIView {
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var removeButton: UIButton!
+    @IBOutlet weak var detailsButton: UIButton!
     @IBOutlet weak var issuerLabel: UILabel!
     @IBOutlet weak var authorizationLabel: UILabel!
     
@@ -33,9 +34,14 @@ class CurrencyView: UIView {
     }
     
     var removeAction: ((AccountBalanceResponse) -> ())?
+    var detailsAction: ((AccountBalanceResponse) -> ())?
     
     @IBAction func removeButtonAction(_ sender: UIButton) {
         removeAction?(currency)
+    }
+    
+    @IBAction func detailsButtonAction(_ sender: UIButton) {
+        detailsAction?(currency)
     }
     
     @IBAction func copyIssuerLabelAction(_ sender: UIButton) {

@@ -39,9 +39,7 @@ class NativeCurrencyFeeInfoViewController: UIViewController {
     @IBOutlet weak var signersLabel: UILabel!
     @IBOutlet weak var dataEntriesLabel: UILabel!
     @IBOutlet weak var offersLabel: UILabel!
-    @IBOutlet weak var availableBalanceLabel: UILabel!
-    @IBOutlet weak var liabilitiesLabel: UILabel!
-    @IBOutlet weak var totalAmountLabel: UILabel!
+    @IBOutlet weak var minimumBalanceLabel: UILabel!
     @IBOutlet weak var liabilitiesInfoLabel: UILabel!
     @IBOutlet weak var liabilitiesValueLabel: UILabel!
     
@@ -88,7 +86,6 @@ class NativeCurrencyFeeInfoViewController: UIViewController {
     
     private func setupLabels() {
         setupUINetworkReserved()
-        availableBalanceLabel.text = "\(wallet.nativeBalance) XLM"
         
         userManager.getAccountDetails(forAccountID: wallet.publicKey) { (response) -> (Void) in
             switch response {
@@ -156,6 +153,7 @@ class NativeCurrencyFeeInfoViewController: UIViewController {
     private func calculateTotal(trustlines: CoinUnit, signers: CoinUnit, dataEntries: CoinUnit, offers: CoinUnit) {
         let liabilities = CoinUnit(currency.sellingLiabilities)
         let additionalAmount = trustlines + signers + dataEntries + offers
+        minimumBalanceLabel.text = "\(additionalAmount + 1) XLM"
         let totalValue = additionalAmount + (liabilities ?? 0) + 1
         let total = "\(totalValue) XLM"
         totalReservesValueLabel.text = total

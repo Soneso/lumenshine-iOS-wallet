@@ -65,6 +65,12 @@ class AccountCurrenciesViewController: UIViewController {
                     }
                 }
                 
+                currencyView.detailsAction = { [weak balance, weak self] (tappedCurrency) in
+                    if tappedCurrency == balance {
+                        self?.showCurrencyDetails(forCurrency: tappedCurrency)
+                    }
+                }
+                
                 if currencyViewHeight == 0 {
                     currencyViewHeight = currencyView.frame.height
                 }
@@ -83,6 +89,78 @@ class AccountCurrenciesViewController: UIViewController {
     private func calculateAndSetContentSize(nrOfCurrencies: Int, viewHeight: CGFloat) {
         intrinsicView.desiredHeight = CGFloat(nrOfCurrencies) * viewHeight + CGFloat(10 * nrOfCurrencies)
         intrinsicView.invalidateIntrinsicContentSize()
+    }
+    
+    private func showCurrencyDetails(forCurrency currency: AccountBalanceResponse) {
+        
+        let detailsVC = CurrencyDetailsViewController()
+        detailsVC.modalTitle = "Currency details"
+        detailsVC.assetCode = currency.assetCode
+        detailsVC.assetIssuerPk = currency.assetIssuer
+        detailsVC.limit = currency.limit
+        
+        if let assetIssuer = currency.assetIssuer {
+            showActivity(message: R.string.localizable.loading())
+            
+            Services.shared.walletService.getAccountDetails(accountId: assetIssuer) { (response) -> (Void) in
+                switch response {
+                case .success(let accountResponse):
+                    if let homeDomain = accountResponse.homeDomain {
+                        detailsVC.homeDomain = homeDomain
+                        do {
+                            try StellarToml.from(domain: homeDomain, secure: true) { (result) -> (Void) in
+                                switch result {
+                                case .success(response: let stellarToml):
+                                    detailsVC.stellarToml = stellarToml
+                                    for currdoc in stellarToml.currenciesDocumentation {
+                                        if currdoc.code == currency.assetCode && currdoc.issuer == currency.assetIssuer {
+                                            if let currencyImageUrl = currdoc.image, let url = URL(string: currencyImageUrl), let data = try? Data(contentsOf: url) {
+                                                detailsVC.currencyImage = UIImage(data: data)
+                                            }
+                                            break
+                                        }
+                                    }
+                                    if let orglogoUrl = stellarToml.issuerDocumentation.orgLogo, let url = URL(string: orglogoUrl), let data = try? Data(contentsOf: url) {
+                                            detailsVC.organisationLogo = UIImage(data: data)
+                                    }
+                                case .failure(error: let stellarTomlError):
+                                    switch stellarTomlError {
+                                    case .invalidDomain:
+                                        detailsVC.invalidTomlDomain = true
+                                    case .invalidToml:
+                                        detailsVC.invalidToml = true
+                                    }
+                                }
+                                self.showDetailsController(detailsVC: detailsVC)
+                            }
+                        } catch {
+                            detailsVC.invalidToml = true
+                            self.showDetailsController(detailsVC: detailsVC)
+                        }
+                    } else {
+                        self.showDetailsController(detailsVC: detailsVC)
+                    }
+                case .failure(let error):
+                    StellarSDKLog.printHorizonRequestErrorMessage(tag:"Error:", horizonRequestError: error)
+                    DispatchQueue.main.async {
+                        self.hideActivity(completion: {
+                            self.displaySimpleAlertView(title: "Error", message: "Could not find issuer: \(assetIssuer)")
+                        })
+                    }
+                }
+            }
+        } else {
+            showDetailsController(detailsVC: detailsVC)
+        }
+    
+    }
+    private func showDetailsController(detailsVC:CurrencyDetailsViewController) {
+        DispatchQueue.main.async {
+            let composeVC = ComposeNavigationController(rootViewController: detailsVC)
+            self.hideActivity(completion: {
+                self.present(composeVC, animated: true)
+            })
+        }
     }
     
     private func removeCurrency(forCurrency currency: AccountBalanceResponse) {

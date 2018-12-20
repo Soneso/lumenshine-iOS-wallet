@@ -259,6 +259,8 @@
 		833F7D71218D95B800ED43D9 /* LoginStep1Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F7D70218D95B800ED43D9 /* LoginStep1Response.swift */; };
 		833F7D73218F6E3F00ED43D9 /* TFASecretResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F7D72218F6E3F00ED43D9 /* TFASecretResponse.swift */; };
 		834D13AA21982F7400428D7A /* QRCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834D13A921982F7400428D7A /* QRCoder.swift */; };
+		837C125821CBE7F3002F8C7B /* CurrencyDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 837C125621CBE7F2002F8C7B /* CurrencyDetailsViewController.xib */; };
+		837C125921CBE7F3002F8C7B /* CurrencyDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837C125721CBE7F2002F8C7B /* CurrencyDetailsViewController.swift */; };
 		8389A0C521BEA06700B9F16A /* HelpDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8389A0C421BEA06700B9F16A /* HelpDetailsViewController.swift */; };
 		8389A0C721BEA95E00B9F16A /* HelpDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8389A0C621BEA95D00B9F16A /* HelpDetailsViewController.xib */; };
 		839C4DDE21A0561500A1B715 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839C4DDD21A0561500A1B715 /* TermsViewController.swift */; };
@@ -720,6 +722,8 @@
 		833F7D70218D95B800ED43D9 /* LoginStep1Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStep1Response.swift; sourceTree = "<group>"; };
 		833F7D72218F6E3F00ED43D9 /* TFASecretResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFASecretResponse.swift; sourceTree = "<group>"; };
 		834D13A921982F7400428D7A /* QRCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCoder.swift; sourceTree = "<group>"; };
+		837C125621CBE7F2002F8C7B /* CurrencyDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurrencyDetailsViewController.xib; sourceTree = "<group>"; };
+		837C125721CBE7F2002F8C7B /* CurrencyDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyDetailsViewController.swift; sourceTree = "<group>"; };
 		8389A0C421BEA06700B9F16A /* HelpDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDetailsViewController.swift; sourceTree = "<group>"; };
 		8389A0C621BEA95D00B9F16A /* HelpDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpDetailsViewController.xib; sourceTree = "<group>"; };
 		839C4DDD21A0561500A1B715 /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
@@ -1887,6 +1891,8 @@
 		C6888502213E6A7A0010615D /* Currencies */ = {
 			isa = PBXGroup;
 			children = (
+				837C125721CBE7F2002F8C7B /* CurrencyDetailsViewController.swift */,
+				837C125621CBE7F2002F8C7B /* CurrencyDetailsViewController.xib */,
 				C6888501213E6A2B0010615D /* AddCurrency */,
 				7491BE42211C2E230058877E /* AccountCurrenciesViewController.swift */,
 				7491BE43211C2E230058877E /* AccountCurrenciesViewController.xib */,
@@ -2146,6 +2152,7 @@
 				746DC58320D1421400AD0856 /* HomeUnfundedWalletHeaderView.xib in Resources */,
 				C6D87E78213400A000154A3B /* KnownCurrenciesTableViewCell.xib in Resources */,
 				74C0913B20F64AF0000A809D /* UnfundedWalletCardContentView.xib in Resources */,
+				837C125821CBE7F3002F8C7B /* CurrencyDetailsViewController.xib in Resources */,
 				43AE633F2135A19300B7A904 /* EncodeSansCondensed-Light.ttf in Resources */,
 				74C8994C2101DD7C009B13EA /* ReceivePaymentCardViewController.xib in Resources */,
 				C69556512126F6AC00B0E110 /* TransactionHistoryTableViewController.xib in Resources */,
@@ -2613,6 +2620,7 @@
 				439EA26E210AF7240054EA52 /* ChangePasswordViewController.swift in Sources */,
 				434E049D20D4154700D3235A /* MenuEntry.swift in Sources */,
 				4319B4D0211B0987002E45F0 /* DecryptedUserData.swift in Sources */,
+				837C125921CBE7F3002F8C7B /* CurrencyDetailsViewController.swift in Sources */,
 				43A51719211D8FBD0034AA46 /* LostSecuritySuccessView.swift in Sources */,
 				435A1CA920C846EC00CE3365 /* SettingsTableViewCell.swift in Sources */,
 				C6725081213FC11F0064F6E3 /* SetInflationDestinationViewController.swift in Sources */,

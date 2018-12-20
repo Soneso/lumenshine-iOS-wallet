@@ -24,12 +24,19 @@
                                 <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxg-0w-gbq" customClass="RegularSubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="308" height="30"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="ABCDEFGHIJKLM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxg-0w-gbq" customClass="RegularSubtitleLabel" customModule="Lumenshine" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="137" height="30"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UrT-Ak-78d" userLabel="Details Button" customClass="SimpleButton" customModule="Lumenshine" customModuleProvider="target">
+                                            <rect key="frame" x="147" y="0.0" width="157" height="30"/>
+                                            <state key="normal" title="details"/>
+                                            <connections>
+                                                <action selector="detailsButtonAction:" destination="6zL-hD-HSN" eventType="touchUpInside" id="C5W-Xy-rnK"/>
+                                            </connections>
+                                        </button>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXW-Jh-7tb" customClass="SimpleButton" customModule="Lumenshine" customModuleProvider="target">
                                             <rect key="frame" x="324" y="0.0" width="51" height="30"/>
                                             <state key="normal" title="remove">
@@ -42,11 +49,13 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
+                                        <constraint firstItem="gXW-Jh-7tb" firstAttribute="leading" secondItem="UrT-Ak-78d" secondAttribute="trailing" constant="20" id="6Wd-st-43n"/>
+                                        <constraint firstItem="UrT-Ak-78d" firstAttribute="centerY" secondItem="gxg-0w-gbq" secondAttribute="centerY" id="BAT-LK-yr0"/>
                                         <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="gXW-Jh-7tb" secondAttribute="trailing" id="F8L-cl-1mx"/>
+                                        <constraint firstItem="UrT-Ak-78d" firstAttribute="leading" secondItem="gxg-0w-gbq" secondAttribute="trailing" constant="10" id="Llg-vN-bee"/>
                                         <constraint firstAttribute="bottom" secondItem="gXW-Jh-7tb" secondAttribute="bottom" id="Pa4-z7-ExW"/>
                                         <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="gxg-0w-gbq" secondAttribute="bottom" id="REI-kf-FCL"/>
                                         <constraint firstItem="gXW-Jh-7tb" firstAttribute="centerY" secondItem="gxg-0w-gbq" secondAttribute="centerY" id="SRx-QA-LhQ"/>
-                                        <constraint firstItem="gXW-Jh-7tb" firstAttribute="leading" secondItem="gxg-0w-gbq" secondAttribute="trailing" constant="16" id="XUm-35-hpb"/>
                                         <constraint firstItem="gxg-0w-gbq" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="lbB-rK-s7i"/>
                                         <constraint firstItem="gXW-Jh-7tb" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="msi-mV-LBR"/>
                                         <constraint firstItem="gxg-0w-gbq" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="ptW-qu-1Ko"/>
@@ -115,6 +124,7 @@
             <connections>
                 <outlet property="authorizationLabel" destination="myo-Sn-9Wh" id="LSL-nq-paI"/>
                 <outlet property="currencyLabel" destination="gxg-0w-gbq" id="uyM-SB-5LK"/>
+                <outlet property="detailsButton" destination="UrT-Ak-78d" id="KuR-gC-mzA"/>
                 <outlet property="issuerLabel" destination="23C-iM-5QB" id="y6x-iB-hBZ"/>
                 <outlet property="removeButton" destination="gXW-Jh-7tb" id="ShZ-ME-EmT"/>
             </connections>
