@@ -171,7 +171,10 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                                                                                  NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
                                 text.append(statusValue)
                             } else {
-                                text.append(notAvailableValue)
+                                let statusValue = NSAttributedString(string: "status is missing" + "\n",
+                                                                     attributes: [NSAttributedStringKey.font : font,
+                                                                                  NSAttributedStringKey.foregroundColor : Stylesheet.color(.red)])
+                                text.append(statusValue)
                             }
                             
                             // short name
@@ -233,8 +236,7 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                             
                             // fixed number of tokens
                             if let fixedNr = currencyDoc.fixedNumber {
-                                let fixedNrTitle = NSAttributedString(string: "Fixed number of tokens: ", attributes: [NSAttributedStringKey.font : prefix_font,
-                                                                                                                  NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                                let fixedNrTitle = NSAttributedString(string: "Fixed number of tokens: ", attributes: [NSAttributedStringKey.font : prefix_font, NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
                                 text.append(fixedNrTitle)
                                 let fixedNrValue = NSAttributedString(string: "\(fixedNr)\n",
                                     attributes: [NSAttributedStringKey.font : font,
@@ -244,8 +246,7 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                             
                             // max number of tokens
                             if let maxNr = currencyDoc.maxNumber {
-                                let fixedNrTitle = NSAttributedString(string: "Max number of tokens: ", attributes: [NSAttributedStringKey.font : prefix_font,
-                                                                                                                       NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                                let fixedNrTitle = NSAttributedString(string: "Max number of tokens: ", attributes: [NSAttributedStringKey.font : prefix_font, NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
                                 text.append(fixedNrTitle)
                                 let maxNrValue = NSAttributedString(string: "\(maxNr)\n",
                                     attributes: [NSAttributedStringKey.font : font,
@@ -255,8 +256,7 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                             
                             // unlimited
                             if let unlimit = currencyDoc.isUnlimited {
-                                let unlimitTitle = NSAttributedString(string: "Unlimited: ", attributes: [NSAttributedStringKey.font : prefix_font,
-                                                                                                                     NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                                let unlimitTitle = NSAttributedString(string: "Unlimited: ", attributes: [NSAttributedStringKey.font : prefix_font, NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
                                 text.append(unlimitTitle)
                                 let unlimitValue = NSAttributedString(string: "\(unlimit)\n",
                                     attributes: [NSAttributedStringKey.font : font,
@@ -266,8 +266,7 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                             
                             // anchored
                             if let anchored = currencyDoc.isAssetAnchored {
-                                let anchoredTitle = NSAttributedString(string: "Anchored: ", attributes: [NSAttributedStringKey.font : prefix_font,
-                                                                                                          NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                                let anchoredTitle = NSAttributedString(string: "Anchored: ", attributes: [NSAttributedStringKey.font : prefix_font, NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
                                 text.append(anchoredTitle)
                                 let anchoredValue = NSAttributedString(string: "\(anchored)\n",
                                     attributes: [NSAttributedStringKey.font : font,
@@ -277,8 +276,7 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                             
                             // anchor asset type
                             if let anchorAssetType = currencyDoc.anchorAssetType {
-                                let anchoredTitle = NSAttributedString(string: "Anchor asset type: ", attributes: [NSAttributedStringKey.font : prefix_font,
-                                                                                                          NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                                let anchoredTitle = NSAttributedString(string: "Anchor asset type: ", attributes: [NSAttributedStringKey.font : prefix_font, NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
                                 text.append(anchoredTitle)
                                 let anchoredValue = NSAttributedString(string: "\(anchorAssetType)\n",
                                     attributes: [NSAttributedStringKey.font : font,
@@ -288,8 +286,7 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                             
                             // anchor asset
                             if let anchorAsset = currencyDoc.anchorAsset {
-                                let anchoredTitle = NSAttributedString(string: "Anchor asset: ", attributes: [NSAttributedStringKey.font : prefix_font,
-                                                                                                                   NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                                let anchoredTitle = NSAttributedString(string: "Anchor asset: ", attributes: [NSAttributedStringKey.font : prefix_font, NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
                                 text.append(anchoredTitle)
                                 let anchoredValue = NSAttributedString(string: "\(anchorAsset)\n",
                                     attributes: [NSAttributedStringKey.font : font,
@@ -299,8 +296,7 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                             
                             // redemption instructions
                             if let redemption = currencyDoc.redemptionInstructions {
-                                let redTitle = NSAttributedString(string: "Redempotion instructions: ", attributes: [NSAttributedStringKey.font : prefix_font,
-                                                                                                              NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                                let redTitle = NSAttributedString(string: "Redempotion instructions: ", attributes: [NSAttributedStringKey.font : prefix_font, NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
                                 text.append(redTitle)
                                 let redValue = NSAttributedString(string: "\(redemption)\n",
                                     attributes: [NSAttributedStringKey.font : font,
@@ -308,6 +304,68 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                                 text.append(redValue)
                             }
                             
+                            // collateral addresses
+                            if currencyDoc.collateralAddresses.count > 0 {
+                                let colateralTitle = NSAttributedString(string: "Collateral addresses:\n", attributes: [NSAttributedStringKey.font : prefix_font, NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                                text.append(colateralTitle)
+                            }
+                            for address in currencyDoc.collateralAddresses {
+                                let colateralValue = NSAttributedString(string: address + "\n", attributes: [NSAttributedStringKey.font : prefix_font, NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                                text.append(colateralValue)
+                            }
+                            
+                            // collateral messages
+                            if currencyDoc.collateralAddressMessages.count > 0 {
+                                let colateralTitle = NSAttributedString(string: "Collateral address messages:\n", attributes: [NSAttributedStringKey.font : prefix_font, NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                                text.append(colateralTitle)
+                            }
+                            for message in currencyDoc.collateralAddressMessages {
+                                let colateralValue = NSAttributedString(string: message + "\n", attributes: [NSAttributedStringKey.font : prefix_font, NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                                text.append(colateralValue)
+                            }
+                            
+                            // collateral signatures
+                            if currencyDoc.collateralAddressSignatures.count > 0 {
+                                let colateralTitle = NSAttributedString(string: "Collateral address signatures:\n", attributes: [NSAttributedStringKey.font : prefix_font, NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                                text.append(colateralTitle)
+                            }
+                            for signature in currencyDoc.collateralAddressSignatures {
+                                let colateralValue = NSAttributedString(string: signature + "\n", attributes: [NSAttributedStringKey.font : prefix_font, NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                                text.append(colateralValue)
+                            }
+                            
+                            // regulated
+                            var regulated = false
+                            if let reg = currencyDoc.regulated {
+                                regulated = reg
+                            }
+                            let regulatedTitle = NSAttributedString(string: "Asset is regulated: ", attributes: [NSAttributedStringKey.font : prefix_font, NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                            text.append(regulatedTitle)
+                            
+                            let regulatedValue = NSAttributedString(string: "\(regulated)\n",
+                                attributes: [NSAttributedStringKey.font : font,
+                                             NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                            text.append(regulatedValue)
+                            
+                            // approval server
+                            if let approvalServer = currencyDoc.approvalServer {
+                                let approvalTitle = NSAttributedString(string: "Approval server: ", attributes: [NSAttributedStringKey.font : prefix_font, NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                                text.append(approvalTitle)
+                                let approvalValue = NSAttributedString(string: "\(approvalServer)\n",
+                                    attributes: [NSAttributedStringKey.font : font,
+                                                 NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                                text.append(approvalValue)
+                            }
+                            
+                            // approval criteria
+                            if let approvalCriteria = currencyDoc.approvalCriteria {
+                                let approvalTitle = NSAttributedString(string: "Approval criteria: ", attributes: [NSAttributedStringKey.font : prefix_font, NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                                text.append(approvalTitle)
+                                let approvalValue = NSAttributedString(string: "\(approvalCriteria)\n",
+                                    attributes: [NSAttributedStringKey.font : font,
+                                                 NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                                text.append(approvalValue)
+                            }
                             
                             break
                         }
