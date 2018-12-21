@@ -113,7 +113,7 @@ class AccountCurrenciesViewController: UIViewController {
                                 case .success(response: let stellarToml):
                                     detailsVC.stellarToml = stellarToml
                                     for currdoc in stellarToml.currenciesDocumentation {
-                                        if currdoc.code == currency.assetCode && currdoc.issuer == currency.assetIssuer {
+                                        if currdoc.code == currency.assetCode && currdoc.issuer == "GBSTRH4QOTWNSVA6E4HFERETX4ZLSR3CIUBLK7AXYII277PFJC4BBYOG" {
                                             if let currencyImageUrl = currdoc.image, let url = URL(string: currencyImageUrl), let data = try? Data(contentsOf: url) {
                                                 detailsVC.currencyImage = UIImage(data: data)
                                             }

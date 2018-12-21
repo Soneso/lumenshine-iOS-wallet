@@ -73,14 +73,27 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
             let chapter_font = R.font.encodeSansSemiBold(size: 17) ?? Stylesheet.font(.body)
             let prefix_font = R.font.encodeSansBold(size: 15) ?? Stylesheet.font(.body)
             let font = R.font.encodeSansRegular(size: 15) ?? Stylesheet.font(.body)
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.paragraphSpacing = 0.5 * (font.lineHeight)
             
-            let notAvailableValue = NSAttributedString(string: "not available" + "\n",
+            let notAvailableValue = NSAttributedString(string: "not available ⚠️" + "\n",
                                                    attributes: [NSAttributedStringKey.font : font,
                                                                 NSAttributedStringKey.foregroundColor : Stylesheet.color(.red)])
             
+            let invalidValue = NSAttributedString(string: "invalid value ⚠️" + "\n",
+                                                  attributes: [NSAttributedStringKey.font : font,
+                                                               NSAttributedStringKey.foregroundColor : Stylesheet.color(.red)])
+            
             let simpleBreak = NSAttributedString(string: "\n", attributes: [NSAttributedStringKey.font : prefix_font, NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+            
+            let checkmark = NSAttributedString(string: " ✔️ ")
+            let warning = NSAttributedString(string: " ⚠️ ")
+            let nogo = NSAttributedString(string: " 🛑 ")
+            
+            var orgHost: String? = nil
+            
+            if let tlink = stellarToml?.issuerDocumentation.orgURL, let turl = URL(string: tlink), let thost = turl.host  {
+                orgHost = thost
+                print("Org Host \(orgHost)")
+            }
             
             // asset code
             let assetCodePrefix = NSAttributedString(string: "Asset code: ",
@@ -134,16 +147,17 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                 
                 text.append(homeDomainValue)
             } else {
-                text.append(notAvailableValue)
+                let homeDomainValue =  NSAttributedString(string: "home domain is missing in the stellar network for this issuer account", attributes: [.font : font, .foregroundColor : Stylesheet.color(.red)])
+                text.append(homeDomainValue)
             }
             
             if invalidTomlDomain {
-                let validationValue = NSAttributedString(string: "\n\nValidation failed: issuer has invalid stellar toml file" + "\n",
+                let validationValue = NSAttributedString(string: "\n\nVerification failed: issuer has invalid stellar toml file." + "\n",
                                                          attributes: [NSAttributedStringKey.font : font,
                                                                       NSAttributedStringKey.foregroundColor : Stylesheet.color(.red)])
                 text.append(validationValue)
             } else if invalidTomlDomain {
-                let validationValue = NSAttributedString(string: "\n\nValidation failed: issuer has no stellar toml file" + "\n",
+                let validationValue = NSAttributedString(string: "\n\nVerification failed: issuer has no stellar toml file." + "\n",
                                                          attributes: [NSAttributedStringKey.font : font,
                                                                       NSAttributedStringKey.foregroundColor : Stylesheet.color(.red)])
                 text.append(validationValue)
@@ -158,7 +172,7 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                 if stellarToml.currenciesDocumentation.count > 0 {
                     for currencyDoc in stellarToml.currenciesDocumentation {
                         //print("sac:\(self.assetCode)-\(currencyDoc.code)-sic:\(self.assetIssuerPk)-\(currencyDoc.issuer)")
-                        if currencyDoc.code == self.assetCode && currencyDoc.issuer == self.assetIssuerPk {
+                        if currencyDoc.code == self.assetCode && currencyDoc.issuer == "GBSTRH4QOTWNSVA6E4HFERETX4ZLSR3CIUBLK7AXYII277PFJC4BBYOG" {
                             metadataFound = true
                             
                             // currency status
@@ -171,10 +185,12 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                                                                                  NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
                                 text.append(statusValue)
                             } else {
-                                let statusValue = NSAttributedString(string: "status is missing" + "\n",
+                                let statusValue = NSAttributedString(string: "status is missing",
                                                                      attributes: [NSAttributedStringKey.font : font,
                                                                                   NSAttributedStringKey.foregroundColor : Stylesheet.color(.red)])
                                 text.append(statusValue)
+                                text.append(warning)
+                                text.append(simpleBreak)
                             }
                             
                             // short name
@@ -414,10 +430,15 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                 
                 if let orgUrl = stellarToml.issuerDocumentation.orgURL {
                     
-                    let link = orgUrl.hasPrefix("http") ? orgUrl : "https://\(orgUrl)"
-                    let orgUrlValue =  NSAttributedString(string: orgUrl, attributes: [.font : font, .foregroundColor : Stylesheet.color(.blue), .link :  link])
+                    if !orgUrl.hasPrefix("https://") {
+                        text.append(invalidValue)
+                    } else if let _ = URL(string:orgUrl) {
+                        let orgUrlValue =  NSAttributedString(string: orgUrl, attributes: [.font : font, .foregroundColor : Stylesheet.color(.blue), .link :  link])
+                        text.append(orgUrlValue)
+                    } else {
+                        text.append(invalidValue)
+                    }
                     
-                    text.append(orgUrlValue)
                     text.append(simpleBreak)
                     
                 } else {
@@ -476,10 +497,17 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                                                                            NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
                     text.append(aATitle)
                     
-                    let link = addressAtestation.hasPrefix("http") ? addressAtestation : "https://\(addressAtestation)"
-                    let aAValue =  NSAttributedString(string: addressAtestation, attributes: [.font : font, .foregroundColor : Stylesheet.color(.blue), .link :  link])
+                    let aAValue =  NSAttributedString(string: addressAtestation, attributes: [.font : font, .foregroundColor : Stylesheet.color(.blue), .link : addressAtestation])
                     
-                    text.append(aAValue)
+                    if !addressAtestation.hasPrefix("https://") {
+                        text.append(invalidValue)
+                    } else if let url = URL(string: addressAtestation), let host = url.host, host == orgHost {
+                        text.append(aAValue)
+                    } else {
+                        text.append(aAValue)
+                        text.append(warning)
+                    }
+                    
                     text.append(simpleBreak)
                 }
                 
@@ -504,8 +532,16 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                                                                       NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
                         text.append(pATitle)
                         
-                        let link = phoneAtestation.hasPrefix("http") ? phoneAtestation : "https://\(phoneAtestation)"
-                        let pAValue =  NSAttributedString(string: phoneAtestation, attributes: [.font : font, .foregroundColor : Stylesheet.color(.blue), .link :  link])
+                        let pAValue =  NSAttributedString(string: phoneAtestation, attributes: [.font : font, .foregroundColor : Stylesheet.color(.blue), .link :  phoneAtestation])
+                        
+                        if !phoneAtestation.hasPrefix("https://") {
+                            text.append(invalidValue)
+                        } else if let url = URL(string: phoneAtestation), let host = url.host, host == orgHost {
+                            text.append(pAValue)
+                        } else {
+                            text.append(pAValue)
+                            text.append(warning)
+                        }
                         
                         text.append(pAValue)
                         text.append(simpleBreak)
@@ -569,6 +605,14 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                     let emailValue =  NSAttributedString(string: email, attributes: [.font : font, .foregroundColor : Stylesheet.color(.blue), .link :  link])
                     
                     text.append(emailValue)
+                    
+                    let emailComponents = email.components(separatedBy: "@")
+                    if emailComponents.count == 2, emailComponents[1] == orgHost {
+                        text.append(checkmark)
+                    } else {
+                        text.append(warning)
+                    }
+                    
                     text.append(simpleBreak)
                 } else {
                     text.append(notAvailableValue)
@@ -608,11 +652,11 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                 }
                 
                 // PRINCIPALS
+                let principalsTitle = NSAttributedString(string: "\nPrincipals" + "\n\n", attributes: [NSAttributedStringKey.font : chapter_font,
+                                                                                                       NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkBlue)])
+                text.append(principalsTitle)
+                
                 if stellarToml.pointsOfContact.count > 0 {
-                    
-                    let principalsTitle = NSAttributedString(string: "\nPrincipals" + "\n\n", attributes: [NSAttributedStringKey.font : chapter_font,
-                                                                                                                          NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkBlue)])
-                    text.append(principalsTitle)
                     
                     for principal in stellarToml.pointsOfContact {
                         // name of principal
@@ -637,6 +681,12 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                             let pemailValue =  NSAttributedString(string: pemail, attributes: [.font : font, .foregroundColor : Stylesheet.color(.blue), .link :  link])
                             
                             text.append(pemailValue)
+                            
+                            let emailComponents = pemail.components(separatedBy: "@")
+                            if emailComponents.count != 2 {
+                                text.append(warning)
+                            }
+                            
                             text.append(simpleBreak)
                         } else {
                             text.append(notAvailableValue)
@@ -656,6 +706,20 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                             text.append(simpleBreak)
                         }
                         
+                        // Principal telegram
+                        if let telegram = principal.telegram {
+                            let telegramTitle = NSAttributedString(string: "Telegram: ",
+                                                                  attributes: [NSAttributedStringKey.font : prefix_font,
+                                                                               NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                            text.append(telegramTitle)
+                            
+                            let link = telegram.hasPrefix("http") ? telegram : "https://t.me/\(telegram)"
+                            let telegramValue =  NSAttributedString(string: telegram, attributes: [.font : font, .foregroundColor : Stylesheet.color(.blue), .link :  link])
+                            
+                            text.append(telegramValue)
+                            text.append(simpleBreak)
+                        }
+                        
                         // Principal twitter
                         if let twitter = principal.twitter {
                             let twitterTitle = NSAttributedString(string: "Twitter: ",
@@ -670,7 +734,7 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                             text.append(simpleBreak)
                         }
                         
-                        // Organisation github
+                        // Principal github
                         if let github = principal.github {
                             let githubTitle = NSAttributedString(string: "Github: ",
                                                                  attributes: [NSAttributedStringKey.font : prefix_font,
@@ -683,48 +747,47 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                             text.append(githubValue)
                             text.append(simpleBreak)
                         }
+                        
+                        // ID photo hash
+                        if let idPhotoHash = principal.idPhotoHash {
+                            let hashTitle = NSAttributedString(string: "Id photo hash: ",
+                                                                 attributes: [NSAttributedStringKey.font : prefix_font,
+                                                                              NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                            text.append(hashTitle)
+                            
+                            let hashValue = NSAttributedString(string: idPhotoHash,
+                                                                attributes: [NSAttributedStringKey.font : font,
+                                                                             NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                            text.append(hashValue)
+                            text.append(simpleBreak)
+                        }
+                        
+                        // Verification photo hash
+                        if let verificationPhotoHash = principal.verificationPhotoHash {
+                            let hashTitle = NSAttributedString(string: "Verification photo hash: ",
+                                                               attributes: [NSAttributedStringKey.font : prefix_font,
+                                                                            NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                            text.append(hashTitle)
+                            
+                            let hashValue = NSAttributedString(string: verificationPhotoHash,
+                                                               attributes: [NSAttributedStringKey.font : font,
+                                                                            NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                            text.append(hashValue)
+                            text.append(simpleBreak)
+                        }
                         text.append(simpleBreak)
                     }
+                } else {
+                    text.append(notAvailableValue)
                 }
                 
             } else {
-                let validationValue = NSAttributedString(string: "\n\nValidation failed: stellar toml file for issuer not found" + "\n",
+                let validationValue = NSAttributedString(string: "\n\nVerification failed: stellar toml file for issuer account not found." + "\n",
                                                          attributes: [NSAttributedStringKey.font : font,
                                                                       NSAttributedStringKey.foregroundColor : Stylesheet.color(.red)])
                 text.append(validationValue)
             }
         }
-        
-        textView.attributedText = text
-        
-        /*for (key, links) in linksDict {
-            let ranges = infoText.ranges(of: key)
-            let nsRanges = ranges.nsRanges
-            
-            for i in 0..<nsRanges.count {
-                if links.count > i {
-                    text.setAttributes([.link: links[i], .font: R.font.encodeSansRegular(size: 16) as Any, .foregroundColor: Stylesheet.color(.blue)], range: nsRanges[i])
-                }
-            }
-        }
-        
-        for chapter in chapters {
-            let ranges = infoText.ranges(of: chapter)
-            let nsRanges = ranges.nsRanges
-            
-            for i in 0..<nsRanges.count {
-                text.setAttributes([.font: R.font.encodeSansSemiBold(size: 16) as Any, .foregroundColor: Stylesheet.color(.orange)], range: nsRanges[i])
-            }
-        }
-        
-        for bold in bolds {
-            let ranges = infoText.ranges(of: bold)
-            let nsRanges = ranges.nsRanges
-            
-            for i in 0..<nsRanges.count {
-                text.setAttributes([.font: R.font.encodeSansSemiBold(size: 16) as Any, .foregroundColor: Stylesheet.color(.darkGray)], range: nsRanges[i])
-            }
-        }*/
         
         textView.attributedText = text
     }

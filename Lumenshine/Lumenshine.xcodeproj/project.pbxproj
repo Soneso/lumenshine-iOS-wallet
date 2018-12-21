@@ -1891,13 +1891,13 @@
 		C6888502213E6A7A0010615D /* Currencies */ = {
 			isa = PBXGroup;
 			children = (
-				837C125721CBE7F2002F8C7B /* CurrencyDetailsViewController.swift */,
-				837C125621CBE7F2002F8C7B /* CurrencyDetailsViewController.xib */,
 				C6888501213E6A2B0010615D /* AddCurrency */,
 				7491BE42211C2E230058877E /* AccountCurrenciesViewController.swift */,
 				7491BE43211C2E230058877E /* AccountCurrenciesViewController.xib */,
 				C66CC2D4212EA2AD00729C09 /* RemoveCurrencyViewController.xib */,
 				C66CC2D6212EA2BD00729C09 /* RemoveCurrencyViewController.swift */,
+				837C125721CBE7F2002F8C7B /* CurrencyDetailsViewController.swift */,
+				837C125621CBE7F2002F8C7B /* CurrencyDetailsViewController.xib */,
 			);
 			path = Currencies;
 			sourceTree = "<group>";
@@ -2226,7 +2226,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Lumenshine/Pods-Lumenshine-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Base32/Base32.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/DGElasticPullToRefresh/DGElasticPullToRefresh.framework",
@@ -2267,7 +2267,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lumenshine/Pods-Lumenshine-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		43FF90192059581C00650ED5 /* Compile R.swift resources */ = {
