@@ -172,7 +172,7 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                 if stellarToml.currenciesDocumentation.count > 0 {
                     for currencyDoc in stellarToml.currenciesDocumentation {
                         //print("sac:\(self.assetCode)-\(currencyDoc.code)-sic:\(self.assetIssuerPk)-\(currencyDoc.issuer)")
-                        if currencyDoc.code == self.assetCode && currencyDoc.issuer == "GBSTRH4QOTWNSVA6E4HFERETX4ZLSR3CIUBLK7AXYII277PFJC4BBYOG" {
+                        if currencyDoc.code == self.assetCode && currencyDoc.issuer == self.assetIssuerPk {
                             metadataFound = true
                             
                             // currency status
