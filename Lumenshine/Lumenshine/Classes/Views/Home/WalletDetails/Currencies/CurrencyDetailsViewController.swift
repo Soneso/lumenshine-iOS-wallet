@@ -326,7 +326,7 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                                 text.append(colateralTitle)
                             }
                             for address in currencyDoc.collateralAddresses {
-                                let colateralValue = NSAttributedString(string: address + "\n", attributes: [NSAttributedStringKey.font : prefix_font, NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                                let colateralValue = NSAttributedString(string: address + "\n", attributes: [NSAttributedStringKey.font : font, NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
                                 text.append(colateralValue)
                             }
                             
@@ -336,7 +336,7 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                                 text.append(colateralTitle)
                             }
                             for message in currencyDoc.collateralAddressMessages {
-                                let colateralValue = NSAttributedString(string: message + "\n", attributes: [NSAttributedStringKey.font : prefix_font, NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                                let colateralValue = NSAttributedString(string: message + "\n", attributes: [NSAttributedStringKey.font : font, NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
                                 text.append(colateralValue)
                             }
                             
@@ -346,7 +346,7 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                                 text.append(colateralTitle)
                             }
                             for signature in currencyDoc.collateralAddressSignatures {
-                                let colateralValue = NSAttributedString(string: signature + "\n", attributes: [NSAttributedStringKey.font : prefix_font, NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                                let colateralValue = NSAttributedString(string: signature + "\n", attributes: [NSAttributedStringKey.font : font, NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
                                 text.append(colateralValue)
                             }
                             
@@ -393,7 +393,7 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                 }
                 
                 // ISSUER DOCUMENTATION
-                let documentationTitle = NSAttributedString(string: "\n\nIssuer Documentation" + "\n\n", attributes: [NSAttributedStringKey.font : chapter_font,
+                let documentationTitle = NSAttributedString(string: "\n\nDocumentation" + "\n\n", attributes: [NSAttributedStringKey.font : chapter_font,
                                                                                                                       NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkBlue)])
                 text.append(documentationTitle)
                 

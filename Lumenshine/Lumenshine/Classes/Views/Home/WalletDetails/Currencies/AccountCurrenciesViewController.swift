@@ -111,18 +111,16 @@ class AccountCurrenciesViewController: UIViewController {
                             try StellarToml.from(domain: homeDomain, secure: true) { (result) -> (Void) in
                                 switch result {
                                 case .success(response: let stellarToml):
+                                    
+                                    //Alternately, stellar.toml can link out to a separate TOML file for each currency by specifying toml="https://DOMAIN/.well-known/CURRENCY.toml" as the currency's only field.
+                                    if let linkedCurrencyDocumentation = self.linkedCurrencyDocumentation(stellarToml: stellarToml, assetCode: currency.assetCode, assetIssuer: currency.assetIssuer) {
+                                        stellarToml.currenciesDocumentation.append(linkedCurrencyDocumentation)
+                                    }
+                                    
                                     detailsVC.stellarToml = stellarToml
-                                    for currdoc in stellarToml.currenciesDocumentation {
-                                        if currdoc.code == currency.assetCode && currdoc.issuer == currency.assetIssuer {
-                                            if let currencyImageUrl = currdoc.image, let url = URL(string: currencyImageUrl), let data = try? Data(contentsOf: url) {
-                                                detailsVC.currencyImage = UIImage(data: data)
-                                            }
-                                            break
-                                        }
-                                    }
-                                    if let orglogoUrl = stellarToml.issuerDocumentation.orgLogo, let url = URL(string: orglogoUrl), let data = try? Data(contentsOf: url) {
-                                            detailsVC.organisationLogo = UIImage(data: data)
-                                    }
+                                    detailsVC.organisationLogo = self.organisationLogo(stellarToml: stellarToml)
+                                    detailsVC.currencyImage = self.currencyLogo(stellarToml: stellarToml, assetCode: currency.assetCode, assetIssuer: currency.assetIssuer)
+                                    
                                 case .failure(error: let stellarTomlError):
                                     switch stellarTomlError {
                                     case .invalidDomain:
@@ -154,6 +152,73 @@ class AccountCurrenciesViewController: UIViewController {
         }
     
     }
+    
+    func linkedCurrencyDocumentation(stellarToml: StellarToml, assetCode:String?, assetIssuer:String?) -> CurrencyDocumentation? {
+        if let code = assetCode, let issuer = assetIssuer {
+            var linkedTomlUrls: [URL] = []
+            for currencyDoc in stellarToml.currenciesDocumentation {
+                if currencyDoc.code == code, currencyDoc.issuer == issuer {
+                    // toml already contains the needed documentation
+                    return nil
+                } else if let tomlLink = currencyDoc.toml, let tomlUrl = URL(string: tomlLink) {
+                    linkedTomlUrls.append(tomlUrl)
+                }
+            }
+            
+            for nextUrl in linkedTomlUrls {
+                if let tomlString = try? String(contentsOf: nextUrl, encoding: .utf8), let currencyToml = try? StellarToml(fromString: tomlString) {
+                    for nextCurrencyDoc in currencyToml.currenciesDocumentation {
+                        if nextCurrencyDoc.code == code, nextCurrencyDoc.issuer == issuer {
+                            return nextCurrencyDoc
+                        }
+                    }
+                }
+            }
+        }
+        return nil
+    }
+    
+    func organisationLogo(stellarToml: StellarToml) -> UIImage? {
+        if let orglogoUrl = stellarToml.issuerDocumentation.orgLogo, let url = URL(string: orglogoUrl), let data = try? Data(contentsOf: url) {
+            return prepareImageForDetails(sourceImage:UIImage(data: data), maxHeight:75.0)
+        }
+        return nil
+    }
+    
+    func currencyLogo(stellarToml: StellarToml, assetCode: String?, assetIssuer: String?) -> UIImage? {
+        // get lopgo of the currency
+        if let code = assetCode, let issuer = assetIssuer {
+            for currdoc in stellarToml.currenciesDocumentation {
+                if currdoc.code == code && currdoc.issuer == issuer {
+                    if let currencyImageUrl = currdoc.image, let url = URL(string: currencyImageUrl), let data = try? Data(contentsOf: url) {
+                        return prepareImageForDetails(sourceImage:UIImage(data: data), maxHeight:75.0)
+                    }
+                }
+            }
+        }
+        return nil
+    }
+    
+    func prepareImageForDetails(sourceImage:UIImage?, maxHeight: CGFloat) -> UIImage? {
+        
+        if let originalImage = sourceImage, originalImage.size.height > maxHeight {
+            
+            let oldHeight = originalImage.size.height
+            let scaleFactor = maxHeight / oldHeight
+            
+            let newHeight = oldHeight * scaleFactor
+            let newWidth = originalImage.size.width * scaleFactor
+            
+            UIGraphicsBeginImageContext(CGSize(width:newWidth, height:newHeight))
+            originalImage.draw(in: CGRect(x:0, y:0, width:newWidth, height:newHeight))
+            let newImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return newImage
+        } else {
+            return sourceImage
+        }
+    }
+    
     private func showDetailsController(detailsVC:CurrencyDetailsViewController) {
         DispatchQueue.main.async {
             let composeVC = ComposeNavigationController(rootViewController: detailsVC)
