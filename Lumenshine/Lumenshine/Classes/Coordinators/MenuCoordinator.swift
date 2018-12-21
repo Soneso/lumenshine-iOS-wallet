@@ -58,9 +58,12 @@ class MenuCoordinator: MenuCoordinatorType {
         }
     }
     deinit {
-        print("Deinit MenuCoordinator")
         if let drawer = baseController as? AppNavigationDrawerController {
-            drawer.setViewController(nil, for: .none)
+            for vc in drawer.childViewControllers {
+                if let nvc = vc as? NavigationController {
+                    nvc.removeFromParentViewController()
+                }
+            }
         }
     }
 }

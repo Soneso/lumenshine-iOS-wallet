@@ -402,7 +402,6 @@ public class UserManager: NSObject {
     }
     
     func walletDetails(wallet: Wallet, completion: @escaping WalletsClosure) {
-        print ("UM- wallet details (single) - load account details for wallet: \(wallet.name)")
         Services.shared.walletService.getAccountDetails(accountId: wallet.publicKey) { (result) -> (Void) in
             switch result {
             case .success(let accountDetails):

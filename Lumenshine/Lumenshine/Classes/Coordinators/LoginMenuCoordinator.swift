@@ -66,6 +66,11 @@ fileprivate extension LoginMenuCoordinator {
         let navigationController = AppNavigationController(rootViewController: snackBar)
         navigationController.navigationBar.isTranslucent = true
         if let drawer = baseController as? AppNavigationDrawerController {
+            for vc in drawer.childViewControllers {
+                if type(of: vc) == type(of: navigationController) {
+                    vc.removeFromParentViewController()
+                }
+            }
             drawer.setViewController(navigationController, for: .none)
             drawer.closeSide()
             menuView.present(snackBar)
@@ -77,6 +82,11 @@ fileprivate extension LoginMenuCoordinator {
         let coordinator = HelpCenterCoordinator(mainCoordinator: mainCoordinator)
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
         if let drawer = baseController as? AppNavigationDrawerController {
+            for vc in drawer.childViewControllers {
+                if type(of: vc) == type(of: navigationController) {
+                    vc.removeFromParentViewController()
+                }
+            }
             drawer.setViewController(navigationController, for: .none)
             drawer.closeSide()
             menuView.present(coordinator.baseController)

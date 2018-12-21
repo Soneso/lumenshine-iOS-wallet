@@ -53,27 +53,6 @@ class HomeViewModel : HomeViewModelType {
     var currencyRateUpdateClosure: ((Double) -> ())?
     var scrollToItemClosure: ((Int) -> ())?
     
-    var barTitles: [String] {
-        return [
-            R.string.localizable.send(),
-            R.string.localizable.sell(),
-            R.string.localizable.scan(),
-            R.string.localizable.receive(),
-            R.string.localizable.more()
-        ]
-        
-    }
-    
-    var barIcons: [UIImage?] {
-        return [
-            MaterialIcon.send.size24pt,
-            MaterialIcon.money.size24pt,
-            MaterialIcon.qrCode.size24pt,
-            MaterialIcon.received.size24pt,
-            MaterialIcon.moreHorizontal.size24pt
-        ]
-    }
-    
     func fundAccount() {
         if let wallet = (self.cardViewModels.first as? WalletCardViewModel)?.wallet {
             navigationCoordinator?.performTransition(transition: .showFundWallet(wallet))

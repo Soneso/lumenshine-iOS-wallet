@@ -61,6 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             loginCoordinator = ReLoginMenuCoordinator(mainCoordinator: mainCoordinator, user: user)
         } else {
             loginCoordinator = LoginMenuCoordinator(mainCoordinator: mainCoordinator)
+            loginCoordinator?.performTransition(transition: .showSignUp)
         }
         
         window = UIWindow(frame: UIScreen.main.bounds)

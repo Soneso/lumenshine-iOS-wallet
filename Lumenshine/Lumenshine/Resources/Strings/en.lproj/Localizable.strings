@@ -230,10 +230,10 @@
 "repeat_password" = "Repeat password";
 
 /*  */
-"forename" = "Forename";
+"forename" = "First name";
 
 /*  */
-"lastname" = "Lastname";
+"lastname" = "Last name";
 
 /*  */
 "company_name" = "Company name";
@@ -1211,16 +1211,16 @@
 "email_mandatory" = "Email is mandatory";
 
 /*  */
-"forename_mandatory" = "Forename is mandatory";
+"forename_mandatory" = "First name is mandatory";
 
 /*  */
-"lastname_mandatory" = "Lastname is mandatory";
+"lastname_mandatory" = "Last name is mandatory";
 
 /*  */
-"invalid_forename" = "Invalid forename";
+"invalid_forename" = "Invalid first name";
 
 /*  */
-"invalid_lastname" = "Invalid lastname";
+"invalid_lastname" = "Invalid last name";
 
 /*  */
 "validateing" = "validating";

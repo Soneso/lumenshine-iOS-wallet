@@ -61,6 +61,11 @@ fileprivate extension SetupMenuCoordinator {
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
         navigationController.navigationBar.isTranslucent = true
         if let drawer = baseController as? AppNavigationDrawerController {
+            for vc in drawer.childViewControllers {
+                if type(of: vc) == type(of: navigationController) {
+                    vc.removeFromParentViewController()
+                }
+            }
             drawer.setViewController(navigationController, for: .none)
             drawer.closeSide()
             menuView.present(coordinator.baseController)

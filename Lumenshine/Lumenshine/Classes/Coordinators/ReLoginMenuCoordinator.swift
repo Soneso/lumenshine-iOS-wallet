@@ -67,6 +67,11 @@ fileprivate extension ReLoginMenuCoordinator {
         let navigationController = AppNavigationController(rootViewController: loginCoordinator.baseController)
         navigationController.navigationBar.isTranslucent = true
         if let drawer = baseController as? AppNavigationDrawerController {
+            for vc in drawer.childViewControllers {
+                if type(of: vc) == type(of: navigationController) {
+                    vc.removeFromParentViewController()
+                }
+            }
             drawer.setViewController(navigationController, for: .none)
             drawer.closeSide()
             menuView.present(loginCoordinator.baseController)

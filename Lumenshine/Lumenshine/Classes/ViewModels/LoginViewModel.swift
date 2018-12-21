@@ -207,6 +207,7 @@ class LoginViewModel : LoginViewModelType {
                 self?.mnemonic = userSecurity.mnemonic24Word
                 
                 self?.checkSetup(tfaConfirmed: false, mailConfirmed: false, mnemonicConfirmed: false, tfaSecret: registrationResponse?.tfaSecret)
+                response(.success)
                 
             case .failure(let error):
                 response(.failure(error: error))
