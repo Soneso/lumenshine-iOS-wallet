@@ -34,7 +34,7 @@ class MenuViewModel : MenuViewModelType {
         self.user = user
         
         self.entries = [[.avatar],
-         [.home, .wallets, .transactions, .contacts, .settings],
+         [.home, .wallets, .transactions, .contacts, .settings, .extras],
          [.help, .signOut]]
         
         NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: .UIApplicationWillEnterForeground, object: nil)
@@ -69,6 +69,8 @@ class MenuViewModel : MenuViewModelType {
         switch entry(at: indexPath) {
         case .avatar, .settings:
             navigationCoordinator?.performTransition(transition: .showSettings)
+        case .extras:
+            navigationCoordinator?.performTransition(transition: .showExtras)
         case .home:
             navigationCoordinator?.performTransition(transition: .showHome)
         case .contacts:

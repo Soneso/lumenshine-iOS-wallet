@@ -255,6 +255,13 @@
 		74E2057A20D1544000E94048 /* HomeFundedWalletHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74E2057920D1544000E94048 /* HomeFundedWalletHeaderView.xib */; };
 		74E2057F20D2A3B200E94048 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E2057E20D2A3B200E94048 /* IconButton.swift */; };
 		74E2058120D2A3C400E94048 /* IconView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74E2058020D2A3C400E94048 /* IconView.xib */; };
+		83028DDD21CFBE410006C972 /* ExtrasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83028DDC21CFBE410006C972 /* ExtrasTableViewController.swift */; };
+		83028DDF21CFBE570006C972 /* ExtrasTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83028DDE21CFBE570006C972 /* ExtrasTableViewCell.swift */; };
+		83028DE121CFBF400006C972 /* ExtrasViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83028DE021CFBF400006C972 /* ExtrasViewModel.swift */; };
+		83028DE321CFBFA50006C972 /* ExtrasEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83028DE221CFBFA50006C972 /* ExtrasEntry.swift */; };
+		83028DE521CFC45E0006C972 /* ExtrasCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83028DE421CFC45E0006C972 /* ExtrasCoordinator.swift */; };
+		83028DE721CFC8D30006C972 /* MergeExternalAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83028DE621CFC8D30006C972 /* MergeExternalAccountViewController.swift */; };
+		83028DE921CFD25D0006C972 /* MergeWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83028DE821CFD25D0006C972 /* MergeWalletViewController.swift */; };
 		833F7D6F2189FB9600ED43D9 /* SEP10ChallengeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F7D6E2189FB9600ED43D9 /* SEP10ChallengeResponse.swift */; };
 		833F7D71218D95B800ED43D9 /* LoginStep1Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F7D70218D95B800ED43D9 /* LoginStep1Response.swift */; };
 		833F7D73218F6E3F00ED43D9 /* TFASecretResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F7D72218F6E3F00ED43D9 /* TFASecretResponse.swift */; };
@@ -718,6 +725,13 @@
 		74E2057920D1544000E94048 /* HomeFundedWalletHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeFundedWalletHeaderView.xib; sourceTree = "<group>"; };
 		74E2057E20D2A3B200E94048 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 		74E2058020D2A3C400E94048 /* IconView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IconView.xib; sourceTree = "<group>"; };
+		83028DDC21CFBE410006C972 /* ExtrasTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtrasTableViewController.swift; sourceTree = "<group>"; };
+		83028DDE21CFBE570006C972 /* ExtrasTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtrasTableViewCell.swift; sourceTree = "<group>"; };
+		83028DE021CFBF400006C972 /* ExtrasViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtrasViewModel.swift; sourceTree = "<group>"; };
+		83028DE221CFBFA50006C972 /* ExtrasEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtrasEntry.swift; sourceTree = "<group>"; };
+		83028DE421CFC45E0006C972 /* ExtrasCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtrasCoordinator.swift; sourceTree = "<group>"; };
+		83028DE621CFC8D30006C972 /* MergeExternalAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeExternalAccountViewController.swift; sourceTree = "<group>"; };
+		83028DE821CFD25D0006C972 /* MergeWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeWalletViewController.swift; sourceTree = "<group>"; };
 		833F7D6E2189FB9600ED43D9 /* SEP10ChallengeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEP10ChallengeResponse.swift; sourceTree = "<group>"; };
 		833F7D70218D95B800ED43D9 /* LoginStep1Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStep1Response.swift; sourceTree = "<group>"; };
 		833F7D72218F6E3F00ED43D9 /* TFASecretResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFASecretResponse.swift; sourceTree = "<group>"; };
@@ -991,6 +1005,7 @@
 				7491BE46211C32040058877E /* Wallet */,
 				43CD7B1520F7C4680014BF69 /* Setup */,
 				4370E23B20655F6F004C62C3 /* Settings */,
+				83028DDB21CFBE060006C972 /* Extras */,
 				4319B17C2063EDFA007CE18D /* Login */,
 				834D13AB219AB33700428D7A /* SignUp */,
 				43FBEE4320628521004E2BB1 /* Scan */,
@@ -1116,6 +1131,7 @@
 				43DCF85E215CEF92004F827E /* HelpEntry.swift */,
 				74C0913E20F65A7A000A809D /* Wallet.swift */,
 				439E3C8A2107786A0004BB91 /* SettingsEntry.swift */,
+				83028DE221CFBFA50006C972 /* ExtrasEntry.swift */,
 				4319B4CF211B0987002E45F0 /* DecryptedUserData.swift */,
 				C6DBDB7021199FF100FCEC78 /* TransactionResult.swift */,
 				C6DBDB722119CD5000FCEC78 /* TransactionInput.swift */,
@@ -1218,6 +1234,7 @@
 				4319B1812063EF72007CE18D /* LoginCoordinator.swift */,
 				4384C70B20E27C72000C7201 /* LoginMenuCoordinator.swift */,
 				4394911D20BEBDFA008D4FA2 /* SettingsCoordinator.swift */,
+				83028DE421CFC45E0006C972 /* ExtrasCoordinator.swift */,
 				4301312920C049CB00E47E83 /* ReLoginCoordinator.swift */,
 				43DAC65520E4EB2C00E491D8 /* ReLoginMenuCoordinator.swift */,
 				43CD7B0D20F7AEBC0014BF69 /* SetupCoordinator.swift */,
@@ -1241,6 +1258,7 @@
 				43844F3D20E3FE2600C352E5 /* ReLoginViewModel.swift */,
 				4319B1832063F00C007CE18D /* MenuViewModel.swift */,
 				4394911B20BEB845008D4FA2 /* SettingsViewModel.swift */,
+				83028DE021CFBF400006C972 /* ExtrasViewModel.swift */,
 				43CD7B1120F7B8A70014BF69 /* SetupMenuViewModel.swift */,
 				43CD7B1320F7BEBF0014BF69 /* SetupViewModel.swift */,
 				43C7A8F1215BB28D007F4E5E /* HelpCenterViewModel.swift */,
@@ -1656,6 +1674,17 @@
 				74C899572107621E009B13EA /* receive_payment.html */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		83028DDB21CFBE060006C972 /* Extras */ = {
+			isa = PBXGroup;
+			children = (
+				83028DDC21CFBE410006C972 /* ExtrasTableViewController.swift */,
+				83028DDE21CFBE570006C972 /* ExtrasTableViewCell.swift */,
+				83028DE621CFC8D30006C972 /* MergeExternalAccountViewController.swift */,
+				83028DE821CFD25D0006C972 /* MergeWalletViewController.swift */,
+			);
+			path = Extras;
 			sourceTree = "<group>";
 		};
 		834D13AB219AB33700428D7A /* SignUp */ = {
@@ -2546,6 +2575,7 @@
 				4391A52E20D141300015A6DA /* EnumPicker.swift in Sources */,
 				43E23994214F8EF00017AABF /* GradientView.swift in Sources */,
 				43CD7B1020F7B0CF0014BF69 /* SetupMenuCoordinator.swift in Sources */,
+				83028DDD21CFBE410006C972 /* ExtrasTableViewController.swift in Sources */,
 				43FBEE452062853A004E2BB1 /* ScanViewController.swift in Sources */,
 				74C8994B2101DD7C009B13EA /* ReceivePaymentCardViewController.swift in Sources */,
 				B16EE6D921820C1700AF1D8B /* InputTableViewCell.swift in Sources */,
@@ -2555,6 +2585,8 @@
 				C6D87E762133ECED00154A3B /* KnownCurrenciesTableViewController.swift in Sources */,
 				B1DA1E912189C586001BB4FA /* TransactionHistoryDetailsTableViewController.swift in Sources */,
 				C66926A121B7EF6800D57D51 /* DepositXLMViewController.swift in Sources */,
+				83028DE921CFD25D0006C972 /* MergeWalletViewController.swift in Sources */,
+				83028DDF21CFBE570006C972 /* ExtrasTableViewCell.swift in Sources */,
 				74C8994E210205C8009B13EA /* UIApplication+ViewControllerTree.swift in Sources */,
 				74C0914A20FB3F6F000A809D /* CurrenciesService.swift in Sources */,
 				43C7A8F0215B92CA007F4E5E /* HelpCenterViewController.swift in Sources */,
@@ -2564,6 +2596,7 @@
 				833F7D71218D95B800ED43D9 /* LoginStep1Response.swift in Sources */,
 				4384C70C20E27C72000C7201 /* LoginMenuCoordinator.swift in Sources */,
 				B1F3AA20219C2AAD00A1F3B4 /* TxInflationOperationResponse.swift in Sources */,
+				83028DE721CFC8D30006C972 /* MergeExternalAccountViewController.swift in Sources */,
 				43D131E220569950000483C4 /* HomeViewController.swift in Sources */,
 				4319B17E2063EE0E007CE18D /* LoginViewController.swift in Sources */,
 				B1ECB662218C67D9002FBB6A /* TransactionsViewController.swift in Sources */,
@@ -2595,6 +2628,7 @@
 				4341251120EBC2C700267260 /* ReLoginHomeView.swift in Sources */,
 				746DC58120D141FE00AD0856 /* HomeHeaderView.swift in Sources */,
 				C665871021254A78006499A7 /* ChartsService.swift in Sources */,
+				83028DE321CFBFA50006C972 /* ExtrasEntry.swift in Sources */,
 				C69556532126F6F400B0E110 /* TransactionHistoryTableViewController.swift in Sources */,
 				436B366E20512114009F7C21 /* FlexibleHeightBarSubviewLayoutAttributes.swift in Sources */,
 				439BB2FA21527ACE003427A5 /* ComposeTransitionController.swift in Sources */,
@@ -2611,6 +2645,7 @@
 				C669269F21B7EF4100D57D51 /* DepositInfoViewController.swift in Sources */,
 				C69A5143211C16500066A4A0 /* TransactionResultPrintView.swift in Sources */,
 				43CF47EB2164CE1400B9E7E2 /* AddUpdateContactViewController.swift in Sources */,
+				83028DE121CFBF400006C972 /* ExtrasViewModel.swift in Sources */,
 				C682C002213691A3007705DF /* BiometricHelper.swift in Sources */,
 				C6257A6E21620C1300E1B879 /* NoMultiSigSupportViewController.swift in Sources */,
 				C685DE0D2154C09E00F99D81 /* SubtitleLabel.swift in Sources */,
@@ -2633,6 +2668,7 @@
 				B102359621B2F054009D5E0D /* TransactionSorter.swift in Sources */,
 				43F3E36120F3B88E0032D017 /* SignUpView.swift in Sources */,
 				B147312C21A466860048DD55 /* TransactionsFilterViewController.swift in Sources */,
+				83028DE521CFC45E0006C972 /* ExtrasCoordinator.swift in Sources */,
 				43F3E35F20F3B8780032D017 /* LoginView.swift in Sources */,
 				439BB2FC21527B41003427A5 /* ComposeNavigationController.swift in Sources */,
 				7435EA7520BAD95F008CC667 /* String+Utils.swift in Sources */,

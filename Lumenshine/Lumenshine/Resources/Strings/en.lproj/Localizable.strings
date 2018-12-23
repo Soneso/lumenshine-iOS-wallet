@@ -665,7 +665,25 @@
 "invalid_password" = "Invalid password.";
 
 /*  */
-"empty_password" = "Empty password.";
+"empty_password" = "Password is mandatory.";
+
+/*  */
+"external_account_seed" = "Seed of account to merge";
+
+/*  */
+"empty_seed" = "Secret seed is mandatory.";
+
+/*  */
+"empty_accountId_or_address" = "mandatory";
+
+/*  */
+"merge_external_account_hint" = "Here you can merge an external Stellar account into a funded Lumenshine wallet. Your external account must not trust other currencies than Stellar Lumens and it must have no data entries.";
+
+/*  */
+"merge_wallet_hint" = "Here you can merge a funded Lumenshine wallet into another stellar account.";
+
+/*  */
+"external_account_id" = "Account ID or address of stellar account";
 
 /*  */
 "invalid_repassword" = "Repetition do not match with password.";
@@ -1242,3 +1260,16 @@
 
 /*  */
 "other" = "Other";
+
+/*  */
+"merge_external_account" = "Merge external account";
+
+/*  */
+"merge_wallet" = "Merge/close wallet";
+
+/*  */
+"merge_into" = "Merge into wallet:";
+
+/*  */
+"merge_close" = "Merge / close wallet:";
+

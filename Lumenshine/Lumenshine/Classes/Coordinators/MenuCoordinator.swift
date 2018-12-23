@@ -42,6 +42,8 @@ class MenuCoordinator: MenuCoordinatorType {
             showHome()
         case .showSettings:
             showSettings()
+        case .showExtras:
+            showExtras()
         case .showHelp:
             showHelpCenter()
         case .showContacts:
@@ -83,6 +85,12 @@ fileprivate extension MenuCoordinator {
     
     func showSettings() {
         let coordinator = SettingsCoordinator(mainCoordinator: mainCoordinator, user: user)
+        let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
+        present(navigationController: navigationController)
+    }
+    
+    func showExtras() {
+        let coordinator = ExtrasCoordinator(mainCoordinator: mainCoordinator, user: user)
         let navigationController = AppNavigationController(rootViewController: coordinator.baseController)
         present(navigationController: navigationController)
     }

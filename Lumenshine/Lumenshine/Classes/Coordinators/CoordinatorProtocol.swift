@@ -39,6 +39,7 @@ public indirect enum Transition {
     case showLost2fa
     case showHome
     case showSettings
+    case showExtras
     case showHelp
     case showFeedback
     case showAbout
@@ -61,6 +62,8 @@ public indirect enum Transition {
     case showChartCurrency
     case showPersonalData
     case showPersonalDataSubList
+    case showMergeExternalAccount
+    case showMergeWallet
     case showWallets
     case showTermsOfService
     case showTransactions
