@@ -86,13 +86,12 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
             
             let checkmark = NSAttributedString(string: " ✔️ ")
             let warning = NSAttributedString(string: " ⚠️ ")
-            let nogo = NSAttributedString(string: " 🛑 ")
+            //let nogo = NSAttributedString(string: " 🛑 ")
             
             var orgHost: String? = nil
             
             if let tlink = stellarToml?.issuerDocumentation.orgURL, let turl = URL(string: tlink), let thost = turl.host  {
                 orgHost = thost
-                print("Org Host \(orgHost)")
             }
             
             // asset code

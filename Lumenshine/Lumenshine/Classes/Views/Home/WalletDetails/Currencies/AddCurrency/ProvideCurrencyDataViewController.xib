@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,6 +17,9 @@
                 <outlet property="currencyValidationStackView" destination="cCz-zb-Taa" id="NWp-of-jjW"/>
                 <outlet property="issuerValidationLabel" destination="99i-c4-Z84" id="CJE-fB-vaQ"/>
                 <outlet property="issuerValidationStackView" destination="ZO6-jJ-L0q" id="fj6-uW-Eui"/>
+                <outlet property="limitTextField" destination="81j-zH-ylq" id="Z6e-jP-A8U"/>
+                <outlet property="limitValidationLabel" destination="oEw-6U-oUS" id="CLa-3x-P37"/>
+                <outlet property="limitValidationStackView" destination="kqx-hx-gIF" id="mEO-ho-kI8"/>
                 <outlet property="passwordViewContainer" destination="9mO-EW-5D8" id="9b0-Bv-2y9"/>
                 <outlet property="publicKeyTextField" destination="Lrd-AW-vRP" id="9EF-Oa-AZW"/>
                 <outlet property="view" destination="iN0-l3-epB" id="OzS-IZ-Ky5"/>
@@ -28,7 +31,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="huj-FQ-jdS">
-                    <rect key="frame" x="0.0" y="20" width="375" height="178"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="224"/>
                     <subviews>
                         <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cCz-zb-Taa">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
@@ -53,7 +56,7 @@
                                 </view>
                             </subviews>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="h45-d7-YgA">
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="h45-d7-YgA" userLabel="Asset Code Stack View">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Currency/asset code, e.g. MOBI" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="HoF-b0-CNj" customClass="InputTextField" customModule="Lumenshine" customModuleProvider="target">
@@ -73,7 +76,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Issuer does not exist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="99i-c4-Z84" customClass="ErrorLabel" customModule="Lumenshine" customModuleProvider="target">
                                             <rect key="frame" x="16" y="0.0" width="359" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="textColor" red="0.92156862745098034" green="0.25098039215686274" blue="0.14509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -87,7 +90,7 @@
                                 </view>
                             </subviews>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ca9-A5-Bto">
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ca9-A5-Bto" userLabel="Issuer Stack View">
                             <rect key="frame" x="0.0" y="46" width="375" height="30"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Public key of currency issuer" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="Lrd-AW-vRP" customClass="InputTextField" customModule="Lumenshine" customModuleProvider="target">
@@ -98,12 +101,46 @@
                                 </textField>
                             </subviews>
                         </stackView>
+                        <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="kqx-hx-gIF" userLabel="Limit Validation Stack View">
+                            <rect key="frame" x="0.0" y="84" width="375" height="0.0"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="62E-Y8-G7d">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Invalid limit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEw-6U-oUS" customClass="ErrorLabel" customModule="Lumenshine" customModuleProvider="target">
+                                            <rect key="frame" x="16" y="0.0" width="359" height="0.0"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.92156862745098034" green="0.25098039215686274" blue="0.14509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="oEw-6U-oUS" firstAttribute="top" secondItem="62E-Y8-G7d" secondAttribute="top" id="D6J-QQ-oXt"/>
+                                        <constraint firstAttribute="trailing" secondItem="oEw-6U-oUS" secondAttribute="trailing" id="cEg-xl-deY"/>
+                                        <constraint firstAttribute="bottom" secondItem="oEw-6U-oUS" secondAttribute="bottom" id="iKW-3a-a8K"/>
+                                        <constraint firstItem="oEw-6U-oUS" firstAttribute="leading" secondItem="62E-Y8-G7d" secondAttribute="leading" constant="16" id="nFN-IZ-zLF"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="W9I-w4-Swd" userLabel="Trust Limit Stack View">
+                            <rect key="frame" x="0.0" y="92" width="375" height="30"/>
+                            <subviews>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Trust limit (optional)" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="81j-zH-ylq" customClass="InputTextField" customModule="Lumenshine" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                </textField>
+                            </subviews>
+                        </stackView>
                         <view contentMode="scaleToFill" verticalHuggingPriority="1000" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="9mO-EW-5D8">
-                            <rect key="frame" x="0.0" y="92" width="375" height="40"/>
+                            <rect key="frame" x="0.0" y="138" width="375" height="40"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jBa-HS-3JG">
-                            <rect key="frame" x="0.0" y="148" width="375" height="30"/>
+                            <rect key="frame" x="0.0" y="194" width="375" height="30"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tiY-k1-PPq">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
@@ -140,7 +177,7 @@
                 <constraint firstItem="huj-FQ-jdS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="n4M-US-mhj"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="24.5" y="51.5"/>
+            <point key="canvasLocation" x="23.199999999999999" y="50.824587706146929"/>
         </view>
     </objects>
 </document>

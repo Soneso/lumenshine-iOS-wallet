@@ -65,7 +65,7 @@ class KnownCurrenciesTableViewCell: UITableViewCell {
         expansionView.isHidden = true
     }
     
-    private func addCurrency(biometricAuth: Bool = false) {
+    private func addCurrency(biometricAuth: Bool = false, limit: Decimal? = nil) {
         passwordView.resetValidationErrors()
         setButtonAsValidating()
         
@@ -78,9 +78,9 @@ class KnownCurrenciesTableViewCell: UITableViewCell {
             
             if passwordView.useExternalSigning {
                 let trustorKeyPair = try! KeyPair(publicKey: PublicKey(accountId:wallet.publicKey), privateKey:nil)
-                self.addTrustLine(assetCode: assetCode, trustingAccountKeyPair:trustorKeyPair, issuerKeyPair: issuerKeyPair)
+                self.addTrustLine(assetCode: assetCode, trustingAccountKeyPair:trustorKeyPair, issuerKeyPair: issuerKeyPair, limit:limit)
             } else {
-                validatePasswordAndAddCurrency(biometricAuth: biometricAuth, assetCode: assetCode, issuerKeyPair: issuerKeyPair)
+                validatePasswordAndAddCurrency(biometricAuth: biometricAuth, assetCode: assetCode, issuerKeyPair: issuerKeyPair, limit:limit)
             }
             
         } else {
@@ -88,7 +88,7 @@ class KnownCurrenciesTableViewCell: UITableViewCell {
         }
     }
     
-    private func validatePasswordAndAddCurrency(biometricAuth: Bool, assetCode: String, issuerKeyPair: KeyPair) {
+    private func validatePasswordAndAddCurrency(biometricAuth: Bool, assetCode: String, issuerKeyPair: KeyPair, limit:Decimal?) {
         passwordManager.getMnemonic(password: !biometricAuth ? passwordView.passwordTextField.text : nil) { (result) -> (Void) in
             switch result {
             case .success(mnemonic: let mnemonic):
@@ -96,7 +96,7 @@ class KnownCurrenciesTableViewCell: UITableViewCell {
                     switch response {
                     case .success(keyPair: let keyPair):
                         if let trustorKeyPair = keyPair {
-                            self.addTrustLine(assetCode: assetCode, trustingAccountKeyPair:trustorKeyPair, issuerKeyPair: issuerKeyPair)
+                            self.addTrustLine(assetCode: assetCode, trustingAccountKeyPair:trustorKeyPair, issuerKeyPair: issuerKeyPair, limit:limit)
                             return
                         }
                     case .failure(error: let error):
@@ -154,7 +154,7 @@ class KnownCurrenciesTableViewCell: UITableViewCell {
         addButton.isEnabled = true
     }
     
-    private func addTrustLine(assetCode: String, trustingAccountKeyPair:KeyPair, issuerKeyPair: KeyPair) {
+    private func addTrustLine(assetCode: String, trustingAccountKeyPair:KeyPair, issuerKeyPair: KeyPair, limit:Decimal?) {
         let assetType: Int32 = assetCode.count < 5 ? AssetType.ASSET_TYPE_CREDIT_ALPHANUM4 : AssetType.ASSET_TYPE_CREDIT_ALPHANUM12
         if let asset = Asset(type: assetType, code: assetCode, issuer: issuerKeyPair) {
             let signer = passwordView.useExternalSigning ? passwordView.signersTextField.text : nil
@@ -162,7 +162,7 @@ class KnownCurrenciesTableViewCell: UITableViewCell {
    
             let transactionHelper = TransactionHelper(wallet: wallet, signer: signer, signerSeed: seed)
             passwordView.clearSeedAndPasswordFields()
-            transactionHelper.addTrustLine(trustingAccountKeyPair:trustingAccountKeyPair, asset:asset) { (result) -> (Void) in
+            transactionHelper.addTrustLine(trustingAccountKeyPair:trustingAccountKeyPair, asset:asset, limit: limit) { (result) -> (Void) in
                 switch result {
                 case .success:
                     Services.shared.walletService.addWalletToRefresh(accountId: self.wallet.publicKey)

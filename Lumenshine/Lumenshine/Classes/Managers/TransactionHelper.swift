@@ -392,9 +392,9 @@ class TransactionHelper {
         }
     }
     
-    private func submitAddTrustLine(trustingAccountKeyPair: KeyPair, accountResponse: AccountResponse, asset: Asset, completion: @escaping TrustLineClosure) {
+    private func submitAddTrustLine(trustingAccountKeyPair: KeyPair, accountResponse: AccountResponse, asset: Asset, limit:Decimal?, completion: @escaping TrustLineClosure) {
         do {
-            let changeTrustOp = ChangeTrustOperation(asset: asset)
+            let changeTrustOp = ChangeTrustOperation(asset: asset, limit: limit)
             let transaction = try Transaction(sourceAccount: accountResponse,
                                               operations: [changeTrustOp],
                                               memo: Memo.none,
@@ -415,11 +415,11 @@ class TransactionHelper {
         }
     }
     
-    func addTrustLine(trustingAccountKeyPair: KeyPair, asset: Asset, completion: @escaping TrustLineClosure) {
+    func addTrustLine(trustingAccountKeyPair: KeyPair, asset: Asset, limit:Decimal?, completion: @escaping TrustLineClosure) {
         Services.shared.walletService.getAccountDetails(accountId: trustingAccountKeyPair.accountId) { (response) -> (Void) in
             switch response {
             case .success(let accountResponse):
-                self.submitAddTrustLine(trustingAccountKeyPair: trustingAccountKeyPair, accountResponse: accountResponse, asset: asset, completion: { (response) -> (Void) in
+                self.submitAddTrustLine(trustingAccountKeyPair: trustingAccountKeyPair, accountResponse: accountResponse, asset: asset, limit:limit, completion: { (response) -> (Void) in
                     DispatchQueue.main.async {
                         completion(response)
                     }

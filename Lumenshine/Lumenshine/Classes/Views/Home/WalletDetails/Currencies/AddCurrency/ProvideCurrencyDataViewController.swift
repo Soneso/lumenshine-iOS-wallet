@@ -24,16 +24,16 @@ fileprivate enum AlphanumericTypesMaximumLength: Int {
 }
 
 class ProvideCurrencyDataViewController: UIViewController {
+    
     @IBOutlet weak var currencyValidationStackView: UIStackView!
     @IBOutlet weak var issuerValidationStackView: UIStackView!
-    
+    @IBOutlet weak var limitValidationStackView: UIStackView!
     @IBOutlet weak var assetCodeTextField: UITextField!
     @IBOutlet weak var publicKeyTextField: UITextField!
-    
+    @IBOutlet weak var limitTextField: UITextField!
     @IBOutlet weak var issuerValidationLabel: UILabel!
-    
+    @IBOutlet weak var limitValidationLabel: UILabel!
     @IBOutlet weak var addButton: UIButton!
-    
     @IBOutlet weak var passwordViewContainer: UIView!
     
     var wallet: FundedWallet!
@@ -57,6 +57,8 @@ class ProvideCurrencyDataViewController: UIViewController {
         resetValidationErrors()
         publicKeyTextField.resignFirstResponder()
         assetCodeTextField.resignFirstResponder()
+        limitTextField.resignFirstResponder()
+        
         addButton.setTitle(AddButtonTitles.validating.rawValue, for: UIControlState.normal)
         addButton.isEnabled = false
         showActivity(message: R.string.localizable.validateing())
@@ -79,19 +81,29 @@ class ProvideCurrencyDataViewController: UIViewController {
     
     private func validatePasswordAndDestination(forBiometricAuth biometricAuth: Bool) {
         if let assetCode = assetCodeTextField.text, let issuer = publicKeyTextField.text {
+            
+            var limit:Decimal? = nil
+            if let limitText = limitTextField.text {
+                let correctedLimit = limitText.replacingOccurrences(of: ",", with: ".")
+                limit = Decimal(string: correctedLimit)
+                if let limitCheck = limit, limitCheck < 0 || limitCheck >= 922337203685.4775807 {
+                    limit = nil
+                }
+            }
+            
             if passwordView.useExternalSigning {
-                validateDestinationForExternalSigning(issuer: issuer, assetCode: assetCode)
+                validateDestinationForExternalSigning(issuer: issuer, assetCode: assetCode, limit: limit)
             } else {
-                validateDestinationAndPassword(issuer: issuer, assetCode: assetCode, biometricAuth: biometricAuth)
+                validateDestinationAndPassword(issuer: issuer, assetCode: assetCode, limit:limit, biometricAuth: biometricAuth)
             }
         }
     }
     
-    private func validateDestinationForExternalSigning(issuer: String, assetCode: String) {
+    private func validateDestinationForExternalSigning(issuer: String, assetCode: String, limit:Decimal?) {
         userManager.checkIfAccountExists(forAccountID: issuer) { (result) -> (Void) in
             if result {
                 let trustorKeyPair = try! KeyPair(publicKey: PublicKey(accountId:self.wallet.publicKey), privateKey:nil)
-                self.addTrustLine(trustingAccountKeyPair: trustorKeyPair, issuer: issuer, assetCode: assetCode)
+                self.addTrustLine(trustingAccountKeyPair: trustorKeyPair, issuer: issuer, assetCode: assetCode, limit:limit)
             } else {
                 self.showValidationError(for: self.issuerValidationStackView)
                 self.issuerValidationLabel.text = self.IssuerDoesntExistValidationError
@@ -100,7 +112,7 @@ class ProvideCurrencyDataViewController: UIViewController {
         }
     }
     
-    private func validateDestinationAndPassword(issuer: String, assetCode: String, biometricAuth: Bool) {
+    private func validateDestinationAndPassword(issuer: String, assetCode: String, limit:Decimal?, biometricAuth: Bool) {
         userManager.checkIfAccountExists(forAccountID: issuer) { (accountExists) -> (Void) in
             if accountExists {
                 let password = !biometricAuth ? self.passwordView.passwordTextField.text : nil
@@ -113,7 +125,7 @@ class ProvideCurrencyDataViewController: UIViewController {
                                     switch response {
                                     case .success(keyPair: let keyPair):
                                         if let trustorKeyPair = keyPair {
-                                            self.addTrustLine(trustingAccountKeyPair: trustorKeyPair, issuer: issuer, assetCode: assetCode)
+                                            self.addTrustLine(trustingAccountKeyPair: trustorKeyPair, issuer: issuer, assetCode: assetCode, limit:limit)
                                             return
                                         }
                                     case .failure(error: let error):
@@ -169,6 +181,7 @@ class ProvideCurrencyDataViewController: UIViewController {
     private func resetValidationErrors() {
         currencyValidationStackView.isHidden = true
         issuerValidationStackView.isHidden = true
+        limitValidationStackView.isHidden = true
         passwordView.resetValidationErrors()
     }
     
@@ -195,6 +208,18 @@ class ProvideCurrencyDataViewController: UIViewController {
             return false
         }
     }
+    private var isLimitValid: Bool {
+        if let limitText = limitTextField.text, limitText.trimmed.count > 0 {
+            let correctedLimit = limitText.replacingOccurrences(of: ",", with: ".")
+            if let limitDecimal = Decimal(string: correctedLimit), limitDecimal >= 0, limitDecimal <= 922337203685.4775807 {
+                return true
+            } else {
+                showValidationError(for: limitValidationStackView)
+                return false
+            }
+        }
+        return true
+    }
     
     private var isAssetCodeValid: Bool {
         get {
@@ -214,9 +239,10 @@ class ProvideCurrencyDataViewController: UIViewController {
     private func isInputDataValid(forBiometricAuth biometricAuth: Bool) -> Bool {
         let isAssetCodeValid = self.isAssetCodeValid
         let isAddressValid = self.isAddressValid
+        let isLimitValid = self.isLimitValid
         let isPasswordValid = self.isPasswordValid(forBiometricAuth: biometricAuth)
         
-        return isAssetCodeValid && isAddressValid && isPasswordValid
+        return isAssetCodeValid && isAddressValid && isLimitValid && isPasswordValid
     }
     
     private var hasEnoughFunding: Bool {
@@ -237,7 +263,7 @@ class ProvideCurrencyDataViewController: UIViewController {
         self.displaySimpleAlertView(title: "Adding failed", message: "A transaction error occured.")
     }
     
-    private func addTrustLine(trustingAccountKeyPair:KeyPair, issuer: String, assetCode: String) {
+    private func addTrustLine(trustingAccountKeyPair:KeyPair, issuer: String, assetCode: String, limit: Decimal?) {
         updateActivityMessage(message: R.string.localizable.sending())
         let signer = passwordView.useExternalSigning ? passwordView.signersTextField.text : nil
         let seed = passwordView.useExternalSigning ? passwordView.seedTextField.text : nil
@@ -257,7 +283,7 @@ class ProvideCurrencyDataViewController: UIViewController {
         if let assetType = assetType,
             let issuerKeyPair = issuerKeyPair,
             let asset = Asset(type: assetType, code: assetCode, issuer: issuerKeyPair) {
-            transactionHelper.addTrustLine(trustingAccountKeyPair:trustingAccountKeyPair, asset:asset) { (result) -> (Void) in
+            transactionHelper.addTrustLine(trustingAccountKeyPair:trustingAccountKeyPair, asset:asset, limit:limit) { (result) -> (Void) in
                 self.hideActivity(completion: {
                     switch result {
                     case .success:
