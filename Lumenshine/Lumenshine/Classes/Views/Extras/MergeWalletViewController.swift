@@ -144,6 +144,12 @@ fileprivate extension MergeWalletViewController {
         }
     }
     
+    var wallets: [String] {
+        return self.viewModel.sortedWallets.map {
+            $0.walletName + " Wallet"
+        }
+    }
+    
     func prepareTextFields() {
         accountInputField.placeholder = R.string.localizable.external_account_id()
         
@@ -154,7 +160,7 @@ fileprivate extension MergeWalletViewController {
         walletField.dividerNormalColor = Stylesheet.color(.gray)
         walletField.backgroundColor = .white
         walletField.textInset = horizontalSpacing
-        walletField.setInputViewOptions(options: viewModel.wallets, selectedIndex: 0) { newIndex in
+        walletField.setInputViewOptions(options: wallets, selectedIndex: 0) { newIndex in
             //self.viewModel.walletIndex = newIndex
         }
         
@@ -184,7 +190,7 @@ fileprivate extension MergeWalletViewController {
         
         view.addSubview(walletField)
         walletField.snp.makeConstraints { make in
-            make.top.equalTo(walletLabel.snp.bottom).offset(3)
+            make.top.equalTo(walletLabel.snp.bottom).offset(5)
             make.left.equalTo(horizontalSpacing)
             make.right.equalTo(-horizontalSpacing)
         }
@@ -198,7 +204,7 @@ fileprivate extension MergeWalletViewController {
         
         view.addSubview(accountInputField)
         accountInputField.snp.makeConstraints { make in
-            make.top.equalTo(accountLabel.snp.bottom).offset(10)
+            make.top.equalTo(accountLabel.snp.bottom).offset(7)
             make.left.equalTo(horizontalSpacing)
             make.right.equalTo(-horizontalSpacing)
         }

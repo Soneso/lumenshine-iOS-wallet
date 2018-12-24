@@ -17,9 +17,9 @@ protocol ExtrasViewModelType: Transitionable, BiometricAuthenticationProtocol {
    
     func name(at indexPath: IndexPath) -> String
     var itemDistribution: [Int] { get }
-    var wallets: [String] { get }
+    var sortedWallets: [WalletsResponse] { get }
     func itemSelected(at indexPath: IndexPath)
-    func mergeExternalAccount(accountSeed:String, walletPK:String, response: @escaping EmptyResponseClosure)
+    func mergeAccount(sourceKeyPair:KeyPair, destinationKeyPair:KeyPair, response: @escaping EmptyResponseClosure)
     func mergeWallet(password:String, walletPK:String, externalAccountID:String, response: @escaping EmptyResponseClosure)
     func showMergeSuccess()
 }
@@ -31,12 +31,12 @@ class ExtrasViewModel: ExtrasViewModelType {
     
     fileprivate let user: User
     fileprivate let entries: [[ExtrasEntry]]
-    fileprivate var sortedWallets: [WalletsResponse] = []
+    var sortedWallets: [WalletsResponse] = []
     
     init(user: User) {
         self.user = user
         self.entries = [[.mergeExternalAccount, .mergeWallet]]
-        getWallets()
+        loadWallets()
     }
     
     func name(at indexPath: IndexPath) -> String {
@@ -45,12 +45,6 @@ class ExtrasViewModel: ExtrasViewModelType {
     
     var itemDistribution: [Int] {
         return entries.map { $0.count }
-    }
-    
-    var wallets: [String] {
-        return sortedWallets.map {
-            $0.walletName
-        }
     }
     
     func itemSelected(at indexPath:IndexPath) {
@@ -70,8 +64,46 @@ class ExtrasViewModel: ExtrasViewModelType {
     }
     
     
-    func mergeExternalAccount(accountSeed:String, walletPK:String, response: @escaping EmptyResponseClosure) {
+    func mergeAccount(sourceKeyPair:KeyPair, destinationKeyPair:KeyPair, response: @escaping EmptyResponseClosure) {
         
+        if let sourceSeed = sourceKeyPair.seed {
+            
+            Services.shared.walletService.getAccountDetails(accountId: sourceKeyPair.accountId) { (sourceDetailsResponse) -> (Void) in
+                switch sourceDetailsResponse {
+                case .success(let sourceAccountData):
+                    Services.shared.walletService.getAccountDetails(accountId: destinationKeyPair.accountId) { (destinationDetailsResponse) -> (Void) in
+                        switch destinationDetailsResponse {
+                        case .success(_):
+                            let transactionHelper = TransactionHelper(signer: sourceKeyPair.accountId, signerSeed: sourceSeed.secret)
+                            transactionHelper.mergeAccount(sourceAccountResponse: sourceAccountData, sourceAccountKeyPair: sourceKeyPair, destinationKeyPair: destinationKeyPair, completion: { (result) -> (Void) in
+                                switch result {
+                                case .success:
+                                    response(.success)
+                                case .failure (_):
+                                    response(.failure(error: .genericError(message: "An error occured while connecting to stellar")))
+                                }
+                            })
+                        case .failure(_):
+                            let error = ErrorResponse()
+                            error.parameterName = "wallet"
+                            error.errorMessage = R.string.localizable.account_not_found()
+                            response(.failure(error: .validationFailed(error: error)))
+                        }
+                    }
+                case .failure(_):
+                    let error = ErrorResponse()
+                    error.parameterName = "seed"
+                    error.errorMessage = R.string.localizable.account_not_found()
+                    response(.failure(error: .validationFailed(error: error)))
+                }
+            }
+           
+        }  else {
+            let error = ErrorResponse()
+            error.parameterName = "seed"
+            error.errorMessage = R.string.localizable.invalid_secret_seed()
+            response(.failure(error: .validationFailed(error: error)))
+        }
     }
     
     func mergeWallet(password:String, walletPK:String, externalAccountID:String, response: @escaping EmptyResponseClosure) {
@@ -90,11 +122,22 @@ fileprivate extension ExtrasViewModel {
         return entries[indexPath.section][indexPath.row]
     }
     
-    func getWallets() {
-        Services.shared.walletService.getWallets { [weak self] (result) -> (Void) in
+    func loadWallets() {
+        Services.shared.walletService.getWallets(reload:false) { [weak self] (result) -> (Void) in
             switch result {
             case .success(let wallets):
-                self?.sortedWallets = wallets.sorted(by: { $0.id < $1.id }) 
+                let allSortedWallets = wallets.sorted(by: { $0.id < $1.id })
+                // add only funded wallets
+                for wallet in allSortedWallets {
+                    Services.shared.walletService.getAccountDetails(accountId: wallet.publicKey, ignoreCachingDuration: true) { (result) -> (Void) in
+                        switch result {
+                        case .success(_):
+                            self?.sortedWallets.append(wallet)
+                        default:
+                            break
+                        }
+                    }
+                }
             case .failure(_):
                 // TODO show error to user
                 print("Failed to get wallets")

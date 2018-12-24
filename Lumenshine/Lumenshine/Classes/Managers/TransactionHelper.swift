@@ -17,8 +17,14 @@ enum TrustLineStatus {
     case failure(error: HorizonRequestError?)
 }
 
+enum AccountMergeStatus {
+    case success
+    case failure(error: HorizonRequestError?)
+}
+
 typealias TransactionResultClosure = () -> (Void)
 typealias TrustLineClosure = (_ completion: TrustLineStatus) -> (Void)
+typealias AccountMergeClosure = (_ completion: AccountMergeStatus) -> (Void)
 
 enum SignerErorr: Error {
     case signerMismatch
@@ -51,6 +57,11 @@ class TransactionHelper {
     
     init(wallet: FundedWallet, signer: String? = nil, signerSeed: String? = nil) {
         self.wallet = wallet
+        self.externalSigner = signer
+        self.externalSignerSeed = signerSeed
+    }
+    
+    init(signer: String? = nil, signerSeed: String? = nil) {
         self.externalSigner = signer
         self.externalSignerSeed = signerSeed
     }
@@ -335,7 +346,7 @@ class TransactionHelper {
                     completion()
                     
                 case .failure(let error):
-                    StellarSDKLog.printHorizonRequestErrorMessage(tag:"SRP Test", horizonRequestError:error)
+                    StellarSDKLog.printHorizonRequestErrorMessage(tag:"submit payment error", horizonRequestError:error)
                     self.transactionResult.status = TransactionStatus.error
                     self.transactionResult.message = error.localizedDescription
                     self.transactionResult.transactionFee = transaction.fee > 0 ? self.transactionFee : nil
@@ -407,6 +418,30 @@ class TransactionHelper {
                     completion(.success)
                 case .failure(let error):
                     StellarSDKLog.printHorizonRequestErrorMessage(tag:"Trust error", horizonRequestError:error)
+                    completion(.failure(error: error))
+                }
+            }
+        } catch {
+            completion(.failure(error: nil))
+        }
+    }
+    
+    func mergeAccount(sourceAccountResponse: AccountResponse, sourceAccountKeyPair: KeyPair, destinationKeyPair:KeyPair, completion: @escaping AccountMergeClosure) {
+        
+        do {
+            let accountMergeOp = AccountMergeOperation(destination: destinationKeyPair)
+            let transaction = try Transaction(sourceAccount: sourceAccountResponse,
+                                              operations: [accountMergeOp],
+                                              memo: Memo.none,
+                                              timeBounds: nil)
+            try signTransaction(transaction: transaction, sourceKeyPair: sourceAccountKeyPair)
+            
+            try self.stellarSdk.transactions.submitTransaction(transaction: transaction) { (response) -> (Void) in
+                switch response {
+                case .success(_):
+                    completion(.success)
+                case .failure(let error):
+                    StellarSDKLog.printHorizonRequestErrorMessage(tag:"merge error", horizonRequestError:error)
                     completion(.failure(error: error))
                 }
             }

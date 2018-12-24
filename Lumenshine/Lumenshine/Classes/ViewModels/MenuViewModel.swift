@@ -193,7 +193,7 @@ fileprivate extension MenuViewModel {
     }
     
     func showWallet(publicKey: String) {
-        Services.shared.walletService.getWallets { (result) -> (Void) in
+        Services.shared.walletService.getWallets(reload: false) { (result) -> (Void) in
             var transition: Transition = .showHome
             switch result {
             case .success(let wallets):

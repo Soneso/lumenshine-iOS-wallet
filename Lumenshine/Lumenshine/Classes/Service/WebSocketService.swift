@@ -188,27 +188,6 @@ public class WebSocketService: BaseService, WebSocketDelegate {
         }
     }
     
-    /*private func sendNeedsUpdateUIAfterWalletReload() {
-        userManager.updatedWalletDetails(forWallets: WebSocketService.wallets) { (response) -> (Void) in
-            switch response {
-            case .success(response: let wallets):
-                var updateWallets = [Wallet]()
-                
-                if let walletsToUpdate = WebSocketService.walletsToUpdate {
-                    for wallet in wallets {
-                        if walletsToUpdate.contains(wallet.publicKey) {
-                            updateWallets.append(wallet)
-                        }
-                    }
-                }
-                
-                NotificationCenter.default.post(name: .updateUIAfterWalletsReload, object: updateWallets)
-            case .failure(error: let error):
-                print(error.localizedDescription)
-            }
-        }
-    }*/
-    
     private func setupWebSocket() {
         if WebSocketService.socket?.isConnected == true {
             return

@@ -118,7 +118,7 @@ class HomeViewModel : HomeViewModelType {
     func reloadCards() {
         cardViewModels.removeAll()
         
-        Services.shared.walletService.getWallets { [weak self] (result) -> (Void) in
+        Services.shared.walletService.getWallets(reload:true) { [weak self] (result) -> (Void) in
             switch result {
             case .success(let wallets):
                 var chartAppended = false

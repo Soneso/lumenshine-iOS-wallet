@@ -1268,8 +1268,19 @@
 "merge_wallet" = "Merge/close wallet";
 
 /*  */
-"merge_into" = "Merge into wallet:";
+"merge_into" = "Merge into:";
 
 /*  */
-"merge_close" = "Merge / close wallet:";
+"merge_close" = "Merge / close:";
 
+/*  */
+"invalid_secret_seed" = "Invalid secret seed";
+
+/*  */
+"unknown_error" = "An unknonwn error occured.";
+
+/*  */
+"account_not_found" = "Account not found.";
+
+/*  */
+"external_account_merged" = "Your external account has been merged.";

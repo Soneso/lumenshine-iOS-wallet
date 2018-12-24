@@ -172,7 +172,7 @@ class WalletsViewController: UpdatableViewController, UITableViewDataSource, Add
     func reloadCards() {
         if let _ = self.viewModel as? HomeViewModel {
             self.viewModel.cardViewModels.removeAll()
-            Services.shared.walletService.getWallets { (result) -> (Void) in
+            Services.shared.walletService.getWallets(reload:true) { (result) -> (Void) in
                 switch result {
                 case .success(let wallets):
                     let sortedWallets = wallets.sorted(by: { $0.id < $1.id })

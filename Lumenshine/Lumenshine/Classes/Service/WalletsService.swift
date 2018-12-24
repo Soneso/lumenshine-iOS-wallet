@@ -42,7 +42,7 @@ public class WalletsService: BaseService {
     private var walletsToRefresh = [String]()
     private var accountDetailsCache = NSCache<NSString, AnyObject>()
     private var accountDetailsCachingDuration = 5.0 //sec.
-    typealias cacheEntry = (Date, AccountResponse)
+    private var userWalletsCache = [WalletsResponse]()
     
     private class AcDetailsCacheEntry {
         let date:Date
@@ -78,12 +78,19 @@ public class WalletsService: BaseService {
         self.walletsToRefresh.removeAll { $0 == accountId }
     }
     
-    open func getWallets(response: @escaping GetWalletsClosure) {
+    open func getWallets(reload:Bool, response: @escaping GetWalletsClosure) {
+        
+        if !reload , self.userWalletsCache.count > 0  {
+            response(.success(response: self.userWalletsCache))
+            return
+        }
+        
         GETRequestWithPath(path: "/portal/user/dashboard/get_user_wallets") { (result) -> (Void) in
             switch result {
             case .success(let data):
                 do {
                     let userWalletsResponse = try self.jsonDecoder.decode(Array<WalletsResponse>.self, from: data)
+                    self.userWalletsCache = userWalletsResponse
                     response(.success(response: userWalletsResponse))
                 } catch {
                     response(.failure(error: .parsingFailed(message: error.localizedDescription)))
@@ -186,18 +193,16 @@ public class WalletsService: BaseService {
         return value
     }
     
-    open func getAccountDetails(accountId: String, response: @escaping AccountResponseClosure) {
+    //open func mergeAccount(sourceSeed: String, destinationPK: String, response
+    open func getAccountDetails(accountId: String, ignoreCachingDuration:Bool = false, response: @escaping AccountResponseClosure) {
         
         if let cachedObject = accountDetailsCache.object(forKey: accountId as NSString) {
             if let entry = cachedObject as? AcDetailsCacheEntry {
                 let validEntryDate = Date().addingTimeInterval(-1.0 * accountDetailsCachingDuration)
-                if validEntryDate <= entry.date {
+                if ignoreCachingDuration || validEntryDate <= entry.date {
                     print("CACHE: account details FOUND for \(accountId)")
                     response(.success(details:entry.accountResponse))
                     return
-                } else {
-                    print("CACHE: account details TO OLD for \(accountId)")
-                    accountDetailsCache.removeObject(forKey: accountId as NSString)
                 }
             }
         }

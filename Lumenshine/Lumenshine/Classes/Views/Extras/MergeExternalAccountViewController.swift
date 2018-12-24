@@ -11,21 +11,23 @@
 
 import UIKit
 import Material
+import stellarsdk
 
 class MergeExternalAccountViewController: UIViewController {
     
     // MARK: - Properties
     
     fileprivate let viewModel: ExtrasViewModelType
+    fileprivate var selectedWalletPK: String? = nil
     
     // MARK: - UI properties
     
     fileprivate let titleLabel = UILabel()
+    fileprivate let successLabel = UILabel()
     fileprivate let seedInputFiled = LSTextField()
+    fileprivate let walletLabel = UILabel()
     fileprivate let walletField = LSTextField()
-    
     fileprivate let submitButton = RaisedButton()
-    
     fileprivate let verticalSpacing: CGFloat = 42.0
     fileprivate let horizontalSpacing: CGFloat = 15.0
     
@@ -62,14 +64,37 @@ extension MergeExternalAccountViewController {
         seedInputFiled.detail = nil
         walletField.detail = nil
         
-        guard let seed = seedInputFiled.text, !seed.isEmpty else {
+        guard let seed = seedInputFiled.text?.uppercased(), !seed.isEmpty else {
             seedInputFiled.detail = R.string.localizable.empty_seed()
+            return
+        }
+        
+        var sourceKeyPair:KeyPair? = nil
+        
+        do {
+            sourceKeyPair = try KeyPair(secretSeed: seed)
+        } catch {
+            seedInputFiled.detail = R.string.localizable.invalid_secret_seed()
             return
         }
         
         _ = resignFirstResponder()
         
-        mergeAccount(accountSeed:"TODO", walletPK:"TODO")
+        var destinationKeyPair:KeyPair? = nil
+        do {
+            if let accountId = selectedWalletPK {
+                destinationKeyPair = try KeyPair(publicKey: PublicKey(accountId: accountId))
+            }
+        } catch {
+            walletField.detail = R.string.localizable.unknown_error()
+            return
+        }
+        
+        if let sourcekey = sourceKeyPair, let destinationkey = destinationKeyPair {
+            mergeAccount(sourceKeyPair: sourcekey, destinationKeyPair: destinationkey)
+        } else {
+            walletField.detail = R.string.localizable.unknown_error()
+        }
     }
 }
 
@@ -113,8 +138,16 @@ fileprivate extension MergeExternalAccountViewController {
         }
     }
     
+    var wallets: [String] {
+        return self.viewModel.sortedWallets.map {
+            $0.walletName + " Wallet"
+        }
+    }
+    
     func prepareTextFields() {
-        seedInputFiled.placeholder = R.string.localizable.external_account_seed()
+        seedInputFiled.autocapitalizationType = .allCharacters
+        seedInputFiled.placeholder = R.string.localizable.external_account_seed().uppercased()
+        
         
         walletField.borderWidthPreset = .border2
         walletField.borderColor = Stylesheet.color(.gray)
@@ -123,11 +156,15 @@ fileprivate extension MergeExternalAccountViewController {
         walletField.dividerNormalColor = Stylesheet.color(.gray)
         walletField.backgroundColor = .white
         walletField.textInset = horizontalSpacing
-        walletField.setInputViewOptions(options: viewModel.wallets, selectedIndex: 0) { newIndex in
-            //self.viewModel.walletIndex = newIndex
+        
+        selectedWalletPK = self.viewModel.sortedWallets.first?.publicKey
+        walletField.setInputViewOptions(options: wallets, selectedIndex: 0) { newIndex in
+            if self.viewModel.sortedWallets.count > newIndex {
+                let wallet = self.viewModel.sortedWallets[newIndex]
+                self.selectedWalletPK = wallet.publicKey
+            }
         }
         
-        let walletLabel = UILabel()
         walletLabel.text = R.string.localizable.merge_into()
         walletLabel.font = R.font.encodeSansRegular(size: 13)
         walletLabel.adjustsFontSizeToFitWidth = true
@@ -149,7 +186,7 @@ fileprivate extension MergeExternalAccountViewController {
         
         view.addSubview(walletField)
         walletField.snp.makeConstraints { make in
-            make.top.equalTo(walletLabel.snp.bottom)
+            make.top.equalTo(walletLabel.snp.bottom).offset(5)
             make.left.equalTo(horizontalSpacing)
             make.right.equalTo(-horizontalSpacing)
         }
@@ -178,6 +215,8 @@ fileprivate extension MergeExternalAccountViewController {
         if let parameter = error.parameterName {
             if parameter == "seed" {
                 seedInputFiled.detail = error.errorDescription
+            } else  if parameter == "wallet" {
+                walletField.detail = error.errorDescription
             } else {
                 let alert = AlertFactory.createAlert(error: error)
                 self.present(alert, animated: true)
@@ -189,12 +228,34 @@ fileprivate extension MergeExternalAccountViewController {
     }
     
     func showMergeSuccess() {
-        //viewModel.showConfirm2faSecret(tfaResponse: tfaSecretResponse)
+        
+        titleLabel.text = R.string.localizable.success()
+        titleLabel.textColor = Stylesheet.color(.green)
+        titleLabel.font = R.font.encodeSansBold(size: 17)
+        
+        submitButton.isHidden = true
+        seedInputFiled.isHidden = true
+        walletLabel.isHidden = true
+        walletField.isHidden = true
+        
+        successLabel.text = R.string.localizable.external_account_merged()
+        successLabel.textColor = Stylesheet.color(.lightBlack)
+        successLabel.font = R.font.encodeSansRegular(size: 15)
+        successLabel.adjustsFontSizeToFitWidth = true
+        successLabel.textAlignment = .center
+        successLabel.numberOfLines = 0
+        
+        view.addSubview(successLabel)
+        successLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
+        }
     }
     
-    func mergeAccount(accountSeed:String, walletPK:String) {
+    func mergeAccount(sourceKeyPair: KeyPair, destinationKeyPair: KeyPair) {
         showActivity(message: R.string.localizable.loading())
-        viewModel.mergeExternalAccount(accountSeed:accountSeed, walletPK:walletPK) { result in
+        viewModel.mergeAccount(sourceKeyPair:sourceKeyPair, destinationKeyPair:destinationKeyPair) { result in
             DispatchQueue.main.async {
                 self.hideActivity(completion: {
                     switch result {
@@ -202,7 +263,6 @@ fileprivate extension MergeExternalAccountViewController {
                         self.showMergeSuccess()
                     case .failure(let error):
                         self.present(error: error)
-                        // TODO show error to user!
                     }
                 })
             }

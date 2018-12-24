@@ -84,7 +84,7 @@ public class UserManager: NSObject {
     }
     
     func totalNativeFounds(completion: @escaping CoinClosure) {
-        walletService.getWallets { (result) -> (Void) in
+        walletService.getWallets(reload: true) { (result) -> (Void) in
             switch result {
             case .success(let data):
                 self.totalBalance(wallets: data, completion: completion)
@@ -97,7 +97,7 @@ public class UserManager: NSObject {
     }
     
     func walletsForCurrentUser(completion: @escaping WalletsClosure) {
-        walletService.getWallets { (result) -> (Void) in
+        walletService.getWallets(reload: false) { (result) -> (Void) in
             switch result {
             case .success(let data):
                 self.walletDetailsFor(wallets: data) { (result) -> (Void) in
@@ -380,23 +380,6 @@ public class UserManager: NSObject {
                 if completed == wallets.count {
                     completion(.success(response: walletDetails))
                 }
-            }
-        }
-    }
-    
-    func updatedWalletDetails(forWallets walletResponses: [WalletsResponse], completion: @escaping UpdateWalletDetailsClosure) {
-        walletDetailsFor(wallets: walletResponses) { (response) -> (Void) in
-            switch response {
-            case .success(response: let wallets):
-                if wallets.count > 0 {
-                    DispatchQueue.main.async {
-                        completion(.success(response: wallets))
-                    }
-                } else {
-                    completion(.failure(error: .genericError(message: "Wallet details not found!")))
-                }
-            case .failure(error: let error):
-                completion(.failure(error: error))
             }
         }
     }

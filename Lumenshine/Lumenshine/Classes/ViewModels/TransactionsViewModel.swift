@@ -517,7 +517,7 @@ fileprivate extension TransactionsViewModel {
     }
     
     func getWallets() {
-        Services.shared.walletService.getWallets { [weak self] (result) -> (Void) in
+        Services.shared.walletService.getWallets(reload:false) { [weak self] (result) -> (Void) in
             switch result {
             case .success(let wallets):
                 self?.sortedWallets = wallets.sorted(by: { $0.id < $1.id })
