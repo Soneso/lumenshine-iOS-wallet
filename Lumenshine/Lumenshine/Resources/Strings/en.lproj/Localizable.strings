@@ -1284,3 +1284,6 @@
 
 /*  */
 "external_account_merged" = "Your external account has been merged.";
+
+/*  */
+"no_funded_wallet_for_merge" = "You have no funded wallet. Please fund a wallet before merge.";

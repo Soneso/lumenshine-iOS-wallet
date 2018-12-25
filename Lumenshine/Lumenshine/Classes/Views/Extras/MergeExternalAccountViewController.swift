@@ -24,6 +24,7 @@ class MergeExternalAccountViewController: UIViewController {
     
     fileprivate let titleLabel = UILabel()
     fileprivate let successLabel = UILabel()
+    fileprivate let noWalletLabel = UILabel()
     fileprivate let seedInputFiled = LSTextField()
     fileprivate let walletLabel = UILabel()
     fileprivate let walletField = LSTextField()
@@ -117,8 +118,24 @@ fileprivate extension MergeExternalAccountViewController {
         navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         prepareTitle()
-        prepareTextFields()
-        prepareSubmitButton()
+        if viewModel.sortedWallets.count != 0 {
+            prepareTextFields()
+            prepareSubmitButton()
+        } else {
+            noWalletLabel.text = R.string.localizable.no_funded_wallet_for_merge()
+            noWalletLabel.textColor = Stylesheet.color(.red)
+            noWalletLabel.font = R.font.encodeSansRegular(size: 15)
+            noWalletLabel.adjustsFontSizeToFitWidth = true
+            noWalletLabel.textAlignment = .center
+            noWalletLabel.numberOfLines = 0
+            
+            view.addSubview(noWalletLabel)
+            noWalletLabel.snp.makeConstraints { make in
+                make.top.equalTo(titleLabel.snp.bottom).offset(verticalSpacing)
+                make.left.equalTo(horizontalSpacing)
+                make.right.equalTo(-horizontalSpacing)
+            }
+        }
         
     }
     
