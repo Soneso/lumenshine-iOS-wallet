@@ -20,8 +20,7 @@ protocol ExtrasViewModelType: Transitionable, BiometricAuthenticationProtocol {
     var sortedWallets: [WalletsResponse] { get }
     func itemSelected(at indexPath: IndexPath)
     func mergeAccount(sourceKeyPair:KeyPair, destinationKeyPair:KeyPair, response: @escaping EmptyResponseClosure)
-    func mergeWallet(password:String, walletPK:String, externalAccountID:String, response: @escaping EmptyResponseClosure)
-    func showMergeSuccess()
+    func reloadWallets()
 }
 
 
@@ -56,9 +55,11 @@ class ExtrasViewModel: ExtrasViewModelType {
         }
     }
     
-    func showMergeSuccess() {
-        navigationCoordinator?.performTransition(transition: .showSuccess)
+    func reloadWallets() {
+        sortedWallets.removeAll()
+        loadWallets()
     }
+    
     func showExtras() {
         navigationCoordinator?.performTransition(transition: .showExtras)
     }
@@ -85,14 +86,14 @@ class ExtrasViewModel: ExtrasViewModelType {
                             })
                         case .failure(_):
                             let error = ErrorResponse()
-                            error.parameterName = "wallet"
+                            error.parameterName = "destination_account"
                             error.errorMessage = R.string.localizable.account_not_found()
                             response(.failure(error: .validationFailed(error: error)))
                         }
                     }
                 case .failure(_):
                     let error = ErrorResponse()
-                    error.parameterName = "seed"
+                    error.parameterName = "source_account"
                     error.errorMessage = R.string.localizable.account_not_found()
                     response(.failure(error: .validationFailed(error: error)))
                 }
@@ -104,10 +105,6 @@ class ExtrasViewModel: ExtrasViewModelType {
             error.errorMessage = R.string.localizable.invalid_secret_seed()
             response(.failure(error: .validationFailed(error: error)))
         }
-    }
-    
-    func mergeWallet(password:String, walletPK:String, externalAccountID:String, response: @escaping EmptyResponseClosure) {
-        
     }
     
     // MARK: Biometric authentication

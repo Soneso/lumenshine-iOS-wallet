@@ -1277,6 +1277,9 @@
 "invalid_secret_seed" = "Invalid secret seed";
 
 /*  */
+"invalid_account_id_or_address" = "Invalid account id or address";
+
+/*  */
 "unknown_error" = "An unknonwn error occured.";
 
 /*  */
@@ -1287,3 +1290,6 @@
 
 /*  */
 "no_funded_wallet_for_merge" = "You have no funded wallet. Please fund a wallet before merge.";
+
+/*  */
+"wallet_merged_and_closed" = "Your wallet has been merged and closed.";

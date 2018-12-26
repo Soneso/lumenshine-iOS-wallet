@@ -230,9 +230,9 @@ fileprivate extension MergeExternalAccountViewController {
     
     func present(error: ServiceError) {
         if let parameter = error.parameterName {
-            if parameter == "seed" {
+            if parameter == "seed" || parameter == "source_account" {
                 seedInputFiled.detail = error.errorDescription
-            } else  if parameter == "wallet" {
+            } else  if parameter == "destination_account" {
                 walletField.detail = error.errorDescription
             } else {
                 let alert = AlertFactory.createAlert(error: error)

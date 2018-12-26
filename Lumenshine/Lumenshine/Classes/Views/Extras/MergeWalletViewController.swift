@@ -11,19 +11,25 @@
 
 import UIKit
 import Material
+import stellarsdk
 
 class MergeWalletViewController: UIViewController {
     
     // MARK: - Properties
     
     fileprivate let viewModel: ExtrasViewModelType
+    fileprivate var selectedWalletPK: String? = nil
     
     // MARK: - UI properties
     
     fileprivate let titleLabel = UILabel()
+    fileprivate let accountLabel = UILabel()
     fileprivate let accountInputField = LSTextField()
+    fileprivate let walletLabel = UILabel()
     fileprivate let walletField = LSTextField()
     fileprivate let passwordInputField = LSTextField()
+    fileprivate let noWalletLabel = UILabel()
+    fileprivate let successLabel = UILabel()
     
     fileprivate let submitButton = RaisedButton()
     fileprivate let touchIDButton = Button()
@@ -73,28 +79,113 @@ extension MergeWalletViewController {
         }
         
         
-        guard let seed = accountInputField.text, !seed.isEmpty else {
+        guard let accountIdOrAddress = accountInputField.text, !accountIdOrAddress.isEmpty else {
             accountInputField.detail = R.string.localizable.empty_accountId_or_address()
             return
         }
         
-        
         passwordInputField.text = nil
         _ = resignFirstResponder()
-        
-        mergeAccount(password: password, walletPK: "TODO", externalAccountID: "TODO")
+        showActivity(message: R.string.localizable.loading())
+        mergeAccount(accountIdOrAddress: accountIdOrAddress, password: password)
     }
+    
+    func mergeAccount(accountIdOrAddress:String, password:String) {
+        if accountIdOrAddress.isFederationAddress() {
+            Federation.resolve(stellarAddress: accountIdOrAddress, completion: { (response) -> (Void) in
+                DispatchQueue.main.async {
+                    switch response {
+                    case .success(let federationResponse):
+                        if let pk = federationResponse.accountId {
+                            do {
+                                let dKeyPair = try KeyPair(publicKey: PublicKey(accountId: pk))
+                                self.mergeAccount(destinationKeyPair: dKeyPair, password: password)
+                            } catch {
+                                self.hideActivity(completion: {
+                                    self.accountInputField.detail = R.string.localizable.invalid_account_id_or_address()
+                                })
+                            }
+                        } else {
+                            //address not found
+                            self.hideActivity(completion: {
+                                self.accountInputField.detail = R.string.localizable.account_not_found()
+                            })
+                        }
+                    case .failure(error: let error):
+                        self.hideActivity(completion: {
+                            switch error {
+                            case FederationError.invalidAddress:
+                                self.accountInputField.detail = R.string.localizable.invalid_account_id_or_address()
+                            default:
+                                self.accountInputField.detail = R.string.localizable.account_not_found()
+                            }
+                        })
+                    }
+                }
+            })
+        } else if accountIdOrAddress.isValidEd25519PublicKey(){
+            do {
+                let dKeyPair = try KeyPair(publicKey: PublicKey(accountId: accountIdOrAddress))
+                self.mergeAccount(destinationKeyPair: dKeyPair, password: password)
+            } catch {
+                self.hideActivity(completion: {
+                    self.accountInputField.detail = R.string.localizable.invalid_account_id_or_address()
+                })
+            }
+        } else {
+            self.hideActivity(completion: {
+                self.accountInputField.detail = R.string.localizable.invalid_account_id_or_address()
+            })
+        }
+    }
+    
+    func mergeAccount(destinationKeyPair: KeyPair, password:String ) {
+        Services.shared.auth.authenticationData { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let authResponse):
+                   if let selectedPK = self.selectedWalletPK, let userSecurity = UserSecurity(from: authResponse), let decryptedUserData = try? UserSecurityHelper.decryptUserSecurity(userSecurity, password: password), let dc = decryptedUserData, let index = PrivateKeyManager.getIndexInMnemonic(forAccountID: selectedPK), let sourceKeyPair = try? stellarsdk.Wallet.createKeyPair(mnemonic: dc.mnemonic, passphrase: nil, index: index) {
+                    
+                        self.mergeAccount(sourceKeyPair: sourceKeyPair, destinationKeyPair: destinationKeyPair)
+                    }
+                    else {
+                        self.hideActivity(completion: {
+                            self.passwordInputField.detail = R.string.localizable.invalid_password()
+                        })
+                    }
+                case .failure(let error):
+                    self.hideActivity(completion: {
+                        let alert = AlertFactory.createAlert(title: R.string.localizable.error(), message: error.errorDescription)
+                        self.present(alert, animated: true)
+                    })
+                }
+            }
+        }
+    }
+    
     
     @objc
     func touchIDLogin() {
+        
+        guard let accountIdOrAddress = accountInputField.text, !accountIdOrAddress.isEmpty else {
+            accountInputField.detail = R.string.localizable.empty_accountId_or_address()
+            return
+        }
+        
+        passwordInputField.text = nil
+        _ = resignFirstResponder()
+        showActivity(message: R.string.localizable.loading())
+
         viewModel.authenticateUser() { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let password):
-                    self?.mergeAccount(password: password, walletPK: "TODO", externalAccountID: "TODO")
+                    self?.mergeAccount(accountIdOrAddress:accountIdOrAddress, password:password)
                 case .failure(let error):
-                    let alert = AlertFactory.createAlert(title: R.string.localizable.error(), message: error.errorDescription)
-                    self?.present(alert, animated: true)
+                    self?.hideActivity(completion: {
+                        let alert = AlertFactory.createAlert(title: R.string.localizable.error(), message: error.errorDescription)
+                        self?.present(alert, animated: true)
+                    })
                 }
             }
         }
@@ -120,11 +211,28 @@ fileprivate extension MergeWalletViewController {
         navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         prepareTitle()
-        prepareTextFields()
-        prepareSubmitButton()
         
-        if BiometricHelper.isBiometricAuthEnabled {
-            prepareTouchButton()
+        if viewModel.sortedWallets.count != 0 {
+            prepareTextFields()
+            prepareSubmitButton()
+            
+            if BiometricHelper.isBiometricAuthEnabled {
+                prepareTouchButton()
+            }
+        } else {
+            noWalletLabel.text = R.string.localizable.no_funded_wallet_for_merge()
+            noWalletLabel.textColor = Stylesheet.color(.red)
+            noWalletLabel.font = R.font.encodeSansRegular(size: 15)
+            noWalletLabel.adjustsFontSizeToFitWidth = true
+            noWalletLabel.textAlignment = .center
+            noWalletLabel.numberOfLines = 0
+            
+            view.addSubview(noWalletLabel)
+            noWalletLabel.snp.makeConstraints { make in
+                make.top.equalTo(titleLabel.snp.bottom).offset(verticalSpacing)
+                make.left.equalTo(horizontalSpacing)
+                make.right.equalTo(-horizontalSpacing)
+            }
         }
     }
     
@@ -160,22 +268,24 @@ fileprivate extension MergeWalletViewController {
         walletField.dividerNormalColor = Stylesheet.color(.gray)
         walletField.backgroundColor = .white
         walletField.textInset = horizontalSpacing
+        
+        selectedWalletPK = self.viewModel.sortedWallets.first?.publicKey
         walletField.setInputViewOptions(options: wallets, selectedIndex: 0) { newIndex in
-            //self.viewModel.walletIndex = newIndex
+            if self.viewModel.sortedWallets.count > newIndex {
+                let wallet = self.viewModel.sortedWallets[newIndex]
+                self.selectedWalletPK = wallet.publicKey
+            }
         }
         
         passwordInputField.isSecureTextEntry = true
         passwordInputField.isVisibilityIconButtonEnabled = true
         passwordInputField.placeholder = R.string.localizable.password().uppercased()
         
-        
-        let walletLabel = UILabel()
         walletLabel.text = R.string.localizable.merge_close()
         walletLabel.font = R.font.encodeSansRegular(size: 13)
         walletLabel.adjustsFontSizeToFitWidth = true
         walletLabel.textColor = Stylesheet.color(.darkGray)
         
-        let accountLabel = UILabel()
         accountLabel.text = R.string.localizable.merge_into()
         accountLabel.font = R.font.encodeSansRegular(size: 13)
         accountLabel.adjustsFontSizeToFitWidth = true
@@ -236,10 +346,47 @@ fileprivate extension MergeWalletViewController {
         }
     }
     
+    func showMergeSuccess() {
+        
+        titleLabel.text = R.string.localizable.success()
+        titleLabel.textColor = Stylesheet.color(.green)
+        titleLabel.font = R.font.encodeSansBold(size: 17)
+        
+        submitButton.isHidden = true
+        accountInputField.isHidden = true
+        passwordInputField.isHidden = true
+        touchIDButton.isHidden = true
+        walletField.isHidden = true
+        accountLabel.isHidden = true
+        walletLabel.isHidden = true
+        
+        successLabel.text = R.string.localizable.wallet_merged_and_closed()
+        successLabel.textColor = Stylesheet.color(.lightBlack)
+        successLabel.font = R.font.encodeSansRegular(size: 15)
+        successLabel.adjustsFontSizeToFitWidth = true
+        successLabel.textAlignment = .center
+        successLabel.numberOfLines = 0
+        
+        view.addSubview(successLabel)
+        successLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.left.equalTo(horizontalSpacing)
+            make.right.equalTo(-horizontalSpacing)
+        }
+        
+        if let pk = selectedWalletPK {
+            Services.shared.walletService.addWalletToRefresh(accountId: pk)
+            Services.shared.walletService.removeCachedAccountDetails(accountId: pk)
+        }
+        viewModel.reloadWallets()
+    }
+    
     func present(error: ServiceError) {
         if let parameter = error.parameterName {
-            if parameter == "current_password" || parameter == "sep10_transaction" {
-                passwordInputField.detail = error.errorDescription
+            if parameter == "source_account" {
+                walletField.detail = error.errorDescription
+            } else if parameter == "seed" || parameter == "destination_account" {
+                accountInputField.detail = error.errorDescription
             } else {
                 let alert = AlertFactory.createAlert(error: error)
                 self.present(alert, animated: true)
@@ -248,10 +395,6 @@ fileprivate extension MergeWalletViewController {
             let alert = AlertFactory.createAlert(error: error)
             self.present(alert, animated: true)
         }
-    }
-    
-    func showMergeSuccess() {
-        //viewModel.showConfirm2faSecret(tfaResponse: tfaSecretResponse)
     }
     
     func prepareTouchButton() {
@@ -268,9 +411,8 @@ fileprivate extension MergeWalletViewController {
         }
     }
     
-    func mergeAccount(password: String, walletPK:String, externalAccountID:String) {
-        showActivity(message: R.string.localizable.loading())
-        viewModel.mergeWallet(password: password, walletPK: walletPK, externalAccountID: externalAccountID) { result in
+    func mergeAccount(sourceKeyPair: KeyPair, destinationKeyPair: KeyPair) {
+        viewModel.mergeAccount(sourceKeyPair:sourceKeyPair, destinationKeyPair:destinationKeyPair) { result in
             DispatchQueue.main.async {
                 self.hideActivity(completion: {
                     switch result {
@@ -278,7 +420,6 @@ fileprivate extension MergeWalletViewController {
                         self.showMergeSuccess()
                     case .failure(let error):
                         self.present(error: error)
-                        // TODO show error to user!
                     }
                 })
             }

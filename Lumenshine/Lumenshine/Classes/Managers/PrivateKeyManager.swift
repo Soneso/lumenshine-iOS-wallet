@@ -41,7 +41,7 @@ class PrivateKeyManager {
     }
     
     static func hasPublicKey(accountId: String) -> Bool {
-        if let _ = getIndex(forAccountID: accountId) {
+        if let _ = getIndexInMnemonic(forAccountID: accountId) {
             return true
         }
         return false
@@ -53,7 +53,7 @@ class PrivateKeyManager {
         })?.key ?? ""
     }
     
-    private static func getIndex(forAccountID accountID: String) -> Int? {
+    static func getIndexInMnemonic(forAccountID accountID: String) -> Int? {
         return walletsKeyPairsIndexes.first(where: { (walletKeyPair) -> Bool in
             return walletKeyPair.key == accountID
         })?.value
@@ -61,7 +61,7 @@ class PrivateKeyManager {
     
     static func getKeyPair(forAccountID accountID: String, fromMnemonic mnemonic: String? = nil, completion: @escaping GetKeyPairClosure) {
         var keyPair: KeyPair? = nil
-        if let index = getIndex(forAccountID: accountID) {
+        if let index = getIndexInMnemonic(forAccountID: accountID) {
             if let mnemonic = mnemonic {
                 keyPair = try? stellarsdk.Wallet.createKeyPair(mnemonic: mnemonic, passphrase: nil, index: index)
                 DispatchQueue.main.async {
