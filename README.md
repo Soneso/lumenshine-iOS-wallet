@@ -1,10 +1,11 @@
 # lumenshine-iOS-wallet
 
-A Xcode project representing the Lumenshine Wallet by Soneso. It is a wallet for the Stellar network. It operates on the Stellar test net and uses our Lumenshine test server.
+A Swift project representing the Lumenshine iOS Wallet by Soneso. Lumenshine is a wallet for the Stellar network. See: https://lumenshine.com
 
-The project connects to our test environment endpoint: https://lsdevapi.ponytest.de.
+App-Store link: https://itunes.apple.com/us/app/lumenshine/id1441524975
 
-Currently the project is in development.
+Lumenshine for web is available here: https://lumenshine.com
+
 
 ## Installation
 
@@ -22,8 +23,11 @@ $ pod install
 
 3. Open `Lumenshine.xcworkspace` using the latest Xcode version.
 
-4. Select your device and run `Lumenshine` target.
+4. Change Swift Language Version to 4.2 for the pod "LTMorphingLabel"
+
+5. Select your device and run `Lumenshine` target.
+
 
 ## License
 
-stellar-iOS-wallet is licensed under an Apache-2.0 license. See the [LICENSE](https://github.com/Soneso/lumenshine-iOS-wallet/blob/master/LICENSE) file for details.
+lumenshine-iOS-wallet is licensed under an Apache-2.0 license. See the [LICENSE](https://github.com/Soneso/lumenshine-iOS-wallet/blob/master/LICENSE) file for details.
