@@ -1,4 +1,4 @@
-# lumenshine-iOS-wallet
+# Lumenshine iOS wallet for Stellar
 
 A Swift project representing the Lumenshine iOS Wallet by [Soneso GmbH](https://soneso.com), a company from Munich, Germany. [Lumenshine](https://lumenshine.com) is a wallet for the [Stellar](https://www.stellar.org/) network.
 
@@ -27,6 +27,18 @@ $ pod install
 
 5. Select your device and run `Lumenshine` target.
 
+
+## About
+
+Lumenshine is a wallet for the decentralized Stellar network. Lumenshine is developed and maintained by [Soneso GmbH](https://soneso.com), a company from Munich, Germany. The Stellar network is hosted by numerous distributed nodes world-wide who are not under the control of any single entity or groups of entities. Lumenshine does not control the Stellar network and it is not created, sponsored or endorsed by the Stellar Development Foundation.
+
+Lumenshine is an interface that can help you to interact with the Stellar network. You can add multiple Stellar accounts, send and receive payments within the Stellar network, add different currencies from the Stellar network, view, search and filter the transaction history of your accounts, set inflation destination, add a short Stellar address (federation) and much more.
+
+Lumenshine is currently available for web and as a native mobile app.
+
+Lumenshine is not responsible for the Stellar network, for its accounts, currencies and transactions or any entities within the Stellar network. Lumenshine takes no responsibility any of the assets provided by different parties within the Stellar network. Lumenshine does not manually curate the lists of assets that it displays on its interface. Any asset that is created on the Stellar network may theoretically be displayed, no matter whether it would be considered a currency, commodity, security, utility token, or other type of asset under your local applicable laws and regulations. You are responsible for determining the legality of your transactions. Please make sure that you understand how the Stellar network works before using Lumenshine.
+
+[Soneso GmbH](https://soneso.com) is a company from Munich, Germany. We are specialized on the Stellar network, offering consulting and development services related to the Stellar Ecosystem.
 
 ## License
 
