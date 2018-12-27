@@ -1,10 +1,10 @@
 # lumenshine-iOS-wallet
 
-A Swift project representing the Lumenshine iOS Wallet by Soneso. Lumenshine is a wallet for the Stellar network. See: https://lumenshine.com
+A Swift project representing the Lumenshine iOS Wallet by [Soneso GmbH](https://soneso.com), a company from Munich, Germany. [Lumenshine](https://lumenshine.com) is a wallet for the [Stellar](https://www.stellar.org/) network.
 
-App-Store link: https://itunes.apple.com/us/app/lumenshine/id1441524975
+App-Store link: [Lumenshine App](https://itunes.apple.com/us/app/lumenshine/id1441524975)
 
-Lumenshine for web is available here: https://lumenshine.com
+Lumenshine for web is available [here](https://lumenshine.com)
 
 
 ## Installation
