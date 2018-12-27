@@ -83,9 +83,9 @@ extension MergeWalletViewController {
             accountInputField.detail = R.string.localizable.empty_accountId_or_address()
             return
         }
-        
-        passwordInputField.text = nil
+
         _ = resignFirstResponder()
+        
         showActivity(message: R.string.localizable.loading())
         mergeAccount(accountIdOrAddress: accountIdOrAddress, password: password)
     }
@@ -145,7 +145,7 @@ extension MergeWalletViewController {
                 switch result {
                 case .success(let authResponse):
                    if let selectedPK = self.selectedWalletPK, let userSecurity = UserSecurity(from: authResponse), let decryptedUserData = try? UserSecurityHelper.decryptUserSecurity(userSecurity, password: password), let dc = decryptedUserData, let index = PrivateKeyManager.getIndexInMnemonic(forAccountID: selectedPK), let sourceKeyPair = try? stellarsdk.Wallet.createKeyPair(mnemonic: dc.mnemonic, passphrase: nil, index: index) {
-                    
+                        self.passwordInputField.text = nil
                         self.mergeAccount(sourceKeyPair: sourceKeyPair, destinationKeyPair: destinationKeyPair)
                     }
                     else {
@@ -212,7 +212,7 @@ fileprivate extension MergeWalletViewController {
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         prepareTitle()
         
-        if viewModel.sortedWallets.count != 0 {
+        if viewModel.walletsForClose.count != 0 {
             prepareTextFields()
             prepareSubmitButton()
             
@@ -220,7 +220,7 @@ fileprivate extension MergeWalletViewController {
                 prepareTouchButton()
             }
         } else {
-            noWalletLabel.text = R.string.localizable.no_funded_wallet_for_merge()
+            noWalletLabel.text = R.string.localizable.no_wallet_for_close()
             noWalletLabel.textColor = Stylesheet.color(.red)
             noWalletLabel.font = R.font.encodeSansRegular(size: 15)
             noWalletLabel.adjustsFontSizeToFitWidth = true
@@ -253,7 +253,7 @@ fileprivate extension MergeWalletViewController {
     }
     
     var wallets: [String] {
-        return self.viewModel.sortedWallets.map {
+        return self.viewModel.walletsForClose.map {
             $0.walletName + " Wallet"
         }
     }
@@ -269,10 +269,10 @@ fileprivate extension MergeWalletViewController {
         walletField.backgroundColor = .white
         walletField.textInset = horizontalSpacing
         
-        selectedWalletPK = self.viewModel.sortedWallets.first?.publicKey
+        selectedWalletPK = self.viewModel.walletsForClose.first?.publicKey
         walletField.setInputViewOptions(options: wallets, selectedIndex: 0) { newIndex in
-            if self.viewModel.sortedWallets.count > newIndex {
-                let wallet = self.viewModel.sortedWallets[newIndex]
+            if self.viewModel.walletsForClose.count > newIndex {
+                let wallet = self.viewModel.walletsForClose[newIndex]
                 self.selectedWalletPK = wallet.publicKey
             }
         }

@@ -680,7 +680,7 @@
 "merge_external_account_hint" = "Here you can merge an external Stellar account into a funded Lumenshine wallet. Your external account must not trust other currencies than Stellar Lumens and it must have no data entries.";
 
 /*  */
-"merge_wallet_hint" = "Here you can merge a funded Lumenshine wallet into another stellar account.";
+"merge_wallet_hint" = "Here you can merge / close a funded Lumenshine wallet into another stellar account. Your wallet must not trusts other currencies than Stellar Lumens and it must have no data entries.";
 
 /*  */
 "external_account_id" = "Account ID or address of stellar account";
@@ -1292,4 +1292,16 @@
 "no_funded_wallet_for_merge" = "You have no funded wallet. Please fund a wallet before merge.";
 
 /*  */
+"no_wallet_for_close" = "You have no wallets that can be closed. Please check funding, trustlines and data entries.";
+
+/*  */
 "wallet_merged_and_closed" = "Your wallet has been merged and closed.";
+
+/*  */
+"account_has_trustlines_no_merge" = "Account has trustlines and can not be merged.";
+
+/*  */
+"account_has_data_entries_no_merge" = "Account has data entries and can not be merged.";
+
+/*  */
+"account_has_subentries_no_merge" = "Account has subentries and can not be merged.";

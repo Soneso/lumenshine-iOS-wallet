@@ -128,6 +128,10 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HomeViewController.CellIdentifier, for: indexPath) as! CardTableViewCell
 
+        if dataSourceItems.count < indexPath.row {
+            return cell
+        }
+        
         cell.card = dataSourceItems[indexPath.row]
         cell.selectionStyle = .none
 

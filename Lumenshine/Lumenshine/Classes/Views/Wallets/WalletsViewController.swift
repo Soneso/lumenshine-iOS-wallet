@@ -70,6 +70,7 @@ class WalletsViewController: UpdatableViewController, UITableViewDataSource, Add
     }
     
     deinit {
+        print("WalletsViewController deinit")
         tableView.dg_removePullToRefresh()
     }
     
@@ -202,6 +203,10 @@ class WalletsViewController: UpdatableViewController, UITableViewDataSource, Add
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! CardTableViewCell
+        
+        if dataSourceItems.count < indexPath.row {
+            return cell
+        }
         
         cell.card = dataSourceItems[indexPath.row]
         cell.selectionStyle = .none

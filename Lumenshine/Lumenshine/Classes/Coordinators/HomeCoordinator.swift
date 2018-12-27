@@ -52,6 +52,18 @@ class HomeCoordinator: CoordinatorType {
         default: break
         }
     }
+    deinit {
+        print("Deinit HomeCoordinator")
+        // HELP NEEDED
+        // This is a hack until we can find out why the home view controller is not being released.
+        // On change to settings or extras in menu, the "old" home view controller is still referenced somewhere - causing
+        // it to load data from horizon on different events such as on notfications from the
+        // websocket. Pls. find out where the home view controller is still referenced, fix
+        // and remove this.
+        if let homeViewController = self.baseController as? HomeViewController {
+            homeViewController.cleanup()
+        }
+    }
 }
 
 fileprivate extension HomeCoordinator {

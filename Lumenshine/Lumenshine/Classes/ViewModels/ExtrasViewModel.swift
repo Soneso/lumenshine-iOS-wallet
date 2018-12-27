@@ -17,7 +17,8 @@ protocol ExtrasViewModelType: Transitionable, BiometricAuthenticationProtocol {
    
     func name(at indexPath: IndexPath) -> String
     var itemDistribution: [Int] { get }
-    var sortedWallets: [WalletsResponse] { get }
+    var walletsForExternalMerge: [WalletsResponse] { get }
+    var walletsForClose: [WalletsResponse] { get }
     func itemSelected(at indexPath: IndexPath)
     func mergeAccount(sourceKeyPair:KeyPair, destinationKeyPair:KeyPair, response: @escaping EmptyResponseClosure)
     func reloadWallets()
@@ -30,12 +31,13 @@ class ExtrasViewModel: ExtrasViewModelType {
     
     fileprivate let user: User
     fileprivate let entries: [[ExtrasEntry]]
-    var sortedWallets: [WalletsResponse] = []
+    var walletsForExternalMerge: [WalletsResponse] = []
+    var walletsForClose: [WalletsResponse] = []
     
     init(user: User) {
         self.user = user
         self.entries = [[.mergeExternalAccount, .mergeWallet]]
-        loadWallets()
+        //loadWallets()
     }
     
     func name(at indexPath: IndexPath) -> String {
@@ -49,14 +51,23 @@ class ExtrasViewModel: ExtrasViewModelType {
     func itemSelected(at indexPath:IndexPath) {
         switch entry(at: indexPath) {
         case .mergeExternalAccount:
-            navigationCoordinator?.performTransition(transition: .showMergeExternalAccount)
+            navigationCoordinator?.baseController.showActivity(message: R.string.localizable.loading())
+            self.reloadWallets()
+            navigationCoordinator?.baseController.hideActivity(completion: {
+                self.navigationCoordinator?.performTransition(transition: .showMergeExternalAccount)
+            })
         case .mergeWallet:
-            navigationCoordinator?.performTransition(transition: .showMergeWallet)
+            navigationCoordinator?.baseController.showActivity(message: R.string.localizable.loading())
+            self.reloadWallets()
+            navigationCoordinator?.baseController.hideActivity(completion: {
+                self.navigationCoordinator?.performTransition(transition: .showMergeWallet)
+            })
         }
     }
     
     func reloadWallets() {
-        sortedWallets.removeAll()
+        walletsForExternalMerge.removeAll()
+        walletsForClose.removeAll()
         loadWallets()
     }
     
@@ -68,10 +79,26 @@ class ExtrasViewModel: ExtrasViewModelType {
     func mergeAccount(sourceKeyPair:KeyPair, destinationKeyPair:KeyPair, response: @escaping EmptyResponseClosure) {
         
         if let sourceSeed = sourceKeyPair.seed {
-            
+            // check if source account exists
             Services.shared.walletService.getAccountDetails(accountId: sourceKeyPair.accountId) { (sourceDetailsResponse) -> (Void) in
                 switch sourceDetailsResponse {
                 case .success(let sourceAccountData):
+                    // source account must not have any subentries
+                    if sourceAccountData.subentryCount > 0 {
+                        let error = ErrorResponse()
+                        error.parameterName = "source_account"
+                        if sourceAccountData.balances.count > 1 {
+                            error.errorMessage = R.string.localizable.account_has_trustlines_no_merge()
+                        } else if sourceAccountData.data.count > 0 {
+                            error.errorMessage = R.string.localizable.account_has_data_entries_no_merge()
+                        } else {
+                            error.errorMessage = R.string.localizable.account_has_subentries_no_merge()
+                        }
+                        
+                        response(.failure(error: .validationFailed(error: error)))
+                        return
+                    }
+                    // check if destination account exists
                     Services.shared.walletService.getAccountDetails(accountId: destinationKeyPair.accountId) { (destinationDetailsResponse) -> (Void) in
                         switch destinationDetailsResponse {
                         case .success(_):
@@ -81,7 +108,7 @@ class ExtrasViewModel: ExtrasViewModelType {
                                 case .success:
                                     response(.success)
                                 case .failure (_):
-                                    response(.failure(error: .genericError(message: "An error occured while connecting to stellar")))
+                                    response(.failure(error: .genericError(message: "Transaction failed.")))
                                 }
                             })
                         case .failure(_):
@@ -128,8 +155,11 @@ fileprivate extension ExtrasViewModel {
                 for wallet in allSortedWallets {
                     Services.shared.walletService.getAccountDetails(accountId: wallet.publicKey, ignoreCachingDuration: true) { (result) -> (Void) in
                         switch result {
-                        case .success(_):
-                            self?.sortedWallets.append(wallet)
+                        case .success(let accountDetails):
+                            self?.walletsForExternalMerge.append(wallet)
+                            if accountDetails.subentryCount == 0 {
+                                self?.walletsForClose.append(wallet)
+                            }
                         default:
                             break
                         }

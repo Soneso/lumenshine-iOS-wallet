@@ -118,7 +118,7 @@ fileprivate extension MergeExternalAccountViewController {
         navigationItem.titleLabel.textColor = Stylesheet.color(.blue)
         navigationItem.titleLabel.font = R.font.encodeSansSemiBold(size: 15)
         prepareTitle()
-        if viewModel.sortedWallets.count != 0 {
+        if viewModel.walletsForExternalMerge.count != 0 {
             prepareTextFields()
             prepareSubmitButton()
         } else {
@@ -156,7 +156,7 @@ fileprivate extension MergeExternalAccountViewController {
     }
     
     var wallets: [String] {
-        return self.viewModel.sortedWallets.map {
+        return self.viewModel.walletsForExternalMerge.map {
             $0.walletName + " Wallet"
         }
     }
@@ -174,10 +174,10 @@ fileprivate extension MergeExternalAccountViewController {
         walletField.backgroundColor = .white
         walletField.textInset = horizontalSpacing
         
-        selectedWalletPK = self.viewModel.sortedWallets.first?.publicKey
+        selectedWalletPK = self.viewModel.walletsForExternalMerge.first?.publicKey
         walletField.setInputViewOptions(options: wallets, selectedIndex: 0) { newIndex in
-            if self.viewModel.sortedWallets.count > newIndex {
-                let wallet = self.viewModel.sortedWallets[newIndex]
+            if self.viewModel.walletsForExternalMerge.count > newIndex {
+                let wallet = self.viewModel.walletsForExternalMerge[newIndex]
                 self.selectedWalletPK = wallet.publicKey
             }
         }
