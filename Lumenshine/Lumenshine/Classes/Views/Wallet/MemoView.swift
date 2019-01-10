@@ -114,7 +114,7 @@ class MemoView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         return true
     }
     
-    private var selectedMemoType: MemoTypeValues! = MemoTypeValues.MEMO_TEXT {
+    public var selectedMemoType: MemoTypeValues! = MemoTypeValues.MEMO_TEXT {
         didSet {
             memoTypeTextField.text = selectedMemoType.rawValue
             

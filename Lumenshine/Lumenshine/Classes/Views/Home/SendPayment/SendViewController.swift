@@ -189,6 +189,22 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
                             self.destinationPublicKey = pk
                             self.destinationStellarAddress = address
                             DispatchQueue.main.async {
+                                if let federationMemoType = federationResponse.memoType, let federationMemo = federationResponse.memo {
+                                    
+                                    switch federationMemoType.trimmed.lowercased() {
+                                    case "text":
+                                        self.memoView.selectedMemoType = MemoTypeValues.MEMO_TEXT
+                                    case "id":
+                                        self.memoView.selectedMemoType = MemoTypeValues.MEMO_ID
+                                    case "hash":
+                                        self.memoView.selectedMemoType = MemoTypeValues.MEMO_HASH
+                                    case "return":
+                                        self.memoView.selectedMemoType = MemoTypeValues.MEMO_RETURN
+                                    default:
+                                        self.memoView.selectedMemoType = MemoTypeValues.MEMO_TEXT
+                                    }
+                                    self.memoView.memo = federationMemo
+                                }
                                 // continue payment process
                                 self.validateDestinationAndContinuePaymentIfValid(forMasterKey:forMasterKey, biometricAuth:biometricAuth)
                             }
