@@ -266,6 +266,14 @@ class TransactionsViewModel : TransactionsViewModelType {
         return "0.0"
     }
     
+    func isHideMemos() -> Bool {
+        
+        if let hide = UserDefaults.standard.value(forKey: Keys.UserDefs.ShowMemos) as? Bool {
+            return hide
+        }
+        return false
+    }
+    
     func details(at indexPath: IndexPath) -> NSAttributedString {
         let item = entry(at: indexPath)
         var subDetails = NSAttributedString()
@@ -322,7 +330,7 @@ class TransactionsViewModel : TransactionsViewModelType {
         let details = NSMutableAttributedString()
         details.append(subDetails)
         
-        if !item.memo.isEmpty {
+        if !item.memo.isEmpty && !self.isHideMemos() {
             details.append(NSAttributedString(string: "\(R.string.localizable.memo()): \(item.memo)\n",
                 attributes: [.font : mainFont,
                              .foregroundColor : Stylesheet.color(.lightBlack)]))

@@ -292,6 +292,7 @@ class LoginViewModel : LoginViewModelType {
         BiometricHelper.enableTouch(false)
         BiometricHelper.removePasswords()
         UserDefaults.standard.setValue(nil, forKey:Keys.UserDefs.SelectedPeriod)
+        UserDefaults.standard.setValue(false, forKey:Keys.UserDefs.ShowMemos)
         UIApplication.shared.unregisterForRemoteNotifications()
     }
 }

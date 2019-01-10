@@ -22,6 +22,8 @@ protocol ExtrasViewModelType: Transitionable, BiometricAuthenticationProtocol {
     func itemSelected(at indexPath: IndexPath)
     func mergeAccount(sourceKeyPair:KeyPair, destinationKeyPair:KeyPair, response: @escaping EmptyResponseClosure)
     func reloadWallets()
+    func switchValue(at indexPath: IndexPath) -> Bool?
+    func switchChanged(value: Bool, at indexPath: IndexPath)
 }
 
 
@@ -36,7 +38,7 @@ class ExtrasViewModel: ExtrasViewModelType {
     
     init(user: User) {
         self.user = user
-        self.entries = [[.mergeExternalAccount, .mergeWallet]]
+        self.entries = [[.mergeExternalAccount, .mergeWallet, .hideMemos]]
         //loadWallets()
     }
     
@@ -62,6 +64,8 @@ class ExtrasViewModel: ExtrasViewModelType {
             navigationCoordinator?.baseController.hideActivity(completion: {
                 self.navigationCoordinator?.performTransition(transition: .showMergeWallet)
             })
+        case .hideMemos:
+            break
         }
     }
     
@@ -75,6 +79,29 @@ class ExtrasViewModel: ExtrasViewModelType {
         navigationCoordinator?.performTransition(transition: .showExtras)
     }
     
+    func switchValue(at indexPath: IndexPath) -> Bool? {
+        switch entry(at: indexPath) {
+        case .hideMemos:
+            if let hide = UserDefaults.standard.value(forKey: Keys.UserDefs.ShowMemos) as? Bool {
+                return hide
+            }
+            return false
+        default:
+            return nil
+        }
+    }
+    
+    func switchChanged(value: Bool, at indexPath: IndexPath) {
+        switch entry(at: indexPath) {
+        case .hideMemos:
+            if value == true {
+                UserDefaults.standard.setValue(true, forKey:Keys.UserDefs.ShowMemos)
+            } else {
+                UserDefaults.standard.setValue(false, forKey:Keys.UserDefs.ShowMemos)
+            }
+        default: break
+        }
+    }
     
     func mergeAccount(sourceKeyPair:KeyPair, destinationKeyPair:KeyPair, response: @escaping EmptyResponseClosure) {
         

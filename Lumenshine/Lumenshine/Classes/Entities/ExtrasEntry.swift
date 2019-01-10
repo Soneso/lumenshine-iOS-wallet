@@ -14,6 +14,7 @@ import Foundation
 enum ExtrasEntry {
     case mergeExternalAccount
     case mergeWallet
+    case hideMemos
     
     var name: String {
         switch self {
@@ -21,6 +22,8 @@ enum ExtrasEntry {
             return R.string.localizable.merge_external_account()
         case .mergeWallet:
             return R.string.localizable.merge_wallet()
+        case .hideMemos:
+            return R.string.localizable.hide_memos()
         }
     }
 }

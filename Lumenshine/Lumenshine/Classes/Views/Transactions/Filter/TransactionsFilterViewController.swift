@@ -361,6 +361,18 @@ fileprivate extension TransactionsFilterViewController {
             make.right.equalTo(-horizontalSpacing)
             make.height.equalTo(40)
         }
+        if isHideMemos() {
+            memoLabel.isHidden = true
+            memoField.isHidden = true
+        }
+    }
+    
+    func isHideMemos() -> Bool {
+        
+        if let hide = UserDefaults.standard.value(forKey: Keys.UserDefs.ShowMemos) as? Bool {
+            return hide
+        }
+        return false
     }
     
     func prepareSwitches() {

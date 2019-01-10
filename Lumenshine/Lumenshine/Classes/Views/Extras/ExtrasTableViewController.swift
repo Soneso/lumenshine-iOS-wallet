@@ -59,12 +59,28 @@ class ExtrasTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: ExtrasTableViewController.CellIdentifier, for: indexPath) as! ExtrasTableViewCell
         
         cell.setText(viewModel.name(at: indexPath))
+        cell.delegate = self
+        if let switchValue = viewModel.switchValue(at: indexPath) {
+            cell.stateSwitch.isOn = switchValue
+            cell.hideSwitch(false)
+        } else {
+            cell.hideSwitch(true)
+        }
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.itemSelected(at: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension ExtrasTableViewController: ExtrasCellDelegate {
+    func switchStateChanged(cell: ExtrasTableViewCell, state: Bool) {
+        if let indexPath = tableView.indexPath(for: cell) {
+            viewModel.switchChanged(value: state, at: indexPath)
+        }
     }
 }
 

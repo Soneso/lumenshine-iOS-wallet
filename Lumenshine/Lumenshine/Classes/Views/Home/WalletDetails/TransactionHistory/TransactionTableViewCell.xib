@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -127,6 +128,7 @@
             <connections>
                 <outlet property="amountValueLabel" destination="sbI-yd-mTY" id="5nz-L9-sJe"/>
                 <outlet property="dateValueLabel" destination="yBU-0x-ei1" id="XAF-Pl-4mw"/>
+                <outlet property="memoKeyLabel" destination="klE-0d-kVD" id="dxQ-YJ-Sak"/>
                 <outlet property="memoValueLabel" destination="a1s-bO-VSI" id="uhD-LX-Y54"/>
                 <outlet property="operationIDValue" destination="QYG-57-AAF" id="hr0-k5-TPg"/>
                 <outlet property="operationTypeValueLabel" destination="VAI-fV-fwr" id="gTO-EM-2vp"/>

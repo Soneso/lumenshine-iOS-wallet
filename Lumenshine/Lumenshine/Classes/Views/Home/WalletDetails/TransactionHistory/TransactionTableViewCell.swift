@@ -15,6 +15,7 @@ import UIKit
 class TransactionTableViewCell: UITableViewCell {
     @IBOutlet weak var dateValueLabel: UILabel!
     @IBOutlet weak var amountValueLabel: UILabel!
+    @IBOutlet weak var memoKeyLabel: UILabel!
     @IBOutlet weak var memoValueLabel: UILabel!
     @IBOutlet weak var operationTypeValueLabel: UILabel!
     @IBOutlet weak var operationIDValue: UILabel!
@@ -29,10 +30,26 @@ class TransactionTableViewCell: UITableViewCell {
             dateformatter.timeStyle = DateFormatter.Style.short
             let date = dateformatter.string(from: operationInfo.date)
             dateValueLabel?.text = date
-            memoValueLabel?.text = operationInfo.memo
+            if isHideMemos() {
+                memoValueLabel?.text = ""
+                memoValueLabel.isHidden = true
+                memoKeyLabel.isHidden = true
+            } else {
+                memoValueLabel?.text = operationInfo.memo
+                memoValueLabel.isHidden = false
+                memoKeyLabel.isHidden = false
+            }
             operationIDValue?.text = operationInfo.operationID
             operationTypeValueLabel?.text = operationInfo.operationType
         }
+    }
+    
+    func isHideMemos() -> Bool {
+        
+        if let hide = UserDefaults.standard.value(forKey: Keys.UserDefs.ShowMemos) as? Bool {
+            return hide
+        }
+        return false
     }
     
     @IBAction func detailsButtonAction(_ sender: UIButton) {
