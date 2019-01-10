@@ -28,7 +28,7 @@ public struct Keys {
         
         static let ShowWallet = "ShowWalletKey"
         
-        static let ShowMemos = "ShowMemos"
+        static let HideMemos = "HideMemos"
     }
 
     

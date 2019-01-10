@@ -82,7 +82,7 @@ class ExtrasViewModel: ExtrasViewModelType {
     func switchValue(at indexPath: IndexPath) -> Bool? {
         switch entry(at: indexPath) {
         case .hideMemos:
-            if let hide = UserDefaults.standard.value(forKey: Keys.UserDefs.ShowMemos) as? Bool {
+            if let hide = UserDefaults.standard.value(forKey: Keys.UserDefs.HideMemos) as? Bool {
                 return hide
             }
             return false
@@ -95,9 +95,9 @@ class ExtrasViewModel: ExtrasViewModelType {
         switch entry(at: indexPath) {
         case .hideMemos:
             if value == true {
-                UserDefaults.standard.setValue(true, forKey:Keys.UserDefs.ShowMemos)
+                UserDefaults.standard.setValue(true, forKey:Keys.UserDefs.HideMemos)
             } else {
-                UserDefaults.standard.setValue(false, forKey:Keys.UserDefs.ShowMemos)
+                UserDefaults.standard.setValue(false, forKey:Keys.UserDefs.HideMemos)
             }
         default: break
         }

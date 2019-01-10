@@ -46,7 +46,7 @@ class TransactionTableViewCell: UITableViewCell {
     
     func isHideMemos() -> Bool {
         
-        if let hide = UserDefaults.standard.value(forKey: Keys.UserDefs.ShowMemos) as? Bool {
+        if let hide = UserDefaults.standard.value(forKey: Keys.UserDefs.HideMemos) as? Bool {
             return hide
         }
         return false
