@@ -606,7 +606,7 @@ class CurrencyDetailsViewController: UIViewController, UITextViewDelegate {
                     text.append(emailValue)
                     
                     let emailComponents = email.components(separatedBy: "@")
-                    if emailComponents.count == 2, emailComponents[1] == orgHost {
+                    if emailComponents.count == 2, emailComponents[1] == orgHost?.removing(prefix: "www.") {
                         text.append(checkmark)
                     } else {
                         text.append(warning)
