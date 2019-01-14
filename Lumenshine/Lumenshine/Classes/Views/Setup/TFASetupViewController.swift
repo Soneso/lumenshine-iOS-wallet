@@ -198,7 +198,7 @@ fileprivate extension TFASetupViewController {
         contentView.addSubview(tfaCodeTextField)
         tfaCodeTextField.snp.makeConstraints { make in
             make.top.equalTo(tfaSecretLabel.snp.bottom).offset(25)
-            make.width.equalTo(160)
+            make.width.equalTo(180)
             make.centerX.equalToSuperview()
         }
         
@@ -206,7 +206,7 @@ fileprivate extension TFASetupViewController {
         separator.backgroundColor = Stylesheet.color(.lightGray)
         contentView.addSubview(separator)
         separator.snp.makeConstraints { (make) in
-            make.top.equalTo(tfaCodeTextField.snp.bottom).offset(20)
+            make.top.equalTo(tfaCodeTextField.snp.bottom).offset(30)
             make.left.right.equalToSuperview()
             make.height.equalTo(0.5)
         }

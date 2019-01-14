@@ -11,6 +11,7 @@
 
 import Foundation
 import OneTimePassword
+import stellarsdk
 
 protocol LoginViewModelType: Transitionable, BiometricAuthenticationProtocol {
     var barItems: [(String, String)] { get }
@@ -395,10 +396,27 @@ fileprivate extension LoginViewModel {
                         }
                     })
                 } else {
-                    let error = ErrorResponse()
-                    error.parameterName = "password"
-                    error.errorMessage = R.string.localizable.invalid_password()
-                    response(.failure(error: .validationFailed(error: error)))
+                    let invalidPasswordError = ErrorResponse()
+                    invalidPasswordError.parameterName = "password"
+                    invalidPasswordError.errorMessage = R.string.localizable.invalid_password()
+                    
+                    //login step 2 without signing the sep10 challenge, so that the server can incrememt the lockout counter.
+                    Services.shared.auth.loginStep2(signedSEP10TransactionEnvelope:login1Response.sep10TransactionEnvelopeXDR, userEmail: self.email!, response: { (loginResponse) -> (Void) in
+                        switch loginResponse {
+                        case .failure(let loginError):
+                            switch loginError {
+                            case .userLockout(_):
+                                // account is locked out
+                                response(.failure(error:loginError))
+                                return
+                            default:
+                                break
+                            }
+                        default:
+                            break
+                        }
+                        response(.failure(error: .validationFailed(error: invalidPasswordError)))
+                    })
                 }
             } catch {
                 response(.failure(error: .encryptionFailed(message: error.localizedDescription)))

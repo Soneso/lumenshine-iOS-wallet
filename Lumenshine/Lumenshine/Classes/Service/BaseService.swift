@@ -21,6 +21,7 @@ public enum ServiceError: Error {
     case parsingFailed(message: String)
     case encryptionFailed(message: String)
     case validationFailed(error: ErrorResponse)
+    case userLockout(minutesLeft: Int)
     case invalidToml
     case noSigningKeySet
     case parsingServerSigningKeyResponseFailed(message:String)
@@ -77,6 +78,8 @@ extension ServiceError: LocalizedError {
             return message
         case .validationFailed(let error):
             return error.errorMessage ?? ""
+        case .userLockout(let minutesLeft):
+            return R.string.localizable.account_locked("\(minutesLeft)")
         case .invalidToml:
             return R.string.localizable.invalid_toml()
         case .noSigningKeySet:
@@ -213,6 +216,16 @@ public class BaseService: NSObject, URLSessionDelegate {
                 switch httpResponse.statusCode {
                 case 200:
                     break
+                case 403:
+                    // user locked out
+                    var lockoutMinutes = 60
+                    if let errorData = data {
+                        if let errorResponse = try? self.jsonDecoder.decode(LockoutResponse.self, from: errorData), let minutes = errorResponse.lockoutMinutes {
+                            lockoutMinutes = minutes
+                        }
+                    }
+                    completion(.failure(error: .userLockout(minutesLeft: lockoutMinutes)))
+                    return
                 case 400...500:
                     
                     print("error response status code: \(httpResponse.statusCode) for url \(url)")

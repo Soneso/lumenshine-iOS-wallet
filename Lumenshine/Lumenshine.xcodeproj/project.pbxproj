@@ -272,6 +272,7 @@
 		8389A0C721BEA95E00B9F16A /* HelpDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8389A0C621BEA95D00B9F16A /* HelpDetailsViewController.xib */; };
 		839C4DDE21A0561500A1B715 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839C4DDD21A0561500A1B715 /* TermsViewController.swift */; };
 		83A4331B21B59ACE005C1C86 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A4331A21B59ACE005C1C86 /* WebViewController.swift */; };
+		83C2F12321ECD02B0082EED4 /* LockoutResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C2F12221ECD02B0082EED4 /* LockoutResponse.swift */; };
 		97E8BBC0289EC0F063E34625 /* Pods_LumenshineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A860572CA3939F9BCA5F5986 /* Pods_LumenshineTests.framework */; };
 		A28F5687F8B3BF38588AC413 /* Pods_Lumenshine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52C8B6B260F28BAB38AF99E2 /* Pods_Lumenshine.framework */; };
 		B102359421B2EC5D009D5E0D /* TransactionsSortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B102359321B2EC5D009D5E0D /* TransactionsSortViewController.swift */; };
@@ -742,6 +743,7 @@
 		8389A0C621BEA95D00B9F16A /* HelpDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpDetailsViewController.xib; sourceTree = "<group>"; };
 		839C4DDD21A0561500A1B715 /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		83A4331A21B59ACE005C1C86 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		83C2F12221ECD02B0082EED4 /* LockoutResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockoutResponse.swift; sourceTree = "<group>"; };
 		8D434202D88BEB188FB96C1D /* Pods_LumenshineUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LumenshineUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E00CFAD5C99654352F5BF2A /* Pods-LumenshineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LumenshineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LumenshineTests/Pods-LumenshineTests.release.xcconfig"; sourceTree = "<group>"; };
 		8EEC14D2AF35010B3F86265E /* Pods-Lumenshine.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lumenshine.development.xcconfig"; path = "Pods/Target Support Files/Pods-Lumenshine/Pods-Lumenshine.development.xcconfig"; sourceTree = "<group>"; };
@@ -1563,6 +1565,7 @@
 				B18D3BA7217E0B9B003B9D9E /* LanguageResponse.swift */,
 				833F7D6E2189FB9600ED43D9 /* SEP10ChallengeResponse.swift */,
 				833F7D72218F6E3F00ED43D9 /* TFASecretResponse.swift */,
+				83C2F12221ECD02B0082EED4 /* LockoutResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -2428,6 +2431,7 @@
 				4376F49E204D9DF800B179C3 /* HomeCoordinator.swift in Sources */,
 				4394911E20BEBDFA008D4FA2 /* SettingsCoordinator.swift in Sources */,
 				4319B4CE211A0347002E45F0 /* BackupMnemonicViewController.swift in Sources */,
+				83C2F12321ECD02B0082EED4 /* LockoutResponse.swift in Sources */,
 				C685DE0F2154C39E00F99D81 /* ErrorLabel.swift in Sources */,
 				C6C0071C218095D0009E15EF /* WalletsViewController.swift in Sources */,
 				74C8995A2108ACD1009B13EA /* AccountBalanceResponse+Extra.swift in Sources */,

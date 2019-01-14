@@ -1308,3 +1308,6 @@
 
 /*  */
 "hide_memos" = "Hide memos";
+
+/*  */
+"account_locked" = "Invalid input. Account is locked. Try again in %@ minutes.";
