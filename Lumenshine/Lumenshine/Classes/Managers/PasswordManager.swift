@@ -50,6 +50,8 @@ class PasswordManager {
                     })
                 }
             })
+        } else {
+            completion(.failure(error: "Error requesting biometric data"))
         }
     }
     

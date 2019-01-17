@@ -11,6 +11,7 @@
 
 import Foundation
 import Rswift
+import OneTimePassword
 
 enum BiometricAuthResponseEnum {
     case success(response: String)
@@ -41,7 +42,19 @@ class BiometricHelper {
     
     static func getMnemonic(completion: @escaping PasswordClosure) {
         let passwordManager = PasswordManager()
-        if let userName = UserDefaults.standard.value(forKey: Keys.UserDefs.Username) as? String {
+        var persistedUserEmail:String? = nil
+        
+        do {
+            let persistentTokens = try Keychain.sharedInstance.allPersistentTokens()
+            for token in persistentTokens {
+                persistedUserEmail = token.token.name
+                break
+            }
+        } catch {
+            completion(.failure(error: "Password not found for user!"))
+        }
+        
+        if let userName = persistedUserEmail {
             password(for: userName) { result in
                 switch result {
                 case .success(let password):
@@ -55,6 +68,11 @@ class BiometricHelper {
                         completion(.failure(error: error.errorDescription))
                     }
                 }
+            }
+        } else {
+            //user not found
+            DispatchQueue.main.async {
+                completion(.failure(error: "Password not found for user!"))
             }
         }
     }

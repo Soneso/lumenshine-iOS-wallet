@@ -13,7 +13,7 @@ import Foundation
 import stellarsdk
 
 public final class Services {
-#if DEBUG
+/*#if DEBUG
     let usePublicStellarNetwork = false
     let baseURL = "https://lsdevapi.ponytest.de"
     //let horizonURL = "https://horizon-testnet.stellar.org"
@@ -44,7 +44,7 @@ public final class Services {
     let privacyUrl = "https://lsdev.ponytest.de/privacy"
     let guidesUrl = "https://lsdev.ponytest.de/guidelines"
 
-#else
+#else*/
     let usePublicStellarNetwork = true
     let baseURL = "https://api.lumenshine.com"
     let horizonURL = "https://horizon.lumenshine.com"
@@ -55,7 +55,7 @@ public final class Services {
     let privacyUrl = "https://lumenshine.com/privacy"
     let guidesUrl = "https://lumenshine.com/guidelines"
     
-#endif
+//#endif
     
     let supportEmailAddress = "support@lumenshine.com"
     
