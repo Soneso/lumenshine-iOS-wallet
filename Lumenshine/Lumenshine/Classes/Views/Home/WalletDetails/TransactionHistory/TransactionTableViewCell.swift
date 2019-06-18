@@ -87,6 +87,7 @@ class TransactionTableViewCell: UITableViewCell {
     }
     
     func updateAmountLabel() {
+        
         if let text = amountValueLabel.text, let amount = CoinUnit(text), let asset = operationInfo.assetCode {
             let assetCode = NSMutableAttributedString(string: asset, attributes: [ NSAttributedString.Key.foregroundColor: Stylesheet.color(.gray) ])
             var amountValue = NSMutableAttributedString()

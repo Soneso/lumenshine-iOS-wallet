@@ -60,6 +60,7 @@ enum TransactionType: String, Comparable {
     case paymentReceived
     case paymentSent
     case offerCreated
+    case buyOfferCreated
     case offerRemoved
     case offerChanged
     case passiveOfferCreated
@@ -78,6 +79,8 @@ enum TransactionType: String, Comparable {
             return R.string.localizable.payment_sent()
         case .offerCreated:
             return R.string.localizable.offer_created()
+        case .buyOfferCreated:
+            return R.string.localizable.buy_offer_created()
         case .offerRemoved:
             return R.string.localizable.offer_removed()
         case .offerChanged:
@@ -681,6 +684,9 @@ fileprivate extension TransactionsViewModel {
             if let item = item.operationResponse as? TxManageOfferOperationResponse {
     
                 if item.offerId == 0 {
+                    if let _ = item as? TxManageBuyOfferOperationResponse {
+                        return  .buyOfferCreated
+                    }
                     return .offerCreated
                 }
                 
@@ -944,20 +950,33 @@ fileprivate extension TransactionsViewModel {
     
     func details(manageOffer: TxManageOfferOperationResponse, sourceAccount: String) -> NSAttributedString {
         
+        let amount = Services.shared.walletService.formatAmount(amount: manageOffer.amount)
+        
         let buyingCode = manageOffer.buyingAssetCode ?? NativeCurrencyNames.xlm.rawValue
-        let buying = NSAttributedString(string: "\(R.string.localizable.buying()): \(buyingCode)\n",
+        var buying = NSAttributedString(string: "\(R.string.localizable.buying()): \(buyingCode)\n",
             attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
                          .font : mainFont])
-        
-        let sellingAmount = Services.shared.walletService.formatAmount(amount: manageOffer.amount)
         let sellingCode = manageOffer.sellingAssetCode ?? NativeCurrencyNames.xlm.rawValue
-        let selling = NSAttributedString(string: "\(R.string.localizable.selling()): \(sellingAmount) \(sellingCode)\n",
+        var selling = NSAttributedString(string: "\(R.string.localizable.selling()): \(amount) \(sellingCode)\n",
             attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
                          .font : mainFont])
         
-        let price = NSAttributedString(string: "\(R.string.localizable.price_for_asset()): \(Services.shared.walletService.formatAmount(amount: manageOffer.price))\n",
+        var price = NSAttributedString(string: "\(R.string.localizable.price_for_asset()): \(Services.shared.walletService.formatAmount(amount: manageOffer.price))\n",
             attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
                          .font : mainFont])
+        
+        if let _ = manageOffer as? TxManageBuyOfferOperationResponse {
+            buying = NSAttributedString(string: "\(R.string.localizable.buying()): \(amount) \(buyingCode)\n",
+                attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
+                             .font : mainFont])
+            selling = NSAttributedString(string: "\(R.string.localizable.selling()): \(sellingCode)\n",
+                attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
+                             .font : mainFont])
+            price = NSAttributedString(string: "\(R.string.localizable.price_for_buy_asset()): \(Services.shared.walletService.formatAmount(amount: manageOffer.price))\n",
+                attributes: [.foregroundColor : Stylesheet.color(.lightBlack),
+                             .font : mainFont])
+            
+        }
         
         let details = NSMutableAttributedString(attributedString: buying)
         details.append(selling)

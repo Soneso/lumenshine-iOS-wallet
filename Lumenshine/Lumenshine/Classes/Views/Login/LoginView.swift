@@ -78,26 +78,6 @@ extension LoginView {
         textField2.detail = nil
         textField3.detail = nil
 
-        textField2.text = "qwer1234T"
-        let tfaSecret = "LFIDE322NNTVS6TJ"
-        guard let secret = tfaSecret.base32DecodedString(),
-            let secretData = secret.data(using: .ascii),
-            !secretData.isEmpty else {
-                print("Invalid secret")
-                return
-        }
-
-        guard let generator = Generator(
-            factor: .timer(period: 30),
-            secret: secretData,
-            algorithm: .sha1,
-            digits: 6) else {
-                print("Invalid generator parameters")
-                return
-        }
-
-        textField3.text = try! generator.password(at: Date())
-
         // Check that text has been entered into both the username and password fields.
         guard let accountName = textField1.text,
             !accountName.isEmpty else {

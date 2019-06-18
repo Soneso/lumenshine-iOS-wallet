@@ -186,7 +186,7 @@ class TransactionHistoryManager {
                 // ManageOfferOperationResponse
                 if let manageOffferOperationResponse = record as? ManageBuyOfferOperationResponse {
                     operation.amount = manageOffferOperationResponse.amount
-                    operation.assetCode = manageOffferOperationResponse.sellingAssetCode
+                    operation.assetCode = manageOffferOperationResponse.buyingAssetCode
                     operation.sign = SignEnum.minus
                 }
                 

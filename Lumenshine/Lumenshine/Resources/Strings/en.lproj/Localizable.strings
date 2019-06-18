@@ -173,6 +173,9 @@
 "price_for_asset" = "Price for 1 unit of asset for sale";
 
 /*  */
+"price_for_buy_asset" = "Price for 1 unit of asset to buy";
+
+/*  */
 "asset" = "Asset";
 
 /*  */
@@ -1095,6 +1098,9 @@
 
 /*  */
 "offer_created" = "Offer created";
+
+/*  */
+"buy_offer_created" = "Buy offer created";
 
 /*  */
 "offer_changed" = "Offer changed";
