@@ -63,14 +63,14 @@ class AddCurrencyViewController: UIViewController {
         }
 
         if let knownCurrenciesTableViewController = knownCurrenciesTableViewController {
-            addChildViewController(knownCurrenciesTableViewController)
+            addChild(knownCurrenciesTableViewController)
             currencyContainer.addSubview(knownCurrenciesTableViewController.view)
 
             knownCurrenciesTableViewController.view.snp.makeConstraints { (make) in
                 make.edges.equalToSuperview()
             }
 
-            knownCurrenciesTableViewController.didMove(toParentViewController: self)
+            knownCurrenciesTableViewController.didMove(toParent: self)
         }
     }
     
@@ -81,14 +81,14 @@ class AddCurrencyViewController: UIViewController {
         
         if let provideCurrencyDataViewController = provideCurrencyDataViewController {
             provideCurrencyDataViewController.wallet = wallet
-            addChildViewController(provideCurrencyDataViewController)
+            addChild(provideCurrencyDataViewController)
             currencyContainer.addSubview(provideCurrencyDataViewController.view)
             
             provideCurrencyDataViewController.view.snp.makeConstraints { (make) in
                 make.edges.equalToSuperview()
             }
             
-            provideCurrencyDataViewController.didMove(toParentViewController: self)
+            provideCurrencyDataViewController.didMove(toParent: self)
         }
     }
         

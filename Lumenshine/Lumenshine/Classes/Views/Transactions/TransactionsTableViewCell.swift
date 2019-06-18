@@ -60,7 +60,7 @@ class TransactionsTableViewCell: UITableViewCell {
         }
     }
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         commonInit()
     }
@@ -72,7 +72,7 @@ class TransactionsTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.frame = UIEdgeInsetsInsetRect(contentView.frame, UIEdgeInsetsMake(0, horizontalSpacing, 0, horizontalSpacing))
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: horizontalSpacing))
     }
     
     func commonInit() {
@@ -197,9 +197,11 @@ extension TransactionsTableViewCell: TransactionsCellProtocol {
                                         var nextManageOfferResult:ManageOfferResultXDR? = nil
                                         
                                         switch opRes {
-                                        case .manageOffer(_, let manageOfferResult):
+                                        case .manageSellOffer(_, let manageOfferResult):
                                             nextManageOfferResult = manageOfferResult
-                                        case .createPassiveOffer(_, let manageOfferResult):
+                                        case .manageBuyOffer(_, let manageOfferResult):
+                                            nextManageOfferResult = manageOfferResult
+                                        case .createPassiveSellOffer(_, let manageOfferResult):
                                             nextManageOfferResult = manageOfferResult
                                         default:
                                             break

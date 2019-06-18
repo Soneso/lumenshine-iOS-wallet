@@ -11,6 +11,14 @@
 
 import Foundation
 
+class TxManageSellOfferOperationResponse: TxManageOfferOperationResponse {
+    
+}
+
+class TxManageBuyOfferOperationResponse: TxManageOfferOperationResponse {
+    
+}
+
 class TxManageOfferOperationResponse: TxCreatePassiveOfferOperationResponse {
     
     /// Offer ID.

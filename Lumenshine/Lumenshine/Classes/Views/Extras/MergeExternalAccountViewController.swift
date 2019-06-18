@@ -172,7 +172,7 @@ fileprivate extension MergeExternalAccountViewController {
         walletField.dividerActiveHeight = 1
         walletField.dividerNormalColor = Stylesheet.color(.gray)
         walletField.backgroundColor = .white
-        walletField.textInset = horizontalSpacing
+        walletField.textInsets = UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: 0)
         
         selectedWalletPK = self.viewModel.walletsForExternalMerge.first?.publicKey
         walletField.setInputViewOptions(options: wallets, selectedIndex: 0) { newIndex in

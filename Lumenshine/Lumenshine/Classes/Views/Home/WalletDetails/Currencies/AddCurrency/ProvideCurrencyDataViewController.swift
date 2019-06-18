@@ -59,7 +59,7 @@ class ProvideCurrencyDataViewController: UIViewController {
         assetCodeTextField.resignFirstResponder()
         limitTextField.resignFirstResponder()
         
-        addButton.setTitle(AddButtonTitles.validating.rawValue, for: UIControlState.normal)
+        addButton.setTitle(AddButtonTitles.validating.rawValue, for: UIControl.State.normal)
         addButton.isEnabled = false
         showActivity(message: R.string.localizable.validateing())
         
@@ -186,7 +186,7 @@ class ProvideCurrencyDataViewController: UIViewController {
     }
     
     private func resetAddButtonToDefault() {
-        self.addButton.setTitle(AddButtonTitles.add.rawValue, for: UIControlState.normal)
+        self.addButton.setTitle(AddButtonTitles.add.rawValue, for: UIControl.State.normal)
         self.addButton.isEnabled = true
     }
     

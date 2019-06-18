@@ -7,10 +7,10 @@ use_frameworks!
 def ui_components_and_helper_pods
     pod 'Material'
     pod 'SnapKit'
-    pod 'KWDrawerController', :git => 'https://github.com/chelemen-razvan/KWDrawerController.git'
-    pod 'DGElasticPullToRefresh', :git => 'https://github.com/sammygutierrez/DGElasticPullToRefresh.git'
-    pod 'Charts', :git => 'https://github.com/danielgindi/Charts.git', :commit => '4fca1f7a027c69782522416ef73d9bb92119d1d3'
-    pod 'LTMorphingLabel'
+    pod 'KWDrawerController', :git => 'https://github.com/chelemen-razvan/KWDrawerController.git', :commit => 'f53f97683e87c016f415e250a7b019c81e524bf6'
+    pod 'DGElasticPullToRefresh', :git => 'https://github.com/Lateblumer88/DGElasticPullToRefresh', :branch => 'Feature/Swift5Support'
+    pod 'Charts', :git => 'https://github.com/danielgindi/Charts.git', :commit => 'e8505930018668b73500203afc13bb92fa585f8a'
+    pod 'LTMorphingLabel', :git => 'https://github.com/lexrus/LTMorphingLabel.git', :commit => '711a91a709570a481f3f6bd902b728cbabdd65a0'
     pod 'TTTAttributedLabel'
     pod 'M13Checkbox'
 end
@@ -20,8 +20,8 @@ target 'Lumenshine' do
   # Pods for jupiter
   ui_components_and_helper_pods
   
-  pod 'R.swift', '~> 4.0.0'
-  pod 'stellar-ios-mac-sdk', :git => 'https://github.com/Soneso/stellar-ios-mac-sdk.git', :commit => '1d883b40e608f570d5f030a2f9857716277959b4'
+  pod 'R.swift', '~> 5.0.3'
+  pod 'stellar-ios-mac-sdk', '~> 1.6.4'
   pod 'OneTimePassword'
   pod 'SwiftRichString'
   pod 'Starscream', :git => 'https://github.com/Soneso/Starscream.git'

@@ -59,14 +59,14 @@ class SetInflationDestinationViewController: UIViewController {
         }
         
         if let knownInflationDestinationsViewController = knownInflationDestinationsViewController {
-            addChildViewController(knownInflationDestinationsViewController)
+            addChild(knownInflationDestinationsViewController)
             destinationContainer.addSubview(knownInflationDestinationsViewController.view)
             
             knownInflationDestinationsViewController.view.snp.makeConstraints { (make) in
                 make.edges.equalToSuperview()
             }
             
-            knownInflationDestinationsViewController.didMove(toParentViewController: self)
+            knownInflationDestinationsViewController.didMove(toParent: self)
         }
     }
     
@@ -76,14 +76,14 @@ class SetInflationDestinationViewController: UIViewController {
         }
         
         if let provideInflationDestinationViewController = provideInflationDestinationViewController {
-            addChildViewController(provideInflationDestinationViewController)
+            addChild(provideInflationDestinationViewController)
             destinationContainer.addSubview(provideInflationDestinationViewController.view)
             
             provideInflationDestinationViewController.view.snp.makeConstraints { (make) in
                 make.edges.equalToSuperview()
             }
             
-            provideInflationDestinationViewController.didMove(toParentViewController: self)
+            provideInflationDestinationViewController.didMove(toParent: self)
         }
     }
     

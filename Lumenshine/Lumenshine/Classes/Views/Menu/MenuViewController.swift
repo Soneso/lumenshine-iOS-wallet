@@ -96,7 +96,7 @@ fileprivate extension MenuViewController {
     func prepare() {
         tableView.register(MenuTableViewCell.self, forCellReuseIdentifier: MenuViewController.MenuCellIdentifier)
         tableView.register(AvatarTableViewCell.self, forCellReuseIdentifier: MenuViewController.AvatarCellIdentifier)
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 80
         tableView.separatorStyle = .none
         tableView.backgroundColor = Stylesheet.color(.lightCyan)

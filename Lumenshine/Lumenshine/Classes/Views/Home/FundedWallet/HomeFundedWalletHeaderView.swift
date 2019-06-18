@@ -53,9 +53,9 @@ class HomeFundedWalletHeaderView: UIView, UITabBarDelegate {
     }
     
     private func setupButtons() {
-        var attributes: Dictionary<NSAttributedStringKey, Any>? = nil
+        var attributes: Dictionary<NSAttributedString.Key, Any>? = nil
         if let font = R.font.encodeSansRegular(size: 10) {
-            attributes = [NSAttributedStringKey.font : font]
+            attributes = [NSAttributedString.Key.font : font]
         }
         
         sendButton.setTitleTextAttributes(attributes, for: .normal)

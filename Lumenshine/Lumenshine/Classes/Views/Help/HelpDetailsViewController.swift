@@ -24,7 +24,7 @@ class HelpDetailsViewController: UIViewController, UITextViewDelegate {
     public var chapters = [String]()
     public var bolds = [String]()
     
-    private let normalTextAttributes: [NSAttributedStringKey : Any] = [ NSAttributedStringKey.foregroundColor: Stylesheet.color(.lightBlack), NSAttributedStringKey.font: R.font.encodeSansRegular(size: 16) as Any ]
+    private let normalTextAttributes: [NSAttributedString.Key : Any] = [ NSAttributedString.Key.foregroundColor: Stylesheet.color(.lightBlack), NSAttributedString.Key.font: R.font.encodeSansRegular(size: 16) as Any ]
     
     @IBAction func closeButtonAction(sender: UIButton) {
         self.dismiss(animated: true)

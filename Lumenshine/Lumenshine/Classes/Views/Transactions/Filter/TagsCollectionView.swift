@@ -31,7 +31,7 @@ class TagsCollectionView: UICollectionView {
         collectionLayout.minimumInteritemSpacing = 2.0
         collectionLayout.minimumLineSpacing = 2.0
         collectionLayout.sectionInset = UIEdgeInsets(top: 4.0, left: 0.0, bottom: 4.0, right: 0.0)
-        collectionLayout.estimatedItemSize = UICollectionViewFlowLayoutAutomaticSize
+        collectionLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         
         isScrollEnabled = false
         dataSource = self

@@ -21,7 +21,7 @@ class CurrencyPickerTextField: PickerTextField {
         currencyLabel.textColor = Stylesheet.color(.lightBlack)
         
         leftView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: frame.height))
-        leftViewMode = UITextFieldViewMode.always
+        leftViewMode = UITextField.ViewMode.always
         leftView?.addSubview(currencyLabel)
         currencyLabel.snp.makeConstraints { (make) in
             make.left.equalTo(16)

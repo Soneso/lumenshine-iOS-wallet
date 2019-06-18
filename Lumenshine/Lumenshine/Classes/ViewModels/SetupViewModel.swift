@@ -10,6 +10,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum SetupStep {
     case none
@@ -66,13 +67,13 @@ class SetupViewModel: SetupViewModelType {
         self.randomIndices = generateRandomIndices()
         updateSetupStep(tfaConfirmed: tfaConfirmed, mailConfirmed: mailConfirmed, mnemonicConfirmed: mnemonicConfirmed)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: .UIApplicationWillEnterForeground, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground(notification:)), name: .UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground(notification:)), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillEnterForeground, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
     
     @objc

@@ -149,6 +149,6 @@ class KnownInflationDestinationsViewController: UIViewController, UITableViewDel
         }
         
         currentExpandedRowIndexPath = indexPath
-        tableView.reloadRows(at: rowsThatNeedReload, with: UITableViewRowAnimation.fade)
+        tableView.reloadRows(at: rowsThatNeedReload, with: UITableView.RowAnimation.fade)
     }
 }

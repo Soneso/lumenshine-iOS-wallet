@@ -144,7 +144,7 @@ extension MergeWalletViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let authResponse):
-                   if let selectedPK = self.selectedWalletPK, let userSecurity = UserSecurity(from: authResponse), let decryptedUserData = try? UserSecurityHelper.decryptUserSecurity(userSecurity, password: password), let dc = decryptedUserData, let index = PrivateKeyManager.getIndexInMnemonic(forAccountID: selectedPK), let sourceKeyPair = try? stellarsdk.Wallet.createKeyPair(mnemonic: dc.mnemonic, passphrase: nil, index: index) {
+                   if let selectedPK = self.selectedWalletPK, let userSecurity = UserSecurity(from: authResponse), let decryptedUserData = try? UserSecurityHelper.decryptUserSecurity(userSecurity, password: password), let index = PrivateKeyManager.getIndexInMnemonic(forAccountID: selectedPK), let sourceKeyPair = try? stellarsdk.Wallet.createKeyPair(mnemonic: decryptedUserData.mnemonic, passphrase: nil, index: index) {
                         self.passwordInputField.text = nil
                         self.mergeAccount(sourceKeyPair: sourceKeyPair, destinationKeyPair: destinationKeyPair)
                     }
@@ -267,7 +267,7 @@ fileprivate extension MergeWalletViewController {
         walletField.dividerActiveHeight = 1
         walletField.dividerNormalColor = Stylesheet.color(.gray)
         walletField.backgroundColor = .white
-        walletField.textInset = horizontalSpacing
+        walletField.textInsets = UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: 0)
         
         selectedWalletPK = self.viewModel.walletsForClose.first?.publicKey
         walletField.setInputViewOptions(options: wallets, selectedIndex: 0) { newIndex in

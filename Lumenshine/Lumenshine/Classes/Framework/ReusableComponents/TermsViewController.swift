@@ -31,10 +31,10 @@ class TermsViewController: UIViewController {
         view = webView
         prepareNavigationItems()
         
-        let terms = UIBarButtonItem(title: R.string.localizable.terms(), style: UIBarButtonItemStyle.plain, target: self, action: #selector(termsTapped))
+        let terms = UIBarButtonItem(title: R.string.localizable.terms(), style: UIBarButtonItem.Style.plain, target: self, action: #selector(termsTapped))
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        let privacy = UIBarButtonItem(title: R.string.localizable.privacy(), style: UIBarButtonItemStyle.plain, target: self, action: #selector(privacyTapped))
-        let guidelines = UIBarButtonItem(title: R.string.localizable.guidelines(), style: UIBarButtonItemStyle.plain, target: self, action: #selector(guidelinesTapped))
+        let privacy = UIBarButtonItem(title: R.string.localizable.privacy(), style: UIBarButtonItem.Style.plain, target: self, action: #selector(privacyTapped))
+        let guidelines = UIBarButtonItem(title: R.string.localizable.guidelines(), style: UIBarButtonItem.Style.plain, target: self, action: #selector(guidelinesTapped))
         toolbarItems = [terms, spacer, privacy, spacer, guidelines]
         
         termsTapped()

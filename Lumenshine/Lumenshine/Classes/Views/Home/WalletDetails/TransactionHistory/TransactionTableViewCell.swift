@@ -88,13 +88,13 @@ class TransactionTableViewCell: UITableViewCell {
     
     func updateAmountLabel() {
         if let text = amountValueLabel.text, let amount = CoinUnit(text), let asset = operationInfo.assetCode {
-            let assetCode = NSMutableAttributedString(string: asset, attributes: [ NSAttributedStringKey.foregroundColor: Stylesheet.color(.gray) ])
+            let assetCode = NSMutableAttributedString(string: asset, attributes: [ NSAttributedString.Key.foregroundColor: Stylesheet.color(.gray) ])
             var amountValue = NSMutableAttributedString()
             
             if operationInfo.sign == .plus {
-                amountValue = NSMutableAttributedString(string: "\(amount) ", attributes: [ NSAttributedStringKey.foregroundColor: Stylesheet.color(.green) ])
+                amountValue = NSMutableAttributedString(string: "\(amount) ", attributes: [ NSAttributedString.Key.foregroundColor: Stylesheet.color(.green) ])
             } else {
-                amountValue = NSMutableAttributedString(string: "- \(amount) ", attributes: [ NSAttributedStringKey.foregroundColor: Stylesheet.color(.red) ])
+                amountValue = NSMutableAttributedString(string: "- \(amount) ", attributes: [ NSAttributedString.Key.foregroundColor: Stylesheet.color(.red) ])
             }
             
             amountValue.append(assetCode)

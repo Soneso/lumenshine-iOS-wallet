@@ -80,7 +80,7 @@ class ProvideInflationDestinationViewController: UIViewController {
     private func addInflation(biometricAuth: Bool = false) {
         passwordView.resetValidationErrors()
         publicKeyTextField.resignFirstResponder()
-        setButton.setTitle(SetButtonTitles.validating.rawValue, for: UIControlState.normal)
+        setButton.setTitle(SetButtonTitles.validating.rawValue, for: UIControl.State.normal)
         setButton.isEnabled = false
         showActivity(message: R.string.localizable.validateing())
         
@@ -137,7 +137,7 @@ class ProvideInflationDestinationViewController: UIViewController {
     }
     
     private func resetSetButtonToDefault() {
-        self.setButton.setTitle(SetButtonTitles.set.rawValue, for: UIControlState.normal)
+        self.setButton.setTitle(SetButtonTitles.set.rawValue, for: UIControl.State.normal)
         self.setButton.isEnabled = true
     }
     

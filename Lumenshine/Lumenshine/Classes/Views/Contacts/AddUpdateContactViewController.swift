@@ -147,7 +147,7 @@ fileprivate extension AddUpdateContactViewController {
         nameField.dividerActiveHeight = 1
         nameField.dividerNormalColor = Stylesheet.color(.gray)
         nameField.backgroundColor = .white
-        nameField.textInset = horizontalSpacing
+        nameField.textInsets = UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: 0)
         
         let icon = IconButton(frame: .zero)
         icon.image = R.image.contact_add()
@@ -169,7 +169,7 @@ fileprivate extension AddUpdateContactViewController {
         addressField.dividerActiveHeight = 1
         addressField.dividerNormalColor = Stylesheet.color(.gray)
         addressField.backgroundColor = .white
-        addressField.textInset = horizontalSpacing
+        addressField.textInsets = UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: 0)
         addressField.detail = R.string.localizable.stellar_address_hint()
         addressField.detailColor = Stylesheet.color(.gray)
         addressField.detailLabel.numberOfLines = 1

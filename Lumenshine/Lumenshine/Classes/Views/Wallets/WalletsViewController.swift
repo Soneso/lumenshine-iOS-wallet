@@ -107,7 +107,7 @@ class WalletsViewController: UpdatableViewController, UITableViewDataSource, Add
         tableView.dataSource = self
         tableView.backgroundColor = Stylesheet.color(.clear)
         tableView.register(CardTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 250
         tableView.separatorStyle = .none
         

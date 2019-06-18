@@ -42,13 +42,13 @@ class TabLikeSegmentedControl: UISegmentedControl {
     
     private func setupTitle() {
         setTitleTextAttributes([
-            NSAttributedStringKey.font : R.font.encodeSansSemiBold(size: 14)!,
-            NSAttributedStringKey.foregroundColor: Stylesheet.color(.darkGray)
+            NSAttributedString.Key.font : R.font.encodeSansSemiBold(size: 14)!,
+            NSAttributedString.Key.foregroundColor: Stylesheet.color(.darkGray)
             ], for: .normal)
         
         setTitleTextAttributes([
-            NSAttributedStringKey.font : R.font.encodeSansSemiBold(size: 14)!,
-            NSAttributedStringKey.foregroundColor: Stylesheet.color(.lightBlack)
+            NSAttributedString.Key.font : R.font.encodeSansSemiBold(size: 14)!,
+            NSAttributedString.Key.foregroundColor: Stylesheet.color(.lightBlack)
             ], for: .selected)
     }
     

@@ -40,7 +40,7 @@ class ContactTableViewCell: UITableViewCell {
     
     private var paymentOperationsVCManager: PaymentOperationsVCManager!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         commonInit()
     }
@@ -52,7 +52,7 @@ class ContactTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.frame = UIEdgeInsetsInsetRect(contentView.frame, UIEdgeInsetsMake(0, horizontalSpacing, 0, horizontalSpacing))
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: horizontalSpacing))
     }
     
     func commonInit() {

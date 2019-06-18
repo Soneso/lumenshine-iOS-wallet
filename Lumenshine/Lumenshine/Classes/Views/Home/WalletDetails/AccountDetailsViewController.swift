@@ -238,8 +238,8 @@ class AccountDetailsViewController: UpdatableViewController {
     
     private func setupNavigationItem() {
         navigationItem.titleLabel.textColor = Stylesheet.color(.white)
-        let walletName = NSMutableAttributedString(string: wallet.name, attributes: [ NSAttributedStringKey.font: R.font.encodeSansSemiBold(size: 15) ?? Font.systemFont(ofSize: 15) ])
-        let subTitle = NSMutableAttributedString(string: "\nDetails", attributes: [ NSAttributedStringKey.font: R.font.encodeSansSemiBold(size: 13) ?? Font.systemFont(ofSize: 13) ])
+        let walletName = NSMutableAttributedString(string: wallet.name, attributes: [ NSAttributedString.Key.font: R.font.encodeSansSemiBold(size: 15) ?? Font.systemFont(ofSize: 15) ])
+        let subTitle = NSMutableAttributedString(string: "\nDetails", attributes: [ NSAttributedString.Key.font: R.font.encodeSansSemiBold(size: 13) ?? Font.systemFont(ofSize: 13) ])
         walletName.append(subTitle)
         navigationItem.titleLabel.numberOfLines = 2
         navigationItem.titleLabel.attributedText = walletName
@@ -310,12 +310,12 @@ class AccountDetailsViewController: UpdatableViewController {
             viewController.wallet = wallet
         }
         
-        addChildViewController(viewController)
+        addChild(viewController)
         accountCurrencyContainer.addSubview(viewController.view)
         viewController.view.snp.makeConstraints {make in
             make.edges.equalToSuperview()
         }
-        viewController.didMove(toParentViewController: self)
+        viewController.didMove(toParent: self)
     }
     
     private func setupTransactionsHistory() {
@@ -324,13 +324,13 @@ class AccountDetailsViewController: UpdatableViewController {
             viewController.wallet = wallet
         }
         
-        addChildViewController(viewController)
+        addChild(viewController)
         transactionsHistoryContainer.addSubview(viewController.view)
         viewController.view.snp.makeConstraints({ (make) in
             make.edges.equalToSuperview()
         })
         
-        viewController.didMove(toParentViewController: self)
+        viewController.didMove(toParent: self)
     }
     
     private func setupWalletDetails() {
@@ -339,13 +339,13 @@ class AccountDetailsViewController: UpdatableViewController {
             viewController.wallet = wallet
         }
         
-        addChildViewController(viewController)
+        addChild(viewController)
         walletDetailsContainer.addSubview(viewController.view)
         viewController.view.snp.makeConstraints({ (make) in
             make.edges.equalToSuperview()
         })
         
-        viewController.didMove(toParentViewController: self)
+        viewController.didMove(toParent: self)
     }
     
     private func reloadWalletDetails() {

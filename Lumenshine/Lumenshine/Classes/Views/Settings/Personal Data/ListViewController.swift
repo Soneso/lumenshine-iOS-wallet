@@ -127,7 +127,7 @@ fileprivate extension ListViewController {
     
     func prepareTableView() {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: ListViewController.CellIdentifier)
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = Stylesheet.color(.lightGray)
         tableView.tableHeaderView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))

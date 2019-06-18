@@ -98,7 +98,7 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
                 image.draw(in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
                 let newImage = UIGraphicsGetImageFromCurrentImageContext()
                 UIGraphicsEndImageContext()
-                if let newImage = newImage, let imageData = UIImagePNGRepresentation(newImage) {
+                if let newImage = newImage, let imageData = newImage.pngData() {
                     mail.addAttachmentData(imageData, mimeType: "image/png", fileName: "qr_code.png")
                     self.present(mail, animated: true, completion: nil)
                 }
@@ -112,7 +112,7 @@ class ReceivePaymentCardViewController: UIViewController, WalletActionsProtocol 
     
     @IBAction func didTapPrint(_ sender: Any) {
         let printInfo = UIPrintInfo(dictionary:nil)
-        printInfo.outputType = UIPrintInfoOutputType.general
+        printInfo.outputType = UIPrintInfo.OutputType.general
         printInfo.jobName = "Payment data print"
         
         // Set up print controller

@@ -21,7 +21,7 @@ class PersonalDataViewController: UITableViewController {
     fileprivate let verticalSpacing = 31.0
     fileprivate let horizontalSpacing = 15.0
     fileprivate let viewModel: PersonalDataViewModelType
-    fileprivate let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+    fileprivate let activityIndicator = UIActivityIndicatorView(style: .white)
     
     init(viewModel: PersonalDataViewModelType) {
         self.viewModel = viewModel
@@ -214,7 +214,7 @@ fileprivate extension PersonalDataViewController {
     func prepareTableView() {
         tableView.register(MultilineInputTableViewCell.self, forCellReuseIdentifier: MultilineInputTableViewCell.CellIdentifier)
         tableView.register(InputTableViewCell.self, forCellReuseIdentifier: InputTableViewCell.CellIdentifier)
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
         tableView.tableHeaderView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         tableView.tableFooterView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))

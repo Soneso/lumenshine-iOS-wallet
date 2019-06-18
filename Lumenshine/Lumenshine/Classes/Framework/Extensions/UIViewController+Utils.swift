@@ -25,7 +25,7 @@ extension UIViewController {
         
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         
-        let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let loadingIndicator = UIActivityIndicatorView(style: .gray)
         loadingIndicator.hidesWhenStopped = true
         loadingIndicator.startAnimating()
         

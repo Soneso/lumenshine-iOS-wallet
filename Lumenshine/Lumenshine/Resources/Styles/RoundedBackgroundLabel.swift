@@ -23,7 +23,7 @@ class RoundedBackgroundLabel: UILabel {
     }
     
     override open func drawText(in rect: CGRect) {
-        return super.drawText(in: UIEdgeInsetsInsetRect(rect, insets))
+        return super.drawText(in: rect.inset(by: insets))
     }
     
     override func awakeFromNib() {

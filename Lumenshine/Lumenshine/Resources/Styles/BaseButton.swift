@@ -28,7 +28,7 @@ class BaseButton: UIButton {
             contentEdgeInsets.top = verticalInset
             contentEdgeInsets.bottom = verticalInset
         } else {
-            contentEdgeInsets = UIEdgeInsetsMake(5,5,5,5)
+            contentEdgeInsets = UIEdgeInsets(top: 5,left: 5,bottom: 5,right: 5)
         }
     }
 }

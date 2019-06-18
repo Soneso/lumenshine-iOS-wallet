@@ -29,7 +29,7 @@ class InputTextField: UITextField {
         }
         
         leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: frame.height))
-        leftViewMode = UITextFieldViewMode.always
+        leftViewMode = UITextField.ViewMode.always
         
         snp.makeConstraints { (make) in
             make.height.equalTo(40)

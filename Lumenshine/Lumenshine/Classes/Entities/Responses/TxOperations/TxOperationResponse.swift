@@ -28,10 +28,12 @@ class TxOperationResponse: Codable {
             response = try jsonDecoder.decode(TxPaymentOperationResponse.self, from: data)
         case .pathPayment:
             response = try jsonDecoder.decode(TxPathPaymentOperationResponse.self, from: data)
-        case .manageOffer:
-            response = try jsonDecoder.decode(TxManageOfferOperationResponse.self, from: data)
-        case .createPassiveOffer:
-            response = try jsonDecoder.decode(TxCreatePassiveOfferOperationResponse.self, from: data)
+        case .manageSellOffer:
+            response = try jsonDecoder.decode(TxManageSellOfferOperationResponse.self, from: data)
+        case .manageBuyOffer:
+            response = try jsonDecoder.decode(TxManageBuyOfferOperationResponse.self, from: data)
+        case .createPassiveSellOffer:
+            response = try jsonDecoder.decode(TxCreatePassiveSellOfferOperationResponse.self, from: data)
         case .setOptions:
             response = try jsonDecoder.decode(TxSetOptionsOperationResponse.self, from: data)
         case .changeTrust:

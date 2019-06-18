@@ -37,7 +37,7 @@ class InputTableViewCell: UITableViewCell, InputTableCellProtocol {
     var textEditingCallback: ((_ text:String) -> (Void))?
     var shouldBeginEditingCallback: (() -> (Bool))?
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         commonInit()
     }
@@ -55,7 +55,7 @@ class InputTableViewCell: UITableViewCell, InputTableCellProtocol {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.frame = UIEdgeInsetsInsetRect(contentView.frame, UIEdgeInsetsMake(0, horizontalSpacing, 0, horizontalSpacing))
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: horizontalSpacing))
     }
     
     func commonInit() {

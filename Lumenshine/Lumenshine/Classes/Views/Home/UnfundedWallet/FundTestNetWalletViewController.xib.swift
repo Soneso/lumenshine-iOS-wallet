@@ -60,11 +60,11 @@ public class FundTestNetWalletViewController: UIViewController {
         prepareNavigationItem()
         setContent()
         publicKeyButton.titleLabel?.numberOfLines = 0
-        publicKeyButton.setTitle(wallet.publicKey, for: UIControlState.normal)
+        publicKeyButton.setTitle(wallet.publicKey, for: UIControl.State.normal)
     }
     
     private func setFundButtonTitle(titleEnum: FundButtonTitles) {
-        fundButton.setTitle(titleEnum.rawValue, for: UIControlState.normal)
+        fundButton.setTitle(titleEnum.rawValue, for: UIControl.State.normal)
         fundButton.isEnabled = false
     }
     

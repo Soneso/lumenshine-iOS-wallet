@@ -144,7 +144,7 @@ class TransactionHistoryManager {
                 
                 break
                 
-            case .createPassiveOffer:
+            case .createPassiveSellOffer:
                 // CreatePassiveOfferOperationResponse
                 if let createPassiveOfferOperationResponse = record as? CreatePassiveOfferOperationResponse {
                     operation.amount = createPassiveOfferOperationResponse.amount
@@ -171,10 +171,20 @@ class TransactionHistoryManager {
                 }
                 
                 break
-                
-            case .manageOffer:
+
+            case .manageSellOffer:
                 // ManageOfferOperationResponse
-                if let manageOffferOperationResponse = record as? ManageOfferOperationResponse {
+                if let manageOffferOperationResponse = record as? ManageSellOfferOperationResponse {
+                    operation.amount = manageOffferOperationResponse.amount
+                    operation.assetCode = manageOffferOperationResponse.sellingAssetCode
+                    operation.sign = SignEnum.minus
+                }
+                
+                break
+                
+            case .manageBuyOffer:
+                // ManageOfferOperationResponse
+                if let manageOffferOperationResponse = record as? ManageBuyOfferOperationResponse {
                     operation.amount = manageOffferOperationResponse.amount
                     operation.assetCode = manageOffferOperationResponse.sellingAssetCode
                     operation.sign = SignEnum.minus

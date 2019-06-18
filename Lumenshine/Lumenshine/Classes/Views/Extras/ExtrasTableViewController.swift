@@ -93,6 +93,6 @@ fileprivate extension ExtrasTableViewController {
         navigationController?.navigationBar.setBackgroundImage(R.image.nav_background(), for: .default)
         
         tableView.register(ExtrasTableViewCell.self, forCellReuseIdentifier: ExtrasTableViewController.CellIdentifier)
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
     }
 }

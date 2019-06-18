@@ -37,8 +37,8 @@ class MenuViewModel : MenuViewModelType {
          [.home, .wallets, .transactions, .contacts, .settings, .extras],
          [.help, .signOut]]
         
-        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: .UIApplicationWillEnterForeground, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground(notification:)), name: .UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground(notification:)), name: UIApplication.didEnterBackgroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updatePushToken(notification:)), name: Notification.Name(Keys.Notifications.DeviceToken), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(scrollToWallet(notification:)), name: Notification.Name(Keys.Notifications.ScrollToWallet), object: nil)
 
@@ -166,8 +166,8 @@ fileprivate extension MenuViewModel {
     }
     
     func removeObservers() {
-        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillEnterForeground, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name(Keys.Notifications.DeviceToken), object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name(Keys.Notifications.ScrollToWallet), object: nil)
     }

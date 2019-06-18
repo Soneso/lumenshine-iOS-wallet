@@ -104,7 +104,7 @@ fileprivate extension HeaderMenuViewController {
         tableView.dataSource = self
         tableView.backgroundColor = Stylesheet.color(.white)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: HeaderMenuViewController.CellIdentifier)
-        tableView.estimatedRowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTap(_:)))

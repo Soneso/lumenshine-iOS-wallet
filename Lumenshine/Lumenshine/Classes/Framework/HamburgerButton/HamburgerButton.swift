@@ -94,7 +94,7 @@ public class HamburgerButton: UIButton {
             topRotation.values = rotationValuesFromTransform(transform: top.transform,
                 endValue: showsMenu ? CGFloat(-Double.pi - Double.pi/4) : CGFloat(Double.pi + Double.pi/4))
             // Kind of a workaround. Used because it was hard to animate positions of segments' such that their ends form the arrow's tip and don't cross each other.
-            topRotation.calculationMode = kCAAnimationCubic
+            topRotation.calculationMode = CAAnimationCalculationMode.cubic
             topRotation.keyTimes = [0.0, 0.33, 0.73, 1.0]
             top.ahk_applyKeyframeValuesAnimation(animation: topRotation)
 
@@ -119,7 +119,7 @@ public class HamburgerButton: UIButton {
             let bottomRotation = CAKeyframeAnimation(keyPath: "transform")
             bottomRotation.values = rotationValuesFromTransform(transform: bottom.transform,
                 endValue: showsMenu ? CGFloat(-Double.pi/2 - Double.pi/4) : CGFloat(Double.pi/2 + Double.pi/4))
-            bottomRotation.calculationMode = kCAAnimationCubic
+            bottomRotation.calculationMode = CAAnimationCalculationMode.cubic
             bottomRotation.keyTimes = [0.0, 0.33, 0.63, 1.0]
             bottom.ahk_applyKeyframeValuesAnimation(animation: bottomRotation)
 

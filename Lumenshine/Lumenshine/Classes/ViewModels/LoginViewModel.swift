@@ -231,35 +231,35 @@ class LoginViewModel : LoginViewModelType {
         let font = R.font.encodeSansRegular(size: 15) ?? Stylesheet.font(.body)
         
         let hint1_prefix = NSAttributedString(string: R.string.localizable.password_hint1_prefix()+"\n",
-                                       attributes: [NSAttributedStringKey.font : prefix_font,
-                                                    NSAttributedStringKey.foregroundColor : Stylesheet.color(.red)])
+                                              attributes: [NSAttributedString.Key.font : prefix_font,
+                                                           NSAttributedString.Key.foregroundColor : Stylesheet.color(.red)])
         
         let hint1 = NSAttributedString(string: R.string.localizable.password_hint1()+"\n\n",
-                                       attributes: [NSAttributedStringKey.font : font,
-                                                    NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                                       attributes: [NSAttributedString.Key.font : font,
+                                                    NSAttributedString.Key.foregroundColor : Stylesheet.color(.darkGray)])
         let hint2_prefix = NSAttributedString(string: R.string.localizable.password_hint2_prefix()+"\n",
-                                              attributes: [NSAttributedStringKey.font : prefix_font,
-                                                           NSAttributedStringKey.foregroundColor : Stylesheet.color(.red)])
+                                              attributes: [NSAttributedString.Key.font : prefix_font,
+                                                           NSAttributedString.Key.foregroundColor : Stylesheet.color(.red)])
         
         let hint2 = NSAttributedString(string: R.string.localizable.password_hint2()+"\n\n",
-                                       attributes: [NSAttributedStringKey.font : font,
-                                                    NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                                       attributes: [NSAttributedString.Key.font : font,
+                                                    NSAttributedString.Key.foregroundColor : Stylesheet.color(.darkGray)])
         
         let hint3_prefix = NSAttributedString(string: R.string.localizable.password_hint3_prefix()+"\n",
-                                              attributes: [NSAttributedStringKey.font : prefix_font,
-                                                           NSAttributedStringKey.foregroundColor : Stylesheet.color(.red)])
+                                              attributes: [NSAttributedString.Key.font : prefix_font,
+                                                           NSAttributedString.Key.foregroundColor : Stylesheet.color(.red)])
         
         let hint3 = NSAttributedString(string: R.string.localizable.password_hint3()+"\n\n",
-                                       attributes: [NSAttributedStringKey.font : font,
-                                                    NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                                       attributes: [NSAttributedString.Key.font : font,
+                                                    NSAttributedString.Key.foregroundColor : Stylesheet.color(.darkGray)])
         
         let hint4_prefix = NSAttributedString(string: R.string.localizable.password_hint4_prefix()+"\n",
-                                              attributes: [NSAttributedStringKey.font : prefix_font,
-                                                           NSAttributedStringKey.foregroundColor : Stylesheet.color(.red)])
+                                              attributes: [NSAttributedString.Key.font : prefix_font,
+                                                           NSAttributedString.Key.foregroundColor : Stylesheet.color(.red)])
         
         let hint4 = NSAttributedString(string: R.string.localizable.password_hint4(),
-                                       attributes: [NSAttributedStringKey.font : font,
-                                                    NSAttributedStringKey.foregroundColor : Stylesheet.color(.darkGray)])
+                                       attributes: [NSAttributedString.Key.font : font,
+                                                    NSAttributedString.Key.foregroundColor : Stylesheet.color(.darkGray)])
         
         let hint = NSMutableAttributedString(attributedString: hint1_prefix)
         hint.append(hint1)

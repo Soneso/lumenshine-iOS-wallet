@@ -18,7 +18,7 @@ class MenuButton: UIButton {
         tintColor = Stylesheet.color(.blue)
         imageView?.contentMode = .scaleAspectFit
         setImage(R.image.iconMenu(), for: .normal)
-        imageEdgeInsets = UIEdgeInsetsMake(0, 11.0, 0, -11.0)
+        imageEdgeInsets = UIEdgeInsets(top: 0, left: 11.0, bottom: 0, right: -11.0)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -232,7 +232,7 @@ class PasswordView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         signerPickerView = UIPickerView()
         signerPickerView.delegate = self
         signerPickerView.dataSource = self
-        signersTextField.text = availableSigners.first?.publicKey
+        signersTextField.text = availableSigners.first?.key
         signersTextField.inputView = signerPickerView
         signersTextField.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(signerDoneButtonTap))
     }
@@ -274,7 +274,7 @@ class PasswordView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView == signerPickerView {
-            return availableSigners[row].publicKey
+            return availableSigners[row].key
         }
         
         return nil
@@ -286,7 +286,7 @@ class PasswordView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     
     private func selectAsset(pickerView: UIPickerView, row: Int) {
         if pickerView == signerPickerView {
-            signersTextField.text = availableSigners[row].publicKey
+            signersTextField.text = availableSigners[row].key
         }
     }
     

@@ -177,7 +177,7 @@ fileprivate extension HelpCenterViewController {
     
     func prepareTableView() {
         tableView.register(HelpTableViewCell.self, forCellReuseIdentifier: HelpCenterViewController.CellIdentifier)
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
         tableView.tableHeaderView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         tableView.tableFooterView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))

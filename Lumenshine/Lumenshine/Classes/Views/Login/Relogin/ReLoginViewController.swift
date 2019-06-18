@@ -53,7 +53,7 @@ class ReLoginViewController: UIViewController {
         prepareView()
         showHome(animated: false)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: .UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground(notification:)), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,9 +79,9 @@ class ReLoginViewController: UIViewController {
         if animated {
             let animation = CATransition()
             animation.duration = 0.3
-            animation.type = kCATransitionReveal
-            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-            contentView.layer.add(animation, forKey: kCATransitionReveal)
+            animation.type = CATransitionType.reveal
+            animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
+            contentView.layer.add(animation, forKey: CATransitionType.reveal.rawValue)
         }
         
         if let oldContent = self.contentView as? UIView {

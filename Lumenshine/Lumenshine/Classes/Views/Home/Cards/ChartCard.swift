@@ -85,7 +85,7 @@ extension ChartCard {
             dataEntries.append(dataEntry)
         }
         
-        let line1 = LineChartDataSet(values: dataEntries, label: nil)
+        let line1 = LineChartDataSet(entries: dataEntries, label: nil)
         line1.colors = [Stylesheet.color(.blue)]
         line1.mode = .cubicBezier
         line1.form = .none

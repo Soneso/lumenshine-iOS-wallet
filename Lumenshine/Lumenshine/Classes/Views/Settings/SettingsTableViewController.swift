@@ -91,6 +91,6 @@ fileprivate extension SettingsTableViewController {
         navigationController?.navigationBar.setBackgroundImage(R.image.nav_background(), for: .default)
         
         tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewController.CellIdentifier)
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
     }
 }

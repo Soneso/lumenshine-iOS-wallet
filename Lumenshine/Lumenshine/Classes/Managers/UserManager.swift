@@ -208,7 +208,7 @@ public class UserManager: NSObject {
                 switch response {
                 case .success(details: let accountDetails):
                     if let signerWeight = accountDetails.signers.first(where: { (nextSigner) -> Bool in
-                        return nextSigner.publicKey == signerPublicKey
+                        return nextSigner.key == signerPublicKey
                     })?.weight {
                         
                         var neededThreshold = accountDetails.thresholds.highThreshold

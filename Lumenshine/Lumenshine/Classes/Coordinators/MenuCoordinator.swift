@@ -61,9 +61,9 @@ class MenuCoordinator: MenuCoordinatorType {
     }
     deinit {
         if let drawer = baseController as? AppNavigationDrawerController {
-            for vc in drawer.childViewControllers {
+            for vc in drawer.children {
                 if let nvc = vc as? NavigationController {
-                    nvc.removeFromParentViewController()
+                    nvc.removeFromParent()
                 }
             }
         }
@@ -139,9 +139,9 @@ fileprivate extension MenuCoordinator {
     
     func present(navigationController: NavigationController) {
         if let drawer = baseController as? AppNavigationDrawerController {
-            for vc in drawer.childViewControllers {
+            for vc in drawer.children {
                 if type(of: vc) == type(of: navigationController) {
-                    vc.removeFromParentViewController()
+                    vc.removeFromParent()
                 }
             }
             drawer.setViewController(navigationController, for: .none)

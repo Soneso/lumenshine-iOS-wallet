@@ -201,10 +201,10 @@ fileprivate extension ContactsViewController {
     
     func prepareTableView() {
         tableView.register(ContactTableViewCell.self, forCellReuseIdentifier: ContactsViewController.CellIdentifier)
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = Stylesheet.color(.lightGray)
-        tableView.separatorInset = UIEdgeInsetsMake(0, 50, 0, 50)
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 50)
         if #available(iOS 11.0, *) {
             tableView.separatorInsetReference = .fromAutomaticInsets
         }

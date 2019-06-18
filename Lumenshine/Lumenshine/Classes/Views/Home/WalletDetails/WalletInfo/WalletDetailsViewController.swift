@@ -55,7 +55,7 @@ class WalletDetailsViewController: UIViewController {
         }
         
         if let password = passwordTextField.text {
-            secretRevealButton.setTitle(CancelRevealButtonTitles.revealing.rawValue, for: UIControlState.normal)
+            secretRevealButton.setTitle(CancelRevealButtonTitles.revealing.rawValue, for: UIControl.State.normal)
             secretRevealButton.isEnabled = false
             
             passwordManager.getPrivateKey(fromPassword: password, forAccountID: wallet.publicKey) { (response) -> (Void) in
@@ -68,7 +68,7 @@ class WalletDetailsViewController: UIViewController {
                     self.setPasswordValidationError(validationError: ValidationErrors.InvalidPassword)
                 }
                 
-                self.secretRevealButton.setTitle(CancelRevealButtonTitles.reveal.rawValue.uppercased(), for: UIControlState.normal)
+                self.secretRevealButton.setTitle(CancelRevealButtonTitles.reveal.rawValue.uppercased(), for: UIControl.State.normal)
                 self.secretRevealButton.isEnabled = true
             }
         }
@@ -77,13 +77,13 @@ class WalletDetailsViewController: UIViewController {
     @IBAction func cancelRevealButtonAction(_ sender: UIButton) {
         if passwordStackView.isHidden  && cancelRevealButton.title(for: .normal) != CancelRevealButtonTitles.hide.rawValue {
             passwordStackView.isHidden = false
-            cancelRevealButton.setTitle(CancelRevealButtonTitles.cancel.rawValue, for: UIControlState.normal)
+            cancelRevealButton.setTitle(CancelRevealButtonTitles.cancel.rawValue, for: UIControl.State.normal)
         } else {
             passwordStackView.isHidden = true
             resetPasswordValidation()
             passwordTextField.text = nil
             privateKeyValueLabel.text = PublicKeyLabelInitialValue
-            cancelRevealButton.setTitle(CancelRevealButtonTitles.reveal.rawValue, for: UIControlState.normal)
+            cancelRevealButton.setTitle(CancelRevealButtonTitles.reveal.rawValue, for: UIControl.State.normal)
         }
     }
     

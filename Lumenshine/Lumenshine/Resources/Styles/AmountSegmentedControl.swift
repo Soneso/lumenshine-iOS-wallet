@@ -20,13 +20,13 @@ class AmountSegmentedControl: UISegmentedControl {
         tintColor = Stylesheet.color(.clear)
 
         setTitleTextAttributes([
-            NSAttributedStringKey.font : R.font.encodeSansSemiBold(size: 12)!,
-            NSAttributedStringKey.foregroundColor: Stylesheet.color(.helpButtonGray)
+            NSAttributedString.Key.font : R.font.encodeSansSemiBold(size: 12)!,
+            NSAttributedString.Key.foregroundColor: Stylesheet.color(.helpButtonGray)
             ], for: .normal)
         
         setTitleTextAttributes([
-            NSAttributedStringKey.font : R.font.encodeSansSemiBold(size: 12)!,
-            NSAttributedStringKey.foregroundColor: Stylesheet.color(.blue)
+            NSAttributedString.Key.font : R.font.encodeSansSemiBold(size: 12)!,
+            NSAttributedString.Key.foregroundColor: Stylesheet.color(.blue)
             ], for: .selected)
                 
         if subviews.count == 2 {

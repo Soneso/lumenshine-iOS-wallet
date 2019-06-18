@@ -249,7 +249,7 @@ fileprivate extension TransactionsFilterViewController {
         walletField.dividerActiveHeight = 1
         walletField.dividerNormalColor = Stylesheet.color(.gray)
         walletField.backgroundColor = .white
-        walletField.textInset = horizontalSpacing
+        walletField.textInsets = UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: 0)
         walletField.setInputViewOptions(options: viewModel.wallets, selectedIndex: viewModel.walletIndex) { newIndex in
             self.viewModel.walletIndex = newIndex
         }
@@ -285,7 +285,7 @@ fileprivate extension TransactionsFilterViewController {
         dateFromField.dividerActiveHeight = 1
         dateFromField.dividerNormalColor = Stylesheet.color(.gray)
         dateFromField.backgroundColor = Stylesheet.color(.gray)
-        dateFromField.textInset = horizontalSpacing
+        dateFromField.textInsets = UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: 0)
         setDatePickerInputView(textField: dateFromField, date: viewModel.dateFrom)
         
         contentView.addSubview(dateFromField)
@@ -317,7 +317,7 @@ fileprivate extension TransactionsFilterViewController {
         dateToField.dividerActiveHeight = 1
         dateToField.dividerNormalColor = Stylesheet.color(.gray)
         dateToField.backgroundColor = Stylesheet.color(.gray)
-        dateToField.textInset = horizontalSpacing
+        dateToField.textInsets = UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: 0)
         setDatePickerInputView(textField: dateToField, date: viewModel.dateTo)
         
         contentView.addSubview(dateToField)
@@ -351,7 +351,7 @@ fileprivate extension TransactionsFilterViewController {
         memoField.dividerActiveHeight = 1
         memoField.dividerNormalColor = Stylesheet.color(.gray)
         memoField.backgroundColor = .white
-        memoField.textInset = horizontalSpacing
+        memoField.textInsets = UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: 0)
         memoField.addTarget(self, action: #selector(memoEditingDidChange(_:)), for: .editingChanged)
         
         contentView.addSubview(memoField)

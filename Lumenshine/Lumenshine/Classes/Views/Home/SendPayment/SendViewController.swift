@@ -151,7 +151,7 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
     private func sendActionPreparation(biometricAuth: Bool = false) {
         resetValidations()
         showActivity(message: R.string.localizable.validateing())
-        sendButton.setTitle(SendButtonTitles.validating.rawValue, for: UIControlState.normal)
+        sendButton.setTitle(SendButtonTitles.validating.rawValue, for: UIControl.State.normal)
         sendButton.isEnabled = false
         
         self.destinationPublicKey = ""
@@ -550,7 +550,7 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
         otherCurrencyAgreementLabel.delegate = self
         otherCurrencyAgreementLabel.font = R.font.encodeSansRegular(size: 16)
         otherCurrencyAgreementLabel.textColor = Stylesheet.color(.lightBlack)
-        let linkAttributes = [ NSAttributedStringKey.foregroundColor: Stylesheet.color(.blue) ] as [NSAttributedStringKey : Any]
+        let linkAttributes = [ NSAttributedString.Key.foregroundColor: Stylesheet.color(.blue) ] as [NSAttributedString.Key : Any]
         otherCurrencyAgreementLabel.activeLinkAttributes = linkAttributes
         otherCurrencyAgreementLabel.linkAttributes = linkAttributes
 
@@ -1048,7 +1048,7 @@ class SendViewController: UpdatableViewController, UIPickerViewDelegate, UIPicke
     
     private func resetSendButtonToNormal() {
         hideActivity()
-        sendButton.setTitle(getSendButtonDefaultTitle(), for: UIControlState.normal)
+        sendButton.setTitle(getSendButtonDefaultTitle(), for: UIControl.State.normal)
         sendButton.isEnabled = agreementCheckBox?.isHidden == false ? sendButton.isEnabled : true
     }
     

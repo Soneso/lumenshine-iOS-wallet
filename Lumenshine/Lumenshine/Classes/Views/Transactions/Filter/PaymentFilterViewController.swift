@@ -170,9 +170,9 @@ fileprivate extension PaymentFilterViewController {
     func prepareReceived() {
         receivedField.label.text = R.string.localizable.received()
         receivedField.textField.placeholder = R.string.localizable.amount_from()
-        receivedField.textField.textInset = horizontalSpacing
+        receivedField.textField.textInsets = UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: 0)
         receivedField.rangeTextField.placeholder = R.string.localizable.amount_to()
-        receivedField.rangeTextField.textInset = horizontalSpacing
+        receivedField.rangeTextField.textInsets = UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: 0)
         receivedField.update(range: viewModel.filter.payment.receivedRange)
         
         contentView.addSubview(receivedField)
@@ -186,9 +186,9 @@ fileprivate extension PaymentFilterViewController {
     func prepareSent() {
         sentField.label.text = R.string.localizable.sent()
         sentField.textField.placeholder = R.string.localizable.amount_from()
-        sentField.textField.textInset = horizontalSpacing
+        sentField.textField.textInsets = UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: 0)
         sentField.rangeTextField.placeholder = R.string.localizable.amount_to()
-        sentField.rangeTextField.textInset = horizontalSpacing
+        sentField.rangeTextField.textInsets = UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: 0)
         sentField.update(range: viewModel.filter.payment.sentRange)
         
         contentView.addSubview(sentField)
@@ -202,7 +202,7 @@ fileprivate extension PaymentFilterViewController {
     func prepareCurrency() {
         currencyField.label.text = R.string.localizable.currency()
         currencyField.textField.placeholder = R.string.localizable.currency()
-        currencyField.textField.textInset = horizontalSpacing
+        currencyField.textField.textInsets = UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: 0)
         currencyField.update(value: viewModel.filter.payment.currency)
         currencyField.textField.setInputViewOptions(options: viewModel.currencies, selectedIndex: viewModel.currencyIndex) { newIndex in
             self.viewModel.currencyIndex = newIndex

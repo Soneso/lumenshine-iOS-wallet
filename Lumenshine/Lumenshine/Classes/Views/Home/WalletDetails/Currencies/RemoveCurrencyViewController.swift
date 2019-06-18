@@ -130,7 +130,7 @@ class RemoveCurrencyViewController: UIViewController {
     
     private func removeCurrency(biometricAuth: Bool = false) {
         passwordView.resetValidationErrors()
-        removeButton.setTitle(RemoveButtonDescriptions.ValidatingAndRemoving.rawValue, for: UIControlState.normal)
+        removeButton.setTitle(RemoveButtonDescriptions.ValidatingAndRemoving.rawValue, for: UIControl.State.normal)
         removeButton.isEnabled = false
         
         if !isInputDataValid(forBiometricAuth: biometricAuth) {
@@ -171,9 +171,9 @@ class RemoveCurrencyViewController: UIViewController {
     
     private func resetRemoveButton() {
         if let balance = CoinUnit(currency.balance), balance > 0.0 {
-            removeButton.setTitle(RemoveButtonDescriptions.RemoveAndAbandon.rawValue, for: UIControlState.normal)
+            removeButton.setTitle(RemoveButtonDescriptions.RemoveAndAbandon.rawValue, for: UIControl.State.normal)
         } else {
-            removeButton.setTitle(RemoveButtonDescriptions.Remove.rawValue, for: UIControlState.normal)
+            removeButton.setTitle(RemoveButtonDescriptions.Remove.rawValue, for: UIControl.State.normal)
         }
         
         removeButton.isEnabled = true

@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     fileprivate let mainCoordinator = MainCoordinator()
     fileprivate var snapshotView: UIView?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         IQKeyboardManager.shared.enable = true

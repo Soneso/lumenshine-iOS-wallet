@@ -130,9 +130,9 @@ extension ToolbarHeader: ToolbarHeaderProtocol {
     }
     
     func setItems(_ items: [(String, String)], selectedAt index: Int? = 0) {
-        var attributes: Dictionary<NSAttributedStringKey, Any>? = nil
+        var attributes: Dictionary<NSAttributedString.Key, Any>? = nil
         if let font = R.font.encodeSansRegular(size: 10) {
-            attributes = [NSAttributedStringKey.font : font]
+            attributes = [NSAttributedString.Key.font : font]
         }
         var barItems = [UITabBarItem]()
         var selectedItem: UITabBarItem?

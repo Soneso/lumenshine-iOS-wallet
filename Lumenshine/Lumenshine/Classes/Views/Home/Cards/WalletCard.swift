@@ -181,7 +181,7 @@ fileprivate extension WalletCard {
         
         emptyView.fundButton.isHidden = true
         
-        let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let loadingIndicator = UIActivityIndicatorView(style: .gray)
         loadingIndicator.startAnimating()
         
         emptyView.balanceBackgroundView.addSubview(loadingIndicator)
@@ -235,19 +235,19 @@ fileprivate extension WalletCard {
         
         fundedView.depositButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapDepositButton), for: .touchUpInside)
         fundedView.depositButton.titleLabel?.font = buttonFont
-        fundedView.depositButton.setTitleColor(buttonColor, for: UIControlState.normal)
+        fundedView.depositButton.setTitleColor(buttonColor, for: UIControl.State.normal)
         
         fundedView.sendButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapSendButton), for: .touchUpInside)
         fundedView.sendButton.titleLabel?.font = buttonFont
-        fundedView.sendButton.setTitleColor(buttonColor, for: UIControlState.normal)
+        fundedView.sendButton.setTitleColor(buttonColor, for: UIControl.State.normal)
         
         fundedView.receiveButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapReceiveButton), for: .touchUpInside)
         fundedView.receiveButton.titleLabel?.font = buttonFont
-        fundedView.receiveButton.setTitleColor(buttonColor, for: UIControlState.normal)
+        fundedView.receiveButton.setTitleColor(buttonColor, for: UIControl.State.normal)
         
         fundedView.detailsButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapDetailsButton), for: .touchUpInside)
         fundedView.detailsButton.titleLabel?.font = buttonFont
-        fundedView.detailsButton.setTitleColor(buttonColor, for: UIControlState.normal)
+        fundedView.detailsButton.setTitleColor(buttonColor, for: UIControl.State.normal)
         
         self.fundedView = fundedView
     }
@@ -283,7 +283,7 @@ fileprivate extension WalletCard {
         
         unfundedView.fundButton.addTarget(viewModel, action: #selector(WalletCardViewModel.didTapFundButton), for: .touchUpInside)
         unfundedView.fundButton.titleLabel?.font = buttonFont
-        unfundedView.fundButton.setTitleColor(buttonColor, for: UIControlState.normal)
+        unfundedView.fundButton.setTitleColor(buttonColor, for: UIControl.State.normal)
         
         self.unfundedView = unfundedView
     }

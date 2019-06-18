@@ -25,7 +25,7 @@ class HelpTableViewCell: UITableViewCell {
     fileprivate let verticalSpacing = 31.0
     fileprivate let horizontalSpacing: CGFloat = 15.0
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         commonInit()
     }
@@ -37,7 +37,7 @@ class HelpTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.frame = UIEdgeInsetsInsetRect(contentView.frame, UIEdgeInsetsMake(0, horizontalSpacing, 0, horizontalSpacing))
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: horizontalSpacing, bottom: 0, right: horizontalSpacing))
     }
     
     func commonInit() {

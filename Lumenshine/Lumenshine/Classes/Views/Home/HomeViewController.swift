@@ -203,7 +203,7 @@ fileprivate extension HomeViewController {
         tableView.dataSource = self
         tableView.backgroundColor = Stylesheet.color(.clear)
         tableView.register(CardTableViewCell.self, forCellReuseIdentifier: HomeViewController.CellIdentifier)
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 250
         tableView.separatorStyle = .none
         
@@ -247,7 +247,7 @@ fileprivate extension HomeViewController {
         }
         
         tableViewContainer.topAnchor.constraint(equalTo: headerBar.bottomAnchor, constant: -1).isActive = true
-        tableView.contentInset = UIEdgeInsetsMake(0.0, 0.0, headerBar.maximumBarHeight + 20, 0.0)
+        tableView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: headerBar.maximumBarHeight + 20, right: 0.0)
         
         let initialLayoutAttributes = FlexibleHeightBarSubviewLayoutAttributes()
         initialLayoutAttributes.size = headerBar.frame.size

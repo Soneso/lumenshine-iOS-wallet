@@ -267,7 +267,7 @@ class TransactionResultViewController: UIViewController, WalletActionsProtocol, 
     
     private func print() {
         let printInfo = UIPrintInfo(dictionary:nil)
-        printInfo.outputType = UIPrintInfoOutputType.general
+        printInfo.outputType = UIPrintInfo.OutputType.general
         printInfo.jobName = TransactionResultPrintJobName
         
         let printController = UIPrintInteractionController.shared

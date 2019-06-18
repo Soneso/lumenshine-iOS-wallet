@@ -145,12 +145,12 @@ class KnownCurrenciesTableViewCell: UITableViewCell {
     }
     
     private func setButtonAsValidating() {
-        addButton.setTitle(AddButtonTitles.validatingAndAdding.rawValue, for: UIControlState.normal)
+        addButton.setTitle(AddButtonTitles.validatingAndAdding.rawValue, for: UIControl.State.normal)
         addButton.isEnabled = false
     }
     
     private func setButtonAsNormal() {
-        addButton.setTitle(AddButtonTitles.add.rawValue, for: UIControlState.normal)
+        addButton.setTitle(AddButtonTitles.add.rawValue, for: UIControl.State.normal)
         addButton.isEnabled = true
     }
     

@@ -100,7 +100,7 @@ fileprivate extension TransactionHistoryDetailsTableViewController {
     func prepareTableView() {
         
         tableView.register(TableViewCell.self, forCellReuseIdentifier: TransactionHistoryDetailsTableViewController.CellIdentifier)
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
     }
     
     func prepareNavigationItem() {

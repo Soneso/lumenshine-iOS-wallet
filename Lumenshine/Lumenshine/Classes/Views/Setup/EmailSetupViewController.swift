@@ -108,16 +108,16 @@ fileprivate extension EmailSetupViewController {
         let email_font = R.font.encodeSansBold(size: 15) ?? Stylesheet.font(.body)
         
         let pretext = NSAttributedString(string: R.string.localizable.email_confirmation_prehint() + " ",
-                                              attributes: [NSAttributedStringKey.font : text_font,
-                                                           NSAttributedStringKey.foregroundColor : Stylesheet.color(.lightBlack)])
+                                         attributes: [NSAttributedString.Key.font : text_font,
+                                                      NSAttributedString.Key.foregroundColor : Stylesheet.color(.lightBlack)])
         
         let email = NSAttributedString(string: viewModel.userEmail,
-                                       attributes: [NSAttributedStringKey.font : email_font,
-                                                    NSAttributedStringKey.foregroundColor : Stylesheet.color(.lightBlack)])
+                                       attributes: [NSAttributedString.Key.font : email_font,
+                                                    NSAttributedString.Key.foregroundColor : Stylesheet.color(.lightBlack)])
         
         let posttext = NSAttributedString(string: ". " + R.string.localizable.email_confirmation_posthint(),
-                                          attributes: [NSAttributedStringKey.font : text_font,
-                                                       NSAttributedStringKey.foregroundColor : Stylesheet.color(.lightBlack)])
+                                          attributes: [NSAttributedString.Key.font : text_font,
+                                                       NSAttributedString.Key.foregroundColor : Stylesheet.color(.lightBlack)])
         
         
         let hint = NSMutableAttributedString(attributedString: pretext)

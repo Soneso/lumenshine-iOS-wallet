@@ -118,7 +118,7 @@ class ScanViewController: UIViewController {
             qrCodeFrameView.layer.borderColor = Stylesheet.color(.green).cgColor
             qrCodeFrameView.layer.borderWidth = 3.0
             view.addSubview(qrCodeFrameView)
-            view.bringSubview(toFront: qrCodeFrameView)
+            view.bringSubviewToFront(qrCodeFrameView)
         }
         
         hideLoading()

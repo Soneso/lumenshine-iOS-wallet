@@ -218,8 +218,9 @@ class TransactionsViewModel : TransactionsViewModelType {
                 return NSAttributedString(string: amount,
                                           attributes: [.foregroundColor : Stylesheet.color(color)])
             }
-        case .manageOffer,
-             .createPassiveOffer:
+        case .manageSellOffer,
+             .manageBuyOffer,
+             .createPassiveSellOffer:
             if let amount = amount(for: item) {
                 return NSAttributedString(string: amount,
                                           attributes: [.foregroundColor : Stylesheet.color(.lightBlack)])
@@ -291,12 +292,16 @@ class TransactionsViewModel : TransactionsViewModelType {
             if let operationItem = item.operationResponse as? TxPathPaymentOperationResponse {
                 subDetails = self.details(pathPayment: operationItem, sourceAccount:item.sourceAccount)
             }
-        case .manageOffer:
-            if let operationItem = item.operationResponse as? TxManageOfferOperationResponse {
+        case .manageSellOffer:
+            if let operationItem = item.operationResponse as? TxManageSellOfferOperationResponse {
                 subDetails = self.details(manageOffer: operationItem, sourceAccount:item.sourceAccount)
             }
-        case .createPassiveOffer:
-            if let operationItem = item.operationResponse as? TxCreatePassiveOfferOperationResponse {
+        case .manageBuyOffer:
+            if let operationItem = item.operationResponse as? TxManageBuyOfferOperationResponse {
+                subDetails = self.details(manageOffer: operationItem, sourceAccount:item.sourceAccount)
+            }
+        case .createPassiveSellOffer:
+            if let operationItem = item.operationResponse as? TxCreatePassiveSellOfferOperationResponse {
                 subDetails = self.details(passiveOffer: operationItem, sourceAccount: item.sourceAccount)
             }
         case .setOptions:
@@ -593,13 +598,18 @@ fileprivate extension TransactionsViewModel {
                 return amountVal
             }
             break
-        case .manageOffer:
-            if let amountVal = (item.operationResponse as? TxManageOfferOperationResponse)?.amount {
+        case .manageSellOffer:
+            if let amountVal = (item.operationResponse as? TxManageSellOfferOperationResponse)?.amount {
                 return amountVal
             }
             break
-        case .createPassiveOffer:
-            if let amountVal = (item.operationResponse as? TxCreatePassiveOfferOperationResponse)?.amount {
+        case .manageBuyOffer:
+            if let amountVal = (item.operationResponse as? TxManageBuyOfferOperationResponse)?.amount {
+                return amountVal
+            }
+            break
+        case .createPassiveSellOffer:
+            if let amountVal = (item.operationResponse as? TxCreatePassiveSellOfferOperationResponse)?.amount {
                 return amountVal
             }
             break
@@ -622,14 +632,20 @@ fileprivate extension TransactionsViewModel {
                 let currency = transactionType(for: item) == .paymentSent ? subitem.sendAssetCode : subitem.assetCode
                 return (currency ?? NativeCurrencyNames.xlm.rawValue, nil)
             }
-        case .manageOffer:
-            if let item = item.operationResponse as? TxManageOfferOperationResponse {
+        case .manageSellOffer:
+            if let item = item.operationResponse as? TxManageSellOfferOperationResponse {
                 let selling = item.sellingAssetCode ?? NativeCurrencyNames.xlm.rawValue
                 let buying = item.buyingAssetCode ?? NativeCurrencyNames.xlm.rawValue
                 return (selling, buying)
             }
-        case .createPassiveOffer:
-            if let item = item.operationResponse as? TxCreatePassiveOfferOperationResponse {
+        case .manageBuyOffer:
+            if let item = item.operationResponse as? TxManageBuyOfferOperationResponse {
+                let selling = item.sellingAssetCode ?? NativeCurrencyNames.xlm.rawValue
+                let buying = item.buyingAssetCode ?? NativeCurrencyNames.xlm.rawValue
+                return (selling, buying)
+            }
+        case .createPassiveSellOffer:
+            if let item = item.operationResponse as? TxCreatePassiveSellOfferOperationResponse {
                 let selling = item.sellingAssetCode ?? NativeCurrencyNames.xlm.rawValue
                 let buying = item.buyingAssetCode ?? NativeCurrencyNames.xlm.rawValue
                 return (selling, buying)
@@ -660,7 +676,8 @@ fileprivate extension TransactionsViewModel {
             if let item = item.operationResponse as? TxPathPaymentOperationResponse {
                 return item.to == currentWalletPK ? .paymentReceived : .paymentSent
             }
-        case .manageOffer:
+        case .manageSellOffer,
+             .manageBuyOffer:
             if let item = item.operationResponse as? TxManageOfferOperationResponse {
     
                 if item.offerId == 0 {
@@ -675,7 +692,7 @@ fileprivate extension TransactionsViewModel {
                 
                 return .offerChanged
             }
-        case .createPassiveOffer:
+        case .createPassiveSellOffer:
             return .passiveOfferCreated
         case .setOptions:
             return .setOptions
@@ -748,7 +765,7 @@ fileprivate extension TransactionsViewModel {
         }
         
         var sellingFlag = false
-        if item.operationType == .manageOffer || item.operationType == .createPassiveOffer {
+        if item.operationType == .manageSellOffer || item.operationType == .createPassiveSellOffer {
             if let selling = filter.offer.sellingCurrency {
                 if let curr = self.currency(for: item) {
                     sellingFlag = selling.isEmpty ? true : curr.0.contains(selling)
@@ -761,7 +778,7 @@ fileprivate extension TransactionsViewModel {
         }
         
         var buyingFlag = false
-        if (item.operationType == .manageOffer || item.operationType == .createPassiveOffer) {
+        if (item.operationType == .manageBuyOffer) {
             if let buying = filter.offer.buyingCurrency {
                 if let curr = self.currency(for: item) {
                     buyingFlag = buying.isEmpty ? true : curr.1?.contains(buying) ?? false

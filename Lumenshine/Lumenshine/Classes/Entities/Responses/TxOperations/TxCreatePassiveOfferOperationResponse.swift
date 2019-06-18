@@ -11,6 +11,10 @@
 
 import Foundation
 
+class TxCreatePassiveSellOfferOperationResponse: TxCreatePassiveOfferOperationResponse {
+    
+}
+
 class TxCreatePassiveOfferOperationResponse: TxOperationResponse {
     
     /// Amount of asset to be sold.

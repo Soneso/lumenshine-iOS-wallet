@@ -79,7 +79,7 @@ public class FundedWallet: Wallet {
         self.balances = accountResponse.balances
         self.subentryCount = accountResponse.subentryCount
         self.masterKeyWeight = accountResponse.signers.first(where: { (signer) -> Bool in
-            return signer.publicKey == accountResponse.accountId
+            return signer.key == accountResponse.accountId
         })?.weight
         self.accountDetails = accountResponse
         super.init(walletResponse: walletResponse)
@@ -89,7 +89,7 @@ public class FundedWallet: Wallet {
         self.balances = accountResponse.balances
         self.subentryCount = accountResponse.subentryCount
         self.masterKeyWeight = accountResponse.signers.first(where: { (signer) -> Bool in
-            return signer.publicKey == accountResponse.accountId
+            return signer.key == accountResponse.accountId
         })?.weight
         self.accountDetails = accountResponse
         super.init(wallet: wallet)

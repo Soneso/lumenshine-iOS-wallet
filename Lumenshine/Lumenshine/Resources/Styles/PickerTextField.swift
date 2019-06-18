@@ -36,6 +36,6 @@ class PickerTextField: InputTextField, UITextFieldDelegate {
             make.centerX.equalToSuperview()
         }
         
-        rightViewMode = UITextFieldViewMode.always
+        rightViewMode = UITextField.ViewMode.always
     }
 }

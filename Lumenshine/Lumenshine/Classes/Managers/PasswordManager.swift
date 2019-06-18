@@ -61,12 +61,7 @@ class PasswordManager {
             case .success(let authResponse):
                 if let userSecurity = UserSecurity(from: authResponse),
                     let decryptUserSecurity = try? UserSecurityHelper.decryptUserSecurity(userSecurity, password: password) {
-                    if let decryptedUserSecurity = decryptUserSecurity {
-                        completion(.success(mnemonic: decryptedUserSecurity.mnemonic))
-                    }
-                    else {
-                        completion(.failure(error: "Wrong password"))
-                    }
+                    completion(.success(mnemonic: decryptUserSecurity.mnemonic))
                 } else {
                     completion(.failure(error: "Wrong password"))
                 }
